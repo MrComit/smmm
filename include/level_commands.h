@@ -30,10 +30,6 @@
 #define WHIRLPOOL_COND_BOWSER2_BEATEN 2
 #define WHIRLPOOL_COND_AT_LEAST_SECOND_STAR 3
 
-// Head defines
-#define REGULAR_FACE 0x0002
-#define DIZZY_FACE 0x0003
-
 #ifdef NO_SEGMENTED_MEMORY
 #define EXECUTE(seg, script, scriptEnd, entry) \
     CMD_BBH(0x00, 0x10, 0x0000), \
@@ -165,8 +161,8 @@
     CMD_PTR(romEnd)
 #endif
 
-#define LOAD_MARIO_HEAD(sethead) \
-    CMD_BBH(0x19, 0x04, sethead)
+#define LOAD_MARIO_HEAD() \
+    CMD_BBH(0x32, 0x04, 0x0000)
 
 #ifdef NO_SEGMENTED_MEMORY
 #define LOAD_MIO0_TEXTURE(seg, romStart, romEnd) \
