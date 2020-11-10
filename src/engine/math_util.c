@@ -576,7 +576,8 @@ void mtxf_to_mtx(Mtx *dest, Mat4 src) {
     register f32 *t1 = (f32 *) src;
 
     for (i = 0; i < 16; i++) {
-        asFixedPoint = *t1++ * (1 << 16); //! float-to-integer conversion responsible for PU crashes
+        asFixedPoint = *t1++ * 24576.0;
+        //asFixedPoint = *t1++ * (1 << 16); //! float-to-integer conversion responsible for PU crashes
         *a3++ = GET_HIGH_S16_OF_32(asFixedPoint); // integer part
         *t0++ = GET_LOW_S16_OF_32(asFixedPoint);  // fraction part
     }
