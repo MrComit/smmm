@@ -4,10 +4,10 @@
 #include <PR/ultratypes.h>
 
 #include "types.h"
+#include "engine/extended_bounds.h"
 
-// NUM_CELLS needs to be a power of 2 so that the bitwise
-// in surface_collision.c functions can work properly
-#define NUM_CELLS   16
+
+extern u8 gSurfacePoolError;
 
 struct SurfaceNode
 {
