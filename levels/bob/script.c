@@ -37,10 +37,13 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_CHAIN_CHOMP_GATE, bob_geo_000440), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM, bob_geo_000458), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, bob_geo_000470), 
+	LOAD_MODEL_FROM_GEO(MODEL_LAND_CHUNK, landchunk_geo), 
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
+		OBJECT(MODEL_LAND_CHUNK, 292, -200, 25083, 0, 0, 0, 0x061E0000, bhvLandChunk),
+		OBJECT(MODEL_LAND_CHUNK, 130, -200, 24211, 0, 28, 0, 0x061E0000, bhvLandChunk),
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),
 		MACRO_OBJECTS(bob_area_1_macro_objs),

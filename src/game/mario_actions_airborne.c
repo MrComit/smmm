@@ -61,7 +61,7 @@ s32 lava_boost_on_wall(struct MarioState *m) {
 s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
     f32 fallHeight;
     f32 damageHeight;
-
+    return FALSE;
     fallHeight = m->peakHeight - m->pos[1];
 
 #pragma GCC diagnostic push
@@ -2012,7 +2012,7 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
         return TRUE;
     }
 
-    play_far_fall_sound(m);
+    //play_far_fall_sound(m);
 
     /* clang-format off */
     switch (m->action) {

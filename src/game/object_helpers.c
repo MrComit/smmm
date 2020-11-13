@@ -29,7 +29,7 @@
 
 s8 D_8032F0A0[] = { -8, 8, -4, 4 };
 s16 D_8032F0A4[] = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
-static s8 sLevelsWithRooms[] = { LEVEL_BBH, LEVEL_CASTLE, LEVEL_HMC, -1 };
+static s8 sLevelsWithRooms[] = { LEVEL_BOB, LEVEL_BBH, LEVEL_CASTLE, LEVEL_HMC, -1 };
 
 static s32 clear_move_flag(u32 *, s32);
 

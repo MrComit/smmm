@@ -6107,3 +6107,19 @@ const BehaviorScript bhvIntroScene[] = {
 };
 
 
+/* CUSTOM BEHAVIORS */
+
+
+const BehaviorScript bhvLandChunk[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x1000),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(landchunk_collision),
+    CALL_NATIVE(bhv_sinking_plat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sinking_plat_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
