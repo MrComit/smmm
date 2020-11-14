@@ -2421,11 +2421,11 @@ void cur_obj_enable_rendering_if_mario_in_room(void) {
         }
 
         if (marioInRoom) {
-            cur_obj_enable_rendering();
+            //cur_obj_enable_rendering();
             o->activeFlags &= ~ACTIVE_FLAG_IN_DIFFERENT_ROOM;
             gNumRoomedObjectsInMarioRoom++;
         } else {
-            cur_obj_disable_rendering();
+            //cur_obj_disable_rendering();
             o->activeFlags |= ACTIVE_FLAG_IN_DIFFERENT_ROOM;
             gNumRoomedObjectsNotInMarioRoom++;
         }

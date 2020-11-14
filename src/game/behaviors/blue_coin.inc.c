@@ -46,7 +46,7 @@ void bhv_hidden_blue_coin_loop(void) {
 
             // After 200 frames of waiting and 20 2-frame blinks (for 240 frames total),
             // delete the object.
-            if (cur_obj_wait_then_blink(200, 20)) {
+            if (cur_obj_wait_then_blink(o->oHiddenBlueCoinSwitch->oF4, o->oHiddenBlueCoinSwitch->oF8)) {
                 obj_mark_for_deletion(o);
             }
 
@@ -54,6 +54,11 @@ void bhv_hidden_blue_coin_loop(void) {
     }
 
     o->oInteractStatus = 0;
+}
+
+void bhv_blue_coin_switch_init(void) {
+    o->oF4 = (o->oBehParams >> 24) * 30;
+    o->oF8 = ((o->oBehParams >> 16) & 0xFF) * 15;
 }
 
 /**
@@ -110,7 +115,7 @@ void bhv_blue_coin_switch_loop(void) {
             break;
         case BLUE_COIN_SWITCH_ACT_TICKING:
             // Tick faster when the blue coins start blinking
-            if (o->oTimer < 200) {
+            if (o->oTimer < o->oF4) {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gDefaultSoundArgs);
             } else {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gDefaultSoundArgs);
@@ -118,7 +123,7 @@ void bhv_blue_coin_switch_loop(void) {
 
             // Delete the switch (which stops the sound) after the last coin is collected,
             // or after the coins unload after the 240-frame timer expires.
-            if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL || o->oTimer > 240) {
+            if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL || o->oTimer > o->oF4 + (o->oF8 * 2)) {
                 obj_mark_for_deletion(o);
             }
 

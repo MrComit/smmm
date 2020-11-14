@@ -992,7 +992,11 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
                         geo_process_rotation((struct GraphNodeRotation *) curGraphNode);
                         break;
                     case GRAPH_NODE_TYPE_OBJECT:
-                        geo_process_object((struct Object *) curGraphNode);
+                        if (((struct Object *) curGraphNode)->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM) {
+                            ((struct GraphNodeObject *) curGraphNode)->throwMatrix = NULL;
+                        } else {
+                            geo_process_object((struct Object *) curGraphNode);
+                        }
                         break;
                     case GRAPH_NODE_TYPE_ANIMATED_PART:
                         geo_process_animated_part((struct GraphNodeAnimatedPart *) curGraphNode);
