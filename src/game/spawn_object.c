@@ -341,6 +341,7 @@ struct Object *create_object(const BehaviorScript *bhvScript) {
     //  themselves.
     switch (objListIndex) {
         case OBJ_LIST_GENACTOR:
+        case OBJ_LIST_DOORS:
         case OBJ_LIST_PUSHABLE:
         case OBJ_LIST_POLELIKE:
             snap_object_to_floor(obj);

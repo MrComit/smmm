@@ -42,7 +42,7 @@ enum ObjectList
                           //      can push each other around as well as their parent
                           //      objects. (goombas, koopas, spinies)
     OBJ_LIST_LEVEL,       //  (6) level objects. general level objects such as heart, star
-    OBJ_LIST_UNUSED_7,    //  (7) (unused)
+    OBJ_LIST_DOORS,    //  (7) (unused)
     OBJ_LIST_DEFAULT,     //  (8) default objects. objects that didnt start with a 00
                           //      command are put here, so this is treated as a default.
     OBJ_LIST_SURFACE,     //  (9) surface objects. objects that specifically have surface

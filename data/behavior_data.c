@@ -330,11 +330,11 @@
 
 
 const BehaviorScript bhvStarDoor[] = {
-    BEGIN(OBJ_LIST_SURFACE),
+    BEGIN(OBJ_LIST_DOORS),
     SET_INT(oInteractType, INTERACT_DOOR),
     LOAD_COLLISION_DATA(inside_castle_seg7_collision_star_door),
     SET_INT(oInteractionSubtype, INT_SUBTYPE_STAR_DOOR),
-    OR_INT(oFlags, (OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_MULTIROOM | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 20000),
@@ -1060,16 +1060,16 @@ const BehaviorScript bhvTriangleParticleSpawner[] = {
 };
 
 const BehaviorScript bhvDoorWarp[] = {
-    BEGIN(OBJ_LIST_SURFACE),
+    BEGIN(OBJ_LIST_DOORS),
     SET_INT(oInteractType, INTERACT_WARP_DOOR),
     GOTO(bhvDoor + 1 + 1),
 };
 
 const BehaviorScript bhvDoor[] = {
-    BEGIN(OBJ_LIST_SURFACE),
+    BEGIN(OBJ_LIST_DOORS),
     SET_INT(oInteractType, INTERACT_DOOR),
     // Door - common:
-    OR_INT(oFlags, (OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_MULTIROOM | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, door_seg3_anims_030156C0),
     ANIMATE(0),
     LOAD_COLLISION_DATA(door_seg3_collision_0301CE78),
@@ -3506,7 +3506,7 @@ UNUSED static const u64 behavior_data_unused_0 = 0;
 const BehaviorScript bhvMario[] = {
     BEGIN(OBJ_LIST_PLAYER),
     SET_INT(oIntangibleTimer, 0),
-    OR_INT(oFlags, OBJ_FLAG_0100),
+    OR_INT(oFlags, OBJ_FLAG_MULTIROOM),
     OR_INT(oUnk94, 0x0001),
     SET_HITBOX(/*Radius*/ 37, /*Height*/ 160),
     BEGIN_LOOP(),

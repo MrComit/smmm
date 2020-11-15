@@ -3,10 +3,11 @@
 const GeoLayout bob_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(2, geo_switch_area),
+		GEO_SWITCH_CASE(3, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, bob_dl_Room1A_geo),
 			GEO_BRANCH(1, bob_dl_Room1B_geo),
+			GEO_BRANCH(1, bob_dl_Room1C_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -14,9 +15,9 @@ const GeoLayout bob_area_1_geo[] = {
 const GeoLayout bob_dl_Room1A_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 945, 26, 27248, bob_dl_Bookshelf_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 945, 26, 27198, bob_dl_Bookshelf_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1271, 89, 28819, bob_dl_Dresser_mesh),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1057, 0, 27507, bob_dl_Lamp_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1057, 0, 27458, bob_dl_Lamp_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1261, 100, 29142, bob_dl_MRoomCrate_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1061, 100, 29142, bob_dl_MRoomCrate_001_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 861, 100, 29142, bob_dl_MRoomCrate_002_mesh),
@@ -65,6 +66,14 @@ const GeoLayout bob_dl_Room1B_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2533, 0, 13277, bob_dl_Pillar_008_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2633, 0, 13277, bob_dl_Pillar_009_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 64, 0, 22575, bob_dl_Simple_Table_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_Room1C_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 6104, 26, 12866, bob_dl_Bookshelf_001_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 28197, bob_dl_Parlor_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

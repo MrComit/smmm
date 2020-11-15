@@ -2412,9 +2412,7 @@ void cur_obj_enable_rendering_if_mario_in_room(void) {
     if (o->oRoom != -1 && gMarioCurrentRoom != 0) {
         if (gMarioCurrentRoom == o->oRoom) {
             marioInRoom = TRUE;
-        } else if (gDoorAdjacentRooms[gMarioCurrentRoom][0] == o->oRoom) {
-            marioInRoom = TRUE;
-        } else if (gDoorAdjacentRooms[gMarioCurrentRoom][1] == o->oRoom) {
+        } else if (o->oFlags & OBJ_FLAG_MULTIROOM && gMarioCurrentRoom == o->oRoom2) {
             marioInRoom = TRUE;
         } else {
             marioInRoom = FALSE;

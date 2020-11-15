@@ -177,6 +177,7 @@ s8 sObjectListUpdateOrder[] = { OBJ_LIST_SPAWNER,
                                 OBJ_LIST_GENACTOR,
                                 OBJ_LIST_DESTRUCTIVE,
                                 OBJ_LIST_LEVEL,
+                                OBJ_LIST_DOORS,
                                 OBJ_LIST_DEFAULT,
                                 OBJ_LIST_UNIMPORTANT,
                                 -1 };
@@ -564,6 +565,7 @@ void update_terrain_objects(void) {
     gObjectCounter = update_objects_in_list(&gObjectLists[OBJ_LIST_SPAWNER]);
     //! This was meant to be +=
     gObjectCounter = update_objects_in_list(&gObjectLists[OBJ_LIST_SURFACE]);
+    gObjectCounter += update_objects_in_list(&gObjectLists[OBJ_LIST_DOORS]);
 }
 
 /**

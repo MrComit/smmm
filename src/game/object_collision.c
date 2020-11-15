@@ -127,6 +127,8 @@ void check_player_object_collision(void) {
                       (struct Object *) &gObjectLists[OBJ_LIST_POLELIKE]);
         check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_LEVEL].next,
                       (struct Object *) &gObjectLists[OBJ_LIST_LEVEL]);
+        check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_DOORS].next,
+                      (struct Object *) &gObjectLists[OBJ_LIST_DOORS]);
         check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_GENACTOR].next,
                       (struct Object *) &gObjectLists[OBJ_LIST_GENACTOR]);
         check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_PUSHABLE].next,
@@ -158,6 +160,8 @@ void check_destructive_object_collision(void) {
             check_collision_in_list(sp18, (struct Object *) sp18->header.next, sp1C);
             check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_GENACTOR].next,
                           (struct Object *) &gObjectLists[OBJ_LIST_GENACTOR]);
+            check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_DOORS].next,
+                          (struct Object *) &gObjectLists[OBJ_LIST_DOORS]);
             check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_PUSHABLE].next,
                           (struct Object *) &gObjectLists[OBJ_LIST_PUSHABLE]);
             check_collision_in_list(sp18, (struct Object *) gObjectLists[OBJ_LIST_SURFACE].next,
@@ -173,6 +177,7 @@ void detect_object_collisions(void) {
     clear_object_collision((struct Object *) &gObjectLists[OBJ_LIST_PUSHABLE]);
     clear_object_collision((struct Object *) &gObjectLists[OBJ_LIST_GENACTOR]);
     clear_object_collision((struct Object *) &gObjectLists[OBJ_LIST_LEVEL]);
+    clear_object_collision((struct Object *) &gObjectLists[OBJ_LIST_DOORS]);
     clear_object_collision((struct Object *) &gObjectLists[OBJ_LIST_SURFACE]);
     clear_object_collision((struct Object *) &gObjectLists[OBJ_LIST_DESTRUCTIVE]);
     check_player_object_collision();
