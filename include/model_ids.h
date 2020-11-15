@@ -593,7 +593,7 @@
 
 // LEVEL 1 MODELS
 #define MODEL_LAND_CHUNK 0xFF
-
+#define MODEL_CHANDELIER 0xFE
 
 
 

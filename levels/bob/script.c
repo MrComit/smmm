@@ -38,6 +38,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_SEESAW_PLATFORM, bob_geo_000458), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOB_BARS_GRILLS, bob_geo_000470), 
 	LOAD_MODEL_FROM_GEO(MODEL_LAND_CHUNK, landchunk_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CHANDELIER, chandelier_geo), 
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -48,6 +49,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BLUE_COIN, -597, -144, 21071, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, -403, -166, 21762, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, -1885, -84, 19060, 0, 0, 0, 0x05020000, bhvBlueCoinSwitch),
+		OBJECT(MODEL_CHANDELIER, 741, 685, 17689, 0, 0, 0, 0x00000000, bhvChandelier),
 		OBJECT(MODEL_LAND_CHUNK, -2431, -200, 23982, 0, 0, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -2101, -200, 23213, 0, 28, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -1210, -200, 23651, 0, 82, 0, 0x021E0000, bhvLandChunk),
@@ -55,7 +57,7 @@ const LevelScript level_bob_entry[] = {
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
-		STOP_MUSIC(0),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SPOOKY),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 

@@ -580,6 +580,8 @@ extern struct WaterDropletParams gShallowWaterWaveDropletParams;
 
 void bhv_sinking_plat_loop(void);
 void bhv_sinking_plat_init(void);
+void bhv_chandelier_loop(void);
+void bhv_chandelier_init(void);
 
 
 #endif // BEHAVIOR_ACTIONS_H

@@ -37,4 +37,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/landchunk/geo_header.h"
 
+#include "levels/bob/chandelier/geo_header.h"
+
 #endif

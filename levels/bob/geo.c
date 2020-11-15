@@ -20,3 +20,4 @@
 #include "levels/bob/geo.inc.c"
 
 #include "levels/bob/landchunk/geo.inc.c"
+#include "levels/bob/chandelier/geo.inc.c"

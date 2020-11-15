@@ -29,3 +29,4 @@
 
 #include "levels/bob/landchunk/collision.inc.c"
 #include "levels/bob/landchunk/model.inc.c"
+#include "levels/bob/chandelier/model.inc.c"
