@@ -1,5 +1,7 @@
 // 0x160003A8
 const GeoLayout castle_door_geo[] = {
+   GEO_CULLING_RADIUS(0x1000),
+   GEO_OPEN_NODE(),
    GEO_TRANSLATE_NODE(0x00, 78, 0, 0),
    GEO_OPEN_NODE(),
       GEO_SCALE(0x00, 16384),
@@ -288,6 +290,8 @@ GEO_END(),
 
 // 0x160009D0
 const GeoLayout key_door_geo[] = {
+   GEO_CULLING_RADIUS(0x1000),
+   GEO_OPEN_NODE(),
    GEO_TRANSLATE_NODE(0x00, 78, 0, 0),
    GEO_OPEN_NODE(),
       GEO_SCALE(0x00, 16384),
