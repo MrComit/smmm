@@ -3,12 +3,13 @@
 const GeoLayout bob_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(4, geo_switch_area),
+		GEO_SWITCH_CASE(5, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, bob_dl_Room1A_geo),
 			GEO_BRANCH(1, bob_dl_Room1B_geo),
 			GEO_BRANCH(1, bob_dl_Room1C_geo),
 			GEO_BRANCH(1, bob_dl_Room1D_geo),
+			GEO_BRANCH(1, bob_dl_Room1E_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -87,6 +88,13 @@ const GeoLayout bob_dl_Room1D_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4800, 373, 16403, bob_dl_Garage_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_Room1E_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4278, 365, 13935, bob_dl_Hallway_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
