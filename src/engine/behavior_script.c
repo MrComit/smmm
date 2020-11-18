@@ -985,9 +985,9 @@ void cur_obj_update(void) {
     }
 
 
-    if (objFlags & OBJ_FLAG_MULTIROOM) {
-        gCurrentObject->oRoom2 = (gCurrentObject->oBehParams >> 8) & 0xFF;
-    }
+    //if (objFlags & OBJ_FLAG_MULTIROOM) {
+    //    gCurrentObject->oRoom2 = (gCurrentObject->oBehParams >> 8) & 0xFF;
+    //}
 
     // Handle visibility of object
     if (gCurrentObject->oRoom != -1) {
