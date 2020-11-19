@@ -97,6 +97,8 @@ const GeoLayout bob_dl_Room1E_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4555, 375, 10154, bob_dl_Hallway_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 5005, 100, 3810, bob_dl_MRoomCrate_005_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 5005, 300, 3810, bob_dl_MRoomCrate_006_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4893, 0, 10462, bob_dl_Vase_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -104,7 +106,9 @@ const GeoLayout bob_dl_Room1E_geo[] = {
 const GeoLayout bob_dl_Room1F_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 6237, 81, 4551, bob_dl_Cabinet_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 5205, 431, 5678, bob_dl_Hallway_001_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 6437, 5, 4951, bob_dl_Plate_006_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 5248, 68, 5678, bob_dl_chair_004_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
