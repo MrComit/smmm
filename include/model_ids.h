@@ -588,7 +588,8 @@
 
 
 
-
+// GLOBAL MODEL
+#define MODEL_KOOPA 0x30
 
 
 // LEVEL 1 MODELS

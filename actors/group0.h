@@ -342,4 +342,8 @@ extern const Gfx white_particle_small_dl_end[];
 extern const Gfx white_particle_small_dl[];
 extern const Gfx white_particle_small_unused_dl[];
 
+#include "new_koopa/geo_header.h"
+
+
+#include "new_koopa/anim_header.h"
 #endif

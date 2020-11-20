@@ -25,3 +25,7 @@
 #include "white_particle_small/model.inc.c"
 
 #include "sparkle_animation/model.inc.c"
+
+#include "new_koopa/model.inc.c"
+#include "new_koopa/anims/data.inc.c"
+#include "new_koopa/anims/table.inc.c"
