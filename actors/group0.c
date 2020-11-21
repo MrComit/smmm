@@ -29,3 +29,6 @@
 #include "new_koopa/model.inc.c"
 #include "new_koopa/anims/data.inc.c"
 #include "new_koopa/anims/table.inc.c"
+#include "new_shyguy/anims/data.inc.c"
+#include "new_shyguy/anims/table.inc.c"
+#include "new_shyguy/model.inc.c"

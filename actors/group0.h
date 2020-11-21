@@ -346,4 +346,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 
 #include "new_koopa/anim_header.h"
+
+#include "new_shyguy/anim_header.h"
+#include "new_shyguy/geo_header.h"
+
 #endif

@@ -18,3 +18,4 @@
 #include "mario/geo.inc.c"
 
 #include "new_koopa/geo.inc.c"
+#include "new_shyguy/geo.inc.c"

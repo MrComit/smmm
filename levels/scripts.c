@@ -115,6 +115,7 @@ const LevelScript level_main_scripts_entry[] = {
 
     //custom
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA, new_koopa_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_SHYGUY, new_shyguy_geo),
 
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
@@ -194,7 +195,7 @@ const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_CANNON_BARREL,           cannon_barrel_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CANNON_BASE,             cannon_base_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HEART,                   heart_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_FLYGUY,                  flyguy_geo),
+    //LOAD_MODEL_FROM_GEO(MODEL_FLYGUY,                  flyguy_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CHUCKYA,                 chuckya_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TRAJECTORY_MARKER_BALL,      bowling_ball_track_geo),
     RETURN(),

@@ -21,3 +21,4 @@
 
 #include "levels/bob/landchunk/geo.inc.c"
 #include "levels/bob/chandelier/geo.inc.c"
+#include "levels/bob/plate/geo.inc.c"

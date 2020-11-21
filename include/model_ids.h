@@ -590,12 +590,13 @@
 
 // GLOBAL MODEL
 #define MODEL_KOOPA 0x30
+#define MODEL_SHYGUY 0x31
 
 
 // LEVEL 1 MODELS
 #define MODEL_LAND_CHUNK 0xFF
 #define MODEL_CHANDELIER 0xFE
-
+#define MODEL_PLATE      0xFD
 
 
 

@@ -544,6 +544,9 @@ extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvLandChunk[];
 extern const BehaviorScript bhvChandelier[];
+extern const BehaviorScript bhvShyguyPlate[];
+extern const BehaviorScript bhvSpinPlate[];
+
 
 
 

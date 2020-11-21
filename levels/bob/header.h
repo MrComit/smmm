@@ -39,4 +39,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/chandelier/geo_header.h"
 
+#include "levels/bob/plate/geo_header.h"
+
+#include "levels/bob/plate/collision_header.h"
+
 #endif

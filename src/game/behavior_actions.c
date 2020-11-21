@@ -287,3 +287,4 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/sl_walking_penguin.inc.c"
 #include "behaviors/sinking_plat.inc.c"
 #include "behaviors/chandelier.inc.c"
+#include "behaviors/dining_room.inc.c"

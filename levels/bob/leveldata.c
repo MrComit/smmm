@@ -30,3 +30,5 @@
 #include "levels/bob/landchunk/collision.inc.c"
 #include "levels/bob/landchunk/model.inc.c"
 #include "levels/bob/chandelier/model.inc.c"
+#include "levels/bob/plate/model.inc.c"
+#include "levels/bob/plate/collision.inc.c"
