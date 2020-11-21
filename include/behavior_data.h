@@ -546,7 +546,8 @@ extern const BehaviorScript bhvLandChunk[];
 extern const BehaviorScript bhvChandelier[];
 extern const BehaviorScript bhvShyguyPlate[];
 extern const BehaviorScript bhvSpinPlate[];
-
+extern const BehaviorScript bhvShyguyChair[];
+extern const BehaviorScript bhvChair[];
 
 
 

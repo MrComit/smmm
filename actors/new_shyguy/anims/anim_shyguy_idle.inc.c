@@ -1,10 +1,10 @@
-static const s16 new_shyguy_anim_sm64_anim_001_values[] = {
+static const s16 new_shyguy_anim_shyguy_idle_values[] = {
 	0x0000, 0x0050, 0x0000, 0x3C1D, 0x3FFF, 0x3C1D, 0x0000, 0xFFFF, 0x3841, 
 	0xFFFF, 0xFFFF, 0xC000, 0xFFFF, 0x0000, 0x945F, 0xFFFF, 0xFFFF, 0xC000, 
 	0xFFFF, 0x0000, 0x93F7, 
 };
 
-static const u16 new_shyguy_anim_sm64_anim_001_indices[] = {
+static const u16 new_shyguy_anim_shyguy_idle_indices[] = {
 	0x0001, 0x0000, 0x0001, 0x0001, 0x0001, 0x0002, 0x0001, 0x0003, 0x0001, 
 	0x0004, 0x0001, 0x0005, 0x0001, 0x0006, 0x0001, 0x0007, 0x0001, 0x0008, 
 	0x0001, 0x0009, 0x0001, 0x000A, 0x0001, 0x000B, 0x0001, 0x000C, 0x0001, 
@@ -12,15 +12,15 @@ static const u16 new_shyguy_anim_sm64_anim_001_indices[] = {
 	0x0001, 0x0012, 0x0001, 0x0013, 0x0001, 0x0014, 
 };
 
-static const struct Animation new_shyguy_anim_sm64_anim_001 = {
-	1,
+static const struct Animation new_shyguy_anim_shyguy_idle = {
 	0,
 	0,
+	0,
 	1,
 	1,
-	ANIMINDEX_NUMPARTS(new_shyguy_anim_sm64_anim_001_indices),
-	new_shyguy_anim_sm64_anim_001_values,
-	new_shyguy_anim_sm64_anim_001_indices,
+	ANIMINDEX_NUMPARTS(new_shyguy_anim_shyguy_idle_indices),
+	new_shyguy_anim_shyguy_idle_values,
+	new_shyguy_anim_shyguy_idle_indices,
 	0,
 };
 

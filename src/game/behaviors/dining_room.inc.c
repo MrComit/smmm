@@ -26,6 +26,11 @@ void bhv_shyguy_plate_loop(void) {
             }
             break;
         case 1:
+            if (o->oTimer > 20) {
+                cur_obj_init_anim_and_check_if_end(2);
+            } else if (o->oTimer > 11) {
+                cur_obj_init_anim_and_check_if_end(0);
+            }
             if (o->oTimer > 30) {
                 o->oAction = 2;
             }
@@ -75,4 +80,29 @@ void bhv_spin_plate_loop(void) {
         if (o->oFloatF4 < 0.01f)
             o->activeFlags = 0;
     }
+}
+
+
+
+void bhv_shyguy_chair_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+    }
+
+
+}
+
+
+
+
+void bhv_dining_chair_loop(void) {
+
+
+
 }

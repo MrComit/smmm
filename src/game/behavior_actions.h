@@ -586,6 +586,8 @@ void bhv_shyguy_plate_loop(void);
 void bhv_spin_plate_init(void);
 void bhv_spin_plate_loop(void);
 void bhv_shyguy_init(void);
+void bhv_shyguy_chair_loop(void);
+void bhv_dining_chair_loop(void);
 
 
 #endif // BEHAVIOR_ACTIONS_H

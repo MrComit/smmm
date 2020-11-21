@@ -341,7 +341,7 @@ static void cur_obj_init_anim_extend(s32 arg0) {
     cur_obj_extend_animation_if_at_end();
 }
 
-static s32 cur_obj_init_anim_and_check_if_end(s32 arg0) {
+s32 cur_obj_init_anim_and_check_if_end(s32 arg0) {
     cur_obj_init_animation_with_sound(arg0);
     return cur_obj_check_if_near_animation_end();
 }

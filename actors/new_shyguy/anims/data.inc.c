@@ -1,1 +1,3 @@
-#include "anim_sm64_anim_001.inc.c"
+#include "anim_shyguy_idle.inc.c"
+#include "anim_shyguy_fly.inc.c"
+#include "anim_shyguy_bow.inc.c"
