@@ -132,6 +132,7 @@ void bhv_shyguy_chair_loop(void) {
                 if (gMarioState->pos[0] > 7002.0f && gMarioState->pos[0] < 7386.0f) {
                     if (gMarioState->pos[2] > 5181.0f && gMarioState->pos[2] < 5565.0f) {
                         o->oAction = 1;
+                        o->oFC = CL_RandomMinMaxU16(65, 95);
                     }
                 }
             }
@@ -141,7 +142,7 @@ void bhv_shyguy_chair_loop(void) {
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 10);
             if (o->oOpacity == 0)
                 cur_obj_disable();
-            if (o->oTimer > 90) {
+            if (o->oTimer > o->oFC) {
                 o->oAction = 2;
             }
             if (o->oF4 > 4) {
@@ -151,6 +152,7 @@ void bhv_shyguy_chair_loop(void) {
                 obj = spawn_object(o, MODEL_SHYGUY, bhvGoomba);
                 obj->oOpacity = 255;
                 o->activeFlags = 0;
+                play_puzzle_jingle();
             }
             break;
         case 2:
@@ -208,7 +210,8 @@ void bhv_dining_chair_loop(void) {
             }
             o->oPosX = 7194.0f + (sins(o->oFaceAngleYaw + 0x8000) * 642.0f);
             o->oPosZ = 5373.0f + (coss(o->oFaceAngleYaw + 0x8000) * 642.0f);
-            o->oFaceAngleYaw += 0x300;
+            o->o100 = approach_s16_symmetric(o->o100, 0x300, 0x10);
+            o->oFaceAngleYaw += o->o100;
             if (o->parentObj->oAction == 2) {
                 if (o->parentObj->oF4 == o->oBehParams2ndByte)
                     o->oAction = 3;
@@ -251,6 +254,7 @@ void bhv_dining_chair_loop(void) {
                 create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
                 o->parentObj->oF4++;
                 o->parentObj->oAction = 1;
+                o->parentObj->oFC = CL_RandomMinMaxU16(65, 95);
             }
             break;
     }

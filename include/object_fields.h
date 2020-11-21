@@ -1165,6 +1165,7 @@
 #define /*0x0FC*/ oFC              OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ o100             OBJECT_FIELD_S32(0x1E)
 #define /*0x104*/ o104             OBJECT_FIELD_S32(0x1F)
+#define /*0x108*/ o108             OBJECT_FIELD_S32(0x20)
 
 
 #define /*0x0F4*/ oFloatF4         OBJECT_FIELD_F32(0x1B)
@@ -1172,5 +1173,6 @@
 #define /*0x0FC*/ oFloatFC         OBJECT_FIELD_F32(0x1D)
 #define /*0x100*/ oFloat100        OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oFloat104        OBJECT_FIELD_F32(0x1F)
+#define /*0x108*/ oFloat108        OBJECT_FIELD_F32(0x20)
 
 #endif // OBJECT_FIELDS_H
