@@ -213,3 +213,12 @@ Vec3f *CL_nearest_point(Vec3f *list, Vec3f source, s16 listcount) {
     }
     return *point;
 }
+
+
+
+s16 CL_obj_pitch_to_mario(void) {
+    f32 x = o->oPosX - gMarioState->pos[0];
+    f32 z = o->oPosZ - gMarioState->pos[2];
+    f32 latDist = sqrtf(x*x + z*z);
+    return atan2s(latDist, o->oPosY - gMarioState->pos[1]);
+}

@@ -32,3 +32,5 @@
 #include "levels/bob/chandelier/model.inc.c"
 #include "levels/bob/plate/model.inc.c"
 #include "levels/bob/plate/collision.inc.c"
+#include "levels/bob/dining_chair/model.inc.c"
+#include "levels/bob/dining_chair/collision.inc.c"

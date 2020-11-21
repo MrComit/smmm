@@ -6187,16 +6187,15 @@ const BehaviorScript bhvShyguyChair[] = {
 };
 
 
-const BehaviorScript bhvChair[] = {
+const BehaviorScript bhvDiningChair[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x400),
     SET_HOME(),
-    //LOAD_COLLISION_DATA(dining_chair_collision),
-    //CALL_NATIVE(bhv_spin_plate_init),
+    LOAD_COLLISION_DATA(dining_chair_collision),
+    CALL_NATIVE(bhv_dining_chair_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_dining_chair_loop),
     END_LOOP(),
 };

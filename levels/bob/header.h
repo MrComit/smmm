@@ -43,4 +43,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/plate/collision_header.h"
 
+#include "levels/bob/dining_chair/geo_header.h"
+
+#include "levels/bob/dining_chair/collision_header.h"
+
 #endif

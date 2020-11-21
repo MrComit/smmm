@@ -597,6 +597,8 @@
 #define MODEL_LAND_CHUNK 0xFF
 #define MODEL_CHANDELIER 0xFE
 #define MODEL_PLATE      0xFD
+#define MODEL_DINING_CHAIR 0xFC
+
 
 
 

@@ -83,13 +83,35 @@ void bhv_spin_plate_loop(void) {
 }
 
 
+void shyguy_clamp_mario_on_table(struct MarioState *m) {
+    if (m->pos[0] > 7586.0f)
+        m->pos[0] = 7586.0f;
+    else if (m->pos[0] < 6802.0f)
+        m->pos[0] = 6802.0f;
+
+    if (m->pos[2] > 5765.0f)
+        m->pos[2] = 5765.0f;
+    else if (m->pos[2] < 4981.0f)
+        m->pos[2] = 4981.0f;
+}
+
 
 void bhv_shyguy_chair_loop(void) {
     switch (o->oAction) {
         case 0:
-            
+            if (gMarioState->pos[1] > 100.0f) {
+                if (gMarioState->pos[0] > 6802.0f && gMarioState->pos[0] < 7586.0f) {
+                    if (gMarioState->pos[2] > 4981.0f && gMarioState->pos[2] < 5765.0f) {
+                        o->oAction = 1;
+                    }
+                }
+            }
             break;
         case 1:
+            shyguy_clamp_mario_on_table(gMarioState);
+            if (o->oTimer > 90) {
+                o->oAction = 2;
+            }
             break;
         case 2:
             break;
@@ -98,11 +120,52 @@ void bhv_shyguy_chair_loop(void) {
 
 }
 
-
+void bhv_dining_chair_init(void) {
+    o->oF8 = 7 * o->oBehParams2ndByte;
+    //o->oFC = 0x2AAA * o->oBehParams2ndByte;
+    o->parentObj = cur_obj_nearest_object_with_behavior(bhvShyguyChair);
+    if (o->parentObj == NULL)
+        o->activeFlags = 0;
+}
 
 
 void bhv_dining_chair_loop(void) {
-
-
-
+    s16 pitchApproach;
+    switch (o->oAction) {
+        case 0:
+            load_object_collision_model();
+            if (o->parentObj->oAction == 1) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > o->oF8) {
+                o->oPosY = 100.0f + (100.0f * -coss(o->oF4));
+                o->oF4 += 0x600;
+            }
+            o->oPosX = 7194.0f + (sins(o->oFaceAngleYaw + 0x8000) * 642.0f);
+            o->oPosZ = 5373.0f + (coss(o->oFaceAngleYaw + 0x8000) * 642.0f);
+            o->oFaceAngleYaw += 0x300;
+            if (o->parentObj->oAction == 2) {
+                if (o->parentObj->oF4 == o->oBehParams2ndByte)
+                    o->oAction = 3;
+                else
+                    o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = 100.0f + (100.0f * -coss(o->oF4));
+            o->oF4 += 0x600;
+            if (o->parentObj->oAction == 1) {
+                o->oAction = 1;
+            }
+            break;
+        case 3:
+            o->oPosY = approach_f32(o->oPosY, 200.0f, 10.0f, 10.0f);
+            //pitchApproach = CL_obj_pitch_to_mario() + 0x4000;
+            //o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, pitchApproach, 0x200);
+            //o->oFaceAngleRoll += 0x1200;
+            o->oFaceAngleYaw += 0x1200;
+            break;
+    }
 }
