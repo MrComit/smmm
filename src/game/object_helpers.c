@@ -1146,6 +1146,12 @@ void cur_obj_disable(void) {
     cur_obj_become_intangible();
 }
 
+void cur_obj_enable(void) {
+    cur_obj_enable_rendering();
+    cur_obj_unhide();
+    cur_obj_become_tangible();
+}
+
 void cur_obj_become_intangible(void) {
     // When the timer is negative, the object is intangible and the timer
     // doesn't count down
@@ -1427,6 +1433,12 @@ void cur_obj_move_y_with_terminal_vel(void) {
 void cur_obj_compute_vel_xz(void) {
     o->oVelX = o->oForwardVel * sins(o->oMoveAngleYaw);
     o->oVelZ = o->oForwardVel * coss(o->oMoveAngleYaw);
+}
+
+void cur_obj_compute_vel_xyz(void) {
+    o->oVelX = o->oForwardVel * sins(o->oMoveAngleYaw) * coss(o->oMoveAnglePitch);
+    o->oVelZ = o->oForwardVel * coss(o->oMoveAngleYaw) * coss(o->oMoveAnglePitch);
+    o->oVelY = o->oForwardVel * sins(o->oMoveAnglePitch);
 }
 
 f32 increment_velocity_toward_range(f32 value, f32 center, f32 zeroThreshold, f32 increment) {

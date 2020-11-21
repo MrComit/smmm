@@ -6,6 +6,7 @@ u16 CL_RandomMinMaxU16(u16 min, u16 max);
 void CL_kill_mario();
 u8 CL_run_timer(u16 time);
 void CL_Move();
+void CL_Move_3d();
 struct Object *CL_Create_Star_Ptr(f32 sp20, f32 sp24, f32 sp28);
 struct Object *CL_Create_Star_Helper(struct Object *sp30, f32 sp34, f32 sp38, f32 sp3C);
 s16 CL_object_to_point(struct Object *o, Vec3f point);

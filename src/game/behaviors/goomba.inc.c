@@ -152,7 +152,7 @@ static void mark_goomba_as_dead(void) {
  * Walk around randomly occasionally jumping. If mario comes within range,
  * chase him.
  */
-static void goomba_act_walk(void) {
+void goomba_act_walk(void) {
     treat_far_home_as_mario(1000.0f);
 
     obj_forward_vel_approach(o->oGoombaRelativeSpeed * o->oGoombaScale, 0.4f);

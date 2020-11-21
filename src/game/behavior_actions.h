@@ -586,9 +586,12 @@ void bhv_shyguy_plate_loop(void);
 void bhv_spin_plate_init(void);
 void bhv_spin_plate_loop(void);
 void bhv_shyguy_init(void);
+void bhv_shyguy_loop(void);
 void bhv_shyguy_chair_loop(void);
 void bhv_dining_chair_loop(void);
 void bhv_dining_chair_init(void);
+void goomba_act_walk(void);
 
 
+#include "!COMIT_LIBRARY.h"
 #endif // BEHAVIOR_ACTIONS_H

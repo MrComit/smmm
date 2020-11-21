@@ -3,11 +3,23 @@ static struct ObjectHitbox sShyguyHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
-    /* numLootCoins:      */ 1,
+    /* numLootCoins:      */ 2,
     /* radius:            */ 72,
     /* height:            */ 50,
     /* hurtboxRadius:     */ 42,
     /* hurtboxHeight:     */ 40,
+};
+
+static struct ObjectHitbox sChairHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 110,
+    /* height:            */ 80,
+    /* hurtboxRadius:     */ 110,
+    /* hurtboxHeight:     */ 80,
 };
 
 f32 sPlateGuyZPos[2] = {6815.44f, 6415.44f};
@@ -15,7 +27,20 @@ f32 sPlateGuyZPos[2] = {6815.44f, 6415.44f};
 
 void bhv_shyguy_init(void) {
     obj_set_hitbox(o, &sShyguyHitbox);
+    o->oOpacity = 0xFF;
 }
+
+void bhv_shyguy_loop(void) {
+    goomba_act_walk();
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+            spawn_mist_particles();
+            obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+            o->activeFlags = 0;
+            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    }
+    o->oInteractStatus = 0;
+}
+
 
 
 void bhv_shyguy_plate_loop(void) {
@@ -97,11 +122,15 @@ void shyguy_clamp_mario_on_table(struct MarioState *m) {
 
 
 void bhv_shyguy_chair_loop(void) {
+    struct Object *obj;
+    s16 yaw;
     switch (o->oAction) {
         case 0:
+            o->oOpacity = 0;
+            cur_obj_disable();
             if (gMarioState->pos[1] > 100.0f) {
-                if (gMarioState->pos[0] > 6802.0f && gMarioState->pos[0] < 7586.0f) {
-                    if (gMarioState->pos[2] > 4981.0f && gMarioState->pos[2] < 5765.0f) {
+                if (gMarioState->pos[0] > 7002.0f && gMarioState->pos[0] < 7386.0f) {
+                    if (gMarioState->pos[2] > 5181.0f && gMarioState->pos[2] < 5565.0f) {
                         o->oAction = 1;
                     }
                 }
@@ -109,12 +138,44 @@ void bhv_shyguy_chair_loop(void) {
             break;
         case 1:
             shyguy_clamp_mario_on_table(gMarioState);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 10);
+            if (o->oOpacity == 0)
+                cur_obj_disable();
             if (o->oTimer > 90) {
                 o->oAction = 2;
             }
+            if (o->oF4 > 4) {
+                //cur_obj_set_behavior(bhvGoomba);
+                //cur_obj_enable();
+                //o->oAction = 3;
+                obj = spawn_object(o, MODEL_SHYGUY, bhvGoomba);
+                obj->oOpacity = 255;
+                o->activeFlags = 0;
+            }
             break;
         case 2:
+            shyguy_clamp_mario_on_table(gMarioState);
+            if (o->oTimer == 0) {
+                cur_obj_enable();
+                obj = CL_obj_nearest_object_behavior_params(bhvDiningChair, o->oF4 << 16);
+                if (obj == NULL) {
+                    o->activeFlags = 0;
+                    break;
+                }
+                o->oPosX = obj->oPosX;
+                o->oPosZ = obj->oPosZ;
+                yaw = cur_obj_angle_to_home();
+                //yaw = CL_angle_between_points(&obj->oPosX, &o->oHomeX);
+                o->oPosX = obj->oPosX - (75.0f * sins(yaw));
+                o->oPosZ = obj->oPosZ - (75.0f * coss(yaw));
+                o->oPosY = 275.0f;
+                o->oFaceAngleYaw = (o->oMoveAngleYaw = yaw);
+            }
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 50 + (o->oF4 * 10), 10);
             break;
+        //case 3:
+        //    bhv_shyguy_loop();
+        //    break;
     }
 
 
@@ -122,6 +183,7 @@ void bhv_shyguy_chair_loop(void) {
 
 void bhv_dining_chair_init(void) {
     o->oF8 = 7 * o->oBehParams2ndByte;
+    o->oFloatFC = 1.0f;
     //o->oFC = 0x2AAA * o->oBehParams2ndByte;
     o->parentObj = cur_obj_nearest_object_with_behavior(bhvShyguyChair);
     if (o->parentObj == NULL)
@@ -130,7 +192,8 @@ void bhv_dining_chair_init(void) {
 
 
 void bhv_dining_chair_loop(void) {
-    s16 pitchApproach;
+    f32 dist;
+    s16 pitch, yaw;
     switch (o->oAction) {
         case 0:
             load_object_collision_model();
@@ -161,11 +224,34 @@ void bhv_dining_chair_loop(void) {
             }
             break;
         case 3:
-            o->oPosY = approach_f32(o->oPosY, 200.0f, 10.0f, 10.0f);
+            create_sound_spawner(SOUND_GENERAL_SWISH_AIR_2);
+            o->oPosY = approach_f32(o->oPosY, 330.0f, 10.0f, 10.0f);
             //pitchApproach = CL_obj_pitch_to_mario() + 0x4000;
             //o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, pitchApproach, 0x200);
             //o->oFaceAngleRoll += 0x1200;
-            o->oFaceAngleYaw += 0x1200;
+            o->oFaceAngleYaw += 0x1C00;
+            o->oFloatFC = approach_f32(o->oFloatFC, 0.87f, 0.06f, 0.06f);
+            cur_obj_scale(o->oFloatFC);
+            if (o->oTimer > 30) {
+                o->oAction = 4;
+                o->oForwardVel = 65.0f;
+                //vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+                o->oMoveAngleYaw = o->oAngleToMario;//yaw;
+                o->oMoveAnglePitch = 0xF500;//pitch;
+                obj_set_hitbox(o, &sChairHitbox);
+            }
+            break;
+        case 4:
+            o->oFaceAngleYaw += 0x1C00;
+            CL_Move_3d();
+            cur_obj_update_floor_and_walls();
+            if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
+            || o->oInteractStatus & INT_STATUS_INTERACTED) {
+                obj_explode_and_spawn_coins(46.0f, 0);
+                create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+                o->parentObj->oF4++;
+                o->parentObj->oAction = 1;
+            }
             break;
     }
 }

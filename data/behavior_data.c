@@ -5170,7 +5170,7 @@ const BehaviorScript bhvFlyGuy[] = {
 const BehaviorScript bhvGoomba[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    DROP_TO_FLOOR(),
+    //DROP_TO_FLOOR(),
     LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
@@ -6193,9 +6193,26 @@ const BehaviorScript bhvDiningChair[] = {
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x400),
     SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     LOAD_COLLISION_DATA(dining_chair_collision),
     CALL_NATIVE(bhv_dining_chair_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_dining_chair_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvShyguy[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    ANIMATE(0),
+    SET_FLOAT(oGraphYOffset, 30),
+    SET_HOME(),
+    //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    CALL_NATIVE(bhv_shyguy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shyguy_loop),
     END_LOOP(),
 };

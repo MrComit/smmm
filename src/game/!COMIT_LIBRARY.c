@@ -33,6 +33,11 @@ void CL_Move() {
     cur_obj_move_using_vel_and_gravity();
 }
 
+void CL_Move_3d() {
+    cur_obj_compute_vel_xyz();
+    cur_obj_move_using_vel_and_gravity();
+}
+
 struct Object *CL_Create_Star_Helper(struct Object *sp30, f32 sp34, f32 sp38, f32 sp3C) {
     sp30 = spawn_object_abs_with_rot(o, 0, MODEL_STAR, bhvStarSpawnCoordinates, o->oPosX, o->oPosY,
                                      o->oPosZ, 0, 0, 0);
