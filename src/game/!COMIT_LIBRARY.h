@@ -21,5 +21,6 @@ s32 CL_NPC_Dialog(s32 dialogId);
 s32 CL_respawn(s16 *timer, Vec3f pos, s16 faceAngle, s16 damage);
 Vec3f *CL_nearest_point(Vec3f *list, Vec3f source, s16 listcount);
 s16 CL_obj_pitch_to_mario(void);
+void CL_get_hit(struct MarioState *m, struct Object *o, u32 damage);
 
 #endif

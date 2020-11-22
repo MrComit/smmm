@@ -5,6 +5,7 @@
 #include "object_list_processor.h"
 #include "include/behavior_data.h"
 #include "audio/internal.h"
+#include "game/interaction.h"
 #define o gCurrentObject
 extern s16 s8DirModeYawOffset;
 
@@ -226,4 +227,45 @@ s16 CL_obj_pitch_to_mario(void) {
     f32 z = o->oPosZ - gMarioState->pos[2];
     f32 latDist = sqrtf(x*x + z*z);
     return atan2s(latDist, o->oPosY - gMarioState->pos[1]);
+}
+
+u32 CL_get_hit_helper(struct MarioState *m, u32 damage) {
+    s32 shake;
+    if (damage >= 4) {
+        shake = SHAKE_LARGE_DAMAGE;
+    } else if (damage >= 2) {
+        shake = SHAKE_MED_DAMAGE;
+    } else {
+        shake = SHAKE_SMALL_DAMAGE;
+    }
+
+    if (!(m->flags & MARIO_CAP_ON_HEAD)) {
+        damage += (damage + 1) / 2;
+    }
+
+    if (m->flags & MARIO_METAL_CAP) {
+        damage = 0;
+    }
+
+    m->hurtCounter += 4 * damage;
+
+    queue_rumble_data(5, 80);
+    set_camera_shake_from_hit(shake);
+
+    return damage;
+}
+
+extern s16 sInvulnerable;
+
+void CL_get_hit(struct MarioState *m, struct Object *o, u32 damage) {
+    if (!sInvulnerable && !(m->flags & MARIO_VANISH_CAP)) {
+        //o->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_ATTACKED_MARIO;
+        m->interactObj = o;
+
+        damage = CL_get_hit_helper(m, damage);
+        play_sound(SOUND_MARIO_ATTACKED, m->marioObj->header.gfx.cameraToObject);
+
+        update_mario_sound_and_camera(m);
+        drop_and_set_mario_action(m, determine_knockback_action(m, o->oDamageOrCoinValue), damage);
+    }
 }

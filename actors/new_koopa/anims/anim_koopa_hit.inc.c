@@ -110,7 +110,7 @@ static const u16 new_koopa_anim_koopa_hit_indices[] = {
 };
 
 static const struct Animation new_koopa_anim_koopa_hit = {
-	0,
+	1,
 	0,
 	0,
 	1,

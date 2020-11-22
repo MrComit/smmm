@@ -105,8 +105,8 @@ static void koopa_play_footstep_sound(s8 animFrame1, s8 animFrame2) {
  * running away.
  */
 static s32 koopa_check_run_from_mario(void) {
-    if (o->oKoopaDistanceToMario < 300.0f
-        && abs_angle_diff(o->oKoopaAngleToMario, o->oMoveAngleYaw) < 0x3000) {
+    if (o->oKoopaDistanceToMario < 500.0f
+        && abs_angle_diff(o->oKoopaAngleToMario, o->oMoveAngleYaw) < 0x6000) {
         o->oAction = KOOPA_SHELLED_ACT_RUN_FROM_MARIO;
         return TRUE;
     }
@@ -120,7 +120,7 @@ static s32 koopa_check_run_from_mario(void) {
  */
 static void koopa_shelled_act_stopped(void) {
     o->oForwardVel = 0.0f;
-    if (cur_obj_init_anim_and_check_if_end(14 /*7*/)) {
+    if (cur_obj_init_anim_and_check_if_end(7)) {
         o->oAction = KOOPA_SHELLED_ACT_WALK;
         o->oKoopaTargetYaw = o->oMoveAngleYaw + 0x2000 * (s16) random_sign();
     }
@@ -171,9 +171,9 @@ static void koopa_shelled_act_walk(void) {
         o->oKoopaTurningAwayFromWall = obj_resolve_collisions_and_turn(o->oKoopaTargetYaw, 0x200);
     } else {
         // If far from home, then begin turning toward home
-        if (o->oDistanceToMario >= 25000.0f) {
-            o->oKoopaTargetYaw = o->oAngleToMario;
-        }
+        //if (o->oDistanceToMario >= 25000.0f) {
+        //    o->oKoopaTargetYaw = o->oAngleToMario;
+        //}
 
         o->oKoopaTurningAwayFromWall = obj_bounce_off_walls_edges_objects(&o->oKoopaTargetYaw);
         cur_obj_rotate_yaw_toward(o->oKoopaTargetYaw, 0x200);
@@ -203,19 +203,25 @@ static void koopa_shelled_act_run_from_mario(void) {
     koopa_play_footstep_sound(0, 11);
 
     // If far from home, run toward it
-    if (o->oDistanceToMario >= 25000.0f) {
-        o->oAngleToMario += 0x8000;
-        o->oDistanceToMario = 0.0f;
-    }
+    //if (o->oDistanceToMario >= 25000.0f) {
+    //    o->oAngleToMario += 0x8000;
+    //    o->oDistanceToMario = 0.0f;
+    //}
 
-    if (o->oTimer > 30 && o->oDistanceToMario > 800.0f) {
-        if (obj_forward_vel_approach(0.0f, 1.0f)) {
-            o->oAction = KOOPA_SHELLED_ACT_STOPPED;
-        }
-    } else {
-        cur_obj_rotate_yaw_toward(o->oAngleToMario + 0x8000, 0x400);
-        obj_forward_vel_approach(17.0f, 1.0f);
+    //if (o->oTimer > 30 && o->oDistanceToMario > 800.0f) {
+    //    if (obj_forward_vel_approach(0.0f, 1.0f)) {
+    //        o->oAction = KOOPA_SHELLED_ACT_STOPPED;
+    //    }
+    //} else {
+    cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x800);
+    obj_forward_vel_approach(17.0f, 1.0f);
+    if (o->oDistanceToMario < 100.0f) {
+        o->oAction = KOOPA_SHELLED_ACT_HIT;
     }
+    if (o->oDistanceToMario > 900.0f) {
+        o->oAction = KOOPA_SHELLED_ACT_STOPPED;
+    }
+    //}
 }
 
 /**
@@ -235,8 +241,26 @@ static void koopa_dive_update_speed(f32 decel) {
 /**
  * Slide on the ground and then come to a stop.
  */
-static void koopa_shelled_act_lying(void) {
-    if (o->oForwardVel != 0.0f) {
+static void koopa_shelled_act_hit(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    cur_obj_init_animation_with_sound(14);
+    o->oForwardVel = 0;
+    o->oMoveAngleYaw = o->oAngleToMario;
+    if (o->oTimer > 20 && o->oTimer < 35) {
+        Vec3f hitboxPos;
+        hitboxPos[1] = o->oPosY;
+        hitboxPos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 120.0f);
+        hitboxPos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 120.0f);
+        vec3f_get_dist_and_angle(hitboxPos, gMarioState->pos, &dist, &pitch, &yaw);
+        if (dist < 75.0f) {
+            CL_get_hit(gMarioState, o, 2);            
+        }
+    }
+    if (o->oTimer >= 40) {
+        o->oAction = KOOPA_SHELLED_ACT_STOPPED;
+    }
+    /*if (o->oForwardVel != 0.0f) {
         if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
             o->oMoveAngleYaw = cur_obj_reflect_move_angle_off_wall();
         }
@@ -248,7 +272,7 @@ static void koopa_shelled_act_lying(void) {
         cur_obj_extend_animation_if_at_end();
     } else if (cur_obj_init_anim_and_check_if_end(6)) {
         o->oAction = KOOPA_SHELLED_ACT_STOPPED;
-    }
+    }*/
 }
 
 /**
@@ -302,20 +326,21 @@ static void koopa_shelled_update(void) {
             koopa_shelled_act_run_from_mario();
             break;
 
-        case KOOPA_SHELLED_ACT_LYING:
-            koopa_shelled_act_lying();
+        case KOOPA_SHELLED_ACT_HIT:
+            koopa_shelled_act_hit();
             break;
     }
 
-    if (o->header.gfx.scale[0] > 0.8f) {
-        obj_handle_attacks(&sKoopaHitbox, o->oAction, sKoopaShelledAttackHandlers);
-    } else {
-        // If tiny koopa, die after attacking mario.
-        obj_handle_attacks(&sKoopaHitbox, KOOPA_SHELLED_ACT_DIE, sKoopaUnshelledAttackHandlers);
-        if (o->oAction == KOOPA_SHELLED_ACT_DIE) {
-            obj_die_if_health_non_positive();
-        }
-    }
+    //if (o->header.gfx.scale[0] > 0.8f) {
+    //    obj_handle_attacks(&sKoopaHitbox, o->oAction, sKoopaShelledAttackHandlers);
+    //} else {
+    //    // If tiny koopa, die after attacking mario.
+    //    obj_handle_attacks(&sKoopaHitbox, KOOPA_SHELLED_ACT_DIE, sKoopaUnshelledAttackHandlers);
+    //    if (o->oAction == KOOPA_SHELLED_ACT_DIE) {
+    //        obj_die_if_health_non_positive();
+    //    }
+        obj_handle_attacks(&sKoopaHitbox, o->oAction, sKoopaUnshelledAttackHandlers);
+    //}
 
     cur_obj_move_standard(-78);
 }
@@ -406,7 +431,7 @@ static void koopa_unshelled_act_dive(void) {
         if (shell != NULL && dist_between_objects(shell, gMarioObject) > 200.0f
             && distToShell < 50.0f) {
             o->oKoopaMovementType = KOOPA_BP_NORMAL;
-            o->oAction = KOOPA_SHELLED_ACT_LYING;
+            o->oAction = KOOPA_SHELLED_ACT_HIT;
             o->oForwardVel *= 0.5f;
 
             cur_obj_set_model(MODEL_KOOPA_WITH_SHELL);
@@ -791,12 +816,12 @@ void bhv_koopa_update(void) {
     // PARTIAL_UPDATE
     o->oDeathSound = SOUND_OBJ_KOOPA_FLYGUY_DEATH;
 
-    if (o->oKoopaMovementType >= KOOPA_BP_KOOPA_THE_QUICK_BASE) {
-        koopa_the_quick_update();
-    } else if (obj_update_standard_actions(o->oKoopaAgility * 1.5f)) {
+    //if (o->oKoopaMovementType >= KOOPA_BP_KOOPA_THE_QUICK_BASE) {
+    //    koopa_the_quick_update();
+    /*} else */if (obj_update_standard_actions(o->oKoopaAgility * 1.5f)) {
         o->oKoopaDistanceToMario = o->oDistanceToMario;
         o->oKoopaAngleToMario = o->oAngleToMario;
-        treat_far_home_as_mario(1000.0f);
+        //treat_far_home_as_mario(1000.0f);
 
         koopa_shelled_update();
         /*switch (o->oKoopaMovementType) {
