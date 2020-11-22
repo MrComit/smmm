@@ -69,21 +69,21 @@ static struct KoopaTheQuickProperties sKoopaTheQuickProperties[] = {
  * Initialization function.
  */
 void bhv_koopa_init(void) {
-    if ((o->oKoopaMovementType = o->oBehParams2ndByte) == KOOPA_BP_TINY) {
+    //if ((o->oKoopaMovementType = o->oBehParams2ndByte) == KOOPA_BP_TINY) {
         // Tiny koopa in THI
-        o->oKoopaMovementType = KOOPA_BP_NORMAL;
-        o->oKoopaAgility = 1.6f / 3.0f;
-        o->oDrawingDistance = 1500.0f;
-        cur_obj_scale(0.8f);
-        o->oGravity = -6.4f / 3.0f;
-    } else if (o->oKoopaMovementType >= KOOPA_BP_KOOPA_THE_QUICK_BASE) {
+    //    o->oKoopaMovementType = KOOPA_BP_NORMAL;
+    //    o->oKoopaAgility = 1.6f / 3.0f;
+    //    o->oDrawingDistance = 1500.0f;
+    //    cur_obj_scale(0.8f);
+    //    o->oGravity = -6.4f / 3.0f;
+    //}// else if (o->oKoopaMovementType >= KOOPA_BP_KOOPA_THE_QUICK_BASE) {
         // Koopa the Quick. Race index is 0 for BoB and 1 for THI
-        o->oKoopaTheQuickRaceIndex = o->oKoopaMovementType - KOOPA_BP_KOOPA_THE_QUICK_BASE;
-        o->oKoopaAgility = 4.0f;
-        cur_obj_scale(3.0f);
-    } else {
+    //    o->oKoopaTheQuickRaceIndex = o->oKoopaMovementType - KOOPA_BP_KOOPA_THE_QUICK_BASE;
+    //    o->oKoopaAgility = 4.0f;
+    //    cur_obj_scale(3.0f);
+    //} else {
         o->oKoopaAgility = 1.0f;
-    }
+    //}
 }
 
 /**
@@ -120,7 +120,7 @@ static s32 koopa_check_run_from_mario(void) {
  */
 static void koopa_shelled_act_stopped(void) {
     o->oForwardVel = 0.0f;
-    if (cur_obj_init_anim_and_check_if_end(7)) {
+    if (cur_obj_init_anim_and_check_if_end(14 /*7*/)) {
         o->oAction = KOOPA_SHELLED_ACT_WALK;
         o->oKoopaTargetYaw = o->oMoveAngleYaw + 0x2000 * (s16) random_sign();
     }
@@ -798,7 +798,8 @@ void bhv_koopa_update(void) {
         o->oKoopaAngleToMario = o->oAngleToMario;
         treat_far_home_as_mario(1000.0f);
 
-        switch (o->oKoopaMovementType) {
+        koopa_shelled_update();
+        /*switch (o->oKoopaMovementType) {
             case KOOPA_BP_UNSHELLED:
                 koopa_unshelled_update();
                 break;
@@ -809,7 +810,7 @@ void bhv_koopa_update(void) {
             case KOOPA_BP_KOOPA_THE_QUICK_THI:
                 koopa_the_quick_update();
                 break;
-        }
+        }*/
     } else {
         o->oAnimState = 1;
     }

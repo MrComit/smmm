@@ -12,3 +12,4 @@
 #include "anim_sm64_anim_025.inc.c"
 #include "anim_sm64_anim_026.inc.c"
 #include "anim_sm64_anim_027.inc.c"
+#include "anim_koopa_hit.inc.c"

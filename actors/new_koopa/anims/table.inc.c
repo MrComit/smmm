@@ -27,5 +27,7 @@ const struct Animation *const new_koopa_anims[] = {
 
 	&new_koopa_anim_sm64_anim_027,
 
+	&new_koopa_anim_koopa_hit,
+
 	NULL,
 };

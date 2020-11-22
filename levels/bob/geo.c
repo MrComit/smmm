@@ -23,3 +23,4 @@
 #include "levels/bob/chandelier/geo.inc.c"
 #include "levels/bob/plate/geo.inc.c"
 #include "levels/bob/dining_chair/geo.inc.c"
+#include "levels/bob/utencils/geo.inc.c"
