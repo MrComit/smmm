@@ -942,6 +942,11 @@ u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Obj
     return FALSE;
 }
 
+
+
+
+
+
 u32 get_door_save_file_flag(struct Object *door) {
     u32 saveFileFlag = 0;
     s16 requiredNumStars = door->oBehParams >> 24;
@@ -985,6 +990,16 @@ u32 get_door_save_file_flag(struct Object *door) {
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     s16 requiredNumStars = o->oBehParams >> 24;
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+
+    if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
+        if (o->oF4 == 0) {
+            if (!sDisplayingDoorText) {
+                set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_023);
+            }
+            sDisplayingDoorText = TRUE;
+            return FALSE;
+        }
+    }
 
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
         if (numStars >= requiredNumStars) {

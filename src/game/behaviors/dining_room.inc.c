@@ -22,6 +22,18 @@ static struct ObjectHitbox sChairHitbox = {
     /* hurtboxHeight:     */ 80,
 };
 
+static struct ObjectHitbox sTeapotHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 70,
+    /* height:            */ 70,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
 f32 sPlateGuyZPos[2] = {6815.44f, 6415.44f};
 
 
@@ -257,5 +269,87 @@ void bhv_dining_chair_loop(void) {
                 o->parentObj->oFC = CL_RandomMinMaxU16(65, 95);
             }
             break;
+    }
+}
+
+void bhv_blocking_chair_loop(void) {
+    struct Object *obj;
+    if (cur_obj_nearest_object_with_behavior(bhvShyguyChair) == NULL) {
+        o->activeFlags = 0;
+        obj = cur_obj_nearest_object_with_behavior(bhvBlockedDoor);
+        if (obj != NULL)
+            obj->oF4 = 1;
+    }
+}
+
+
+void bhv_teapot_spawn_loop(void) {
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            o->oFloatF4 = absf(o->oPosX - gMarioState->pos[0]);
+            o->oFloatF8 = o->oPosZ - gMarioState->pos[2];
+            break;
+        case 1:
+            o->oFloatF4 = absf(o->oPosZ - gMarioState->pos[2]);
+            o->oFloatF8 = o->oPosX - gMarioState->pos[0];
+            break;
+        case 2:
+            o->oFloatF4 = absf(o->oPosX - gMarioState->pos[0]);
+            o->oFloatF8 = gMarioState->pos[2] - o->oPosZ;
+            break;
+        case 3:
+            o->oFloatF4 = absf(o->oPosZ - gMarioState->pos[2]);
+            o->oFloatF8 = gMarioState->pos[0] - o->oPosX;
+            break;
+    }
+
+    switch (o->oAction) {
+        case 0:
+            if (o->oFloatF4 < 600.0f) {
+                if (o->oFloatF8 > 0.0f && o->oFloatF8 < 1000.0f) {
+                    o->oAction = 1;
+                    o->oFC = CL_RandomMinMaxU16(35, 60);
+                }
+            }
+            break;
+        case 1:
+            if (o->oFloatF4 > 600.0f || o->oFloatF8 < 0.0f || o->oFloatF8 > 1000.0f) {
+                o->oAction = 0;
+            }
+            if (o->oTimer > o->oFC) {
+                spawn_object(o, MODEL_TEAPOT, bhvTeapot);
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            break;
+    }
+}
+
+void bhv_teapot_init(void) {
+    s16 pitch, yaw;
+    f32 dist;
+    vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+    o->oMoveAnglePitch = pitch;
+    o->oMoveAngleYaw = yaw;
+    o->oForwardVel = 52.0f;
+    obj_set_hitbox(o, &sTeapotHitbox);
+
+}
+
+void bhv_teapot_loop(void) {
+    CL_Move_3d();
+    cur_obj_update_floor_and_walls();
+    o->oFaceAngleYaw += 0x1C00;
+    o->oFaceAngleRoll += 0x1C00;
+    o->oFaceAnglePitch += 0x1C00;
+    if (o->oTimer > 30 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
+    || o->oInteractStatus & INT_STATUS_INTERACTED) {
+        spawn_mist_particles_variable(0, 0, 25.0f);
+        spawn_triangle_break_particles(6, 138, 1.0f, 4);
+        create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+        o->activeFlags = 0;
+        o->parentObj->oAction = 1;
+        o->parentObj->oFC = CL_RandomMinMaxU16(35, 60);
     }
 }

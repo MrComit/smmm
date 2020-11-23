@@ -598,7 +598,7 @@
 #define MODEL_CHANDELIER 0xFE
 #define MODEL_PLATE      0xFD
 #define MODEL_DINING_CHAIR 0xFC
-
+#define MODEL_TEAPOT     0xFB
 
 
 

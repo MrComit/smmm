@@ -35,3 +35,4 @@
 #include "levels/bob/dining_chair/model.inc.c"
 #include "levels/bob/dining_chair/collision.inc.c"
 #include "levels/bob/utencils/model.inc.c"
+#include "levels/bob/teapot/model.inc.c"

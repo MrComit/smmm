@@ -6202,6 +6202,22 @@ const BehaviorScript bhvDiningChair[] = {
 };
 
 
+const BehaviorScript bhvBlockingChair[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    LOAD_COLLISION_DATA(dining_chair_collision),
+    //CALL_NATIVE(bhv_dining_chair_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_blocking_chair_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
 const BehaviorScript bhvShyguy[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -6215,4 +6231,35 @@ const BehaviorScript bhvShyguy[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_shyguy_loop),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvTeapotSpawner[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    //CALL_NATIVE(bhv_teapot_spawn_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_teapot_spawn_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvTeapot[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    SCALE(0, 80),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_teapot_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_teapot_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvBlockedDoor[] = {
+    BEGIN(OBJ_LIST_DOORS),
+    SET_INT(oInteractType, INTERACT_DOOR),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_LOCKED_DOOR),
+    GOTO(bhvDoor + 1 + 1),
 };

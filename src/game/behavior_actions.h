@@ -590,7 +590,13 @@ void bhv_shyguy_loop(void);
 void bhv_shyguy_chair_loop(void);
 void bhv_dining_chair_loop(void);
 void bhv_dining_chair_init(void);
+void bhv_blocking_chair_loop(void);
 void goomba_act_walk(void);
+void bhv_teapot_loop(void);
+void bhv_teapot_init(void);
+void bhv_teapot_spawn_loop(void);
+
+
 
 
 #include "!COMIT_LIBRARY.h"
