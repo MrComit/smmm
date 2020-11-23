@@ -26,6 +26,9 @@
 
 #include "sparkle_animation/model.inc.c"
 
+#include "boo/model.inc.c"
+#include "haunted_cage/model.inc.c"
+
 #include "new_koopa/model.inc.c"
 #include "new_koopa/anims/data.inc.c"
 #include "new_koopa/anims/table.inc.c"

@@ -384,7 +384,7 @@
 #define MODEL_CAP_SWITCH_BASE             0x56        // cap_switch_base_seg5_dl_05003120
 
 // group 9
-#define MODEL_BOO                         0x54        // boo_geo
+//#define MODEL_BOO                         0x54        // boo_geo
 #define MODEL_BETA_BOO_KEY                   0x55        // small_key_geo
 #define MODEL_HAUNTED_CHAIR               0x56        // haunted_chair_geo
 #define MODEL_MAD_PIANO                   0x57        // mad_piano_geo
@@ -588,17 +588,18 @@
 
 
 
-// GLOBAL MODEL
-#define MODEL_KOOPA 0x30
-#define MODEL_SHYGUY 0x31
-
+// GLOBAL MODELS - 0x30 TO 0x53 ARE FREE
+#define MODEL_KOOPA               0x30
+#define MODEL_SHYGUY              0x31
+#define MODEL_BOO                 0x32
+#define MODEL_HAUNTED_CAGE        0x33        // haunted_cage_geo
 
 // LEVEL 1 MODELS
-#define MODEL_LAND_CHUNK 0xFF
-#define MODEL_CHANDELIER 0xFE
-#define MODEL_PLATE      0xFD
-#define MODEL_DINING_CHAIR 0xFC
-#define MODEL_TEAPOT     0xFB
+#define MODEL_LAND_CHUNK          0xFF
+#define MODEL_CHANDELIER          0xFE
+#define MODEL_PLATE               0xFD
+#define MODEL_DINING_CHAIR        0xFC
+#define MODEL_TEAPOT              0xFB
 
 
 

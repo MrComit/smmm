@@ -342,6 +342,28 @@ extern const Gfx white_particle_small_dl_end[];
 extern const Gfx white_particle_small_dl[];
 extern const Gfx white_particle_small_unused_dl[];
 
+
+
+
+//boo
+extern const GeoLayout boo_geo[];
+extern const Gfx boo_seg5_dl_0500BEE0[];
+extern const Gfx boo_seg5_dl_0500BF48[];
+extern const Gfx boo_seg5_dl_0500BFA0[];
+extern const Gfx boo_seg5_dl_0500C1B0[];
+
+// haunted_cage
+extern const GeoLayout haunted_cage_geo[];
+extern const Gfx haunted_cage_seg5_dl_0500F4C8[];
+extern const Gfx haunted_cage_seg5_dl_0500F660[];
+extern const Gfx haunted_cage_seg5_dl_0500F760[];
+extern const Gfx haunted_cage_seg5_dl_0500F7D8[];
+extern const Gfx haunted_cage_seg5_dl_0500FB40[];
+extern const Gfx haunted_cage_seg5_dl_0500FC28[];
+extern const Gfx haunted_cage_seg5_dl_0500FFF0[];
+extern const Gfx haunted_cage_seg5_dl_05010100[];
+
+
 #include "new_koopa/geo_header.h"
 
 

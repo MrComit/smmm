@@ -17,5 +17,8 @@
 #include "sparkle_animation/geo.inc.c"
 #include "mario/geo.inc.c"
 
+#include "boo/geo.inc.c"
+#include "haunted_cage/geo.inc.c"
+
 #include "new_koopa/geo.inc.c"
 #include "new_shyguy/geo.inc.c"

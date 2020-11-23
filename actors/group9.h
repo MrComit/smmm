@@ -4,11 +4,11 @@
 #include "types.h"
 
 // boo
-extern const GeoLayout boo_geo[];
+/*extern const GeoLayout boo_geo[];
 extern const Gfx boo_seg5_dl_0500BEE0[];
 extern const Gfx boo_seg5_dl_0500BF48[];
 extern const Gfx boo_seg5_dl_0500BFA0[];
-extern const Gfx boo_seg5_dl_0500C1B0[];
+extern const Gfx boo_seg5_dl_0500C1B0[];*/
 
 // book
 extern const GeoLayout bookend_geo[];
@@ -49,7 +49,7 @@ extern const Gfx chair_seg5_dl_05005680[];
 extern const struct Animation *const chair_seg5_anims_05005784[];
 
 // haunted_cage
-extern const GeoLayout haunted_cage_geo[];
+/*extern const GeoLayout haunted_cage_geo[];
 extern const Gfx haunted_cage_seg5_dl_0500F4C8[];
 extern const Gfx haunted_cage_seg5_dl_0500F660[];
 extern const Gfx haunted_cage_seg5_dl_0500F760[];
@@ -57,7 +57,7 @@ extern const Gfx haunted_cage_seg5_dl_0500F7D8[];
 extern const Gfx haunted_cage_seg5_dl_0500FB40[];
 extern const Gfx haunted_cage_seg5_dl_0500FC28[];
 extern const Gfx haunted_cage_seg5_dl_0500FFF0[];
-extern const Gfx haunted_cage_seg5_dl_05010100[];
+extern const Gfx haunted_cage_seg5_dl_05010100[];*/
 
 // mad_piano
 extern const GeoLayout mad_piano_geo[];
