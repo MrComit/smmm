@@ -43,7 +43,10 @@ void bhv_shyguy_init(void) {
 }
 
 void bhv_shyguy_loop(void) {
+    cur_obj_scale(o->oGoombaScale);
+    cur_obj_update_floor_and_walls();
     goomba_act_walk();
+    cur_obj_move_standard(-78);
     if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
             spawn_mist_particles();
             obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
@@ -161,7 +164,7 @@ void bhv_shyguy_chair_loop(void) {
                 //cur_obj_set_behavior(bhvGoomba);
                 //cur_obj_enable();
                 //o->oAction = 3;
-                obj = spawn_object(o, MODEL_SHYGUY, bhvGoomba);
+                obj = spawn_object(o, MODEL_SHYGUY, bhvShyguy);
                 obj->oOpacity = 255;
                 o->activeFlags = 0;
                 play_puzzle_jingle();
