@@ -373,9 +373,9 @@ static void boo_chase_mario(f32 a0, s16 a1, f32 a2) {
 static void boo_act_0(void) {
     o->activeFlags |= ACTIVE_FLAG_MOVE_THROUGH_GRATE;
 
-    if (o->oBehParams2ndByte == 2) {
-        o->oRoom = 10;
-    }
+    //if (o->oBehParams2ndByte == 2) {
+    //    o->oRoom = 10;
+    //}
 
     cur_obj_set_pos_to_home();
     o->oMoveAngleYaw = o->oBooInitialMoveYaw;
@@ -387,12 +387,12 @@ static void boo_act_0(void) {
 
     if (boo_should_be_active()) {
         // Condition is met if the object is bhvBalconyBigBoo or bhvMerryGoRoundBoo
-        if (o->oBehParams2ndByte == 2) {
+        //if (o->oBehParams2ndByte == 2) {
             o->oBooParentBigBoo = NULL;
             o->oAction = 5;
-        } else {
-            o->oAction = 1;
-        }
+        //} else {
+        //    o->oAction = 1;
+        //}
     }
 }
 
@@ -444,12 +444,12 @@ static void boo_act_2(void) {
 
 static void boo_act_3(void) {
     if (boo_update_during_death()) {
-        if (o->oBehParams2ndByte != 0) {
+        //if (o->oBehParams2ndByte != 0) {
             obj_mark_for_deletion(o);
-        } else {
-            o->oAction = 4;
-            cur_obj_disable();
-        }
+        //} else {
+        //    o->oAction = 4;
+        //    cur_obj_disable();
+        //}
     }
 }
 

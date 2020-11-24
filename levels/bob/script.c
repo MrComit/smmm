@@ -86,6 +86,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_GOOMBA, 8804, 0, 4760, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, 8307, 0, 4039, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, 8790, 0, 4141, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_BOO, 6690, 179, 6799, 0, -180, 0, 0x00000000, bhvRoomBoo),
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),
 		MACRO_OBJECTS(bob_area_1_macro_objs),

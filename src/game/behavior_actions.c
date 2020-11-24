@@ -187,7 +187,6 @@ Gfx *geo_move_mario_part_from_parent(s32 run, UNUSED struct GraphNode *node, Mat
 #include "behaviors/unused_poundable_platform.inc.c"
 #include "behaviors/beta_trampoline.inc.c"
 #include "behaviors/jumping_box.inc.c"
-#include "behaviors/boo_cage.inc.c"
 
 // not in behavior file
 // n is the number of objects to spawn, r if the rate of change of phase (frequency?)
@@ -288,3 +287,4 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/sinking_plat.inc.c"
 #include "behaviors/chandelier.inc.c"
 #include "behaviors/dining_room.inc.c"
+#include "behaviors/new_boo.inc.c"
