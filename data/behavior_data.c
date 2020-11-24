@@ -1734,7 +1734,7 @@ const BehaviorScript bhvFloorSwitchHiddenObjects[] = {
 const BehaviorScript bhvHiddenObject[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_COLLISION_DATA(breakable_box_seg8_collision_08012D70),
+    LOAD_COLLISION_DATA(crate_collision),
     SET_FLOAT(oCollisionDistance, 300),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_object_loop),
@@ -1744,12 +1744,12 @@ const BehaviorScript bhvHiddenObject[] = {
 const BehaviorScript bhvBreakableBox[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_COLLISION_DATA(breakable_box_seg8_collision_08012D70),
-    SET_FLOAT(oCollisionDistance, 500),
-    CALL_NATIVE(bhv_init_room),
+    LOAD_COLLISION_DATA(crate_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 100, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_breakable_box_loop),
         CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_breakable_box_loop),
     END_LOOP(),
     BREAK(),
 };
