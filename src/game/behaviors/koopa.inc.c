@@ -840,7 +840,7 @@ void bhv_koopa_update(void) {
         o->oAnimState = 1;
     }
 
-    obj_face_yaw_approach(o->oMoveAngleYaw, 0x600);
+    obj_face_yaw_approach(o->oMoveAngleYaw, 0x1000);
 }
 
 /**

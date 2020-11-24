@@ -554,6 +554,7 @@ extern const BehaviorScript bhvTeapotSpawner[];
 extern const BehaviorScript bhvTeapot[];
 extern const BehaviorScript bhvBlockedDoor[];
 extern const BehaviorScript bhvRoomBoo[];
+extern const BehaviorScript bhvBreakableBoxChild[];
 
 
 

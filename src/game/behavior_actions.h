@@ -597,7 +597,7 @@ void bhv_teapot_init(void);
 void bhv_teapot_spawn_loop(void);
 void bhv_room_boo_loop(void);
 void bhv_room_boo_init(void);
-
+void bhv_breakable_box_child_loop(void);
 
 
 #include "!COMIT_LIBRARY.h"

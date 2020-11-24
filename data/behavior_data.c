@@ -1742,14 +1742,25 @@ const BehaviorScript bhvHiddenObject[] = {
 };
 
 const BehaviorScript bhvBreakableBox[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 70, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBreakableBoxChild),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_breakable_box_loop),
+    END_LOOP(),
+    BREAK(),
+};
+
+const BehaviorScript bhvBreakableBoxChild[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(crate_collision),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
-    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 100, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 70, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
-        CALL_NATIVE(bhv_breakable_box_loop),
+        CALL_NATIVE(bhv_breakable_box_child_loop),
     END_LOOP(),
     BREAK(),
 };

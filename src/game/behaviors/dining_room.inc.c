@@ -166,8 +166,9 @@ void bhv_shyguy_chair_loop(void) {
                 //o->oAction = 3;
                 obj = spawn_object(o, MODEL_SHYGUY, bhvShyguy);
                 obj->oOpacity = 255;
+                obj->oVelY = 20.0f;
                 o->activeFlags = 0;
-                play_puzzle_jingle();
+                cur_obj_play_sound_2(SOUND_OBJ_GOOMBA_ALERT);
             }
             break;
         case 2:
