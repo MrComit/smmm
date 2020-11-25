@@ -6325,3 +6325,16 @@ const BehaviorScript bhvLever[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvL1Book[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_book_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_l1_book_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

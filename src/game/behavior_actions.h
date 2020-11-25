@@ -600,7 +600,7 @@ void bhv_room_boo_init(void);
 void bhv_breakable_box_child_loop(void);
 void bhv_l1_gate_loop(void);
 void bhv_lever_loop(void);
-
+void bhv_l1_book_loop(void);
 
 
 #include "!COMIT_LIBRARY.h"

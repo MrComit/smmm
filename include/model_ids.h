@@ -594,7 +594,7 @@
 #define MODEL_BOO                 0x32
 #define MODEL_HAUNTED_CAGE        0x33        // haunted_cage_geo
 
-// LEVEL 1 MODELS
+// LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF
 #define MODEL_CHANDELIER          0xFE
 #define MODEL_PLATE               0xFD
@@ -602,6 +602,7 @@
 #define MODEL_TEAPOT              0xFB
 #define MODEL_L1_GATE             0xFA
 #define MODEL_LEVER               0xF9
+#define MODEL_L1_BOOK             0xF8
 
 
 #endif // MODEL_IDS_H

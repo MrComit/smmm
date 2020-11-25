@@ -139,7 +139,7 @@ extern Vtx bob_dl_Simple_Table_mesh_vtx_1[30];
 extern Gfx bob_dl_Simple_Table_mesh_tri_1[];
 extern Vtx bob_dl_Bookshelf_001_mesh_vtx_0[70];
 extern Gfx bob_dl_Bookshelf_001_mesh_tri_0[];
-extern Vtx bob_dl_Bookshelf_001_mesh_vtx_1[124];
+extern Vtx bob_dl_Bookshelf_001_mesh_vtx_1[8];
 extern Gfx bob_dl_Bookshelf_001_mesh_tri_1[];
 extern Vtx bob_dl_Medal_mesh_vtx_0[25];
 extern Gfx bob_dl_Medal_mesh_tri_0[];

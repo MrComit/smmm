@@ -42,3 +42,5 @@
 #include "levels/bob/lever/anims/data.inc.c"
 #include "levels/bob/lever/anims/table.inc.c"
 #include "levels/bob/lever/collision.inc.c"
+#include "levels/bob/l1_book/model.inc.c"
+#include "levels/bob/l1_book/collision.inc.c"
