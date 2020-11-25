@@ -600,7 +600,8 @@
 #define MODEL_PLATE               0xFD
 #define MODEL_DINING_CHAIR        0xFC
 #define MODEL_TEAPOT              0xFB
-
+#define MODEL_L1_GATE             0xFA
+#define MODEL_LEVER               0xF9
 
 
 #endif // MODEL_IDS_H

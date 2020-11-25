@@ -51,4 +51,14 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/teapot/geo_header.h"
 
+#include "levels/bob/l1_gate/geo_header.h"
+
+#include "levels/bob/l1_gate/collision_header.h"
+
+#include "levels/bob/lever/geo_header.h"
+
+#include "levels/bob/lever/anim_header.h"
+
+#include "levels/bob/lever/collision_header.h"
+
 #endif

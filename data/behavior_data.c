@@ -6294,3 +6294,34 @@ const BehaviorScript bhvRoomBoo[] = {
         CALL_NATIVE(bhv_room_boo_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvL1Gate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_gate_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l1_gate_loop),
+    END_LOOP(),
+    BREAK(),
+};
+
+
+const BehaviorScript bhvLever[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, lever_anims),
+    ANIMATE(0),
+    LOAD_COLLISION_DATA(lever_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lever_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

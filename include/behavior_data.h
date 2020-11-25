@@ -555,6 +555,8 @@ extern const BehaviorScript bhvTeapot[];
 extern const BehaviorScript bhvBlockedDoor[];
 extern const BehaviorScript bhvRoomBoo[];
 extern const BehaviorScript bhvBreakableBoxChild[];
+extern const BehaviorScript bhvL1Gate[];
+extern const BehaviorScript bhvLever[];
 
 
 
