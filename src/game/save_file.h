@@ -94,7 +94,7 @@ extern s8 gLevelToCourseNumTable[];
  * !!!!!!!!!!!!!!!!!!!!!!!!!
  */
 #define SAVE_NEW_FLAG_MUDROOM_SWITCH     /* 0x00000001 */ (1 << 0)
-#define SAVE_NEW_FLAG_002                /* 0x00000002 */ (1 << 1)
+#define SAVE_NEW_FLAG_PARLOR_SWITCH      /* 0x00000002 */ (1 << 1)
 #define SAVE_NEW_FLAG_003                /* 0x00000004 */ (1 << 2)
 #define SAVE_NEW_FLAG_004                /* 0x00000008 */ (1 << 3)
 #define SAVE_NEW_FLAG_005                /* 0x00000010 */ (1 << 4)
@@ -203,6 +203,11 @@ void save_file_move_cap_to_default_location(void);
 void save_file_set_newflags(u32 flags, u8 index);
 void save_file_clear_newflags(u32 flags,  u8 index);
 u32 save_file_get_newflags(u8 index);
+
+u32 save_file_get_boos(void);
+void save_file_set_boos(u32 boo);
+u32 save_file_get_star_piece(void);
+void save_file_set_star_piece(u32 piece);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);

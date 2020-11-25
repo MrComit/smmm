@@ -495,6 +495,36 @@ u32 save_file_get_newflags(u8 index) {
 }
 
 
+
+u32 save_file_get_boos(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured;
+}
+
+void save_file_set_boos(u32 boo) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured |= 1 << boo;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+
+u32 save_file_get_star_piece(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces;
+}
+
+void save_file_set_star_piece(u32 piece) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces |= 1 << piece;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+
+
 /**
  * Return the bitset of obtained stars in the specified course.
  * If course is -1, return the bitset of obtained castle secret stars.
