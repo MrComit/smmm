@@ -14,10 +14,17 @@ struct ObjectHitbox sLeverHitbox = {
 void bhv_lever_loop(void) {
     obj_set_hitbox(o, &sLeverHitbox);
 
-    if (o->oF4 == 0 && cur_obj_was_attacked_or_ground_pounded() != 0) {
-        cur_obj_init_anim_and_check_if_end(1);
-        play_puzzle_jingle();
-        o->oF4 = 1;
+    if (o->oF4 == 0) {
+        if (save_file_get_newflags(0) & SAVE_NEW_FLAG_MUDROOM_SWITCH) {
+            o->oF4 = 1;
+            cur_obj_init_anim_and_check_if_end(1);
+        }
+        if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+            cur_obj_init_anim_and_check_if_end(1);
+            play_puzzle_jingle();
+            save_file_set_newflags(SAVE_NEW_FLAG_MUDROOM_SWITCH, 0);
+            o->oF4 = 1;
+        }
     }
 }
 
@@ -31,6 +38,10 @@ void bhv_l1_gate_loop(void) {
                     obj = cur_obj_nearest_object_with_behavior(bhvLever);
                     if (obj == NULL || obj->oF4 == 1) {
                         o->oAction = 1;
+                        break;
+                    }
+                    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_MUDROOM_SWITCH) {
+                        o->activeFlags = 0;
                     }
                     break;
                 case 1:

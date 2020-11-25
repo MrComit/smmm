@@ -22,9 +22,10 @@ struct SaveFile
     // Location of lost cap.
     // Note: the coordinates get set, but are never actually used, since the
     // cap can always be found in a fixed spot within the course
-    u8 capLevel;
-    u8 capArea;
-    Vec3s capPos;
+    //u8 capLevel;
+    //u8 capArea;
+    //Vec3s capPos;
+    u32 newFlags[2];
 
     u32 flags;
 
@@ -33,7 +34,9 @@ struct SaveFile
     // cannon is open.
     u8 courseStars[COURSE_COUNT];
 
-    u8 courseCoinScores[COURSE_STAGES_COUNT];
+    u32 starPieces;
+    u32 boosCaptured;
+    s32 coinCount;
 
     struct SaveBlockSignature signature;
 };
@@ -81,6 +84,50 @@ extern u8 gGotFileCoinHiScore;
 extern u8 gCurrCourseStarFlags;
 extern u8 gSpecialTripleJump;
 extern s8 gLevelToCourseNumTable[];
+
+
+
+
+/*
+ * !!!!!!!!!!!!!!!!!!!!!!!!!
+ *       NEW FLAGS
+ * !!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+#define SAVE_NEW_FLAG_MUDROOM_SWITCH     /* 0x00000001 */ (1 << 0)
+#define SAVE_NEW_FLAG_002                /* 0x00000002 */ (1 << 1)
+#define SAVE_NEW_FLAG_003                /* 0x00000004 */ (1 << 2)
+#define SAVE_NEW_FLAG_004                /* 0x00000008 */ (1 << 3)
+#define SAVE_NEW_FLAG_005                /* 0x00000010 */ (1 << 4)
+#define SAVE_NEW_FLAG_006                /* 0x00000020 */ (1 << 5)
+#define SAVE_NEW_FLAG_007                /* 0x00000040 */ (1 << 6)
+#define SAVE_NEW_FLAG_008                /* 0x00000080 */ (1 << 7)
+#define SAVE_NEW_FLAG_009                /* 0x00000100 */ (1 << 8)
+#define SAVE_NEW_FLAG_010                /* 0x00000200 */ (1 << 9)
+#define SAVE_NEW_FLAG_011                /* 0x00000400 */ (1 << 10)
+#define SAVE_NEW_FLAG_012                /* 0x00000800 */ (1 << 11)
+#define SAVE_NEW_FLAG_013                /* 0x00001000 */ (1 << 12)
+#define SAVE_NEW_FLAG_014                /* 0x00002000 */ (1 << 13)
+#define SAVE_NEW_FLAG_015                /* 0x00004000 */ (1 << 14)
+#define SAVE_NEW_FLAG_016                /* 0x00008000 */ (1 << 15)
+#define SAVE_NEW_FLAG_017                /* 0x00010000 */ (1 << 16)
+#define SAVE_NEW_FLAG_018                /* 0x00020000 */ (1 << 17)
+#define SAVE_NEW_FLAG_019                /* 0x00040000 */ (1 << 18)
+#define SAVE_NEW_FLAG_020                /* 0x00080000 */ (1 << 19)
+#define SAVE_NEW_FLAG_021                /* 0x00100000 */ (1 << 20)
+#define SAVE_NEW_FLAG_022                /* 0x00200000 */ (1 << 21)
+#define SAVE_NEW_FLAG_023                /* 0x00400000 */ (1 << 22)
+#define SAVE_NEW_FLAG_024                /* 0x00800000 */ (1 << 23)
+#define SAVE_NEW_FLAG_025                /* 0x01000000 */ (1 << 24)
+#define SAVE_NEW_FLAG_026                /* 0x02000000 */ (1 << 25)
+#define SAVE_NEW_FLAG_027                /* 0x04000000 */ (1 << 26)
+#define SAVE_NEW_FLAG_028                /* 0x08000000 */ (1 << 27)
+#define SAVE_NEW_FLAG_029                /* 0x10000000 */ (1 << 28)
+#define SAVE_NEW_FLAG_030                /* 0x20000000 */ (1 << 29)
+#define SAVE_NEW_FLAG_031                /* 0x40000000 */ (1 << 30)
+#define SAVE_NEW_FLAG_032                /* 0x80000000 */ (1 << 31)
+
+
+
 
 // game progress flags
 #define SAVE_FLAG_FILE_EXISTS            /* 0x00000001 */ (1 << 0)
@@ -152,6 +199,10 @@ s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
 void save_file_move_cap_to_default_location(void);
+
+void save_file_set_newflags(u32 flags, u8 index);
+void save_file_clear_newflags(u32 flags,  u8 index);
+u32 save_file_get_newflags(u8 index);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);

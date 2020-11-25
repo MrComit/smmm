@@ -367,7 +367,7 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
         }
 
         if (coinScore > save_file_get_course_coin_score(fileIndex, courseIndex)) {
-            gSaveBuffer.files[fileIndex][0].courseCoinScores[courseIndex] = coinScore;
+            //gSaveBuffer.files[fileIndex][0].courseCoinScores[courseIndex] = coinScore;
             touch_coin_score_age(fileIndex, courseIndex);
 
             gGotFileCoinHiScore = TRUE;
@@ -473,6 +473,28 @@ u32 save_file_get_flags(void) {
     return gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags;
 }
 
+
+
+void save_file_set_newflags(u32 flags, u8 index) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].newFlags[index] |= flags;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+void save_file_clear_newflags(u32 flags,  u8 index) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].newFlags[index] &= ~flags;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+u32 save_file_get_newflags(u8 index) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].newFlags[index];
+}
+
+
 /**
  * Return the bitset of obtained stars in the specified course.
  * If course is -1, return the bitset of obtained castle secret stars.
@@ -505,7 +527,7 @@ void save_file_set_star_flags(s32 fileIndex, s32 courseIndex, u32 starFlags) {
 }
 
 s32 save_file_get_course_coin_score(s32 fileIndex, s32 courseIndex) {
-    return gSaveBuffer.files[fileIndex][0].courseCoinScores[courseIndex];
+    return 0;//gSaveBuffer.files[fileIndex][0].courseCoinScores[courseIndex];
 }
 
 /**
@@ -525,23 +547,23 @@ void save_file_set_cannon_unlocked(void) {
 }
 
 void save_file_set_cap_pos(s16 x, s16 y, s16 z) {
-    struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
+    /*struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
 
     saveFile->capLevel = gCurrLevelNum;
     saveFile->capArea = gCurrAreaIndex;
     vec3s_set(saveFile->capPos, x, y, z);
-    save_file_set_flags(SAVE_FLAG_CAP_ON_GROUND);
+    save_file_set_flags(SAVE_FLAG_CAP_ON_GROUND);*/
 }
 
 s32 save_file_get_cap_pos(Vec3s capPos) {
-    struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
+    /*struct SaveFile *saveFile = &gSaveBuffer.files[gCurrSaveFileNum - 1][0];
     s32 flags = save_file_get_flags();
 
     if (saveFile->capLevel == gCurrLevelNum && saveFile->capArea == gCurrAreaIndex
         && (flags & SAVE_FLAG_CAP_ON_GROUND)) {
         vec3s_copy(capPos, saveFile->capPos);
         return TRUE;
-    }
+    }*/
     return FALSE;
 }
 
@@ -558,7 +580,8 @@ u16 save_file_get_sound_mode(void) {
 }
 
 void save_file_move_cap_to_default_location(void) {
-    if (save_file_get_flags() & SAVE_FLAG_CAP_ON_GROUND) {
+    return;
+    /*if (save_file_get_flags() & SAVE_FLAG_CAP_ON_GROUND) {
         switch (gSaveBuffer.files[gCurrSaveFileNum - 1][0].capLevel) {
             case LEVEL_SSL:
                 save_file_set_flags(SAVE_FLAG_CAP_ON_KLEPTO);
@@ -571,7 +594,7 @@ void save_file_move_cap_to_default_location(void) {
                 break;
         }
         save_file_clear_flags(SAVE_FLAG_CAP_ON_GROUND);
-    }
+    }*/
 }
 
 #ifdef VERSION_EU
