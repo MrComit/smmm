@@ -347,10 +347,12 @@ extern const Gfx white_particle_small_unused_dl[];
 
 //boo
 extern const GeoLayout boo_geo[];
-extern const Gfx boo_seg5_dl_0500BEE0[];
 extern const Gfx boo_seg5_dl_0500BF48[];
 extern const Gfx boo_seg5_dl_0500BFA0[];
-extern const Gfx boo_seg5_dl_0500C1B0[];
+
+extern const Gfx boo_dl_color1[];
+extern const Gfx boo_dl_color2[];
+extern const Gfx boo_dl_color3[];
 
 // haunted_cage
 extern const GeoLayout haunted_cage_geo[];

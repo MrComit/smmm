@@ -82,7 +82,8 @@ void bhv_room_boo_loop(void) {
     } else if (o->oUnk1A8 == 1) {
         o->oUnk1A8 = 2;
         o->oOpacity = 255;
-        play_puzzle_jingle();
+        if (o->oBehParams2ndByte)
+            play_puzzle_jingle();
     } else {
         bhv_boo_loop();
     }

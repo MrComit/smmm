@@ -78,7 +78,12 @@ void bhv_l1_gate_loop(void) {
 
 
 void bhv_l1_book_init(void) {
-    struct Object *obj = spawn_object(o, MODEL_SHYGUY, bhvShyguyBookSteal);
+    struct Object *obj;
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PARLOR_GATE) {
+        o->activeFlags = 0;
+        return;
+    }
+    obj = spawn_object(o, MODEL_SHYGUY, bhvShyguyBookSteal);
     vec3f_copy(&obj->oPosX, sStealerPos[o->oBehParams >> 24]);
 }
 
@@ -99,7 +104,7 @@ void bhv_shyguy_book_steal_loop(void) {
     switch (o->oAction) {
         case 0:
             cur_obj_disable();
-            if (/*save_file_get_boos() & 1*/1) {
+            if (save_file_get_boos() & 1) {
                 o->oAction = 1;
                 cur_obj_enable();
                 o->parentObj->oFaceAngleRoll = 0x4000;
@@ -111,8 +116,8 @@ void bhv_shyguy_book_steal_loop(void) {
             }
             break;
         case 1:
-            o->parentObj->oPosX = o->oPosX + (100.0f * sins(o->oMoveAngleYaw));
-            o->parentObj->oPosZ = o->oPosZ + (100.0f * coss(o->oMoveAngleYaw));
+            o->parentObj->oPosX = o->oPosX - (50.0f * sins(o->oMoveAngleYaw - 0x6000));
+            o->parentObj->oPosZ = o->oPosZ - (50.0f * coss(o->oMoveAngleYaw - 0x6000));
             o->parentObj->oPosY = o->oPosY + 140.0f;
             o->parentObj->oFaceAngleYaw = o->oMoveAngleYaw;
 

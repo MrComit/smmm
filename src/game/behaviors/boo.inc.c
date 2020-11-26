@@ -444,12 +444,8 @@ static void boo_act_2(void) {
 
 static void boo_act_3(void) {
     if (boo_update_during_death()) {
-        //if (o->oBehParams2ndByte != 0) {
-            obj_mark_for_deletion(o);
-        //} else {
-        //    o->oAction = 4;
-        //    cur_obj_disable();
-        //}
+        o->activeFlags = 0;
+        save_file_set_boos(o->oBehParams2ndByte);
     }
 }
 
