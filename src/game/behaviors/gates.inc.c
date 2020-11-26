@@ -57,6 +57,7 @@ void bhv_l1_gate_loop(void) {
                     if (cur_obj_nearest_object_with_behavior(bhvShyguyBookSteal) == NULL) {
                         o->oAction = 1;
                         save_file_set_newflags(SAVE_NEW_FLAG_PARLOR_GATE, 0);
+                        play_puzzle_jingle();
                         break;
                     }
                     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PARLOR_GATE) {
