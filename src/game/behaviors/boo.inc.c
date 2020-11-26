@@ -53,7 +53,7 @@ static s32 boo_should_be_stopped(void) {
 
 static s32 boo_should_be_active(void) {
     f32 activationRadius;
-
+    return TRUE;
     if (cur_obj_has_behavior(bhvBalconyBigBoo)) {
         activationRadius = 5000.0f;
     } else {

@@ -217,7 +217,7 @@ extern Vtx bob_dl_chair_008_mesh_vtx_1[8];
 extern Gfx bob_dl_chair_008_mesh_tri_1[];
 extern Vtx bob_dl_chair_008_mesh_vtx_2[5];
 extern Gfx bob_dl_chair_008_mesh_tri_2[];
-extern Vtx bob_dl_Garage_mesh_vtx_0[90];
+extern Vtx bob_dl_Garage_mesh_vtx_0[84];
 extern Gfx bob_dl_Garage_mesh_tri_0[];
 extern Vtx bob_dl_Garage_mesh_vtx_1[24];
 extern Gfx bob_dl_Garage_mesh_tri_1[];
