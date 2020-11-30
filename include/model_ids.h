@@ -603,6 +603,8 @@
 #define MODEL_L1_GATE             0xFA
 #define MODEL_LEVER               0xF9
 #define MODEL_L1_BOOK             0xF8
+#define MODEL_L1_BURNER           0xF7
+
 
 
 #endif // MODEL_IDS_H

@@ -6354,3 +6354,19 @@ const BehaviorScript bhvShyguyBookSteal[] = {
         CALL_NATIVE(bhv_shyguy_book_steal_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvOvenBurner[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(L1_burner_collision),
+    //SCALE(/*Unused*/ 0, /*Field*/ 100),
+    CALL_NATIVE(bhv_burner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_burner_loop),
+    END_LOOP(),
+};

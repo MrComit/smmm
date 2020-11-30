@@ -44,3 +44,5 @@
 #include "levels/bob/lever/collision.inc.c"
 #include "levels/bob/l1_book/model.inc.c"
 #include "levels/bob/l1_book/collision.inc.c"
+#include "levels/bob/L1_burner/model.inc.c"
+#include "levels/bob/L1_burner/collision.inc.c"

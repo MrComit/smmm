@@ -559,6 +559,8 @@ extern const BehaviorScript bhvL1Gate[];
 extern const BehaviorScript bhvLever[];
 extern const BehaviorScript bhvL1Book[];
 extern const BehaviorScript bhvShyguyBookSteal[];
+extern const BehaviorScript bhvOvenBurner[];
+
 
 
 

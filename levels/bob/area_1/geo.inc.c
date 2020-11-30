@@ -147,7 +147,9 @@ const GeoLayout bob_dl_Room1F_geo[] = {
 const GeoLayout bob_dl_Room1G_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4555, 375, 10154, bob_dl_Kitchen_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2823, 375, 7681, bob_dl_Kitchen_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 2630, -206, 3588, bob_dl_Kitchen_001_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 588, 822, 8227, bob_dl_KitchenGround_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
