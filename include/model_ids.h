@@ -604,6 +604,7 @@
 #define MODEL_LEVER               0xF9
 #define MODEL_L1_BOOK             0xF8
 #define MODEL_L1_BURNER           0xF7
+#define MODEL_L1_CABINET          0xF6
 
 
 

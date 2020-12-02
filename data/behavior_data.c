@@ -6370,3 +6370,18 @@ const BehaviorScript bhvOvenBurner[] = {
         CALL_NATIVE(bhv_burner_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvL1Cabinet[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_cabinet_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    //SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_l1_cabinet_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_l1_cabinet_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

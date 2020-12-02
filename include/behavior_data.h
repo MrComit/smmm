@@ -560,7 +560,7 @@ extern const BehaviorScript bhvLever[];
 extern const BehaviorScript bhvL1Book[];
 extern const BehaviorScript bhvShyguyBookSteal[];
 extern const BehaviorScript bhvOvenBurner[];
-
+extern const BehaviorScript bhvL1Cabinet[];
 
 
 

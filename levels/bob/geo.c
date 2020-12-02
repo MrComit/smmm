@@ -29,3 +29,4 @@
 #include "levels/bob/lever/geo.inc.c"
 #include "levels/bob/l1_book/geo.inc.c"
 #include "levels/bob/L1_burner/geo.inc.c"
+#include "levels/bob/l1_cabinet/geo.inc.c"

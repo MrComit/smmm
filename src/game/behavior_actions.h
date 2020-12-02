@@ -605,6 +605,10 @@ void bhv_l1_book_loop(void);
 void bhv_shyguy_book_steal_loop(void);
 void bhv_burner_loop(void);
 void bhv_burner_init(void);
+void bhv_l1_cabinet_loop(void);
+void bhv_l1_cabinet_init(void);
+
+
 
 
 #include "!COMIT_LIBRARY.h"
