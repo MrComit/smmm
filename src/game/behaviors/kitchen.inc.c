@@ -65,9 +65,9 @@ void bhv_l1_cabinet_loop(void) {
             }
             break;
         case 1:
-            o->oFaceAngleYaw += 0x400;
-            if (o->oFaceAngleYaw >= 0x7800) {
-                o->oFaceAngleYaw = 0x7800;
+            o->oFaceAngleYaw += 0x300;
+            if (o->oFaceAngleYaw >= 0x4000) {
+                o->oFaceAngleYaw = 0x4000;
                 o->oAction = 2;
             }
             break;
