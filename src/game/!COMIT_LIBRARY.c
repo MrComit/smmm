@@ -6,6 +6,7 @@
 #include "include/behavior_data.h"
 #include "audio/internal.h"
 #include "game/interaction.h"
+#include "game/mario.h"
 #define o gCurrentObject
 extern s16 s8DirModeYawOffset;
 
@@ -268,4 +269,21 @@ void CL_get_hit(struct MarioState *m, struct Object *o, u32 damage) {
         update_mario_sound_and_camera(m);
         drop_and_set_mario_action(m, determine_knockback_action(m, o->oDamageOrCoinValue), damage);
     }
+}
+
+
+
+struct Surface *CL_get_mario_punched_wall(struct MarioState *m) {
+    struct Surface *wall;
+    if (m->flags & (MARIO_PUNCHING | MARIO_KICKING | MARIO_TRIPPING)) {
+        Vec3f detector;
+        detector[0] = m->pos[0] + 50.0f * sins(m->faceAngle[1]);
+        detector[2] = m->pos[2] + 50.0f * coss(m->faceAngle[1]);
+        detector[1] = m->pos[1];
+        wall = resolve_and_return_wall_collisions(detector, 80.0f, 5.0f);
+        if (wall != NULL) {
+            return wall;
+        }
+    }
+    return NULL;
 }

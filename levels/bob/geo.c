@@ -31,3 +31,4 @@
 #include "levels/bob/L1_burner/geo.inc.c"
 #include "levels/bob/l1_cabinet/geo.inc.c"
 #include "levels/bob/l1_barrel/geo.inc.c"
+#include "levels/bob/l1_loose_shelf/geo.inc.c"

@@ -607,6 +607,7 @@ void bhv_burner_loop(void);
 void bhv_burner_init(void);
 void bhv_l1_cabinet_loop(void);
 void bhv_l1_barrel_loop(void);
+void bhv_l1_shelf_loop(void);
 
 
 

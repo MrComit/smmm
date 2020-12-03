@@ -6398,6 +6398,20 @@ const BehaviorScript bhvL1Barrel[] = {
     //CALL_NATIVE(bhv_l1_barrel_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_l1_barrel_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvL1Shelf[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_loose_shelf_collision),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 128, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    //CALL_NATIVE(bhv_l1_shelf_init),
+    BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l1_shelf_loop),
     END_LOOP(),
 };
