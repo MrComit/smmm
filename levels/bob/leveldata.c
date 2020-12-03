@@ -48,3 +48,5 @@
 #include "levels/bob/L1_burner/collision.inc.c"
 #include "levels/bob/l1_cabinet/model.inc.c"
 #include "levels/bob/l1_cabinet/collision.inc.c"
+#include "levels/bob/l1_barrel/model.inc.c"
+#include "levels/bob/l1_barrel/collision.inc.c"

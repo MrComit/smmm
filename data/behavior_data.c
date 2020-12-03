@@ -6377,11 +6377,27 @@ const BehaviorScript bhvL1Cabinet[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(l1_cabinet_collision),
     SET_FLOAT(oCollisionDistance, 0x300),
-    //SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
-    CALL_NATIVE(bhv_l1_cabinet_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_l1_cabinet_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvL1Barrel[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_barrel_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    DROP_TO_FLOOR(),
+    //ADD_FLOAT(oPosY, 111),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 128, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    //CALL_NATIVE(bhv_l1_barrel_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_l1_barrel_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
