@@ -12,6 +12,18 @@ static struct ObjectHitbox sBobombHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+static struct ObjectHitbox sIceBobombHitbox = {
+    /* interactType:      */ INTERACT_IGLOO_BARRIER,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 65,
+    /* height:            */ 113,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
 void bhv_bobomb_init(void) {
     o->oGravity = 2.5;
     o->oFriction = 0.8;
@@ -417,5 +429,47 @@ void bhv_bobomb_buddy_loop(void) {
 
     curr_obj_random_blink(&o->oBobombBuddyBlinkTimer);
 
+    o->oInteractStatus = 0;
+}
+
+
+void ice_bobomb_act_explode(void) {
+    struct Object *explosion;
+    if (o->oTimer < 5)
+        cur_obj_scale(1.0 + (f32) o->oTimer / 5.0);
+    else {
+        //explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        //explosion->oGraphYOffset += 100.0f;
+        create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
+        o->activeFlags = 0;
+    }
+}
+
+void bhv_ice_bobomb_loop(void) {
+    s8 dustPeriodMinus1;
+    obj_set_hitbox(o, &sIceBobombHitbox);
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(-78);
+    if (o->oAction == 1)
+        ice_bobomb_act_explode();
+
+    curr_obj_random_blink(&o->oBobombBlinkTimer);
+
+    if (o->oBobombFuseTimer >= 151)
+        o->oAction = 1;
+    //if (o->oBobombFuseLit == 1) {
+    if (o->oBobombFuseTimer >= 121)
+        dustPeriodMinus1 = 1;
+    else
+        dustPeriodMinus1 = 7;
+
+    if ((dustPeriodMinus1 & o->oBobombFuseTimer)
+        == 0) /* oBobombFuseTimer % 2 or oBobombFuseTimer % 8 */
+        spawn_object(o, MODEL_SMOKE, bhvBobombFuseSmoke);
+
+    //cur_obj_play_sound_1(SOUND_AIR_BOBOMB_LIT_FUSE);
+
+    o->oBobombFuseTimer++;
+    //}
     o->oInteractStatus = 0;
 }

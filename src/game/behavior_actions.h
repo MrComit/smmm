@@ -609,6 +609,9 @@ void bhv_l1_cabinet_loop(void);
 void bhv_l1_barrel_loop(void);
 void bhv_l1_shelf_loop(void);
 void bhv_kitchen_door_loop(void);
+void bhv_fridge_spawner_loop(void);
+void bhv_ice_bobomb_loop(void);
+
 
 
 

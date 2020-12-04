@@ -564,6 +564,9 @@ extern const BehaviorScript bhvL1Cabinet[];
 extern const BehaviorScript bhvL1Barrel[];
 extern const BehaviorScript bhvL1Shelf[];
 extern const BehaviorScript bhvFridgeDoor[];
+extern const BehaviorScript bhvFridgeSpawner[];
+extern const BehaviorScript bhvIceBobomb[];
+
 
 
 

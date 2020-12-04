@@ -165,3 +165,32 @@ void bhv_kitchen_door_loop(void) {
             break;
     }
 }
+
+
+void bhv_fridge_spawner_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            obj = cur_obj_nearest_object_with_behavior(bhvFridgeDoor);
+            if (obj == NULL) {
+                o->activeFlags = 0;
+                break;
+            }
+            if (obj->oAction != 0) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > 30) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvIceBobomb);
+            obj->oMoveAngleYaw = 0x4000;
+            obj->oVelY = 30.0f;
+            obj->oForwardVel = 13.0f;
+            o->oAction = 1;
+            break;
+    }
+}

@@ -137,6 +137,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_BURNER, 2652, -9, 1480, 0, 0, 0, 0x00010000, bhvOvenBurner),
 		OBJECT(MODEL_L1_BARREL, 2993, 236, 8691, 0, 0, 0, 0x00010000, bhvL1Barrel),
 		OBJECT(MODEL_KITCHEN_FRIDGE, 676, 350, 7753, 0, 0, 0, 0x00000000, bhvFridgeDoor),
+		OBJECT(MODEL_NONE, 592, 283, 7973, 0, 0, 0, 0x00000000, bhvFridgeSpawner),
 		OBJECT(MODEL_L1_SHELF, 655, 733, 8452, 0, 0, 0, 0x00000000, bhvL1Shelf),
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),
