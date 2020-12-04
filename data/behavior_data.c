@@ -6415,3 +6415,19 @@ const BehaviorScript bhvL1Shelf[] = {
         CALL_NATIVE(bhv_l1_shelf_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvFridgeDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(kitchen_fridge_collision),
+    SET_FLOAT(oCollisionDistance, 0x500),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 128, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    //CALL_NATIVE(bhv_kitchen_door_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_kitchen_door_loop),
+    END_LOOP(),
+};

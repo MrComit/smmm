@@ -563,6 +563,7 @@ extern const BehaviorScript bhvOvenBurner[];
 extern const BehaviorScript bhvL1Cabinet[];
 extern const BehaviorScript bhvL1Barrel[];
 extern const BehaviorScript bhvL1Shelf[];
+extern const BehaviorScript bhvFridgeDoor[];
 
 
 

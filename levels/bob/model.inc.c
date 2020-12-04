@@ -22815,50 +22815,6 @@ Gfx bob_dl_KitchenGround_002_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx bob_dl_KitchenGround_003_mesh_vtx_cull[8] = {
-	{{{-21, -350, -440},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-21, -350, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-21, 350, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-21, 350, -440},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{21, -350, -440},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{21, -350, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{21, 350, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{21, 350, -440},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-};
-
-Vtx bob_dl_KitchenGround_003_mesh_vtx_0[20] = {
-	{{{-21, 350, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-21, -350, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{21, -350, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{21, 350, 0},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{21, -350, 0},0, {-16, 2032},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{21, -350, -440},0, {1008, 2032},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{21, 350, -440},0, {1008, -16},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{21, 350, 0},0, {-16, -16},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-21, 350, -440},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-21, 350, 0},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{21, 350, 0},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{21, 350, -440},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-21, -350, -440},0, {1140, 893},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-21, 350, -440},0, {1140, 85},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{21, 350, -440},0, {1140, 85},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{21, -350, -440},0, {1140, 893},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-21, 350, 0},0, {-16, 1008},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-21, 350, -440},0, {1008, 1008},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-21, -350, -440},0, {1008, -16},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-21, -350, 0},0, {-16, -16},{0x81, 0x0, 0x0, 0xFF}}},
-};
-
-Gfx bob_dl_KitchenGround_003_mesh_tri_0[] = {
-	gsSPVertex(bob_dl_KitchenGround_003_mesh_vtx_0 + 0, 20, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx bob_dl_KitchenGround_004_mesh_vtx_cull[8] = {
 	{{{-225, -350, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-225, -350, 440},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -26030,19 +25986,6 @@ Gfx bob_dl_KitchenGround_002_mesh[] = {
 	gsSPDisplayList(mat_bob_dl_Cabinet_Side_v3),
 	gsSPDisplayList(bob_dl_KitchenGround_002_mesh_tri_0),
 	gsSPDisplayList(mat_revert_bob_dl_Cabinet_Side_v3),
-	gsSPEndDisplayList(),
-};
-
-
-
-Gfx bob_dl_KitchenGround_003_mesh[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(bob_dl_KitchenGround_003_mesh_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_bob_dl_Fridge_v3),
-	gsSPDisplayList(bob_dl_KitchenGround_003_mesh_tri_0),
-	gsSPDisplayList(mat_revert_bob_dl_Fridge_v3),
 	gsSPEndDisplayList(),
 };
 

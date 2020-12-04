@@ -1,3 +1,5 @@
+#include "game/camera.h"
+
 struct ObjectHitbox sBarrelHitbox = {
     /* interactType: */ INTERACT_IGLOO_BARRIER,
     /* downOffset: */ 0,
@@ -59,8 +61,10 @@ void bhv_l1_cabinet_loop(void) {
             }
             break;
         case 1:
-            o->oFaceAngleYaw += 0x300;
-            if (o->oFaceAngleYaw >= 0x4000) {
+            o->oFaceAngleYaw -= 0x4000;
+            o->oFaceAngleYaw -= o->oFaceAngleYaw / 20;
+            o->oFaceAngleYaw += 0x4000;
+            if (o->oFaceAngleYaw == 0x4000) {
                 o->oFaceAngleYaw = 0x4000;
                 o->oAction = 2;
             }
@@ -127,10 +131,34 @@ void bhv_l1_shelf_loop(void) {
             }
             break;
         case 1:
-            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x4000, 0x400);
+            //o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x4000, 0x400);
+            o->oFaceAnglePitch -= 0x4000;
+            o->oFaceAnglePitch -= o->oFaceAnglePitch / 18;
+            o->oFaceAnglePitch += 0x4000;
             if (o->oFaceAnglePitch == 0x4000) {
                 o->oAction = 2;
                 play_puzzle_jingle();
+            }
+            break;
+        case 2:
+            break;
+    }
+}
+
+
+void bhv_kitchen_door_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 800.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFaceAngleYaw -= 0xA000;
+            o->oFaceAngleYaw -= o->oFaceAngleYaw / 48;
+            o->oFaceAngleYaw += 0xA000;
+            if (o->oFaceAngleYaw == 0xA000) {
+                o->oAction = 2;
             }
             break;
         case 2:

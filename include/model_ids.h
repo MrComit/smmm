@@ -607,6 +607,7 @@
 #define MODEL_L1_CABINET          0xF6
 #define MODEL_L1_BARREL           0xF5
 #define MODEL_L1_SHELF            0xF4
+#define MODEL_KITCHEN_FRIDGE      0xF3
 
 
 

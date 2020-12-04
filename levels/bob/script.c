@@ -47,6 +47,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_L1_CABINET, l1_cabinet_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L1_BARREL, l1_barrel_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L1_SHELF, l1_loose_shelf_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_KITCHEN_FRIDGE, kitchen_fridge_geo), 
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -135,6 +136,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_BURNER, 3102, -9, 2075, 0, 0, 0, 0x00010000, bhvOvenBurner),
 		OBJECT(MODEL_L1_BURNER, 2652, -9, 1480, 0, 0, 0, 0x00010000, bhvOvenBurner),
 		OBJECT(MODEL_L1_BARREL, 2993, 236, 8691, 0, 0, 0, 0x00010000, bhvL1Barrel),
+		OBJECT(MODEL_KITCHEN_FRIDGE, 676, 350, 7753, 0, 0, 0, 0x00000000, bhvFridgeDoor),
 		OBJECT(MODEL_L1_SHELF, 655, 733, 8452, 0, 0, 0, 0x00000000, bhvL1Shelf),
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),

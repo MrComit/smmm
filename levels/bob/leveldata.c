@@ -52,3 +52,5 @@
 #include "levels/bob/l1_barrel/collision.inc.c"
 #include "levels/bob/l1_loose_shelf/model.inc.c"
 #include "levels/bob/l1_loose_shelf/collision.inc.c"
+#include "levels/bob/kitchen_fridge/model.inc.c"
+#include "levels/bob/kitchen_fridge/collision.inc.c"
