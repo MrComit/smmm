@@ -54,3 +54,6 @@
 #include "levels/bob/l1_loose_shelf/collision.inc.c"
 #include "levels/bob/kitchen_fridge/model.inc.c"
 #include "levels/bob/kitchen_fridge/collision.inc.c"
+#include "levels/bob/stove_button/model.inc.c"
+#include "levels/bob/stove_button/collision.inc.c"
+#include "levels/bob/frying_pan/model.inc.c"

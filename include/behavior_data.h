@@ -542,6 +542,9 @@ extern const BehaviorScript bhvEndBirds1[];
 extern const BehaviorScript bhvEndBirds2[];
 extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
+
+
+//NEW
 extern const BehaviorScript bhvLandChunk[];
 extern const BehaviorScript bhvChandelier[];
 extern const BehaviorScript bhvShyguyPlate[];
@@ -566,7 +569,9 @@ extern const BehaviorScript bhvL1Shelf[];
 extern const BehaviorScript bhvFridgeDoor[];
 extern const BehaviorScript bhvFridgeSpawner[];
 extern const BehaviorScript bhvIceBobomb[];
-
+extern const BehaviorScript bhvStoveButton[];
+extern const BehaviorScript bhvFryingPan[];
+extern const BehaviorScript bhvPanFlame[];
 
 
 

@@ -6376,7 +6376,7 @@ const BehaviorScript bhvL1Cabinet[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(l1_cabinet_collision),
-    SET_FLOAT(oCollisionDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
     CALL_NATIVE(bhv_l1_cabinet_init),
@@ -6455,5 +6455,44 @@ const BehaviorScript bhvIceBobomb[] = {
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 60, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_ice_bobomb_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvStoveButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(stove_button_collision),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oFloatF4, 1),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_stove_button_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvFryingPan[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_frying_pan_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_frying_pan_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvPanFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 250),
+    BEGIN_LOOP(),
+        ANIMATE_TEXTURE(oAnimState, 2),
     END_LOOP(),
 };

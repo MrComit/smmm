@@ -273,17 +273,15 @@ void CL_get_hit(struct MarioState *m, struct Object *o, u32 damage) {
 
 
 
-struct Surface *CL_get_mario_punched_wall(struct MarioState *m) {
-    struct Surface *wall;
-    if (m->flags & (MARIO_PUNCHING | MARIO_KICKING | MARIO_TRIPPING)) {
-        Vec3f detector;
-        detector[0] = m->pos[0] + 50.0f * sins(m->faceAngle[1]);
-        detector[2] = m->pos[2] + 50.0f * coss(m->faceAngle[1]);
-        detector[1] = m->pos[1];
-        wall = resolve_and_return_wall_collisions(detector, 80.0f, 5.0f);
-        if (wall != NULL) {
-            return wall;
-        }
+void CL_explode_object(struct Object *obj, s16 noDamage) {
+    struct Object *explosion;
+    if (obj->oTimer < 5)
+        cur_obj_scale(1.0 + (f32) obj->oTimer / 5.0);
+    else {
+        explosion = spawn_object(obj, MODEL_EXPLOSION, bhvExplosion);
+        explosion->oGraphYOffset += 100.0f;
+        if (noDamage)
+            explosion->oIntangibleTimer = -1;
+        obj->activeFlags = 0;
     }
-    return NULL;
 }

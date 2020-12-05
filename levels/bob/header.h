@@ -85,4 +85,10 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/kitchen_fridge/collision_header.h"
 
+#include "levels/bob/stove_button/geo_header.h"
+
+#include "levels/bob/stove_button/collision_header.h"
+
+#include "levels/bob/frying_pan/geo_header.h"
+
 #endif

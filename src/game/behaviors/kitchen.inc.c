@@ -12,6 +12,18 @@ struct ObjectHitbox sBarrelHitbox = {
     /* hurtboxHeight: */ 240,
 };
 
+static struct ObjectHitbox sPanHitbox = {
+    /* interactType:      */ INTERACT_GRABBABLE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 65,
+    /* height:            */ 113,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
 
 
 void bhv_burner_init(void) {
@@ -204,6 +216,120 @@ void bhv_fridge_spawner_loop(void) {
             obj->oVelY = 30.0f;
             obj->oForwardVel = 13.0f;
             o->oAction = 1;
+            break;
+    }
+}
+
+
+
+void bhv_stove_button_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFloatF4 -= 0.08f;
+            if (o->oFloatF4 < 0) {
+                o->oFloatF4 = 0.1f;
+                o->oAction = 2;
+            }
+            o->header.gfx.scale[2] = o->oFloatF4;
+            break;
+        case 2:
+            break;
+    }
+}
+
+void pan_held_loop(void) {
+    cur_obj_become_intangible();
+    o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    //cur_obj_init_animation(1);
+    cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
+    vec3f_copy(&o->oObjF4->oPosX, &o->oPosX);
+    o->oObjF4->oPosY += 25.0f;
+}
+
+void pan_dropped_loop(void) {
+    cur_obj_get_dropped();
+    cur_obj_become_tangible();
+
+    o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+    //cur_obj_init_animation(0);
+
+    o->oHeldState = 0;
+    //o->oAction = 0;
+}
+
+void pan_thrown_loop(void) {
+    cur_obj_enable_rendering_2();
+    cur_obj_become_tangible();
+
+    o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+    o->oHeldState = 0;
+    o->oFlags &= ~0x8; /* bit 3 */
+    o->oForwardVel = 25.0;
+    o->oVelY = 20.0;
+    //o->oAction = BOBOMB_ACT_LAUNCHED;
+}
+
+
+void pan_free_loop(void) {
+    struct Object *obj;
+    object_step();
+    switch (o->oAction) {
+        case 0:
+            cur_obj_become_intangible();
+            if (o->oObjF8->oAction != 0) {
+                o->oAction = 1;
+                cur_obj_become_tangible();
+                o->oObjF4 = spawn_object(o, MODEL_RED_FLAME, bhvPanFlame);
+            }
+            break;
+        case 1:
+            vec3f_copy(&o->oObjF4->oPosX, &o->oPosX);
+            obj = cur_obj_nearest_object_with_behavior(bhvFridgeSpawner);
+            if (obj == NULL) {
+                o->activeFlags = 0;
+                return;
+            }
+            if (dist_between_objects(o, obj) < 200.0f) {
+                CL_explode_object(o, 1);
+                obj->activeFlags = 0;
+                o->oObjF4->activeFlags = 0;
+            }
+            break;
+    }
+
+}
+void bhv_frying_pan_init(void) {
+    o->oGravity = 2.5;
+    o->oFriction = 0.8;
+    o->oBuoyancy = 1.3;
+    obj_set_hitbox(o, &sPanHitbox);
+    o->oObjF8 = cur_obj_nearest_object_with_behavior(bhvStoveButton);
+    if (o->oObjF8 == NULL)
+        o->activeFlags = 0;
+
+}
+
+void bhv_frying_pan_loop(void) {
+    switch (o->oHeldState) {
+        case HELD_FREE:
+            pan_free_loop();
+            break;
+
+        case HELD_HELD:
+            pan_held_loop();
+            break;
+
+        case HELD_THROWN:
+            pan_thrown_loop();
+            break;
+
+        case HELD_DROPPED:
+            pan_dropped_loop();
             break;
     }
 }

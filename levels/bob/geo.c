@@ -33,3 +33,5 @@
 #include "levels/bob/l1_barrel/geo.inc.c"
 #include "levels/bob/l1_loose_shelf/geo.inc.c"
 #include "levels/bob/kitchen_fridge/geo.inc.c"
+#include "levels/bob/stove_button/geo.inc.c"
+#include "levels/bob/frying_pan/geo.inc.c"

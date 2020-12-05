@@ -18,9 +18,16 @@ static const Lights1 boo_light_2 = gdSPDefLights1(
 );
 
 static const Lights1 boo_light_3 = gdSPDefLights1(
+    0x53, 0x53, 0x80,
+    0xA5, 0xA5, 0xFF, 0x28, 0x28, 0x28
+);
+
+static const Lights1 boo_light_4 = gdSPDefLights1(
     0x97, 0x9a, 0xff,
     0xff, 0xff, 0xff, 0x28, 0x28, 0x28
 );
+
+
 
 // 0x05009B40
 ALIGNED8 static const u8 boo_seg5_texture_05009B40[] = {
@@ -401,6 +408,23 @@ const Gfx boo_dl_color3[] = {
     gsSPDisplayList(boo_dl_helper),
     gsSPLight(&boo_light_3.l, 1),
     gsSPLight(&boo_light_3.a, 2),
+    gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
+    gsDPTileSync(),
+    gsSPDisplayList(boo_seg5_dl_0500C1B0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+
+const Gfx boo_dl_color4[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(boo_dl_helper),
+    gsSPLight(&boo_light_4.l, 1),
+    gsSPLight(&boo_light_4.a, 2),
     gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),

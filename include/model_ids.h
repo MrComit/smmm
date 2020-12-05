@@ -608,6 +608,8 @@
 #define MODEL_L1_BARREL           0xF5
 #define MODEL_L1_SHELF            0xF4
 #define MODEL_KITCHEN_FRIDGE      0xF3
+#define MODEL_STOVE_BUTTON        0xF2
+#define MODEL_FRYING_PAN          0xF1
 
 
 

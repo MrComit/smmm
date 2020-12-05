@@ -612,7 +612,9 @@ void bhv_l1_shelf_loop(void);
 void bhv_kitchen_door_loop(void);
 void bhv_fridge_spawner_loop(void);
 void bhv_ice_bobomb_loop(void);
-
+void bhv_stove_button_loop(void);
+void bhv_frying_pan_loop(void);
+void bhv_frying_pan_init(void);
 
 
 
