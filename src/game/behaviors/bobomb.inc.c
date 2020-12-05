@@ -435,12 +435,10 @@ void bhv_bobomb_buddy_loop(void) {
 
 void ice_bobomb_act_explode(void) {
     struct Object *explosion;
-    if (o->oTimer < 5)
-        cur_obj_scale(1.0 + (f32) o->oTimer / 5.0);
-    else {
-        //explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-        //explosion->oGraphYOffset += 100.0f;
-        create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
+    if (o->oTimer < 24) {
+        cur_obj_scale(1.0 - (f32) o->oTimer / 24.0);
+        cur_obj_play_sound_1(SOUND_AIR_BOBOMB_LIT_FUSE);
+    } else {
         o->activeFlags = 0;
     }
 }

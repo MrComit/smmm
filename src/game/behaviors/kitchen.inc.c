@@ -53,11 +53,25 @@ void bhv_burner_loop(void) {
 }
 
 
+void bhv_l1_cabinet_init(void) {
+    if (o->oBehParams2ndByte == 1) {
+        o->oObjF4 = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+        o->oObjF4->oPosX -= 250.0f;
+        o->oObjF4->oPosZ += 125.0f;
+        o->oObjF4->parentObj = o->oObjF4;
+        //o->oObjF4->oHomeX = o->oObjF4->oPosX;
+        //o->oObjF4->oHomeZ = o->oObjF4->oPosZ;
+    }
+}
+
 void bhv_l1_cabinet_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (gMarioState->flags & (MARIO_KICKING | MARIO_PUNCHING) && gMarioState->wall != NULL && gMarioState->wall->object == o) {
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
                 o->oAction = 1;
+            }
+            if (o->oTimer > 1 && o->oObjF4 != NULL) {
+                vec3f_copy(&o->oObjF4->oPosX, &o->oObjF4->oHomeX);
             }
             break;
         case 1:
@@ -79,8 +93,7 @@ void bhv_l1_barrel_loop(void) {
     switch (o->oAction) {
         case 0:
             load_object_collision_model();
-            if (gMarioState->flags & (MARIO_KICKING | MARIO_PUNCHING) && gMarioState->wall != NULL && gMarioState->wall->object == o 
-            && absi(gMarioState->faceAngle[1] + 0x4000) < 0x2000) {
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED && absi(gMarioState->faceAngle[1] + 0x4000) < 0x2000) {
                 o->oAction = 1;
                 o->oMoveAngleYaw = 0xC000;
                 o->oForwardVel = 5.0f;

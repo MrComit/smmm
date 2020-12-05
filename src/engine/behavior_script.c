@@ -1007,4 +1007,8 @@ void cur_obj_update(void) {
             }
         }
     }
+
+    if (gCurrentObject->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+        gCurrentObject->oFlags &= ~OBJ_FLAG_KICKED_OR_PUNCHED;
+    }
 }

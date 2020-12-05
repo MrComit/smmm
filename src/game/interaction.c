@@ -1731,13 +1731,14 @@ u32 interact_text(struct MarioState *m, UNUSED u32 interactType, struct Object *
 }
 
 void check_kick_or_punch_wall(struct MarioState *m) {
+    struct Surface *wall;
     if (m->flags & (MARIO_PUNCHING | MARIO_KICKING | MARIO_TRIPPING)) {
         Vec3f detector;
         detector[0] = m->pos[0] + 50.0f * sins(m->faceAngle[1]);
         detector[2] = m->pos[2] + 50.0f * coss(m->faceAngle[1]);
         detector[1] = m->pos[1];
-
-        if (resolve_and_return_wall_collisions(detector, 80.0f, 5.0f) != NULL) {
+        wall = resolve_and_return_wall_collisions(detector, 80.0f, 5.0f);
+        if (wall != NULL) {
             if (m->action != ACT_MOVE_PUNCHING || m->forwardVel >= 0.0f) {
                 if (m->action == ACT_PUNCHING) {
                     m->action = ACT_MOVE_PUNCHING;
@@ -1750,6 +1751,10 @@ void check_kick_or_punch_wall(struct MarioState *m) {
                 mario_set_forward_vel(m, -16.0f);
                 play_sound(SOUND_ACTION_HIT_2, m->marioObj->header.gfx.cameraToObject);
                 m->particleFlags |= PARTICLE_TRIANGLE;
+            }
+
+            if (wall->object != NULL) {
+                wall->object->oFlags |= OBJ_FLAG_KICKED_OR_PUNCHED;
             }
         }
     }
