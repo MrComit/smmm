@@ -38,8 +38,15 @@ void bhv_burner_init(void) {
 void bhv_burner_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 45) {
+            if (o->oTimer > 105) {
+                if (o->oTimer % 2)
+                    o->oFaceAngleRoll += 0x200;
+                else
+                    o->oFaceAngleRoll -= 0x200;
+            }
+            if (o->oTimer > 135) {
                 o->oAction = 1;
+                o->oFaceAngleRoll = 0;
             }
             break;
         case 1:
@@ -50,8 +57,15 @@ void bhv_burner_loop(void) {
             }
             break;
         case 2:
-            if (o->oTimer > 45) {
+            if (o->oTimer > 105) {
+                if (o->oTimer % 2)
+                    o->oFaceAngleRoll += 0x200;
+                else
+                    o->oFaceAngleRoll -= 0x200;
+            }
+            if (o->oTimer > 135) {
                 o->oAction = 3;
+                o->oFaceAngleRoll = 0x8000;
             }
             break;
         case 3:
