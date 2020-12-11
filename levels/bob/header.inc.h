@@ -388,7 +388,7 @@ extern Vtx bob_dl_LTable_mesh_vtx_0[88];
 extern Gfx bob_dl_LTable_mesh_tri_0[];
 extern Vtx bob_dl_LivingRoom_mesh_vtx_0[48];
 extern Gfx bob_dl_LivingRoom_mesh_tri_0[];
-extern Vtx bob_dl_LivingRoom_mesh_vtx_1[10];
+extern Vtx bob_dl_LivingRoom_mesh_vtx_1[8];
 extern Gfx bob_dl_LivingRoom_mesh_tri_1[];
 extern Vtx bob_dl_TV_mesh_vtx_0[40];
 extern Gfx bob_dl_TV_mesh_tri_0[];

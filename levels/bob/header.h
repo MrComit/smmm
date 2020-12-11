@@ -95,4 +95,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/tv_static/geo_header.h"
 
+#include "levels/bob/cushion/collision_header.h"
+
+#include "levels/bob/cushion/geo_header.h"
+
 #endif

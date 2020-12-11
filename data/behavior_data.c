@@ -6513,10 +6513,27 @@ const BehaviorScript bhvRemote[] = {
 const BehaviorScript bhvTVStatic[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_INT(oAnimState, 1),
     //SET_HOME(),
     //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 128, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     //CALL_NATIVE(bhv_tv_static_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_tv_static_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCushion[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(cushion_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_TWIRL_BOUNCE),
+    //SET_HOME(),
+    //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 128, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_cushion_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_cushion_loop),
     END_LOOP(),
 };

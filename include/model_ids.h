@@ -612,6 +612,7 @@
 #define MODEL_FRYING_PAN          0xF1
 #define MODEL_REMOTE              0xF0
 #define MODEL_TV_STATIC           0xEF
+#define MODEL_CUSHION             0xEE
 
 
 

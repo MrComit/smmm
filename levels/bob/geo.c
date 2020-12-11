@@ -37,3 +37,4 @@
 #include "levels/bob/frying_pan/geo.inc.c"
 #include "levels/bob/remote/geo.inc.c"
 #include "levels/bob/tv_static/geo.inc.c"
+#include "levels/bob/cushion/geo.inc.c"

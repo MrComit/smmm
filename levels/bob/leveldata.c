@@ -59,3 +59,5 @@
 #include "levels/bob/frying_pan/model.inc.c"
 #include "levels/bob/remote/model.inc.c"
 #include "levels/bob/tv_static/model.inc.c"
+#include "levels/bob/cushion/collision.inc.c"
+#include "levels/bob/cushion/model.inc.c"
