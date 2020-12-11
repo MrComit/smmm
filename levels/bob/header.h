@@ -91,4 +91,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/frying_pan/geo_header.h"
 
+#include "levels/bob/remote/geo_header.h"
+
+#include "levels/bob/tv_static/geo_header.h"
+
 #endif

@@ -615,6 +615,9 @@ void bhv_ice_bobomb_loop(void);
 void bhv_stove_button_loop(void);
 void bhv_frying_pan_loop(void);
 void bhv_frying_pan_init(void);
+void bhv_remote_loop(void);
+void bhv_remote_init(void);
+void bhv_tv_static_loop(void);
 
 
 

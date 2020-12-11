@@ -35,3 +35,5 @@
 #include "levels/bob/kitchen_fridge/geo.inc.c"
 #include "levels/bob/stove_button/geo.inc.c"
 #include "levels/bob/frying_pan/geo.inc.c"
+#include "levels/bob/remote/geo.inc.c"
+#include "levels/bob/tv_static/geo.inc.c"

@@ -572,6 +572,10 @@ extern const BehaviorScript bhvIceBobomb[];
 extern const BehaviorScript bhvStoveButton[];
 extern const BehaviorScript bhvFryingPan[];
 extern const BehaviorScript bhvPanFlame[];
+extern const BehaviorScript bhvRemote[];
+extern const BehaviorScript bhvTVStatic[];
+
+
 
 
 

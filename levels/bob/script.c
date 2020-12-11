@@ -50,6 +50,8 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_KITCHEN_FRIDGE, kitchen_fridge_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STOVE_BUTTON, stove_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FRYING_PAN, frying_pan_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_REMOTE, remote_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TV_STATIC, tv_static_geo), 
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -148,6 +150,8 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_SHYGUY, 2621, 0, 19, 0, 0, 0, 0x00000000, bhvShyguy),
 		OBJECT(MODEL_STOVE_BUTTON, 2992, 131, 5062, 0, 0, 0, 0x00000000, bhvStoveButton),
 		OBJECT(MODEL_FRYING_PAN, 3071, 269, 4990, 0, 0, 0, 0x00000000, bhvFryingPan),
+		OBJECT(MODEL_REMOTE, -3752, 0, 7509, 0, 0, 0, 0x00000000, bhvRemote),
+		OBJECT(MODEL_TV_STATIC, -4614, 500, 6055, 0, 0, 0, 0x00000000, bhvTVStatic),
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),
 		MACRO_OBJECTS(bob_area_1_macro_objs),

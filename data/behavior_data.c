@@ -6496,3 +6496,27 @@ const BehaviorScript bhvPanFlame[] = {
         ANIMATE_TEXTURE(oAnimState, 2),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvRemote[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    ADD_FLOAT(oPosY, 100),
+    CALL_NATIVE(bhv_remote_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_remote_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvTVStatic[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    //SET_HOME(),
+    //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 128, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    //CALL_NATIVE(bhv_tv_static_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_tv_static_loop),
+    END_LOOP(),
+};

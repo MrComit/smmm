@@ -57,3 +57,5 @@
 #include "levels/bob/stove_button/model.inc.c"
 #include "levels/bob/stove_button/collision.inc.c"
 #include "levels/bob/frying_pan/model.inc.c"
+#include "levels/bob/remote/model.inc.c"
+#include "levels/bob/tv_static/model.inc.c"

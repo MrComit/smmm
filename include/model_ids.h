@@ -610,6 +610,9 @@
 #define MODEL_KITCHEN_FRIDGE      0xF3
 #define MODEL_STOVE_BUTTON        0xF2
 #define MODEL_FRYING_PAN          0xF1
+#define MODEL_REMOTE              0xF0
+#define MODEL_TV_STATIC           0xEF
+
 
 
 

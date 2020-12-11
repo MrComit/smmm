@@ -176,6 +176,7 @@ const GeoLayout bob_dl_Room1H_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2823, 375, 7681, bob_dl_Kitchen_002_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 414, 87, 3925, bob_dl_SpiderWeb_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
