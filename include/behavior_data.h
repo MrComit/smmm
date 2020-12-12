@@ -575,7 +575,8 @@ extern const BehaviorScript bhvPanFlame[];
 extern const BehaviorScript bhvRemote[];
 extern const BehaviorScript bhvTVStatic[];
 extern const BehaviorScript bhvCushion[];
-
+extern const BehaviorScript bhvTVPeepa[];
+extern const BehaviorScript bhvPeepaNumber[];
 
 
 

@@ -6537,3 +6537,26 @@ const BehaviorScript bhvCushion[] = {
         CALL_NATIVE(bhv_cushion_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvTVPeepa[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_tv_peepa_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_tv_peepa_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvPeepaNumber[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    //CALL_NATIVE(bhv_peepa_number_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_peepa_number_loop),
+    END_LOOP(),
+};

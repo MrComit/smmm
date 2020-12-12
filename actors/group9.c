@@ -31,3 +31,5 @@ UNUSED static const u64 binid_4 = 4;
 
 //#include "haunted_cage/model.inc.c"
 //UNUSED static const u64 binid_6 = 6;
+
+#include "peepa/model.inc.c"

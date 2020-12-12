@@ -620,6 +620,9 @@ void bhv_remote_init(void);
 void bhv_tv_static_loop(void);
 void bhv_cushion_loop(void);
 void bhv_cushion_init(void);
+void bhv_tv_peepa_loop(void);
+void bhv_tv_peepa_init(void);
+void bhv_peepa_number_loop(void);
 
 
 
