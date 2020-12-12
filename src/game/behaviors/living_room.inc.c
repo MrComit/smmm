@@ -23,6 +23,8 @@ struct ObjectHitbox sCushionHitbox = {
     /* hurtboxHeight: */ 72,
 };
 
+u8 sPeepaNumbers[6] = {0, 1, 2, 3, 4, 5};
+
 
 void bhv_remote_init(void) {
    obj_set_hitbox(o, &sRemoteHitbox);
@@ -66,7 +68,7 @@ void bhv_remote_loop(void) {
 void tv_spawn_peepa(s32 count) {
     s32 i;
     for (i = 0; i < count; i++) {
-        spawn_object_relative(i, 0, -50, -200, o, MODEL_PEEPA, bhvTVPeepa);
+        spawn_object_relative(count << 8 | i, 0, -150, -200, o, MODEL_PEEPA, bhvTVPeepa);
     }
 }
 
@@ -75,6 +77,7 @@ void bhv_tv_static_loop(void) {
     if (o->oAnimState == 0) {
         switch (o->oAction) {
             case 0:
+                CL_scramble_array(&sPeepaNumbers, o->oBehParams2ndByte + 3);
                 tv_spawn_peepa(o->oBehParams2ndByte + 3);
                 o->oAction = 1;
                 break;
@@ -143,26 +146,31 @@ void bhv_cushion_loop(void) {
 
 
 void bhv_tv_peepa_init(void) {
+    s16 beh1 = o->oBehParams2ndByte >> 8;
+    s16 beh2 = o->oBehParams2ndByte & 0xFF;
     o->oForwardVel = 15.0f;
-    o->oF8 = o->oBehParams2ndByte * 15;
-    o->oF4 = o->oBehParams2ndByte * 0x2000;
-    o->oFC = o->oBehParams2ndByte * 0x2AAA;
+    o->oF8 = beh2 * 10;
+    o->oF4 = beh2 * 0x2000;
+    o->oFC = beh2 * (0x10000 / beh1);
+    o->oHomeX = -4614.0f;
+    o->oHomeZ = 6800.0f;
 
-    o->oObj108 = spawn_object(o, MODEL_NUMBER, bhvPeepaNumber);
-    o->oObj108->oAnimState = o->oBehParams2ndByte;
+    o->oBehParams2ndByte = sPeepaNumbers[beh2];
+    o->prevObj = spawn_object(o, MODEL_NUMBER, bhvPeepaNumber);
+    o->prevObj->oAnimState = o->oBehParams2ndByte + 1;
 }
 
 void bhv_tv_peepa_loop(void) {
+    o->oF4 += 0x800;
+    o->oGraphYOffset = 25.0f * sins(o->oF4);
     switch (o->oAction) {
         case 0:
             if (o->oTimer > o->oF8)
                 CL_Move();
-            o->oF4 += 0x800;
-            o->oGraphYOffset = 25.0f * sins(o->oF4);
-            if (o->oTimer > 120) {
+            if (o->oTimer > 70) {
                 o->oAction = 1;
-                o->oFloat100 = o->oPosX + (1550.0f * sins(o->oFC));
-                o->oFloat104 = o->oPosZ + (1550.0f * coss(o->oFC));
+                o->oFloat100 = o->oHomeX + (324.0f * sins(o->oFC));
+                o->oFloat104 = o->oHomeZ + (324.0f * coss(o->oFC));
             }
             break;
         case 1:
@@ -170,10 +178,22 @@ void bhv_tv_peepa_loop(void) {
             o->oPosZ = approach_f32(o->oPosZ, o->oFloat104, 20.0f, 20.0f);
             if (o->oTimer > 60) {
                 o->oAction = 2;
-                o->oObj108->activeFlags = 0;
+                //o->prevObj->activeFlags = 0;
             }
             break;
         case 2:
+            o->o108 = approach_s16_symmetric(o->o108, 0x800, 0x40);
+            o->oFC += o->o108;
+            o->oPosX = o->oHomeX + (324.0f * sins(o->oFC));
+            o->oPosZ = o->oHomeZ + (324.0f * coss(o->oFC));
+            
+            if (o->oTimer > 120) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            o->activeFlags = 0;
+            o->prevObj->activeFlags = 0;
             break;
     }
 }
