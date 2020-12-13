@@ -9,7 +9,7 @@ const GeoLayout boo_opaque_geo[] = {
          GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color2),
          GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color3),
          GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color4),
-         GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color1),
+         GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color5),
          GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color1),
          GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color1),
          GEO_DISPLAY_LIST(LAYER_OPAQUE, boo_dl_color1),

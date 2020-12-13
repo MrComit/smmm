@@ -194,7 +194,7 @@ void scroll_bob_dl_Steam_mesh_vtx_0() {
 }
 void scroll_bob_dl_LivingRoom_mesh_vtx_2() {
 	int i = 0;
-	int count = 7;
+	int count = 12;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 

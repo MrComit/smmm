@@ -6500,7 +6500,7 @@ const BehaviorScript bhvPanFlame[] = {
 
 const BehaviorScript bhvRemote[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     DROP_TO_FLOOR(),
     ADD_FLOAT(oPosY, 100),
     CALL_NATIVE(bhv_remote_init),

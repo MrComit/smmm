@@ -77,9 +77,11 @@ void bhv_tv_static_loop(void) {
     if (o->oAnimState == 0) {
         switch (o->oAction) {
             case 0:
-                CL_scramble_array(&sPeepaNumbers, o->oBehParams2ndByte + 3);
-                tv_spawn_peepa(o->oBehParams2ndByte + 3);
-                o->oAction = 1;
+                if (o->oDistanceToMario < 1500.0f) {
+                    CL_scramble_array(&sPeepaNumbers, o->oBehParams2ndByte + 3);
+                    tv_spawn_peepa(o->oBehParams2ndByte + 3);
+                    o->oAction = 1;
+                }
                 break;
             case 1:
                 if (count_room_objects_with_behavior(bhvTVPeepa, o->oRoom) == 0) {
