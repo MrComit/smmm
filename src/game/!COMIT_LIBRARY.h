@@ -23,6 +23,6 @@ Vec3f *CL_nearest_point(Vec3f *list, Vec3f source, s16 listcount);
 s16 CL_obj_pitch_to_mario(void);
 void CL_get_hit(struct MarioState *m, struct Object *o, u32 damage);
 void CL_explode_object(struct Object *obj, s16 noDamage);
-void CL_scramble_array(const u8 *array[], s16 size);
+void CL_scramble_array(u8 *array[], s16 size);
 
 #endif

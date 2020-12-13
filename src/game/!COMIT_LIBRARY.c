@@ -287,12 +287,13 @@ void CL_explode_object(struct Object *obj, s16 noDamage) {
 }
 
 
-void CL_scramble_array(const u8 *array[], s16 size) {
-    s32 i, j, k;
+void CL_scramble_array(u8 *array[], s16 size) {
+    s16 i, j, k;
+    u8 *bytes = (u8 *) array;
     for (i = size - 1; i > 0; i--) {
         j = CL_RandomMinMaxU16(0, i);
-        k = array[j];
-        array[j] = array[i];
-        array[i] = k;
+        k = bytes[j];
+        bytes[j] = bytes[i];
+        bytes[i] = k;
     }
 }

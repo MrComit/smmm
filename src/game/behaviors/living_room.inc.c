@@ -23,6 +23,18 @@ struct ObjectHitbox sCushionHitbox = {
     /* hurtboxHeight: */ 72,
 };
 
+static struct ObjectHitbox sTVPeepaHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 90,
+    /* height:            */ 60,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 50,
+};
+
 u8 sPeepaNumbers[6] = {0, 1, 2, 3, 4, 5};
 
 
@@ -86,6 +98,7 @@ void bhv_tv_static_loop(void) {
             case 1:
                 if (count_room_objects_with_behavior(bhvTVPeepa, o->oRoom) == 0) {
                     o->oAnimState = 1;
+                    o->oF4 = 0;
                     o->oAction = 0;
                     o->oBehParams2ndByte++;
                     if (o->oBehParams2ndByte >= 4) {
@@ -163,6 +176,8 @@ void bhv_tv_peepa_init(void) {
 }
 
 void bhv_tv_peepa_loop(void) {
+    struct Object *obj;
+    s32 i, k;
     o->oF4 += 0x800;
     o->oGraphYOffset = 25.0f * sins(o->oF4);
     switch (o->oAction) {
@@ -191,11 +206,40 @@ void bhv_tv_peepa_loop(void) {
             
             if (o->oTimer > 120) {
                 o->oAction = 3;
+                o->prevObj->activeFlags = 0;
+                obj_set_hitbox(o, &sTVPeepaHitbox);
             }
             break;
         case 3:
-            o->activeFlags = 0;
-            o->prevObj->activeFlags = 0;
+            obj = cur_obj_nearest_object_with_behavior(bhvTVStatic);
+            if (obj == NULL) {
+                o->activeFlags = 0;
+                break;
+            }
+            o->oMoveAngleYaw += 0x600;
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                for (i = 0; i < o->oBehParams2ndByte; i++) {
+                    if (!(obj->oF4 & 1 << i)) {
+                        k = 1;
+                        break;
+                    } else {
+                        k = 0;
+                    }
+                }
+
+                if (k) {
+                    CL_get_hit(gMarioState, o, 2);
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gDefaultSoundArgs);
+                } else {
+                    obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);
+                }
+                spawn_mist_particles();
+                o->activeFlags = 0;
+                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                obj->oF4 |= 1 << o->oBehParams2ndByte;
+            }
+            o->oInteractStatus = 0;
             break;
     }
 }
