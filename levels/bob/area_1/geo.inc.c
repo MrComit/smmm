@@ -123,6 +123,7 @@ const GeoLayout bob_dl_Room1D_geo[] = {
 const GeoLayout bob_dl_Room1E_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3364, 343, 9552, bob_dl_Barracade_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -6230, 522, 9552, bob_dl_Bars_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_DECAL, 5017, 0, 5678, bob_dl_Bookshelf_Col_003_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_DECAL, 4085, 0, 7927, bob_dl_Bookshelf_Col_004_mesh),
