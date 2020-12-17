@@ -31,6 +31,7 @@ Vec3f sStealerPos[6] = {
 {5276.90f, 0, 13639.6f},
 };
 
+Vec3f sStrayBookPos = {-9683.0f, 186.0f, 3062.0f};
 
 void bhv_lever_loop(void) {
     obj_set_hitbox(o, &sLeverHitbox);
@@ -73,6 +74,11 @@ void bhv_l1_gate_loop(void) {
                         break;
                     }
                     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PARLOR_GATE) {
+                        o->activeFlags = 0;
+                    }
+                    break;
+                case 2:
+                    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_STUDY_GATE) {
                         o->activeFlags = 0;
                     }
                     break;
@@ -158,18 +164,21 @@ void bhv_book_thrower_loop(void) {
     struct Object *obj;
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 1000.0f && absf(gMarioState->pos[0] - o->oPosX) < 200.0f) {
+            if (o->oDistanceToMario < 1000.0f && absf(gMarioState->pos[0] - o->oPosX) < 200.0f && gMarioState->pos[1] < 550.0f) {
                 o->oAction = 1;
             }
             break;
         case 1:
-            if (absf(gMarioState->pos[0] - o->oPosX) > 200.0f) {
+            if (absf(gMarioState->pos[0] - o->oPosX) > 200.0f || gMarioState->pos[1] > 550.0f) {
                 o->oAction = 0;
                 break;
             }
             obj = spawn_object(o, MODEL_L1_BOOK, bhvStrayBook);
             obj->oPosY = gMarioState->pos[1] + 80.0f;
-            obj->oPosX = gMarioState->pos[0];
+            obj->oBehParams2ndByte = CL_RandomMinMaxU16(0, 2);
+            if (o->oBehParams2ndByte)
+                obj->oF4 = 1;
+            //obj->oPosX = gMarioState->pos[0];
             o->oAction = 2;
             break;
         case 2:
@@ -184,24 +193,68 @@ void bhv_stray_book_init(void) {
     //vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
     //o->oMoveAnglePitch = pitch;
     //o->oMoveAngleYaw = yaw;
-    o->oForwardVel = 48.0f;
+    o->oForwardVel = 40.0f;
     obj_set_hitbox(o, &sStrayBookHitbox);
 
 }
 
 void bhv_stray_book_loop(void) {
-    //CL_Move_3d();
-    CL_Move();
-    cur_obj_update_floor_and_walls();
-    o->oFaceAngleYaw += 0xC00;
-    o->oFaceAngleRoll += 0xC00;
-    o->oFaceAnglePitch += 0xC00;
-    if (o->oTimer > 30 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
-        spawn_mist_particles_variable(0, 0, 25.0f);
-        spawn_triangle_break_particles(6, 138, 1.0f, 4);
-        create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
-        o->activeFlags = 0;
-        o->parentObj->oAction = 1;
-        o->parentObj->oFC = CL_RandomMinMaxU16(35, 60);
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            CL_Move();
+            cur_obj_update_floor_and_walls();
+            o->oFaceAngleYaw += 0xC00;
+            o->oFaceAngleRoll += 0xC00;
+            o->oFaceAnglePitch += 0xC00;
+            if (o->oF4) {
+                if (o->oDistanceToMario < 120.0f && gMarioState->flags & (MARIO_PUNCHING | MARIO_KICKING)) {
+                    o->oMoveAngleYaw = gMarioState->faceAngle[1];
+                    o->oForwardVel = 52.0f;
+                    o->oAction = 1;
+                    break;
+                }
+            }
+            if (o->oTimer > 30 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
+                spawn_mist_particles_variable(0, 0, 25.0f);
+                spawn_triangle_break_particles(6, 138, 1.0f, 4);
+                create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+                o->activeFlags = 0;
+                o->parentObj->oAction = 1;
+            }
+            break;
+        case 1:
+            CL_Move();
+            cur_obj_update_floor_and_walls();
+            o->oFaceAngleYaw += 0xC00;
+            o->oFaceAngleRoll += 0xC00;
+            o->oFaceAnglePitch += 0xC00;
+            if (o->oTimer > 60) {
+                spawn_mist_particles_variable(0, 0, 25.0f);
+                spawn_triangle_break_particles(6, 138, 1.0f, 4);
+                create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+                o->activeFlags = 0;
+                o->parentObj->oAction = 1;
+                break;
+            }
+            if (o->oMoveFlags & OBJ_MOVE_HIT_WALL && o->oPosZ > 2863.0f && o->oPosZ < 3313.0f) {
+                create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+                o->oAction = 2;
+                o->parentObj->activeFlags = 0;
+                vec3f_copy(&o->oPosX, sStrayBookPos);
+                o->header.gfx.scale[1] = 1.0f;
+                o->oFaceAngleYaw = 0x4000;
+                o->oFaceAngleRoll = 0;
+                o->oFaceAnglePitch = 0;
+                obj = CL_obj_nearest_object_behavior_params(bhvL1Gate, 0x00020000);
+                if (obj != NULL) {
+                    obj->oAction = 1;
+                    save_file_set_newflags(SAVE_NEW_FLAG_STUDY_GATE, 0);
+                    play_puzzle_jingle();
+                }
+            }
+            break;
+        case 2:
+            break;
     }
 }
