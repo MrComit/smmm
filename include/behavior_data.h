@@ -577,6 +577,9 @@ extern const BehaviorScript bhvTVStatic[];
 extern const BehaviorScript bhvCushion[];
 extern const BehaviorScript bhvTVPeepa[];
 extern const BehaviorScript bhvPeepaNumber[];
+extern const BehaviorScript bhvBookThrower[];
+extern const BehaviorScript bhvStrayBook[];
+
 
 
 

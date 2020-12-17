@@ -10,6 +10,18 @@ struct ObjectHitbox sLeverHitbox = {
     /* hurtboxHeight: */ 90,
 };
 
+struct ObjectHitbox sStrayBookHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 70,
+    /* height:            */ 70,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
 Vec3f sStealerPos[6] = {
 {5336.97f, 0, 12903.7f},
 {4810.03f, 0, 13092.4f},
@@ -138,5 +150,58 @@ void bhv_shyguy_book_steal_loop(void) {
             }
             o->oInteractStatus = 0;
             break;
+    }
+}
+
+
+void bhv_book_thrower_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 1000.0f && absf(gMarioState->pos[0] - o->oPosX) < 200.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (absf(gMarioState->pos[0] - o->oPosX) > 200.0f) {
+                o->oAction = 0;
+                break;
+            }
+            obj = spawn_object(o, MODEL_L1_BOOK, bhvStrayBook);
+            obj->oPosY = gMarioState->pos[1] + 80.0f;
+            obj->oPosX = gMarioState->pos[0];
+            o->oAction = 2;
+            break;
+        case 2:
+            break;
+    }
+}
+
+
+void bhv_stray_book_init(void) {
+    //s16 pitch, yaw;
+    //f32 dist;
+    //vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+    //o->oMoveAnglePitch = pitch;
+    //o->oMoveAngleYaw = yaw;
+    o->oForwardVel = 48.0f;
+    obj_set_hitbox(o, &sStrayBookHitbox);
+
+}
+
+void bhv_stray_book_loop(void) {
+    //CL_Move_3d();
+    CL_Move();
+    cur_obj_update_floor_and_walls();
+    o->oFaceAngleYaw += 0xC00;
+    o->oFaceAngleRoll += 0xC00;
+    o->oFaceAnglePitch += 0xC00;
+    if (o->oTimer > 30 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
+        spawn_mist_particles_variable(0, 0, 25.0f);
+        spawn_triangle_break_particles(6, 138, 1.0f, 4);
+        create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+        o->activeFlags = 0;
+        o->parentObj->oAction = 1;
+        o->parentObj->oFC = CL_RandomMinMaxU16(35, 60);
     }
 }

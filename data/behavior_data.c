@@ -6560,3 +6560,24 @@ const BehaviorScript bhvPeepaNumber[] = {
         CALL_NATIVE(bhv_peepa_number_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBookThrower[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_book_thrower_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvStrayBook[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SCALE(0, 65),
+    CALL_NATIVE(bhv_stray_book_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_stray_book_loop),
+    END_LOOP(),
+};

@@ -623,6 +623,9 @@ void bhv_cushion_init(void);
 void bhv_tv_peepa_loop(void);
 void bhv_tv_peepa_init(void);
 void bhv_peepa_number_loop(void);
+void bhv_book_thrower_loop(void);
+void bhv_stray_book_init(void);
+void bhv_stray_book_loop(void);
 
 
 
