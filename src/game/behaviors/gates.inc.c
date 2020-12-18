@@ -31,7 +31,7 @@ Vec3f sStealerPos[6] = {
 {5276.90f, 0, 13639.6f},
 };
 
-Vec3f sStrayBookPos = {-9683.0f, 186.0f, 3062.0f};
+Vec3f sStrayBookPos = {-10783.0f, 186.0f, 3062.0f};
 
 void bhv_lever_loop(void) {
     obj_set_hitbox(o, &sLeverHitbox);

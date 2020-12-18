@@ -8,6 +8,7 @@ extern const GeoLayout bob_dl_Room1F_geo[];
 extern const GeoLayout bob_dl_Room1G_geo[];
 extern const GeoLayout bob_dl_Room1H_geo[];
 extern const GeoLayout bob_dl_Room1I_geo[];
+extern const GeoLayout bob_dl_Room1J_geo[];
 extern const GeoLayout bob_area_1[];
 extern const Collision bob_area_1_collision[];
 extern const u8 bob_area_1_collision_rooms[];
@@ -496,6 +497,10 @@ extern Vtx bob_dl_TV_mesh_vtx_0[40];
 extern Gfx bob_dl_TV_mesh_tri_0[];
 extern Vtx bob_dl_TV_mesh_vtx_1[4];
 extern Gfx bob_dl_TV_mesh_tri_1[];
+extern Vtx bob_dl_Hallway_003_mesh_vtx_0[30];
+extern Gfx bob_dl_Hallway_003_mesh_tri_0[];
+extern Vtx bob_dl_Hallway_003_mesh_vtx_1[12];
+extern Gfx bob_dl_Hallway_003_mesh_tri_1[];
 
 extern Gfx bob_dl_Bookshelf_mesh[];
 extern Gfx bob_dl_Dresser_mesh[];
@@ -654,5 +659,6 @@ extern Gfx bob_dl_LivingRoom_001_mesh[];
 extern Gfx bob_dl_Shelf_mesh[];
 extern Gfx bob_dl_Shelf_001_mesh[];
 extern Gfx bob_dl_TV_mesh[];
+extern Gfx bob_dl_Hallway_003_mesh[];
 extern Gfx bob_dl_material_revert_render_settings[];
 
