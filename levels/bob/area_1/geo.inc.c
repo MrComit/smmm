@@ -233,7 +233,9 @@ const GeoLayout bob_dl_Room1I_geo[] = {
 const GeoLayout bob_dl_Room1J_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -9876, 125, 3763, bob_dl_Hallway_003_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -8801, 26, 5397, bob_dl_Green_001_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -8801, 0, 4487, bob_dl_HalfPillar_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -9876, 125, 3763, bob_dl_Study_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

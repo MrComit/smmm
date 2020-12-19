@@ -78,9 +78,9 @@ void bhv_l1_gate_loop(void) {
                     }
                     break;
                 case 2:
-                    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_STUDY_GATE) {
+                    //if (save_file_get_newflags(0) & SAVE_NEW_FLAG_STUDY_GATE) {
                         o->activeFlags = 0;
-                    }
+                    //}
                     break;
             }
             break;

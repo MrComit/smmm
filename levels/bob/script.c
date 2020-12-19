@@ -56,7 +56,7 @@ const LevelScript level_bob_entry[] = {
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_NONE, -795, 192, 3134, 0, -90, 0, 0x000A0000, bhvFlyingWarp),
+		OBJECT(MODEL_NONE, -9892, 192, 3134, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_BREAKABLE_BOX, 861, 0, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 1061, 0, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 1061, 200, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),

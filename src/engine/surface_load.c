@@ -37,7 +37,7 @@ s16 sSurfacePoolSize;
 
 u8 unused8038EEA8[0x30];
 
-u8 gSurfacePoolError;
+u8 gSurfacePoolError = 0;
 
 /**
  * Allocate the part of the surface node pool to contain a surface node.
