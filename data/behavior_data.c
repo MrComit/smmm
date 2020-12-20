@@ -6582,3 +6582,17 @@ const BehaviorScript bhvStrayBook[] = {
         CALL_NATIVE(bhv_stray_book_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvAppearingBook[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_book_collision),
+    SET_FLOAT(oCollisionDistance, 0xF00),
+    SET_HOME(),
+    CALL_NATIVE(bhv_appearing_book_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_appearing_book_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
