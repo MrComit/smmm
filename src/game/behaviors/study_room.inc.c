@@ -11,7 +11,7 @@ void bhv_appearing_book_loop(void) {
         case 0:
             if (gMarioState->pos[1] <= gMarioState->floorHeight && absf(gMarioState->pos[2] - o->oPosZ) < 800.0f) {
                 o->oAction = 1;
-                o->oFloatF4 = o->oHomeX - 611.0f;
+                o->oFloatF4 = o->oHomeX - 641.0f;
             }
             break;
         case 1:
