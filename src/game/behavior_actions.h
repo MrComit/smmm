@@ -628,7 +628,8 @@ void bhv_stray_book_init(void);
 void bhv_stray_book_loop(void);
 void bhv_appearing_book_loop(void);
 void bhv_appearing_book_init(void);
-
+void bhv_spinning_book_init(void);
+void bhv_spinning_book_loop(void);
 
 
 

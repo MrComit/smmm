@@ -6596,3 +6596,17 @@ const BehaviorScript bhvAppearingBook[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSpinningBook[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_thin_book_big_collision),
+    SET_FLOAT(oCollisionDistance, 0x500),
+    SET_HOME(),
+    CALL_NATIVE(bhv_spinning_book_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_spinning_book_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

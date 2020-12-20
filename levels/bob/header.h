@@ -99,4 +99,10 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/cushion/geo_header.h"
 
+#include "levels/bob/l1_thin_book/collision_header.h"
+
+#include "levels/bob/l1_thin_book/geo_header.h"
+
+#include "levels/bob/l1_thin_book_big/collision_header.h"
+
 #endif

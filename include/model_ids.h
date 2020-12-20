@@ -614,7 +614,7 @@
 #define MODEL_REMOTE              0xF0
 #define MODEL_TV_STATIC           0xEF
 #define MODEL_CUSHION             0xEE
-
+#define MODEL_L1_THIN_BOOK        0xED
 
 
 
