@@ -16,7 +16,7 @@ return value: pointer of str1
 explanation:  adds character string, str2 to the end of character string, str1  
 -----------------------------------------------------------------------------
 */
-#include    <string.h>
+/*#include    <string.h>
 
 char  *strcat(char *str1, const char *str2)
 {
@@ -27,3 +27,4 @@ char  *strcat(char *str1, const char *str2)
     *p = '\0';
     return  str1;
 }
+*/

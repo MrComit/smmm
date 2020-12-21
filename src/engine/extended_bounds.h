@@ -72,6 +72,7 @@
 STATIC_ASSERT(LEVEL_BOUNDARY_MAX != 0, "You must set a valid extended bounds mode!");
 
 #define NUM_CELLS (2 * LEVEL_BOUNDARY_MAX / CELL_SIZE)
+#define NUM_CELLS_INDEX (NUM_CELLS - 1)
 
 #define NOT_ENOUGH_ROOM_FOR_SURFACES (1 << 0)
 #define NOT_ENOUGH_ROOM_FOR_NODES    (1 << 1)

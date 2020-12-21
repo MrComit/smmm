@@ -7,9 +7,8 @@
 #include "mario.h"
 #include "audio/external.h"
 #include "interaction.h"
-#include "audio_defines.h"
 #include "engine/math_util.h"
-#include "thread6.h"
+#include "rumble_init.h"
 
 /**
  * Used by act_punching() to determine Mario's forward velocity during each

@@ -3,11 +3,15 @@
 
 #include <PR/ultratypes.h>
 
+#include "surface_collision.h"
 #include "types.h"
 #include "engine/extended_bounds.h"
 
 
 extern u8 gSurfacePoolError;
+
+//#define NUM_CELLS       (2 * LEVEL_BOUNDARY_MAX / CELL_SIZE)
+//#define NUM_CELLS_INDEX (NUM_CELLS - 1)
 
 struct SurfaceNode
 {

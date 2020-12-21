@@ -85,6 +85,15 @@ SECTIONS
    BEGIN_NOLOAD(buffers)
    {
       BUILD_DIR/src/buffers/buffers.o(.bss*);
+      BUILD_DIR/src/buffers/hvqmwork.o(.bss*);
+      BUILD_DIR/src/buffers/adpcmbuf.o(.bss*);
+      BUILD_DIR/src/buffers/hvqbuf.o(.bss*);
+      BUILD_DIR/src/audio/globals_start.o(.bss*);
+      BUILD_DIR/src/audio/synthesis.o(.bss*);
+      BUILD_DIR/src/audio/heap.o(.bss*);
+      BUILD_DIR/src/audio/load.o(.bss*);
+      BUILD_DIR/src/audio/data.o(.bss*);
+      BUILD_DIR/src/audio*.o(.bss*);
 
 #ifdef VERSION_EU
       . = ALIGN(0x200);
@@ -98,11 +107,22 @@ SECTIONS
    /*ASSERT((. <= SEG_MAIN), "Error: buffers segment extended into main")*/
 
    . = _buffersSegmentNoloadEnd;
+   /* lib/src/__osDevMgrMain.c and lib/src/osCreateViManager.c contain infinite
+    * loops compiled without -g, which cause the return statements and the .o
+    * files themselves to be aligned to 32-byte boundaries. But the linker
+    * Nintendo used did not respect .o file alignment, and aligned the files
+    * only to 16 bytes, in some cases misaligning them. We force the same to
+    * happen using the SUBALIGN directive. This is harmless; the alignment is
+    * just an optimization. */
    BEGIN_SEG(main, .) SUBALIGN(16)
    {
       BUILD_DIR/asm/entry.o(.text);
 
       BUILD_DIR/src/game*.o(.text);
+      BUILD_DIR/src/hvqm*.o(.text);
+#ifdef UNF
+      BUILD_DIR/src/usb*.o(.text);
+#endif
       BUILD_DIR/src/audio*.o(.text);
       BUILD_DIR/asm/llmuldiv_gcc.o(.text);
       BUILD_DIR/asm/slidec.o(.text);
@@ -112,11 +132,14 @@ SECTIONS
 
       BUILD_DIR/lib/rsp.o(.text);   
       lib/PR/hvqm/hvqm2sp1.o(.text);
-      lib/PR/hvqm/hvqm2sp2.o(.text);
 
       /* data */
       BUILD_DIR/src/game*.o(.data*);
       BUILD_DIR/src/game*.o(.sdata*);
+#ifdef UNF
+      BUILD_DIR/src/usb*.o(.data*);
+      BUILD_DIR/src/usb*.o(.sdata*);
+#endif
       BUILD_DIR/src/audio*.o(.data*);
       BUILD_DIR/src/audio*.o(.sdata*);
 
@@ -126,10 +149,12 @@ SECTIONS
 
       BUILD_DIR/lib/rsp.o(.data*);
       lib/PR/hvqm/hvqm2sp1.o(.data*);
-      lib/PR/hvqm/hvqm2sp2.o(.data*);
 
       /* rodata */
       BUILD_DIR/src/game*.o(.rodata*);
+#ifdef UNF
+      BUILD_DIR/src/usb*.o(.rodata*);
+#endif
       BUILD_DIR/src/audio*.o(.rodata*);
 
       */libultra_rom.a:*.o(.rodata*);
@@ -137,18 +162,21 @@ SECTIONS
 
       BUILD_DIR/lib/rsp.o(.rodata*);
       lib/PR/hvqm/hvqm2sp1.o(.rodata*);
-      lib/PR/hvqm/hvqm2sp2.o(.rodata*);
    }
    END_SEG(main)
    BEGIN_NOLOAD(main)
    {
       BUILD_DIR/src/game*.o(.bss*);
       BUILD_DIR/src/game*.o(.sbss*);
+      BUILD_DIR/src/hvqm*.o(.bss*);
+      BUILD_DIR/src/usb*.o(.bss*);
+      BUILD_DIR/src/usb*.o(.sbss*);
       BUILD_DIR/src/audio*.o(.bss*);
       BUILD_DIR/src/audio*.o(.sbss*);
       
       */libultra_rom.a:*.o(.bss*);
       */libultra_rom.a:*.o(.sbss*);
+      */libhvqm2.a:*.o(.bss*);
 
       . = ALIGN(0x8);
    }
@@ -244,28 +272,13 @@ SECTIONS
    /* 0x8016F000 21D7D0-255EC0 [386F0] */
    BEGIN_SEG(goddard, SEG_GODDARD)
    {
-      BUILD_DIR/src/menu/level_select_menu.o(.text);
-      BUILD_DIR/src/menu/intro_geo.o(.text);
-      BUILD_DIR/src/menu/file_select.o(.text);
-      BUILD_DIR/src/menu/star_select.o(.text);
       BUILD_DIR/src/menu*.o(.text);
-      /* data, rodata, per file */
-      BUILD_DIR/src/menu/level_select_menu.o(.data*);
-      BUILD_DIR/src/menu/level_select_menu.o(.rodata*);
-      BUILD_DIR/src/menu/intro_geo.o(.data*);
-      BUILD_DIR/src/menu/file_select.o(.data*);
-      BUILD_DIR/src/menu/file_select.o(.rodata*);
-      BUILD_DIR/src/menu/star_select.o(.data*);
-      BUILD_DIR/src/menu/star_select.o(.rodata*);
       BUILD_DIR/src/menu*.o(.data*);
       BUILD_DIR/src/menu*.o(.rodata*);
    }
    END_SEG(goddard)
    BEGIN_NOLOAD(goddard)
    {
-      BUILD_DIR/src/menu/intro_geo.o(.bss*);
-      BUILD_DIR/src/menu/file_select.o(.bss*);
-      BUILD_DIR/src/menu/star_select.o(.bss*);
       BUILD_DIR/src/menu*.o(.bss*);
    }
    END_NOLOAD(goddard)
@@ -354,13 +367,18 @@ SECTIONS
       BUILD_DIR/sound/sound_data.o(.data);
    }
    END_SEG(assets)
-
-#ifdef HVQM   
-   BEGIN_SEG(hvqm, __romPos)
+  
+   BEGIN_SEG(capcom, __romPos) SUBALIGN(2)
    {
-      BUILD_DIR/assets/hvqm.o(.data*);
+      BUILD_DIR/data/capcom.o(.data);
    }
-	   END_SEG(hvqm)
+	END_SEG(capcom)
+#if 0
+   BEGIN_SEG(sein, __romPos) SUBALIGN(2)
+   {
+      BUILD_DIR/data/sein.o(.data);
+   }
+	END_SEG(sein)
 #endif
    /* Discard everything not specifically mentioned above. */
    /DISCARD/ :

@@ -8,7 +8,6 @@
 /n64graphics_ci
 /patch_libultra_math
 /skyconv
-/slienc
 /tabledesign
 /textconv
 /vadpcm_enc
@@ -16,9 +15,4 @@
 !/ido5.3_compiler/usr/lib/*.so
 !/ido5.3_compiler/usr/lib/*.so.1
 !/ido5.3_compiler/**/*.o
-
-!/ido7.1_compiler/lib/*.so
-!/ido7.1_compiler/usr/lib/*.so
-!/ido7.1_compiler/usr/lib/*.so.1
-!/ido7.1_compiler/**/*.o
-!libbfd-2.30.so
+!/*.so

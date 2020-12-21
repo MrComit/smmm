@@ -6,6 +6,7 @@
 
 #include <ultra64.h>
 #include "macros.h"
+#include "config.h"
 
 
 // Certain functions are marked as having return values, but do not
@@ -50,6 +51,7 @@ typedef s16 Collision;
 typedef s16 Trajectory;
 typedef s16 PaintingData;
 typedef uintptr_t BehaviorScript;
+typedef u8 Texture;
 
 enum SpTaskState {
     SPTASK_STATE_NOT_STARTED,

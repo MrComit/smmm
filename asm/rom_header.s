@@ -8,13 +8,7 @@
 .word  entry_point              /* Entrypoint */
 
 /* Revision */
-.if VERSION_SH == 1
-    .word  0x0000144C
-.elseif VERSION_EU == 1
-    .word  0x0000144C
-.else /* NTSC-U and NTSC-J 1.0 */
-    .word  0x0000144C
-.endif
+.word  0x0000144C
 
 .word  0x00000000               /* Checksum 1 */
 .word  0x00000000               /* Checksum 2 */
@@ -38,8 +32,4 @@
     .ascii "P"                  /* PAL (Europe) */
 .endif
 
-.if VERSION_SH == 1
-    .byte  0x03                 /* Version (Shindou) */
-.else
     .byte  0x00                 /* Version */
-.endif

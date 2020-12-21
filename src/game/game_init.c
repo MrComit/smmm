@@ -18,7 +18,10 @@
 #include "print.h"
 #include "segment2.h"
 #include "segment_symbols.h"
-#include "thread6.h"
+#include "rumble_init.h"
+#include <hvqm/hvqm.h>
+#include "usb/usb.h"
+#include "usb/debug.h"
 #include <prevent_bss_reordering.h>
 
 // FIXME: I'm not sure all of these variables belong in this file, but I don't
@@ -50,7 +53,7 @@ u32 gGlobalTimer = 0;
 
 u16 sCurrFBNum = 0;
 u16 frameBufferIndex = 0;
-void (*D_8032C6A0)(void) = NULL;
+void (*gGoddardVblankCallback)(void) = NULL;
 struct Controller *gPlayer1Controller = &gControllers[0];
 struct Controller *gPlayer2Controller = &gControllers[1];
 // probably debug only, see note below
@@ -334,9 +337,9 @@ void config_gfx_pool(void) {
 void display_and_vsync(void) {
     profiler_log_thread5_time(BEFORE_DISPLAY_LISTS);
     osRecvMesg(&D_80339CB8, &D_80339BEC, OS_MESG_BLOCK);
-    if (D_8032C6A0 != NULL) {
-        D_8032C6A0();
-        D_8032C6A0 = NULL;
+    if (gGoddardVblankCallback != NULL) {
+        gGoddardVblankCallback();
+        gGoddardVblankCallback = NULL;
     }
     send_display_list(&gGfxPool->spTask);
     profiler_log_thread5_time(AFTER_DISPLAY_LISTS);
@@ -355,7 +358,7 @@ void display_and_vsync(void) {
 
 // this function records distinct inputs over a 255-frame interval to RAM locations and was likely
 // used to record the demo sequences seen in the final game. This function is unused.
-static void record_demo(void) {
+UNUSED static void record_demo(void) {
     // record the player's button mask and current rawStickX and rawStickY.
     u8 buttonMask =
         ((gPlayer1Controller->buttonDown & (A_BUTTON | B_BUTTON | Z_TRIG | START_BUTTON)) >> 8)
@@ -600,8 +603,13 @@ void thread5_game_loop(UNUSED void *arg) {
 
     setup_game_memory();
     init_rumble_pak_scheduler_queue();
+#ifdef UNF
+    debug_initialize();
+#endif
     init_controllers();
     create_thread_6();
+    
+    createHvqmThread();
     save_file_load_all();
 
     set_vblank_handler(2, &gGameVblankHandler, &gGameVblankQueue, (OSMesg) 1);
@@ -632,6 +640,7 @@ void thread5_game_loop(UNUSED void *arg) {
         config_gfx_pool();
         read_controller_inputs();
         addr = level_script_execute(addr);
+
         display_and_vsync();
 
         // when debug info is enabled, print the "BUF %d" information.
@@ -640,11 +649,9 @@ void thread5_game_loop(UNUSED void *arg) {
             // amount of free space remaining.
             print_text_fmt_int(180, 20, "BUF %d", gGfxPoolEnd - (u8 *) gDisplayListHead);
         }
-#if 0        
         if (gPlayer1Controller->buttonPressed & L_TRIG) {
             osStartThread(&hvqmThread);
             osRecvMesg(&gDmaMesgQueue, NULL, OS_MESG_BLOCK);
         }
-#endif
     }
 }

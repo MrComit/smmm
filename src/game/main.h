@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include <config.h>
+
 struct RumbleData {
     u8 unk00;
     u8 unk01;
@@ -24,9 +26,12 @@ extern OSThread gIdleThread;
 extern OSThread gMainThread;
 extern OSThread gGameLoopThread;
 extern OSThread gSoundThread;
+extern OSThread hvqmThread;
+
 extern OSThread gRumblePakThread;
 
-extern OSPfs gRumblePakPfs; // Actually an OSPfs but we don't have that header yet
+extern OSPfs gRumblePakPfs;
+
 
 extern OSMesgQueue gPIMesgQueue;
 extern OSMesgQueue gIntrMesgQueue;
@@ -51,7 +56,7 @@ extern struct StructSH8031D9B0 gCurrRumbleSettings;
 extern struct VblankHandler *gVblankHandler1;
 extern struct VblankHandler *gVblankHandler2;
 extern struct SPTask *gActiveSPTask;
-extern u32 sNumVblanks;
+extern u32 gNumVblanks;
 extern s8 gResetTimer;
 extern s8 D_8032C648;
 extern s8 gDebugLevelSelect;

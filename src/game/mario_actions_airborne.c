@@ -12,7 +12,7 @@
 #include "mario.h"
 #include "mario_step.h"
 #include "save_file.h"
-#include "thread6.h"
+#include "rumble_init.h"
 
 void play_flip_sounds(struct MarioState *m, s16 frame1, s16 frame2, s16 frame3) {
     s32 animFrame = m->marioObj->header.gfx.animInfo.animFrame;
@@ -698,6 +698,9 @@ s32 act_twirling(struct MarioState *m) {
     }
 
     m->marioObj->header.gfx.angle[1] += m->twirlYaw;
+#if ENABLE_RUMBLE
+    reset_rumble_timers();
+#endif
     return FALSE;
 }
 
@@ -1076,8 +1079,8 @@ u32 common_air_knockback_step(struct MarioState *m, u32 landAction, u32 hardFall
             break;
 
         case AIR_STEP_LANDED:
-            if (m->action == ACT_SOFT_BONK) {
-                queue_rumble_data(5, 80);
+            if (m->action != ACT_SOFT_BONK) {
+                queue_rumble_data(5, 40);
             }
             if (!check_fall_damage_or_get_stuck(m, hardFallAction)) {
 #ifndef VERSION_JP

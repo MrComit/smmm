@@ -17,7 +17,7 @@ return value:  pointer of destination to be written, dst
 explanation:   writes byte data c from the pointer dst indicates by the amount of count  
 -----------------------------------------------------------------------------
 */
-#include    <string.h>
+/*#include    <string.h>
 
 void    *memset(void* dst, int c, size_t count)
 {
@@ -25,3 +25,4 @@ void    *memset(void* dst, int c, size_t count)
     while(count--) *p++ = c;
     return  dst;
 }
+*/

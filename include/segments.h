@@ -23,9 +23,6 @@
 #define RAM_END          0x80800000
 #endif
 
-#ifndef LINKER
-#include "segment_symbols.h"
-#endif
 /*
  * Workaround for running out of pool space due to
  * importing large custom content.
@@ -33,7 +30,6 @@
 
 #define SEG_POOL_START   _framebuffersSegmentNoloadEnd // 0x0165000 in size
 #define SEG_GODDARD      SEG_POOL_START + 0x113000
-#define SEG_POOL_END_4MB 0x80400000 // For the error message screen enhancement.
 
 #define POOL_SIZE        RAM_END - SEG_POOL_START
 

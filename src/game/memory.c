@@ -5,7 +5,7 @@
 #define INCLUDED_FROM_MEMORY_C
 
 #include "buffers/buffers.h"
-#include "slienc.h"
+#include "slidec.h"
 #include "game_init.h"
 #include "main.h"
 #include "memory.h"
@@ -335,7 +335,7 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
         dest = main_pool_alloc(*size, MEMORY_POOL_LEFT);
         if (dest != NULL) {
             slidstart(compressed, dest);
-            set_segment_base_addr(segment, dest); sSegmentROMTable[segment] = (uintptr_t) srcStart;
+            set_segment_base_addr(segment, dest);
             main_pool_free(compressed);
         } else {
         }
@@ -353,7 +353,7 @@ void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
     if (compressed != NULL) {
         dma_read(compressed, srcStart, srcEnd);
         slidstart(compressed, gDecompressionHeap);
-        set_segment_base_addr(segment, gDecompressionHeap); sSegmentROMTable[segment] = (uintptr_t) srcStart;
+        set_segment_base_addr(segment, gDecompressionHeap);
         main_pool_free(compressed);
     } else {
     }
@@ -554,6 +554,7 @@ void func_80278A78(struct MarioAnimation *a, void *b, struct Animation *target) 
     a->targetAnim = target;
 }
 
+// TODO: (Scrub C)
 s32 load_patchable_table(struct MarioAnimation *a, u32 index) {
     s32 ret = FALSE;
     struct MarioAnimDmaRelatedThing *sp20 = a->animDmaTable;

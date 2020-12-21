@@ -11,9 +11,10 @@
 #include "buffers/buffers.h"
 #include "segments.h"
 #include "main.h"
-#include "thread6.h"
-#include "crash_screen.h"
-#include "mem_error_screen.h"
+#include "rumble_init.h"
+#include "usb/usb.h"
+#include "usb/debug.h"
+#include "game/mem_error_screen.h"
 
 // Message IDs
 #define MESG_SP_COMPLETE 100
@@ -27,29 +28,20 @@ OSThread gIdleThread;
 OSThread gMainThread;
 OSThread gGameLoopThread;
 OSThread gSoundThread;
-OSThread gRumblePakThread;
-
-OSPfs gRumblePakPfs; // Actually an OSPfs but we don't have that header yet
 
 OSIoMesg gDmaIoMesg;
 OSMesg D_80339BEC;
+
 OSMesgQueue gDmaMesgQueue;
 OSMesgQueue gSIEventMesgQueue;
 OSMesgQueue gPIMesgQueue;
 OSMesgQueue gIntrMesgQueue;
 OSMesgQueue gSPTaskMesgQueue;
-OSMesgQueue gRumblePakSchedulerMesgQueue;
-OSMesgQueue gRumbleThreadVIMesgQueue;
 OSMesg gDmaMesgBuf[1];
 OSMesg gPIMesgBuf[32];
 OSMesg gSIEventMesgBuf[1];
 OSMesg gIntrMesgBuf[16];
 OSMesg gUnknownMesgBuf[16];
-OSMesg gRumblePakSchedulerMesgBuf[1];
-OSMesg gRumbleThreadVIMesgBuf[1];
-
-struct RumbleData gRumbleDataQueue[3];
-struct StructSH8031D9B0 gCurrRumbleSettings;
 
 struct VblankHandler *gVblankHandler1 = NULL;
 struct VblankHandler *gVblankHandler2 = NULL;
@@ -60,7 +52,7 @@ struct SPTask *sCurrentDisplaySPTask = NULL;
 struct SPTask *sNextAudioSPTask = NULL;
 struct SPTask *sNextDisplaySPTask = NULL;
 s8 sAudioEnabled = TRUE;
-u32 sNumVblanks = 0;
+u32 gNumVblanks = 0;
 s8 gResetTimer = 0;
 s8 D_8032C648 = 0;
 s8 gDebugLevelSelect = FALSE;
@@ -97,22 +89,6 @@ void handle_debug_key_sequences(void) {
     }
 }
 
-void unknown_main_func(void) {
-    // uninitialized
-    OSTime time;
-    u32 b;
-
-    osSetTime(time);
-    osMapTLB(0, b, NULL, 0, 0, 0);
-    osUnmapTLBAll();
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wnonnull"
-    sprintf(NULL, NULL);
-#pragma GCC diagnostic pop
-}
-
-
 void setup_mesg_queues(void) {
     osCreateMesgQueue(&gDmaMesgQueue, gDmaMesgBuf, ARRAY_COUNT(gDmaMesgBuf));
     osCreateMesgQueue(&gSIEventMesgQueue, gSIEventMesgBuf, ARRAY_COUNT(gSIEventMesgBuf));
@@ -131,10 +107,6 @@ void alloc_pool(void) {
     void *start = (void *) SEG_POOL_START;
     void *end = (void *) (SEG_POOL_START + POOL_SIZE);
 
-    // Detect memory size
-    if (does_pool_end_lie_out_of_bounds())
-        end = (void *)SEG_POOL_END_4MB;
-
     main_pool_init(start, end);
     gEffectsMemoryPool = mem_pool_init(0x4000, MEMORY_POOL_LEFT);
 }
@@ -146,17 +118,17 @@ void create_thread(OSThread *thread, OSId id, void (*entry)(void *), void *arg, 
 }
 
 #ifdef VERSION_SH
-extern void func_sh_802F69CC(void);
+extern void func_sh_802f69cc(void);
 #endif
 
 void handle_nmi_request(void) {
     gResetTimer = 1;
     D_8032C648 = 0;
-    func_80320890();
-    sound_banks_disable(2, 0x037A);
+    stop_sounds_in_continuous_banks();
+    sound_banks_disable(SEQ_PLAYER_SFX, SOUND_BANKS_BACKGROUND);
     fadeout_music(90);
 #ifdef VERSION_SH
-    func_sh_802F69CC();
+    func_sh_802f69cc();
 #endif
 }
 
@@ -222,9 +194,8 @@ void pretend_audio_sptask_done(void) {
 }
 
 void handle_vblank(void) {
-    UNUSED s32 pad; // needed to pad the stack
 
-    sNumVblanks++;
+    gNumVblanks++;
 #ifdef VERSION_SH
     if (gResetTimer > 0 && gResetTimer < 100) {
         gResetTimer++;
@@ -331,6 +302,7 @@ void handle_dp_complete(void) {
     sCurrentDisplaySPTask->state = SPTASK_STATE_FINISHED_DP;
     sCurrentDisplaySPTask = NULL;
 }
+extern void crash_screen_init(void);
 
 //extern void createHvqmThread(void);
 
@@ -350,6 +322,7 @@ void thread3_main(UNUSED void *arg) {
     osStartThread(&gGameLoopThread);
     
 //    createHvqmThread();
+
 
     while (TRUE) {
         OSMesg msg;
@@ -465,17 +438,7 @@ void thread1_idle(UNUSED void *arg) {
     }
 }
 
-/*
- * Clear RAM after main segment, to avoid potential issues with some N64s that didn't clear RDRAM for up to *30 MINUTES* after power off
- */
-
-static void ClearRAM(void)
-{
-    bzero(_mainSegmentEnd, (size_t)osMemSize - (size_t)OS_K0_TO_PHYSICAL(_mainSegmentEnd));
-}
-
 void main_func(void) {
-    ClearRAM();
     osInitialize();
     create_thread(&gIdleThread, 1, thread1_idle, NULL, gIdleThreadStack + 0x800, 100);
     osStartThread(&gIdleThread);

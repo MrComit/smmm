@@ -266,7 +266,7 @@ void bhv_flip_book_loop(void) {
             if (o->oFaceAngleRoll == 0x7FFF) {
                 o->oAction = 2;
                 o->oObjF4->oF4++;
-                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
             }
             break;
     }

@@ -229,10 +229,10 @@ void bhv_tv_peepa_loop(void) {
 
                 if (k) {
                     CL_get_hit(gMarioState, o, 2);
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gDefaultSoundArgs);
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
                 } else {
                     obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
-                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);
+                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
                 }
                 spawn_mist_particles();
                 o->activeFlags = 0;
