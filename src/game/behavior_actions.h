@@ -638,6 +638,8 @@ void bhv_water_bucket_init(void);
 void bhv_water_bucket_loop(void);
 void bhv_sine_book_init(void);
 void bhv_sine_book_loop(void);
+void bhv_flip_book_loop(void);
+void bhv_flip_book_init(void);
 
 
 

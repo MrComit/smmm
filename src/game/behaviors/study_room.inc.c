@@ -238,3 +238,36 @@ void bhv_sine_book_loop(void) {
     o->oF4 += 0x200;
     o->oPosY = o->oHomeY + (sins(o->oF4) * 500.0f);
 }
+
+
+void bhv_flip_book_init(void) {
+    o->oObjF4 = CL_obj_nearest_object_behavior_params(bhvL1Gate, 0x00030000);
+    if (o->oObjF4 == NULL) {
+        o->oFaceAnglePitch = 0x8000;
+        o->oAction = 2;
+    }
+}
+
+
+void bhv_flip_book_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oObjF4->activeFlags == 0) {
+                o->oFaceAnglePitch = 0x8000;
+                o->oAction = 2;
+            }
+            load_object_collision_model();
+            if (cur_obj_is_mario_ground_pounding_platform()) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0x7FFF, 0x400);
+            if (o->oFaceAngleRoll == 0x7FFF) {
+                o->oAction = 2;
+                o->oObjF4->oF4++;
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gDefaultSoundArgs);
+            }
+            break;
+    }
+}

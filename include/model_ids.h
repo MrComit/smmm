@@ -616,6 +616,7 @@
 #define MODEL_CUSHION             0xEE
 #define MODEL_L1_THIN_BOOK        0xED
 #define MODEL_WATER_BUCKET        0xEC
+#define MODEL_L1_FLIP_BOOK        0xEB
 
 
 #endif // MODEL_IDS_H

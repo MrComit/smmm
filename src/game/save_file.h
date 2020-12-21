@@ -95,8 +95,8 @@ extern s8 gLevelToCourseNumTable[];
  */
 #define SAVE_NEW_FLAG_MUDROOM_GATE       /* 0x00000001 */ (1 << 0)
 #define SAVE_NEW_FLAG_PARLOR_GATE        /* 0x00000002 */ (1 << 1)
-#define SAVE_NEW_FLAG_STUDY_GATE         /* 0x00000004 */ (1 << 2)
-#define SAVE_NEW_FLAG_004                /* 0x00000008 */ (1 << 3)
+#define SAVE_NEW_FLAG_PRE_STUDY_GATE     /* 0x00000004 */ (1 << 2)
+#define SAVE_NEW_FLAG_STUDY_GATE         /* 0x00000008 */ (1 << 3)
 #define SAVE_NEW_FLAG_005                /* 0x00000010 */ (1 << 4)
 #define SAVE_NEW_FLAG_006                /* 0x00000020 */ (1 << 5)
 #define SAVE_NEW_FLAG_007                /* 0x00000040 */ (1 << 6)

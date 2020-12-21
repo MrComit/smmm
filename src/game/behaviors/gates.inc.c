@@ -78,9 +78,19 @@ void bhv_l1_gate_loop(void) {
                     }
                     break;
                 case 2:
+                    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PRE_STUDY_GATE) {
+                        o->activeFlags = 0;
+                    }
+                    break;
+                case 3:
                     //if (save_file_get_newflags(0) & SAVE_NEW_FLAG_STUDY_GATE) {
                         o->activeFlags = 0;
                     //}
+                    if (o->oF4 > 3) {
+                        o->oAction = 1;
+                        save_file_set_newflags(SAVE_NEW_FLAG_STUDY_GATE, 0);
+                        play_puzzle_jingle();
+                    }
                     break;
             }
             break;
@@ -249,7 +259,7 @@ void bhv_stray_book_loop(void) {
                 obj = CL_obj_nearest_object_behavior_params(bhvL1Gate, 0x00020000);
                 if (obj != NULL) {
                     obj->oAction = 1;
-                    save_file_set_newflags(SAVE_NEW_FLAG_STUDY_GATE, 0);
+                    save_file_set_newflags(SAVE_NEW_FLAG_PRE_STUDY_GATE, 0);
                     play_puzzle_jingle();
                 }
             }

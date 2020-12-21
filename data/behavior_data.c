@@ -6669,3 +6669,17 @@ const BehaviorScript bhvSineBook[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFlipBook[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_flip_book_collision),
+    SET_FLOAT(oCollisionDistance, 0x500),
+    SCALE(0, 200),
+    SET_HOME(),
+    CALL_NATIVE(bhv_flip_book_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_flip_book_loop),
+    END_LOOP(),
+};

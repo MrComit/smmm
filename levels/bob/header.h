@@ -107,4 +107,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/water_bucket/geo_header.h"
 
+#include "levels/bob/l1_flip_book/geo_header.h"
+
+#include "levels/bob/l1_flip_book/collision_header.h"
+
 #endif
