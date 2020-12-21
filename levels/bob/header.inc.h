@@ -512,7 +512,7 @@ extern Vtx bob_dl_FancyChair_mesh_vtx_1[52];
 extern Gfx bob_dl_FancyChair_mesh_tri_1[];
 extern Vtx bob_dl_Fireplace_mesh_vtx_0[40];
 extern Gfx bob_dl_Fireplace_mesh_tri_0[];
-extern Vtx bob_dl_GBook_mesh_vtx_0[24];
+extern Vtx bob_dl_GBook_mesh_vtx_0[28];
 extern Gfx bob_dl_GBook_mesh_tri_0[];
 extern Vtx bob_dl_GBook_mesh_vtx_1[24];
 extern Gfx bob_dl_GBook_mesh_tri_1[];

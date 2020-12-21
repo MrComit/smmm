@@ -630,6 +630,11 @@ void bhv_appearing_book_loop(void);
 void bhv_appearing_book_init(void);
 void bhv_spinning_book_init(void);
 void bhv_spinning_book_loop(void);
+void bhv_l1_fireplace_init(void);
+void bhv_l1_fireplace_loop(void);
+void bhv_shooting_flame_loop(void);
+void bhv_shooting_flame_init(void);
+
 
 
 

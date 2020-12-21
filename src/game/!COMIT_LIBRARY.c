@@ -297,3 +297,10 @@ void CL_scramble_array(u8 *array[], s16 size) {
         bytes[i] = k;
     }
 }
+
+
+void CL_Lava_Boost(void) {
+    struct MarioState *m = gMarioState;
+    m->floorHeight = m->pos[1];
+    check_lava_boost(m);
+}
