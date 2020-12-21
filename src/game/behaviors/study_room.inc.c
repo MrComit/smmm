@@ -74,7 +74,7 @@ void bhv_spinning_book_loop(void) {
 
 void bhv_l1_fireplace_init(void) {
     o->header.gfx.scale[0] = 11.0f;
-    o->header.gfx.scale[1] = 9.0f;
+    o->header.gfx.scale[1] = 9.5f;
     o->header.gfx.scale[2] = 11.0f;
 
 
@@ -218,4 +218,23 @@ void bhv_water_bucket_loop(void) {
             bucket_dropped_loop();
             break;
     }
+}
+
+
+void bhv_sine_book_init(void) {
+    o->header.gfx.scale[0] = 2.8f;
+    o->header.gfx.scale[1] = 7.5f;
+    o->header.gfx.scale[2] = 7.5f;
+    o->oF4 = (o->oBehParams >> 24) << 8;
+    if (o->oBehParams2ndByte) {
+        o->oFaceAnglePitch = 0x8000;
+        o->oFaceAngleYaw = 0xC000;
+        o->oFaceAngleRoll = 0xC000;
+    }
+}
+
+
+void bhv_sine_book_loop(void) {
+    o->oF4 += 0x200;
+    o->oPosY = o->oHomeY + (sins(o->oF4) * 500.0f);
 }

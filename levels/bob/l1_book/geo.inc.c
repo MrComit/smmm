@@ -15,7 +15,7 @@ const GeoLayout l1_book_Purple[] = {
 	GEO_RETURN(),
 };
 const GeoLayout l1_book_geo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(4096),
 	GEO_OPEN_NODE(),
 		GEO_NODE_START(),
 		GEO_OPEN_NODE(),

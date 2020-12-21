@@ -636,6 +636,8 @@ void bhv_shooting_flame_loop(void);
 void bhv_shooting_flame_init(void);
 void bhv_water_bucket_init(void);
 void bhv_water_bucket_loop(void);
+void bhv_sine_book_init(void);
+void bhv_sine_book_loop(void);
 
 
 

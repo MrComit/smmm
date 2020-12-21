@@ -584,7 +584,7 @@ extern const BehaviorScript bhvSpinningBook[];
 extern const BehaviorScript bhvL1Fireplace[];
 extern const BehaviorScript bhvShootingFlame[];
 extern const BehaviorScript bhvWaterBucket[];
-
+extern const BehaviorScript bhvSineBook[];
 
 
 
