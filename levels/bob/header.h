@@ -105,4 +105,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/l1_thin_book_big/collision_header.h"
 
+#include "levels/bob/water_bucket/geo_header.h"
+
 #endif

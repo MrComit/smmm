@@ -64,3 +64,4 @@
 #include "levels/bob/l1_thin_book/collision.inc.c"
 #include "levels/bob/l1_thin_book/model.inc.c"
 #include "levels/bob/l1_thin_book_big/collision.inc.c"
+#include "levels/bob/water_bucket/model.inc.c"

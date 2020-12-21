@@ -6643,3 +6643,15 @@ const BehaviorScript bhvShootingFlame[] = {
         ANIMATE_TEXTURE(oAnimState, 2),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvWaterBucket[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_water_bucket_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_water_bucket_loop),
+    END_LOOP(),
+};

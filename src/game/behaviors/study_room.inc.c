@@ -1,3 +1,16 @@
+static struct ObjectHitbox sBucketHitbox = {
+    /* interactType:      */ INTERACT_GRABBABLE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 65,
+    /* height:            */ 113,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+
 void bhv_appearing_book_init(void) {
     o->header.gfx.scale[0] = 3.0f;
     o->header.gfx.scale[1] = 6.0f;
@@ -113,5 +126,96 @@ void bhv_shooting_flame_loop(void) {
     }
     if (o->oMoveFlags & (OBJ_MOVE_HIT_WALL | OBJ_MOVE_LANDED)) {
         o->activeFlags = 0;
+    }
+}
+
+
+
+
+
+
+void bucket_held_loop(void) {
+    cur_obj_become_intangible();
+    o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    //cur_obj_init_animation(1);
+    cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
+}
+
+void bucket_dropped_loop(void) {
+    cur_obj_get_dropped();
+    cur_obj_become_tangible();
+
+    o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+    //cur_obj_init_animation(0);
+    o->oF4 = 1;
+    o->oTimer = 0;
+    o->oHeldState = 0;
+    //o->oAction = 0;
+}
+
+void bucket_thrown_loop(void) {
+    cur_obj_enable_rendering_2();
+    cur_obj_become_tangible();
+
+    o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+    o->oF4 = 1;
+    o->oTimer = 0;
+    o->oHeldState = 0;
+    o->oFlags &= ~0x8; /* bit 3 */
+    o->oForwardVel = 25.0;
+    o->oVelY = 20.0;
+    //o->oAction = BOBOMB_ACT_LAUNCHED;
+}
+
+
+void bucket_free_loop(void) {
+    struct Object *obj= cur_obj_nearest_object_with_behavior(bhvL1Fireplace);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    object_step();
+    if (dist_between_objects(o, obj) < 200.0f) {
+        CL_explode_object(o, 1);
+        water_bomb_spawn_explode_particles(0, 3, 10);
+        obj->activeFlags = 0;
+    }
+
+    if (o->oF4 == 1) {
+        if (o->oTimer > 200) {
+            o->oTimer = 0;
+            o->oHeldState = 0;
+            o->oPosX = o->oHomeX;
+            o->oPosY = o->oHomeY;
+            o->oPosZ = o->oHomeZ;
+            o->oFaceAngleYaw = 0;
+            o->oF4 = 0;
+        }
+    }
+}
+void bhv_water_bucket_init(void) {
+    o->oGravity = 2.5;
+    o->oFriction = 0.8;
+    o->oBuoyancy = 1.3;
+    obj_set_hitbox(o, &sBucketHitbox);
+}
+
+void bhv_water_bucket_loop(void) {
+    switch (o->oHeldState) {
+        case HELD_FREE:
+            bucket_free_loop();
+            break;
+
+        case HELD_HELD:
+            bucket_held_loop();
+            break;
+
+        case HELD_THROWN:
+            bucket_thrown_loop();
+            break;
+
+        case HELD_DROPPED:
+            bucket_dropped_loop();
+            break;
     }
 }

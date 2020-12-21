@@ -54,6 +54,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TV_STATIC, tv_static_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CUSHION, cushion_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L1_THIN_BOOK, l1_thin_book_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_WATER_BUCKET, water_bucket_geo), 
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -192,6 +193,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_THIN_BOOK, -9342, 697, 7933, 0, 0, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L1_THIN_BOOK, -9040, 890, 8382, 0, 0, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_BLUE_COIN, -10298, 524, 8862, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
+		OBJECT(MODEL_WATER_BUCKET, -11069, 250, 7954, 0, 0, 0, 0x00000000, bhvWaterBucket),
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),
 		MACRO_OBJECTS(bob_area_1_macro_objs),

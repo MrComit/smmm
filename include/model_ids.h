@@ -615,7 +615,7 @@
 #define MODEL_TV_STATIC           0xEF
 #define MODEL_CUSHION             0xEE
 #define MODEL_L1_THIN_BOOK        0xED
-
+#define MODEL_WATER_BUCKET        0xEC
 
 
 #endif // MODEL_IDS_H

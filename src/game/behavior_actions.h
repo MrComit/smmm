@@ -634,6 +634,8 @@ void bhv_l1_fireplace_init(void);
 void bhv_l1_fireplace_loop(void);
 void bhv_shooting_flame_loop(void);
 void bhv_shooting_flame_init(void);
+void bhv_water_bucket_init(void);
+void bhv_water_bucket_loop(void);
 
 
 

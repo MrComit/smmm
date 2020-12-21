@@ -33024,48 +33024,6 @@ Gfx bob_dl_Black_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx bob_dl_Bucket_mesh_vtx_0[26] = {
-	{{{30, -1, 0},0, {1008, 3454},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{15, -1, 26},0, {663, 3255},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-15, -1, 26},0, {663, 2857},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-15, -1, -26},0, {1353, 2857},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-30, -1, 0},0, {1008, 2658},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{15, -1, -26},0, {1353, 3255},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-43, 63, 0},0, {752, 2128},{0x83, 0xE8, 0x0, 0xFF}}},
-	{{{-15, -1, 26},0, {624, 3920},{0xC2, 0xE8, 0x6C, 0xFF}}},
-	{{{-21, 63, 37},0, {624, 2128},{0xC2, 0xE8, 0x6C, 0xFF}}},
-	{{{-30, -1, 0},0, {752, 3920},{0x83, 0xE8, 0x0, 0xFF}}},
-	{{{-15, -1, -26},0, {624, 3920},{0xC2, 0xE8, 0x94, 0xFF}}},
-	{{{-21, 63, -37},0, {624, 2128},{0xC2, 0xE8, 0x94, 0xFF}}},
-	{{{15, -1, -26},0, {942, 3920},{0x3E, 0xE8, 0x94, 0xFF}}},
-	{{{-15, -1, -26},0, {1458, 3920},{0xC2, 0xE8, 0x94, 0xFF}}},
-	{{{-21, 63, -37},0, {1563, 2127},{0xC2, 0xE8, 0x94, 0xFF}}},
-	{{{21, 63, -37},0, {837, 2127},{0x3E, 0xE8, 0x94, 0xFF}}},
-	{{{-15, -1, 26},0, {918, 3920},{0xC2, 0xE8, 0x6C, 0xFF}}},
-	{{{15, -1, 26},0, {1434, 3920},{0x3E, 0xE8, 0x6C, 0xFF}}},
-	{{{21, 63, 37},0, {1539, 2127},{0x3E, 0xE8, 0x6C, 0xFF}}},
-	{{{-21, 63, 37},0, {813, 2127},{0xC2, 0xE8, 0x6C, 0xFF}}},
-	{{{43, 63, 0},0, {16, 2128},{0x7D, 0xE8, 0x0, 0xFF}}},
-	{{{15, -1, -26},0, {144, 3920},{0x3E, 0xE8, 0x94, 0xFF}}},
-	{{{21, 63, -37},0, {144, 2128},{0x3E, 0xE8, 0x94, 0xFF}}},
-	{{{30, -1, 0},0, {16, 3920},{0x7D, 0xE8, 0x0, 0xFF}}},
-	{{{15, -1, 26},0, {144, 3920},{0x3E, 0xE8, 0x6C, 0xFF}}},
-	{{{21, 63, 37},0, {144, 2128},{0x3E, 0xE8, 0x6C, 0xFF}}},
-};
-
-Gfx bob_dl_Bucket_mesh_tri_0[] = {
-	gsSPVertex(bob_dl_Bucket_mesh_vtx_0 + 0, 26, 0),
-	gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
-	gsSP2Triangles(2, 4, 3, 0, 3, 5, 0, 0),
-	gsSP2Triangles(6, 7, 8, 0, 6, 9, 7, 0),
-	gsSP2Triangles(10, 9, 6, 0, 10, 6, 11, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSP2Triangles(20, 21, 22, 0, 20, 23, 21, 0),
-	gsSP2Triangles(24, 23, 20, 0, 24, 20, 25, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx bob_dl_BucketStack_mesh_vtx_0[107] = {
 	{{{-16, 1, -26},0, {1008, 3454},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-30, 1, 0},0, {663, 3255},{0x0, 0x7F, 0x0, 0xFF}}},
@@ -33349,12 +33307,12 @@ Vtx bob_dl_FancyChair_mesh_vtx_0[281] = {
 	{{{-40, 81, 175},0, {137, 1852},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-46, 16, 158},0, {127, 1897},{0xCD, 0xCD, 0xCD, 0xFF}}},
 	{{{-38, 81, 142},0, {110, 1852},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{80, 82, 10},0, {117, 1850},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{90, 16, -5},0, {114, 1890},{0xD5, 0xD5, 0xD5, 0xFF}}},
-	{{{118, 81, 14},0, {127, 1850},{0xFE, 0xFE, 0xFE, 0xFF}}},
-	{{{85, 81, -22},0, {110, 1852},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{90, 16, -5},0, {127, 1897},{0xD5, 0xD5, 0xD5, 0xFF}}},
-	{{{80, 82, 10},0, {137, 1851},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{41, 82, 254},0, {117, 1850},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{51, 16, 239},0, {114, 1890},{0xD5, 0xD5, 0xD5, 0xFF}}},
+	{{{79, 81, 258},0, {127, 1850},{0xFE, 0xFE, 0xFE, 0xFF}}},
+	{{{46, 81, 222},0, {110, 1852},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{51, 16, 239},0, {127, 1897},{0xD5, 0xD5, 0xD5, 0xFF}}},
+	{{{41, 82, 254},0, {137, 1851},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-529, 231, -1215},0, {1855, 647},{0xCA, 0xCA, 0xCA, 0xFF}}},
 	{{{-477, 212, -1283},0, {476, 1365},{0xFC, 0xFC, 0xFC, 0xFF}}},
 	{{{-472, 264, -1267},0, {629, 89},{0xFF, 0xFF, 0xFF, 0xFF}}},
@@ -33391,10 +33349,10 @@ Vtx bob_dl_FancyChair_mesh_vtx_0[281] = {
 	{{{-46, 16, 158},0, {41, 1894},{0xCD, 0xCD, 0xCD, 0xFF}}},
 	{{{-68, 79, 137},0, {31, 1853},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-78, 81, 170},0, {59, 1853},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{85, 81, -22},0, {19, 1854},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{115, 78, -19},0, {31, 1854},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{90, 16, -5},0, {40, 1894},{0xD5, 0xD5, 0xD5, 0xFF}}},
-	{{{118, 81, 14},0, {59, 1853},{0xFE, 0xFE, 0xFE, 0xFF}}},
+	{{{46, 81, 222},0, {19, 1854},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{77, 78, 224},0, {31, 1854},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{51, 16, 239},0, {40, 1894},{0xD5, 0xD5, 0xD5, 0xFF}}},
+	{{{79, 81, 258},0, {59, 1853},{0xFE, 0xFE, 0xFE, 0xFF}}},
 	{{{-465, 288, -1621},0, {978, 1253},{0xCA, 0xCA, 0xCA, 0xFF}}},
 	{{{-452, 216, -1578},0, {978, 1253},{0xCA, 0xCA, 0xCA, 0xFF}}},
 	{{{-356, 282, -1538},0, {978, 1253},{0xFF, 0xFF, 0xFF, 0xFF}}},
@@ -34351,22 +34309,6 @@ Gfx bob_dl_Study_mesh_tri_2[] = {
 	gsSP2Triangles(6, 10, 9, 0, 11, 12, 13, 0),
 	gsSP2Triangles(11, 14, 12, 0, 14, 15, 12, 0),
 	gsSP1Triangle(14, 16, 15, 0),
-	gsSPEndDisplayList(),
-};
-
-Vtx bob_dl_Water_mesh_vtx_0[6] = {
-	{{{20, 46, -34},0, {-16, 240},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-20, 46, -34},0, {-16, 752},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-39, 46, 0},0, {427, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{20, 46, 34},0, {871, 240},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-20, 46, 34},0, {871, 752},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{39, 46, 0},0, {427, -16},{0x0, 0x7F, 0x0, 0xFF}}},
-};
-
-Gfx bob_dl_Water_mesh_tri_0[] = {
-	gsSPVertex(bob_dl_Water_mesh_vtx_0 + 0, 6, 0),
-	gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
-	gsSP2Triangles(2, 4, 3, 0, 3, 5, 0, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -36710,15 +36652,6 @@ Gfx mat_bob_dl_Deathplane[] = {
 };
 
 
-Gfx mat_bob_dl_WWater[] = {
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsDPSetEnvColor(104, 144, 254, 60),
-	gsSPEndDisplayList(),
-};
-
-
 Gfx bob_dl_Bookshelf_mesh[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPVertex(bob_dl_Bookshelf_mesh_vtx_cull + 0, 8, 0),
@@ -38848,15 +38781,6 @@ Gfx bob_dl_Black_mesh[] = {
 
 
 
-Gfx bob_dl_Bucket_mesh[] = {
-	gsSPDisplayList(mat_bob_dl_Bucket),
-	gsSPDisplayList(bob_dl_Bucket_mesh_tri_0),
-	gsSPDisplayList(mat_revert_bob_dl_Bucket),
-	gsSPEndDisplayList(),
-};
-
-
-
 Gfx bob_dl_BucketStack_mesh[] = {
 	gsSPDisplayList(mat_bob_dl_Bucket),
 	gsSPDisplayList(bob_dl_BucketStack_mesh_tri_0),
@@ -38942,14 +38866,6 @@ Gfx bob_dl_Study_mesh[] = {
 	gsSPDisplayList(mat_revert_bob_dl_STFloor),
 	gsSPDisplayList(mat_bob_dl_Deathplane),
 	gsSPDisplayList(bob_dl_Study_mesh_tri_2),
-	gsSPEndDisplayList(),
-};
-
-
-
-Gfx bob_dl_Water_mesh[] = {
-	gsSPDisplayList(mat_bob_dl_WWater),
-	gsSPDisplayList(bob_dl_Water_mesh_tri_0),
 	gsSPEndDisplayList(),
 };
 
