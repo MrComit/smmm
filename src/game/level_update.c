@@ -985,6 +985,7 @@ s32 play_mode_normal(void) {
     }
 
     area_update_objects();
+    //scroll_textures();
     update_hud_values();
 
     if (gCurrentArea != NULL) {

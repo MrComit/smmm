@@ -247,5 +247,4 @@ void scroll_bob() {
 	scroll_bob_dl_Steam_mesh_vtx_0();
 	scroll_bob_dl_LivingRoom_mesh_vtx_2();
 	scroll_bob_dl_LivingRoom_001_mesh_vtx_0();
-
 }

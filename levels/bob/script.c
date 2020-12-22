@@ -27,7 +27,6 @@ const LevelScript level_bob_entry[] = {
 	LOAD_RAW(0x0D, _group14_geoSegmentRomStart, _group14_geoSegmentRomEnd), 
 	LOAD_YAY0(0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd), 
 	LOAD_RAW(0x0F, _common0_geoSegmentRomStart, _common0_geoSegmentRomEnd), 
-	LOAD_YAY0(0x7, _bob_segment_7SegmentRomStart, _bob_segment_7SegmentRomEnd), 
 	ALLOC_LEVEL_POOL(),
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
 	JUMP_LINK(script_func_global_1), 
@@ -59,7 +58,7 @@ const LevelScript level_bob_entry[] = {
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_NONE, -9724, 3042, 12454, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
+		OBJECT(MODEL_NONE, -9736, 3026, 12415, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_BREAKABLE_BOX, 861, 0, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 1061, 0, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 1061, 200, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
