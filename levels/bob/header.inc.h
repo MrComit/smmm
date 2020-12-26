@@ -534,12 +534,14 @@ extern Vtx bob_dl_Study_mesh_vtx_2[20];
 extern Gfx bob_dl_Study_mesh_tri_2[];
 extern Vtx bob_dl_Study_mesh_vtx_3[4];
 extern Gfx bob_dl_Study_mesh_tri_3[];
-extern Vtx bob_dl_Library_mesh_vtx_0[42];
+extern Vtx bob_dl_Library_mesh_vtx_0[58];
 extern Gfx bob_dl_Library_mesh_tri_0[];
-extern Vtx bob_dl_Library_mesh_vtx_1[120];
+extern Vtx bob_dl_Library_mesh_vtx_1[180];
 extern Gfx bob_dl_Library_mesh_tri_1[];
-extern Vtx bob_dl_Library_mesh_vtx_2[20];
+extern Vtx bob_dl_Library_mesh_vtx_2[26];
 extern Gfx bob_dl_Library_mesh_tri_2[];
+extern Vtx bob_dl_Railing_mesh_vtx_0[72];
+extern Gfx bob_dl_Railing_mesh_tri_0[];
 
 extern Gfx bob_dl_Bookshelf_mesh[];
 extern Gfx bob_dl_Dresser_mesh[];
@@ -710,5 +712,6 @@ extern Gfx bob_dl_HalfPillar_mesh[];
 extern Gfx bob_dl_Light_mesh[];
 extern Gfx bob_dl_Study_mesh[];
 extern Gfx bob_dl_Library_mesh[];
+extern Gfx bob_dl_Railing_mesh[];
 extern Gfx bob_dl_material_revert_render_settings[];
 
