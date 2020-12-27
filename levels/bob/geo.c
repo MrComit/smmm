@@ -41,3 +41,4 @@
 #include "levels/bob/l1_thin_book/geo.inc.c"
 #include "levels/bob/water_bucket/geo.inc.c"
 #include "levels/bob/l1_flip_book/geo.inc.c"
+#include "levels/bob/boss_koopa/geo.inc.c"

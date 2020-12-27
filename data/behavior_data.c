@@ -6683,3 +6683,19 @@ const BehaviorScript bhvFlipBook[] = {
         CALL_NATIVE(bhv_flip_book_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvKoopaBoss[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    LOAD_ANIMATIONS(oAnimations, new_koopa_anims),
+    ANIMATE(12),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SCALE(/*Unused*/ 0, /*Field*/ 001),
+    //CALL_NATIVE(bhv_koopa_boss_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_koopa_boss_loop),
+    END_LOOP(),
+};

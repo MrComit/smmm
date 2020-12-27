@@ -586,6 +586,7 @@ extern const BehaviorScript bhvShootingFlame[];
 extern const BehaviorScript bhvWaterBucket[];
 extern const BehaviorScript bhvSineBook[];
 extern const BehaviorScript bhvFlipBook[];
+extern const BehaviorScript bhvKoopaBoss[];
 
 
 

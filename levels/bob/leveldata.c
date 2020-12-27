@@ -67,3 +67,4 @@
 #include "levels/bob/water_bucket/model.inc.c"
 #include "levels/bob/l1_flip_book/model.inc.c"
 #include "levels/bob/l1_flip_book/collision.inc.c"
+#include "levels/bob/boss_koopa/model.inc.c"

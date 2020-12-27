@@ -43,7 +43,7 @@ static const u16 new_koopa_anim_sm64_anim_026_indices[] = {
 };
 
 static const struct Animation new_koopa_anim_sm64_anim_026 = {
-	0,
+	1,
 	0,
 	0,
 	1,

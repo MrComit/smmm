@@ -111,4 +111,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/l1_flip_book/collision_header.h"
 
+#include "levels/bob/boss_koopa/geo_header.h"
+
 #endif

@@ -287,5 +287,6 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/kitchen.inc.c"
 #include "behaviors/living_room.inc.c"
 #include "behaviors/study_room.inc.c"
+#include "behaviors/library.inc.c"
 
 

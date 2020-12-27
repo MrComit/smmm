@@ -617,6 +617,7 @@
 #define MODEL_L1_THIN_BOOK        0xED
 #define MODEL_WATER_BUCKET        0xEC
 #define MODEL_L1_FLIP_BOOK        0xEB
+#define MODEL_KOOPA_BOSS          0xEA
 
 
 #endif // MODEL_IDS_H
