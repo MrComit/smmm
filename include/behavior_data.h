@@ -588,6 +588,7 @@ extern const BehaviorScript bhvSineBook[];
 extern const BehaviorScript bhvFlipBook[];
 extern const BehaviorScript bhvKoopaBoss[];
 extern const BehaviorScript bhvFlamingBossBook[];
+extern const BehaviorScript bhvL1Lock[];
 
 
 

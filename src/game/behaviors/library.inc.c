@@ -1,3 +1,5 @@
+#include "game/camera.h"
+
 void koopa_boss_move(void) {
     switch ((o->oF8 & 2) >> 1) {
         case 0:
@@ -14,8 +16,6 @@ void koopa_boss_move(void) {
             break;
     }
 }
-
-
 
 void koopa_boss_clamp_mario(void) {
     struct MarioState *m = gMarioState;
@@ -70,7 +70,7 @@ void bhv_koopa_boss_loop(void) {
                 obj->oPosY += 1800.0f;
                 obj->oPosX += 600.0f;
                 o->o100 += 1;
-                if (o->o100 >= 8) {
+                if (o->o100 >= 5) {
                     obj->oBehParams |= 1 << 24;
                     o->o100 = 0;
                 }
@@ -97,8 +97,11 @@ void boss_book_sparkling_loop(void) {
     spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 100.0f) {
+            if (o->oDistanceToMario < 300.0f) {
                 o->oAction = 1;
+                o->oMoveAnglePitch = 0;
+                o->oMoveAngleYaw = 0xC000;
+                o->oForwardVel = 90.0f;
             }
             if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
                 spawn_mist_particles_variable(0, 0, 25.0f);
@@ -157,4 +160,17 @@ void bhv_flaming_boss_book_init(void) {
     o->oMoveAngleYaw = yaw;
     o->oBehParams2ndByte = CL_RandomMinMaxU16(0, 2);
     //obj_set_hitbox(o, &sStrayBookHitbox);
+}
+
+
+void bhv_l1_lock_loop(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvFlamingBossBook);
+    if (obj == NULL) {
+        return;
+    }
+    if (dist_between_objects(o, obj) < 300.0f) {
+        CL_explode_object(o, 1);
+        obj->activeFlags = 0;
+    }
+
 }

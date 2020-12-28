@@ -546,12 +546,6 @@ extern Vtx bob_dl_Library_mesh_vtx_1[180];
 extern Gfx bob_dl_Library_mesh_tri_1[];
 extern Vtx bob_dl_Library_mesh_vtx_2[26];
 extern Gfx bob_dl_Library_mesh_tri_2[];
-extern Vtx bob_dl_Medal_003_mesh_vtx_0[25];
-extern Gfx bob_dl_Medal_003_mesh_tri_0[];
-extern Vtx bob_dl_Medal_004_mesh_vtx_0[25];
-extern Gfx bob_dl_Medal_004_mesh_tri_0[];
-extern Vtx bob_dl_Medal_005_mesh_vtx_0[25];
-extern Gfx bob_dl_Medal_005_mesh_tri_0[];
 extern Vtx bob_dl_Railing_mesh_vtx_0[56];
 extern Gfx bob_dl_Railing_mesh_tri_0[];
 
@@ -725,9 +719,6 @@ extern Gfx bob_dl_Light_mesh[];
 extern Gfx bob_dl_Study_mesh[];
 extern Gfx bob_dl_Chandelier_001_mesh[];
 extern Gfx bob_dl_Library_mesh[];
-extern Gfx bob_dl_Medal_003_mesh[];
-extern Gfx bob_dl_Medal_004_mesh[];
-extern Gfx bob_dl_Medal_005_mesh[];
 extern Gfx bob_dl_Railing_mesh[];
 extern Gfx bob_dl_material_revert_render_settings[];
 

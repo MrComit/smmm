@@ -113,4 +113,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/boss_koopa/geo_header.h"
 
+#include "levels/bob/l1_lock/geo_header.h"
+
 #endif
