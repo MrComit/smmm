@@ -6486,7 +6486,7 @@ const BehaviorScript bhvFryingPan[] = {
 };
 
 
-const BehaviorScript bhvPanFlame[] = {
+const BehaviorScript bhvFlameDecoration[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
     BILLBOARD(),
@@ -6697,5 +6697,18 @@ const BehaviorScript bhvKoopaBoss[] = {
     //CALL_NATIVE(bhv_koopa_boss_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_koopa_boss_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvFlamingBossBook[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SCALE(0, 65),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 90, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_flaming_boss_book_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_flaming_boss_book_loop),
     END_LOOP(),
 };

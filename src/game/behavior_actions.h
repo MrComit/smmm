@@ -641,6 +641,8 @@ void bhv_sine_book_loop(void);
 void bhv_flip_book_loop(void);
 void bhv_flip_book_init(void);
 void bhv_koopa_boss_loop(void);
+void bhv_flaming_boss_book_init(void);
+void bhv_flaming_boss_book_loop(void);
 
 
 

@@ -571,7 +571,7 @@ extern const BehaviorScript bhvFridgeSpawner[];
 extern const BehaviorScript bhvIceBobomb[];
 extern const BehaviorScript bhvStoveButton[];
 extern const BehaviorScript bhvFryingPan[];
-extern const BehaviorScript bhvPanFlame[];
+extern const BehaviorScript bhvFlameDecoration[];
 extern const BehaviorScript bhvRemote[];
 extern const BehaviorScript bhvTVStatic[];
 extern const BehaviorScript bhvCushion[];
@@ -587,6 +587,7 @@ extern const BehaviorScript bhvWaterBucket[];
 extern const BehaviorScript bhvSineBook[];
 extern const BehaviorScript bhvFlipBook[];
 extern const BehaviorScript bhvKoopaBoss[];
+extern const BehaviorScript bhvFlamingBossBook[];
 
 
 

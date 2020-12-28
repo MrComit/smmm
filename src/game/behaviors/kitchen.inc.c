@@ -298,7 +298,7 @@ void pan_free_loop(void) {
             if (o->oObjF8->oAction != 0) {
                 o->oAction = 1;
                 cur_obj_become_tangible();
-                o->oObjF4 = spawn_object(o, MODEL_RED_FLAME, bhvPanFlame);
+                o->oObjF4 = spawn_object(o, MODEL_RED_FLAME, bhvFlameDecoration);
             }
             break;
         case 1:
