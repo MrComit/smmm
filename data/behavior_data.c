@@ -6703,7 +6703,7 @@ const BehaviorScript bhvKoopaBoss[] = {
 
 const BehaviorScript bhvFlamingBossBook[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_HOLDABLE)),
     SET_HOME(),
     SCALE(0, 65),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 90, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),

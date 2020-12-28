@@ -1,5 +1,18 @@
 #include "game/camera.h"
 
+struct ObjectHitbox sFlamingBookHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 70,
+    /* height:            */ 70,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
+
 void koopa_boss_move(void) {
     switch ((o->oF8 & 2) >> 1) {
         case 0:
@@ -93,25 +106,88 @@ void boss_book_flaming_loop(void) {
     }
 }
 
+void sparkling_book_act_1(void) {
+    o->oFaceAngleYaw -= 0x800;
+    o->oFaceAngleRoll -= 0x800;
+    o->oFaceAnglePitch -= 0x800;
+    switch (o->oHeldState) {
+        case HELD_FREE:
+            o->oF8++;
+            if (o->oF8 > 120) {
+                if (o->oF8 & 1)
+                    o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+                else
+                    o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+                if (o->oF8 > 150) {
+                    o->activeFlags = 0;
+                    //o->parentObj->o104 = 0;
+                }
+            }
+            break;
+
+        case HELD_HELD:
+            cur_obj_become_intangible();
+            o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
+            break;
+
+        case HELD_THROWN:
+            cur_obj_enable_rendering_2();
+            cur_obj_become_tangible();
+
+            o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+            //o->oF4 = 1;
+            o->oAction = 2;
+            o->oHeldState = 0;
+            o->oFlags &= ~0x8; /* bit 3 */
+            o->oMoveAnglePitch = 0;
+            o->oForwardVel = 90.0f;
+            //o->oVelY = 20.0;
+            break;
+
+        case HELD_DROPPED:
+            cur_obj_get_dropped();
+            cur_obj_become_tangible();
+            o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+            break;
+    }
+}
+
+
 void boss_book_sparkling_loop(void) {
     spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 300.0f) {
+            /*if (o->oDistanceToMario < 300.0f) {
                 o->oAction = 1;
                 o->oMoveAnglePitch = 0;
                 o->oMoveAngleYaw = 0xC000;
                 o->oForwardVel = 90.0f;
+            }*/
+            if (o->oFloor != NULL && absf(o->oFloor->upperY - o->oPosY) < 100.0f /*o->oMoveFlags & (OBJ_MOVE_HIT_WALL | OBJ_MOVE_LANDED | OBJ_MOVE_ON_GROUND)*/) {
+                //spawn_mist_particles_variable(0, 0, 25.0f);
+                //spawn_triangle_break_particles(6, 138, 1.0f, 4);
+                //create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+                //o->activeFlags = 0;
+                //o->parentObj->oAction = 1;
+                o->oForwardVel = 0;
+                o->oVelY = 0;
+                o->oMoveAnglePitch = 0;
+                o->oAction = 1;
+                cur_obj_become_tangible();
             }
-            if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
+            break;
+        case 1:
+            sparkling_book_act_1();
+            break;
+        case 2:
+            if (o->oTimer > 90 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
                 spawn_mist_particles_variable(0, 0, 25.0f);
                 spawn_triangle_break_particles(6, 138, 1.0f, 4);
                 create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
                 o->activeFlags = 0;
-                //o->parentObj->oAction = 1;
+                //o->parentObj->o104 = 0;
             }
-            break;
-        case 1:
             break;
     }
 }
@@ -140,8 +216,12 @@ void bhv_flaming_boss_book_init(void) {
     s16 pitch, yaw;
     f32 dist;
     Vec3f point;
+    obj_set_hitbox(o, &sFlamingBookHitbox);
     if (o->oBehParams >> 24 == 1) {
-        cur_obj_scale(1.6f);
+        o->oInteractType = INTERACT_GRABBABLE;
+        cur_obj_become_intangible();
+        //o->hitboxDownOffset = 100.0f;
+        cur_obj_scale(1.35f);
         o->oForwardVel = 30.0f;
         point[0] = -6824.0f;
         point[1] = 1944.0f;
@@ -159,7 +239,6 @@ void bhv_flaming_boss_book_init(void) {
     o->oMoveAnglePitch = pitch;
     o->oMoveAngleYaw = yaw;
     o->oBehParams2ndByte = CL_RandomMinMaxU16(0, 2);
-    //obj_set_hitbox(o, &sStrayBookHitbox);
 }
 
 
@@ -171,6 +250,7 @@ void bhv_l1_lock_loop(void) {
     if (dist_between_objects(o, obj) < 300.0f) {
         CL_explode_object(o, 1);
         obj->activeFlags = 0;
+        //obj->parentObj->o104 = 0;
     }
 
 }
