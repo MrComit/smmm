@@ -304,3 +304,31 @@ void CL_Lava_Boost(void) {
     m->floorHeight = m->pos[1];
     check_lava_boost(m);
 }
+
+
+
+struct Object *CL_nearest_object_with_behavior_and_field(const BehaviorScript *behavior, u32 field, u32 param) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    f32 minDist = 0x20000;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr && obj->rawData.asU32[(field - 0x88) / 4] == param) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj != o) {
+                f32 objDist = dist_between_objects(o, obj);
+                if (objDist < minDist) {
+                    closestObj = obj;
+                    minDist = objDist;
+                }
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+
+    return closestObj;
+}

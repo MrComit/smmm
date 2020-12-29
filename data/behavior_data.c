@@ -6694,7 +6694,7 @@ const BehaviorScript bhvKoopaBoss[] = {
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SCALE(/*Unused*/ 0, /*Field*/ 001),
-    //CALL_NATIVE(bhv_koopa_boss_init),
+    CALL_NATIVE(bhv_koopa_boss_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_koopa_boss_loop),
     END_LOOP(),
@@ -6733,5 +6733,19 @@ const BehaviorScript bhvKoopaBossChandelier[] = {
     SCALE(0, 180),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_boss_chandelier_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvKoopaBossFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SET_FLOAT(oGraphYOffset, 50),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 90, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_koopa_boss_flame_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_koopa_boss_flame_loop),
+        ANIMATE_TEXTURE(oAnimState, 2),
     END_LOOP(),
 };

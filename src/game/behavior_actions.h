@@ -641,11 +641,13 @@ void bhv_sine_book_loop(void);
 void bhv_flip_book_loop(void);
 void bhv_flip_book_init(void);
 void bhv_koopa_boss_loop(void);
+void bhv_koopa_boss_init(void);
 void bhv_flaming_boss_book_init(void);
 void bhv_flaming_boss_book_loop(void);
 void bhv_l1_lock_loop(void);
 void bhv_boss_chandelier_loop(void);
-
+void bhv_koopa_boss_flame_init(void);
+void bhv_koopa_boss_flame_loop(void);
 
 
 

@@ -6,10 +6,15 @@ struct ObjectHitbox sFlamingBookHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 70,
-    /* height:            */ 70,
-    /* hurtboxRadius:     */ 70,
-    /* hurtboxHeight:     */ 70,
+    /* radius:            */ 100,
+    /* height:            */ 100,
+    /* hurtboxRadius:     */ 100,
+    /* hurtboxHeight:     */ 100,
+};
+
+Vec3f sKFlamePos[2] = {
+{-6824.33f, 1943.89f, 18688.9f},
+{-6824.33f, 1943.89f, 15308.9f},
 };
 
 
@@ -48,7 +53,9 @@ void koopa_boss_clamp_mario(void) {
     }
 }
 
-
+void bhv_koopa_boss_init(void) {
+    o->oHealth = 2;
+}
 
 
 void bhv_koopa_boss_loop(void) {
@@ -93,6 +100,49 @@ void bhv_koopa_boss_loop(void) {
                 o->oFC = CL_RandomMinMaxU16(45, 90);
                 o->oTimer = 0;
             }
+            obj = CL_nearest_object_with_behavior_and_field(bhvFlamingBossBook, 0x14C, 2);
+            if (obj == NULL) {
+                break;
+            }
+            o->o104 = 0;
+            if (lateral_dist_between_objects(o, obj) < 300.0f) {
+                CL_explode_object(obj, 1);
+                if (o->oBehParams2ndByte) {
+                    cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
+                    if (--o->oHealth > 0) {
+                        o->oAction = 3;
+                    } else {
+                        o->oAction = 4;
+                    }
+                }
+            }
+            break;
+        case 3:
+            if (cur_obj_init_anim_and_check_if_end(1)) {
+                o->oAction = 2;
+                cur_obj_init_animation_with_sound(3);
+            }
+            break;
+        case 4:
+            if (cur_obj_init_anim_and_check_if_end(2)) {
+                o->oAction = 2;
+            }
+            break;
+        case 5:
+            if (cur_obj_init_anim_and_check_if_end(4)) {
+                spawn_object_relative(0, 600, 1800, 0, o, MODEL_RED_FLAME, bhvKoopaBossFlame);
+                o->oAction = 2;
+                cur_obj_init_animation_with_sound(3);
+            }
+            break;
+        case 6:
+            if (cur_obj_init_anim_and_check_if_end(4)) {
+                spawn_object_relative(1, 600, 1800, 0, o, MODEL_RED_FLAME, bhvKoopaBossFlame);
+                o->oAction = 2;
+                cur_obj_init_animation_with_sound(3);
+            }
+            break;
+        case 7:
             break;
     }
 }
@@ -251,6 +301,7 @@ void bhv_l1_lock_loop(void) {
         obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
         obj->o104 = 0;
         obj2->oF4++;
+        obj->oAction = 4 + obj2->oF4;
         CL_explode_object(o, 1);
     }
 
@@ -274,7 +325,65 @@ void bhv_boss_chandelier_loop(void) {
             if (o->oPosY < 2500.0f) {
                 CL_explode_object(o, 1);
                 obj->oBehParams2ndByte = 1;
+                cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
             }
             break;
     }
+}
+
+
+void bhv_koopa_boss_flame_init(void) {
+    o->header.gfx.scale[0] = 11.0f;
+    o->header.gfx.scale[1] = 9.5f;
+    o->header.gfx.scale[2] = 11.0f;
+}
+
+
+void koopa_boss_flame_act_2(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oF4 = CL_RandomMinMaxU16(50, 120);
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oTimer > o->oF4) {
+                spawn_object(o, MODEL_RED_FLAME, bhvShootingFlame);
+                o->oAction = 0;
+            }
+            break;
+    }
+
+    if (o->oDistanceToMario < 180.0f) {
+        CL_Lava_Boost();
+    }    
+}
+
+
+
+void bhv_koopa_boss_flame_loop(void) {
+    s16 pitch, yaw;
+    f32 dist;
+    switch (o->oAction) {
+        case 0:
+            //o->oForwardVel = 70.0f;
+            //vec3f_get_dist_and_angle(&o->oPosX, sKFlamePos[o->oBehParams2ndByte], &dist, &pitch, &yaw);
+            //o->oMoveAnglePitch = pitch;
+            //o->oMoveAngleYaw = yaw;
+            o->oAction = 1;
+            break;
+        case 1:
+            //CL_Move_3d();
+            //cur_obj_update_floor_and_walls();
+            o->oPosX = approach_f32(o->oPosX, sKFlamePos[0][o->oBehParams2ndByte], 40.0f, 40.0f);
+            o->oPosY = approach_f32(o->oPosY, sKFlamePos[1][o->oBehParams2ndByte], 10.0f, 10.0f);
+            o->oPosZ = approach_f32(o->oPosZ, sKFlamePos[2][o->oBehParams2ndByte], 40.0f, 40.0f);
+            if (o->oPosX == sKFlamePos[0][o->oBehParams2ndByte] && o->oPosY == sKFlamePos[1][o->oBehParams2ndByte] && 
+            o->oPosZ == sKFlamePos[2][o->oBehParams2ndByte]) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            koopa_boss_flame_act_2();
+            break;
+    }  
 }

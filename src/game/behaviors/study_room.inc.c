@@ -76,9 +76,6 @@ void bhv_l1_fireplace_init(void) {
     o->header.gfx.scale[0] = 11.0f;
     o->header.gfx.scale[1] = 9.5f;
     o->header.gfx.scale[2] = 11.0f;
-
-
-
 }
 
 
@@ -98,7 +95,7 @@ void bhv_l1_fireplace_loop(void) {
         }
     }
 
-    if (o->oDistanceToMario < 180.0f) {
+    if (o->oDistanceToMario < 400.0f) {
         CL_Lava_Boost();
     }    
 }
