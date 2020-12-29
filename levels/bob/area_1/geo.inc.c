@@ -251,8 +251,8 @@ const GeoLayout bob_dl_Room1J_geo[] = {
 const GeoLayout bob_dl_Room1K_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -9070, 3292, 17409, bob_dl_Chandelier_001_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -9757, 983, 12805, bob_dl_Library_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -10641, 2941, 17403, bob_dl_Library_001_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -8258, 2319, 17142, bob_dl_Railing_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

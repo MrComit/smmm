@@ -1,3 +1,4 @@
+extern const GeoLayout boss_koopa_helmet[];
 extern const GeoLayout boss_koopa_geo[];
 extern Vtx boss_koopa_000_offset_001_mesh_vtx_0[10];
 extern Gfx boss_koopa_000_offset_001_mesh_tri_0[];
@@ -15,6 +16,14 @@ extern Vtx boss_koopa_000_offset_002_mesh_vtx_2[3];
 extern Gfx boss_koopa_000_offset_002_mesh_tri_2[];
 extern Vtx boss_koopa_000_offset_002_mesh_vtx_3[26];
 extern Gfx boss_koopa_000_offset_002_mesh_tri_3[];
+extern Vtx boss_koopa_root_000_offset_003_mesh_vtx_0[27];
+extern Gfx boss_koopa_root_000_offset_003_mesh_tri_0[];
+extern Vtx boss_koopa_root_000_offset_003_mesh_vtx_1[35];
+extern Gfx boss_koopa_root_000_offset_003_mesh_tri_1[];
+extern Vtx boss_koopa_root_000_offset_003_mesh_vtx_2[3];
+extern Gfx boss_koopa_root_000_offset_003_mesh_tri_2[];
+extern Vtx boss_koopa_root_000_offset_003_mesh_vtx_3[26];
+extern Gfx boss_koopa_root_000_offset_003_mesh_tri_3[];
 extern Vtx boss_koopa_000_offset_003_mesh_vtx_0[9];
 extern Gfx boss_koopa_000_offset_003_mesh_tri_0[];
 extern Vtx boss_koopa_000_offset_004_mesh_vtx_0[24];
@@ -38,6 +47,7 @@ extern Gfx boss_koopa_000_offset_010_mesh_tri_0[];
 
 extern Gfx boss_koopa_000_offset_001_mesh[];
 extern Gfx boss_koopa_000_offset_002_mesh[];
+extern Gfx boss_koopa_root_000_offset_003_mesh[];
 extern Gfx boss_koopa_000_offset_003_mesh[];
 extern Gfx boss_koopa_000_offset_004_mesh[];
 extern Gfx boss_koopa_000_offset_005_mesh[];

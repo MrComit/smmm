@@ -1,5 +1,12 @@
 #include "src/game/envfx_snow.h"
 
+const GeoLayout boss_koopa_helmet[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, boss_koopa_root_000_offset_003_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout boss_koopa_geo[] = {
 	GEO_CULLING_RADIUS(4096),
 	GEO_OPEN_NODE(),
@@ -11,12 +18,13 @@ const GeoLayout boss_koopa_geo[] = {
 				GEO_OPEN_NODE(),
 					GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, 0, boss_koopa_000_offset_001_mesh),
 					GEO_OPEN_NODE(),
-						GEO_SWITCH_CASE(2, geo_switch_anim_state),
+						GEO_SWITCH_CASE(2, geo_switch_bparam2),
 						GEO_OPEN_NODE(),
 							GEO_NODE_START(),
 							GEO_OPEN_NODE(),
 								GEO_ANIMATED_PART(LAYER_OPAQUE, 448, 0, 0, boss_koopa_000_offset_002_mesh),
 							GEO_CLOSE_NODE(),
+							GEO_BRANCH(1, boss_koopa_helmet),
 						GEO_CLOSE_NODE(),
 						GEO_ANIMATED_PART(LAYER_OPAQUE, -114, 153, 236, NULL),
 						GEO_OPEN_NODE(),

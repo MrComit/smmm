@@ -82,10 +82,13 @@ void bhv_koopa_boss_loop(void) {
                 obj = spawn_object(o, MODEL_L1_THIN_BOOK, bhvFlamingBossBook);
                 obj->oPosY += 1800.0f;
                 obj->oPosX += 600.0f;
-                o->o100 += 1;
-                if (o->o100 >= 5) {
-                    obj->oBehParams |= 1 << 24;
-                    o->o100 = 0;
+                if (o->o104 == 0) {
+                    o->o100 += 1;
+                    if (o->o100 >= 5) {
+                        obj->oBehParams |= 1 << 24;
+                        o->o100 = 0;
+                        o->o104 = 1;
+                    }
                 }
                 o->oFC = CL_RandomMinMaxU16(45, 90);
                 o->oTimer = 0;
@@ -96,7 +99,7 @@ void bhv_koopa_boss_loop(void) {
 
 void boss_book_flaming_loop(void) {
     vec3f_copy(&o->oObjF4->oPosX, &o->oPosX);
-    if (o->oTimer > 90 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
+    if (o->oTimer > 120 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
         spawn_mist_particles_variable(0, 0, 25.0f);
         spawn_triangle_break_particles(6, 138, 1.0f, 4);
         create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
@@ -120,13 +123,14 @@ void sparkling_book_act_1(void) {
                     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
                 if (o->oF8 > 150) {
                     o->activeFlags = 0;
-                    //o->parentObj->o104 = 0;
+                    o->parentObj->o104 = 0;
                 }
             }
             break;
 
         case HELD_HELD:
             cur_obj_become_intangible();
+            o->oF8 = 0;
             o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
             cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
             break;
@@ -158,18 +162,8 @@ void boss_book_sparkling_loop(void) {
     spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
     switch (o->oAction) {
         case 0:
-            /*if (o->oDistanceToMario < 300.0f) {
-                o->oAction = 1;
-                o->oMoveAnglePitch = 0;
-                o->oMoveAngleYaw = 0xC000;
-                o->oForwardVel = 90.0f;
-            }*/
-            if (o->oFloor != NULL && absf(o->oFloor->upperY - o->oPosY) < 100.0f /*o->oMoveFlags & (OBJ_MOVE_HIT_WALL | OBJ_MOVE_LANDED | OBJ_MOVE_ON_GROUND)*/) {
-                //spawn_mist_particles_variable(0, 0, 25.0f);
-                //spawn_triangle_break_particles(6, 138, 1.0f, 4);
-                //create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
-                //o->activeFlags = 0;
-                //o->parentObj->oAction = 1;
+
+            if (o->oFloor != NULL && absf(o->oFloor->upperY - o->oPosY) < 100.0f) {
                 o->oForwardVel = 0;
                 o->oVelY = 0;
                 o->oMoveAnglePitch = 0;
@@ -186,7 +180,7 @@ void boss_book_sparkling_loop(void) {
                 spawn_triangle_break_particles(6, 138, 1.0f, 4);
                 create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
                 o->activeFlags = 0;
-                //o->parentObj->o104 = 0;
+                o->parentObj->o104 = 0;
             }
             break;
     }
@@ -244,13 +238,43 @@ void bhv_flaming_boss_book_init(void) {
 
 void bhv_l1_lock_loop(void) {
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvFlamingBossBook);
+    struct Object *obj2 = cur_obj_nearest_object_with_behavior(bhvKoopaBossChandelier);
+    if (obj2 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
     if (obj == NULL) {
         return;
     }
     if (dist_between_objects(o, obj) < 300.0f) {
-        CL_explode_object(o, 1);
         obj->activeFlags = 0;
-        //obj->parentObj->o104 = 0;
+        obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
+        obj->o104 = 0;
+        obj2->oF4++;
+        CL_explode_object(o, 1);
     }
 
+}
+
+
+void bhv_boss_chandelier_loop(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    switch (o->oAction) {
+        case 0:
+            if (o->oF4 >= 3) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY -= 40.0f;
+            if (o->oPosY < 2500.0f) {
+                CL_explode_object(o, 1);
+                obj->oBehParams2ndByte = 1;
+            }
+            break;
+    }
 }

@@ -6723,3 +6723,15 @@ const BehaviorScript bhvL1Lock[] = {
         CALL_NATIVE(bhv_l1_lock_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvKoopaBossChandelier[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SCALE(0, 180),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boss_chandelier_loop),
+    END_LOOP(),
+};
