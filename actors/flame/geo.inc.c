@@ -9,7 +9,7 @@ const GeoLayout red_flame_shadow_geo[] = {
 
 // 0x16000B2C
 const GeoLayout red_flame_geo[] = {
-   GEO_NODE_START(),
+   GEO_CULLING_RADIUS(0x1000),
    GEO_OPEN_NODE(),
       GEO_SWITCH_CASE(8, geo_switch_anim_state),
       GEO_OPEN_NODE(),
@@ -28,7 +28,7 @@ const GeoLayout red_flame_geo[] = {
 
 // 0x16000B8C
 const GeoLayout blue_flame_geo[] = {
-   GEO_NODE_START(),
+   GEO_CULLING_RADIUS(0x1000),
    GEO_OPEN_NODE(),
       GEO_SWITCH_CASE(8, geo_switch_anim_state),
       GEO_OPEN_NODE(),

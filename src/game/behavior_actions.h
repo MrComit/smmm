@@ -648,6 +648,9 @@ void bhv_l1_lock_loop(void);
 void bhv_boss_chandelier_loop(void);
 void bhv_koopa_boss_flame_init(void);
 void bhv_koopa_boss_flame_loop(void);
+void bhv_koopa_boss_moving_flame_loop(void);
+void bhv_koopa_boss_moving_flame_init(void);
+
 
 
 

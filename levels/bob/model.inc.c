@@ -38068,17 +38068,6 @@ Gfx bob_dl_Library_001_mesh_tri_0[] = {
 
 
 
-Vtx bob_dl_Railing_mesh_vtx_cull[8] = {
-	{{{-2413, -375, -1433},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-2413, -375, 1867},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-2413, -215, 1867},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-2413, -215, -1433},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{834, -375, -1433},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{834, -375, 1867},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{834, -215, 1867},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{834, -215, -1433},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-};
-
 Vtx bob_dl_Railing_mesh_vtx_0[56] = {
 	{{{834, -295, 1867},0, {-5431, 2023},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{734, -295, -533},0, {395, 1789},{0x0, 0x7F, 0x0, 0xFF}}},
@@ -42642,10 +42631,6 @@ Gfx bob_dl_Library_001_mesh[] = {
 };
 
 Gfx bob_dl_Railing_mesh[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(bob_dl_Railing_mesh_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_bob_dl_LibRail),
 	gsSPDisplayList(bob_dl_Railing_mesh_tri_0),
 	gsSPDisplayList(mat_revert_bob_dl_LibRail),

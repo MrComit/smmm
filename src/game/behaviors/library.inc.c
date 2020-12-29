@@ -17,6 +17,11 @@ Vec3f sKFlamePos[2] = {
 {-6824.33f, 1943.89f, 15308.9f},
 };
 
+Vec3f sKFlameXPos[2] = {
+{-7324.33f, -6924.33f, -6524.33f},
+{-7124.33f, -6724.33f, -6324.33f},
+};
+
 
 void koopa_boss_move(void) {
     switch ((o->oF8 & 2) >> 1) {
@@ -165,6 +170,13 @@ void sparkling_book_act_1(void) {
     o->oFaceAnglePitch -= 0x800;
     switch (o->oHeldState) {
         case HELD_FREE:
+            if (o->oTimer > 10 && o->oDistanceToMario < 150.0f) {
+                o->oHeldState = HELD_HELD;
+                set_mario_action(gMarioState, ACT_HOLD_IDLE, 0);
+                gMarioState->usedObj = o;
+                mario_grab_used_object(gMarioState);
+                gMarioState->marioBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
+            }
             o->oF8++;
             if (o->oF8 > 120) {
                 if (o->oF8 & 1)
@@ -191,6 +203,7 @@ void sparkling_book_act_1(void) {
 
             o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
             //o->oF4 = 1;
+            o->oTimer = 0;
             o->oAction = 2;
             o->oHeldState = 0;
             o->oFlags &= ~0x8; /* bit 3 */
@@ -203,6 +216,7 @@ void sparkling_book_act_1(void) {
             cur_obj_get_dropped();
             cur_obj_become_tangible();
             o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+            o->oTimer = 0;
             break;
     }
 }
@@ -333,27 +347,27 @@ void bhv_boss_chandelier_loop(void) {
 
 
 void bhv_koopa_boss_flame_init(void) {
-    o->header.gfx.scale[0] = 11.0f;
-    o->header.gfx.scale[1] = 9.5f;
-    o->header.gfx.scale[2] = 11.0f;
+    o->header.gfx.scale[0] = 60.0f;
+    o->header.gfx.scale[1] = 40.0f;
+    o->header.gfx.scale[2] = 60.0f;
+
+    if (o->oBehParams2ndByte) {
+        o->oFaceAngleYaw = 0x1000;
+    } else {
+        o->oFaceAngleYaw = 0x7000;
+    }
 }
 
 
 void koopa_boss_flame_act_2(void) {
-    switch (o->oAction) {
-        case 0:
-            o->oF4 = CL_RandomMinMaxU16(50, 120);
-            o->oAction = 1;
-            break;
-        case 1:
-            if (o->oTimer > o->oF4) {
-                spawn_object(o, MODEL_RED_FLAME, bhvShootingFlame);
-                o->oAction = 0;
-            }
-            break;
+    if (o->oTimer > o->oFC) {
+        struct Object *obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMovingFlame);
+        obj->oBehParams2ndByte = o->oBehParams2ndByte;
+        o->oTimer = 0;
+        o->oFC = CL_RandomMinMaxU16(60, 90);
     }
 
-    if (o->oDistanceToMario < 180.0f) {
+    if (absf(o->oPosZ - gMarioState->pos[2]) < 200.0f && gMarioState->pos[1] < 2500.0f) {
         CL_Lava_Boost();
     }    
 }
@@ -374,16 +388,36 @@ void bhv_koopa_boss_flame_loop(void) {
         case 1:
             //CL_Move_3d();
             //cur_obj_update_floor_and_walls();
-            o->oPosX = approach_f32(o->oPosX, sKFlamePos[0][o->oBehParams2ndByte], 40.0f, 40.0f);
-            o->oPosY = approach_f32(o->oPosY, sKFlamePos[1][o->oBehParams2ndByte], 10.0f, 10.0f);
-            o->oPosZ = approach_f32(o->oPosZ, sKFlamePos[2][o->oBehParams2ndByte], 40.0f, 40.0f);
-            if (o->oPosX == sKFlamePos[0][o->oBehParams2ndByte] && o->oPosY == sKFlamePos[1][o->oBehParams2ndByte] && 
-            o->oPosZ == sKFlamePos[2][o->oBehParams2ndByte]) {
+            o->oPosX = approach_f32(o->oPosX, sKFlamePos[o->oBehParams2ndByte][0], 40.0f, 40.0f);
+            o->oPosY = approach_f32(o->oPosY, sKFlamePos[o->oBehParams2ndByte][1], 20.0f, 20.0f);
+            o->oPosZ = approach_f32(o->oPosZ, sKFlamePos[o->oBehParams2ndByte][2], 40.0f, 40.0f);
+            if (o->oPosX == sKFlamePos[o->oBehParams2ndByte][0] && o->oPosY == sKFlamePos[o->oBehParams2ndByte][1] && 
+            o->oPosZ == sKFlamePos[o->oBehParams2ndByte][2]) {
                 o->oAction = 2;
+                o->oFC = 30;
             }
             break;
         case 2:
             koopa_boss_flame_act_2();
             break;
     }  
+}
+
+
+void bhv_koopa_boss_moving_flame_init(void) {
+    s16 num = CL_RandomMinMaxU16(0, 2);
+    o->oPosX = sKFlameXPos[o->oBehParams2ndByte][num];
+}
+
+
+
+void bhv_koopa_boss_moving_flame_loop(void) {
+    if (o->oBehParams2ndByte) {
+        o->oPosZ += 20.0f;
+    } else {
+        o->oPosZ -= 20.0f;
+    }
+    if (o->oTimer > 120) {
+        o->activeFlags = 0;
+    }
 }
