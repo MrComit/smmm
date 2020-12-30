@@ -6741,7 +6741,7 @@ const BehaviorScript bhvKoopaBossFlame[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO |  OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     //BILLBOARD(),
     SET_HOME(),
-    SET_FLOAT(oGraphYOffset, 50),
+    SET_FLOAT(oGraphYOffset, 200),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 90, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_koopa_boss_flame_init),
     BEGIN_LOOP(),
@@ -6766,5 +6766,26 @@ const BehaviorScript bhvKoopaBossMovingFlame[] =  {
         SET_INT(oInteractStatus, 0),
         ANIMATE_TEXTURE(oAnimState, 2),
         CALL_NATIVE(bhv_koopa_boss_moving_flame_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvKoopaBossMiniFlame[] =  {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SCALE(/*Unused*/ 0, /*Field*/ 250),
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oGraphYOffset, 50),
+    SET_FLOAT(oForwardVel, 7),
+    SET_FLOAT(oVelY, 20),
+    //CALL_NATIVE(bhv_koopa_boss_moving_flame_init),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 90, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        SET_INT(oInteractStatus, 0),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_koopa_boss_mini_flame_loop),
     END_LOOP(),
 };

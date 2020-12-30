@@ -94,6 +94,9 @@ void bhv_koopa_boss_loop(void) {
                 obj = spawn_object(o, MODEL_L1_THIN_BOOK, bhvFlamingBossBook);
                 obj->oPosY += 1800.0f;
                 obj->oPosX += 600.0f;
+                if (o->oBehParams2ndByte) {
+                    obj->o100 = 1;
+                }
                 if (o->o104 == 0) {
                     o->o100 += 1;
                     if (o->o100 >= 5) {
@@ -148,11 +151,19 @@ void bhv_koopa_boss_loop(void) {
             }
             break;
         case 7:
+            if (cur_obj_init_anim_and_check_if_end(5)) {
+                o->oAction = 2;
+                cur_obj_init_anim_and_check_if_end(3);
+            }
+            if (cur_obj_check_anim_frame(2)) {
+                cur_obj_shake_screen(0);
+            }
             break;
     }
 }
 
 void boss_book_flaming_loop(void) {
+    struct Object *obj;
     vec3f_copy(&o->oObjF4->oPosX, &o->oPosX);
     if (o->oTimer > 120 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
         spawn_mist_particles_variable(0, 0, 25.0f);
@@ -161,6 +172,14 @@ void boss_book_flaming_loop(void) {
         o->activeFlags = 0;
         o->oObjF4->activeFlags = 0;
         //o->parentObj->oAction = 1;
+        if (o->o100) {
+            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMiniFlame);
+            obj->oMoveAngleYaw = o->oFaceAngleYaw;
+            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMiniFlame);
+            obj->oMoveAngleYaw = o->oFaceAngleYaw + 0x5555;
+            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMiniFlame);
+            obj->oMoveAngleYaw = o->oFaceAngleYaw + 0xAAAA;
+        }
     }
 }
 
@@ -332,6 +351,7 @@ void bhv_boss_chandelier_loop(void) {
         case 0:
             if (o->oF4 >= 3) {
                 o->oAction = 1;
+                o->oPosZ = obj->oPosZ;
             }
             break;
         case 1:
@@ -364,11 +384,12 @@ void koopa_boss_flame_act_2(void) {
         struct Object *obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMovingFlame);
         obj->oBehParams2ndByte = o->oBehParams2ndByte;
         o->oTimer = 0;
-        o->oFC = CL_RandomMinMaxU16(60, 90);
+        o->oFC = CL_RandomMinMaxU16(60, 120);
     }
-
-    if (absf(o->oPosZ - gMarioState->pos[2]) < 200.0f && gMarioState->pos[1] < 2500.0f) {
+    o->o104++;
+    if (o->o104 > 10 && absf(o->oPosZ - gMarioState->pos[2]) < 200.0f && gMarioState->pos[1] < 2500.0f) {
         CL_Lava_Boost();
+        o->o104 = 0;
     }    
 }
 
@@ -418,6 +439,17 @@ void bhv_koopa_boss_moving_flame_loop(void) {
         o->oPosZ -= 20.0f;
     }
     if (o->oTimer > 120) {
+        o->activeFlags = 0;
+    }
+}
+
+
+
+void bhv_koopa_boss_mini_flame_loop(void) {
+    cur_obj_move_standard(-78);
+    o->oVelY -= 1.7f;
+    if (o->oTimer > 120 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED ||
+    o->oPosY <= 1860.0f) {
         o->activeFlags = 0;
     }
 }

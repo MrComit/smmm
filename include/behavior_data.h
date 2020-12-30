@@ -592,6 +592,7 @@ extern const BehaviorScript bhvL1Lock[];
 extern const BehaviorScript bhvKoopaBossChandelier[];
 extern const BehaviorScript bhvKoopaBossFlame[];
 extern const BehaviorScript bhvKoopaBossMovingFlame[];
+extern const BehaviorScript bhvKoopaBossMiniFlame[];
 
 
 
