@@ -85,11 +85,15 @@ void bhv_koopa_boss_loop(void) {
             if (o->oFloatF4 == 1.1f) {
                 o->oAction = 2;
                 o->oFC = 120;
-                cur_obj_init_animation_with_sound(3);
+                cur_obj_init_animation_with_sound(1);
             }
             break;
         case 2:
             koopa_boss_move();
+            if (o->oTimer > o->oFC - 20) {
+                cur_obj_init_animation_with_sound(2);
+                o->o108 = 1;
+            }
             if (o->oTimer > o->oFC) {
                 obj = spawn_object(o, MODEL_L1_THIN_BOOK, bhvFlamingBossBook);
                 obj->oPosY += 1800.0f;
@@ -107,6 +111,11 @@ void bhv_koopa_boss_loop(void) {
                 }
                 o->oFC = CL_RandomMinMaxU16(45, 90);
                 o->oTimer = 0;
+            }
+            if (o->o108 && cur_obj_check_if_near_animation_end()) {
+                o->o108 = 0;
+                cur_obj_init_animation_with_sound(1);
+                o->header.gfx.animInfo.animFrame = 10;
             }
             obj = CL_nearest_object_with_behavior_and_field(bhvFlamingBossBook, 0x14C, 2);
             if (obj == NULL) {
@@ -126,37 +135,40 @@ void bhv_koopa_boss_loop(void) {
             }
             break;
         case 3:
-            if (cur_obj_init_anim_and_check_if_end(1)) {
+            if (cur_obj_init_anim_and_check_if_end(5)) {
                 o->oAction = 2;
-                cur_obj_init_animation_with_sound(3);
+                cur_obj_init_animation_with_sound(1);
+                o->header.gfx.animInfo.animFrame = 10;
             }
             break;
         case 4:
-            if (cur_obj_init_anim_and_check_if_end(2)) {
-                o->oAction = 2;
+            if (cur_obj_init_anim_and_check_if_end(6)) {
+                o->oAction = 8;
             }
             break;
         case 5:
-            if (cur_obj_init_anim_and_check_if_end(4)) {
+            if (cur_obj_init_anim_check_frame(3, 23)) {
                 spawn_object_relative(0, 600, 1800, 0, o, MODEL_RED_FLAME, bhvKoopaBossFlame);
                 o->oAction = 2;
-                cur_obj_init_animation_with_sound(3);
+                cur_obj_init_animation_with_sound(1);
+                o->header.gfx.animInfo.animFrame = 10;
             }
             break;
         case 6:
-            if (cur_obj_init_anim_and_check_if_end(4)) {
+            if (cur_obj_init_anim_check_frame(3, 23)) {
                 spawn_object_relative(1, 600, 1800, 0, o, MODEL_RED_FLAME, bhvKoopaBossFlame);
                 o->oAction = 2;
-                cur_obj_init_animation_with_sound(3);
+                cur_obj_init_animation_with_sound(1);
+                o->header.gfx.animInfo.animFrame = 10;
             }
             break;
         case 7:
-            if (cur_obj_init_anim_and_check_if_end(5)) {
-                o->oAction = 2;
-                cur_obj_init_anim_and_check_if_end(3);
-            }
-            if (cur_obj_check_anim_frame(2)) {
-                cur_obj_shake_screen(0);
+            if (o->oBehParams2ndByte) {
+                if (cur_obj_init_anim_and_check_if_end(4)) {
+                    o->oAction = 2;
+                    cur_obj_init_anim_and_check_if_end(1);
+                    o->header.gfx.animInfo.animFrame = 10;
+                }
             }
             break;
     }
@@ -360,6 +372,7 @@ void bhv_boss_chandelier_loop(void) {
                 CL_explode_object(o, 1);
                 obj->oBehParams2ndByte = 1;
                 cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
+                cur_obj_shake_screen(0);
             }
             break;
     }

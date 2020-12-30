@@ -346,7 +346,7 @@ s32 cur_obj_init_anim_and_check_if_end(s32 arg0) {
     return cur_obj_check_if_near_animation_end();
 }
 
-static s32 cur_obj_init_anim_check_frame(s32 arg0, s32 arg1) {
+s32 cur_obj_init_anim_check_frame(s32 arg0, s32 arg1) {
     cur_obj_init_animation_with_sound(arg0);
     return cur_obj_check_anim_frame(arg1);
 }
