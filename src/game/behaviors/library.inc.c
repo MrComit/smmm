@@ -71,12 +71,15 @@ void bhv_koopa_boss_loop(void) {
             cur_obj_hide();
             if (gMarioState->pos[2] > 18000.0f) {
                 o->oAction = 1;
+                o->oKleptoStartPosZ = 300.0f;
                 cur_obj_unhide();
+                set_mario_npc_dialog(1);
             }
             break;
         case 1:
             o->oFloatF4 = approach_f32(o->oFloatF4, 1.1f, 0.015f, 0.015);
             cur_obj_scale(o->oFloatF4);
+            set_mario_npc_dialog(1);
             o->oGraphYOffset += 11.34825f;
             if (o->oFloatF4 >= 0.8f) {
                 o->header.gfx.scale[0] = 0.8f;
@@ -86,6 +89,7 @@ void bhv_koopa_boss_loop(void) {
                 o->oAction = 2;
                 o->oFC = 120;
                 cur_obj_init_animation_with_sound(1);
+                set_mario_npc_dialog(0);
             }
             break;
         case 2:
@@ -122,7 +126,7 @@ void bhv_koopa_boss_loop(void) {
                 break;
             }
             o->o104 = 0;
-            if (lateral_dist_between_objects(o, obj) < 300.0f) {
+            if (lateral_dist_between_objects(o, obj) < o->oKleptoStartPosZ) {
                 CL_explode_object(obj, 1);
                 if (o->oBehParams2ndByte) {
                     cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
@@ -142,7 +146,7 @@ void bhv_koopa_boss_loop(void) {
             }
             break;
         case 4:
-            if (cur_obj_init_anim_and_check_if_end(6)) {
+            if (cur_obj_init_anim_check_frame(6, 10)) {
                 o->oAction = 8;
             }
             break;
@@ -169,6 +173,16 @@ void bhv_koopa_boss_loop(void) {
                     cur_obj_init_anim_and_check_if_end(1);
                     o->header.gfx.animInfo.animFrame = 10;
                 }
+            }
+            break;
+        case 8:
+            o->oFloatF4 = approach_f32(o->oFloatF4, 0.3f, 0.02f, 0.02f);
+            obj_scale_xyz(o, o->oFloatF4 / 1.38f, o->oFloatF4, o->oFloatF4 / 1.38f);
+
+            if (o->oFloatF4 == 0.3f) {
+                CL_explode_object(o, 1);
+                obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
+                obj->oBehParams2ndByte = 4;
             }
             break;
     }
@@ -371,6 +385,7 @@ void bhv_boss_chandelier_loop(void) {
             if (o->oPosY < 2500.0f) {
                 CL_explode_object(o, 1);
                 obj->oBehParams2ndByte = 1;
+                obj->oKleptoStartPosZ = 500.0f;
                 cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
                 cur_obj_shake_screen(0);
             }
@@ -434,6 +449,9 @@ void bhv_koopa_boss_flame_loop(void) {
         case 2:
             koopa_boss_flame_act_2();
             break;
+    }
+    if (o->parentObj->oAction == 8) {
+        o->activeFlags = 0;
     }  
 }
 
