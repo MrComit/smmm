@@ -6756,7 +6756,7 @@ const BehaviorScript bhvKoopaBossMovingFlame[] =  {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BILLBOARD(),
     SET_HOME(),
-    SCALE(/*Unused*/ 0, /*Field*/ 700),
+    SCALE(/*Unused*/ 0, /*Field*/ 640),
     SET_INTERACT_TYPE(INTERACT_FLAME),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
     SET_INT(oIntangibleTimer, 0),

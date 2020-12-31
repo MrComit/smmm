@@ -397,7 +397,7 @@ void koopa_boss_flame_act_2(void) {
         struct Object *obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMovingFlame);
         obj->oBehParams2ndByte = o->oBehParams2ndByte;
         o->oTimer = 0;
-        o->oFC = CL_RandomMinMaxU16(60, 120);
+        o->oFC = CL_RandomMinMaxU16(90, 120);
     }
     o->o104++;
     if (o->o104 > 10 && absf(o->oPosZ - gMarioState->pos[2]) < 200.0f && gMarioState->pos[1] < 2500.0f) {
@@ -447,11 +447,11 @@ void bhv_koopa_boss_moving_flame_init(void) {
 
 void bhv_koopa_boss_moving_flame_loop(void) {
     if (o->oBehParams2ndByte) {
-        o->oPosZ += 20.0f;
+        o->oPosZ += 15.0f;
     } else {
-        o->oPosZ -= 20.0f;
+        o->oPosZ -= 15.0f;
     }
-    if (o->oTimer > 120) {
+    if (o->oTimer > 180) {
         o->activeFlags = 0;
     }
 }
