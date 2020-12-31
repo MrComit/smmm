@@ -355,7 +355,7 @@ void bhv_l1_lock_loop(void) {
     if (obj == NULL) {
         return;
     }
-    if (dist_between_objects(o, obj) < 300.0f) {
+    if (dist_between_objects(o, obj) < 400.0f) {
         obj->activeFlags = 0;
         obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
         obj->o104 = 0;
