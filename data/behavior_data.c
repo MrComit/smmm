@@ -6789,3 +6789,14 @@ const BehaviorScript bhvKoopaBossMiniFlame[] =  {
         CALL_NATIVE(bhv_koopa_boss_mini_flame_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFlameDecorationBig[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 6000),
+    BEGIN_LOOP(),
+        ANIMATE_TEXTURE(oAnimState, 2),
+    END_LOOP(),
+};

@@ -539,16 +539,14 @@ void check_instant_warp(void) {
     s16 cameraAngle;
     struct Surface *floor;
 
-    if (gCurrLevelNum == LEVEL_CASTLE
-        && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
-        return;
-    }
+    //if (gCurrLevelNum == LEVEL_CASTLE
+    //    && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
+    //    return;
+    //}
 
-    if ((floor = gMarioState->floor) != NULL) {
-        s32 index = floor->type - SURFACE_INSTANT_WARP_1B;
-        if (index >= INSTANT_WARP_INDEX_START && index < INSTANT_WARP_INDEX_STOP
-            && gCurrentArea->instantWarps != NULL) {
-            struct InstantWarp *warp = &gCurrentArea->instantWarps[index];
+    if ((floor = gMarioState->floor) != NULL && floor->type == SURFACE_INSTANT_WARP_1B) {
+        if (gCurrentArea->instantWarps != NULL) {
+            struct InstantWarp *warp = &gCurrentArea->instantWarps[floor->force];
 
             if (warp->id != 0) {
                 gMarioState->pos[0] += warp->displacement[0];
