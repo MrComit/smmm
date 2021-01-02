@@ -377,4 +377,8 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 #include "new_shyguy/anim_header.h"
 #include "new_shyguy/geo_header.h"
 
+#include "toad_friend/geo_header.h"
+
+
+#include "toad_friend/anim_header.h"
 #endif

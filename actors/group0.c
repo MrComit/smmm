@@ -35,3 +35,6 @@
 #include "new_shyguy/anims/data.inc.c"
 #include "new_shyguy/anims/table.inc.c"
 #include "new_shyguy/model.inc.c"
+#include "toad_friend/model.inc.c"
+#include "toad_friend/anims/data.inc.c"
+#include "toad_friend/anims/table.inc.c"

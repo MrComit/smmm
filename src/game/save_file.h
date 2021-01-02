@@ -127,6 +127,45 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_NEW_FLAG_032                /* 0x80000000 */ (1 << 31)
 
 
+/*
+ * !!!!!!!!!!!!!!!!!!!!!!!!!
+ *       TOAD FLAGS
+ * !!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+#define SAVE_TOAD_FLAG_INTRODUCTION      /* 0x00000001 */ (1 << 0)
+#define SAVE_TOAD_FLAG_FOUND_FIRST_BOO   /* 0x00000002 */ (1 << 1)
+#define SAVE_TOAD_FLAG_ENTER_DINING      /* 0x00000004 */ (1 << 2)
+#define SAVE_TOAD_FLAG_CLEAR_DINING      /* 0x00000008 */ (1 << 3)
+#define SAVE_TOAD_FLAG_005               /* 0x00000010 */ (1 << 4)
+#define SAVE_TOAD_FLAG_006               /* 0x00000020 */ (1 << 5)
+#define SAVE_TOAD_FLAG_007               /* 0x00000040 */ (1 << 6)
+#define SAVE_TOAD_FLAG_008               /* 0x00000080 */ (1 << 7)
+#define SAVE_TOAD_FLAG_009               /* 0x00000100 */ (1 << 8)
+#define SAVE_TOAD_FLAG_010               /* 0x00000200 */ (1 << 9)
+#define SAVE_TOAD_FLAG_011               /* 0x00000400 */ (1 << 10)
+#define SAVE_TOAD_FLAG_012               /* 0x00000800 */ (1 << 11)
+#define SAVE_TOAD_FLAG_013               /* 0x00001000 */ (1 << 12)
+#define SAVE_TOAD_FLAG_014               /* 0x00002000 */ (1 << 13)
+#define SAVE_TOAD_FLAG_015               /* 0x00004000 */ (1 << 14)
+#define SAVE_TOAD_FLAG_016               /* 0x00008000 */ (1 << 15)
+#define SAVE_TOAD_FLAG_017               /* 0x00010000 */ (1 << 16)
+#define SAVE_TOAD_FLAG_018               /* 0x00020000 */ (1 << 17)
+#define SAVE_TOAD_FLAG_019               /* 0x00040000 */ (1 << 18)
+#define SAVE_TOAD_FLAG_020               /* 0x00080000 */ (1 << 19)
+#define SAVE_TOAD_FLAG_021               /* 0x00100000 */ (1 << 20)
+#define SAVE_TOAD_FLAG_022               /* 0x00200000 */ (1 << 21)
+#define SAVE_TOAD_FLAG_023               /* 0x00400000 */ (1 << 22)
+#define SAVE_TOAD_FLAG_024               /* 0x00800000 */ (1 << 23)
+#define SAVE_TOAD_FLAG_025               /* 0x01000000 */ (1 << 24)
+#define SAVE_TOAD_FLAG_026               /* 0x02000000 */ (1 << 25)
+#define SAVE_TOAD_FLAG_027               /* 0x04000000 */ (1 << 26)
+#define SAVE_TOAD_FLAG_028               /* 0x08000000 */ (1 << 27)
+#define SAVE_TOAD_FLAG_029               /* 0x10000000 */ (1 << 28)
+#define SAVE_TOAD_FLAG_030               /* 0x20000000 */ (1 << 29)
+#define SAVE_TOAD_FLAG_031               /* 0x40000000 */ (1 << 30)
+#define SAVE_TOAD_FLAG_032               /* 0x80000000 */ (1 << 31)
+
+
 
 
 // game progress flags
