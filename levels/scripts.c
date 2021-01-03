@@ -119,6 +119,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BOO, boo_geo),
     LOAD_MODEL_FROM_GEO(MODEL_HAUNTED_CAGE, haunted_cage_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TOAD_FRIEND, toad_friend_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_STAR_PIECE, star_piece_geo),
 
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),

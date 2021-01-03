@@ -6815,3 +6815,14 @@ const BehaviorScript bhvToadFriend[] = {
         CALL_NATIVE(bhv_friend_toad_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvStarPiece[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SCALE(0, 200),
+    CALL_NATIVE(bhv_star_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_piece_loop),
+    END_LOOP(),
+};

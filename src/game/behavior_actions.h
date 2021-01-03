@@ -653,7 +653,8 @@ void bhv_koopa_boss_moving_flame_init(void);
 void bhv_koopa_boss_mini_flame_loop(void);
 void bhv_friend_toad_loop(void);
 void bhv_friend_toad_init(void);
-
+void bhv_star_piece_loop(void);
+void bhv_star_piece_init(void);
 
 
 

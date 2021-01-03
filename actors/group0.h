@@ -381,4 +381,6 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 
 #include "toad_friend/anim_header.h"
+#include "star_piece/geo_header.h"
+
 #endif

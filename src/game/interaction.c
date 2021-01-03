@@ -763,8 +763,8 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
 
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     u32 starIndex;
-    u32 starGrabAction = ACT_STAR_DANCE_EXIT;
-    u32 noExit = (o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
+    u32 starGrabAction;// = ACT_STAR_DANCE_EXIT;
+    u32 noExit = 1;//(o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
     u32 grandStar = (o->oInteractionSubtype & INT_SUBTYPE_GRAND_STAR) != 0;
 
     if (m->health >= 0x100) {
@@ -774,26 +774,23 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         if (!noExit) {
             m->hurtCounter = 0;
             m->healCounter = 0;
-            if (m->capTimer > 1) {
-                m->capTimer = 1;
-            }
         }
 
-        if (noExit) {
-            starGrabAction = ACT_STAR_DANCE_NO_EXIT;
-        }
+        //if (noExit) {
+        //    starGrabAction = ACT_STAR_DANCE_NO_EXIT;
+        //}
 
-        if (m->action & ACT_FLAG_SWIMMING) {
+        //if (m->action & ACT_FLAG_SWIMMING) {
             starGrabAction = ACT_STAR_DANCE_WATER;
-        }
+        //}
 
-        if (m->action & ACT_FLAG_METAL_WATER) {
-            starGrabAction = ACT_STAR_DANCE_WATER;
-        }
+        //if (m->action & ACT_FLAG_METAL_WATER) {
+        //    starGrabAction = ACT_STAR_DANCE_WATER;
+        //}
 
-        if (m->action & ACT_FLAG_AIR) {
-            starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
-        }
+        //if (m->action & ACT_FLAG_AIR) {
+        //    starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
+        //}
 
         spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
 
@@ -801,11 +798,12 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         m->interactObj = o;
         m->usedObj = o;
 
-        starIndex = (o->oBehParams >> 24) & 0x1F;
-        save_file_collect_star_or_key(m->numCoins, starIndex);
+        starIndex = (o->oBehParams >> 24) & 0xFF;
+        save_file_set_star_piece(starIndex);
+        //save_file_collect_star_or_key(m->numCoins, starIndex);
 
-        m->numStars =
-            save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+        //m->numStars =
+        //    save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
 
         if (!noExit) {
             drop_queued_background_music();

@@ -262,6 +262,45 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
     }
 }
 
+
+void mario_update_friend_l1_loop(struct MarioState *m) {
+    u32 flags = save_file_get_newflags(1);
+    u32 index = CL_count_bits(flags);
+    struct Object *obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvToadFriend);
+    if (obj == NULL)
+        return;
+    switch (index) {
+        case 0:
+            if (gMarioCurrentRoom == 2 && m->pos[2] < 14900.0f) {
+            }
+            break;
+        case 1:
+            if (gMarioCurrentRoom == 4) {
+
+            }
+            break;
+        case 2:
+            if (gMarioCurrentRoom == 6) {
+                
+            }
+            break;
+        case 3:
+            //if 
+            break;
+    }
+}
+
+
+void mario_update_toad_friend(struct MarioState *m) {
+    switch (gCurrLevelNum) {
+        case LEVEL_BOB:
+            mario_update_friend_l1_loop(m);
+            break;
+        case LEVEL_WF:
+            break;
+    }
+}
+
 /**
  * Mario's primary behavior update function.
  */
@@ -285,6 +324,7 @@ void bhv_mario_update(void) {
 
         i++;
     }
+    mario_update_toad_friend(gMarioState);
 }
 
 /**

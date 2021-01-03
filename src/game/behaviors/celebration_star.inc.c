@@ -6,26 +6,12 @@ void bhv_celebration_star_init(void) {
     o->oHomeZ = gMarioObject->header.gfx.pos[2];
     o->oMoveAngleYaw = gMarioObject->header.gfx.angle[1] + 0x8000;
     o->oCelebStarDiameterOfRotation = 100;
-#if BUGFIX_STAR_BOWSER_KEY
-    if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2) {
-        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_BOWSER_KEY];
-        o->oFaceAnglePitch = 0;
-        o->oFaceAngleRoll = 49152;
-        cur_obj_scale(0.1f);
-        o->oCelebStarUnkF4 = 1;
-    } else {
-        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR];
-        o->oFaceAnglePitch = 0;
-        o->oFaceAngleRoll = 0;
-        cur_obj_scale(0.4f);
-        o->oCelebStarUnkF4 = 0;
-    }
-#else
-    o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR];
-    cur_obj_scale(0.4f);
+
+    //o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR_PIECE];
+    //cur_obj_scale(0.4f);
+    cur_obj_scale(0.7f);
     o->oFaceAnglePitch = 0;
     o->oFaceAngleRoll = 0;
-#endif
 }
 
 void celeb_star_act_spin_around_mario(void) {
@@ -33,6 +19,7 @@ void celeb_star_act_spin_around_mario(void) {
     o->oPosZ = o->oHomeZ + coss(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
     o->oPosY += 5.0f;
     o->oFaceAngleYaw += 0x1000;
+    o->oFaceAnglePitch += 0x400;
     o->oMoveAngleYaw += 0x2000;
 
     if (o->oTimer == 40)
@@ -57,8 +44,11 @@ void celeb_star_act_face_camera(void) {
         cur_obj_scale((f32) o->oTimer / 10.0);
 #endif
         o->oFaceAngleYaw += 0x1000;
+        o->oFaceAnglePitch += 0x400;
     } else {
-        o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];
+        //o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];
+        o->oFaceAngleYaw += 0x400;
+        o->oFaceAnglePitch += 0x400;
     }
 
     if (o->oTimer == 59)
