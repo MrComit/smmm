@@ -57,14 +57,25 @@ void bhv_hidden_blue_coin_loop(void) {
 }
 
 void bhv_blue_coin_switch_init(void) {
+    u8 page, challenge, list;
     o->oF4 = (o->oBehParams >> 24) * 30;
     o->oF8 = ((o->oBehParams >> 16) & 0xFF) * 15;
+    challenge = (o->oBehParams >> 8) & 0xFF;
+    while (challenge >= 32) {
+        challenge -= 32;
+        page++;
+    }
+    list = save_file_get_challenges(page);
+    if (list & 1 << challenge) {
+        o->activeFlags = 0;
+    }
 }
 
 /**
  * Update function for bhvBlueCoinSwitch.
  */
 void bhv_blue_coin_switch_loop(void) {
+    u8 page, challenge;
     // The switch's model is 1/3 size.
     cur_obj_scale(3.0f);
 
@@ -125,6 +136,12 @@ void bhv_blue_coin_switch_loop(void) {
             // or after the coins unload after the 240-frame timer expires.
             if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL || o->oTimer > o->oF4 + (o->oF8 * 2)) {
                 obj_mark_for_deletion(o);
+                challenge = (o->oBehParams >> 8) & 0xFF;
+                while (challenge >= 32) {
+                    challenge -= 32;
+                    page++;
+                }
+                save_file_set_challenges(page, challenge);
             }
 
             break;

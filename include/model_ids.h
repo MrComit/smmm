@@ -596,6 +596,7 @@
 #define MODEL_HAUNTED_CAGE        0x33        // haunted_cage_geo
 #define MODEL_TOAD_FRIEND         0x34
 #define MODEL_STAR_PIECE          0x35
+#define MODEL_TOKEN               0x36
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF

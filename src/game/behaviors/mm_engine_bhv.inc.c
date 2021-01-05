@@ -10,6 +10,51 @@ static struct ObjectHitbox sStarPieceHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+struct ObjectHitbox sTokenHitbox = {
+    /* interactType: */ INTERACT_COIN,
+    /* downOffset: */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health: */ 0,
+    /* numLootCoins: */ 0,
+    /* radius: */ 120,
+    /* height: */ 78,
+    /* hurtboxRadius: */ 0,
+    /* hurtboxHeight: */ 0,
+};
+
+u8 sTokenCoins[3] = {5, 20, 50};
+
+void bhv_token_init(void) {
+    u8 page, challenge, list;
+    obj_set_hitbox(o, &sTokenHitbox);
+    o->oNumLootCoins = sTokenCoins[o->oBehParams2ndByte];
+    challenge = (o->oBehParams >> 8) & 0xFF;
+    while (challenge >= 32) {
+        challenge -= 32;
+        page++;
+    }
+    list = save_file_get_challenges(page);
+    if (list & 1 << challenge) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_token_loop(void) {
+    u8 page, challenge;
+    if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+        o->activeFlags = 0;
+        challenge = (o->oBehParams >> 8) & 0xFF;
+        while (challenge >= 32) {
+            challenge -= 32;
+            page++;
+        }
+        save_file_set_challenges(page, challenge);
+    }
+}
+
+
 void bhv_star_piece_init(void) {
     s8 pieceId;
     u32 starPieces;

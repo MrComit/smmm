@@ -655,6 +655,8 @@ void bhv_friend_toad_loop(void);
 void bhv_friend_toad_init(void);
 void bhv_star_piece_loop(void);
 void bhv_star_piece_init(void);
+void bhv_token_init(void);
+void bhv_token_loop(void);
 
 
 

@@ -6826,3 +6826,12 @@ const BehaviorScript bhvStarPiece[] = {
         CALL_NATIVE(bhv_star_piece_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvToken[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_token_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_token_loop),
+    END_LOOP(),
+};

@@ -32,7 +32,9 @@ struct SaveFile
     // Star flags for each course.
     // The most significant bit of the byte *following* each course is set if the
     // cannon is open.
-    u8 courseStars[COURSE_COUNT];
+    //u8 courseStars[COURSE_COUNT];
+    u32 roomsCleared[4];
+    u32 miscChallenges[3];
 
     u32 starPieces;
     u32 boosCaptured;
@@ -247,6 +249,8 @@ u32 save_file_get_boos(void);
 void save_file_set_boos(u32 boo);
 u32 save_file_get_star_piece(void);
 void save_file_set_star_piece(u32 piece);
+u32 save_file_get_challenges(u8 index);
+void save_file_set_challenges(u32 challenge, u8 index);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);

@@ -525,20 +525,36 @@ void save_file_set_star_piece(u32 piece) {
 
 
 
+u32 save_file_get_challenges(u8 index) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[index];
+}
+
+void save_file_set_challenges(u32 challenge, u8 index) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[index] |= 1 << challenge;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+
+
 /**
  * Return the bitset of obtained stars in the specified course.
  * If course is -1, return the bitset of obtained castle secret stars.
  */
 u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex) {
-    u32 starFlags;
+    //u32 starFlags;
 
-    if (courseIndex == -1) {
-        starFlags = SAVE_FLAG_TO_STAR_FLAG(gSaveBuffer.files[fileIndex][0].flags);
-    } else {
-        starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] & 0x7F;
-    }
+    //if (courseIndex == -1) {
+    //    starFlags = SAVE_FLAG_TO_STAR_FLAG(gSaveBuffer.files[fileIndex][0].flags);
+    //} else {
+    //    starFlags = gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] & 0x7F;
+    //}
 
-    return starFlags;
+    //return starFlags;
+    return 0;
 }
 
 /**
@@ -546,14 +562,14 @@ u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex) {
  * If course is -1, add to the bitset of obtained castle secret stars.
  */
 void save_file_set_star_flags(s32 fileIndex, s32 courseIndex, u32 starFlags) {
-    if (courseIndex == -1) {
-        gSaveBuffer.files[fileIndex][0].flags |= STAR_FLAG_TO_SAVE_FLAG(starFlags);
-    } else {
-        gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] |= starFlags;
-    }
+    //if (courseIndex == -1) {
+    //    gSaveBuffer.files[fileIndex][0].flags |= STAR_FLAG_TO_SAVE_FLAG(starFlags);
+    //} else {
+    //    gSaveBuffer.files[fileIndex][0].courseStars[courseIndex] |= starFlags;
+    //}
 
-    gSaveBuffer.files[fileIndex][0].flags |= SAVE_FLAG_FILE_EXISTS;
-    gSaveFileModified = TRUE;
+    //gSaveBuffer.files[fileIndex][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    //gSaveFileModified = TRUE;
 }
 
 s32 save_file_get_course_coin_score(s32 fileIndex, s32 courseIndex) {
@@ -564,16 +580,16 @@ s32 save_file_get_course_coin_score(s32 fileIndex, s32 courseIndex) {
  * Return TRUE if the cannon is unlocked in the current course.
  */
 s32 save_file_is_cannon_unlocked(void) {
-    return (gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] & 0x80) != 0;
+    return 0;//(gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] & 0x80) != 0;
 }
 
 /**
  * Sets the cannon status to unlocked in the current course.
  */
 void save_file_set_cannon_unlocked(void) {
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] |= 0x80;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
-    gSaveFileModified = TRUE;
+    //gSaveBuffer.files[gCurrSaveFileNum - 1][0].courseStars[gCurrCourseNum] |= 0x80;
+    //gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    //gSaveFileModified = TRUE;
 }
 
 void save_file_set_cap_pos(s16 x, s16 y, s16 z) {
