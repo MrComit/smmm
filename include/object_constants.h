@@ -45,6 +45,7 @@
 #define OBJ_FLAG_PERSISTENT_RESPAWN               (1 << 14) // 0x00004000
 #define OBJ_FLAG_DISABLE_TO_ROOM_CLEAR            (1 << 15) // 0x00008000
 #define OBJ_FLAG_KICKED_OR_PUNCHED                (1 << 16) // 0x00010000
+#define OBJ_FLAG_DISABLE_ON_ROOM_EXIT             (1 << 17) // 0x00010000
 #define OBJ_FLAG_30                               (1 << 30) // 0x40000000
 
 /* oHeldState */

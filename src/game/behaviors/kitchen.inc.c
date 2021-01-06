@@ -82,6 +82,7 @@ void bhv_burner_loop(void) {
 void bhv_l1_cabinet_init(void) {
     if (o->oBehParams2ndByte == 1) {
         o->oObjF4 = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+        o->oObjF4->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         o->oObjF4->oPosX -= 250.0f;
         o->oObjF4->oPosZ += 125.0f;
         o->oObjF4->parentObj = o->oObjF4;

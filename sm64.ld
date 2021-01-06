@@ -76,7 +76,8 @@ SECTIONS
    END_SEG(boot)
 
    . = 0x80000400;
-   BEGIN_NOLOAD(zbuffer) {
+   BEGIN_NOLOAD(zbuffer)
+   {
       BUILD_DIR/src/buffers/zbuffer.o(.bss*);
    }
    END_NOLOAD(zbuffer)
@@ -85,21 +86,18 @@ SECTIONS
    BEGIN_NOLOAD(buffers)
    {
       BUILD_DIR/src/buffers/buffers.o(.bss*);
+#ifdef HVQM
       BUILD_DIR/src/buffers/hvqmwork.o(.bss*);
       BUILD_DIR/src/buffers/adpcmbuf.o(.bss*);
       BUILD_DIR/src/buffers/hvqbuf.o(.bss*);
+#endif
       BUILD_DIR/src/audio/globals_start.o(.bss*);
       BUILD_DIR/src/audio/synthesis.o(.bss*);
       BUILD_DIR/src/audio/heap.o(.bss*);
       BUILD_DIR/src/audio/load.o(.bss*);
       BUILD_DIR/src/audio/data.o(.bss*);
       BUILD_DIR/src/audio*.o(.bss*);
-
-#ifdef VERSION_EU
       . = ALIGN(0x200);
-#else
-      . = ALIGN(0x1000);
-#endif
       BUILD_DIR/src/buffers/gfx_output_buffer.o(.bss*);
    }
    END_NOLOAD(buffers)
@@ -119,16 +117,37 @@ SECTIONS
       BUILD_DIR/asm/entry.o(.text);
 
       BUILD_DIR/src/game*.o(.text);
+#ifdef HVQM
       BUILD_DIR/src/hvqm*.o(.text);
+#endif
 #ifdef UNF
       BUILD_DIR/src/usb*.o(.text);
 #endif
       BUILD_DIR/src/audio*.o(.text);
-      BUILD_DIR/asm/llmuldiv_gcc.o(.text);
+#ifdef GZIP
+      BUILD_DIR/src/gzip*.o(.text);
+#endif
+#ifdef YAY0
       BUILD_DIR/asm/slidec.o(.text);
+#endif
 
       */libultra_rom.a:*.o(.text);
+      */libgcc.a:_umoddi3.o(.text);
+      */libgcc.a:_udivdi3.o(.text);
+      */libgcc.a:_divdi3.o(.text);
+      */libgcc.a:_moddi3.o(.text);
+      */libgcc.a:_fixdfdi.o(.text);
+      */libgcc.a:_fixsfdi.o(.text);
+      */libgcc.a:_fixunsfdi.o(.text);
+      */libgcc.a:_fixunssfdi.o(.text);
+      */libgcc.a:_fixunsdfdi.o(.text);
+      */libgcc.a:_floatdidf.o(.text);
+      */libgcc.a:_floatdisf.o(.text);
+      */libgcc.a:_fixunsdfdi.o(.text);
+      */libgcc.a:_cmpdi2.o(.text);
+#ifdef HVQM
       */libhvqm2.a:*.o(.text);
+#endif
 
       BUILD_DIR/lib/rsp.o(.text);   
       lib/PR/hvqm/hvqm2sp1.o(.text);
@@ -142,13 +161,20 @@ SECTIONS
 #endif
       BUILD_DIR/src/audio*.o(.data*);
       BUILD_DIR/src/audio*.o(.sdata*);
+#ifdef GZIP
+      BUILD_DIR/src/gzip*.o(.data*);
+#endif
 
       */libultra_rom.a:*.o(.data*);
       */libultra_rom.a:*.o(.sdata*);
+#ifdef HVQM
       */libhvqm2.a:*.o(.data*);
+#endif
 
       BUILD_DIR/lib/rsp.o(.data*);
+#ifdef HVQM
       lib/PR/hvqm/hvqm2sp1.o(.data*);
+#endif
 
       /* rodata */
       BUILD_DIR/src/game*.o(.rodata*);
@@ -156,27 +182,49 @@ SECTIONS
       BUILD_DIR/src/usb*.o(.rodata*);
 #endif
       BUILD_DIR/src/audio*.o(.rodata*);
+#ifdef GZIP
+      BUILD_DIR/src/gzip*.o(.rodata*);
+#endif
 
       */libultra_rom.a:*.o(.rodata*);
+      */libgcc.a:_umoddi3.o(.rodata*);
+      */libgcc.a:_udivdi3.o(.rodata*);
+      */libgcc.a:_divdi3.o(.rodata*);
+      */libgcc.a:_moddi3.o(.rodata*);
+#ifdef HVQM
       */libhvqm2.a:*.o(.rodata*);
+#endif
 
       BUILD_DIR/lib/rsp.o(.rodata*);
+#ifdef HVQM
       lib/PR/hvqm/hvqm2sp1.o(.rodata*);
+#endif
    }
    END_SEG(main)
    BEGIN_NOLOAD(main)
    {
       BUILD_DIR/src/game*.o(.bss*);
       BUILD_DIR/src/game*.o(.sbss*);
+#ifdef HVQM
       BUILD_DIR/src/hvqm*.o(.bss*);
+#endif
+#ifdef UNF
       BUILD_DIR/src/usb*.o(.bss*);
       BUILD_DIR/src/usb*.o(.sbss*);
+#endif
       BUILD_DIR/src/audio*.o(.bss*);
       BUILD_DIR/src/audio*.o(.sbss*);
+#ifdef GZIP
+      BUILD_DIR/src/gzip*.o(.bss*);
+#endif
       
+      */libultra_rom.a:*.o(COMMON);
+      */libultra_rom.a:*.o(.scommon);
       */libultra_rom.a:*.o(.bss*);
       */libultra_rom.a:*.o(.sbss*);
+#ifdef HVQM
       */libhvqm2.a:*.o(.bss*);
+#endif
 
       . = ALIGN(0x8);
    }
@@ -367,12 +415,13 @@ SECTIONS
       BUILD_DIR/sound/sound_data.o(.data);
    }
    END_SEG(assets)
-  
+#ifdef HVQM 
    BEGIN_SEG(capcom, __romPos) SUBALIGN(2)
    {
       BUILD_DIR/data/capcom.o(.data);
    }
 	END_SEG(capcom)
+#endif
 #if 0
    BEGIN_SEG(sein, __romPos) SUBALIGN(2)
    {

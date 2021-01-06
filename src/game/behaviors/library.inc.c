@@ -24,7 +24,9 @@ Vec3f sKFlameXPos[2] = {
 
 
 void koopa_boss_move(void) {
-    switch ((o->oF8 & 2) >> 1) {
+    o->oF8 += 0x180;
+    o->oPosZ = 17400.0f + (sins(o->oF8 & ~1) * 1300.0f);
+    /*switch ((o->oF8 & 2) >> 1) {
         case 0:
             o->oPosZ += 30.0f;
             if (o->oPosZ > 18700.0f) {
@@ -37,11 +39,14 @@ void koopa_boss_move(void) {
                 o->oF8 &= ~2;
             }
             break;
-    }
+    }*/
 }
 
 void koopa_boss_clamp_mario(void) {
     struct MarioState *m = gMarioState;
+    if (gMarioCurrentRoom != o->oRoom) {
+        return;
+    }
     switch (o->oF8 & 1) {
         case 0:
             if (m->pos[2] > 15630.0f) {
@@ -191,7 +196,7 @@ void bhv_koopa_boss_loop(void) {
 void boss_book_flaming_loop(void) {
     struct Object *obj;
     vec3f_copy(&o->oObjF4->oPosX, &o->oPosX);
-    if (o->oTimer > 120 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
+    if (o->oTimer > 120 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || (o->oFloor != NULL && absf(o->oFloor->upperY - o->oPosY) < 20.0f)) {
         spawn_mist_particles_variable(0, 0, 25.0f);
         spawn_triangle_break_particles(6, 138, 1.0f, 4);
         create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);

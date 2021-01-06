@@ -112,6 +112,7 @@ void bhv_l1_book_init(void) {
         return;
     }
     obj = spawn_object(o, MODEL_SHYGUY, bhvShyguyBookSteal);
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     vec3f_copy(&obj->oPosX, sStealerPos[o->oBehParams >> 24]);
 }
 
@@ -210,6 +211,9 @@ void bhv_stray_book_init(void) {
 
 void bhv_stray_book_loop(void) {
     struct Object *obj;
+    if (o->oF4) {
+        spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+    }
     switch (o->oAction) {
         case 0:
             CL_Move();

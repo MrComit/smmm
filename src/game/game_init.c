@@ -19,9 +19,13 @@
 #include "segment2.h"
 #include "segment_symbols.h"
 #include "rumble_init.h"
+#ifdef HVQM
 #include <hvqm/hvqm.h>
+#endif
+#ifdef UNF
 #include "usb/usb.h"
 #include "usb/debug.h"
+#endif
 #include <prevent_bss_reordering.h>
 
 // FIXME: I'm not sure all of these variables belong in this file, but I don't
@@ -603,13 +607,11 @@ void thread5_game_loop(UNUSED void *arg) {
 
     setup_game_memory();
     init_rumble_pak_scheduler_queue();
-#ifdef UNF
-    debug_initialize();
-#endif
     init_controllers();
     create_thread_6();
-    
+#ifdef HVQM
     createHvqmThread();
+#endif
     save_file_load_all();
 
     set_vblank_handler(2, &gGameVblankHandler, &gGameVblankQueue, (OSMesg) 1);

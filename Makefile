@@ -8,6 +8,8 @@ default: all
 # Preprocessor definitions
 DEFINES :=
 
+SRC_DIRS :=
+
 #==============================================================================#
 # Build Options                                                                #
 #==============================================================================#
@@ -18,6 +20,20 @@ DEFINES :=
 # Build for the N64 (turn this off for ports)
 TARGET_N64 ?= 1
 
+# CONSOLE - selects the console to target
+#   bb - Targets the iQue Player (codenamed BB)
+#   n64 - Targets the N64
+CONSOLE ?= n64
+$(eval $(call validate-option,CONSOLE,n64 bb))
+
+ifeq      ($(CONSOLE),n64)
+  INCLUDE_DIRS   += include/n64
+  LIBS_DIR       := lib/n64
+else ifeq ($(CONSOLE),bb)
+  INCLUDE_DIRS   += include/ique
+  LIBS_DIR       := lib/ique
+  DEFINES        += BBPLAYER=1
+endif
 
 # COMPILER - selects the C compiler to use
 #   ido - uses the SGI IRIS Development Option compiler, which is used to build
@@ -26,6 +42,15 @@ TARGET_N64 ?= 1
 COMPILER ?= gcc
 $(eval $(call validate-option,COMPILER,ido gcc))
 
+
+COMPRESS ?= yay0
+$(eval $(call validate-option,COMPRESS,yay0 gzip))
+ifeq ($(COMPRESS),gzip)
+  DEFINES += GZIP=1
+  SRC_DIRS += src/gzip
+else ifeq ($(COMPRESS),yay0)
+  DEFINES += YAY0=1
+endif
 
 # VERSION - selects the version of the game to build
 #   jp - builds the 1996 Japanese version
@@ -130,7 +155,7 @@ endif
 COMPARE ?= 0
 $(eval $(call validate-option,COMPARE,0 1))
 
-TARGET_STRING := smmm.$(VERSION).$(GRUCODE)
+TARGET_STRING := smmm.$(VERSION).$(CONSOLE).$(GRUCODE)
 # If non-default settings were chosen, disable COMPARE
 ifeq ($(filter $(TARGET_STRING), sm64.jp.f3d_old sm64.us.f3d_old sm64.eu.f3d_new sm64.sh.f3d_new),)
   COMPARE := 0
@@ -145,6 +170,17 @@ $(eval $(call validate-option,UNF,0 1))
 
 ifeq ($(UNF),1)
   DEFINES += UNF=1
+  SRC_DIRS += src/usb
+endif
+
+# HVQM - whether to use HVQM fmv library
+#   1 - includes code in ROM
+#   0 - does not 
+HVQM ?= 0
+$(eval $(call validate-option,HVQM,0 1))
+ifeq ($(HVQM),1)
+  DEFINES += HVQM=1
+  SRC_DIRS += src/hvqm
 endif
 
 # Whether to hide commands or not
@@ -161,6 +197,7 @@ ifeq ($(filter clean distclean,$(MAKECMDGOALS)),)
   $(info ==== Build Options ====)
   $(info Version:        $(VERSION))
   $(info Microcode:      $(GRUCODE))
+  $(info Console:        $(CONSOLE))
   $(info Target:         $(TARGET))
   ifeq ($(COMPARE),1)
     $(info Compare ROM:    yes)
@@ -182,8 +219,6 @@ endif
 
 TOOLS_DIR := tools
 
-# Location of official N64 libraries
-N64_LIBS_DIR ?= lib
 
 # (This is a bit hacky, but a lot of rules implicitly depend
 # on tools and assets, and we use directory globs further down
@@ -230,7 +265,7 @@ ACTOR_DIR      := actors
 LEVEL_DIRS     := $(patsubst levels/%,%,$(dir $(wildcard levels/*/header.h)))
 
 # Directories containing source files
-SRC_DIRS := src src/usb src/engine src/game src/hvqm src/audio src/menu src/buffers actors levels bin data assets asm lib sound
+SRC_DIRS += src src/engine src/game src/audio src/menu src/buffers actors levels bin data assets asm lib sound
 BIN_DIRS := bin bin/$(VERSION)
 
 # File dependencies and variables for specific files
@@ -282,12 +317,12 @@ endif
 #==============================================================================#
 
 # detect prefix for MIPS toolchain
-ifneq      ($(call find-command,mips-linux-gnu-ld),)
+ifneq ($(call find-command,mips64-elf-ld),)
+  CROSS := mips64-elf-
+else ifneq ($(call find-command,mips-linux-gnu-ld),)
   CROSS := mips-linux-gnu-
 else ifneq ($(call find-command,mips64-linux-gnu-ld),)
   CROSS := mips64-linux-gnu-
-else ifneq ($(call find-command,mips64-elf-ld),)
-  CROSS := mips64-elf-
 else
   $(error Unable to detect a suitable MIPS toolchain installed)
 endif
@@ -328,7 +363,7 @@ ifeq ($(TARGET_N64),1)
   CC_CFLAGS := -fno-builtin
 endif
 
-INCLUDE_DIRS := include $(BUILD_DIR) $(BUILD_DIR)/include src . include/hvqm
+INCLUDE_DIRS += include $(BUILD_DIR) $(BUILD_DIR)/include src . include/hvqm
 ifeq ($(TARGET_N64),1)
   INCLUDE_DIRS += include/libc
 endif
@@ -371,6 +406,9 @@ export LANG := C
 
 # N64 tools
 YAY0TOOL              := $(TOOLS_DIR)/slienc
+ROMALIGN              := $(TOOLS_DIR)/romalign
+BFSIZE                := $(TOOLS_DIR)/bfsize
+FILESIZER             := $(TOOLS_DIR)/filesizer
 N64CKSUM              := $(TOOLS_DIR)/n64cksum
 N64GRAPHICS           := $(TOOLS_DIR)/n64graphics
 N64GRAPHICS_CI        := $(TOOLS_DIR)/n64graphics_ci
@@ -440,6 +478,7 @@ libultra: $(BUILD_DIR)/libultra.a
 # Extra object file dependencies
 $(BUILD_DIR)/asm/boot.o:              $(IPL3_RAW_FILES)
 $(BUILD_DIR)/src/game/crash_screen.o: $(CRASH_TEXTURE_C_FILES)
+$(BUILD_DIR)/src/game/version.o:      $(BUILD_DIR)/src/game/version_data.h
 $(BUILD_DIR)/lib/rsp.o:               $(BUILD_DIR)/rsp/rspboot.bin $(BUILD_DIR)/rsp/fast3d.bin $(BUILD_DIR)/rsp/audio.bin
 $(SOUND_BIN_DIR)/sound_data.o:        $(SOUND_BIN_DIR)/sound_data.ctl.inc.c $(SOUND_BIN_DIR)/sound_data.tbl.inc.c $(SOUND_BIN_DIR)/sequences.bin.inc.c $(SOUND_BIN_DIR)/bank_sets.inc.c
 $(BUILD_DIR)/levels/scripts.o:        $(BUILD_DIR)/include/level_headers.h
@@ -542,6 +581,26 @@ $(BUILD_DIR)/levels/%/leveldata.bin: $(BUILD_DIR)/levels/%/leveldata.elf
 	$(call print,Extracting compressionable data from:,$<,$@)
 	$(V)$(EXTRACT_DATA_FOR_MIO) $< $@
 
+ifeq ($(COMPRESS),gzip)
+# Compress binary file to gzip
+$(BUILD_DIR)/%.gz: $(BUILD_DIR)/%.bin
+	$(call print,Compressing:,$<,$@)
+	$(V)gzip -c -9 -n $< > $@
+#	$(V)dd if=/dev/zero bs=1 count=4 >> $@
+#	$(ROMALIGN) $@ 16
+#	$(V)$(FILESIZER) $< $@
+
+# Strip gzip header
+$(BUILD_DIR)/%.szp: $(BUILD_DIR)/%.gz
+	$(call print,Converting:,$<,$@)
+	$(V)dd bs=10 skip=1 if=$< of=$@
+	$(V)$(FILESIZER) $(<:.gz=.bin) $@
+
+# convert binary szp to object file
+$(BUILD_DIR)/%.szp.o: $(BUILD_DIR)/%.szp
+	$(call print,Converting GZIP to ELF:,$<,$@)
+	$(V)printf ".section .data\n\n.incbin \"$<\"\n" | $(AS) $(ASFLAGS) -o $@
+else
 # Compress binary file
 $(BUILD_DIR)/%.szp: $(BUILD_DIR)/%.bin
 	$(call print,Compressing:,$<,$@)
@@ -551,7 +610,7 @@ $(BUILD_DIR)/%.szp: $(BUILD_DIR)/%.bin
 $(BUILD_DIR)/%.szp.o: $(BUILD_DIR)/%.szp
 	$(call print,Converting YAY0 to ELF:,$<,$@)
 	$(V)printf ".section .data\n\n.incbin \"$<\"\n" | $(AS) $(ASFLAGS) -o $@
-
+endif
 
 #==============================================================================#
 # Sound File Generation                                                        #
@@ -651,6 +710,10 @@ $(GLOBAL_ASM_DEP).$(NON_MATCHING):
 	@$(RM) $(GLOBAL_ASM_DEP).*
 	$(V)touch $@
 
+# Generate version_data.h
+$(BUILD_DIR)/src/game/version_data.h: tools/make_version.sh
+	@$(PRINT) "$(GREEN)Generating:  $(BLUE)$@ $(NO_COL)\n"
+	$(V)tools/make_version.sh $(CROSS) > $@
 
 #==============================================================================#
 # Compilation Recipes                                                          #
@@ -730,16 +793,10 @@ $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(call print,Preprocessing linker script:,$<,$@)
 	$(V)$(CPP) $(CPPFLAGS) -DBUILD_DIR=$(BUILD_DIR) -MMD -MP -MT $@ -MF $@.d -o $@ $<
 
-# Link libultra
-$(BUILD_DIR)/libultra.a: $(ULTRA_O_FILES)
-	@$(PRINT) "$(GREEN)Linking libultra:  $(BLUE)$@ $(NO_COL)\n"
-	$(V)$(AR) rcs -o $@ $(ULTRA_O_FILES)
-	$(V)$(TOOLS_DIR)/patch_libultra_math $@
-
 # Link SM64 ELF file
-$(ELF): $(O_FILES) $(YAY0_OBJ_FILES) $(SEG_FILES) $(BUILD_DIR)/$(LD_SCRIPT) undefined_syms.txt $(BUILD_DIR)/libultra.a
+$(ELF): $(O_FILES) $(YAY0_OBJ_FILES) $(SEG_FILES) $(BUILD_DIR)/$(LD_SCRIPT) undefined_syms.txt
 	@$(PRINT) "$(GREEN)Linking ELF file:  $(BLUE)$@ $(NO_COL)\n"
-	$(V)$(LD) -L $(BUILD_DIR) -T undefined_syms.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/smmm.$(VERSION).map --no-check-sections $(addprefix -R ,$(SEG_FILES)) -o $@ $(O_FILES) -L $(N64_LIBS_DIR) -lultra_rom -lhvqm2
+	$(V)$(LD) -L $(BUILD_DIR) -T undefined_syms.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/smmm.$(VERSION).map --no-check-sections $(addprefix -R ,$(SEG_FILES)) -o $@ $(O_FILES) -L$(LIBS_DIR) -lultra_rom -Llib -lhvqm2 -lgcc
 
 # Build ROM
 $(ROM): $(ELF)

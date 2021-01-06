@@ -159,6 +159,7 @@ static s32 bhv_cmd_spawn_child(void) {
 
     struct Object *child = spawn_object_at_origin(gCurrentObject, 0, model, behavior);
     obj_copy_pos_and_angle(child, gCurrentObject);
+    child->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
     gCurBhvCommand += 3;
     return BHV_PROC_CONTINUE;
@@ -172,6 +173,7 @@ static s32 bhv_cmd_spawn_obj(void) {
 
     struct Object *object = spawn_object_at_origin(gCurrentObject, 0, model, behavior);
     obj_copy_pos_and_angle(object, gCurrentObject);
+    object->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     // TODO: Does this cmd need renaming? This line is the only difference between this and the above func.
     gCurrentObject->prevObj = object;
 
@@ -189,6 +191,7 @@ static s32 bhv_cmd_spawn_child_with_param(void) {
     struct Object *child = spawn_object_at_origin(gCurrentObject, 0, modelID, behavior);
     obj_copy_pos_and_angle(child, gCurrentObject);
     child->oBehParams2ndByte = bhvParam;
+    child->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
     gCurBhvCommand += 3;
     return BHV_PROC_CONTINUE;

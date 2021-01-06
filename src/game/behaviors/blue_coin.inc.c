@@ -141,7 +141,7 @@ void bhv_blue_coin_switch_loop(void) {
                     challenge -= 32;
                     page++;
                 }
-                save_file_set_challenges(page, challenge);
+                save_file_set_challenges(challenge, page);
             }
 
             break;

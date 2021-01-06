@@ -27,7 +27,7 @@ u8 sTokenCoins[3] = {5, 20, 50};
 void bhv_token_init(void) {
     u8 page, challenge, list;
     obj_set_hitbox(o, &sTokenHitbox);
-    o->oNumLootCoins = sTokenCoins[o->oBehParams2ndByte];
+    o->oDamageOrCoinValue = sTokenCoins[o->oBehParams2ndByte];
     challenge = (o->oBehParams >> 8) & 0xFF;
     while (challenge >= 32) {
         challenge -= 32;
@@ -50,7 +50,7 @@ void bhv_token_loop(void) {
             challenge -= 32;
             page++;
         }
-        save_file_set_challenges(page, challenge);
+        save_file_set_challenges(challenge, page);
     }
 }
 

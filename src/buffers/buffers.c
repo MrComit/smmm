@@ -2,7 +2,9 @@
 #include <hvqm2dec.h>
 
 #include "buffers.h"
+#ifdef HVQM
 #include <hvqm/hvqm.h>
+#endif
 #include "config.h"
 
 ALIGNED8 u8 gDecompressionHeap[0xD000];
@@ -33,10 +35,4 @@ struct GfxPool gGfxPools[2];
 // task never yields.
 #ifdef VERSION_JP
 ALIGNED8 u8 gAudioSPTaskYieldBuffer[OS_YIELD_AUDIO_SIZE];
-#endif
-
-// Probably Thread 2 stack space. Unreferenced, and stubbed out with f3dex to
-// avoid an overflowing .buffers segment.
-#if !defined(F3DEX_GBI_SHARED) && !defined(VERSION_EU)
-ALIGNED8 u8 gUnusedThread2Stack[0x1400];
 #endif

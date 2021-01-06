@@ -579,6 +579,7 @@ struct Object *spawn_object_at_origin(struct Object *parent, UNUSED s32 unusedAr
 
     behaviorAddr = segmented_to_virtual(behavior);
     obj = create_object(behaviorAddr);
+    obj->oFlags |= OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
     obj->parentObj = parent;
     obj->header.gfx.areaIndex = parent->header.gfx.areaIndex;
@@ -2506,7 +2507,11 @@ void cur_obj_enable_rendering_if_mario_in_room(void) {
         } else {
             //cur_obj_disable_rendering();
             o->activeFlags |= ACTIVE_FLAG_IN_DIFFERENT_ROOM;
-            gNumRoomedObjectsNotInMarioRoom++;
+            if (o->oFlags & OBJ_FLAG_DISABLE_ON_ROOM_EXIT) {
+                o->activeFlags = 0;
+            } else {
+                gNumRoomedObjectsNotInMarioRoom++;
+            }
         }
     }
 }

@@ -11,6 +11,13 @@
 #include "memory.h"
 #include "segment_symbols.h"
 #include "segments.h"
+#ifdef GZIP
+#include "gzip/gzip.h"
+#endif
+#ifdef UNF
+#include "usb/debug.h"
+#endif
+
 
 // round up to the next multiple
 #define ALIGN4(val) (((val) + 0x3) & ~0x3)
@@ -245,7 +252,7 @@ u32 main_pool_pop_state(void) {
  * Perform a DMA read from ROM. The transfer is split into 4KB blocks, and this
  * function blocks until completion.
  */
-static void dma_read(u8 *dest, u8 *srcStart, u8 *srcEnd) {
+void dma_read(u8 *dest, u8 *srcStart, u8 *srcEnd) {
     u32 size = ALIGN16(srcEnd - srcStart);
 
     osInvalDCache(dest, size);
@@ -277,7 +284,7 @@ static void *dynamic_dma_read(u8 *srcStart, u8 *srcEnd, u32 side) {
     return dest;
 }
 
-#ifndef NO_SEGMENTED_MEMORY
+//#ifndef NO_SEGMENTED_MEMORY
 /**
  * Load data from ROM into a newly allocated block, and set the segment base
  * address to this block.
@@ -316,6 +323,17 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
     return dest;
 }
 
+#ifdef GZIP
+u32 ExpandGZip(void *src, void *dest, u32 size)
+{
+	u32 len;
+
+	len = expand_gzip((char *)src, (char *)dest, size);
+
+	return ((u32)dest + len + 7) & ~7;
+}
+#endif
+
 /**
  * Decompress the block of ROM data from srcStart to srcEnd and return a
  * pointer to an allocated buffer holding the decompressed data. Set the
@@ -324,17 +342,31 @@ void *load_to_fixed_pool_addr(u8 *destAddr, u8 *srcStart, u8 *srcEnd) {
 void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
     void *dest = NULL;
 
+#ifdef GZIP
+    u32 compSize = (srcEnd - 4 - srcStart);
+#else
     u32 compSize = ALIGN16(srcEnd - srcStart);
+#endif
+
     u8 *compressed = main_pool_alloc(compSize, MEMORY_POOL_RIGHT);
 
+#ifdef GZIP
+    // Decompressed size from end of gzip
+    u32 *size = (u32 *) (compressed + compSize);
+#else
     // Decompressed size from mio0 header
     u32 *size = (u32 *) (compressed + 4);
+#endif
 
     if (compressed != NULL) {
         dma_read(compressed, srcStart, srcEnd);
         dest = main_pool_alloc(*size, MEMORY_POOL_LEFT);
         if (dest != NULL) {
+#ifdef GZIP
+            ExpandGZip(compressed, dest, compSize);
+#else
             slidstart(compressed, dest);
+#endif
             set_segment_base_addr(segment, dest); sSegmentROMTable[segment] = (uintptr_t) srcStart;
             main_pool_free(compressed);
         } else {
@@ -346,12 +378,19 @@ void *load_segment_decompress(s32 segment, u8 *srcStart, u8 *srcEnd) {
 
 void *load_segment_decompress_heap(u32 segment, u8 *srcStart, u8 *srcEnd) {
     UNUSED void *dest = NULL;
+
+#ifdef GZIP
+    u32 compSize = (srcEnd - 4 - srcStart);
+#else
     u32 compSize = ALIGN16(srcEnd - srcStart);
+#endif
     u8 *compressed = main_pool_alloc(compSize, MEMORY_POOL_RIGHT);
-    UNUSED u32 *pUncSize = (u32 *) (compressed + 4);
 
     if (compressed != NULL) {
         dma_read(compressed, srcStart, srcEnd);
+#ifdef GZIP
+        ExpandGZip(gDecompressionHeap, compressed, compSize);
+#else
         slidstart(compressed, gDecompressionHeap);
         set_segment_base_addr(segment, gDecompressionHeap); sSegmentROMTable[segment] = (uintptr_t) srcStart;
         main_pool_free(compressed);
@@ -366,10 +405,16 @@ void load_engine_code_segment(void) {
     UNUSED u32 alignedSize = ALIGN16(_engineSegmentRomEnd - _engineSegmentRomStart);
 
     bzero(startAddr, totalSize);
+#ifdef UNF
+    debug_printf("DMA-ing engine segment...");
+#endif
     osWritebackDCacheAll();
     dma_read(startAddr, _engineSegmentRomStart, _engineSegmentRomEnd);
     osInvalICache(startAddr, totalSize);
     osInvalDCache(startAddr, totalSize);
+#ifdef UNF
+    debug_printf("\rDMA-ing engine segment...Done!\n");
+#endif
 }
 #endif
 
