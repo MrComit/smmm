@@ -597,6 +597,9 @@ extern const BehaviorScript bhvFlameDecorationBig[];
 extern const BehaviorScript bhvToadFriend[];
 extern const BehaviorScript bhvStarPiece[];
 extern const BehaviorScript bhvToken[];
+extern const BehaviorScript bhvSmallKey[];
+extern const BehaviorScript bhvCelebrationKey[];
+extern const BehaviorScript bhvSmallKeyDoor[];
 
 
 

@@ -78,3 +78,49 @@ void bhv_star_key_collection_puff_spawner_loop(void) {
     spawn_mist_particles_variable(0, 10, 30.0f);
     o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
+
+
+
+
+void celeb_key_act_spin_around_mario(void) {
+    o->oPosX = o->oHomeX + sins(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
+    o->oPosZ = o->oHomeZ + coss(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
+    o->oPosY += 5.0f;
+    o->oFaceAngleYaw += 0x1000;
+    o->oMoveAngleYaw += 0x2000;
+
+    if (o->oTimer == 40)
+        o->oAction = 1;
+    if (o->oTimer < 35) {
+        spawn_object(o, MODEL_SPARKLES, bhvCelebrationStarSparkle);
+        o->oCelebStarDiameterOfRotation++;
+    } else
+        o->oCelebStarDiameterOfRotation -= 20;
+}
+
+void celeb_key_act_face_camera(void) {
+    if (o->oTimer < 10) {
+        cur_obj_scale((f32) o->oTimer / 10.0);
+        o->oFaceAngleYaw += 0x1000;
+    } else {
+        o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];
+    }
+
+    if (o->oTimer == 59)
+        o->activeFlags = 0;
+}
+
+
+
+
+void bhv_celebration_key_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            celeb_key_act_spin_around_mario();
+            break;
+
+        case 1:
+            celeb_key_act_face_camera();
+            break;
+    }
+}

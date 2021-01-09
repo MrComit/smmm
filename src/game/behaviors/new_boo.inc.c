@@ -71,6 +71,7 @@ void bhv_room_boo_init(void) {
     bhv_boo_init();
 }
 
+//BPARAM 1 = NO KEY, SMALL KEY, OR BIG KEY - BPARAM 3 = KEY ID
 void bhv_room_boo_loop(void) {
     s32 numObjs;
     if (o->oUnk1A8 == 0) {

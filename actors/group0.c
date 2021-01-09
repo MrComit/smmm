@@ -40,3 +40,4 @@
 #include "toad_friend/anims/table.inc.c"
 #include "star_piece/model.inc.c"
 //#include "token/model.inc.c"
+#include "key_small/model.inc.c"

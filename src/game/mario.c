@@ -952,7 +952,7 @@ static u32 set_mario_action_submerged(struct MarioState *m, u32 action, UNUSED u
 /**
  * Transitions for a variety of cutscene actions.
  */
-static u32 set_mario_action_cutscene(struct MarioState *m, u32 action, UNUSED u32 actionArg) {
+static u32 set_mario_action_cutscene(struct MarioState *m, u32 action, u32 actionArg) {
     switch (action) {
         case ACT_EMERGE_FROM_PIPE:
             m->vel[1] = 52.0f;
@@ -969,6 +969,9 @@ static u32 set_mario_action_cutscene(struct MarioState *m, u32 action, UNUSED u3
         case ACT_SPECIAL_EXIT_AIRBORNE:
         case ACT_SPECIAL_DEATH_EXIT:
             m->vel[1] = 64.0f;
+            break;
+        case ACT_STAR_DANCE_WATER:
+            m->actionArg = actionArg;
             break;
     }
 

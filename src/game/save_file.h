@@ -34,8 +34,8 @@ struct SaveFile
     // cannon is open.
     //u8 courseStars[COURSE_COUNT];
     u32 roomsCleared[4];
-    u32 miscChallenges[3];
-
+    u32 miscChallenges[2];
+    u32 keys;
     u32 starPieces;
     u32 boosCaptured;
     s32 coinCount;
@@ -244,13 +244,14 @@ void save_file_move_cap_to_default_location(void);
 void save_file_set_newflags(u32 flags, u8 index);
 void save_file_clear_newflags(u32 flags,  u8 index);
 u32 save_file_get_newflags(u8 index);
-
 u32 save_file_get_boos(void);
 void save_file_set_boos(u32 boo);
 u32 save_file_get_star_piece(void);
 void save_file_set_star_piece(u32 piece);
 u32 save_file_get_challenges(u8 index);
 void save_file_set_challenges(u32 challenge, u8 index);
+u32 save_file_get_keys(void);
+void save_file_set_keys(u32 key);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);

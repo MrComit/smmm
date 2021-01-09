@@ -597,6 +597,7 @@
 #define MODEL_TOAD_FRIEND         0x34
 #define MODEL_STAR_PIECE          0x35
 #define MODEL_TOKEN               0x36
+#define MODEL_SMALL_KEY           0x37
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF

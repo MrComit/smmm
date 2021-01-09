@@ -762,10 +762,10 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
 }
 
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
-    u32 starIndex;
+    u32 starKeyIndex;
     u32 starGrabAction;// = ACT_STAR_DANCE_EXIT;
     u32 noExit = 1;//(o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
-    u32 grandStar = (o->oInteractionSubtype & INT_SUBTYPE_GRAND_STAR) != 0;
+    u32 isKey = (o->oInteractionSubtype & (INT_SUBTYPE_SMALL_KEY | INT_SUBTYPE_BIG_KEY)) != 0;
 
     if (m->health >= 0x100) {
         mario_stop_riding_and_holding(m);
@@ -776,21 +776,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
             m->healCounter = 0;
         }
 
-        //if (noExit) {
-        //    starGrabAction = ACT_STAR_DANCE_NO_EXIT;
-        //}
-
-        //if (m->action & ACT_FLAG_SWIMMING) {
-            starGrabAction = ACT_STAR_DANCE_WATER;
-        //}
-
-        //if (m->action & ACT_FLAG_METAL_WATER) {
-        //    starGrabAction = ACT_STAR_DANCE_WATER;
-        //}
-
-        //if (m->action & ACT_FLAG_AIR) {
-        //    starGrabAction = ACT_FALL_AFTER_STAR_GRAB;
-        //}
+        starGrabAction = ACT_STAR_DANCE_WATER;
 
         spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
 
@@ -798,8 +784,12 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         m->interactObj = o;
         m->usedObj = o;
 
-        starIndex = (o->oBehParams >> 24) & 0xFF;
-        save_file_set_star_piece(starIndex);
+        starKeyIndex = (o->oBehParams >> 24) & 0xFF;
+        if (isKey) {
+            save_file_set_keys(starKeyIndex);
+        } else {
+            save_file_set_star_piece(starKeyIndex);
+        }
         //save_file_collect_star_or_key(m->numCoins, starIndex);
 
         //m->numStars =
@@ -811,15 +801,13 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         }
 
         play_sound(SOUND_MENU_STAR_SOUND, m->marioObj->header.gfx.cameraToObject);
-#ifndef VERSION_JP
         update_mario_sound_and_camera(m);
-#endif
 
-        if (grandStar) {
-            return set_mario_action(m, ACT_JUMBO_STAR_CUTSCENE, 0);
-        }
+        //if (grandStar) {
+        //    return set_mario_action(m, ACT_JUMBO_STAR_CUTSCENE, 0);
+        //}
 
-        return set_mario_action(m, starGrabAction, noExit + 2 * grandStar);
+        return set_mario_action(m, starGrabAction, isKey);
     }
 
     return FALSE;

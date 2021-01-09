@@ -317,6 +317,7 @@ void bhv_bowser_bomb_explosion_loop(void);
 void bhv_bowser_bomb_smoke_loop(void);
 void bhv_celebration_star_init(void);
 void bhv_celebration_star_loop(void);
+void bhv_celebration_key_loop(void);
 void bhv_celebration_star_sparkle_loop(void);
 void bhv_star_key_collection_puff_spawner_loop(void);
 void bhv_lll_drawbridge_spawner_loop(void);
@@ -657,6 +658,8 @@ void bhv_star_piece_loop(void);
 void bhv_star_piece_init(void);
 void bhv_token_init(void);
 void bhv_token_loop(void);
+void bhv_small_key_loop(void);
+
 
 
 

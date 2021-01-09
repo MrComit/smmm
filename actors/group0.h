@@ -385,4 +385,6 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 //#include "token/geo_header.h"
 
+#include "key_small/geo_header.h"
+
 #endif

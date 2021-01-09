@@ -540,6 +540,21 @@ void save_file_set_challenges(u32 challenge, u8 index) {
 
 
 
+u32 save_file_get_keys(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys;
+}
+
+void save_file_set_keys(u32 key) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys |= 1 << key;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+
+
 /**
  * Return the bitset of obtained stars in the specified course.
  * If course is -1, return the bitset of obtained castle secret stars.

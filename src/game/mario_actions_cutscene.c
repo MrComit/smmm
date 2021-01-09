@@ -589,12 +589,16 @@ s32 act_debug_free_move(struct MarioState *m) {
     return FALSE;
 }
 
-void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
+void general_star_dance_handler(struct MarioState *m, s32 isKey) {
     s32 dialogID;
     if (m->actionState == 0) {
         switch (++m->actionTimer) {
             case 1:
-                spawn_object(m->marioObj, MODEL_STAR_PIECE, bhvCelebrationStar);
+                if (isKey) {
+                    spawn_object(m->marioObj, MODEL_SMALL_KEY, bhvCelebrationKey);
+                } else {
+                    spawn_object(m->marioObj, MODEL_STAR_PIECE, bhvCelebrationStar);
+                }
                 disable_background_sound();
                 if (m->actionArg & 1) {
                     play_course_clear();
@@ -634,7 +638,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isInWater) {
             // look up for dialog
             set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, dialogID);
         } else {
-            set_mario_action(m, isInWater ? ACT_WATER_IDLE : ACT_IDLE, 0);
+            set_mario_action(m, ACT_IDLE, 0);
         }
     }
 }
@@ -657,7 +661,7 @@ s32 act_star_dance_water(struct MarioState *m) {
                                                : MARIO_ANIM_WATER_STAR_DANCE);
     vec3f_copy(m->marioObj->header.gfx.pos, m->pos);
     vec3s_set(m->marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
-    general_star_dance_handler(m, 1);
+    general_star_dance_handler(m, m->actionArg);
     if (m->actionState != 2 && m->actionTimer >= 62) {
         m->marioBodyState->handState = MARIO_HAND_PEACE_SIGN;
     }

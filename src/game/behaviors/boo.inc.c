@@ -443,9 +443,17 @@ static void boo_act_2(void) {
 }
 
 static void boo_act_3(void) {
+    struct Object *obj;
     if (boo_update_during_death()) {
         o->activeFlags = 0;
         save_file_set_boos(o->oBehParams2ndByte);
+        if (o->oBehParams >> 24 == 1) {
+            obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+            obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+        } else if (o->oBehParams >> 24 == 2) {
+            obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+            obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+        }
     }
 }
 

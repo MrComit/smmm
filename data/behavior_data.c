@@ -6835,3 +6835,45 @@ const BehaviorScript bhvToken[] = {
         CALL_NATIVE(bhv_token_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSmallKey[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_SMALL_KEY),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_small_key_loop),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvCelebrationKey[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_celebration_star_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_celebration_key_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSmallKeyDoor[] = {
+    BEGIN(OBJ_LIST_DOORS),
+    SET_INT(oInteractType, INTERACT_DOOR),
+    // Door - common:
+    OR_INT(oFlags, (OBJ_FLAG_MULTIROOM | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, door_seg3_anims_030156C0),
+    ANIMATE(0),
+    LOAD_COLLISION_DATA(door_seg3_collision_0301CE78),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oCollisionDistance, 1000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_door_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_door_loop),
+    END_LOOP(),
+};
