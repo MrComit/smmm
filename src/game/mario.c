@@ -1796,13 +1796,13 @@ void init_mario(void) {
 
     gMarioState->invincTimer = 0;
 
-    if (save_file_get_flags()
-        & (SAVE_FLAG_CAP_ON_GROUND | SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI
-           | SAVE_FLAG_CAP_ON_MR_BLIZZARD)) {
-        gMarioState->flags = 0;
-    } else {
+    //if (save_file_get_flags()
+    //    & (SAVE_FLAG_CAP_ON_GROUND | SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI
+    //       | SAVE_FLAG_CAP_ON_MR_BLIZZARD)) {
+    //    gMarioState->flags = 0;
+    //} else {
         gMarioState->flags = (MARIO_NORMAL_CAP | MARIO_CAP_ON_HEAD);
-    }
+    //}
 
     gMarioState->forwardVel = 0.0f;
     gMarioState->squishTimer = 0;

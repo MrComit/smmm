@@ -976,14 +976,34 @@ u32 get_door_save_file_flag(struct Object *door) {
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     s16 requiredNumStars = o->oBehParams >> 24;
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+    u32 keyCount = save_file_get_keys();
+    u32 saveFlags = save_file_get_flags();
+    u32 doorAction;
 
-    if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
+    if (o->oInteractionSubtype & INT_SUBTYPE_BLOCKED_DOOR) {
         if (o->oF4 == 0) {
             if (!sDisplayingDoorText) {
                 set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_023);
             }
             sDisplayingDoorText = TRUE;
             return FALSE;
+        }
+    }
+
+    if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
+        m->interactObj = o;
+        m->usedObj = o;
+        return set_mario_action(m, ACT_UNLOCKING_KEY_DOOR, 0);
+        if (!(keyCount & (1 << o->oBehParams2ndByte))) {
+            if (!sDisplayingDoorText) {
+                set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_023);
+            }
+            sDisplayingDoorText = TRUE;
+            return FALSE;
+        } else if (!(saveFlags & (1 << (o->oBehParams2ndByte + 1)))) {
+            m->interactObj = o;
+            m->usedObj = o;
+            return set_mario_action(m, ACT_UNLOCKING_KEY_DOOR, 0);
         }
     }
 

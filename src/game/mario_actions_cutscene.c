@@ -479,7 +479,7 @@ s32 act_reading_automatic_dialog(struct MarioState *m) {
             disable_time_stop();
             if (gNeverEnteredCastle) {
                 gNeverEnteredCastle = FALSE;
-                play_cutscene_music(SEQUENCE_ARGS(0, SEQ_LEVEL_INSIDE_CASTLE));
+                //play_cutscene_music(SEQUENCE_ARGS(0, SEQ_LEVEL_INSIDE_CASTLE));
             }
             if (m->prevAction == ACT_STAR_DANCE_WATER) {
                 set_mario_action(m, ACT_WATER_IDLE, 0); // 100c star?
@@ -798,6 +798,9 @@ s32 act_unlocking_key_door(struct MarioState *m) {
             play_sound(SOUND_GENERAL_DOOR_INSERT_KEY, m->marioObj->header.gfx.cameraToObject);
             break;
         case 111:
+            if (obj_has_behavior(m->usedObj, bhvSmallKeyDoor)) {
+                m->usedObj->oAnimState = 0;
+            }
             play_sound(SOUND_GENERAL_DOOR_TURN_KEY, m->marioObj->header.gfx.cameraToObject);
             break;
     }
@@ -806,13 +809,9 @@ s32 act_unlocking_key_door(struct MarioState *m) {
     stop_and_set_height_to_floor(m);
 
     if (is_anim_at_end(m)) {
-        if (m->usedObj->oBehParams >> 24 == 1) {
-            save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
-            save_file_clear_flags(SAVE_FLAG_HAVE_KEY_2);
-        } else {
-            save_file_set_flags(SAVE_FLAG_UNLOCKED_BASEMENT_DOOR);
-            save_file_clear_flags(SAVE_FLAG_HAVE_KEY_1);
-        }
+        save_file_set_flags(1 << (m->usedObj->oBehParams2ndByte + 1));
+        //save_file_set_keys(1 << m->usedObj->oBehParams2ndByte);
+        //save_file_clear_flags(SAVE_FLAG_HAVE_KEY_2);
         set_mario_action(m, ACT_WALKING, 0);
     }
 

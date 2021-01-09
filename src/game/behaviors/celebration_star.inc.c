@@ -116,6 +116,7 @@ void celeb_key_act_face_camera(void) {
 void bhv_celebration_key_loop(void) {
     switch (o->oAction) {
         case 0:
+            cur_obj_scale(0.3f);
             celeb_key_act_spin_around_mario();
             break;
 

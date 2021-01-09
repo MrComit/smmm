@@ -5080,7 +5080,7 @@ const BehaviorScript bhvYoshi[] = {
 
 const BehaviorScript bhvKoopa[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     DROP_TO_FLOOR(),
     LOAD_ANIMATIONS(oAnimations, new_koopa_anims),
     ANIMATE(9),
@@ -6261,7 +6261,7 @@ const BehaviorScript bhvTeapot[] = {
 const BehaviorScript bhvBlockedDoor[] = {
     BEGIN(OBJ_LIST_DOORS),
     SET_INT(oInteractType, INTERACT_DOOR),
-    SET_INT(oInteractionSubtype, INT_SUBTYPE_LOCKED_DOOR),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_BLOCKED_DOOR),
     GOTO(bhvDoor + 1 + 1),
 };
 
@@ -6863,17 +6863,7 @@ const BehaviorScript bhvCelebrationKey[] = {
 const BehaviorScript bhvSmallKeyDoor[] = {
     BEGIN(OBJ_LIST_DOORS),
     SET_INT(oInteractType, INTERACT_DOOR),
-    // Door - common:
-    OR_INT(oFlags, (OBJ_FLAG_MULTIROOM | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, door_seg3_anims_030156C0),
-    ANIMATE(0),
-    LOAD_COLLISION_DATA(door_seg3_collision_0301CE78),
-    SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
-    SET_INT(oIntangibleTimer, 0),
-    SET_FLOAT(oCollisionDistance, 1000),
-    SET_HOME(),
-    CALL_NATIVE(bhv_door_init),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_door_loop),
-    END_LOOP(),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_LOCKED_DOOR),
+    SET_INT(oAnimState, 1),
+    GOTO(bhvDoor + 1 + 1),
 };
