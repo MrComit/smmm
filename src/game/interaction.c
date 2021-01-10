@@ -789,8 +789,8 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         m->interactObj = o;
         m->usedObj = o;
 
-        starKeyIndex = (o->oBehParams >> 24) & 0xFF;
-        if (isKey) {
+        starKeyIndex = o->oBehParams2ndByte;
+        if (isKey != 0) {
             save_file_set_keys(starKeyIndex);
         } else {
             save_file_set_star_piece(starKeyIndex);

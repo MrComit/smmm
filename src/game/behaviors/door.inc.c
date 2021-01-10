@@ -46,11 +46,12 @@ void play_warp_door_open_noise(void) {
 void bhv_door_loop(void) {
     s32 sp1C = 0;
     
-    if (o->oAnimState == 1) {
+    if (cur_obj_has_behavior(bhvSmallKeyDoor)) {
         if (save_file_get_flags() & (1 << o->oBehParams2ndByte + 1)) {
             o->oAnimState = 0;
         }
     }
+
 
     while (D_8032F300[sp1C].flag != (u32)~0) {
         if (cur_obj_clear_interact_status_flag(D_8032F300[sp1C].flag)) {
@@ -101,6 +102,11 @@ void bhv_door_init(void) {
     find_floor(x, o->oPosY, z, &floor);
     if (floor != NULL) {
         o->oRoom2 = floor->room;
+    }
+
+    if (cur_obj_has_behavior(bhvBigKeyDoor)) {
+        o->oAnimState = o->oBehParams >> 24;
+        return;
     }
 }
 

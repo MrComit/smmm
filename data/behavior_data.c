@@ -6879,3 +6879,12 @@ const BehaviorScript bhvBigKey[] = {
         CALL_NATIVE(bhv_big_key_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBigKeyDoor[] = {
+    BEGIN(OBJ_LIST_DOORS),
+    SET_INT(oInteractType, INTERACT_DOOR),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_LOCKED_DOOR),
+    //SET_INT(oAnimState, 1),
+    GOTO(bhvDoor + 1 + 1),
+};
