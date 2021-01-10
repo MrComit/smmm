@@ -25,6 +25,7 @@ UNUSED static const u64 binid_3 = 3;
 UNUSED static const u64 binid_4 = 4;
 
 #include "door/model.inc.c"
+#include "door/model2.inc.c"
 #include "door/anims/data.inc.c"
 #include "door/anims/table.inc.c"
 UNUSED static const u64 binid_5 = 5;

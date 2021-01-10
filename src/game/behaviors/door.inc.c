@@ -46,6 +46,12 @@ void play_warp_door_open_noise(void) {
 void bhv_door_loop(void) {
     s32 sp1C = 0;
     
+    if (o->oAnimState == 1) {
+        if (save_file_get_flags() & (1 << o->oBehParams2ndByte + 1)) {
+            o->oAnimState = 0;
+        }
+    }
+
     while (D_8032F300[sp1C].flag != (u32)~0) {
         if (cur_obj_clear_interact_status_flag(D_8032F300[sp1C].flag)) {
             //set_door_camera_event();

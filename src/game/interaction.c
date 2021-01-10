@@ -979,7 +979,6 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
     u32 keyCount = save_file_get_keys();
     u32 saveFlags = save_file_get_flags();
     u32 doorAction;
-
     if (o->oInteractionSubtype & INT_SUBTYPE_BLOCKED_DOOR) {
         if (o->oF4 == 0) {
             if (!sDisplayingDoorText) {
@@ -991,9 +990,6 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
     }
 
     if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
-        m->interactObj = o;
-        m->usedObj = o;
-        return set_mario_action(m, ACT_UNLOCKING_KEY_DOOR, 0);
         if (!(keyCount & (1 << o->oBehParams2ndByte))) {
             if (!sDisplayingDoorText) {
                 set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_023);

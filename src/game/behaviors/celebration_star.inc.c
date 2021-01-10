@@ -100,7 +100,7 @@ void celeb_key_act_spin_around_mario(void) {
 
 void celeb_key_act_face_camera(void) {
     if (o->oTimer < 10) {
-        cur_obj_scale((f32) o->oTimer / 10.0);
+        cur_obj_scale((f32) (o->oTimer) / 33.3);
         o->oFaceAngleYaw += 0x1000;
     } else {
         o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];

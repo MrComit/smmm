@@ -779,17 +779,25 @@ s32 launch_mario_until_land(struct MarioState *m, s32 endAction, s32 animation, 
 }
 
 s32 act_unlocking_key_door(struct MarioState *m) {
-    m->faceAngle[1] = m->usedObj->oMoveAngleYaw;
+    f32 mag = 75.0f;
+    s16 faceAngle = m->usedObj->oMoveAngleYaw;
+    m->faceAngle[1] = faceAngle;
+    if (obj_has_behavior(m->usedObj, bhvSmallKeyDoor)) {
+        faceAngle += 0x2000;
+        mag -= 55.0f;
+    }
 
-    m->pos[0] = m->usedObj->oPosX + coss(m->faceAngle[1]) * 75.0f;
-    m->pos[2] = m->usedObj->oPosZ + sins(m->faceAngle[1]) * 75.0f;
+    m->pos[0] = m->usedObj->oPosX + coss(faceAngle) * mag;
+    m->pos[2] = m->usedObj->oPosZ + sins(faceAngle) * mag;
 
     if (m->actionArg & 2) {
         m->faceAngle[1] += 0x8000;
     }
 
     if (m->actionTimer == 0) {
-        spawn_obj_at_mario_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
+        if (!obj_has_behavior(m->usedObj, bhvSmallKeyDoor)) {
+            spawn_obj_at_mario_rel_yaw(m, MODEL_BOWSER_KEY_CUTSCENE, bhvBowserKeyUnlockDoor, 0);
+        }
         set_mario_animation(m, MARIO_ANIM_UNLOCK_DOOR);
     }
 
