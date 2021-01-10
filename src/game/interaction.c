@@ -765,7 +765,12 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
     u32 starKeyIndex;
     u32 starGrabAction;// = ACT_STAR_DANCE_EXIT;
     u32 noExit = 1;//(o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
-    u32 isKey = (o->oInteractionSubtype & (INT_SUBTYPE_SMALL_KEY | INT_SUBTYPE_BIG_KEY)) != 0;
+    u32 isKey = 0;
+    if (o->oInteractionSubtype & INT_SUBTYPE_SMALL_KEY) {
+        isKey = 1;
+    } else if (o->oInteractionSubtype & INT_SUBTYPE_BIG_KEY) {
+        isKey = 2;
+    }
 
     if (m->health >= 0x100) {
         mario_stop_riding_and_holding(m);

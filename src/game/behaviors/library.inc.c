@@ -188,6 +188,7 @@ void bhv_koopa_boss_loop(void) {
                 CL_explode_object(o, 1);
                 obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                 obj->oBehParams2ndByte = 4;
+                obj->oBehParams = 0x02040100;
             }
             break;
     }

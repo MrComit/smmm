@@ -600,6 +600,7 @@ extern const BehaviorScript bhvToken[];
 extern const BehaviorScript bhvSmallKey[];
 extern const BehaviorScript bhvCelebrationKey[];
 extern const BehaviorScript bhvSmallKeyDoor[];
+extern const BehaviorScript bhvBigKey[];
 
 
 

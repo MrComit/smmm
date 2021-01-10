@@ -659,7 +659,7 @@ void bhv_star_piece_init(void);
 void bhv_token_init(void);
 void bhv_token_loop(void);
 void bhv_small_key_loop(void);
-
+void bhv_big_key_loop(void);
 
 
 

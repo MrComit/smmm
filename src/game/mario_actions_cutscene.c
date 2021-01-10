@@ -595,20 +595,16 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
         switch (++m->actionTimer) {
             case 1:
                 if (isKey) {
-                    spawn_object(m->marioObj, MODEL_SMALL_KEY, bhvCelebrationKey);
+                    if (isKey == 1) {
+                        spawn_object(m->marioObj, MODEL_SMALL_KEY, bhvCelebrationKey);
+                    } else {
+                        spawn_object(m->marioObj, MODEL_BIG_KEY, bhvCelebrationKey);
+                    }
                 } else {
                     spawn_object(m->marioObj, MODEL_STAR_PIECE, bhvCelebrationStar);
                 }
                 disable_background_sound();
-                if (m->actionArg & 1) {
-                    play_course_clear();
-                } else {
-                    if (gCurrLevelNum == LEVEL_BOWSER_1 || gCurrLevelNum == LEVEL_BOWSER_2) {
-                        play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_KEY), 0);
-                    } else {
-                        play_music(SEQ_PLAYER_ENV, SEQUENCE_ARGS(15, SEQ_EVENT_CUTSCENE_COLLECT_STAR), 0);
-                    }
-                }
+                play_course_clear();
                 break;
 
             case 42:
@@ -616,13 +612,9 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                 break;
 
             case 80:
-                if ((m->actionArg & 1) == 0) {
-                    level_trigger_warp(m, WARP_OP_STAR_EXIT);
-                } else {
-                    enable_time_stop();
-                    create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
-                    m->actionState = 1;
-                }
+                enable_time_stop();
+                create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
+                m->actionState = 1;
                 break;
         }
     } else if (m->actionState == 1 && gDialogResponse) {

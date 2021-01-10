@@ -429,6 +429,8 @@ static void boo_act_1(void) {
 
     if (attackStatus == BOO_ATTACKED) {
         o->oAction = 3;
+        o->oHomeX = o->oPosX;
+        o->oHomeZ = o->oPosZ;
     }
 
     if (attackStatus == BOO_ATTACKED) {
@@ -450,9 +452,22 @@ static void boo_act_3(void) {
         if (o->oBehParams >> 24 == 1) {
             obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
             obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+            obj->oFaceAngleRoll = 0xF000;
+            obj->oFaceAngleYaw = 0;
+            obj->oPosX = o->oHomeX;
+            obj->oPosZ = o->oHomeZ;
         } else if (o->oBehParams >> 24 == 2) {
-            obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+            obj = spawn_object(o, MODEL_BIG_KEY, bhvBigKey);
             obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+            obj->oFaceAngleRoll = 0xF000;
+            obj->oFaceAngleYaw = 0;
+            obj->oPosX = o->oHomeX;
+            obj->oPosZ = o->oHomeZ;
+            if (o->oBehParams2ndByte == 1) {
+                o->oAnimState = 0;
+            } else if (o->oBehParams2ndByte == 0xFF) {
+                
+            }
         }
     }
 }

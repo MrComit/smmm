@@ -85,7 +85,7 @@ void bhv_star_key_collection_puff_spawner_loop(void) {
 void celeb_key_act_spin_around_mario(void) {
     o->oPosX = o->oHomeX + sins(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
     o->oPosZ = o->oHomeZ + coss(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
-    o->oPosY += 5.0f;
+    o->oPosY += 3.0f;
     o->oFaceAngleYaw += 0x1000;
     o->oMoveAngleYaw += 0x2000;
 
