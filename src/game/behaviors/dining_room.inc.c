@@ -277,12 +277,13 @@ void bhv_dining_chair_loop(void) {
 }
 
 void bhv_blocking_chair_loop(void) {
-    struct Object *obj;
-    if (cur_obj_nearest_object_with_behavior(bhvShyguyChair) == NULL) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvBlockedDoor);
+    if (obj != NULL)
+        obj->oF4 = 1;
+    if (save_file_get_rooms(o->oRoom / 32) & (1 << (o->oRoom % 32))) {
         o->activeFlags = 0;
-        obj = cur_obj_nearest_object_with_behavior(bhvBlockedDoor);
         if (obj != NULL)
-            obj->oF4 = 1;
+            obj->oF4 = 0;
     }
 }
 

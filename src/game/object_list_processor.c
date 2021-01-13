@@ -290,7 +290,6 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
     }
 }
 
-
 void mario_update_toad_friend(struct MarioState *m) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
@@ -300,6 +299,29 @@ void mario_update_toad_friend(struct MarioState *m) {
             break;
     }
 }
+
+s8 sLevelRoomOffsets[] = {0, 15,};
+
+
+void mario_update_room_clear(struct MarioState *m) {
+    u32 index = 0;
+    u32 room = gMarioCurrentRoom;
+    while (room > 32) {
+        room -= 32;
+        index++;
+    }
+
+    if (save_file_get_rooms(index) & (1 << room)) {
+        return;
+    }
+
+    if (!(count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, gMarioCurrentRoom))) {
+        save_file_set_rooms(gMarioCurrentRoom + sLevelRoomOffsets[gCurrLevelNum - 1]);
+    }
+
+}
+
+
 
 /**
  * Mario's primary behavior update function.
@@ -325,6 +347,7 @@ void bhv_mario_update(void) {
         i++;
     }
     mario_update_toad_friend(gMarioState);
+    mario_update_room_clear(gMarioState);
 }
 
 /**

@@ -113,16 +113,12 @@ void bhv_token_init(void) {
 
 
 void bhv_token_loop(void) {
-    u8 page, challenge;
+    u8 challenge;
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
         o->activeFlags = 0;
         challenge = (o->oBehParams >> 8) & 0xFF;
-        while (challenge >= 32) {
-            challenge -= 32;
-            page++;
-        }
-        save_file_set_challenges(challenge, page);
+        save_file_set_challenges(challenge);
     }
 }
 

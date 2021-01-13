@@ -249,9 +249,12 @@ void save_file_set_boos(u32 boo);
 u32 save_file_get_star_piece(void);
 void save_file_set_star_piece(u32 piece);
 u32 save_file_get_challenges(u8 index);
-void save_file_set_challenges(u32 challenge, u8 index);
+void save_file_set_challenges(u32 challenge);
 u32 save_file_get_keys(void);
 void save_file_set_keys(u32 key);
+
+u32 save_file_get_rooms(u32 index);
+void save_file_set_rooms(u32 room);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);

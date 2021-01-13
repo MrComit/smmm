@@ -532,7 +532,12 @@ u32 save_file_get_challenges(u8 index) {
     return gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[index];
 }
 
-void save_file_set_challenges(u32 challenge, u8 index) {
+void save_file_set_challenges(u32 challenge) {
+    u32 index = 0;
+    while (challenge >= 32) {
+        challenge -= 32;
+        index++;
+    }
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[index] |= 1 << challenge;
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
@@ -549,6 +554,25 @@ u32 save_file_get_keys(void) {
 
 void save_file_set_keys(u32 key) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys |= 1 << key;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+
+u32 save_file_get_rooms(u32 index) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].roomsCleared[index];
+}
+
+void save_file_set_rooms(u32 room) {
+    u32 index = 0;
+    while (room >= 32) {
+        room -= 32;
+        index++;
+    }
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].roomsCleared[index] |= 1 << room;
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }

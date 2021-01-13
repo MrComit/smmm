@@ -985,7 +985,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
     u32 saveFlags = save_file_get_flags();
     u32 doorAction;
     if (o->oInteractionSubtype & INT_SUBTYPE_BLOCKED_DOOR) {
-        if (o->oF4 == 0) {
+        if (o->oF4 != 0) {
             if (!sDisplayingDoorText) {
                 set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_023);
             }

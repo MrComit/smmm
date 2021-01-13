@@ -77,7 +77,7 @@ void bhv_room_boo_loop(void) {
     if (o->oUnk1A8 == 0) {
         numObjs = count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, o->oRoom);
         o->oOpacity = 255 - (o->oBigBooNumMinionBoosKilled * numObjs);
-        if (numObjs == 0) {
+        if (numObjs <= 2) {
             o->oUnk1A8 = 1;
         }
     } else if (o->oUnk1A8 == 1) {

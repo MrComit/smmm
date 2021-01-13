@@ -987,6 +987,12 @@ void cur_obj_update(void) {
         }
     }
 
+    if (objFlags & OBJ_FLAG_DISABLE_ON_ROOM_CLEAR) {
+        if (save_file_get_rooms(gCurrentObject->oRoom / 32) & (1 << (gCurrentObject->oRoom % 32))) {
+            gCurrentObject->activeFlags = 0;
+            return;
+        }
+    }
 
     //if (objFlags & OBJ_FLAG_MULTIROOM) {
     //    gCurrentObject->oRoom2 = (gCurrentObject->oBehParams >> 8) & 0xFF;

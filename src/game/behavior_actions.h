@@ -664,5 +664,10 @@ void bhv_big_key_loop(void);
 
 
 
+s32 count_room_objects_with_flag(u32 flag, s16 room);
+
+
+
+
 #include "!COMIT_LIBRARY.h"
 #endif // BEHAVIOR_ACTIONS_H

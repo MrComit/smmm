@@ -75,7 +75,7 @@ void bhv_blue_coin_switch_init(void) {
  * Update function for bhvBlueCoinSwitch.
  */
 void bhv_blue_coin_switch_loop(void) {
-    u8 page, challenge;
+    u8 challenge;
     // The switch's model is 1/3 size.
     cur_obj_scale(3.0f);
 
@@ -137,11 +137,7 @@ void bhv_blue_coin_switch_loop(void) {
             if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL || o->oTimer > o->oF4 + (o->oF8 * 2)) {
                 obj_mark_for_deletion(o);
                 challenge = (o->oBehParams >> 8) & 0xFF;
-                while (challenge >= 32) {
-                    challenge -= 32;
-                    page++;
-                }
-                save_file_set_challenges(challenge, page);
+                save_file_set_challenges(challenge);
             }
 
             break;
