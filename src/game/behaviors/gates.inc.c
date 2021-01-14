@@ -56,18 +56,6 @@ void bhv_l1_room_gate_loop(void) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 void bhv_lever_loop(void) {
     obj_set_hitbox(o, &sLeverHitbox);
 

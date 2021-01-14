@@ -167,11 +167,11 @@ void bhv_star_piece_loop(void) {
 void toad_friend_l1_loop(void) {
     switch (o->oF4) {
         case 0:
-            bhv_toad_message_loop();
-            o->oOpacity = 255;
-            if (o->oToadMessageRecentlyTalked) {
-                save_file_set_newflags(SAVE_TOAD_FLAG_INTRODUCTION, 1);
-            }
+            //bhv_toad_message_loop();
+            //o->oOpacity = 255;
+            //if (o->oToadMessageRecentlyTalked) {
+            //    save_file_set_newflags(SAVE_TOAD_FLAG_INTRODUCTION, 1);
+            //}
             break;
         case 1:
             break;

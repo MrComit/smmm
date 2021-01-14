@@ -19,6 +19,7 @@
 #include "platform_displacement.h"
 #include "profiler.h"
 #include "spawn_object.h"
+#include "save_file.h"
 
 
 /**
@@ -271,21 +272,30 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
         return;
     switch (index) {
         case 0:
-            if (gMarioCurrentRoom == 2 && m->pos[2] < 14900.0f) {
+            if (gMarioCurrentRoom == 2/* && m->pos[2] < 14900.0f*/) {
+                obj->oF4 = 1;
             }
             break;
         case 1:
             if (gMarioCurrentRoom == 4) {
-
+                if (CL_NPC_Dialog(10)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_FOUND_FIRST_BOO, 1);
+                }
             }
             break;
         case 2:
             if (gMarioCurrentRoom == 6) {
-                
+                if (CL_NPC_Dialog(11)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_DINING, 1);
+                }
             }
             break;
         case 3:
-            //if 
+            if (gMarioCurrentRoom == 6 && save_file_get_rooms(0) & (1 << 6)) {
+                if (CL_NPC_Dialog(12)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_DINING, 1);
+                }
+            }
             break;
     }
 }
