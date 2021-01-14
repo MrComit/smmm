@@ -240,6 +240,7 @@ void bhv_fridge_spawner_loop(void) {
 void bhv_stove_button_loop(void) {
     switch (o->oAction) {
         case 0:
+            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
                 o->oAction = 1;
             }

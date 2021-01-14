@@ -117,4 +117,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/boss_koopa/anim_header.h"
 
+#include "levels/bob/l1_gate_alt/collision_header.h"
+
 #endif

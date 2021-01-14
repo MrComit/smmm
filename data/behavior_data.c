@@ -6839,7 +6839,7 @@ const BehaviorScript bhvToken[] = {
 
 const BehaviorScript bhvSmallKey[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
     SET_INT(oInteractionSubtype, INT_SUBTYPE_SMALL_KEY),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
@@ -6871,7 +6871,7 @@ const BehaviorScript bhvSmallKeyDoor[] = {
 
 const BehaviorScript bhvBigKey[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
     SET_INT(oInteractionSubtype, INT_SUBTYPE_BIG_KEY),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
@@ -6887,4 +6887,19 @@ const BehaviorScript bhvBigKeyDoor[] = {
     SET_INT(oInteractionSubtype, INT_SUBTYPE_LOCKED_DOOR),
     //SET_INT(oAnimState, 1),
     GOTO(bhvDoor + 1 + 1),
+};
+
+
+const BehaviorScript bhvL1RoomGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l1_gate_alt_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    ADD_FLOAT(oPosY, 300),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l1_room_gate_loop),
+    END_LOOP(),
+    BREAK(),
 };
