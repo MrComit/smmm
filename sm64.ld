@@ -199,6 +199,10 @@ SECTIONS
 #ifdef HVQM
       lib/PR/hvqm/hvqm2sp1.o(.rodata*);
 #endif
+      BUILD_DIR/src/s2d_engine*.o(.text*);
+      BUILD_DIR/src/s2d_engine*.o(.data);
+      BUILD_DIR/src/s2d_engine*.o(.rodata*);
+
    }
    END_SEG(main)
    BEGIN_NOLOAD(main)
@@ -225,6 +229,8 @@ SECTIONS
 #ifdef HVQM
       */libhvqm2.a:*.o(.bss*);
 #endif
+      /* add the below to the main noload segment */
+      BUILD_DIR/src/s2d_engine*.o(.bss);
 
       . = ALIGN(0x8);
    }

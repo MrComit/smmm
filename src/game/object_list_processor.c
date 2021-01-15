@@ -331,8 +331,6 @@ void mario_update_room_clear(struct MarioState *m) {
 
 }
 
-
-
 /**
  * Mario's primary behavior update function.
  */

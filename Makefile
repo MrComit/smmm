@@ -95,18 +95,18 @@ TARGET := smmm.$(VERSION)
 $(eval $(call validate-option,GRUCODE,f3d_old f3dex f3dex2 f3d_new f3dzex super3d))
 
 ifeq      ($(GRUCODE),f3d_old)
-  DEFINES += F3D_OLD=1
+  DEFINES += F3D_OLD=1 S2DEX_GBI_2=1
 else ifeq ($(GRUCODE),f3d_new) # Fast3D 2.0H
-  DEFINES += F3D_NEW=1
+  DEFINES += F3D_NEW=1 S2DEX_GBI_2=1
 else ifeq ($(GRUCODE),f3dex) # Fast3DEX
-  DEFINES += F3DEX_GBI=1 F3DEX_GBI_SHARED=1
+  DEFINES += F3DEX_GBI=1 F3DEX_GBI_SHARED=1 S2DEX_GBI_2=1
 else ifeq ($(GRUCODE),f3dex2) # Fast3DEX2
-  DEFINES += F3DEX_GBI_2=1 F3DEX_GBI_SHARED=1
+  DEFINES += F3DEX_GBI_2=1 F3DEX_GBI_SHARED=1 S2DEX_GBI_2=1
 else ifeq ($(GRUCODE),f3dzex) # Fast3DZEX (2.08J / Animal Forest - Dōbutsu no Mori)
-  DEFINES += F3DZEX_GBI_2=1 F3DEX_GBI_2=1 F3DEX_GBI_SHARED=1
-else ifeq ($(GRUCODE),super3d) # Super3D
+  DEFINES += F3DZEX_GBI_2=1 F3DEX_GBI_2=1 F3DEX_GBI_SHARED=1 S2DEX_GBI_2=1
+else ifeq ($(GRUCODE),super3d) # Super3D 
   $(warning Super3D is experimental. Try at your own risk.)
-  DEFINES += SUPER3D_GBI=1 F3D_NEW=1
+  DEFINES += SUPER3D_GBI=1 F3D_NEW=1 S2DEX_GBI_2=1
 endif
 
 
@@ -265,7 +265,7 @@ ACTOR_DIR      := actors
 LEVEL_DIRS     := $(patsubst levels/%,%,$(dir $(wildcard levels/*/header.h)))
 
 # Directories containing source files
-SRC_DIRS += src src/engine src/game src/audio src/menu src/buffers actors levels bin data assets asm lib sound
+SRC_DIRS += src src/engine src/game src/audio src/menu src/buffers src/s2d_engine actors levels bin data assets asm lib sound
 BIN_DIRS := bin bin/$(VERSION)
 
 # File dependencies and variables for specific files
