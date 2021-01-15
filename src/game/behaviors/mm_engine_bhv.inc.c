@@ -165,17 +165,39 @@ void bhv_star_piece_loop(void) {
 
 
 void toad_friend_l1_loop(void) {
-    switch (o->oF4) {
-        case 0:
-            //bhv_toad_message_loop();
-            //o->oOpacity = 255;
-            //if (o->oToadMessageRecentlyTalked) {
-            //    save_file_set_newflags(SAVE_TOAD_FLAG_INTRODUCTION, 1);
-            //}
-            break;
-        case 1:
-            break;
+    if (o->oF4) {
+        switch (o->oAction) {
+            case 0:
+                if (o->oF4 == 1) {
+                    set_mario_npc_dialog(1);
+                    CL_Move();
+                    o->oForwardVel = 22.0f;
+                    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+                    o->oFaceAngleYaw = o->oMoveAngleYaw + 0x2666;
+                    if (o->oDistanceToMario < 100.0f) {
+                        o->oAction = 2;
+                    }
+                } else {
+                    if (o->oInteractStatus == INT_STATUS_INTERACTED)
+                        o->oAction = 1;
+                }
+                break;
+            case 1:
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+                if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario)
+                    o->oAction = 2;
+
+                cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+                break;
+            case 2:
+                if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                    o->oF4 = 2;
+                    o->oAction = 0;
+                }
+                break;
+        }
     }
+    o->oInteractStatus = 0;
 }
 
 
@@ -192,8 +214,9 @@ void bhv_friend_toad_loop(void) {
 
 
 void bhv_friend_toad_init(void) {
-        o->oToadMessageDialogId = (o->oBehParams >> 24) & 0xFF;
-        o->oToadMessageRecentlyTalked = FALSE;
+        //o->oToadMessageDialogId = (o->oBehParams >> 24) & 0xFF;
+        //o->oToadMessageRecentlyTalked = FALSE;
         //o->oToadMessageState = TOAD_MESSAGE_FADED;
         //o->oOpacity = 81;
+        o->oInteractionSubtype = INT_SUBTYPE_NPC;
 }

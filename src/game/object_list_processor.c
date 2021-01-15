@@ -263,6 +263,7 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
     }
 }
 
+Vec3f sToadFriendWarp1 = {0, 0, 12706};
 
 void mario_update_friend_l1_loop(struct MarioState *m) {
     u32 flags = save_file_get_newflags(1);
@@ -272,30 +273,39 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
         return;
     switch (index) {
         case 0:
-            if (gMarioCurrentRoom == 2/* && m->pos[2] < 14900.0f*/) {
-                obj->oF4 = 1;
+            if (gMarioCurrentRoom == 2 && m->pos[2] < 14900.0f && m->pos[1] <= m->floorHeight) {
+                if (obj->oF4 == 0)
+                    obj->oF4 = 1;
+                obj->oBehParams2ndByte = 0;
+                if (obj->oF4 == 2) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_INTRODUCTION, 1);
+                }
             }
             break;
         case 1:
             if (gMarioCurrentRoom == 4) {
-                if (CL_NPC_Dialog(10)) {
+                if (CL_NPC_Dialog(1)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_FOUND_FIRST_BOO, 1);
+                    vec3f_copy(&obj->oPosX, sToadFriendWarp1);
                 }
             }
             break;
         case 2:
             if (gMarioCurrentRoom == 6) {
-                if (CL_NPC_Dialog(11)) {
+                if (CL_NPC_Dialog(2)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_DINING, 1);
                 }
             }
             break;
         case 3:
             if (gMarioCurrentRoom == 6 && save_file_get_rooms(0) & (1 << 6)) {
-                if (CL_NPC_Dialog(12)) {
+                if (CL_NPC_Dialog(3)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_DINING, 1);
                 }
             }
+            break;
+        case 4:
+            obj->oBehParams2ndByte = 4;
             break;
     }
 }

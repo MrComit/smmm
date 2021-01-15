@@ -381,7 +381,7 @@ void s2d_print_string(s16 x, s16 y, const char *str) {
 
 void s2d_level_manager() {
     if (gCurrLevelNum == LEVEL_BOB) {
-        s2d_print_string(40, 210, DROPSHADOW SCALE "2" "Floor 1");
+        //s2d_print_string(40, 210, DROPSHADOW SCALE "2" "Floor 1");
     }
 
 }
