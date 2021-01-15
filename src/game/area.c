@@ -362,37 +362,26 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
 #include "s2d_engine/init.h"
 #include "s2d_engine/s2d_draw.h"
 #include "s2d_engine/s2d_print.h"
-//uObjMtx buf[0x100];
 
 char myString[] = "This is a " SCALE "2" "test string!\n"
                 "Supports a bunch of standard " ROTATE "-36" "escape characters!\n"
                 "\tIncluding " COLOR "255 0 0 0" "Colorful text!";
 
-//char myString[] = "This is a test string!";
 
 
 // ...
-void some_func(void) {
-	// initialized S2DEX; only needed once before all prints
+void s2d_print_string(s16 x, s16 y, const char *str) {
 	s2d_init();
 	uObjMtx *buffer;
-	// substitute with a different alloc function as neccesary
 	buffer = alloc_display_list(0x200 * sizeof(uObjMtx));
-	s2d_print(50, 50, myString, buffer);
-
-	// reloads the original microcode; only needed once after all prints
+	s2d_print(x, y, str, buffer);
 	s2d_stop();
-    /*s2d_init();
-    s2d_print(50, 20, "String at 1x" SCALE "\x2" "String at 2x", &buf);
-    s2d_stop();*/
 }
 
 
-void mario_l_button_cheat(struct MarioState *m) {
+void s2d_level_manager() {
     if (gCurrLevelNum == LEVEL_BOB) {
-        some_func();
-        //m->vel[1] = 40.0f;
-        //m->action = ACT_JUMP;
+        s2d_print_string(40, 210, DROPSHADOW SCALE "2" "Floor 1");
     }
 
 }
@@ -406,7 +395,7 @@ void render_game(void) {
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
         render_hud();
-        mario_l_button_cheat(gMarioState);
+        s2d_level_manager();
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
