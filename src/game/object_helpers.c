@@ -1815,7 +1815,7 @@ static void cur_obj_update_floor(void) {
             o->oMoveFlags |= OBJ_MOVE_ABOVE_LAVA;
         }
 #ifndef VERSION_JP
-        else if (floor->type == SURFACE_DEATH_PLANE) {
+        else if (floor->type == SURFACE_DEATH_PLANE || floor->type == SURFACE_INSTANT_QUICKSAND) {
             //! This misses SURFACE_VERTICAL_WIND (and maybe SURFACE_WARP)
             o->oMoveFlags |= OBJ_MOVE_ABOVE_DEATH_BARRIER;
         }

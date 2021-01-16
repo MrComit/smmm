@@ -151,6 +151,7 @@ s16 *gEnvironmentRegions;
 s32 gEnvironmentLevels[20];
 s8 gDoorAdjacentRooms[60][2];
 s16 gMarioCurrentRoom;
+s16 gMarioPreviousRoom;
 s16 D_8035FEE2;
 s16 D_8035FEE4;
 s16 gTHIWaterDrained;
@@ -288,6 +289,7 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
                 if (CL_NPC_Dialog(1)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_FOUND_FIRST_BOO, 1);
                     vec3f_copy(&obj->oPosX, sToadFriendWarp1);
+                    obj->oRoom = 13;
                 }
             }
             break;

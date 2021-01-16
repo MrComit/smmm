@@ -661,7 +661,7 @@ void bhv_token_loop(void);
 void bhv_small_key_loop(void);
 void bhv_big_key_loop(void);
 void bhv_l1_room_gate_loop(void);
-
+void bhv_deathwarp_loop(void);
 
 
 

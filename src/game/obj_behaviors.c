@@ -713,6 +713,7 @@ void obj_check_floor_death(s16 collisionFlags, struct Surface *floor) {
     if ((collisionFlags & OBJ_COL_FLAG_GROUNDED) == OBJ_COL_FLAG_GROUNDED) {
         switch (floor->type) {
             case SURFACE_BURNING:
+            case SURFACE_INSTANT_QUICKSAND:
                 o->oAction = OBJ_ACT_LAVA_DEATH;
                 break;
             //! @BUG Doesn't check for the vertical wind death floor.

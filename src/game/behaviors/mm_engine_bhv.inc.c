@@ -34,7 +34,27 @@ struct ObjectHitbox sSmallKeyHitbox = {
     /* hurtboxHeight: */ 100,
 };
 
+Vec3f sPreviousMarioPos = {0, 0, 0};
+
 u8 sTokenCoins[3] = {5, 20, 50};
+
+
+void bhv_deathwarp_loop(void) {
+    Vec3f pos;
+    s16 angle;
+    struct MarioState *m = gMarioState;
+    if (gMarioCurrentRoom != gMarioPreviousRoom) {
+        angle = atan2s(m->pos[2] - sPreviousMarioPos[2], m->pos[0] - sPreviousMarioPos[0]);
+        o->oFaceAngleYaw = angle;
+        pos[0] = m->pos[0] + (sins(angle) * 150.0f);
+        pos[2] = m->pos[2] + (coss(angle) * 150.0f);
+        pos[1] = m->pos[1] + 50.0f;
+        vec3f_copy(&o->oPosX, pos);
+    }
+    o->oRoom = (gMarioPreviousRoom = gMarioCurrentRoom);
+    vec3f_copy(sPreviousMarioPos, m->pos);
+}
+
 
 
 void bhv_big_key_loop(void) {
