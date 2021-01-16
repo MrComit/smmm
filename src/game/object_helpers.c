@@ -2649,6 +2649,7 @@ static void cur_obj_end_dialog(s32 dialogFlags, s32 dialogResult) {
     }
 }
 
+
 s32 cur_obj_update_dialog(s32 actionArg, s32 dialogFlags, s32 dialogID, UNUSED s32 unused) {
     s32 dialogResponse = 0;
     UNUSED s32 doneTurning = TRUE;

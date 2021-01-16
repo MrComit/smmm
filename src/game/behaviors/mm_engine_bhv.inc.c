@@ -173,8 +173,8 @@ void toad_friend_l1_loop(void) {
                     CL_Move();
                     o->oForwardVel = 22.0f;
                     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
-                    o->oFaceAngleYaw = o->oMoveAngleYaw + 0x2666;
-                    if (o->oDistanceToMario < 100.0f) {
+                    o->oFaceAngleYaw = o->oMoveAngleYaw + 0x2000;
+                    if (o->oDistanceToMario < 150.0f) {
                         o->oAction = 2;
                     }
                 } else {
@@ -191,6 +191,9 @@ void toad_friend_l1_loop(void) {
                 break;
             case 2:
                 if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                    if (o->oF4 == 1) {
+                        o->oBehParams2ndByte = 5;
+                    }
                     o->oF4 = 2;
                     o->oAction = 0;
                 }

@@ -17,110 +17,152 @@
 #endif
 
 DEFINE_DIALOG(DIALOG_000, 1, 6, 30, 200, _("\
-Wow! You're smack in the\n\
-middle of the battlefield.\n\
-You'll find the Power\n\
-Stars that Bowser stole\n\
-inside the painting\n\
-worlds.\n\
-First, talk to the\n\
-Bob-omb Buddy. (Press [B]\n\
-to talk.) He'll certainly\n\
-help you out, and so will\n\
-his " COMRADES " in other\n\
-areas.\n\
-To read signs, stop, face\n\
-them and press [B]. Press [A]\n\
-or [B] to scroll ahead. You\n\
-can talk to some other\n\
-characters by facing them\n\
-and pressing [B]."))
+Ah, well if it isn't the \n\
+world famous Mario! You \n\
+can call me Professor T. \n\
+I'm what you could \n\
+consider the owner of\n\
+this manor. \n\
+I wish I had time to sit\n\
+around and chat - but as\n\
+you can see things are\n\
+not well. My manor has\n\
+been sieged by ghosts, \n\
+monsters of another realm.\n\
+I was down in the basement\n\
+working on my... research.\n\
+That was when it happened.\n\
+Before I knew it, these \n\
+otherwordly creatures had\n\
+taken over my lab, and -\n\
+infested every part of the \n\
+manor, stealing, distorting\n\
+rooms, and creating holes \n\
+in the very fabric of this\n\
+world - though, I suppose \n\
+you're familiar with that one.\n\
+If I could just get into my\n\
+lab I might be able to shut \n\
+the portal that's letting \n\
+them in - but there's just 1 \n\
+small problem with that, the \n\
+entrance to the basement - \n\
+seems to be blocked by some\n\
+sort of spectral barrier. \n\
+The only lead I have is an \n\
+especially high level of \n\
+paranormal activity \n\
+detected on the third floor.\n\
+Do you think you could check\n\
+it out for me? You'll first\n\
+need to find the key to this\n\
+door, which I believe I left\n\
+in the Library. Here, I'll \n\
+give you this, I call it the -\n\
+Room Manager. \n\
+\n\
+\n\
+\n\
+\n\
+\n\
+It will allow me to contact \n\
+you anywhere, in addition to\n\
+functioning as a map of the\n\
+entire manor. I'm counting on\n\
+you Mario, the fate of our \n\
+world is in your hands."))
 
-DEFINE_DIALOG(DIALOG_001, 1, 4, 95, 200, _("\
-Watch out! If you wander\n\
-around here, you're liable\n\
-to be " PLASTERED " by a\n\
-water bomb!\n\
-Those enemy Bob-ombs love\n\
-to fight, and they're\n\
-always finding ways to\n\
-attack.\n\
-This meadow has become\n\
-a battlefield ever since\n\
-the Big Bob-omb got his\n\
-paws on the Power Star.\n\
-Can you recover the Star\n\
-for us? Cross the bridge\n\
-and go left up the path\n\
-to find the Big Bob-omb.\n\
-Please come back to see\n\
-me after you've retrieved\n\
-the Power Star!"))
+DEFINE_DIALOG(DIALOG_001, 1, 5, 95, 200, _("\
+Hello Mario! It's me, \n\
+Professor T. If the GPS on\n\
+your Room Manager is accurate,\n\
+you've just entered the garage.\n\
+\n\
+To your left is that spectral \n\
+barrier I was talking about. \n\
+I wouldn't even go near it if\n\
+I were you. \n\
+\n\
+But anyway, I'm just calling\n\
+you to give a warning. Be\n\
+careful out there, virtually\n\
+every room of this place is\n\
+crawling with creatures - \n\
+but more importantly, money.\n\
+These little gremlins broke \n\
+into my treasury and spread \n\
+its contents far and wide.\n\
+\n\
+I'm asking you to be on the\n\
+lookout for anything and\n\
+everything that looks valuable.\n\
+Alright, that's all - \n\
+take care! ☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_002, 1, 4, 95, 200, _("\
-Hey, you! It's dangerous\n\
-ahead, so listen up! Take\n\
-my advice.\n\
+Hello again, Mario! I \n\
+believe you've just found\n\
+your way into the dining \n\
+room. \n\
+Now would be as good a \n\
+time as any to mention \n\
+that certain rooms, like\n\
+this one, have been -\n\
+especially 『infected』 by\n\
+one ghost in particular. \n\
 \n\
-Cross the two\n\
-bridges ahead, then\n\
-watch for falling\n\
-water bombs.\n\
-The Big Bob-omb at the\n\
-top of the mountain is\n\
-very powerful--don't let\n\
-him grab you!\n\
-We're Bob-omb Buddies,\n\
-and we're on your side.\n\
-You can talk to us\n\
-whenever you'd like to!"))
+\n\
+To restore these rooms to\n\
+their former state, first\n\
+destroy all of the ghost's\n\
+minions, and then you can -\n\
+take on the ghost itself. \n\
+Good luck! ☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
-Thank you, Mario! The Big\n\
-Bob-omb is nothing but a\n\
-big dud now! But the\n\
-battle for the castle has\n\
-just begun.\n\
-Other enemies are holding\n\
-the other Power Stars. If\n\
-you recover more Stars,\n\
-you can open new doors\n\
-that lead to new worlds!\n\
-My Bob-omb Buddies are\n\
-waiting for you. Be sure\n\
-to talk to them--they'll\n\
-set up cannons for you."))
-
-DEFINE_DIALOG(DIALOG_004, 1, 3, 95, 200, _("\
-We're peace-loving\n\
-Bob-ombs, so we don't use\n\
-cannons.\n\
-But if you'd like\n\
-to blast off, we don't\n\
-mind. Help yourself.\n\
-We'll prepare all of the\n\
-cannons in this course for\n\
-you to use. Bon Voyage!"))
-
-DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
-Hey, Mario! Is it true\n\
-that you beat the Big\n\
-Bob-omb? Cool!\n\
-You must be strong. And\n\
-pretty fast. So, how fast\n\
-are you, anyway?\n\
-Fast enough to beat me...\n\
-Koopa the Quick? I don't\n\
-think so. Just try me.\n\
-How about a race to the\n\
-mountaintop, where the\n\
-Big Bob-omb was?\n\
-Whaddya say? When I say\n\
-『Go,』 let the race begin!\n\
+Good work, Mario. It seems\n\
+that the money you acquired\n\
+in this room was actually \n\
+under the affect of a \n\
+multiplier, that you could -\n\
+see in the top right of \n\
+your screen.\n\
 \n\
-Ready....\n\
 \n\
-//Go!////Don't Go"))
+\n\
+The more damage you sustain\n\
+in these rooms, the lower\n\
+this multiplier will go.\n\
+It can go below 1.0x, \n\
+so be careful! ☆CLICK☆"))
+
+DEFINE_DIALOG(DIALOG_004, 1, 6, 95, 200, _("\
+Aha, Mario you did it! This\n\
+staircase leads to the 2nd\n\
+floor, and from there it's a\n\
+straight shot to floor 3,\n\
+where you can investigate\n\
+that strange activity.\n\
+By the way, about those\n\
+ghosts you've been taking\n\
+out. They would actually be\n\
+incredibly valuable for my \n\
+research, so if you can try\n\
+to capture as many as - \n\
+possible and bring them\n\
+back to me, I would greatly\n\
+appreciate it. I'll give you\n\
+some rewards too, if you can\n\
+bring back enough."))
+
+DEFINE_DIALOG(DIALOG_005, 1, 4, 30, 200, _("\
+The Room Manager will allow\n\
+me to contact you anywhere,\n\
+in addition to functioning\n\
+as a map of the entire manor.\n\
+I'm counting on you Mario,\n\
+the fate of our world is\n\
+in your hands."))
 
 DEFINE_DIALOG(DIALOG_006, 1, 3, 30, 200, _("\
 Hey!!! Don't try to " SCAM_ME

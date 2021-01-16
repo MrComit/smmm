@@ -274,9 +274,10 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
     switch (index) {
         case 0:
             if (gMarioCurrentRoom == 2 && m->pos[2] < 14900.0f && m->pos[1] <= m->floorHeight) {
-                if (obj->oF4 == 0)
+                if (obj->oF4 == 0) {
                     obj->oF4 = 1;
-                obj->oBehParams2ndByte = 0;
+                    obj->oBehParams2ndByte = 0;
+                }
                 if (obj->oF4 == 2) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_INTRODUCTION, 1);
                 }
