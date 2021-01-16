@@ -238,6 +238,9 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node) {
 
             if (sp20) {
                 gMarioCurrentRoom = sp20->room;
+                if (sp20->object != NULL && sp20->object->oRoom != 0) {
+                    gMarioCurrentRoom = sp20->object->oRoom;
+                }
                 sp26 = sp20->room - 1;
                 print_debug_top_down_objectinfo("areainfo %d", sp20->room);
 

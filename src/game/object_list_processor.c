@@ -264,7 +264,7 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
     }
 }
 
-Vec3f sToadFriendWarp1 = {0, 0, 12706};
+Vec3f sToadFriendWarp1 = {438.67, 0, 11512.5};
 
 void mario_update_friend_l1_loop(struct MarioState *m) {
     u32 flags = save_file_get_newflags(1);

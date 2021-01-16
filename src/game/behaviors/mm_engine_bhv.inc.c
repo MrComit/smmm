@@ -45,6 +45,11 @@ void bhv_deathwarp_loop(void) {
     struct MarioState *m = gMarioState;
     if (gMarioCurrentRoom != gMarioPreviousRoom) {
         angle = atan2s(m->pos[2] - sPreviousMarioPos[2], m->pos[0] - sPreviousMarioPos[0]);
+        if (absi((u16)(angle) - (u16)(angle & 0xE000)) < 0x1000) {
+            angle &= 0xE000;
+        } else {
+            angle = (angle & 0xE000) + 0x2000;
+        }
         o->oFaceAngleYaw = angle;
         pos[0] = m->pos[0] + (sins(angle) * 150.0f);
         pos[2] = m->pos[2] + (coss(angle) * 150.0f);

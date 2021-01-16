@@ -82,6 +82,10 @@ ALIGNED8 static const u8 door_seg3_texture_03013510[] = {
 #include "actors/door/door_lock.rgba16.inc.c"
 };
 
+ALIGNED8 static const u8 door_seg3_texture_03013510_i8[] = {
+#include "actors/door/custom_door_lock.i8.inc.c"
+};
+
 // 0x03013910
 static const Vtx door_seg3_vertex_03013910[] = {
     {{{   -12,      0,    -58}, 0, {     0,      0}, {0x81, 0x00, 0x00, 0xff}}},
@@ -462,6 +466,27 @@ const Gfx door_seg3_dl_030144E0[] = {
     gsSPEndDisplayList(),
 };
 
+
+const Gfx door_seg3_lock4_helper[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_FADEA, G_CC_FADEA),
+    gsSPClearGeometryMode(G_SHADING_SMOOTH),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPTileSync(),
+    gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 4, G_TX_NOLOD),
+    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
+    gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b, 1, door_seg3_texture_03013510_i8),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_8b_BYTES)),
+    gsSPLight(&door_seg3_lights_03009CE0.l, 1),
+    gsSPLight(&door_seg3_lights_03009CE0.a, 2),
+    gsSPEndDisplayList(),
+};
+
+
+
+
 // 0x03014528 - 0x03014540
 const Gfx door_seg3_lock1[] = {
     gsSPDisplayList(door_seg3_dl_03014470),
@@ -486,7 +511,7 @@ const Gfx door_seg3_lock3[] = {
 
 const Gfx door_seg3_lock4[] = {
     gsSPDisplayList(door_seg3_dl_03014470),
-	gsDPSetEnvColor(186, 223, 254, 255),
+	gsDPSetEnvColor(0x59, 0xB1, 0xFE, 255),
     gsSPVertex(door_seg3_vertex_03014370, 8, 0),
     gsSPBranchList(door_seg3_dl_030144E0),
 };

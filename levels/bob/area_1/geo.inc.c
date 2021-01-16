@@ -3,7 +3,7 @@
 const GeoLayout bob_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(12, geo_switch_area),
+		GEO_SWITCH_CASE(14, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, bob_dl_Room1A_geo),
 			GEO_BRANCH(1, bob_dl_Room1B_geo),
@@ -17,6 +17,8 @@ const GeoLayout bob_area_1_geo[] = {
 			GEO_BRANCH(1, bob_dl_Room1J_geo),
 			GEO_BRANCH(1, bob_dl_Room1K_geo),
 			GEO_BRANCH(1, bob_dl_Room1L_geo),
+			GEO_BRANCH(1, bob_dl_Room1M_geo),
+			GEO_BRANCH(1, bob_dl_Room1N_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -272,6 +274,21 @@ const GeoLayout bob_dl_Room1L_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -9757, 983, 12805, bob_dl_QuickHall_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -4355, 1263, 17158, bob_dl_QuickHall_001_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_Room1M_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1111, 531, 19291, bob_dl_MainHall_012_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 163, 10414, bob_dl_MainHall_013_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_Room1N_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1111, 531, 19291, bob_dl_MainHall_014_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
