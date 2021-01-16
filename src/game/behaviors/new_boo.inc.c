@@ -64,10 +64,6 @@ void bhv_boo_cage_loop(void) {
 }
 
 void bhv_room_boo_init(void) {
-    s32 numObjs = count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, o->oRoom);
-    if (numObjs == 0)
-        numObjs = 1;
-    o->oBigBooNumMinionBoosKilled = 255 / numObjs;
     bhv_boo_init();
 }
 
@@ -76,7 +72,9 @@ void bhv_room_boo_loop(void) {
     s32 numObjs;
     if (o->oUnk1A8 == 0) {
         numObjs = count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, o->oRoom);
-        o->oOpacity = 255 - (o->oBigBooNumMinionBoosKilled * numObjs);
+        if (numObjs <= 15) {
+            o->oOpacity = 255 - (17 * numObjs);
+        }
         if (numObjs <= 2) {
             o->oUnk1A8 = 1;
         }
