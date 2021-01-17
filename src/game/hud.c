@@ -318,7 +318,7 @@ void render_hud_keys(void) {
     s16 i;
     s16 keyCount = CL_count_bits(save_file_get_keys()) - (CL_count_bits(save_file_get_flags() & ~1));
     for (i = 0; i < keyCount; i++) {
-        print_text((i * 16) + 220, 142, "/"); // unused glyph - beta key
+        print_text((i * 16) + GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), HUD_TOP_Y, "/"); // unused glyph - beta key
     }
 }
 
@@ -460,9 +460,9 @@ void render_hud(void) {
             render_hud_coins();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-            render_hud_stars();
-        }
+        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
+        //    render_hud_stars();
+        //}
 
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
             render_hud_keys();

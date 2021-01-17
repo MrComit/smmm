@@ -19,19 +19,11 @@ struct SaveBlockSignature
 
 struct SaveFile
 {
-    // Location of lost cap.
-    // Note: the coordinates get set, but are never actually used, since the
-    // cap can always be found in a fixed spot within the course
     //u8 capLevel;
     //u8 capArea;
     //Vec3s capPos;
     u32 newFlags[2];
-
     u32 flags;
-
-    // Star flags for each course.
-    // The most significant bit of the byte *following* each course is set if the
-    // cannon is open.
     //u8 courseStars[COURSE_COUNT];
     u32 roomsCleared[4];
     u32 miscChallenges[2];
