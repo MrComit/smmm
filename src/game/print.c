@@ -332,6 +332,7 @@ s8 char_to_glyph_index(char c) {
     if (c == ',') {
         return GLYPH_MARIO_HEAD; // Imagine I drew Mario's head
     }
+    
 
     if (c == '-') {
         return GLYPH_STAR; // star
