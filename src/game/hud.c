@@ -316,8 +316,8 @@ void render_hud_stars(void) {
  */
 void render_hud_keys(void) {
     s16 i;
-
-    for (i = 0; i < gHudDisplay.keys; i++) {
+    s16 keyCount = CL_count_bits(save_file_get_keys()) - (CL_count_bits(save_file_get_flags() & ~1));
+    for (i = 0; i < keyCount; i++) {
         print_text((i * 16) + 220, 142, "/"); // unused glyph - beta key
     }
 }
@@ -452,9 +452,9 @@ void render_hud(void) {
             render_hud_cannon_reticle();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
-            render_hud_mario_lives();
-        }
+        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
+        //    render_hud_mario_lives();
+        //}
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
             render_hud_coins();
@@ -464,13 +464,13 @@ void render_hud(void) {
             render_hud_stars();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
+        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
             render_hud_keys();
-        }
+        //}
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER) {
             render_hud_power_meter();
-            render_hud_camera_status();
+            //render_hud_camera_status();
         }
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {

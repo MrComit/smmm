@@ -385,10 +385,12 @@ void kill_objects_in_room(s32 room) {
     for (i = 0; i < NUM_OBJ_LISTS; i++) {
         listHead = &gObjectLists[i];
         obj = (struct Object *) listHead->next;
+        if (i == OBJ_LIST_DOORS)
+            continue;
         while (obj != (struct Object *) listHead) {
             if (obj->oRoom == room && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
-                if (get_object_list_from_behavior(obj->behavior) != OBJ_LIST_DOORS && 
-                    !(obj_has_behavior(obj, bhvAirborneDeathWarp)) && obj != gMarioObject) {
+                if (!(obj_has_behavior(obj, bhvAirborneDeathWarp)) && !(obj->oFlags & OBJ_FLAG_PERSISTENT_RESPAWN)
+                    && obj != gMarioObject) {
                     //unload_object(obj);
                     obj->activeFlags = 0;
                 }
@@ -417,16 +419,20 @@ void reset_objects_in_room(s32 room, struct SpawnInfo *spawnInfo) {
         struct Object *object;
         const BehaviorScript *script = segmented_to_virtual(spawnInfo->behaviorScript);
 
-        if (CL_get_room_from_point(spawnInfo->startPos) != room || 
-            get_object_list_from_behavior(spawnInfo->behaviorScript) == OBJ_LIST_DOORS || 
+        point[0] = (f32)spawnInfo->startPos[0];
+        point[1] = (f32)spawnInfo->startPos[1];
+        point[2] = (f32)spawnInfo->startPos[2];
+
+        if (CL_get_room_from_point(point) != room || 
+            get_object_list_from_behavior(script) == OBJ_LIST_DOORS || 
             script == bhvAirborneDeathWarp || spawnInfo->behaviorArg & 0x01) {
             spawnInfo = spawnInfo->next;
             continue;
         }
 
         // If the object was previously killed/collected, don't respawn it
-        //if ((spawnInfo->behaviorArg & (RESPAWN_INFO_DONT_RESPAWN << 8))
-        //    != (RESPAWN_INFO_DONT_RESPAWN << 8)) {
+        if ((spawnInfo->behaviorArg & (RESPAWN_INFO_DONT_RESPAWN << 8))
+            == (RESPAWN_INFO_DONT_RESPAWN << 8)) {
             object = create_object(script);
 
 
@@ -458,16 +464,24 @@ void reset_objects_in_room(s32 room, struct SpawnInfo *spawnInfo) {
             object->oMoveAnglePitch = spawnInfo->startAngle[0];
             object->oMoveAngleYaw = spawnInfo->startAngle[1];
             object->oMoveAngleRoll = spawnInfo->startAngle[2];
-        //}
+        }
 
         spawnInfo = spawnInfo->next;
     }
 }
 
 
-
-
-
+void reset_level(s16 level, s16 room) {
+    switch (level) {
+        case LEVEL_BOB:
+            if (room == 11) {
+                reset_objects_in_room(room, gCurrentArea->objectSpawnInfos);
+            }
+            break;
+        case LEVEL_WF:
+            break;
+    }
+}
 
 
 
@@ -530,7 +544,8 @@ void init_mario_after_warp(void) {
             if (sWarpDest.nodeId = WARP_NODE_DEATH) {
                 gMarioState->faceAngle[1] = spawnNode->object->oFaceAngleYaw;
                 s8DirModeBaseYaw = spawnNode->object->oFaceAngleYaw + 0x8000;
-                reset_objects_in_room(gMarioCurrentRoom, gCurrentArea->objectSpawnInfos);
+                //reset_objects_in_room(gMarioCurrentRoom, gCurrentArea->objectSpawnInfos);
+                reset_level(gCurrLevelNum, gMarioCurrentRoom);
             }
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
@@ -842,9 +857,9 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 break;
 
             case WARP_OP_DEATH:
-                if (m->numLives == 0) {
-                    sDelayedWarpOp = WARP_OP_GAME_OVER;
-                }
+                //if (m->numLives == 0) {
+                //    sDelayedWarpOp = WARP_OP_GAME_OVER;
+                //}
                 sDelayedWarpTimer = 48;
                 sSourceWarpNodeId = WARP_NODE_DEATH;
                 play_transition(WARP_TRANSITION_FADE_INTO_BOWSER, 0x30, 0x00, 0x00, 0x00);
@@ -857,11 +872,11 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 }  else {
                     sSourceWarpNodeId = WARP_NODE_WARP_FLOOR;
                     if (area_get_warp_node(sSourceWarpNodeId) == NULL) {
-                        if (m->numLives == 0) {
-                            sDelayedWarpOp = WARP_OP_GAME_OVER;
-                        } else {
+                        //if (m->numLives == 0) {
+                        //    sDelayedWarpOp = WARP_OP_GAME_OVER;
+                        //} else {
                             sSourceWarpNodeId = WARP_NODE_DEATH;
-                        }
+                        //}
                     }
                 }
                 sDelayedWarpTimer = 20;
