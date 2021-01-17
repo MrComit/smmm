@@ -7,6 +7,7 @@
 #include "audio/internal.h"
 #include "game/interaction.h"
 #include "game/mario.h"
+#include "engine/surface_collision.h"
 #define o gCurrentObject
 extern s16 s8DirModeYawOffset;
 
@@ -358,4 +359,27 @@ struct Object *CL_objptr_nearest_object_behavior(struct Object *obj2, const Beha
     }
 
     return closestObj;
+}
+
+
+
+s32 CL_get_room_from_point(Vec3f point) {
+    struct Surface *floor;
+    f32 floorHeight = find_floor(point[0], point[1], point[2], &floor);
+    
+    if (floor != NULL) {
+        return floor->room;
+        if (floor->room != 0) {
+            return floor->room;
+        } else {
+            // Floor probably belongs to a platform object. Try looking
+            // underneath it
+            find_floor(point[0], floorHeight - 100.0f, point[2], &floor);
+            if (floor != NULL) {
+                //! Technically possible that the room could still be 0 here
+                return floor->room;
+            }
+        }
+    }
+    return -1;
 }

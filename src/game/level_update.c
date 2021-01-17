@@ -29,6 +29,7 @@
 #include "level_table.h"
 #include "course_table.h"
 #include "rumble_init.h"
+#include "behavior_data.h"
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -373,6 +374,104 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
     set_mario_initial_cap_powerup(m);
 }
 
+
+
+
+void kill_objects_in_room(s32 room) {
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    s32 i;
+
+    for (i = 0; i < NUM_OBJ_LISTS; i++) {
+        listHead = &gObjectLists[i];
+        obj = (struct Object *) listHead->next;
+        while (obj != (struct Object *) listHead) {
+            if (obj->oRoom == room && obj->activeFlags != ACTIVE_FLAG_DEACTIVATED) {
+                if (get_object_list_from_behavior(obj->behavior) != OBJ_LIST_DOORS && 
+                    !(obj_has_behavior(obj, bhvAirborneDeathWarp)) && obj != gMarioObject) {
+                    //unload_object(obj);
+                    obj->activeFlags = 0;
+                }
+            }
+            obj = (struct Object *) obj->header.next;
+        }
+        unload_deactivated_objects_in_list(listHead);
+    }
+}
+
+
+
+void reset_objects_in_room(s32 room, struct SpawnInfo *spawnInfo) {
+    Vec3f point;
+    //gObjectLists = gObjectListArray;
+    //gTimeStopState = 0;
+
+    //! (Spawning Displacement) On the Japanese version, Mario's platform object
+    //  isn't cleared when transitioning between areas. This can cause Mario to
+    //  receive displacement after spawning.
+    //clear_mario_platform();
+
+    kill_objects_in_room(room);
+    //return;
+    while (spawnInfo != NULL) {
+        struct Object *object;
+        const BehaviorScript *script = segmented_to_virtual(spawnInfo->behaviorScript);
+
+        if (CL_get_room_from_point(spawnInfo->startPos) != room || 
+            get_object_list_from_behavior(spawnInfo->behaviorScript) == OBJ_LIST_DOORS || 
+            script == bhvAirborneDeathWarp || spawnInfo->behaviorArg & 0x01) {
+            spawnInfo = spawnInfo->next;
+            continue;
+        }
+
+        // If the object was previously killed/collected, don't respawn it
+        //if ((spawnInfo->behaviorArg & (RESPAWN_INFO_DONT_RESPAWN << 8))
+        //    != (RESPAWN_INFO_DONT_RESPAWN << 8)) {
+            object = create_object(script);
+
+
+            object->oBehParams = spawnInfo->behaviorArg;
+            object->oBehParams2ndByte = ((spawnInfo->behaviorArg) >> 16) & 0xFF;
+
+            object->behavior = script;
+            object->unused1 = 0;
+
+            // Record death/collection in the SpawnInfo
+            object->respawnInfoType = RESPAWN_INFO_TYPE_32;
+            object->respawnInfo = &spawnInfo->behaviorArg;
+
+            //if (spawnInfo->behaviorArg & 0x01) {
+            //    gMarioObject = object;
+            //    geo_make_first_child(&object->header.gfx.node);
+            //}
+
+            geo_obj_init_spawninfo(&object->header.gfx, spawnInfo);
+
+            object->oPosX = spawnInfo->startPos[0];
+            object->oPosY = spawnInfo->startPos[1];
+            object->oPosZ = spawnInfo->startPos[2];
+
+            object->oFaceAnglePitch = spawnInfo->startAngle[0];
+            object->oFaceAngleYaw = spawnInfo->startAngle[1];
+            object->oFaceAngleRoll = spawnInfo->startAngle[2];
+
+            object->oMoveAnglePitch = spawnInfo->startAngle[0];
+            object->oMoveAngleYaw = spawnInfo->startAngle[1];
+            object->oMoveAngleRoll = spawnInfo->startAngle[2];
+        //}
+
+        spawnInfo = spawnInfo->next;
+    }
+}
+
+
+
+
+
+
+
+
+
 extern s16 s8DirModeBaseYaw;
 
 void init_mario_after_warp(void) {
@@ -431,6 +530,7 @@ void init_mario_after_warp(void) {
             if (sWarpDest.nodeId = WARP_NODE_DEATH) {
                 gMarioState->faceAngle[1] = spawnNode->object->oFaceAngleYaw;
                 s8DirModeBaseYaw = spawnNode->object->oFaceAngleYaw + 0x8000;
+                reset_objects_in_room(gMarioCurrentRoom, gCurrentArea->objectSpawnInfos);
             }
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
