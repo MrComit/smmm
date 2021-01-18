@@ -44686,19 +44686,19 @@ Gfx bob_dl_MainHall_013_mesh_tri_0[] = {
 };
 
 Vtx bob_dl_MainHall_013_mesh_vtx_1[13] = {
-	{{{-150, 341, 242},0, {-8357, 1444},{0xC2, 0xD1, 0xA0, 0x62}}},
+	{{{-150, 341, 242},0, {-8357, 1444},{0x50, 0x50, 0x50, 0x0}}},
 	{{{150, 341, -212},0, {-8926, 812},{0x0, 0x0, 0x0, 0x0}}},
-	{{{150, 341, 242},0, {-8926, 1444},{0xC2, 0xD1, 0xA0, 0x62}}},
+	{{{150, 341, 242},0, {-8926, 1444},{0x50, 0x50, 0x50, 0x62}}},
 	{{{-150, 341, -212},0, {-8357, 812},{0x0, 0x0, 0x0, 0x0}}},
 	{{{150, -163, -212},0, {-8926, -16},{0x1, 0x1, 0x1, 0x1}}},
 	{{{-150, -163, -212},0, {-8357, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-150, 341, 242},0, {-7686, 812},{0xC2, 0xD1, 0xA0, 0x62}}},
-	{{{-150, -163, 242},0, {-7686, -16},{0xC2, 0xD1, 0xA0, 0x62}}},
-	{{{-150, -163, 166},0, {-7798, -16},{0xC2, 0xD1, 0xA0, 0xFF}}},
+	{{{-150, 341, 242},0, {-7686, 812},{0x50, 0x50, 0x50, 0x0}}},
+	{{{-150, -163, 242},0, {-7686, -16},{0x5D, 0x5F, 0x58, 0x62}}},
+	{{{-150, -163, 166},0, {-7798, -16},{0xBC, 0xCA, 0x9B, 0xFF}}},
 	{{{150, -163, -212},0, {-8926, -16},{0x1, 0x1, 0x1, 0x1}}},
-	{{{150, -163, 166},0, {-9485, -16},{0xC2, 0xD1, 0xA0, 0xFF}}},
-	{{{150, 341, 242},0, {-9597, 812},{0xC2, 0xD1, 0xA0, 0x62}}},
-	{{{150, -163, 242},0, {-9597, -16},{0xC2, 0xD1, 0xA0, 0x62}}},
+	{{{150, -163, 166},0, {-9485, -16},{0x50, 0x50, 0x50, 0xFF}}},
+	{{{150, 341, 242},0, {-9597, 812},{0x50, 0x50, 0x50, 0x62}}},
+	{{{150, -163, 242},0, {-9597, -16},{0x50, 0x50, 0x50, 0x62}}},
 };
 
 Gfx bob_dl_MainHall_013_mesh_tri_1[] = {
@@ -44931,7 +44931,7 @@ Gfx mat_revert_bob_dl_MRWall_v3_layer1[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_NOOP2),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
 
@@ -46389,7 +46389,7 @@ Gfx mat_revert_bob_dl_KFloor_v3_layer1[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_NOOP2),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
 

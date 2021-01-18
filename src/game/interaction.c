@@ -1004,7 +1004,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
         } else if (!(saveFlags & (1 << (o->oBehParams2ndByte + 1)))) {
             m->interactObj = o;
             m->usedObj = o;
-            return set_mario_action(m, ACT_UNLOCKING_KEY_DOOR, 0);
+            return set_mario_action(m, ACT_UNLOCKING_KEY_DOOR, should_push_or_pull_door(m, o) + 0x00000004);
         }
     }
 

@@ -122,39 +122,28 @@ void bhv_small_key_loop(void) {
 
 
 void bhv_token_init(void) {
-    u8 page, challenge, list;
+    u8 challenge;
     obj_set_hitbox(o, &sTokenHitbox);
     o->oDamageOrCoinValue = sTokenCoins[o->oBehParams2ndByte];
     challenge = (o->oBehParams >> 8) & 0xFF;
-    while (challenge >= 32) {
-        challenge -= 32;
-        page++;
-    }
-    list = save_file_get_challenges(page);
-    if (list & 1 << challenge) {
+    if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
         o->activeFlags = 0;
     }
 }
 
 
 void bhv_token_loop(void) {
-    u8 challenge;
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
         o->activeFlags = 0;
-        challenge = (o->oBehParams >> 8) & 0xFF;
-        save_file_set_challenges(challenge);
+        save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
     }
 }
 
 
 void bhv_star_piece_init(void) {
-    s8 pieceId;
-    u32 starPieces;
-
-    pieceId = (o->oBehParams >> 24) & 0xFF;
-    starPieces = save_file_get_star_piece();
-    if (starPieces & (1 << pieceId)) {
+    s8 pieceId = (o->oBehParams >> 24) & 0xFF;
+    if (save_file_get_star_piece() & (1 << pieceId)) {
         o->activeFlags = 0;
     }
 
@@ -167,6 +156,7 @@ void bhv_star_piece_loop(void) {
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         o->activeFlags = 0;
         o->oInteractStatus = 0;
+        save_file_set_star_piece(o->oBehParams >> 24);
     }
 
     if (o->oBehParams2ndByte == 1) {

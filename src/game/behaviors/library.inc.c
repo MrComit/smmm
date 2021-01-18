@@ -26,20 +26,6 @@ Vec3f sKFlameXPos[2] = {
 void koopa_boss_move(void) {
     o->oF8 += 0x180;
     o->oPosZ = 17400.0f + (sins(o->oF8 & ~1) * 1300.0f);
-    /*switch ((o->oF8 & 2) >> 1) {
-        case 0:
-            o->oPosZ += 30.0f;
-            if (o->oPosZ > 18700.0f) {
-                o->oF8 |= 2;
-            }
-            break;
-        case 1:
-            o->oPosZ -= 30.0f;
-            if (o->oPosZ < 16100.0f) {
-                o->oF8 &= ~2;
-            }
-            break;
-    }*/
 }
 
 void koopa_boss_clamp_mario(void) {
@@ -74,7 +60,7 @@ void bhv_koopa_boss_loop(void) {
     switch (o->oAction) {
         case 0:
             cur_obj_hide();
-            if (gMarioState->pos[2] > 18000.0f) {
+            if (gMarioState->pos[2] > 18000.0f && gMarioCurrentRoom == o->oRoom) {
                 o->oAction = 1;
                 o->oKleptoStartPosZ = 300.0f;
                 cur_obj_unhide();
@@ -340,6 +326,7 @@ void bhv_flaming_boss_book_init(void) {
             point[2] = 18177.0f;
     } else {
         vec3f_copy(point, gMarioState->pos);
+        point[1] += 15.0f;
         o->oObjF4 = spawn_object(o, MODEL_RED_FLAME, bhvFlameDecoration);
         obj_scale(o->oObjF4, 10.0f);
         o->oForwardVel = 70.0f;

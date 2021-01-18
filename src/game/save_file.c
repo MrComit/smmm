@@ -589,12 +589,7 @@ u32 save_file_get_challenges(u8 index) {
 }
 
 void save_file_set_challenges(u32 challenge) {
-    u32 index = 0;
-    while (challenge >= 32) {
-        challenge -= 32;
-        index++;
-    }
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[index] |= 1 << challenge;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[challenge / 32] |= 1 << (challenge % 32);
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }

@@ -65,6 +65,10 @@ void bhv_boo_cage_loop(void) {
 
 void bhv_room_boo_init(void) {
     bhv_boo_init();
+
+    if (save_file_get_boos() & (1 << o->oBehParams2ndByte)) {
+        o->activeFlags = 0;
+    }
 }
 
 //BPARAM 1 = NO KEY, SMALL KEY, OR BIG KEY - BPARAM 3 = KEY ID
