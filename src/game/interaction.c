@@ -761,6 +761,8 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
     return FALSE;
 }
 
+extern s32 gHudLowerTimer;
+
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     u32 starKeyIndex;
     u32 starGrabAction;// = ACT_STAR_DANCE_EXIT;
@@ -772,7 +774,8 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         isKey = 2;
     }
 
-    //gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+    gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+    gHudLowerTimer = 0;
 
     if (m->health >= 0x100) {
         mario_stop_riding_and_holding(m);

@@ -54,6 +54,8 @@ static struct PowerMeterHUD sPowerMeterHUD = {
 // when the power meter is hidden.
 s32 sPowerMeterVisibleTimer = 0;
 
+s32 gHudTopY = 209; // default 209, high is 225
+
 static struct UnusedHUDStruct sUnusedHUDValues = { 0x00, 0x0A, 0x00 };
 
 static struct CameraHUD sCameraHUD = { CAM_STATUS_NONE };
@@ -276,9 +278,14 @@ void render_hud_mario_lives(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(168+30, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184+30, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198+30, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    s32 hudY;
+    if (sCurrPlayMode == 2)
+        hudY = 209;
+    else
+        hudY = gHudTopY;
+    print_text(168+30, gHudTopY, "+"); // 'Coin' glyph
+    print_text(184+30, gHudTopY, "*"); // 'X' glyph
+    print_text_fmt_int(198+30, gHudTopY, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
@@ -455,10 +462,11 @@ void render_hud(void) {
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
         //    render_hud_mario_lives();
         //}
+        if (sCurrPlayMode == 2)
+            gHudTopY = 209;
 
-        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
+        if (gHudTopY < 240)
             render_hud_coins();
-        //}
 
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
         //    render_hud_stars();

@@ -1018,6 +1018,10 @@ void initiate_delayed_warp(void) {
     }
 }
 
+extern s32 gHudTopY;
+s32 gHudLowerTimer = 0;
+s32 sTimer2 = 0;
+
 void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
@@ -1028,6 +1032,27 @@ void update_hud_values(void) {
             gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_COIN_COUNT;
         }
 
+        if (gMarioState->action & ACT_FLAG_STATIONARY) {
+            if (sTimer2++ > 45) {
+                gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+            }
+        } else {
+            sTimer2 = 0;
+        }
+
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER) {
+            gHudLowerTimer++;
+            gHudTopY = approach_s16_symmetric(gHudTopY, 209, 2);
+        } else {
+            gHudTopY = approach_s16_symmetric(gHudTopY, 240, 2);
+        }
+
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER && gHudLowerTimer > 150) {
+            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_LOWER;
+            gHudLowerTimer = 0;
+        }
+
+
         if (gHudDisplay.coins < gMarioState->numCoins) {
             if (gGlobalTimer & 0x00000001) {
                 u32 coinSound;
@@ -1037,8 +1062,8 @@ void update_hud_values(void) {
                     coinSound = SOUND_GENERAL_COIN;
                 }
 
-                //gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
-                //gHudLowerTimer = 0;
+                gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+                gHudLowerTimer = 0;
                 gHudDisplay.coins += 1;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
 
@@ -1058,8 +1083,8 @@ void update_hud_values(void) {
                     coinSound = SOUND_GENERAL_COIN;
                 }
 
-                //gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
-                //gHudLowerTimer = 0;
+                gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+                gHudLowerTimer = 0;
                 gHudDisplay.coins -= 1;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
 

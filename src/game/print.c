@@ -392,10 +392,10 @@ void render_textrect(s32 x, s32 y, s32 pos) {
     s32 rectX;
     s32 rectY;
 
-#ifndef WIDESCREEN
+//#ifndef WIDESCREEN
     // For widescreen we must allow drawing outside the usual area
-    clip_to_bounds(&rectBaseX, &rectBaseY);
-#endif
+    //clip_to_bounds(&rectBaseX, &rectBaseY);
+//#endif
     rectX = rectBaseX;
     rectY = rectBaseY;
     gSPTextureRectangle(gDisplayListHead++, rectX << 2, rectY << 2, (rectX + 15) << 2,
