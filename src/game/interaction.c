@@ -744,10 +744,10 @@ u32 interact_coin(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
     o->oInteractStatus = INT_STATUS_INTERACTED;
 
-    if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - o->oDamageOrCoinValue < 100
-        && m->numCoins >= 100) {
-        bhv_spawn_star_no_level_exit(6);
-    }
+    //if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && m->numCoins - o->oDamageOrCoinValue < 100
+    //    && m->numCoins >= 100) {
+    //    bhv_spawn_star_no_level_exit(6);
+    //}
     if (o->oDamageOrCoinValue >= 2) {
         queue_rumble_data(5, 80);
     }
@@ -771,6 +771,8 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
     } else if (o->oInteractionSubtype & INT_SUBTYPE_BIG_KEY) {
         isKey = 2;
     }
+
+    //gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
 
     if (m->health >= 0x100) {
         mario_stop_riding_and_holding(m);

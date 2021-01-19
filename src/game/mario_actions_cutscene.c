@@ -236,13 +236,13 @@ s32 get_star_collection_dialog(struct MarioState *m) {
 
     for (i = 0; i < ARRAY_COUNT(sStarsNeededForDialog); i++) {
         numStarsRequired = sStarsNeededForDialog[i];
-        if (m->prevNumStarsForDialog < numStarsRequired && m->numStars >= numStarsRequired) {
-            dialogID = i + DIALOG_141;
+        //if (m->prevNumStarsForDialog < numStarsRequired && m->numStars >= numStarsRequired) {
+        //    dialogID = i + DIALOG_141;
             break;
-        }
+        //}
     }
 
-    m->prevNumStarsForDialog = m->numStars;
+    //m->prevNumStarsForDialog = m->numStars;
     return dialogID;
 }
 
@@ -1186,6 +1186,12 @@ s32 act_unused_death_exit(struct MarioState *m) {
         //m->numLives--;
         // restore 7.75 units of health
         m->healCounter = 31;
+
+        if (m->numCoins > 10)
+            m->numCoins -= 10;
+        else
+            m->numCoins = 0;
+
     }
     // one unit of health
     m->health = 0x0100;

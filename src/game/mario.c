@@ -32,6 +32,7 @@
 #include "save_file.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "buffers/buffers.h"
 
 u32 unused80339F10;
 s8 filler80339F1C[20];
@@ -1868,26 +1869,27 @@ void init_mario(void) {
 }
 
 void init_mario_from_save_file(void) {
-    gMarioState->unk00 = 0;
-    gMarioState->flags = 0;
-    gMarioState->action = 0;
-    gMarioState->spawnInfo = &gPlayerSpawnInfos[0];
-    gMarioState->statusForCamera = &gPlayerCameraState[0];
-    gMarioState->marioBodyState = &gBodyStates[0];
-    gMarioState->controller = &gControllers[0];
-    gMarioState->animation = &D_80339D10;
+    struct MarioState *m = gMarioState;
+    m->unk00 = 0;
+    m->flags = 0;
+    m->action = 0;
+    m->spawnInfo = &gPlayerSpawnInfos[0];
+    m->statusForCamera = &gPlayerCameraState[0];
+    m->marioBodyState = &gBodyStates[0];
+    m->controller = &gControllers[0];
+    m->animation = &D_80339D10;
 
-    gMarioState->numCoins = 0;
-    gMarioState->numStars =
-        save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
-    gMarioState->numKeys = 0;
+    m->numCoins = gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount;
+    //m->numStars =
+    //    save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
+    //m->numKeys = 0;
 
-    //gMarioState->numLives = 4;
-    gMarioState->health = 0x880;
+    //m->numLives = 4;
+    m->health = 0x880;
 
-    gMarioState->prevNumStarsForDialog = gMarioState->numStars;
-    gMarioState->unkB0 = 0xBD;
+    //m->prevNumStarsForDialog = m->numStars;
+    m->unkB0 = 0xBD;
 
-    gHudDisplay.coins = 0;
+    gHudDisplay.coins = m->numCoins;
     gHudDisplay.wedges = 8;
 }

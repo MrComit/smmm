@@ -276,9 +276,9 @@ void render_hud_mario_lives(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    print_text(168+30, HUD_TOP_Y, "+"); // 'Coin' glyph
+    print_text(184+30, HUD_TOP_Y, "*"); // 'X' glyph
+    print_text_fmt_int(198+30, HUD_TOP_Y, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
@@ -456,9 +456,9 @@ void render_hud(void) {
         //    render_hud_mario_lives();
         //}
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
+        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
             render_hud_coins();
-        }
+        //}
 
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
         //    render_hud_stars();
