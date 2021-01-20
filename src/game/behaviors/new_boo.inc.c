@@ -85,6 +85,7 @@ void room_boo_multiplier_loop(void) {
         gMarioState->numCoins += gMarioState->numBooCoins * (o->oFloat98 + ((f32)o->o148 / 10));
         gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_BOO;
         gMarioState->numBooCoins = 0;
+        gHudDisplay.booCoins = 0;
     }
 
 }
@@ -130,6 +131,7 @@ void bhv_room_boo_loop(void) {
         bhv_boo_loop();
     }
 
-    room_boo_multiplier_loop();
+    if (o->oBehParams2ndByte)
+        room_boo_multiplier_loop();
 
 }

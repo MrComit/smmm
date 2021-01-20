@@ -14,6 +14,7 @@
 #include "save_file.h"
 #include "print.h"
 #include "engine/surface_load.h"
+#include "game/object_helpers.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -55,6 +56,7 @@ static struct PowerMeterHUD sPowerMeterHUD = {
 s32 sPowerMeterVisibleTimer = 0;
 
 s32 gHudTopY = 209; // default 209, high is 225
+s32 gHuds2dX = 0;
 
 static struct UnusedHUDStruct sUnusedHUDValues = { 0x00, 0x0A, 0x00 };
 
@@ -492,6 +494,57 @@ void render_hud(void) {
         if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_NODES)
         {
             print_text(10, 60, "SURFACE NODE POOL FULL");
+        }
+    }
+}
+
+
+
+
+
+#include "src/s2d_engine/sprites/starpiece/starpiece.c"
+#include "src/s2d_engine/sprites/starpiece_chart/starpiece_chart.c"
+
+uObjMtx starpiecebuf[0x6];
+
+void s2d_print_starpiece(s16 x, s16 y, s16 idx) {
+	s2d_init();
+    call_starpiece_sprite_dl(idx, x, y, &starpiecebuf[idx], idx);
+	s2d_stop();
+}
+
+/*void s2d_level_manager() {
+    if (gCurrLevelNum == LEVEL_BOB) {
+        //s2d_print_string(40, 210, DROPSHADOW SCALE "2" "Floor 1");
+        //s2d_print_starpiece(20, 80);
+        starpiece_chart_bg.b.frameX = approach_s16_symmetric(starpiece_chart_bg.b.frameX, 0<<2, 2<<2);
+        s2d_init();
+        gSPDisplayList(gDisplayListHead++, starpiece_chart_bg_dl);
+        s2d_stop();
+    }
+
+}*/
+
+
+void render_s2d_hud(void) {
+    s32 i = 0; 
+    s32 h = 0;
+    if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE) {
+        starpiece_chart_bg.b.frameX = approach_s16_symmetric(starpiece_chart_bg.b.frameX, 0<<2, 4<<2);
+    } else {
+        starpiece_chart_bg.b.frameX = approach_s16_symmetric(starpiece_chart_bg.b.frameX, -30<<2, 4<<2);
+    }
+    if (sCurrPlayMode == 2) {
+        starpiece_chart_bg.b.frameX = 0;
+    }
+    if (starpiece_chart_bg.b.frameX != -30<<2) {
+        s2d_init();
+        gSPDisplayList(gDisplayListHead++, starpiece_chart_bg_dl);
+        s2d_stop();
+        h = save_file_get_star_piece();
+        for (i = 0; i < 5; i++) {
+            if (h & (1<<i))
+                s2d_print_starpiece((starpiece_chart_bg.b.frameX / 5) + 4, 70+(i*21), i);
         }
     }
 }

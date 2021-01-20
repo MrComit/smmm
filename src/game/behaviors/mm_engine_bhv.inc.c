@@ -156,7 +156,7 @@ void bhv_star_piece_loop(void) {
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         o->activeFlags = 0;
         o->oInteractStatus = 0;
-        save_file_set_star_piece(o->oBehParams >> 24);
+        //save_file_set_star_piece(o->oBehParams >> 24);
     }
 
     if (o->oBehParams2ndByte == 1) {
