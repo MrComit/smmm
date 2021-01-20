@@ -379,12 +379,30 @@ void s2d_print_string(s16 x, s16 y, const char *str) {
 }
 
 
+
+/*#include "src/s2d_engine/sprites/starpiece/starpiece.c"
+#include "src/s2d_engine/sprites/starpiece_chart/starpiece_chart.c"
+
+uObjMtx starpiecebuf[0x8];
+uObjMtx starpiecebuf2[0x8];
+
+void s2d_print_starpiece(s16 x, s16 y) {
+	s2d_init();
+    call_starpiece_sprite_dl(0, x, y, &starpiecebuf[0], 0);
+	s2d_stop();
+}
+
 void s2d_level_manager() {
     if (gCurrLevelNum == LEVEL_BOB) {
         //s2d_print_string(40, 210, DROPSHADOW SCALE "2" "Floor 1");
+        //s2d_print_starpiece(20, 80);
+        //s2d_init();
+        //gSPDisplayList(gDisplayListHead++, starpiece_chart_bg_dl);
+        //setup_mtx(&starpiecebuf2[0], 30, 40, 1);
+        //s2d_stop();
     }
 
-}
+}*/
 
 void render_game(void) {
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
@@ -395,7 +413,7 @@ void render_game(void) {
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
         render_hud();
-        s2d_level_manager();
+        //s2d_level_manager();
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();

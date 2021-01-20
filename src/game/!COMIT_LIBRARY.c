@@ -383,3 +383,31 @@ s32 CL_get_room_from_point(Vec3f point) {
     }
     return -1;
 }
+
+
+
+struct Object *CL_obj_find_nearest_object_with_behavior_room(struct Object *curObj, const BehaviorScript *behavior, s32 room) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    f32 minDist = 0x20000;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj != curObj && obj->oRoom == room) {
+                f32 objDist = dist_between_objects(curObj, obj);
+                if (objDist < minDist) {
+                    closestObj = obj;
+                    minDist = objDist;
+                }
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+
+    return closestObj;
+}

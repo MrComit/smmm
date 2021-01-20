@@ -28,6 +28,7 @@ void CL_Lava_Boost(void);
 struct Object *CL_nearest_object_with_behavior_and_field(const BehaviorScript *behavior, u32 field, u32 param);
 struct Object *CL_objptr_nearest_object_behavior(struct Object *obj2, const BehaviorScript *behavior);
 s32 CL_get_room_from_point(Vec3f point);
+struct Object *CL_obj_find_nearest_object_with_behavior_room(struct Object *curObj, const BehaviorScript *behavior, s32 room);
 
 
 #endif

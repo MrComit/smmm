@@ -389,4 +389,6 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 #include "key_big/geo_header.h"
 
+//#include "src/s2d_engine/sprites/starpiece/starpiece.h"
+
 #endif
