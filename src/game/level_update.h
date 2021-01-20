@@ -92,6 +92,7 @@ extern s8 sTimerRunning;
 struct HudDisplay {
     /*0x00*/ s16 lives;
     /*0x02*/ s32 coins;
+             s16 booCoins;
     /*0x04*/ s16 stars;
     /*0x06*/ s16 wedges;
     ///*0x08*/ s16 keys;
@@ -111,6 +112,7 @@ enum HUDDisplayFlag {
     HUD_DISPLAY_FLAG_UNKNOWN_0020 = 0x0020,
     HUD_DISPLAY_FLAG_TIMER = 0x0040,
     HUD_DISPLAY_FLAG_LOWER = 0x0080,
+    HUD_DISPLAY_FLAG_BOO = 0x0100,
     HUD_DISPLAY_FLAG_EMPHASIZE_POWER = 0x8000,
 
     HUD_DISPLAY_NONE = 0x0000,

@@ -1053,7 +1053,7 @@ void update_hud_values(void) {
         }
 
 
-        if (gHudDisplay.coins < gMarioState->numCoins) {
+        if (gHudDisplay.coins < gMarioState->numCoins && !(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
             if (gGlobalTimer & 0x00000001) {
                 u32 coinSound;
                 if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
@@ -1064,17 +1064,16 @@ void update_hud_values(void) {
 
                 gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
                 gHudLowerTimer = 0;
+
                 gHudDisplay.coins += 1;
-                play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
-
-
                 gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount = gHudDisplay.coins;
+                play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
                 //gGotFileCoinHiScore = 1;
                 gSaveFileModified = TRUE;
             }
         }
 
-        if (gHudDisplay.coins > gMarioState->numCoins) {
+        if (gHudDisplay.coins > gMarioState->numCoins && !(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
             if (gGlobalTimer & 0x00000001) {
                 u32 coinSound;
                 if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
@@ -1085,19 +1084,30 @@ void update_hud_values(void) {
 
                 gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
                 gHudLowerTimer = 0;
+
                 gHudDisplay.coins -= 1;
-                play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
-
-
                 gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount = gHudDisplay.coins;
+                play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
                 //gGotFileCoinHiScore = 1;
                 gSaveFileModified = TRUE;
+            }
+        }
+
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+            if (gHudDisplay.booCoins < gMarioState->numBooCoins) {
+                if (gGlobalTimer & 0x00000001) {
+                    gHudDisplay.booCoins += 1;
+                    //gMarioState->numBooCoins = gHudDisplay.booCoins;
+                    play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
+                }
             }
         }
 
         //if (gMarioState->numLives > 100) {
         //    gMarioState->numLives = 100;
         //}
+        //gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_BOO;
+
 
         //gHudDisplay.stars = gMarioState->numStars;
         gHudDisplay.lives = gMarioState->numLives;

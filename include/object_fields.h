@@ -1158,6 +1158,12 @@
 #define /*0x100*/ oYoshiTargetYaw  OBJECT_FIELD_S32(0x1E)
 
 
+
+/* new boo */
+#define /*0x098*/ oFloat98         OBJECT_FIELD_F32(0x04)
+#define /*0x148*/ o148             OBJECT_FIELD_S16(0x30, 0)
+#define /*0x14A*/ o14A             OBJECT_FIELD_S16(0x30, 1)
+
 /* general */
 #define /*0x0F4*/ oF4              OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oF8              OBJECT_FIELD_S32(0x1C)

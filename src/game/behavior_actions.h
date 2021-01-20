@@ -138,6 +138,7 @@ void bhv_beta_trampoline_top_loop(void);
 void bhv_beta_trampoline_spring_loop(void);
 void bhv_jumping_box_loop(void);
 void bhv_boo_cage_loop(void);
+void bhv_boo_cage_init(void);
 void bhv_bowser_key_loop(void);
 void bhv_grand_star_loop(void);
 void bhv_beta_boo_key_loop(void);

@@ -329,6 +329,7 @@ struct MarioState
     /*0xA0*/ struct MarioAnimation *animation;
     /*0xA4*/ u32 collidedObjInteractTypes;
     /*0xA8*/ s32 numCoins;
+             s16 numBooCoins;
     ///*0xAA*/ s16 numStars;
     /*0xAC*/ s8 numKeys; // Unused key mechanic
     /*0xAD*/ s8 numLives;

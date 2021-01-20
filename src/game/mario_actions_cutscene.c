@@ -1187,10 +1187,17 @@ s32 act_unused_death_exit(struct MarioState *m) {
         // restore 7.75 units of health
         m->healCounter = 31;
 
-        if (m->numCoins > 10)
-            m->numCoins -= 10;
-        else
-            m->numCoins = 0;
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+            if (m->numBooCoins > 10)
+                m->numBooCoins -= 10;
+            else
+                m->numBooCoins = 0;
+        } else {
+            if (m->numCoins > 10)
+                m->numCoins -= 10;
+            else
+                m->numCoins = 0;
+        }
 
     }
     // one unit of health
