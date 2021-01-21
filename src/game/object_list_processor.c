@@ -152,6 +152,7 @@ s32 gEnvironmentLevels[20];
 s8 gDoorAdjacentRooms[60][2];
 s16 gMarioCurrentRoom;
 s16 gMarioPreviousRoom;
+s16 gMarioPreviousRoom2;
 s16 D_8035FEE2;
 s16 D_8035FEE4;
 s16 gTHIWaterDrained;

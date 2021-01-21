@@ -359,7 +359,7 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
-#include "s2d_engine/init.h"
+/*#include "s2d_engine/init.h"
 #include "s2d_engine/s2d_draw.h"
 #include "s2d_engine/s2d_print.h"
 
@@ -376,7 +376,7 @@ void s2d_print_string(s16 x, s16 y, const char *str) {
 	buffer = alloc_display_list(0x200 * sizeof(uObjMtx));
 	s2d_print(x, y, str, buffer);
 	s2d_stop();
-}
+}*/
 
 
 void render_game(void) {

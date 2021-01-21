@@ -1,13 +1,13 @@
 COURSE_ACTS(COURSE_BOB, _(" 1 BOB-OMB BATTLEFIELD"),
-       _("BIG BOB-OMB ON THE SUMMIT")     , _("FOOTRACE WITH KOOPA THE QUICK") , _("SHOOT TO THE ISLAND IN THE SKY"),
-       _("FIND THE 8 RED COINS")          , _("MARIO WINGS TO THE SKY")        , _("BEHIND CHAIN CHOMP'S GATE"))
+       _("Mudroom")     , _("Entrance Hall") , _("Parlor"),
+       _("Garage")          , _("Hallway")        , _("Dining Room"))
 
 COURSE_ACTS(COURSE_WF, _(" 2 WHOMP'S FORTRESS"),
-       _("CHIP OFF WHOMP'S BLOCK")        , _("TO THE TOP OF THE FORTRESS")    , _("SHOOT INTO THE WILD BLUE"),
-       _("RED COINS ON THE FLOATING ISLE"), _("FALL ONTO THE CAGED ISLAND")    , _("BLAST AWAY THE WALL"))
+       _("Kitchen")        , _("Pantry")    , _("Living Room"),
+       _("Study"), _("Library")    , _("Hallway"))
 
 COURSE_ACTS(COURSE_JRB, _(" 3 JOLLY ROGER BAY"),
-       _("PLUNDER IN THE SUNKEN SHIP")    , _("CAN THE EEL COME OUT TO PLAY?") , _("TREASURE OF THE OCEAN CAVE"),
+       _("Hallway")    , _("Treasury") , _("TREASURE OF THE OCEAN CAVE"),
        _("RED COINS ON THE SHIP AFLOAT")  , _("BLAST TO THE STONE PILLAR")     , _("THROUGH THE JET STREAM"))
 
 COURSE_ACTS(COURSE_CCM, _(" 4 COOL, COOL MOUNTAIN"),

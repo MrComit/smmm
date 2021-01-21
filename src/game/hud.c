@@ -17,6 +17,9 @@
 #include "game/object_helpers.h"
 #include "src/s2d_engine/init.h"
 #include "!COMIT_LIBRARY.h"
+#include "s2d_engine/s2d_draw.h"
+#include "s2d_engine/s2d_print.h"
+#include "object_list_processor.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -500,8 +503,47 @@ void render_hud(void) {
     }
 }
 
+//char myString[] = "Mudroom";
 
+// ...
+void print_s2d_string(s16 x, s16 y, char *str) {
+	s2d_init();
+	uObjMtx *buffer;
+	buffer = alloc_display_list(0x200 * sizeof(uObjMtx));
+	s2d_print(x, y, str, buffer);
+	s2d_stop();
+}
 
+#include "src/s2d_engine/sprites/room_names.c"
+
+extern s8 sLevelRoomOffsets[];
+s32 gRoomEntryTimer = -1;
+
+void render_s2d_room_names(void) {
+    s16 y;
+    if (gMarioCurrentRoom != gMarioPreviousRoom2) {
+        gRoomEntryTimer = 0;
+
+    }
+    gMarioPreviousRoom2 = gMarioCurrentRoom;
+
+    if (gRoomEntryTimer >= 0) {
+        gRoomEntryTimer++;
+        y = 290;
+        if (gRoomEntryTimer < 20) {
+            y = 290 - (gRoomEntryTimer * 4);
+        } else if (gRoomEntryTimer < 70) {
+            y = 210;
+        } else {
+            y = 210 + ((gRoomEntryTimer - 70) * 4);
+        }
+
+        print_s2d_string(40, y, roomNames[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrLevelNum - 1]]);
+        if (gRoomEntryTimer > 90) {
+            gRoomEntryTimer = -1;
+        }
+    }
+}
 
 
 #include "src/s2d_engine/sprites/starpiece/starpiece.c"
@@ -539,4 +581,5 @@ void render_s2d_hud(void) {
             }
         }
     }
+    render_s2d_room_names();
 }
