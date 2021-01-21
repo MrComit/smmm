@@ -72,3 +72,5 @@
 #include "levels/bob/boss_koopa/anims/data.inc.c"
 #include "levels/bob/boss_koopa/anims/table.inc.c"
 #include "levels/bob/l1_gate_alt/collision.inc.c"
+#include "levels/bob/ghost_barrier/collision.inc.c"
+#include "levels/bob/ghost_barrier/model.inc.c"

@@ -1046,7 +1046,7 @@ void update_hud_values(void) {
             gHudLowerTimer++;
             gHudTopY = approach_s16_symmetric(gHudTopY, 209, 2);
         } else {
-            gHudTopY = approach_s16_symmetric(gHudTopY, 240, 2);
+            gHudTopY = approach_s16_symmetric(gHudTopY, 225, 2);
         }
 
         if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER && gHudLowerTimer > 150) {

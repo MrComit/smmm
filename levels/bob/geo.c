@@ -43,3 +43,4 @@
 #include "levels/bob/l1_flip_book/geo.inc.c"
 #include "levels/bob/boss_koopa/geo.inc.c"
 #include "levels/bob/l1_lock/geo.inc.c"
+#include "levels/bob/ghost_barrier/geo.inc.c"

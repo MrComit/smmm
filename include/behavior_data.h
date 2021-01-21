@@ -603,7 +603,7 @@ extern const BehaviorScript bhvSmallKeyDoor[];
 extern const BehaviorScript bhvBigKey[];
 extern const BehaviorScript bhvBigKeyDoor[];
 extern const BehaviorScript bhvL1RoomGate[];
-
+extern const BehaviorScript bhvGhostBarrier[];
 
 
 

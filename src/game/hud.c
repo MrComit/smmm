@@ -472,7 +472,7 @@ void render_hud(void) {
         if (sCurrPlayMode == 2)
             gHudTopY = 209;
 
-        if (gHudTopY < 240)
+        if (gHudTopY < 225)
             render_hud_coins();
 
         //if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {

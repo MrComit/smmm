@@ -1,0 +1,21 @@
+const Collision ghost_barrier_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(8),
+	COL_VERTEX(-31, 0, -84),
+	COL_VERTEX(-31, 0, 79),
+	COL_VERTEX(-31, 250, 79),
+	COL_VERTEX(-31, 250, -84),
+	COL_VERTEX(23, 0, 221),
+	COL_VERTEX(23, 250, 221),
+	COL_VERTEX(23, 0, -227),
+	COL_VERTEX(23, 250, -227),
+	COL_TRI_INIT(SURFACE_DEFAULT, 6),
+	COL_TRI(0, 1, 2),
+	COL_TRI(0, 2, 3),
+	COL_TRI(1, 4, 5),
+	COL_TRI(1, 5, 2),
+	COL_TRI(6, 0, 3),
+	COL_TRI(6, 3, 7),
+	COL_TRI_STOP(),
+	COL_END()
+};
