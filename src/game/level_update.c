@@ -1111,6 +1111,10 @@ void update_hud_values(void) {
                     //gMarioState->numBooCoins = gHudDisplay.booCoins;
                     play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
                 }
+            } else if (gHudDisplay.booCoins > gMarioState->numBooCoins) {
+                    gHudDisplay.booCoins -= 1;
+                    //gMarioState->numBooCoins = gHudDisplay.booCoins;
+                    play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
             }
         }
 

@@ -778,7 +778,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         isKey = 2;
     }
 
-    gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER | HUD_DISPLAY_FLAG_STAR_PIECE);
+    gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
     gHudLowerTimer = 0;
 
     if (m->health >= 0x100) {
@@ -802,6 +802,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         if (isKey != 0) {
             save_file_set_keys(starKeyIndex);
         } else {
+            gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
             save_file_set_star_piece(o->oBehParams >> 24);
         }
         //save_file_collect_star_or_key(m->numCoins, starIndex);
