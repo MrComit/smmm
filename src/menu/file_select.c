@@ -599,7 +599,7 @@ void render_score_menu_buttons(struct Object *scoreButton) {
     }
     sMainMenuButtons[MENU_BUTTON_SCORE_FILE_C]->oMenuButtonScale = 0.11111111f;
     // File D
-    if (save_file_exists(SAVE_FILE_D) == TRUE) {
+    if (save_file_exists(SAVE_FILE_A) == TRUE) {
         sMainMenuButtons[MENU_BUTTON_SCORE_FILE_D] =
             spawn_object_rel_with_rot(scoreButton, MODEL_MAIN_MENU_MARIO_SAVE_BUTTON, bhvMenuButton,
                                       -166, 0, -100, 0, -0x8000, 0);
@@ -719,7 +719,7 @@ void render_copy_menu_buttons(struct Object *copyButton) {
     }
     sMainMenuButtons[MENU_BUTTON_COPY_FILE_C]->oMenuButtonScale = 0.11111111f;
     // File D
-    if (save_file_exists(SAVE_FILE_D) == TRUE) {
+    if (save_file_exists(SAVE_FILE_A) == TRUE) {
         sMainMenuButtons[MENU_BUTTON_COPY_FILE_D] = spawn_object_rel_with_rot(
             copyButton, MODEL_MAIN_MENU_MARIO_SAVE_BUTTON, bhvMenuButton, -166, 0, -100, 0, -0x8000, 0);
     } else {
@@ -909,7 +909,7 @@ void render_erase_menu_buttons(struct Object *eraseButton) {
     }
     sMainMenuButtons[MENU_BUTTON_ERASE_FILE_C]->oMenuButtonScale = 0.11111111f;
     // File D
-    if (save_file_exists(SAVE_FILE_D) == TRUE) {
+    if (save_file_exists(SAVE_FILE_A) == TRUE) {
         sMainMenuButtons[MENU_BUTTON_ERASE_FILE_D] =
             spawn_object_rel_with_rot(eraseButton, MODEL_MAIN_MENU_MARIO_SAVE_BUTTON, bhvMenuButton,
                                       -166, 0, -100, 0, -0x8000, 0);
@@ -1348,7 +1348,7 @@ void bhv_menu_button_manager_init(void) {
     }
     sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C]->oMenuButtonScale = 1.0f;
     // File D
-    if (save_file_exists(SAVE_FILE_D) == TRUE) {
+    if (save_file_exists(SAVE_FILE_A) == TRUE) {
         sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D] = spawn_object_rel_with_rot(
             gCurrentObject, MODEL_MAIN_MENU_MARIO_SAVE_BUTTON_FADE, bhvMenuButton, 1500, 0, 0, 0, 0, 0);
     } else {
@@ -1830,7 +1830,7 @@ void print_main_menu_strings(void) {
     print_save_file_star_count(SAVE_FILE_A, SAVEFILE_X1, 78);
     print_save_file_star_count(SAVE_FILE_B, SAVEFILE_X2, 78);
     print_save_file_star_count(SAVE_FILE_C, SAVEFILE_X1, 118);
-    print_save_file_star_count(SAVE_FILE_D, SAVEFILE_X2, 118);
+    print_save_file_star_count(SAVE_FILE_A, SAVEFILE_X2, 118);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 #ifndef VERSION_EU
     // Print menu names
@@ -1972,7 +1972,7 @@ void print_score_menu_strings(void) {
     print_save_file_star_count(SAVE_FILE_A, 90, 76);
     print_save_file_star_count(SAVE_FILE_B, 211, 76);
     print_save_file_star_count(SAVE_FILE_C, 90, 119);
-    print_save_file_star_count(SAVE_FILE_D, 211, 119);
+    print_save_file_star_count(SAVE_FILE_A, 211, 119);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 #endif
 
@@ -2159,7 +2159,7 @@ void print_copy_menu_strings(void) {
     print_save_file_star_count(SAVE_FILE_A, 90, 76);
     print_save_file_star_count(SAVE_FILE_B, 211, 76);
     print_save_file_star_count(SAVE_FILE_C, 90, 119);
-    print_save_file_star_count(SAVE_FILE_D, 211, 119);
+    print_save_file_star_count(SAVE_FILE_A, 211, 119);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 #endif
     // Print menu names
@@ -2432,7 +2432,7 @@ void print_erase_menu_strings(void) {
     print_save_file_star_count(SAVE_FILE_A, 90, 76);
     print_save_file_star_count(SAVE_FILE_B, 211, 76);
     print_save_file_star_count(SAVE_FILE_C, 90, 119);
-    print_save_file_star_count(SAVE_FILE_D, 211, 119);
+    print_save_file_star_count(SAVE_FILE_A, 211, 119);
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 #endif
 
@@ -2816,7 +2816,7 @@ static void print_file_select_strings(void) {
             print_save_file_scores(SAVE_FILE_C);
             break;
         case MENU_BUTTON_SCORE_FILE_D:
-            print_save_file_scores(SAVE_FILE_D);
+            print_save_file_scores(SAVE_FILE_A);
             break;
         case MENU_BUTTON_SOUND_MODE:
             print_sound_mode_menu_strings();
@@ -2824,7 +2824,7 @@ static void print_file_select_strings(void) {
     }
     // If all 4 save file exists, define true to sAllFilesExist to prevent more copies in copy menu
     if (save_file_exists(SAVE_FILE_A) == TRUE && save_file_exists(SAVE_FILE_B) == TRUE &&
-        save_file_exists(SAVE_FILE_C) == TRUE && save_file_exists(SAVE_FILE_D) == TRUE) {
+        save_file_exists(SAVE_FILE_C) == TRUE && save_file_exists(SAVE_FILE_A) == TRUE) {
         sAllFilesExist = TRUE;
     } else {
         sAllFilesExist = FALSE;

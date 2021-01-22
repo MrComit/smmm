@@ -1,3 +1,6 @@
+#include "game/save_file.h"
+#include "buffers/buffers.h"
+
 static struct ObjectHitbox sStarPieceHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
     /* downOffset:        */ 0,
@@ -39,6 +42,16 @@ Vec3f sPreviousMarioPos = {0, 0, 0};
 u8 sTokenCoins[3] = {5, 20, 50};
 
 
+void bhv_deathwarp_init(void) {
+    if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+        o->oPosX = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0];
+        o->oPosY = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1];
+        o->oPosZ = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2];
+        vec3f_copy(gMarioState->pos, &o->oPosX);
+    }
+
+}
+
 void bhv_deathwarp_loop(void) {
     Vec3f pos;
     s16 angle;
@@ -55,6 +68,10 @@ void bhv_deathwarp_loop(void) {
         pos[2] = m->pos[2] + (coss(angle) * 150.0f);
         pos[1] = m->pos[1] + 50.0f;
         vec3f_copy(&o->oPosX, pos);
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = (s16)pos[0];
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)pos[1];
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)pos[2];
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
     }
     o->oRoom = (gMarioPreviousRoom = gMarioCurrentRoom);
     vec3f_copy(sPreviousMarioPos, m->pos);

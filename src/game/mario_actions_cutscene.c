@@ -1188,8 +1188,8 @@ s32 act_unused_death_exit(struct MarioState *m) {
         m->healCounter = 31;
 
         if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
-            if (m->numBooCoins > 10)
-                m->numBooCoins -= 10;
+            if (m->numBooCoins > 5)
+                m->numBooCoins -= 5;
             else
                 m->numBooCoins = 0;
         } else {

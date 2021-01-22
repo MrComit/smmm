@@ -90,6 +90,7 @@ void bhv_l1_gate_loop(void) {
                     }
                     break;
                 case 1:
+                    o->oFlags |= (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR);
                     if (cur_obj_nearest_object_with_behavior(bhvShyguyBookSteal) == NULL) {
                         o->oAction = 1;
                         save_file_set_newflags(SAVE_NEW_FLAG_PARLOR_GATE, 0);

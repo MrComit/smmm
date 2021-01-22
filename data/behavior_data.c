@@ -3568,6 +3568,9 @@ const BehaviorScript bhvSpinAirborneWarp[] = {
 };
 
 const BehaviorScript bhvFlyingWarp[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    //CALL_NATIVE(bhv_deathwarp_init),
     BREAK(),
 };
 
@@ -3582,6 +3585,7 @@ const BehaviorScript bhvPaintingDeathWarp[] = {
 const BehaviorScript bhvAirborneDeathWarp[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_deathwarp_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_deathwarp_loop),
     END_LOOP(),

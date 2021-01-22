@@ -20,6 +20,8 @@ void bhv_appearing_book_init(void) {
 
 
 void bhv_appearing_book_loop(void) {
+    if (gMarioCurrentRoom != o->oRoom)
+        return;
     switch (o->oAction) {
         case 0:
             if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->pos[2] > 4596.0f) {

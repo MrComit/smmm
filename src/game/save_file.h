@@ -9,7 +9,7 @@
 #include "course_table.h"
 
 #define EEPROM_SIZE 0x200
-#define NUM_SAVE_FILES 4
+#define NUM_SAVE_FILES 3
 
 struct SaveBlockSignature
 {
@@ -19,9 +19,9 @@ struct SaveBlockSignature
 
 struct SaveFile
 {
-    //u8 capLevel;
-    //u8 capArea;
-    //Vec3s capPos;
+    u8 spawnLevel;
+    u8 spawnArea;
+    Vec3s spawnPos;
     u32 newFlags[2];
     u32 flags;
     //u8 courseStars[COURSE_COUNT];
@@ -38,8 +38,8 @@ struct SaveFile
 enum SaveFileIndex {
     SAVE_FILE_A,
     SAVE_FILE_B,
-    SAVE_FILE_C,
-    SAVE_FILE_D
+    SAVE_FILE_C//,
+    //SAVE_FILE_D
 };
 
 struct MainMenuSaveData

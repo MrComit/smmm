@@ -549,7 +549,7 @@ void render_s2d_room_names(void) {
 #include "src/s2d_engine/sprites/starpiece/starpiece.c"
 #include "src/s2d_engine/sprites/starpiece_chart/starpiece_chart.c"
 
-uObjMtx starpiecebuf[0x7];
+uObjMtx starpiecebuf[0x8];
 
 void s2d_print_starpiece(s16 x, s16 y, s16 idx) {
 	s2d_init();
