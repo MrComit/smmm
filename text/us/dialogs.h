@@ -250,20 +250,20 @@ Would you like to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
-You've collected 100\n\
-coins! Mario gains more\n\
-power from the castle.\n\
+You've collected a\n\
+Star Piece! Collect all 5 in\n\
+this chapter to get a prize.\n\
 Do you want to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
-Wow! Another Power Star!\n\
-Mario gains more courage\n\
-from the power of the\n\
-castle.\n\
+You've Collected a Key!\n\
+Use this to unlock a\n\
+door somewhere in the\n\
+manor.\n\
 Do you want to Save?\n\
 \n\
-//You Bet//Not Now"))
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
 You can punch enemies to\n\

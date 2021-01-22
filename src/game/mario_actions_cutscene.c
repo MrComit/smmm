@@ -613,7 +613,12 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
 
             case 80:
                 enable_time_stop();
-                create_dialog_box_with_response(gLastCompletedStarNum == 7 ? DIALOG_013 : DIALOG_014);
+                if (isKey)
+                    dialogID = DIALOG_014;
+                else
+                    dialogID = DIALOG_013;
+                create_dialog_box_with_response(dialogID);
+                dialogID = 0;
                 m->actionState = 1;
                 break;
         }

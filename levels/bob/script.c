@@ -68,6 +68,7 @@ const LevelScript level_bob_entry[] = {
 		WARP_NODE(0x10, LEVEL_WF, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 4563, 142, 8543, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
+		MARIO_POS(0x01, -180, 0, 192, 28972),
 		OBJECT(MODEL_BREAKABLE_BOX, 861, 0, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 1061, 0, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 1061, 200, 29142, 0, 0, 0, 0x00000000, bhvBreakableBox),
@@ -253,7 +254,7 @@ const LevelScript level_bob_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(1, 0, 0, 0, 0),
+	MARIO_POS(0x01, -180, 0, 192, 28972),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

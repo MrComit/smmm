@@ -76,6 +76,9 @@ void bhv_lever_loop(void) {
 
 void bhv_l1_gate_loop(void) {
     struct Object *obj;
+    if (o->oBehParams2ndByte != 1) {
+        o->oFlags &= ~(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR);
+    }
     switch (o->oAction) {
         case 0:
             switch (o->oBehParams2ndByte) {
@@ -90,15 +93,14 @@ void bhv_l1_gate_loop(void) {
                     }
                     break;
                 case 1:
-                    o->oFlags |= (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR);
+                    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PARLOR_GATE) {
+                        o->activeFlags = 0;
+                        break;
+                    }
                     if (cur_obj_nearest_object_with_behavior(bhvShyguyBookSteal) == NULL) {
                         o->oAction = 1;
                         save_file_set_newflags(SAVE_NEW_FLAG_PARLOR_GATE, 0);
                         play_puzzle_jingle();
-                        break;
-                    }
-                    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PARLOR_GATE) {
-                        o->activeFlags = 0;
                     }
                     break;
                 case 2:

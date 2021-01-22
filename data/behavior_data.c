@@ -6309,7 +6309,7 @@ const BehaviorScript bhvRoomBoo[] = {
 
 const BehaviorScript bhvL1Gate[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(l1_gate_collision),
     SET_FLOAT(oCollisionDistance, 0x300),
     SET_HOME(),

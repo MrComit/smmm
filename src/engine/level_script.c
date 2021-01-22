@@ -23,6 +23,7 @@
 #include "math_util.h"
 #include "surface_collision.h"
 #include "surface_load.h"
+#include "buffers/buffers.h"
 
 #define CMD_GET(type, offset) (*(type *) (CMD_PROCESS_OFFSET(offset) + (u8 *) sCurrentCmd))
 
@@ -648,6 +649,13 @@ static void level_cmd_set_mario_start_pos(void) {
     vec3s_copy(gMarioSpawnInfo->startPos, CMD_GET(Vec3s, 6));
 #endif
     vec3s_set(gMarioSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
+
+
+    if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+        gMarioSpawnInfo->areaIndex = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea;
+        vec3s_copy(gMarioSpawnInfo->startPos, gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos);
+    }
+
 
     sCurrentCmd = CMD_NEXT;
 }

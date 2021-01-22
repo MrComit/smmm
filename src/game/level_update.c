@@ -1460,11 +1460,6 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
 
     if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
         levelNum = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel;
-        //gCurrLevelNum = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel;
-        //gMarioState->pos[0] = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0];
-        //gMarioState->pos[1] = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1];
-        //gMarioState->pos[2] = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2];
-        //vec3s_copy(gMarioSpawnInfo->startPos, gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos);
     }
 
 

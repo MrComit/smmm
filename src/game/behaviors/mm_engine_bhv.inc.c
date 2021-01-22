@@ -72,6 +72,7 @@ void bhv_deathwarp_loop(void) {
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)pos[1];
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)pos[2];
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea = gCurrAreaIndex;
     }
     o->oRoom = (gMarioPreviousRoom = gMarioCurrentRoom);
     vec3f_copy(sPreviousMarioPos, m->pos);
