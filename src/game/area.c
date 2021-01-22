@@ -21,6 +21,8 @@
 #include "engine/geo_layout.h"
 #include "save_file.h"
 #include "level_table.h"
+#include "ingame_menu.h"
+#include "segment2.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
@@ -359,23 +361,20 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
-/*#include "s2d_engine/init.h"
-#include "s2d_engine/s2d_draw.h"
-#include "s2d_engine/s2d_print.h"
+/*void shade_screen_rgba(u8 r, u8 g, u8 b, u8 a) {
+    create_dl_ortho_matrix();
+    create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
 
-char myString[] = "This is a " SCALE "2" "test string!\n"
-                "Supports a bunch of standard " ROTATE "-36" "escape characters!\n"
-                "\tIncluding " COLOR "255 0 0 0" "Colorful text!";
+    // This is a bit weird. It reuses the dialog text box (width 130, height -80),
+    // so scale to at least fit the screen.
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
 
-
-
-// ...
-void s2d_print_string(s16 x, s16 y, const char *str) {
-	s2d_init();
-	uObjMtx *buffer;
-	buffer = alloc_display_list(0x200 * sizeof(uObjMtx));
-	s2d_print(x, y, str, buffer);
-	s2d_stop();
+    gDPSetEnvColor(gDisplayListHead++, r, g, b, a);
+    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    //gWarpTransition.data.red = r;
+    //gWarpTransition.data.green = g;
+    //gWarpTransition.data.blue = b;
 }*/
 
 
@@ -387,6 +386,12 @@ void render_game(void) {
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
+        //if (!gWarpTransition.isActive) {
+        //    render_screen_transition(0, WARP_TRANSITION_FADE_FROM_COLOR, 0, &gWarpTransition.data);
+        //    set_warp_transition_rgb(0, 0, 0);
+        //    gWarpTransition.time = 0;
+        //}
+        gPauseScreenMode = render_menus_and_dialogs();
         render_hud();
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -395,11 +400,11 @@ void render_game(void) {
         print_displaying_credits_entry();
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
                       SCREEN_HEIGHT - BORDER_HEIGHT);
-        gPauseScreenMode = render_menus_and_dialogs();
-
+        //gPauseScreenMode = render_menus_and_dialogs();
         if (gPauseScreenMode != 0) {
             gSaveOptSelectIndex = gPauseScreenMode;
         }
+        //shade_screen_rgba(0x0F, 0x1B, 0x0E, 0xFF);
 
         if (D_8032CE78 != NULL) {
             make_viewport_clip_rect(D_8032CE78);

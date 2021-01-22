@@ -22,6 +22,7 @@
 #include "sm64.h"
 #include "text_strings.h"
 #include "types.h"
+#include "object_list_processor.h"
 
 u16 gDialogColorFadeTimer;
 s8 gLastDialogLineNum;
@@ -3046,11 +3047,36 @@ s16 render_course_complete_screen(void) {
     return 0;
 }
 
+
+void shade_screen_rgba(u8 r, u8 g, u8 b, u8 a) {
+    create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
+
+    // This is a bit weird. It reuses the dialog text box (width 130, height -80),
+    // so scale to at least fit the screen.
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
+
+    gDPSetEnvColor(gDisplayListHead++, r, g, b, a);
+    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    //gWarpTransition.data.red = r;
+    //gWarpTransition.data.green = g;
+    //gWarpTransition.data.blue = b;
+}
+
+s16 gRoomAlpha = 0x0;
+
 // Only case 1 and 2 are used
 s16 render_menus_and_dialogs(void) {
     s16 mode = 0;
 
     create_dl_ortho_matrix();
+    shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
+
+    if (save_file_get_rooms(gMarioCurrentRoom / 32) & (1 << (gMarioCurrentRoom % 32))) {
+        gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);
+    } else {
+        gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x90, 0x10);
+    }
 
     if (gMenuMode != -1) {
         switch (gMenuMode) {
