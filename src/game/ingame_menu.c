@@ -2195,6 +2195,10 @@ u8 gTextCourseArr[][7] = {
 #define MYSCORE_X  62
 #endif
 
+
+extern s8 sLevelRoomOffsets[];
+
+
 void render_pause_my_score_coins(void) {
 #ifdef VERSION_EU
     u8 textMyScore[][10] = {
@@ -2246,10 +2250,10 @@ void render_pause_my_score_coins(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    if (courseIndex < COURSE_STAGES_COUNT) {
-        print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 103);
-        print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 103);
-    }
+    //if (courseIndex < COURSE_STAGES_COUNT) {
+    //    print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 103);
+    //    print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 103);
+    //}
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
@@ -2263,7 +2267,7 @@ void render_pause_my_score_coins(void) {
     courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
 
     if (courseIndex < COURSE_STAGES_COUNT) {
-#ifdef VERSION_EU
+/*#ifdef VERSION_EU
         print_generic_string(48, 157, gTextCourseArr[gInGameLanguage]);
 #else
         print_generic_string(63, 157, textCourse);
@@ -2273,21 +2277,21 @@ void render_pause_my_score_coins(void) {
         print_generic_string(get_string_width(gTextCourseArr[gInGameLanguage]) + 51, 157, strCourseNum);
 #else
         print_generic_string(CRS_NUM_X1, 157, strCourseNum);
-#endif
+#endif*/
 
-        actName = segmented_to_virtual(actNameTbl[(gCurrCourseNum - 1) * 6 + gDialogCourseActNum - 1]);
+        actName = segmented_to_virtual(actNameTbl[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrLevelNum - 1]]);
 
-        if (starFlags & (1 << (gDialogCourseActNum - 1))) {
+        /*if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
         } else {
             print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
-        }
+        }*/
         print_generic_string(ACT_NAME_X, 140, actName);
-#ifndef VERSION_JP
+/*#ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
-#endif
+#endif*/
     }
-#ifndef VERSION_JP
+/*#ifndef VERSION_JP
     else {
 #if defined(VERSION_US) || defined(VERSION_SH)
         print_generic_string(94, 157, &courseName[3]);
@@ -2297,7 +2301,7 @@ void render_pause_my_score_coins(void) {
     }
 #else
     print_generic_string(117, 157, &courseName[3]);
-#endif
+#endif*/
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
 
