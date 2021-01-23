@@ -900,11 +900,8 @@ s32 update_radial_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     f32 cenDistZ = sMarioCamState->pos[2] - c->areaCenZ;
     s16 camYaw = atan2s(cenDistZ, cenDistX) + sModeOffsetYaw;
     s16 pitch = look_down_slopes(camYaw);
-    UNUSED f32 unused1;
     f32 posY;
     f32 focusY;
-    UNUSED f32 unused2;
-    UNUSED f32 unused3;
     f32 yOff = 125.f;
     f32 baseDist = 1000.f;
 
@@ -936,9 +933,6 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);
     focus_on_mario(focus, pos, posY + yOff, focusY + yOff, sLakituDist + baseDist, pitch, camYaw);
     pan_ahead_of_player(c);
-    if (gCurrLevelArea == AREA_DDD_SUB) {
-        camYaw = clamp_positions_and_find_yaw(pos, focus, 6839.f, 995.f, 5994.f, -3945.f);
-    }
 
     return camYaw;
 }
@@ -963,12 +957,12 @@ void radial_camera_move(struct Camera *c) {
     // How much the camera's yaw changed
     s16 yawOffset = calculate_yaw(sMarioCamState->pos, c->pos) - atan2s(areaDistZ, areaDistX);
 
-    if (yawOffset > maxAreaYaw) {
+    /*if (yawOffset > maxAreaYaw) {
         yawOffset = maxAreaYaw;
     }
     if (yawOffset < minAreaYaw) {
         yawOffset = minAreaYaw;
-    }
+    }*/
 
     // Check if Mario stepped on a surface that rotates the camera. For example, when Mario enters the
     // gate in BoB, the camera turns right to face up the hill path
@@ -1008,12 +1002,12 @@ void radial_camera_move(struct Camera *c) {
         avoidYaw -= atan2s(areaDistZ, areaDistX);
 
         // Bound avoid yaw to radial mode constraints
-        if (avoidYaw > DEGREES(105)) {
+        /*if (avoidYaw > DEGREES(105)) {
             avoidYaw = DEGREES(105);
         }
         if (avoidYaw < DEGREES(-105)) {
             avoidYaw = DEGREES(-105);
-        }
+        }*/
     }
 
     if (gCameraMovementFlags & CAM_MOVE_RETURN_TO_MIDDLE) {
@@ -1072,12 +1066,12 @@ void radial_camera_move(struct Camera *c) {
     }
 
     // Bound sModeOffsetYaw within (-120, 120) degrees
-    if (sModeOffsetYaw > 0x5554) {
+    /*if (sModeOffsetYaw > 0x5554) {
         sModeOffsetYaw = 0x5554;
     }
     if (sModeOffsetYaw < -0x5554) {
         sModeOffsetYaw = -0x5554;
-    }
+    }*/
 }
 
 /**
@@ -1140,9 +1134,7 @@ void update_yaw_and_dist_from_c_up(UNUSED struct Camera *c) {
  */
 void mode_radial_camera(struct Camera *c) {
     Vec3f pos;
-    UNUSED u8 unused1[8];
     s16 oldAreaYaw = sAreaYaw;
-    UNUSED u8 unused2[4];
 
     if (gCameraMovementFlags & CAM_MOVING_INTO_MODE) {
         update_yaw_and_dist_from_c_up(c);
@@ -2198,7 +2190,7 @@ s16 update_default_camera(struct Camera *c) {
         vec3f_set_dist_and_angle(sMarioCamState->pos, cPos, xzDist, tempPitch, tempYaw);
         sAvoidYawVel = (sAvoidYawVel - yaw) / 0x100;
     } else {
-        if (gMarioStates[0].forwardVel == 0.f) {
+        /*if (gMarioStates[0].forwardVel == 0.f) {
             if (sStatusFlags & CAM_FLAG_COLLIDED_WITH_WALL) {
                 if ((yawGoal - yaw) / 0x100 >= 0) {
                     yawDir = -1;
@@ -2228,7 +2220,7 @@ s16 update_default_camera(struct Camera *c) {
         }
         if (yawVel != 0 && get_dialog_id() == -1) {
             camera_approach_s16_symmetric_bool(&yaw, yawGoal, yawVel);
-        }
+        }*/
     }
 
     // Only zoom out if not obstructed by walls and Lakitu hasn't collided with any
@@ -2368,9 +2360,6 @@ s16 update_default_camera(struct Camera *c) {
             && (avoidStatus = is_range_behind_surface(c->pos, sMarioCamState->pos, ceil, 0, -1)) == 1) {
             c->pos[1] = ceilHeight;
         }
-    }
-    if (gCurrLevelArea == AREA_WDW_TOWN) {
-        yaw = clamp_positions_and_find_yaw(c->pos, c->focus, 2254.f, -3789.f, 3790.f, -2253.f);
     }
     return yaw;
 }
@@ -3073,7 +3062,7 @@ void update_camera(struct Camera *c) {
     if (c->cutscene == 0) {
         sYawSpeed = 0x400;
 
-        if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
+        /*if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
             switch (c->mode) {
                 case CAMERA_MODE_BEHIND_MARIO:
                     mode_behind_mario_camera(c);
@@ -3093,65 +3082,69 @@ void update_camera(struct Camera *c) {
 
                 default:
                     mode_mario_camera(c);
-            }
-        } else {
-            switch (c->mode) {
-                case CAMERA_MODE_BEHIND_MARIO:
-                    mode_behind_mario_camera(c);
-                    break;
+            }*/
+        //} else {
 
-                case CAMERA_MODE_C_UP:
-                    mode_c_up_camera(c);
-                    break;
+        
+        switch (c->mode) {
+            case CAMERA_MODE_BEHIND_MARIO:
+                mode_behind_mario_camera(c);
+                break;
 
-                case CAMERA_MODE_WATER_SURFACE:
-                    mode_water_surface_camera(c);
-                    break;
+            case CAMERA_MODE_C_UP:
+                mode_c_up_camera(c);
+                break;
 
-                case CAMERA_MODE_INSIDE_CANNON:
-                    mode_cannon_camera(c);
-                    break;
+            /*case CAMERA_MODE_WATER_SURFACE:
+                mode_water_surface_camera(c);
+                break;
 
-                case CAMERA_MODE_8_DIRECTIONS:
-                    mode_8_directions_camera(c);
-                    break;
+            case CAMERA_MODE_INSIDE_CANNON:
+                mode_cannon_camera(c);
+                break;*/
 
-                case CAMERA_MODE_RADIAL:
-                    mode_radial_camera(c);
-                    break;
+            case CAMERA_MODE_8_DIRECTIONS:
+                mode_8_directions_camera(c);
+                //mode_radial_camera(c);
+                //mode_lakitu_camera(c);
+                break;
 
-                case CAMERA_MODE_OUTWARD_RADIAL:
-                    mode_outward_radial_camera(c);
-                    break;
+            /*case CAMERA_MODE_RADIAL:
+                mode_radial_camera(c);
+                break;
 
-                case CAMERA_MODE_CLOSE:
-                    mode_lakitu_camera(c);
-                    break;
+            case CAMERA_MODE_OUTWARD_RADIAL:
+                mode_outward_radial_camera(c);
+                break;
 
-                case CAMERA_MODE_FREE_ROAM:
-                    mode_lakitu_camera(c);
-                    break;
-                case CAMERA_MODE_BOSS_FIGHT:
-                    mode_boss_fight_camera(c);
-                    break;
+            case CAMERA_MODE_CLOSE:
+                mode_lakitu_camera(c);
+                break;
 
-                case CAMERA_MODE_PARALLEL_TRACKING:
-                    mode_parallel_tracking_camera(c);
-                    break;
+            case CAMERA_MODE_FREE_ROAM:
+                mode_lakitu_camera(c);
+                break;
+            case CAMERA_MODE_BOSS_FIGHT:
+                mode_boss_fight_camera(c);
+                break;
 
-                case CAMERA_MODE_SLIDE_HOOT:
-                    mode_slide_camera(c);
-                    break;
+            case CAMERA_MODE_PARALLEL_TRACKING:
+                mode_parallel_tracking_camera(c);
+                break;
 
-                case CAMERA_MODE_FIXED:
-                    mode_fixed_camera(c);
-                    break;
+            case CAMERA_MODE_SLIDE_HOOT:
+                mode_slide_camera(c);
+                break;*/
 
-                case CAMERA_MODE_SPIRAL_STAIRS:
-                    mode_spiral_stairs_camera(c);
-                    break;
-            }
+            case CAMERA_MODE_FIXED:
+                mode_fixed_camera(c);
+                break;
+
+            /*case CAMERA_MODE_SPIRAL_STAIRS:
+                mode_spiral_stairs_camera(c);
+                break;*/
         }
+        //}
     }
     // Start any Mario-related cutscenes
     start_cutscene(c, get_cutscene_from_mario_status(c));
@@ -3715,7 +3708,7 @@ s32 cam_select_alt_mode(s32 selection) {
  */
 s32 set_cam_angle(s32 mode) {
     s32 curMode = CAM_ANGLE_LAKITU;
-
+    return CAM_ANGLE_LAKITU;
     // Switch to Mario mode
     if (mode == CAM_ANGLE_MARIO && !(sSelectionFlags & CAM_MODE_MARIO_ACTIVE)) {
         sSelectionFlags |= CAM_MODE_MARIO_ACTIVE;

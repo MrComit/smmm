@@ -17,6 +17,7 @@ extern const GeoLayout bob_area_1[];
 extern const Collision bob_area_1_collision[];
 extern const u8 bob_area_1_collision_rooms[];
 extern const MacroObject bob_area_1_macro_objs[];
+extern const Trajectory bob_area_1_spline_EntranceHallCutscene[];
 extern Lights1 bob_dl_Bookshelf_v3_lights;
 extern Lights1 bob_dl_Dresser_v3_lights;
 extern Lights1 bob_dl_MRLamp_v3_lights;
