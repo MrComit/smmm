@@ -23,6 +23,45 @@ Vec3f sKFlameXPos[2] = {
 };
 
 
+void koopa_boss_multiplier_loop(void) {
+    s32 action = FALSE;
+    if (gMarioCurrentRoom == o->oRoom)
+        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
+    //print_text(168+30, 189, "+"); // 'Coin' glyph
+    //print_text(184+30, 189, "*"); // 'X' glyph
+    //print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins);
+
+    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat98);
+    print_text(184+30, 169+20, ".");
+    print_text_fmt_int(198+30, 169+20, "%d", o->o148);
+    print_text(212+30, 169+20, "*"); // 'X' glyph
+
+    if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
+        || gMarioState->action == ACT_BURNING_GROUND) {
+        if (o->oKleptoTimeUntilTargetChange == 0) {
+            action = TRUE;
+            o->oKleptoTimeUntilTargetChange = 1;
+        }
+    } else {
+        o->oKleptoTimeUntilTargetChange = 0;
+        action = FALSE;
+    }
+    if (((gMarioState->hurtCounter > 0 && o->o14A == 0) || action) && o->oFloat98 > 0) {
+        if (o->o148 == 0) {
+            o->oFloat98 -= 1.0f;
+            o->o148 = 5;
+        } else {
+            o->o148 = 0;
+        }
+        o->o14A = 1;
+    } else if (gMarioState->hurtCounter <= 0) {
+        o->o14A = 0;
+    }
+
+
+}
+
+
 void koopa_boss_move(void) {
     o->oF8 += 0x180;
     o->oPosZ = 17400.0f + (sins(o->oF8 & ~1) * 1300.0f);
@@ -51,12 +90,14 @@ void koopa_boss_clamp_mario(void) {
 
 void bhv_koopa_boss_init(void) {
     o->oHealth = 2;
+    o->oFloat98 = 5.0f;
 }
 
 
 void bhv_koopa_boss_loop(void) {
     struct Object *obj;
     koopa_boss_clamp_mario();
+    koopa_boss_multiplier_loop();
     switch (o->oAction) {
         case 0:
             cur_obj_hide();
@@ -171,6 +212,7 @@ void bhv_koopa_boss_loop(void) {
             obj_scale_xyz(o, o->oFloatF4 / 1.38f, o->oFloatF4, o->oFloatF4 / 1.38f);
 
             if (o->oFloatF4 == 0.3f) {
+                gMarioState->numCoins += 100 * (o->oFloat98 + ((f32)o->o148 / 10));
                 CL_explode_object(o, 1);
                 obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                 obj->oBehParams2ndByte = 4;
