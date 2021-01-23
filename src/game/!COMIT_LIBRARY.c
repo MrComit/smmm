@@ -283,6 +283,8 @@ void CL_explode_object(struct Object *obj, s16 noDamage) {
         explosion->oGraphYOffset += 100.0f;
         if (noDamage)
             explosion->oIntangibleTimer = -1;
+        else 
+            explosion->oIntangibleTimer = 0;
         obj->activeFlags = 0;
     }
 }

@@ -234,8 +234,10 @@ void bhv_sine_book_init(void) {
 
 
 void bhv_sine_book_loop(void) {
+    f32 oldPos = o->oPosY;
     o->oF4 += 0x200;
     o->oPosY = o->oHomeY + (sins(o->oF4) * 500.0f);
+    o->oVelY = o->oPosY - oldPos;
 }
 
 

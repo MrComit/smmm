@@ -767,10 +767,20 @@ void set_steep_jump_action(struct MarioState *m) {
 static void set_mario_y_vel_based_on_fspeed(struct MarioState *m, f32 initialVelY, f32 multiplier) {
     // get_additive_y_vel_for_jumps is always 0 and a stubbed function.
     // It was likely trampoline related based on code location.
+    struct Object *obj;
+    obj = m->marioObj->platform;
+    
     m->vel[1] = initialVelY + get_additive_y_vel_for_jumps() + m->forwardVel * multiplier;
 
     if (m->squishTimer != 0 || m->quicksandDepth > 1.0f) {
         m->vel[1] *= 0.5f;
+    }
+
+    if (obj != NULL) {
+        if (obj->oVelY > 0.0f) {
+            m->vel[1] += obj->oVelY;
+            m->pos[1] += obj->oVelY;
+        }
     }
 }
 

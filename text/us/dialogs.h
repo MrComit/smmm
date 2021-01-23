@@ -332,13 +332,12 @@ and don't come back!\n\
 Gwa ha ha!"))
 
 DEFINE_DIALOG(DIALOG_022, 1, 2, 95, 200, _("\
-You need a key to open\n\
-this door."))
+You don't have the key to\n\
+open this door."))
 
-DEFINE_DIALOG(DIALOG_023, 1, 3, 95, 200, _("\
-This key doesn't fit!\n\
-Maybe it's for the\n\
-basement..."))
+DEFINE_DIALOG(DIALOG_023, 1, 2, 95, 200, _("\
+This door is blocked! Try to\n\
+find an alternative entrance."))
 
 DEFINE_DIALOG(DIALOG_024, 1, 5, 95, 200, _("\
 You need Star power to\n\

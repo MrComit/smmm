@@ -3084,7 +3084,9 @@ void update_camera(struct Camera *c) {
                     mode_mario_camera(c);
             }*/
         //} else {
-
+        if (gMarioCurrentRoom != 11) {
+            c->mode = CAMERA_MODE_8_DIRECTIONS;
+        }
         
         switch (c->mode) {
             case CAMERA_MODE_BEHIND_MARIO:

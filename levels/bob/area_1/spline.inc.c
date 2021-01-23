@@ -1,7 +1,0 @@
-const Trajectory bob_area_1_spline_EntranceHallCutscene[] = {
-	TRAJECTORY_POS( 0, 1078, 810, 22528),
-	TRAJECTORY_POS( 1, 863, 866, 24988),
-	TRAJECTORY_POS( 2, 1078, 691, 25750),
-	TRAJECTORY_POS( 3, 1078, 442, 26411),
-	TRAJECTORY_END(),
-};
