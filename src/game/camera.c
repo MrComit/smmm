@@ -1446,22 +1446,22 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
     play_camera_buzz_if_c_sideways();
 
     // Don't move closer to Mario in these areas
-    switch (gCurrLevelArea) {
-        case AREA_RR:
+    //switch (gCurrLevelArea) {
+    //    case AREA_RR:
             scaleToMario = 0.f;
             heightOffset = 0.f;
-            break;
+    //        break;
 
-        case AREA_CASTLE_LOBBY:
-            scaleToMario = 0.3f;
-            heightOffset = 0.f;
-            break;
+    //    case AREA_CASTLE_LOBBY:
+    //        scaleToMario = 0.3f;
+    //        heightOffset = 0.f;
+    //        break;
 
-        case AREA_BBH:
-            scaleToMario = 0.f;
-            heightOffset = 0.f;
-            break;
-    }
+    //    case AREA_BBH:
+    //        scaleToMario = 0.f;
+    //        heightOffset = 0.f;
+    //        break;
+    //}
 
     handle_c_button_movement(c);
     play_camera_buzz_if_cdown();
@@ -1722,17 +1722,24 @@ void mode_parallel_tracking_camera(struct Camera *c) {
  * Fixed camera mode, the camera rotates around a point and looks and zooms toward Mario.
  */
 void mode_fixed_camera(struct Camera *c) {
-    UNUSED u8 unused[8];
+    struct MarioState *m = gMarioState;
 
     if (gCurrLevelNum == LEVEL_BBH) {
         set_fov_function(CAM_FOV_BBH);
     } else {
         set_fov_function(CAM_FOV_APP_45);
     }
-    c->nextYaw = update_fixed_camera(c, c->focus, c->pos);
-    c->yaw = c->nextYaw;
-    pan_ahead_of_player(c);
+    //c->nextYaw = update_fixed_camera(c, c->focus, c->pos);
+    //c->yaw = c->nextYaw;
+    //pan_ahead_of_player(c);
     vec3f_set(sCastleEntranceOffset, 0.f, 0.f, 0.f);
+
+
+    if (gCurrLevelNum == LEVEL_BOB && gMarioCurrentRoom == 11) {
+        vec3f_set(c->pos, -5000.0f, m->pos[1] + 600.0f, m->pos[2]);
+        vec3f_set(c->focus, -9070.0f, m->pos[1], m->pos[2]);
+        c->yaw = 0x4000;
+    }
 }
 
 /**
@@ -5771,7 +5778,8 @@ BAD_RETURN(s32) cam_thi_look_through_tunnel(UNUSED struct Camera *c) {
  */
 BAD_RETURN(s32) cam_bob_tower(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    transition_to_camera_mode(c, CAMERA_MODE_RADIAL, 90);
+    //transition_to_camera_mode(c, CAMERA_MODE_FIXED, 90);
+    set_camera_mode_fixed(c, -5424, 595, 17408);
 }
 
 /**
@@ -6208,6 +6216,7 @@ struct CameraTrigger sCamRR[] = {
  * to free_roam when Mario is not walking up the tower.
  */
 struct CameraTrigger sCamBOB[] = {
+	{1, cam_bob_tower, -6765, 2895, 17409, 701, 983, 2638, 0xffff},
 	NULL_TRIGGER
 };
 
@@ -6493,7 +6502,7 @@ s16 camera_course_processing(struct Camera *c) {
     // Camera trigger's bounding box
     Vec3f center, bounds;
     u32 insideBounds = FALSE;
-    UNUSED struct CameraTrigger unused;
+    u32 anyChecked = FALSE;
     u8 oldMode = c->mode;
 
     if (c->mode == CAMERA_MODE_C_UP) {
@@ -6529,6 +6538,7 @@ s16 camera_course_processing(struct Camera *c) {
                     if (!(sStatusFlags & CAM_FLAG_BLOCK_AREA_PROCESSING)) {
                         sCameraTriggers[level][b].event(c);
                         insideBounds = TRUE;
+                        anyChecked = TRUE;
                     }
                 }
             }
@@ -6543,6 +6553,9 @@ s16 camera_course_processing(struct Camera *c) {
             }
 
             b += 1;
+        }
+        if (!anyChecked) {
+            c->mode = CAMERA_MODE_8_DIRECTIONS;
         }
     }
 

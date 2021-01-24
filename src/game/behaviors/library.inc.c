@@ -215,6 +215,7 @@ void bhv_koopa_boss_loop(void) {
                 gMarioState->numCoins += 100 * (o->oFloat98 + ((f32)o->o148 / 10));
                 CL_explode_object(o, 1);
                 obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 obj->oBehParams2ndByte = 4;
                 obj->oBehParams = 0x02040100;
             }

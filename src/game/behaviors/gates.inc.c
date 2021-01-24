@@ -259,6 +259,7 @@ void bhv_stray_book_loop(void) {
             o->oFaceAngleRoll += 0xC00;
             o->oFaceAnglePitch += 0xC00;
             if (o->oF4) {
+                o->oForwardVel = 25.0f;
                 if (o->oDistanceToMario < 120.0f && gMarioState->flags & (MARIO_PUNCHING | MARIO_KICKING)) {
                     o->oMoveAngleYaw = gMarioState->faceAngle[1];
                     o->oForwardVel = 52.0f;

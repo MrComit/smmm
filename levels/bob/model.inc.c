@@ -44033,6 +44033,19 @@ Gfx bob_dl_Library_006_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx bob_dl_Library_007_mesh_vtx_0[4] = {
+	{{{-342, 0, -2100},0, {2349, 11816},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-342, 0, 2100},0, {2349, -8642},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{342, 0, 2100},0, {-2167, -8642},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{342, 0, -2100},0, {-2167, 11816},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx bob_dl_Library_007_mesh_tri_0[] = {
+	gsSPVertex(bob_dl_Library_007_mesh_vtx_0 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx bob_dl_Railing_mesh_vtx_0[82] = {
 	{{{834, -295, -1433},0, {-16811, 1804},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{834, -375, -1333},0, {-16577, 1804},{0x7F, 0x0, 0x0, 0xFF}}},
@@ -49331,6 +49344,13 @@ Gfx bob_dl_Library_006_mesh[] = {
 	gsSPDisplayList(mat_bob_dl_Bars),
 	gsSPDisplayList(bob_dl_Library_006_mesh_tri_0),
 	gsSPDisplayList(mat_revert_bob_dl_Bars),
+	gsSPEndDisplayList(),
+};
+
+Gfx bob_dl_Library_007_mesh[] = {
+	gsSPDisplayList(mat_bob_dl_LibFloor),
+	gsSPDisplayList(bob_dl_Library_007_mesh_tri_0),
+	gsSPDisplayList(mat_revert_bob_dl_LibFloor),
 	gsSPEndDisplayList(),
 };
 
