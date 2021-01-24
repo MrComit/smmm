@@ -39,7 +39,7 @@ struct ObjectHitbox sSmallKeyHitbox = {
 
 Vec3f sPreviousMarioPos = {0, 0, 0};
 
-u8 sTokenCoins[3] = {5, 20, 50};
+u8 sTokenCoins[3] = {10, 50, 100};
 
 
 void bhv_deathwarp_init(void) {
