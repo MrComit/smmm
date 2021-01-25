@@ -236,11 +236,19 @@ void toad_friend_l1_loop(void) {
     o->oInteractStatus = 0;
 }
 
+extern Vec3f sToadFriendWarp1;
 
 void bhv_friend_toad_loop(void) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
             toad_friend_l1_loop();
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_INTRODUCTION) {
+                o->oF4 = 2;
+            }
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_FOUND_FIRST_BOO) {
+                vec3f_copy(&o->oPosX, sToadFriendWarp1);
+                o->oRoom = 13;
+            }
             break;
         case LEVEL_WF:
             break;

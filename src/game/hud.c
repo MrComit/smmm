@@ -50,7 +50,7 @@ static s16 sPowerMeterStoredHealth;
 
 static struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
-    140,
+    40,
     166,
     1.0,
 };
@@ -325,14 +325,13 @@ void render_hud_stars(void) {
 }
 
 /**
- * Unused function that renders the amount of keys collected.
- * Leftover function from the beta version of the game.
+ * Renders the amount of keys collected.
  */
 void render_hud_keys(void) {
     s16 i;
     s16 keyCount = CL_count_bits(save_file_get_keys()) - (CL_count_bits(save_file_get_flags() & ~1));
     for (i = 0; i < keyCount; i++) {
-        print_text((i * 6) + GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), HUD_TOP_Y, "/"); // unused glyph - beta key
+        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(30) - (i * 6), 15, "/"); // unused glyph - beta key
     }
 }
 

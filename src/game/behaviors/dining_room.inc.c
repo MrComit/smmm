@@ -103,7 +103,7 @@ void bhv_shyguy_plate_loop(void) {
 
 void bhv_spin_plate_init(void) {
     o->oForwardVel = 15.0f;
-    o->oAngleVelYaw = 0x400;
+    o->oAngleVelYaw = 0x300;
     o->oFloatF4 = 1.8f;
 }
 

@@ -36,7 +36,7 @@ void bhv_appearing_book_loop(void) {
             break;
         case 2:
             queue_rumble_data(5, 80);
-            cur_obj_shake_screen(1);
+            cur_obj_shake_screen(0);
             o->oPosX = approach_f32(o->oPosX, o->oFloatF4, 13.0f, 13.0f);
             if (o->oPosX == o->oFloatF4) {
                 o->oAction = 3;
@@ -97,7 +97,7 @@ void bhv_l1_fireplace_loop(void) {
         }
     }
 
-    if (o->oDistanceToMario < 400.0f) {
+    if (gMarioState->pos[2] < 7800.0f && gMarioState->pos[2] > 7300.0f && gMarioState->pos[0] < -12000.0f) {
         CL_Lava_Boost();
     }    
 }

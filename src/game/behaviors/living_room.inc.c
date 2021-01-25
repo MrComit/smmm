@@ -17,9 +17,9 @@ struct ObjectHitbox sCushionHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health: */ 1,
     /* numLootCoins: */ 0,
-    /* radius: */ 150,
+    /* radius: */ 180,
     /* height: */ 132,
-    /* hurtboxRadius: */ 130,
+    /* hurtboxRadius: */ 180,
     /* hurtboxHeight: */ 72,
 };
 

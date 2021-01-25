@@ -2523,6 +2523,7 @@ void store_lakitu_cam_info_for_c_up(struct Camera *c) {
  * @see update_mario_inputs
  */
 s32 set_mode_c_up(struct Camera *c) {
+    return 0;
     if (!(gCameraMovementFlags & CAM_MOVE_C_UP_MODE)) {
         gCameraMovementFlags |= CAM_MOVE_C_UP_MODE;
         store_lakitu_cam_info_for_c_up(c);
