@@ -416,6 +416,12 @@ void reset_objects_in_room(s32 room, struct SpawnInfo *spawnInfo) {
 
     kill_objects_in_room(room);
     //return;
+    gMarioState->interactObj = NULL;
+    gMarioState->heldObj = NULL;
+    gMarioState->usedObj = NULL;
+    gMarioState->riddenObj = NULL;
+    gMarioState->marioObj = gMarioObject;
+
     while (spawnInfo != NULL) {
         struct Object *object;
         const BehaviorScript *script = segmented_to_virtual(spawnInfo->behaviorScript);

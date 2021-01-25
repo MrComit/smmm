@@ -6925,3 +6925,19 @@ const BehaviorScript bhvGhostBarrier[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvKoopaBossMovingCoin[] =  {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    SET_HOME(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oGraphYOffset, 50),
+    CALL_NATIVE(bhv_koopa_boss_moving_flame_init),
+    CALL_NATIVE(bhv_yellow_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_koopa_boss_moving_flame_loop),
+        CALL_NATIVE(bhv_yellow_coin_loop),
+    END_LOOP(),
+};

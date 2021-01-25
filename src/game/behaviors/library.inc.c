@@ -137,7 +137,7 @@ void bhv_koopa_boss_loop(void) {
                 if (o->oBehParams2ndByte) {
                     obj->o100 = 1;
                 }
-                if (o->o104 == 0) {
+                if (CL_obj_nearest_object_behavior_params(bhvFlamingBossBook, 0x01000000) == NULL) {
                     o->o100 += 1;
                     if (o->o100 >= 5) {
                         obj->oBehParams |= 1 << 24;
@@ -445,7 +445,12 @@ void bhv_koopa_boss_flame_init(void) {
 
 void koopa_boss_flame_act_2(void) {
     if (o->oTimer > o->oFC) {
-        struct Object *obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMovingFlame);
+        struct Object *obj;
+        if (CL_RandomMinMaxU16(1, 15) == 5) {
+            obj = spawn_object(o, MODEL_YELLOW_COIN, bhvKoopaBossMovingCoin);
+        } else {
+            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMovingFlame);
+        }
         obj->oBehParams2ndByte = o->oBehParams2ndByte;
         o->oTimer = 0;
         o->oFC = CL_RandomMinMaxU16(90, 120);

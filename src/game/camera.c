@@ -1738,7 +1738,8 @@ void mode_fixed_camera(struct Camera *c) {
     if (gCurrLevelNum == LEVEL_BOB && gMarioCurrentRoom == 11) {
         vec3f_set(c->pos, -5000.0f, m->pos[1] + 600.0f, m->pos[2]);
         vec3f_set(c->focus, -9070.0f, m->pos[1], m->pos[2]);
-        c->yaw = 0x4000;
+        c->nextYaw = 0x4000;
+        c->yaw = c->nextYaw;
     }
 }
 
