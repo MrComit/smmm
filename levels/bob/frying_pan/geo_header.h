@@ -1,7 +1,11 @@
 extern const GeoLayout frying_pan_geo[];
+extern Lights1 frying_pan_Pan_001_lights;
+extern u8 frying_pan_pan2_ci4[];
+extern u8 frying_pan_pan2_ci4_pal_rgba16[];
+extern Vtx frying_pan_Frying_Pan_mesh_vtx_cull[8];
 extern Vtx frying_pan_Frying_Pan_mesh_vtx_0[84];
 extern Gfx frying_pan_Frying_Pan_mesh_tri_0[];
-
+extern Gfx mat_frying_pan_Pan_001[];
+extern Gfx mat_revert_frying_pan_Pan_001[];
 extern Gfx frying_pan_Frying_Pan_mesh[];
 extern Gfx frying_pan_material_revert_render_settings[];
-

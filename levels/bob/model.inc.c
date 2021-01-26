@@ -134,6 +134,10 @@ Lights1 bob_dl_Bars_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
+Lights1 bob_dl_Yellow_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
+
 Lights1 bob_dl_Clock_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
@@ -34205,7 +34209,7 @@ Gfx bob_dl_Bookshelf_011_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx bob_dl_Bookshelf_011_mesh_vtx_1[52] = {
+Vtx bob_dl_Bookshelf_011_mesh_vtx_1[32] = {
 	{{{33, 111, 0},0, {983, 947},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{33, 203, 153},0, {-41, 21},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{33, 111, 153},0, {-41, 947},{0x7F, 0x0, 0x0, 0xFF}}},
@@ -34234,30 +34238,10 @@ Vtx bob_dl_Bookshelf_011_mesh_vtx_1[52] = {
 	{{{33, 111, -52},0, {2354, 947},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{33, 9, -153},0, {3031, 1971},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{33, 111, -153},0, {3031, 947},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{33, -93, -52},0, {2006, 2995},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{33, 9, -52},0, {2006, 1971},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-41, 9, -52},0, {2006, 1971},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-41, -93, -52},0, {2006, 2995},{0x0, 0x0, 0x7F, 0xFF}}},
 	{{{33, -93, -153},0, {2682, 2995},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{33, 9, -153},0, {2682, 1971},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{33, 9, -52},0, {2006, 1971},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{33, -93, -52},0, {2006, 2995},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{33, -93, 0},0, {2334, 2995},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{33, -93, -52},0, {2681, 2995},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-41, -93, -52},0, {2681, 2995},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-41, -93, 0},0, {2334, 2995},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{33, 9, 0},0, {1658, 1971},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{33, -93, 0},0, {1658, 2995},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-41, -93, 0},0, {1658, 2995},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-41, 9, 0},0, {1658, 1971},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{33, 9, -52},0, {2354, 1971},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{33, 9, 0},0, {2007, 1971},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-41, 9, 0},0, {2007, 1971},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-41, 9, -52},0, {2354, 1971},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-41, -93, 0},0, {327, 867},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-41, -93, -52},0, {327, 867},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-41, 9, -52},0, {327, 867},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-41, 9, 0},0, {327, 867},{0x7F, 0x0, 0x0, 0xFF}}},
 };
 
 Gfx bob_dl_Bookshelf_011_mesh_tri_1[] = {
@@ -34273,12 +34257,70 @@ Gfx bob_dl_Bookshelf_011_mesh_tri_1[] = {
 	gsSP2Triangles(24, 23, 20, 0, 24, 25, 23, 0),
 	gsSP2Triangles(26, 25, 24, 0, 26, 27, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 28, 30, 31, 0),
-	gsSPVertex(bob_dl_Bookshelf_011_mesh_vtx_1 + 32, 20, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx bob_dl_Bookshelf_011_mesh_vtx_2[20] = {
+	{{{33, -93, -52},0, {346, 426},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{33, 9, -52},0, {346, 426},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-41, 9, -52},0, {346, 426},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-41, -93, -52},0, {346, 426},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{33, -93, 0},0, {346, 426},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{33, -93, -52},0, {346, 426},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-41, -93, -52},0, {346, 426},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-41, -93, 0},0, {346, 426},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{33, 9, 0},0, {346, 426},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{33, -93, 0},0, {346, 426},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{-41, -93, 0},0, {346, 426},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{-41, 9, 0},0, {346, 426},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{33, 9, -52},0, {346, 426},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{33, 9, 0},0, {346, 426},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{-41, 9, 0},0, {346, 426},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{-41, 9, -52},0, {346, 426},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{-41, -93, 0},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-41, -93, -52},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-41, 9, -52},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-41, 9, 0},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+};
+
+Gfx bob_dl_Bookshelf_011_mesh_tri_2[] = {
+	gsSPVertex(bob_dl_Bookshelf_011_mesh_vtx_2 + 0, 20, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
 	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
 	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx bob_dl_Bookshelf_013_mesh_vtx_cull[8] = {
+	{{{33, -102, -65},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{33, -102, 13},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{33, 17, 13},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{33, 17, -65},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{33, -102, -65},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{33, -102, 13},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{33, 17, 13},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{33, 17, -65},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx bob_dl_Bookshelf_013_mesh_vtx_0[8] = {
+	{{{33, -102, -65},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{33, 17, -65},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{33, 9, -52},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{33, 9, 0},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{33, 17, 13},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{33, -93, 0},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{33, -102, 13},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{33, -93, -52},0, {346, 426},{0x7F, 0x0, 0x0, 0xFF}}},
+};
+
+Gfx bob_dl_Bookshelf_013_mesh_tri_0[] = {
+	gsSPVertex(bob_dl_Bookshelf_013_mesh_vtx_0 + 0, 8, 0),
+	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
+	gsSP2Triangles(1, 4, 3, 0, 4, 5, 3, 0),
+	gsSP2Triangles(4, 6, 5, 0, 6, 7, 5, 0),
+	gsSP2Triangles(6, 0, 7, 0, 0, 2, 7, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -45992,6 +46034,15 @@ Gfx mat_revert_bob_dl_Floor_Mat[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_bob_dl_Yellow[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetEnvColor(87, 58, 16, 255),
+	gsSPSetLights1(bob_dl_Yellow_lights),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_bob_dl_Clock[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
@@ -48475,6 +48526,18 @@ Gfx bob_dl_Bookshelf_011_mesh[] = {
 	gsSPDisplayList(mat_bob_dl_Books_v3),
 	gsSPDisplayList(bob_dl_Bookshelf_011_mesh_tri_1),
 	gsSPDisplayList(mat_revert_bob_dl_Books_v3),
+	gsSPDisplayList(mat_bob_dl_Yellow),
+	gsSPDisplayList(bob_dl_Bookshelf_011_mesh_tri_2),
+	gsSPEndDisplayList(),
+};
+
+Gfx bob_dl_Bookshelf_013_mesh[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(bob_dl_Bookshelf_013_mesh_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_bob_dl_Yellow),
+	gsSPDisplayList(bob_dl_Bookshelf_013_mesh_tri_0),
 	gsSPEndDisplayList(),
 };
 
