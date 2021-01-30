@@ -57,14 +57,22 @@ else ifeq ($(SAVETYPE),sram)
   DEFINES += SRAM=1
 endif
 
+DEFINES += NO_ERRNO_H=1 NO_GZIP=1
+
 COMPRESS ?= yay0
-$(eval $(call validate-option,COMPRESS,yay0 gzip))
+$(eval $(call validate-option,COMPRESS,yay0 gzip rnc1 rnc2))
 ifeq ($(COMPRESS),gzip)
   DEFINES += GZIP=1
-  SRC_DIRS += src/gzip
+else ifeq ($(COMPRESS),rnc1)
+  DEFINES += RNC1=1
+else ifeq ($(COMPRESS),rnc2)
+  DEFINES += RNC2=1
 else ifeq ($(COMPRESS),yay0)
   DEFINES += YAY0=1
 endif
+
+GZIPVER ?= std
+$(eval $(call validate-option,GZIPVER,std libdef))
 
 # VERSION - selects the version of the game to build
 #   jp - builds the 1996 Japanese version
@@ -271,6 +279,7 @@ BUILD_DIR_BASE := build
 BUILD_DIR      := $(BUILD_DIR_BASE)/$(VERSION)
 ROM            := $(BUILD_DIR)/$(TARGET_STRING).z64
 ELF            := $(BUILD_DIR)/$(TARGET_STRING).elf
+LIBZ           := $(BUILD_DIR)/libz.a
 LD_SCRIPT      := sm64.ld
 YAY0_DIR       := $(BUILD_DIR)/bin
 SOUND_BIN_DIR  := $(BUILD_DIR)/sound
@@ -280,6 +289,7 @@ LEVEL_DIRS     := $(patsubst levels/%,%,$(dir $(wildcard levels/*/header.h)))
 
 # Directories containing source files
 SRC_DIRS += src src/engine src/game src/audio src/menu src/buffers src/s2d_engine actors levels bin data assets asm lib sound
+LIBZ_SRC_DIRS := src/libz
 BIN_DIRS := bin bin/$(VERSION)
 
 # File dependencies and variables for specific files
@@ -288,6 +298,7 @@ include Makefile.split
 # Source code files
 LEVEL_C_FILES     := $(wildcard levels/*/leveldata.c) $(wildcard levels/*/script.c) $(wildcard levels/*/geo.c)
 C_FILES           := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c)) $(LEVEL_C_FILES)
+LIBZ_C_FILES     := $(foreach dir,$(LIBZ_SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES           := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.s))
 GENERATED_C_FILES := $(BUILD_DIR)/assets/mario_anim_data.c $(BUILD_DIR)/assets/demo_data.c
 
@@ -311,8 +322,10 @@ O_FILES := $(foreach file,$(C_FILES),$(BUILD_DIR)/$(file:.c=.o)) \
            $(foreach file,$(GENERATED_C_FILES),$(file:.c=.o)) \
            lib/PR/hvqm/hvqm2sp1.o lib/PR/hvqm/hvqm2sp2.o
 
+LIBZ_O_FILES := $(foreach file,$(LIBZ_C_FILES),$(BUILD_DIR)/$(file:.c=.o))
+
 # Automatic dependency files
-DEP_FILES := $(O_FILES:.o=.d) $(BUILD_DIR)/$(LD_SCRIPT).d
+DEP_FILES := $(O_FILES:.o=.d) $(LIBZ_O_FILES:.o=.d) $(BUILD_DIR)/$(LD_SCRIPT).d
 
 # Files with GLOBAL_ASM blocks
 ifeq ($(NON_MATCHING),0)
@@ -333,6 +346,8 @@ endif
 # detect prefix for MIPS toolchain
 ifneq ($(call find-command,mips64-elf-ld),)
   CROSS := mips64-elf-
+else ifneq ($(call find-command,mips-n64-ld),)
+  CROSS := mips-n64-
 else ifneq ($(call find-command,mips-linux-gnu-ld),)
   CROSS := mips-linux-gnu-
 else ifneq ($(call find-command,mips64-linux-gnu-ld),)
@@ -367,7 +382,11 @@ ifneq (,$(call find-command,cpp-10))
 else
   CPP     := cpp
 endif
+ifneq ($(call find-command,mips-n64-ld),)
+LD        := mips-n64-ld
+else
 LD        := tools/mips64-elf-ld
+endif
 AR        := $(CROSS)ar
 OBJDUMP   := $(CROSS)objdump
 OBJCOPY   := $(CROSS)objcopy
@@ -420,6 +439,7 @@ export LANG := C
 
 # N64 tools
 YAY0TOOL              := $(TOOLS_DIR)/slienc
+RNCPACK               := $(TOOLS_DIR)/rncpack
 ROMALIGN              := $(TOOLS_DIR)/romalign
 BFSIZE                := $(TOOLS_DIR)/bfsize
 FILESIZER             := $(TOOLS_DIR)/filesizer
@@ -431,6 +451,11 @@ AIFF_EXTRACT_CODEBOOK := $(TOOLS_DIR)/aiff_extract_codebook
 VADPCM_ENC            := $(TOOLS_DIR)/vadpcm_enc
 EXTRACT_DATA_FOR_MIO  := $(TOOLS_DIR)/extract_data_for_mio
 SKYCONV               := $(TOOLS_DIR)/skyconv
+ifeq ($(GZIPVER),std)
+GZIP                  := gzip
+else
+GZIP                  := libdeflate-gzip
+endif
 # Use the system installed armips if available. Otherwise use the one provided with this repository.
 ifneq (,$(call find-command,armips))
   RSPASM              := armips
@@ -504,7 +529,7 @@ endif
 $(CRASH_TEXTURE_C_FILES): TEXTURE_ENCODING := u32
 
 ifeq ($(COMPILER),gcc)
-  $(BUILD_DIR)/lib/src/math/%.o: CFLAGS += -fno-builtin
+$(BUILD_DIR)/src/libz/%.o: OPT_FLAGS := -Os
 endif
 
 ifeq ($(VERSION),eu)
@@ -535,7 +560,7 @@ $(BUILD_DIR)/src/usb/usb.o: CFLAGS += -Wno-unused-variable -Wno-sign-compare -Wn
 $(BUILD_DIR)/src/usb/debug.o: OPT_FLAGS := -O0
 $(BUILD_DIR)/src/usb/debug.o: CFLAGS += -Wno-unused-parameter -Wno-maybe-uninitialized
 
-ALL_DIRS := $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(GODDARD_SRC_DIRS) $(ULTRA_SRC_DIRS) $(ULTRA_BIN_DIRS) $(BIN_DIRS) $(TEXTURE_DIRS) $(TEXT_DIRS) $(SOUND_SAMPLE_DIRS) $(addprefix levels/,$(LEVEL_DIRS)) rsp include) $(YAY0_DIR) $(addprefix $(YAY0_DIR)/,$(VERSION)) $(SOUND_BIN_DIR) $(SOUND_BIN_DIR)/sequences/$(VERSION)
+ALL_DIRS := $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(GODDARD_SRC_DIRS) $(LIBZ_SRC_DIRS) $(ULTRA_BIN_DIRS) $(BIN_DIRS) $(TEXTURE_DIRS) $(TEXT_DIRS) $(SOUND_SAMPLE_DIRS) $(addprefix levels/,$(LEVEL_DIRS)) rsp include) $(YAY0_DIR) $(addprefix $(YAY0_DIR)/,$(VERSION)) $(SOUND_BIN_DIR) $(SOUND_BIN_DIR)/sequences/$(VERSION)
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
@@ -596,34 +621,13 @@ $(BUILD_DIR)/levels/%/leveldata.bin: $(BUILD_DIR)/levels/%/leveldata.elf
 	$(V)$(EXTRACT_DATA_FOR_MIO) $< $@
 
 ifeq ($(COMPRESS),gzip)
-# Compress binary file to gzip
-$(BUILD_DIR)/%.gz: $(BUILD_DIR)/%.bin
-	$(call print,Compressing:,$<,$@)
-	$(V)gzip -c -9 -n $< > $@
-#	$(V)dd if=/dev/zero bs=1 count=4 >> $@
-#	$(ROMALIGN) $@ 16
-#	$(V)$(FILESIZER) $< $@
-
-# Strip gzip header
-$(BUILD_DIR)/%.szp: $(BUILD_DIR)/%.gz
-	$(call print,Converting:,$<,$@)
-	$(V)dd bs=10 skip=1 if=$< of=$@
-	$(V)$(FILESIZER) $(<:.gz=.bin) $@
-
-# convert binary szp to object file
-$(BUILD_DIR)/%.szp.o: $(BUILD_DIR)/%.szp
-	$(call print,Converting GZIP to ELF:,$<,$@)
-	$(V)printf ".section .data\n\n.incbin \"$<\"\n" | $(AS) $(ASFLAGS) -o $@
+include gziprules.mk
+else ifeq ($(COMPRESS),rnc1)
+include rnc1rules.mk
+else ifeq ($(COMPRESS),rnc2)
+include rnc2rules.mk
 else
-# Compress binary file
-$(BUILD_DIR)/%.szp: $(BUILD_DIR)/%.bin
-	$(call print,Compressing:,$<,$@)
-	$(V)$(YAY0TOOL) $< $@
-
-# convert binary szp to object file
-$(BUILD_DIR)/%.szp.o: $(BUILD_DIR)/%.szp
-	$(call print,Converting YAY0 to ELF:,$<,$@)
-	$(V)printf ".section .data\n\n.incbin \"$<\"\n" | $(AS) $(ASFLAGS) -o $@
+include yay0rules.mk
 endif
 
 #==============================================================================#
@@ -795,7 +799,7 @@ endif
 # Assemble assembly code
 $(BUILD_DIR)/%.o: %.s
 	$(call print,Assembling:,$<,$@)
-	$(V)$(AS) $(ASFLAGS) -MD $(BUILD_DIR)/$*.d -o $@ $<
+	$(V)$(CPP) $(CPPFLAGS) $< | $(AS) $(ASFLAGS) -MD $(BUILD_DIR)/$*.d -o $@
 
 # Assemble RSP assembly code
 $(BUILD_DIR)/rsp/%.bin $(BUILD_DIR)/rsp/%_data.bin: rsp/%.s
@@ -807,16 +811,21 @@ $(BUILD_DIR)/$(LD_SCRIPT): $(LD_SCRIPT)
 	$(call print,Preprocessing linker script:,$<,$@)
 	$(V)$(CPP) $(CPPFLAGS) -DBUILD_DIR=$(BUILD_DIR) -MMD -MP -MT $@ -MF $@.d -o $@ $<
 
+# Link libz
+$(BUILD_DIR)/libz.a: $(LIBZ_O_FILES)
+	@$(PRINT) "$(GREEN)Linking libz:  $(BLUE)$@ $(NO_COL)\n"
+	$(V)$(AR) rcs -o $@ $(LIBZ_O_FILES)
+
 # Link SM64 ELF file
-$(ELF): $(O_FILES) $(YAY0_OBJ_FILES) $(SEG_FILES) $(BUILD_DIR)/$(LD_SCRIPT) undefined_syms.txt
+$(ELF): $(O_FILES) $(YAY0_OBJ_FILES) $(SEG_FILES) $(BUILD_DIR)/$(LD_SCRIPT) undefined_syms.txt $(BUILD_DIR)/libz.a
 	@$(PRINT) "$(GREEN)Linking ELF file:  $(BLUE)$@ $(NO_COL)\n"
-	$(V)$(LD) -L $(BUILD_DIR) -T undefined_syms.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/smmm.$(VERSION).map --no-check-sections $(addprefix -R ,$(SEG_FILES)) -o $@ $(O_FILES) -L$(LIBS_DIR) -lultra_rom -Llib -lhvqm2 -lgcc
+	$(V)$(LD) -L $(BUILD_DIR) -T undefined_syms.txt -T $(BUILD_DIR)/$(LD_SCRIPT) -Map $(BUILD_DIR)/smmm.$(VERSION).map --no-check-sections $(addprefix -R ,$(SEG_FILES)) -o $@ $(O_FILES) -L$(LIBS_DIR) -lultra_rom -Llib -lgcc -lnustd -lhvqm2 -lz
 
 # Build ROM
 $(ROM): $(ELF)
 	$(call print,Building ROM:,$<,$@)
-	$(V)$(OBJCOPY) --pad-to=0x800000 --gap-fill=0xFF $< $(@:.z64=.bin) -O binary
-	$(V)$(N64CKSUM) $(@:.z64=.bin) $@
+	$(V)$(OBJCOPY) --pad-to=0x100000 --gap-fill=0xFF $< $@ -O binary
+	$(V)$(N64CKSUM) $@
 
 $(BUILD_DIR)/$(TARGET).objdump: $(ELF)
 	$(OBJDUMP) -D $< > $@

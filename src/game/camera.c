@@ -1723,18 +1723,7 @@ void mode_parallel_tracking_camera(struct Camera *c) {
  */
 void mode_fixed_camera(struct Camera *c) {
     struct MarioState *m = gMarioState;
-
-    if (gCurrLevelNum == LEVEL_BBH) {
-        set_fov_function(CAM_FOV_BBH);
-    } else {
-        set_fov_function(CAM_FOV_APP_45);
-    }
-    //c->nextYaw = update_fixed_camera(c, c->focus, c->pos);
-    //c->yaw = c->nextYaw;
-    //pan_ahead_of_player(c);
-    vec3f_set(sCastleEntranceOffset, 0.f, 0.f, 0.f);
-
-
+    //vec3f_set(sCastleEntranceOffset, 0.f, 0.f, 0.f);
     if (gCurrLevelNum == LEVEL_BOB && gMarioCurrentRoom == 11) {
         vec3f_set(c->pos, -5000.0f, m->pos[1] + 600.0f, m->pos[2]);
         vec3f_set(c->focus, -9070.0f, m->pos[1], m->pos[2]);
