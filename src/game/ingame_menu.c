@@ -3074,7 +3074,7 @@ s16 render_menus_and_dialogs(void) {
     s16 mode = 0;
 
     create_dl_ortho_matrix();
-    shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
+    //shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
     if (gMarioCurrentRoom != 0) {
         if (save_file_get_rooms(gMarioCurrentRoom / 32) & (1 << (gMarioCurrentRoom % 32))) {
             gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);

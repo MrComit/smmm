@@ -14,6 +14,7 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -17911, wf_dl_Hallway_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 7100, 163, -18730, wf_dl_ToFloor1_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
