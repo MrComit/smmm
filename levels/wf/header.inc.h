@@ -1,0 +1,15 @@
+extern const GeoLayout wf_area_1_geo[];
+extern const GeoLayout wf_dl_01__Lounge_geo[];
+extern const GeoLayout wf_area_1[];
+extern const Collision wf_area_1_collision[];
+extern const u8 wf_area_1_collision_rooms[];
+extern const MacroObject wf_area_1_macro_objs[];
+extern Lights1 wf_dl_WoodFloor_lights;
+extern u8 wf_dl_wood_flooring2_ci4[];
+extern u8 wf_dl_wood_flooring2_ci4_pal_rgba16[];
+extern Vtx wf_dl_Hallway_mesh_vtx_0[18];
+extern Gfx wf_dl_Hallway_mesh_tri_0[];
+extern Gfx mat_wf_dl_WoodFloor[];
+extern Gfx mat_revert_wf_dl_WoodFloor[];
+extern Gfx wf_dl_Hallway_mesh[];
+extern Gfx wf_dl_material_revert_render_settings[];
