@@ -13,6 +13,8 @@ const GeoLayout wf_area_1_geo[] = {
 const GeoLayout wf_dl_01__Lounge_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE_DECAL, -762, 329, -9985, wf_dl_Gate_Indicator_mesh),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2147, 83, -9809, wf_dl_Gate_Indicator_001_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -17911, wf_dl_Hallway_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 7100, 163, -18730, wf_dl_ToFloor1_mesh),
 	GEO_CLOSE_NODE(),
@@ -41,6 +43,7 @@ const GeoLayout wf_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, wf_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
