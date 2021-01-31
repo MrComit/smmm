@@ -66,6 +66,7 @@ const LevelScript level_wf_entry[] = {
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x10, LEVEL_BOB, 0x01, 0x0D, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 7647, 200, -17971, 0, 0, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 7647, 200, -17971, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, 0, 7647, 200, -17971),
