@@ -1,0 +1,13 @@
+extern const GeoLayout heavyobject_geo[];
+extern Lights1 heavyobject_MetalCube_001_lights;
+extern u8 heavyobject_metal_ci4[];
+extern u8 heavyobject_metal_ci4_pal_rgba16[];
+extern Vtx heavyobject_Body_mesh_layer_1_vtx_0[96];
+extern Gfx heavyobject_Body_mesh_layer_1_tri_0[];
+extern Vtx heavyobject_Sphere_mesh_layer_1_vtx_0[20];
+extern Gfx heavyobject_Sphere_mesh_layer_1_tri_0[];
+extern Gfx mat_heavyobject_MetalCube_001[];
+extern Gfx mat_revert_heavyobject_MetalCube_001[];
+extern Gfx heavyobject_Body_mesh_layer_1[];
+extern Gfx heavyobject_Sphere_mesh_layer_1[];
+extern Gfx heavyobject_material_revert_render_settings[];

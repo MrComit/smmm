@@ -605,7 +605,7 @@ extern const BehaviorScript bhvBigKeyDoor[];
 extern const BehaviorScript bhvL1RoomGate[];
 extern const BehaviorScript bhvGhostBarrier[];
 extern const BehaviorScript bhvKoopaBossMovingCoin[];
-
+extern const BehaviorScript bhvHeavyObject[];
 
 
 
