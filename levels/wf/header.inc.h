@@ -13,7 +13,7 @@ extern Lights1 wf_dl_HallWall_v4_lights;
 extern Lights1 wf_dl_LoungeWall_v4_lights;
 extern u8 wf_dl_wood_flooring_ci4[];
 extern u8 wf_dl_wood_flooring_ci4_pal_rgba16[];
-extern u8 wf_dl_i8_polkadot_i8[];
+extern u8 wf_dl_loungecarpet_i8[];
 extern u8 wf_dl_ci4_hallway_wall3_ci4[];
 extern u8 wf_dl_ci4_hallway_wall3_ci4_pal_rgba16[];
 extern u8 wf_dl_loungewall_ci8[];
