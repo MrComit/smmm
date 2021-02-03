@@ -50,7 +50,7 @@
 /**
  * Current object floor as defined in object_step.
  */
-static struct Surface *sObjFloor;
+struct Surface *sObjFloor;
 
 /**
  * Set to false when an object close to the floor should not be oriented in reference
@@ -434,6 +434,7 @@ s16 object_step(void) {
     }
 
     floorY = find_floor(objX + objVelX, objY, objZ + objVelZ, &sObjFloor);
+    o->oFloorHeight = floorY;
     if (turn_obj_away_from_steep_floor(sObjFloor, floorY, objVelX, objVelZ) == 1) {
         waterY = find_water_level(objX + objVelX, objZ + objVelZ);
         if (waterY > objY) {

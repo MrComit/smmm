@@ -73,3 +73,7 @@
 #include "levels/wf/heavyobject/anims/data.inc.c"
 #include "levels/wf/heavyobject/anims/table.inc.c"
 #include "levels/wf/heavyobject/collision.inc.c"
+#include "levels/wf/heavyswitch/model.inc.c"
+#include "levels/wf/heavyswitch/collision.inc.c"
+#include "levels/wf/l2_gate/model.inc.c"
+#include "levels/wf/l2_gate/collision.inc.c"

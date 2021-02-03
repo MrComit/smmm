@@ -664,10 +664,11 @@ void bhv_big_key_loop(void);
 void bhv_l1_room_gate_loop(void);
 void bhv_deathwarp_loop(void);
 void bhv_deathwarp_init(void);
-
-
-
 s32 count_room_objects_with_flag(u32 flag, s16 room);
+void bhv_heavy_switch_loop(void);
+void bhv_heavy_gate_loop(void);
+void bhv_heavy_object_init(void);
+void bhv_heavy_object_loop(void);
 
 
 

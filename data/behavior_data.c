@@ -6950,8 +6950,36 @@ const BehaviorScript bhvHeavyObject[] = {
     ANIMATE(0),
     SET_INT(oIntangibleTimer, 0),
     SET_HOME(),
-    //CALL_NATIVE(bhv_heavy_object_init),
+    CALL_NATIVE(bhv_heavy_object_init),
     BEGIN_LOOP(),
-        //CALL_NATIVE(bhv_heavy_object_loop),
+        CALL_NATIVE(bhv_heavy_object_loop),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvHeavySwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(heavyswitch_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_heavy_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvL2Gate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l2_gate_collision),
+    SET_FLOAT(oCollisionDistance, 0x500),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_heavy_gate_loop),
     END_LOOP(),
 };

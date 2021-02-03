@@ -44,3 +44,5 @@
 #include "levels/wf/geo.inc.c"
 
 #include "levels/wf/heavyobject/geo.inc.c"
+#include "levels/wf/heavyswitch/geo.inc.c"
+#include "levels/wf/l2_gate/geo.inc.c"

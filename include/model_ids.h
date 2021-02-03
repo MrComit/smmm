@@ -629,6 +629,8 @@
 
 // LEVEL 2 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_HEAVY_OBJECT        0xFF
+#define MODEL_HEAVY_SWITCH        0xFE
+#define MODEL_L2_GATE             0xFD
 
 
 #endif // MODEL_IDS_H
