@@ -14,7 +14,7 @@ const GeoLayout wf_area_1_geo[] = {
 const GeoLayout wf_dl_01__Lounge_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 1689, 280, -10009, wf_dl_Bookshelf_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 1689, 280, -11057, wf_dl_Bookshelf_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 933, 71, -7550, wf_dl_Chair_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 1439, 178, -8026, wf_dl_Couch_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(2, -42, 420, -11149, wf_dl_Gate_Indicator_mesh_layer_2),
@@ -26,6 +26,7 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(2, 4896, 581, -5545, wf_dl_Hallway_002_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_004_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(6, -443, 238, -7701, wf_dl_Hallway_005_mesh_layer_6),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -3337, 175, -5810, wf_dl_Jail_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(4, wf_dl_Jail_mesh_layer_4),
@@ -67,6 +68,7 @@ const GeoLayout wf_area_1[] = {
 		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(1, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(4, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(6, wf_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
