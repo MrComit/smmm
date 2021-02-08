@@ -7,20 +7,23 @@ void bhv_lemon_loop(void) {
         o->activeFlags = 0;
         return;
     }
+
     if (gMarioObject->platform == o) {
-        approach_pos = obj->oPosY - o->oFloatF8;
+        approach_pos = o->oHomeY - o->oFloatF8;
     } else {
-        approach_pos = obj->oPosY;
+        approach_pos = o->oHomeY;
     }
     o->oPosY = approach_f32(o->oPosY, approach_pos, o->oFloatF4 * 4, o->oFloatF4);
+    o->oPosY += obj->oVelY;
+    o->oHomeY += obj->oVelY;
 }
 
 
 void bhv_l2_lava_loop(void) {
-    //f32 oldPos = o->oPosY;
+    f32 oldPos = o->oPosY;
     o->oF4 += 0x140;
     o->oPosY = o->oHomeY + (sins(o->oF4) * 75.0f);
-    //o->oVelY = o->oPosY - oldPos;
+    o->oVelY = o->oPosY - oldPos;
 }
 
 
