@@ -79,3 +79,5 @@
 #include "levels/wf/l2_gate/collision.inc.c"
 #include "levels/wf/l2_lava/model.inc.c"
 #include "levels/wf/l2_lava/collision.inc.c"
+#include "levels/wf/lemon/model.inc.c"
+#include "levels/wf/lemon/collision.inc.c"

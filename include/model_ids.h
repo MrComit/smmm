@@ -632,6 +632,7 @@
 #define MODEL_HEAVY_SWITCH        0xFE
 #define MODEL_L2_GATE             0xFD
 #define MODEL_L2_LAVA             0xFC
+#define MODEL_LEMON               0xFB
 
 
 #endif // MODEL_IDS_H

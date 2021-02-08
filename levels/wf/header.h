@@ -119,4 +119,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/l2_lava/collision_header.h"
 
+#include "levels/wf/lemon/geo_header.h"
+
+#include "levels/wf/lemon/collision_header.h"
+
 #endif

@@ -38,6 +38,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_HEAVY_SWITCH, heavyswitch_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L2_GATE, l2_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L2_LAVA, l2_lava_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LEMON, lemon_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -60,6 +61,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_HEAVY_SWITCH, 3245, -190, -7323, 0, 90, 0, 0x00020000, bhvHeavySwitch),
 		OBJECT(MODEL_STAR_PIECE, 5296, 487, -5545, 0, 0, 0, 0x05000000, bhvStarPiece),
 		OBJECT(MODEL_L2_LAVA, 1181, -175, 1039, 0, 0, 0, 0x00000000, bhvL2Lava),
+		OBJECT(MODEL_LEMON, 1181, -175, 805, 0, 0, 0, 0x01640000, bhvLemon),
 		OBJECT(MODEL_NONE, 1116, -500, 2228, 0, 0, 0, 0x00790000, bhvPoleGrabbing),
 		OBJECT(MODEL_NONE, -922, -150, 266, 0, 0, 0, 0x00790000, bhvPoleGrabbing),
 		OBJECT(MODEL_TOKEN, 2573, -230, -1117, 0, 99, 0, 0x00000800, bhvToken),

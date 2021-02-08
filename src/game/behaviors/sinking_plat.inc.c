@@ -1,3 +1,21 @@
+
+
+void bhv_lemon_loop(void) {
+    f32 approach_pos;
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvL2Lava);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    if (gMarioObject->platform == o) {
+        approach_pos = obj->oPosY - o->oFloatF8;
+    } else {
+        approach_pos = obj->oPosY;
+    }
+    o->oPosY = approach_f32(o->oPosY, approach_pos, o->oFloatF4 * 4, o->oFloatF4);
+}
+
+
 void bhv_l2_lava_loop(void) {
     //f32 oldPos = o->oPosY;
     o->oF4 += 0x140;

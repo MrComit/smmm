@@ -1,0 +1,10 @@
+extern const GeoLayout lemon_geo[];
+extern Lights1 lemon_Lemon_001_lights;
+extern u8 lemon_lemon2_ci8[];
+extern u8 lemon_lemon2_ci8_pal_rgba16[];
+extern Vtx lemon_Lemon_mesh_layer_4_vtx_0[24];
+extern Gfx lemon_Lemon_mesh_layer_4_tri_0[];
+extern Gfx mat_lemon_Lemon_001[];
+extern Gfx mat_revert_lemon_Lemon_001[];
+extern Gfx lemon_Lemon_mesh_layer_4[];
+extern Gfx lemon_material_revert_render_settings[];
