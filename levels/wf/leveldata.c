@@ -77,3 +77,5 @@
 #include "levels/wf/heavyswitch/collision.inc.c"
 #include "levels/wf/l2_gate/model.inc.c"
 #include "levels/wf/l2_gate/collision.inc.c"
+#include "levels/wf/l2_lava/model.inc.c"
+#include "levels/wf/l2_lava/collision.inc.c"

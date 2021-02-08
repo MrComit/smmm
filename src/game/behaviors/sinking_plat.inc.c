@@ -1,3 +1,13 @@
+void bhv_l2_lava_loop(void) {
+    //f32 oldPos = o->oPosY;
+    o->oF4 += 0x140;
+    o->oPosY = o->oHomeY + (sins(o->oF4) * 75.0f);
+    //o->oVelY = o->oPosY - oldPos;
+}
+
+
+
+
 void bhv_sinking_plat_init(void) {
     o->oFloatF4 = (f32)(o->oBehParams >> 24);
     o->oFloatF8 = (f32)((o->oBehParams >> 16) & 0xFF) * 10.0f;

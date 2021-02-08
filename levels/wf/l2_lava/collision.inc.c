@@ -1,0 +1,13 @@
+const Collision l2_lava_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(4),
+	COL_VERTEX(-2725, 0, 5500),
+	COL_VERTEX(2725, 0, 5500),
+	COL_VERTEX(2725, 0, -5500),
+	COL_VERTEX(-2725, 0, -5500),
+	COL_TRI_INIT(SURFACE_BURNING, 2),
+	COL_TRI(0, 1, 2),
+	COL_TRI(0, 2, 3),
+	COL_TRI_STOP(),
+	COL_END()
+};

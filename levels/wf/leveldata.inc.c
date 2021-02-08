@@ -1,4 +1,3 @@
-#include "levels/wf/texture_include.inc.c"
 #include "levels/wf/area_1/collision.inc.c"
 #include "levels/wf/area_1/room.inc.c"
 #include "levels/wf/area_1/macro.inc.c"

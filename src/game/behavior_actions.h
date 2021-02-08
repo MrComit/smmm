@@ -669,6 +669,7 @@ void bhv_heavy_switch_loop(void);
 void bhv_heavy_gate_loop(void);
 void bhv_heavy_object_init(void);
 void bhv_heavy_object_loop(void);
+void bhv_l2_lava_loop(void);
 
 
 
