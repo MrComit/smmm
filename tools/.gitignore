@@ -1,7 +1,6 @@
 /aifc_decode
 /aiff_extract_codebook
 /armips
-/bfsize
 /extract_data_for_mio
 /filesizer
 /mio0
@@ -10,6 +9,7 @@
 /n64graphics_ci
 /patch_libultra_math
 /rncpack
+/slienc
 /skyconv
 /tabledesign
 /textconv
