@@ -70,6 +70,10 @@ const GeoLayout wf_dl_03__Balcony_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(4, wf_dl_Hallway_001_mesh_layer_4),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 922, 116, 8208, wf_dl_PlantPlatform_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(6, wf_dl_PlantPlatform_mesh_layer_6),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
