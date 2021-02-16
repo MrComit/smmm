@@ -123,4 +123,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/lemon/collision_header.h"
 
+#include "levels/wf/lightning/geo_header.h"
+
+#include "levels/wf/lightning/anim_header.h"
+
 #endif

@@ -671,6 +671,9 @@ void bhv_heavy_object_init(void);
 void bhv_heavy_object_loop(void);
 void bhv_l2_lava_loop(void);
 void bhv_lemon_loop(void);
+void bhv_lightning_init(void);
+void bhv_lightning_loop(void);
+
 
 
 

@@ -290,4 +290,6 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/library.inc.c"
 #include "behaviors/mm_engine_bhv.inc.c"
 #include "behaviors/lounge.inc.c"
+#include "behaviors/balcony.inc.c"
+
 

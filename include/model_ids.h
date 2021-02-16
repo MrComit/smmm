@@ -633,6 +633,8 @@
 #define MODEL_L2_GATE             0xFD
 #define MODEL_L2_LAVA             0xFC
 #define MODEL_LEMON               0xFB
+#define MODEL_LIGHTNING           0xFA
+
 
 
 #endif // MODEL_IDS_H

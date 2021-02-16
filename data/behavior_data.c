@@ -7013,3 +7013,18 @@ const BehaviorScript bhvLemon[] = {
         CALL_NATIVE(bhv_lemon_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvLightning[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, lightning_anims),
+    ANIMATE(0),
+    DROP_TO_FLOOR(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_lightning_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lightning_loop),
+    END_LOOP(),
+};

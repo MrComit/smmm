@@ -39,6 +39,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_L2_GATE, l2_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L2_LAVA, l2_lava_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEMON, lemon_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LIGHTNING, lightning_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -73,6 +74,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_TOKEN, 2573, -230, -1117, 0, 99, 0, 0x00000800, bhvToken),
 		OBJECT(MODEL_TOKEN, -1374, 900, 266, 0, 90, 0, 0x00010900, bhvToken),
 		OBJECT(MODEL_TOKEN, 2829, 812, 6360, 0, -180, 0, 0x00010A00, bhvToken),
+		OBJECT(MODEL_LIGHTNING, 1017, 216, 8638, 0, 0, 0, 0x00000000, bhvLightning),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),
 		MACRO_OBJECTS(wf_area_1_macro_objs),

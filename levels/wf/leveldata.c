@@ -81,3 +81,6 @@
 #include "levels/wf/l2_lava/collision.inc.c"
 #include "levels/wf/lemon/model.inc.c"
 #include "levels/wf/lemon/collision.inc.c"
+#include "levels/wf/lightning/model.inc.c"
+#include "levels/wf/lightning/anims/data.inc.c"
+#include "levels/wf/lightning/anims/table.inc.c"
