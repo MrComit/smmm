@@ -182,14 +182,14 @@ u8 lightning_amp_electricity_ci4_pal_rgba16[] = {
 	
 };
 
-Vtx lightning_mark_mesh_layer_6_vtx_0[3] = {
+Vtx lightning_mark_mesh_layer_5_vtx_0[3] = {
 	{{{0, 0, 496},0, {496, 1874},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{404, 0, -313},0, {1594, -322},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-404, 0, -313},0, {-602, -322},{0x0, 0x7F, 0x0, 0xFF}}},
 };
 
-Gfx lightning_mark_mesh_layer_6_tri_0[] = {
-	gsSPVertex(lightning_mark_mesh_layer_6_vtx_0 + 0, 3, 0),
+Gfx lightning_mark_mesh_layer_5_tri_0[] = {
+	gsSPVertex(lightning_mark_mesh_layer_5_vtx_0 + 0, 3, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSPEndDisplayList(),
 };
@@ -373,9 +373,10 @@ Gfx lightning_spinner_mesh_layer_1_tri_0[] = {
 };
 
 
-Gfx mat_lightning_Smoke_001[] = {
+Gfx mat_lightning_Smoke_001_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, 0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsDPSetRenderMode(G_RM_AA_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_DECAL2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b, 32, lightning_burn_smoke_ia8),
@@ -385,6 +386,12 @@ Gfx mat_lightning_Smoke_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_lightning_Smoke_001_layer5[] = {
+	gsDPPipeSync(),
+	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
 	gsSPEndDisplayList(),
 };
 
@@ -448,9 +455,10 @@ Gfx mat_lightning_Spinner_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx lightning_mark_mesh_layer_6[] = {
-	gsSPDisplayList(mat_lightning_Smoke_001),
-	gsSPDisplayList(lightning_mark_mesh_layer_6_tri_0),
+Gfx lightning_mark_mesh_layer_5[] = {
+	gsSPDisplayList(mat_lightning_Smoke_001_layer5),
+	gsSPDisplayList(lightning_mark_mesh_layer_5_tri_0),
+	gsSPDisplayList(mat_revert_lightning_Smoke_001_layer5),
 	gsSPEndDisplayList(),
 };
 
