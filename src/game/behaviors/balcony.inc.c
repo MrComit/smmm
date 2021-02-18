@@ -1,3 +1,5 @@
+void obj_set_dist_from_home(f32 distFromHome);
+
 static struct ObjectHitbox sLightningHitbox = {
     /* interactType:      */ INTERACT_SHOCK,
     /* downOffset:        */ 0,
@@ -9,6 +11,37 @@ static struct ObjectHitbox sLightningHitbox = {
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
 };
+
+
+s32 clamp_pole_f32(f32 *value, f32 minimum, f32 maximum) {
+    if (*value <= minimum) {
+        *value = minimum;
+    } else if (*value >= maximum) {
+        *value = maximum;
+    } else {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+
+void bhv_moving_vine_init(void) {
+    //o->hitboxDownOffset = 100.0f;
+    o->oFloatF8 = 100.0f * o->oBehParams2ndByte;
+}
+
+void bhv_moving_vine_loop(void) {
+    if (o->oTimer > 20) {
+        o->oFloatFC += o->oFloatF4;
+
+        if (clamp_pole_f32(&o->oFloatFC, 0.0f, o->oFloatF8)) {
+            o->oFloatF4 = -o->oFloatF4;
+            o->oTimer = 0;
+        }
+    }
+    obj_set_dist_from_home(o->oFloatFC);
+}
 
 
 void bhv_lightning_init(void) {

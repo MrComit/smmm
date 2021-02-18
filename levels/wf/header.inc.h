@@ -443,7 +443,7 @@ extern Gfx wf_dl_Tree_001_mesh_layer_1_tri_0[];
 extern Vtx wf_dl_Tree_001_mesh_layer_4_vtx_cull[8];
 extern Vtx wf_dl_Tree_001_mesh_layer_4_vtx_0[110];
 extern Gfx wf_dl_Tree_001_mesh_layer_4_tri_0[];
-extern Vtx wf_dl_Vine_mesh_layer_1_vtx_0[16];
+extern Vtx wf_dl_Vine_mesh_layer_1_vtx_0[45];
 extern Gfx wf_dl_Vine_mesh_layer_1_tri_0[];
 extern Vtx wf_dl_WeatherVane_mesh_layer_1_vtx_cull[8];
 extern Vtx wf_dl_WeatherVane_mesh_layer_1_vtx_0[106];

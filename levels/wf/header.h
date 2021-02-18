@@ -127,4 +127,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/lightning/anim_header.h"
 
+#include "levels/wf/moving_vine/geo_header.h"
+
 #endif

@@ -634,6 +634,7 @@
 #define MODEL_L2_LAVA             0xFC
 #define MODEL_LEMON               0xFB
 #define MODEL_LIGHTNING           0xFA
+#define MODEL_MOVING_VINE         0xF9
 
 
 

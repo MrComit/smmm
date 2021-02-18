@@ -108,7 +108,7 @@ static s32 obj_update_race_proposition_dialog(s16 dialogID) {
     return dialogResponse;
 }
 
-static void obj_set_dist_from_home(f32 distFromHome) {
+void obj_set_dist_from_home(f32 distFromHome) {
     o->oPosX = o->oHomeX + distFromHome * coss(o->oMoveAngleYaw);
     o->oPosZ = o->oHomeZ + distFromHome * sins(o->oMoveAngleYaw);
 }
@@ -324,7 +324,7 @@ static s32 clamp_s16(s16 *value, s16 minimum, s16 maximum) {
     return TRUE;
 }
 
-static s32 clamp_f32(f32 *value, f32 minimum, f32 maximum) {
+s32 clamp_f32(f32 *value, f32 minimum, f32 maximum) {
     if (*value <= minimum) {
         *value = minimum;
     } else if (*value >= maximum) {

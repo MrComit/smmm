@@ -49,3 +49,4 @@
 #include "levels/wf/l2_lava/geo.inc.c"
 #include "levels/wf/lemon/geo.inc.c"
 #include "levels/wf/lightning/geo.inc.c"
+#include "levels/wf/moving_vine/geo.inc.c"
