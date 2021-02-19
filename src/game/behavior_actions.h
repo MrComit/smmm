@@ -675,6 +675,8 @@ void bhv_lightning_init(void);
 void bhv_lightning_loop(void);
 void bhv_moving_vine_init(void);
 void bhv_moving_vine_loop(void);
+void bhv_boo_coin_init(void);
+void bhv_boo_coin_loop(void);
 
 
 

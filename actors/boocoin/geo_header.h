@@ -1,0 +1,10 @@
+extern const GeoLayout boocoin_geo[];
+extern Lights1 boocoin_BooCoin_001_lights;
+extern u8 boocoin_boocoin_sprite_ci4[];
+extern u8 boocoin_boocoin_sprite_ci4_pal_rgba16[];
+extern Vtx boocoin_BooCoin_mesh_layer_4_vtx_0[3];
+extern Gfx boocoin_BooCoin_mesh_layer_4_tri_0[];
+extern Gfx mat_boocoin_BooCoin_001[];
+extern Gfx mat_revert_boocoin_BooCoin_001[];
+extern Gfx boocoin_BooCoin_mesh_layer_4[];
+extern Gfx boocoin_material_revert_render_settings[];

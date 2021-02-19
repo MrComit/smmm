@@ -7044,3 +7044,14 @@ const BehaviorScript bhvMovingVine[] = {
         CALL_NATIVE(bhv_pole_base_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBooCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    CALL_NATIVE(bhv_boo_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boo_coin_loop),
+    END_LOOP(),
+};

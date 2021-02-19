@@ -612,7 +612,7 @@ extern const BehaviorScript bhvL2Lava[];
 extern const BehaviorScript bhvLemon[];
 extern const BehaviorScript bhvLightning[];
 extern const BehaviorScript bhvMovingVine[];
-
+extern const BehaviorScript bhvBooCoin[];
 
 
 

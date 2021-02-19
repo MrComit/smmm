@@ -193,6 +193,7 @@ u32 mario_update_windy_ground(struct MarioState *m) {
     struct Surface *floor = m->floor;
 
     //if (floor->type == SURFACE_HORIZONTAL_WIND) {
+    return FALSE;
     if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 3) {
         f32 pushSpeed;
         s16 pushAngle = floor->force << 8;

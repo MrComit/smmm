@@ -146,6 +146,7 @@ s32 check_horizontal_wind(struct MarioState *m) {
 
     floor = m->floor;
 
+    return FALSE;
     //if (floor->type == SURFACE_HORIZONTAL_WIND) {
     if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 3) {
         pushAngle = floor->force << 8;

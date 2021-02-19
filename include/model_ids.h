@@ -599,6 +599,7 @@
 #define MODEL_TOKEN               0x36
 #define MODEL_SMALL_KEY           0x37
 #define MODEL_BIG_KEY             0x38
+#define MODEL_BOO_COIN            0x39
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF

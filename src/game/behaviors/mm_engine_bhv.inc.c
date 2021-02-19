@@ -37,9 +37,37 @@ struct ObjectHitbox sSmallKeyHitbox = {
     /* hurtboxHeight: */ 100,
 };
 
+
+struct ObjectHitbox sBooCoinHitbox = {
+    /* interactType: */ INTERACT_COIN,
+    /* downOffset: */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health: */ 0,
+    /* numLootCoins: */ 0,
+    /* radius: */ 120,
+    /* height: */ 84,
+    /* hurtboxRadius: */ 0,
+    /* hurtboxHeight: */ 0,
+};
+
+
 Vec3f sPreviousMarioPos = {0, 0, 0};
 
 u8 sTokenCoins[3] = {10, 50, 100};
+
+
+void bhv_boo_coin_init(void) {
+   obj_set_hitbox(o, &sBooCoinHitbox);
+}
+
+
+void bhv_boo_coin_loop(void) {
+    o->oFaceAngleYaw += 0x380;
+    if (o->oInteractStatus) {
+        spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+        o->activeFlags = 0;
+    }
+}
 
 
 void bhv_deathwarp_init(void) {
