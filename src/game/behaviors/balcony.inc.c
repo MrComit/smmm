@@ -29,6 +29,7 @@ s32 clamp_pole_f32(f32 *value, f32 minimum, f32 maximum) {
 void bhv_moving_vine_init(void) {
     //o->hitboxDownOffset = 100.0f;
     o->oFloatF8 = 100.0f * o->oBehParams2ndByte;
+    o->header.gfx.scale[1] = 1.3f + (0.1f * (o->oBehParams >> 24));
 }
 
 void bhv_moving_vine_loop(void) {
@@ -49,6 +50,11 @@ void bhv_lightning_init(void) {
     obj_set_hitbox(o, &sLightningHitbox);
     if (o->oBehParams2ndByte) {
         o->oAction = 3;
+    }
+
+    if (o->oBehParams >> 24) {
+        cur_obj_become_intangible();
+        o->oAction = 4;
     }
 }
 

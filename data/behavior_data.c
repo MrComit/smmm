@@ -7033,7 +7033,7 @@ const BehaviorScript bhvLightning[] = {
 const BehaviorScript bhvMovingVine[] = {
     BEGIN(OBJ_LIST_POLELIKE),
     SET_INTERACT_TYPE(INTERACT_POLE),
-    SET_HITBOX(/*Radius*/ 80, /*Height*/ 1000),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 1300),
     SET_INT(oIntangibleTimer, 0),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_HOME(),
