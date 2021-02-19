@@ -13,6 +13,9 @@
 #include "mario_step.h"
 #include "save_file.h"
 #include "rumble_init.h"
+#include "game/area.h"
+#include "object_list_processor.h"
+
 
 void play_flip_sounds(struct MarioState *m, s16 frame1, s16 frame2, s16 frame3) {
     s32 animFrame = m->marioObj->header.gfx.animInfo.animFrame;
@@ -143,11 +146,12 @@ s32 check_horizontal_wind(struct MarioState *m) {
 
     floor = m->floor;
 
-    if (floor->type == SURFACE_HORIZONTAL_WIND) {
+    //if (floor->type == SURFACE_HORIZONTAL_WIND) {
+    if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 3) {
         pushAngle = floor->force << 8;
 
-        m->slideVelX += 1.2f * sins(pushAngle);
-        m->slideVelZ += 1.2f * coss(pushAngle);
+        m->slideVelX += 1.05f * sins(pushAngle);
+        m->slideVelZ += 1.05f * coss(pushAngle);
 
         speed = sqrtf(m->slideVelX * m->slideVelX + m->slideVelZ * m->slideVelZ);
 
@@ -178,7 +182,7 @@ void update_air_with_turn(struct MarioState *m) {
     s16 intendedDYaw;
     f32 intendedMag;
 
-    if (!check_horizontal_wind(m)) {
+    //if (!check_horizontal_wind(m)) {
         dragThreshold = m->action == ACT_LONG_JUMP ? 48.0f : 32.0f;
         m->forwardVel = approach_f32(m->forwardVel, 0.0f, 0.35f, 0.35f);
 
@@ -200,7 +204,7 @@ void update_air_with_turn(struct MarioState *m) {
 
         m->vel[0] = m->slideVelX = m->forwardVel * sins(m->faceAngle[1]);
         m->vel[2] = m->slideVelZ = m->forwardVel * coss(m->faceAngle[1]);
-    }
+    //}
 }
 
 void update_air_without_turn(struct MarioState *m) {
@@ -209,7 +213,7 @@ void update_air_without_turn(struct MarioState *m) {
     s16 intendedDYaw;
     f32 intendedMag;
 
-    if (!check_horizontal_wind(m)) {
+    //if (!check_horizontal_wind(m)) {
         dragThreshold = m->action == ACT_LONG_JUMP ? 48.0f : 32.0f;
         m->forwardVel = approach_f32(m->forwardVel, 0.0f, 0.35f, 0.35f);
 
@@ -237,7 +241,7 @@ void update_air_without_turn(struct MarioState *m) {
 
         m->vel[0] = m->slideVelX;
         m->vel[2] = m->slideVelZ;
-    }
+    //}
 }
 
 void update_lava_boost_or_twirling(struct MarioState *m) {
