@@ -7068,3 +7068,17 @@ const BehaviorScript bhvBooCoinCage[] = {
         CALL_NATIVE(bhv_boocoin_cage_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvLockedCage[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(locked_cage_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    CALL_NATIVE(bhv_locked_cage_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_locked_cage_loop),
+    END_LOOP(),
+};

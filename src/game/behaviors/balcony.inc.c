@@ -13,6 +13,26 @@ static struct ObjectHitbox sLightningHitbox = {
 };
 
 
+void bhv_locked_cage_init(void) {
+    if (save_file_get_flags() & (1 << (o->oBehParams2ndByte + 1))) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_locked_cage_loop(void) {
+    if (o->oDistanceToMario < 500.0f) {
+        if (save_file_get_keys() & (1 << o->oBehParams2ndByte)) {
+            CL_explode_object(o, 1);
+            play_puzzle_jingle();
+            save_file_set_flags(1 << (o->oBehParams2ndByte + 1));
+        }
+    }
+}
+
+
+
+
 s32 clamp_pole_f32(f32 *value, f32 minimum, f32 maximum) {
     if (*value <= minimum) {
         *value = minimum;

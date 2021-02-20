@@ -129,4 +129,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/moving_vine/geo_header.h"
 
+#include "levels/wf/locked_cage/collision_header.h"
+
+#include "levels/wf/locked_cage/geo_header.h"
+
 #endif

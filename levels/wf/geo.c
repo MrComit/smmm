@@ -50,3 +50,4 @@
 #include "levels/wf/lemon/geo.inc.c"
 #include "levels/wf/lightning/geo.inc.c"
 #include "levels/wf/moving_vine/geo.inc.c"
+#include "levels/wf/locked_cage/geo.inc.c"

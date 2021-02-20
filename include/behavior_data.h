@@ -614,6 +614,7 @@ extern const BehaviorScript bhvLightning[];
 extern const BehaviorScript bhvMovingVine[];
 extern const BehaviorScript bhvBooCoin[];
 extern const BehaviorScript bhvBooCoinCage[];
+extern const BehaviorScript bhvLockedCage[];
 
 
 

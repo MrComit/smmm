@@ -85,3 +85,5 @@
 #include "levels/wf/lightning/anims/data.inc.c"
 #include "levels/wf/lightning/anims/table.inc.c"
 #include "levels/wf/moving_vine/model.inc.c"
+#include "levels/wf/locked_cage/collision.inc.c"
+#include "levels/wf/locked_cage/model.inc.c"

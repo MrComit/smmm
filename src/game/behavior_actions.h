@@ -679,6 +679,9 @@ void bhv_boo_coin_init(void);
 void bhv_boo_coin_loop(void);
 void bhv_boocoin_cage_init(void);
 void bhv_boocoin_cage_loop(void);
+void bhv_locked_cage_init(void);
+void bhv_locked_cage_loop(void);
+
 
 
 

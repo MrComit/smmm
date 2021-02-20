@@ -636,6 +636,8 @@
 #define MODEL_LEMON               0xFB
 #define MODEL_LIGHTNING           0xFA
 #define MODEL_MOVING_VINE         0xF9
+#define MODEL_LOCKED_CAGE         0xF8
+
 
 
 
