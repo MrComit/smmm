@@ -50,10 +50,45 @@ struct ObjectHitbox sBooCoinHitbox = {
     /* hurtboxHeight: */ 0,
 };
 
+static struct ObjectHitbox sBooCoinCageHitbox = {
+    /* interactType: */ INTERACT_IGLOO_BARRIER,
+    /* downOffset: */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health: */ 0,
+    /* numLootCoins: */ 0,
+    /* radius: */ 80,
+    /* height: */ 70,
+    /* hurtboxRadius: */ 0,
+    /* hurtboxHeight: */ 0,
+};
+
+
 
 Vec3f sPreviousMarioPos = {0, 0, 0};
 
 u8 sTokenCoins[3] = {10, 50, 100};
+
+void bhv_boocoin_cage_init(void) {
+    struct Object *obj;
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+            obj->oAction = 1;
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+            break;
+    }
+    obj_set_hitbox(o, &sBooCoinCageHitbox);
+}
+
+void bhv_boocoin_cage_loop(void) {
+    if (o->oF4 >= 5) {
+        o->activeFlags = 0;
+        play_puzzle_jingle();
+        //cutscene_object_without_dialog(o, CUTSCENE_STAR_SPAWN);
+    }
+}
+
 
 
 void bhv_boo_coin_init(void) {
@@ -62,10 +97,22 @@ void bhv_boo_coin_init(void) {
 
 
 void bhv_boo_coin_loop(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvBooCoinCage);
+    struct Object *obj2;
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
     o->oFaceAngleYaw += 0x380;
     if (o->oInteractStatus) {
-        spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+        obj2 = spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+        obj2->oPosY -= 50.0f;
         o->activeFlags = 0;
+        obj->oF4++;
+        if (obj->oF4 != 5) {
+            spawn_orange_number(obj->oF4, 0, 0, 0);
+        }
+        play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) obj->oF4 - 1) << 16), gGlobalSoundSource);
     }
 }
 
