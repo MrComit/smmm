@@ -1,0 +1,15 @@
+extern const GeoLayout l2_falling_floor_geo[];
+extern Lights1 l2_falling_floor_BathroomTiles_001_lights;
+extern u8 l2_falling_floor_RockPattern09_ci8[];
+extern u8 l2_falling_floor_RockPattern09_ci8_pal_rgba16[];
+extern u8 l2_falling_floor_stonetiles_i8[];
+extern Vtx l2_falling_floor_FallingFloor_mesh_layer_1_vtx_0[32];
+extern Gfx l2_falling_floor_FallingFloor_mesh_layer_1_tri_0[];
+extern Vtx l2_falling_floor_FallingFloor_mesh_layer_1_vtx_1[36];
+extern Gfx l2_falling_floor_FallingFloor_mesh_layer_1_tri_1[];
+extern Gfx mat_l2_falling_floor_Ground_001[];
+extern Gfx mat_revert_l2_falling_floor_Ground_001[];
+extern Gfx mat_l2_falling_floor_BathroomTiles_001[];
+extern Gfx mat_revert_l2_falling_floor_BathroomTiles_001[];
+extern Gfx l2_falling_floor_FallingFloor_mesh_layer_1[];
+extern Gfx l2_falling_floor_material_revert_render_settings[];

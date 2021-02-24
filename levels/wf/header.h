@@ -133,4 +133,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/locked_cage/geo_header.h"
 
+#include "levels/wf/l2_falling_floor/collision_header.h"
+
+#include "levels/wf/l2_falling_floor/geo_header.h"
+
 #endif

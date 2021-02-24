@@ -51,3 +51,4 @@
 #include "levels/wf/lightning/geo.inc.c"
 #include "levels/wf/moving_vine/geo.inc.c"
 #include "levels/wf/locked_cage/geo.inc.c"
+#include "levels/wf/l2_falling_floor/geo.inc.c"

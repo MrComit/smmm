@@ -7082,3 +7082,18 @@ const BehaviorScript bhvLockedCage[] = {
         CALL_NATIVE(bhv_locked_cage_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvL2FallingFloor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l2_falling_floor_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    CALL_NATIVE(bhv_falling_floor_init),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_falling_floor_loop),
+    END_LOOP(),
+};

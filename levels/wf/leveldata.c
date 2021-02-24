@@ -87,3 +87,5 @@
 #include "levels/wf/moving_vine/model.inc.c"
 #include "levels/wf/locked_cage/collision.inc.c"
 #include "levels/wf/locked_cage/model.inc.c"
+#include "levels/wf/l2_falling_floor/collision.inc.c"
+#include "levels/wf/l2_falling_floor/model.inc.c"
