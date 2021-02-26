@@ -638,6 +638,7 @@
 #define MODEL_MOVING_VINE         0xF9
 #define MODEL_LOCKED_CAGE         0xF8
 #define MODEL_L2_FALLING_FLOOR    0xF7
+#define MODEL_PIPESEG             0xF6
 
 
 

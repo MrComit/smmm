@@ -683,6 +683,8 @@ void bhv_locked_cage_init(void);
 void bhv_locked_cage_loop(void);
 void bhv_falling_floor_loop(void);
 void bhv_falling_floor_init(void);
+void bhv_pipeseg_init(void);
+void bhv_pipeseg_loop(void);
 
 
 

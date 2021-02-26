@@ -137,4 +137,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/l2_falling_floor/geo_header.h"
 
+#include "levels/wf/pipeseg/geo_header.h"
+
 #endif

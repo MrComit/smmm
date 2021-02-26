@@ -43,6 +43,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MOVING_VINE, moving_vine_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LOCKED_CAGE, locked_cage_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L2_FALLING_FLOOR, l2_falling_floor_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PIPESEG, pipeseg_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -116,6 +117,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_L2_FALLING_FLOOR, 2071, 0, -13060, 0, 0, 0, 0x00000000, bhvL2FallingFloor),
 		OBJECT(MODEL_L2_FALLING_FLOOR, 3616, 0, -12404, 0, 0, 0, 0x00000000, bhvL2FallingFloor),
 		OBJECT(MODEL_L2_FALLING_FLOOR, 4023, 0, -14484, 0, 0, 0, 0x00000000, bhvL2FallingFloor),
+		OBJECT(MODEL_PIPESEG, 3545, -2339, -12404, 0, 0, 0, 0x00000000, bhvPipeseg),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),
 		MACRO_OBJECTS(wf_area_1_macro_objs),

@@ -173,7 +173,6 @@ const GeoLayout wf_dl_04__Bathroom_geo[] = {
 			GEO_DISPLAY_LIST(5, wf_dl_Bathroom_mesh_layer_5),
 			GEO_DISPLAY_LIST(2, wf_dl_Bathroom_mesh_layer_2),
 		GEO_CLOSE_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 3545, -2274, -12404, wf_dl_PipeObject_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 924, -2274, -13081, wf_dl_Pipes_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 4023, -2423, -12959, wf_dl_Pipes_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 3616, -2274, -12978, wf_dl_Pipes_004_mesh_layer_1),
