@@ -1157,6 +1157,24 @@ void mode_radial_camera(struct Camera *c) {
     pan_ahead_of_player(c);
 }
 
+void fixed_cam_presets(struct Camera *c) {
+    struct MarioState *m = gMarioState;
+    switch (c->filler31[0]) {
+        case 0:
+            break;
+        case 1:
+            vec3f_set(c->pos, -5000.0f, m->pos[1] + 600.0f, m->pos[2]);
+            vec3f_set(c->focus, -9070.0f, m->pos[1], m->pos[2]);
+            c->nextYaw = 0x4000;
+            c->yaw = c->nextYaw;
+            break;
+        case 2:
+            c->pos[1] = m->pos[1] + 200.0f;
+            c->focus[1] = m->pos[1];
+            break;
+    }
+}
+
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
@@ -1182,6 +1200,8 @@ void mode_8_directions_camera(struct Camera *c) {
     c->pos[2] = pos[2];
     sAreaYawChange = sAreaYaw - oldAreaYaw;
     set_camera_height(c, pos[1]);
+
+    fixed_cam_presets(c);
 }
 
 /**
@@ -1729,6 +1749,12 @@ void mode_fixed_camera(struct Camera *c) {
         vec3f_set(c->focus, -9070.0f, m->pos[1], m->pos[2]);
         c->nextYaw = 0x4000;
         c->yaw = c->nextYaw;
+    } else if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 4) {
+        mode_8_directions_camera(c);
+        //c->pos[1] = m->pos[1] + 200.0f;
+        //c->focus[1] = m->pos[1];
+        //c->nextYaw = 0x4000;
+        //c->yaw = c->nextYaw;   
     }
 }
 
@@ -5771,7 +5797,14 @@ BAD_RETURN(s32) cam_thi_look_through_tunnel(UNUSED struct Camera *c) {
 BAD_RETURN(s32) cam_bob_tower(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
     //transition_to_camera_mode(c, CAMERA_MODE_FIXED, 90);
-    set_camera_mode_fixed(c, -5424, 595, 17408);
+    //set_camera_mode_fixed(c, -5424, 595, 17408);
+    c->filler31[0] = 1;
+}
+
+
+BAD_RETURN(s32) cam_wf_bathroom(struct Camera *c) {
+    sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
+    c->filler31[0] = 2;
 }
 
 /**
@@ -6359,6 +6392,7 @@ struct CameraTrigger sCamBBH[] = {
  * Each table is terminated with NULL_TRIGGER
  */
 struct CameraTrigger sCamWF[] = {
+	{1, cam_wf_bathroom, 2018, -796, -13061, 580, 496, 580, 0xffff},
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
@@ -6550,7 +6584,7 @@ s16 camera_course_processing(struct Camera *c) {
             b += 1;
         }
         if (!anyChecked) {
-            c->mode = CAMERA_MODE_8_DIRECTIONS;
+            c->filler31[0] = 0;
         }
     }
 
