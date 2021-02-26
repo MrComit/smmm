@@ -13,6 +13,18 @@ void bhv_warp_loop(void) {
         o->hitboxHeight = 50.0f;
     }
     o->oInteractStatus = 0;
+
+
+    if (cur_obj_has_behavior(bhvWarpPipe)) {
+        if (((o->oBehParams >> 8) & 0xFF) == 0) {
+            load_object_collision_model();
+            if (o->oFaceAngleRoll != 0) {
+                o->hitboxDownOffset = 75.0f;
+            }
+        } else {
+            cur_obj_become_intangible();
+        }
+    }
 }
 
 void bhv_fading_warp_loop() // identical to the above function except for o->hitboxRadius

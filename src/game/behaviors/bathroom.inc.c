@@ -4,18 +4,20 @@ static struct ObjectHitbox sPipesegHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 65,
-    /* height:            */ 113,
+    /* radius:            */ 90,
+    /* height:            */ 140,
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
 };
 
 
 Vec3f sPipeSlots[3] = {
-{3616.01f, -2210.11f, -10404.5f},
-{4023.04f, -2487.23f, -12483.6f},
-{2061.84f, -2487.23f, -13058.9f},
+{3616.01f, -2338.67f, -12404.5f},
+{4023.04f, -2487.23f, -14483.6f},
+{2061.84f, -2840.87f, -15058.9f},
 };
+
+Vec3s sPipeRots = {0, 0, 0x4000};
 
 
 
@@ -23,6 +25,7 @@ void pipeseg_held_loop(void) {
     cur_obj_become_intangible();
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     o->oObjF4 = NULL;
+    o->oAction = 0;
     cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
 }
 
@@ -39,13 +42,16 @@ void pipeseg_dropped_loop(void) {
     o->oHeldState = 0;
     for (i = 0; i < 3; i++) {
         CL_dist_between_points(&o->oPosX, sPipeSlots[i], &dist);
-        if (dist < 50.0f) {
+        if (dist < 150.0f) {
             h = 1;
             break;
         }
     }
     if (h) {
         vec3f_copy(&o->oPosX, sPipeSlots[i]);
+        o->oFaceAngleYaw = sPipeRots[i];
+        o->oAction = 1;
+        play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
     }
     //o->oAction = 0;
 }
@@ -58,6 +64,15 @@ void pipeseg_free_loop(void) {
         o->oObjF4 = sObjFloor->object;
     } else {
         o->oObjF4 = NULL;
+    }
+
+    switch (o->oAction) {
+        case 1:
+            //o->oObjF8 = spawn_object(o, );
+            o->oAction = 2;
+            break;
+        case 2:
+            break;
     }
 }
 
@@ -102,9 +117,9 @@ void bhv_falling_floor_loop(void) {
             }
             break;
         case 1:
-            o->oFloatF4 = approach_f32(o->oFloatF4, 30.0f, 1.1f, 1.1f);
+            o->oFloatF4 = approach_f32(o->oFloatF4, 60.0f, 1.1f, 1.1f);
             o->oPosY -= o->oFloatF4;
-            if (o->oPosY < o->oHomeY - 800.0f) {
+            if (o->oPosY < o->oHomeY - 2200.0f) {
                 CL_explode_object(o, 1);
                 o->oAction = 2;
             }
