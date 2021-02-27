@@ -10,6 +10,19 @@ static struct ObjectHitbox sPipesegHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+static struct ObjectHitbox sGushingWaterHitbox = {
+    /* interactType:      */ INTERACT_IGLOO_BARRIER,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 80,
+    /* height:            */ 800,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+
 
 Vec3f sPipeSlots[3] = {
 {3616.01f, -2338.67f, -12404.5f},
@@ -18,6 +31,28 @@ Vec3f sPipeSlots[3] = {
 };
 
 Vec3s sPipeRots = {0, 0, 0x4000};
+Vec3s sPipeScales = {5, 5, 5};
+
+
+void bhv_gushing_water_init(void) {
+    obj_set_hitbox(o, &sGushingWaterHitbox);
+    o->header.gfx.scale[1] = 0.01f;
+    o->oFloatF4 = 0.5f + (o->oBehParams2ndByte * 0.1f);
+}
+
+
+void bhv_gushing_water_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], o->oFloatF4, 0.05f, 0.05f);
+            if (o->header.gfx.scale[1] == o->oFloatF4) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            break;
+    }
+}
 
 
 
@@ -27,6 +62,10 @@ void pipeseg_held_loop(void) {
     o->oObjF4 = NULL;
     o->oAction = 0;
     cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
+    if (o->oObjF8 != NULL) {
+        o->oObjF8->activeFlags = 0;
+        o->oObjF8 = NULL;
+    }
 }
 
 void pipeseg_dropped_loop(void) {
@@ -51,6 +90,9 @@ void pipeseg_dropped_loop(void) {
         vec3f_copy(&o->oPosX, sPipeSlots[i]);
         o->oFaceAngleYaw = sPipeRots[i];
         o->oAction = 1;
+        o->oObjF8 = spawn_object(o, MODEL_GUSHING_WATER, bhvGushingWater);
+        o->oObjF8->oF8 = i;
+        o->oObjF8->oBehParams2ndByte = sPipeScales[i];
         play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
     }
     //o->oAction = 0;
@@ -106,6 +148,7 @@ void bhv_pipeseg_loop(void) {
 
 void bhv_falling_floor_init(void) {
     o->oFloatF4 = 10.0f;
+    o->oAnimState = o->oBehParams2ndByte;
 }
 
 

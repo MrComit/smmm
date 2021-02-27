@@ -617,6 +617,9 @@ extern const BehaviorScript bhvBooCoinCage[];
 extern const BehaviorScript bhvLockedCage[];
 extern const BehaviorScript bhvL2FallingFloor[];
 extern const BehaviorScript bhvPipeseg[];
+extern const BehaviorScript bhvGushingWater[];
+
+
 
 
 

@@ -7109,3 +7109,13 @@ const BehaviorScript bhvPipeseg[] = {
         CALL_NATIVE(bhv_pipeseg_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvGushingWater[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_gushing_water_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gushing_water_loop),
+    END_LOOP(),
+};

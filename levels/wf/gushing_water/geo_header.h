@@ -1,0 +1,14 @@
+extern const GeoLayout gushing_water_geo[];
+extern u8 gushing_water_water_ci4[];
+extern u8 gushing_water_water_ci4_pal_rgba16[];
+extern u8 gushing_water_i8_water_i8[];
+extern Vtx gushing_water_Water_mesh_layer_5_vtx_0[30];
+extern Gfx gushing_water_Water_mesh_layer_5_tri_0[];
+extern Vtx gushing_water_Water_mesh_layer_6_vtx_0[24];
+extern Gfx gushing_water_Water_mesh_layer_6_tri_0[];
+extern Gfx mat_gushing_water_Water_001[];
+extern Gfx mat_revert_gushing_water_Water_001[];
+extern Gfx mat_gushing_water_WaterDecal_001[];
+extern Gfx gushing_water_Water_mesh_layer_5[];
+extern Gfx gushing_water_Water_mesh_layer_6[];
+extern Gfx gushing_water_material_revert_render_settings[];

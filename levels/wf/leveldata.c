@@ -90,3 +90,4 @@
 #include "levels/wf/l2_falling_floor/collision.inc.c"
 #include "levels/wf/l2_falling_floor/model.inc.c"
 #include "levels/wf/pipeseg/model.inc.c"
+#include "levels/wf/gushing_water/model.inc.c"
