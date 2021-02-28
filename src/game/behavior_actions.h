@@ -687,6 +687,8 @@ void bhv_pipeseg_init(void);
 void bhv_pipeseg_loop(void);
 void bhv_gushing_water_init(void);
 void bhv_gushing_water_loop(void);
+void bhv_rising_floor_loop(void);
+
 
 
 

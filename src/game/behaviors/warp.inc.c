@@ -19,7 +19,7 @@ void bhv_warp_loop(void) {
         if (((o->oBehParams >> 8) & 0xFF) == 0) {
             load_object_collision_model();
             if (o->oFaceAngleRoll != 0) {
-                o->hitboxDownOffset = 75.0f;
+                o->hitboxDownOffset = 100.0f;
             }
         } else {
             cur_obj_become_intangible();

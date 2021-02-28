@@ -31,13 +31,13 @@ Vec3f sPipeSlots[3] = {
 };
 
 Vec3s sPipeRots = {0, 0, 0x4000};
-Vec3s sPipeScales = {5, 5, 5};
+Vec3s sPipeScales = {29, 32, 27};
 
 
 void bhv_gushing_water_init(void) {
     obj_set_hitbox(o, &sGushingWaterHitbox);
     o->header.gfx.scale[1] = 0.01f;
-    o->oFloatF4 = 0.5f + (o->oBehParams2ndByte * 0.1f);
+    o->oFloatF4 = 0.5f + (o->oF8 * 0.1f);
 }
 
 
@@ -52,6 +52,8 @@ void bhv_gushing_water_loop(void) {
         case 1:
             break;
     }
+    o->hitboxHeight = 1000 * o->header.gfx.scale[1];
+    o->oFlags &= ~OBJ_FLAG_HOLDABLE;
 }
 
 
@@ -61,6 +63,7 @@ void pipeseg_held_loop(void) {
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     o->oObjF4 = NULL;
     o->oAction = 0;
+    o->oFC = 0;
     cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
     if (o->oObjF8 != NULL) {
         o->oObjF8->activeFlags = 0;
@@ -69,9 +72,6 @@ void pipeseg_held_loop(void) {
 }
 
 void pipeseg_dropped_loop(void) {
-    s16 i;
-    s16 h = 0;
-    f32 dist;
     cur_obj_get_dropped();
     cur_obj_become_tangible();
 
@@ -79,28 +79,15 @@ void pipeseg_dropped_loop(void) {
     //cur_obj_init_animation(0);
 
     o->oHeldState = 0;
-    for (i = 0; i < 3; i++) {
-        CL_dist_between_points(&o->oPosX, sPipeSlots[i], &dist);
-        if (dist < 150.0f) {
-            h = 1;
-            break;
-        }
-    }
-    if (h) {
-        vec3f_copy(&o->oPosX, sPipeSlots[i]);
-        o->oFaceAngleYaw = sPipeRots[i];
-        o->oAction = 1;
-        o->oObjF8 = spawn_object(o, MODEL_GUSHING_WATER, bhvGushingWater);
-        o->oObjF8->oF8 = i;
-        o->oObjF8->oBehParams2ndByte = sPipeScales[i];
-        play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
-    }
     //o->oAction = 0;
 }
 
 
 void pipeseg_free_loop(void) {
     struct Object *obj;
+    s16 i;
+    s16 h = 0;
+    f32 dist;
     object_step();
     if (sObjFloor != NULL && sObjFloor->object != NULL && absf(o->oPosY - o->oFloorHeight) <= 30.0f) {
         o->oObjF4 = sObjFloor->object;
@@ -108,12 +95,43 @@ void pipeseg_free_loop(void) {
         o->oObjF4 = NULL;
     }
 
+    if (o->oFC == 1) {
+        if (o->oTimer > 200) {
+            o->oTimer = 0;
+            o->oHeldState = 0;
+            o->oPosX = o->oHomeX;
+            o->oPosY = o->oHomeY;
+            o->oPosZ = o->oHomeZ;
+            o->oFaceAngleYaw = 0;
+            o->oFC = 0;
+        }
+    }
+
     switch (o->oAction) {
-        case 1:
-            //o->oObjF8 = spawn_object(o, );
-            o->oAction = 2;
+        case 0:
+            for (i = 0; i < 3; i++) {
+                CL_dist_between_points(&o->oPosX, sPipeSlots[i], &dist);
+                if (dist < 150.0f) {
+                    h = 1;
+                    break;
+                }
+            }
+            if (h) {
+                vec3f_copy(&o->oPosX, sPipeSlots[i]);
+                o->oFaceAngleYaw = sPipeRots[i];
+                o->oAction = 1;
+                o->oObjF8 = spawn_object(o, MODEL_GUSHING_WATER, bhvGushingWater);
+                o->oObjF8->oBehParams2ndByte = i;
+                o->oObjF8->oF8 = sPipeScales[i];
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+            } else {
+                o->oFC = 1;
+            }
+            if (o->oTimer > 75) {
+                o->oAction = 1;
+            }
             break;
-        case 2:
+        case 1:
             break;
     }
 }
@@ -147,6 +165,10 @@ void bhv_pipeseg_loop(void) {
 
 
 void bhv_falling_floor_init(void) {
+    if (o->oBehParams2ndByte == 2) {
+        o->header.gfx.scale[0] = 2.0f / 3.0f;
+        o->header.gfx.scale[2] = 2.0f / 3.0f;
+    }
     o->oFloatF4 = 10.0f;
     o->oAnimState = o->oBehParams2ndByte;
 }
@@ -166,6 +188,27 @@ void bhv_falling_floor_loop(void) {
                 CL_explode_object(o, 1);
                 o->oAction = 2;
             }
+            break;
+    }
+}
+
+
+void bhv_rising_floor_loop(void) {
+    struct Object *obj;
+    f32 pos;
+    switch (o->oAction) {
+        case 0:
+            obj = CL_nearest_object_with_behavior_and_field(bhvGushingWater, 0x144, o->oBehParams >> 24);
+            if (obj != NULL) {
+                pos = obj->oPosY + (obj->header.gfx.scale[1] * 1000.0f) + 100.0f;
+                if (pos > o->oHomeY) {
+                    o->oPosY = pos;
+                }
+            } else {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 50.0f, 50.0f);
+            }
+            break;
+        case 1:
             break;
     }
 }
