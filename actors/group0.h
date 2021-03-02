@@ -356,6 +356,9 @@ extern const Gfx boo_dl_color3[];
 extern const Gfx boo_dl_color4[];
 extern const Gfx boo_dl_color5[];
 extern const Gfx boo_dl_color6[];
+extern const Gfx boo_dl_color7[];
+extern const Gfx boo_dl_color8[];
+extern const Gfx boo_dl_color9[];
 
 // haunted_cage
 extern const GeoLayout haunted_cage_geo[];

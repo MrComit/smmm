@@ -177,7 +177,7 @@ const GeoLayout wf_dl_04__Bathroom_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 3809, -2284, -15016, wf_dl_Pipes_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 2005, 582, -13493, wf_dl_Platforms_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(4, 2020, -2339, -13093, wf_dl_Scaffolding_001_mesh_layer_4),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 4701, 1312, -15299, wf_dl_Shelf_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 2754, 1132, -14760, wf_dl_Shelf_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 1408, 34, -13660, wf_dl_Sink_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 1408, 34, -13660, wf_dl_Sink_001_mesh_layer_1),
 		GEO_OPEN_NODE(),

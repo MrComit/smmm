@@ -59,7 +59,8 @@ void bhv_octopus_loop(void) {
         case 0:
             if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                 o->oAction = 1;
-            }
+            } else 
+                o->oInteractStatus = 0;
             break;
         case 1:
             o->oFaceAngleRoll -= 0xC00;
@@ -70,7 +71,6 @@ void bhv_octopus_loop(void) {
             }
             break;
     }
-    o->oInteractStatus = 0;
 }
 
 

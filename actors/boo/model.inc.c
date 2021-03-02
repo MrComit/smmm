@@ -34,9 +34,27 @@ static const Lights1 boo_light_5 = gdSPDefLights1(
 );
 
 static const Lights1 boo_light_6 = gdSPDefLights1(
+    0x11, 0x54, 0x18,
+    0x22, 0xa8, 0x2f, 0x28, 0x28, 0x28
+);
+
+static const Lights1 boo_light_7 = gdSPDefLights1(
     0x97, 0x9a, 0xff,
     0xff, 0xff, 0xff, 0x28, 0x28, 0x28
 );
+
+
+static const Lights1 boo_light_8 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+
+static const Lights1 boo_light_9 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
 
 
 
@@ -465,6 +483,54 @@ const Gfx boo_dl_color5[] = {
 
 
 const Gfx boo_dl_color6[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(boo_dl_helper),
+    gsSPLight(&boo_light_6.l, 1),
+    gsSPLight(&boo_light_6.a, 2),
+    gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
+    gsDPTileSync(),
+    gsSPDisplayList(boo_seg5_dl_0500C1B0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx boo_dl_color7[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(boo_dl_helper),
+    gsSPLight(&boo_light_6.l, 1),
+    gsSPLight(&boo_light_6.a, 2),
+    gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
+    gsDPTileSync(),
+    gsSPDisplayList(boo_seg5_dl_0500C1B0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx boo_dl_color8[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(boo_dl_helper),
+    gsSPLight(&boo_light_6.l, 1),
+    gsSPLight(&boo_light_6.a, 2),
+    gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
+    gsDPTileSync(),
+    gsSPDisplayList(boo_seg5_dl_0500C1B0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx boo_dl_color9[] = {
     gsDPPipeSync(),
     gsSPDisplayList(boo_dl_helper),
     gsSPLight(&boo_light_6.l, 1),

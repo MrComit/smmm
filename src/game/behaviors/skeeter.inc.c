@@ -36,7 +36,7 @@ static void skeeter_act_idle(void) {
     o->oForwardVel = 0.0f;
 
     if (o->oTimer > 90 && cur_obj_check_if_near_animation_end()) {
-        o->oAction = SKEETER_ACT_LUNGE;
+        o->oAction = SKEETER_ACT_WALK;
     }
 }
 
@@ -77,7 +77,7 @@ static void skeeter_act_walk(void) {
         cur_obj_play_sound_at_anim_range(3, 13, SOUND_OBJ_SKEETER_WALK);
 
         if (o->oSkeeterUnkF8 != 0) {
-            o->oSkeeterUnkF8 = obj_resolve_collisions_and_turn(o->oSkeeterTargetAngle, 0x400);
+            o->oSkeeterUnkF8 = obj_resolve_collisions_and_turn(o->oSkeeterTargetAngle, 0);
         } else {
             if (o->oDistanceToMario >= 25000.0f) {
                 o->oSkeeterTargetAngle = o->oAngleToMario;
