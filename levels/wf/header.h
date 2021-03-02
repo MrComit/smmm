@@ -141,4 +141,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/gushing_water/geo_header.h"
 
+#include "levels/wf/octopus/geo_header.h"
+
 #endif

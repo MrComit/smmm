@@ -640,6 +640,7 @@
 #define MODEL_L2_FALLING_FLOOR    0xF7
 #define MODEL_PIPESEG             0xF6
 #define MODEL_GUSHING_WATER       0xF5
+#define MODEL_OCTOPUS             0xF4
 
 
 

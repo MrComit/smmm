@@ -54,3 +54,4 @@
 #include "levels/wf/l2_falling_floor/geo.inc.c"
 #include "levels/wf/pipeseg/geo.inc.c"
 #include "levels/wf/gushing_water/geo.inc.c"
+#include "levels/wf/octopus/geo.inc.c"

@@ -1,3 +1,5 @@
+void obj_die_if_health_non_positive(void);
+
 static struct ObjectHitbox sPipesegHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 0,
@@ -23,6 +25,19 @@ static struct ObjectHitbox sGushingWaterHitbox = {
 };
 
 
+static struct ObjectHitbox sOctopusHitbox = {
+    /* interactType:      */ INTERACT_HIT_FROM_BELOW,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 2,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 50,
+    /* height:            */ 60,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+
 
 Vec3f sPipeSlots[3] = {
 {3616.01f, -2338.67f, -12404.5f},
@@ -32,6 +47,31 @@ Vec3f sPipeSlots[3] = {
 
 Vec3s sPipeRots = {0, 0, 0x4000};
 Vec3s sPipeScales = {29, 32, 27};
+
+
+void bhv_octopus_init(void) {
+    obj_set_hitbox(o, &sOctopusHitbox);
+}
+
+
+void bhv_octopus_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFaceAngleRoll -= 0xC00;
+            obj_scale(o, o->header.gfx.scale[0] - 0.03f);
+            if (o->header.gfx.scale[0] < 0.25f) {
+                o->oHealth = 0;
+                obj_die_if_health_non_positive();
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
 
 
 void bhv_gushing_water_init(void) {

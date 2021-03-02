@@ -1,0 +1,10 @@
+extern const GeoLayout octopus_geo[];
+extern Lights1 octopus_Octopus_001_lights;
+extern u8 octopus_octopus_ci8[];
+extern u8 octopus_octopus_ci8_pal_rgba16[];
+extern Vtx octopus_Octopus_mesh_layer_1_vtx_0[58];
+extern Gfx octopus_Octopus_mesh_layer_1_tri_0[];
+extern Gfx mat_octopus_Octopus_001[];
+extern Gfx mat_revert_octopus_Octopus_001[];
+extern Gfx octopus_Octopus_mesh_layer_1[];
+extern Gfx octopus_material_revert_render_settings[];
