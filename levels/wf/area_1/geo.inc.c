@@ -194,9 +194,9 @@ const GeoLayout wf_dl_04__Bathroom_geo[] = {
 const GeoLayout wf_dl_05__Den_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(2, -3207, 0, -18703, wf_dl_Carpet_mesh_layer_2),
+		GEO_TRANSLATE_NODE_WITH_DL(6, -3207, 0, -18703, wf_dl_Carpet_mesh_layer_6),
 		GEO_OPEN_NODE(),
-			GEO_DISPLAY_LIST(6, wf_dl_Carpet_mesh_layer_6),
+			GEO_DISPLAY_LIST(2, wf_dl_Carpet_mesh_layer_2),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -5178, 178, -19832, wf_dl_Couch_008_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -4538, 0, -19711, wf_dl_Cushion_mesh_layer_1),
