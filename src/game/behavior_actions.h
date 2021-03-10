@@ -690,7 +690,8 @@ void bhv_gushing_water_loop(void);
 void bhv_rising_floor_loop(void);
 void bhv_octopus_loop(void);
 void bhv_octopus_init(void);
-
+void bhv_mirror_light_loop(void);
+void bhv_mirror_light_init(void);
 
 
 

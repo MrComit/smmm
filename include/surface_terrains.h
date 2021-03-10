@@ -60,6 +60,9 @@
 #define SURFACE_NO_CAM_COL_SLIPPERY          0x0079 // Surface with no cam collision flag, slippery with noise (CCM, PSS and TTM slides)
 #define SURFACE_SWITCH                       0x007A // Surface with no cam collision flag, non-slippery with noise, used by switches and Dorrie
 #define SURFACE_VANISH_CAP_WALLS             0x007B // Vanish cap walls, pass through them with Vanish Cap
+
+#define SURFACE_MIRROR                       0x007C
+
 #define SURFACE_PAINTING_WOBBLE_A6           0x00A6 // Painting wobble (BOB Left)
 #define SURFACE_PAINTING_WOBBLE_A7           0x00A7 // Painting wobble (BOB Middle)
 #define SURFACE_PAINTING_WOBBLE_A8           0x00A8 // Painting wobble (BOB Right)

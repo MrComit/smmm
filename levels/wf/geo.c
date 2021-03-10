@@ -55,3 +55,4 @@
 #include "levels/wf/pipeseg/geo.inc.c"
 #include "levels/wf/gushing_water/geo.inc.c"
 #include "levels/wf/octopus/geo.inc.c"
+#include "levels/wf/mirror_light/geo.inc.c"

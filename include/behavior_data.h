@@ -620,7 +620,7 @@ extern const BehaviorScript bhvPipeseg[];
 extern const BehaviorScript bhvGushingWater[];
 extern const BehaviorScript bhvL2RisingFloor[];
 extern const BehaviorScript bhvOctopus[];
-
+extern const BehaviorScript bhvMirrorLight[];
 
 
 

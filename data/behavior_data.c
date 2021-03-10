@@ -7143,3 +7143,13 @@ const BehaviorScript bhvOctopus[] = {
         CALL_NATIVE(bhv_octopus_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMirrorLight[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_mirror_light_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mirror_light_loop),
+    END_LOOP(),
+};

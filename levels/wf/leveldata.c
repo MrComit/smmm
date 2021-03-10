@@ -92,3 +92,4 @@
 #include "levels/wf/pipeseg/model.inc.c"
 #include "levels/wf/gushing_water/model.inc.c"
 #include "levels/wf/octopus/model.inc.c"
+#include "levels/wf/mirror_light/model.inc.c"

@@ -641,6 +641,7 @@
 #define MODEL_PIPESEG             0xF6
 #define MODEL_GUSHING_WATER       0xF5
 #define MODEL_OCTOPUS             0xF4
+#define MODEL_MIRROR_LIGHT        0xF3
 
 
 
