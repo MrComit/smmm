@@ -1251,9 +1251,9 @@ s32 act_getting_blown(struct MarioState *m) {
         }
     }
 
-    if (++(m->actionTimer) == 20) {
-        mario_blow_off_cap(m, 50.0f);
-    }
+    //if (++(m->actionTimer) == 20) {
+    //    mario_blow_off_cap(m, 50.0f);
+    //}
 
     mario_set_forward_vel(m, m->forwardVel);
 #ifdef VERSION_JP
