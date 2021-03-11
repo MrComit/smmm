@@ -7161,7 +7161,7 @@ const BehaviorScript bhvMirror[] = {
     LOAD_COLLISION_DATA(mirror_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
-    //CALL_NATIVE(bhv_mirror_init),
+    CALL_NATIVE(bhv_mirror_init),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
