@@ -257,6 +257,7 @@ const LevelScript script_func_global_7[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MONTY_MOLE,              monty_mole_geo),
     LOAD_MODEL_FROM_GEO(MODEL_UKIKI,                   ukiki_geo),
     LOAD_MODEL_FROM_GEO(MODEL_FWOOSH,                  fwoosh_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_SWOOP,                   swoop_geo),
     RETURN(),
 };
 
@@ -355,7 +356,7 @@ const LevelScript script_func_global_17[] = {
 };
 
 const LevelScript script_func_global_18[] = {
-    LOAD_MODEL_FROM_GEO(MODEL_SWOOP,                   swoop_geo),
+    //LOAD_MODEL_FROM_GEO(MODEL_SWOOP,                   swoop_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SCUTTLEBUG,              scuttlebug_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MR_I_IRIS,               mr_i_iris_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MR_I,                    mr_i_geo),

@@ -371,6 +371,7 @@
 #define MODEL_MONTY_MOLE                  0x55        // monty_mole_geo
 #define MODEL_UKIKI                       0x56        // ukiki_geo
 #define MODEL_FWOOSH                      0x57        // fwoosh_geo
+#define MODEL_SWOOP                       0x58        // swoop_geo
 
 // group 7
 #define MODEL_SPINDRIFT                   0x54        // spindrift_geo
@@ -446,7 +447,7 @@
 #define MODEL_MONEYBAG                    0x66        // moneybag_geo
 
 // group 17
-#define MODEL_SWOOP                       0x64        // swoop_geo
+//#define MODEL_SWOOP                       0x64        // swoop_geo
 #define MODEL_SCUTTLEBUG                  0x65        // scuttlebug_geo
 #define MODEL_MR_I_IRIS                   0x66        // mr_i_iris_geo
 #define MODEL_MR_I                        0x67        // mr_i_geo

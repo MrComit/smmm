@@ -84,4 +84,21 @@ extern const Gfx ukiki_seg5_dl_0500D078[];
 extern const Gfx ukiki_seg5_dl_0500D108[];
 extern const struct Animation *const ukiki_seg5_anims_05015784[];
 
+
+// swoop
+extern const GeoLayout swoop_geo[];
+extern const Gfx swoop_seg6_dl_060065B8[];
+extern const Gfx swoop_seg6_dl_060066F8[];
+extern const Gfx swoop_seg6_dl_06006758[];
+extern const Gfx swoop_seg6_dl_06006848[];
+extern const Gfx swoop_seg6_dl_06006880[];
+extern const Gfx swoop_seg6_dl_06006A10[];
+extern const Gfx swoop_seg6_dl_06006A68[];
+extern const Gfx swoop_seg6_dl_06006A88[];
+extern const Gfx swoop_seg6_dl_06006B98[];
+extern const Gfx swoop_seg6_dl_06006BD0[];
+extern const Gfx swoop_seg6_dl_06006CC8[];
+extern const Gfx swoop_seg6_dl_06006D00[];
+extern const struct Animation *const swoop_seg6_anims_060070D0[];
+
 #endif

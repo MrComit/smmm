@@ -24,3 +24,8 @@ UNUSED static const u64 binid_3 = 3;
 
 #include "fwoosh/model.inc.c"
 UNUSED static const u64 binid_4 = 4;
+
+
+#include "swoop/model.inc.c"
+#include "swoop/anims/data.inc.c"
+#include "swoop/anims/table.inc.c"
