@@ -145,4 +145,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/mirror_light/geo_header.h"
 
+#include "levels/wf/mirror/geo_header.h"
+
+#include "levels/wf/mirror/collision_header.h"
+
 #endif

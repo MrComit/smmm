@@ -7153,3 +7153,18 @@ const BehaviorScript bhvMirrorLight[] = {
         CALL_NATIVE(bhv_mirror_light_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMirror[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(mirror_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    //CALL_NATIVE(bhv_mirror_init),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_mirror_loop),
+    END_LOOP(),
+};

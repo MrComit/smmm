@@ -216,10 +216,7 @@ const GeoLayout wf_dl_05__Den_geo[] = {
 const GeoLayout wf_dl_06__Mirror_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(1, -8384, 100, -19434, wf_dl_Mirror_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Mirror_Room_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, -9302, 100, -18651, wf_dl_Mirror_001_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, -7832, 100, -18793, wf_dl_Mirror_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -245,11 +242,11 @@ const GeoLayout wf_area_1[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(1, wf_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(5, wf_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(4, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(6, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(4, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(5, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

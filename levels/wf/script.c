@@ -48,6 +48,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_GUSHING_WATER, gushing_water_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_OCTOPUS, octopus_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIRROR_LIGHT, mirror_light_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MIRROR, mirror_geo),
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -145,6 +146,10 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, 4574, -300, -11870, 0, 0, -180, 0x0A400000, bhvWarpPipe),
 		OBJECT(MODEL_NONE, 4574, 1356, -11870, 0, -180, 0, 0x00410100, bhvWarpPipe),
 		OBJECT(MODEL_MIRROR_LIGHT, -9807, 181, -19319, 0, 90, 0, 0x00000000, bhvMirrorLight),
+		OBJECT(MODEL_MIRROR, -8415, 0, -19319, 0, 45, 0, 0x00000000, bhvMirror),
+		OBJECT(MODEL_MIRROR, -8063, 0, -19080, 0, 90, 0, 0x00000000, bhvMirror),
+		OBJECT(MODEL_MIRROR, -9235, 0, -18499, 0, -180, 0, 0x00000000, bhvMirror),
+		OBJECT(MODEL_MIRROR, -7482, 0, -18499, 0, -45, 0, 0x00000000, bhvMirror),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),
 		MACRO_OBJECTS(wf_area_1_macro_objs),
