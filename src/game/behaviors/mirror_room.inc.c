@@ -22,6 +22,12 @@ void bhv_mirror_switch_loop(void) {
                 o->os16F4 -= 0x2000;
             }
 
+            if (gPlayer1Controller->buttonPressed & U_JPAD) {
+                o->os16F6 = 0;
+            } else if (gPlayer1Controller->buttonPressed & D_JPAD) {
+                o->os16F6 = 1;
+            }
+
             if (gMarioObject->platform != o) {
                 o->oAction = 3;
             }
@@ -39,28 +45,49 @@ void bhv_mirror_switch_loop(void) {
 
 void bhv_mirror_init(void) {
     o->os16F6 = o->oFaceAngleYaw;
+    o->oFloatF8 = 1.0f;
 }
 
 
 void bhv_mirror_loop(void) {
-    struct Object *obj;
+    struct Object *obj = CL_obj_nearest_object_behavior_params(bhvMirrorSwitch, o->oBehParams2ndByte << 16);
+    if (obj == NULL)
+        return;
     switch (o->oAction) {
         case 0:
-            obj = CL_obj_nearest_object_behavior_params(bhvMirrorSwitch, o->oBehParams2ndByte << 16);
-            if (obj == NULL)
-                break;
-
-            
             if (obj->os16F4 != o->os16F4 - o->os16F6) {
                 o->oAction = 1;
                 o->os16F4 = o->os16F6 + obj->os16F4;
             }
+
+            if (obj->os16F6 == 1) {
+                o->oAction = 2;
+            }
+            load_object_collision_model();
             break;
         case 1:
             o->oFaceAngleYaw = approach_s16_symmetric((s16)o->oFaceAngleYaw, o->os16F4, 0x200);
             if (o->oFaceAngleYaw == o->os16F4) {
                 o->oAction = 0;
             }
+            load_object_collision_model();
+            break;
+        case 2:
+            if (o->oFloatF8 > 0.4f) {
+                o->oFloatF8 -= 0.05f;
+                cur_obj_scale(o->oFloatF8);
+            }
+            if (obj->os16F6 == 0) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            o->oFloatF8 += 0.05f;
+            if (o->oFloatF8 >= 1.0f) {
+                o->oFloatF8 = 1.0f;
+                o->oAction = 0;
+            }
+            cur_obj_scale(o->oFloatF8);
             break;
     }
 }

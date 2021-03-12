@@ -7164,7 +7164,6 @@ const BehaviorScript bhvMirror[] = {
     CALL_NATIVE(bhv_mirror_init),
     SET_HOME(),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_mirror_loop),
     END_LOOP(),
 };

@@ -1172,6 +1172,10 @@ void fixed_cam_presets(struct Camera *c) {
             c->pos[1] = m->pos[1] + 200.0f;
             c->focus[1] = m->pos[1];
             break;
+        case 3:
+            vec3f_set(c->pos, -7807.0f, 2800.0f, -16378.0f);
+            vec3f_set(c->focus, -7807.0f, 0, -18814.0f);
+            break;
     }
 }
 
@@ -5807,6 +5811,12 @@ BAD_RETURN(s32) cam_wf_bathroom(struct Camera *c) {
     c->filler31[0] = 2;
 }
 
+
+BAD_RETURN(s32) cam_wf_mirror_room(struct Camera *c) {
+    sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
+    c->filler31[0] = 3;
+}
+
 /**
  * Unused. Changes the camera to free roam mode when Mario is not climbing the tower.
  *
@@ -6396,6 +6406,7 @@ struct CameraTrigger sCamWF[] = {
 	{1, cam_wf_bathroom, 3505, -796, -12375, 580, 496, 580, 0xffff},
 	{1, cam_wf_bathroom, 3873, -446, -14395, -580, -185, -580, 0x8000},
 	{1, cam_wf_bathroom, 2198, -707, -15052, -580, -420, -580, 0x8000},
+	{1, cam_wf_mirror_room, -9098, 789, -19707, 725, 1092, 382, 0xffff},
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
