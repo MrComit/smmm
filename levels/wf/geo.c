@@ -57,3 +57,4 @@
 #include "levels/wf/octopus/geo.inc.c"
 #include "levels/wf/mirror_light/geo.inc.c"
 #include "levels/wf/mirror/geo.inc.c"
+#include "levels/wf/mirror_switch/geo.inc.c"

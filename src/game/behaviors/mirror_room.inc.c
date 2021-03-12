@@ -1,14 +1,59 @@
+void bhv_mirror_switch_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            cur_obj_scale_over_time(2, 3, 1.5f, 0.2f);
+            if (o->oTimer == 3) {
+                cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                o->oAction = 2;
+                cur_obj_shake_screen(SHAKE_POS_SMALL);
+                queue_rumble_data(5, 80);
+            }
+            break;
+        case 2:
+            if (gPlayer1Controller->buttonPressed & L_JPAD) {
+                o->os16F4 += 0x2000;
+            } else if (gPlayer1Controller->buttonPressed & R_JPAD) {
+                o->os16F4 -= 0x2000;
+            }
+
+            if (gMarioObject->platform != o) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            cur_obj_scale_over_time(2, 3, 0.2f, 1.5f);
+            if (o->oTimer == 3) {
+                o->oAction = 0;
+            }
+            break;
+    }
+}
+
+
+
 void bhv_mirror_init(void) {
-    o->os16F4 = o->oFaceAngleYaw;
+    o->os16F6 = o->oFaceAngleYaw;
 }
 
 
 void bhv_mirror_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
-            if (gMarioState->input & INPUT_A_PRESSED) {
+            obj = CL_obj_nearest_object_behavior_params(bhvMirrorSwitch, o->oBehParams2ndByte << 16);
+            if (obj == NULL)
+                break;
+
+            
+            if (obj->os16F4 != o->os16F4 - o->os16F6) {
                 o->oAction = 1;
-                o->os16F4 += 0x2000;
+                o->os16F4 = o->os16F6 + obj->os16F4;
             }
             break;
         case 1:

@@ -622,6 +622,7 @@ extern const BehaviorScript bhvL2RisingFloor[];
 extern const BehaviorScript bhvOctopus[];
 extern const BehaviorScript bhvMirrorLight[];
 extern const BehaviorScript bhvMirror[];
+extern const BehaviorScript bhvMirrorSwitch[];
 
 
 

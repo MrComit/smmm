@@ -644,6 +644,7 @@
 #define MODEL_OCTOPUS             0xF4
 #define MODEL_MIRROR_LIGHT        0xF3
 #define MODEL_MIRROR              0xF2
+#define MODEL_MIRROR_SWITCH       0xF1
 
 
 

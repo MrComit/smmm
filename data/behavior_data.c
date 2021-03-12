@@ -7168,3 +7168,16 @@ const BehaviorScript bhvMirror[] = {
         CALL_NATIVE(bhv_mirror_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMirrorSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(heavyswitch_collision),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mirror_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
