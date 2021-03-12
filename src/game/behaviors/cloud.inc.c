@@ -80,8 +80,8 @@ static void cloud_fwoosh_update(void) {
             o->oCloudFwooshMovementRadius += 0xC8;
 
             // If mario stays nearby for 100 frames, begin blowing
-            if (o->oDistanceToMario < 1000.0f) {
-                if (o->oTimer > 100) {
+            if (o->oDistanceToMario < 500.0f && o->header.gfx.scale[0] > 2.4f) {
+                if (o->oTimer > 5 && absi(o->oAngleToMario + 0x8000) < 0x2000) {
                     o->oCloudBlowing = TRUE;
                     o->oCloudGrowSpeed = 0.14f;
                 }
@@ -89,9 +89,16 @@ static void cloud_fwoosh_update(void) {
                 o->oTimer = 0;
             }
 
-            o->oCloudCenterX = o->oHomeX + 100.0f * coss(o->oCloudFwooshMovementRadius);
-            o->oPosZ = o->oHomeZ + 100.0f * sins(o->oCloudFwooshMovementRadius);
-            o->oCloudCenterY = o->oHomeY;
+            o->oCloudCenterX = o->oPosX + 100.0f * coss(o->oCloudFwooshMovementRadius);
+            //o->oPosZ = o->oHomeZ + 100.0f * sins(o->oCloudFwooshMovementRadius);
+            o->oCloudCenterY = o->oPosY;
+            if (o->oDistanceToMario < 1000.0f) {
+                o->oForwardVel = 7.0f;
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
+                CL_Move();
+            } else {
+                o->oForwardVel = 0;
+            }
         }
 
         cur_obj_scale(o->header.gfx.scale[0]);
@@ -115,9 +122,9 @@ static void cloud_act_main(void) {
         } else {
             o->oCloudCenterX = o->parentObj->oPosX;
             o->oCloudCenterY = o->parentObj->oPosY;
-            o->oPosZ = o->parentObj->oPosZ;
+            //o->oPosZ = o->parentObj->oPosZ;
 
-            o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
+            ///o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
         }
     } else if (o->oBehParams2ndByte != CLOUD_BP_FWOOSH) {
         // This code should never run, since a lakitu cloud should always have
@@ -131,8 +138,8 @@ static void cloud_act_main(void) {
 
     localOffset = 2 * coss(localOffsetPhase) * o->header.gfx.scale[0];
 
-    o->oPosX = o->oCloudCenterX + localOffset;
-    o->oPosY = o->oCloudCenterY + localOffset + 12.0f * o->header.gfx.scale[0];
+    //o->oPosX = o->oCloudCenterX + localOffset;
+    //o->oPosY = o->oCloudCenterY + localOffset + 12.0f * o->header.gfx.scale[0];
 }
 
 /**

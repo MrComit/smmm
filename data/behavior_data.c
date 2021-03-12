@@ -5153,7 +5153,6 @@ const BehaviorScript bhvSwoop[] = {
     LOAD_ANIMATIONS(oAnimations, swoop_seg6_anims_060070D0),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
-    CALL_NATIVE(bhv_init_room),
     SCALE(/*Unused*/ 0, /*Field*/ 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_swoop_update),
@@ -5316,7 +5315,7 @@ const BehaviorScript bhvCloud[] = {
 
 const BehaviorScript bhvCloudPart[] = {
     BEGIN(OBJ_LIST_DEFAULT),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_INT(oOpacity, 240),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_cloud_part_update),
