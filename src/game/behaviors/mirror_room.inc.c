@@ -90,6 +90,7 @@ void bhv_mirror_loop(void) {
             cur_obj_scale(o->oFloatF8);
             break;
     }
+    //o->os16FC = 0;
 }
 
 
@@ -99,38 +100,47 @@ void bhv_mirror_light_init(void) {
 }
 
 void bhv_mirror_light_loop(void) {
-    s32 i;
-    Vec3f pos;
     struct Surface *wall;
     struct Object *obj;
     //o->oFaceAngleYaw += 0x400;
+    o->header.gfx.scale[1] = 1.0f;
+    if (o->oRoom != gMarioCurrentRoom)
+        return;
     switch (o->oAction) {
         case 0:
-            if (gMarioState->input & INPUT_B_PRESSED) {
-                o->oAction = 2;
-            }
-            break;
-        case 2:
-            for (i = 0; i < 4; i++) {
-                o->header.gfx.scale[1] += 0.5f;
-                pos[1] = o->oPosY;
-                pos[0] = o->oPosX + ((o->header.gfx.scale[1] * 100.0f) * sins(o->oFaceAngleYaw));
-                pos[2] = o->oPosZ + ((o->header.gfx.scale[1] * 100.0f) * coss(o->oFaceAngleYaw));
-                o->oSurfF4 = resolve_and_return_wall_collisions(pos, 0, 40.0f);
+            while (o->oSurfF4 == NULL) {
+                o->header.gfx.scale[1] += 0.1f;
+                o->oHomeY = o->oPosY;
+                o->oHomeX = o->oPosX + ((o->header.gfx.scale[1] * 100.0f) * sins(o->oFaceAngleYaw));
+                o->oHomeZ = o->oPosZ + ((o->header.gfx.scale[1] * 100.0f) * coss(o->oFaceAngleYaw));
+                o->oSurfF4 = resolve_and_return_wall_collisions(&o->oHomeX, 0, 40.0f);
                 if (o->oSurfF4 != NULL) {
-                    o->oAction = 1;
-                    if (o->oSurfF4->type == SURFACE_MIRROR) {
-                        obj = spawn_object(o, MODEL_MIRROR_LIGHT, bhvMirrorLight);
-                        obj->oFaceAngleYaw = atan2s(o->oSurfF4->normal.z, o->oSurfF4->normal.x);
-                        obj->oBehParams2ndByte = 1;
-                        obj->oAction = 2;
-                        vec3f_copy(&obj->oPosX, pos);
-                    }
+                    o->header.gfx.scale[1] -= 0.1f;
                     break;
                 }
             }
+            if (o->oSurfF4->type == SURFACE_MIRROR && (o->oSurfF4->object == NULL || o->oSurfF4->object->os16FC == 0)) {
+                if (o->oSurfF4->object != NULL) {
+                    o->oObjF8 = o->oSurfF4->object;
+                    o->oObjF8->os16FC = 1;
+                }
+                obj = spawn_object(o, MODEL_MIRROR_LIGHT, bhvMirrorLight);
+                obj->oFaceAngleYaw = atan2s(o->oSurfF4->normal.z, o->oSurfF4->normal.x);
+                obj->oBehParams2ndByte = 1;
+                vec3f_copy(&obj->oPosX, &o->oHomeX);
+                //o->oAction = 1;
+            }
+            o->oSurfF4 = NULL;
             break;
         case 1:
             break;
+    }
+    if (o->oBehParams2ndByte && o->oTimer) {
+        o->activeFlags = 0;
+        if (o->oObjF8 != NULL) {
+            o->oObjF8->os16FC = 0;
+            o->oObjF8 = NULL;
+        }
+        //o->parentObj->header.gfx.scale[1] = 1.0f;
     }
 }

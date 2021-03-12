@@ -7147,6 +7147,7 @@ const BehaviorScript bhvOctopus[] = {
 const BehaviorScript bhvMirrorLight[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
     CALL_NATIVE(bhv_mirror_light_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_mirror_light_loop),
