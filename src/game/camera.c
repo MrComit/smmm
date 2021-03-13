@@ -913,6 +913,24 @@ s32 update_radial_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     return camYaw;
 }
 
+
+void set_r_button_camera(struct Camera *c) {
+    Vec3f marioOffset;
+    marioOffset[0] = 0.f;
+    if (gCameraMovementFlags & CAM_MOVE_ZOOMED_OUT)
+        marioOffset[1] = 625.0f;
+    else
+        marioOffset[1] = 240.0f;
+    marioOffset[2] = 1310.0f;
+    offset_rotated(c->pos, gMarioState->pos, marioOffset, &gMarioObject->oMoveAngleYaw);//gMarioState->faceAngle);
+    vec3f_copy(c->focus, gMarioState->pos);
+    vec3f_copy(gLakituState.goalPos, c->pos);
+    vec3f_copy(gLakituState.goalFocus, c->focus);
+}
+
+
+
+
 /**
  * Update the camera during 8 directional mode
  */
@@ -1190,11 +1208,13 @@ void mode_8_directions_camera(struct Camera *c) {
     radial_camera_input(c, 0.f);
 
     if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
-        s8DirModeYawOffset += DEGREES(45);
+        //s8DirModeYawOffset += DEGREES(45);
+        s8DirModeBaseYaw += DEGREES(45);
         play_sound_cbutton_side();
     }
     if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-        s8DirModeYawOffset -= DEGREES(45);
+        //s8DirModeYawOffset -= DEGREES(45);
+        s8DirModeBaseYaw -= DEGREES(45);
         play_sound_cbutton_side();
     }
 
@@ -3219,6 +3239,32 @@ void update_camera(struct Camera *c) {
     update_lakitu(c);
 
     gLakituState.lastFrameAction = sMarioCamState->action;
+
+    if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
+        s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
+        set_r_button_camera(c);
+    }
+
+    if (gPlayer1Controller->buttonDown & L_JPAD) {
+        //s8DirModeYawOffset -= sDpadSens[dpadSens];
+        s8DirModeBaseYaw -= 0x80;
+    }
+    if (gPlayer1Controller->buttonDown & R_JPAD) {
+        //s8DirModeYawOffset += sDpadSens[dpadSens];
+        s8DirModeBaseYaw += 0x80;
+    }
+    if (gPlayer1Controller->buttonPressed & U_JPAD) {
+        s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
+        //s8DirModeYawOffset = 0;
+    }
+    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+        if (absi((u16)(s8DirModeBaseYaw) - (u16)(s8DirModeBaseYaw & 0xE000)) < 0x1000) {
+            s8DirModeBaseYaw &= 0xE000;
+        } else {
+            s8DirModeBaseYaw = (s8DirModeBaseYaw & 0xE000) + 0x2000;
+        }
+    }
+
 }
 
 /**
@@ -6598,6 +6644,8 @@ s16 camera_course_processing(struct Camera *c) {
             b += 1;
         }
         if (!anyChecked) {
+            if (c->filler31[0])
+                set_r_button_camera(c);
             c->filler31[0] = 0;
         }
     }
