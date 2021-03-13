@@ -39,8 +39,8 @@ static const Lights1 boo_light_6 = gdSPDefLights1(
 );
 
 static const Lights1 boo_light_7 = gdSPDefLights1(
-    0x97, 0x9a, 0xff,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+    0x80, 0x6e, 0x24,
+    0xff, 0xdc, 0x47, 0x28, 0x28, 0x28
 );
 
 
@@ -501,8 +501,8 @@ const Gfx boo_dl_color6[] = {
 const Gfx boo_dl_color7[] = {
     gsDPPipeSync(),
     gsSPDisplayList(boo_dl_helper),
-    gsSPLight(&boo_light_6.l, 1),
-    gsSPLight(&boo_light_6.a, 2),
+    gsSPLight(&boo_light_7.l, 1),
+    gsSPLight(&boo_light_7.a, 2),
     gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
@@ -517,8 +517,8 @@ const Gfx boo_dl_color7[] = {
 const Gfx boo_dl_color8[] = {
     gsDPPipeSync(),
     gsSPDisplayList(boo_dl_helper),
-    gsSPLight(&boo_light_6.l, 1),
-    gsSPLight(&boo_light_6.a, 2),
+    gsSPLight(&boo_light_8.l, 1),
+    gsSPLight(&boo_light_8.a, 2),
     gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
@@ -533,8 +533,8 @@ const Gfx boo_dl_color8[] = {
 const Gfx boo_dl_color9[] = {
     gsDPPipeSync(),
     gsSPDisplayList(boo_dl_helper),
-    gsSPLight(&boo_light_6.l, 1),
-    gsSPLight(&boo_light_6.a, 2),
+    gsSPLight(&boo_light_9.l, 1),
+    gsSPLight(&boo_light_9.a, 2),
     gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),

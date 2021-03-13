@@ -1,10 +1,37 @@
+void bhv_den_light_init(void) {
+    o->oFaceAnglePitch = 0x4000;
+    o->header.gfx.scale[1] = 50.0f;
+    o->header.gfx.scale[0] = o->header.gfx.scale[2] = 6.0f;
+    cur_obj_hide();
+}
+
+void bhv_den_light_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            obj = CL_obj_nearest_object_behavior_params(bhvLightButton, 0);
+            if (obj != NULL && obj->oF4 == 1) {
+                o->oAction = 1;
+                cur_obj_unhide();
+            }
+            break;
+        case 1:
+            break;
+    }
+}
+
+
 void bhv_light_button_loop(void) {
     switch (o->oAction) {
         case 0:
             o->oAnimState = 0;
             break;
         case 1:
-            o->oF4 = o->oAnimState = 1;
+            o->oAnimState = 1;
+            if (o->oF4 == 0) {
+                o->oF4 = 1;
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+            }
             break;
     }
     o->oAction = 0;
@@ -13,7 +40,7 @@ void bhv_light_button_loop(void) {
 
 
 void bhv_mirror_switch_init(void) {
-    o->os16F6 = o->os16F8 = 0x180;
+    o->os16F6 = o->os16F8 = 0x100;
 }
 
 
@@ -41,17 +68,17 @@ void bhv_mirror_switch_loop(void) {
                 o->os16F4 -= 0x2000;
             }*/
             if (gPlayer1Controller->buttonDown & L_JPAD) {
-                o->os16F6 = approach_s16_symmetric(o->os16F6, 0x200, 0x10);
+                o->os16F6 = approach_s16_symmetric(o->os16F6, 0x140, 0x8);
                 o->os16F4 += o->os16F6;
             } else {
-                o->os16F6 = 0x180;
+                o->os16F6 = 0x100;
             }
             
             if (gPlayer1Controller->buttonDown & R_JPAD) {
-                o->os16F8 = approach_s16_symmetric(o->os16F8, 0x200, 0x10);
+                o->os16F8 = approach_s16_symmetric(o->os16F8, 0x140, 0x8);
                 o->os16F4 -= o->os16F8;
             } else {
-                o->os16F8 = 0x180;
+                o->os16F8 = 0x100;
             }
 
             if (gPlayer1Controller->buttonPressed & U_JPAD) {

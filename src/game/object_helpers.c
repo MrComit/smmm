@@ -2503,6 +2503,9 @@ void cur_obj_enable_rendering_if_mario_in_room(void) {
         } else {
             //cur_obj_disable_rendering();
             o->activeFlags |= ACTIVE_FLAG_IN_DIFFERENT_ROOM;
+            if (cur_obj_has_behavior(bhvCloud)) {
+                o->oAction = 0;
+            }
             if (o->oFlags & OBJ_FLAG_DISABLE_ON_ROOM_EXIT) {
                 o->activeFlags = 0;
             } else {

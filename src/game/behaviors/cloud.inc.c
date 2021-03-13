@@ -58,6 +58,7 @@ static void cloud_act_fwoosh_hidden(void) {
  * long enough, blow wind at him.
  */
 static void cloud_fwoosh_update(void) {
+    struct Object *obj;
     if (o->oDistanceToMario > 2500.0f) {
         o->oAction = CLOUD_ACT_UNLOAD;
     } else {
@@ -98,6 +99,14 @@ static void cloud_fwoosh_update(void) {
                 CL_Move();
             } else {
                 o->oForwardVel = 0;
+            }
+        }
+
+        obj = cur_obj_nearest_object_with_behavior(bhvDenLight);
+        if (obj != NULL && obj->oAction == 1) {
+            if (absf(obj->oPosZ - o->oPosZ) < 120.0f) {
+                o->activeFlags = 0;
+                spawn_mist_particles();
             }
         }
 
@@ -180,7 +189,7 @@ void bhv_cloud_update(void) {
  * Update function for bhvCloudPart. Follow the parent cloud with some oscillation.
  */
 void bhv_cloud_part_update(void) {
-    if (o->parentObj->oAction == CLOUD_ACT_UNLOAD) {
+    if (o->parentObj->oAction == CLOUD_ACT_UNLOAD || o->parentObj->activeFlags == 0) {
         obj_mark_for_deletion(o);
     } else {
         f32 size = 2.0f / 3.0f * o->parentObj->header.gfx.scale[0];

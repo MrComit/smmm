@@ -697,6 +697,8 @@ void bhv_mirror_init(void);
 void bhv_mirror_switch_loop(void);
 void bhv_mirror_switch_init(void);
 void bhv_light_button_loop(void);
+void bhv_den_light_init(void);
+void bhv_den_light_loop(void);
 
 
 

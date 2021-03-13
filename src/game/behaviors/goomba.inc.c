@@ -67,9 +67,8 @@ static u8 sGoombaAttackHandlers[][6] = {
  * Update function for goomba triplet spawner.
  */
 void bhv_goomba_triplet_spawner_update(void) {
-    UNUSED s32 unused1;
+    struct Object *obj;
     s16 goombaFlag;
-    UNUSED s16 unused2;
     s32 angle;
     s32 dAngle;
     s16 dx;
@@ -91,9 +90,10 @@ void bhv_goomba_triplet_spawner_update(void) {
                     dx = 500.0f * coss(angle);
                     dz = 500.0f * sins(angle);
 
-                    spawn_object_relative((o->oBehParams2ndByte & GOOMBA_TRIPLET_SPAWNER_BP_SIZE_MASK)
+                    obj = spawn_object_relative((o->oBehParams2ndByte & GOOMBA_TRIPLET_SPAWNER_BP_SIZE_MASK)
                                               | (goombaFlag >> 6),
                                           dx, 0, dz, o, MODEL_GOOMBA, bhvGoomba);
+                    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 }
             }
 
