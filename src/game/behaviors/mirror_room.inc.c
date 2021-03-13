@@ -16,10 +16,15 @@ void bhv_mirror_switch_loop(void) {
             }
             break;
         case 2:
-            if (gPlayer1Controller->buttonPressed & L_JPAD) {
+            /*if (gPlayer1Controller->buttonPressed & L_JPAD) {
                 o->os16F4 += 0x2000;
             } else if (gPlayer1Controller->buttonPressed & R_JPAD) {
                 o->os16F4 -= 0x2000;
+            }*/
+            if (gPlayer1Controller->buttonDown & L_JPAD) {
+                o->os16F4 += 0x200;
+            } else if (gPlayer1Controller->buttonDown & R_JPAD) {
+                o->os16F4 -= 0x200;
             }
 
             if (gPlayer1Controller->buttonPressed & U_JPAD) {
@@ -102,7 +107,7 @@ void bhv_mirror_light_init(void) {
 void bhv_mirror_light_loop(void) {
     struct Surface *wall;
     struct Object *obj;
-    //o->oFaceAngleYaw += 0x400;
+    s16 angle;
     if (o->oObjF8 != NULL) {
         o->oObjF8->os16FC = 0;
     }
@@ -134,7 +139,8 @@ void bhv_mirror_light_loop(void) {
                     o->oObjF8->os16FC = 1;
                 }
                 obj = spawn_object(o, MODEL_MIRROR_LIGHT, bhvMirrorLight);
-                obj->oFaceAngleYaw = atan2s(o->oSurfF4->normal.z, o->oSurfF4->normal.x);
+                angle = atan2s(o->oSurfF4->normal.z, o->oSurfF4->normal.x);
+                obj->oFaceAngleYaw = (angle - o->oFaceAngleYaw) - (0x8000 - angle);
                 obj->oBehParams2ndByte = 1;
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 //o->oAction = 1;

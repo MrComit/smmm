@@ -31875,7 +31875,7 @@ Gfx mat_revert_wf_dl_WindowFrame[] = {
 
 Gfx mat_wf_dl_MirrorFloor[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b, 64, wf_dl_marble_i8),
@@ -31885,6 +31885,7 @@ Gfx mat_wf_dl_MirrorFloor[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
+	gsDPSetEnvColor(220, 251, 254, 255),
 	gsSPEndDisplayList(),
 };
 
