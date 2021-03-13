@@ -29861,136 +29861,6 @@ Gfx wf_dl_FunctionNode_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx wf_dl_LightButton_mesh_layer_1_vtx_cull[8] = {
-	{{{-87, -100, -56},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-87, -100, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-87, 100, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-87, 100, -56},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{87, -100, -56},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{87, -100, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{87, 100, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{87, 100, -56},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-};
-
-Vtx wf_dl_LightButton_mesh_layer_1_vtx_0[48] = {
-	{{{87, -50, 0},0, {116, 192},{0x40, 0x92, 0x0, 0xFF}}},
-	{{{0, -100, 0},0, {116, 44},{0x40, 0x92, 0x0, 0xFF}}},
-	{{{0, -100, -38},0, {1, 44},{0x40, 0x92, 0x0, 0xFF}}},
-	{{{87, -50, -38},0, {1, 192},{0x40, 0x92, 0x0, 0xFF}}},
-	{{{0, 100, 0},0, {116, 488},{0x40, 0x6E, 0x0, 0xFF}}},
-	{{{87, 50, 0},0, {116, 340},{0x40, 0x6E, 0x0, 0xFF}}},
-	{{{87, 50, -38},0, {1, 340},{0x40, 0x6E, 0x0, 0xFF}}},
-	{{{0, 100, -38},0, {1, 488},{0x40, 0x6E, 0x0, 0xFF}}},
-	{{{-87, -50, 0},0, {116, 784},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-87, 50, 0},0, {116, 636},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-87, 50, -38},0, {1, 636},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-87, -50, -38},0, {1, 784},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{87, 50, 0},0, {116, 340},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{87, -50, 0},0, {116, 192},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{87, -50, -38},0, {1, 192},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{87, 50, -38},0, {1, 340},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-87, 50, 0},0, {116, 636},{0xC1, 0x6E, 0x0, 0xFF}}},
-	{{{0, 100, 0},0, {116, 488},{0xC1, 0x6E, 0x0, 0xFF}}},
-	{{{0, 100, -38},0, {1, 488},{0xC1, 0x6E, 0x0, 0xFF}}},
-	{{{-87, 50, -38},0, {1, 636},{0xC1, 0x6E, 0x0, 0xFF}}},
-	{{{0, -100, 0},0, {116, 932},{0xC0, 0x92, 0x0, 0xFF}}},
-	{{{-87, -50, 0},0, {116, 784},{0xC0, 0x92, 0x0, 0xFF}}},
-	{{{-87, -50, -38},0, {1, 784},{0xC0, 0x92, 0x0, 0xFF}}},
-	{{{0, -100, -38},0, {1, 932},{0xC0, 0x92, 0x0, 0xFF}}},
-	{{{-68, -39, -56},0, {427, 105},{0xD4, 0xB3, 0xA5, 0xFF}}},
-	{{{0, -79, -56},0, {766, 301},{0xD4, 0xB3, 0xA5, 0xFF}}},
-	{{{0, -100, -38},0, {858, 247},{0xD4, 0xB3, 0xA5, 0xFF}}},
-	{{{-87, -50, -38},0, {427, -1},{0xD4, 0xB3, 0xA5, 0xFF}}},
-	{{{-68, 39, -56},0, {89, 301},{0xA7, 0x0, 0xA5, 0xFF}}},
-	{{{-68, -39, -56},0, {427, 105},{0xA7, 0x0, 0xA5, 0xFF}}},
-	{{{-87, -50, -38},0, {427, -1},{0xA7, 0x0, 0xA5, 0xFF}}},
-	{{{-87, 50, -38},0, {-3, 247},{0xA7, 0x0, 0xA5, 0xFF}}},
-	{{{0, 79, -56},0, {89, 691},{0xD4, 0x4D, 0xA5, 0xFF}}},
-	{{{-68, 39, -56},0, {89, 301},{0xD4, 0x4D, 0xA5, 0xFF}}},
-	{{{-87, 50, -38},0, {-3, 247},{0xD4, 0x4D, 0xA5, 0xFF}}},
-	{{{0, 100, -38},0, {-3, 745},{0xD4, 0x4D, 0xA5, 0xFF}}},
-	{{{68, 39, -56},0, {427, 887},{0x2C, 0x4D, 0xA5, 0xFF}}},
-	{{{0, 79, -56},0, {89, 691},{0x2C, 0x4D, 0xA5, 0xFF}}},
-	{{{0, 100, -38},0, {-3, 745},{0x2C, 0x4D, 0xA5, 0xFF}}},
-	{{{87, 50, -38},0, {427, 993},{0x2C, 0x4D, 0xA5, 0xFF}}},
-	{{{68, -39, -56},0, {766, 691},{0x59, 0x0, 0xA5, 0xFF}}},
-	{{{68, 39, -56},0, {427, 887},{0x59, 0x0, 0xA5, 0xFF}}},
-	{{{87, 50, -38},0, {427, 993},{0x59, 0x0, 0xA5, 0xFF}}},
-	{{{87, -50, -38},0, {858, 745},{0x59, 0x0, 0xA5, 0xFF}}},
-	{{{0, -79, -56},0, {766, 301},{0x2C, 0xB3, 0xA5, 0xFF}}},
-	{{{68, -39, -56},0, {766, 691},{0x2C, 0xB3, 0xA5, 0xFF}}},
-	{{{87, -50, -38},0, {858, 745},{0x2C, 0xB3, 0xA5, 0xFF}}},
-	{{{0, -100, -38},0, {858, 247},{0x2C, 0xB3, 0xA5, 0xFF}}},
-};
-
-Gfx wf_dl_LightButton_mesh_layer_1_tri_0[] = {
-	gsSPVertex(wf_dl_LightButton_mesh_layer_1_vtx_0 + 0, 32, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
-	gsSP2Triangles(24, 25, 26, 0, 24, 26, 27, 0),
-	gsSP2Triangles(28, 29, 30, 0, 28, 30, 31, 0),
-	gsSPVertex(wf_dl_LightButton_mesh_layer_1_vtx_0 + 32, 16, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSPEndDisplayList(),
-};
-
-Vtx wf_dl_LightButton_mesh_layer_1_vtx_1[6] = {
-	{{{-51, -29, -56},0, {427, 205},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-51, 29, -56},0, {175, 351},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{0, 59, -56},0, {175, 641},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{51, -29, -56},0, {679, 641},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{51, 29, -56},0, {427, 787},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{0, -59, -56},0, {679, 351},{0x0, 0x0, 0x81, 0xFF}}},
-};
-
-Gfx wf_dl_LightButton_mesh_layer_1_tri_1[] = {
-	gsSPVertex(wf_dl_LightButton_mesh_layer_1_vtx_1 + 0, 6, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(2, 4, 3, 0, 3, 5, 0, 0),
-	gsSPEndDisplayList(),
-};
-
-Vtx wf_dl_LightButton_mesh_layer_1_vtx_2[20] = {
-	{{{-51, -29, -56},0, {427, 205},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{0, -79, -56},0, {766, 301},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-68, -39, -56},0, {427, 105},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{0, -59, -56},0, {679, 351},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{68, -39, -56},0, {766, 691},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{51, -29, -56},0, {679, 641},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-51, 29, -56},0, {175, 351},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-51, -29, -56},0, {427, 205},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-68, -39, -56},0, {427, 105},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-68, 39, -56},0, {89, 301},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{0, 59, -56},0, {175, 641},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-51, 29, -56},0, {175, 351},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-68, 39, -56},0, {89, 301},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{0, 79, -56},0, {89, 691},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{51, 29, -56},0, {427, 787},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{68, 39, -56},0, {427, 887},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{51, -29, -56},0, {679, 641},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{51, 29, -56},0, {427, 787},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{68, 39, -56},0, {427, 887},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{68, -39, -56},0, {766, 691},{0x0, 0x0, 0x81, 0xFF}}},
-};
-
-Gfx wf_dl_LightButton_mesh_layer_1_tri_2[] = {
-	gsSPVertex(wf_dl_LightButton_mesh_layer_1_vtx_2 + 0, 20, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
-	gsSP2Triangles(3, 4, 1, 0, 3, 5, 4, 0),
-	gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
-	gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0),
-	gsSP2Triangles(14, 10, 13, 0, 14, 13, 15, 0),
-	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx wf_dl_Mirror_Room_mesh_layer_1_vtx_cull[8] = {
 	{{{-2293, -604, -1754},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-2293, -604, 896},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -32003,42 +31873,6 @@ Gfx mat_revert_wf_dl_WindowFrame[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_wf_dl_LightButton[] = {
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsDPSetTextureLUT(G_TT_RGBA16),
-	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, wf_dl_stoneplat_ci8_pal_rgba16),
-	gsDPTileSync(),
-	gsDPSetTile(0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
-	gsDPLoadSync(),
-	gsDPLoadTLUTCmd(7, 86),
-	gsDPPipeSync(),
-	gsDPTileSync(),
-	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b, 32, wf_dl_stoneplat_ci8),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
-	gsDPLoadSync(),
-	gsDPLoadTile(7, 0, 0, 124, 124),
-	gsDPPipeSync(),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
-	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPEndDisplayList(),
-};
-
-Gfx mat_revert_wf_dl_LightButton[] = {
-	gsDPPipeSync(),
-	gsDPSetTextureLUT(G_TT_NONE),
-	gsSPEndDisplayList(),
-};
-
-Gfx mat_wf_dl_LightDecal[] = {
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsDPSetEnvColor(254, 254, 0, 255),
-	gsSPEndDisplayList(),
-};
-
 Gfx mat_wf_dl_MirrorFloor[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
@@ -33438,21 +33272,6 @@ Gfx wf_dl_WindowFrame_mesh_layer_1[] = {
 Gfx wf_dl_FunctionNode_mesh_layer_1[] = {
 	gsSPDisplayList(mat_wf_dl_Black),
 	gsSPDisplayList(wf_dl_FunctionNode_mesh_layer_1_tri_0),
-	gsSPEndDisplayList(),
-};
-
-Gfx wf_dl_LightButton_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(wf_dl_LightButton_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_wf_dl_LightButton),
-	gsSPDisplayList(wf_dl_LightButton_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_wf_dl_LightButton),
-	gsSPDisplayList(mat_wf_dl_Black),
-	gsSPDisplayList(wf_dl_LightButton_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_wf_dl_LightDecal),
-	gsSPDisplayList(wf_dl_LightButton_mesh_layer_1_tri_2),
 	gsSPEndDisplayList(),
 };
 

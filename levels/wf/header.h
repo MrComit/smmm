@@ -151,4 +151,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/mirror_switch/geo_header.h"
 
+#include "levels/wf/light_button/geo_header.h"
+
+#include "levels/wf/light_button/collision_header.h"
+
 #endif

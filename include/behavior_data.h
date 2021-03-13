@@ -623,6 +623,7 @@ extern const BehaviorScript bhvOctopus[];
 extern const BehaviorScript bhvMirrorLight[];
 extern const BehaviorScript bhvMirror[];
 extern const BehaviorScript bhvMirrorSwitch[];
+extern const BehaviorScript bhvLightButton[];
 
 
 

@@ -50,6 +50,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MIRROR_LIGHT, mirror_light_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIRROR, mirror_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIRROR_SWITCH, mirror_switch_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LIGHT_BUTTON, light_button_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -159,6 +160,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SWOOP, -767, 590, -19567, 0, -71, 0, 0x00000000, bhvSwoop),
 		OBJECT(MODEL_SWOOP, -1049, 590, -19987, 0, -17, 0, 0x00000000, bhvSwoop),
 		OBJECT(MODEL_MIRROR_LIGHT, -9807, 181, -19012, 0, 90, 0, 0x00000000, bhvMirrorLight),
+		OBJECT(MODEL_LIGHT_BUTTON, -5807, 213, -18671, 0, -90, 0, 0x00000000, bhvLightButton),
 		OBJECT(MODEL_MIRROR, -8415, 0, -19012, 0, 45, 0, 0x00000000, bhvMirror),
 		OBJECT(MODEL_MIRROR, -8063, 0, -18773, 0, 90, 0, 0x00020000, bhvMirror),
 		OBJECT(MODEL_MIRROR, -9235, 0, -18192, 0, -180, 0, 0x00000000, bhvMirror),

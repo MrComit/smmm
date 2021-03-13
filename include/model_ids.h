@@ -645,6 +645,7 @@
 #define MODEL_MIRROR_LIGHT        0xF3
 #define MODEL_MIRROR              0xF2
 #define MODEL_MIRROR_SWITCH       0xF1
+#define MODEL_LIGHT_BUTTON        0xF0
 
 
 

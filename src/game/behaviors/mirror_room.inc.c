@@ -1,3 +1,17 @@
+void bhv_light_button_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oAnimState = 0;
+            break;
+        case 1:
+            o->oF4 = o->oAnimState = 1;
+            break;
+    }
+    o->oAction = 0;
+}
+
+
+
 void bhv_mirror_switch_init(void) {
     o->os16F6 = o->os16F8 = 0x180;
 }
@@ -147,6 +161,8 @@ void bhv_mirror_light_loop(void) {
                 obj->oBehParams2ndByte = 1;
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 //o->oAction = 1;
+            } else if (o->oSurfF4->type == SURFACE_LIGHT_CHECKPOINT && o->oSurfF4->object != NULL) {
+                o->oSurfF4->object->oAction = 1;
             }
             o->oSurfF4 = NULL;
             break;
