@@ -1,3 +1,8 @@
+void bhv_mirror_switch_init(void) {
+    o->os16F6 = o->os16F8 = 0x180;
+}
+
+
 void bhv_mirror_switch_loop(void) {
     struct Object *obj;
     switch (o->oAction) {
@@ -22,9 +27,17 @@ void bhv_mirror_switch_loop(void) {
                 o->os16F4 -= 0x2000;
             }*/
             if (gPlayer1Controller->buttonDown & L_JPAD) {
-                o->os16F4 += 0x200;
-            } else if (gPlayer1Controller->buttonDown & R_JPAD) {
-                o->os16F4 -= 0x200;
+                o->os16F6 = approach_s16_symmetric(o->os16F6, 0x200, 0x10);
+                o->os16F4 += o->os16F6;
+            } else {
+                o->os16F6 = 0x180;
+            }
+            
+            if (gPlayer1Controller->buttonDown & R_JPAD) {
+                o->os16F8 = approach_s16_symmetric(o->os16F8, 0x200, 0x10);
+                o->os16F4 -= o->os16F8;
+            } else {
+                o->os16F8 = 0x180;
             }
 
             if (gPlayer1Controller->buttonPressed & U_JPAD) {
@@ -60,33 +73,23 @@ void bhv_mirror_loop(void) {
         return;
     switch (o->oAction) {
         case 0:
-            if (obj->os16F4 != o->os16F4 - o->os16F6) {
-                o->oAction = 1;
-                o->os16F4 = o->os16F6 + obj->os16F4;
-            }
+            o->oFaceAngleYaw = o->os16F6 + obj->os16F4;
 
             if (obj->os16F6 == 1) {
-                o->oAction = 2;
+                o->oAction = 1;
             }
             load_object_collision_model();
             break;
         case 1:
-            o->oFaceAngleYaw = approach_s16_symmetric((s16)o->oFaceAngleYaw, o->os16F4, 0x200);
-            if (o->oFaceAngleYaw == o->os16F4) {
-                o->oAction = 0;
-            }
-            load_object_collision_model();
-            break;
-        case 2:
             if (o->oFloatF8 > 0.4f) {
                 o->oFloatF8 -= 0.05f;
                 cur_obj_scale(o->oFloatF8);
             }
             if (obj->os16F6 == 0) {
-                o->oAction = 3;
+                o->oAction = 2;
             }
             break;
-        case 3:
+        case 2:
             o->oFloatF8 += 0.05f;
             if (o->oFloatF8 >= 1.0f) {
                 o->oFloatF8 = 1.0f;

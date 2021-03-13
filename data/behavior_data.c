@@ -7175,6 +7175,7 @@ const BehaviorScript bhvMirrorSwitch[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(heavyswitch_collision),
     SET_FLOAT(oCollisionDistance, 0x400),
+    CALL_NATIVE(bhv_mirror_switch_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_mirror_switch_loop),
         CALL_NATIVE(load_object_collision_model),

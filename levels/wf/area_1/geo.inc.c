@@ -218,6 +218,7 @@ const GeoLayout wf_dl_06__Mirror_Room_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_ASM(0, geo_render_mirror_mario),
 		GEO_DISPLAY_LIST(1, wf_dl_FunctionNode_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -8390, 155, -17378, wf_dl_LightButton_mesh_layer_1),
 		GEO_ANIMATED_PART(1, -7514, 604, -18275, wf_dl_Mirror_Room_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(5, wf_dl_Mirror_Room_mesh_layer_5),
