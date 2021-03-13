@@ -103,9 +103,18 @@ void bhv_mirror_light_loop(void) {
     struct Surface *wall;
     struct Object *obj;
     //o->oFaceAngleYaw += 0x400;
+    if (o->oObjF8 != NULL) {
+        o->oObjF8->os16FC = 0;
+    }
     o->header.gfx.scale[1] = 1.0f;
     if (o->oRoom != gMarioCurrentRoom)
         return;
+
+    if (o->oBehParams2ndByte && o->oTimer) {
+        o->activeFlags = 0;
+        return;
+        //o->parentObj->header.gfx.scale[1] = 1.0f;
+    }
     switch (o->oAction) {
         case 0:
             while (o->oSurfF4 == NULL) {
@@ -134,13 +143,5 @@ void bhv_mirror_light_loop(void) {
             break;
         case 1:
             break;
-    }
-    if (o->oBehParams2ndByte && o->oTimer) {
-        o->activeFlags = 0;
-        if (o->oObjF8 != NULL) {
-            o->oObjF8->os16FC = 0;
-            o->oObjF8 = NULL;
-        }
-        //o->parentObj->header.gfx.scale[1] = 1.0f;
     }
 }
