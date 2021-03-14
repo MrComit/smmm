@@ -344,7 +344,9 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
             set_mario_action(m, ACT_FALLING_DEATH_EXIT, 0);
             break;
         case MARIO_SPAWN_SPIN_AIRBORNE:
-            set_mario_action(m, ACT_SPAWN_SPIN_AIRBORNE, 0);
+            //set_mario_action(m, ACT_SPAWN_SPIN_AIRBORNE, 0); ACT_TWIRLING
+            set_mario_action(m, ACT_TWIRLING, 0);
+            //gCamera->filler31[0] = 4;
             break;
         case MARIO_SPAWN_FLYING:
             set_mario_action(m, ACT_FLYING, 2);

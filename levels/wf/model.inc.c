@@ -28628,6 +28628,46 @@ Gfx wf_dl_Plant_002_mesh_layer_4_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx wf_dl_Shelf_004_mesh_layer_1_vtx_cull[8] = {
+	{{{-100, -17, -100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-100, -17, 100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-100, 17, 100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-100, 17, -100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{100, -17, -100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{100, -17, 100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{100, 17, 100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{100, 17, -100},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx wf_dl_Shelf_004_mesh_layer_1_vtx_0[16] = {
+	{{{-100, -17, -100},0, {1404, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-100, 17, -100},0, {1008, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, 17, -100},0, {-16, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, -17, -100},0, {-412, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, -17, 100},0, {-16, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, 17, 100},0, {-16, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-100, 17, 100},0, {1008, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-100, -17, 100},0, {1008, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-100, -17, -100},0, {-3252, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, -17, 100},0, {-1436, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-100, -17, 100},0, {-3252, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, -17, -100},0, {-1436, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, 17, 100},0, {380, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{100, 17, -100},0, {380, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-100, 17, 100},0, {2196, 1677},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-100, 17, -100},0, {2196, 2443},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx wf_dl_Shelf_004_mesh_layer_1_tri_0[] = {
+	gsSPVertex(wf_dl_Shelf_004_mesh_layer_1_vtx_0 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 11, 9, 0),
+	gsSP2Triangles(11, 12, 9, 0, 11, 13, 12, 0),
+	gsSP2Triangles(13, 14, 12, 0, 13, 15, 14, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx wf_dl_Skybox_001_mesh_layer_1_vtx_0[178] = {
 	{{{6066, 3310, -645},0, {1349, 667},{0x83, 0x0, 0x16, 0xFF}}},
 	{{{6066, 4966, -645},0, {1349, -16},{0x83, 0x0, 0x16, 0xFF}}},
@@ -32717,6 +32757,17 @@ Gfx wf_dl_Plant_002_mesh_layer_4[] = {
 	gsSPDisplayList(mat_wf_dl_Leaves_v4),
 	gsSPDisplayList(wf_dl_Plant_002_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_wf_dl_Leaves_v4),
+	gsSPEndDisplayList(),
+};
+
+Gfx wf_dl_Shelf_004_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(wf_dl_Shelf_004_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_wf_dl_DenWall),
+	gsSPDisplayList(wf_dl_Shelf_004_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_wf_dl_DenWall),
 	gsSPEndDisplayList(),
 };
 

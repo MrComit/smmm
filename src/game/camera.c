@@ -1194,6 +1194,11 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->focus, -7807.0f, 0, -18814.0f);
             c->yaw = c->nextYaw = 0;
             break;
+        case 4:
+            vec3f_set(c->pos, 0.0f, m->pos[1] + 1500.0f, 0.0f);
+            vec3f_set(c->focus, 0.0f, m->pos[1], 0.0f);
+            c->yaw = c->nextYaw = 0x8000;
+            break;
     }
 }
 
@@ -5863,6 +5868,13 @@ BAD_RETURN(s32) cam_wf_mirror_room(struct Camera *c) {
     c->filler31[0] = 3;
 }
 
+
+BAD_RETURN(s32) cam_garden_fall(struct Camera *c) {
+    sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
+    c->filler31[0] = 4;
+}
+
+
 /**
  * Unused. Changes the camera to free roam mode when Mario is not climbing the tower.
  *
@@ -6453,6 +6465,10 @@ struct CameraTrigger sCamWF[] = {
 	{1, cam_wf_bathroom, 3873, -446, -14395, -580, -185, -580, 0x8000},
 	{1, cam_wf_bathroom, 2198, -707, -15052, -580, -420, -580, 0x8000},
 	{1, cam_wf_mirror_room, -9098, 789, -19707, 725, 1092, 382, 0xffff},
+	NULL_TRIGGER
+};
+struct CameraTrigger sCamJRB[] = {
+	{2, cam_garden_fall, 0, 7759, 0, 6788, 12056, 6788, 0xffff},
 	NULL_TRIGGER
 };
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
@@ -10901,7 +10917,7 @@ u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
-	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // JRB            | THI
+	ZOOMOUT_AREA_MASK(1, 1, 0, 0, 1, 1, 0, 0), // JRB            | THI
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // TTC            | RR
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // CASTLE_GROUNDS | BITDW
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 0, 0, 0), // VCUTM          | BITFS
