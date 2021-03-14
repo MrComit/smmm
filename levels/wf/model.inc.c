@@ -27783,40 +27783,6 @@ Gfx wf_dl_Couch_008_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx wf_dl_Cushion_mesh_layer_1_vtx_0[16] = {
-	{{{114, 0, -113},0, {1895, 837},{0x2C, 0x91, 0xD5, 0xFF}}},
-	{{{150, 46, -150},0, {1974, 942},{0x3C, 0xA1, 0xC4, 0xFF}}},
-	{{{150, 46, 150},0, {1329, 942},{0x3C, 0xA1, 0x3C, 0xFF}}},
-	{{{-114, 0, -113},0, {1895, 177},{0xD4, 0x91, 0xD5, 0xFF}}},
-	{{{-114, 0, 113},0, {1409, 177},{0xD4, 0x91, 0x2B, 0xFF}}},
-	{{{114, 0, 113},0, {1409, 837},{0x2C, 0x91, 0x2B, 0xFF}}},
-	{{{-150, 46, 150},0, {1329, 73},{0xC4, 0xA1, 0x3C, 0xFF}}},
-	{{{-150, 46, -150},0, {1974, 73},{0xC4, 0xA1, 0xC4, 0xFF}}},
-	{{{114, 92, -113},0, {1895, 837},{0x2C, 0x6F, 0xD5, 0xFF}}},
-	{{{150, 46, 150},0, {1329, 942},{0x3C, 0x5F, 0x3C, 0xFF}}},
-	{{{150, 46, -150},0, {1974, 942},{0x3C, 0x5F, 0xC4, 0xFF}}},
-	{{{114, 92, 113},0, {1409, 837},{0x2C, 0x6F, 0x2B, 0xFF}}},
-	{{{-114, 92, 113},0, {1409, 177},{0xD4, 0x6F, 0x2B, 0xFF}}},
-	{{{-114, 92, -113},0, {1895, 177},{0xD4, 0x6F, 0xD5, 0xFF}}},
-	{{{-150, 46, -150},0, {1974, 73},{0xC4, 0x5F, 0xC4, 0xFF}}},
-	{{{-150, 46, 150},0, {1329, 73},{0xC4, 0x5F, 0x3C, 0xFF}}},
-};
-
-Gfx wf_dl_Cushion_mesh_layer_1_tri_0[] = {
-	gsSPVertex(wf_dl_Cushion_mesh_layer_1_vtx_0 + 0, 16, 0),
-	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
-	gsSP2Triangles(0, 4, 3, 0, 0, 5, 4, 0),
-	gsSP2Triangles(0, 2, 5, 0, 5, 2, 6, 0),
-	gsSP2Triangles(5, 6, 4, 0, 4, 6, 7, 0),
-	gsSP2Triangles(4, 7, 3, 0, 3, 7, 1, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 11, 9, 0),
-	gsSP2Triangles(8, 12, 11, 0, 8, 13, 12, 0),
-	gsSP2Triangles(13, 8, 10, 0, 13, 10, 14, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(11, 12, 15, 0, 11, 15, 9, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx wf_dl_Den_mesh_layer_1_vtx_cull[8] = {
 	{{{-5757, -500, -2317},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-5757, -500, 533},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -29188,12 +29154,12 @@ Gfx wf_dl_Skybox_001_mesh_layer_1_tri_0[] = {
 Vtx wf_dl_WindowFrame_mesh_layer_1_vtx_cull[8] = {
 	{{{-5182, 72, -2117},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-5182, 72, -2067},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-5182, 2059, -2067},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-5182, 2059, -2117},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-5182, 1728, -2067},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-5182, 1728, -2117},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-1232, 72, -2117},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-1232, 72, -2067},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-1232, 2059, -2067},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-1232, 2059, -2117},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-1232, 1728, -2067},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-1232, 1728, -2117},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
 Vtx wf_dl_WindowFrame_mesh_layer_1_vtx_0[96] = {
@@ -32689,13 +32655,6 @@ Gfx wf_dl_Carpet_mesh_layer_2[] = {
 Gfx wf_dl_Couch_008_mesh_layer_1[] = {
 	gsSPDisplayList(mat_wf_dl_Couch),
 	gsSPDisplayList(wf_dl_Couch_008_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_wf_dl_Couch),
-	gsSPEndDisplayList(),
-};
-
-Gfx wf_dl_Cushion_mesh_layer_1[] = {
-	gsSPDisplayList(mat_wf_dl_Couch),
-	gsSPDisplayList(wf_dl_Cushion_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_wf_dl_Couch),
 	gsSPEndDisplayList(),
 };

@@ -1,7 +1,7 @@
 void bhv_l2_fog_init(void) {
-    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOG_KILLED) {
+    //if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOG_KILLED) {
         o->activeFlags = 0;
-    }
+    //}
 }
 
 void bhv_l2_fog_loop(void) {

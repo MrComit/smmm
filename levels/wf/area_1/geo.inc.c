@@ -200,7 +200,6 @@ const GeoLayout wf_dl_05__Den_geo[] = {
 			GEO_DISPLAY_LIST(2, wf_dl_Carpet_mesh_layer_2),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -5178, 178, -19832, wf_dl_Couch_008_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, -4538, 0, -19711, wf_dl_Cushion_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Den_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -914, 198, -19769, wf_dl_FancyChair_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -5707, 213, -18703, wf_dl_LightWindow_mesh_layer_1),

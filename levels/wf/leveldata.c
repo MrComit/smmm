@@ -100,3 +100,5 @@
 #include "levels/wf/light_button/collision.inc.c"
 #include "levels/wf/l2_fog/model.inc.c"
 #include "levels/wf/l2_fog/collision.inc.c"
+#include "levels/wf/blue_cushion/model.inc.c"
+#include "levels/wf/blue_cushion/collision.inc.c"

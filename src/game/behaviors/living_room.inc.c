@@ -110,11 +110,15 @@ void bhv_tv_static_loop(void) {
     }
 }
 
-
+static void const *sCushionCollision[] = {
+    cushion_collision,
+    blue_cushion_collision
+};
 
 void bhv_cushion_init(void) {
    obj_set_hitbox(o, &sCushionHitbox);
    o->oFloatF4 = 1.0f;
+   o->collisionData = segmented_to_virtual(sCushionCollision[o->oBehParams2ndByte]);
 }
 
 

@@ -1394,9 +1394,9 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
                 bounce_off_object(m, o, 30.0f);
             }
         }
-    } else if (take_damage_and_knock_back(m, o)) {
-        return TRUE;
-    }
+    }// else if (take_damage_and_knock_back(m, o)) {
+    //    return TRUE;
+    //}
 
     if (!(o->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         sDelayInvincTimer = TRUE;
