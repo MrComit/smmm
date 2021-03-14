@@ -625,6 +625,7 @@ extern const BehaviorScript bhvMirror[];
 extern const BehaviorScript bhvMirrorSwitch[];
 extern const BehaviorScript bhvLightButton[];
 extern const BehaviorScript bhvDenLight[];
+extern const BehaviorScript bhvL2Fog[];
 
 
 

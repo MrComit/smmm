@@ -1,3 +1,27 @@
+void bhv_l2_fog_init(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOG_KILLED) {
+        o->activeFlags = 0;
+    }
+}
+
+void bhv_l2_fog_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (CL_nearest_object_with_behavior_and_field(bhvDenLight, 0x144, 1)) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oOpacity -= 10;
+            if (o->oOpacity < 15) {
+                o->activeFlags = 0;
+                save_file_set_newflags(SAVE_NEW_FLAG_FOG_KILLED, 0);
+            }
+            break;
+    }
+}
+
+
 void bhv_den_light_init(void) {
     o->header.gfx.scale[1] = 50.0f;
     if (o->oBehParams2ndByte == 0) {

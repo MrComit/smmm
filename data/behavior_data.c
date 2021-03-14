@@ -7207,3 +7207,19 @@ const BehaviorScript bhvDenLight[] = {
         CALL_NATIVE(bhv_den_light_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvL2Fog[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(l2_fog_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    //CALL_NATIVE(bhv_light_button_init),
+    SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_l2_fog_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_l2_fog_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

@@ -98,3 +98,5 @@
 #include "levels/wf/mirror_switch/model.inc.c"
 #include "levels/wf/light_button/model.inc.c"
 #include "levels/wf/light_button/collision.inc.c"
+#include "levels/wf/l2_fog/model.inc.c"
+#include "levels/wf/l2_fog/collision.inc.c"
