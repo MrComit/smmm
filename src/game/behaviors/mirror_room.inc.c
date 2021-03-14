@@ -1,8 +1,13 @@
 void bhv_den_light_init(void) {
-    o->oFaceAnglePitch = 0x4000;
     o->header.gfx.scale[1] = 50.0f;
-    o->header.gfx.scale[0] = o->header.gfx.scale[2] = 6.0f;
-    cur_obj_hide();
+    if (o->oBehParams2ndByte == 0) {
+        o->oFaceAnglePitch = 0x4000;
+        o->header.gfx.scale[0] = o->header.gfx.scale[2] = 6.0f;
+        cur_obj_hide();
+    } else {
+        o->oFaceAnglePitch = 0x3800;
+        o->header.gfx.scale[0] = o->header.gfx.scale[2] = 4.0f;
+    }
 }
 
 void bhv_den_light_loop(void) {
@@ -109,35 +114,56 @@ void bhv_mirror_init(void) {
 
 
 void bhv_mirror_loop(void) {
-    struct Object *obj = CL_obj_nearest_object_behavior_params(bhvMirrorSwitch, o->oBehParams2ndByte << 16);
-    if (obj == NULL)
-        return;
-    switch (o->oAction) {
-        case 0:
-            o->oFaceAngleYaw = o->os16F6 + obj->os16F4;
+    struct Object *obj;
+    if ((o->oBehParams >> 24) == 0) {
+        obj = CL_obj_nearest_object_behavior_params(bhvMirrorSwitch, o->oBehParams2ndByte << 16);
+        if (obj == NULL)
+            return;
+        switch (o->oAction) {
+            case 0:
+                o->oFaceAngleYaw = o->os16F6 + obj->os16F4;
 
-            if (obj->os16F6 == 1) {
-                o->oAction = 1;
-            }
-            load_object_collision_model();
-            break;
-        case 1:
-            if (o->oFloatF8 > 0.4f) {
-                o->oFloatF8 -= 0.05f;
+                if (obj->os16F6 == 1) {
+                    o->oAction = 1;
+                }
+                load_object_collision_model();
+                break;
+            case 1:
+                if (o->oFloatF8 > 0.4f) {
+                    o->oFloatF8 -= 0.05f;
+                    cur_obj_scale(o->oFloatF8);
+                }
+                if (obj->os16F6 == 0) {
+                    o->oAction = 2;
+                }
+                break;
+            case 2:
+                o->oFloatF8 += 0.05f;
+                if (o->oFloatF8 >= 1.0f) {
+                    o->oFloatF8 = 1.0f;
+                    o->oAction = 0;
+                }
                 cur_obj_scale(o->oFloatF8);
-            }
-            if (obj->os16F6 == 0) {
-                o->oAction = 2;
-            }
-            break;
-        case 2:
-            o->oFloatF8 += 0.05f;
-            if (o->oFloatF8 >= 1.0f) {
-                o->oFloatF8 = 1.0f;
-                o->oAction = 0;
-            }
-            cur_obj_scale(o->oFloatF8);
-            break;
+                break;
+        }
+    } else {
+        switch (o->oAction) {
+            case 0:
+                spawn_mist_particles();
+                obj = cur_obj_nearest_object_with_behavior(bhvDenLight);
+                if (obj == NULL)
+                    return;
+                obj->header.gfx.scale[1] = 27.0;
+                obj = spawn_object(o, MODEL_MIRROR_LIGHT, bhvDenLight);
+                obj->oBehParams2ndByte = 1;
+                obj->oFaceAngleYaw = 0x8000;
+                obj->oPosY = 213.0f;
+                o->oAction = 1;
+                break;
+            case 1:
+                break;
+        }
+        load_object_collision_model();
     }
     //o->os16FC = 0;
 }

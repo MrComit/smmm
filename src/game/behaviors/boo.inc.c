@@ -474,6 +474,12 @@ static void boo_act_3(void) {
                 }
                 break;
             case 3:
+                obj = spawn_object(o, MODEL_MIRROR, bhvMirror);
+                obj->oBehParams2ndByte = 3;
+                obj->oBehParams = 1 << 24;
+                vec3f_set(&obj->oPosX, -2950.0f, 0.0f, -18700.0f);
+                obj->oFaceAngleYaw = 0xE000;
+                obj->oFaceAngleRoll = obj->oFaceAnglePitch = 0;
                 break;
         }
     }

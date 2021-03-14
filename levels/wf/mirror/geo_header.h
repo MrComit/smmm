@@ -1,5 +1,6 @@
 extern const GeoLayout mirror_Switch_opt1[];
 extern const GeoLayout mirror_Switch_opt2[];
+extern const GeoLayout mirror_Switch_opt3[];
 extern const GeoLayout mirror_geo[];
 extern u8 mirror_mirror2_ci8[];
 extern u8 mirror_mirror2_ci8_pal_rgba16[];
@@ -13,8 +14,10 @@ extern Gfx mat_revert_mirror_Mirror_002[];
 extern Gfx mat_mirror_Mirror_Edge_001[];
 extern Gfx mat_mirror_Mirror_Edge_teal[];
 extern Gfx mat_mirror_Mirror_Edge_purple[];
+extern Gfx mat_mirror_Mirror_Edge_Gray[];
 extern Gfx mirror_Mirror_mesh_layer_1[];
 extern Gfx mirror_Rim_mesh_layer_1[];
 extern Gfx mirror_Rim_mesh_layer_1_mat_override_Mirror_Edge_teal_0[];
 extern Gfx mirror_Rim_mesh_layer_1_mat_override_Mirror_Edge_purple_1[];
+extern Gfx mirror_Rim_mesh_layer_1_mat_override_Mirror_Edge_Gray_2[];
 extern Gfx mirror_material_revert_render_settings[];

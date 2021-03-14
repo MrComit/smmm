@@ -833,6 +833,22 @@ Gfx mat_mirror_Mirror_Edge_purple[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_mirror_Mirror_Edge_Gray[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, 1),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b, 256, mirror_mirror_edge_i8),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 32, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 8, 0),
+	gsDPLoadSync(),
+	gsDPLoadTile(7, 0, 0, 1020, 60),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 32, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 8, 0),
+	gsDPSetTileSize(0, 0, 0, 1020, 60),
+	gsDPSetEnvColor(117, 117, 117, 255),
+	gsSPEndDisplayList(),
+};
+
 Gfx mirror_Mirror_mesh_layer_1[] = {
 	gsSPDisplayList(mat_mirror_Mirror_002),
 	gsSPDisplayList(mirror_Mirror_mesh_layer_1_tri_0),
@@ -854,6 +870,12 @@ Gfx mirror_Rim_mesh_layer_1_mat_override_Mirror_Edge_teal_0[] = {
 
 Gfx mirror_Rim_mesh_layer_1_mat_override_Mirror_Edge_purple_1[] = {
 	gsSPDisplayList(mat_mirror_Mirror_Edge_purple),
+	gsSPDisplayList(mirror_Rim_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx mirror_Rim_mesh_layer_1_mat_override_Mirror_Edge_Gray_2[] = {
+	gsSPDisplayList(mat_mirror_Mirror_Edge_Gray),
 	gsSPDisplayList(mirror_Rim_mesh_layer_1_tri_0),
 	gsSPEndDisplayList(),
 };
