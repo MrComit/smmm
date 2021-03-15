@@ -7223,3 +7223,15 @@ const BehaviorScript bhvL2Fog[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBlueCoinSwitchAuto[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    //LOAD_COLLISION_DATA(blue_coin_switch_seg8_collision_08000E98),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_blue_coin_switch_auto_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_blue_coin_switch_auto_loop),
+    END_LOOP(),
+};

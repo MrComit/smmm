@@ -21,8 +21,9 @@ void bhv_hidden_blue_coin_loop(void) {
 
             if (o->oHiddenBlueCoinSwitch != NULL) {
                 o->oAction++;
+            } else if ((o->oHiddenBlueCoinSwitch = cur_obj_nearest_object_with_behavior(bhvBlueCoinSwitchAuto)) != NULL) {
+                o->oAction++;
             }
-
             break;
         case HIDDEN_BLUE_COIN_ACT_WAITING:
             // Wait until the blue coin switch starts ticking to activate.
@@ -133,6 +134,63 @@ void bhv_blue_coin_switch_loop(void) {
                 save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
             }
 
+            break;
+    }
+}
+
+
+
+void bhv_blue_coin_switch_auto_init(void) {
+    u8 challenge;
+    o->oF4 = (o->oBehParams >> 24) * 30;
+    o->oF8 = ((o->oBehParams >> 16) & 0xFF) * 15;
+    challenge = (o->oBehParams >> 8) & 0xFF;
+    if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
+        o->activeFlags = 0;
+        sDelayedWarpOp = 0x10;
+        sDelayedWarpTimer = 1;
+        sSourceWarpNodeId = 0xAB;
+        music_changed_through_warp(sSourceWarpNodeId);
+        //play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 1, 0x00, 0x00, 0x00);
+        shade_screen_rgba(0, 0, 0, 255);
+    }
+    //cur_obj_set_behavior(bhvBlueCoinSwitch);
+}
+
+
+void bhv_blue_coin_switch_auto_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oAction = 2;
+            break;
+        case 2:
+            if (o->oTimer < o->oF4) {
+                play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+            } else {
+                play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+            }
+            if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL || o->oTimer > o->oF4 + (o->oF8 * 2)) {
+                o->activeFlags = 0;
+                save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                sDelayedWarpOp = 0x10;
+                sDelayedWarpTimer = 12;
+                sSourceWarpNodeId = 0xAB;
+                music_changed_through_warp(sSourceWarpNodeId);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                o->oFC = (s32)gMarioState->pos[1];
+            }
+
+            if (gMarioState->pos[0] > 650.0f) {
+                gMarioState->pos[0] = 650.0f;
+            } else if (gMarioState->pos[0] < -650.0f) {
+                gMarioState->pos[0] = -650.0f;
+            }
+
+            if (gMarioState->pos[2] > 600.0f) {
+                gMarioState->pos[2] = 600.0f;
+            } else if (gMarioState->pos[2] < -550.0f) {
+                gMarioState->pos[2] = -550.0f;
+            }
             break;
     }
 }

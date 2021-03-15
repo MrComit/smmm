@@ -510,6 +510,9 @@ void apply_twirl_gravity(struct MarioState *m) {
 
     if (m->angleVel[1] > 1024) {
         heaviness = 1024.0f / m->angleVel[1];
+        if (gCurrLevelNum == LEVEL_JRB && gCurrAreaIndex == 2) {
+            heaviness = 1536.0f / m->angleVel[1];
+        }
     }
 
     terminalVelocity = -75.0f * heaviness;

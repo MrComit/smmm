@@ -13,6 +13,7 @@ const GeoLayout jrb_area_1_geo[] = {
 const GeoLayout jrb_dl_101__Garden_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 19, -6154, 404, jrb_dl_Ground_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -38,6 +39,7 @@ const GeoLayout jrb_area_1[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(1, jrb_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

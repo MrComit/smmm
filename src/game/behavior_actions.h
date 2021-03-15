@@ -701,6 +701,9 @@ void bhv_den_light_init(void);
 void bhv_den_light_loop(void);
 void bhv_l2_fog_loop(void);
 void bhv_l2_fog_init(void);
+void bhv_blue_coin_switch_auto_loop(void);
+void bhv_blue_coin_switch_auto_init(void);
+
 
 
 
