@@ -40,3 +40,7 @@
 #include "levels/jrb/areas/2/macro.inc.c"
 #include "levels/jrb/areas/2/movtext.inc.c"
 #include "levels/jrb/leveldata.inc.c"
+
+#include "levels/jrb/sunflower/model.inc.c"
+#include "levels/jrb/sunflower/anims/data.inc.c"
+#include "levels/jrb/sunflower/anims/table.inc.c"

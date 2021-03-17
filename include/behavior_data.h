@@ -627,6 +627,7 @@ extern const BehaviorScript bhvLightButton[];
 extern const BehaviorScript bhvDenLight[];
 extern const BehaviorScript bhvL2Fog[];
 extern const BehaviorScript bhvBlueCoinSwitchAuto[];
+extern const BehaviorScript bhvSunflower[];
 
 
 

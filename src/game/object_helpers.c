@@ -126,6 +126,47 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
     return dlStart;
 }
 
+
+
+
+Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 objectBrightness;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        if (gCurGraphNodeHeldObject) {
+            objectGraphNode = gCurGraphNodeHeldObject->objNode;
+        }
+
+        objectBrightness = objectGraphNode->oOpacity;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+
+        dlHead = dlStart;
+        if (currentGraphNode->parameter == 20) {
+            currentGraphNode->fnNode.node.flags =
+            0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        } else {
+            currentGraphNode->fnNode.node.flags =
+            0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        }
+
+        gDPSetEnvColor(dlHead++, objectBrightness, objectBrightness, objectBrightness, 255);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
+
+
+
 /**
  * @bug Every geo function declares the 3 parameters of callContext, node, and
  * the matrix array. This one (see also geo_switch_area) doesn't. When executed,

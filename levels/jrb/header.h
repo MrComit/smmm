@@ -65,4 +65,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/header.inc.h"
 
+#include "levels/jrb/sunflower/geo_header.h"
+
+#include "levels/jrb/sunflower/anim_header.h"
+
 #endif

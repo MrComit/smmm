@@ -7235,3 +7235,15 @@ const BehaviorScript bhvBlueCoinSwitchAuto[] = {
         CALL_NATIVE(bhv_blue_coin_switch_auto_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvSunflower[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, sunflower_anims),
+    ANIMATE(0),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_sunflower_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sunflower_loop),
+    END_LOOP(),
+};
