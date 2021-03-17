@@ -47,8 +47,8 @@ const LevelScript level_jrb_entry[] = {
 
 	AREA(1, jrb_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_NONE, 0, -5896, 0, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
-		MARIO_POS(0x01, 0, 0, -5896, 0),
+		OBJECT(MODEL_NONE, 0, -230, 0, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
+		MARIO_POS(0x01, -180, 0, -230, 0),
 		TERRAIN(jrb_area_1_collision),
 		ROOMS(jrb_area_1_collision_rooms),
 		MACRO_OBJECTS(jrb_area_1_macro_objs),

@@ -34,7 +34,7 @@ const GeoLayout jrb_area_2[] = {
 		GEO_OPEN_NODE(),
 			GEO_CAMERA_FRUSTUM_WITH_FUNC(45.0000, 100, 30000, geo_camera_fov),
 			GEO_OPEN_NODE(),
-				GEO_CAMERA(CAMERA_MODE_8_DIRECTIONS, 0, 0, 0, 0, -100, 0, geo_camera_main),
+				GEO_CAMERA(CAMERA_MODE_8_DIRECTIONS, 65536, 0, 0, 65536, -100, 0, geo_camera_main),
 				GEO_OPEN_NODE(),
 					GEO_BRANCH(1, jrb_area_2_geo),
 					GEO_RENDER_OBJ(),
@@ -42,8 +42,8 @@ const GeoLayout jrb_area_2[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(1, jrb_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(4, jrb_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, jrb_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

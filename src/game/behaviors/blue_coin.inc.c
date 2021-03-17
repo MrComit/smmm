@@ -145,16 +145,14 @@ void bhv_blue_coin_switch_auto_init(void) {
     o->oF4 = (o->oBehParams >> 24) * 30;
     o->oF8 = ((o->oBehParams >> 16) & 0xFF) * 15;
     challenge = (o->oBehParams >> 8) & 0xFF;
-    if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
+    //if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
         o->activeFlags = 0;
         sDelayedWarpOp = 0x10;
         sDelayedWarpTimer = 1;
         sSourceWarpNodeId = 0xAB;
         music_changed_through_warp(sSourceWarpNodeId);
-        //play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 1, 0x00, 0x00, 0x00);
         shade_screen_rgba(0, 0, 0, 255);
-    }
-    //cur_obj_set_behavior(bhvBlueCoinSwitch);
+    //}
 }
 
 
