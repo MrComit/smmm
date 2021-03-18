@@ -3,11 +3,12 @@
 const GeoLayout jrb_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(4, geo_switch_area),
+		GEO_SWITCH_CASE(5, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, jrb_dl_101__Garden_geo),
 			GEO_BRANCH(1, jrb_dl_102__Dog_House_geo),
 			GEO_BRANCH(1, jrb_dl_103__Underground_geo),
+			GEO_BRANCH(1, jrb_dl_104__Conservatory_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -39,6 +40,13 @@ const GeoLayout jrb_dl_103__Underground_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 0, -1672, 0, jrb_dl_Ground_002_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout jrb_dl_104__Conservatory_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -3630, 1012, 7489, jrb_dl_Conservatory_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
