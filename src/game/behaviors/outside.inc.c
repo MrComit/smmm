@@ -9,6 +9,7 @@ void bhv_sunflower_init(void) {
 }
 
 void bhv_sunflower_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             o->header.gfx.animInfo.animFrame = 0;
@@ -19,6 +20,8 @@ void bhv_sunflower_loop(void) {
             }
             break;
         case 1:
+            obj = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+            obj->oPosY += 200.0f;
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 12);
             o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.9f, 0.02f, 0.02f);
             //cur_obj_scale(o->oFloatF4);

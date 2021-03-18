@@ -3,10 +3,11 @@
 const GeoLayout jrb_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(3, geo_switch_area),
+		GEO_SWITCH_CASE(4, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, jrb_dl_101__Garden_geo),
 			GEO_BRANCH(1, jrb_dl_102__Dog_House_geo),
+			GEO_BRANCH(1, jrb_dl_103__Underground_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -20,6 +21,10 @@ const GeoLayout jrb_dl_101__Garden_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(4, jrb_dl_Ground_001_mesh_layer_4),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(4, -1097, -388, -1984, jrb_dl_TallGrass_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(4, -2031, -388, -1016, jrb_dl_TallGrass_001_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(4, 2679, -388, 2189, jrb_dl_TallGrass_002_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(4, -5588, -388, 2560, jrb_dl_TallGrass_003_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -27,6 +32,13 @@ const GeoLayout jrb_dl_102__Dog_House_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -4929, -388, -8753, jrb_dl_DogHouseExterior_003_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout jrb_dl_103__Underground_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 0, -1672, 0, jrb_dl_Ground_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

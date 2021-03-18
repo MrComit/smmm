@@ -3,6 +3,7 @@
 
 #include "src/game/texscroll/bob_texscroll.inc.h"
 #include "src/game/texscroll/wf_texscroll.inc.h"
+#include "src/game/texscroll/jrb_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif
