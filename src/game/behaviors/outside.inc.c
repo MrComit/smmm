@@ -1,5 +1,23 @@
 s32 sSunflowers = 0;
 
+void bhv_dirt_mound_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_is_mario_ground_pounding_platform())
+                o->oAction = 1;
+            break;
+        case 1:
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0, 0.2f);
+            if (o->header.gfx.scale[1] == 0) {
+                o->activeFlags = 0;
+                spawn_mist_particles();
+            }
+            break;
+    }
+}
+
+
+
 void bhv_sunflower_init(void) {
     sSunflowers = 0;
     o->oOpacity = 80;

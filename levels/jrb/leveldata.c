@@ -44,3 +44,5 @@
 #include "levels/jrb/sunflower/model.inc.c"
 #include "levels/jrb/sunflower/anims/data.inc.c"
 #include "levels/jrb/sunflower/anims/table.inc.c"
+#include "levels/jrb/dirt_mound/collision.inc.c"
+#include "levels/jrb/dirt_mound/model.inc.c"

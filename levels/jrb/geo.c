@@ -24,3 +24,4 @@
 #include "levels/jrb/geo.inc.c"
 
 #include "levels/jrb/sunflower/geo.inc.c"
+#include "levels/jrb/dirt_mound/geo.inc.c"

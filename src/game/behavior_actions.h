@@ -705,6 +705,7 @@ void bhv_blue_coin_switch_auto_loop(void);
 void bhv_blue_coin_switch_auto_init(void);
 void bhv_sunflower_loop(void);
 void bhv_sunflower_init(void);
+void bhv_dirt_mound_loop(void);
 
 
 
