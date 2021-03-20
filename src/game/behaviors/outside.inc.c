@@ -1,5 +1,9 @@
 s32 sSunflowers = 0;
 
+void bhv_dirt_mound_init(void) {
+    o->oRoom = 1;
+}
+
 void bhv_dirt_mound_loop(void) {
     switch (o->oAction) {
         case 0:

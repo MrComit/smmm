@@ -1199,6 +1199,10 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->focus, 0.0f, m->pos[1], 0.0f);
             c->yaw = c->nextYaw = 0x8000;
             break;
+        case 5:
+            c->pos[1] = m->pos[1] + 550.0f;
+            c->focus[1] = m->pos[1];
+            break;
     }
 }
 
@@ -5875,6 +5879,12 @@ BAD_RETURN(s32) cam_garden_fall(struct Camera *c) {
 }
 
 
+BAD_RETURN(s32) cam_underground(struct Camera *c) {
+    sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
+    c->filler31[0] = 5;
+}
+
+
 /**
  * Unused. Changes the camera to free roam mode when Mario is not climbing the tower.
  *
@@ -6468,6 +6478,7 @@ struct CameraTrigger sCamWF[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamJRB[] = {
+	{1, cam_underground, -1812, -1995, 786, 6020, 840, 5484, 0xffff},
 	{2, cam_garden_fall, 0, 7759, 0, 6788, 12056, 6788, 0xffff},
 	NULL_TRIGGER
 };

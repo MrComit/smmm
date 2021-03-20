@@ -22,6 +22,10 @@ const GeoLayout jrb_dl_101__Garden_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(4, jrb_dl_Ground_001_mesh_layer_4),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 869, -488, 1108, jrb_dl_Poochy_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(4, jrb_dl_Poochy_mesh_layer_4),
+		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(4, -1097, -388, -1984, jrb_dl_TallGrass_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(4, -2031, -388, -1016, jrb_dl_TallGrass_001_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(4, 2679, -388, 2189, jrb_dl_TallGrass_002_mesh_layer_4),
@@ -39,7 +43,10 @@ const GeoLayout jrb_dl_102__Dog_House_geo[] = {
 const GeoLayout jrb_dl_103__Underground_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 0, -1672, 0, jrb_dl_Ground_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 1459, -1733, -868, jrb_dl_Cave_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 2712, -1731, 3837, jrb_dl_Cave_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 1307, -1733, 990, jrb_dl_Cave_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -2046, -1731, 2958, jrb_dl_Cave_003_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
