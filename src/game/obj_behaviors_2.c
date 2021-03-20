@@ -384,7 +384,7 @@ static s16 obj_turn_pitch_toward_mario(f32 targetOffsetY, s16 turnAmount) {
     return targetPitch;
 }
 
-static s32 approach_f32_ptr(f32 *px, f32 target, f32 delta) {
+s32 approach_f32_ptr(f32 *px, f32 target, f32 delta) {
     if (*px > target) {
         delta = -delta;
     }

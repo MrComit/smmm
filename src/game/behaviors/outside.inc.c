@@ -1,4 +1,48 @@
+s32 approach_f32_ptr(f32 *px, f32 target, f32 delta);
 s32 sSunflowers = 0;
+
+void bhv_bounce_box_loop(void) {
+    struct MarioState *m = gMarioState;
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o)
+                o->oAction = 1;
+            break;
+        case 1:
+            if (approach_f32_ptr(&o->header.gfx.scale[1], 0.5f, 0.25f)) {
+                set_mario_action(m, ACT_CUTSCENE_JUMP, 1);
+                m->vel[1] = 200.0f;
+                m->faceAngle[1] = (m->angleVel[1] = o->oFaceAngleYaw + 0xC000);
+                mario_set_forward_vel(m, 15.0f);
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (approach_f32_ptr(&o->header.gfx.scale[1], 1.25f, 0.2f)) {
+                o->oAction = 3;
+            }
+
+            if (gMarioObject->platform == o) {
+                o->header.gfx.scale[1] = 1.0f;
+                o->oAction = 1;
+            }
+            break;
+        case 3:
+            if (approach_f32_ptr(&o->header.gfx.scale[1], 1.0f, 0.2f)) {
+                o->header.gfx.scale[1] = 1.0f;
+                o->oAction = 0;
+            }
+
+            if (gMarioObject->platform == o) {
+                o->header.gfx.scale[1] = 1.0f;
+                o->oAction = 1;
+            }
+            break;
+    }
+}
+
+
+
 
 void bhv_dirt_mound_init(void) {
     o->oRoom = 1;

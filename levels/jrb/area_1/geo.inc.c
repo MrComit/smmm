@@ -43,10 +43,8 @@ const GeoLayout jrb_dl_102__Dog_House_geo[] = {
 const GeoLayout jrb_dl_103__Underground_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 1459, -1733, -868, jrb_dl_Cave_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 2712, -1731, 3837, jrb_dl_Cave_001_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 1307, -1733, 990, jrb_dl_Cave_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -2046, -1731, 2958, jrb_dl_Cave_003_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 380, 0, jrb_dl_Ground_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -79,8 +77,8 @@ const GeoLayout jrb_area_1[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(1, jrb_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(4, jrb_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, jrb_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

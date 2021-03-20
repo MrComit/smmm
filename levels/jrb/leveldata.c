@@ -46,3 +46,5 @@
 #include "levels/jrb/sunflower/anims/table.inc.c"
 #include "levels/jrb/dirt_mound/collision.inc.c"
 #include "levels/jrb/dirt_mound/model.inc.c"
+#include "levels/jrb/bounce_box/model.inc.c"
+#include "levels/jrb/bounce_box/collision.inc.c"

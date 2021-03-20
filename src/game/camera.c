@@ -6478,7 +6478,7 @@ struct CameraTrigger sCamWF[] = {
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamJRB[] = {
-	{1, cam_underground, -1812, -1995, 786, 6020, 840, 5484, 0xffff},
+	{1, cam_underground, -1812, -3161, 786, 7486, 2206, 7218, 0xffff},
 	{2, cam_garden_fall, 0, 7759, 0, 6788, 12056, 6788, 0xffff},
 	NULL_TRIGGER
 };

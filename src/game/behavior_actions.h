@@ -707,6 +707,7 @@ void bhv_sunflower_loop(void);
 void bhv_sunflower_init(void);
 void bhv_dirt_mound_loop(void);
 void bhv_dirt_mound_init(void);
+void bhv_bounce_box_loop(void);
 
 
 

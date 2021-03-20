@@ -2690,6 +2690,28 @@ static s32 check_for_instant_quicksand(struct MarioState *m) {
     return FALSE;
 }
 
+
+
+static s32 act_cutscene_jump(struct MarioState *m) {
+    Vec3f camPos;
+    set_mario_animation(m, MARIO_ANIM_SINGLE_JUMP);
+    if (perform_air_step(m, 0) == AIR_STEP_LANDED) {
+        set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
+        if (!m->actionArg)
+            mario_set_forward_vel(m, 0.0f);
+        play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
+    }
+    camPos[0] = gLakituState.curPos[0];
+    camPos[1] = m->pos[1];
+    camPos[2] = gLakituState.curPos[2];
+    if (gCamera->cutscene == 0)
+        CL_set_camera_pos(camPos);
+    return FALSE;
+}
+
+
+
+
 s32 mario_execute_cutscene_action(struct MarioState *m) {
     s32 cancel;
 
@@ -2750,6 +2772,7 @@ s32 mario_execute_cutscene_action(struct MarioState *m) {
         case ACT_BUTT_STUCK_IN_GROUND:       cancel = act_butt_stuck_in_ground(m);       break;
         case ACT_FEET_STUCK_IN_GROUND:       cancel = act_feet_stuck_in_ground(m);       break;
         case ACT_PUTTING_ON_CAP:             cancel = act_putting_on_cap(m);             break;
+        case ACT_CUTSCENE_JUMP:              cancel = act_cutscene_jump(m);              break;
     }
     /* clang-format on */
 
