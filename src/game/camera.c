@@ -1200,7 +1200,7 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = 0x8000;
             break;
         case 5:
-            c->pos[1] = m->pos[1] + 550.0f;
+            c->pos[1] = m->pos[1] + 600.0f;
             c->focus[1] = m->pos[1];
             break;
     }
