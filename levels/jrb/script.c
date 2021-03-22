@@ -39,7 +39,8 @@ const LevelScript level_jrb_entry[] = {
 
 	AREA(1, jrb_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		INSTANT_WARP(0, 0x01, 0, 40, -8000),
+		INSTANT_WARP(0, 0x01, 0, 40, -7880),
+		INSTANT_WARP(1, 0x01, 0, 0, 8000),
 		OBJECT(MODEL_DIRT_MOUND, 776, -488, -1265, 0, 0, 0, 0x00000000, bhvDirtMound),
 		OBJECT(MODEL_DIRT_MOUND, 3208, -488, 3931, 0, 0, 0, 0x00000000, bhvDirtMound),
 		OBJECT(MODEL_DIRT_MOUND, -1528, -488, 3343, 0, 0, 0, 0x00000000, bhvDirtMound),
