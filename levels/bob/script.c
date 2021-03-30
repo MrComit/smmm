@@ -251,7 +251,7 @@ const LevelScript level_bob_entry[] = {
 		TERRAIN(bob_area_1_collision),
 		ROOMS(bob_area_1_collision_rooms),
 		MACRO_OBJECTS(bob_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SPOOKY),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_MANOR),
 		TERRAIN_TYPE(TERRAIN_STONE),
 	END_AREA(),
 
