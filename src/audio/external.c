@@ -311,6 +311,8 @@ u8 sBackgroundMusicDefaultVolume[] = {
     80,  // SEQ_EVENT_CUTSCENE_VICTORY
     70,  // SEQ_EVENT_CUTSCENE_ENDING
     65,  // SEQ_MENU_FILE_SELECT
+    0,   // SEQ_SMALL_KEY
+    0,   // SEQ_BIG_KEY
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
@@ -2582,8 +2584,24 @@ void func_803210D4(u16 fadeDuration) {
 /**
  * Called from threads: thread5_game_loop
  */
+void play_course_clear_big(void) {
+    //seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_CUTSCENE_COLLECT_STAR, 0);
+    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_BIG_KEY, 0);
+    sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG | 0;
+#if defined(VERSION_EU) || defined(VERSION_SH)
+    D_EU_80300558 = 2;
+#endif
+    begin_background_music_fade(50);
+}
+
+
+
+/**
+ * Called from threads: thread5_game_loop
+ */
 void play_course_clear(void) {
-    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_CUTSCENE_COLLECT_STAR, 0);
+    //seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_CUTSCENE_COLLECT_STAR, 0);
+    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_SMALL_KEY, 0);
     sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG | 0;
 #if defined(VERSION_EU) || defined(VERSION_SH)
     D_EU_80300558 = 2;

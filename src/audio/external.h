@@ -53,6 +53,7 @@ void play_secondary_music(u8 seqId, u8 bgMusicVolume, u8 volume, u16 fadeTimer);
 void func_80321080(u16 fadeTimer);
 void func_803210D4(u16 fadeOutTime);
 void play_course_clear(void);
+void play_course_clear_big(void);
 void play_peachs_jingle(void);
 void play_puzzle_jingle(void);
 void play_star_fanfare(void);

@@ -604,11 +604,14 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                     spawn_object(m->marioObj, MODEL_STAR_PIECE, bhvCelebrationStar);
                 }
                 disable_background_sound();
-                play_course_clear();
+                if (isKey == 2)
+                    play_course_clear_big();
                 break;
 
             case 42:
-                play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
+                //play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
+                if (isKey != 2)
+                    play_course_clear();
                 break;
 
             case 80:
