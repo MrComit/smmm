@@ -284,6 +284,7 @@ void toad_friend_l1_loop(void) {
                     o->oFaceAngleYaw = o->oMoveAngleYaw + 0x2000;
                     if (o->oDistanceToMario < 150.0f) {
                         o->oAction = 2;
+                        play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
                     }
                 } else {
                     if (o->oInteractStatus == INT_STATUS_INTERACTED)
@@ -292,8 +293,10 @@ void toad_friend_l1_loop(void) {
                 break;
             case 1:
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
-                if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario)
+                if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                     o->oAction = 2;
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                }
 
                 cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
                 break;
@@ -304,6 +307,7 @@ void toad_friend_l1_loop(void) {
                     }
                     o->oF4 = 2;
                     o->oAction = 0;
+                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
                 }
                 break;
         }

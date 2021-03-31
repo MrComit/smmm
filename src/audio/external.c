@@ -314,6 +314,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     0,   // SEQ_SMALL_KEY
     0,   // SEQ_BIG_KEY
     50,  // SEQ_MANOR
+    50,  // SEQ_PROF_T
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
@@ -2687,6 +2688,12 @@ void play_toads_jingle(void) {
     D_EU_80300558 = 2;
 #endif
     begin_background_music_fade(50);
+}
+
+void play_prof_t_jingle(void) {
+    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_PROF_T, 0);
+    sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG;
+    begin_background_music_fade(0);
 }
 
 /**

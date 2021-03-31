@@ -32,6 +32,12 @@
             [32700, 29430],
             "hang"
         ],
+        "envelopeSynth": [
+            [2, 32700],
+            [205, 18167],
+            [205, 0],
+            "hang"
+        ],
         "envelopePercussion": [
             [2, 32700],
             [1, 32700],
@@ -43,12 +49,12 @@
         "instOrgan": {
             "release_rate": 208,
             "envelope": "envelopeOrgan",
-            "sound": "35_gospel_organ"
+            "sound": "05_acoustic_bass"
         },
         "instBass": {
             "release_rate": 208,
             "envelope": "envelopeBass",
-            "sound": "37_square_synth"
+            "sound": "34b_organ"
         },
         "instPiano": {
             "release_rate": 34,
@@ -64,6 +70,11 @@
             "release_rate": 208,
             "envelope": "envelopeHorns",
             "sound": "16_french_horns"
+        },
+        "instSynth": {
+            "release_rate": 208,
+            "envelope": "envelopeSynth",
+            "sound": "21_sine_bass"
         },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelopePercussion", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
@@ -129,7 +140,9 @@
             {"release_rate": 10, "pan": 82, "envelope": "envelopePercussion", "sound": {"sample": "0C_conga_stick", "tuning": 1.33484}},
             {"release_rate": 10, "pan": 82, "envelope": "envelopePercussion", "sound": {"sample": "0C_conga_stick", "tuning": 1.414214}},
             {"release_rate": 10, "pan": 82, "envelope": "envelopePercussion", "sound": {"sample": "0C_conga_stick", "tuning": 1.498307}},
-            {"release_rate": 10, "pan": 128, "envelope": "envelopePercussion", "sound": "0D_clave"}
+            {"release_rate": 10, "pan": 128, "envelope": "envelopePercussion", "sound": "0D_clave"},
+            {"release_rate": 10, "pan": 128, "envelope": "envelopePercussion", "sound": "49_long_guiro"},
+            {"release_rate": 10, "pan": 128, "envelope": "envelopePercussion", "sound": "4A_vibraslap"}
         ]
     },
     "instrument_list": [
@@ -137,6 +150,7 @@
         "instBass",
         "instPiano",
         "instWhistle",
-        "instHorns"
+        "instHorns",
+        "instSynth"
     ]
 }
