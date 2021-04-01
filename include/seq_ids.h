@@ -46,6 +46,7 @@ enum SeqId {
     SEQ_BIG_KEY,                      // 0x24
     SEQ_MANOR,                        // 0x25
     SEQ_PROF_T,                       // 0x26
+    SEQ_GENERIC_BOSS,                 // 0x27
     SEQ_COUNT
 };
 

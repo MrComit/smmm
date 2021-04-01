@@ -122,6 +122,8 @@ void bhv_koopa_boss_loop(void) {
                 o->oFC = 120;
                 cur_obj_init_animation_with_sound(1);
                 set_mario_npc_dialog(0);
+                seq_player_unlower_volume(0, 60);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
             }
             break;
         case 2:
@@ -218,6 +220,7 @@ void bhv_koopa_boss_loop(void) {
                 obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 obj->oBehParams2ndByte = 4;
                 obj->oBehParams = 0x02040100;
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
             }
             break;
     }

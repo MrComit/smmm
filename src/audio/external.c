@@ -315,6 +315,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     0,   // SEQ_BIG_KEY
     50,  // SEQ_MANOR
     50,  // SEQ_PROF_T
+    50,  // SEQ_GENERIC_BOSS
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
