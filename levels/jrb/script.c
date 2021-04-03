@@ -36,6 +36,7 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SUNFLOWER, sunflower_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_DIRT_MOUND, dirt_mound_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOUNCE_BOX, bounce_box_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_POOCHY, poochy_geo), 
 
 	AREA(1, jrb_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -49,6 +50,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_DIRT_MOUND, 3719, -488, 1605, 0, 0, 0, 0x00000000, bhvDirtMound),
 		OBJECT(MODEL_NONE, 0, -230, 0, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 0, -230, 0),
+		OBJECT(MODEL_POOCHY, 1132, 3509, 1206, 0, -90, 0, 0x00000000, bhvPoochyBoss),
 		OBJECT(MODEL_SUNFLOWER, -6480, -488, 2215, 0, 0, 0, 0x00000000, bhvSunflower),
 		OBJECT(MODEL_SUNFLOWER, -1503, -488, -1749, 0, -60, 0, 0x00000000, bhvSunflower),
 		OBJECT(MODEL_SUNFLOWER, 3043, -539, 23, 0, 145, 0, 0x00000000, bhvSunflower),

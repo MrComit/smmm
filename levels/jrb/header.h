@@ -77,4 +77,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/bounce_box/collision_header.h"
 
+#include "levels/jrb/poochy/geo_header.h"
+
 #endif

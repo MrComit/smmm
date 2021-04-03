@@ -1,6 +1,58 @@
 s32 approach_f32_ptr(f32 *px, f32 target, f32 delta);
 s32 sSunflowers = 0;
 
+void bhv_poochy_boss_init(void) {
+    cur_obj_disable();
+}
+
+void bhv_poochy_boss_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 90) {
+                o->oAction = 1;
+                cur_obj_enable();
+            }
+            break;
+        case 1:
+            cur_obj_move_standard(-78);
+            if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+                o->oAction = 2;
+                //o->oForwardVel = 10.0f;
+            }
+            break;
+        case 2:
+            cur_obj_move_standard(-78);
+            cur_obj_update_floor_and_walls();
+            if (o->oSubAction == 0) {
+                o->oForwardVel = approach_f32(o->oForwardVel, 40.0f, 0.5f, 0.5f);
+                o->oMoveAngleYaw += 0x100;
+                if (o->oTimer > 180) {
+                    o->oSubAction = 1;
+                }
+            } else {
+                o->oForwardVel = approach_f32(o->oForwardVel, 30.0f, 1.0f, 1.0f);
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x180);
+                if (o->oDistanceToMario < 1500.0f) {
+                    o->oAction = 3;
+                    o->oVelY = 77.0f;
+                    o->oForwardVel = 40.0f;
+                }
+            }
+            break;
+        case 3:
+            cur_obj_move_standard(-78);
+            cur_obj_update_floor_and_walls();
+            o->oForwardVel = approach_f32(o->oForwardVel, 8.0f, 0.5f, 0.5f);
+            if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+                o->oAction = 4;
+            }
+            break;
+        case 4:
+            break;
+    }
+}
+
+
 void bhv_bounce_box_loop(void) {
     struct MarioState *m = gMarioState;
     switch (o->oAction) {

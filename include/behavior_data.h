@@ -630,6 +630,7 @@ extern const BehaviorScript bhvBlueCoinSwitchAuto[];
 extern const BehaviorScript bhvSunflower[];
 extern const BehaviorScript bhvDirtMound[];
 extern const BehaviorScript bhvBounceBoxes[];
+extern const BehaviorScript bhvPoochyBoss[];
 
 
 

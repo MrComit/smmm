@@ -655,6 +655,7 @@
 #define MODEL_SUNFLOWER           0xFF
 #define MODEL_DIRT_MOUND          0xFE
 #define MODEL_BOUNCE_BOX          0xFD
+#define MODEL_POOCHY              0xFC
 
 
 

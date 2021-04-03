@@ -26,3 +26,4 @@
 #include "levels/jrb/sunflower/geo.inc.c"
 #include "levels/jrb/dirt_mound/geo.inc.c"
 #include "levels/jrb/bounce_box/geo.inc.c"
+#include "levels/jrb/poochy/geo.inc.c"
