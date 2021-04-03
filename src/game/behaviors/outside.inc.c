@@ -1,8 +1,24 @@
 s32 approach_f32_ptr(f32 *px, f32 target, f32 delta);
+
+struct ObjectHitbox sPoochyHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 3,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 400,
+    /* height:            */ 550,
+    /* hurtboxRadius:     */ 400,
+    /* hurtboxHeight:     */ 550,
+};
+
+
 s32 sSunflowers = 0;
+
 
 void bhv_poochy_boss_init(void) {
     cur_obj_disable();
+    obj_set_hitbox(o, &sPoochyHitbox);
 }
 
 void bhv_poochy_boss_loop(void) {
@@ -26,19 +42,24 @@ void bhv_poochy_boss_loop(void) {
         case 2:
             cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
-            if (o->oSubAction == 0) {
+            if (o->os16FA == 0) {
                 o->oForwardVel = approach_f32(o->oForwardVel, 40.0f, 0.5f, 0.5f);
                 o->oMoveAngleYaw += 0x100;
                 if (o->oTimer > 180) {
-                    o->oSubAction = 1;
+                    o->os16FA = 1;
                 }
             } else {
                 o->oForwardVel = approach_f32(o->oForwardVel, 30.0f, 1.0f, 1.0f);
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x180);
                 if (o->oDistanceToMario < 1500.0f) {
-                    o->oAction = 3;
+                    if (o->os16F8 > (2 - o->oHealth)) {
+                        o->oAction = 3;
+                    } else {
+                        o->oAction = 6;
+                    }
                     o->oVelY = 77.0f;
                     o->oForwardVel = 40.0f;
+                    o->os16FA = 0;
                 }
             }
             break;
@@ -46,13 +67,65 @@ void bhv_poochy_boss_loop(void) {
             cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
             o->oForwardVel = approach_f32(o->oForwardVel, 8.0f, 0.5f, 0.5f);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x20);
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oAction = 4;
+                o->oPosY -= 200.0f;
+                o->os16F8 = 0;
             }
+            if (dist_between_objects(o, gMarioObject) < 400.0f) {
+                CL_get_hit(gMarioState, o, 2);
+                o->oAction = 2;
+                o->os16F8 = 0;
+            }
+            o->oInteractType = INTERACT_BOUNCE_TOP;
             break;
         case 4:
+            if (o->oSubAction == 0) {
+                if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                    o->oHealth--;
+                    o->oSubAction = 1;
+                    o->oTimer = 0;
+                }
+            } else {
+                if (o->oTimer > 90) {
+                    o->oAction = 2;
+                    o->oPosY += 200.0f;
+                    o->oInteractType = INTERACT_DAMAGE;
+                }
+                if (o->oHealth == 0) {
+                    o->oAction = 5;
+                }
+            }
+            break;
+        case 5:
+            o->activeFlags = 0;
+            o->oObjF4->activeFlags = 0;
+            break;
+        case 6:
+            cur_obj_move_standard(-78);
+            cur_obj_update_floor_and_walls();
+            o->oForwardVel = approach_f32(o->oForwardVel, 8.0f, 0.5f, 0.5f);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x20);
+            if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+                o->oAction = 2;
+                o->os16F8++;
+                o->os16FA = 1;
+                if (absi(o->oAngleToMario - o->oMoveAngleYaw) < 0x3000)
+                    o->oMoveAngleYaw = o->oAngleToMario;
+                else
+                    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x3000);
+            }
+
+            if (dist_between_objects(o, gMarioObject) < 400.0f) {
+                CL_get_hit(gMarioState, o, 2);
+                o->oAction = 2;
+                o->os16F8 = 0;
+            }
+            //o->oInteractType = INTERACT_BOUNCE_TOP;
             break;
     }
+    o->oInteractStatus = 0;
 }
 
 

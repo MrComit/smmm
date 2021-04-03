@@ -7286,6 +7286,7 @@ const BehaviorScript bhvPoochyBoss[] = {
     SET_HOME(),
     //SCALE(/*Unused*/ 0, /*Field*/ 001),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 1000, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SCALE(0, 80),
     CALL_NATIVE(bhv_poochy_boss_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_poochy_boss_loop),
