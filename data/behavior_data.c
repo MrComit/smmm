@@ -7291,3 +7291,13 @@ const BehaviorScript bhvPoochyBoss[] = {
         CALL_NATIVE(bhv_poochy_boss_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvGardenHoles[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(garden_holes_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

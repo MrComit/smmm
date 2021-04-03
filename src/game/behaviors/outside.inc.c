@@ -17,7 +17,10 @@ void bhv_poochy_boss_loop(void) {
             cur_obj_move_standard(-78);
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oAction = 2;
-                //o->oForwardVel = 10.0f;
+                o->oObjF4 = spawn_object(o, MODEL_NONE, bhvGardenHoles);
+                o->oObjF4->oPosX = o->oObjF4->oPosZ = 0;
+                o->oObjF4->oPosY = -488.0f;
+                o->oObjF4->oFaceAngleYaw = o->oObjF4->oMoveAngleYaw = 0;
             }
             break;
         case 2:

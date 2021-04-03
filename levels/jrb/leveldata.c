@@ -49,3 +49,4 @@
 #include "levels/jrb/bounce_box/model.inc.c"
 #include "levels/jrb/bounce_box/collision.inc.c"
 #include "levels/jrb/poochy/model.inc.c"
+#include "levels/jrb/garden_holes/collision.inc.c"
