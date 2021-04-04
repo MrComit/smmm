@@ -656,6 +656,7 @@
 #define MODEL_DIRT_MOUND          0xFE
 #define MODEL_BOUNCE_BOX          0xFD
 #define MODEL_POOCHY              0xFC
+#define MODEL_FLOWER_WALL         0xFB
 
 
 

@@ -50,3 +50,5 @@
 #include "levels/jrb/bounce_box/collision.inc.c"
 #include "levels/jrb/poochy/model.inc.c"
 #include "levels/jrb/garden_holes/collision.inc.c"
+#include "levels/jrb/flower_wall/model.inc.c"
+#include "levels/jrb/flower_wall/collision.inc.c"

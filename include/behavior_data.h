@@ -632,6 +632,7 @@ extern const BehaviorScript bhvDirtMound[];
 extern const BehaviorScript bhvBounceBoxes[];
 extern const BehaviorScript bhvPoochyBoss[];
 extern const BehaviorScript bhvGardenHoles[];
+extern const BehaviorScript bhvFlowerWall[];
 
 
 

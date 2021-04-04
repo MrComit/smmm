@@ -1,0 +1,13 @@
+extern const GeoLayout flower_wall_Switch_opt1[];
+extern const GeoLayout flower_wall_geo[];
+extern u8 flower_wall_whitewall_i8[];
+extern u8 flower_wall__2dsunflower_rgba16[];
+extern Vtx flower_wall_Group_mesh_layer_1_vtx_0[4];
+extern Gfx flower_wall_Group_mesh_layer_1_tri_0[];
+extern Vtx flower_wall_Group_mesh_layer_6_vtx_0[4];
+extern Gfx flower_wall_Group_mesh_layer_6_tri_0[];
+extern Gfx mat_flower_wall_Side_001[];
+extern Gfx mat_flower_wall_f3d_material[];
+extern Gfx flower_wall_Group_mesh_layer_1[];
+extern Gfx flower_wall_Group_mesh_layer_6[];
+extern Gfx flower_wall_material_revert_render_settings[];

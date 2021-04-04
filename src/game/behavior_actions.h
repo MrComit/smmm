@@ -710,7 +710,8 @@ void bhv_dirt_mound_init(void);
 void bhv_bounce_box_loop(void);
 void bhv_poochy_boss_loop(void);
 void bhv_poochy_boss_init(void);
-
+void bhv_flower_wall_init(void);
+void bhv_flower_wall_loop(void);
 
 
 #include "!COMIT_LIBRARY.h"
