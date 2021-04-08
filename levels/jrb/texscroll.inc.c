@@ -54,8 +54,8 @@ void scroll_jrb_dl_Sun_mesh_layer_5_vtx_0() {
 	int deltaY;
 	Vtx *vertices = segmented_to_virtual(jrb_dl_Sun_mesh_layer_5_vtx_0);
 
-	deltaX = (int)(1.0 * 0x20) % width;
-	deltaY = (int)(1.0 * 0x20) % height;
+	deltaX = (int)(-0.5 * 0x20) % width;
+	deltaY = (int)(-0.5 * 0x20) % height;
 
 	if (absi(currentX) > width) {
 		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
