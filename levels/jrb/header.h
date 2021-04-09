@@ -85,4 +85,12 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/flower_wall/collision_header.h"
 
+#include "levels/jrb/l3_sun/geo_header.h"
+
+#include "levels/jrb/l3_sun/anim_header.h"
+
+#include "levels/jrb/sunblock/geo_header.h"
+
+#include "levels/jrb/sunblock/collision_header.h"
+
 #endif

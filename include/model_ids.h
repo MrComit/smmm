@@ -657,6 +657,8 @@
 #define MODEL_BOUNCE_BOX          0xFD
 #define MODEL_POOCHY              0xFC
 #define MODEL_FLOWER_WALL         0xFB
+#define MODEL_L3_SUN              0xFA
+#define MODEL_SUNBLOCK            0xF9
 
 
 

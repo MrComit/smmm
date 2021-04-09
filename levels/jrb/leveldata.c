@@ -52,3 +52,8 @@
 #include "levels/jrb/garden_holes/collision.inc.c"
 #include "levels/jrb/flower_wall/model.inc.c"
 #include "levels/jrb/flower_wall/collision.inc.c"
+#include "levels/jrb/l3_sun/model.inc.c"
+#include "levels/jrb/l3_sun/anims/data.inc.c"
+#include "levels/jrb/l3_sun/anims/table.inc.c"
+#include "levels/jrb/sunblock/model.inc.c"
+#include "levels/jrb/sunblock/collision.inc.c"

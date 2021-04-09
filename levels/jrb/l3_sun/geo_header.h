@@ -1,0 +1,14 @@
+extern const GeoLayout l3_sun_geo[];
+extern Lights1 l3_sun_SpinningSun_002_lights;
+extern u8 l3_sun_bright_chain_ci8[];
+extern u8 l3_sun_bright_chain_ci8_pal_rgba16[];
+extern Vtx l3_sun_Sun_mesh_layer_1_vtx_0[90];
+extern Gfx l3_sun_Sun_mesh_layer_1_tri_0[];
+extern Vtx l3_sun_Beams_mesh_layer_5_vtx_0[18];
+extern Gfx l3_sun_Beams_mesh_layer_5_tri_0[];
+extern Gfx mat_l3_sun_Sun_002[];
+extern Gfx mat_l3_sun_SpinningSun_002[];
+extern Gfx mat_revert_l3_sun_SpinningSun_002[];
+extern Gfx l3_sun_Sun_mesh_layer_1[];
+extern Gfx l3_sun_Beams_mesh_layer_5[];
+extern Gfx l3_sun_material_revert_render_settings[];

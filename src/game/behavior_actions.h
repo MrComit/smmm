@@ -712,6 +712,11 @@ void bhv_poochy_boss_loop(void);
 void bhv_poochy_boss_init(void);
 void bhv_flower_wall_init(void);
 void bhv_flower_wall_loop(void);
+void bhv_sun_loop(void);
+void bhv_sun_init(void);
+void bhv_sunblock_loop(void);
+
+
 
 
 #include "!COMIT_LIBRARY.h"
