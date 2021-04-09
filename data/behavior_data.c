@@ -7320,15 +7320,15 @@ const BehaviorScript bhvFlowerWall[] = {
 
 const BehaviorScript bhvDarkPiranha[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     DROP_TO_FLOOR(),
     LOAD_ANIMATIONS(oAnimations, piranha_plant_seg6_anims_0601C31C),
     ANIMATE(0),
     SET_HOME(),
     HIDE(),
-    CALL_NATIVE(bhv_fire_piranha_plant_init),
+    CALL_NATIVE(bhv_dark_piranha_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_fire_piranha_plant_update),
+        CALL_NATIVE(bhv_dark_piranha_loop),
     END_LOOP(),
 };
 

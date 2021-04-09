@@ -77,7 +77,7 @@ f32 sObjSavedPosZ;
 void wiggler_jumped_on_attack_handler(void);
 void huge_goomba_weakly_attacked(void);
 
-static s32 obj_is_rendering_enabled(void) {
+s32 obj_is_rendering_enabled(void) {
     if (o->header.gfx.node.flags & GRAPH_RENDER_ACTIVE) {
         return TRUE;
     } else {
@@ -336,7 +336,7 @@ s32 clamp_f32(f32 *value, f32 minimum, f32 maximum) {
     return TRUE;
 }
 
-static void cur_obj_init_anim_extend(s32 arg0) {
+void cur_obj_init_anim_extend(s32 arg0) {
     cur_obj_init_animation_with_sound(arg0);
     cur_obj_extend_animation_if_at_end();
 }

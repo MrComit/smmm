@@ -57,3 +57,4 @@
 #include "levels/jrb/l3_sun/anims/table.inc.c"
 #include "levels/jrb/sunblock/model.inc.c"
 #include "levels/jrb/sunblock/collision.inc.c"
+#include "levels/jrb/dark_piranha/model.inc.c"

@@ -1,4 +1,7 @@
+#include "game/object_helpers.h"
 s32 approach_f32_ptr(f32 *px, f32 target, f32 delta);
+s32 obj_is_rendering_enabled(void);
+void cur_obj_init_anim_extend(s32 arg0);
 
 struct ObjectHitbox sPoochyHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
@@ -24,8 +27,128 @@ static struct ObjectHitbox sSunHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+struct ObjectHitbox sDarkPiranhaHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 2,
+    /* radius:            */ 120,
+    /* height:            */ 180,
+    /* hurtboxRadius:     */ 100,
+    /* hurtboxHeight:     */ 180,
+};
+
 
 s32 sSunflowers = 0;
+
+void dark_piranha_act_hide(void) {
+    if (o->oFirePiranhaPlantDeathSpinTimer != 0) {
+        o->oMoveAngleYaw += (s32) o->oFirePiranhaPlantDeathSpinVel;
+        approach_f32_ptr(&o->oFirePiranhaPlantDeathSpinVel, 0.0f, 200.0f);
+
+        if (cur_obj_check_if_near_animation_end()) {
+            if (--o->oFirePiranhaPlantDeathSpinTimer == 0) {
+                cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEFEAT_SHRINK);
+            }
+        }
+    } else if (approach_f32_ptr(&o->oFirePiranhaPlantScale, 0.0f,
+                                0.04f * o->oFirePiranhaPlantNeutralScale)) {
+        cur_obj_become_intangible();
+        if (o->oFirePiranhaPlantActive) {
+            o->oFirePiranhaPlantActive = FALSE;
+
+            if (o->oHealth == 0) {
+                obj_die_if_health_non_positive();
+                set_object_respawn_info_bits(o, 1);
+            }
+        } else {
+            cur_obj_play_sound_2(SOUND_OBJ_PIRANHA_PLANT_APPEAR);
+
+            o->oFirePiranhaPlantActive = TRUE;
+
+            cur_obj_unhide();
+            o->oAction = 1;
+            o->oMoveAngleYaw = o->oAngleToMario;
+        }
+    }
+
+    cur_obj_extend_animation_if_at_end();
+}
+
+
+void dark_piranha_act_grow(void) {
+    cur_obj_init_anim_extend(4);
+
+    if (o->oDistanceToMario > 1400.0f) {
+        o->oTimer = 0;
+        o->header.gfx.animInfo.animFrame = 0;
+    }
+
+    if (approach_f32_ptr(&o->oFirePiranhaPlantScale, o->oFirePiranhaPlantNeutralScale,
+                         0.04f * o->oFirePiranhaPlantNeutralScale)) {
+        if (o->oTimer > 80) {
+            //cur_obj_play_sound_2(SOUND_OBJ_PIRANHA_PLANT_SHRINK);
+            //o->oAction = 0;
+            //cur_obj_init_animation_with_sound(0);
+        } else if (o->oTimer < 50) {
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
+        } else { // TODO: Check if we can put these conditionals on same line
+            if (obj_is_rendering_enabled()) {
+                if (cur_obj_check_anim_frame(56)) {
+                    cur_obj_play_sound_2(SOUND_OBJ_FLAME_BLOWN);
+                    obj_spit_fire(0, (s32)(30.0f * o->oFirePiranhaPlantNeutralScale),
+                                  (s32)(140.0f * o->oFirePiranhaPlantNeutralScale),
+                                  2.5f * o->oFirePiranhaPlantNeutralScale, MODEL_RED_FLAME_SHADOW,
+                                  20.0f, 15.0f, 0x1000);
+                    o->oTimer = 0;
+                    o->header.gfx.animInfo.animFrame = 0;
+                }
+            }
+        }
+    } else if (o->oFirePiranhaPlantScale > o->oFirePiranhaPlantNeutralScale / 2) {
+        cur_obj_become_tangible();
+    }
+}
+
+
+void bhv_dark_piranha_loop(void) {
+    struct Object *obj;
+    cur_obj_scale(o->oFirePiranhaPlantScale);
+
+    switch (o->oAction) {
+        case 0:
+            dark_piranha_act_hide();
+            break;
+        case 1:
+            dark_piranha_act_grow();
+            break;
+    }
+
+    obj = cur_obj_nearest_object_with_behavior(bhvL3Sun);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+    }
+    if (o->oHealth != 0 && obj->oHeldState == HELD_HELD && o->oDistanceToMario < 500.0f) {
+        o->oAction = 0;
+        o->oHealth = 0;
+        o->oFirePiranhaPlantDeathSpinTimer = 10;
+        o->oFirePiranhaPlantDeathSpinVel = 8000.0f;
+
+        cur_obj_become_intangible();
+    }
+    o->oInteractStatus = 0;
+}
+
+
+
+
+void bhv_dark_piranha_init(void) {
+    o->oFirePiranhaPlantNeutralScale = 1.0f;
+    obj_set_hitbox(o, &sDarkPiranhaHitbox);
+    o->oFlags |= 0x00004000;
+    //o->oAction = 1;
+}
 
 
 

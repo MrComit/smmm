@@ -93,4 +93,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/sunblock/collision_header.h"
 
+#include "levels/jrb/dark_piranha/geo_header.h"
+
 #endif

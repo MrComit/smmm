@@ -30,3 +30,4 @@
 #include "levels/jrb/flower_wall/geo.inc.c"
 #include "levels/jrb/l3_sun/geo.inc.c"
 #include "levels/jrb/sunblock/geo.inc.c"
+#include "levels/jrb/dark_piranha/geo.inc.c"

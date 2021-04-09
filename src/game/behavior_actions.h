@@ -715,6 +715,8 @@ void bhv_flower_wall_loop(void);
 void bhv_sun_loop(void);
 void bhv_sun_init(void);
 void bhv_sunblock_loop(void);
+void bhv_dark_piranha_init(void);
+void bhv_dark_piranha_loop(void);
 
 
 
