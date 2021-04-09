@@ -43,7 +43,7 @@ void bhv_sunblock_loop(void) {
             break;
         case 1:
             load_object_collision_model();
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xFF, 0x10);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xA0, 0x10);
             obj = cur_obj_nearest_object_with_behavior(bhvL3Sun);
             if (obj == NULL)
                 o->activeFlags = 0;
