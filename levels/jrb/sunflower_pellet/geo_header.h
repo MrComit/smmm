@@ -1,0 +1,10 @@
+extern const GeoLayout sunflower_pellet_geo[];
+extern u8 sunflower_pellet_flower_petal_ci8[];
+extern u8 sunflower_pellet_flower_petal_ci8_pal_rgba16[];
+extern Vtx sunflower_pellet_SunPellet_mesh_layer_1_vtx_cull[8];
+extern Vtx sunflower_pellet_SunPellet_mesh_layer_1_vtx_0[48];
+extern Gfx sunflower_pellet_SunPellet_mesh_layer_1_tri_0[];
+extern Gfx mat_sunflower_pellet_FlowerPetal_001[];
+extern Gfx mat_revert_sunflower_pellet_FlowerPetal_001[];
+extern Gfx sunflower_pellet_SunPellet_mesh_layer_1[];
+extern Gfx sunflower_pellet_material_revert_render_settings[];

@@ -70,7 +70,7 @@ void bhv_sunflower_pellet_loop(void) {
         spawn_mist_particles();
         create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
     }
-    if (o->oTimer < 20) {
+    if (o->oTimer < 30) {
         o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 100.0f, 5.0f, 5.0f);
     }
 }
@@ -84,11 +84,12 @@ void bhv_standing_sunflower_loop(void) {
     }
     if (obj->oHeldState == HELD_HELD/* && o->oDistanceToMario < 1000.0f*/) {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x80);
-        if (o->oTimer > 90) {
+        if (o->oTimer > o->oF4) {
             obj = spawn_object(o, MODEL_SUNFLOWER_PELLET, bhvSunflowerPellet);
             obj->oMoveAngleYaw = o->oMoveAngleYaw;
             obj->oPosY += 244.0f;
             o->oTimer = 0;
+            o->oF4 = CL_RandomMinMaxU16(90, 180);
         }
     } else {
         o->oTimer = 0;
