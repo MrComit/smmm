@@ -95,4 +95,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/dark_piranha/geo_header.h"
 
+#include "levels/jrb/standing_sunflower/geo_header.h"
+
+#include "levels/jrb/sunflower_pellet/geo_header.h"
+
 #endif

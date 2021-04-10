@@ -58,3 +58,5 @@
 #include "levels/jrb/sunblock/model.inc.c"
 #include "levels/jrb/sunblock/collision.inc.c"
 #include "levels/jrb/dark_piranha/model.inc.c"
+#include "levels/jrb/standing_sunflower/model.inc.c"
+#include "levels/jrb/sunflower_pellet/model.inc.c"

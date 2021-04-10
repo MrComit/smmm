@@ -660,6 +660,8 @@
 #define MODEL_L3_SUN              0xFA
 #define MODEL_SUNBLOCK            0xF9
 #define MODEL_DARK_PIRANHA        0xF8
+#define MODEL_STANDING_SUNFLOWER  0xF7
+#define MODEL_SUNFLOWER_PELLET    0xF6
 
 
 

@@ -636,6 +636,9 @@ extern const BehaviorScript bhvFlowerWall[];
 extern const BehaviorScript bhvDarkPiranha[];
 extern const BehaviorScript bhvL3Sun[];
 extern const BehaviorScript bhvSunblock[];
+extern const BehaviorScript bhvStandingSunflower[];
+extern const BehaviorScript bhvSunflowerPellet[];
+
 
 
 

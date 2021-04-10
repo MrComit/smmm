@@ -40,7 +40,60 @@ struct ObjectHitbox sDarkPiranhaHitbox = {
 };
 
 
+static struct ObjectHitbox sPelletHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 70,
+    /* height:            */ 70,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
+
 s32 sSunflowers = 0;
+
+void bhv_sunflower_pellet_init(void) {
+    o->oForwardVel = 30.0f;
+    obj_set_hitbox(o, &sPelletHitbox);
+}
+
+
+void bhv_sunflower_pellet_loop(void) {
+    CL_Move();
+    cur_obj_update_floor_and_walls();
+    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
+    || o->oInteractStatus & INT_STATUS_INTERACTED) {
+        o->activeFlags = 0;
+        spawn_mist_particles();
+        create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+    }
+    if (o->oTimer < 20) {
+        o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 100.0f, 5.0f, 5.0f);
+    }
+}
+
+
+void bhv_standing_sunflower_loop(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvL3Sun);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    if (obj->oHeldState == HELD_HELD/* && o->oDistanceToMario < 1000.0f*/) {
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x80);
+        if (o->oTimer > 90) {
+            obj = spawn_object(o, MODEL_SUNFLOWER_PELLET, bhvSunflowerPellet);
+            obj->oMoveAngleYaw = o->oMoveAngleYaw;
+            obj->oPosY += 244.0f;
+            o->oTimer = 0;
+        }
+    } else {
+        o->oTimer = 0;
+    }
+}
 
 void dark_piranha_act_hide(void) {
     if (o->oFirePiranhaPlantDeathSpinTimer != 0) {

@@ -717,6 +717,10 @@ void bhv_sun_init(void);
 void bhv_sunblock_loop(void);
 void bhv_dark_piranha_init(void);
 void bhv_dark_piranha_loop(void);
+void bhv_standing_sunflower_loop(void);
+void bhv_sunflower_pellet_loop(void);
+void bhv_sunflower_pellet_init(void);
+
 
 
 

@@ -31,3 +31,5 @@
 #include "levels/jrb/l3_sun/geo.inc.c"
 #include "levels/jrb/sunblock/geo.inc.c"
 #include "levels/jrb/dark_piranha/geo.inc.c"
+#include "levels/jrb/standing_sunflower/geo.inc.c"
+#include "levels/jrb/sunflower_pellet/geo.inc.c"
