@@ -201,12 +201,15 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
 
 
 
-Vec3s gRoomColor = {0xFF, 0xFF, 0xFF};
-
+Vec3s gRoomColors[] = {
+    {0xFF, 0xFF, 0xFF},
+    {0xFF, 0xFF, 0xFF},
+};
 
 Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct GraphNodeGenerated *currentGraphNode;
+    Vec3s colors;
 
     dlStart = NULL;
 
@@ -216,15 +219,9 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
 
         dlHead = dlStart;
-        if (currentGraphNode->parameter == 20) {
-            currentGraphNode->fnNode.node.flags =
-            0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
-        } else {
-            currentGraphNode->fnNode.node.flags =
-            0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
-        }
+        vec3s_copy(colors, gRoomColors[currentGraphNode->parameter]);
 
-        gDPSetEnvColor(dlHead++, gRoomColor[0], gRoomColor[1], gRoomColor[2], 255);
+        gDPSetEnvColor(dlHead++, colors[0], colors[1], colors[2], 255);
         gSPEndDisplayList(dlHead);
     }
 

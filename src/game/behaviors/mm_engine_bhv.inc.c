@@ -1,6 +1,6 @@
 #include "game/save_file.h"
 #include "buffers/buffers.h"
-extern Vec3s gRoomColor;
+extern Vec3s gRoomColors[];
 
 static struct ObjectHitbox sStarPieceHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
@@ -79,9 +79,9 @@ void bhv_env_flame_init(void) {
 
 void bhv_env_flame_loop(void) {
     if (o->oTimer > 90) {
-        gRoomColor[0] = approach_s16_symmetric(gRoomColor[0], o->os16F4, 0x8);
-        gRoomColor[1] = approach_s16_symmetric(gRoomColor[1], o->os16F6, 0x8);
-        gRoomColor[2] = approach_s16_symmetric(gRoomColor[2], o->os16F8, 0x8);
+        gRoomColors[0][0] = approach_s16_symmetric(gRoomColors[0][0], o->os16F4, 0x8);
+        gRoomColors[0][1] = approach_s16_symmetric(gRoomColors[0][1], o->os16F6, 0x8);
+        gRoomColors[0][2] = approach_s16_symmetric(gRoomColors[0][2], o->os16F8, 0x8);
     }
 
     if (o->oTimer > 180) {
