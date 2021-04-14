@@ -231,7 +231,12 @@ const GeoLayout wf_dl_06__Mirror_Room_geo[] = {
 const GeoLayout wf_dl_07__Bedroom_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_007_mesh_layer_1),
+		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -8764, 604, -10140),
+		GEO_OPEN_NODE(),
+			GEO_ASM(0, geo_set_room_color_env),
+			GEO_DISPLAY_LIST(1, wf_dl_AAA_mesh_layer_1),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -5472, 604, -10140, wf_dl_Bedroom_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

@@ -1,5 +1,6 @@
 #include "game/save_file.h"
 #include "buffers/buffers.h"
+extern Vec3s gRoomColor;
 
 static struct ObjectHitbox sStarPieceHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
@@ -67,6 +68,28 @@ static struct ObjectHitbox sBooCoinCageHitbox = {
 Vec3f sPreviousMarioPos = {0, 0, 0};
 
 u8 sTokenCoins[3] = {10, 50, 100};
+
+
+
+void bhv_env_flame_init(void) {
+    o->os16F4 = (o->oBehParams >> 24) & 0xFF;
+    o->os16F6 = (o->oBehParams >> 16) & 0xFF;
+    o->os16F8 = (o->oBehParams >> 8) & 0xFF;
+}
+
+void bhv_env_flame_loop(void) {
+    if (o->oTimer > 90) {
+        gRoomColor[0] = approach_s16_symmetric(gRoomColor[0], o->os16F4, 0x8);
+        gRoomColor[1] = approach_s16_symmetric(gRoomColor[1], o->os16F6, 0x8);
+        gRoomColor[2] = approach_s16_symmetric(gRoomColor[2], o->os16F8, 0x8);
+    }
+
+    if (o->oTimer > 180) {
+        o->os16F4 += 0x8;
+        o->os16F6 += 0x8;
+        o->os16F8 += 0x8;
+    }
+}
 
 void bhv_boocoin_cage_init(void) {
     struct Object *obj;

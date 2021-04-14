@@ -1174,7 +1174,7 @@ const BehaviorScript bhvFlame[] = {
     SET_INTERACT_TYPE(INTERACT_FLAME),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
     SET_INT(oIntangibleTimer, 0),
-    CALL_NATIVE(bhv_init_room),
+    //CALL_NATIVE(bhv_init_room),
     BEGIN_LOOP(),
         SET_INT(oInteractStatus, 0),
         ANIMATE_TEXTURE(oAnimState, 2),
@@ -7384,5 +7384,23 @@ const BehaviorScript bhvSunflowerPellet[] = {
     CALL_NATIVE(bhv_sunflower_pellet_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_sunflower_pellet_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvEnvFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 700),
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_env_flame_init),
+    BEGIN_LOOP(),
+        SET_INT(oInteractStatus, 0),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_env_flame_loop),
     END_LOOP(),
 };

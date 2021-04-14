@@ -720,6 +720,8 @@ void bhv_dark_piranha_loop(void);
 void bhv_standing_sunflower_loop(void);
 void bhv_sunflower_pellet_loop(void);
 void bhv_sunflower_pellet_init(void);
+void bhv_env_flame_init(void);
+void bhv_env_flame_loop(void);
 
 
 
