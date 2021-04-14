@@ -3,7 +3,7 @@
 const GeoLayout wf_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(7, geo_switch_area),
+		GEO_SWITCH_CASE(8, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, wf_dl_01__Lounge_geo),
 			GEO_BRANCH(1, wf_dl_02__Bar_geo),
@@ -11,6 +11,7 @@ const GeoLayout wf_area_1_geo[] = {
 			GEO_BRANCH(1, wf_dl_04__Bathroom_geo),
 			GEO_BRANCH(1, wf_dl_05__Den_geo),
 			GEO_BRANCH(1, wf_dl_06__Mirror_Room_geo),
+			GEO_BRANCH(1, wf_dl_07__Bedroom_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 7647, 200, -17812),
 	GEO_CLOSE_NODE(),
@@ -27,10 +28,11 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(2, -4052, 420, -8015, wf_dl_Gate_Indicator_002_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(2, 3559, 420, -5720, wf_dl_Gate_Indicator_003_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(2, 504, 420, -13084, wf_dl_Gate_Indicator_004_mesh_layer_2),
+		GEO_TRANSLATE_NODE_WITH_DL(2, -5472, 420, -8870, wf_dl_Gate_Indicator_005_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 4496, 2500, -10469, wf_dl_HalfPillar_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(2, 4896, 581, -5545, wf_dl_Hallway_002_mesh_layer_2),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_004_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -5426, 603, -8207, wf_dl_Hallway_004_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(6, -443, 238, -7701, wf_dl_Hallway_005_mesh_layer_6),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 1142, 82, -7141, wf_dl_Simple_Table_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 7100, 163, -18730, wf_dl_ToFloor1_mesh_layer_1),
@@ -226,6 +228,13 @@ const GeoLayout wf_dl_06__Mirror_Room_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout wf_dl_07__Bedroom_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_007_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout wf_area_1[] = {
 	GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
 	GEO_OPEN_NODE(),
@@ -249,10 +258,10 @@ const GeoLayout wf_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(1, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(6, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(4, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(5, wf_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(6, wf_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
