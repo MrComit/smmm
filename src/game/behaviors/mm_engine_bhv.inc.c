@@ -75,19 +75,25 @@ void bhv_env_flame_init(void) {
     o->os16F4 = (o->oBehParams >> 24) & 0xFF;
     o->os16F6 = (o->oBehParams >> 16) & 0xFF;
     o->os16F8 = (o->oBehParams >> 8) & 0xFF;
+
+    o->os16FA = o->oRoom - 7;
+    if (o->os16FA < 0) {
+        o->activeFlags = 0;
+    }
 }
 
 void bhv_env_flame_loop(void) {
-    if (o->oTimer > 90) {
-        gRoomColors[0][0] = approach_s16_symmetric(gRoomColors[0][0], o->os16F4, 0x8);
-        gRoomColors[0][1] = approach_s16_symmetric(gRoomColors[0][1], o->os16F6, 0x8);
-        gRoomColors[0][2] = approach_s16_symmetric(gRoomColors[0][2], o->os16F8, 0x8);
-    }
-
-    if (o->oTimer > 180) {
-        o->os16F4 += 0x8;
-        o->os16F6 += 0x8;
-        o->os16F8 += 0x8;
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 10) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            gRoomColors[o->os16FA][0] = approach_s16_symmetric(gRoomColors[o->os16FA][0], o->os16F4, 0x8);
+            gRoomColors[o->os16FA][1] = approach_s16_symmetric(gRoomColors[o->os16FA][1], o->os16F6, 0x8);
+            gRoomColors[o->os16FA][2] = approach_s16_symmetric(gRoomColors[o->os16FA][2], o->os16F8, 0x8);
+            break;
     }
 }
 
