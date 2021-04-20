@@ -1171,6 +1171,8 @@
 #define /*0x100*/ o100             OBJECT_FIELD_S32(0x1E)
 #define /*0x104*/ o104             OBJECT_FIELD_S32(0x1F)
 #define /*0x108*/ o108             OBJECT_FIELD_S32(0x20)
+#define /*0x10C*/ o10C             OBJECT_FIELD_S32(0x21)
+#define /*0x110*/ o110             OBJECT_FIELD_S32(0x22)
 
 
 #define /*0x0F4*/ oFloatF4         OBJECT_FIELD_F32(0x1B)
@@ -1179,6 +1181,8 @@
 #define /*0x100*/ oFloat100        OBJECT_FIELD_F32(0x1E)
 #define /*0x104*/ oFloat104        OBJECT_FIELD_F32(0x1F)
 #define /*0x108*/ oFloat108        OBJECT_FIELD_F32(0x20)
+#define /*0x10C*/ oFloat10C        OBJECT_FIELD_F32(0x21)
+#define /*0x110*/ oFloat110        OBJECT_FIELD_F32(0x22)
 
 #define /*0x0F4*/ oObjF4           OBJECT_FIELD_OBJ(0x1B)
 #define /*0x0F8*/ oObjF8           OBJECT_FIELD_OBJ(0x1C)
@@ -1186,6 +1190,8 @@
 #define /*0x100*/ oObj100          OBJECT_FIELD_OBJ(0x1E)
 #define /*0x104*/ oObj104          OBJECT_FIELD_OBJ(0x1F)
 #define /*0x108*/ oObj108          OBJECT_FIELD_OBJ(0x20)
+#define /*0x10C*/ oObj10C          OBJECT_FIELD_OBJ(0x21)
+#define /*0x110*/ oObj110          OBJECT_FIELD_OBJ(0x22)
 
 #define /*0x0F4*/ oSurfF4           OBJECT_FIELD_SURFACE(0x1B)
 #define /*0x0F8*/ oSurfF8           OBJECT_FIELD_SURFACE(0x1C)
@@ -1193,6 +1199,8 @@
 #define /*0x100*/ oSurf100          OBJECT_FIELD_SURFACE(0x1E)
 #define /*0x104*/ oSurf104          OBJECT_FIELD_SURFACE(0x1F)
 #define /*0x108*/ oSurf108          OBJECT_FIELD_SURFACE(0x20)
+#define /*0x10C*/ oSurf10C          OBJECT_FIELD_SURFACE(0x21)
+#define /*0x110*/ oSurf110          OBJECT_FIELD_SURFACE(0x22)
 
 #define /*0x0F4*/ os16F4              OBJECT_FIELD_S16(0x1B, 0)
 #define /*0x0F4*/ os16F6              OBJECT_FIELD_S16(0x1B, 1)

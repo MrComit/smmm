@@ -294,5 +294,6 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "behaviors/bathroom.inc.c"
 #include "behaviors/mirror_room.inc.c"
 #include "behaviors/outside.inc.c"
+#include "behaviors/bedroom.inc.c"
 
 

@@ -7404,3 +7404,40 @@ const BehaviorScript bhvEnvFlame[] = {
         CALL_NATIVE(bhv_env_flame_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvShyguyFlame[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    ANIMATE(0),
+    //SET_FLOAT(oGraphYOffset, 30),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    CALL_NATIVE(bhv_shyguy_init),
+    CALL_NATIVE(bhv_shyguy_flame_init),
+    CALL_NATIVE(bhv_goomba_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shyguy_flame_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvHeldEnvFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 140),
+    //SET_INTERACT_TYPE(INTERACT_FLAME),
+    //SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
+    //SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_env_flame_init),
+    BEGIN_LOOP(),
+        SET_INT(oInteractStatus, 0),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        //CALL_NATIVE(bhv_env_flame_loop),
+    END_LOOP(),
+};

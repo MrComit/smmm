@@ -722,7 +722,8 @@ void bhv_sunflower_pellet_loop(void);
 void bhv_sunflower_pellet_init(void);
 void bhv_env_flame_init(void);
 void bhv_env_flame_loop(void);
-
+void bhv_shyguy_flame_loop(void);
+void bhv_shyguy_flame_init(void);
 
 
 
