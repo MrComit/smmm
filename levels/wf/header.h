@@ -163,4 +163,10 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/blue_cushion/collision_header.h"
 
+#include "levels/wf/bedroom_gate/geo_header.h"
+
+#include "levels/wf/bedroom_gate/collision_header.h"
+
+#include "levels/wf/bedroom_gate_alt/collision_header.h"
+
 #endif

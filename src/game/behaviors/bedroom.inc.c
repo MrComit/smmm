@@ -7,6 +7,44 @@ Vec3f sBedroomFlamePos[4] = {
 
 u32 sBedroomFlameCol[4] = {0x00802000, 0x96008F00, 0x58009600, 0x96690000};
 
+void bhv_bedroom_trigger_loop(void) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == 1) {
+        play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_l2_bedroom_gate_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (gMarioCurrentRoom == o->oRoom) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            //o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
+            if (o->oBehParams2ndByte != 3) {
+                obj = CL_obj_nearest_object_behavior_params(bhvBedroomTrigger, o->oBehParams2ndByte << 16);
+                if (obj == NULL) {
+                    o->oAction = 2;
+                }
+            } else {
+                if (save_file_get_boos() & (1 << 8)) {
+                    o->oAction = 2;
+                }
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY + 300.0f, 20.0f, 20.0f);
+            if (o->oPosY == o->oHomeY + 300.0f)
+                o->activeFlags = 0;
+            break;
+    }
+}
+
+
 
 void bhv_shyguy_flame_init(void) {
     s16 param = o->oBehParams >> 24;
@@ -30,10 +68,10 @@ void bhv_shyguy_flame_loop(void) {
     goomba_act_walk();
     cur_obj_move_standard(-78);
 
-    if (dist < 150.0f)
-        dist = 150.0f;
+    if (dist < 50.0f)
+        dist = 50.0f;
 
-    o->oOpacity = 255 * (150.0f / dist);
+    o->oOpacity = 255 * (50.0f / dist);
 
     o->oObj110->oPosX = o->oPosX + (sins(o->oFaceAngleYaw) * 50.0f);
     o->oObj110->oPosZ = o->oPosZ + (coss(o->oFaceAngleYaw) * 50.0f);

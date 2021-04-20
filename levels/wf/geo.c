@@ -61,3 +61,4 @@
 #include "levels/wf/light_button/geo.inc.c"
 #include "levels/wf/l2_fog/geo.inc.c"
 #include "levels/wf/blue_cushion/geo.inc.c"
+#include "levels/wf/bedroom_gate/geo.inc.c"

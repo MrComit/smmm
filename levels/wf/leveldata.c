@@ -102,3 +102,6 @@
 #include "levels/wf/l2_fog/collision.inc.c"
 #include "levels/wf/blue_cushion/model.inc.c"
 #include "levels/wf/blue_cushion/collision.inc.c"
+#include "levels/wf/bedroom_gate/model.inc.c"
+#include "levels/wf/bedroom_gate/collision.inc.c"
+#include "levels/wf/bedroom_gate_alt/collision.inc.c"

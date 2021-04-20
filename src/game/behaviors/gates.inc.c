@@ -74,6 +74,8 @@ void bhv_lever_loop(void) {
 }
 
 
+
+
 void bhv_l1_gate_loop(void) {
     struct Object *obj;
     if (o->oBehParams2ndByte != 1) {

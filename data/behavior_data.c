@@ -7441,3 +7441,29 @@ const BehaviorScript bhvHeldEnvFlame[] = {
         //CALL_NATIVE(bhv_env_flame_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBedroomGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(bedroom_gate_alt_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x500),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l2_bedroom_gate_loop),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvBedroomTrigger[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
+    SET_INT(oIntangibleTimer, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bedroom_trigger_loop),
+    END_LOOP(),
+};
