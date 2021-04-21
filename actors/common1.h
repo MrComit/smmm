@@ -160,6 +160,7 @@ extern const Gfx flame_frame5_dl[];
 extern const Gfx flame_frame6_dl[];
 extern const Gfx flame_frame7_dl[];
 extern const Gfx flame_frame8_dl[];
+extern const Gfx flame_reset[];
 
 // leaves
 extern const GeoLayout leaves_geo[];

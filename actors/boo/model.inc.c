@@ -51,6 +51,21 @@ static const Lights1 boo_light_8 = gdSPDefLights1(
 
 
 static const Lights1 boo_light_9 = gdSPDefLights1(
+    0x4B, 0x34, 0x00,
+    0x96, 0x69, 0x00, 0x28, 0x28, 0x28
+);
+
+static const Lights1 boo_light_10 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+static const Lights1 boo_light_11 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+static const Lights1 boo_light_12 = gdSPDefLights1(
     0x97, 0x9a, 0xff,
     0xff, 0xff, 0xff, 0x28, 0x28, 0x28
 );
@@ -535,6 +550,54 @@ const Gfx boo_dl_color9[] = {
     gsSPDisplayList(boo_dl_helper),
     gsSPLight(&boo_light_9.l, 1),
     gsSPLight(&boo_light_9.a, 2),
+    gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
+    gsDPTileSync(),
+    gsSPDisplayList(boo_seg5_dl_0500C1B0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx boo_dl_color10[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(boo_dl_helper),
+    gsSPLight(&boo_light_10.l, 1),
+    gsSPLight(&boo_light_10.a, 2),
+    gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
+    gsDPTileSync(),
+    gsSPDisplayList(boo_seg5_dl_0500C1B0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx boo_dl_color11[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(boo_dl_helper),
+    gsSPLight(&boo_light_11.l, 1),
+    gsSPLight(&boo_light_11.a, 2),
+    gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
+    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
+    gsDPTileSync(),
+    gsSPDisplayList(boo_seg5_dl_0500C1B0),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsDPSetEnvColor(255, 255, 255, 255),
+    gsSPEndDisplayList(),
+};
+
+const Gfx boo_dl_color12[] = {
+    gsDPPipeSync(),
+    gsSPDisplayList(boo_dl_helper),
+    gsSPLight(&boo_light_12.l, 1),
+    gsSPLight(&boo_light_12.a, 2),
     gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
