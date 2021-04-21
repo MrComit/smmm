@@ -7409,7 +7409,7 @@ const BehaviorScript bhvEnvFlame[] = {
 
 const BehaviorScript bhvShyguyFlame[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
-    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
     ANIMATE(0),
     //SET_FLOAT(oGraphYOffset, 30),
@@ -7460,7 +7460,7 @@ const BehaviorScript bhvBedroomGate[] = {
 
 const BehaviorScript bhvBedroomTrigger[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
     SET_INT(oIntangibleTimer, 0),
     BEGIN_LOOP(),

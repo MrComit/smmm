@@ -36,11 +36,11 @@
 
 //the maximum amount of collision surfaces (static and dynamic combined)
 //8200 should work fine for a 2x extended stage, the vanilla value is 2300
-#define SURFACE_POOL_SIZE 6400
+#define SURFACE_POOL_SIZE 7400
 
 //make this approximately (amount of collision cells) + (SURFACE_POOL_SIZE * 3)
 //22000 should work fine for a 2x extended stage, the vanilla value is 7000
-#define SURFACE_NODE_POOL_SIZE 20000
+#define SURFACE_NODE_POOL_SIZE 22000
 
 
 

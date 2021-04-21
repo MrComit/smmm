@@ -8,9 +8,17 @@ Vec3f sBedroomFlamePos[4] = {
 u32 sBedroomFlameCol[4] = {0x00802000, 0x96008F00, 0x58009600, 0x96690000};
 
 void bhv_bedroom_trigger_loop(void) {
+    struct Object *obj;
+    if (o->oBehParams2ndByte == 3) {
+        //o->oFlags |= OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
+    }
     if (obj_check_if_collided_with_object(o, gMarioObject) == 1) {
         play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
         o->activeFlags = 0;
+        if (o->oBehParams2ndByte == 3) {
+            obj = spawn_object(o, MODEL_NONE, bhvGoombaTripletSpawner);
+            obj->oPosY += 500.0f;
+        }
     }
 }
 
