@@ -152,11 +152,11 @@ Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void
     return dlStart;
 }
 
+
 Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;
     struct GraphNodeGenerated *currentGraphNode;
-    s32 objectBrightness;
 
     dlStart = NULL;
 
@@ -168,18 +168,18 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
 
-        objectBrightness = objectGraphNode->oOpacity;
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
 
         dlHead = dlStart;
+
         if (currentGraphNode->parameter == 20) {
             currentGraphNode->fnNode.node.flags =
             0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
         } else {
             currentGraphNode->fnNode.node.flags =
-            0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+            0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
         }
-        
+
         if (currentGraphNode->parameter != 10) {
             if (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA) {
                 gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
@@ -194,7 +194,6 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
 }
 
 
-
 Vec3s gRoomColors[] = {
     {0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF, 0xFF},
@@ -206,6 +205,8 @@ Vec3s gRoomColors[] = {
     {0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF, 0xFF},
 };
+
+
 
 Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;

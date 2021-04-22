@@ -7467,3 +7467,17 @@ const BehaviorScript bhvBedroomTrigger[] = {
         CALL_NATIVE(bhv_bedroom_trigger_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvServantsFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 600),
+    CALL_NATIVE(bhv_servants_flame_init),
+    BEGIN_LOOP(),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_servants_flame_loop),
+    END_LOOP(),
+};
