@@ -35,7 +35,7 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(2, 504, 420, -13084, wf_dl_Gate_Indicator_004_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(2, -5472, 420, -8870, wf_dl_Gate_Indicator_005_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 4496, 2500, -10469, wf_dl_HalfPillar_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 1328, 340, -10508, wf_dl_Hallway_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(2, 4896, 581, -5545, wf_dl_Hallway_002_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -5426, 603, -8207, wf_dl_Hallway_004_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(6, -443, 238, -7701, wf_dl_Hallway_005_mesh_layer_6),
@@ -51,7 +51,7 @@ const GeoLayout wf_dl_02__Bar_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(5, 3732, 396, 772, wf_dl_Bottle_002_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(5, -1083, -115, 5351, wf_dl_Bottle_003_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(5, -842, 360, -3928, wf_dl_Bottle_004_mesh_layer_5),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Hallway_003_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 1709, 244, 136, wf_dl_Hallway_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 2485, -500, -3374, wf_dl_Plat_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 326, -500, -3155, wf_dl_Plat_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -143, -500, -2096, wf_dl_Plat_002_mesh_layer_1),
@@ -341,7 +341,7 @@ const GeoLayout wf_dl_11__Bedroom4_geo[] = {
 const GeoLayout wf_dl_12__Servant_s_Quarters_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 0, 0, -17911, wf_dl_Servant_s_Quarters_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 7138, 160, -2802, wf_dl_Servant_s_Quarters_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
