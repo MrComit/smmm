@@ -73,7 +73,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SHYGUY, -5528, 19, -13050, 0, 0, 0, 0x01000000, bhvShyguyFlame),
 		OBJECT(MODEL_SHYGUY, -7853, 19, -13149, 0, 0, 0, 0x02000000, bhvShyguyFlame),
 		OBJECT(MODEL_SHYGUY, -8238, 19, -10644, 0, 0, 0, 0x03000000, bhvShyguyFlame),
-		OBJECT(MODEL_GOOMBA, -7595, 0, -10802, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_NONE, -7516, 19, -10610, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_L2_GATE, 1031, 0, -4811, 0, 180, 0, 0x00020000, bhvL2Gate),
 		OBJECT(MODEL_L2_GATE, -42, 0, -11219, 0, 0, 0, 0x00000000, bhvL2Gate),
 		OBJECT(MODEL_BREAKABLE_BOX, -1912, 0, -6531, 0, 0, 0, 0x00000000, bhvBreakableBox),

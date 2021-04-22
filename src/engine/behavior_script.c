@@ -905,6 +905,9 @@ static BhvCommandProc BehaviorCmdTable[] = {
     bhv_cmd_spawn_water_droplet,
 };
 
+
+extern s8 sLevelRoomOffsets[];
+
 // Execute the behavior script of the current object, process the object flags, and other miscellaneous code for updating objects.
 void cur_obj_update(void) {
     UNUSED u32 unused;
@@ -988,7 +991,7 @@ void cur_obj_update(void) {
     }
 
     if (objFlags & OBJ_FLAG_DISABLE_ON_ROOM_CLEAR) {
-        if (save_file_get_rooms(gCurrentObject->oRoom / 32) & (1 << (gCurrentObject->oRoom % 32))) {
+        if (save_file_get_rooms(gCurrentObject->oRoom / 32) & (1 << ((gCurrentObject->oRoom + sLevelRoomOffsets[gCurrLevelNum - 1]) % 32))) {
             gCurrentObject->activeFlags = 0;
             return;
         }

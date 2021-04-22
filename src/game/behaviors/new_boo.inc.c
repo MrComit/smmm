@@ -115,8 +115,11 @@ void bhv_room_boo_init(void) {
 //BPARAM 1 = NO KEY, SMALL KEY, OR BIG KEY - BPARAM 3 = KEY ID
 void bhv_room_boo_loop(void) {
     s32 numObjs;
+    if (gMarioCurrentRoom != o->oRoom)
+        return;
     if (o->oUnk1A8 == 0) {
         numObjs = count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, o->oRoom);
+        print_text_fmt_int(0, 80, "%d", numObjs);
         if (numObjs <= 15) {
             o->oOpacity = 255 - (17 * numObjs);
         }
@@ -134,5 +137,8 @@ void bhv_room_boo_loop(void) {
 
     if (o->oBehParams2ndByte != 0 && o->oBehParams2ndByte != 4)
         room_boo_multiplier_loop();
+
+    print_text_fmt_int(80, 80, "%d", o->oRoom);
+    print_text_fmt_int(40, 80, "%d", gMarioCurrentRoom);
 
 }

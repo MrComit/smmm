@@ -324,12 +324,12 @@ void mario_update_toad_friend(struct MarioState *m) {
     }
 }
 
-s8 sLevelRoomOffsets[] = {0, 15,};
+s8 sLevelRoomOffsets[] = {0, 14, 28, };
 
 
 void mario_update_room_clear(struct MarioState *m) {
     u32 index = 0;
-    u32 room = gMarioCurrentRoom;
+    u32 room = gMarioCurrentRoom +  + sLevelRoomOffsets[gCurrLevelNum - 1];
     while (room > 32) {
         room -= 32;
         index++;
