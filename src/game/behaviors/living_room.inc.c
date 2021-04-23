@@ -116,17 +116,25 @@ static void const *sCushionCollision[] = {
 };
 
 void bhv_cushion_init(void) {
-   obj_set_hitbox(o, &sCushionHitbox);
    o->oFloatF4 = 1.0f;
    o->collisionData = segmented_to_virtual(sCushionCollision[o->oBehParams2ndByte]);
 }
 
 
 void bhv_cushion_loop(void) {
+    struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
-            if (o->oInteractStatus)
+            if (gMarioObject->platform == o) {
+                play_sound(SOUND_ACTION_BOUNCE_OFF_OBJECT, m->marioObj->header.gfx.cameraToObject);
+                m->pos[1] = m->floorHeight + 20.0f;
+                m->vel[1] = 80.0f;
+                m->flags & MARIO_UNKNOWN_08;
+                reset_mario_pitch(m);
+                play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
+                drop_and_set_mario_action(m, ACT_TWIRLING, 0);
                 o->oAction = 1;
+            }
             break;
         case 1:
             o->oFloatF4 -= 0.15f;
@@ -160,7 +168,6 @@ void bhv_cushion_loop(void) {
             o->header.gfx.scale[1] = o->oFloatF4;
             break;
     }
-    o->oInteractStatus = 0;
 }
 
 

@@ -1,16 +1,4 @@
 extern Vec3s gRoomColors[];
-struct ObjectHitbox sBouncyBedHitbox = {
-    /* interactType: */ INTERACT_BOUNCE_TOP,
-    /* downOffset: */ 0,
-    /* damageOrCoinValue: */ 0,
-    /* health: */ 1,
-    /* numLootCoins: */ 0,
-    /* radius: */ 240,
-    /* height: */ 152,
-    /* hurtboxRadius: */ 240,
-    /* hurtboxHeight: */ 92,
-};
-
 
 s8 sServantsLights = 0;
 
@@ -52,7 +40,6 @@ void bhv_pressure_plate_loop(void) {
 
 
 void bhv_bouncy_bed_init(void) {
-   obj_set_hitbox(o, &sBouncyBedHitbox);
    o->oFloatFC = 1.0f;
    o->os16F4 = 255;
    o->os16F6 = 255;
@@ -61,14 +48,23 @@ void bhv_bouncy_bed_init(void) {
 
 
 void bhv_bouncy_bed_loop(void) {
+    struct MarioState *m = gMarioState;
     o->oFC += 0x200;
     o->os16F4 = 205 + (s8)(sins(o->oFC) * 50);
     o->os16F8 = (o->os16F6 = o->os16F4);
 
     switch (o->oAction) {
         case 0:
-            if (o->oInteractStatus)
+            if (gMarioObject->platform == o) {
+                play_sound(SOUND_ACTION_BOUNCE_OFF_OBJECT, m->marioObj->header.gfx.cameraToObject);
+                m->pos[1] = m->floorHeight + 20.0f;
+                m->vel[1] = 80.0f;
+                m->flags & MARIO_UNKNOWN_08;
+                reset_mario_pitch(m);
+                play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
+                drop_and_set_mario_action(m, ACT_TWIRLING, 0);
                 o->oAction = 1;
+            }
             break;
         case 1:
             o->oFloatFC -= 0.15f;
@@ -102,7 +98,6 @@ void bhv_bouncy_bed_loop(void) {
             o->header.gfx.scale[1] = o->oFloatFC;
             break;
     }
-    o->oInteractStatus = 0;
 }
 
 
