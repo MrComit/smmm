@@ -7495,3 +7495,17 @@ const BehaviorScript bhvBouncyBed[] = {
         CALL_NATIVE(bhv_bouncy_bed_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvServantsPlate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(pressure_plate_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    SET_HOME(),
+    CALL_NATIVE(bhv_pressure_plate_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_pressure_plate_loop),
+    END_LOOP(),
+};

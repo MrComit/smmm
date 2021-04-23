@@ -173,4 +173,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/bouncy_bed/collision_header.h"
 
+#include "levels/wf/pressure_plate/geo_header.h"
+
+#include "levels/wf/pressure_plate/collision_header.h"
+
 #endif

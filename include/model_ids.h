@@ -650,6 +650,7 @@
 #define MODEL_BLUE_CUSHION        0xEE
 #define MODEL_BEDROOM_GATE        0xED
 #define MODEL_BOUNCY_BED          0xEC
+#define MODEL_PRESSURE_PLATE      0xEB
 
 
 

@@ -107,3 +107,5 @@
 #include "levels/wf/bedroom_gate_alt/collision.inc.c"
 #include "levels/wf/bouncy_bed/model.inc.c"
 #include "levels/wf/bouncy_bed/collision.inc.c"
+#include "levels/wf/pressure_plate/model.inc.c"
+#include "levels/wf/pressure_plate/collision.inc.c"

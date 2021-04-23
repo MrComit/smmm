@@ -157,9 +157,7 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;
     struct GraphNodeGenerated *currentGraphNode;
-
     dlStart = NULL;
-
     if (callContext == GEO_CONTEXT_RENDER) {
         objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
         currentGraphNode = (struct GraphNodeGenerated *) node;
@@ -167,11 +165,8 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
         if (gCurGraphNodeHeldObject) {
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
-
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
-
         dlHead = dlStart;
-
         if (currentGraphNode->parameter == 20) {
             currentGraphNode->fnNode.node.flags =
             0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
@@ -179,17 +174,14 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
             currentGraphNode->fnNode.node.flags =
             0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
         }
-
         if (currentGraphNode->parameter != 10) {
             if (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA) {
                 gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
             }
         }
-
         gDPSetEnvColor(dlHead++, objectGraphNode->os16F4, objectGraphNode->os16F6, objectGraphNode->os16F8, 255);
         gSPEndDisplayList(dlHead);
     }
-
     return dlStart;
 }
 
