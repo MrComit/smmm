@@ -29,9 +29,9 @@ void bhv_pressure_plate_loop(void) {
                 o->oAction = 1;
                 sServantsLights = 1;
             }
-            gRoomColors[5][0] = approach_s16_symmetric(gRoomColors[5][0], 0, 0x3);
-            gRoomColors[5][1] = approach_s16_symmetric(gRoomColors[5][1], 0, 0x3);
-            gRoomColors[5][2] = approach_s16_symmetric(gRoomColors[5][2], 0, 0x3);
+            gRoomColors[5][0] = approach_s16_symmetric(gRoomColors[5][0], 5, 0x3);
+            gRoomColors[5][1] = approach_s16_symmetric(gRoomColors[5][1], 5, 0x3);
+            gRoomColors[5][2] = approach_s16_symmetric(gRoomColors[5][2], 5, 0x3);
             o->os16F4 = approach_s16_symmetric(o->os16F4, 100, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
             break;
