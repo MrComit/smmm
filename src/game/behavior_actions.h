@@ -728,6 +728,8 @@ void bhv_l2_bedroom_gate_loop(void);
 void bhv_bedroom_trigger_loop(void);
 void bhv_servants_flame_loop(void);
 void bhv_servants_flame_init(void);
+void bhv_bouncy_bed_init(void);
+void bhv_bouncy_bed_loop(void);
 
 
 

@@ -62,3 +62,4 @@
 #include "levels/wf/l2_fog/geo.inc.c"
 #include "levels/wf/blue_cushion/geo.inc.c"
 #include "levels/wf/bedroom_gate/geo.inc.c"
+#include "levels/wf/bouncy_bed/geo.inc.c"

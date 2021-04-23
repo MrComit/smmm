@@ -7481,3 +7481,17 @@ const BehaviorScript bhvServantsFlame[] = {
         CALL_NATIVE(bhv_servants_flame_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBouncyBed[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(bouncy_bed_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_TWIRL_BOUNCE),
+    CALL_NATIVE(bhv_bouncy_bed_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_bouncy_bed_loop),
+    END_LOOP(),
+};

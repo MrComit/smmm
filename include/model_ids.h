@@ -649,6 +649,7 @@
 #define MODEL_L2_FOG              0xEF
 #define MODEL_BLUE_CUSHION        0xEE
 #define MODEL_BEDROOM_GATE        0xED
+#define MODEL_BOUNCY_BED          0xEC
 
 
 

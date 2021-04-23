@@ -169,4 +169,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/bedroom_gate_alt/collision_header.h"
 
+#include "levels/wf/bouncy_bed/geo_header.h"
+
+#include "levels/wf/bouncy_bed/collision_header.h"
+
 #endif
