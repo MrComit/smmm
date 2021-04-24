@@ -224,7 +224,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_ENV_FLAME, 9995, 735, -1339, 0, 0, 0, 0x00000000, bhvServantsFlame),
 		OBJECT(MODEL_ENV_FLAME, 11975, 735, -4232, 0, 0, 0, 0x00000000, bhvServantsFlame),
 		OBJECT(MODEL_ENV_FLAME, 11975, 1135, -1339, 0, 0, 0, 0x00000000, bhvServantsFlame),
-		OBJECT(MODEL_TOKEN, 10000, 402, -1609, 0, 90, 0, 0x00021200, bhvToken),
+		OBJECT(MODEL_TOKEN, 9880, 402, -1609, 0, 90, 0, 0x00021200, bhvToken),
 		OBJECT(MODEL_TOKEN, 15179, 487, -1939, 90, 0, -180, 0x00011400, bhvToken),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),

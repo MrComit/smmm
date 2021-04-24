@@ -338,6 +338,34 @@ const GeoLayout wf_dl_11__Bedroom4_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout wf_dl_B_geo[] = {
+	GEO_TRANSLATE_NODE(LAYER_OPAQUE, 12662, 1029, -2960),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -4293, -129, 999, wf_dl_B_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_C_geo[] = {
+	GEO_TRANSLATE_NODE(LAYER_OPAQUE, 12662, 1029, -2960),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -4293, -129, 999, wf_dl_C_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_BB_geo[] = {
+	GEO_TRANSLATE_NODE(LAYER_OPAQUE, 12662, 1029, -2960),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -2514, 3, 1351, wf_dl_BB_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_CC_geo[] = {
+	GEO_TRANSLATE_NODE(LAYER_OPAQUE, 12662, 1029, -2960),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -1001, 3, 3523, wf_dl_CC_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout wf_dl_12__Servant_s_Quarters_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -357,6 +385,18 @@ const GeoLayout wf_dl_12__Servant_s_Quarters_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 5151, -30, -2802, wf_dl_Platform_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 10226, -139, -2306, wf_dl_Platform_005_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 7138, 160, -2802, wf_dl_Servant_s_Quarters_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_servants_wall),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, wf_dl_B_geo),
+			GEO_BRANCH(1, wf_dl_C_geo),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -2480, -129, 4068, wf_dl_A_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_servants_wall_2),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, wf_dl_BB_geo),
+			GEO_BRANCH(1, wf_dl_CC_geo),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -864, 3, 3252, wf_dl_AA_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -384,9 +424,9 @@ const GeoLayout wf_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(5, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(4, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(1, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(4, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(6, wf_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),

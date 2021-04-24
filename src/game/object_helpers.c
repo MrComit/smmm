@@ -215,7 +215,6 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
 
 
 
-
 /**
  * @bug Every geo function declares the 3 parameters of callContext, node, and
  * the matrix array. This one (see also geo_switch_area) doesn't. When executed,
@@ -304,6 +303,64 @@ Gfx *geo_switch_level(s32 callContext, struct GraphNode *node) {
 
     return NULL;
 }
+
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        if (gMarioState->pos[0] > 8500.0f) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_servants_wall_2(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_servants_wall_2(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        if (gMarioState->pos[0] > 10200.0f) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
 
 
 //! @bug Same issue as geo_switch_anim_state.
