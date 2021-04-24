@@ -44,12 +44,14 @@ void bhv_bouncy_bed_init(void) {
    o->os16F8 = 255;
 }
 
-
+//CBCD9B
+//576771
 void bhv_bouncy_bed_loop(void) {
     struct MarioState *m = gMarioState;
-    o->oFC += 0x200;
-    o->os16F4 = 205 + (s8)(sins(o->oFC) * 50);
-    o->os16F8 = (o->os16F6 = o->os16F4);
+    o->o100 += 0x200;
+    o->os16F4 = 145 + (s8)(sins(o->o100) * 58);
+    o->os16F6 = 154 + (s8)(sins(o->o100) * 51);
+    o->os16F8 = 134 + (s8)(sins(o->o100) * 21);
 
     switch (o->oAction) {
         case 0:
