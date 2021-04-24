@@ -49,7 +49,7 @@ const GeoLayout blue_flame_geo[] = {
 const GeoLayout env_flame_geo[] = {
    GEO_CULLING_RADIUS(0x1000),
    GEO_OPEN_NODE(),
-      GEO_ASM(0, geo_set_color_env),
+      GEO_ASM(5, geo_set_color_env),
       GEO_OPEN_NODE(),
          GEO_SWITCH_CASE(8, geo_switch_anim_state),
          GEO_OPEN_NODE(),

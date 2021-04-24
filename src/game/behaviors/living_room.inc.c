@@ -10,19 +10,6 @@ struct ObjectHitbox sRemoteHitbox = {
     /* hurtboxHeight: */ 0,
 };
 
-
-struct ObjectHitbox sCushionHitbox = {
-    /* interactType: */ INTERACT_BOUNCE_TOP,
-    /* downOffset: */ 0,
-    /* damageOrCoinValue: */ 0,
-    /* health: */ 1,
-    /* numLootCoins: */ 0,
-    /* radius: */ 180,
-    /* height: */ 132,
-    /* hurtboxRadius: */ 180,
-    /* hurtboxHeight: */ 72,
-};
-
 static struct ObjectHitbox sTVPeepaHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,

@@ -167,17 +167,10 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
         }
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;
-        if (currentGraphNode->parameter == 20) {
-            currentGraphNode->fnNode.node.flags =
-            0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
-        } else {
-            currentGraphNode->fnNode.node.flags =
-            0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
-        }
-        if (currentGraphNode->parameter != 10) {
-            if (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA) {
-                gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
-            }
+        if (currentGraphNode->parameter == 1) {
+            currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        } else if (currentGraphNode->parameter == 5) {
+            currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
         }
         gDPSetEnvColor(dlHead++, objectGraphNode->os16F4, objectGraphNode->os16F6, objectGraphNode->os16F8, 255);
         gSPEndDisplayList(dlHead);
@@ -211,7 +204,7 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
 
         dlHead = dlStart;
-        vec3s_copy(colors, gRoomColors[currentGraphNode->parameter]);
+        vec3s_copy(colors, gRoomColors[currentGraphNode->parameter & 0xFF]);
 
         gDPSetEnvColor(dlHead++, colors[0], colors[1], colors[2], 255);
         gSPEndDisplayList(dlHead);

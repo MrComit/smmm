@@ -5,7 +5,7 @@ const GeoLayout l3_sun_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_NODE_START(),
 		GEO_OPEN_NODE(),
-			GEO_ASM(0, geo_set_color_env),
+			GEO_ASM(1, geo_set_color_env),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, l3_sun_Sun_mesh_layer_1),
 			GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, 0, 0, 0, -90, 0, -90),
 			GEO_OPEN_NODE(),
