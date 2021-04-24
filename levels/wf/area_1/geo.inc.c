@@ -3,7 +3,7 @@
 const GeoLayout wf_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(13, geo_switch_area),
+		GEO_SWITCH_CASE(14, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, wf_dl_01__Lounge_geo),
 			GEO_BRANCH(1, wf_dl_02__Bar_geo),
@@ -17,6 +17,7 @@ const GeoLayout wf_area_1_geo[] = {
 			GEO_BRANCH(1, wf_dl_10__Bedroom3_geo),
 			GEO_BRANCH(1, wf_dl_11__Bedroom4_geo),
 			GEO_BRANCH(1, wf_dl_12__Servant_s_Quarters_geo),
+			GEO_BRANCH(1, wf_dl_13__Office_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 7647, 200, -17812),
 	GEO_CLOSE_NODE(),
@@ -397,6 +398,13 @@ const GeoLayout wf_dl_12__Servant_s_Quarters_geo[] = {
 			GEO_BRANCH(1, wf_dl_CC_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -864, 3, 3252, wf_dl_AA_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_13__Office_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 7138, 160, -2802, wf_dl_Office_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
