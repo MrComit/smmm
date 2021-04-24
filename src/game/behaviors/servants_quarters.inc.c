@@ -17,17 +17,15 @@ void bhv_pressure_plate_loop(void) {
                 o->oAction = 1;
                 sServantsLights = 1;
             }
-            gRoomColors[5][0] = approach_s16_symmetric(gRoomColors[5][0], 16, 0x3);
-            gRoomColors[5][1] = approach_s16_symmetric(gRoomColors[5][1], 16, 0x3);
-            gRoomColors[5][2] = approach_s16_symmetric(gRoomColors[5][2], 16, 0x3);
+            gRoomColors[5][0] = approach_s16_symmetric(gRoomColors[5][0], 16, 0x1);
+            gRoomColors[5][2] = (gRoomColors[5][1] = gRoomColors[5][0]);
             o->os16F4 = approach_s16_symmetric(o->os16F4, 100, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
             break;
         case 1:
             o->oPosY = approach_f32(o->oPosY, o->oHomeY - 10.0f, 2.5f, 2.5f);
-            gRoomColors[5][0] = approach_s16_symmetric(gRoomColors[5][0], 180, 0x8);
-            gRoomColors[5][1] = approach_s16_symmetric(gRoomColors[5][1], 180, 0x8);
-            gRoomColors[5][2] = approach_s16_symmetric(gRoomColors[5][2], 180, 0x8);
+            gRoomColors[5][0] = approach_s16_symmetric(gRoomColors[5][0], 180, 20);
+            gRoomColors[5][2] = (gRoomColors[5][1] = gRoomColors[5][0]);
             o->os16F4 = approach_s16_symmetric(o->os16F4, 255, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
             if (gMarioObject->platform != o) {
