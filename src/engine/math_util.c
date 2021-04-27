@@ -564,7 +564,18 @@ void mtxf_mul_vec3s(Mat4 mtx, Vec3s b) {
  * and no crashes occur.
  */
 void mtxf_to_mtx(Mtx *dest, Mat4 src) {
-#ifdef AVOID_UB
+    Mat4 temp;
+	register s32 i, j;
+	
+	for( i = 0; i < 4; i++ ) {
+		for( j = 0; j < 3; j++ ) {
+			temp[i][j] = src[i][j] / WORLD_SCALE;
+		}
+		temp[i][3] = src[i][3];
+	}
+
+	guMtxF2L( temp, dest );
+/*#ifdef AVOID_UB
     // Avoid type-casting which is technically UB by calling the equivalent
     // guMtxF2L function. This helps little-endian systems, as well.
     guMtxF2L(src, dest);
@@ -581,7 +592,7 @@ void mtxf_to_mtx(Mtx *dest, Mat4 src) {
         *a3++ = GET_HIGH_S16_OF_32(asFixedPoint); // integer part
         *t0++ = GET_LOW_S16_OF_32(asFixedPoint);  // fraction part
     }
-#endif
+#endif*/
 }
 
 /**
