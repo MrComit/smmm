@@ -103,11 +103,25 @@ const Gfx coin_seg3_dl_03007878[] = {
     gsSPBranchList(coin_seg3_dl_030077D0),
 };
 
+
+const Gfx coin_seg3_dl_bluecombiner[] = {
+    gsDPPipeSync(),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsDPSetCombineMode(G_CC_MODULATEIFADEA, G_CC_MODULATEIFADEA),
+    gsSPTexture(0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON),
+    gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
+    gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
+    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
+    gsSPEndDisplayList(),
+};
+
 // 0x030078A0 - 0x030078C8
 const Gfx coin_seg3_dl_030078A0[] = {
     gsDPPipeSync(),
     gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005780),
-    gsSPDisplayList(coin_seg3_dl_03007780),
+    gsSPDisplayList(coin_seg3_dl_bluecombiner),
     gsSPVertex(coin_seg3_vertex_03005700, 4, 0),
     gsSPBranchList(coin_seg3_dl_030077D0),
 };
@@ -116,7 +130,7 @@ const Gfx coin_seg3_dl_030078A0[] = {
 const Gfx coin_seg3_dl_030078C8[] = {
     gsDPPipeSync(),
     gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03005F80),
-    gsSPDisplayList(coin_seg3_dl_03007780),
+    gsSPDisplayList(coin_seg3_dl_bluecombiner),
     gsSPVertex(coin_seg3_vertex_03005700, 4, 0),
     gsSPBranchList(coin_seg3_dl_030077D0),
 };
@@ -125,7 +139,7 @@ const Gfx coin_seg3_dl_030078C8[] = {
 const Gfx coin_seg3_dl_030078F0[] = {
     gsDPPipeSync(),
     gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006780),
-    gsSPDisplayList(coin_seg3_dl_03007780),
+    gsSPDisplayList(coin_seg3_dl_bluecombiner),
     gsSPVertex(coin_seg3_vertex_03005700, 4, 0),
     gsSPBranchList(coin_seg3_dl_030077D0),
 };
@@ -134,7 +148,7 @@ const Gfx coin_seg3_dl_030078F0[] = {
 const Gfx coin_seg3_dl_03007918[] = {
     gsDPPipeSync(),
     gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b, 1, coin_seg3_texture_03006F80),
-    gsSPDisplayList(coin_seg3_dl_03007780),
+    gsSPDisplayList(coin_seg3_dl_bluecombiner),
     gsSPVertex(coin_seg3_vertex_03005700, 4, 0),
     gsSPBranchList(coin_seg3_dl_030077D0),
 };

@@ -33,7 +33,7 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 4496, 2500, -10469, wf_dl_HalfPillar_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(2, 4896, 581, -5545, wf_dl_Hallway_002_mesh_layer_2),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -5426, 603, -8207, wf_dl_Hallway_004_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(6, 973, 341, -9934, wf_dl_Hallway_005_mesh_layer_6),
+		GEO_TRANSLATE_NODE_WITH_DL(6, 1021, 333, -9999, wf_dl_Hallway_005_mesh_layer_6),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(1, wf_dl_Hallway_005_mesh_layer_1),
 			GEO_DISPLAY_LIST(2, wf_dl_Hallway_005_mesh_layer_2),
