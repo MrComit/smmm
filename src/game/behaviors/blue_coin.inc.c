@@ -35,7 +35,7 @@ void bhv_hidden_blue_coin_loop(void) {
                 cur_obj_disable_rendering();
             }
             if (gMarioState->floor->object == blueCoinSwitch) {
-                o->oOpacity = approach_s16_symmetric(o->oOpacity, 180, 25);
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 165, 25);
             } else {
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 40);
             }

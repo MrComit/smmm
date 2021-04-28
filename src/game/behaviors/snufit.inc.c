@@ -105,9 +105,9 @@ void snufit_act_shoot(void) {
     if ((u16) o->oSnufitBodyScalePeriod == 0x8000 && o->oSnufitBodyBaseScale == 167) {
         o->oAction = SNUFIT_ACT_IDLE;
     } else if (o->oSnufitBullets < 3 && o->oTimer >= 3) {
-        o->oSnufitBullets += 1;
+        o->oSnufitBullets += 3;
         cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
-        spawn_object_relative(0, 0, -20, 40, o, MODEL_BOWLING_BALL, bhvSnufitBalls);
+        spawn_object_relative(0, 0, -20, 40, o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
         o->oSnufitRecoil = -30;
         o->oTimer = 0;
     }

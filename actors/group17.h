@@ -71,7 +71,7 @@ extern const Gfx scuttlebug_seg6_dl_06014378[];
 extern const struct Animation *const scuttlebug_seg6_anims_06015064[];
 
 // snufit
-extern const GeoLayout snufit_geo[];
+/*extern const GeoLayout snufit_geo[];
 extern const Gfx snufit_seg6_dl_060091E0[];
 extern const Gfx snufit_seg6_dl_06009278[];
 extern const Gfx snufit_seg6_dl_060092F0[];
@@ -84,7 +84,7 @@ extern const Gfx snufit_seg6_dl_06009938[];
 extern const Gfx snufit_seg6_dl_060099D8[];
 extern const Gfx snufit_seg6_dl_06009A10[];
 extern const Gfx snufit_seg6_dl_06009B18[];
-extern const Gfx snufit_seg6_dl_06009B68[];
+extern const Gfx snufit_seg6_dl_06009B68[];*/
 
 // swoop
 /*extern const GeoLayout swoop_geo[];

@@ -125,6 +125,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BIG_KEY, key_big_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOO_COIN, boocoin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_ENV_FLAME, env_flame_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_GHOSTSAND_BALL, ghostsand_ball_geo),
 
     FREE_LEVEL_POOL(),
     CALL(/*arg*/ 0, /*func*/ lvl_init_from_save_file),
@@ -326,6 +327,7 @@ const LevelScript script_func_global_14[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WATER_MINE,              water_mine_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SEAWEED,                 seaweed_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SKEETER,                 skeeter_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_SNUFIT,                  snufit_geo),
     RETURN(),
 };
 
@@ -362,6 +364,6 @@ const LevelScript script_func_global_18[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MR_I_IRIS,               mr_i_iris_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MR_I,                    mr_i_geo),
     LOAD_MODEL_FROM_GEO(MODEL_DORRIE,                  dorrie_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_SNUFIT,                  snufit_geo),
+    //LOAD_MODEL_FROM_GEO(MODEL_SNUFIT,                  snufit_geo),
     RETURN(),
 };

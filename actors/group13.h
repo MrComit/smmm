@@ -100,4 +100,21 @@ extern const GeoLayout water_ring_geo[];
 extern const Gfx water_ring_seg6_dl_06013AC0[];
 extern const struct Animation *const water_ring_seg6_anims_06013F7C[];
 
+
+// snufit 
+extern const GeoLayout snufit_geo[];
+extern const Gfx snufit_seg6_dl_060091E0[];
+extern const Gfx snufit_seg6_dl_06009278[];
+extern const Gfx snufit_seg6_dl_060092F0[];
+extern const Gfx snufit_seg6_dl_06009498[];
+extern const Gfx snufit_seg6_dl_06009668[];
+extern const Gfx snufit_seg6_dl_06009700[];
+extern const Gfx snufit_seg6_dl_06009748[];
+extern const Gfx snufit_seg6_dl_060098A0[];
+extern const Gfx snufit_seg6_dl_06009938[];
+extern const Gfx snufit_seg6_dl_060099D8[];
+extern const Gfx snufit_seg6_dl_06009A10[];
+extern const Gfx snufit_seg6_dl_06009B18[];
+extern const Gfx snufit_seg6_dl_06009B68[];
+
 #endif

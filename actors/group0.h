@@ -399,4 +399,6 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 #include "boocoin/geo_header.h"
 
+#include "ghostsand_ball/geo_header.h"
+
 #endif

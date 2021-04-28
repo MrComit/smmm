@@ -5836,7 +5836,7 @@ const BehaviorScript bhvSnufitBalls[] = {
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 10, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_init_room),
     SET_FLOAT(oGraphYOffset, 10),
-    SCALE(/*Unused*/ 0, /*Field*/ 10),
+    SCALE(/*Unused*/ 0, /*Field*/ 40),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_snufit_balls_loop),
     END_LOOP(),

@@ -28,3 +28,4 @@
 #include "key_small/geo.inc.c"
 #include "key_big/geo.inc.c"
 #include "boocoin/geo.inc.c"
+#include "ghostsand_ball/geo.inc.c"
