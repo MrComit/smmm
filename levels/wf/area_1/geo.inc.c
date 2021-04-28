@@ -403,6 +403,7 @@ const GeoLayout wf_dl_13__Office_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 7138, 160, -2802, wf_dl_Office_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 19867, 498, -2913, wf_dl_Printer_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
