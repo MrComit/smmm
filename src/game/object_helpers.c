@@ -298,7 +298,7 @@ Gfx *geo_switch_level(s32 callContext, struct GraphNode *node) {
         switchCase = (struct GraphNodeSwitchCase *) node;
 
         // assign the case number for execution.
-        switchCase->selectedCase = gCurrLevelNum;
+        switchCase->selectedCase = gCurrCourseNum;
     }
 
     return NULL;

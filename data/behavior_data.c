@@ -879,10 +879,11 @@ const BehaviorScript bhvMrIBlueCoin[] = {
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_coin_init),
     SET_INT(oDamageOrCoinValue, 5),
+    SET_INT(oOpacity, 255),
     SET_HITBOX(/*Radius*/ 120, /*Height*/ 64),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_coin_loop),
-        ADD_INT(oAnimState, 1),
+        ADD_INT(oBehParams2ndByte, 1),
     END_LOOP(),
 };
 
@@ -3688,9 +3689,10 @@ const BehaviorScript bhvMovingBlueCoin[] = {
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_moving_blue_coin_init),
+    SET_INT(oOpacity, 255),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_moving_blue_coin_loop),
-        ADD_INT(oAnimState, 1),
+        ADD_INT(oBehParams2ndByte, 1),
     END_LOOP(),
 };
 
@@ -3701,9 +3703,10 @@ const BehaviorScript bhvBlueCoinSliding[] = {
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_blue_coin_sliding_jumping_init),
+    SET_INT(oOpacity, 255),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blue_coin_sliding_loop),
-        ADD_INT(oAnimState, 1),
+        ADD_INT(oBehParams2ndByte, 1),
     END_LOOP(),
 };
 
@@ -3714,9 +3717,10 @@ const BehaviorScript bhvBlueCoinJumping[] = {
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oAnimState, -1),
     CALL_NATIVE(bhv_blue_coin_sliding_jumping_init),
+    SET_INT(oOpacity, 255),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blue_coin_jumping_loop),
-        ADD_INT(oAnimState, 1),
+        ADD_INT(oBehParams2ndByte, 1),
     END_LOOP(),
 };
 
