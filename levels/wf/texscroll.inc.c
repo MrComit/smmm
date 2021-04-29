@@ -110,7 +110,7 @@ void scroll_wf_dl_Servant_s_Quarters_mesh_layer_1_vtx_3() {
 }
 void scroll_wf_dl_Office_mesh_layer_1_vtx_3() {
 	int i = 0;
-	int count = 13;
+	int count = 17;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 

@@ -29,13 +29,10 @@ void bhv_printer_paper_loop(void) {
     CL_Move();
     cur_obj_update_floor_and_walls();
     if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
-    || o->oInteractStatus & INT_STATUS_INTERACTED) {
+    || o->oInteractStatus & INT_STATUS_INTERACTED || o->oTimer > 90) {
         o->activeFlags = 0;
         spawn_mist_particles();
         create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
-    }
-    if (o->oTimer < 30) {
-        o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 100.0f, 5.0f, 5.0f);
     }
 }
 
@@ -51,7 +48,7 @@ void bhv_printer_loop(void) {
 
     if (o->oDistanceToMario < 2500.0f && o->oDistanceToMario > 400.0f) {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x60);
-        if (o->oTimer > 40) {
+        if (o->oTimer > 38) {
             obj = spawn_object(o, MODEL_PRINTER_PAPER, bhvPrinterPaper);
             obj->oMoveAngleYaw = (obj->oFaceAngleYaw = o->oMoveAngleYaw);
             obj->oPosY += 55.0f;
