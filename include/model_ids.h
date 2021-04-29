@@ -652,6 +652,8 @@
 #define MODEL_BEDROOM_GATE        0xED
 #define MODEL_BOUNCY_BED          0xEC
 #define MODEL_PRESSURE_PLATE      0xEB
+#define MODEL_PRINTER             0xEA
+#define MODEL_PRINTER_PAPER       0xE9
 
 
 

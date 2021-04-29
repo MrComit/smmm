@@ -732,6 +732,9 @@ void bhv_bouncy_bed_init(void);
 void bhv_bouncy_bed_loop(void);
 void bhv_pressure_plate_init(void);
 void bhv_pressure_plate_loop(void);
+void bhv_printer_loop(void);
+void bhv_printer_paper_loop(void);
+void bhv_printer_paper_init(void);
 
 
 

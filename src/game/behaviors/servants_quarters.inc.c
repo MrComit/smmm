@@ -1,6 +1,69 @@
 extern Vec3s gRoomColors[];
 
+static struct ObjectHitbox sPaperHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 70,
+    /* height:            */ 70,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
 s8 sServantsLights = 0;
+
+
+//void bhv_printer_init(void) {
+
+//}
+
+void bhv_printer_paper_init(void) {
+    o->oForwardVel = 60.0f;
+    obj_set_hitbox(o, &sPaperHitbox);
+}
+
+
+void bhv_printer_paper_loop(void) {
+    CL_Move();
+    cur_obj_update_floor_and_walls();
+    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
+    || o->oInteractStatus & INT_STATUS_INTERACTED) {
+        o->activeFlags = 0;
+        spawn_mist_particles();
+        create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+    }
+    if (o->oTimer < 30) {
+        o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1] + 100.0f, 5.0f, 5.0f);
+    }
+}
+
+void bhv_printer_loop(void) {
+    struct Object *obj;
+    if (cur_obj_is_mario_ground_pounding_platform()) {
+        o->oNumLootCoins = -1;
+        o->oHealth = 0;
+        obj_die_if_health_non_positive();
+        obj_explode_and_spawn_coins(46.0f, 1);
+        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+    }
+
+    if (o->oDistanceToMario < 1500.0f && o->oDistanceToMario > 300.0f) {
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x60);
+        if (o->oTimer > 75) {
+            obj = spawn_object(o, MODEL_PRINTER_PAPER, bhvPrinterPaper);
+            obj->oMoveAngleYaw = (obj->oFaceAngleYaw = o->oMoveAngleYaw);
+            obj->oPosY += 55.0f;
+            o->oTimer = 0;
+        }
+    }
+}
+
+
+
+
+
 
 void bhv_pressure_plate_init(void) {
    //o->os16F4 = 170;

@@ -109,3 +109,6 @@
 #include "levels/wf/bouncy_bed/collision.inc.c"
 #include "levels/wf/pressure_plate/model.inc.c"
 #include "levels/wf/pressure_plate/collision.inc.c"
+#include "levels/wf/printer/model.inc.c"
+#include "levels/wf/printer/collision.inc.c"
+#include "levels/wf/printer_paper/model.inc.c"

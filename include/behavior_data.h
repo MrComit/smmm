@@ -646,6 +646,8 @@ extern const BehaviorScript bhvBedroomTrigger[];
 extern const BehaviorScript bhvServantsFlame[];
 extern const BehaviorScript bhvBouncyBed[];
 extern const BehaviorScript bhvServantsPlate[];
+extern const BehaviorScript bhvPrinter[];
+extern const BehaviorScript bhvPrinterPaper[];
 
 
 

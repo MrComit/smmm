@@ -64,3 +64,5 @@
 #include "levels/wf/bedroom_gate/geo.inc.c"
 #include "levels/wf/bouncy_bed/geo.inc.c"
 #include "levels/wf/pressure_plate/geo.inc.c"
+#include "levels/wf/printer/geo.inc.c"
+#include "levels/wf/printer_paper/geo.inc.c"

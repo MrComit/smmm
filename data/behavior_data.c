@@ -7513,3 +7513,29 @@ const BehaviorScript bhvServantsPlate[] = {
         CALL_NATIVE(bhv_pressure_plate_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvPrinter[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(printer_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    //CALL_NATIVE(bhv_printer_init),
+    SET_INT(oNumLootCoins, -1),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_printer_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvPrinterPaper[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SCALE(0, 80),
+    CALL_NATIVE(bhv_printer_paper_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_printer_paper_loop),
+    END_LOOP(),
+};

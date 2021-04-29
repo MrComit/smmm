@@ -177,4 +177,10 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/pressure_plate/collision_header.h"
 
+#include "levels/wf/printer/geo_header.h"
+
+#include "levels/wf/printer/collision_header.h"
+
+#include "levels/wf/printer_paper/geo_header.h"
+
 #endif

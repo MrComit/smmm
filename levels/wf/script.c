@@ -56,6 +56,8 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BEDROOM_GATE, bedroom_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOUNCY_BED, bouncy_bed_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PRESSURE_PLATE, pressure_plate_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PRINTER, printer_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PRINTER_PAPER, printer_paper_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -229,6 +231,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_KOOPA, 17578, 470, -3943, 0, 0, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_KOOPA, 16620, 470, -4440, 0, 0, 0, 0x00010000, bhvKoopa),
 		OBJECT(MODEL_KOOPA, 16940, 470, -3541, 0, 0, 0, 0x00020000, bhvKoopa),
+		OBJECT(MODEL_PRINTER, 19570, 470, -2893, 0, -90, 0, 0x00000000, bhvPrinter),
 		OBJECT(MODEL_SNUFIT, 19199, 632, -1994, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_SNUFIT, 17283, 632, -2131, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_SNUFIT, 18656, 632, -3868, 0, 0, 0, 0x00000000, bhvSnufit),
