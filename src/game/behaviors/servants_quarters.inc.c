@@ -49,9 +49,9 @@ void bhv_printer_loop(void) {
         create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
     }
 
-    if (o->oDistanceToMario < 1500.0f && o->oDistanceToMario > 300.0f) {
+    if (o->oDistanceToMario < 2500.0f && o->oDistanceToMario > 400.0f) {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x60);
-        if (o->oTimer > 75) {
+        if (o->oTimer > 40) {
             obj = spawn_object(o, MODEL_PRINTER_PAPER, bhvPrinterPaper);
             obj->oMoveAngleYaw = (obj->oFaceAngleYaw = o->oMoveAngleYaw);
             obj->oPosY += 55.0f;
@@ -59,8 +59,6 @@ void bhv_printer_loop(void) {
         }
     }
 }
-
-
 
 
 
