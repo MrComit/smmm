@@ -416,9 +416,10 @@ const GeoLayout wf_dl_13__Office_geo[] = {
 const GeoLayout wf_dl_14__Master_Bedroom_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(2, -6172, 0, -5951, wf_dl_Carpet_mesh_layer_2),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -8976, 0, -6514, wf_dl_Bed_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(6, -6922, 0, -5451, wf_dl_Carpet_mesh_layer_6),
 		GEO_OPEN_NODE(),
-			GEO_DISPLAY_LIST(6, wf_dl_Carpet_mesh_layer_6),
+			GEO_DISPLAY_LIST(2, wf_dl_Carpet_mesh_layer_2),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -5772, 604, -6113, wf_dl_Master_Bedroom_mesh_layer_1),
 	GEO_CLOSE_NODE(),
