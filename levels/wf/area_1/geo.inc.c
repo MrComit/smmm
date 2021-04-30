@@ -417,6 +417,7 @@ const GeoLayout wf_dl_14__Master_Bedroom_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -8976, 0, -6514, wf_dl_Bed_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -7328, 304, -5521, wf_dl_Boss_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(6, -6922, 0, -5451, wf_dl_Carpet_mesh_layer_6),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(2, wf_dl_Carpet_mesh_layer_2),
