@@ -654,6 +654,7 @@
 #define MODEL_PRESSURE_PLATE      0xEB
 #define MODEL_PRINTER             0xEA
 #define MODEL_PRINTER_PAPER       0xE9
+#define MODEL_SHADOW_BOSS         0xE8
 
 
 

@@ -7539,3 +7539,14 @@ const BehaviorScript bhvPrinterPaper[] = {
         CALL_NATIVE(bhv_printer_paper_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvShadowBoss[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_shadow_boss_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shadow_boss_loop),
+    END_LOOP(),
+};

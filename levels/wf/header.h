@@ -183,4 +183,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/printer_paper/geo_header.h"
 
+#include "levels/wf/shadow_boss/geo_header.h"
+
 #endif

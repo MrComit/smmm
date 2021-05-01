@@ -58,6 +58,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PRESSURE_PLATE, pressure_plate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PRINTER, printer_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PRINTER_PAPER, printer_paper_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SHADOW_BOSS, shadow_boss_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -240,6 +241,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SNUFIT, 16455, 632, -3914, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_SNUFIT, 20071, 1092, -3659, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_TOKEN, 18790, 487, -1631, -90, 161, 0, 0x00001400, bhvToken),
+		OBJECT(MODEL_SHADOW_BOSS, -7328, 201, -5521, 0, 0, 0, 0x00000000, bhvShadowBoss),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),
 		MACRO_OBJECTS(wf_area_1_macro_objs),

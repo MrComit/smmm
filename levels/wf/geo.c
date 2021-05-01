@@ -66,3 +66,4 @@
 #include "levels/wf/pressure_plate/geo.inc.c"
 #include "levels/wf/printer/geo.inc.c"
 #include "levels/wf/printer_paper/geo.inc.c"
+#include "levels/wf/shadow_boss/geo.inc.c"
