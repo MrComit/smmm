@@ -7566,3 +7566,18 @@ const BehaviorScript bhvMastersPlate[] = {
         CALL_NATIVE(bhv_master_pressure_plate_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMastersFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 600),
+    SET_FLOAT(oGraphYOffset, 50),
+    CALL_NATIVE(bhv_masters_flame_init),
+    BEGIN_LOOP(),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_masters_flame_loop),
+    END_LOOP(),
+};

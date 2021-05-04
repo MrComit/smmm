@@ -739,6 +739,8 @@ void bhv_shadow_boss_init(void);
 void bhv_shadow_boss_loop(void);
 void bhv_master_pressure_plate_init(void);
 void bhv_master_pressure_plate_loop(void);
+void bhv_masters_flame_init(void);
+void bhv_masters_flame_loop(void);
 
 
 
