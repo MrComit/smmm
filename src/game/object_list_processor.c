@@ -329,7 +329,7 @@ s8 sLevelRoomOffsets[] = {0, 14, 28, };
 
 void mario_update_room_clear(struct MarioState *m) {
     u32 index = 0;
-    u32 room = gMarioCurrentRoom +  + sLevelRoomOffsets[gCurrLevelNum - 1];
+    u32 room = gMarioCurrentRoom +  + sLevelRoomOffsets[gCurrCourseNum - 1];
     while (room > 32) {
         room -= 32;
         index++;
@@ -340,7 +340,7 @@ void mario_update_room_clear(struct MarioState *m) {
     }
 
     if (!(count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, gMarioCurrentRoom))) {
-        save_file_set_rooms(gMarioCurrentRoom + sLevelRoomOffsets[gCurrLevelNum - 1]);
+        save_file_set_rooms(gMarioCurrentRoom + sLevelRoomOffsets[gCurrCourseNum - 1]);
     }
 
 }

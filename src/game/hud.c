@@ -502,8 +502,6 @@ void render_hud(void) {
     }
 }
 
-//char myString[] = "Mudroom";
-
 // ...
 void print_s2d_string(s16 x, s16 y, char *str) {
 	s2d_init();
@@ -537,7 +535,7 @@ void render_s2d_room_names(void) {
             y = 210 + ((gRoomEntryTimer - 70) * 4);
         }
 
-        print_s2d_string(40, y, roomNames[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrLevelNum - 1]]);
+        //print_s2d_string(40, y, roomNames[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]]);
         if (gRoomEntryTimer > 90) {
             gRoomEntryTimer = -1;
         }

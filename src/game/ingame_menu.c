@@ -2279,7 +2279,7 @@ void render_pause_my_score_coins(void) {
         print_generic_string(CRS_NUM_X1, 157, strCourseNum);
 #endif*/
 
-        actName = segmented_to_virtual(actNameTbl[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrLevelNum - 1]]);
+        actName = segmented_to_virtual(actNameTbl[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]]);
 
         /*if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
@@ -3076,7 +3076,7 @@ s16 render_menus_and_dialogs(void) {
     create_dl_ortho_matrix();
     //shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
     if (gMarioCurrentRoom != 0) {
-        if (save_file_get_rooms(gMarioCurrentRoom / 32) & (1 << ((gMarioCurrentRoom  + sLevelRoomOffsets[gCurrLevelNum - 1]) % 32))) {
+        if (save_file_get_rooms(gMarioCurrentRoom / 32) & (1 << ((gMarioCurrentRoom  + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
             gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);
         } else {
             gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x90, 0x10);

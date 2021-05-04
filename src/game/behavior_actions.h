@@ -737,6 +737,8 @@ void bhv_printer_paper_loop(void);
 void bhv_printer_paper_init(void);
 void bhv_shadow_boss_init(void);
 void bhv_shadow_boss_loop(void);
+void bhv_master_pressure_plate_init(void);
+void bhv_master_pressure_plate_loop(void);
 
 
 
