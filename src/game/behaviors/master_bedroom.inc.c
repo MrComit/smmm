@@ -40,10 +40,10 @@ void bhv_masters_flame_init(void) {
 
 void bhv_masters_flame_loop(void) {
     struct Object *obj = CL_nearest_object_with_behavior_and_field(bhvMastersPlate, 0x144, o->oBehParams2ndByte);
-    if (obj == NULL)
-        return;
     switch (o->oAction) {
         case 0:
+            if (obj == NULL)
+                return;
             if (obj->oAction == 1) {
                 o->oAction = 1;
             }
@@ -86,11 +86,18 @@ void bhv_master_pressure_plate_loop(void) {
             o->os16F6 = approach_s16_symmetric(o->os16F6, sMastersFlames[o->oBehParams2ndByte][1], 0x6);
             o->os16F8 = approach_s16_symmetric(o->os16F8, sMastersFlames[o->oBehParams2ndByte][2], 0x6);
             if (gMarioObject->platform != o) {
-                o->oAction = 0;
+                o->oAction = 2;
                 o->oBehParams2ndByte++;
                 if (o->oBehParams2ndByte > 5) {
                     o->oBehParams2ndByte = 5;
                 }
+            }
+            break;
+        case 2:
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 10, 0x10);
+            o->os16F6 = (o->os16F8 = o->os16F4);
+            if (o->oTimer > 180) {
+                o->oAction = 0;
             }
             break;
     }
@@ -126,7 +133,7 @@ void bhv_shadow_boss_loop(void) {
     switch (o->oAction) {
         case 0:
             if (gMarioState->input & INPUT_A_PRESSED) {
-                //o->oAction = 1;
+                o->oAction = 1;
                 o->oForwardVel = 8.0f;
                 break;
             }
