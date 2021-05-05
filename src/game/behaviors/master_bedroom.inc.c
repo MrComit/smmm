@@ -4,7 +4,7 @@ struct ObjectHitbox sShadowBossHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
-    /* health:            */ 0,
+    /* health:            */ 5,
     /* numLootCoins:      */ 2,
     /* radius:            */ 170,
     /* height:            */ 340,
@@ -70,11 +70,20 @@ void bhv_master_pressure_plate_loop(void) {
     s32 i;
     s32 k = o->oBehParams2ndByte;
     s16 r, g, b;
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             o->oPosY = approach_f32(o->oPosY, o->oHomeY, 2.5f, 2.5f);
             if (gMarioObject->platform == o) {
                 o->oAction = 1;
+                obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
+                if (obj != NULL) {
+                    obj->oAction = 3;
+                    obj->oHealth--;
+                    obj->oForwardVel = (obj->oVelY = 0);
+                    obj->oInteractType = INTERACT_BOUNCE_TOP;
+                    cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
+                }
             }
             o->os16F4 = approach_s16_symmetric(o->os16F4, 100, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
@@ -159,8 +168,46 @@ void bhv_shadow_boss_loop(void) {
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x100);
             if (o->oTimer > 60) {
                 cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
-                spawn_object_relative(0, 0, -80, 40, o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
+                spawn_object_relative(0, 0, 50, 40, o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
                 o->oTimer = 0;
+            }
+            break;
+        case 3:
+            if (o->oHealth) {
+                cur_obj_update_floor_and_walls();
+                cur_obj_move_standard(-78);
+                o->oFaceAnglePitch = approach_s16_asymptotic(o->oFaceAnglePitch, 0x4000, 10);
+                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 0.8f, 0.05f, 0.05f);
+                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 0.9f, 0.025f, 0.025f);
+                o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.9f, 0.025f, 0.025f);
+                o->oGraphYOffset = approach_f32(o->oGraphYOffset, 140.0f, 8.0f, 8.0f);
+                if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                    cur_obj_play_sound_2(SOUND_OBJ_DYING_ENEMY1);
+                    o->oAction = 4;
+                    o->oInteractType = INTERACT_DAMAGE;
+                }
+            } else {
+                cur_obj_play_sound_2(SOUND_OBJ_DYING_ENEMY1);
+                cur_obj_become_intangible();
+                o->oAction = 5;
+            }
+            break;
+        case 4:
+            if (o->oTimer > 10) {
+                o->oFaceAnglePitch = approach_s16_asymptotic(o->oFaceAnglePitch, 0x0000, 10);
+                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 1.0f, 0.05f, 0.05f);
+                o->header.gfx.scale[0] = (o->header.gfx.scale[1] = o->header.gfx.scale[2]);
+                o->oGraphYOffset = approach_f32(o->oGraphYOffset, 175.0f, 8.0f, 8.0f);
+            }
+            if (o->oTimer > 30) {
+                o->oAction = 2;
+            }
+            break;
+        case 5:
+            o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 0.1f, 0.05f, 0.05f);
+            o->header.gfx.scale[0] = (o->header.gfx.scale[1] = o->header.gfx.scale[2]);
+            if (o->header.gfx.scale[2] == 0.1f) {
+                o->activeFlags = 0;
             }
             break;
     }
