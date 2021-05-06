@@ -454,7 +454,7 @@ void bhv_bounce_box_loop(void) {
             break;
         case 1:
             if (approach_f32_ptr(&o->header.gfx.scale[1], 0.5f, 0.25f)) {
-                set_mario_action(m, ACT_CUTSCENE_JUMP, 1);
+                set_mario_action(m, ACT_CUTSCENE_JUMP, 2);
                 m->vel[1] = 200.0f;
                 m->faceAngle[1] = (m->angleVel[1] = o->oFaceAngleYaw + 0xC000);
                 mario_set_forward_vel(m, 15.0f);

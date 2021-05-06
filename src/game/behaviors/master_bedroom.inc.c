@@ -42,6 +42,9 @@ Vec3s sMastersFlamesInterpolate[6] = {
 };
 
 
+//Vec3f sBedroomCenter = {-6922.0f, 0.0f, 9450.0f};
+
+
 void bhv_light_bubble_init(void) {
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
     if (obj == NULL) {
@@ -52,7 +55,6 @@ void bhv_light_bubble_init(void) {
     obj_set_hitbox(o, &sLightBubbleHitbox);
     o->os16F4 = 0x40;
     o->os16F6 = (o->os16F8 = o->os16F4);
-    o->oOpacity = 0x40;
 }
 
 
@@ -74,7 +76,6 @@ void bhv_light_bubble_loop(void) {
         case 1:
             o->os16F4 = approach_s16_symmetric(o->os16F4, 0xFF, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xFF, 0x10);
             if (o->oInteractStatus) {
                 /*obj2 = */spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
                 //obj2->oPosY -= 50.0f;
@@ -257,6 +258,16 @@ void bhv_shadow_boss_loop(void) {
                     cur_obj_play_sound_2(SOUND_OBJ_DYING_ENEMY1);
                     o->oAction = 4;
                     o->oInteractType = INTERACT_DAMAGE;
+                    gMarioState->pos[0] = o->oPosX;
+                    gMarioState->pos[1] = o->oPosY + o->hitboxHeight;
+                    gMarioState->pos[2] = o->oPosZ;
+                    //vec3f_get_dist_and_angle(sBedroomCenter, gMarioState->pos, &dist, &pitch, &yaw);
+                    //gMarioState->faceAngle[1] = yaw;
+                    //gMarioState->faceAngle[1] = CL_object_to_point(gMarioObject, sBedroomCenter);
+                    gMarioState->faceAngle[1] = cur_obj_angle_to_home();
+                    gMarioState->vel[1] = 20.0f;
+                    mario_set_forward_vel(gMarioState, 50.0f);
+                    set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
                 }
             } else {
                 cur_obj_play_sound_2(SOUND_OBJ_DYING_ENEMY1);

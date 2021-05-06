@@ -2700,15 +2700,17 @@ static s32 act_cutscene_jump(struct MarioState *m) {
     set_mario_animation(m, MARIO_ANIM_SINGLE_JUMP);
     if (perform_air_step(m, 0) == AIR_STEP_LANDED) {
         set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
-        if (!m->actionArg)
+        if (!(m->actionArg & 1))
             mario_set_forward_vel(m, 0.0f);
         play_mario_landing_sound(m, SOUND_ACTION_TERRAIN_LANDING);
     }
-    camPos[0] = gLakituState.curPos[0];
-    camPos[1] = m->pos[1];
-    camPos[2] = gLakituState.curPos[2];
-    if (gCamera->cutscene == 0)
-        CL_set_camera_pos(camPos);
+    if (m->actionArg & 2) {
+        camPos[0] = gLakituState.curPos[0];
+        camPos[1] = m->pos[1];
+        camPos[2] = gLakituState.curPos[2];
+        if (gCamera->cutscene == 0)
+            CL_set_camera_pos(camPos);
+    }
     return FALSE;
 }
 
