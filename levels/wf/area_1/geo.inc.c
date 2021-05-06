@@ -422,7 +422,6 @@ const GeoLayout wf_dl_14__Master_Bedroom_geo[] = {
 			GEO_DISPLAY_LIST(1, wf_dl_AAA_005_mesh_layer_1),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -8981, 0, -6514, wf_dl_Bed_002_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, -6486, 0, -5386, wf_dl_Fist_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -5752, 456, -3965, wf_dl_Light_010_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -6337, 456, -3965, wf_dl_Light_011_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -6922, 456, -3965, wf_dl_Light_012_mesh),

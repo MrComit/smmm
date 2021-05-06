@@ -656,6 +656,8 @@
 #define MODEL_PRINTER_PAPER       0xE9
 #define MODEL_SHADOW_BOSS         0xE8
 #define MODEL_LIGHT_BUBBLE        0xE7
+#define MODEL_RISING_FIST         0xE6
+#define MODEL_FIST_INDICATOR      0xE5
 
 
 

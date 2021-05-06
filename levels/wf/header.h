@@ -187,4 +187,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/light_bubble/geo_header.h"
 
+#include "levels/wf/rising_fist/geo_header.h"
+
+#include "levels/wf/fist_indicator/geo_header.h"
+
 #endif

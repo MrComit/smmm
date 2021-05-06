@@ -7592,3 +7592,26 @@ const BehaviorScript bhvLightBubble[] = {
         CALL_NATIVE(bhv_light_bubble_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvRisingFist[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SET_FLOAT(oGraphYOffset, -450),
+    SPAWN_OBJ(MODEL_FIST_INDICATOR, bhvFistIndicator),
+    CALL_NATIVE(bhv_rising_fist_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rising_fist_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvFistIndicator[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    DROP_TO_FLOOR(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fist_indicator_loop),
+    END_LOOP(),
+};

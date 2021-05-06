@@ -1394,7 +1394,10 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
                 bounce_off_object(m, o, 30.0f);
             }
         }
-    } else if (!(o->oInteractionSubtype & INT_SUBTYPE_TWIRL_BOUNCE) && take_damage_and_knock_back(m, o)) {
+    } else if (!(obj_has_behavior(o, bhvShadowBoss)) && !(o->oInteractionSubtype & INT_SUBTYPE_TWIRL_BOUNCE) && take_damage_and_knock_back(m, o)) {
+        return TRUE;
+    } else if (obj_has_behavior(o, bhvShadowBoss)) {
+        push_mario_out_of_object(m, o, 5.0f);
         return TRUE;
     }
 

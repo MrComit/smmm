@@ -114,3 +114,5 @@
 #include "levels/wf/printer_paper/model.inc.c"
 #include "levels/wf/shadow_boss/model.inc.c"
 #include "levels/wf/light_bubble/model.inc.c"
+#include "levels/wf/rising_fist/model.inc.c"
+#include "levels/wf/fist_indicator/model.inc.c"

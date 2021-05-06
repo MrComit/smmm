@@ -68,3 +68,5 @@
 #include "levels/wf/printer_paper/geo.inc.c"
 #include "levels/wf/shadow_boss/geo.inc.c"
 #include "levels/wf/light_bubble/geo.inc.c"
+#include "levels/wf/rising_fist/geo.inc.c"
+#include "levels/wf/fist_indicator/geo.inc.c"

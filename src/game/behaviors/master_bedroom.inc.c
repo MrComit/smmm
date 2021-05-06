@@ -5,7 +5,7 @@ struct ObjectHitbox sShadowBossHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
     /* health:            */ 5,
-    /* numLootCoins:      */ 2,
+    /* numLootCoins:      */ 0,
     /* radius:            */ 170,
     /* height:            */ 340,
     /* hurtboxRadius:     */ 170,
@@ -22,6 +22,19 @@ struct ObjectHitbox sLightBubbleHitbox = {
     /* height: */ 84,
     /* hurtboxRadius: */ 0,
     /* hurtboxHeight: */ 0,
+};
+
+
+struct ObjectHitbox sFistHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 120,
+    /* height:            */ 400,
+    /* hurtboxRadius:     */ 120,
+    /* hurtboxHeight:     */ 400,
 };
 
 Vec3s sMastersFlames[5] = {
@@ -41,12 +54,56 @@ Vec3s sMastersFlamesInterpolate[6] = {
 {0x00, 0x33, 0x33},
 };
 
+
+s16 sBubbleCount[] = {5, 6, 8, 10, 127};
+
 static void const *sBubbleSpots[] = {
     wf_area_1_spline_Bubbles1, wf_area_1_spline_Bubbles2,
     wf_area_1_spline_Bubbles3, wf_area_1_spline_Bubbles4,
 };
 
-//Vec3f sBedroomCenter = {-6922.0f, 0.0f, 9450.0f};
+void bhv_fist_indicator_loop(void) {
+    if (gMarioState->input & INPUT_A_DOWN) {
+    o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 8);
+    }
+}
+
+
+
+void bhv_rising_fist_init(void) {
+    obj_set_hitbox(o, &sFistHitbox);
+    cur_obj_become_intangible();
+}
+
+
+
+void bhv_rising_fist_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->prevObj->oOpacity == 0xFF) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oGraphYOffset = approach_f32(o->oGraphYOffset, 0.0f, 90.0f, 90.0f);
+            if (o->oTimer > 3) {
+                cur_obj_become_tangible();
+                o->prevObj->activeFlags = 0;
+            }
+            if (o->oTimer > 18) {
+                o->oAction = 2;
+                cur_obj_become_intangible();
+            }
+            break;
+        case 2:
+            o->oGraphYOffset = approach_f32(o->oGraphYOffset, -500.0f, 50.0f, 50.0f);
+            if (o->oGraphYOffset == -500.0f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
 
 
 void bhv_light_bubble_init(void) {
@@ -188,10 +245,10 @@ void bhv_master_pressure_plate_loop(void) {
             }
             break;
         case 3:
-            o->os16F4 = 20 + (80/(6 - o->oFC));
+            o->os16F4 = 20 + (80/((sBubbleCount[o->oBehParams2ndByte-1]+1) - o->oFC));
             o->os16F6 = (o->os16F8 = o->os16F4);
-            o->oPosY = o->oHomeY - (2.0f*(5 - o->oFC));
-            if (o->oFC >= 5) {
+            o->oPosY = o->oHomeY - (2.0f*(sBubbleCount[o->oBehParams2ndByte-1] - o->oFC));
+            if (o->oFC >= sBubbleCount[o->oBehParams2ndByte-1]) {
                 o->oAction = 0;
                 o->oFC = 0;
                 vec3s_set(&o->os16F4, 160, 160, 160);
@@ -265,10 +322,10 @@ void bhv_shadow_boss_loop(void) {
                 cur_obj_update_floor_and_walls();
                 cur_obj_move_standard(-78);
                 o->oFaceAnglePitch = approach_s16_asymptotic(o->oFaceAnglePitch, 0x4000, 10);
-                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 0.8f, 0.05f, 0.05f);
-                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 0.9f, 0.025f, 0.025f);
-                o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.9f, 0.025f, 0.025f);
-                o->oGraphYOffset = approach_f32(o->oGraphYOffset, 140.0f, 8.0f, 8.0f);
+                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 0.6f, 0.1f, 0.1f);
+                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 0.8f, 0.05f, 0.05f);
+                o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.8f, 0.05f, 0.05f);
+                o->oGraphYOffset = approach_f32(o->oGraphYOffset, 60.0f, 8.0f, 8.0f);
                 if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                     cur_obj_play_sound_2(SOUND_OBJ_DYING_ENEMY1);
                     o->oAction = 4;
