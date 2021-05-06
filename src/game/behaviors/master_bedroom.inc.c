@@ -41,6 +41,10 @@ Vec3s sMastersFlamesInterpolate[6] = {
 {0x00, 0x33, 0x33},
 };
 
+static void const *sBubbleSpots[] = {
+    wf_area_1_spline_Bubbles1, wf_area_1_spline_Bubbles2,
+    wf_area_1_spline_Bubbles3, wf_area_1_spline_Bubbles4,
+};
 
 //Vec3f sBedroomCenter = {-6922.0f, 0.0f, 9450.0f};
 
@@ -116,6 +120,19 @@ void bhv_masters_flame_loop(void) {
 
 
 
+void spawn_light_bubbles(s16 index) {
+    struct Object *obj;
+    struct Waypoint *traj;
+    for (traj = segmented_to_virtual(sBubbleSpots[index]); traj->flags != -1; traj++) {
+        obj = spawn_object(o, MODEL_LIGHT_BUBBLE, bhvLightBubble);
+        obj->oPosX = traj->pos[0];
+        obj->oPosY = traj->pos[1];
+        obj->oPosZ = traj->pos[2];
+    }   
+
+}
+
+
 void bhv_master_pressure_plate_init(void) {
    //o->os16F4 = 170;
    //o->os16F6 = 170;
@@ -143,9 +160,7 @@ void bhv_master_pressure_plate_loop(void) {
                     cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
                 }
                 if (o->oBehParams2ndByte < 4) {
-                    for (i = 0; i < 5; i++) {
-                        spawn_object_relative(0, 400*(i+1), 100, 0, o, MODEL_LIGHT_BUBBLE, bhvLightBubble);
-                    }   
+                    spawn_light_bubbles(o->oBehParams2ndByte);
                 }
             }
             o->os16F4 = approach_s16_symmetric(o->os16F4, 160, 0x10);

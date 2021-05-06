@@ -428,7 +428,7 @@ const GeoLayout wf_dl_14__Master_Bedroom_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -6922, 456, -3965, wf_dl_Light_012_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -7507, 456, -3965, wf_dl_Light_013_mesh),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -8091, 456, -3965, wf_dl_Light_014_mesh),
-		GEO_TRANSLATE_NODE_WITH_DL(1, -5772, 604, -6113, wf_dl_Master_Bedroom_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -6922, 900, -5476, wf_dl_Master_Bedroom_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -454,12 +454,12 @@ const GeoLayout wf_area_1[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(2, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(5, wf_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(6, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(1, wf_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(4, wf_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(6, wf_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
