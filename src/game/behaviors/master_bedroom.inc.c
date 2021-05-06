@@ -141,8 +141,10 @@ void bhv_master_pressure_plate_loop(void) {
                     obj->oInteractType = INTERACT_BOUNCE_TOP;
                     cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
                 }
-                for (i = 0; i < 5; i++) {
-                    spawn_object_relative(0, 400*(i+1), 100, 0, o, MODEL_LIGHT_BUBBLE, bhvLightBubble);
+                if (o->oBehParams2ndByte < 4) {
+                    for (i = 0; i < 5; i++) {
+                        spawn_object_relative(0, 400*(i+1), 100, 0, o, MODEL_LIGHT_BUBBLE, bhvLightBubble);
+                    }   
                 }
             }
             o->os16F4 = approach_s16_symmetric(o->os16F4, 160, 0x10);
