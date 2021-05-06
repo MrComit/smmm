@@ -67,3 +67,4 @@
 #include "levels/wf/printer/geo.inc.c"
 #include "levels/wf/printer_paper/geo.inc.c"
 #include "levels/wf/shadow_boss/geo.inc.c"
+#include "levels/wf/light_bubble/geo.inc.c"

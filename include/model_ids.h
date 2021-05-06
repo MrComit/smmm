@@ -655,6 +655,7 @@
 #define MODEL_PRINTER             0xEA
 #define MODEL_PRINTER_PAPER       0xE9
 #define MODEL_SHADOW_BOSS         0xE8
+#define MODEL_LIGHT_BUBBLE        0xE7
 
 
 

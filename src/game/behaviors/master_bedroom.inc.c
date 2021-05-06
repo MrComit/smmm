@@ -12,6 +12,18 @@ struct ObjectHitbox sShadowBossHitbox = {
     /* hurtboxHeight:     */ 340,
 };
 
+struct ObjectHitbox sLightBubbleHitbox = {
+    /* interactType: */ INTERACT_COIN,
+    /* downOffset: */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health: */ 0,
+    /* numLootCoins: */ 0,
+    /* radius: */ 120,
+    /* height: */ 84,
+    /* hurtboxRadius: */ 0,
+    /* hurtboxHeight: */ 0,
+};
+
 Vec3s sMastersFlames[5] = {
 {0x00, 0x33, 0x05},
 {0x33, 0x00, 0x1F},
@@ -29,6 +41,51 @@ Vec3s sMastersFlamesInterpolate[6] = {
 {0x00, 0x33, 0x33},
 };
 
+
+void bhv_light_bubble_init(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    o->os16FA = obj->oHealth;
+    obj_set_hitbox(o, &sLightBubbleHitbox);
+    o->os16F4 = 0x40;
+    o->os16F6 = (o->os16F8 = o->os16F4);
+    o->oOpacity = 0x40;
+}
+
+
+void bhv_light_bubble_loop(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvMastersPlate);
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    switch (o->oAction) {
+        case 0:
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0x40, 0x10);
+            o->os16F6 = (o->os16F8 = o->os16F4);
+            obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
+            if (obj != NULL && obj->oAction == 4) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0xFF, 0x10);
+            o->os16F6 = (o->os16F8 = o->os16F4);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xFF, 0x10);
+            if (o->oInteractStatus) {
+                /*obj2 = */spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+                //obj2->oPosY -= 50.0f;
+                o->activeFlags = 0;
+                obj->oFC++;
+                //play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) obj->oF4 - 1) << 16), gGlobalSoundSource);
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
 
 
 void bhv_masters_flame_init(void) {
@@ -62,7 +119,7 @@ void bhv_master_pressure_plate_init(void) {
    //o->os16F4 = 170;
    //o->os16F6 = 170;
    //o->os16F8 = 170;
-   vec3s_set(&o->os16F4, 100, 100, 100);
+   vec3s_set(&o->os16F4, 160, 160, 160);
    o->os16FA = o->oRoom - 7;
 }
 
@@ -84,8 +141,11 @@ void bhv_master_pressure_plate_loop(void) {
                     obj->oInteractType = INTERACT_BOUNCE_TOP;
                     cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
                 }
+                for (i = 0; i < 5; i++) {
+                    spawn_object_relative(0, 400*(i+1), 100, 0, o, MODEL_LIGHT_BUBBLE, bhvLightBubble);
+                }
             }
-            o->os16F4 = approach_s16_symmetric(o->os16F4, 100, 0x10);
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 160, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
             break;
         case 1:
@@ -103,10 +163,20 @@ void bhv_master_pressure_plate_loop(void) {
             }
             break;
         case 2:
-            o->os16F4 = approach_s16_symmetric(o->os16F4, 10, 0x10);
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 20, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
-            if (o->oTimer > 180) {
+            if (o->oTimer > 10) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            o->os16F4 = 20 + (80/(6 - o->oFC));
+            o->os16F6 = (o->os16F8 = o->os16F4);
+            o->oPosY = o->oHomeY - (2.0f*(5 - o->oFC));
+            if (o->oFC >= 5) {
                 o->oAction = 0;
+                o->oFC = 0;
+                vec3s_set(&o->os16F4, 160, 160, 160);
             }
             break;
     }

@@ -7581,3 +7581,14 @@ const BehaviorScript bhvMastersFlame[] = {
         CALL_NATIVE(bhv_masters_flame_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvLightBubble[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    CALL_NATIVE(bhv_light_bubble_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_light_bubble_loop),
+    END_LOOP(),
+};

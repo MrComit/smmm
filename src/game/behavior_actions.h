@@ -741,6 +741,8 @@ void bhv_master_pressure_plate_init(void);
 void bhv_master_pressure_plate_loop(void);
 void bhv_masters_flame_init(void);
 void bhv_masters_flame_loop(void);
+void bhv_light_bubble_loop(void);
+void bhv_light_bubble_init(void);
 
 
 

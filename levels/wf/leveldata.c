@@ -113,3 +113,4 @@
 #include "levels/wf/printer/collision.inc.c"
 #include "levels/wf/printer_paper/model.inc.c"
 #include "levels/wf/shadow_boss/model.inc.c"
+#include "levels/wf/light_bubble/model.inc.c"

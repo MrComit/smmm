@@ -185,4 +185,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/shadow_boss/geo_header.h"
 
+#include "levels/wf/light_bubble/geo_header.h"
+
 #endif

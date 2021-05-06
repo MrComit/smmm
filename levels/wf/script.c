@@ -59,6 +59,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PRINTER, printer_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PRINTER_PAPER, printer_paper_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SHADOW_BOSS, shadow_boss_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LIGHT_BUBBLE, light_bubble_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),

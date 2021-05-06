@@ -651,6 +651,7 @@ extern const BehaviorScript bhvPrinterPaper[];
 extern const BehaviorScript bhvShadowBoss[];
 extern const BehaviorScript bhvMastersPlate[];
 extern const BehaviorScript bhvMastersFlame[];
+extern const BehaviorScript bhvLightBubble[];
 
 
 
