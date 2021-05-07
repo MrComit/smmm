@@ -7615,3 +7615,13 @@ const BehaviorScript bhvFistIndicator[] = {
         CALL_NATIVE(bhv_fist_indicator_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFistSpawner[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    DROP_TO_FLOOR(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fist_spawner_loop),
+    END_LOOP(),
+};

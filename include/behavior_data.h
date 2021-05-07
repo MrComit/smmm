@@ -654,7 +654,7 @@ extern const BehaviorScript bhvMastersFlame[];
 extern const BehaviorScript bhvLightBubble[];
 extern const BehaviorScript bhvRisingFist[];
 extern const BehaviorScript bhvFistIndicator[];
-
+extern const BehaviorScript bhvFistSpawner[];
 
 
 

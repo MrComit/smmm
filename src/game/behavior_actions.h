@@ -746,6 +746,7 @@ void bhv_light_bubble_init(void);
 void bhv_rising_fist_init(void);
 void bhv_rising_fist_loop(void);
 void bhv_fist_indicator_loop(void);
+void bhv_fist_spawner_loop(void);
 
 
 

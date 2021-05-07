@@ -62,10 +62,30 @@ static void const *sBubbleSpots[] = {
     wf_area_1_spline_Bubbles3, wf_area_1_spline_Bubbles4,
 };
 
-void bhv_fist_indicator_loop(void) {
-    if (gMarioState->input & INPUT_A_DOWN) {
-    o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 8);
+
+void bhv_fist_spawner_loop(void) {
+    Vec3f pos;
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 120) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oObjF4 = spawn_object(o, MODEL_RISING_FIST, bhvRisingFist);
+            pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 25.0f * gMarioState->forwardVel);
+            pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 25.0f * gMarioState->forwardVel);
+            pos[1] = 0;            
+            vec3f_copy(&o->oObjF4->oPosX, pos);
+            o->oAction = 0;
+            break;
     }
+}
+
+
+
+void bhv_fist_indicator_loop(void) {
+    o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 12);
 }
 
 
@@ -226,14 +246,15 @@ void bhv_master_pressure_plate_loop(void) {
         case 1:
             k = o->oBehParams2ndByte + 1;
             o->oPosY = approach_f32(o->oPosY, o->oHomeY - 10.0f, 2.5f, 2.5f);
-            o->os16F4 = approach_s16_symmetric(o->os16F4, sMastersFlames[o->oBehParams2ndByte][0], 0x6);
-            o->os16F6 = approach_s16_symmetric(o->os16F6, sMastersFlames[o->oBehParams2ndByte][1], 0x6);
-            o->os16F8 = approach_s16_symmetric(o->os16F8, sMastersFlames[o->oBehParams2ndByte][2], 0x6);
+            o->os16F4 = approach_s16_symmetric(o->os16F4, sMastersFlames[o->oBehParams2ndByte][0], 0x10);
+            o->os16F6 = approach_s16_symmetric(o->os16F6, sMastersFlames[o->oBehParams2ndByte][1], 0x10);
+            o->os16F8 = approach_s16_symmetric(o->os16F8, sMastersFlames[o->oBehParams2ndByte][2], 0x10);
             if (gMarioObject->platform != o) {
                 o->oAction = 2;
                 o->oBehParams2ndByte++;
-                if (o->oBehParams2ndByte > 5) {
-                    o->oBehParams2ndByte = 5;
+                if (o->oBehParams2ndByte == 5) {
+                    o->activeFlags = 0;
+                    return;
                 }
             }
             break;

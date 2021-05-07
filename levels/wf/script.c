@@ -61,7 +61,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SHADOW_BOSS, shadow_boss_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LIGHT_BUBBLE, light_bubble_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RISING_FIST, rising_fist_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_FIST_INDICATOR, fist_indicator_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_FIST_INDICATOR, fist_indicator_geo), 
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -250,7 +250,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_ENV_FLAME, -7506, 495, -3965, 0, 0, 0, 0x00030000, bhvMastersFlame),
 		OBJECT(MODEL_ENV_FLAME, -8091, 495, -3965, 0, 0, 0, 0x00040000, bhvMastersFlame),
 		OBJECT(MODEL_PRESSURE_PLATE, -8827, 0, -4840, 0, 0, 0, 0x00000000, bhvMastersPlate),
-		OBJECT(MODEL_RISING_FIST, -5879, 0, -5330, 0, 0, 0, 0x00000000, bhvRisingFist),
+		OBJECT(MODEL_NONE, -5879, 0, -5330, 0, 0, 0, 0x00000000, bhvFistSpawner),
 		OBJECT(MODEL_SHADOW_BOSS, -7328, 201, -5521, 0, 90, 0, 0x00000000, bhvShadowBoss),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),
