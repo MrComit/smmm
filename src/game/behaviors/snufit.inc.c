@@ -17,6 +17,18 @@ struct ObjectHitbox sSnufitHitbox = {
     /* hurtboxHeight:     */ 50,
 };
 
+struct ObjectHitbox sSnufitHitboxNoCoin = {
+    /* interactType:      */ INTERACT_HIT_FROM_BELOW,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 100,
+    /* height:            */ 60,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 50,
+};
+
 struct ObjectHitbox sSnufitBulletHitbox = {
     /* interactType:      */ INTERACT_SNUFIT_BULLET,
     /* downOffset:        */ 50,
@@ -170,7 +182,10 @@ void bhv_snufit_loop(void) {
         }
 
         cur_obj_scale(o->oSnufitScale);
-        obj_check_attacks(&sSnufitHitbox, o->oAction);
+        if (o->oBehParams2ndByte)
+            obj_check_attacks(&sSnufitHitboxNoCoin, o->oAction);
+        else
+            obj_check_attacks(&sSnufitHitbox, o->oAction);
     }
 }
 
