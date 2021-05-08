@@ -2,7 +2,7 @@
 
 #include "sm64.h"
 #include "area.h"
-#include "behavior_actions.h"
+#include "behaviors/behavior_actions.h"
 #include "behavior_data.h"
 #include "camera.h"
 #include "sm_debug.h"

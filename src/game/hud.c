@@ -535,7 +535,7 @@ void render_s2d_room_names(void) {
             y = 210 + ((gRoomEntryTimer - 70) * 4);
         }
 
-        //print_s2d_string(40, y, roomNames[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]]);
+        print_s2d_string(40, y, roomNames[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]]);
         if (gRoomEntryTimer > 90) {
             gRoomEntryTimer = -1;
         }

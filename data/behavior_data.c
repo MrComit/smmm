@@ -5,7 +5,7 @@
 #include "object_constants.h"
 #include "game/object_list_processor.h"
 #include "game/interaction.h"
-#include "game/behavior_actions.h"
+#include "behaviors/behavior_actions.h"
 #include "game/mario_actions_cutscene.h"
 #include "game/mario_misc.h"
 #include "game/object_helpers.h"

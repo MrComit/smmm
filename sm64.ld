@@ -273,16 +273,27 @@ SECTIONS
    BEGIN_SEG(engine, .)
    {
       BUILD_DIR/src/engine*.o(.text);
+
+      BUILD_DIR/src/behaviors*.o(.text);
       /* data */
       BUILD_DIR/src/engine*.o(.data*);
       BUILD_DIR/src/engine*.o(.sdata*);
+
+      BUILD_DIR/src/behaviors*.o(.data*);
+      BUILD_DIR/src/behaviors*.o(.sdata*);
+
       /* rodata */
       BUILD_DIR/src/engine*.o(.rodata*);
+
+      BUILD_DIR/src/behaviors*.o(.rodata*);
    }
    END_SEG(engine)
    BEGIN_NOLOAD(engine)
    {
       BUILD_DIR/src/engine*.o(.bss*);
+
+      BUILD_DIR/src/behaviors*.o(.bss*);
+      BUILD_DIR/src/behaviors*.o(.sbss*);
       . = ALIGN(0x100);
    }
    END_NOLOAD(engine)

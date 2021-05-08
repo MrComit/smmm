@@ -1,4 +1,8 @@
 // lll_volcano_flames.c.inc
+#include "game/object_list_processor.h"
+#define o gCurrentObject
+#include "include/object_constants.h"
+#include "include/object_fields.h"
 
 void bhv_volcano_flames_loop(void) {
     cur_obj_update_floor_height();

@@ -269,7 +269,7 @@ ACTOR_DIR      := actors
 LEVEL_DIRS     := $(patsubst levels/%,%,$(dir $(wildcard levels/*/header.h)))
 
 # Directories containing source files
-SRC_DIRS += src src/engine src/game src/audio src/menu src/buffers src/s2d_engine actors levels bin data assets asm lib sound
+SRC_DIRS += src src/engine src/game src/behaviors src/audio src/menu src/buffers src/s2d_engine actors levels bin data assets asm lib sound
 LIBZ_SRC_DIRS := src/libz
 BIN_DIRS := bin bin/$(VERSION)
 

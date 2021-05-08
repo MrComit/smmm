@@ -751,5 +751,5 @@ void bhv_fist_spawner_init(void);
 
 
 
-#include "!COMIT_LIBRARY.h"
+#include "game/!COMIT_LIBRARY.h"
 #endif // BEHAVIOR_ACTIONS_H

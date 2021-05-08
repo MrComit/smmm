@@ -22,7 +22,7 @@
 #include "object_helpers.h"
 #include "print.h"
 #include "spawn_sound.h"
-#include "behavior_actions.h"
+#include "behaviors/behavior_actions.h"
 #include "behavior_data.h"
 #include "object_list_processor.h"
 #include "paintings.h"
