@@ -481,6 +481,20 @@ static void boo_act_3(void) {
                 obj->oFaceAngleYaw = 0xE000;
                 obj->oFaceAngleRoll = obj->oFaceAnglePitch = 0;
                 break;
+            case 4: // THIS WILL BE KEY PART
+                obj = spawn_object(o, MODEL_BIG_KEY, bhvBigKey);
+                obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+                obj->oFaceAngleRoll = 0xF000;
+                obj->oFaceAngleYaw = 0;
+                obj->oPosX = o->oHomeX;
+                obj->oPosZ = o->oHomeZ;
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                if (o->oBehParams2ndByte == 1) {
+                    o->oAnimState = 0;
+                } else if (o->oBehParams2ndByte == 0xFF) {
+                    
+                }
+                break;
         }
     }
 }

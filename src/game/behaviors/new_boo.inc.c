@@ -134,7 +134,7 @@ void bhv_room_boo_loop(void) {
         bhv_boo_loop();
     }
 
-    if (o->oBehParams2ndByte != 0 && o->oBehParams2ndByte != 4)
+    if (o->oBehParams2ndByte != 0 && o->oBehParams2ndByte != 4 && o->oBehParams2ndByte != 0xA)
         room_boo_multiplier_loop();
 
 }

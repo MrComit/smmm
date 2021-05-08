@@ -54,8 +54,14 @@ Vec3s sMastersFlamesInterpolate[6] = {
 {0x00, 0x33, 0x33},
 };
 
+s16 sFistTimer[] = {120, 90};
 
-s16 sBubbleCount[] = {5, 6, 8, 10, 127};
+/*Vec3f sPlatePositions[] = {
+{-8464.0f, 0.0f, -2932.0f},
+{-7090.0f, 0.0f, -1690.0f},
+{-6590.0f, 0.0f, -4150.0f},
+{-5555.0f, 0.0f, -2432.0f},
+};*/
 
 static void const *sBubbleSpots[] = {
     wf_area_1_spline_Bubbles1, wf_area_1_spline_Bubbles2,
@@ -63,8 +69,8 @@ static void const *sBubbleSpots[] = {
 };
 
 static void const *sSnufitSpots[] = {
-    wf_area_1_spline_Bubbles1, NULL,
-    wf_area_1_spline_Bubbles3, wf_area_1_spline_Bubbles4,
+    wf_area_1_spline_Snufit1, NULL,
+    wf_area_1_spline_Snufit2, wf_area_1_spline_Snufit3,
 };
 
 void spawn_snufits(s16 index) {
@@ -90,22 +96,38 @@ void bhv_fist_spawner_init(void) {
 
 void bhv_fist_spawner_loop(void) {
     Vec3f pos;
+    s16 index, i;
+    struct Surface *floor;
     if (o->oObj104->oAction == 3) {
         o->oTimer = 0;
         return;
     }
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 120) {
+            if (o->oObj104->oHealth == 1)
+                index = 1;
+            else
+                index = 0;
+            if (o->oTimer > sFistTimer[index]) {
                 o->oAction = 1;
             }
             break;
         case 1:
             o->oObjF4 = spawn_object(o, MODEL_RISING_FIST, bhvRisingFist);
-            pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 25.0f * gMarioState->forwardVel);
-            pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 25.0f * gMarioState->forwardVel);
-            pos[1] = 0;            
+            pos[1] = 0;   
+            for (i=0;i<5;i++) {
+                pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 5.0f*(i+1) * gMarioState->forwardVel);
+                pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 5.0f*(i+1) * gMarioState->forwardVel);
+                find_floor(pos[0], pos[1], pos[2], &floor);
+                if (floor == NULL) {
+                    pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 5.0f*i * gMarioState->forwardVel);
+                    pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 5.0f*i * gMarioState->forwardVel);
+                    break;
+                }
+            }         
             vec3f_copy(&o->oObjF4->oPosX, pos);
+            o->oObjF4->oPosY += 1000.0f;
+            o->oObjF4->oPosY = find_floor_height(o->oObjF4->oPosX, o->oObjF4->oPosY, o->oObjF4->oPosZ);
             o->oObjF4->oFaceAngleYaw = CL_RandomMinMaxU16(0, 0xFFFF);
             o->oObjF4->oFaceAnglePitch = CL_RandomMinMaxU16(0, 0x1000);
             o->oAction = 0;
@@ -118,6 +140,9 @@ void bhv_fist_spawner_loop(void) {
 
 void bhv_fist_indicator_loop(void) {
     o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 12);
+    if (cur_obj_nearest_object_with_behavior(bhvShadowBoss) == NULL) {
+        o->activeFlags = 0;
+    }
 }
 
 
@@ -129,8 +154,20 @@ void bhv_rising_fist_init(void) {
 }
 
 
+f32 sFistSpeeds[] = {90.0f, 100.0f};
+
 
 void bhv_rising_fist_loop(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
+    s16 index;
+    if (obj == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    if (obj->oHealth == 1)
+        index = 1;
+    else
+        index = 0;
     switch (o->oAction) {
         case 0:
             if (o->prevObj->oOpacity == 0xFF) {
@@ -139,7 +176,7 @@ void bhv_rising_fist_loop(void) {
             }
             break;
         case 1:
-            o->oGraphYOffset = approach_f32(o->oGraphYOffset, 0.0f, 90.0f, 90.0f);
+            o->oGraphYOffset = approach_f32(o->oGraphYOffset, 0.0f, sFistSpeeds[index], sFistSpeeds[index]);
             if (o->oTimer > 3) {
                 cur_obj_become_tangible();
                 o->prevObj->activeFlags = 0;
@@ -297,13 +334,14 @@ void bhv_master_pressure_plate_loop(void) {
             o->os16F6 = (o->os16F8 = o->os16F4);
             if (o->oTimer > 10) {
                 o->oAction = 3;
+                o->o100 = count_objects_with_behavior(bhvLightBubble);
             }
             break;
         case 3:
-            o->os16F4 = 20 + (80/((sBubbleCount[o->oBehParams2ndByte-1]+1) - o->oFC));
+            o->os16F4 = 20 + (80/((o->o100+1) - o->oFC));
             o->os16F6 = (o->os16F8 = o->os16F4);
-            o->oPosY = o->oHomeY - (2.0f*(sBubbleCount[o->oBehParams2ndByte-1] - o->oFC));
-            if (o->oFC >= sBubbleCount[o->oBehParams2ndByte-1]) {
+            o->oPosY = o->oHomeY - (2.0f*(o->o100 - o->oFC));
+            if (o->oFC >= o->o100) {
                 o->oAction = 0;
                 o->oFC = 0;
                 vec3s_set(&o->os16F4, 160, 160, 160);
@@ -321,6 +359,8 @@ void bhv_master_pressure_plate_loop(void) {
     if (cur_obj_nearest_object_with_behavior(bhvShadowBoss) == NULL)
         o->activeFlags = 0;
 }
+
+f32 sShadowPhase2Speeds[] = {8.0f, 10.0f};
 
 
 void handle_shadow_boss_phases(s16 phase) {
@@ -345,6 +385,7 @@ void handle_shadow_boss_phases(s16 phase) {
             break;
         case 2:
         case 3:
+            o->oForwardVel = sShadowPhase2Speeds[phase - 2];
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(-78);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x100);
@@ -354,14 +395,14 @@ void handle_shadow_boss_phases(s16 phase) {
                 o->oTimer = 0;
             }
             o->oFC += 0x500;
-            o->oPosY = 20.0f + (sins(o->oFC) * 100.0f);
+            o->oPosY = 120.0f + (sins(o->oFC) * 100.0f);
             break;
         case 4:
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(-78);
             if (o->oMoveFlags & OBJ_MOVE_LANDED) {
-                o->oVelY = 30.0f;
-                o->oForwardVel = 10.0f;
+                o->oVelY = 38.0f;
+                o->oForwardVel = 12.0f;
                 cur_obj_play_sound_2(SOUND_GENERAL_BOING1);
                 cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
                 obj = spawn_object(o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
@@ -372,8 +413,8 @@ void handle_shadow_boss_phases(s16 phase) {
                 o->oMoveAngleYaw = o->oWallAngle;//cur_obj_angle_to_home();
             }
             o->oGraphYOffset = approach_f32(o->oGraphYOffset, 175.0f, 10.0f, 10.0f);
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x100);
-            o->oFaceAnglePitch += 0x600;
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1C0);
+            o->oFaceAnglePitch += 0x800;
             /*if (o->oTimer > 60) {
                 cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
                 spawn_object_relative(0, 0, 50, 40, o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
@@ -383,14 +424,55 @@ void handle_shadow_boss_phases(s16 phase) {
     }
 }
 
+u16 sShadowBossColors[] = {60, 100, 140, 180};
+
+
+void shadow_boss_multiplier_loop(void) {
+    s32 action = FALSE;
+    if (gMarioCurrentRoom == o->oRoom)
+        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
+    //print_text(168+30, 189, "+"); // 'Coin' glyph
+    //print_text(184+30, 189, "*"); // 'X' glyph
+    //print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins);
+
+    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat98);
+    print_text(184+30, 169+20, ".");
+    print_text_fmt_int(198+30, 169+20, "%d", o->o148);
+    print_text(212+30, 169+20, "*"); // 'X' glyph
+
+    if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
+        || gMarioState->action == ACT_BURNING_GROUND) {
+        if (o->oKleptoTimeUntilTargetChange == 0) {
+            action = TRUE;
+            o->oKleptoTimeUntilTargetChange = 1;
+        }
+    } else {
+        o->oKleptoTimeUntilTargetChange = 0;
+        action = FALSE;
+    }
+    if (((gMarioState->hurtCounter > 0 && o->o14A == 0) || action) && o->oFloat98 > 0) {
+        if (o->o148 == 0) {
+            o->oFloat98 -= 1.0f;
+            o->o148 = 5;
+        } else {
+            o->o148 = 0;
+        }
+        o->o14A = 1;
+    } else if (gMarioState->hurtCounter <= 0) {
+        o->o14A = 0;
+    }
+
+
+}
 
 void bhv_shadow_boss_init(void) {
     obj_set_hitbox(o, &sShadowBossHitbox);
-    o->os16F4 = 0xFF;
-    o->os16F6 = 0xFF;
-    o->os16F8 = 0xFF;
+    o->os16F4 = 20;
+    o->os16F6 = 20;
+    o->os16F8 = 20;
     //o->os16FA = o->oRoom - 7;
     o->oVelY = 30.0f;
+    o->oFloat98 = 5.0f;
     o->oObj100 = cur_obj_nearest_object_with_behavior(bhvMastersPlate);
     if (o->oObj100 == NULL)
         o->activeFlags = 0;
@@ -399,16 +481,13 @@ void bhv_shadow_boss_init(void) {
 
 
 void bhv_shadow_boss_loop(void) {
-    //o->oFC += 0x100;
-    //o->os16F4 = absi(sins(o->oFC) * 255);
-    //o->os16F8 = (o->os16F6 = o->os16F4);
-    //print_text_fmt_int(20, 20, "%d", gPrevFrameObjectCount);
+    struct Object *obj;
+    shadow_boss_multiplier_loop();
     switch (o->oAction) {
         case 0:
-            if (gMarioState->input & INPUT_A_PRESSED) {
+            if (gMarioState->pos[0] < -6000.0f && gMarioState->pos[2] > -6500.0f) {
                 o->oAction = 1;
                 o->oForwardVel = 8.0f;
-                break;
             }
             break;
         case 1:
@@ -418,6 +497,8 @@ void bhv_shadow_boss_loop(void) {
             break;
         case 3:
             if (o->oHealth) {
+                o->os16F4 = approach_s16_asymptotic(o->os16F4, sShadowBossColors[4 - o->oHealth], 0x10);
+                o->os16F8 = (o->os16F6 = o->os16F4);
                 cur_obj_update_floor_and_walls();
                 cur_obj_move_standard(-78);
                 o->oFaceAnglePitch = approach_s16_asymptotic(o->oFaceAnglePitch, 0x4000, 10);
@@ -439,6 +520,8 @@ void bhv_shadow_boss_loop(void) {
                     gMarioState->vel[1] = 20.0f;
                     mario_set_forward_vel(gMarioState, 50.0f);
                     set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                    o->header.gfx.scale[1] = (o->header.gfx.scale[0] = 0.9f);
+                    o->header.gfx.scale[2] = 0.45f;
                 }
             } else {
                 cur_obj_play_sound_2(SOUND_OBJ_DYING_ENEMY1);
@@ -449,8 +532,9 @@ void bhv_shadow_boss_loop(void) {
         case 4:
             if (o->oTimer > 10) {
                 o->oFaceAnglePitch = approach_s16_asymptotic(o->oFaceAnglePitch, 0x0000, 10);
-                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 1.0f, 0.05f, 0.05f);
-                o->header.gfx.scale[0] = (o->header.gfx.scale[1] = o->header.gfx.scale[2]);
+                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[1], 1.0f, 0.055f, 0.055f);
+                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 1.0f, 0.01f, 0.01f);
+                o->header.gfx.scale[1] = o->header.gfx.scale[0];
                 o->oGraphYOffset = approach_f32(o->oGraphYOffset, 175.0f, 8.0f, 8.0f);
             }
             if (o->oTimer > 30) {
@@ -462,13 +546,21 @@ void bhv_shadow_boss_loop(void) {
                     o->oObj104 = spawn_object(o, MODEL_NONE, bhvFistSpawner);
                     o->oObj104->oObj104 = o;
                 }
+                if (o->oHealth == 1) {
+                    o->oGravity = -2.0f;
+                }
             }
             break;
         case 5:
             o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 0.1f, 0.05f, 0.05f);
             o->header.gfx.scale[0] = (o->header.gfx.scale[1] = o->header.gfx.scale[2]);
             if (o->header.gfx.scale[2] == 0.1f) {
-                o->activeFlags = 0;
+                gMarioState->numCoins += 100 * (o->oFloat98 + ((f32)o->o148 / 10));
+                CL_explode_object(o, 1);
+                obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                obj->oBehParams2ndByte = 0xA;
+                obj->oBehParams = 0x020A0200;
             }
             break;
     }
