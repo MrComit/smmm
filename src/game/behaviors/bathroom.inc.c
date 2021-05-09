@@ -18,7 +18,7 @@ static struct ObjectHitbox sGushingWaterHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 80,
+    /* radius:            */ 30,
     /* height:            */ 800,
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
@@ -158,7 +158,7 @@ void pipeseg_free_loop(void) {
             }
             if (h) {
                 vec3f_copy(&o->oPosX, sPipeSlots[i]);
-                o->oFaceAngleYaw = sPipeRots[i];
+                o->oMoveAngleYaw = sPipeRots[i];
                 o->oAction = 1;
                 o->oObjF8 = spawn_object(o, MODEL_GUSHING_WATER, bhvGushingWater);
                 o->oObjF8->oBehParams2ndByte = i;

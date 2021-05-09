@@ -9,7 +9,7 @@ extern u8 l2_falling_floor_Glover_0B62F8CF_0_0_B70F30CC_ciByRGBA_lightblue_ci4[]
 extern u8 l2_falling_floor_Glover_0B62F8CF_0_0_B70F30CC_ciByRGBA_lightblue_ci4_pal_rgba16[];
 extern Vtx l2_falling_floor_ground_mesh_layer_1_vtx_0[32];
 extern Gfx l2_falling_floor_ground_mesh_layer_1_tri_0[];
-extern Vtx l2_falling_floor_top_mesh_layer_1_vtx_0[17];
+extern Vtx l2_falling_floor_top_mesh_layer_1_vtx_0[8];
 extern Gfx l2_falling_floor_top_mesh_layer_1_tri_0[];
 extern Gfx mat_l2_falling_floor_Ground_001[];
 extern Gfx mat_revert_l2_falling_floor_Ground_001[];

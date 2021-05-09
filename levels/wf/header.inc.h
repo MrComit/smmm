@@ -634,7 +634,7 @@ extern Vtx wf_dl_Bathroom_mesh_layer_1_vtx_3[72];
 extern Gfx wf_dl_Bathroom_mesh_layer_1_tri_3[];
 extern Vtx wf_dl_Bathroom_mesh_layer_1_vtx_4[8];
 extern Gfx wf_dl_Bathroom_mesh_layer_1_tri_4[];
-extern Vtx wf_dl_Bathroom_mesh_layer_1_vtx_5[18];
+extern Vtx wf_dl_Bathroom_mesh_layer_1_vtx_5[22];
 extern Gfx wf_dl_Bathroom_mesh_layer_1_tri_5[];
 extern Vtx wf_dl_Bathroom_mesh_layer_1_vtx_6[8];
 extern Gfx wf_dl_Bathroom_mesh_layer_1_tri_6[];
