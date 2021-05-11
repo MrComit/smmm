@@ -1190,7 +1190,7 @@ void fixed_cam_presets(struct Camera *c) {
             c->focus[1] = m->pos[1];
             break;
         case 3:
-            vec3f_set(c->pos, -7807.0f, 2800.0f, -16378.0f);
+            vec3f_set(c->pos, -7807.0f, 3300.0f, -16078.0f);
             vec3f_set(c->focus, -7807.0f, 0, -18814.0f);
             c->yaw = c->nextYaw = 0;
             break;

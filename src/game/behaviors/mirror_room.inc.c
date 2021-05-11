@@ -109,15 +109,25 @@ void bhv_mirror_switch_loop(void) {
             if (gPlayer1Controller->buttonDown & L_JPAD) {
                 o->os16F6 = approach_s16_symmetric(o->os16F6, 0xC0, 0x8);
                 o->os16F4 += o->os16F6;
+                o->os16102++;
+                if (o->os16102 > 30) {
+                    o->os16F6 = approach_s16_symmetric(o->os16F6, 0x200, 0x20);
+                }
             } else {
                 o->os16F6 = 0x80;
+                o->os16102 = 0;
             }
             
             if (gPlayer1Controller->buttonDown & R_JPAD) {
                 o->os16F8 = approach_s16_symmetric(o->os16F8, 0xC0, 0x8);
                 o->os16F4 -= o->os16F8;
+                o->os16104++;
+                if (o->os16104 > 30) {
+                    o->os16F8 = approach_s16_symmetric(o->os16F8, 0x200, 0x20);
+                }
             } else {
                 o->os16F8 = 0x80;
+                o->os16104 = 0;
             }
 
             if (gPlayer1Controller->buttonPressed & U_JPAD) {
