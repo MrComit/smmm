@@ -1,7 +1,7 @@
 void bhv_l2_fog_init(void) {
-    //if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOG_KILLED) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOG_KILLED) {
         o->activeFlags = 0;
-    //}
+    }
 }
 
 void bhv_l2_fog_loop(void) {
@@ -16,6 +16,7 @@ void bhv_l2_fog_loop(void) {
             if (o->oOpacity < 15) {
                 o->activeFlags = 0;
                 save_file_set_newflags(SAVE_NEW_FLAG_FOG_KILLED, 0);
+                o->oObj100 = spawn_object_relative(17, 0, -600, -800, o, MODEL_NONE, bhvCoinFormation);
             }
             break;
     }
@@ -60,6 +61,11 @@ void bhv_light_button_loop(void) {
             if (o->oF4 == 0) {
                 o->oF4 = 1;
                 play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                if (o->oBehParams2ndByte) {
+                    o->oObj100 = spawn_object(o, MODEL_STAR_PIECE, bhvStarPiece);
+                    o->oObj100->oBehParams = 0x09000000;
+                    vec3f_set(&o->oObj100->oPosX, -8823.0f, 493.5f, -17575.0f);
+                }
             }
             break;
     }
@@ -69,6 +75,10 @@ void bhv_light_button_loop(void) {
 
 
 void bhv_mirror_switch_init(void) {
+    f32 zpos = o->oPosZ + 20028.0f;
+    o->oObj100 = spawn_object(o, MODEL_MIRROR_SWITCH, bhvStaticObject);
+    o->oObj100->oPosZ = -20028.0f - zpos;   
+    o->oObj100->oBehParams2ndByte = o->oBehParams2ndByte;
     o->os16F6 = o->os16F8 = 0x100;
 }
 
@@ -97,17 +107,17 @@ void bhv_mirror_switch_loop(void) {
                 o->os16F4 -= 0x2000;
             }*/
             if (gPlayer1Controller->buttonDown & L_JPAD) {
-                o->os16F6 = approach_s16_symmetric(o->os16F6, 0x140, 0x8);
+                o->os16F6 = approach_s16_symmetric(o->os16F6, 0xC0, 0x8);
                 o->os16F4 += o->os16F6;
             } else {
-                o->os16F6 = 0x100;
+                o->os16F6 = 0x80;
             }
             
             if (gPlayer1Controller->buttonDown & R_JPAD) {
-                o->os16F8 = approach_s16_symmetric(o->os16F8, 0x140, 0x8);
+                o->os16F8 = approach_s16_symmetric(o->os16F8, 0xC0, 0x8);
                 o->os16F4 -= o->os16F8;
             } else {
-                o->os16F8 = 0x100;
+                o->os16F8 = 0x80;
             }
 
             if (gPlayer1Controller->buttonPressed & U_JPAD) {
@@ -127,13 +137,22 @@ void bhv_mirror_switch_loop(void) {
             }
             break;
     }
+    if (o->oObj100 != NULL) {
+        o->oObj100->header.gfx.scale[1] = o->header.gfx.scale[1];
+    }
 }
 
 
 
 void bhv_mirror_init(void) {
+    f32 zpos = o->oPosZ + 20028.0f;
     o->os16F6 = o->oFaceAngleYaw;
     o->oFloatF8 = 1.0f;
+    if (o->oRoom == 6) {
+        o->oObj100 = spawn_object(o, MODEL_MIRROR, bhvStaticObject);
+        o->oObj100->oPosZ = -20028.0f - zpos;   
+        o->oObj100->oBehParams2ndByte = o->oBehParams2ndByte;
+    }
 }
 
 
@@ -190,6 +209,11 @@ void bhv_mirror_loop(void) {
         load_object_collision_model();
     }
     //o->os16FC = 0;
+    if (o->oObj100 != NULL) {
+        obj_scale(o->oObj100, o->oFloatF8);
+        //o->oObj100->header.gfx.scale[2] = -o->oFloatF8;
+        o->oObj100->oFaceAngleYaw = -o->oFaceAngleYaw;
+    }
 }
 
 

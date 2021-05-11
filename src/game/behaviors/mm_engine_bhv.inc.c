@@ -273,7 +273,10 @@ void bhv_star_piece_init(void) {
 }
 
 void bhv_star_piece_loop(void) {
-    //o->oFaceAngleRoll += 0x400;
+    s8 pieceId = (o->oBehParams >> 24) & 0xFF;
+    if (save_file_get_star_piece() & (1 << pieceId)) {
+        o->activeFlags = 0;
+    }
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         o->activeFlags = 0;
