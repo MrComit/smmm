@@ -29423,6 +29423,75 @@ Gfx wf_dl_Plat_007_mesh_layer_1_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx wf_dl_Plat_008_mesh_layer_1_vtx_cull[8] = {
+	{{{-276, 0, -403},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-276, 0, 394},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-276, 450, 394},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-276, 450, -403},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{263, 0, -403},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{263, 0, 394},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{263, 450, 394},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{263, 450, -403},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx wf_dl_Plat_008_mesh_layer_1_vtx_0[10] = {
+	{{{-56, 450, -323},0, {-7991, -120},{0xF7, 0x7D, 0xEB, 0xFF}}},
+	{{{176, 430, -256},0, {-9981, -1747},{0x58, 0x42, 0xC1, 0xFF}}},
+	{{{-78, 430, -403},0, {-8134, 788},{0xDD, 0x40, 0x98, 0xFF}}},
+	{{{132, 450, -213},0, {-9322, -1972},{0x15, 0x7D, 0xF3, 0xFF}}},
+	{{{-218, 450, 75},0, {-4725, -3206},{0xE6, 0x7C, 0x0, 0xFF}}},
+	{{{-276, 430, 83},0, {-4094, -3015},{0x93, 0x42, 0x2, 0xFF}}},
+	{{{-113, 450, 315},0, {-4712, -5957},{0xF9, 0x7D, 0x15, 0xFF}}},
+	{{{-139, 430, 394},0, {-4094, -6629},{0xDD, 0x40, 0x68, 0xFF}}},
+	{{{204, 450, 142},0, {-8458, -5672},{0x17, 0x7D, 0x9, 0xFF}}},
+	{{{263, 430, 174},0, {-8916, -6273},{0x63, 0x41, 0x2E, 0xFF}}},
+};
+
+Gfx wf_dl_Plat_008_mesh_layer_1_tri_0[] = {
+	gsSPVertex(wf_dl_Plat_008_mesh_layer_1_vtx_0 + 0, 10, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(3, 0, 4, 0, 4, 0, 2, 0),
+	gsSP2Triangles(4, 2, 5, 0, 6, 4, 5, 0),
+	gsSP2Triangles(6, 5, 7, 0, 8, 6, 7, 0),
+	gsSP2Triangles(8, 7, 9, 0, 3, 8, 9, 0),
+	gsSP2Triangles(3, 9, 1, 0, 4, 8, 3, 0),
+	gsSP1Triangle(4, 6, 8, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx wf_dl_Plat_008_mesh_layer_1_vtx_1[20] = {
+	{{{263, 0, 174},0, {959, -1369},{0x7D, 0x0, 0xE7, 0xFF}}},
+	{{{176, 0, -256},0, {959, -2657},{0x7D, 0x0, 0xE7, 0xFF}}},
+	{{{176, 430, -256},0, {-16, -2657},{0x7D, 0x0, 0xE7, 0xFF}}},
+	{{{263, 430, 174},0, {-16, -1369},{0x7D, 0x0, 0xE7, 0xFF}}},
+	{{{-276, 0, 83},0, {959, 1008},{0x8C, 0x0, 0x33, 0xFF}}},
+	{{{-139, 0, 394},0, {959, -16},{0x8C, 0x0, 0x33, 0xFF}}},
+	{{{-139, 430, 394},0, {-16, -16},{0x8C, 0x0, 0x33, 0xFF}}},
+	{{{-276, 430, 83},0, {-16, 1008},{0x8C, 0x0, 0x33, 0xFF}}},
+	{{{176, 0, -256},0, {959, 2625},{0x40, 0x0, 0x92, 0xFF}}},
+	{{{-78, 0, -403},0, {959, 2014},{0x40, 0x0, 0x92, 0xFF}}},
+	{{{-78, 430, -403},0, {-16, 2014},{0x40, 0x0, 0x92, 0xFF}}},
+	{{{176, 430, -256},0, {-16, 2625},{0x40, 0x0, 0x92, 0xFF}}},
+	{{{-139, 0, 394},0, {959, -16},{0x3D, 0x0, 0x70, 0xFF}}},
+	{{{263, 0, 174},0, {959, -1369},{0x3D, 0x0, 0x70, 0xFF}}},
+	{{{263, 430, 174},0, {-16, -1369},{0x3D, 0x0, 0x70, 0xFF}}},
+	{{{-139, 430, 394},0, {-16, -16},{0x3D, 0x0, 0x70, 0xFF}}},
+	{{{-78, 0, -403},0, {959, 2014},{0x8A, 0x0, 0xD0, 0xFF}}},
+	{{{-276, 0, 83},0, {959, 1008},{0x8A, 0x0, 0xD0, 0xFF}}},
+	{{{-276, 430, 83},0, {-16, 1008},{0x8A, 0x0, 0xD0, 0xFF}}},
+	{{{-78, 430, -403},0, {-16, 2014},{0x8A, 0x0, 0xD0, 0xFF}}},
+};
+
+Gfx wf_dl_Plat_008_mesh_layer_1_tri_1[] = {
+	gsSPVertex(wf_dl_Plat_008_mesh_layer_1_vtx_1 + 0, 20, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx wf_dl_Shelf_mesh_layer_1_vtx_cull[8] = {
 	{{{-200, -20, -459},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-200, -20, 459},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -54969,6 +55038,19 @@ Gfx wf_dl_Plat_007_mesh_layer_1[] = {
 	gsSPDisplayList(wf_dl_Plat_007_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_wf_dl_Ground),
 	gsSPDisplayList(wf_dl_Plat_007_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_wf_dl_Ground),
+	gsSPEndDisplayList(),
+};
+
+Gfx wf_dl_Plat_008_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(wf_dl_Plat_008_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_wf_dl_BarFloor),
+	gsSPDisplayList(wf_dl_Plat_008_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_wf_dl_Ground),
+	gsSPDisplayList(wf_dl_Plat_008_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_wf_dl_Ground),
 	gsSPEndDisplayList(),
 };

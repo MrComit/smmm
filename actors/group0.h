@@ -401,4 +401,6 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 #include "ghostsand_ball/geo_header.h"
 
+#include "teleporter/geo_header.h"
+
 #endif

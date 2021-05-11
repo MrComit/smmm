@@ -49,3 +49,4 @@
 //#include "src/s2d_engine/sprites/starpiece/starpiece.c"
 #include "boocoin/model.inc.c"
 #include "ghostsand_ball/model.inc.c"
+#include "teleporter/model.inc.c"

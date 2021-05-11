@@ -1,0 +1,10 @@
+extern const GeoLayout teleporter_geo[];
+extern Lights1 teleporter_Spinning_001_lights;
+extern u8 teleporter_rgba32_neonrainbow_rgba32[];
+extern Vtx teleporter_Spinning_mesh_layer_5_vtx_cull[8];
+extern Vtx teleporter_Spinning_mesh_layer_5_vtx_0[18];
+extern Gfx teleporter_Spinning_mesh_layer_5_tri_0[];
+extern Gfx mat_teleporter_Spinning_001[];
+extern Gfx mat_revert_teleporter_Spinning_001[];
+extern Gfx teleporter_Spinning_mesh_layer_5[];
+extern Gfx teleporter_material_revert_render_settings[];

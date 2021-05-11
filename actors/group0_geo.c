@@ -29,3 +29,4 @@
 #include "key_big/geo.inc.c"
 #include "boocoin/geo.inc.c"
 #include "ghostsand_ball/geo.inc.c"
+#include "teleporter/geo.inc.c"

@@ -77,8 +77,9 @@ void bhv_light_button_loop(void) {
 void bhv_mirror_switch_init(void) {
     f32 zpos = o->oPosZ + 20028.0f;
     o->oObj100 = spawn_object(o, MODEL_MIRROR_SWITCH, bhvStaticObject);
-    o->oObj100->oPosZ = -20028.0f - zpos;   
+    o->oObj100->oPosZ = -20028.0f - zpos;
     o->oObj100->oBehParams2ndByte = o->oBehParams2ndByte;
+    o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     o->os16F6 = o->os16F8 = 0x100;
 }
 
@@ -162,6 +163,7 @@ void bhv_mirror_init(void) {
         o->oObj100 = spawn_object(o, MODEL_MIRROR, bhvStaticObject);
         o->oObj100->oPosZ = -20028.0f - zpos;   
         o->oObj100->oBehParams2ndByte = o->oBehParams2ndByte;
+        o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     }
 }
 
