@@ -748,6 +748,8 @@ void bhv_rising_fist_loop(void);
 void bhv_fist_indicator_loop(void);
 void bhv_fist_spawner_loop(void);
 void bhv_fist_spawner_init(void);
+void bhv_bedroom_object_init(void);
+void bhv_bedroom_object_loop(void);
 
 
 

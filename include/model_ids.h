@@ -659,6 +659,7 @@
 #define MODEL_LIGHT_BUBBLE        0xE7
 #define MODEL_RISING_FIST         0xE6
 #define MODEL_FIST_INDICATOR      0xE5
+#define MODEL_BEDROOM_OBJECT      0xE4
 
 
 

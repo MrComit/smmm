@@ -191,4 +191,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/fist_indicator/geo_header.h"
 
+#include "levels/wf/bedroom_object/geo_header.h"
+
+#include "levels/wf/bedroom_object/collision_header.h"
+
 #endif

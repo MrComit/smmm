@@ -7,12 +7,42 @@ Vec3f sBedroomFlamePos[4] = {
 
 u32 sBedroomFlameCol[4] = {0x00802000, 0x96008F00, 0x58009600, 0x96690000};
 
+static void const *sBedroomObjectCol[] = {
+    bedroom_object_collision1, bedroom_object_collision2,
+    bedroom_object_collision2, bedroom_object_collision3,
+};
+
+
 void bhv_bedroom_trigger_loop(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject) == 1) {
         play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
         o->activeFlags = 0;
     }
 }
+
+void bhv_bedroom_object_init(void) {
+    o->collisionData = segmented_to_virtual(sBedroomObjectCol[o->oBehParams2ndByte]);
+}
+
+
+void bhv_bedroom_object_loop(void) {
+    if (gMarioCurrentRoom != o->oRoom) {
+        return;
+    }
+    switch (o->oAction) {
+        case 0:
+            if (CL_obj_find_nearest_object_with_behavior_room(o, bhvShyguyFlame, o->oRoom) == NULL) {
+                o->oAction = 1;
+            }
+            load_object_collision_model();
+            break;
+        case 1:
+            bhv_bedroom_trigger_loop();
+            break;
+
+    }
+}
+
 
 
 void bhv_l2_bedroom_gate_loop(void) {
@@ -26,7 +56,7 @@ void bhv_l2_bedroom_gate_loop(void) {
         case 1:
             //o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
             if (o->oBehParams2ndByte != 3) {
-                obj = CL_obj_nearest_object_behavior_params(bhvBedroomTrigger, o->oBehParams2ndByte << 16);
+                obj = CL_obj_nearest_object_behavior_params(bhvBedroomObject, o->oBehParams2ndByte << 16);
                 if (obj == NULL) {
                     o->oAction = 2;
                 }

@@ -116,3 +116,5 @@
 #include "levels/wf/light_bubble/model.inc.c"
 #include "levels/wf/rising_fist/model.inc.c"
 #include "levels/wf/fist_indicator/model.inc.c"
+#include "levels/wf/bedroom_object/model.inc.c"
+#include "levels/wf/bedroom_object/collision.inc.c"
