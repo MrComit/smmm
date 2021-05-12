@@ -73,17 +73,36 @@ static void const *sSnufitSpots[] = {
     wf_area_1_spline_Snufit2, wf_area_1_spline_Snufit3,
 };
 
+u8 sCoinBits[4][8] = {
+{0, 0, 0, 1, 0, 0, 0, 0,},
+{0, 0, 0, 1, 0, 0, 0, 0,},
+{0, 0, 0, 1, 0, 0, 0, 0,},
+{1, 0, 0, 1, 0, 0, 0, 0,},
+};
+
+s8 sCoinBitLen[4] = {4, 4, 5, 7};
+
 void spawn_snufits(s16 index) {
+    s32 i;
     struct Object *obj;
     struct Waypoint *traj;
     if (sSnufitSpots[index] == NULL)
         return;
-    for (traj = segmented_to_virtual(sSnufitSpots[index]); traj->flags != -1; traj++) {
-        obj = spawn_object(o, MODEL_SNUFIT, bhvSnufit);
-        obj->oBehParams2ndByte = 1;
-        obj->oPosX = traj->pos[0];
-        obj->oPosY = traj->pos[1];
-        obj->oPosZ = traj->pos[2];
+    CL_scramble_array(&sCoinBits[index], sCoinBitLen[index]);
+    for (i = 0, traj = segmented_to_virtual(sSnufitSpots[index]); traj->flags != -1; traj++, i++) {
+        if  (sCoinBits[index][i] == 1) {
+            obj = spawn_object(o, MODEL_YELLOW_COIN, bhvYellowCoin);
+            //obj->oBehParams2ndByte = 1;
+            obj->oPosX = traj->pos[0];
+            obj->oPosY = traj->pos[1];
+            obj->oPosZ = traj->pos[2];
+        } else {
+            obj = spawn_object(o, MODEL_SNUFIT, bhvSnufit);
+            obj->oBehParams2ndByte = 1;
+            obj->oPosX = traj->pos[0];
+            obj->oPosY = traj->pos[1];
+            obj->oPosZ = traj->pos[2];
+        }
         //spawn_mist_particles();
     }   
 }

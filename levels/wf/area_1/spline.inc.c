@@ -40,16 +40,18 @@ const Trajectory wf_area_1_spline_Bubbles4[] = {
 	TRAJECTORY_END(),
 };
 const Trajectory wf_area_1_spline_Snufit1[] = {
-	TRAJECTORY_POS( 0, -6902, 55, -6039),
-	TRAJECTORY_POS( 1, -5200, 55, -4157),
-	TRAJECTORY_POS( 2, -5334, 55, -3554),
+	TRAJECTORY_POS( 0, -7251, 55, -5634),
+	TRAJECTORY_POS( 1, -6902, 55, -6039),
+	TRAJECTORY_POS( 2, -5200, 55, -4157),
+	TRAJECTORY_POS( 3, -5334, 55, -3554),
 	TRAJECTORY_END(),
 };
 const Trajectory wf_area_1_spline_Snufit2[] = {
-	TRAJECTORY_POS( 0, -6947, 55, -6381),
-	TRAJECTORY_POS( 1, -8496, 55, -5189),
-	TRAJECTORY_POS( 2, -5244, 55, -4758),
-	TRAJECTORY_POS( 3, -5325, 55, -4430),
+	TRAJECTORY_POS( 0, -6360, -68, -6290),
+	TRAJECTORY_POS( 1, -6947, 55, -6381),
+	TRAJECTORY_POS( 2, -8496, 55, -5189),
+	TRAJECTORY_POS( 3, -5244, 55, -4758),
+	TRAJECTORY_POS( 4, -5325, 55, -4430),
 	TRAJECTORY_END(),
 };
 const Trajectory wf_area_1_spline_Snufit3[] = {
@@ -59,5 +61,6 @@ const Trajectory wf_area_1_spline_Snufit3[] = {
 	TRAJECTORY_POS( 3, -7471, 55, -3851),
 	TRAJECTORY_POS( 4, -4895, 55, -5843),
 	TRAJECTORY_POS( 5, -5414, 55, -5979),
+	TRAJECTORY_POS( 6, -8557, 55, -3645),
 	TRAJECTORY_END(),
 };
