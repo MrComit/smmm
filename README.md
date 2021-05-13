@@ -6,10 +6,18 @@
 - Shindou Rumble Pak code is on for all regions.
 - Targeting the iQue Player is supported.
 - Saving to 32kbyte/256kbit SRAM is supported.
-- Using gzip DEFLATE compression is supported.
+- Newer compression options are supported.
+- UNFLoader (flashcart USB library) is supported, allowing for debugging on EverDrive/64Drive.
 - It has been patched with someone2639's shiftable segments patch
-- Getting HVQM FMV support to work with the game is in progress.
-- Getting UNFLoader (flashcart USB library) to work with the game is in progress.
+- Getting HVQM FMV support to work with the game is WIP.
+
+## UNFLoader support
+
+The repository supports UNFLoader for debugging.
+
+To build with UNF, run make with ``UNF=1``.
+
+Further instructions can be found at the [official repository](https://github.com/buu342/N64-UNFLoader)
 
 ## Multi-Save support
 
@@ -47,6 +55,12 @@ Both methods are fast. Method 1 has better compression than 2, so I suggest usin
 
 To switch to RNC, run make with either ``COMPRESS=rnc1`` or ``COMPRESS=rnc2``, depending on preferred method.
 
+The repo also supports building a ROM with no compression.
+
+This is not recommended as it increases ROM size significantly, with little point other than load times decreased to almost nothing.
+
+To switch to no compression, run make with the ``COMPRESS=uncomp`` argument.
+
 
 ## FAQ
 
@@ -65,6 +79,5 @@ Q: Will this allow me to use FlashRAM/Transfer Pak/microcode swapping/Other Cool
 A: Theoretically, all yes.
 
 ## Installation help
-
 
 Go read the original repo README.md
