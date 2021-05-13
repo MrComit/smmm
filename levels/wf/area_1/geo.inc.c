@@ -418,7 +418,12 @@ const GeoLayout wf_dl_13__Office_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 16664, 738, -942, wf_dl_Dresser_006_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 16885, 560, -1754, wf_dl_Dresser_007_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 18469, 769, -3417, wf_dl_Office_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 20606, 1087, -2965, wf_dl_Paper_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 19979, 200, -4267, wf_dl_Paper_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 16106, 948, -2965, wf_dl_Paper_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 16975, 669, -2972, wf_dl_Phone_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 18538, 713, -5023, wf_dl_Simple_Table_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 16926, 677, -2724, wf_dl_Stapler_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
