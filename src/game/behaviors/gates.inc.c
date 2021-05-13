@@ -1,3 +1,4 @@
+extern s8 sLevelRoomOffsets[];
 struct ObjectHitbox sLeverHitbox = {
     /* interactType: */ INTERACT_BREAKABLE,
     /* downOffset: */ 0,
@@ -43,7 +44,7 @@ void bhv_l1_room_gate_loop(void) {
             break;
         case 1:
             o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
-            if (save_file_get_rooms(o->oRoom / 32) & (1 << (o->oRoom % 32))) {
+            if (save_file_get_rooms(o->oRoom / 32) & (1 << ((o->oRoom  + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
                 o->oAction = 2;
             }
             break;

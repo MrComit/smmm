@@ -7653,3 +7653,17 @@ const BehaviorScript bhvBrokenKey[] = {
         CALL_NATIVE(bhv_broken_key_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvL2RoomGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(bedroom_gate_alt_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    ADD_FLOAT(oPosY, 300),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l1_room_gate_loop),
+    END_LOOP(),
+    BREAK(),
+};

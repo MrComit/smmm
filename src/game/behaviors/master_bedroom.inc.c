@@ -579,7 +579,7 @@ void bhv_shadow_boss_loop(void) {
                 obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                 obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 obj->oBehParams2ndByte = 0xA;
-                obj->oBehParams = 0x020A0200;
+                obj->oBehParams = 0x040A0700;
             }
             break;
     }

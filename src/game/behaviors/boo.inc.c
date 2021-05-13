@@ -482,7 +482,7 @@ static void boo_act_3(void) {
                 obj->oFaceAngleRoll = obj->oFaceAnglePitch = 0;
                 break;
             case 4: // THIS WILL BE KEY PART
-                obj = spawn_object(o, MODEL_BIG_KEY, bhvBigKey);
+                obj = spawn_object(o, MODEL_BROKEN_KEY, bhvBrokenKey);
                 obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
                 obj->oFaceAngleRoll = 0xF000;
                 obj->oFaceAngleYaw = 0;
