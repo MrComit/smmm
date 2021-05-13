@@ -590,22 +590,31 @@ s32 act_debug_free_move(struct MarioState *m) {
 }
 
 void general_star_dance_handler(struct MarioState *m, s32 isKey) {
+    struct Object *obj;
     s32 dialogID;
+    s32 animState = (isKey >> 16) & 0xFF;
+    isKey = isKey & 0xFF;
     if (m->actionState == 0) {
         switch (++m->actionTimer) {
             case 1:
-                if (isKey) {
-                    if (isKey == 1) {
+                switch (isKey) {
+                    case 0:
+                        spawn_object(m->marioObj, MODEL_STAR_PIECE, bhvCelebrationStar);
+                        break;
+                    case 1:
                         spawn_object(m->marioObj, MODEL_SMALL_KEY, bhvCelebrationKey);
-                    } else {
-                        spawn_object(m->marioObj, MODEL_BIG_KEY, bhvCelebrationKey);
-                    }
-                } else {
-                    spawn_object(m->marioObj, MODEL_STAR_PIECE, bhvCelebrationStar);
+                        break;
+                    case 2:
+                        obj = spawn_object(m->marioObj, MODEL_BIG_KEY, bhvCelebrationKey);
+                        obj->oAnimState = animState;
+                        play_course_clear_big();
+                        break;
+                    case 3:
+                        obj = spawn_object(m->marioObj, MODEL_BROKEN_KEY, bhvCelebrationKey);
+                        obj->oAnimState = animState;
+                        break;
                 }
                 disable_background_sound();
-                if (isKey == 2)
-                    play_course_clear_big();
                 break;
 
             case 42:

@@ -7640,3 +7640,16 @@ const BehaviorScript bhvBedroomObject[] = {
         CALL_NATIVE(bhv_bedroom_object_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBrokenKey[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_BROKEN_KEY),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_broken_key_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_broken_key_loop),
+    END_LOOP(),
+};

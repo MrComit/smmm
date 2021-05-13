@@ -1,0 +1,17 @@
+extern const GeoLayout key_broken_BrokenKeyGeo2[];
+extern const GeoLayout key_broken_geo[];
+extern Lights1 key_broken_BigKey_v4_lights;
+extern u8 key_broken_token_silver_i8[];
+extern Vtx key_broken_key1_mesh_layer_1_vtx_0[23];
+extern Gfx key_broken_key1_mesh_layer_1_tri_0[];
+extern Vtx key_broken_gem1_mesh_layer_1_vtx_0[15];
+extern Gfx key_broken_gem1_mesh_layer_1_tri_0[];
+extern Vtx key_broken_Start_key2_mesh_layer_1_vtx_0[22];
+extern Gfx key_broken_Start_key2_mesh_layer_1_tri_0[];
+extern Gfx mat_key_broken_BigKey_v4[];
+extern Gfx mat_key_broken_Emerald_v4[];
+extern Gfx mat_revert_key_broken_Emerald_v4[];
+extern Gfx key_broken_key1_mesh_layer_1[];
+extern Gfx key_broken_gem1_mesh_layer_1[];
+extern Gfx key_broken_Start_key2_mesh_layer_1[];
+extern Gfx key_broken_material_revert_render_settings[];

@@ -776,6 +776,8 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         isKey = 1;
     } else if (o->oInteractionSubtype & INT_SUBTYPE_BIG_KEY) {
         isKey = 2;
+    } else if (o->oInteractionSubtype & INT_SUBTYPE_BROKEN_KEY) {
+        isKey = 3;
     }
 
     gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
@@ -799,7 +801,9 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         m->usedObj = o;
 
         starKeyIndex = o->oBehParams2ndByte;
-        if (isKey != 0) {
+        if (isKey == 3) {
+            save_file_set_newflags(0, 1 << ((o->oBehParams >> 24) & 0xFF));
+        } else if (isKey != 0) {
             save_file_set_keys(starKeyIndex);
         } else {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
@@ -822,7 +826,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         //    return set_mario_action(m, ACT_JUMBO_STAR_CUTSCENE, 0);
         //}
 
-        return set_mario_action(m, starGrabAction, isKey);
+        return set_mario_action(m, starGrabAction, isKey | (o->oAnimState << 16));
     }
 
     return FALSE;

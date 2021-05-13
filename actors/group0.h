@@ -403,4 +403,6 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 #include "teleporter/geo_header.h"
 
+#include "key_broken/geo_header.h"
+
 #endif

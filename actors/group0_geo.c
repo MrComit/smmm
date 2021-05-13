@@ -30,3 +30,4 @@
 #include "boocoin/geo.inc.c"
 #include "ghostsand_ball/geo.inc.c"
 #include "teleporter/geo.inc.c"
+#include "key_broken/geo.inc.c"

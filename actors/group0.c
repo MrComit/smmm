@@ -50,3 +50,4 @@
 #include "boocoin/model.inc.c"
 #include "ghostsand_ball/model.inc.c"
 #include "teleporter/model.inc.c"
+#include "key_broken/model.inc.c"
