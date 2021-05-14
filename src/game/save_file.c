@@ -551,6 +551,26 @@ u32 save_file_get_newflags(u8 index) {
 }
 
 
+void save_file_set_gpflags(u32 flags) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].gpFlags |= flags;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+void save_file_clear_gpflags(u32 flags) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].gpFlags &= ~flags;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+u32 save_file_get_gpflags(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].gpFlags;
+}
+
+
 
 u32 save_file_get_boos(void) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {

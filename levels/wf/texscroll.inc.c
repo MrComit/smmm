@@ -1,4 +1,4 @@
-void scroll_wf_dl_Hallway_005_mesh_layer_1_vtx_5() {
+void scroll_wf_dl_Hallway_005_mesh_layer_1_vtx_3() {
 	int i = 0;
 	int count = 9;
 	int width = 64 * 0x20;
@@ -6,7 +6,7 @@ void scroll_wf_dl_Hallway_005_mesh_layer_1_vtx_5() {
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(wf_dl_Hallway_005_mesh_layer_1_vtx_5);
+	Vtx *vertices = segmented_to_virtual(wf_dl_Hallway_005_mesh_layer_1_vtx_3);
 
 	deltaY = (int)(0.3499999940395355 * 0x20) % height;
 
@@ -131,7 +131,7 @@ void scroll_wf_dl_Office_mesh_layer_1_vtx_3() {
 
 }
 void scroll_wf() {
-	scroll_wf_dl_Hallway_005_mesh_layer_1_vtx_5();
+	scroll_wf_dl_Hallway_005_mesh_layer_1_vtx_3();
 	scroll_wf_dl_Hallway_005_mesh_layer_6_vtx_0();
 	scroll_wf_dl_Steam_mesh_layer_5_vtx_0();
 	scroll_wf_dl_Den_mesh_layer_1_vtx_3();

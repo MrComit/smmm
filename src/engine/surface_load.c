@@ -404,6 +404,7 @@ static s32 surface_has_force(s16 surfaceType) {
         case SURFACE_INSTANT_MOVING_QUICKSAND:
         case SURFACE_INSTANT_WARP_1B:
         case SURFACE_WARP:
+        case SURFACE_GP_FLOOR:
             hasForce = TRUE;
             break;
 

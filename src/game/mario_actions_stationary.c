@@ -16,6 +16,7 @@
 #include "sound_init.h"
 #include "surface_terrains.h"
 #include "rumble_init.h"
+#include "object_list_processor.h"
 
 s32 check_common_idle_cancels(struct MarioState *m) {
     mario_drop_held_object(m);
@@ -1040,8 +1041,47 @@ s32 act_twirl_land(struct MarioState *m) {
     return FALSE;
 }
 
+Vec3f sSpawnedTokens = {-1831.0f, 160.0f, -6211.0f};
+
+void spawn_token(u8 type, u8 index, Vec3f pos, s16 yaw, s16 pitch) {
+    struct Object *obj = spawn_object(gMarioObject, MODEL_TOKEN, bhvToken);
+    obj->oBehParams = (type << 16) | (index << 8);
+    obj->oBehParams2ndByte = type;
+    obj->oFaceAnglePitch = pitch;
+    obj->oFaceAngleYaw = yaw;
+    obj->oFaceAngleRoll = 0;
+    vec3f_copy(&obj->oPosX, pos);
+    spawn_object(obj, MODEL_NONE, bhvSparkleSpawn);
+    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+}
+
+
+void handle_ground_pound_floor(struct MarioState *m) {
+    struct Object *obj;
+    s32 index = m->floor->force;
+    if (save_file_get_gpflags() & (1 << index)) {
+        return;
+    }
+    switch (index) {
+        case 0:
+            spawn_token(1, 0x16, sSpawnedTokens, 0, 0);
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+    }
+    save_file_set_gpflags(1 << index);
+}
+
+
 s32 act_ground_pound_land(struct MarioState *m) {
     m->actionState = 1;
+    if (m->floor != NULL && m->floor->type == SURFACE_GP_FLOOR) {
+        handle_ground_pound_floor(m);
+    }
     if (m->input & INPUT_UNKNOWN_10) {
         return drop_and_set_mario_action(m, ACT_SHOCKWAVE_BOUNCE, 0);
     }
