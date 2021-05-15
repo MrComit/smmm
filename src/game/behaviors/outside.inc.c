@@ -261,13 +261,17 @@ void sun_free_loop(void) {
     o->os16F4 = approach_s16_symmetric(o->os16F4, 0x99, 0x10);
     o->os16F6 = approach_s16_symmetric(o->os16F6, 0x71, 0x10);
 
-    if (o->oFC == 1) {
-        if (o->oTimer > 200) {
-            o->oTimer = 0;
+    if (sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
+        o->os16FC = 1;
+    }
+    if (o->os16FC == 1) {
+        o->os16FE++;
+        if (o->os16FE > 90) {
+            o->os16FE = 0;
             o->oHeldState = 0;
             vec3f_copy(&o->oPosX, &o->oHomeX);
             o->oFaceAngleYaw = 0;
-            o->oFC = 0;
+            o->os16FC = 0;
         }
     }
 }

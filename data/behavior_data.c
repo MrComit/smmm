@@ -7365,6 +7365,19 @@ const BehaviorScript bhvSunblock[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvSunblockBig[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(sunblock_big_collision),
+    SET_FLOAT(oDrawingDistance, 0x6000),
+    SET_FLOAT(oCollisionDistance, 0xA00),
+    //CALL_NATIVE(bhv_flower_wall_init),
+    BEGIN_LOOP(),
+        //CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_sunblock_loop),
+    END_LOOP(),
+};
+
 
 const BehaviorScript bhvStandingSunflower[] = {
     BEGIN(OBJ_LIST_GENACTOR),
@@ -7658,6 +7671,21 @@ const BehaviorScript bhvL2RoomGate[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(bedroom_gate_alt_collision),
+    SET_FLOAT(oCollisionDistance, 0x300),
+    ADD_FLOAT(oPosY, 300),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l1_room_gate_loop),
+    END_LOOP(),
+    BREAK(),
+};
+
+
+const BehaviorScript bhvGardenGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(garden_gate_alt_collision),
     SET_FLOAT(oCollisionDistance, 0x300),
     ADD_FLOAT(oPosY, 300),
     SET_HOME(),

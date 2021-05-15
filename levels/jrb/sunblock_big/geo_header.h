@@ -1,0 +1,10 @@
+extern const GeoLayout sunblock_big_Switch_opt1[];
+extern const GeoLayout sunblock_big_geo[];
+extern u8 sunblock_big_sun_symbol2_ci4[];
+extern u8 sunblock_big_sun_symbol2_ci4_pal_rgba16[];
+extern Vtx sunblock_big_H1_mesh_layer_4_vtx_0[24];
+extern Gfx sunblock_big_H1_mesh_layer_4_tri_0[];
+extern Gfx mat_sunblock_big_Sunblock_001[];
+extern Gfx mat_revert_sunblock_big_Sunblock_001[];
+extern Gfx sunblock_big_H1_mesh_layer_4[];
+extern Gfx sunblock_big_material_revert_render_settings[];

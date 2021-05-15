@@ -675,6 +675,8 @@
 #define MODEL_DARK_PIRANHA        0xF8
 #define MODEL_STANDING_SUNFLOWER  0xF7
 #define MODEL_SUNFLOWER_PELLET    0xF6
+#define MODEL_SUNBLOCK_BIG        0xF5
+#define MODEL_GARDEN_GATE         0xF4
 
 
 

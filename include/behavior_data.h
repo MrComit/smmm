@@ -658,6 +658,8 @@ extern const BehaviorScript bhvFistSpawner[];
 extern const BehaviorScript bhvBedroomObject[];
 extern const BehaviorScript bhvBrokenKey[];
 extern const BehaviorScript bhvL2RoomGate[];
+extern const BehaviorScript bhvSunblockBig[];
+extern const BehaviorScript bhvGardenGate[];
 
 
 

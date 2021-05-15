@@ -99,4 +99,12 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/sunflower_pellet/geo_header.h"
 
+#include "levels/jrb/sunblock_big/collision_header.h"
+
+#include "levels/jrb/sunblock_big/geo_header.h"
+
+#include "levels/jrb/garden_gate_alt/collision_header.h"
+
+#include "levels/jrb/garden_gate/geo_header.h"
+
 #endif
