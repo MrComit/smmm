@@ -802,7 +802,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
 
         starKeyIndex = o->oBehParams2ndByte;
         if (isKey == 3) {
-            save_file_set_newflags(0, 1 << ((o->oBehParams >> 24) & 0xFF));
+            save_file_set_newflags(1 << starKeyIndex, 0);
         } else if (isKey != 0) {
             save_file_set_keys(starKeyIndex);
         } else {

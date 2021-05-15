@@ -344,9 +344,13 @@ void bhv_poochy_boss_init(void) {
 void bhv_poochy_boss_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 90) {
-                o->oAction = 1;
-                cur_obj_enable();
+            if (save_file_get_newflags(0) & (1 << 8)) {
+                if (o->oTimer > 60) {
+                    o->oAction = 1;
+                    cur_obj_enable();
+                }
+            } else {
+                o->oTimer = 0;
             }
             break;
         case 1:
