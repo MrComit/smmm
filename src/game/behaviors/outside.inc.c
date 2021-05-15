@@ -313,7 +313,7 @@ void bhv_flower_wall_init(void) {
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FLOWER_DOOR) {
         o->activeFlags = 0;
     }
-    o->activeFlags = 0;
+    //o->activeFlags = 0;
 }
 
 

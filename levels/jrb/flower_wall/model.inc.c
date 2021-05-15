@@ -649,15 +649,15 @@ u8 flower_wall__2dsunflower_rgba16[] = {
 };
 
 Vtx flower_wall_Group_mesh_layer_1_vtx_0[4] = {
-	{{{681, 0, 0},0, {-1127, -1149},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-681, 0, 0},0, {-2486, -1149},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-681, 1500, 0},0, {-2486, 496},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{681, 0, 0},0, {-1127, -1215},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{-681, 1500, 0},0, {-2818, 496},{0x0, 0x0, 0x81, 0xFF}}},
 	{{{681, 1500, 0},0, {-1127, 496},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{-681, 0, 0},0, {-2818, -1215},{0x0, 0x0, 0x81, 0xFF}}},
 };
 
 Gfx flower_wall_Group_mesh_layer_1_tri_0[] = {
 	gsSPVertex(flower_wall_Group_mesh_layer_1_vtx_0 + 0, 4, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSPEndDisplayList(),
 };
 
