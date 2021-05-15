@@ -64,3 +64,4 @@
 #include "levels/jrb/sunblock_big/model.inc.c"
 #include "levels/jrb/garden_gate_alt/collision.inc.c"
 #include "levels/jrb/garden_gate/model.inc.c"
+#include "levels/jrb/exit_wall/model.inc.c"

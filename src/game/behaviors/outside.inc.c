@@ -336,6 +336,34 @@ void bhv_flower_wall_loop(void) {
 }
 
 
+void bhv_exit_wall_init(void) {
+    o->oOpacity = 0xFF;
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_EXIT_DOOR) {
+        o->activeFlags = 0;
+    }
+    //o->activeFlags = 0;
+}
+
+
+void bhv_exit_wall_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_nearest_object_with_behavior(bhvPoochyBoss) == NULL ) {
+               o->oAction = 1;
+               play_puzzle_jingle();
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 10);
+            if (o->oOpacity < 10) {
+                o->activeFlags = 0;
+                save_file_set_newflags(SAVE_NEW_FLAG_EXIT_DOOR, 0);
+            }
+            break;
+    }
+}
+
+
 void bhv_poochy_boss_init(void) {
     cur_obj_disable();
     obj_set_hitbox(o, &sPoochyHitbox);
@@ -466,6 +494,7 @@ void bhv_bounce_box_loop(void) {
                 m->vel[1] = 200.0f;
                 m->faceAngle[1] = (m->angleVel[1] = o->oFaceAngleYaw + 0xC000);
                 mario_set_forward_vel(m, 15.0f);
+                play_sound(SOUND_ACTION_BOUNCE_OFF_OBJECT, m->marioObj->header.gfx.cameraToObject);
                 o->oAction = 2;
             }
             break;

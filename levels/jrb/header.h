@@ -107,4 +107,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/garden_gate/geo_header.h"
 
+#include "levels/jrb/exit_wall/geo_header.h"
+
 #endif

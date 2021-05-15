@@ -35,3 +35,4 @@
 #include "levels/jrb/sunflower_pellet/geo.inc.c"
 #include "levels/jrb/sunblock_big/geo.inc.c"
 #include "levels/jrb/garden_gate/geo.inc.c"
+#include "levels/jrb/exit_wall/geo.inc.c"
