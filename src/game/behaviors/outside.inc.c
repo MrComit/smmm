@@ -389,6 +389,7 @@ void bhv_poochy_boss_loop(void) {
             cur_obj_move_standard(-78);
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oAction = 2;
+                cur_obj_init_animation_with_sound(0);
                 o->oObjF4 = spawn_object(o, MODEL_NONE, bhvGardenHoles);
                 o->oObjF4->oPosX = o->oObjF4->oPosZ = 0;
                 o->oObjF4->oPosY = -488.0f;
@@ -398,6 +399,7 @@ void bhv_poochy_boss_loop(void) {
         case 2:
             cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x400);
             if (o->os16FA == 0) {
                 o->oForwardVel = approach_f32(o->oForwardVel, 40.0f, 0.5f, 0.5f);
                 o->oMoveAngleYaw += 0x100;
@@ -410,8 +412,10 @@ void bhv_poochy_boss_loop(void) {
                 if (o->oDistanceToMario < 1500.0f && (absi(o->oMoveAngleYaw - o->oAngleToMario) < 0x1000 || o->os16F8 != 0)) {
                     if (o->os16F8 > (2 - o->oHealth)) {
                         o->oAction = 3;
+                        cur_obj_init_animation_with_sound(1);
                     } else {
                         o->oAction = 6;
+                        cur_obj_init_animation_with_sound(1);
                     }
                     o->oVelY = 77.0f;
                     o->oForwardVel = 40.0f;
@@ -420,18 +424,28 @@ void bhv_poochy_boss_loop(void) {
             }
             break;
         case 3:
+            if (o->oTimer < 2) {
+                break;
+            }
             cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
             o->oForwardVel = approach_f32(o->oForwardVel, 8.0f, 0.5f, 0.5f);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x20);
+            o->oFaceAnglePitch = -atan2s(o->oForwardVel, o->oVelY);
+            //o->oFaceAnglePitch = 0x4000;
+            if (o->oVelY == 0) {
+                o->oFaceAnglePitch = 0x4000;
+            }
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oAction = 4;
+                o->oFaceAnglePitch = 0x4000;
                 o->oPosY -= 200.0f;
                 o->os16F8 = 0;
             }
             if (dist_between_objects(o, gMarioObject) < 400.0f) {
                 CL_get_hit(gMarioState, o, 2);
                 o->oAction = 2;
+                cur_obj_init_animation_with_sound(0);
                 o->os16F8 = 0;
             }
             o->oInteractType = INTERACT_BOUNCE_TOP;
@@ -449,15 +463,16 @@ void bhv_poochy_boss_loop(void) {
                     gMarioState->vel[1] = 20.0f;
                     mario_set_forward_vel(gMarioState, 50.0f);
                     set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
-                    o->header.gfx.scale[2] = (o->header.gfx.scale[0] = 0.7f);
-                    o->header.gfx.scale[1] = 0.6f;
+                    o->header.gfx.scale[1] = (o->header.gfx.scale[0] = 0.9f);
+                    o->header.gfx.scale[2] = 0.6f;
                 }
             } else {
-                o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.8f, 0.02f, 0.02f);
+                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[1], 0.8f, 0.02f, 0.02f);
                 o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 0.8f, 0.01f, 0.01f);
-                o->header.gfx.scale[2] = o->header.gfx.scale[0];
-                if (o->oTimer > 90) {
+                o->header.gfx.scale[1] = o->header.gfx.scale[2];
+                if (o->oTimer > 45) {
                     o->oAction = 2;
+                    cur_obj_init_animation_with_sound(0);
                     o->oPosY += 200.0f;
                     o->oInteractType = INTERACT_DAMAGE;
                 }
@@ -471,12 +486,20 @@ void bhv_poochy_boss_loop(void) {
             o->oObjF4->activeFlags = 0;
             break;
         case 6:
+            if (o->oTimer < 2) {
+                break;
+            }
             cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
             o->oForwardVel = approach_f32(o->oForwardVel, 8.0f, 0.5f, 0.5f);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x20);
+            o->oFaceAnglePitch = -atan2s(o->oForwardVel, o->oVelY);
+            if (o->oVelY == 0) {
+                o->oFaceAnglePitch = 0x4000;
+            }
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oAction = 2;
+                cur_obj_init_animation_with_sound(0);
                 o->os16F8++;
                 o->os16FA = 1;
                 if (absi(o->oAngleToMario - o->oMoveAngleYaw) < 0x3000)
@@ -488,6 +511,7 @@ void bhv_poochy_boss_loop(void) {
             if (dist_between_objects(o, gMarioObject) < 400.0f) {
                 CL_get_hit(gMarioState, o, 2);
                 o->oAction = 2;
+                cur_obj_init_animation_with_sound(0);
                 o->os16F8 = 0;
             }
             //o->oInteractType = INTERACT_BOUNCE_TOP;
