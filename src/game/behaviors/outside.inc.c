@@ -367,19 +367,23 @@ void bhv_exit_wall_loop(void) {
 void bhv_poochy_boss_init(void) {
     cur_obj_disable();
     obj_set_hitbox(o, &sPoochyHitbox);
+    vec3f_set(&o->oHomeX, -1359.0f, -488.0f, 1587.0f);
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_EXIT_DOOR) {
+        o->activeFlags = 0;
+    }
 }
 
 void bhv_poochy_boss_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (save_file_get_newflags(0) & (1 << 8)) {
+            //if (save_file_get_newflags(0) & (1 << 8)) {
                 if (o->oTimer > 60) {
                     o->oAction = 1;
                     cur_obj_enable();
                 }
-            } else {
-                o->oTimer = 0;
-            }
+            //} else {
+            //    o->oTimer = 0;
+            //}
             break;
         case 1:
             cur_obj_move_standard(-78);
@@ -438,8 +442,20 @@ void bhv_poochy_boss_loop(void) {
                     o->oHealth--;
                     o->oSubAction = 1;
                     o->oTimer = 0;
+                    gMarioState->pos[0] = o->oPosX;
+                    gMarioState->pos[1] = o->oPosY + o->hitboxHeight;
+                    gMarioState->pos[2] = o->oPosZ;
+                    gMarioState->faceAngle[1] = cur_obj_angle_to_home();
+                    gMarioState->vel[1] = 20.0f;
+                    mario_set_forward_vel(gMarioState, 50.0f);
+                    set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                    o->header.gfx.scale[2] = (o->header.gfx.scale[0] = 0.7f);
+                    o->header.gfx.scale[1] = 0.6f;
                 }
             } else {
+                o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], 0.8f, 0.02f, 0.02f);
+                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 0.8f, 0.01f, 0.01f);
+                o->header.gfx.scale[2] = o->header.gfx.scale[0];
                 if (o->oTimer > 90) {
                     o->oAction = 2;
                     o->oPosY += 200.0f;
