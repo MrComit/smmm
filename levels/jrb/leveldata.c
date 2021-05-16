@@ -65,3 +65,5 @@
 #include "levels/jrb/garden_gate_alt/collision.inc.c"
 #include "levels/jrb/garden_gate/model.inc.c"
 #include "levels/jrb/exit_wall/model.inc.c"
+#include "levels/jrb/poochy/anims/data.inc.c"
+#include "levels/jrb/poochy/anims/table.inc.c"

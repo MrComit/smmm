@@ -109,4 +109,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/exit_wall/geo_header.h"
 
+#include "levels/jrb/poochy/anim_header.h"
+
 #endif
