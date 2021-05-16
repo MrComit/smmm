@@ -20,7 +20,7 @@ extern Vtx poochy_BLFoot_skinned_mesh_layer_1_vtx_0[4];
 extern Gfx poochy_BLFoot_skinned_mesh_layer_1_tri_0[];
 extern Vtx poochy_BLFoot_mesh_layer_1_vtx_0[4];
 extern Gfx poochy_BLFoot_mesh_layer_1_tri_0[];
-extern Vtx poochy_BLFoot_mesh_layer_1_vtx_1[19];
+extern Vtx poochy_BLFoot_mesh_layer_1_vtx_1[20];
 extern Gfx poochy_BLFoot_mesh_layer_1_tri_1[];
 extern Vtx poochy_BRFoot_skinned_mesh_layer_1_vtx_0[4];
 extern Gfx poochy_BRFoot_skinned_mesh_layer_1_tri_0[];
