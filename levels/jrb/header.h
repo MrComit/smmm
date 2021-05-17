@@ -111,4 +111,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/poochy/anim_header.h"
 
+#include "levels/jrb/garden_holes/geo_header.h"
+
 #endif

@@ -47,6 +47,7 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SUNBLOCK_BIG, sunblock_big_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GARDEN_GATE, garden_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_EXIT_WALL, exit_wall_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_GARDEN_HOLES, garden_holes_geo),
 
 	AREA(1, jrb_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),

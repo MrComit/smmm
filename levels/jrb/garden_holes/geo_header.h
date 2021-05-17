@@ -1,0 +1,10 @@
+extern const GeoLayout garden_holes_geo[];
+extern u8 garden_holes_living_wood2_ci8[];
+extern u8 garden_holes_living_wood2_ci8_pal_rgba16[];
+extern Vtx garden_holes_GroundModel_mesh_layer_1_vtx_cull[8];
+extern Vtx garden_holes_GroundModel_mesh_layer_1_vtx_0[72];
+extern Gfx garden_holes_GroundModel_mesh_layer_1_tri_0[];
+extern Gfx mat_garden_holes_Wood_001[];
+extern Gfx mat_revert_garden_holes_Wood_001[];
+extern Gfx garden_holes_GroundModel_mesh_layer_1[];
+extern Gfx garden_holes_material_revert_render_settings[];

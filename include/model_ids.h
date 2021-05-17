@@ -678,6 +678,7 @@
 #define MODEL_SUNBLOCK_BIG        0xF5
 #define MODEL_GARDEN_GATE         0xF4
 #define MODEL_EXIT_WALL           0xF3
+#define MODEL_GARDEN_HOLES        0xF2
 
 
 

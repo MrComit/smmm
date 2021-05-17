@@ -376,30 +376,37 @@ void bhv_poochy_boss_init(void) {
 void bhv_poochy_boss_loop(void) {
     switch (o->oAction) {
         case 0:
-            //if (save_file_get_newflags(0) & (1 << 8)) {
+            if (save_file_get_newflags(0) & (1 << 8)) {
                 if (o->oTimer > 60) {
                     o->oAction = 1;
                     cur_obj_enable();
+                    o->oObjF4 = spawn_object(o, MODEL_GARDEN_HOLES, bhvGardenHoles);
+                    o->oObjF4->oPosX = o->oObjF4->oPosZ = 0;
+                    o->oObjF4->oCollisionDistance = 0;
+                    o->oObjF4->oPosY = 0;
+                    o->oObjF4->oFaceAngleYaw = o->oObjF4->oMoveAngleYaw = 0;
+                    o->oObjF4->oFaceAnglePitch = o->oObjF4->oMoveAnglePitch = 0;
+                    o->oObjF4->oFaceAngleRoll = o->oObjF4->oMoveAngleRoll = 0;
                 }
-            //} else {
-            //    o->oTimer = 0;
-            //}
+            } else {
+                o->oTimer = 0;
+            }
             break;
         case 1:
             cur_obj_move_standard(-78);
+            o->oObjF4->oPosY = o->oPosY;
+            o->oObjF4->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oAction = 2;
-                cur_obj_init_animation_with_sound(0);
-                o->oObjF4 = spawn_object(o, MODEL_NONE, bhvGardenHoles);
-                o->oObjF4->oPosX = o->oObjF4->oPosZ = 0;
                 o->oObjF4->oPosY = -488.0f;
-                o->oObjF4->oFaceAngleYaw = o->oObjF4->oMoveAngleYaw = 0;
+                o->oObjF4->oCollisionDistance = 32767.0f;
+                cur_obj_init_animation_with_sound(0);
             }
             break;
         case 2:
-            cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
-            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x400);
+            cur_obj_move_standard(-78);
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x800);
             if (o->os16FA == 0) {
                 o->oForwardVel = approach_f32(o->oForwardVel, 40.0f, 0.5f, 0.5f);
                 o->oMoveAngleYaw += 0x100;
@@ -427,11 +434,11 @@ void bhv_poochy_boss_loop(void) {
             if (o->oTimer < 2) {
                 break;
             }
-            cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(-78);
             o->oForwardVel = approach_f32(o->oForwardVel, 8.0f, 0.5f, 0.5f);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x20);
-            o->oFaceAnglePitch = -atan2s(o->oForwardVel, o->oVelY);
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, -atan2s(o->oForwardVel, o->oVelY), 0x400);
             //o->oFaceAnglePitch = 0x4000;
             if (o->oVelY == 0) {
                 o->oFaceAnglePitch = 0x4000;
@@ -470,33 +477,50 @@ void bhv_poochy_boss_loop(void) {
                 o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[1], 0.8f, 0.02f, 0.02f);
                 o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 0.8f, 0.01f, 0.01f);
                 o->header.gfx.scale[1] = o->header.gfx.scale[2];
-                if (o->oTimer > 45) {
+                if (o->oTimer > 25) {
                     o->oAction = 2;
                     cur_obj_init_animation_with_sound(0);
                     o->oPosY += 200.0f;
                     o->oInteractType = INTERACT_DAMAGE;
+                    play_sound(SOUND_ACTION_UNSTUCK_FROM_GROUND, gGlobalSoundSource);
                 }
                 if (o->oHealth == 0) {
                     o->oAction = 5;
+                    o->oForwardVel = 300.0f;
+                    o->oVelY = 110.0f;
+                    cur_obj_become_intangible();
+                    cur_obj_init_animation_with_sound(0);
                 }
             }
             break;
         case 5:
-            o->activeFlags = 0;
-            o->oObjF4->activeFlags = 0;
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, -0, 0x400);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, 0x8000, 0x400);
+            if (o->oTimer > 28) {
+                cur_obj_init_animation_with_sound(1);
+            }
+            if (o->oTimer > 30) {
+                CL_Move();
+                //cur_obj_move_standard(-78);
+                //cur_obj_update_floor_and_walls();
+            }
+            if (o->oTimer > 90) {
+                o->activeFlags = 0;
+                o->oObjF4->activeFlags = 0;
+            }
             break;
         case 6:
             if (o->oTimer < 2) {
                 break;
             }
-            cur_obj_move_standard(-78);
             cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(-78);
             o->oForwardVel = approach_f32(o->oForwardVel, 8.0f, 0.5f, 0.5f);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x20);
-            o->oFaceAnglePitch = -atan2s(o->oForwardVel, o->oVelY);
+            /*o->oFaceAnglePitch = -atan2s(o->oForwardVel, o->oVelY);
             if (o->oVelY == 0) {
                 o->oFaceAnglePitch = 0x4000;
-            }
+            }*/
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oAction = 2;
                 cur_obj_init_animation_with_sound(0);
