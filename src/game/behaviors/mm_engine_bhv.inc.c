@@ -151,7 +151,7 @@ void bhv_deathwarp_init(void) {
         o->oPosX = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0];
         o->oPosY = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1];
         o->oPosZ = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2];
-        vec3f_copy(gMarioState->pos, &o->oPosX);
+        //vec3f_copy(gMarioState->pos, &o->oPosX);
     }
 
 }

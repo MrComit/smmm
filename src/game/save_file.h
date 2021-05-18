@@ -268,7 +268,8 @@ s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
 void save_file_move_cap_to_default_location(void);
-
+u32 save_file_get_heavy_object(void);
+void save_file_set_heavy_object(u8 obj, u32 id);
 void save_file_set_newflags(u32 flags, u8 index);
 void save_file_clear_newflags(u32 flags,  u8 index);
 u32 save_file_get_newflags(u8 index);

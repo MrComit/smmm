@@ -1,6 +1,6 @@
 void scroll_wf_dl_Hallway_005_mesh_layer_1_vtx_3() {
 	int i = 0;
-	int count = 9;
+	int count = 11;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 

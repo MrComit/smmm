@@ -576,7 +576,7 @@ u32 save_file_get_boos(void) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }
-    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured;
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured & 0x03FFFFFF;
 }
 
 void save_file_set_boos(u32 boo) {
@@ -584,6 +584,24 @@ void save_file_set_boos(u32 boo) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
+
+
+u32 save_file_get_heavy_object(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return (gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured & 0xFC000000) >> 26;
+}
+
+void save_file_set_heavy_object(u8 obj, u32 id) {
+    id = id << (obj * 2);
+    id = id << 26;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured &= ~(3 << (26 + (obj * 2)));
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured |= id;
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
 
 
 u32 save_file_get_star_piece(void) {

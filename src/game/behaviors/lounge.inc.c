@@ -13,7 +13,6 @@ static struct ObjectHitbox sHeavyHitbox = {
 };
 
 
-
 void heavy_object_held_loop(void) {
     cur_obj_become_intangible();
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
@@ -41,9 +40,33 @@ void heavy_object_free_loop(void) {
     } else {
         o->oObjF4 = NULL;
     }
+    if (sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
+        o->os16FC = 1;
+    }
+    if (o->os16FC == 1) {
+        o->os16FE++;
+        if (o->os16FE > 90) {
+            o->os16FE = 0;
+            o->oHeldState = 0;
+            vec3f_copy(&o->oPosX, &o->oHomeX);
+            o->oFaceAngleYaw = 0;
+            o->os16FC = 0;
+            o->oObjF4 = NULL;
+        }
+    }
 }
 
 void bhv_heavy_object_init(void) {
+    struct Object *obj;
+    s16 posId = save_file_get_heavy_object() & (3 << (o->oBehParams2ndByte*2));
+    posId = posId >> (o->oBehParams2ndByte * 2);
+    if (posId) {
+        obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, (posId - 1) << 16);
+        if (obj != NULL) {
+            vec3f_copy(&o->oPosX, &obj->oPosX);
+            vec3f_copy(&o->oHomeX, &o->oPosX);
+        }
+    }
     o->oGravity = 2.5;
     o->oFriction = 0.8;
     o->oBuoyancy = 1.3;
@@ -102,6 +125,8 @@ void bhv_heavy_switch_loop(void) {
                 break;
             if (obj->oObjF4 == o) {
                 o->oAction = 1;
+                save_file_set_heavy_object(obj->oBehParams2ndByte, o->oBehParams2ndByte + 1);
+                vec3f_copy(&obj->oHomeX, &o->oPosX);
             }
             break;
         case 1:
