@@ -3424,19 +3424,19 @@ void init_camera(struct Camera *c) {
             break;
 
         //! Hardcoded position checks determine which cutscene to play when Mario enters castle grounds.
-        case LEVEL_CASTLE_GROUNDS:
-            if (is_within_100_units_of_mario(-1328.f, 260.f, 4664.f) != 1) {
-                marioOffset[0] = -400.f;
-                marioOffset[2] = -800.f;
-            }
-            if (is_within_100_units_of_mario(-6901.f, 2376.f, -6509.f) == 1) {
-                start_cutscene(c, CUTSCENE_EXIT_WATERFALL);
-            }
-            if (is_within_100_units_of_mario(5408.f, 4500.f, 3637.f) == 1) {
-                start_cutscene(c, CUTSCENE_EXIT_FALL_WMOTR);
-            }
-            gLakituState.mode = CAMERA_MODE_FREE_ROAM;
-            break;
+        // case LEVEL_CASTLE_GROUNDS:
+        //     if (is_within_100_units_of_mario(-1328.f, 260.f, 4664.f) != 1) {
+        //         marioOffset[0] = -400.f;
+        //         marioOffset[2] = -800.f;
+        //     }
+        //     if (is_within_100_units_of_mario(-6901.f, 2376.f, -6509.f) == 1) {
+        //         start_cutscene(c, CUTSCENE_EXIT_WATERFALL);
+        //     }
+        //     if (is_within_100_units_of_mario(5408.f, 4500.f, 3637.f) == 1) {
+        //         start_cutscene(c, CUTSCENE_EXIT_FALL_WMOTR);
+        //     }
+        //     gLakituState.mode = CAMERA_MODE_FREE_ROAM;
+        //     break;
         case LEVEL_SA:
             marioOffset[2] = 200.f;
             break;
@@ -6620,6 +6620,8 @@ s16 camera_course_processing(struct Camera *c) {
     u32 insideBounds = FALSE;
     u32 anyChecked = FALSE;
     u8 oldMode = c->mode;
+
+    return oldMode;
 
     if (c->mode == CAMERA_MODE_C_UP) {
         c->mode = sModeInfo.lastMode;

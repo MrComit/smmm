@@ -31,6 +31,8 @@
 #endif
 #include <prevent_bss_reordering.h>
 
+#include <point_lights.h>
+
 // FIXME: I'm not sure all of these variables belong in this file, but I don't
 // know of a good way to split them
 struct Controller gControllers[3];
@@ -116,12 +118,12 @@ void my_rdp_init(void) {
  * almost immediately overwritten.
  */
 void my_rsp_init(void) {
+
     gSPClearGeometryMode(gDisplayListHead++, G_SHADE | G_SHADING_SMOOTH | G_CULL_BOTH | G_FOG
                         | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD);
 
     gSPSetGeometryMode(gDisplayListHead++, G_SHADE | G_SHADING_SMOOTH | G_CULL_BACK | G_LIGHTING);
 
-    gSPNumLights(gDisplayListHead++, NUMLIGHTS_1);
     gSPTexture(gDisplayListHead++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
 
     // @bug Nintendo did not explicitly define the clipping ratio.
@@ -672,6 +674,12 @@ void thread5_game_loop(UNUSED void *arg) {
         audio_game_loop_tick();
         config_gfx_pool();
         read_controller_inputs();
+
+        // Reset the point light count before running the level script
+        // This is because the level script is responsible for calling the function
+        // that updates objects, which is where objects that emit light create their point lights
+        gPointLightCount = gAreaPointLightCount;
+
         addr = level_script_execute(addr);
 
         display_and_vsync();

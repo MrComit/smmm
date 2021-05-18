@@ -51,3 +51,4 @@
 #include "ghostsand_ball/model.inc.c"
 #include "teleporter/model.inc.c"
 #include "key_broken/model.inc.c"
+#include "lantern/model.inc.c"

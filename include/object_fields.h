@@ -1215,5 +1215,12 @@
 #define /*0x108*/ os16108             OBJECT_FIELD_S16(0x20, 0)
 #define /*0x108*/ os1610A             OBJECT_FIELD_S16(0x20, 1)
 
+// Advanced lighting engine
+// These use previously unused object fields outside of the normal range
+// for specific behaviors, so they shouldn't interfere with any custom ones
+#define /*0x148*/ oLightColor                 OBJECT_FIELD_S32(0x30) // 0xRRGGBB00
+#define /*0x1A4*/ oLightQuadraticFalloff      OBJECT_FIELD_S16(0x47, 0)
+#define /*0x1A6*/ oLightLinearFalloff         OBJECT_FIELD_S16(0x47, 1)
+#define /*0x098*/ oLightConstantFalloff       OBJECT_FIELD_S16(0x04, 0)
 
 #endif // OBJECT_FIELDS_H

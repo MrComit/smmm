@@ -31,3 +31,4 @@
 #include "ghostsand_ball/geo.inc.c"
 #include "teleporter/geo.inc.c"
 #include "key_broken/geo.inc.c"
+#include "lantern/geo.inc.c"

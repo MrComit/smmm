@@ -48,6 +48,9 @@
 #define OBJ_FLAG_DISABLE_ON_ROOM_EXIT             (1 << 17) // 0x00010000
 #define OBJ_FLAG_30                               (1 << 30) // 0x40000000
 
+// Flag to make objects emit a point light (was OBJ_FLAG_1000)
+#define OBJ_FLAG_EMIT_LIGHT                       (1 << 12) // 0x00001000
+
 /* oHeldState */
 #define HELD_FREE 0
 #define HELD_HELD 1
