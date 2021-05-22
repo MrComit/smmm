@@ -3,7 +3,7 @@
 const GeoLayout wf_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(16, geo_switch_area),
+		GEO_SWITCH_CASE(18, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, wf_dl_01__Lounge_geo),
 			GEO_BRANCH(1, wf_dl_02__Bar_geo),
@@ -20,6 +20,8 @@ const GeoLayout wf_area_1_geo[] = {
 			GEO_BRANCH(1, wf_dl_13__Office_geo),
 			GEO_BRANCH(1, wf_dl_14__Master_Bedroom_geo),
 			GEO_BRANCH(1, wf_dl_15__Hallway_geo),
+			GEO_BRANCH(1, wf_dl_16__Hallway_geo),
+			GEO_BRANCH(1, wf_dl_17__Play_Room_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -64,7 +66,6 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 1021, 333, -9999, wf_dl_Hallway_005_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(5, -438, 238, -7706, wf_dl_Hallway_007_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(4, 1021, 333, -9999, wf_dl_Hallway_008_mesh_layer_4),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 1021, 333, -9999, wf_dl_Hallway_010_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -231, 267, -4999, wf_dl_Plant_001_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(4, wf_dl_Plant_001_mesh_layer_4),
@@ -488,6 +489,20 @@ const GeoLayout wf_dl_15__Hallway_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -3449, 1333, -3628, wf_dl_Master_Bedroom_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -3389, 465, -2882, wf_dl_ToFloor1_002_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_16__Hallway_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 1021, 333, -9999, wf_dl_Hallway_010_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_17__Play_Room_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 1021, 333, -9999, wf_dl_Hallway_011_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
