@@ -1008,7 +1008,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
         }
     }
 
-    if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
+    /*if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
         if (!(keyCount & (1 << o->oBehParams2ndByte))) {
             if (!sDisplayingDoorText) {
                 set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_022);
@@ -1020,7 +1020,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
             m->usedObj = o;
             return set_mario_action(m, ACT_UNLOCKING_KEY_DOOR, should_push_or_pull_door(m, o) + 0x00000004);
         }
-    }
+    }*/
 
     if (m->action == ACT_WALKING || m->action == ACT_DECELERATING) {
         if (numStars >= requiredNumStars) {

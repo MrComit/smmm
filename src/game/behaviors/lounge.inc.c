@@ -127,6 +127,23 @@ void bhv_heavy_switch_loop(void) {
                 o->oAction = 1;
                 save_file_set_heavy_object(obj->oBehParams2ndByte, o->oBehParams2ndByte + 1);
                 vec3f_copy(&obj->oHomeX, &o->oPosX);
+
+                obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, 0);
+                if (obj == NULL || obj->oAction == 2) {
+                    obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, 1 << 16);
+                    if (obj == NULL || obj->oAction == 2) {
+                        obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, 2 << 16);
+                        if (obj == NULL || obj->oAction == 2) {
+                            if ((save_file_get_keys() & (1 << 6)) == 0 && 
+                                CL_obj_nearest_object_behavior_params(bhvSmallKey, 6 << 16) == NULL) {
+                                obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+                                obj->oBehParams2ndByte = 6;
+                                obj->oBehParams = 6 << 16;
+                                vec3f_set(&obj->oPosX, 3420.0f, -150.0f, -7728.0f);
+                            }
+                        }
+                    }
+                }
             }
             break;
         case 1:
