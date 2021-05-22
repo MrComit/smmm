@@ -198,6 +198,7 @@ void bhv_dark_piranha_loop(void) {
 
 
 void bhv_dark_piranha_init(void) {
+    o->oRoom = 4;
     o->oFirePiranhaPlantNeutralScale = 1.0f;
     obj_set_hitbox(o, &sDarkPiranhaHitbox);
     //o->oFlags |= 0x00004000;

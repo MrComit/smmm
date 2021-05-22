@@ -31,9 +31,9 @@ void koopa_boss_multiplier_loop(void) {
     //print_text(184+30, 189, "*"); // 'X' glyph
     //print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins);
 
-    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat98);
+    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C);
     print_text(184+30, 169+20, ".");
-    print_text_fmt_int(198+30, 169+20, "%d", o->o148);
+    print_text_fmt_int(198+30, 169+20, "%d", o->os16110);
     print_text(212+30, 169+20, "*"); // 'X' glyph
 
     if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
@@ -46,16 +46,16 @@ void koopa_boss_multiplier_loop(void) {
         o->oKleptoTimeUntilTargetChange = 0;
         action = FALSE;
     }
-    if (((gMarioState->hurtCounter > 0 && o->o14A == 0) || action) && o->oFloat98 > 0) {
-        if (o->o148 == 0) {
-            o->oFloat98 -= 1.0f;
-            o->o148 = 5;
+    if (((gMarioState->hurtCounter > 0 && o->os16112 == 0) || action) && o->oFloat10C > 0) {
+        if (o->os16110 == 0) {
+            o->oFloat10C -= 1.0f;
+            o->os16110 = 5;
         } else {
-            o->o148 = 0;
+            o->os16110 = 0;
         }
-        o->o14A = 1;
+        o->os16112 = 1;
     } else if (gMarioState->hurtCounter <= 0) {
-        o->o14A = 0;
+        o->os16112 = 0;
     }
 
 
@@ -90,7 +90,7 @@ void koopa_boss_clamp_mario(void) {
 
 void bhv_koopa_boss_init(void) {
     o->oHealth = 2;
-    o->oFloat98 = 5.0f;
+    o->oFloat10C = 5.0f;
 }
 
 
@@ -214,7 +214,7 @@ void bhv_koopa_boss_loop(void) {
             obj_scale_xyz(o, o->oFloatF4 / 1.38f, o->oFloatF4, o->oFloatF4 / 1.38f);
 
             if (o->oFloatF4 == 0.3f) {
-                gMarioState->numCoins += 100 * (o->oFloat98 + ((f32)o->o148 / 10));
+                gMarioState->numCoins += 100 * (o->oFloat10C + ((f32)o->os16110 / 10));
                 CL_explode_object(o, 1);
                 obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                 obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;

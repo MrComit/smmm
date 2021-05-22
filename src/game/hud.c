@@ -543,6 +543,7 @@ void render_s2d_room_names(void) {
             gRoomEntryTimer = -1;
         }
     }
+    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]);
 }
 
 
@@ -559,6 +560,7 @@ void s2d_print_starpiece(s16 x, s16 y, s16 idx) {
 
 void render_s2d_hud(void) {
     s16 i, h;
+    //print_text_fmt_int(20, 20, "%d", main_pool_available());
     if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE) {
         starpiece_chart_bg.b.frameX = approach_s16_symmetric(starpiece_chart_bg.b.frameX, 0<<2, 4<<2);
     } else {

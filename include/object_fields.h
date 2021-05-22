@@ -124,8 +124,8 @@
 #define /*0x194*/ oCollisionDistance          OBJECT_FIELD_F32(0x43)
 #define /*0x198*/ oNumLootCoins               OBJECT_FIELD_S32(0x44)
 #define /*0x19C*/ oDrawingDistance            OBJECT_FIELD_F32(0x45)
-#define /*0x1A0*/ oRoom                       OBJECT_FIELD_S32(0x46)
-#define /*0x1A4*/ oRoom2                      OBJECT_FIELD_S32(0x47)
+#define /*0x1A0*/ oRoom                       OBJECT_FIELD_S16(0x46, 0)
+#define /*0x1A2*/ oRoom2                      OBJECT_FIELD_S16(0x46, 1)
 #define /*0x1A8*/ oUnk1A8                     OBJECT_FIELD_U32(0x48)
 // 0x1AC-0x1B2 (0x48-0x4A) are object specific and defined below the common fields.
 #define /*0x1B4*/ oWallAngle                  OBJECT_FIELD_S32(0x4B)
@@ -234,15 +234,18 @@
 
 /* Boo */
 #define /*0x088*/ oBooDeathStatus           OBJECT_FIELD_S32(0x00)
-#define /*0x0F4*/ oBooTargetOpacity         OBJECT_FIELD_S32(0x1B)
+//#define /*0x0F4*/ oBooTargetOpacity         OBJECT_FIELD_S32(0x1B)
 #define /*0x0F8*/ oBooBaseScale             OBJECT_FIELD_F32(0x1C)
-#define /*0x0FC*/ oBooOscillationTimer      OBJECT_FIELD_S32(0x1D)
-#define /*0x100*/ oBooMoveYawDuringHit      OBJECT_FIELD_S32(0x1E)
+//#define /*0x0FC*/ oBooOscillationTimer      OBJECT_FIELD_S32(0x1D)
+//#define /*0x100*/ oBooMoveYawDuringHit      OBJECT_FIELD_S32(0x1E)
+#define /*0x0FC*/ oBooOscillationTimer      OBJECT_FIELD_S16(0x1D, 0)
+#define /*0x0FE*/ oBooMoveYawDuringHit      OBJECT_FIELD_S16(0x1D, 0)
 #define /*0x104*/ oBooMoveYawBeforeHit      OBJECT_FIELD_F32(0x1F)
 #define /*0x108*/ oBooParentBigBoo          OBJECT_FIELD_OBJ(0x20)
 #define /*0x10C*/ oBooNegatedAggressiveness OBJECT_FIELD_F32(0x21)
 #define /*0x110*/ oBooInitialMoveYaw        OBJECT_FIELD_S32(0x22)
 #define /*0x1B0*/ oBooTurningSpeed          OBJECT_FIELD_S16(0x4A, 0)
+#define /*0x1B2*/ oBooTargetOpacity         OBJECT_FIELD_S16(0x4A, 1)
 
 /* Big Boo */
 #define /*0x1AC*/ oBigBooNumMinionBoosKilled OBJECT_FIELD_S32(0x49)
@@ -1203,17 +1206,21 @@
 #define /*0x110*/ oSurf110          OBJECT_FIELD_SURFACE(0x22)
 
 #define /*0x0F4*/ os16F4              OBJECT_FIELD_S16(0x1B, 0)
-#define /*0x0F4*/ os16F6              OBJECT_FIELD_S16(0x1B, 1)
+#define /*0x0F6*/ os16F6              OBJECT_FIELD_S16(0x1B, 1)
 #define /*0x0F8*/ os16F8              OBJECT_FIELD_S16(0x1C, 0)
-#define /*0x0F8*/ os16FA              OBJECT_FIELD_S16(0x1C, 1)
+#define /*0x0FA*/ os16FA              OBJECT_FIELD_S16(0x1C, 1)
 #define /*0x0FC*/ os16FC              OBJECT_FIELD_S16(0x1D, 0)
-#define /*0x0FC*/ os16FE              OBJECT_FIELD_S16(0x1D, 1)
+#define /*0x0FE*/ os16FE              OBJECT_FIELD_S16(0x1D, 1)
 #define /*0x100*/ os16100             OBJECT_FIELD_S16(0x1E, 0)
-#define /*0x100*/ os16102             OBJECT_FIELD_S16(0x1E, 1)
+#define /*0x102*/ os16102             OBJECT_FIELD_S16(0x1E, 1)
 #define /*0x104*/ os16104             OBJECT_FIELD_S16(0x1F, 0)
-#define /*0x104*/ os16106             OBJECT_FIELD_S16(0x1F, 1)
+#define /*0x106*/ os16106             OBJECT_FIELD_S16(0x1F, 1)
 #define /*0x108*/ os16108             OBJECT_FIELD_S16(0x20, 0)
-#define /*0x108*/ os1610A             OBJECT_FIELD_S16(0x20, 1)
+#define /*0x10A*/ os1610A             OBJECT_FIELD_S16(0x20, 1)
+#define /*0x10C*/ os1610C             OBJECT_FIELD_S16(0x21, 0)
+#define /*0x10E*/ os1610E             OBJECT_FIELD_S16(0x21, 1)
+#define /*0x110*/ os16110             OBJECT_FIELD_S16(0x22, 0)
+#define /*0x112*/ os16112             OBJECT_FIELD_S16(0x22, 1)
 
 // Advanced lighting engine
 // These use previously unused object fields outside of the normal range

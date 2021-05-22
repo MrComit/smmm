@@ -63,27 +63,27 @@ void room_boo_multiplier_loop(void) {
     print_text(184+30, 189, "*"); // 'X' glyph
     print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins);
 
-    print_text_fmt_int(168+30, 169, "%d", (s32)o->oFloat98);
+    print_text_fmt_int(168+30, 169, "%d", (s32)o->oFloatF4);
     print_text(184+30, 169, ".");
-    print_text_fmt_int(198+30, 169, "%d", o->o148);
+    print_text_fmt_int(198+30, 169, "%d", o->os16100);
     print_text(212+30, 169, "*"); // 'X' glyph
 
 
-    if (gMarioState->hurtCounter > 0 && o->o14A == 0 && o->oFloat98 > 0) {
-        if (o->o148 == 0) {
-            o->oFloat98 -= 1.0f;
-            o->o148 = 5;
+    if (gMarioState->hurtCounter > 0 && o->os16102 == 0 && o->oFloatF4 > 0) {
+        if (o->os16100 == 0) {
+            o->oFloatF4 -= 1.0f;
+            o->os16100 = 5;
         } else {
-            o->o148 = 0;
+            o->os16100 = 0;
         }
-        o->o14A = 1;
+        o->os16102 = 1;
     } else if (gMarioState->hurtCounter <= 0) {
-        o->o14A = 0;
+        o->os16102 = 0;
     }
 
 
     if (o->activeFlags == 0) {
-        gMarioState->numCoins += gMarioState->numBooCoins * (o->oFloat98 + ((f32)o->o148 / 10));
+        gMarioState->numCoins += gMarioState->numBooCoins * (o->oFloatF4 + ((f32)o->os16100 / 10));
         gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_BOO;
         gMarioState->numBooCoins = 0;
         gHudDisplay.booCoins = 0;
@@ -104,7 +104,8 @@ void bhv_boo_cage_init(void) {
 
 void bhv_room_boo_init(void) {
     bhv_boo_init();
-    o->oFloat98 = 5.0f;
+    //o->activeFlags = 0;
+    o->oFloatF4 = 5.0f;
     gMarioState->numBooCoins = 0;
     if (save_file_get_boos() & (1 << o->oBehParams2ndByte)) {
         o->activeFlags = 0;
@@ -117,6 +118,8 @@ void bhv_room_boo_loop(void) {
     s32 numObjs;
     if (gMarioCurrentRoom != o->oRoom)
         return;
+    //o->oAction = 3;
+    //o->oUnk1A8 = 2;
     if (o->oUnk1A8 == 0) {
         numObjs = count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, o->oRoom);
         if (numObjs <= 15) {

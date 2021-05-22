@@ -55,6 +55,7 @@ void bhv_controllable_platform_sub_loop(void) {
 
 void bhv_controllable_platform_init(void) {
     struct Object *sp34;
+    gCurrentObject->oFlags |= OBJ_FLAG_0020;
     sp34 = spawn_object_rel_with_rot(o, MODEL_HMC_METAL_ARROW_PLATFORM, bhvControllablePlatformSub, 0,
                                      51, 204, 0, 0, 0);
     sp34->oBehParams2ndByte = 1;
