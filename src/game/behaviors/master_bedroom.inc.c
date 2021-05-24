@@ -461,12 +461,12 @@ void shadow_boss_multiplier_loop(void) {
 
     if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
         || gMarioState->action == ACT_BURNING_GROUND) {
-        if (o->oKleptoTimeUntilTargetChange == 0) {
+        if (o->oKleptoTargetNumber == 0) {
             action = TRUE;
-            o->oKleptoTimeUntilTargetChange = 1;
+            o->oKleptoTargetNumber = 1;
         }
     } else {
-        o->oKleptoTimeUntilTargetChange = 0;
+        o->oKleptoTargetNumber = 0;
         action = FALSE;
     }
     if (((gMarioState->hurtCounter > 0 && o->os16112 == 0) || action) && o->oFloat10C > 0) {
