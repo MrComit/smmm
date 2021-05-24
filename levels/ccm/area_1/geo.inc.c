@@ -14,7 +14,7 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 20322, -161, 3070, ccm_dl_City_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 18110, 323, 5282, ccm_dl_House_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 18337, 550, 5054, ccm_dl_House_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 16243, -794, 2085, ccm_dl_Lego_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
