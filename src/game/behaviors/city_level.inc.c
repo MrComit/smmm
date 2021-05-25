@@ -25,11 +25,22 @@ void bhv_rubber_band_loop(void) {
                 set_mario_action(m, ACT_SHOT_FROM_CANNON, 0);
             }
             if (m->input & INPUT_B_PRESSED) {
+                m->vel[1] = 0;
                 set_mario_action(m, ACT_THROWN_FORWARD, 0);
-                o->oAction = 2;
+                o->oAction = 3;
             }
             break;
         case 2:
+            if (o->oTimer > 45) {
+                o->oAction = 4;
+                sDelayedWarpOp = 0x10;
+                sDelayedWarpTimer = 12;
+                sSourceWarpNodeId = 0x20;
+                music_changed_through_warp(sSourceWarpNodeId);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                break;
+            }
+        case 3:
             if (o->oTimer < 10) {
                 //o->header.gfx.scale[2] = approach_f32_asymptotic(o->header.gfx.scale[2], -3.0f, 0.7f);
                 o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], -3.0f, 1.0f, 1.0f);
@@ -38,13 +49,8 @@ void bhv_rubber_band_loop(void) {
                 o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 1.5f, 0.5f, 0.5f);
             } else if (o->oTimer < 45) {
                 o->header.gfx.scale[2] = approach_f32_asymptotic(o->header.gfx.scale[2], 1.0f, 0.5f);
-            } else {
-                o->oAction = 3;
-                sDelayedWarpOp = 0x10;
-                sDelayedWarpTimer = 12;
-                sSourceWarpNodeId = 0x20;
-                music_changed_through_warp(sSourceWarpNodeId);
-                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+            } else if (o->oTimer > 50) {
+                o->oAction = 0;
             }
             break;
     }
