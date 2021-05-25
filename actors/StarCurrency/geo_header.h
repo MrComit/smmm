@@ -4,7 +4,7 @@ extern u8 StarCurrency_star_surface_rgba16_ci8[];
 extern u8 StarCurrency_star_surface_rgba16_ci8_pal_rgba16[];
 extern u8 StarCurrency_star_carpet_ci4[];
 extern u8 StarCurrency_star_carpet_ci4_pal_rgba16[];
-extern Vtx StarCurrency_dl_mesh_layer_1_vtx_0[128];
+extern Vtx StarCurrency_dl_mesh_layer_1_vtx_0[124];
 extern Gfx StarCurrency_dl_mesh_layer_1_tri_0[];
 extern Vtx StarCurrency_dl_mesh_layer_1_vtx_1[20];
 extern Gfx StarCurrency_dl_mesh_layer_1_tri_1[];

@@ -754,6 +754,7 @@ void bhv_bedroom_object_init(void);
 void bhv_bedroom_object_loop(void);
 void bhv_broken_key_loop(void);
 void bhv_broken_key_init(void);
+void bhv_rubber_band_loop(void);
 
 
 

@@ -7726,3 +7726,14 @@ const BehaviorScript bhvExitWall[] = {
         CALL_NATIVE(bhv_exit_wall_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvRubberband[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_HOME(),
+    //CALL_NATIVE(bhv_rubber_band_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rubber_band_loop),
+    END_LOOP(),
+};

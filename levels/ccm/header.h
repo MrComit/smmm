@@ -59,4 +59,6 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/header.inc.h"
 
+#include "levels/ccm/rubberband/geo_header.h"
+
 #endif
