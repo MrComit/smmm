@@ -31,6 +31,7 @@ struct SaveFile
     u32 keys;
     u32 starPieces;
     u32 boosCaptured;
+    u32 currencyStars;
     s32 coinCount;
 
     struct SaveBlockSignature signature;
@@ -287,6 +288,8 @@ void save_file_set_keys(u32 key);
 
 u32 save_file_get_rooms(u32 index);
 void save_file_set_rooms(u32 room);
+u32 save_file_get_currency_flags(void);
+void save_file_set_currency_flags(u32 flag);
 
 void disable_warp_checkpoint(void);
 void check_if_should_set_warp_checkpoint(struct WarpNode *warpNode);

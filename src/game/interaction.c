@@ -805,6 +805,10 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
             save_file_set_newflags(1 << starKeyIndex, 0);
         } else if (isKey != 0) {
             save_file_set_keys(starKeyIndex);
+        } else if (o->oInteractionSubtype & INT_SUBTYPE_CURRENCY){
+            //gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
+            save_file_set_currency_flags(o->oBehParams >> 24);
+            isKey = 4;
         } else {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
             save_file_set_star_piece(o->oBehParams >> 24);

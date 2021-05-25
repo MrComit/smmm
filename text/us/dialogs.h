@@ -257,7 +257,7 @@ Do you want to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
-You've Collected a Key!\n\
+You've collected a Key!\n\
 Use this to unlock a\n\
 door somewhere in the\n\
 manor.\n\
@@ -266,14 +266,12 @@ Do you want to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
-You can punch enemies to\n\
-knock them down. Press [A]\n\
-to jump, [B] to punch.\n\
-Press [A] then [B] to Kick.\n\
-To pick something up,\n\
-press [B], too. To throw\n\
-something you're holding,\n\
-press [B] again."))
+You've collected a Star Coin!\n\
+Exchange them for goods and\n\
+services from other civilians.\n\
+Do you want to Save?\n\
+\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_016, 1, 3, 30, 200, _("\
 Hop on the shiny shell and\n\

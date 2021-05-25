@@ -32,3 +32,5 @@
 #include "teleporter/geo.inc.c"
 #include "key_broken/geo.inc.c"
 #include "lantern/geo.inc.c"
+
+#include "StarCurrency/geo.inc.c"

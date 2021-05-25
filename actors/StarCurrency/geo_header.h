@@ -1,0 +1,16 @@
+extern const GeoLayout StarCurrency_geo[];
+extern Lights1 StarCurrency_StarCenter_lights;
+extern u8 StarCurrency_star_surface_rgba16_ci8[];
+extern u8 StarCurrency_star_surface_rgba16_ci8_pal_rgba16[];
+extern u8 StarCurrency_star_carpet_ci4[];
+extern u8 StarCurrency_star_carpet_ci4_pal_rgba16[];
+extern Vtx StarCurrency_dl_mesh_layer_1_vtx_0[128];
+extern Gfx StarCurrency_dl_mesh_layer_1_tri_0[];
+extern Vtx StarCurrency_dl_mesh_layer_1_vtx_1[20];
+extern Gfx StarCurrency_dl_mesh_layer_1_tri_1[];
+extern Gfx mat_StarCurrency_Star[];
+extern Gfx mat_revert_StarCurrency_Star[];
+extern Gfx mat_StarCurrency_StarCenter[];
+extern Gfx mat_revert_StarCurrency_StarCenter[];
+extern Gfx StarCurrency_dl_mesh_layer_1[];
+extern Gfx StarCurrency_material_revert_render_settings[];

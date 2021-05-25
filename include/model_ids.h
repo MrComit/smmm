@@ -606,6 +606,7 @@
 #define MODEL_GHOSTSAND_BALL      0x3A
 #define MODEL_TELEPORTER          0x3B
 #define MODEL_BROKEN_KEY          0x3C
+#define MODEL_STAR_CURRENCY       0x3D
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF

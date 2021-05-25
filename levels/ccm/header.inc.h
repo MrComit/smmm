@@ -32,7 +32,7 @@ extern Gfx ccm_dl_House_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_House_mesh_layer_1_vtx_1[8];
 extern Gfx ccm_dl_House_mesh_layer_1_tri_1[];
 extern Vtx ccm_dl_Lego_mesh_layer_1_vtx_cull[8];
-extern Vtx ccm_dl_Lego_mesh_layer_1_vtx_0[141];
+extern Vtx ccm_dl_Lego_mesh_layer_1_vtx_0[110];
 extern Gfx ccm_dl_Lego_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_Lego_001_mesh_layer_1_vtx_cull[8];
 extern Vtx ccm_dl_Lego_001_mesh_layer_1_vtx_0[4];

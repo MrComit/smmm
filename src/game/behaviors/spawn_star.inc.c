@@ -17,21 +17,17 @@ void bhv_collect_star_init(void) {
     u8 currentLevelStarFlags;
 
     starId = (o->oBehParams >> 24) & 0xFF;
-    currentLevelStarFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, gCurrCourseNum - 1);
+    currentLevelStarFlags = save_file_get_currency_flags();
     if (currentLevelStarFlags & (1 << starId)) {
-        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_TRANSPARENT_STAR];
-    } else {
-        o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR];
+        o->activeFlags = 0;
     }
-
     obj_set_hitbox(o, &sCollectStarHitbox);
 }
 
 void bhv_collect_star_loop(void) {
-    o->oFaceAngleYaw += 0x800;
-
+    o->oFaceAngleYaw += 0x400; // originally 0x800
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        mark_obj_for_deletion(o);
+        o->activeFlags = 0;
         o->oInteractStatus = 0;
     }
 }

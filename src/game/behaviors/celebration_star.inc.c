@@ -19,8 +19,10 @@ void celeb_star_act_spin_around_mario(void) {
     o->oPosZ = o->oHomeZ + coss(o->oMoveAngleYaw) * (f32)(o->oCelebStarDiameterOfRotation / 2);
     o->oPosY += 5.0f;
     o->oFaceAngleYaw += 0x1000;
-    o->oFaceAnglePitch += 0x400;
-    o->oMoveAngleYaw += 0x2000;
+    //if (!cur_obj_has_model(MODEL_STAR_CURRENCY)) {
+        o->oFaceAnglePitch += 0x400;
+        o->oMoveAngleYaw += 0x2000;
+    //}
 
     if (o->oTimer == 40)
         o->oAction = CELEB_STAR_ACT_FACE_CAMERA;
@@ -44,11 +46,17 @@ void celeb_star_act_face_camera(void) {
         cur_obj_scale((f32) o->oTimer / 10.0);
 #endif
         o->oFaceAngleYaw += 0x1000;
-        o->oFaceAnglePitch += 0x400;
+        if (cur_obj_has_model(MODEL_STAR_CURRENCY))
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x500);
+        else
+            o->oFaceAnglePitch += 0x400;
     } else {
         //o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];
         o->oFaceAngleYaw += 0x400;
-        o->oFaceAnglePitch += 0x400;
+        if (cur_obj_has_model(MODEL_STAR_CURRENCY))
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x500);
+        else
+            o->oFaceAnglePitch += 0x400;
     }
 
     if (o->oTimer == 59)
