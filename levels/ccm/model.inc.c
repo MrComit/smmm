@@ -18,6 +18,10 @@ Lights1 ccm_dl_LegoWall_layer1_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
+Lights1 ccm_dl_Band_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
+
 Lights1 ccm_dl_Slingshot_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
@@ -2925,18 +2929,18 @@ Vtx ccm_dl_House_mesh_layer_1_vtx_0[40] = {
 	{{{-711, 3556, -711},0, {-4111, 7710},{0xB9, 0x0, 0x3, 0xFF}}},
 	{{{-711, 711, 711},0, {-8206, -481},{0xB9, 0x0, 0x3, 0xFF}}},
 	{{{-711, 3556, 711},0, {-8206, 7710},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{3556, 2133, -711},0, {12270, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
-	{{{6400, 2133, -711},0, {-4111, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
+	{{{3556, 2133, -711},0, {-12301, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{6400, -711, -711},0, {-4111, -481},{0x0, 0x8C, 0x46, 0xFF}}},
+	{{{3556, -711, -711},0, {-12301, -481},{0x0, 0x8C, 0x46, 0xFF}}},
+	{{{6400, 2133, -711},0, {-4111, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{6400, -711, 711},0, {-16, -481},{0x0, 0x8C, 0x46, 0xFF}}},
-	{{{6400, -711, 711},0, {-16, -481},{0x0, 0x8C, 0x46, 0xFF}}},
+	{{{6400, -711, -711},0, {-4111, -481},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{6400, 2133, -711},0, {-4111, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{6400, 2133, 711},0, {-16, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{3556, -711, 711},0, {8175, -481},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{3556, 2133, 711},0, {8175, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{3556, 2133, -711},0, {12270, 7710},{0x0, 0x8C, 0x46, 0xFF}}},
 	{{{3556, -711, -711},0, {12270, -481},{0x0, 0x8C, 0x46, 0xFF}}},
-	{{{6400, -711, -711},0, {-4111, -481},{0x0, 0x8C, 0x46, 0xFF}}},
 };
 
 Gfx ccm_dl_House_mesh_layer_1_tri_0[] = {
@@ -2951,11 +2955,11 @@ Gfx ccm_dl_House_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(22, 21, 18, 0, 22, 23, 21, 0),
 	gsSP2Triangles(24, 23, 22, 0, 24, 25, 23, 0),
 	gsSP2Triangles(26, 25, 24, 0, 26, 27, 25, 0),
-	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
+	gsSP2Triangles(28, 29, 30, 0, 28, 31, 29, 0),
 	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_0 + 32, 8, 0),
-	gsSP2Triangles(0, 1, 2, 0, 2, 3, 0, 0),
-	gsSP2Triangles(2, 4, 3, 0, 3, 4, 5, 0),
-	gsSP2Triangles(3, 5, 6, 0, 5, 7, 6, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(3, 4, 0, 0, 3, 5, 4, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -3204,6 +3208,55 @@ Vtx ccm_dl_Lego_001_mesh_layer_1_vtx_0[4] = {
 Gfx ccm_dl_Lego_001_mesh_layer_1_tri_0[] = {
 	gsSPVertex(ccm_dl_Lego_001_mesh_layer_1_vtx_0 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ccm_dl_Plane_mesh_layer_1_vtx_cull[8] = {
+	{{{-302, -27, -27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-302, -27, 27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-302, 27, 27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-302, 27, -27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{302, -27, -27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{302, -27, 27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{302, 27, 27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{302, 27, -27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx ccm_dl_Plane_mesh_layer_1_vtx_0[24] = {
+	{{{-302, 27, 27},0, {-16, 1008},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{-302, 27, -27},0, {-16, -16},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{-302, -27, -27},0, {1008, -16},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{-302, -27, 27},0, {1008, 1008},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{302, 27, 27},0, {-16, 1008},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{302, -27, 27},0, {1008, 1008},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{302, -27, -27},0, {1008, -16},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{302, 27, -27},0, {-16, -16},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-302, -27, -27},0, {1008, -16},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{-302, 27, -27},0, {-16, -16},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{302, 27, -27},0, {-16, -16},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{302, -27, -27},0, {1008, -16},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{-302, 27, 27},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-302, -27, 27},0, {1008, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{302, -27, 27},0, {1008, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{302, 27, 27},0, {-16, 1008},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-302, -27, 27},0, {1008, 1008},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{-302, -27, -27},0, {1008, -16},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{302, -27, -27},0, {1008, -16},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{302, -27, 27},0, {1008, 1008},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{-302, 27, -27},0, {-16, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-302, 27, 27},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{302, 27, 27},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{302, 27, -27},0, {-16, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+};
+
+Gfx ccm_dl_Plane_mesh_layer_1_tri_0[] = {
+	gsSPVertex(ccm_dl_Plane_mesh_layer_1_vtx_0 + 0, 24, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
+	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -3476,6 +3529,15 @@ Gfx mat_revert_ccm_dl_LegoWall_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_ccm_dl_Band[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetEnvColor(118, 86, 61, 255),
+	gsSPSetLights1(ccm_dl_Band_lights),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_ccm_dl_Slingshot[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
@@ -3560,6 +3622,16 @@ Gfx ccm_dl_Lego_001_mesh_layer_1[] = {
 	gsSPDisplayList(mat_ccm_dl_LegoWall_layer1),
 	gsSPDisplayList(ccm_dl_Lego_001_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_ccm_dl_LegoWall_layer1),
+	gsSPEndDisplayList(),
+};
+
+Gfx ccm_dl_Plane_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(ccm_dl_Plane_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_ccm_dl_Band),
+	gsSPDisplayList(ccm_dl_Plane_mesh_layer_1_tri_0),
 	gsSPEndDisplayList(),
 };
 

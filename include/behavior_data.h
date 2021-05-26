@@ -662,6 +662,7 @@ extern const BehaviorScript bhvSunblockBig[];
 extern const BehaviorScript bhvGardenGate[];
 extern const BehaviorScript bhvExitWall[];
 extern const BehaviorScript bhvRubberband[];
+extern const BehaviorScript bhvHorizontalPole[];
 
 
 

@@ -56,9 +56,6 @@ void play_climbing_sounds(struct MarioState *m, s32 b) {
 }
 
 s32 set_pole_position(struct MarioState *m, f32 offsetY) {
-    UNUSED s32 unused1;
-    UNUSED s32 unused2;
-    UNUSED s32 unused3;
     struct Surface *floor;
     struct Surface *ceil;
     f32 floorHeight;
@@ -185,6 +182,43 @@ s32 act_holding_pole(struct MarioState *m) {
     return FALSE;
 }
 
+s32 act_holding_horizontal_pole(struct MarioState *m) {
+    struct Object *marioObj = m->marioObj;
+
+    if ((m->input & INPUT_Z_PRESSED) || m->health < 0x100) {
+        add_tree_leaf_particles(m);
+        m->forwardVel = -2.0f;
+        return set_mario_action(m, ACT_SOFT_BONK, 0);
+    }
+
+    if (m->input & INPUT_A_PRESSED) {
+        add_tree_leaf_particles(m);
+        m->forwardVel = -m->faceAngle[0] / 140.0f;
+        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+    }
+    if (m->controller->stickY > 16.0f) {
+        //if (m->faceAngle[0] < 0) {
+            m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0xE000, 0x200);
+        //} else {
+        //    m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0xE000, 0x100);
+        //}
+    }
+
+    if (m->controller->stickY < -16.0f) {
+        //if (m->faceAngle[0] > 0) {
+            m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0x2000, 0x200);
+        //} else {
+        //    m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0x2000, 0x100);
+        //}
+    }
+
+    set_mario_animation(m, MARIO_ANIM_IDLE_ON_LEDGE);
+    //m->marioObj->header.gfx.animInfo.animFrame = 7;
+
+    vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], 0);
+    return FALSE;
+}
+
 s32 act_climbing_pole(struct MarioState *m) {
     s32 sp24;
     struct Object *marioObj = m->marioObj;
@@ -222,15 +256,60 @@ s32 act_climbing_pole(struct MarioState *m) {
     return FALSE;
 }
 
-s32 act_grab_pole_slow(struct MarioState *m) {
-    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+
+s32 act_climbing_horizontal_pole(struct MarioState *m) {
+    s32 sp24;
+    struct Object *marioObj = m->marioObj;
+    s16 cameraAngle = m->area->camera->yaw;
+
+    if (m->health < 0x100) {
+        add_tree_leaf_particles(m);
+        m->forwardVel = -2.0f;
+        return set_mario_action(m, ACT_SOFT_BONK, 0);
+    }
+
+    if (m->input & INPUT_A_PRESSED) {
+        add_tree_leaf_particles(m);
+        m->faceAngle[1] += 0x8000;
+        return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
+    }
+
+    if (m->controller->stickX < 8.0f) {
+        return set_mario_action(m, ACT_HOLDING_POLE, 0);
+    }
+
+    marioObj->oMarioPolePos += m->controller->stickX / 8.0f;
+    marioObj->oMarioPoleYawVel = 0;
+    m->faceAngle[1] = cameraAngle - approach_s32((s16)(cameraAngle - m->faceAngle[1]), 0, 0x400, 0x400);
 
     if (set_pole_position(m, 0.0f) == POLE_NONE) {
-        set_mario_animation(m, MARIO_ANIM_GRAB_POLE_SHORT);
-        if (is_anim_at_end(m)) {
-            set_mario_action(m, ACT_HOLDING_POLE, 0);
-        }
+        sp24 = m->controller->stickY / 4.0f * 0x10000;
+        set_mario_anim_with_accel(m, MARIO_ANIM_CLIMB_UP_POLE, sp24);
         add_tree_leaf_particles(m);
+        play_climbing_sounds(m, 1);
+    }
+
+    return FALSE;
+}
+
+s32 act_grab_pole_slow(struct MarioState *m) {
+    if (m->interactObj->oInteractionSubtype & INT_SUBTYPE_HORIZONTAL) {
+        play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+
+        if (set_pole_position(m, 0.0f) == POLE_NONE) {
+            set_mario_action(m, ACT_HOLDING_HORIZONTAL_POLE, 0);
+            m->faceAngle[1] = m->interactObj->oFaceAngleYaw;
+        }
+    } else {
+        play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+
+        if (set_pole_position(m, 0.0f) == POLE_NONE) {
+            set_mario_animation(m, MARIO_ANIM_GRAB_POLE_SHORT);
+            if (is_anim_at_end(m)) {
+                set_mario_action(m, ACT_HOLDING_POLE, 0);
+            }
+            add_tree_leaf_particles(m);
+        }
     }
 
     return FALSE;
@@ -238,22 +317,31 @@ s32 act_grab_pole_slow(struct MarioState *m) {
 
 s32 act_grab_pole_fast(struct MarioState *m) {
     struct Object *marioObj = m->marioObj;
+    if (m->interactObj->oInteractionSubtype & INT_SUBTYPE_HORIZONTAL) {
+        play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
 
-    play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
-    m->faceAngle[1] += marioObj->oMarioPoleYawVel;
-    marioObj->oMarioPoleYawVel = marioObj->oMarioPoleYawVel * 8 / 10;
-
-    if (set_pole_position(m, 0.0f) == POLE_NONE) {
-        if (marioObj->oMarioPoleYawVel > 0x800) {
-            set_mario_animation(m, MARIO_ANIM_GRAB_POLE_SWING_PART1);
-        } else {
-            set_mario_animation(m, MARIO_ANIM_GRAB_POLE_SWING_PART2);
-            if (is_anim_at_end(m)) {
-                marioObj->oMarioPoleYawVel = 0;
-                set_mario_action(m, ACT_HOLDING_POLE, 0);
-            }
+        if (set_pole_position(m, 0.0f) == POLE_NONE) {
+            marioObj->oMarioPoleYawVel = 0;
+            set_mario_action(m, ACT_HOLDING_HORIZONTAL_POLE, 0);
+            m->faceAngle[1] = m->interactObj->oFaceAngleYaw;
         }
-        add_tree_leaf_particles(m);
+    } else {
+        play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
+        m->faceAngle[1] += marioObj->oMarioPoleYawVel;
+        marioObj->oMarioPoleYawVel = marioObj->oMarioPoleYawVel * 8 / 10;
+
+        if (set_pole_position(m, 0.0f) == POLE_NONE) {
+            if (marioObj->oMarioPoleYawVel > 0x800) {
+                set_mario_animation(m, MARIO_ANIM_GRAB_POLE_SWING_PART1);
+            } else {
+                set_mario_animation(m, MARIO_ANIM_GRAB_POLE_SWING_PART2);
+                if (is_anim_at_end(m)) {
+                    marioObj->oMarioPoleYawVel = 0;
+                    set_mario_action(m, ACT_HOLDING_POLE, 0);
+                }
+            }
+            add_tree_leaf_particles(m);
+        }   
     }
 
     return FALSE;
@@ -857,6 +945,10 @@ s32 mario_execute_automatic_action(struct MarioState *m) {
         case ACT_CLIMBING_POLE:          cancel = act_climbing_pole(m);          break;
         case ACT_TOP_OF_POLE_TRANSITION: cancel = act_top_of_pole_transition(m); break;
         case ACT_TOP_OF_POLE:            cancel = act_top_of_pole(m);            break;
+
+        case ACT_HOLDING_HORIZONTAL_POLE: cancel = act_holding_horizontal_pole(m); break;
+        case ACT_CLIMBING_HORIZONTAL_POLE: cancel = act_climbing_horizontal_pole(m); break;
+
         case ACT_START_HANGING:          cancel = act_start_hanging(m);          break;
         case ACT_HANGING:                cancel = act_hanging(m);                break;
         case ACT_HANG_MOVING:            cancel = act_hang_moving(m);            break;

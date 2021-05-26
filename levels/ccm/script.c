@@ -50,6 +50,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_STAR_CURRENCY, 18783, 139, 1609, 0, 0, 0, 0x04000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 19854, 1561, 10918, 0, 0, 0, 0x05000000, bhvStar),
 		OBJECT(MODEL_RUBBERBAND, 17787, 119, 1560, 0, -180, 0, 0x00000000, bhvRubberband),
+		OBJECT(MODEL_NONE, 19573, 39, 5537, 0, 0, 0, 0x00100000, bhvHorizontalPole),
 		TERRAIN(ccm_area_1_collision),
 		ROOMS(ccm_area_1_collision_rooms),
 		MACRO_OBJECTS(ccm_area_1_macro_objs),

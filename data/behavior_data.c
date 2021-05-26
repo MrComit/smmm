@@ -7737,3 +7737,17 @@ const BehaviorScript bhvRubberband[] = {
         CALL_NATIVE(bhv_rubber_band_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvHorizontalPole[] = {
+    BEGIN(OBJ_LIST_POLELIKE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_INT(oInteractType, INTERACT_POLE),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_HORIZONTAL),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
+    CALL_NATIVE(bhv_horizontal_pole_init),
+    SET_INT(oIntangibleTimer, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_horizontal_pole_loop),
+    END_LOOP(),
+};
