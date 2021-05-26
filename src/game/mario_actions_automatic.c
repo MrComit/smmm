@@ -298,7 +298,7 @@ s32 act_grab_pole_slow(struct MarioState *m) {
 
         if (set_pole_position(m, 0.0f) == POLE_NONE) {
             set_mario_action(m, ACT_HOLDING_HORIZONTAL_POLE, 0);
-            m->faceAngle[1] = m->interactObj->oFaceAngleYaw;
+            //m->faceAngle[1] = m->interactObj->oFaceAngleYaw;
         }
     } else {
         play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
@@ -323,7 +323,7 @@ s32 act_grab_pole_fast(struct MarioState *m) {
         if (set_pole_position(m, 0.0f) == POLE_NONE) {
             marioObj->oMarioPoleYawVel = 0;
             set_mario_action(m, ACT_HOLDING_HORIZONTAL_POLE, 0);
-            m->faceAngle[1] = m->interactObj->oFaceAngleYaw;
+            //m->faceAngle[1] = m->interactObj->oFaceAngleYaw;
         }
     } else {
         play_sound_if_no_flag(m, SOUND_MARIO_WHOA, MARIO_MARIO_SOUND_PLAYED);
