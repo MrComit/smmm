@@ -13,6 +13,7 @@ const GeoLayout ccm_area_1_geo[] = {
 const GeoLayout ccm_dl_101__City_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 9128, -118, -2298, ccm_dl_Bridge_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 7412, -953, 9368, ccm_dl_City_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -2426, -161, -3026, ccm_dl_City_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 20322, -161, 8878, ccm_dl_City_002_mesh_layer_1),
@@ -20,9 +21,10 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 3915, 550, 13364, ccm_dl_House_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 16977, -794, 9019, ccm_dl_Lego_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 4732, 2308, 11285, ccm_dl_Lego_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 14904, -289, 1222, ccm_dl_LegoPiece_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 19573, 89, 5537, ccm_dl_Plane_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 19573, 39, 5537, ccm_dl_Plane_001_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 15660, 201, -6033, ccm_dl_Slingshot_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 15673, 201, -5842, ccm_dl_Slingshot_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
