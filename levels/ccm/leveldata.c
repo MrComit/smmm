@@ -48,3 +48,5 @@
 #include "levels/ccm/leveldata.inc.c"
 
 #include "levels/ccm/rubberband/model.inc.c"
+#include "levels/ccm/lego_piece/model.inc.c"
+#include "levels/ccm/lego_piece/collision.inc.c"

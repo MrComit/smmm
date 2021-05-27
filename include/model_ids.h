@@ -686,6 +686,7 @@
 
 // LEVEL 4 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_RUBBERBAND          0xFF
+#define MODEL_LEGO_PIECE          0xFE
 
 
 

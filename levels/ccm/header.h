@@ -61,4 +61,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/rubberband/geo_header.h"
 
+#include "levels/ccm/lego_piece/geo_header.h"
+
+#include "levels/ccm/lego_piece/collision_header.h"
+
 #endif

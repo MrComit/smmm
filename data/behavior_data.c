@@ -38,6 +38,7 @@
 #include "levels/hmc/header.h"
 #include "levels/ssl/header.h"
 #include "levels/bob/header.h"
+#include "levels/ccm/header.h"
 #include "levels/sl/header.h"
 #include "levels/wdw/header.h"
 #include "levels/jrb/header.h"
@@ -7749,5 +7750,19 @@ const BehaviorScript bhvHorizontalPole[] = {
     SET_INT(oIntangibleTimer, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_horizontal_pole_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvLegoPiece[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(lego_piece_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    SET_HOME(),
+    CALL_NATIVE(bhv_lego_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lego_piece_loop),
     END_LOOP(),
 };

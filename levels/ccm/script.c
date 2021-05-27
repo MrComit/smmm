@@ -34,6 +34,7 @@ const LevelScript level_ccm_entry[] = {
 	JUMP_LINK(script_func_global_8), 
 	JUMP_LINK(script_func_global_17), 
 	LOAD_MODEL_FROM_GEO(MODEL_RUBBERBAND, rubberband_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LEGO_PIECE, lego_piece_geo), 
 
 	AREA(1, ccm_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -50,6 +51,9 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_STAR_CURRENCY, 18783, 139, 1609, 0, 0, 0, 0x04000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 19854, 1561, 10918, 0, 0, 0, 0x05000000, bhvStar),
 		OBJECT(MODEL_RUBBERBAND, 15673, 119, -5812, 0, -180, 0, 0x00000000, bhvRubberband),
+		OBJECT(MODEL_LEGO_PIECE, 15566, -159, 1111, 0, 19, 0, 0x00000000, bhvLegoPiece),
+		OBJECT(MODEL_LEGO_PIECE, 17198, -159, 638, 0, 19, 0, 0x00010000, bhvLegoPiece),
+		OBJECT(MODEL_LEGO_PIECE, 18763, -159, 245, 0, 19, 0, 0x00020000, bhvLegoPiece),
 		OBJECT(MODEL_NONE, 19573, 89, 5537, 0, 0, 0, 0x00100000, bhvHorizontalPole),
 		TERRAIN(ccm_area_1_collision),
 		ROOMS(ccm_area_1_collision_rooms),
