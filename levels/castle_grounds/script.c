@@ -25,7 +25,8 @@ static const LevelScript script_func_local_1[] = {
     WARP_NODE(/*id*/ 0x84, /*destLevel*/ LEVEL_JRB, /*destArea*/ 0x02, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
     OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -2100, 260, 4750, /*angle*/ 0, 180, 0, /*behParam*/ 0x00850000, /*beh*/ bhvWarpPipe),
     WARP_NODE(/*id*/ 0x85, /*destLevel*/ LEVEL_CCM, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
-
+    OBJECT(/*model*/ MODEL_CASTLE_GROUNDS_WARP_PIPE, /*pos*/ -1750, 260, 4600, /*angle*/ 0, 180, 0, /*behParam*/ 0x00860000, /*beh*/ bhvWarpPipe),
+    WARP_NODE(/*id*/ 0x86, /*destLevel*/ LEVEL_BBH, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
 
 
     OBJECT(/*model*/ MODEL_NONE, /*pos*/ -1878, 260, 3964, /*angle*/ 0, 180, 0, /*behParam*/ 0x001F0000, /*beh*/ bhvInstantActiveWarp),
