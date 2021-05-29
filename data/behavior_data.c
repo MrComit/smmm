@@ -7777,6 +7777,7 @@ const BehaviorScript bhvShakyPlat[] = {
     SET_HOME(),
     //CALL_NATIVE(bhv_lego_piece_init),
     BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_shaky_plat_loop),
     END_LOOP(),
 };

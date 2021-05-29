@@ -54,7 +54,7 @@ extern Gfx ccm_dl_House_001_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_House_001_mesh_layer_1_vtx_1[12];
 extern Gfx ccm_dl_House_001_mesh_layer_1_tri_1[];
 extern Vtx ccm_dl_House_002_mesh_layer_1_vtx_cull[8];
-extern Vtx ccm_dl_House_002_mesh_layer_1_vtx_0[168];
+extern Vtx ccm_dl_House_002_mesh_layer_1_vtx_0[134];
 extern Gfx ccm_dl_House_002_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_House_003_mesh_layer_1_vtx_cull[8];
 extern Vtx ccm_dl_House_003_mesh_layer_1_vtx_0[4];

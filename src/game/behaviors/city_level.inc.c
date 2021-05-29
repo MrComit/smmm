@@ -6,8 +6,32 @@ Vec3s sLegoColors[] = {
 
 
 void bhv_shaky_plat_loop(void) {
-
-    
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFaceAnglePitch += o->oTimer & 1 ? 0x100 : -0x100;
+            if (o->oTimer > 15) {
+                o->oAction = 2;
+                play_sound(SOUND_GENERAL_CLAM_SHELL3, o->header.gfx.cameraToObject);
+            } 
+            break;
+        case 2:
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x4000, 0x800);
+            if (o->oTimer > 60) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x300);
+            if (o->oFaceAnglePitch == 0) {
+                o->oAction = 0;
+            }
+            break;
+    }
 }
 
 
