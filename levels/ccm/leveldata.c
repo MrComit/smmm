@@ -52,3 +52,5 @@
 #include "levels/ccm/lego_piece/collision.inc.c"
 #include "levels/ccm/shaky_plat/model.inc.c"
 #include "levels/ccm/shaky_plat/collision.inc.c"
+#include "levels/ccm/pound_lego/model.inc.c"
+#include "levels/ccm/pound_lego/collision.inc.c"

@@ -760,6 +760,8 @@ void bhv_horizontal_pole_loop(void);
 void bhv_lego_piece_loop(void);
 void bhv_lego_piece_init(void);
 void bhv_shaky_plat_loop(void);
+void bhv_pound_lego_loop(void);
+
 
 
 

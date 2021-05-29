@@ -5,6 +5,33 @@ Vec3s sLegoColors[] = {
 };
 
 
+void bhv_pound_lego_loop(void) {
+    s16 count;
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_is_mario_ground_pounding_platform()) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY -= 20.0f;
+            if (o->oPosY < o->oHomeY - 100.0f) {
+                spawn_mist_particles();
+                o->activeFlags = 0;
+                count = count_objects_with_behavior(bhvPoundLego);
+                if (count != 1) {
+                    spawn_orange_number(6 - count, 0, 50, 0);
+                } else {
+                    spawn_default_star(13610.0f, -460.0f, 8520.0f);
+                }
+                play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) 6 - count) << 16),
+                    gGlobalSoundSource);
+            }
+            break;
+    }
+}
+
+
 void bhv_shaky_plat_loop(void) {
     switch (o->oAction) {
         case 0:

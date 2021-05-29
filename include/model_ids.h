@@ -688,6 +688,7 @@
 #define MODEL_RUBBERBAND          0xFF
 #define MODEL_LEGO_PIECE          0xFE
 #define MODEL_SHAKY_PLAT          0xFD
+#define MODEL_POUND_LEGO          0xFC
 
 
 

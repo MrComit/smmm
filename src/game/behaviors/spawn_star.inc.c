@@ -90,7 +90,7 @@ void bhv_star_spawn_loop(void) {
             break;
 
         case 3:
-            o->oFaceAngleYaw += 0x800;
+            o->oFaceAngleYaw += 0x400;
             if (o->oTimer == 20) {
                 gObjCutsceneDone = TRUE;
                 clear_time_stop_flags(TIME_STOP_ENABLED | TIME_STOP_MARIO_AND_DOORS);
@@ -106,7 +106,7 @@ void bhv_star_spawn_loop(void) {
 }
 
 struct Object *spawn_star(struct Object *sp30, f32 sp34, f32 sp38, f32 sp3C) {
-    sp30 = spawn_object_abs_with_rot(o, 0, MODEL_STAR, bhvStarSpawnCoordinates, o->oPosX, o->oPosY,
+    sp30 = spawn_object_abs_with_rot(o, 0, MODEL_STAR_CURRENCY, bhvStarSpawnCoordinates, o->oPosX, o->oPosY,
                                      o->oPosZ, 0, 0, 0);
     sp30->oBehParams = o->oBehParams;
     sp30->oHomeX = sp34;
