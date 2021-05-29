@@ -7766,3 +7766,17 @@ const BehaviorScript bhvLegoPiece[] = {
         CALL_NATIVE(bhv_lego_piece_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvShakyPlat[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(shaky_plat_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x400),
+    SET_HOME(),
+    //CALL_NATIVE(bhv_lego_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shaky_plat_loop),
+    END_LOOP(),
+};

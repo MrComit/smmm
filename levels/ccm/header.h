@@ -65,4 +65,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/lego_piece/collision_header.h"
 
+#include "levels/ccm/shaky_plat/geo_header.h"
+
+#include "levels/ccm/shaky_plat/collision_header.h"
+
 #endif

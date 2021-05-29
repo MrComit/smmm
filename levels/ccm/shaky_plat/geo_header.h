@@ -1,0 +1,10 @@
+extern const GeoLayout shaky_plat_geo[];
+extern Lights1 shaky_plat_Platform_001_lights;
+extern u8 shaky_plat_book_cover_ci8[];
+extern u8 shaky_plat_book_cover_ci8_pal_rgba16[];
+extern Vtx shaky_plat_Shake_mesh_layer_1_vtx_0[14];
+extern Gfx shaky_plat_Shake_mesh_layer_1_tri_0[];
+extern Gfx mat_shaky_plat_Platform_001[];
+extern Gfx mat_revert_shaky_plat_Platform_001[];
+extern Gfx shaky_plat_Shake_mesh_layer_1[];
+extern Gfx shaky_plat_material_revert_render_settings[];

@@ -664,6 +664,7 @@ extern const BehaviorScript bhvExitWall[];
 extern const BehaviorScript bhvRubberband[];
 extern const BehaviorScript bhvHorizontalPole[];
 extern const BehaviorScript bhvLegoPiece[];
+extern const BehaviorScript bhvShakyPlat[];
 
 
 

@@ -50,3 +50,5 @@
 #include "levels/ccm/rubberband/model.inc.c"
 #include "levels/ccm/lego_piece/model.inc.c"
 #include "levels/ccm/lego_piece/collision.inc.c"
+#include "levels/ccm/shaky_plat/model.inc.c"
+#include "levels/ccm/shaky_plat/collision.inc.c"

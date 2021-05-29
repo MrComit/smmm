@@ -27,3 +27,4 @@
 
 #include "levels/ccm/rubberband/geo.inc.c"
 #include "levels/ccm/lego_piece/geo.inc.c"
+#include "levels/ccm/shaky_plat/geo.inc.c"

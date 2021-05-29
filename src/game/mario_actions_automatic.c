@@ -193,7 +193,7 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
 
     if (m->input & INPUT_A_PRESSED) {
         add_tree_leaf_particles(m);
-        m->forwardVel = -m->faceAngle[0] / 140.0f;
+        m->forwardVel = -m->faceAngle[0] / 110.0f;
         return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
     }
     if (m->controller->stickY > 16.0f) {

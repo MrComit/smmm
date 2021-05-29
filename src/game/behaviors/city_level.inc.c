@@ -5,6 +5,13 @@ Vec3s sLegoColors[] = {
 };
 
 
+void bhv_shaky_plat_loop(void) {
+
+    
+}
+
+
+
 void bhv_lego_piece_init(void) {
     o->os16F4 = sLegoColors[o->oBehParams2ndByte][0];
     o->os16F6 = sLegoColors[o->oBehParams2ndByte][1];
