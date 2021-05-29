@@ -1177,7 +1177,7 @@ void mode_radial_camera(struct Camera *c) {
 
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
-    switch (c->filler31[0]) {
+    switch (c->filler31[1]) {
         case 0:
             break;
         case 1:
@@ -5857,31 +5857,31 @@ BAD_RETURN(s32) cam_bob_tower(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
     //transition_to_camera_mode(c, CAMERA_MODE_FIXED, 90);
     //set_camera_mode_fixed(c, -5424, 595, 17408);
-    c->filler31[0] = 1;
+    c->filler31[1] = 1;
 }
 
 
 BAD_RETURN(s32) cam_wf_bathroom(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[0] = 2;
+    c->filler31[1] = 2;
 }
 
 
 BAD_RETURN(s32) cam_wf_mirror_room(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[0] = 3;
+    c->filler31[1] = 3;
 }
 
 
 BAD_RETURN(s32) cam_garden_fall(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[0] = 4;
+    c->filler31[1] = 4;
 }
 
 
 BAD_RETURN(s32) cam_underground(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[0] = 5;
+    c->filler31[1] = 5;
 }
 
 
@@ -6611,9 +6611,9 @@ s16 camera_course_processing(struct Camera *c) {
             b += 1;
         }
         if (!anyChecked) {
-            if (c->filler31[0])
+            if (c->filler31[1])
                 set_r_button_camera(c);
-            c->filler31[0] = 0;
+            c->filler31[1] = 0;
         }
     }
 
