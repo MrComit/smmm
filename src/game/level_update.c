@@ -550,7 +550,7 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             break;
         case MARIO_SPAWN_AIRBORNE_DEATH:
-            if (sWarpDest.nodeId = WARP_NODE_DEATH) {
+            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
                 gMarioState->faceAngle[1] = spawnNode->object->oFaceAngleYaw;
                 s8DirModeBaseYaw = spawnNode->object->oFaceAngleYaw + 0x8000;
                 //reset_objects_in_room(gMarioCurrentRoom, gCurrentArea->objectSpawnInfos);

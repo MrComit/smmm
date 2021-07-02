@@ -41,7 +41,7 @@ void bhv_shaky_plat_loop(void) {
             break;
         case 1:
             o->oFaceAnglePitch += o->oTimer & 1 ? 0x100 : -0x100;
-            if (o->oTimer > 15) {
+            if (o->oTimer > 20) {
                 o->oAction = 2;
                 play_sound(SOUND_GENERAL_CLAM_SHELL3, o->header.gfx.cameraToObject);
             } 

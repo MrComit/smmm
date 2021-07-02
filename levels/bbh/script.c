@@ -50,6 +50,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, -7817, 200, 123, 0, 0, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -7817, 200, 123, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, 0, -7817, 200, 123),
+		OBJECT(MODEL_NONE, -66, 250, -3133, 0, 0, 0, 0x00100000, bhvHorizontalPole),
 		TERRAIN(bbh_area_1_collision),
 		ROOMS(bbh_area_1_collision_rooms),
 		MACRO_OBJECTS(bbh_area_1_macro_objs),
