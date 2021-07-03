@@ -471,3 +471,78 @@ void bhv_ice_bobomb_loop(void) {
     //}
     o->oInteractStatus = 0;
 }
+
+
+void bobomb_chuckya_act_explode(void) {
+    struct Object *explosion;
+    if (o->oTimer < 5)
+        cur_obj_scale(1.0 + (f32) o->oTimer / 5.0);
+    else {
+        /*explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        explosion->oGraphYOffset += 100.0f;
+
+        create_respawner(MODEL_BLACK_BOBOMB, bhvBobomb, 3000);
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;*/
+        CL_explode_object(o, 0);
+    }
+}
+
+
+
+
+void bobomb_chuckya_check_interactions(void) {
+    obj_set_hitbox(o, &sIceBobombHitbox);
+    if (o->oDistanceToMario < 150.0f) {
+        //CL_explode_object(o, 0);
+        bobomb_chuckya_act_explode();
+    }
+}
+
+
+void stationary_bobomb_chuckya_free_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->parentObj->oAction == 3) {
+                o->oAction = BOBOMB_ACT_LAUNCHED;
+            }
+            break;
+        case BOBOMB_ACT_LAUNCHED:
+            bobomb_act_launched();
+            bobomb_chuckya_check_interactions();
+            break;
+        case BOBOMB_ACT_EXPLODE:
+            bobomb_chuckya_act_explode();
+            break;
+    }
+
+
+    //if (o->oBobombFuseTimer >= 151)
+    //    o->oAction = 3;
+}
+
+void bhv_bobomb_chuckya_init(void) {
+    o->oGravity = 3.0f;
+    o->oFriction = 0.8;
+    o->oBuoyancy = 1.3;
+    o->oInteractionSubtype = INT_SUBTYPE_KICKABLE;
+}
+
+void bhv_bobomb_chuckya_loop(void) {
+    s8 dustPeriodMinus1;
+    vec3f_copy(&o->oPosX, o->header.gfx.pos);
+    stationary_bobomb_chuckya_free_loop();
+    curr_obj_random_blink(&o->oBobombBlinkTimer);
+
+    if (o->oBobombFuseTimer >= 121)
+        dustPeriodMinus1 = 1;
+    else
+        dustPeriodMinus1 = 7;
+
+    if ((dustPeriodMinus1 & o->oBobombFuseTimer)
+        == 0) /* oBobombFuseTimer % 2 or oBobombFuseTimer % 8 */
+        spawn_object(o, MODEL_SMOKE, bhvBobombFuseSmoke);
+
+    cur_obj_play_sound_1(SOUND_AIR_BOBOMB_LIT_FUSE);
+
+    o->oBobombFuseTimer++;
+}

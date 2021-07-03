@@ -1,4 +1,48 @@
 // chuckya.c.inc
+static struct ObjectHitbox sChuckyaHitbox = {
+    /* interactType:      */ INTERACT_IGLOO_BARRIER,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 75,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 75,
+    /* hurtboxHeight:     */ 50,
+};
+
+
+void common_anchor_bomb_behavior(f32 forwardVel, f32 yVel, s32 sp30, struct Object *obj) {
+    //return;
+    if (obj == NULL)
+        return;
+    switch (o->parentObj->oChuckyaUnk88) {
+        case 0:
+            break;
+        case 1:
+            obj_set_gfx_pos_at_obj_pos(obj, o);
+            obj->header.gfx.pos[1] -= 25.0f;
+            break;
+        case 2:
+            //obj->oInteractStatus |= (sp30 + INT_STATUS_MARIO_UNK2);
+            obj->oForwardVel = forwardVel;
+            obj->oVelY = yVel;
+            o->parentObj->oChuckyaUnk88 = 0;
+            break;
+        case 3:
+            //gMarioObject->oInteractStatus |=
+            //    (INT_STATUS_MARIO_UNK2 + INT_STATUS_MARIO_UNK6); // loads 2 interactions at once?
+            //gMarioStates[0].forwardVel = 10.0f;
+            //gMarioStates[0].vel[1] = 10.0f;
+            o->parentObj->oChuckyaUnk88 = 0;
+            break;
+    }
+    o->oMoveAngleYaw = o->parentObj->oMoveAngleYaw;
+    if (o->parentObj->activeFlags == ACTIVE_FLAG_DEACTIVATED)
+        obj_mark_for_deletion(o);
+}
+
+
 
 void common_anchor_mario_behavior(f32 sp28, f32 sp2C, s32 sp30) {
     switch (o->parentObj->oChuckyaUnk88) {
@@ -28,6 +72,13 @@ void common_anchor_mario_behavior(f32 sp28, f32 sp2C, s32 sp30) {
 
 void bhv_chuckya_anchor_mario_loop(void) {
     common_anchor_mario_behavior(40.0f, 40.0f, 64);
+}
+
+void bhv_chuckya_anchor_bomb_loop(void) {
+    f32 dist = dist_between_objects(o, gMarioObject);
+    f32 fSpeed = dist / 40.0f;
+    //f32 ySpeed = fSpeed * 1.1f;
+    common_anchor_bomb_behavior(fSpeed, 60.0f, 64, o->parentObj->oObjF4);
 }
 
 s32 unknown_chuckya_function(s32 sp20, f32 sp24, f32 sp28, s32 sp2C) {
@@ -174,7 +225,123 @@ void chuckya_act_2(void) {
     }
 }
 
+void chuckya_bomb_act_0(void) {
+    s32 sp3C;
+    UNUSED u8 pad[16];
+    s32 sp28;
+    if (o->oTimer == 0)
+        o->oChuckyaUnkFC = 0;
+    o->oAngleToMario = obj_angle_to_object(o, gMarioObject);
+    switch (sp28 = o->oSubAction) {
+        case 0:
+            o->oForwardVel = 0;
+            if (cur_obj_lateral_dist_from_mario_to_home() < 2000.0f) {
+                cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
+                if (o->oChuckyaUnkFC > 40
+                    || abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) < 0x1000)
+                    o->oSubAction = 1;
+            } else
+                o->oSubAction = 3;
+            break;
+        case 1:
+            approach_forward_vel(&o->oForwardVel, 30.0f, 4.0f);
+            if (abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) > 0x4000)
+                o->oSubAction = 2;
+            if (cur_obj_lateral_dist_from_mario_to_home() > 2000.0f)
+                o->oSubAction = 3;
+            break;
+        case 2:
+            approach_forward_vel(&o->oForwardVel, 0, 4.0f);
+            if (o->oChuckyaUnkFC > 48)
+                o->oSubAction = 0;
+            break;
+        case 3:
+            if (cur_obj_lateral_dist_to_home() < 500.0f)
+                o->oForwardVel = 0;
+            else {
+                approach_forward_vel(&o->oForwardVel, 10.0f, 4.0f);
+                o->oAngleToMario = cur_obj_angle_to_home();
+                cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x800);
+            }
+            if (cur_obj_lateral_dist_from_mario_to_home() < 1900.0f)
+                o->oSubAction = 0;
+            break;
+    }
+    if (o->oSubAction != sp28)
+        o->oChuckyaUnkFC = 0;
+    else
+        o->oChuckyaUnkFC++;
+    cur_obj_init_animation_with_sound(4);
+    if (o->oForwardVel > 1.0f)
+        cur_obj_play_sound_1(SOUND_AIR_CHUCKYA_MOVE);
+}
+
+void chuckya_bomb_act_1(void) {
+    if (o->oSubAction == 0) {
+        if (cur_obj_init_animation_and_check_if_near_end(0)) {
+            o->oSubAction++;
+            o->oObjF4 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvBombHeldByChuckya);
+        }
+        o->oChuckyaUnkFC = 10.0f;
+        o->oChuckyaUnk100 = 0;
+        o->oForwardVel = 0.0f;
+    } else {
+        if (o->oSubAction == 1) {
+            cur_obj_init_animation_with_sound(1);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);//+= INT_STATUS_GRABBED_MARIO;
+            o->oObjF4->oMoveAngleYaw = o->oMoveAngleYaw;
+            if (o->oChuckyaUnkFC-- < 0)
+                if (check_if_moving_over_floor(50.0f, 150.0f) || o->oChuckyaUnkFC < -16) {
+                    o->oSubAction++;
+                }
+        } else {
+            cur_obj_init_animation_with_sound(3);
+            if (cur_obj_check_anim_frame(18)) {
+                cur_obj_play_sound_2(SOUND_OBJ_UNKNOWN4);
+                o->oChuckyaUnk88 = 2;
+                o->oAction = 3;
+                //o->oInteractStatus &= ~(INT_STATUS_GRABBED_MARIO);
+            }
+        }
+    }
+}
+
+void chuckya_bomb_act_3(void) {
+    o->oForwardVel = 0;
+    o->oVelY = 0;
+    cur_obj_init_animation_with_sound(4);
+    if (o->oTimer > 100)
+        o->oAction = 0;
+}
+
+void chuckya_bomb_act_2(void) {
+    if (o->oMoveFlags & (OBJ_MOVE_HIT_WALL | OBJ_MOVE_MASK_IN_WATER | OBJ_MOVE_LANDED)) {
+        obj_mark_for_deletion(o);
+        obj_spawn_loot_yellow_coins(o, 5, 20.0f);
+        spawn_mist_particles_with_sound(SOUND_OBJ_CHUCKYA_DEATH);
+    }
+}
+
 void (*sChuckyaActions[])(void) = { chuckya_act_0, chuckya_act_1, chuckya_act_2, chuckya_act_3 };
+void (*sChuckyaBombActions[])(void) = { chuckya_bomb_act_0, chuckya_bomb_act_1, chuckya_bomb_act_2, chuckya_bomb_act_3 };
+
+void chuckya_move_bomb(void) {
+    cur_obj_update_floor_and_walls();
+    cur_obj_call_action_function(sChuckyaBombActions);
+    if (o->oBehParams2ndByte == 0)
+        cur_obj_move_standard(-30);
+    if (o->oAction == 0) {
+        if (o->oDistanceToMario < 1000.0f) {
+            if (o->oTimer > 10) {
+                o->oAction = 1;
+                o->oChuckyaUnk88 = 1;
+                cur_obj_play_sound_2(SOUND_OBJ_UNKNOWN3);
+            }
+        } else {
+            o->oTimer = 0;
+        }
+    }
+}
 
 void chuckya_move(void) {
     cur_obj_update_floor_and_walls();
@@ -206,4 +373,14 @@ void bhv_chuckya_loop(void) {
     }
     o->oInteractStatus = 0;
     print_debug_bottom_up("md %d", o->oAction);
+}
+
+
+
+void bhv_chuckya_bomb_loop(void) {
+    //cur_obj_scale(2.0f);
+    obj_set_hitbox(o, &sChuckyaHitbox);
+    chuckya_move_bomb();
+
+    o->oInteractStatus = 0;
 }

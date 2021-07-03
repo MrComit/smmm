@@ -7796,3 +7796,49 @@ const BehaviorScript bhvPoundLego[] = {
         CALL_NATIVE(bhv_pound_lego_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvChuckyaBomb[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, chuckya_seg8_anims_0800C070),
+    ANIMATE(5),
+    //SET_INT(oInteractType, INTERACT_IGLOO_BARRIER),
+    //SET_HITBOX(/*Radius*/ 150, /*Height*/ 100),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvChuckyaAnchorBomb),
+    SET_INT(oNumLootCoins, 5),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    SCALE(0, 200),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_chuckya_bomb_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBombHeldByChuckya[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, bobomb_seg8_anims_0802396C),
+    //DROP_TO_FLOOR(),
+    ANIMATE(1),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_bobomb_chuckya_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bobomb_chuckya_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvChuckyaAnchorBomb[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    SET_FLOAT(oParentRelativePosY, -60),
+    SET_FLOAT(oParentRelativePosZ, 150),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_chuckya_anchor_bomb_loop),
+    END_LOOP(),
+};

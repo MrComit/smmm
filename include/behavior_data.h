@@ -666,6 +666,10 @@ extern const BehaviorScript bhvHorizontalPole[];
 extern const BehaviorScript bhvLegoPiece[];
 extern const BehaviorScript bhvShakyPlat[];
 extern const BehaviorScript bhvPoundLego[];
+extern const BehaviorScript bhvChuckyaBomb[];
+extern const BehaviorScript bhvBombHeldByChuckya[];
+extern const BehaviorScript bhvChuckyaAnchorBomb[];
+
 
 
 

@@ -761,6 +761,10 @@ void bhv_lego_piece_loop(void);
 void bhv_lego_piece_init(void);
 void bhv_shaky_plat_loop(void);
 void bhv_pound_lego_loop(void);
+void bhv_chuckya_bomb_loop(void);
+void bhv_chuckya_anchor_bomb_loop(void);
+void bhv_bobomb_chuckya_loop(void);
+void bhv_bobomb_chuckya_init(void);
 
 
 
