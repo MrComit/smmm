@@ -102,7 +102,7 @@ void scroll_bbh_dl_Waterfall_mesh_layer_2_vtx_0() {
 }
 void scroll_bbh_dl_Waterfall_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 11;
+	int count = 15;
 	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
