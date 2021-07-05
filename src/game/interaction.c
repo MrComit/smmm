@@ -1518,12 +1518,19 @@ u32 check_object_grab_mario(struct MarioState *m, UNUSED u32 interactType, struc
     return FALSE;
 }
 
+extern f32 gHorizontalPoleSpeed;
+
 u32 interact_pole(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     s32 actionId = m->action & ACT_ID_MASK;
     if (actionId >= 0x080 && actionId < 0x0A0) {
         if ((!(m->prevAction & ACT_FLAG_ON_POLE) || (m->actionTimer > 10 && m->action == ACT_TRIPLE_JUMP))|| m->usedObj != o) {
             u32 lowSpeed = (m->forwardVel <= 10.0f);
             struct Object *marioObj = m->marioObj;
+
+            if (o->oInteractionSubtype & INT_SUBTYPE_HORIZONTAL) {
+                gHorizontalPoleSpeed = m->forwardVel * 2.5f;
+            }
+
 
             mario_stop_riding_and_holding(m);
             m->usedObj = (m->interactObj = o);

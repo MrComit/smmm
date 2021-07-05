@@ -16,6 +16,8 @@
 #include "camera.h"
 #include "level_table.h"
 #include "rumble_init.h"
+#include "object_helpers.h"
+#include "print.h"
 
 #define POLE_NONE          0
 #define POLE_TOUCHED_FLOOR 1
@@ -182,40 +184,65 @@ s32 act_holding_pole(struct MarioState *m) {
     return FALSE;
 }
 
+f32 gHorizontalPoleSpeed = 0;
+f32 gHorizontalPoleMomentum = 0;
+
 s32 act_holding_horizontal_pole(struct MarioState *m) {
     struct Object *marioObj = m->marioObj;
-
+    f32 friction = 0.95f;
     if ((m->input & INPUT_Z_PRESSED) || m->health < 0x100) {
         add_tree_leaf_particles(m);
         m->forwardVel = -2.0f;
+        gHorizontalPoleMomentum = 0;
+        gHorizontalPoleSpeed = 0;
+        m->faceAngle[0] = 0;
         return set_mario_action(m, ACT_SOFT_BONK, 0);
     }
 
     if (m->input & INPUT_A_PRESSED) {
         add_tree_leaf_particles(m);
-        m->forwardVel = -m->faceAngle[0] / 110.0f;
-        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
-    }
-    if (m->controller->stickY > 16.0f) {
-        //if (m->faceAngle[0] < 0) {
-            m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0xE000, 0x200);
-        //} else {
-        //    m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0xE000, 0x100);
-        //}
+        set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+        gHorizontalPoleSpeed /= 2;
+        m->forwardVel = gHorizontalPoleSpeed;
+        m->vel[1] = absf(gHorizontalPoleSpeed) / 1.2f;
+        gHorizontalPoleMomentum = 0;
+        gHorizontalPoleSpeed = 0;
+        m->faceAngle[0] = 0;
+        return;
     }
 
-    if (m->controller->stickY < -16.0f) {
-        //if (m->faceAngle[0] > 0) {
-            m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0x2000, 0x200);
-        //} else {
-        //    m->faceAngle[0] = approach_s16_symmetric(m->faceAngle[0], 0x2000, 0x100);
-        //}
+    gHorizontalPoleMomentum = approach_f32(gHorizontalPoleMomentum, 0.0f, 0.1f, 0.1f);
+    if (m->controller->stickY > 16.0f) {
+        friction = 1.0f;
+        gHorizontalPoleMomentum += 0.4f;
+    } else if (m->controller->stickY < -16.0f) {
+        friction = 1.0f;
+        gHorizontalPoleMomentum -= 0.4f;
+    }
+
+
+    if (gHorizontalPoleMomentum > 5.0f) {
+        gHorizontalPoleMomentum = 5.0f;
+    } else if (gHorizontalPoleMomentum < -5.0f) {
+        gHorizontalPoleMomentum = -5.0f;
+    }
+
+    m->faceAngle[0] -= 0x20 * gHorizontalPoleSpeed;
+    gHorizontalPoleSpeed += (coss(m->faceAngle[0] - 0x4000) * 5) + gHorizontalPoleMomentum;
+    gHorizontalPoleSpeed *= friction;
+
+    if (gHorizontalPoleSpeed > 150.0f) {
+        gHorizontalPoleSpeed = 150.0f;
+    } else if (gHorizontalPoleSpeed < -150.0f) {
+        gHorizontalPoleSpeed = -150.0f;
     }
 
     set_mario_animation(m, MARIO_ANIM_IDLE_ON_LEDGE);
     //m->marioObj->header.gfx.animInfo.animFrame = 7;
 
     vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], 0);
+    print_text_fmt_int(80, 80, "%x", m->faceAngle[0]);
+    //print_text_fmt_int(120, 80, "%d", gHorizontalPoleSpeed);
     return FALSE;
 }
 
