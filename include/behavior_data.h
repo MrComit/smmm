@@ -669,6 +669,8 @@ extern const BehaviorScript bhvPoundLego[];
 extern const BehaviorScript bhvChuckyaBomb[];
 extern const BehaviorScript bhvBombHeldByChuckya[];
 extern const BehaviorScript bhvChuckyaAnchorBomb[];
+extern const BehaviorScript bhvGreenCoin[];
+extern const BehaviorScript bhvHiddenGreenCoinStar[];
 
 
 

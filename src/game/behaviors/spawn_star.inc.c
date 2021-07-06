@@ -33,6 +33,7 @@ void bhv_collect_star_loop(void) {
 }
 
 void bhv_star_spawn_init(void) {
+    o->oInteractionSubtype |= INT_SUBTYPE_CURRENCY;
     o->oMoveAngleYaw = atan2s(o->oHomeZ - o->oPosZ, o->oHomeX - o->oPosX);
     o->oStarSpawnDisFromHome = sqrtf(sqr(o->oHomeX - o->oPosX) + sqr(o->oHomeZ - o->oPosZ));
     o->oVelY = (o->oHomeY - o->oPosY) / 30.0f;

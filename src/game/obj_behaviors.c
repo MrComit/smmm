@@ -768,6 +768,19 @@ void spawn_orange_number(s8 behParam, s16 relX, s16 relY, s16 relZ) {
     orangeNumber->oPosY += 25.0f;
 }
 
+void spawn_orange_number_two_digit(u16 behParam, s16 relX, s16 relY, s16 relZ) {
+    struct Object *orangeNumber, *orangeNumber2;
+
+    if (behParam >= 10) {
+        orangeNumber = spawn_object_relative(behParam % 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber2 = spawn_object_relative(behParam / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber->oF4 = 1;
+        orangeNumber2->oF4 = 2;
+    } else {
+        orangeNumber = spawn_object_relative(behParam, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+    }
+}
+
 /**
  * Unused variables for debug_sequence_tracker.
  */

@@ -17,4 +17,11 @@ void bhv_orange_number_loop(void) {
         sp1C->oPosY -= 30.f;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
+    if (o->oF4 == 1) {
+        o->oPosX = o->oHomeX + (sins(gCamera->yaw + 0x4000) * 20.0f);
+        o->oPosZ = o->oHomeZ + (coss(gCamera->yaw + 0x4000) * 20.0f);
+    } else if (o->oF4 == 2) {
+        o->oPosX = o->oHomeX + (sins(gCamera->yaw - 0x4000) * 20.0f);
+        o->oPosZ = o->oHomeZ + (coss(gCamera->yaw - 0x4000) * 20.0f);
+    }
 }

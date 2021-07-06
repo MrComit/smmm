@@ -7842,3 +7842,26 @@ const BehaviorScript bhvChuckyaAnchorBomb[] = {
         CALL_NATIVE(bhv_chuckya_anchor_bomb_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvGreenCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, -1),
+    CALL_NATIVE(bhv_green_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_green_coin_loop),
+        ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvHiddenGreenCoinStar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hidden_green_coin_star_loop),
+    END_LOOP(),
+};

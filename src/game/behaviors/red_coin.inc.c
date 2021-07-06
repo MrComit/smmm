@@ -19,6 +19,19 @@ static struct ObjectHitbox sRedCoinHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+
+static struct ObjectHitbox sGreenCoinHitbox = {
+    /* interactType:      */ INTERACT_COIN,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 100,
+    /* height:            */ 64,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
 /**
  * Red coin initialization function. Sets the coin's hitbox and parent object.
  */
@@ -77,5 +90,55 @@ void bhv_red_coin_loop(void) {
         coin_collected();
         // Despawn the coin.
         o->oInteractStatus = 0;
+    }
+}
+
+
+
+void bhv_green_coin_init(void) {
+    struct Object *hiddenRedCoinStar;
+
+    // Set the red coins to have a parent of the closest red coin star.
+    hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenGreenCoinStar);
+    if (hiddenRedCoinStar != NULL)
+        o->parentObj = hiddenRedCoinStar;
+
+    obj_set_hitbox(o, &sGreenCoinHitbox);
+}
+
+
+void bhv_green_coin_loop(void) {
+    if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        if (o->parentObj != NULL) {
+            o->parentObj->oHiddenStarTriggerCounter++;
+            if (o->parentObj->oHiddenStarTriggerCounter != 100) {
+                spawn_orange_number_two_digit(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
+            }
+            play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
+        }
+
+        coin_collected();
+        o->oInteractStatus = 0;
+    }
+}
+
+
+
+
+void bhv_hidden_green_coin_star_loop(void) {
+    //gRedCoinsCollected = o->oHiddenStarTriggerCounter;
+    switch (o->oAction) {
+        case 0:
+            if (o->oHiddenStarTriggerCounter >= 100)
+                o->oAction = 1;
+            break;
+
+        case 1:
+            if (o->oTimer > 2) {
+                spawn_default_star(o->oPosX, o->oPosY, o->oPosZ);
+                spawn_mist_particles();
+                o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+            }
+            break;
     }
 }

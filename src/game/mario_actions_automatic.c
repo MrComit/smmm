@@ -190,6 +190,12 @@ f32 gHorizontalPoleMomentum = 0;
 s32 act_holding_horizontal_pole(struct MarioState *m) {
     struct Object *marioObj = m->marioObj;
     f32 friction = 0.95f;
+    f32 stickX = m->controller->stickX * sins((gCamera->yaw + 0x8000) - m->faceAngle[1]);
+    f32 stickY = m->controller->stickY * coss((gCamera->yaw + 0x8000) - m->faceAngle[1]);
+    s32 isStickNegative = stickX + stickY < 0;
+    f32 stickD = sqrtf((stickX * stickX) + (stickY * stickY));
+    if (isStickNegative)
+        stickD = -stickD;
     if ((m->input & INPUT_Z_PRESSED) || m->health < 0x100) {
         add_tree_leaf_particles(m);
         m->forwardVel = -2.0f;
@@ -202,7 +208,7 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
     if (m->input & INPUT_A_PRESSED) {
         add_tree_leaf_particles(m);
         set_mario_action(m, ACT_TRIPLE_JUMP, 0);
-        gHorizontalPoleSpeed /= 2;
+        gHorizontalPoleSpeed /= 3.3333;
         m->forwardVel = gHorizontalPoleSpeed;
         m->vel[1] = absf(gHorizontalPoleSpeed) / 1.2f;
         gHorizontalPoleMomentum = 0;
@@ -212,10 +218,10 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
     }
 
     gHorizontalPoleMomentum = approach_f32(gHorizontalPoleMomentum, 0.0f, 0.1f, 0.1f);
-    if (m->controller->stickY > 16.0f) {
+    if (stickD > 16.0f) {
         friction = 1.0f;
         gHorizontalPoleMomentum += 0.4f;
-    } else if (m->controller->stickY < -16.0f) {
+    } else if (stickD < -16.0f) {
         friction = 1.0f;
         gHorizontalPoleMomentum -= 0.4f;
     }
@@ -231,17 +237,18 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
     gHorizontalPoleSpeed += (coss(m->faceAngle[0] - 0x4000) * 5) + gHorizontalPoleMomentum;
     gHorizontalPoleSpeed *= friction;
 
-    if (gHorizontalPoleSpeed > 150.0f) {
-        gHorizontalPoleSpeed = 150.0f;
-    } else if (gHorizontalPoleSpeed < -150.0f) {
-        gHorizontalPoleSpeed = -150.0f;
+    if (gHorizontalPoleSpeed > 250.0f) {
+        gHorizontalPoleSpeed = 250.0f;
+    } else if (gHorizontalPoleSpeed < -250.0f) {
+        gHorizontalPoleSpeed = -250.0f;
     }
 
     set_mario_animation(m, MARIO_ANIM_IDLE_ON_LEDGE);
     //m->marioObj->header.gfx.animInfo.animFrame = 7;
 
     vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], 0);
-    print_text_fmt_int(80, 80, "%x", m->faceAngle[0]);
+    //print_text_fmt_int(80, 80, "%x", m->faceAngle[1]);
+    //print_text_fmt_int(80, 60, "%x", gCamera->yaw);
     //print_text_fmt_int(120, 80, "%d", gHorizontalPoleSpeed);
     return FALSE;
 }

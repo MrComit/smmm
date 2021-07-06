@@ -39,7 +39,7 @@ extern u8 bbh_dl_waterfall_i8[];
 extern Vtx bbh_dl_Grass_mesh_layer_1_vtx_cull[8];
 extern Vtx bbh_dl_Grass_mesh_layer_1_vtx_0[83];
 extern Gfx bbh_dl_Grass_mesh_layer_1_tri_0[];
-extern Vtx bbh_dl_Grass_mesh_layer_1_vtx_1[183];
+extern Vtx bbh_dl_Grass_mesh_layer_1_vtx_1[186];
 extern Gfx bbh_dl_Grass_mesh_layer_1_tri_1[];
 extern Vtx bbh_dl_Grass_mesh_layer_1_vtx_2[45];
 extern Gfx bbh_dl_Grass_mesh_layer_1_tri_2[];
