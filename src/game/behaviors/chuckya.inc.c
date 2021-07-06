@@ -75,10 +75,11 @@ void bhv_chuckya_anchor_mario_loop(void) {
 }
 
 void bhv_chuckya_anchor_bomb_loop(void) {
-    f32 dist = dist_between_objects(o, gMarioObject);
+    f32 dist = lateral_dist_between_objects(o, gMarioObject);
+    f32 yDist = gMarioState->pos[1] - o->parentObj->oPosY;
     f32 fSpeed = dist / 40.0f;
-    //f32 ySpeed = fSpeed * 1.1f;
-    common_anchor_bomb_behavior(fSpeed, 60.0f, 64, o->parentObj->oObjF4);
+    f32 ySpeed = 60.0f + (yDist / 40.0f);
+    common_anchor_bomb_behavior(fSpeed, ySpeed, 64, o->parentObj->oObjF4);
 }
 
 s32 unknown_chuckya_function(s32 sp20, f32 sp24, f32 sp28, s32 sp2C) {
@@ -288,13 +289,15 @@ void chuckya_bomb_act_1(void) {
     } else {
         if (o->oSubAction == 1) {
             cur_obj_init_animation_with_sound(1);
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);//+= INT_STATUS_GRABBED_MARIO;
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0xA00);//+= INT_STATUS_GRABBED_MARIO;
             o->oObjF4->oMoveAngleYaw = o->oMoveAngleYaw;
             if (o->oChuckyaUnkFC-- < 0)
                 if (check_if_moving_over_floor(50.0f, 150.0f) || o->oChuckyaUnkFC < -16) {
                     o->oSubAction++;
                 }
         } else {
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
+            o->oObjF4->oMoveAngleYaw = o->oMoveAngleYaw;
             cur_obj_init_animation_with_sound(3);
             if (cur_obj_check_anim_frame(18)) {
                 cur_obj_play_sound_2(SOUND_OBJ_UNKNOWN4);
@@ -331,7 +334,7 @@ void chuckya_move_bomb(void) {
     if (o->oBehParams2ndByte == 0)
         cur_obj_move_standard(-30);
     if (o->oAction == 0) {
-        if (o->oDistanceToMario < 1000.0f) {
+        if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f) {
             if (o->oTimer > 10) {
                 o->oAction = 1;
                 o->oChuckyaUnk88 = 1;
