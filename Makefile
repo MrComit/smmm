@@ -207,6 +207,12 @@ ifeq ($(HVQM),1)
   SRC_DIRS += src/hvqm
 endif
 
+SMMM_DEBUG ?= 1
+$(eval $(call validate-option,HVQM,0 1))
+ifeq ($(SMMM_DEBUG),1)
+  DEFINES += SMMM_DEBUG=1
+endif
+
 # GODDARD - whether to use libgoddard (Mario Head)
 #   1 - includes code in ROM
 #   0 - does not 

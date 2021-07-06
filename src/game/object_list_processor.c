@@ -352,12 +352,24 @@ void print_text(s32, s32, char*);
 f32 intDist;
 Vec3f intersect;
 
+
+void mario_l_to_levitate(void) {
+    if (gMarioState->controller->buttonPressed & L_TRIG) {
+         set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);   
+    } else if (gMarioState->controller->buttonDown & L_TRIG)
+        gMarioState->pos[1] += 20.0f;
+}
+
+
 /**
  * Mario's primary behavior update function.
  */
 void bhv_mario_update(void) {
     u32 particleFlags = 0;
     s32 i;
+    #ifdef SMMM_DEBUG
+        mario_l_to_levitate();
+    #endif
 
     //print_text_fmt_int(20, 80, "%x", sPoolFreeSpace);
 
