@@ -18,10 +18,10 @@ void bhv_orange_number_loop(void) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
     if (o->oF4 == 1) {
-        o->oPosX = o->oHomeX + (sins(gCamera->yaw + 0x4000) * 20.0f);
-        o->oPosZ = o->oHomeZ + (coss(gCamera->yaw + 0x4000) * 20.0f);
+        o->oPosX = o->oHomeX + (sins(gCamera->yaw + 0x4000) * o->oFloatF8);
+        o->oPosZ = o->oHomeZ + (coss(gCamera->yaw + 0x4000) * o->oFloatF8);
     } else if (o->oF4 == 2) {
-        o->oPosX = o->oHomeX + (sins(gCamera->yaw - 0x4000) * 20.0f);
-        o->oPosZ = o->oHomeZ + (coss(gCamera->yaw - 0x4000) * 20.0f);
+        o->oPosX = o->oHomeX + (sins(gCamera->yaw - 0x4000) * o->oFloatF8);
+        o->oPosZ = o->oHomeZ + (coss(gCamera->yaw - 0x4000) * o->oFloatF8);
     }
 }

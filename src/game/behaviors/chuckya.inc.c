@@ -313,7 +313,7 @@ void chuckya_bomb_act_3(void) {
     o->oForwardVel = 0;
     o->oVelY = 0;
     cur_obj_init_animation_with_sound(4);
-    if (o->oTimer > 100)
+    if (o->oTimer > 60)
         o->oAction = 0;
 }
 

@@ -768,7 +768,7 @@ void spawn_orange_number(s8 behParam, s16 relX, s16 relY, s16 relZ) {
     orangeNumber->oPosY += 25.0f;
 }
 
-void spawn_orange_number_two_digit(u16 behParam, s16 relX, s16 relY, s16 relZ) {
+void spawn_orange_number_two_digit(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist) {
     struct Object *orangeNumber, *orangeNumber2;
 
     if (behParam >= 10) {
@@ -776,8 +776,27 @@ void spawn_orange_number_two_digit(u16 behParam, s16 relX, s16 relY, s16 relZ) {
         orangeNumber2 = spawn_object_relative(behParam / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
         orangeNumber->oF4 = 1;
         orangeNumber2->oF4 = 2;
+        orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = dist;
     } else {
         orangeNumber = spawn_object_relative(behParam, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+    }
+}
+
+
+void spawn_orange_number_two_digit_scale(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale) {
+    struct Object *orangeNumber, *orangeNumber2;
+
+    if (behParam >= 10) {
+        orangeNumber = spawn_object_relative(behParam % 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber2 = spawn_object_relative(behParam / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber->oF4 = 1;
+        orangeNumber2->oF4 = 2;
+        orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = dist;
+        obj_scale(orangeNumber, scale);
+        obj_scale(orangeNumber2, scale);
+    } else {
+        orangeNumber = spawn_object_relative(behParam, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        obj_scale(orangeNumber, scale);
     }
 }
 

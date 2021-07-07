@@ -112,7 +112,7 @@ void bhv_green_coin_loop(void) {
         if (o->parentObj != NULL) {
             o->parentObj->oHiddenStarTriggerCounter++;
             if (o->parentObj->oHiddenStarTriggerCounter != 100) {
-                spawn_orange_number_two_digit(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
+                spawn_orange_number_two_digit_scale(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0, 15.0f, 0.75f);
             }
             play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
         }
