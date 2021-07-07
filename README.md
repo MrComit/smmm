@@ -1,3 +1,8 @@
+# Super Mario and the Monstrous Manor
+
+- Hack Made by MrComit
+
+
 # UltraSM64
 
 - This repo contains a full decompilation of Super Mario 64 (J), (U), (E), and (SH).
