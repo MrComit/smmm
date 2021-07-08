@@ -124,9 +124,9 @@ void bhv_green_coin_loop(void) {
 
 
 
-
+extern s8 gGreenCoinsCollected;
 void bhv_hidden_green_coin_star_loop(void) {
-    //gRedCoinsCollected = o->oHiddenStarTriggerCounter;
+    gGreenCoinsCollected = o->oHiddenStarTriggerCounter;
     switch (o->oAction) {
         case 0:
             if (o->oHiddenStarTriggerCounter >= 100)

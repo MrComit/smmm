@@ -18,6 +18,9 @@
 #define SURFACE_SLIPPERY                     0x0014 // Slippery
 #define SURFACE_NOT_SLIPPERY                 0x0015 // Non-slippery, climbable
 #define SURFACE_TTM_VINES                    0x0016 // TTM vines, has no action defined
+
+#define SURFACE_SUPER_SLIPPERY               0x0017
+
 #define SURFACE_MGR_MUSIC                    0x001A // Plays the Merry go round music, see handle_merry_go_round_music in bbh_merry_go_round.inc.c for more details
 #define SURFACE_INSTANT_WARP_1B              0x001B // Instant warp to another area, used to warp between areas in WDW and the endless stairs to warp back
 #define SURFACE_INSTANT_WARP_1C              0x001C // Instant warp to another area, used to warp between areas in WDW

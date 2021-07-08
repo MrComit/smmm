@@ -35,6 +35,7 @@ s16 gDialogY; // D_8032F69C
 s16 gCutsceneMsgXOffset;
 s16 gCutsceneMsgYOffset;
 s8 gRedCoinsCollected;
+s8 gGreenCoinsCollected;
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2109,6 +2110,7 @@ void render_hud_cannon_reticle(void) {
 
 void reset_red_coins_collected(void) {
     gRedCoinsCollected = 0;
+    gGreenCoinsCollected = 0;
 }
 
 void change_dialog_camera_angle(void) {
@@ -2169,6 +2171,40 @@ void render_pause_red_coins(void) {
         print_animated_red_coin(GFX_DIMENSIONS_FROM_RIGHT_EDGE(30) - x * 20, 16);
     }
 }
+
+#define GREEN_COINS_HUD_X 240
+#define GREEN_COINS_HUD_Y 16
+
+
+void render_pause_green_coins(void) {
+    s32 timer = gGlobalTimer;
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, GREEN_COINS_HUD_X, GREEN_COINS_HUD_Y, 0);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.23f, 0.23f, 1.0f);
+    gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+
+    switch (timer & 6) {
+        case 0:
+            gSPDisplayList(gDisplayListHead++, green_coin_dl_1);
+            break;
+        case 2:
+            gSPDisplayList(gDisplayListHead++, green_coin_dl_2);
+            break;
+        case 4:
+            gSPDisplayList(gDisplayListHead++, green_coin_dl_3);
+            break;
+        case 6:
+            gSPDisplayList(gDisplayListHead++, green_coin_dl_4);
+            break;
+    }
+
+    gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    print_text(GREEN_COINS_HUD_X+10, GREEN_COINS_HUD_Y, "*"); // 'X' glyph
+    print_text_fmt_int(GREEN_COINS_HUD_X+24, GREEN_COINS_HUD_Y, "%d", gGreenCoinsCollected);
+}
+
 
 #ifdef VERSION_EU
 u8 gTextCourseArr[][7] = {
@@ -2637,6 +2673,8 @@ s16 render_pause_courses_and_castle(void) {
             shade_screen();
             render_pause_my_score_coins();
             render_pause_red_coins();
+            if (gGreenCoinsCollected)
+                render_pause_green_coins();
 
             if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
                 render_pause_course_options(99, 93, &gDialogLineNum, 15);
