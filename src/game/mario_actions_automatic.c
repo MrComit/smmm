@@ -220,9 +220,13 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
     gHorizontalPoleMomentum = approach_f32(gHorizontalPoleMomentum, 0.0f, 0.1f, 0.1f);
     if (stickD > 16.0f) {
         friction = 1.0f;
+        if (gHorizontalPoleMomentum < 0)
+            gHorizontalPoleMomentum += 0.2f;
         gHorizontalPoleMomentum += 0.4f;
     } else if (stickD < -16.0f) {
         friction = 1.0f;
+        if (gHorizontalPoleMomentum > 0)
+            gHorizontalPoleMomentum -= 0.2f;
         gHorizontalPoleMomentum -= 0.4f;
     }
 
@@ -234,7 +238,7 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
     }
 
     m->faceAngle[0] -= 0x20 * gHorizontalPoleSpeed;
-    gHorizontalPoleSpeed += (coss(m->faceAngle[0] - 0x4000) * 5) + gHorizontalPoleMomentum;
+    gHorizontalPoleSpeed += (coss(m->faceAngle[0] - 0x4000) * 8) + gHorizontalPoleMomentum;
     gHorizontalPoleSpeed *= friction;
 
     if (gHorizontalPoleSpeed > 250.0f) {
