@@ -94,7 +94,7 @@ void bhv_red_coin_loop(void) {
 }
 
 
-
+extern s8 gGreenCoinsCollected;
 void bhv_green_coin_init(void) {
     struct Object *hiddenRedCoinStar;
 
@@ -111,6 +111,7 @@ void bhv_green_coin_loop(void) {
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         if (o->parentObj != NULL) {
             o->parentObj->oHiddenStarTriggerCounter++;
+            gGreenCoinsCollected++;
             if (o->parentObj->oHiddenStarTriggerCounter != 100) {
                 spawn_orange_number_two_digit_scale(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0, 15.0f, 0.75f);
             }
@@ -124,9 +125,8 @@ void bhv_green_coin_loop(void) {
 
 
 
-extern s8 gGreenCoinsCollected;
 void bhv_hidden_green_coin_star_loop(void) {
-    gGreenCoinsCollected = o->oHiddenStarTriggerCounter;
+    //gGreenCoinsCollected = o->oHiddenStarTriggerCounter;
     switch (o->oAction) {
         case 0:
             if (o->oHiddenStarTriggerCounter >= 100)
