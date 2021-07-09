@@ -1528,7 +1528,7 @@ u32 interact_pole(struct MarioState *m, UNUSED u32 interactType, struct Object *
             struct Object *marioObj = m->marioObj;
 
             if (o->oInteractionSubtype & INT_SUBTYPE_HORIZONTAL) {
-                gHorizontalPoleSpeed = m->forwardVel * 5.0f;
+                gHorizontalPoleSpeed = m->forwardVel * 3.5f;
             }
 
 
