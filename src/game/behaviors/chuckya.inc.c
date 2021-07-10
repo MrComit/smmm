@@ -334,7 +334,7 @@ void chuckya_move_bomb(void) {
     if (o->oBehParams2ndByte == 0)
         cur_obj_move_standard(-30);
     if (o->oAction == 0) {
-        if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f) {
+        if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f && absf(o->oPosY - gMarioObject->oPosY) < 800.0f) {
             if (o->oTimer > 10) {
                 o->oAction = 1;
                 o->oChuckyaUnk88 = 1;
