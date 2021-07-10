@@ -14,6 +14,7 @@ const GeoLayout bbh_area_1_geo[] = {
 const GeoLayout bbh_dl_101__Oasis_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(4, 1210, 0, 585, bbh_dl_Flower_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 787, 1767, -466, bbh_dl_Grass_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(4, bbh_dl_Grass_mesh_layer_4),
