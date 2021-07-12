@@ -7865,3 +7865,31 @@ const BehaviorScript bhvHiddenGreenCoinStar[] = {
         CALL_NATIVE(bhv_hidden_green_coin_star_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFakeWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(fake_dirt_wall_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0xF00),
+    CALL_NATIVE(bhv_fake_wall_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fake_wall_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+
+};
+
+
+const BehaviorScript bhvGenericSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SCALE(0, 150),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_generic_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

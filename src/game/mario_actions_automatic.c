@@ -18,6 +18,7 @@
 #include "rumble_init.h"
 #include "object_helpers.h"
 #include "print.h"
+#include "game_init.h"
 
 #define POLE_NONE          0
 #define POLE_TOUCHED_FLOOR 1
@@ -251,9 +252,11 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
     //m->marioObj->header.gfx.animInfo.animFrame = 7;
 
     vec3s_set(m->marioObj->header.gfx.angle, m->faceAngle[0], m->faceAngle[1], 0);
-    //print_text_fmt_int(80, 80, "%x", m->faceAngle[1]);
-    //print_text_fmt_int(80, 60, "%x", gCamera->yaw);
-    //print_text_fmt_int(120, 80, "%d", gHorizontalPoleSpeed);
+    if (gPlayer1Controller->buttonDown & (L_JPAD | R_JPAD) || 
+        gPlayer1Controller->buttonPressed & (R_TRIG | U_JPAD | D_JPAD | R_CBUTTONS | L_CBUTTONS)) {
+            m->actionState = 1;
+    }
+    //gCamera->nextYaw = approach_s16_symmetric(gCamera->nextYaw, m->faceAngle[1] + 0x4000, 0x400);
     return FALSE;
 }
 

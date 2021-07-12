@@ -70,3 +70,6 @@
 #include "levels/bbh/coffin/collision.inc.c"
 #include "levels/bbh/areas/1/movtext.inc.c"
 #include "levels/bbh/leveldata.inc.c"
+
+#include "levels/bbh/fake_dirt_wall/model.inc.c"
+#include "levels/bbh/fake_dirt_wall/collision.inc.c"

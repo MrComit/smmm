@@ -768,7 +768,9 @@ void bhv_chuckya_bomb_loop(void);
 void bhv_chuckya_anchor_bomb_loop(void);
 void bhv_bobomb_chuckya_loop(void);
 void bhv_bobomb_chuckya_init(void);
-
+void bhv_fake_wall_loop(void);
+void bhv_fake_wall_init(void);
+void bhv_generic_switch_loop(void);
 
 
 

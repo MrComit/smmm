@@ -1177,7 +1177,7 @@ void mode_radial_camera(struct Camera *c) {
 
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
-    switch (c->filler31[1]) {
+    switch (c->comitCutscene) {
         case 0:
             break;
         case 1:
@@ -1202,6 +1202,11 @@ void fixed_cam_presets(struct Camera *c) {
         case 5:
             c->pos[1] = m->pos[1] + 600.0f;
             c->focus[1] = m->pos[1];
+            break;
+        case 6:
+            vec3f_set(c->pos, 3743.73f, 200.0f, 2615.31f);
+            vec3f_set(c->focus, 5591.49f, 300.0f, 3380.68f);
+            c->yaw = c->nextYaw = 0xB000;
             break;
     }
 }
@@ -3252,6 +3257,10 @@ void update_camera(struct Camera *c) {
     if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
         s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
         set_r_button_camera(c);
+    }
+
+    if (gMarioState->action == ACT_HOLDING_HORIZONTAL_POLE && gMarioState->actionState == 0) {
+        s8DirModeBaseYaw = approach_s16_symmetric(s8DirModeBaseYaw, gMarioState->faceAngle[1] + 0x8000, 0x400);
     }
 
     if (gPlayer1Controller->buttonDown & L_JPAD) {
@@ -5857,31 +5866,31 @@ BAD_RETURN(s32) cam_bob_tower(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
     //transition_to_camera_mode(c, CAMERA_MODE_FIXED, 90);
     //set_camera_mode_fixed(c, -5424, 595, 17408);
-    c->filler31[1] = 1;
+    c->comitCutscene = 1;
 }
 
 
 BAD_RETURN(s32) cam_wf_bathroom(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[1] = 2;
+    c->comitCutscene = 2;
 }
 
 
 BAD_RETURN(s32) cam_wf_mirror_room(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[1] = 3;
+    c->comitCutscene = 3;
 }
 
 
 BAD_RETURN(s32) cam_garden_fall(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[1] = 4;
+    c->comitCutscene = 4;
 }
 
 
 BAD_RETURN(s32) cam_underground(struct Camera *c) {
     sStatusFlags |= CAM_FLAG_BLOCK_AREA_PROCESSING;
-    c->filler31[1] = 5;
+    c->comitCutscene = 5;
 }
 
 
@@ -6611,9 +6620,9 @@ s16 camera_course_processing(struct Camera *c) {
             b += 1;
         }
         if (!anyChecked) {
-            if (c->filler31[1])
+            if (c->comitCutscene)
                 set_r_button_camera(c);
-            c->filler31[1] = 0;
+            c->comitCutscene = 0;
         }
     }
 

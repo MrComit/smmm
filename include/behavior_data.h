@@ -671,6 +671,8 @@ extern const BehaviorScript bhvBombHeldByChuckya[];
 extern const BehaviorScript bhvChuckyaAnchorBomb[];
 extern const BehaviorScript bhvGreenCoin[];
 extern const BehaviorScript bhvHiddenGreenCoinStar[];
+extern const BehaviorScript bhvFakeWall[];
+extern const BehaviorScript bhvGenericSwitch[];
 
 
 
