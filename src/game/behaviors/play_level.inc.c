@@ -34,6 +34,7 @@ void bhv_fake_wall_loop(void) {
             if (o->oTimer > 30) {
                 o->activeFlags = 0;
                 gCamera->comitCutscene = 0;
+                set_r_button_camera(gCamera);
                 set_mario_npc_dialog(0);
                 save_file_set_newflags(SAVE_NEW_FLAG_FAKE_WALL, 0);
             }
