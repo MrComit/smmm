@@ -91,6 +91,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, -1753, 2099, 4604, 0, 59, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_NONE, 1321, 2489, -5773, 0, 89, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_PURPLE_SWITCH, 6211, 2089, -564, 0, 111, 0, 0x00000000, bhvGenericSwitch),
+		OBJECT(MODEL_TOKEN, -1171, 809, 5156, 0, -14, 0, 0x00001900, bhvToken),
 		OBJECT(MODEL_NONE, -311, 320, -5575, 0, 0, 0, 0x00000000, bhvWaterfallSoundLoop),
 		OBJECT(MODEL_NONE, -793, 2579, -7280, 0, 0, 0, 0x00000000, bhvWaterfallSoundLoop),
 		OBJECT(MODEL_GREEN_COIN, -3586, 0, -6494, 0, 0, 0, 0x00000000, bhvGreenCoin),

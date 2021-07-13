@@ -1041,7 +1041,19 @@ s32 act_twirl_land(struct MarioState *m) {
     return FALSE;
 }
 
-Vec3f sSpawnedTokens = {-1831.0f, 160.0f, -6211.0f};
+Vec3f sSpawnedTokens[] = {
+{-1831.0f, 160.0f, -6211.0f},
+{-1214.25f, 46.13f, -150.62f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+{0.0f, 0.0f, 0.0f},
+};
 
 void spawn_token(u8 type, u8 index, Vec3f pos, s16 yaw, s16 pitch) {
     struct Object *obj = spawn_object(gMarioObject, MODEL_TOKEN, bhvToken);
@@ -1064,9 +1076,10 @@ void handle_ground_pound_floor(struct MarioState *m) {
     }
     switch (index) {
         case 0:
-            spawn_token(1, 0x16, sSpawnedTokens, 0, 0);
+            spawn_token(1, 0x16, sSpawnedTokens[0], 0, 0);
             break;
         case 1:
+            spawn_token(2, 0x18, sSpawnedTokens[1], 0x4000, 0);
             break;
         case 2:
             break;
