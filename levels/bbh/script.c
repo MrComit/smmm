@@ -33,6 +33,7 @@ const LevelScript level_bbh_entry[] = {
 	JUMP_LINK(script_func_global_10), 
 	JUMP_LINK(script_func_global_18), 
 	LOAD_MODEL_FROM_GEO(MODEL_FAKE_WALL, fake_dirt_wall_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BOMB_ROCK, bomb_rock_geo), 
 
 	AREA(1, bbh_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -42,6 +43,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, -5159, 200, 123, 0, 90, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -5159, 200, 123, 0, 90, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, 90, -5159, 200, 123),
+		OBJECT(MODEL_BOMB_ROCK, -2215, 0, 2564, 0, 0, 0, 0x00000000, bhvBombRock),
 		OBJECT(MODEL_CHUCKYA, -1178, 909, -1752, 0, 0, 0, 0x00010000, bhvChuckyaBomb),
 		OBJECT(MODEL_CHUCKYA, -38, 1350, -3435, 0, 0, 0, 0x00010000, bhvChuckyaBomb),
 		OBJECT(MODEL_STAR_CURRENCY, -4768, 2539, -3297, 0, 0, 0, 0x06000000, bhvStar),

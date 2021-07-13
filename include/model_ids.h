@@ -695,6 +695,8 @@
 
 // LEVEL 5 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_FAKE_WALL           0xFF
+#define MODEL_BOMB_ROCK           0xFE
+
 
 
 

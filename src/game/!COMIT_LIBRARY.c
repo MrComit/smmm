@@ -413,3 +413,31 @@ struct Object *CL_obj_find_nearest_object_with_behavior_room(struct Object *curO
 
     return closestObj;
 }
+
+
+s32 CL_cur_obj_get_obj_collision(struct Object *obj) {
+    f32 objVelX = o->oForwardVel * sins(o->oMoveAngleYaw);
+    f32 objVelZ = o->oForwardVel * coss(o->oMoveAngleYaw);
+    f32 posX = o->oPosX + objVelX;
+    f32 posY = o->oPosY;
+    f32 posZ = o->oPosZ + objVelZ;
+    f32 floorY;
+    struct Surface *floor;
+    struct WallCollisionData hitbox;
+    hitbox.x = posX;
+    hitbox.y = posY;
+    hitbox.z = posZ;
+    hitbox.offsetY = o->hitboxHeight / 2;
+    hitbox.radius = o->hitboxRadius;
+    if (find_wall_collisions(&hitbox) != 0) {
+        if (hitbox.walls[0] != NULL && hitbox.walls[0]->object == obj) {
+            return TRUE;
+        }
+    }
+
+    floorY = find_floor(posX, posY, posZ, &floor);
+    if (floor != NULL && floor->object == obj) {
+        return TRUE;
+    }
+    return FALSE;
+}

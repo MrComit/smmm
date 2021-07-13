@@ -25,3 +25,4 @@
 #include "levels/bbh/geo.inc.c"
 
 #include "levels/bbh/fake_dirt_wall/geo.inc.c"
+#include "levels/bbh/bomb_rock/geo.inc.c"

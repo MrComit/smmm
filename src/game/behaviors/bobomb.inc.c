@@ -485,6 +485,10 @@ void bobomb_chuckya_act_explode(void) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;*/
         CL_explode_object(o, 0);
     }
+    if (sObjFloor != NULL && sObjFloor->object != NULL && obj_has_behavior(sObjFloor->object, bhvBombRock) &&
+        sObjFloor->upperY - o->oPosY > 30.0f) {
+        CL_explode_object(sObjFloor->object, 0);
+    }
 }
 
 
@@ -495,6 +499,11 @@ void bobomb_chuckya_check_interactions(void) {
     if (o->oDistanceToMario < 150.0f) {
         //CL_explode_object(o, 0);
         bobomb_chuckya_act_explode();
+    }
+    if (sObjFloor != NULL && sObjFloor->object != NULL && obj_has_behavior(sObjFloor->object, bhvBombRock) &&
+        sObjFloor->upperY - o->oPosY > 30.0f) {
+        bobomb_chuckya_act_explode();
+        CL_explode_object(sObjFloor->object, 0);
     }
 }
 

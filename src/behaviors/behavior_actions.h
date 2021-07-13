@@ -773,6 +773,5 @@ void bhv_fake_wall_init(void);
 void bhv_generic_switch_loop(void);
 
 
-
 #include "game/!COMIT_LIBRARY.h"
 #endif // BEHAVIOR_ACTIONS_H

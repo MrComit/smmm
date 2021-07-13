@@ -117,4 +117,8 @@ extern const LevelScript level_bbh_entry[];
 
 #include "levels/bbh/fake_dirt_wall/collision_header.h"
 
+#include "levels/bbh/bomb_rock/geo_header.h"
+
+#include "levels/bbh/bomb_rock/collision_header.h"
+
 #endif
