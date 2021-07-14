@@ -68,7 +68,11 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
     fallHeight = m->peakHeight - m->pos[1];
 
 #pragma GCC diagnostic push
+#if defined(__clang__)
+#pragma GCC diagnostic ignored "-Wtautological-constant-out-of-range-compare"
+#elif defined(__GNUC__)
 #pragma GCC diagnostic ignored "-Wtype-limits"
+#endif
 
     //! Never true
     if (m->actionState == ACT_GROUND_POUND) {
@@ -1487,8 +1491,10 @@ s32 act_hold_butt_slide_air(struct MarioState *m) {
 s32 act_lava_boost(struct MarioState *m) {
     if (!(m->flags & MARIO_MARIO_SOUND_PLAYED)) {
         play_sound_if_no_flag(m, SOUND_MARIO_ON_FIRE, MARIO_MARIO_SOUND_PLAYED);
+#if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
     }
+#endif
 
     if (!(m->input & INPUT_NONZERO_ANALOG)) {
         m->forwardVel = approach_f32(m->forwardVel, 0.0f, 0.35f, 0.35f);

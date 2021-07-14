@@ -1,6 +1,12 @@
 #ifndef RUMBLE_INIT_H
 #define RUMBLE_INIT_H
 
+#include <PR/ultratypes.h>
+
+#include "config.h"
+
+//#if ENABLE_RUMBLE
+
 extern s32 gRumblePakTimer;
 
 void init_rumble_pak_scheduler_queue(void);

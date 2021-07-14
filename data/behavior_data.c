@@ -1979,6 +1979,7 @@ const BehaviorScript bhvBowser[] = {
     SPAWN_CHILD(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBowserBodyAnchor),
     SPAWN_CHILD(/*Model*/ MODEL_BOWSER_BOMB_CHILD_OBJ, /*Behavior*/ bhvBowserFlameSpawn),
     SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBowserTailAnchor),
+    // Beta leftover that spawn 50 coins when Bowser is defeated
     SET_INT(oNumLootCoins, 50),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 0, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SET_HOME(),
@@ -3039,7 +3040,7 @@ const BehaviorScript bhvHiddenStaircaseStep[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvBooBossSpawnedBridge[] = {
+const BehaviorScript bhvBooStaircase[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(bbh_seg7_collision_staircase_step),
@@ -3047,7 +3048,7 @@ const BehaviorScript bhvBooBossSpawnedBridge[] = {
     SET_FLOAT(oCollisionDistance, 1000),
     SET_HOME(),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_boo_boss_spawned_bridge_loop),
+        CALL_NATIVE(bhv_boo_staircase),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
@@ -3157,7 +3158,7 @@ const BehaviorScript bhvUnusedFakeStar[] = {
 };
 
 // What is this?
-static const BehaviorScript unused_1[] = {
+UNUSED static const BehaviorScript unused_1[] = {
     BREAK(),
     BREAK(),
     BREAK(),
@@ -3878,7 +3879,7 @@ const BehaviorScript bhvSignOnWall[] = {
 const BehaviorScript bhvHomingAmp[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, amp_seg8_anims_08004034),
+    LOAD_ANIMATIONS(oAnimations, dAmpAnimsList),
     ANIMATE(0),
     SET_FLOAT(oGraphYOffset, 40),
     SET_INT(oIntangibleTimer, 0),
@@ -3891,7 +3892,7 @@ const BehaviorScript bhvHomingAmp[] = {
 const BehaviorScript bhvCirclingAmp[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, amp_seg8_anims_08004034),
+    LOAD_ANIMATIONS(oAnimations, dAmpAnimsList),
     ANIMATE(0),
     SET_FLOAT(oGraphYOffset, 40),
     SET_INT(oIntangibleTimer, 0),

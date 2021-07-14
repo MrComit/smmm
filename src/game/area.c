@@ -23,6 +23,7 @@
 #include "level_table.h"
 #include "ingame_menu.h"
 #include "segment2.h"
+#include "dialog_ids.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
@@ -34,7 +35,7 @@ s16 gCurrCourseNum;
 s16 gCurrActNum;
 s16 gCurrAreaIndex;
 s16 gSavedCourseNum;
-s16 gPauseScreenMode;
+s16 gMenuOptSelectIndex;
 s16 gSaveOptSelectIndex;
 
 struct SpawnInfo *gMarioSpawnInfo = &gPlayerSpawnInfos[0];
@@ -198,8 +199,8 @@ void clear_areas(void) {
         gAreaData[i].unused28 = NULL;
         gAreaData[i].whirlpools[0] = NULL;
         gAreaData[i].whirlpools[1] = NULL;
-        gAreaData[i].dialog[0] = 255;
-        gAreaData[i].dialog[1] = 255;
+        gAreaData[i].dialog[0] = DIALOG_NONE;
+        gAreaData[i].dialog[1] = DIALOG_NONE;
         gAreaData[i].musicParam = 0;
         gAreaData[i].musicParam2 = 0;
     }
@@ -384,33 +385,33 @@ void render_game(void) {
 
         gSPViewport(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(&D_8032CF00));
 
-        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
-                      SCREEN_HEIGHT - BORDER_HEIGHT);
+        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                      SCREEN_HEIGHT - gBorderHeight);
         //if (!gWarpTransition.isActive) {
         //    render_screen_transition(0, WARP_TRANSITION_FADE_FROM_COLOR, 0, &gWarpTransition.data);
         //    set_warp_transition_rgb(0, 0, 0);
         //    gWarpTransition.time = 0;
         //}
-        gPauseScreenMode = render_menus_and_dialogs();
+        gMenuOptSelectIndex = render_menus_and_dialogs();
         render_hud();
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
         do_cutscene_handler();
         print_displaying_credits_entry();
-        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
-                      SCREEN_HEIGHT - BORDER_HEIGHT);
-        //gPauseScreenMode = render_menus_and_dialogs();
-        if (gPauseScreenMode != 0) {
-            gSaveOptSelectIndex = gPauseScreenMode;
+        gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                      SCREEN_HEIGHT - gBorderHeight);
+        //gMenuOptSelectIndex = render_menus_and_dialogs();
+        if (gMenuOptSelectIndex != 0) {
+            gSaveOptSelectIndex = gMenuOptSelectIndex;
         }
         //shade_screen_rgba(0x0F, 0x1B, 0x0E, 0xFF);
 
         if (D_8032CE78 != NULL) {
             make_viewport_clip_rect(D_8032CE78);
         } else
-            gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, BORDER_HEIGHT, SCREEN_WIDTH,
-                          SCREEN_HEIGHT - BORDER_HEIGHT);
+            gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
+                          SCREEN_HEIGHT - gBorderHeight);
 
         if (gWarpTransition.isActive) {
             if (gWarpTransDelay == 0) {

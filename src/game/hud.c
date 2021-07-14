@@ -62,8 +62,7 @@ s32 sPowerMeterVisibleTimer = 0;
 
 s32 gHudTopY = 209; // default 209, high is 225
 s32 gHuds2dX = 0;
-
-//static struct UnusedHUDStruct sUnusedHUDValues = { 0x00, 0x0A, 0x00 };
+//UNUSED static struct UnusedHUDStruct sUnusedHUDValues = { 0x00, 0x0A, 0x00 };
 
 static struct CameraHUD sCameraHUD = { CAM_STATUS_NONE };
 

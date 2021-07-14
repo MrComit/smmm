@@ -28,7 +28,9 @@ OUTPUT_ARCH (mips)
       KEEP(BUILD_DIR/bin/name.szp.o(.data)); \
       . = ALIGN(0x10); \
    } \
-   END_SEG(name##_yay0)
+   END_SEG(name##_yay0) \
+   _##name##_mio0SegmentRomStart = _##name##_yay0SegmentRomStart; \
+   _##name##_mio0SegmentRomEnd = _##name##_yay0SegmentRomEnd;
 
 #define YAY0_EU_SEG(name, segAddr) \
    BEGIN_SEG(name##_yay0, segAddr) \
@@ -36,7 +38,9 @@ OUTPUT_ARCH (mips)
       KEEP(BUILD_DIR/bin/eu/name.szp.o(.data)); \
       . = ALIGN(0x10); \
    } \
-   END_SEG(name##_yay0)
+   END_SEG(name##_yay0) \
+   _##name##_mio0SegmentRomStart = _##name##_yay0SegmentRomStart; \
+   _##name##_mio0SegmentRomEnd = _##name##_yay0SegmentRomEnd;
 
 #define STANDARD_LEVEL(name) \
    BEGIN_SEG(name##_segment_7, 0x07000000) \
@@ -63,7 +67,9 @@ OUTPUT_ARCH (mips)
    { \
       KEEP(BUILD_DIR/actors/name##_geo.o(.data)); \
    } \
-   END_SEG(name##_geo)
+   END_SEG(name##_geo) \
+   _##name##_mio0SegmentRomStart = _##name##_yay0SegmentRomStart; \
+   _##name##_mio0SegmentRomEnd = _##name##_yay0SegmentRomEnd;
 
 SECTIONS
 {
@@ -230,7 +236,7 @@ SECTIONS
 
       BUILD_DIR/src/behaviors*.o(.bss*);
       BUILD_DIR/src/behaviors*.o(.sbss*);
-      . = ALIGN(0x100);
+      . = ALIGN(0x40);
    }
    END_NOLOAD(engine)
 
@@ -249,7 +255,6 @@ SECTIONS
 
    __expansionRamStart = 0x80400000;
    ASSERT((. <= __expansionRamStart), "Error: RDRAM expanded into Expansion RAM, despite Expansion RAM not being defined.")
-
 
    BEGIN_SEG(entry, 0x10000000)
    {
@@ -344,7 +349,6 @@ SECTIONS
    END_NOLOAD(goddard)
 
    ASSERT((. <= (SEG_POOL_START + POOL_SIZE)), "Error: extended past pool end.")
-
 
    /* 0x268020 0x268020-0 [0] */
    BEGIN_SEG(intro, 0x14000000)
