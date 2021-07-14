@@ -488,6 +488,19 @@ void bobomb_chuckya_act_explode(void) {
     if (sObjFloor != NULL && sObjFloor->object != NULL && obj_has_behavior(sObjFloor->object, bhvBombRock) &&
         sObjFloor->upperY - o->oPosY > 30.0f) {
         CL_explode_object(sObjFloor->object, 0);
+        if (sObjFloor->object->oBehParams2ndByte == 1) {
+            play_puzzle_jingle();
+        }
+    }
+    Vec3f pos;
+    vec3f_copy(pos, &o->oPosX);
+    struct Surface *wall = resolve_and_return_wall_collisions(pos, 0.0f, 300.0f);
+    if (wall != NULL && wall->object != NULL && obj_has_behavior(wall->object, bhvBombRock) &&
+        wall->upperY - o->oPosY > 30.0f) {
+        CL_explode_object(wall->object, 0);
+        if (wall->object->oBehParams2ndByte == 1) {
+            play_puzzle_jingle();
+        }
     }
 }
 
@@ -502,8 +515,22 @@ void bobomb_chuckya_check_interactions(void) {
     }
     if (sObjFloor != NULL && sObjFloor->object != NULL && obj_has_behavior(sObjFloor->object, bhvBombRock) &&
         sObjFloor->upperY - o->oPosY > 30.0f) {
-        bobomb_chuckya_act_explode();
+        CL_explode_object(o, 0);
         CL_explode_object(sObjFloor->object, 0);
+        if (sObjFloor->object->oBehParams2ndByte == 1) {
+            play_puzzle_jingle();
+        }
+    }
+    Vec3f pos;
+    vec3f_copy(pos, &o->oPosX);
+    struct Surface *wall = resolve_and_return_wall_collisions(pos, 0.0f, 200.0f);
+    if (wall != NULL && wall->object != NULL && obj_has_behavior(wall->object, bhvBombRock) &&
+        wall->upperY - o->oPosY > 30.0f) {
+        CL_explode_object(o, 0);
+        CL_explode_object(wall->object, 0);
+        if (wall->object->oBehParams2ndByte == 1) {
+            play_puzzle_jingle();
+        }
     }
 }
 

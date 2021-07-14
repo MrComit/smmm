@@ -236,7 +236,7 @@ void chuckya_bomb_act_0(void) {
     switch (sp28 = o->oSubAction) {
         case 0:
             o->oForwardVel = 0;
-            if (cur_obj_lateral_dist_from_mario_to_home() < 2000.0f) {
+            if (cur_obj_lateral_dist_from_mario_to_home() < 3000.0f) {
                 cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400);
                 if (o->oChuckyaUnkFC > 40
                     || abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) < 0x1000)
@@ -248,7 +248,7 @@ void chuckya_bomb_act_0(void) {
             approach_forward_vel(&o->oForwardVel, 30.0f, 4.0f);
             if (abs_angle_diff(o->oMoveAngleYaw, o->oAngleToMario) > 0x4000)
                 o->oSubAction = 2;
-            if (cur_obj_lateral_dist_from_mario_to_home() > 2000.0f)
+            if (cur_obj_lateral_dist_from_mario_to_home() > 3000.0f)
                 o->oSubAction = 3;
             break;
         case 2:
@@ -264,7 +264,7 @@ void chuckya_bomb_act_0(void) {
                 o->oAngleToMario = cur_obj_angle_to_home();
                 cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x800);
             }
-            if (cur_obj_lateral_dist_from_mario_to_home() < 1900.0f)
+            if (cur_obj_lateral_dist_from_mario_to_home() < 2900.0f)
                 o->oSubAction = 0;
             break;
     }
