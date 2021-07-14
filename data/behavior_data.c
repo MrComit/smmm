@@ -7885,7 +7885,7 @@ const BehaviorScript bhvFakeWall[] = {
 const BehaviorScript bhvGenericSwitch[] = {
     BEGIN(OBJ_LIST_SURFACE),
     // Floor switch - common:
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
     LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
     SCALE(0, 150),
     BEGIN_LOOP(),

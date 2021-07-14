@@ -71,6 +71,9 @@ u8 sTokenCoins[3] = {10, 50, 100};
 
 
 void bhv_generic_switch_loop(void) {
+    if (o->oBehParams >> 24 == 1) {
+        o->oRoom2 = 2;
+    }
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
