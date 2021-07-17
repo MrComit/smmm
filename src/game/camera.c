@@ -750,6 +750,8 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
     f32 marioFloorHeight;
     f32 marioCeilHeight;
     f32 camFloorHeight;
+    f32 approachRate = 20.0f;
+    f32 approachDist = 0.0f;
     UNUSED u8 filler[8];
     UNUSED s16 action = sMarioCamState->action;
     f32 baseOff = 125.f;
@@ -782,14 +784,17 @@ void set_camera_height(struct Camera *c, f32 goalHeight) {
             c->pos[1] = goalHeight;
         }
         // Warp camera to goalHeight if further than 1000 and Mario is stuck in the ground
+        approachDist = ABS(c->pos[1] - goalHeight);
         if (sMarioCamState->action == ACT_BUTT_STUCK_IN_GROUND ||
             sMarioCamState->action == ACT_HEAD_STUCK_IN_GROUND ||
             sMarioCamState->action == ACT_FEET_STUCK_IN_GROUND) {
-            if (ABS(c->pos[1] - goalHeight) > 1000.f) {
+            if (approachDist > 1000.f) {
                 c->pos[1] = goalHeight;
             }
         }
-        approach_camera_height(c, goalHeight, 20.f);
+            
+        approachRate += ABS(c->pos[1] - goalHeight) / 20;
+        approach_camera_height(c, goalHeight, approachRate);
         if (camCeilHeight != CELL_HEIGHT_LIMIT) {
             camCeilHeight -= baseOff;
             if ((c->pos[1] > camCeilHeight && sMarioGeometry.currFloorHeight + baseOff < camCeilHeight)
@@ -1215,6 +1220,11 @@ void fixed_cam_presets(struct Camera *c) {
     }
 }
 
+s8 gLeftCPressed = 0;
+s8 gRightCPressed = 0;
+u8 gLeftCTimer = 0;
+u8 gRightCTimer = 0;
+
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
@@ -1225,15 +1235,46 @@ void mode_8_directions_camera(struct Camera *c) {
 
     radial_camera_input(c, 0.f);
 
+    if (gRightCPressed) {
+        if (++gRightCTimer > 5) {
+            gRightCPressed = 0;
+            gRightCTimer = 0;
+        }
+    }
+    if (gLeftCPressed) {
+        if (++gLeftCTimer > 5) {
+            gLeftCPressed = 0;
+            gLeftCTimer = 0;
+        }
+    }
+
     if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
-        //s8DirModeYawOffset += DEGREES(45);
         s8DirModeBaseYaw += DEGREES(45);
+        gRightCPressed = 1;
         play_sound_cbutton_side();
     }
     if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-        //s8DirModeYawOffset -= DEGREES(45);
         s8DirModeBaseYaw -= DEGREES(45);
+        gLeftCPressed = 1;
         play_sound_cbutton_side();
+    }
+    if (gPlayer1Controller->buttonDown & R_CBUTTONS) {
+        if (!gRightCPressed)
+            s8DirModeBaseYaw += DEGREES(3);
+        if (gRightCPressed && gRightCTimer > 2) {
+            //s8DirModeBaseYaw -= DEGREES(5);
+            gRightCPressed = 0;
+            gRightCTimer = 0;
+        }
+    }
+    if (gPlayer1Controller->buttonDown & L_CBUTTONS) {
+        if (!gLeftCPressed)
+            s8DirModeBaseYaw -= DEGREES(3);
+        if (gLeftCPressed && gLeftCTimer > 2) {
+            //s8DirModeBaseYaw += DEGREES(5);
+            gLeftCPressed = 0;
+            gLeftCTimer = 0;
+        }
     }
 
     lakitu_zoom(400.f, 0x900);
@@ -1241,7 +1282,12 @@ void mode_8_directions_camera(struct Camera *c) {
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];
     sAreaYawChange = sAreaYaw - oldAreaYaw;
-    set_camera_height(c, pos[1]);
+    if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
+        s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
+        c->pos[1] = pos[1];
+    } else {
+        set_camera_height(c, pos[1]);
+    }
 
     fixed_cam_presets(c);
 }
@@ -3264,10 +3310,10 @@ void update_camera(struct Camera *c) {
 
     gLakituState.lastFrameAction = sMarioCamState->action;
 
-    if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
-        s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
-        set_r_button_camera(c);
-    }
+    //if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
+    //    s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
+    //    set_r_button_camera(c);
+    //}
 
     if (gMarioState->action == ACT_HOLDING_HORIZONTAL_POLE && gMarioState->actionState == 0) {
         s8DirModeBaseYaw = approach_s16_symmetric(s8DirModeBaseYaw, gMarioState->faceAngle[1] + 0x8000, 0x400);
