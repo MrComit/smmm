@@ -13,6 +13,7 @@ const GeoLayout bbh_area_3_geo[] = {
 const GeoLayout bbh_dl_301__SnowGlobe_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 860, -497, 5233, bbh_dl_IceSlide_mesh_layer_1),
 		GEO_DISPLAY_LIST(1, bbh_dl_Skybox_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 3, -1500, 0, bbh_dl_Snow_mesh_layer_1),
 	GEO_CLOSE_NODE(),
