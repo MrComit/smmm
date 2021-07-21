@@ -131,15 +131,43 @@ void bhv_boocoin_cage_init(void) {
             obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
             break;
+        case 1:
+            obj = spawn_object(o, MODEL_STAR_CURRENCY, bhvStar);
+            obj->oAction = 1;
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            obj->oBehParams = o->oBehParams << 16;
+            obj->oPosY += 80.0f;
+            obj_scale(o, 1.8f);
+            break;
     }
     obj_set_hitbox(o, &sBooCoinCageHitbox);
 }
 
 void bhv_boocoin_cage_loop(void) {
-    if (o->oF4 >= 5) {
-        o->activeFlags = 0;
-        play_puzzle_jingle();
-        //cutscene_object_without_dialog(o, CUTSCENE_STAR_SPAWN);
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (o->oF4 >= 5) {
+                play_puzzle_jingle();
+                gCamera->comitCutscene = 7 + o->oBehParams2ndByte;
+                o->oAction = 1;
+                o->oObjF8 = spawn_object(o, MODEL_NONE, bhvStaticObject);
+                set_mario_npc_dialog(1);
+            }
+            break;
+        case 1:
+            set_mario_npc_dialog(1);
+            if (o->oTimer == 15) {
+                spawn_object(o->oObjF8, MODEL_EXPLOSION, bhvExplosion);
+                cur_obj_disable();
+            }
+            if (o->oTimer > 90) {
+                gCamera->comitCutscene = 0;
+                set_r_button_camera(gCamera);
+                set_mario_npc_dialog(0);
+                o->activeFlags = 0;
+            }
+            break;
     }
 }
 

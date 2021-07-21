@@ -1186,6 +1186,8 @@ void mode_radial_camera(struct Camera *c) {
 
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
+    struct Object *obj;
+    Vec3f pos;
     switch (c->comitCutscene) {
         case 0:
             break;
@@ -1216,6 +1218,28 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->pos, 3743.73f, 200.0f, 2615.31f);
             vec3f_set(c->focus, 5591.49f, 300.0f, 3380.68f);
             c->yaw = c->nextYaw = 0xB000;
+            break;
+        case 7:
+            obj = cur_obj_nearest_object_with_behavior(bhvBooCoinCage);
+            if (obj == NULL)
+                break;
+            pos[1] = obj->oPosY + 100.0f;
+            pos[0] = obj->oPosX + (sins(0) * 1500.0f);
+            pos[2] = obj->oPosZ + (coss(0) * 1500.0f);
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, &obj->oPosX);
+            c->yaw = c->nextYaw = 0;
+            break;
+        case 8:
+            obj = cur_obj_nearest_object_with_behavior(bhvBooCoinCage);
+            if (obj == NULL)
+                break;
+            pos[1] = obj->oPosY + 100.0f;
+            pos[0] = obj->oPosX + (sins(DEGREES(165)) * 1500.0f);
+            pos[2] = obj->oPosZ + (coss(DEGREES(165)) * 1500.0f);
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, &obj->oPosX);
+            c->yaw = c->nextYaw = DEGREES(165);
             break;
     }
 }
