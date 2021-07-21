@@ -1273,19 +1273,12 @@ void mode_8_directions_camera_2d(struct Camera *c) {
                     gDepthOffset2d = 1000.0f;
                 }
             }
-
-
-            //lakitu_zoom(400.f, 0x900);
             update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = pos[0];
             c->focus[0] = gMarioState->pos[0];
             sAreaYawChange = sAreaYaw - oldAreaYaw;
             c->yaw = c->nextYaw = s8DirModeYawOffset;
             c->pos[2] = 2000.0f + gDepthOffset2d;
-            //c->pos[0] = c->focus[0] = gMarioState->pos[0];
-            //c->pos[1] = c->focus[1] = gMarioState->pos[1] + 500.0f;
-            //set_camera_height(c, pos[1]);
-            //c->pos[1] += 300.0f;
             approach_camera_height(c, pos[1] + 300.0f, ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;

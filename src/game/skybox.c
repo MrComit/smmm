@@ -303,7 +303,7 @@ Gfx *create_skybox_facing_camera(s8 player, s8 background, f32 fov,
     s8 colorIndex = 1;
 
     // If the first star is collected in JRB, make the sky darker and slightly green
-    if (background == 8 && !(save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_JRB - 1) & 1)) {
+    if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 3) {
         colorIndex = 0;
     }
 
