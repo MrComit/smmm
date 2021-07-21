@@ -1225,10 +1225,76 @@ s8 gRightCPressed = 0;
 u8 gLeftCTimer = 0;
 u8 gRightCTimer = 0;
 
+f32 gDepthOffset2d = 0;
+
+void check_2d_cam(struct Camera *c) {
+    if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
+        c->comit2dcam = 1;
+    } else {
+        c->comit2dcam = 0;
+        gDepthOffset2d = 0;
+    }
+}
+
+
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
-void mode_8_directions_camera(struct Camera *c) {
+
+void mode_8_directions_camera_2d(struct Camera *c) {
+    Vec3f pos;
+    s16 oldAreaYaw = sAreaYaw;
+
+    switch (c->comit2dcam) {
+        case 1:
+            s8DirModeBaseYaw = 0;
+            gMarioState->pos[2] = 0;
+            if (gPlayer1Controller->buttonDown & R_CBUTTONS) {
+                s8DirModeYawOffset += DEGREES(2);
+                if (s8DirModeYawOffset > DEGREES(30)) {
+                    s8DirModeYawOffset = DEGREES(30);
+                }
+            }
+            if (gPlayer1Controller->buttonDown & L_CBUTTONS) {
+                s8DirModeYawOffset -= DEGREES(2);
+                if (s8DirModeYawOffset < -DEGREES(30)) {
+                    s8DirModeYawOffset = -DEGREES(30);
+                }
+            }
+            if (gPlayer1Controller->buttonDown & U_CBUTTONS) {
+                gDepthOffset2d -= 50.0f;
+                if (gDepthOffset2d < -1000.0f) {
+                    gDepthOffset2d = -1000.0f;
+                }
+            }
+            if (gPlayer1Controller->buttonDown & D_CBUTTONS) {
+                gDepthOffset2d += 50.0f;
+                if (gDepthOffset2d > 1000.0f) {
+                    gDepthOffset2d = 1000.0f;
+                }
+            }
+
+
+            //lakitu_zoom(400.f, 0x900);
+            update_8_directions_camera(c, c->focus, pos);
+            c->pos[0] = pos[0];
+            c->focus[0] = gMarioState->pos[0];
+            sAreaYawChange = sAreaYaw - oldAreaYaw;
+            c->yaw = c->nextYaw = s8DirModeYawOffset;
+            c->pos[2] = 2000.0f + gDepthOffset2d;
+            //c->pos[0] = c->focus[0] = gMarioState->pos[0];
+            //c->pos[1] = c->focus[1] = gMarioState->pos[1] + 500.0f;
+            //set_camera_height(c, pos[1]);
+            //c->pos[1] += 300.0f;
+            approach_camera_height(c, pos[1] + 300.0f, ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
+            if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
+                s8DirModeYawOffset = 0;
+            }
+            break;
+    }
+}
+
+void mode_8_directions_camera_3d(struct Camera *c) {
     Vec3f pos;
     UNUSED u8 unused[8];
     s16 oldAreaYaw = sAreaYaw;
@@ -1277,6 +1343,28 @@ void mode_8_directions_camera(struct Camera *c) {
         }
     }
 
+    //ALTERNATIVE CAMERA, KINDA CRINGE
+    /*if (gPlayer1Controller->buttonDown & R_CBUTTONS || gPlayer1Controller->buttonPressed & R_CBUTTONS) {
+        s8DirModeBaseYaw += 0x400;//DEGREES(3);
+        gRightCPressed = 1;
+    } else if (gRightCPressed == 1) {
+        if ((u16)(s8DirModeBaseYaw) - (u16)(s8DirModeBaseYaw & 0xE000) > 0x400) {
+            s8DirModeBaseYaw = (s8DirModeBaseYaw + 0x2000) & 0xE000;
+        }
+        gRightCPressed = 0;
+        play_sound_cbutton_side();
+    }
+    if (gPlayer1Controller->buttonDown & L_CBUTTONS || gPlayer1Controller->buttonPressed & L_CBUTTONS) {
+        s8DirModeBaseYaw -= 0x400;//DEGREES(3);
+        gLeftCPressed = 1;
+    } else if (gLeftCPressed == 1) {
+        if ((u16)(s8DirModeBaseYaw) - (u16)(s8DirModeBaseYaw & 0xE000) > 0x400) {
+            s8DirModeBaseYaw &= 0xE000;
+        }
+        gLeftCPressed = 0;
+        play_sound_cbutton_side();
+    }*/
+
     lakitu_zoom(400.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
     c->pos[0] = pos[0];
@@ -1290,6 +1378,14 @@ void mode_8_directions_camera(struct Camera *c) {
     }
 
     fixed_cam_presets(c);
+}
+
+void mode_8_directions_camera(struct Camera *c) {
+    if (c->comit2dcam)
+        mode_8_directions_camera_2d(c);
+    else
+        mode_8_directions_camera_3d(c);
+    check_2d_cam(c);
 }
 
 /**
@@ -10938,7 +11034,7 @@ u8 sDanceCutsceneIndexTable[][4] = {
 u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
-	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // BBH            | CCM
+	ZOOMOUT_AREA_MASK(1, 1, 1, 0, 1, 0, 0, 0), // BBH            | CCM
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW
