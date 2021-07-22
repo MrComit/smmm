@@ -158,9 +158,11 @@ void bhv_boocoin_cage_loop(void) {
                 o->oObjF8 = spawn_object(o, MODEL_NONE, bhvStaticObject);
                 o->oObjF8->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
                 vec3f_copy(&o->oFloatFC, gMarioState->pos);
+                set_mario_npc_dialog(1);
             }
             break;
         case 1:
+            set_mario_npc_dialog(1);
             vec3f_copy(gMarioState->pos, &o->oFloatFC);
             if (o->oTimer == 15) {
                 obj = spawn_object(o->oObjF8, MODEL_EXPLOSION, bhvExplosion);
@@ -172,6 +174,7 @@ void bhv_boocoin_cage_loop(void) {
                 disable_time_stop();
                 set_r_button_camera(gCamera);
                 o->activeFlags = 0;
+                set_mario_npc_dialog(0);
             }
             break;
     }

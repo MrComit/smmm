@@ -1,3 +1,8 @@
+void bhv_unstable_rock_init(void) {
+    o->os16F4 = o->os16F6 = o->os16F8 = 0;
+}
+
+
 void bhv_unstable_rock_loop(void) {
     switch (o->oAction) {
         case 0:
@@ -9,8 +14,8 @@ void bhv_unstable_rock_loop(void) {
             }
             break;
         case 1:
-            o->oPosY = o->oHomeY + o->oFloatF4;
-            o->oFloatF4 = -o->oFloatF4;
+            o->oPosY = o->oHomeY + o->oFloat100;
+            o->oFloat100 = -o->oFloat100;
             if (o->oTimer > 45) {
                 o->oAction = 2;
                 o->oGraphYOffset = 0;
@@ -18,15 +23,21 @@ void bhv_unstable_rock_loop(void) {
             break;
         case 2:
             o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 35.0f, 35.0f);
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0xA0, 0x18);
+            o->os16F6 = o->os16F8 = o->os16F4;
             if (o->oPosY == o->oHomeY - 300.0f) {
                 o->oAction = 3;
+                o->os16F4 = o->os16F6 = o->os16F8 = 0x80;
             }
             break;
         case 3:
             if (o->oTimer > 60) {
                 o->oPosY = approach_f32(o->oPosY, o->oHomeY, 14.0f, 14.0f);
+                o->os16F4 = approach_s16_symmetric(o->os16F4, 0, 0xA);
+                o->os16F6 = o->os16F8 = o->os16F4;
                 if (o->oPosY == o->oHomeY) {
                     o->oAction = 0;
+                    o->os16F4 = o->os16F6 = o->os16F8 = 0;
                 }
             }
             break;

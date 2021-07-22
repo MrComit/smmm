@@ -772,6 +772,7 @@ void bhv_fake_wall_loop(void);
 void bhv_fake_wall_init(void);
 void bhv_generic_switch_loop(void);
 void bhv_unstable_rock_loop(void);
+void bhv_unstable_rock_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

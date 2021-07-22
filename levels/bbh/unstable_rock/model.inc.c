@@ -524,7 +524,7 @@ u8 unstable_rock_dirt_i8_i8[] = {
 	
 };
 
-Vtx unstable_rock_Snow_002_mesh_layer_1_vtx_0[26] = {
+Vtx unstable_rock_dl_mesh_layer_1_vtx_0[26] = {
 	{{{0, 0, 168},0, {4572, -16},{0x4F, 0x21, 0x6C, 0x0}}},
 	{{{-156, 240, 148},0, {6186, 2032},{0x4F, 0x21, 0x6C, 0xD6}}},
 	{{{-156, 0, 148},0, {6186, -16},{0x4F, 0x21, 0x6C, 0x0}}},
@@ -543,18 +543,18 @@ Vtx unstable_rock_Snow_002_mesh_layer_1_vtx_0[26] = {
 	{{{-202, 240, -10},0, {-4740, 2032},{0x4F, 0x21, 0x6C, 0xD6}}},
 	{{{-156, 0, 148},0, {-6424, -16},{0x4F, 0x21, 0x6C, 0x0}}},
 	{{{-156, 240, 148},0, {-6424, 2032},{0x4F, 0x21, 0x6C, 0xD6}}},
-	{{{156, 240, -127},0, {395, 140},{0x4F, 0x21, 0x6C, 0xD6}}},
-	{{{0, 240, -188},0, {-16, 891},{0x4F, 0x21, 0x6C, 0xD6}}},
-	{{{-156, 240, -127},0, {189, 1722},{0x4F, 0x21, 0x6C, 0xD6}}},
 	{{{-156, 240, 148},0, {1582, 1902},{0x4F, 0x21, 0x6C, 0xD6}}},
-	{{{-202, 240, -10},0, {753, 2032},{0x4F, 0x21, 0x6C, 0xD6}}},
-	{{{156, 240, 148},0, {1788, 321},{0x4F, 0x21, 0x6C, 0xD6}}},
 	{{{0, 240, 168},0, {1788, 1125},{0x4F, 0x21, 0x6C, 0xD6}}},
+	{{{156, 240, 148},0, {1788, 321},{0x4F, 0x21, 0x6C, 0xD6}}},
+	{{{156, 240, -127},0, {395, 140},{0x4F, 0x21, 0x6C, 0xD6}}},
 	{{{202, 240, -10},0, {1019, -16},{0x4F, 0x21, 0x6C, 0xD6}}},
+	{{{-156, 240, -127},0, {189, 1722},{0x4F, 0x21, 0x6C, 0xD6}}},
+	{{{0, 240, -188},0, {-16, 891},{0x4F, 0x21, 0x6C, 0xD6}}},
+	{{{-202, 240, -10},0, {753, 2032},{0x4F, 0x21, 0x6C, 0xD6}}},
 };
 
-Gfx unstable_rock_Snow_002_mesh_layer_1_tri_0[] = {
-	gsSPVertex(unstable_rock_Snow_002_mesh_layer_1_vtx_0 + 0, 26, 0),
+Gfx unstable_rock_dl_mesh_layer_1_tri_0[] = {
+	gsSPVertex(unstable_rock_dl_mesh_layer_1_vtx_0 + 0, 26, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 3, 0, 0, 4, 5, 3, 0),
 	gsSP2Triangles(6, 5, 4, 0, 6, 7, 5, 0),
@@ -572,7 +572,7 @@ Gfx unstable_rock_Snow_002_mesh_layer_1_tri_0[] = {
 
 Gfx mat_unstable_rock_SnowWall_001_layer1[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, 1),
+	gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, 0, COMBINED, ENVIRONMENT, SHADE, 0, 0, 0, 0, 1),
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetRenderMode(G_RM_NOOP, G_RM_AA_ZB_OPA_SURF2),
@@ -605,9 +605,9 @@ Gfx mat_revert_unstable_rock_SnowWall_001_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx unstable_rock_Snow_002_mesh_layer_1[] = {
+Gfx unstable_rock_dl_mesh_layer_1[] = {
 	gsSPDisplayList(mat_unstable_rock_SnowWall_001_layer1),
-	gsSPDisplayList(unstable_rock_Snow_002_mesh_layer_1_tri_0),
+	gsSPDisplayList(unstable_rock_dl_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_unstable_rock_SnowWall_001_layer1),
 	gsSPEndDisplayList(),
 };
