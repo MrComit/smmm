@@ -1,3 +1,41 @@
+void bhv_unstable_rock_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o) {
+                if (o->oTimer > 5)
+                    o->oAction = 1;
+            } else {
+                o->oTimer = 0;
+            }
+            break;
+        case 1:
+            o->oPosY = o->oHomeY + o->oFloatF4;
+            o->oFloatF4 = -o->oFloatF4;
+            if (o->oTimer > 45) {
+                o->oAction = 2;
+                o->oGraphYOffset = 0;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 35.0f, 35.0f);
+            if (o->oPosY == o->oHomeY - 300.0f) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            if (o->oTimer > 60) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 14.0f, 14.0f);
+                if (o->oPosY == o->oHomeY) {
+                    o->oAction = 0;
+                }
+            }
+            break;
+    }
+}
+
+
+
+
 void bhv_fake_wall_init(void) {
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FAKE_WALL) {
         o->activeFlags = 0;

@@ -112,6 +112,7 @@ void bhv_green_coin_loop(void) {
         if (o->parentObj != NULL) {
             o->parentObj->oHiddenStarTriggerCounter++;
             gGreenCoinsCollected++;
+            gMarioState->healCounter += 4;
             if (o->parentObj->oHiddenStarTriggerCounter != 100) {
                 spawn_orange_number_two_digit_scale(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0, 15.0f, 0.75f);
             }

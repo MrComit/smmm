@@ -26,3 +26,4 @@
 
 #include "levels/bbh/fake_dirt_wall/geo.inc.c"
 #include "levels/bbh/bomb_rock/geo.inc.c"
+#include "levels/bbh/unstable_rock/geo.inc.c"

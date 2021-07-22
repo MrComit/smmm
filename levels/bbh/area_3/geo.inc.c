@@ -19,6 +19,7 @@ const GeoLayout bbh_dl_301__SnowGlobe_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(6, bbh_dl_Snow_mesh_layer_6),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 3, -1500, 0, bbh_dl_Snow_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
