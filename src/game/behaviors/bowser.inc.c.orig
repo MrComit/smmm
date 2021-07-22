@@ -1480,8 +1480,6 @@ s32 bowser_check_fallen_off_stage(void) {
     return FALSE;
 }
 
-struct PlatformDisplacementInfo sBowserDisplacementInfo;
-
 /**
  * Set Bowser's actions
  */
@@ -1561,8 +1559,7 @@ void bowser_free_update(void) {
 
     // Platform displacement check (for BITFS)
     if ((platform = o->platform) != NULL) {
-        //apply_platform_displacement(FALSE, platform);
-        apply_platform_displacement(&sBowserDisplacementInfo, &o->oPosX, &o->oFaceAngleYaw, platform);
+        apply_platform_displacement(FALSE, platform);
     }
     // Reset grabbed status
     o->oBowserGrabbedStatus = BOWSER_GRAB_STATUS_NONE;
