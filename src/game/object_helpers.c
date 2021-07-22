@@ -402,6 +402,25 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+
+/**
+ *  Uses case 0 on emulator, case 1 on console.
+ */
+#ifdef AVOID_UB
+Gfx *geo_switch_console(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_console(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        switchCase = (struct GraphNodeSwitchCase *) node;
+        switchCase->selectedCase = gIsConsole;
+    }
+
+    return NULL;
+}
+
 void obj_update_pos_from_parent_transformation(Mat4 a0, struct Object *a1) {
     f32 spC = a1->oParentRelativePosX;
     f32 sp8 = a1->oParentRelativePosY;
