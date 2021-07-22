@@ -1878,7 +1878,10 @@ void mario_handle_special_floors(struct MarioState *m) {
             case SURFACE_VERTICAL_WIND:
                 check_death_barrier(m);
                 break;
-
+            case SURFACE_WARP_HEIGHT:
+                if (m->pos[1] - m->floorHeight > 200.0f) {
+                    break;
+                }
             case SURFACE_WARP:
                 level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                 break;
