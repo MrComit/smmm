@@ -7,16 +7,20 @@ void bhv_unstable_rock_loop(void) {
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o) {
-                if (o->oTimer > 5)
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY - 25.0f, 5.0f, 5.0f);
+                if (o->oTimer > 5) {
                     o->oAction = 1;
+                    o->oHomeY = o->oPosY;
+                }
             } else {
                 o->oTimer = 0;
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 3.0f, 3.0f);
             }
             break;
         case 1:
             o->oPosY = o->oHomeY + o->oFloat100;
             o->oFloat100 = -o->oFloat100;
-            if (o->oTimer > 45) {
+            if (o->oTimer > 25) {
                 o->oAction = 2;
                 o->oGraphYOffset = 0;
             }

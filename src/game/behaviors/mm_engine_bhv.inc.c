@@ -158,12 +158,16 @@ void bhv_boocoin_cage_loop(void) {
                 o->oObjF8 = spawn_object(o, MODEL_NONE, bhvStaticObject);
                 o->oObjF8->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
                 vec3f_copy(&o->oFloatFC, gMarioState->pos);
+                o->oFloat108 =  gMarioState->vel[1];
+                o->oFloat10C = gMarioState->forwardVel;
                 set_mario_npc_dialog(1);
             }
             break;
         case 1:
             set_mario_npc_dialog(1);
             vec3f_copy(gMarioState->pos, &o->oFloatFC);
+            gMarioState->vel[1] = o->oFloat108;
+            gMarioState->forwardVel = o->oFloat10C;
             if (o->oTimer == 15) {
                 obj = spawn_object(o->oObjF8, MODEL_EXPLOSION, bhvExplosion);
                 obj->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
