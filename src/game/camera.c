@@ -938,6 +938,7 @@ void set_r_button_camera(struct Camera *c) {
 }
 
 
+s32 gCliffTimer = 0;
 
 
 /**
@@ -955,6 +956,23 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     UNUSED f32 unused3;
     f32 yOff = 125.f;
     f32 baseDist = 1000.f;
+    Vec3f mPos;
+    
+    mPos[1] = gMarioState->pos[1];
+    mPos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 100.0f);
+    mPos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 100.0f);
+    if (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && mPos[1] - find_floor_height(mPos[0], mPos[1], mPos[2]) > 300.0f) {
+        if (gCliffTimer > 59)
+            gCliffTimer = 59;
+        if (++gCliffTimer > 20) {
+            pitch = DEGREES(gCliffTimer - 10);
+        }
+    } else {
+        gCliffTimer -= 2;
+        if (gCliffTimer < 0)
+            gCliffTimer = 0;
+    }
+
 
     sAreaYaw = camYaw;
     calc_y_to_curr_floor(&posY, 1.f, 200.f, &focusY, 0.9f, 200.f);
@@ -1248,7 +1266,6 @@ s8 gLeftCPressed = 0;
 s8 gRightCPressed = 0;
 u8 gLeftCTimer = 0;
 u8 gRightCTimer = 0;
-
 f32 gDepthOffset2d = 0;
 
 void check_2d_cam(struct Camera *c) {
