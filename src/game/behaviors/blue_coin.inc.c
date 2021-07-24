@@ -134,10 +134,12 @@ void bhv_blue_coin_switch_loop(void) {
         case BLUE_COIN_SWITCH_ACT_TICKING:
             if (CL_obj_find_nearest_object_with_behavior_room(o, bhvHiddenBlueCoin, o->oRoom) == NULL) {
                 if (gMarioState->numCoins == gHudDisplay.coins) {
-                    gMarioState->numCoins += 25;
-                    o->activeFlags = 0;
-                    play_puzzle_jingle();
-                    save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                    if (++o->o100 > 10) {
+                        gMarioState->numCoins += 25;
+                        o->activeFlags = 0;
+                        play_puzzle_jingle();
+                        save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                    }
                 }
             } else {
                 // Tick faster when the blue coins start blinking
