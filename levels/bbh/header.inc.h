@@ -281,7 +281,7 @@ extern Gfx bbh_dl_Castle_mesh_layer_1_tri_0[];
 extern Vtx bbh_dl_Castle_mesh_layer_1_vtx_1[56];
 extern Gfx bbh_dl_Castle_mesh_layer_1_tri_1[];
 extern Vtx bbh_dl_CastleRuins_mesh_layer_1_vtx_cull[8];
-extern Vtx bbh_dl_CastleRuins_mesh_layer_1_vtx_0[471];
+extern Vtx bbh_dl_CastleRuins_mesh_layer_1_vtx_0[463];
 extern Gfx bbh_dl_CastleRuins_mesh_layer_1_tri_0[];
 extern Vtx bbh_dl_IcePlatforms_mesh_layer_1_vtx_cull[8];
 extern Vtx bbh_dl_IcePlatforms_mesh_layer_1_vtx_0[123];

@@ -132,20 +132,28 @@ void bhv_blue_coin_switch_loop(void) {
 
             break;
         case BLUE_COIN_SWITCH_ACT_TICKING:
-            // Tick faster when the blue coins start blinking
-            if (o->oTimer < o->oF4) {
-                play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+            if (CL_obj_find_nearest_object_with_behavior_room(o, bhvHiddenBlueCoin, o->oRoom) == NULL) {
+                if (gMarioState->numCoins == gHudDisplay.coins) {
+                    gMarioState->numCoins += 25;
+                    o->activeFlags = 0;
+                    play_puzzle_jingle();
+                    save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                }
             } else {
-                play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
-            }
+                // Tick faster when the blue coins start blinking
+                if (o->oTimer < o->oF4) {
+                    play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+                } else {
+                    play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+                }
 
-            // Delete the switch (which stops the sound) after the last coin is collected,
-            // or after the coins unload after the 240-frame timer expires.
-            if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL || o->oTimer > o->oF4 + (o->oF8 * 2)) {
-                obj_mark_for_deletion(o);
-                save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                // Delete the switch (which stops the sound) after the last coin is collected,
+                // or after the coins unload after the 240-frame timer expires.
+                if (o->oTimer > o->oF4 + (o->oF8 * 2)) {
+                    o->activeFlags = 0;
+                    save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                }
             }
-
             break;
     }
 }
