@@ -273,7 +273,7 @@ extern Vtx bbh_dl_PitPlatforms_mesh_layer_4_vtx_cull[8];
 extern Vtx bbh_dl_PitPlatforms_mesh_layer_4_vtx_0[12];
 extern Gfx bbh_dl_PitPlatforms_mesh_layer_4_tri_0[];
 extern Vtx bbh_dl_Castle_mesh_layer_1_vtx_cull[8];
-extern Vtx bbh_dl_Castle_mesh_layer_1_vtx_0[313];
+extern Vtx bbh_dl_Castle_mesh_layer_1_vtx_0[639];
 extern Gfx bbh_dl_Castle_mesh_layer_1_tri_0[];
 extern Vtx bbh_dl_IcePlatforms_mesh_layer_1_vtx_cull[8];
 extern Vtx bbh_dl_IcePlatforms_mesh_layer_1_vtx_0[123];

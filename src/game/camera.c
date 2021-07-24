@@ -957,17 +957,22 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     f32 yOff = 125.f;
     f32 baseDist = 1000.f;
     Vec3f mPos;
-    
     mPos[1] = gMarioState->pos[1];
     mPos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 100.0f);
     mPos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 100.0f);
-    if (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && mPos[1] - find_floor_height(mPos[0], mPos[1], mPos[2]) > 300.0f) {
+
+    if (gPlayer1Controller->buttonDown & U_JPAD) {
+        gCliffTimer = 60;
+    }
+
+    if (gPlayer1Controller->buttonDown & U_JPAD 
+        || (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && mPos[1] - find_floor_height(mPos[0], mPos[1], mPos[2]) > 300.0f)) {
         if (gCliffTimer > 59)
             gCliffTimer = 59;
         if (++gCliffTimer > 20) {
             pitch = DEGREES(gCliffTimer - 10);
         }
-    } else {
+    } else if (!(gPlayer1Controller->buttonDown & U_JPAD)) {
         gCliffTimer -= 2;
         if (gCliffTimer < 0)
             gCliffTimer = 0;
@@ -3449,18 +3454,15 @@ void update_camera(struct Camera *c) {
         s8DirModeBaseYaw = approach_s16_symmetric(s8DirModeBaseYaw, gMarioState->faceAngle[1] + 0x8000, 0x400);
     }
 
-    if (gPlayer1Controller->buttonDown & L_JPAD) {
-        //s8DirModeYawOffset -= sDpadSens[dpadSens];
+    /*if (gPlayer1Controller->buttonDown & L_JPAD) {
         s8DirModeBaseYaw -= 0x80;
     }
     if (gPlayer1Controller->buttonDown & R_JPAD) {
-        //s8DirModeYawOffset += sDpadSens[dpadSens];
         s8DirModeBaseYaw += 0x80;
-    }
-    if (gPlayer1Controller->buttonPressed & U_JPAD) {
+    }*/
+    /*if (gPlayer1Controller->buttonPressed & U_JPAD) {
         s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
-        //s8DirModeYawOffset = 0;
-    }
+    }*/
     if (gPlayer1Controller->buttonPressed & D_JPAD) {
         if (absi((u16)(s8DirModeBaseYaw) - (u16)(s8DirModeBaseYaw & 0xE000)) < 0x1000) {
             s8DirModeBaseYaw &= 0xE000;
