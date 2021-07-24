@@ -995,9 +995,9 @@ void cur_obj_update(void) {
         // Execute various code based on object flags.
         objFlags = (s16) gCurrentObject->oFlags;
 
-        if (objFlags & OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE) {
-            obj_set_face_angle_to_move_angle(gCurrentObject);
-        }
+        //if (objFlags & OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE) {
+        //    obj_set_face_angle_to_move_angle(gCurrentObject);
+        //}
 
         if (objFlags & OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW) {
             gCurrentObject->oFaceAngleYaw = gCurrentObject->oMoveAngleYaw;

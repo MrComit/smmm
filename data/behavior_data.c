@@ -6615,7 +6615,7 @@ const BehaviorScript bhvStrayBook[] = {
 
 const BehaviorScript bhvAppearingBook[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
     LOAD_COLLISION_DATA(l1_book_collision),
     SET_FLOAT(oCollisionDistance, 0xF00),
     SET_HOME(),
@@ -6629,7 +6629,7 @@ const BehaviorScript bhvAppearingBook[] = {
 
 const BehaviorScript bhvSpinningBook[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
     LOAD_COLLISION_DATA(l1_thin_book_big_collision),
     SET_FLOAT(oCollisionDistance, 0x500),
     SET_HOME(),

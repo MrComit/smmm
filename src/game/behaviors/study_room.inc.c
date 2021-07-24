@@ -37,7 +37,10 @@ void bhv_appearing_book_loop(void) {
         case 2:
             queue_rumble_data(5, 80);
             cur_obj_shake_screen(0);
+            o->oFloatF8 = o->oPosX;
             o->oPosX = approach_f32(o->oPosX, o->oFloatF4, 13.0f, 13.0f);
+            if (gMarioObject->platform == o)
+                gMarioState->pos[0] += o->oPosX - o->oFloatF8;
             if (o->oPosX == o->oFloatF4) {
                 o->oAction = 3;
             }

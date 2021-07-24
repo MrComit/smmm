@@ -211,7 +211,7 @@ void apply_mario_platform_displacement(void) {
     struct Object *platform = gMarioPlatform;
 
     if (!(gTimeStopState & TIME_STOP_ACTIVE) && gMarioObject != NULL) {
-		if (platform != NULL && !(obj_has_behavior(platform, bhvSpinningBook))) {
+		if (platform != NULL && !(platform->oFlags & OBJ_FLAG_DONT_DISPLACE_MARIO)) {
 			apply_platform_displacement(&sMarioDisplacementInfo, gMarioState->pos, &gMarioState->faceAngle[1], platform);
 			sShouldApplyInertia = TRUE;
 			sInertiaFirstFrame = TRUE;

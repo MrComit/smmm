@@ -32,7 +32,7 @@
 #define OBJ_FLAG_MOVE_XZ_USING_FVEL               (1 <<  1) // 0x00000002
 #define OBJ_FLAG_MOVE_Y_WITH_TERMINAL_VEL         (1 <<  2) // 0x00000004
 #define OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW         (1 <<  3) // 0x00000008
-#define OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE     (1 <<  4) // 0x00000010
+#define OBJ_FLAG_DONT_DISPLACE_MARIO              (1 <<  4) // 0x00000010
 #define OBJ_FLAG_DISABLE_ON_ROOM_CLEAR            (1 <<  5) // 0x00000020
 #define OBJ_FLAG_COMPUTE_DIST_TO_MARIO            (1 <<  6) // 0x00000040
 #define OBJ_FLAG_ACTIVE_FROM_AFAR                 (1 <<  7) // 0x00000080
@@ -47,6 +47,10 @@
 #define OBJ_FLAG_DISABLE_ON_ROOM_EXIT             (1 << 17) // 0x00020000
 #define OBJ_FLAG_0020                             (1 << 18) // 0x00040000
 #define OBJ_FLAG_30                               (1 << 30) // 0x40000000
+
+
+
+#define OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE     OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW
 
 // Flag to make objects emit a point light (was OBJ_FLAG_1000)
 #define OBJ_FLAG_EMIT_LIGHT                       (1 << 12) // 0x00001000
