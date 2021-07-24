@@ -408,6 +408,7 @@ static s32 surface_has_force(s16 surfaceType) {
         case SURFACE_WARP:
         case SURFACE_WARP_HEIGHT:
         case SURFACE_GP_FLOOR:
+        case SURFACE_FIXED_CAM:
             hasForce = TRUE;
             break;
 

@@ -21,6 +21,7 @@
 
 #define SURFACE_SUPER_SLIPPERY               0x0017
 #define SURFACE_WARP_HEIGHT                  0x0018 // Surface warp
+#define SURFACE_FIXED_CAM                    0x0019
 
 #define SURFACE_MGR_MUSIC                    0x001A // Plays the Merry go round music, see handle_merry_go_round_music in bbh_merry_go_round.inc.c for more details
 #define SURFACE_INSTANT_WARP_1B              0x001B // Instant warp to another area, used to warp between areas in WDW and the endless stairs to warp back
