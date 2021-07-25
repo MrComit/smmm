@@ -469,7 +469,7 @@ s32 should_begin_sliding(struct MarioState *m) {
     if (m->input & INPUT_ABOVE_SLIDE) {
         s32 slideLevel = (m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE;
         s32 movingBackward = m->forwardVel <= -1.0f;
-        s32 superSlippery = (m->floor != NULL) && m->floor->type == SURFACE_SUPER_SLIPPERY;
+        s32 superSlippery = (m->floor != NULL) && (m->floor->type == SURFACE_SUPER_SLIPPERY || m->floor->type == SURFACE_SUPER_SLIDE);
 
         if (slideLevel || movingBackward || superSlippery || mario_facing_downhill(m, FALSE)) {
             return TRUE;
@@ -1356,6 +1356,7 @@ void tilt_body_butt_slide(struct MarioState *m) {
 
 void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32 animation) {
     Vec3f pos;
+    s32 superSlide = 0;
 
     vec3f_copy(pos, m->pos);
     play_sound(SOUND_MOVING_TERRAIN_SLIDE + m->terrainSoundAddend, m->marioObj->header.gfx.cameraToObject);
@@ -1364,9 +1365,16 @@ void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32
 
     adjust_sound_for_speed(m);
 
+    if (m->floor != NULL && m->floor->type == SURFACE_SUPER_SLIDE)
+        superSlide = 1;
+
     switch (perform_ground_step(m)) {
         case GROUND_STEP_LEFT_GROUND:
             set_mario_action(m, airAction, 0);
+            if (superSlide) {
+                m->forwardVel += 40.0f;
+                m->vel[1] += 10.0f;
+            }
             if (m->forwardVel < -50.0f || 50.0f < m->forwardVel) {
                 play_sound(SOUND_MARIO_HOOHOO, m->marioObj->header.gfx.cameraToObject);
             }
@@ -1410,7 +1418,8 @@ void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32
 s32 common_slide_action_with_jump(struct MarioState *m, u32 stopAction, u32 jumpAction, u32 airAction,
                                   s32 animation) {
     if (m->actionTimer == 5) {
-        if (m->input & INPUT_A_PRESSED && (m->floor == NULL || m->floor->type != SURFACE_SUPER_SLIPPERY)) {
+        if (m->input & INPUT_A_PRESSED && (m->floor == NULL || 
+            (m->floor->type != SURFACE_SUPER_SLIPPERY && m->floor->type != SURFACE_SUPER_SLIDE))) {
             return set_jumping_action(m, jumpAction, 0);
         }
     } else {

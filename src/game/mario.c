@@ -420,6 +420,7 @@ s32 mario_get_floor_class(struct MarioState *m) {
             case SURFACE_NOISE_VERY_SLIPPERY:
             case SURFACE_NO_CAM_COL_VERY_SLIPPERY:
             case SURFACE_SUPER_SLIPPERY:
+            case SURFACE_SUPER_SLIDE:
                 floorClass = SURFACE_CLASS_VERY_SLIPPERY;
                 break;
         }
@@ -578,6 +579,9 @@ u32 mario_floor_is_slippery(struct MarioState *m) {
     if ((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE
         && m->floor->normal.y < 0.9998477f //~cos(1 deg)
     ) {
+        return TRUE;
+    }
+    if (m->floor->type == SURFACE_SUPER_SLIDE) {
         return TRUE;
     }
 
