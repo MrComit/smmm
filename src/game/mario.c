@@ -581,7 +581,8 @@ u32 mario_floor_is_slippery(struct MarioState *m) {
     ) {
         return TRUE;
     }
-    if (m->floor->type == SURFACE_SUPER_SLIDE) {
+
+    if (m->floor != NULL && m->floor->type == SURFACE_SUPER_SLIDE) {
         return TRUE;
     }
 
@@ -614,6 +615,10 @@ s32 mario_floor_is_slope(struct MarioState *m) {
 
     if ((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE
         && m->floor->normal.y < 0.9998477f) { // ~cos(1 deg)
+        return TRUE;
+    }
+
+    if (m->floor != NULL && m->floor->type == SURFACE_SUPER_SLIDE) {
         return TRUE;
     }
 

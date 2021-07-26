@@ -1372,7 +1372,10 @@ void common_slide_action(struct MarioState *m, u32 endAction, u32 airAction, s32
         case GROUND_STEP_LEFT_GROUND:
             set_mario_action(m, airAction, 0);
             if (superSlide) {
-                m->forwardVel += 40.0f;
+                if (m->forwardVel >= 0)
+                    m->forwardVel += 45.0f;
+                else
+                    m->forwardVel -= 45.0f;
                 m->vel[1] += 10.0f;
             }
             if (m->forwardVel < -50.0f || 50.0f < m->forwardVel) {

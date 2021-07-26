@@ -646,9 +646,7 @@ s32 act_butt_slide_stop(struct MarioState *m) {
     }
 
     if (m->input & INPUT_NONZERO_ANALOG) {
-        //return set_mario_action(m, ACT_IDLE, 0);
-        set_mario_action(m, ACT_IDLE, 0);
-        return 1;
+        return set_mario_action(m, ACT_IDLE, 0);
     }
 
     if (m->input & (INPUT_NONZERO_ANALOG | INPUT_A_PRESSED | INPUT_OFF_FLOOR | INPUT_ABOVE_SLIDE)) {

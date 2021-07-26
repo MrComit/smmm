@@ -1421,7 +1421,8 @@ s32 act_butt_slide_air(struct MarioState *m) {
 
     switch (perform_air_step(m, 0)) {
         case AIR_STEP_LANDED:
-            if (m->actionState == 0 && m->vel[1] < 0.0f && m->floor->normal.y >= 0.9848077f) {
+            if (m->actionState == 0 && m->vel[1] < 0.0f && m->floor->normal.y >= 0.9848077f 
+                && (m->floor == NULL || m->floor->type != SURFACE_SUPER_SLIDE)) {
                 m->vel[1] = -m->vel[1] / 2.0f;
                 m->actionState = 1;
             } else {

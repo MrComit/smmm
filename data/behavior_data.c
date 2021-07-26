@@ -7909,7 +7909,7 @@ const BehaviorScript bhvBombRock[] = {
 
 const BehaviorScript bhvUnstableRock[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
     LOAD_COLLISION_DATA(unstable_rock_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0xA00),
