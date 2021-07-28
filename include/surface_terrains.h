@@ -52,6 +52,8 @@
 #define SURFACE_VERTICAL_WIND                0x0038 // Death at bottom with vertical wind
 
 #define SURFACE_SUPER_SLIDE                  0x0039
+#define SURFACE_SNOWFLAKE_SPAWN              0x003A
+#define SURFACE_SNOWFLAKE_DESPAWN            0x003B
 
 #define SURFACE_BOSS_FIGHT_CAMERA            0x0065 // Wide camera for BOB and WF bosses
 #define SURFACE_CAMERA_FREE_ROAM             0x0066 // Free roam camera for THI and TTC

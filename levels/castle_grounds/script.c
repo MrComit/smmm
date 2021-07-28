@@ -29,7 +29,7 @@ static const LevelScript script_func_local_1[] = {
     WARP_NODE(/*id*/ 0x86, /*destLevel*/ LEVEL_BBH, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
 
 
-    OBJECT(/*model*/ MODEL_NONE, /*pos*/ -1878, 260, 3964, /*angle*/ 0, 180, 0, /*behParam*/ 0x001F0000, /*beh*/ bhvInstantActiveWarp),
+    OBJECT(/*model*/ MODEL_NONE, /*pos*/ -1878, 260, 3964, /*angle*/ 0, 180, 0, /*behParam*/ 0x001F0000, /*beh*/ bhvFlyingWarp),
     WARP_NODE(/*id*/ 0x1F, /*destLevel*/ LEVEL_BOB, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
 
 

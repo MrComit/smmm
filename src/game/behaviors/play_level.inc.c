@@ -1,15 +1,52 @@
+#include "game/object_helpers.h"
+
+void bhv_snowflake_init(void) {
+    o->oFaceAngleYaw = random_u16();
+    if (o->oBehParams2ndByte)
+        o->oF8 = 155;
+    else
+        o->oF8 = 255;
+}
+
 void bhv_snowflake_loop(void) {
-    o->oFaceAngleYaw += 0x100;
-    if (o->oBehParams2ndByte) {
-        o->oOpacity = 200;
-    } else {
-        load_object_collision_model();
+    switch (o->oAction) {
+        case 0:
+            if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_SNOWFLAKE_SPAWN &&
+                absf(gMarioState->pos[1] - gMarioState->floorHeight) < 20.0f) {
+                if (o->oTimer > 30)
+                    o->oAction = 1;
+            } else {
+                o->oTimer = 0;
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, o->oF8, 10);
+            if (o->oOpacity == o->oF8) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oFaceAngleYaw += 0xC0;
+            if (o->oBehParams2ndByte == 0)
+                load_object_collision_model();
+            if (gMarioObject->platform == o) {
+                o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 20.0f, 0.2f);
+                o->oFaceAngleYaw += 0x140;
+            } else {
+                o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.1f);
+            }
+            if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_SNOWFLAKE_DESPAWN &&
+                absf(gMarioState->pos[1] - gMarioState->floorHeight) < 20.0f) {
+                    o->oAction = 3;
+                }
+            break;
+        case 3:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, o->oF8 / 20);
+            if (o->oOpacity == 0)
+                o->activeFlags = 0;
+            break;
     }
-    if (gMarioObject->platform == o) {
-        o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 20.0f, 0.3f);
-    } else {
-        o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.15f);
-    }
+
 }
 
 
