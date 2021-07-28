@@ -212,14 +212,6 @@ void scroll_bbh_dl_BB_mesh_layer_5_vtx_0() {
 	currentX += deltaX;	timeX += 1;	currentY += deltaY;	timeY += 1;
 }
 
-void scroll_sts_mat_bbh_dl_SolidQuicksand_v4_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_bbh_dl_SolidQuicksand_v4_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_t(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s_down(mat, 21, PACK_TILESIZE(0, 1));
-	shift_t_down(mat, 21, PACK_TILESIZE(0, 1));
-};
-
 void scroll_bbh_dl_Snow_mesh_layer_1_vtx_2() {
 	int i = 0;
 	int count = 14;
@@ -265,6 +257,5 @@ void scroll_bbh() {
 	scroll_bbh_dl_Waterfall_001_mesh_layer_5_vtx_0();
 	scroll_bbh_dl_Waterfall_001_mesh_layer_5_vtx_1();
 	scroll_bbh_dl_BB_mesh_layer_5_vtx_0();
-	scroll_sts_mat_bbh_dl_SolidQuicksand_v4_layer1();
 	scroll_bbh_dl_Snow_mesh_layer_1_vtx_2();
 }

@@ -43,7 +43,6 @@ const GeoLayout bbh_dl_301__SnowGlobe_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 3031, 2305, -6076, bbh_dl_Castle_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 6586, 2349, -3428, bbh_dl_CastleRuins_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 5089, 1615, -2106, bbh_dl_CastleRuins_001_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 5048, 570, 6778, bbh_dl_Goop_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -2284, 320, -5459, bbh_dl_IcePlatforms_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -4696, 1503, -4946, bbh_dl_IceSlide_mesh_layer_1),
 		GEO_OPEN_NODE(),
