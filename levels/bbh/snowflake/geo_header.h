@@ -1,0 +1,11 @@
+extern const GeoLayout snowflake_switch_opt1[];
+extern const GeoLayout snowflake_geo[];
+extern Lights1 snowflake_Ice_001_lights;
+extern u8 snowflake_ci4_pyrojay_ice_ci4[];
+extern u8 snowflake_ci4_pyrojay_ice_ci4_pal_rgba16[];
+extern Vtx snowflake_dl_mesh_layer_1_vtx_0[54];
+extern Gfx snowflake_dl_mesh_layer_1_tri_0[];
+extern Gfx mat_snowflake_Ice_001[];
+extern Gfx mat_revert_snowflake_Ice_001[];
+extern Gfx snowflake_dl_mesh_layer_1[];
+extern Gfx snowflake_material_revert_render_settings[];

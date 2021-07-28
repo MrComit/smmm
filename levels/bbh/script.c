@@ -37,6 +37,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_FAKE_WALL, fake_dirt_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOMB_ROCK, bomb_rock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_UNSTABLE_ROCK, unstable_rock_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SNOWFLAKE, snowflake_geo), 
 
 	AREA(1, bbh_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -210,6 +211,8 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_STAR_CURRENCY, -1738, -200, -50, 0, 0, 0, 0x0E000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, -1845, -200, 677, 0, 0, 0, 0x10000000, bhvStar),
 		OBJECT(MODEL_NONE, -1146, -200, 2160, 0, 0, 0, 0x11000000, bhvHiddenGreenCoinStar),
+		OBJECT(MODEL_SNOWFLAKE, 3997, 459, 7780, 0, 0, 0, 0x00000000, bhvSnowflake),
+		OBJECT(MODEL_SNOWFLAKE, 3343, 573, 7440, 0, 0, 0, 0x00000000, bhvSnowflake),
 		OBJECT(MODEL_TOKEN, 3678, 4203, -4392, 0, 60, 0, 0x00011A00, bhvToken),
 		TERRAIN(bbh_area_3_collision),
 		ROOMS(bbh_area_3_collision_rooms),

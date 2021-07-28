@@ -697,6 +697,7 @@
 #define MODEL_FAKE_WALL           0xFF
 #define MODEL_BOMB_ROCK           0xFE
 #define MODEL_UNSTABLE_ROCK       0xFD
+#define MODEL_SNOWFLAKE           0xFC
 
 
 

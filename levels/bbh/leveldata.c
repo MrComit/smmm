@@ -77,3 +77,5 @@
 #include "levels/bbh/bomb_rock/collision.inc.c"
 #include "levels/bbh/unstable_rock/model.inc.c"
 #include "levels/bbh/unstable_rock/collision.inc.c"
+#include "levels/bbh/snowflake/model.inc.c"
+#include "levels/bbh/snowflake/collision.inc.c"

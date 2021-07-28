@@ -2,6 +2,24 @@
     "date": "1996-03-19",
     "sample_bank": "instruments",
     "envelopes": {
+        "envelopeInverseLong": [
+            [2, 0],
+            [100, 18167],
+            [100, 32700],
+            "hang"
+        ],
+        "envelopeInverseMedium": [
+            [2, 0],
+            [50, 18167],
+            [20, 32700],
+            "hang"
+        ],
+        "envelopeInverseShort": [
+            [2, 0],
+            [15, 5000],
+            [50, 32700],
+            "hang"
+        ],
         "envelopeOrgan": [
             [2, 32700],
             [1, 32700],

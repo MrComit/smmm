@@ -675,7 +675,7 @@ extern const BehaviorScript bhvFakeWall[];
 extern const BehaviorScript bhvGenericSwitch[];
 extern const BehaviorScript bhvBombRock[];
 extern const BehaviorScript bhvUnstableRock[];
-
+extern const BehaviorScript bhvSnowflake[];
 
 
 

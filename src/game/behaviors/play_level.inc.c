@@ -1,3 +1,18 @@
+void bhv_snowflake_loop(void) {
+    o->oFaceAngleYaw += 0x100;
+    if (o->oBehParams2ndByte) {
+        o->oOpacity = 200;
+    } else {
+        load_object_collision_model();
+    }
+    if (gMarioObject->platform == o) {
+        o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY - 20.0f, 0.3f);
+    } else {
+        o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.15f);
+    }
+}
+
+
 void bhv_unstable_rock_init(void) {
     o->os16F4 = o->os16F6 = o->os16F8 = 0;
 }

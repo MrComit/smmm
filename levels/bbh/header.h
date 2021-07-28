@@ -125,4 +125,8 @@ extern const LevelScript level_bbh_entry[];
 
 #include "levels/bbh/unstable_rock/collision_header.h"
 
+#include "levels/bbh/snowflake/geo_header.h"
+
+#include "levels/bbh/snowflake/collision_header.h"
+
 #endif
