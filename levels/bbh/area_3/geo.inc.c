@@ -3,9 +3,10 @@
 const GeoLayout bbh_area_3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(2, geo_switch_area),
+		GEO_SWITCH_CASE(3, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, bbh_dl_301__SnowGlobe_geo),
+			GEO_BRANCH(1, bbh_dl_302__UnderGlobe_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -57,6 +58,14 @@ const GeoLayout bbh_dl_301__SnowGlobe_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 2525, 1000, -1866, bbh_dl_Snow_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -546, -875, 16143, bbh_dl_Snow_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 7085, 550, 4623, bbh_dl_SnowMountain_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bbh_dl_302__UnderGlobe_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -2678, -2469, -4948, bbh_dl_Underglobe_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(5, 1648, -2585, -7804, bbh_dl_Waterfall_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

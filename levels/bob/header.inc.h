@@ -116,7 +116,7 @@ extern u8 bob_dl_RockPattern09_ci8_pal_rgba16[];
 extern u8 bob_dl_fancy_wall_ci8[];
 extern u8 bob_dl_fancy_wall_ci8_pal_rgba16[];
 extern u8 bob_dl_BOOGOO1_i4[];
-extern u8 bob_dl_BOOGOO2_i4[];
+extern u8 bob_dl_BOOGOO3_i4[];
 extern u8 bob_dl_ci4_painting_frame_ci4[];
 extern u8 bob_dl_ci4_painting_frame_ci4_pal_rgba16[];
 extern u8 bob_dl_i8_gradient_sphere_i8[];

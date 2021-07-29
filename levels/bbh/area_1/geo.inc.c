@@ -48,7 +48,6 @@ const GeoLayout bbh_dl_101__Oasis_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(1, 871, 857, 1885, bbh_dl_Rope_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -3189, 423, -4607, bbh_dl_Tunnel_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(5, 2616, -60, -2138, bbh_dl_Water_mesh_layer_5),
-		GEO_TRANSLATE_NODE_WITH_DL(5, -380, 1934, -5824, bbh_dl_Waterfall_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
