@@ -12,6 +12,8 @@
 #include "engine/behavior_script.h"
 #include "audio/external.h"
 #include "obj_behaviors.h"
+#include "object_list_processor.h"
+#include "area.h"
 
 /**
  * This file contains the function that handles 'environment effects',
@@ -390,6 +392,9 @@ Gfx *envfx_update_snow(s32 snowMode, Vec3s marioPos, Vec3s camFrom, Vec3s camTo)
     gfx = gfxStart;
 
     if (gfxStart == NULL) {
+        return NULL;
+    }
+    if (gCurrLevelNum == LEVEL_BBH && gMarioCurrentRoom != 1) {
         return NULL;
     }
 
