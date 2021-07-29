@@ -13,14 +13,14 @@ void bhv_snowflake_loop(void) {
         case 0:
             if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_SNOWFLAKE_SPAWN &&
                 absf(gMarioState->pos[1] - gMarioState->floorHeight) < 20.0f) {
-                if (o->oTimer > 30)
+                if (o->oTimer > 20)
                     o->oAction = 1;
             } else {
                 o->oTimer = 0;
             }
             break;
         case 1:
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, o->oF8, 10);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, o->oF8, o->oF8 / 15);
             if (o->oOpacity == o->oF8) {
                 o->oAction = 2;
             }

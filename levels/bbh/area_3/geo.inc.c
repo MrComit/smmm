@@ -64,7 +64,12 @@ const GeoLayout bbh_dl_301__SnowGlobe_geo[] = {
 const GeoLayout bbh_dl_302__UnderGlobe_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, -2678, -2469, -4948, bbh_dl_BooGoo_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(4, -1951, -3379, -4234, bbh_dl_Chain_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(1, -2678, -2469, -4948, bbh_dl_Underglobe_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(5, bbh_dl_Underglobe_mesh_layer_5),
+		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(5, 1648, -2585, -7804, bbh_dl_Waterfall_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
