@@ -23,6 +23,9 @@ void bhv_snowflake_loop(void) {
             o->oOpacity = approach_s16_symmetric(o->oOpacity, o->oF8, o->oF8 / 15);
             if (o->oOpacity == o->oF8) {
                 o->oAction = 2;
+                if (o->oBehParams >> 24 == 1) {
+                    play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+                }
             }
             break;
         case 2:
@@ -35,8 +38,7 @@ void bhv_snowflake_loop(void) {
             } else {
                 o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.1f);
             }
-            if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_SNOWFLAKE_DESPAWN &&
-                absf(gMarioState->pos[1] - gMarioState->floorHeight) < 20.0f) {
+            if (save_file_get_currency_flags() & (1 << 0xD)) {
                     o->oAction = 3;
                 }
             break;
