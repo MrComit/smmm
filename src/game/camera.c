@@ -956,6 +956,7 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     UNUSED f32 unused3;
     f32 yOff = 125.f;
     f32 baseDist = 1000.f;
+    f32 floorHeight;
     Vec3f mPos;
     mPos[1] = gMarioState->pos[1];
     mPos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 100.0f);
@@ -965,8 +966,9 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
         gCliffTimer = 60;
     }
 
-    if (gPlayer1Controller->buttonDown & U_JPAD 
-        || (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && mPos[1] - find_floor_height(mPos[0], mPos[1], mPos[2]) > 300.0f)) {
+    floorHeight = find_floor_height(mPos[0], mPos[1], mPos[2]);
+    if (gPlayer1Controller->buttonDown & U_JPAD || (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && 
+        mPos[1] - floorHeight > 300.0f && floorHeight > FLOOR_LOWER_LIMIT)) {
         if (gCliffTimer > 59)
             gCliffTimer = 59;
         if (++gCliffTimer > 20) {
