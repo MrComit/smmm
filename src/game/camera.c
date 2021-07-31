@@ -1343,7 +1343,7 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = pos[0];
             c->focus[0] = gMarioState->pos[0];
-            sAreaYawChange = sAreaYaw - oldAreaYaw;
+            //sAreaYawChange = sAreaYaw - oldAreaYaw;
             c->yaw = c->nextYaw = s8DirModeYawOffset;
             c->pos[2] = 2000.0f + gDepthOffset2d;
             approach_camera_height(c, pos[1] + 300.0f, ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
