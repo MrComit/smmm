@@ -15,6 +15,9 @@ const GeoLayout bbh_dl_201__Cave_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(0, 462, 694, -11205, bbh_dl_Background_mesh_layer_0),
 		GEO_TRANSLATE_NODE_WITH_DL(1, 9614, -3415, 0, bbh_dl_Cave_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(5, bbh_dl_Cave_mesh_layer_5),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -40,6 +43,7 @@ const GeoLayout bbh_area_2[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(5, bbh_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(1, bbh_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(0, bbh_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
