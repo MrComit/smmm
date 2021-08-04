@@ -7936,3 +7936,17 @@ const BehaviorScript bhvSnowflake[] = {
         CALL_NATIVE(bhv_snowflake_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvStalactite[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_INT(oF8, 0x120),
+    ADD_FLOAT(oPosY, 400),
+    CALL_NATIVE(bhv_stalactite_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_stalactite_loop),
+    END_LOOP(),
+};

@@ -28,3 +28,5 @@
 #include "levels/bbh/bomb_rock/geo.inc.c"
 #include "levels/bbh/unstable_rock/geo.inc.c"
 #include "levels/bbh/snowflake/geo.inc.c"
+#include "levels/bbh/unstable_rock_yellow/geo.inc.c"
+#include "levels/bbh/stalactite/geo.inc.c"

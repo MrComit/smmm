@@ -1,5 +1,53 @@
 #include "game/object_helpers.h"
 
+static struct ObjectHitbox sStalactiteHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 450,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 50,
+    /* height:            */ 300,
+    /* hurtboxRadius:     */ 50,
+    /* hurtboxHeight:     */ 300,
+};
+
+
+void bhv_stalactite_init(void) {
+    obj_set_hitbox(o, &sStalactiteHitbox);
+}
+
+
+void bhv_stalactite_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 30.0f, 30.0f);
+            if (gMarioState->pos[1] < o->oPosY && absf(o->oPosX - gMarioState->pos[0]) < 125.0f) {
+                o->oFaceAngleRoll += o->oF8;
+                o->oF8 = -o->oF8;
+                if (o->oTimer > 4) {
+                    o->oFaceAngleRoll = 0;
+                    o->oAction = 1;
+                    cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            break;
+        case 1:
+            cur_obj_update_floor_height();
+            o->oFloatF4 = approach_f32(o->oFloatF4, 30.0f, 3.0f, 3.0f);
+            o->oPosY -= o->oFloatF4;
+            if (o->oInteractStatus || absf(o->oFloorHeight - (o->oPosY - 200.0f)) < 16.0f) {
+                obj_explode_and_spawn_coins(46.0f, 0);
+                create_respawner(MODEL_STALACTITE, bhvStalactite, 100);
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
 void bhv_snowflake_init(void) {
     o->oFaceAngleYaw = random_u16();
     if (o->oBehParams2ndByte)
@@ -64,6 +112,7 @@ void bhv_unstable_rock_loop(void) {
                 o->oPosY = approach_f32(o->oPosY, o->oHomeY - 20.0f, 4.0f, 4.0f);
                 if (o->oTimer > 5) {
                     o->oAction = 1;
+                    o->oPosY = o->oHomeY - 20.0f;
                     o->oHomeY = o->oPosY;
                 }
             } else {
@@ -86,6 +135,7 @@ void bhv_unstable_rock_loop(void) {
             if (o->oPosY == o->oHomeY - 300.0f) {
                 o->oAction = 3;
                 o->os16F4 = o->os16F6 = o->os16F8 = 0x80;
+                o->oHomeY += 20.0f;
             }
             break;
         case 3:

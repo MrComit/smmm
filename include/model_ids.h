@@ -698,6 +698,8 @@
 #define MODEL_BOMB_ROCK           0xFE
 #define MODEL_UNSTABLE_ROCK       0xFD
 #define MODEL_SNOWFLAKE           0xFC
+#define MODEL_UNSTABLE_ROCK_YELLOW 0xFB
+#define MODEL_STALACTITE          0xFA
 
 
 

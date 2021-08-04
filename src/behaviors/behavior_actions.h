@@ -775,6 +775,8 @@ void bhv_unstable_rock_loop(void);
 void bhv_unstable_rock_init(void);
 void bhv_snowflake_loop(void);
 void bhv_snowflake_init(void);
+void bhv_stalactite_loop(void);
+void bhv_stalactite_init(void);
 
 
 
