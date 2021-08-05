@@ -350,18 +350,9 @@ extern const GeoLayout boo_geo[];
 extern const Gfx boo_seg5_dl_0500BF48[];
 extern const Gfx boo_seg5_dl_0500BFA0[];
 
-extern const Gfx boo_dl_color1[];
-extern const Gfx boo_dl_color2[];
-extern const Gfx boo_dl_color3[];
-extern const Gfx boo_dl_color4[];
-extern const Gfx boo_dl_color5[];
-extern const Gfx boo_dl_color6[];
-extern const Gfx boo_dl_color7[];
-extern const Gfx boo_dl_color8[];
-extern const Gfx boo_dl_color9[];
-extern const Gfx boo_dl_color10[];
-extern const Gfx boo_dl_color11[];
-extern const Gfx boo_dl_color12[];
+extern const Gfx boo_dl_color[];
+extern const Gfx boo_dl_helper[];
+extern const Lights1 boo_light_color;
 
 // haunted_cage
 extern const GeoLayout haunted_cage_geo[];

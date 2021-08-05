@@ -446,6 +446,7 @@ static void boo_act_2(void) {
 
 static void boo_act_3(void) {
     struct Object *obj;
+    u32 params = 0;
     if (boo_update_during_death()) {
         o->activeFlags = 0;
         save_file_set_boos(o->oBehParams2ndByte);
@@ -481,7 +482,7 @@ static void boo_act_3(void) {
                 obj->oFaceAngleYaw = 0xE000;
                 obj->oFaceAngleRoll = obj->oFaceAnglePitch = 0;
                 break;
-            case 4: // THIS WILL BE KEY PART
+            case 4:
                 obj = spawn_object(o, MODEL_BROKEN_KEY, bhvBrokenKey);
                 obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
                 obj->oFaceAngleRoll = 0xF000;
@@ -494,6 +495,14 @@ static void boo_act_3(void) {
                 } else if (o->oBehParams2ndByte == 0xFF) {
                     
                 }
+                break;
+            case 5:
+                params = o->oBehParams;
+                o->oBehParams = (o->oBehParams & 0xFF00) << 16;
+                spawn_default_star(o->oPosX, o->oPosY + 100.0f, o->oPosZ);
+                o->oBehParams = params;
+                //obj->oBehParams2ndByte = 0;
+                //obj->oBehParams = ((o->oBehParams >> 8) & 0xFF) << 24;
                 break;
         }
     }

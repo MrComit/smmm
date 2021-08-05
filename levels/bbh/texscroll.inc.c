@@ -185,7 +185,6 @@ void scroll_bbh_dl_Waterfall_003_mesh_layer_5_vtx_1() {
 void scroll_sts_mat_bbh_dl_BooSand_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_bbh_dl_BooSand_layer1);
 	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
 	shift_t(mat, 21, PACK_TILESIZE(0, 1));
 };
 

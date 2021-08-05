@@ -26,6 +26,96 @@
 #include "rendering_graph_node.h"
 #include "spawn_object.h"
 #include "spawn_sound.h"
+#include "actors/group0.h"
+
+const Lights1 boo_light_1 = gdSPDefLights1(
+    0x3C, 0x32, 0x7F,
+    0x78, 0x64, 0xff, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_2 = gdSPDefLights1(
+    0x65, 0x7F, 0x3A,
+    0xCB, 0xFF, 0x74, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_3 = gdSPDefLights1(
+    0x53, 0x53, 0x80,
+    0xA5, 0xA5, 0xFF, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_4 = gdSPDefLights1(
+    0x6a, 0x25, 0x0e,
+    0xd5, 0x4b, 0x1c, 0x28, 0x28, 0x28
+);
+
+
+const Lights1 boo_light_5 = gdSPDefLights1(
+    0x7F, 0x00, 0x00,
+    0xFF, 0x00, 0x00, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_6 = gdSPDefLights1(
+    0x11, 0x54, 0x18,
+    0x22, 0xa8, 0x2f, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_7 = gdSPDefLights1(
+    0x80, 0x6e, 0x24,
+    0xff, 0xdc, 0x47, 0x28, 0x28, 0x28
+);
+
+
+const Lights1 boo_light_8 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+
+const Lights1 boo_light_9 = gdSPDefLights1(
+    0x4B, 0x34, 0x00,
+    0x96, 0x69, 0x00, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_10 = gdSPDefLights1(
+    0x4E, 0x33, 0x71,
+    0x9D, 0x65, 0xE1, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_11 = gdSPDefLights1(
+    0x2A, 0x00, 0x4D,
+    0x55, 0x00, 0x9B, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_12 = gdSPDefLights1(
+    0x3E, 0x2D, 0x00,
+    0x7D, 0x5B, 0x00, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_13 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_14 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_15 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_16 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
+const Lights1 boo_light_17 = gdSPDefLights1(
+    0x97, 0x9a, 0xff,
+    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+);
+
 
 static s8 sBbhStairJiggleOffsets[] = { -8, 8, -4, 4 };
 static s16 sPowersOfTwo[] = { 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
@@ -210,6 +300,49 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
     }
 
     return dlStart;
+}
+
+Lights1 *sBooLights[] = {
+    &boo_light_1,
+    &boo_light_2,
+    &boo_light_3,
+    &boo_light_4,
+    &boo_light_5,
+    &boo_light_6,
+    &boo_light_7,
+    &boo_light_8,
+    &boo_light_9,
+    &boo_light_10,
+    &boo_light_11,
+    &boo_light_12,
+    &boo_light_13,
+    &boo_light_14,
+    &boo_light_15,
+    &boo_light_16,
+    &boo_light_17,
+};
+
+
+Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    Lights1 *light;
+    Lights1 *light2;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        if (gCurGraphNodeHeldObject) {
+            objectGraphNode = gCurGraphNodeHeldObject->objNode;
+        }
+        currentGraphNode->fnNode.node.flags = (currentGraphNode->parameter << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        light2 = segmented_to_virtual(sBooLights[objectGraphNode->oBehParams2ndByte]);
+        light = segmented_to_virtual(&boo_light_color);
+        *light = *light2;
+    }
+    return NULL;
 }
 
 

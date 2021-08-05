@@ -23,8 +23,6 @@ void bhv_stalactite_loop(void) {
         case 0:
             o->oPosY = approach_f32(o->oPosY, o->oHomeY, 30.0f, 30.0f);
             if (gMarioState->pos[1] < o->oPosY && absf(o->oPosX - gMarioState->pos[0]) < 125.0f) {
-                o->oFaceAngleRoll += o->oF8;
-                o->oF8 = -o->oF8;
                 if (o->oTimer > 4) {
                     o->oFaceAngleRoll = 0;
                     o->oAction = 1;
@@ -32,6 +30,10 @@ void bhv_stalactite_loop(void) {
                 }
             } else {
                 o->oTimer = 0;
+            }
+            if (gMarioState->pos[1] < o->oPosY && absf(o->oPosX - gMarioState->pos[0]) < 300.0f) {
+                o->oFaceAngleRoll += o->oF8;
+                o->oF8 = -o->oF8;
             }
             break;
         case 1:

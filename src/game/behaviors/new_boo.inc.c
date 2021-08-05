@@ -112,14 +112,16 @@ void bhv_room_boo_init(void) {
     }
 }
 
+s8 sBooBits[] = {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1,}; // ends at 0xF
 
 //BPARAM 1 = NO KEY, SMALL KEY, OR BIG KEY - BPARAM 3 = KEY ID
 void bhv_room_boo_loop(void) {
     s32 numObjs;
     if (gMarioCurrentRoom != o->oRoom)
         return;
-    //o->oAction = 3;
-    //o->oUnk1A8 = 2;
+    if (gCamera->comit2dcam == 1) {
+        o->oPosZ = 0;
+    }
     if (o->oUnk1A8 == 0) {
         numObjs = count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, o->oRoom);
         if (numObjs <= 15) {
@@ -137,7 +139,7 @@ void bhv_room_boo_loop(void) {
         bhv_boo_loop();
     }
 
-    if (o->oBehParams2ndByte != 0 && o->oBehParams2ndByte != 4 && o->oBehParams2ndByte != 0xA)
+    if (sBooBits[o->oBehParams2ndByte])
         room_boo_multiplier_loop();
 
 }
