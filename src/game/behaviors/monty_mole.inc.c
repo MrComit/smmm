@@ -146,16 +146,19 @@ void bhv_monty_mole_init(void) {
 static void monty_mole_act_select_hole(void) {
     f32 minDistToMario;
 
-    if (o->oBehParams2ndByte != MONTY_MOLE_BP_NO_ROCK) {
+    /*if (o->oBehParams2ndByte != MONTY_MOLE_BP_NO_ROCK) {
         minDistToMario = 200.0f;
     } else if (gMarioStates[0].forwardVel < 8.0f) {
         minDistToMario = 100.0f;
     } else {
         minDistToMario = 500.0f;
-    }
+    }*/
 
     // Select a hole to pop out of
-    if ((o->oMontyMoleCurrentHole = monty_mole_select_available_hole(minDistToMario)) != NULL) {
+    if (o->oMontyMoleCurrentHole == NULL) {
+        o->oMontyMoleCurrentHole = spawn_object(o, MODEL_DL_MONTY_MOLE_HOLE, bhvMontyMoleHole);
+    }
+    //if ((o->oMontyMoleCurrentHole = monty_mole_select_available_hole(minDistToMario)) != NULL) {
         cur_obj_play_sound_2(SOUND_OBJ2_MONTY_MOLE_APPEAR);
 
         // Mark hole as unavailable
@@ -183,7 +186,7 @@ static void monty_mole_act_select_hole(void) {
 
         cur_obj_unhide();
         cur_obj_become_tangible();
-    }
+    //}
 }
 
 /**
@@ -367,7 +370,10 @@ void bhv_monty_mole_update(void) {
 
     // Spawn a 1-up if you kill 8 monty moles
     if (obj_check_attacks(&sMontyMoleHitbox, o->oAction)) {
-        if (sMontyMoleKillStreak != 0) {
+        o->activeFlags = 0;
+        if (o->oMontyMoleCurrentHole != NULL)
+            o->oMontyMoleCurrentHole->activeFlags = 0;
+        /*if (sMontyMoleKillStreak != 0) {
             f32 dx = o->oPosX - sMontyMoleLastKilledPosX;
             f32 dy = o->oPosY - sMontyMoleLastKilledPosY;
             f32 dz = o->oPosZ - sMontyMoleLastKilledPosZ;
@@ -397,7 +403,7 @@ void bhv_monty_mole_update(void) {
         monty_mole_hide_in_hole();
 
         // Throw rock if holding one
-        o->prevObj = NULL;
+        o->prevObj = NULL;*/
     }
 
     cur_obj_move_standard(78);
