@@ -499,7 +499,7 @@ static void boo_act_3(void) {
             case 5:
                 params = o->oBehParams;
                 o->oBehParams = (o->oBehParams & 0xFF00) << 16;
-                spawn_default_star(o->oPosX, o->oPosY + 100.0f, o->oPosZ);
+                spawn_default_star(gMarioState->pos[0], gMarioState->pos[1] + 100.0f, gMarioState->pos[2]);
                 o->oBehParams = params;
                 //obj->oBehParams2ndByte = 0;
                 //obj->oBehParams = ((o->oBehParams >> 8) & 0xFF) << 24;
