@@ -63,6 +63,9 @@ void bhv_coin_loop(void) {
     cur_obj_update_floor_and_walls();
     cur_obj_if_hit_wall_bounce_away();
     cur_obj_move_standard(-62);
+    if (gCamera->comit2dcam == 1) {
+        o->oPosZ = 0;
+    }
     if ((sp1C = o->oFloor) != NULL) {
         if (o->oMoveFlags & OBJ_MOVE_ON_GROUND)
             o->oSubAction = 1;

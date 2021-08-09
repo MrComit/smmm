@@ -323,7 +323,7 @@ static struct ObjectHitbox sMontyMoleHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
     /* health:            */ -1,
-    /* numLootCoins:      */ 0,
+    /* numLootCoins:      */ 1,
     /* radius:            */ 70,
     /* height:            */ 50,
     /* hurtboxRadius:     */ 30,
