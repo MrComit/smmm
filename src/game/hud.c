@@ -513,13 +513,13 @@ void print_s2d_string(s16 x, s16 y, char *str) {
 	s2d_stop();
 }
 
-#include "src/s2d_engine/sprites/room_names.c"
+//#include "src/s2d_engine/sprites/room_names.c"
 
-extern s8 sLevelRoomOffsets[];
-s32 gRoomEntryTimer = -1;
+//extern s8 sLevelRoomOffsets[];
+//s32 gRoomEntryTimer = -1;
 
 void render_s2d_room_names(void) {
-    s16 y;
+    /*s16 y;
     if (gMarioCurrentRoom != gMarioPreviousRoom2) {
         gRoomEntryTimer = 0;
 
@@ -542,7 +542,7 @@ void render_s2d_room_names(void) {
             gRoomEntryTimer = -1;
         }
     }
-    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]);
+    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]);*/
 }
 
 
@@ -582,5 +582,5 @@ void render_s2d_hud(void) {
             }
         }
     }
-    render_s2d_room_names();
+    //render_s2d_room_names();
 }

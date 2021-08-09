@@ -3145,3 +3145,112 @@ s16 render_menus_and_dialogs(void) {
     }
     return index;
 }
+
+//#include "src/s2d_engine/sprites/room_names.c"
+
+static char sRoom1[] = { TEXT_ROOM1 };
+static char sRoom2[] = { TEXT_ROOM2 };
+static char sRoom3[] = { TEXT_ROOM3 };
+static char sRoom4[] = { TEXT_ROOM4 };
+static char sRoom5[] = { TEXT_ROOM5 };
+static char sRoom6[] = { TEXT_ROOM6 };
+static char sRoom7[] = { TEXT_ROOM7 };
+static char sRoom8[] = { TEXT_ROOM8 };
+static char sRoom9[] = { TEXT_ROOM9 };
+static char sRoom10[] = { TEXT_ROOM10 };
+static char sRoom11[] = { TEXT_ROOM11 };
+static char sRoom12[] = { TEXT_ROOM12 };
+static char sRoom13[] = { TEXT_ROOM13 };
+static char sRoom14[] = { TEXT_ROOM14 };
+static char sRoom15[] = { TEXT_ROOM15 };
+static char sRoom16[] = { TEXT_ROOM16 };
+static char sRoom17[] = { TEXT_ROOM17 };
+static char sRoom18[] = { TEXT_ROOM18 };
+static char sRoom19[] = { TEXT_ROOM19 };
+static char sRoom20[] = { TEXT_ROOM20 };
+static char sRoom21[] = { TEXT_ROOM21 };
+static char sRoom22[] = { TEXT_ROOM22 };
+static char sRoom23[] = { TEXT_ROOM23 };
+static char sRoom24[] = { TEXT_ROOM24 };
+static char sRoom25[] = { TEXT_ROOM25 };
+static char sRoom26[] = { TEXT_ROOM26 };
+static char sRoom27[] = { TEXT_ROOM27 };
+static char sRoom28[] = { TEXT_ROOM28 };
+static char sRoom29[] = { TEXT_ROOM29 };
+static char sRoom30[] = { TEXT_ROOM30 };
+static char sRoom31[] = { TEXT_ROOM31 };
+static char sRoom32[] = { TEXT_ROOM32 };
+static char sRoom33[] = { TEXT_ROOM33 };
+static char sRoom34[] = { TEXT_ROOM34 };
+static char sRoom35[] = { TEXT_ROOM35 };
+static char sRoom36[] = { TEXT_ROOM36 };
+static char sRoom37[] = { TEXT_ROOM37 };
+static char sRoom38[] = { TEXT_ROOM38 };
+static char sRoom39[] = { TEXT_ROOM39 };
+static char sRoom40[] = { TEXT_ROOM40 };
+static char sRoom41[] = { TEXT_ROOM41 };
+static char sRoom42[] = { TEXT_ROOM42 };
+static char sRoom43[] = { TEXT_ROOM43 };
+static char sRoom44[] = { TEXT_ROOM44 };
+static char sRoom45[] = { TEXT_ROOM45 };
+static char sRoom46[] = { TEXT_ROOM46 };
+static char sRoom47[] = { TEXT_ROOM47 };
+static char sRoom48[] = { TEXT_ROOM48 };
+static char sRoom49[] = { TEXT_ROOM49 };
+static char sRoom50[] = { TEXT_ROOM50 };
+
+char *sRoomNames[] = {
+    sRoom1, sRoom2, sRoom3, sRoom4, sRoom5, sRoom6, sRoom7, sRoom8, sRoom9, sRoom10,
+    sRoom11, sRoom12, sRoom13, sRoom14, sRoom15, sRoom16, sRoom17, sRoom18, sRoom19, sRoom20,
+    sRoom21, sRoom22, sRoom23, sRoom24, sRoom25, sRoom26, sRoom27, sRoom28, sRoom29, sRoom30,
+    sRoom31, sRoom32, sRoom33, sRoom34, sRoom35, sRoom36, sRoom37, sRoom38, sRoom39, sRoom40,
+    sRoom41, sRoom42, sRoom43, sRoom44, sRoom45, sRoom46, sRoom47, sRoom48, sRoom49, sRoom50,
+};
+
+
+extern s8 sLevelRoomOffsets[];
+s32 gRoomEntryTimer = -1;
+
+void print_name_string(s16 x, s16 y, u8 alpha, const u8 *str) {
+    f32 scale = 1.5f;
+    if (gIsConsole)
+        scale = 2.0f;
+    create_dl_ortho_matrix();
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, 1.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
+    print_generic_string(x + 1, y - 1, str);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
+    print_generic_string(x, y, str);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+
+void print_room_names(void) {
+    s16 y;
+    if (gMarioCurrentRoom != gMarioPreviousRoom2) {
+        gRoomEntryTimer = 0;
+
+    }
+    gMarioPreviousRoom2 = gMarioCurrentRoom;
+
+    if (gRoomEntryTimer >= 0) {
+        gRoomEntryTimer++;
+        y = 255;
+        if (gRoomEntryTimer < 25) {
+            y = (gRoomEntryTimer * 10) + 5;
+        } else if (gRoomEntryTimer < 65) {
+            y = 255;
+        } else {
+            y = 255 - ((gRoomEntryTimer - 65) * 10);
+        }
+
+        print_name_string(15, 10, y, sRoomNames[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]]);
+        if (gRoomEntryTimer >= 90) {
+            gRoomEntryTimer = -1;
+        }
+    }
+    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]);
+}
