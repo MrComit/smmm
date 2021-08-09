@@ -14,10 +14,12 @@ const GeoLayout bbh_dl_201__Cave_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(0, 462, 694, -11205, bbh_dl_Background_mesh_layer_0),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 9614, -3415, 0, bbh_dl_Cave_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(0, 9087, 4461, 864, bbh_dl_Background_001_mesh_layer_0),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 521, 3657, 38, bbh_dl_Cave_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(5, bbh_dl_Cave_mesh_layer_5),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(1, 9801, 6287, -332, bbh_dl_Cave_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

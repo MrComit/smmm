@@ -19,8 +19,8 @@
 #define SURFACE_NOT_SLIPPERY                 0x0015 // Non-slippery, climbable
 #define SURFACE_TTM_VINES                    0x0016 // TTM vines, has no action defined
 
-#define SURFACE_SUPER_SLIPPERY               0x0017
-#define SURFACE_WARP_HEIGHT                  0x0018 // Surface warp
+#define SURFACE_WARP_HEIGHT_LOWER            0x0017
+#define SURFACE_WARP_HEIGHT_HIGHER           0x0018 // Surface warp
 #define SURFACE_FIXED_CAM                    0x0019
 
 #define SURFACE_MGR_MUSIC                    0x001A // Plays the Merry go round music, see handle_merry_go_round_music in bbh_merry_go_round.inc.c for more details
@@ -52,8 +52,9 @@
 #define SURFACE_VERTICAL_WIND                0x0038 // Death at bottom with vertical wind
 
 #define SURFACE_SUPER_SLIDE                  0x0039
-#define SURFACE_SNOWFLAKE_SPAWN              0x003A
-#define SURFACE_SNOWFLAKE_DESPAWN            0x003B
+#define SURFACE_SUPER_SLIPPERY               0x003A
+#define SURFACE_SNOWFLAKE_SPAWN              0x003B
+#define SURFACE_SNOWFLAKE_DESPAWN            0x003C
 
 #define SURFACE_BOSS_FIGHT_CAMERA            0x0065 // Wide camera for BOB and WF bosses
 #define SURFACE_CAMERA_FREE_ROAM             0x0066 // Free roam camera for THI and TTC
