@@ -3,14 +3,30 @@
 const GeoLayout bbh_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(2, geo_switch_area),
+		GEO_SWITCH_CASE(4, geo_switch_area),
 		GEO_OPEN_NODE(),
-			GEO_BRANCH(1, bbh_dl_201__Cave_geo),
+			GEO_BRANCH(1, bbh_dl_201__NOP_geo),
+			GEO_BRANCH(1, bbh_dl_202__NOP_geo),
+			GEO_BRANCH(1, bbh_dl_203__Cave_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout bbh_dl_201__Cave_geo[] = {
+const GeoLayout bbh_dl_201__NOP_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(0, -9369, 5750, 20990, bbh_dl_Background_003_mesh_layer_0),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bbh_dl_202__NOP_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(0, -16889, 6030, 20754, bbh_dl_Background_002_mesh_layer_0),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bbh_dl_203__Cave_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(0, 462, 694, -11205, bbh_dl_Background_mesh_layer_0),
@@ -45,9 +61,9 @@ const GeoLayout bbh_area_2[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(1, bbh_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(0, bbh_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(5, bbh_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(0, bbh_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(1, bbh_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
