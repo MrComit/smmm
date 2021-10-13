@@ -19,9 +19,7 @@ void door_animation_and_reset(s32 sp18) {
 }
 
 void set_door_camera_event(void) {
-    if (segmented_to_virtual(bhvDoor) == o->behavior)
-        gPlayerCameraState->cameraEvent = CAM_EVENT_DOOR;
-    else
+    if (segmented_to_virtual(bhvDoor) != o->behavior)
         gPlayerCameraState->cameraEvent = CAM_EVENT_DOOR_WARP;
     gPlayerCameraState->usedObj = o;
 }
