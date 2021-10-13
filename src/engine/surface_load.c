@@ -14,6 +14,7 @@
 #include "game/mario.h"
 #include "game/object_list_processor.h"
 #include "surface_load.h"
+#define o gCurrentObject
 
 s32 unused8038BE90;
 
@@ -767,7 +768,84 @@ void load_object_surfaces(s16 **data, s16 *vertexData) {
 /**
  * Transform an object's vertices, reload them, and render the object.
  */
+
+void get_optimal_coll_dist(struct Object *this) {
+    f32 maxDist = 0.f;
+    f32 x, y, z;
+    f32 thisVertDist;
+    u32 vertsLeft;
+    s16 *collisionData = gCurrentObject->collisionData;
+    this->oFlags |= OBJ_FLAG_DONT_CALC_COLL_DIST;
+    collisionData++;
+    vertsLeft = *(collisionData);
+    collisionData++;
+
+    // vertices = *data;
+    while (vertsLeft) {
+        x = *(collisionData);
+        y = *(collisionData + 1);
+        z = *(collisionData + 2);
+        x = o->header.gfx.scale[0] * x;
+        y = o->header.gfx.scale[1] * y;
+        z = o->header.gfx.scale[2] * z;
+
+        thisVertDist = (x * x + y * y + z * z);
+        if (thisVertDist > maxDist) {
+            maxDist = thisVertDist;
+        }
+        collisionData += 3;
+        vertsLeft--;
+    }
+
+    this->oCollisionDistance = sqrtf(maxDist) + 100.f;
+}
+
 void load_object_collision_model(void) {
+    s16 vertexData[600];
+
+    s16 *collisionData = gCurrentObject->collisionData;
+    f32 marioDist = gCurrentObject->oDistanceToMario;
+
+    // On an object's first frame, the distance is set to 19000.0f.
+    // If the distance hasn't been updated, update it now.
+    if (gCurrentObject->oDistanceToMario == 19000.0f) {
+        marioDist = dist_between_objects(gCurrentObject, gMarioObject);
+    }
+
+    if (!(gCurrentObject->oFlags & OBJ_FLAG_DONT_CALC_COLL_DIST)) {
+        get_optimal_coll_dist(gCurrentObject);
+    }
+
+    // If the object collision is supposed to be loaded more than the
+    // drawing distance, extend the drawing range.
+    if (gCurrentObject->oCollisionDistance > gCurrentObject->oDrawingDistance) {
+        gCurrentObject->oDrawingDistance = gCurrentObject->oCollisionDistance;
+    }
+
+    // Update if no Time Stop, in range, and in the current room.
+    if (!(gTimeStopState & TIME_STOP_ACTIVE) && (marioDist < gCurrentObject->oCollisionDistance)
+        && !(gCurrentObject->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
+        collisionData++;
+        transform_object_vertices(&collisionData, vertexData);
+
+        // TERRAIN_LOAD_CONTINUE acts as an "end" to the terrain data.
+        while (*collisionData != TERRAIN_LOAD_CONTINUE) {
+            load_object_surfaces(&collisionData, vertexData);
+        }
+    }
+
+    if (marioDist < gCurrentObject->oDrawingDistance) {
+        gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+    } else {
+        gCurrentObject->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
+    }
+}
+
+
+
+
+
+/*void load_object_collision_model(void) {
     UNUSED s32 unused;
     s16 vertexData[600];
 
@@ -805,3 +883,4 @@ void load_object_collision_model(void) {
         gCurrentObject->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
     }
 }
+*/

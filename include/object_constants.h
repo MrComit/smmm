@@ -46,6 +46,9 @@
 #define OBJ_FLAG_KICKED_OR_PUNCHED                (1 << 16) // 0x00010000
 #define OBJ_FLAG_DISABLE_ON_ROOM_EXIT             (1 << 17) // 0x00020000
 #define OBJ_FLAG_0020                             (1 << 18) // 0x00040000
+
+#define OBJ_FLAG_DONT_CALC_COLL_DIST              (1 << 19) // 0x00080000
+
 #define OBJ_FLAG_30                               (1 << 30) // 0x40000000
 
 
