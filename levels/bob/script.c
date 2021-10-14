@@ -13,8 +13,14 @@
 
 #include "actors/common1.h"
 
+/* Fast64 begin persistent block [includes] */
+/* Fast64 end persistent block [includes] */
+
 #include "make_const_nonconst.h"
 #include "levels/bob/header.h"
+
+/* Fast64 begin persistent block [scripts] */
+/* Fast64 end persistent block [scripts] */
 
 const LevelScript level_bob_entry[] = {
 	INIT_LEVEL(),
@@ -58,6 +64,9 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_KOOPA_BOSS, boss_koopa_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L1_LOCK, l1_lock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOST_BARRIER, ghost_barrier_geo), 
+
+	/* Fast64 begin persistent block [level commands] */
+	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, bob_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -255,6 +264,8 @@ const LevelScript level_bob_entry[] = {
 		MACRO_OBJECTS(bob_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_MANOR),
 		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),

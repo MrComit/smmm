@@ -28,6 +28,7 @@
 #include "paintings.h"
 #include "engine/graph_node.h"
 #include "level_table.h"
+#include "levels/bob/header.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -1210,11 +1211,15 @@ void mode_radial_camera(struct Camera *c) {
 }
 
 
+s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *splineSegment, f32 *progress);
 s32 gFixedFloorCheck = 0;
+s16 gComitCutsceneAction = 0;
+s16 gComitCutsceneTimer = 0;
 
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
+    struct CutsceneSplinePoint *point, *point2;
     Vec3f pos;
     s16 yaw, pitch;
     if (m->floor != NULL && m->floor->type == SURFACE_FIXED_CAM) {
@@ -1226,6 +1231,7 @@ void fixed_cam_presets(struct Camera *c) {
         s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
         set_r_button_camera(c);
     }
+
     switch (c->comitCutscene) {
         case 0:
             break;
@@ -1284,6 +1290,29 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_copy(c->focus, m->pos);
             vec3f_get_dist_and_angle(c->focus, c->pos, &pos[0], &pitch, &yaw);
             c->yaw = c->nextYaw = yaw;
+            break;
+        case 10:
+            if (gComitCutsceneAction == 0 && gComitCutsceneTimer == 0)
+                play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
+            gComitCutsceneTimer++;
+            if (gComitCutsceneAction == 0 && gComitCutsceneTimer > 30) {
+                set_mario_npc_dialog(1);
+                start_cutscene(c, CUTSCENE_MAIN_HALL);
+                point = segmented_to_virtual(bob_area_1_spline_HallPos);
+                point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
+                move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+                if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                    gComitCutsceneAction = 1;
+                    gComitCutsceneTimer = 0;
+                }
+            } else if (gComitCutsceneTimer > 30) {
+                set_mario_npc_dialog(0);
+                gComitCutsceneAction = 0;
+                gComitCutsceneTimer = 0;
+                c->comitCutscene = 0;
+                stop_cutscene_and_retrieve_stored_info(c);
+                save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
+            }
             break;
     }
 }
@@ -1359,6 +1388,8 @@ void mode_8_directions_camera_3d(struct Camera *c) {
     UNUSED u8 unused[8];
     s16 oldAreaYaw = sAreaYaw;
 
+    if (c->cutscene == 0) 
+    {
     radial_camera_input(c, 0.f);
 
     if (gRightCPressed) {
@@ -1435,6 +1466,7 @@ void mode_8_directions_camera_3d(struct Camera *c) {
         c->pos[1] = pos[1];
     } else {
         set_camera_height(c, pos[1]);
+    }
     }
 
     fixed_cam_presets(c);
@@ -3333,35 +3365,9 @@ void update_camera(struct Camera *c) {
         }
     }
     // If not in a cutscene, do mode processing
-    if (c->cutscene == 0) {
-        sYawSpeed = 0x400;
+    sYawSpeed = 0x400;
 
-        /*if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
-            switch (c->mode) {
-                case CAMERA_MODE_BEHIND_MARIO:
-                    mode_behind_mario_camera(c);
-                    break;
-
-                case CAMERA_MODE_C_UP:
-                    mode_c_up_camera(c);
-                    break;
-
-                case CAMERA_MODE_WATER_SURFACE:
-                    mode_water_surface_camera(c);
-                    break;
-
-                case CAMERA_MODE_INSIDE_CANNON:
-                    mode_cannon_camera(c);
-                    break;
-
-                default:
-                    mode_mario_camera(c);
-            }*/
-        //} else {
-        if (gMarioCurrentRoom != 11) {
-            c->mode = CAMERA_MODE_8_DIRECTIONS;
-        }
-        
+    /*if (sSelectionFlags & CAM_MODE_MARIO_ACTIVE) {
         switch (c->mode) {
             case CAMERA_MODE_BEHIND_MARIO:
                 mode_behind_mario_camera(c);
@@ -3371,57 +3377,83 @@ void update_camera(struct Camera *c) {
                 mode_c_up_camera(c);
                 break;
 
-            /*case CAMERA_MODE_WATER_SURFACE:
+            case CAMERA_MODE_WATER_SURFACE:
                 mode_water_surface_camera(c);
                 break;
 
             case CAMERA_MODE_INSIDE_CANNON:
                 mode_cannon_camera(c);
-                break;*/
-
-            case CAMERA_MODE_8_DIRECTIONS:
-                mode_8_directions_camera(c);
-                //mode_radial_camera(c);
-                //mode_lakitu_camera(c);
                 break;
 
-            /*case CAMERA_MODE_RADIAL:
-                mode_radial_camera(c);
-                break;
-
-            case CAMERA_MODE_OUTWARD_RADIAL:
-                mode_outward_radial_camera(c);
-                break;
-
-            case CAMERA_MODE_CLOSE:
-                mode_lakitu_camera(c);
-                break;
-
-            case CAMERA_MODE_FREE_ROAM:
-                mode_lakitu_camera(c);
-                break;
-            case CAMERA_MODE_BOSS_FIGHT:
-                mode_boss_fight_camera(c);
-                break;
-
-            case CAMERA_MODE_PARALLEL_TRACKING:
-                mode_parallel_tracking_camera(c);
-                break;
-
-            case CAMERA_MODE_SLIDE_HOOT:
-                mode_slide_camera(c);
-                break;*/
-
-            case CAMERA_MODE_FIXED:
-                mode_fixed_camera(c);
-                break;
-
-            /*case CAMERA_MODE_SPIRAL_STAIRS:
-                mode_spiral_stairs_camera(c);
-                break;*/
-        }
-        //}
+            default:
+                mode_mario_camera(c);
+        }*/
+    //} else {
+    if (gMarioCurrentRoom != 11) {
+        c->mode = CAMERA_MODE_8_DIRECTIONS;
     }
+    
+    switch (c->mode) {
+        case CAMERA_MODE_BEHIND_MARIO:
+            mode_behind_mario_camera(c);
+            break;
+
+        case CAMERA_MODE_C_UP:
+            mode_c_up_camera(c);
+            break;
+
+        /*case CAMERA_MODE_WATER_SURFACE:
+            mode_water_surface_camera(c);
+            break;
+
+        case CAMERA_MODE_INSIDE_CANNON:
+            mode_cannon_camera(c);
+            break;*/
+
+        case CAMERA_MODE_8_DIRECTIONS:
+            mode_8_directions_camera(c);
+            //mode_radial_camera(c);
+            //mode_lakitu_camera(c);
+            break;
+
+        /*case CAMERA_MODE_RADIAL:
+            mode_radial_camera(c);
+            break;
+
+        case CAMERA_MODE_OUTWARD_RADIAL:
+            mode_outward_radial_camera(c);
+            break;
+
+        case CAMERA_MODE_CLOSE:
+            mode_lakitu_camera(c);
+            break;
+
+        case CAMERA_MODE_FREE_ROAM:
+            mode_lakitu_camera(c);
+            break;
+        case CAMERA_MODE_BOSS_FIGHT:
+            mode_boss_fight_camera(c);
+            break;
+
+        case CAMERA_MODE_PARALLEL_TRACKING:
+            mode_parallel_tracking_camera(c);
+            break;
+
+        case CAMERA_MODE_SLIDE_HOOT:
+            mode_slide_camera(c);
+            break;*/
+
+        case CAMERA_MODE_FIXED:
+            if (c->cutscene == 0) {
+                mode_fixed_camera(c);
+            }
+            break;
+
+        /*case CAMERA_MODE_SPIRAL_STAIRS:
+            mode_spiral_stairs_camera(c);
+            break;*/
+    }
+    //}
     // Start any Mario-related cutscenes
     start_cutscene(c, get_cutscene_from_mario_status(c));
     stub_camera_2(c);
@@ -3954,18 +3986,6 @@ s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *s
         secondSpeed = 1.0f / spline[*splineSegment + 2].speed;
     }
     progressChange = (secondSpeed - firstSpeed) * *progress + firstSpeed;
-
-#ifdef VERSION_EU
-    if (gCamera->cutscene == CUTSCENE_INTRO_PEACH) {
-        progressChange += progressChange * 0.19f;
-    }
-    if (gCamera->cutscene == CUTSCENE_CREDITS) {
-        progressChange += progressChange * 0.15f;
-    }
-    if (gCamera->cutscene == CUTSCENE_ENDING) {
-        progressChange += progressChange * 0.1f;
-    }
-#endif
 
     if (1 <= (*progress += progressChange)) {
         (*splineSegment)++;
