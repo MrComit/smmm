@@ -1292,26 +1292,56 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = yaw;
             break;
         case 10:
-            if (gComitCutsceneAction == 0 && gComitCutsceneTimer == 0)
-                play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
             gComitCutsceneTimer++;
-            if (gComitCutsceneAction == 0 && gComitCutsceneTimer > 30) {
-                set_mario_npc_dialog(1);
-                start_cutscene(c, CUTSCENE_MAIN_HALL);
-                point = segmented_to_virtual(bob_area_1_spline_HallPos);
-                point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
-                move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-                if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
-                    gComitCutsceneAction = 1;
-                    gComitCutsceneTimer = 0;
-                }
-            } else if (gComitCutsceneTimer > 30) {
-                set_mario_npc_dialog(0);
-                gComitCutsceneAction = 0;
-                gComitCutsceneTimer = 0;
-                c->comitCutscene = 0;
-                stop_cutscene_and_retrieve_stored_info(c);
-                save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
+            switch (gComitCutsceneAction) {
+                case 0:
+                    if (gComitCutsceneTimer == 1) {
+                        play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
+                    }
+
+                    if (gComitCutsceneTimer == 31) {
+                        point = segmented_to_virtual(bob_area_1_spline_HallPos);
+                        point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
+                        c->pos[0] = point[0].point[0];
+                        c->pos[1] = point[0].point[1];
+                        c->pos[2] = point[0].point[2];
+                        c->focus[0] = point2[0].point[0];
+                        c->focus[1] = point2[0].point[1];
+                        c->focus[2] = point2[0].point[2];
+                    }
+                    if (gComitCutsceneTimer > 30) {
+                        set_mario_npc_dialog(1);
+                        start_cutscene(c, CUTSCENE_MAIN_HALL);
+                        point = segmented_to_virtual(bob_area_1_spline_HallPos);
+                        point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
+                        move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+                        if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                            gComitCutsceneAction = 1;
+                            gComitCutsceneTimer = 0;
+                        }
+                    }
+                    break;
+                case 1:
+                    if (gComitCutsceneTimer == 20) {
+                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+                    } else if (gComitCutsceneTimer == 30) {
+                        gMarioState->pos[0] = 0.0f;
+                        gMarioState->pos[2] -= 300.0f;
+                        stop_cutscene_and_retrieve_stored_info(c);
+                        gComitCutsceneAction = 2;
+                        gComitCutsceneTimer = 0;
+                    }
+                    break;
+                case 2:
+                    if (gComitCutsceneTimer > 10) {
+                        play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
+                        set_mario_npc_dialog(0);
+                        gComitCutsceneAction = 0;
+                        gComitCutsceneTimer = 0;
+                        c->comitCutscene = 0;
+                        save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
+                    }
+                    break;
             }
             break;
     }
