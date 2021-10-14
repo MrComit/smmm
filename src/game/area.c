@@ -429,7 +429,7 @@ void render_game(void) {
                 gWarpTransDelay--;
             }
         }
-        render_s2d_hud();
+        //render_s2d_hud();
     } else {
         render_text_labels();
         if (D_8032CE78 != NULL) {
