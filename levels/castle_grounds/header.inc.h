@@ -2,6 +2,10 @@ extern const GeoLayout castle_grounds_area_1_geo[];
 extern const GeoLayout castle_grounds_area_1[];
 extern const Collision castle_grounds_area_1_collision[];
 extern const MacroObject castle_grounds_area_1_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint castle_grounds_area_1_spline_OpeningFoc[];
+extern struct CutsceneSplinePoint castle_grounds_area_1_spline_OpeningPos[];
 extern Lights1 castle_grounds_dl_BalconyWall_001_lights;
 extern Lights1 castle_grounds_dl_BalconyRoof_001_lights;
 extern Lights1 castle_grounds_dl_BalconyFloor_001_lights;

@@ -1798,35 +1798,51 @@ static void intro_cutscene_set_mario_to_idle(struct MarioState *m) {
 }
 
 enum {
-    INTRO_CUTSCENE_HIDE_HUD_AND_MARIO,
+    /*INTRO_CUTSCENE_HIDE_HUD_AND_MARIO,
     INTRO_CUTSCENE_PEACH_LAKITU_SCENE,
     INTRO_CUTSCENE_RAISE_PIPE,
     INTRO_CUTSCENE_JUMP_OUT_OF_PIPE,
     INTRO_CUTSCENE_LAND_OUTSIDE_PIPE,
     INTRO_CUTSCENE_LOWER_PIPE,
+    INTRO_CUTSCENE_SET_MARIO_TO_IDLE*/
+    INTRO_CUTSCENE_HIDE_HUD_AND_MARIO,
+    INTRO_CUTSCENE_UNHIDE_MARIO,
+    INTRO_CUTSCENE_SPAWN_LETTER,
     INTRO_CUTSCENE_SET_MARIO_TO_IDLE
 };
 
 static s32 act_intro_cutscene(struct MarioState *m) {
     switch (m->actionArg) {
         case INTRO_CUTSCENE_HIDE_HUD_AND_MARIO:
-            intro_cutscene_hide_hud_and_mario(m);
+            //intro_cutscene_hide_hud_and_mario(m);
+            m->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
+            gCamera->comitCutscene = 11;
+            gHudDisplay.flags = HUD_DISPLAY_NONE;
+            if (++m->actionTimer > 60) {
+                m->actionArg++;
+                m->actionTimer = 0;
+            }
             break;
-        case INTRO_CUTSCENE_PEACH_LAKITU_SCENE:
-            intro_cutscene_peach_lakitu_scene(m);
+        case INTRO_CUTSCENE_UNHIDE_MARIO:
+            m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
             break;
-        case INTRO_CUTSCENE_RAISE_PIPE:
-            intro_cutscene_raise_pipe(m);
+        case INTRO_CUTSCENE_SPAWN_LETTER:
+            create_dialog_box(DIALOG_020);
+            m->actionArg++;
+            //intro_cutscene_peach_lakitu_scene(m);
             break;
-        case INTRO_CUTSCENE_JUMP_OUT_OF_PIPE:
-            intro_cutscene_jump_out_of_pipe(m);
-            break;
-        case INTRO_CUTSCENE_LAND_OUTSIDE_PIPE:
-            intro_cutscene_land_outside_pipe(m);
-            break;
-        case INTRO_CUTSCENE_LOWER_PIPE:
-            intro_cutscene_lower_pipe(m);
-            break;
+        //case INTRO_CUTSCENE_RAISE_PIPE:
+        //    intro_cutscene_raise_pipe(m);
+        //    break;
+        //case INTRO_CUTSCENE_JUMP_OUT_OF_PIPE:
+        //    intro_cutscene_jump_out_of_pipe(m);
+        //    break;
+        //case INTRO_CUTSCENE_LAND_OUTSIDE_PIPE:
+        //    intro_cutscene_land_outside_pipe(m);
+        //    break;
+        //case INTRO_CUTSCENE_LOWER_PIPE:
+        //    intro_cutscene_lower_pipe(m);
+        //    break;
         case INTRO_CUTSCENE_SET_MARIO_TO_IDLE:
             intro_cutscene_set_mario_to_idle(m);
             break;

@@ -16,6 +16,11 @@ static const Lights1 lights_menu_save_button = gdSPDefLights1(
     0xff, 0xff, 0xff, 0x28, 0x28, 0x28
 );
 
+static const Lights1 lights_menu_save_button_back = gdSPDefLights1(
+    0x0, 0x0, 0x0,
+    0x10, 0x10, 0x10, 0x28, 0x28, 0x28
+);
+
 // 0x07000018 - 0x07000818
 ALIGNED8 static const Texture texture_menu_stone[] = {
 #include "levels/menu/main_menu_seg7.00018.rgba16.inc.c"
@@ -179,8 +184,8 @@ const Gfx dl_menu_save_button_back[] = {
 const Gfx dl_menu_save_button_fade_back[] = {
     gsDPPipeSync(),
     gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsSPLight(&lights_menu_save_button.l, 1),
-    gsSPLight(&lights_menu_save_button.a, 2),
+    gsSPLight(&lights_menu_save_button_back.l, 1),
+    gsSPLight(&lights_menu_save_button_back.a, 2),
     gsSPVertex(vertex_menu_save_button_back, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  1,  3,  2, 0x0),
     gsDPPipeSync(),

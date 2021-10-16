@@ -29,6 +29,7 @@
 #include "engine/graph_node.h"
 #include "level_table.h"
 #include "levels/bob/header.h"
+#include "levels/castle_grounds/header.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -1215,6 +1216,7 @@ s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *s
 s32 gFixedFloorCheck = 0;
 s16 gComitCutsceneAction = 0;
 s16 gComitCutsceneTimer = 0;
+extern s32 gRoomEntryTimer;
 
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
@@ -1310,12 +1312,13 @@ void fixed_cam_presets(struct Camera *c) {
                         c->focus[2] = point2[0].point[2];
                     }
                     if (gComitCutsceneTimer > 30) {
+                        gRoomEntryTimer = 64;
                         set_mario_npc_dialog(1);
                         start_cutscene(c, CUTSCENE_MAIN_HALL);
                         point = segmented_to_virtual(bob_area_1_spline_HallPos);
                         point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
-                        move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-                        if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                        move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+                        if (move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
                             gComitCutsceneAction = 1;
                             gComitCutsceneTimer = 0;
                         }
@@ -1342,6 +1345,17 @@ void fixed_cam_presets(struct Camera *c) {
                         save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
                     }
                     break;
+            }
+            break;
+        case 11:
+            start_cutscene(c, CUTSCENE_OPENING);
+            point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos);
+            point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc);
+            move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+            if (move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                stop_cutscene_and_retrieve_stored_info(c);
+                gMarioState->actionArg++;
+                gCamera->comitCutscene = 0;
             }
             break;
     }
