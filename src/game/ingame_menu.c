@@ -1998,7 +1998,7 @@ void do_cutscene_handler(void) {
 #define STR_Y 136
 #else
 #define STR_X 38
-#define STR_Y 142
+#define STR_Y 147
 #endif
 
 // "Dear Mario" message handler

@@ -314,13 +314,14 @@ DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
 Shhh! Please walk\n\
 quietly in the hallway!"))
 
-DEFINE_DIALOG(DIALOG_020, 1, 6, 95, 150, _("\
+DEFINE_DIALOG(DIALOG_020, 1, 7, 95, 150, _("\
 Dear Mario:\n\
-Please come to the\n\
-castle. I've baked\n\
-a cake for you.\n\
+Come to 61 Troopa Road.\n\
+If you care about this\n\
+world, then it's in\n\
+your best interest.\n\
 Yours truly--\n\
-Princess Toadstool"))
+Your New Friend"))
 
 DEFINE_DIALOG(DIALOG_021, 1, 5, 95, 200, _("\
 Welcome.\n\
