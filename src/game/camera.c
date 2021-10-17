@@ -1328,8 +1328,8 @@ void fixed_cam_presets(struct Camera *c) {
                     if (gComitCutsceneTimer == 20) {
                         play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
                     } else if (gComitCutsceneTimer == 30) {
-                        gMarioState->pos[0] = 0.0f;
-                        gMarioState->pos[2] -= 300.0f;
+                        m->pos[0] = 0.0f;
+                        m->pos[2] -= 300.0f;
                         stop_cutscene_and_retrieve_stored_info(c);
                         gComitCutsceneAction = 2;
                         gComitCutsceneTimer = 0;
@@ -1348,14 +1348,61 @@ void fixed_cam_presets(struct Camera *c) {
             }
             break;
         case 11:
-            start_cutscene(c, CUTSCENE_OPENING);
-            point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos);
-            point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc);
-            move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-            if (move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
-                stop_cutscene_and_retrieve_stored_info(c);
-                gMarioState->actionArg++;
-                gCamera->comitCutscene = 0;
+            gComitCutsceneTimer++;
+            switch (gComitCutsceneAction) {
+                case 0:
+                    if (gComitCutsceneTimer == 250) {
+                        m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+                        set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
+                    }
+
+                    start_cutscene(c, CUTSCENE_OPENING);
+                    point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos);
+                    point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc);
+                    move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+                    if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                        //stop_cutscene_and_retrieve_stored_info(c);
+                        m->actionArg++;
+                        gComitCutsceneAction++;
+                        gComitCutsceneTimer = 0;
+                        create_dialog_box(DIALOG_020);
+                    }
+                    break;
+                case 1:
+                    vec3f_set(c->pos, 480.0f, -2320.0f, -4740.0f);
+                    vec3f_set(c->focus, 495.0f, -2572.0f, -4900.0f);
+                    if (gComitCutsceneTimer > 100) {
+                        gComitCutsceneTimer = 0;
+                        gComitCutsceneAction++;
+                    }
+                    break;
+                case 2:
+                    point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos2);
+                    point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc2);
+                    move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+                    if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                        m->actionArg++;
+                        gComitCutsceneAction++;
+                        gComitCutsceneTimer = 0;
+                    }
+                    break;
+                case 3:
+                    if (gComitCutsceneTimer == 20) {
+                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+                    } else if (gComitCutsceneTimer == 30) {
+                        stop_cutscene_and_retrieve_stored_info(c);
+                        gComitCutsceneAction++;
+                        gComitCutsceneTimer = 0;
+                    }
+                    break;
+                case 4:
+                    if (gComitCutsceneTimer > 10) {
+                        play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
+                        gComitCutsceneAction = 0;
+                        gComitCutsceneTimer = 0;
+                        c->comitCutscene = 0;
+                    }
+                    break;
             }
             break;
     }

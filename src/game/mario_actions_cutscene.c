@@ -1798,55 +1798,57 @@ static void intro_cutscene_set_mario_to_idle(struct MarioState *m) {
 }
 
 enum {
-    /*INTRO_CUTSCENE_HIDE_HUD_AND_MARIO,
-    INTRO_CUTSCENE_PEACH_LAKITU_SCENE,
-    INTRO_CUTSCENE_RAISE_PIPE,
-    INTRO_CUTSCENE_JUMP_OUT_OF_PIPE,
-    INTRO_CUTSCENE_LAND_OUTSIDE_PIPE,
-    INTRO_CUTSCENE_LOWER_PIPE,
-    INTRO_CUTSCENE_SET_MARIO_TO_IDLE*/
     INTRO_CUTSCENE_HIDE_HUD_AND_MARIO,
-    INTRO_CUTSCENE_UNHIDE_MARIO,
-    INTRO_CUTSCENE_SPAWN_LETTER,
+    INTRO_CUTSCENE_WAIT,
+    INTRO_CUTSCENE_LOOK,
     INTRO_CUTSCENE_SET_MARIO_TO_IDLE
 };
 
 static s32 act_intro_cutscene(struct MarioState *m) {
+    gHudDisplay.flags = HUD_DISPLAY_NONE;
     switch (m->actionArg) {
         case INTRO_CUTSCENE_HIDE_HUD_AND_MARIO:
-            //intro_cutscene_hide_hud_and_mario(m);
             m->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
             gCamera->comitCutscene = 11;
-            gHudDisplay.flags = HUD_DISPLAY_NONE;
-            if (++m->actionTimer > 60) {
-                m->actionArg++;
-                m->actionTimer = 0;
-            }
-            break;
-        case INTRO_CUTSCENE_UNHIDE_MARIO:
-            m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
-            break;
-        case INTRO_CUTSCENE_SPAWN_LETTER:
-            create_dialog_box(DIALOG_020);
             m->actionArg++;
-            //intro_cutscene_peach_lakitu_scene(m);
             break;
-        //case INTRO_CUTSCENE_RAISE_PIPE:
-        //    intro_cutscene_raise_pipe(m);
-        //    break;
-        //case INTRO_CUTSCENE_JUMP_OUT_OF_PIPE:
-        //    intro_cutscene_jump_out_of_pipe(m);
-        //    break;
-        //case INTRO_CUTSCENE_LAND_OUTSIDE_PIPE:
-        //    intro_cutscene_land_outside_pipe(m);
-        //    break;
-        //case INTRO_CUTSCENE_LOWER_PIPE:
-        //    intro_cutscene_lower_pipe(m);
-        //    break;
+        case INTRO_CUTSCENE_WAIT:
+            break;
+        case INTRO_CUTSCENE_LOOK:
+            /*set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
+            if (is_anim_at_end(m)) {
+                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_LEFT);
+                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
+            }*/
+            m->marioBodyState->headAngle[1] = approach_s16_symmetric(m->marioBodyState->headAngle[1], 0xC000, 0x200);
+            print_text_fmt_int(80, 80, "%d", m->marioBodyState->headAngle[1]);
+            break;
         case INTRO_CUTSCENE_SET_MARIO_TO_IDLE:
             intro_cutscene_set_mario_to_idle(m);
             break;
     }
+
+    if (m->actionArg != INTRO_CUTSCENE_LOOK) {
+        switch (m->actionState) {
+            case 0:
+                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_LEFT);
+                break;
+
+            case 1:
+                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_RIGHT);
+                break;
+
+            case 2:
+                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
+                break;
+        }
+        if (is_anim_at_end(m)) {
+            if (++m->actionState == 3) {
+                m->actionState = 0;
+            }
+        }
+    }
+
     return FALSE;
 }
 

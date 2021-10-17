@@ -1990,7 +1990,7 @@ void do_cutscene_handler(void) {
 #ifdef VERSION_JP
 #define PEACH_MESSAGE_TIMER 170
 #else
-#define PEACH_MESSAGE_TIMER 250
+#define PEACH_MESSAGE_TIMER 150
 #endif
 
 #if defined(VERSION_JP) || defined(VERSION_SH)
@@ -2058,12 +2058,12 @@ void print_peach_letter_message(void) {
 
     // we're after PEACH_MESSAGE_TIMER increments, so decrease the fade.
     if (gCutsceneMsgTimer > PEACH_MESSAGE_TIMER) {
-        gCutsceneMsgFade -= 10;
+        gCutsceneMsgFade -= 18;
     }
 
     // 20 increments after the start of the decrease, we're
     // back where we are, so reset everything at the end.
-    if (gCutsceneMsgTimer > (PEACH_MESSAGE_TIMER + 20)) {
+    if (gCutsceneMsgTimer > (PEACH_MESSAGE_TIMER + 11)) {
         gCutsceneMsgIndex = -1;
         gCutsceneMsgFade = 0; //! uselessly reset since the next execution will just set it to 0 again.
         gDialogID = DIALOG_NONE;
