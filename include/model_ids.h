@@ -608,6 +608,7 @@
 #define MODEL_BROKEN_KEY          0x3C
 #define MODEL_STAR_CURRENCY       0x3D
 #define MODEL_GREEN_COIN          0x3E
+#define MODEL_HELD_LETTER         0x3F
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF

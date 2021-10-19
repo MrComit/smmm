@@ -1354,6 +1354,9 @@ void fixed_cam_presets(struct Camera *c) {
                     if (gComitCutsceneTimer == 250) {
                         m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
                         set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
+                        m->heldObj = spawn_object(m->marioObj, MODEL_HELD_LETTER, bhvHeldLetter);
+                        obj_set_held_state(m->heldObj, bhvCarrySomething3);
+                        m->marioBodyState->grabPos = GRAB_POS_LETTER;
                     }
 
                     start_cutscene(c, CUTSCENE_OPENING);
@@ -1389,6 +1392,9 @@ void fixed_cam_presets(struct Camera *c) {
                 case 3:
                     if (gComitCutsceneTimer == 20) {
                         play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+                        obj_set_held_state(m->heldObj, bhvCarrySomething4);
+                        m->heldObj->activeFlags = 0;
+                        m->heldObj = NULL;
                     } else if (gComitCutsceneTimer == 30) {
                         stop_cutscene_and_retrieve_stored_info(c);
                         gComitCutsceneAction++;

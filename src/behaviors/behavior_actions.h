@@ -777,6 +777,11 @@ void bhv_snowflake_loop(void);
 void bhv_snowflake_init(void);
 void bhv_stalactite_loop(void);
 void bhv_stalactite_init(void);
+void bhv_held_letter_loop(void);
+
+
+
+
 
 
 

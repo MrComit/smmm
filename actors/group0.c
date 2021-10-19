@@ -54,3 +54,4 @@
 #include "lantern/model.inc.c"
 
 #include "StarCurrency/model.inc.c"
+#include "held_letter/model.inc.c"

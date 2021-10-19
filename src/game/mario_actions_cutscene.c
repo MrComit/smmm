@@ -1815,20 +1815,21 @@ static s32 act_intro_cutscene(struct MarioState *m) {
         case INTRO_CUTSCENE_WAIT:
             break;
         case INTRO_CUTSCENE_LOOK:
-            /*set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
-            if (is_anim_at_end(m)) {
-                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_LEFT);
-                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
-            }*/
-            m->marioBodyState->headAngle[1] = approach_s16_symmetric(m->marioBodyState->headAngle[1], 0xC000, 0x200);
-            print_text_fmt_int(80, 80, "%d", m->marioBodyState->headAngle[1]);
+            //set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
+            //m->marioBodyState->headAngle[1] = 0x4000;
+            m->marioBodyState->headAngle[0] = approach_s16_symmetric(m->marioBodyState->headAngle[0], 0x1400, 0x200);
+            m->marioBodyState->headAngle[1] = approach_s16_symmetric(m->marioBodyState->headAngle[1], 0xF000, 0x100);
+            //m->marioBodyState->headAngle[1] = approach_s16_symmetric(m->marioBodyState->headAngle[1], 0, 0x200);
+            //m->marioBodyState->headAngle[0] = 0;
+            //print_text_fmt_int(80, 80, "%d", m->marioBodyState->headAngle[1]);
             break;
         case INTRO_CUTSCENE_SET_MARIO_TO_IDLE:
+            m->marioBodyState->headAngle[0] = 0;
             intro_cutscene_set_mario_to_idle(m);
             break;
     }
 
-    if (m->actionArg != INTRO_CUTSCENE_LOOK) {
+    //if (m->actionArg != INTRO_CUTSCENE_LOOK) {
         switch (m->actionState) {
             case 0:
                 set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_LEFT);
@@ -1847,7 +1848,7 @@ static s32 act_intro_cutscene(struct MarioState *m) {
                 m->actionState = 0;
             }
         }
-    }
+    //}
 
     return FALSE;
 }

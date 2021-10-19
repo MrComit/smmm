@@ -4863,7 +4863,7 @@ Gfx castle_grounds_dl_MountainExterior_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_grounds_dl_MountainExterior_mesh_layer_1_vtx_1[34] = {
+Vtx castle_grounds_dl_MountainExterior_mesh_layer_1_vtx_1[30] = {
 	{{{-16791, 4968, -7343},0, {11365, 6183},{0x82, 0x82, 0x82, 0x0}}},
 	{{{-16791, 4968, -12979},0, {13191, 6276},{0x82, 0x82, 0x82, 0x0}}},
 	{{{-18014, 7556, -14302},0, {14088, 5292},{0x82, 0x82, 0x82, 0x0}}},
@@ -4894,10 +4894,6 @@ Vtx castle_grounds_dl_MountainExterior_mesh_layer_1_vtx_1[34] = {
 	{{{16153, 7556, -8287},0, {-6640, 5275},{0x82, 0x82, 0x82, 0x0}}},
 	{{{14689, 4968, -13011},0, {-7684, 6281},{0x82, 0x82, 0x82, 0x0}}},
 	{{{16153, 7556, -14356},0, {-8744, 5293},{0x82, 0x82, 0x82, 0x0}}},
-	{{{23280, 10155, -15532},0, {-16686, 4654},{0x65, 0x65, 0x65, 0x0}}},
-	{{{21942, 19691, -13333},0, {-16645, 1556},{0x65, 0x65, 0x65, 0x0}}},
-	{{{20025, 19691, -16523},0, {-19271, 1731},{0x65, 0x65, 0x65, 0x0}}},
-	{{{20445, 10155, -17759},0, {-17208, 4707},{0x65, 0x65, 0x65, 0x0}}},
 };
 
 Gfx castle_grounds_dl_MountainExterior_mesh_layer_1_tri_1[] = {
@@ -4916,8 +4912,6 @@ Gfx castle_grounds_dl_MountainExterior_mesh_layer_1_tri_1[] = {
 	gsSP2Triangles(24, 22, 23, 0, 24, 23, 25, 0),
 	gsSP2Triangles(26, 24, 25, 0, 26, 25, 27, 0),
 	gsSP2Triangles(28, 26, 27, 0, 28, 27, 29, 0),
-	gsSPVertex(castle_grounds_dl_MountainExterior_mesh_layer_1_vtx_1 + 30, 4, 0),
-	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
 	gsSPEndDisplayList(),
 };
 

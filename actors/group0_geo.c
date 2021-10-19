@@ -34,3 +34,4 @@
 #include "lantern/geo.inc.c"
 
 #include "StarCurrency/geo.inc.c"
+#include "held_letter/geo.inc.c"

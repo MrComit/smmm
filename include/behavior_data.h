@@ -677,6 +677,7 @@ extern const BehaviorScript bhvBombRock[];
 extern const BehaviorScript bhvUnstableRock[];
 extern const BehaviorScript bhvSnowflake[];
 extern const BehaviorScript bhvStalactite[];
+extern const BehaviorScript bhvHeldLetter[];
 
 
 

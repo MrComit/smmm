@@ -86,7 +86,7 @@ extern Vtx castle_grounds_dl_Mansion_001_mesh_layer_1_vtx_4[6];
 extern Gfx castle_grounds_dl_Mansion_001_mesh_layer_1_tri_4[];
 extern Vtx castle_grounds_dl_MountainExterior_mesh_layer_1_vtx_0[60];
 extern Gfx castle_grounds_dl_MountainExterior_mesh_layer_1_tri_0[];
-extern Vtx castle_grounds_dl_MountainExterior_mesh_layer_1_vtx_1[34];
+extern Vtx castle_grounds_dl_MountainExterior_mesh_layer_1_vtx_1[30];
 extern Gfx castle_grounds_dl_MountainExterior_mesh_layer_1_tri_1[];
 extern Vtx castle_grounds_dl_Tree_Leaves_mesh_layer_4_vtx_cull[8];
 extern Vtx castle_grounds_dl_Tree_Leaves_mesh_layer_4_vtx_0[218];

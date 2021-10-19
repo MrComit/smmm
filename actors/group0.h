@@ -401,4 +401,6 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 #include "StarCurrency/geo_header.h"
 
+#include "held_letter/geo_header.h"
+
 #endif

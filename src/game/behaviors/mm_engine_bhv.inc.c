@@ -70,6 +70,16 @@ Vec3f sPreviousMarioPos = {0, 0, 0};
 u8 sTokenCoins[3] = {10, 50, 100};
 
 
+void bhv_held_letter_loop(void) {
+    if (o->oHeldState == HELD_HELD) {
+        cur_obj_become_intangible();
+        o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+        cur_obj_set_pos_relative(gMarioObject, -80.0f, 60.0f, 60.0f);
+        o->oMoveAngleYaw = 0x8000;
+    }
+}
+
+
 void bhv_generic_switch_loop(void) {
     if (o->oBehParams >> 24 == 1) {
         o->oRoom2 = 2;

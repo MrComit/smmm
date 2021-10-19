@@ -7910,3 +7910,13 @@ const BehaviorScript bhvStalactite[] = {
         CALL_NATIVE(bhv_stalactite_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvHeldLetter[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_held_letter_loop),
+    END_LOOP(),
+};

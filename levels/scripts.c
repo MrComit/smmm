@@ -130,6 +130,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_TELEPORTER, teleporter_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BROKEN_KEY, key_broken_geo),
     LOAD_MODEL_FROM_GEO(MODEL_STAR_CURRENCY, StarCurrency_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_HELD_LETTER, held_letter_geo),
 
     //LOAD_MODEL_FROM_GEO(MODEL_LANTERN,                 lantern_geo),
     FREE_LEVEL_POOL(),
