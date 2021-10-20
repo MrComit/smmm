@@ -1805,7 +1805,6 @@ enum {
 };
 
 static s32 act_intro_cutscene(struct MarioState *m) {
-    gHudDisplay.flags = HUD_DISPLAY_NONE;
     switch (m->actionArg) {
         case INTRO_CUTSCENE_HIDE_HUD_AND_MARIO:
             m->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
