@@ -1,3 +1,4 @@
+#include "levels/bob/tv_static/geo_header.h"
 struct ObjectHitbox sRemoteHitbox = {
     /* interactType: */ INTERACT_COIN,
     /* downOffset: */ 0,
@@ -73,7 +74,12 @@ void tv_spawn_peepa(s32 count) {
 
 
 void bhv_tv_static_loop(void) {
+    u8 *texture = segmented_to_virtual(&tv_static_i8_static_i4);
+    s32 i;
     if (o->oAnimState == 0) {
+        for (i = 0; i < 2048; i++) {
+            texture[i] = random_u16() & 0xFF;
+        }
         switch (o->oAction) {
             case 0:
                 if (o->oDistanceToMario < 1500.0f) {

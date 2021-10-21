@@ -317,11 +317,9 @@ Gfx tv_static_Light_mesh_layer_6_tri_0[] = {
 };
 
 
-Gfx mat_tv_static_Static_001_v4_layer1[] = {
+Gfx mat_tv_static_Static_001_v4[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, TEXEL1, 0, 0, 0, 0, ENVIRONMENT),
-	gsDPSetCycleType(G_CYC_2CYCLE),
-	gsDPSetRenderMode(G_RM_NOOP, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetCombineLERP(TEXEL0, 0, TEXEL0, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, TEXEL0, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_16b, 1, tv_static_i8_static_i4),
@@ -331,13 +329,6 @@ Gfx mat_tv_static_Static_001_v4_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPEndDisplayList(),
-};
-
-Gfx mat_revert_tv_static_Static_001_v4_layer1[] = {
-	gsDPPipeSync(),
-	gsDPSetCycleType(G_CYC_1CYCLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
 
@@ -365,9 +356,8 @@ Gfx mat_tv_static_Blank[] = {
 };
 
 Gfx tv_static_Static_mesh_layer_1[] = {
-	gsSPDisplayList(mat_tv_static_Static_001_v4_layer1),
+	gsSPDisplayList(mat_tv_static_Static_001_v4),
 	gsSPDisplayList(tv_static_Static_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_tv_static_Static_001_v4_layer1),
 	gsSPEndDisplayList(),
 };
 
