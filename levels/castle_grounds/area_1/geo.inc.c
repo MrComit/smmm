@@ -3,7 +3,17 @@
 const GeoLayout castle_grounds_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_area),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, castle_grounds_dl_101__Outside_geo),
+		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -45, 0, 13043),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout castle_grounds_dl_101__Outside_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -45, 0, 13043),
 		GEO_OPEN_NODE(),
 			GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -23410, 12776, -18804, 0, -109, 0, castle_grounds_dl_BackgroundTrees_mesh_layer_1),
@@ -28,7 +38,7 @@ const GeoLayout castle_grounds_area_1_geo[] = {
 			GEO_CLOSE_NODE(),
 			GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1089, 2169, -30075, castle_grounds_dl_Mansion_mesh_layer_1),
 			GEO_OPEN_NODE(),
-				GEO_DISPLAY_LIST(LAYER_ALPHA, castle_grounds_dl_Mansion_mesh_layer_4),
+				GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_grounds_dl_Mansion_mesh_layer_6),
 			GEO_CLOSE_NODE(),
 			GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1128, -2761, -24251, castle_grounds_dl_Mansion_001_mesh_layer_1),
 			GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1128, -2761, -24251, castle_grounds_dl_MountainExterior_mesh_layer_1),
@@ -62,6 +72,7 @@ const GeoLayout castle_grounds_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_grounds_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, castle_grounds_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_grounds_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
