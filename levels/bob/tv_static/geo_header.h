@@ -1,9 +1,19 @@
 extern const GeoLayout tv_static_Switch_opt1[];
+extern const GeoLayout tv_static_Switch2_opt1[];
 extern const GeoLayout tv_static_geo[];
-extern Vtx tv_static_Static_mesh_vtx_0[4];
-extern Gfx tv_static_Static_mesh_tri_0[];
-
-extern Gfx tv_static_Static_mesh[];
-extern Gfx tv_static_Static_mesh_mat_override_Black_0[];
+extern Lights1 tv_static_Light_lights;
+extern u8 tv_static_i8_static_i4[];
+extern Vtx tv_static_Static_mesh_layer_1_vtx_0[4];
+extern Gfx tv_static_Static_mesh_layer_1_tri_0[];
+extern Vtx tv_static_Light_mesh_layer_6_vtx_0[24];
+extern Gfx tv_static_Light_mesh_layer_6_tri_0[];
+extern Gfx mat_tv_static_Static_001_v4_layer1[];
+extern Gfx mat_revert_tv_static_Static_001_v4_layer1[];
+extern Gfx mat_tv_static_Black_v4[];
+extern Gfx mat_tv_static_Light[];
+extern Gfx mat_tv_static_Blank[];
+extern Gfx tv_static_Static_mesh_layer_1[];
+extern Gfx tv_static_Static_mesh_layer_1_mat_override_Black_v4_0[];
+extern Gfx tv_static_Light_mesh_layer_6[];
+extern Gfx tv_static_Light_mesh_layer_6_mat_override_Blank_0[];
 extern Gfx tv_static_material_revert_render_settings[];
-
