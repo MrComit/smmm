@@ -3103,7 +3103,7 @@ s16 render_menus_and_dialogs(void) {
     s16 index = MENU_OPT_NONE;
 
     create_dl_ortho_matrix();
-    //shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
+    shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
     if (gMarioCurrentRoom != 0) {
         if (save_file_get_rooms((gMarioCurrentRoom + sLevelRoomOffsets[gCurrCourseNum - 1]) / 32) & (1 << ((gMarioCurrentRoom  + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
             gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);
@@ -3226,6 +3226,9 @@ void print_name_string(s16 x, s16 y, u8 alpha, const u8 *str) {
 
 void print_room_names(void) {
     s16 y;
+    if (gCurrCourseNum > COURSE_MAX || gCurrCourseNum < COURSE_MIN) {
+        return;
+    }
     if (gMarioCurrentRoom != gMarioPreviousRoom2) {
         gRoomEntryTimer = 0;
 

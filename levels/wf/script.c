@@ -13,8 +13,14 @@
 
 #include "actors/common1.h"
 
+/* Fast64 begin persistent block [includes] */
+/* Fast64 end persistent block [includes] */
+
 #include "make_const_nonconst.h"
 #include "levels/wf/header.h"
+
+/* Fast64 begin persistent block [scripts] */
+/* Fast64 end persistent block [scripts] */
 
 const LevelScript level_wf_entry[] = {
 	INIT_LEVEL(),
@@ -63,6 +69,9 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_RISING_FIST, rising_fist_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FIST_INDICATOR, fist_indicator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BEDROOM_OBJECT, bedroom_object_geo), 
+
+	/* Fast64 begin persistent block [level commands] */
+	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, wf_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -283,6 +292,8 @@ const LevelScript level_wf_entry[] = {
 		MACRO_OBJECTS(wf_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SPOOKY),
 		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),

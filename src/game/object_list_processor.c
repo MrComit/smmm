@@ -393,7 +393,7 @@ void bhv_mario_update(void) {
     mario_update_toad_friend(gMarioState);
     mario_update_room_clear(gMarioState);
 
-    if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) && gMarioCurrentRoom == 2) {
+    if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) && gMarioCurrentRoom == 2 && gCurrLevelNum == LEVEL_BOB) {
         gCamera->comitCutscene = 10;
     }
 }
