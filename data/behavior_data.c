@@ -7920,3 +7920,12 @@ const BehaviorScript bhvHeldLetter[] = {
         CALL_NATIVE(bhv_held_letter_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvPlaysetEntrance[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_level_entrance_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_level_entrance_loop),
+    END_LOOP(),
+};

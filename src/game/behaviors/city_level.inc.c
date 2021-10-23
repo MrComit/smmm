@@ -1,8 +1,34 @@
+static struct ObjectHitbox sLevelEntranceHitbox = {
+    /* interactType: */ INTERACT_BBH_ENTRANCE,
+    /* downOffset: */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health: */ 0,
+    /* numLootCoins: */ 0,
+    /* radius: */ 120,
+    /* height: */ 300,
+    /* hurtboxRadius: */ 0,
+    /* hurtboxHeight: */ 0,
+};
+
 Vec3s sLegoColors[] = {
 {0xFF, 0xFF, 0xFF},
 {0x19, 0x6A, 0x19},
 {0xB9, 0x00, 0x03},
 };
+
+
+void bhv_level_entrance_init(void) {
+    obj_set_hitbox(o, &sLevelEntranceHitbox);
+}
+
+
+void bhv_level_entrance_loop(void) {
+    if (o->oBehParams >> 24) {
+        if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_UNLOCKED_PLAYSET)) {
+            o->activeFlags = 0;
+        }
+    }
+}
 
 
 void bhv_pound_lego_loop(void) {
@@ -175,6 +201,9 @@ void bhv_rubber_band_loop(void) {
                 sSourceWarpNodeId = 0x20;
                 music_changed_through_warp(sSourceWarpNodeId);
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_UNLOCKED_PLAYSET)) {
+                    save_file_set_newflags(SAVE_NEW_FLAG_UNLOCKED_PLAYSET, 0);
+                }
                 break;
             }
         case 3:

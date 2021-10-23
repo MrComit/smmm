@@ -505,7 +505,13 @@ const GeoLayout wf_dl_16__Hallway_geo[] = {
 const GeoLayout wf_dl_17__Play_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 7200, 100, -9377, 0, 10, 0, wf_dl_Block_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 1021, 333, -9999, wf_dl_Hallway_011_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 6621, 136, -7749, wf_dl_Playset_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Playset_mesh_layer_5),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 6621, 67, -7749, wf_dl_Table_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

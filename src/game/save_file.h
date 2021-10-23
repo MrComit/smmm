@@ -111,7 +111,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_NEW_FLAG_BROKEN3            /* 0x00000400 */ (1 << 10)
 #define SAVE_NEW_FLAG_EXIT_DOOR          /* 0x00000800 */ (1 << 11)
 #define SAVE_NEW_FLAG_FAKE_WALL          /* 0x00001000 */ (1 << 12)
-#define SAVE_NEW_FLAG_014                /* 0x00002000 */ (1 << 13)
+#define SAVE_NEW_FLAG_UNLOCKED_PLAYSET   /* 0x00002000 */ (1 << 13)
 #define SAVE_NEW_FLAG_015                /* 0x00004000 */ (1 << 14)
 #define SAVE_NEW_FLAG_016                /* 0x00008000 */ (1 << 15)
 #define SAVE_NEW_FLAG_017                /* 0x00010000 */ (1 << 16)
