@@ -23,6 +23,8 @@
 #include "text_strings.h"
 #include "types.h"
 #include "object_list_processor.h"
+#include "config.h"
+#include "main.h"
 
 u16 gDialogColorFadeTimer;
 s8 gLastDialogLineNum;
@@ -36,6 +38,12 @@ s16 gCutsceneMsgXOffset;
 s16 gCutsceneMsgYOffset;
 s8 gRedCoinsCollected;
 s8 gGreenCoinsCollected;
+
+#if defined(WIDE)
+u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
+u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
+u8 textPressL[] = { TEXT_HUD_PRESS_L };
+#endif
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2163,6 +2171,28 @@ void render_pause_red_coins(void) {
     }
 }
 
+#if defined(WIDE)
+void render_widescreen_setting(void) {
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    if (!gConfig.widescreen) {
+        print_generic_string(10, 20, textCurrRatio43);
+        print_generic_string(10, 7, textPressL);
+    }
+    else {
+        print_generic_string(10, 20, textCurrRatio169);
+        print_generic_string(10, 7, textPressL);
+    }
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    if (gPlayer1Controller->buttonPressed & L_TRIG){
+        gConfig.widescreen ^= 1;
+        save_file_set_widescreen_mode(gConfig.widescreen);
+    }
+}
+#endif
+
+
+
 #define GREEN_COINS_HUD_X 240
 #define GREEN_COINS_HUD_Y 16
 
@@ -2714,6 +2744,10 @@ s16 render_pause_courses_and_castle(void) {
             }
             break;
     }
+
+    #if defined(WIDE)
+        render_widescreen_setting();
+    #endif
 
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;

@@ -33,6 +33,8 @@
 
 #include <point_lights.h>
 
+#include "config.h"
+
 // FIXME: I'm not sure all of these variables belong in this file, but I don't
 // know of a good way to split them
 // First 3 controller slots
@@ -710,6 +712,9 @@ void thread5_game_loop(UNUSED void *arg) {
 
     play_music(SEQ_PLAYER_SFX, SEQUENCE_ARGS(0, SEQ_SOUND_PLAYER), 0);
     set_sound_mode(save_file_get_sound_mode());
+#ifdef WIDE
+    gConfig.widescreen = save_file_get_widescreen_mode();
+#endif
     render_init();
 
     while (TRUE) {

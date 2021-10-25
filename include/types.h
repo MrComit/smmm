@@ -9,6 +9,16 @@
 #include "config.h"
 
 
+struct Config
+{
+    f32 audioFrequency;
+#ifdef WIDE
+    s16 widescreen;
+#endif
+    u8 tvType;
+};
+
+
 // Certain functions are marked as having return values, but do not
 // actually return a value. This causes undefined behavior, which we'd rather
 // avoid on modern GCC. This only impacts -O2 and can matter for both the function

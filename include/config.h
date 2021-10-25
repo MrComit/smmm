@@ -57,4 +57,13 @@
 #define BORDER_HEIGHT_EMULATOR 0
 #endif
 
+
+
+#define WIDE
+
+
+
+
+
+
 #endif // CONFIG_H

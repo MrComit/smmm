@@ -59,6 +59,10 @@ struct MainMenuSaveData
     u32 coinScoreAges[NUM_SAVE_FILES];
     u8 soundMode: 2;
 
+#ifdef WIDE
+    u8 wideMode: 1;
+#endif
+
 #ifdef VERSION_EU
     u8 language: 2;
 #define SUBTRAHEND 8
@@ -282,6 +286,12 @@ void save_file_set_cap_pos(s16 x, s16 y, s16 z);
 s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
+
+#ifdef WIDE
+u8 save_file_get_widescreen_mode(void);
+void save_file_set_widescreen_mode(u8 mode);
+#endif
+
 void save_file_move_cap_to_default_location(void);
 u32 save_file_get_heavy_object(void);
 void save_file_set_heavy_object(u8 obj, u32 id);

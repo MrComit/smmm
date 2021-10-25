@@ -25,6 +25,14 @@
 #define TEXT_PAUSE _("PAUSE") // Pause text, Castle Courses
 #define TEXT_HUD_CONGRATULATIONS _("CONGRATULATIONS") // Course Complete Text, Bowser Courses
 
+//Widescreen stuff
+#if defined(WIDE)
+#define TEXT_HUD_CURRENT_RATIO_43 _("ASPECT RATIO: 4:3")
+#define TEXT_HUD_CURRENT_RATIO_169 _("ASPECT RATIO: 16:9")
+#define TEXT_HUD_PRESS_L _("PRESS L TO SWITCH")
+#endif
+
+
 // Memory Expansion Error Screen
 #define TEXT_CONSOLE_8MB _("If you're using an N64 console, then you will need to buy an\nExpansion Pak to play this ROM hack.")
 #define TEXT_PJ64 _("If you are using PJ64 1.6, go to:\nOptions > Settings > Rom Settings Tab > Memory Size\nthen select 8 MB from the drop-down box.")

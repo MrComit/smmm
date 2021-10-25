@@ -764,6 +764,19 @@ u16 save_file_get_sound_mode(void) {
     return gSaveBuffer.menuData[0].soundMode;
 }
 
+#ifdef WIDE
+u8 save_file_get_widescreen_mode(void) {
+    return gSaveBuffer.menuData[0].wideMode;
+}
+
+void save_file_set_widescreen_mode(u8 mode) {
+    gSaveBuffer.menuData[0].wideMode = mode;
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+#endif
+
 void save_file_move_cap_to_default_location(void) {
     return;
     /*if (save_file_get_flags() & SAVE_FLAG_CAP_ON_GROUND) {

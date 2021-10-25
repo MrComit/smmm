@@ -49,6 +49,8 @@ OSMesg gUnknownMesgBuf[16];
 
 OSViMode VI;
 
+struct Config gConfig;
+
 struct VblankHandler *gVblankHandler1 = NULL;
 struct VblankHandler *gVblankHandler2 = NULL;
 struct VblankHandler *gVblankHandler3 = NULL;
@@ -438,6 +440,20 @@ void change_vi(OSViMode *mode, int width, int height){
     }
 }
 
+void get_audio_frequency(void) {
+    switch (gConfig.tvType) {
+#if defined(VERSION_JP) || defined(VERSION_US)
+    case 0: gConfig.audioFrequency = 1.0f;    break;
+    case 1: gConfig.audioFrequency = 0.9915f; break;
+    case 2:  gConfig.audioFrequency = 0.9876f; break;
+#else
+    case 0: gConfig.audioFrequency = 1.0126f; break;
+    case 1: gConfig.audioFrequency = 1.0086f; break;
+    case 2:  gConfig.audioFrequency = 1.0f;    break;
+#endif
+    }
+}
+
 /**
  * Initialize hardware, start main thread, then idle.
  */
@@ -449,18 +465,22 @@ void thread1_idle(UNUSED void *arg) {
 		// NTSC
         //osViSetMode(&osViModeTable[OS_VI_NTSC_LAN1]);
         VI = osViModeTable[OS_VI_NTSC_LAN1];
+        gConfig.tvType = 0;
 		break;
 	case OS_TV_MPAL:
 		// MPAL
         //osViSetMode(&osViModeTable[OS_VI_MPAL_LAN1]);
         VI = osViModeTable[OS_VI_MPAL_LAN1];
+        gConfig.tvType = 1;
 		break;
 	case OS_TV_PAL:
 		// PAL
 		//osViSetMode(&osViModeTable[OS_VI_PAL_LAN1]);
         VI = osViModeTable[OS_VI_PAL_LAN1];
+        gConfig.tvType = 2;
 		break;
 	}
+    get_audio_frequency();
     change_vi(&VI, SCREEN_WIDTH, SCREEN_HEIGHT);
     osViSetMode(&VI);
     osViBlack(TRUE);
