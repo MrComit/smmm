@@ -1713,6 +1713,8 @@ static void update_game_sound(void) {
         // doesn't do anything)
         channelIndex += sMaxChannelsForSoundBank[bank] - sUsedChannelsForSoundBank[bank];
     }
+
+    //gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = 0.0f;
 }
 
 /**

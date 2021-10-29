@@ -6103,7 +6103,7 @@ Gfx castle_grounds_dl_Mansion_001_mesh_layer_1_tri_3[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx castle_grounds_dl_Mansion_001_mesh_layer_1_vtx_4[6] = {
+Vtx castle_grounds_dl_Mansion_001_mesh_layer_4_vtx_0[6] = {
 	{{{467, 2425, 8015},0, {-2672, -537},{0xAA, 0xAA, 0xAA, 0x0}}},
 	{{{-1181, 886, 7989},0, {1771, 1540},{0xD5, 0xD5, 0xD5, 0x0}}},
 	{{{-1181, 2425, 7989},0, {1771, -536},{0xAA, 0xAA, 0xAA, 0x0}}},
@@ -6112,8 +6112,8 @@ Vtx castle_grounds_dl_Mansion_001_mesh_layer_1_vtx_4[6] = {
 	{{{467, 188, 8015},0, {-2672, 2476},{0xD5, 0xD5, 0xD5, 0xFF}}},
 };
 
-Gfx castle_grounds_dl_Mansion_001_mesh_layer_1_tri_4[] = {
-	gsSPVertex(castle_grounds_dl_Mansion_001_mesh_layer_1_vtx_4 + 0, 6, 0),
+Gfx castle_grounds_dl_Mansion_001_mesh_layer_4_tri_0[] = {
+	gsSPVertex(castle_grounds_dl_Mansion_001_mesh_layer_4_vtx_0 + 0, 6, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 1, 3, 0, 4, 3, 5, 0),
 	gsSPEndDisplayList(),
@@ -7546,8 +7546,12 @@ Gfx castle_grounds_dl_Mansion_001_mesh_layer_1[] = {
 	gsSPDisplayList(mat_castle_grounds_dl_HillRockTransition_layer1),
 	gsSPDisplayList(castle_grounds_dl_Mansion_001_mesh_layer_1_tri_3),
 	gsSPDisplayList(mat_revert_castle_grounds_dl_HillRockTransition_layer1),
+	gsSPEndDisplayList(),
+};
+
+Gfx castle_grounds_dl_Mansion_001_mesh_layer_4[] = {
 	gsSPDisplayList(mat_castle_grounds_dl_Bars),
-	gsSPDisplayList(castle_grounds_dl_Mansion_001_mesh_layer_1_tri_4),
+	gsSPDisplayList(castle_grounds_dl_Mansion_001_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_castle_grounds_dl_Bars),
 	gsSPEndDisplayList(),
 };
