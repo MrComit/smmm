@@ -355,7 +355,8 @@ Vec3f intersect;
 
 void mario_l_to_levitate(void) {
     if (gMarioState->controller->buttonPressed & L_TRIG) {
-         set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);   
+         set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
+         //gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0]; //makes mario invisible
     } else if (gMarioState->controller->buttonDown & L_TRIG)
         gMarioState->pos[1] += 20.0f;
 }
