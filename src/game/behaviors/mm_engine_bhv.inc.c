@@ -64,10 +64,84 @@ static struct ObjectHitbox sBooCoinCageHitbox = {
 };
 
 
+struct ObjectHitbox sCollectHeartHitbox = {
+    /* interactType:      */ INTERACT_COIN,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 75,
+    /* height:            */ 75,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
 
 Vec3f sPreviousMarioPos = {0, 0, 0};
 
 u8 sTokenCoins[3] = {10, 50, 100};
+
+
+void bhv_collect_heart_init(void) {
+    o->oVelY = random_float() * 5.0f + 15 + (o->oCoinUnk110 / 2);
+    o->oForwardVel = random_float() * 10.0f;
+    o->oMoveAngleYaw = random_u16();
+
+    obj_set_hitbox(o, &sCollectHeartHitbox);
+    cur_obj_become_intangible();
+}
+
+
+void bhv_collect_heart_loop(void) {
+    struct Surface *sp1C;
+
+    cur_obj_update_floor_and_walls();
+    cur_obj_if_hit_wall_bounce_away();
+    cur_obj_move_standard(-62);
+    if (gCamera->comit2dcam == 1) {
+        o->oPosZ = 0;
+    }
+
+    o->oFaceAngleYaw += 0x400;
+
+    if ((sp1C = o->oFloor) != NULL) {
+        if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+            o->oSubAction = 1;
+        }
+        if (o->oSubAction == 1) {
+            o->oBounciness = 0;
+            if (sp1C->normal.y < 0.9) {
+                s16 sp1A = atan2s(sp1C->normal.z, sp1C->normal.x);
+                cur_obj_rotate_yaw_toward(sp1A, 0x400);
+            }
+        }
+    }
+
+    if (o->oVelY < 0) {
+        cur_obj_become_tangible();
+    }
+
+    if (o->oMoveFlags & OBJ_MOVE_LANDED) {
+        if (o->oMoveFlags & (OBJ_MOVE_ABOVE_DEATH_BARRIER | OBJ_MOVE_ABOVE_LAVA)) {
+            obj_mark_for_deletion(o);
+        }
+    }
+
+    o->oForwardVel = approach_f32_asymptotic(o->oForwardVel, 0.0f, 0.01f);
+
+    if (cur_obj_wait_then_blink(400, 20)) {
+        obj_mark_for_deletion(o);
+    }
+
+    if (o->oInteractStatus & INT_STATUS_INTERACTED
+        && !(o->oInteractStatus & INT_STATUS_TOUCHED_BOB_OMB)) {
+        o->activeFlags = 0;
+        gMarioState->healCounter += 4;
+        cur_obj_play_sound_2(SOUND_GENERAL_HEART_SPIN);
+    }
+
+    o->oInteractStatus = 0;
+}
 
 
 void bhv_held_letter_loop(void) {

@@ -8,7 +8,7 @@
 #include "make_const_nonconst.h"
 
 
-//#define TEST_STAGE LEVEL_BBH
+#define TEST_STAGE LEVEL_BBH
 
 extern const LevelScript level_main_scripts_entry[];
 const LevelScript level_script_entry[] = {

@@ -13,8 +13,14 @@
 
 #include "actors/common1.h"
 
+/* Fast64 begin persistent block [includes] */
+/* Fast64 end persistent block [includes] */
+
 #include "make_const_nonconst.h"
 #include "levels/bbh/header.h"
+
+/* Fast64 begin persistent block [scripts] */
+/* Fast64 end persistent block [scripts] */
 
 const LevelScript level_bbh_entry[] = {
 	INIT_LEVEL(),
@@ -42,6 +48,9 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SNOWFLAKE, snowflake_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STALACTITE, stalactite_geo), 
 
+	/* Fast64 begin persistent block [level commands] */
+	/* Fast64 end persistent block [level commands] */
+
 	AREA(1, bbh_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -65,6 +74,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_STAR_CURRENCY, -934, 4057, -7156, 0, 0, 0, 0x07000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 2310, -275, -1450, 0, 0, 0, 0x09000000, bhvStar),
 		OBJECT(MODEL_FAKE_WALL, 5591, 0, 3381, 0, -112, 0, 0x00000000, bhvFakeWall),
+		OBJECT(MODEL_NONE, -1185, 0, -934, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_GREEN_COIN, -1040, 400, 602, 0, 0, 0, 0x00000000, bhvGreenCoin),
 		OBJECT(MODEL_GREEN_COIN, 518, 1000, 1754, 0, 0, 0, 0x00000000, bhvGreenCoin),
 		OBJECT(MODEL_GREEN_COIN, 1775, 1300, 2706, 0, 0, 0, 0x00000000, bhvGreenCoin),
@@ -146,6 +156,8 @@ const LevelScript level_bbh_entry[] = {
 		MACRO_OBJECTS(bbh_area_1_macro_objs),
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(2, bbh_area_2),
@@ -188,6 +200,8 @@ const LevelScript level_bbh_entry[] = {
 		MACRO_OBJECTS(bbh_area_2_macro_objs),
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(3, bbh_area_3),
@@ -303,6 +317,8 @@ const LevelScript level_bbh_entry[] = {
 		MACRO_OBJECTS(bbh_area_3_macro_objs),
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_SNOW),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),

@@ -780,6 +780,8 @@ void bhv_stalactite_init(void);
 void bhv_held_letter_loop(void);
 void bhv_level_entrance_init(void);
 void bhv_level_entrance_loop(void);
+void bhv_collect_heart_init(void);
+void bhv_collect_heart_loop(void);
 
 
 

@@ -7929,3 +7929,16 @@ const BehaviorScript bhvPlaysetEntrance[] = {
         CALL_NATIVE(bhv_level_entrance_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvCollectHeart[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_collect_heart_init),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -150, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SCALE(0, 60),
+    SET_FLOAT(oGraphYOffset, 30),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_collect_heart_loop),
+    END_LOOP(),
+};

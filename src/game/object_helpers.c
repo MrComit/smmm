@@ -1979,6 +1979,11 @@ static void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
     struct Surface *floor;
     struct Object *coin;
 
+    if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
+        coinBehavior = bhvCollectHeart;
+        model = MODEL_HEART;
+    }
+
     spawnHeight = find_floor(obj->oPosX, obj->oPosY, obj->oPosZ, &floor);
     if (obj->oPosY - spawnHeight > 100.0f) {
         spawnHeight = obj->oPosY;
