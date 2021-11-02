@@ -1,3 +1,5 @@
+// skeeter.inc.c
+
 struct Struct80331C38 {
     s16 unk00;
     s16 unk02;
@@ -47,7 +49,7 @@ static void skeeter_act_lunge(void) {
     if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
         o->oMoveAngleYaw = cur_obj_reflect_move_angle_off_wall();
         o->oForwardVel *= 0.3f;
-        o->oFlags &= ~0x00000008;
+        o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
     }
 
     if (obj_forward_vel_approach(0.0f, 0.8f) && cur_obj_check_if_at_animation_end()) {
@@ -60,7 +62,7 @@ static void skeeter_act_lunge(void) {
         //}
 
         o->oAction = SKEETER_ACT_IDLE;
-        o->oFlags |= 0x00000008;
+        o->oFlags |= OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
     }
 }
 
@@ -76,23 +78,23 @@ static void skeeter_act_walk(void) {
         cur_obj_init_animation_with_accel_and_sound(2, sp24);
         cur_obj_play_sound_at_anim_range(3, 13, SOUND_OBJ_SKEETER_WALK);
 
-        if (o->oSkeeterUnkF8 != 0) {
-            o->oSkeeterUnkF8 = obj_resolve_collisions_and_turn(o->oSkeeterTargetAngle, 0);
+        if (o->oSkeeterTurningAwayFromWall != 0) {
+            o->oSkeeterTurningAwayFromWall = obj_resolve_collisions_and_turn(o->oSkeeterTargetAngle, 0);
         } else {
             if (o->oDistanceToMario >= 25000.0f) {
                 o->oSkeeterTargetAngle = o->oAngleToMario;
                 o->oSkeeterWaitTime = random_linear_offset(20, 30);
             }
 
-            if ((o->oSkeeterUnkF8 = obj_bounce_off_walls_edges_objects(&o->oSkeeterTargetAngle)) == 0) {
+            if (!(o->oSkeeterTurningAwayFromWall = obj_bounce_off_walls_edges_objects(&o->oSkeeterTargetAngle))) {
                 if (o->oDistanceToMario < 500.0f) {
                     o->oSkeeterTargetAngle = o->oAngleToMario;
                     o->oSkeeterUnkFC = 20.0f;
                 } else {
                     o->oSkeeterUnkFC = 10.0f;
                     if (o->oSkeeterWaitTime != 0) {
-                        o->oSkeeterWaitTime -= 1;
-                    } else if (cur_obj_check_if_near_animation_end() != 0) {
+                        o->oSkeeterWaitTime--;
+                    } else if (cur_obj_check_if_near_animation_end()) {
                         if (random_u16() & 0x0003) {
                             o->oSkeeterTargetAngle = obj_random_fixed_turn(0x2000);
                             o->oSkeeterWaitTime = random_linear_offset(100, 100);

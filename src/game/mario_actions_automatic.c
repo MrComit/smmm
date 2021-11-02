@@ -426,7 +426,7 @@ s32 act_top_of_pole(struct MarioState *m) {
 }
 
 s32 perform_hanging_step(struct MarioState *m, Vec3f nextPos) {
-    UNUSED s32 unused;
+    UNUSED u8 filler[4];
     struct Surface *ceil;
     struct Surface *floor;
     f32 ceilHeight;

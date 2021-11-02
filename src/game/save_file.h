@@ -18,8 +18,7 @@
 
 #define NUM_SAVE_FILES 3
 
-struct SaveBlockSignature
-{
+struct SaveBlockSignature {
     u16 magic;
     u16 chksum;
 };
@@ -51,8 +50,7 @@ enum SaveFileIndex {
     //SAVE_FILE_D
 };
 
-struct MainMenuSaveData
-{
+struct MainMenuSaveData {
     // Each save file has a 2 bit "age" for each course. The higher this value,
     // the older the high score is. This is used for tie-breaking when displaying
     // on the high score screen.
@@ -76,8 +74,7 @@ struct MainMenuSaveData
     struct SaveBlockSignature signature;
 };
 
-struct SaveBuffer
-{
+struct SaveBuffer {
     // Each of the four save files has two copies. If one is bad, the other is used as a backup.
     struct SaveFile files[NUM_SAVE_FILES][2];
     // The main menu data has two copies. If one is bad, the other is used as a backup.

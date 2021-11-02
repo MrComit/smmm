@@ -366,6 +366,28 @@ struct GraphNodeAnimatedPart *init_graph_node_animated_part(struct AllocOnlyPool
 }
 
 /**
+ * Allocates and returns a newly created bone node with initial rotation/translation
+ */
+struct GraphNodeBone *init_graph_node_bone(struct AllocOnlyPool *pool,
+                                           struct GraphNodeBone *graphNode,
+                                           s32 drawingLayer, void *displayList,
+                                           Vec3s translation, Vec3s rotation) {
+    if (pool != NULL) {
+        graphNode = alloc_only_pool_alloc(pool, sizeof(struct GraphNodeBone));
+    }
+
+    if (graphNode != NULL) {
+        init_scene_graph_node_links(&graphNode->node, GRAPH_NODE_TYPE_BONE);
+        vec3s_copy(graphNode->translation, translation);
+        vec3s_copy(graphNode->rotation, rotation);
+        graphNode->node.flags = (drawingLayer << 8) | (graphNode->node.flags & 0xFF);
+        graphNode->displayList = displayList;
+    }
+
+    return graphNode;
+}
+
+/**
  * Allocates and returns a newly created billboard node
  */
 struct GraphNodeBillboard *init_graph_node_billboard(struct AllocOnlyPool *pool,
@@ -762,7 +784,7 @@ void geo_obj_init_spawninfo(struct GraphNodeObject *graphNode, struct SpawnInfo 
 
     graphNode->areaIndex = spawn->areaIndex;
     graphNode->activeAreaIndex = spawn->activeAreaIndex;
-    graphNode->sharedChild = spawn->unk18;
+    graphNode->sharedChild = spawn->model;
     graphNode->unk4C = spawn;
     graphNode->throwMatrix = NULL;
     graphNode->animInfo.curAnim = 0;
@@ -834,9 +856,7 @@ s32 retrieve_animation_index(s32 frame, u16 **attributes) {
  */
 s16 geo_update_animation_frame(struct AnimInfo *obj, s32 *accelAssist) {
     s32 result;
-    struct Animation *anim;
-
-    anim = obj->curAnim;
+    struct Animation *anim = obj->curAnim;
 
     if (obj->animTimer == gAreaUpdateCounter || anim->flags & ANIM_FLAG_2) {
         if (accelAssist != NULL) {
@@ -847,7 +867,7 @@ s16 geo_update_animation_frame(struct AnimInfo *obj, s32 *accelAssist) {
     }
 
     if (anim->flags & ANIM_FLAG_FORWARD) {
-        if (obj->animAccel) {
+        if (obj->animAccel != 0) {
             result = obj->animFrameAccelAssist - obj->animAccel;
         } else {
             result = (obj->animFrame - 1) << 16;

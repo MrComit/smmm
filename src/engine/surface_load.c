@@ -1,7 +1,5 @@
 #include <PR/ultratypes.h>
 
-#include "prevent_bss_reordering.h"
-
 #include "sm64.h"
 #include "game/ingame_menu.h"
 #include "graph_node.h"
@@ -220,7 +218,7 @@ static s16 lower_cell_index(s32 coord) {
     //! Some wall checks are larger than the buffer, meaning wall checks can
     //  miss walls that are near a cell border.
     if (coord % CELL_SIZE < 50) {
-        index -= 1;
+        index--;
     }
 
     if (index < 0) {
@@ -252,7 +250,7 @@ static s16 upper_cell_index(s32 coord) {
     //! Some wall checks are larger than the buffer, meaning wall checks can
     //  miss walls that are near a cell border.
     if (coord % CELL_SIZE > CELL_SIZE - 50) {
-        index += 1;
+        index++;
     }
 
     if (index > NUM_CELLS_INDEX) {
@@ -455,12 +453,12 @@ static void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s
     s16 flags = surf_has_no_cam_collision(surfaceType);
 
     numSurfaces = *(*data);
-    *data += 1;
+    (*data)++;
 
     for (i = 0; i < numSurfaces; i++) {
         if (*surfaceRooms != NULL) {
             room = *(*surfaceRooms);
-            *surfaceRooms += 1;
+            (*surfaceRooms)++;
         }
 
         surface = read_surface_data(vertexData, data);
@@ -480,7 +478,7 @@ static void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s
 
         *data += 3;
         if (hasForce) {
-            *data += 1;
+            (*data)++;
         }
     }
 }
@@ -490,8 +488,7 @@ static void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s
  */
 static s16 *read_vertex_data(s16 **data) {
     s32 numVertices;
-    UNUSED s16 unused1[3];
-    UNUSED s16 unused2[3];
+    UNUSED u8 filler[16];
     s16 *vertexData;
 
     numVertices = *(*data);
@@ -603,7 +600,7 @@ u32 get_area_terrain_size(s16 *data) {
 void load_area_terrain(s16 index, s16 *data, s8 *surfaceRooms, s16 *macroObjects) {
     s16 terrainLoadType;
     s16 *vertexData;
-    UNUSED s32 unused;
+    UNUSED u8 filler[4];
 
     // Initialize the data for this.
     gEnvironmentRegions = NULL;

@@ -23,7 +23,7 @@ struct Object *gMarioPlatform = NULL;
  */
 void update_mario_platform(void) {
     struct Surface *floor;
-    UNUSED u32 unused;
+    UNUSED u8 filler[4];
     f32 marioX;
     f32 marioY;
     f32 marioZ;

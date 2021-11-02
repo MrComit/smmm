@@ -445,5 +445,22 @@
 #define GEO_SCENE_LIGHT(lightType, red, green, blue, a, b, c) \
     CMD_BBBB(0x21, lightType, red, green), \
     CMD_BBBB(blue, a, b, c)
+#define GEO_BONE_ID 0xFF
+
+/**
+ * 0x21: Create a scene graph node that is rotated by the object's animation + an initial rotation.
+ *       u8 drawingLayer
+ *       s16 xTranslation
+ *       s16 yTranslation
+ *       s16 zTranslation
+ *       s16 xRotation
+ *       s16 yRotation
+ *       s16 zRotation
+ *       u32 displayList: dislay list segmented address
+ */
+#define GEO_BONE(layer, tx, ty, tz, rx, ry, rz, displayList) \
+    CMD_BBH(GEO_BONE_ID, layer, 0x0000), \
+    CMD_HHHHHH(tx, ty, tz, rx, ry, rz), \
+    CMD_PTR(displayList)
 
 #endif // GEO_COMMANDS_H

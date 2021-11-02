@@ -5,15 +5,15 @@
 
 #include "sm64.h"
 #include "audio/external.h"
-#include "game_init.h"
-#include "memory.h"
-#include "sound_init.h"
-#include "profiler.h"
+#include "game/game_init.h"
+#include "game/memory.h"
+#include "game/sound_init.h"
+#include "game/profiler.h"
 #include "buffers/buffers.h"
 #include "segments.h"
-#include "main.h"
-#include "rumble_init.h"
-#include "version.h"
+#include "game/main.h"
+#include "game/rumble_init.h"
+#include "game/version.h"
 #ifdef UNF
 #include "usb/usb.h"
 #include "usb/debug.h"
@@ -166,7 +166,7 @@ void receive_new_tasks(void) {
 }
 
 void start_sptask(s32 taskType) {
-    UNUSED s32 pad; // needed to pad the stack
+    UNUSED u8 filler[4];
 
     if (taskType == M_AUDTASK) {
         gActiveSPTask = sCurrentAudioSPTask;
@@ -319,6 +319,10 @@ void thread3_main(UNUSED void *arg) {
     load_engine_code_segment();
 #ifndef UNF
     crash_screen_init();
+#endif
+
+#ifdef UNF
+    debug_initialize();
 #endif
 
 #ifdef DEBUG
@@ -487,9 +491,6 @@ void thread1_idle(UNUSED void *arg) {
     osViSetSpecialFeatures(OS_VI_DITHER_FILTER_ON);
     osViSetSpecialFeatures(OS_VI_GAMMA_OFF);
     osCreatePiManager(OS_PRIORITY_PIMGR, &gPIMesgQueue, gPIMesgBuf, ARRAY_COUNT(gPIMesgBuf));
-#ifdef UNF
-    debug_initialize();
-#endif
     create_thread(&gMainThread, 3, thread3_main, NULL, gThread3Stack + 0x2000, 100);
     osStartThread(&gMainThread);
 

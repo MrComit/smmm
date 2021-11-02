@@ -1,4 +1,4 @@
-// breakable_box.c.inc
+// breakable_box.inc.c
 
 void bhv_breakable_box_loop(void) {
     cur_obj_update_floor_and_walls();

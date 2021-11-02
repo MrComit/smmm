@@ -62,7 +62,7 @@
 #define SURFACE_CAMERA_8_DIR                 0x0069 // Surface that enables far camera for platforms, used in THI
 #define SURFACE_CAMERA_MIDDLE                0x006E // Surface camera that returns to the middle, used on the 4 pillars of SSL
 #define SURFACE_CAMERA_ROTATE_RIGHT          0x006F // Surface camera that rotates to the right (Bowser 1 & THI)
-#define SURFACE_CAMERA_ROTATE_LEFT           0x0070 // Surface camera that rotates to the left (BOB & TTM)
+#define SURFACE_CAMERA_ROTATE_LEFT           0x0070 // Surface camera that rotates to the left (BoB & TTM)
 #define SURFACE_CAMERA_BOUNDARY              0x0072 // Intangible Area, only used to restrict camera movement
 #define SURFACE_NOISE_VERY_SLIPPERY_73       0x0073 // Very slippery floor with noise, unused
 #define SURFACE_NOISE_VERY_SLIPPERY_74       0x0074 // Very slippery floor with noise, unused
@@ -123,9 +123,9 @@
 #define SURFACE_PAINTING_WOBBLE_D0           0x00D0 // Painting wobble (HMC & COTMC - Left), makes the painting wobble if touched
 #define SURFACE_PAINTING_WOBBLE_D1           0x00D1 // Painting wobble (Unused, HMC & COTMC - Middle)
 #define SURFACE_PAINTING_WOBBLE_D2           0x00D2 // Painting wobble (Unused, HMC & COTMC - Right)
-#define SURFACE_PAINTING_WARP_D3             0x00D3 // Painting warp (BOB Left)
-#define SURFACE_PAINTING_WARP_D4             0x00D4 // Painting warp (BOB Middle)
-#define SURFACE_PAINTING_WARP_D5             0x00D5 // Painting warp (BOB Right)
+#define SURFACE_PAINTING_WARP_D3             0x00D3 // Painting warp (BoB Left)
+#define SURFACE_PAINTING_WARP_D4             0x00D4 // Painting warp (BoB Middle)
+#define SURFACE_PAINTING_WARP_D5             0x00D5 // Painting warp (BoB Right)
 #define SURFACE_PAINTING_WARP_D6             0x00D6 // Painting warp (CCM Left)
 #define SURFACE_PAINTING_WARP_D7             0x00D7 // Painting warp (CCM Middle)
 #define SURFACE_PAINTING_WARP_D8             0x00D8 // Painting warp (CCM Right)
