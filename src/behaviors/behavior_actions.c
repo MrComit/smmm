@@ -54,22 +54,6 @@
 #include "include/object_fields.h"
 #include "include/types.h"
 
-
-struct WFRotatingPlatformData {
-    s16 pad;
-    s16 scale;
-    const Collision *collisionData;
-    s16 collisionDistance;
-};
-
-struct Struct8032F34C {
-    s16 numBridgeSections;
-    s16 bridgeRelativeStartingXorZ;
-    s16 platformWidth;
-    s16 model;
-    const void *segAddr;
-};
-
 struct Struct8032F698 {
     void *unk0;
     s16 unk1;
@@ -78,25 +62,6 @@ struct Struct8032F698 {
     s16 unk4;
 };
 
-struct Struct802C0DF0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u8 model;
-    const BehaviorScript *behavior;
-};
-
-struct Struct8032F754 {
-    s32 unk0;
-    Vec3f unk1;
-    f32 unk2;
-};
-
-struct OpenableGrill {
-    s16 halfWidth;
-    s16 modelID;
-    const Collision *collision;
-};
 
 static s32 sCapSaveFlags[] = { SAVE_FLAG_HAVE_WING_CAP, SAVE_FLAG_HAVE_METAL_CAP, SAVE_FLAG_HAVE_VANISH_CAP };
 

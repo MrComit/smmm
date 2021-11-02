@@ -342,7 +342,7 @@ const Gfx boo_seg5_dl_0500C1B0[] = {
 const Gfx boo_dl_helper[] = {
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_BLENDRGBFADEA, G_CC_BLENDRGBFADEA),
-    //gsSPNumLights(NUMLIGHTS_1),
+    gsSPNumLights(NUMLIGHTS_1),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPTileSync(),
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),

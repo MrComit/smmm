@@ -289,7 +289,7 @@ void bhv_broken_key_loop(void) {
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND)
                 o->oAction++;
             else if (o->oMoveFlags & OBJ_MOVE_LANDED)
-                cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3_2);
+                cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3);
         } else {
             obj_set_hitbox(o, &sSmallKeyHitbox);
             o->oFaceAngleYaw += 0x400;
@@ -319,7 +319,7 @@ void bhv_big_key_loop(void) {
         if (o->oMoveFlags & OBJ_MOVE_ON_GROUND)
             o->oAction++;
         else if (o->oMoveFlags & OBJ_MOVE_LANDED)
-            cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3_2);
+            cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3);
     } else {
         obj_set_hitbox(o, &sSmallKeyHitbox);
         o->oFaceAngleYaw += 0x400;
@@ -348,7 +348,7 @@ void bhv_small_key_loop(void) {
         if (o->oMoveFlags & OBJ_MOVE_ON_GROUND)
             o->oAction++;
         else if (o->oMoveFlags & OBJ_MOVE_LANDED)
-            cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3_2);
+            cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3);
     } else {
         obj_set_hitbox(o, &sSmallKeyHitbox);
         if (o->oInteractStatus & INT_STATUS_INTERACTED) {
