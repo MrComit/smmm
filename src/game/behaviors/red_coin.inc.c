@@ -112,7 +112,7 @@ void bhv_green_coin_loop(void) {
             o->parentObj->oHiddenStarTriggerCounter++;
             gGreenCoinsCollected++;
             gMarioState->healCounter += 4;
-            if (o->parentObj->oHiddenStarTriggerCounter != 100) {
+            if (o->parentObj->oHiddenStarTriggerCounter != 50) {
                 spawn_orange_number_two_digit_scale(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0, 15.0f, 0.75f);
             }
             play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
@@ -129,7 +129,7 @@ void bhv_hidden_green_coin_star_loop(void) {
     //gGreenCoinsCollected = o->oHiddenStarTriggerCounter;
     switch (o->oAction) {
         case 0:
-            if (o->oHiddenStarTriggerCounter >= 100)
+            if (o->oHiddenStarTriggerCounter >= 50)
                 o->oAction = 1;
             break;
 

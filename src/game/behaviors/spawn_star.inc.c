@@ -65,7 +65,7 @@ void bhv_star_spawn_loop(void) {
             o->oFaceAngleYaw += 0x1000;
             spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             cur_obj_play_sound_1(SOUND_ENV_STAR);
-            if (o->oTimer == 30) {
+            if (o->oTimer == 29) {
                 o->oAction = 2;
                 o->oForwardVel = 0;
                 play_power_star_jingle(TRUE);
