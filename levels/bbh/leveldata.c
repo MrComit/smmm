@@ -83,3 +83,5 @@
 #include "levels/bbh/stalactite/model.inc.c"
 #include "levels/bbh/sand_mound/model.inc.c"
 #include "levels/bbh/sand_mound/collision.inc.c"
+#include "levels/bbh/sand_crab/model.inc.c"
+#include "levels/bbh/sand_crab/collision.inc.c"

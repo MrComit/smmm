@@ -16,31 +16,58 @@ static struct ObjectHitbox sStalactiteHitbox = {
 static struct Object *sMoundObjs[3][3] = {NULL};
 
 
+void bhv_sand_crab_loop(void) {
+    if (gMarioObject->platform == o) {
+        if (gMarioState->input & INPUT_Z_PRESSED) {
+            sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16FA = 0;
+            o->oBehParams2ndByte++;
+            while (sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16F8 == 0) {
+                o->oBehParams2ndByte++;
+            }
+        }
+
+        if (gMarioState->input & INPUT_B_PRESSED) {
+            sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16FA = 0;
+            o->oBehParams2ndByte--;
+            while (sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16F8 == 0) {
+                o->oBehParams2ndByte--;
+            }
+        }
+
+        o->oPosX = sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->oPosX;
+        o->oPosZ = sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->oPosZ;
+    }
+
+    sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16FA = 1;
+}
+
+
+
 
 void sand_mounds_check_adjacent(void) {
     struct Object *obj;
     if (o->os16F4 > 0) {
         obj = sMoundObjs[o->os16F4 - 1][o->os16F6];
-        if (obj->os16F8 == 1) {
+        if (obj->os16F8 == 1 && obj->os16FA == 0) {
             obj->oAction = 3;
         }
     }
     if (o->os16F4 < 2) {
         obj = sMoundObjs[o->os16F4 + 1][o->os16F6];
-        if (obj->os16F8 == 1) {
+        if (obj->os16F8 == 1 && obj->os16FA == 0) {
             obj->oAction = 3;
         }
     }
 
     if (o->os16F6 > 0) {
         obj = sMoundObjs[o->os16F4][o->os16F6 - 1];
-        if (obj->os16F8 == 1) {
+        if (obj->os16F8 == 1 && obj->os16FA == 0) {
             obj->oAction = 3;
         }
     }
     if (o->os16F6 < 2) {
         obj = sMoundObjs[o->os16F4][o->os16F6 + 1];
-        if (obj->os16F8 == 1) {
+        if (obj->os16F8 == 1 && obj->os16FA == 0) {
             obj->oAction = 3;
         }
     }
@@ -48,8 +75,27 @@ void sand_mounds_check_adjacent(void) {
 }
 
 
-//F4 = row/horizontal
-//F6 = column/vertical
+s32 check_mound_star(void) {
+    s32 i;
+    for (i = 0; i < 9; i++) {
+        if (sMoundObjs[i % 3][i / 3]->os16F8 == 0) {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+
+void despawn_all_mounds(void) {
+    s32 i;
+    for (i = 0; i < 9; i++) {
+        sMoundObjs[i % 3][i / 3]->activeFlags = 0;
+    }
+}
+
+
+//F4 = column/horizontal
+//F6 = row/vertical
 void bhv_sand_mound_init(void) {
     o->os16F4 = o->oBehParams2ndByte % 3;
     o->os16F6 = o->oBehParams2ndByte / 3;
@@ -81,6 +127,12 @@ void bhv_sand_mound_loop(void) {
                     o->header.gfx.scale[0] = o->header.gfx.scale[1] = o->header.gfx.scale[2] = 1.0f;
                     o->oPosY -= 150.0f;
                     o->os16F8 = 1;
+
+                    if (check_mound_star()) {
+                        o->oBehParams = 8 << 24;
+                        spawn_default_star(o->oPosX, o->oPosY + 450.0f, o->oPosZ);
+                        despawn_all_mounds();
+                    }
                 }
             }
             break;

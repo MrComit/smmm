@@ -702,6 +702,7 @@
 #define MODEL_UNSTABLE_ROCK_YELLOW 0xFB
 #define MODEL_STALACTITE          0xFA
 #define MODEL_SAND_MOUND          0xF9
+#define MODEL_SAND_CRAB           0xF8
 
 
 

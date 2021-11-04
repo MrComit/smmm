@@ -48,6 +48,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SNOWFLAKE, snowflake_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STALACTITE, stalactite_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SAND_MOUND, sand_mound_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SAND_CRAB, sand_crab_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -71,6 +72,8 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_CHUCKYA, -38, 1350, -3435, 0, 0, 0, 0x00010000, bhvChuckyaBomb),
 		OBJECT(MODEL_CHUCKYA, -1132, 0, 2203, 0, 0, 0, 0x00000000, bhvChuckyaBomb),
 		OBJECT(MODEL_CHUCKYA, 3836, 0, 1059, 0, 0, 0, 0x00000000, bhvChuckyaBomb),
+		OBJECT(MODEL_SAND_CRAB, 4035, 0, -4875, 0, -40, 0, 0x00010000, bhvSandCrab),
+		OBJECT(MODEL_SAND_CRAB, 4485, 0, -4488, 0, -40, 0, 0x00060000, bhvSandCrab),
 		OBJECT(MODEL_STAR_CURRENCY, -4768, 2539, -3297, 0, 0, 0, 0x06000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, -934, 4057, -7156, 0, 0, 0, 0x07000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 2310, -275, -1450, 0, 0, 0, 0x09000000, bhvStar),

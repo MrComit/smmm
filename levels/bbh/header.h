@@ -137,4 +137,8 @@ extern const LevelScript level_bbh_entry[];
 
 #include "levels/bbh/sand_mound/collision_header.h"
 
+#include "levels/bbh/sand_crab/geo_header.h"
+
+#include "levels/bbh/sand_crab/collision_header.h"
+
 #endif

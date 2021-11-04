@@ -31,3 +31,4 @@
 #include "levels/bbh/unstable_rock_yellow/geo.inc.c"
 #include "levels/bbh/stalactite/geo.inc.c"
 #include "levels/bbh/sand_mound/geo.inc.c"
+#include "levels/bbh/sand_crab/geo.inc.c"
