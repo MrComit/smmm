@@ -13,6 +13,93 @@ static struct ObjectHitbox sStalactiteHitbox = {
 };
 
 
+static struct Object *sMoundObjs[3][3] = {NULL};
+
+
+
+void sand_mounds_check_adjacent(void) {
+    struct Object *obj;
+    if (o->os16F4 > 0) {
+        obj = sMoundObjs[o->os16F4 - 1][o->os16F6];
+        if (obj->os16F8 == 1) {
+            obj->oAction = 3;
+        }
+    }
+    if (o->os16F4 < 2) {
+        obj = sMoundObjs[o->os16F4 + 1][o->os16F6];
+        if (obj->os16F8 == 1) {
+            obj->oAction = 3;
+        }
+    }
+
+    if (o->os16F6 > 0) {
+        obj = sMoundObjs[o->os16F4][o->os16F6 - 1];
+        if (obj->os16F8 == 1) {
+            obj->oAction = 3;
+        }
+    }
+    if (o->os16F6 < 2) {
+        obj = sMoundObjs[o->os16F4][o->os16F6 + 1];
+        if (obj->os16F8 == 1) {
+            obj->oAction = 3;
+        }
+    }
+
+}
+
+
+//F4 = row/horizontal
+//F6 = column/vertical
+void bhv_sand_mound_init(void) {
+    o->os16F4 = o->oBehParams2ndByte % 3;
+    o->os16F6 = o->oBehParams2ndByte / 3;
+    sMoundObjs[o->os16F4][o->os16F6] = o;
+
+    o->os16F8 = o->oBehParams >> 24;
+    if (o->os16F8) {
+        o->oAction = 2;
+        o->oPosY -= 150.0f;
+    }
+}
+
+
+void bhv_sand_mound_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_is_mario_ground_pounding_platform()) {
+                o->oAction = 1;
+                sand_mounds_check_adjacent();
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 0.0f, 0.2f);
+            if (o->header.gfx.scale[1] < 0.1f) {
+                o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.0f, 0.1f);
+                o->header.gfx.scale[2] = o->header.gfx.scale[0];
+                if (o->header.gfx.scale[0] < 0.1f) {
+                    o->oAction = 2;
+                    o->header.gfx.scale[0] = o->header.gfx.scale[1] = o->header.gfx.scale[2] = 1.0f;
+                    o->oPosY -= 150.0f;
+                    o->os16F8 = 1;
+                }
+            }
+            break;
+        case 2:
+            cur_obj_hide();
+            break;
+        case 3:
+            cur_obj_unhide();
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
+            if (o->oPosY == o->oHomeY) {
+                o->oAction = 0;
+                o->os16F8 = 0;
+            }
+            break;
+    }
+}
+
+
+
 void bhv_stalactite_init(void) {
     obj_set_hitbox(o, &sStalactiteHitbox);
 }

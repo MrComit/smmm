@@ -1,0 +1,15 @@
+extern const GeoLayout sand_mound_geo[];
+extern Lights1 sand_mound_Sand_002_lights;
+extern Lights1 sand_mound_SandDecal_002_lights;
+extern u8 sand_mound_grayscale_sand_i8[];
+extern Vtx sand_mound_Mound_mesh_layer_1_vtx_0[10];
+extern Gfx sand_mound_Mound_mesh_layer_1_tri_0[];
+extern Vtx sand_mound_Mound_mesh_layer_6_vtx_0[10];
+extern Gfx sand_mound_Mound_mesh_layer_6_tri_0[];
+extern Gfx mat_sand_mound_Sand_002[];
+extern Gfx mat_revert_sand_mound_Sand_002[];
+extern Gfx mat_sand_mound_SandDecal_002[];
+extern Gfx mat_revert_sand_mound_SandDecal_002[];
+extern Gfx sand_mound_Mound_mesh_layer_1[];
+extern Gfx sand_mound_Mound_mesh_layer_6[];
+extern Gfx sand_mound_material_revert_render_settings[];

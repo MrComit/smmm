@@ -782,6 +782,8 @@ void bhv_level_entrance_init(void);
 void bhv_level_entrance_loop(void);
 void bhv_collect_heart_init(void);
 void bhv_collect_heart_loop(void);
+void bhv_sand_mound_loop(void);
+void bhv_sand_mound_init(void);
 
 
 

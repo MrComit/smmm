@@ -1,10 +1,3 @@
-void scroll_sts_mat_bbh_dl_RainbowMultitex_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_bbh_dl_RainbowMultitex_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_t(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
-};
-
 void scroll_bbh_dl_Water_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 12;
@@ -322,7 +315,6 @@ void scroll_bbh_dl_Waterfall_mesh_layer_5_vtx_0() {
 }
 
 void scroll_bbh() {
-	scroll_sts_mat_bbh_dl_RainbowMultitex_layer1();
 	scroll_bbh_dl_Water_mesh_layer_5_vtx_0();
 	scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_0();
 	scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_1();

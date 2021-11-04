@@ -45,7 +45,6 @@ const GeoLayout bbh_dl_101__Oasis_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1867, 390, -1991, bbh_dl_PIllars_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 309, 425, 1246, bbh_dl_PIllars_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 787, 1767, -466, bbh_dl_Plats_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -3455, 298, 455, bbh_dl_RainbowEffect_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 871, 857, 1885, bbh_dl_Rope_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -3189, 423, -4607, bbh_dl_Tunnel_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 2616, -60, -2138, bbh_dl_Water_mesh_layer_5),

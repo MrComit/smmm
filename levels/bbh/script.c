@@ -47,6 +47,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_UNSTABLE_ROCK_YELLOW, unstable_rock_yellow_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SNOWFLAKE, snowflake_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STALACTITE, stalactite_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SAND_MOUND, sand_mound_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -125,6 +126,15 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, 1273, 1750, 4986, 0, 89, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_NONE, -1753, 2099, 4604, 0, 59, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_NONE, 1321, 2489, -5773, 0, 89, 0, 0x00100000, bhvHorizontalPole),
+		OBJECT(MODEL_SAND_MOUND, 4060, 0, -3510, 0, -40, 0, 0x01050000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 3294, 0, -4153, 0, -40, 0, 0x01030000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 3999, 0, -4215, 0, -40, 0, 0x01010000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 3677, 0, -3832, 0, -40, 0, 0x00040000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 4382, 0, -3893, 0, -40, 0, 0x00020000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 3616, 0, -4536, 0, -40, 0, 0x01000000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 3356, 0, -3449, 0, -40, 0, 0x01070000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 3739, 0, -3127, 0, -40, 0, 0x01080000, bhvSandMound),
+		OBJECT(MODEL_SAND_MOUND, 2973, 0, -3770, 0, -40, 0, 0x01060000, bhvSandMound),
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, -4095, 0, -431, 0, 0, 0, 0x00800000, bhvWarpPipe),
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, -4028, 0, 136, 0, 0, 0, 0x00810000, bhvWarpPipe),
 		OBJECT(MODEL_PURPLE_SWITCH, 6211, 2089, -564, 0, 111, 0, 0x01000000, bhvGenericSwitch),

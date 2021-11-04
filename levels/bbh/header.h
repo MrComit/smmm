@@ -133,4 +133,8 @@ extern const LevelScript level_bbh_entry[];
 
 #include "levels/bbh/stalactite/geo_header.h"
 
+#include "levels/bbh/sand_mound/geo_header.h"
+
+#include "levels/bbh/sand_mound/collision_header.h"
+
 #endif

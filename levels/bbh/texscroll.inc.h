@@ -1,4 +1,3 @@
-extern void scroll_sts_mat_bbh_dl_RainbowMultitex_layer1();
 extern void scroll_bbh_dl_Water_mesh_layer_5_vtx_0();
 extern void scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_0();
 extern void scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_1();

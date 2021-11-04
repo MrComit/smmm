@@ -680,6 +680,8 @@ extern const BehaviorScript bhvStalactite[];
 extern const BehaviorScript bhvHeldLetter[];
 extern const BehaviorScript bhvPlaysetEntrance[];
 extern const BehaviorScript bhvCollectHeart[];
+extern const BehaviorScript bhvSandMound[];
+
 
 
 

@@ -81,3 +81,5 @@
 #include "levels/bbh/snowflake/collision.inc.c"
 #include "levels/bbh/unstable_rock_yellow/model.inc.c"
 #include "levels/bbh/stalactite/model.inc.c"
+#include "levels/bbh/sand_mound/model.inc.c"
+#include "levels/bbh/sand_mound/collision.inc.c"
