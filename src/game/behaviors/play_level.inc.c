@@ -13,32 +13,78 @@ static struct ObjectHitbox sStalactiteHitbox = {
 };
 
 
-static struct Object *sMoundObjs[3][3] = {NULL};
+static struct Object *sMoundObjs[4][4] = {NULL};
+
+
 
 
 void bhv_sand_crab_loop(void) {
-    if (gMarioObject->platform == o) {
-        if (gMarioState->input & INPUT_Z_PRESSED) {
-            sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16FA = 0;
-            o->oBehParams2ndByte++;
-            while (sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16F8 == 0) {
-                o->oBehParams2ndByte++;
-            }
-        }
-
-        if (gMarioState->input & INPUT_B_PRESSED) {
-            sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16FA = 0;
-            o->oBehParams2ndByte--;
-            while (sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16F8 == 0) {
-                o->oBehParams2ndByte--;
-            }
-        }
-
-        o->oPosX = sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->oPosX;
-        o->oPosZ = sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->oPosZ;
+    if (sMoundObjs[0][0] == NULL) {
+        return;
     }
 
-    sMoundObjs[o->oBehParams2ndByte % 3][o->oBehParams2ndByte / 3]->os16FA = 1;
+    o->os16F4 = o->oBehParams2ndByte % 4;
+    o->os16F6 = o->oBehParams2ndByte / 4;
+    sMoundObjs[o->os16F4][o->os16F6]->os16FA = 0;
+
+    if (gMarioState->wall != NULL && gMarioState->wall->object == o) {
+        switch (gMarioState->wall->force) {
+            case 0:
+                if (o->oBehParams2ndByte <= 3) {
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                o->oBehParams2ndByte -= 4;
+                if (sMoundObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4]->os16F8 == 0) {
+                    o->oBehParams2ndByte += 4;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                break;
+            case 1:
+                if (o->oBehParams2ndByte % 4 == 0) {
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                o->oBehParams2ndByte -= 1;
+                if (sMoundObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4]->os16F8 == 0) {
+                    o->oBehParams2ndByte += 1;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                break;
+            case 2:
+                if (o->oBehParams2ndByte >= 12) {
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                o->oBehParams2ndByte += 4;
+                if (sMoundObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4]->os16F8 == 0) {
+                    o->oBehParams2ndByte -= 4;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                break;
+            case 3:
+                if (o->oBehParams2ndByte % 4 == 3) {
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                o->oBehParams2ndByte += 1;
+                if (sMoundObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4]->os16F8 == 0) {
+                    o->oBehParams2ndByte -= 1;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+                break;
+        }
+    }
+
+    o->os16F4 = o->oBehParams2ndByte % 4;
+    o->os16F6 = o->oBehParams2ndByte / 4;
+    sMoundObjs[o->os16F4][o->os16F6]->os16FA = 1;
+    o->oPosX = approach_f32_symmetric(o->oPosX, sMoundObjs[o->os16F4][o->os16F6]->oPosX, 20.0f);
+    o->oPosZ = approach_f32_symmetric(o->oPosZ, sMoundObjs[o->os16F4][o->os16F6]->oPosZ, 20.0f);
 }
 
 
@@ -52,7 +98,7 @@ void sand_mounds_check_adjacent(void) {
             obj->oAction = 3;
         }
     }
-    if (o->os16F4 < 2) {
+    if (o->os16F4 < 3) {
         obj = sMoundObjs[o->os16F4 + 1][o->os16F6];
         if (obj->os16F8 == 1 && obj->os16FA == 0) {
             obj->oAction = 3;
@@ -65,7 +111,7 @@ void sand_mounds_check_adjacent(void) {
             obj->oAction = 3;
         }
     }
-    if (o->os16F6 < 2) {
+    if (o->os16F6 < 3) {
         obj = sMoundObjs[o->os16F4][o->os16F6 + 1];
         if (obj->os16F8 == 1 && obj->os16FA == 0) {
             obj->oAction = 3;
@@ -77,8 +123,8 @@ void sand_mounds_check_adjacent(void) {
 
 s32 check_mound_star(void) {
     s32 i;
-    for (i = 0; i < 9; i++) {
-        if (sMoundObjs[i % 3][i / 3]->os16F8 == 0) {
+    for (i = 0; i < 16; i++) {
+        if (sMoundObjs[i % 4][i / 4]->os16F8 == 0) {
             return FALSE;
         }
     }
@@ -88,8 +134,9 @@ s32 check_mound_star(void) {
 
 void despawn_all_mounds(void) {
     s32 i;
-    for (i = 0; i < 9; i++) {
-        sMoundObjs[i % 3][i / 3]->activeFlags = 0;
+    for (i = 0; i < 16; i++) {
+        sMoundObjs[i % 4][i / 4]->activeFlags = 0;
+        sMoundObjs[i % 4][i / 4] = NULL;
     }
 }
 
@@ -97,8 +144,8 @@ void despawn_all_mounds(void) {
 //F4 = column/horizontal
 //F6 = row/vertical
 void bhv_sand_mound_init(void) {
-    o->os16F4 = o->oBehParams2ndByte % 3;
-    o->os16F6 = o->oBehParams2ndByte / 3;
+    o->os16F4 = o->oBehParams2ndByte % 4;
+    o->os16F6 = o->oBehParams2ndByte / 4;
     sMoundObjs[o->os16F4][o->os16F6] = o;
 
     o->os16F8 = o->oBehParams >> 24;

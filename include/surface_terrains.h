@@ -77,6 +77,7 @@
 #define SURFACE_MIRROR                       0x007C
 #define SURFACE_LIGHT_CHECKPOINT             0x007D
 #define SURFACE_GP_FLOOR                     0x007E
+#define SURFACE_GENERAL_USE                  0x007F
 
 #define SURFACE_PAINTING_WOBBLE_A6           0x00A6 // Painting wobble (BOB Left)
 #define SURFACE_PAINTING_WOBBLE_A7           0x00A7 // Painting wobble (BOB Middle)
