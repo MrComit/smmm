@@ -7266,8 +7266,8 @@ const BehaviorScript bhvBounceBoxes[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_INT(oAnimState, 1),
-    LOAD_COLLISION_DATA(bounce_box_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_bounce_box_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bounce_box_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -7964,6 +7964,19 @@ const BehaviorScript bhvSandCrab[] = {
     LOAD_COLLISION_DATA(sand_crab_collision),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_sand_crab_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSnowPile[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(snow_pile_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_snow_pile_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_snow_pile_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

@@ -83,6 +83,7 @@ const GeoLayout bbh_dl_305__SnowGlobe_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_ALPHA, bbh_dl_IceSlide_mesh_layer_4),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_ALPHA, -8345, 359, -343, 0, 31, 0, bbh_dl_IceSlide_002_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4933, 185, 6448, bbh_dl_Platform_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bbh_dl_Platform_mesh_layer_6),

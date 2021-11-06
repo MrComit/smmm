@@ -85,3 +85,7 @@
 #include "levels/bbh/sand_mound/collision.inc.c"
 #include "levels/bbh/sand_crab/model.inc.c"
 #include "levels/bbh/sand_crab/collision.inc.c"
+#include "levels/bbh/snow_box/collision.inc.c"
+#include "levels/bbh/snow_box/model.inc.c"
+#include "levels/bbh/snow_pile/model.inc.c"
+#include "levels/bbh/snow_pile/collision.inc.c"

@@ -12,11 +12,69 @@ static struct ObjectHitbox sStalactiteHitbox = {
     /* hurtboxHeight:     */ 300,
 };
 
+void bhv_snow_pile_init(void) {
+    vec3f_set(&o->oHomeX, -2359.0f, -500.0f, -2184.0f);
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PUSHED_SNOWPILE) {
+        vec3f_copy(&o->oPosX, &o->oHomeX);
+        o->oAction = 2;
+    }
+}
+
+void bhv_snow_pile_loop(void) {
+    struct MarioState *m = gMarioState;
+    struct Object *obj;
+    s32 whichSide = 0;
+    switch (o->oAction) {
+        case 0:
+            o->oMoveAngleYaw = o->oFaceAngleYaw + 0x4000;
+            if (m->faceAngle[1] - o->oFaceAngleYaw <= 0x6000 && m->faceAngle[1] - o->oFaceAngleYaw >= 0x2000)
+                whichSide = 1;
+            if (m->wall != NULL && m->wall->object == o && whichSide && m->action == ACT_WALKING) {
+                o->oForwardVel = 10.0f;
+                CL_Move();
+                m->pos[0] += o->oVelX;
+                m->pos[2] += o->oVelZ;
+                if (o->oPosY - find_floor_height(o->oPosX, o->oPosY, o->oPosZ) > 100.0f) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            set_mario_npc_dialog(1);
+            gCamera->comitCutscene = 12;
+            if (o->oTimer < 15) {
+                o->oForwardVel = 10.0f;
+                CL_Move();
+            } else if (o->oTimer > 40) {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 100.0f, 5.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, o->oFloatF4);
+                if (o->oPosY == o->oHomeY) {
+                    spawn_mist_particles();
+                    save_file_set_newflags(SAVE_NEW_FLAG_PUSHED_SNOWPILE, 0);
+                    cur_obj_shake_screen(1);
+                    play_puzzle_jingle();
+                    o->oAction = 2;
+                    set_mario_npc_dialog(0);
+                }
+            }
+            break;
+        case 2:
+            if (o->oTimer == 0) {
+                obj = spawn_object(o, MODEL_SNOW_BOX, bhvBounceBoxes);
+                obj->oBehParams = 0x010F0000;
+                obj->oBehParams2ndByte = 0x0F;
+                cur_obj_hide();
+            }
+            if (o->oTimer > 30) {
+                gCamera->comitCutscene = 0;
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
 
 static struct Object *sMoundObjs[4][4] = {NULL};
-
-
-
 
 void bhv_sand_crab_loop(void) {
     if (sMoundObjs[0][0] == NULL) {

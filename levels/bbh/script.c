@@ -49,6 +49,8 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_STALACTITE, stalactite_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SAND_MOUND, sand_mound_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SAND_CRAB, sand_crab_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SNOW_BOX, snow_box_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SNOW_PILE, snow_pile_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -327,6 +329,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, -4123, 1817, -4394, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 7542, 1849, -2332, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -1146, -200, 2160, 0, 0, 0, 0x11000000, bhvHiddenGreenCoinStar),
+		OBJECT(MODEL_SNOW_BOX, -2685, 2230, -8541, 0, 20, 0, (1 << 24) | (16 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_SNOWFLAKE, 4430, 462, 7376, 0, -27, 0, 0x01000000, bhvSnowflake),
 		OBJECT(MODEL_SNOWFLAKE, 3970, 562, 8264, 0, -27, 0, 0x00000000, bhvSnowflake),
 		OBJECT(MODEL_SNOWFLAKE, 3082, 562, 7804, 0, -27, 0, 0x00010000, bhvSnowflake),
@@ -355,6 +358,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_SNOWFLAKE, 1274, 762, 9120, 0, -27, 0, 0x00000000, bhvSnowflake),
 		OBJECT(MODEL_SNOWFLAKE, 3510, 662, 9152, 0, -27, 0, 0x00010000, bhvSnowflake),
 		OBJECT(MODEL_SNOWFLAKE, 2622, 662, 8692, 0, -27, 0, 0x00000000, bhvSnowflake),
+		OBJECT(MODEL_SNOW_PILE, -2081, 1500, -2905, 0, -109, 0, (1 << 24) | (15 << 16), bhvSnowPile),
 		OBJECT(MODEL_TOKEN, 3678, 4203, -4392, 0, 60, 0, 0x00011A00, bhvToken),
 		OBJECT(MODEL_STAR_CURRENCY, -233, -3070, 1861, 0, 0, 0, 0x0E000000, bhvStar),
 		OBJECT(MODEL_TELEPORTER, -655, -3370, 2198, 0, 0, 0, 0x00930000, bhvFadingWarp),

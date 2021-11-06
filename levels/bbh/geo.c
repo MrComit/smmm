@@ -32,3 +32,5 @@
 #include "levels/bbh/stalactite/geo.inc.c"
 #include "levels/bbh/sand_mound/geo.inc.c"
 #include "levels/bbh/sand_crab/geo.inc.c"
+#include "levels/bbh/snow_box/geo.inc.c"
+#include "levels/bbh/snow_pile/geo.inc.c"

@@ -1,0 +1,17 @@
+extern const GeoLayout snow_pile_geo[];
+extern Lights1 snow_pile_Snow_lights;
+extern Lights1 snow_pile_SnowFade_lights;
+extern u8 snow_pile_snow2_i8_i8[];
+extern Vtx snow_pile_snow_pile_mesh_layer_1_vtx_cull[8];
+extern Vtx snow_pile_snow_pile_mesh_layer_1_vtx_0[28];
+extern Gfx snow_pile_snow_pile_mesh_layer_1_tri_0[];
+extern Vtx snow_pile_snow_pile_mesh_layer_5_vtx_cull[8];
+extern Vtx snow_pile_snow_pile_mesh_layer_5_vtx_0[24];
+extern Gfx snow_pile_snow_pile_mesh_layer_5_tri_0[];
+extern Gfx mat_snow_pile_Snow[];
+extern Gfx mat_revert_snow_pile_Snow[];
+extern Gfx mat_snow_pile_SnowFade[];
+extern Gfx mat_revert_snow_pile_SnowFade[];
+extern Gfx snow_pile_snow_pile_mesh_layer_1[];
+extern Gfx snow_pile_snow_pile_mesh_layer_5[];
+extern Gfx snow_pile_material_revert_render_settings[];

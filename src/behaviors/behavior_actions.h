@@ -711,6 +711,7 @@ void bhv_sunflower_init(void);
 void bhv_dirt_mound_loop(void);
 void bhv_dirt_mound_init(void);
 void bhv_bounce_box_loop(void);
+void bhv_bounce_box_init(void);
 void bhv_poochy_boss_loop(void);
 void bhv_poochy_boss_init(void);
 void bhv_flower_wall_init(void);
@@ -785,6 +786,8 @@ void bhv_collect_heart_loop(void);
 void bhv_sand_mound_loop(void);
 void bhv_sand_mound_init(void);
 void bhv_sand_crab_loop(void);
+void bhv_snow_pile_loop(void);
+void bhv_snow_pile_init(void);
 
 
 

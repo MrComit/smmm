@@ -1409,6 +1409,17 @@ void fixed_cam_presets(struct Camera *c) {
                     break;
             }
             break;
+        case 12:
+            obj = cur_obj_nearest_object_with_behavior(bhvSnowPile);
+            if (obj == NULL)
+                break;
+            pos[0] = -3200.0f;
+            pos[1] = 2200.0f;
+            pos[2] = -2400.0f;
+            vec3f_copy(c->pos, pos);
+            vec3f_copy(c->focus, &obj->oPosX);
+            c->yaw = c->nextYaw = DEGREES(165);
+            break;
     }
 }
 

@@ -703,6 +703,8 @@
 #define MODEL_STALACTITE          0xFA
 #define MODEL_SAND_MOUND          0xF9
 #define MODEL_SAND_CRAB           0xF8
+#define MODEL_SNOW_BOX            0xF7
+#define MODEL_SNOW_PILE           0xF6
 
 
 

@@ -545,18 +545,36 @@ void bhv_poochy_boss_loop(void) {
     o->oInteractStatus = 0;
 }
 
+extern const Collision bounce_box_collision[];
+extern const Collision snow_box_collision[];
+
+static void const *sBoxCollision[] = {
+    bounce_box_collision,
+    snow_box_collision
+};
+
+void bhv_bounce_box_init(void) {
+    o->collisionData = segmented_to_virtual(sBoxCollision[o->oBehParams >> 24]);
+}
+
 
 void bhv_bounce_box_loop(void) {
     struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
-            if (gMarioObject->platform == o)
+            if (gMarioObject->platform == o) {
+                if (o->oBehParams2ndByte)
+                    o->oFloatF4 = o->oBehParams2ndByte * 10.0f;
+                else
+                    o->oFloatF4 = 200.0f;
                 o->oAction = 1;
+            }
             break;
         case 1:
             if (approach_f32_ptr(&o->header.gfx.scale[1], 0.5f, 0.25f)) {
                 set_mario_action(m, ACT_CUTSCENE_JUMP, 2);
-                m->vel[1] = 200.0f;
+                set_r_button_camera(gCamera);
+                m->vel[1] = o->oFloatF4;
                 m->faceAngle[1] = (m->angleVel[1] = o->oFaceAngleYaw + 0xC000);
                 mario_set_forward_vel(m, 15.0f);
                 play_sound(SOUND_ACTION_BOUNCE_OFF_OBJECT, m->marioObj->header.gfx.cameraToObject);
