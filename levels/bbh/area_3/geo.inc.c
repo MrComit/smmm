@@ -92,6 +92,7 @@ const GeoLayout bbh_dl_305__SnowGlobe_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3, -1500, 0, bbh_dl_Snow_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2525, 1000, -1866, bbh_dl_Snow_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -546, -875, 16143, bbh_dl_Snow_003_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -4629, -400, -1550, bbh_dl_Snow_009_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 7085, 550, 4623, bbh_dl_SnowMountain_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1608, -3191, -3596, bbh_dl_UnderglobeFake_mesh_layer_1),
 	GEO_CLOSE_NODE(),
@@ -113,7 +114,10 @@ const GeoLayout bbh_dl_306__UnderGlobe_geo[] = {
 const GeoLayout bbh_dl_307__Ice_Castle_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2603, 11500, -4746, 0, -12, 0, bbh_dl_Castle_002_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2454, 12042, -6822, 0, -12, 0, bbh_dl_Castle_002_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bbh_dl_Castle_002_mesh_layer_5),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

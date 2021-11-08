@@ -149,4 +149,8 @@ extern const LevelScript level_bbh_entry[];
 
 #include "levels/bbh/snow_pile/collision_header.h"
 
+#include "levels/bbh/ice_cube/geo_header.h"
+
+#include "levels/bbh/ice_cube/collision_header.h"
+
 #endif

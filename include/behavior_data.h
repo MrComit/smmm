@@ -683,6 +683,8 @@ extern const BehaviorScript bhvCollectHeart[];
 extern const BehaviorScript bhvSandMound[];
 extern const BehaviorScript bhvSandCrab[];
 extern const BehaviorScript bhvSnowPile[];
+extern const BehaviorScript bhvFrozenGoomba[];
+extern const BehaviorScript bhvIceCube[];
 
 
 

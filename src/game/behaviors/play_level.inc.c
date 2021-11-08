@@ -12,6 +12,95 @@ static struct ObjectHitbox sStalactiteHitbox = {
     /* hurtboxHeight:     */ 300,
 };
 
+
+
+void bhv_frozen_goomba_init(void) {
+    o->oMoveAngleYaw = random_u16();
+    o->oFaceAnglePitch = random_u16();
+    o->oFaceAngleRoll = random_u16();
+}
+
+void bhv_frozen_goomba_loop(void) {
+    vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
+    o->oPosY += 60.0f;
+    o->header.gfx.animInfo.animFrame = 0;
+}
+
+
+s32 ice_cube_detect_wall(void) {
+    s32 numCollisions;
+    s32 i, k;
+    struct Surface *wall;
+    struct WallCollisionData collisionData;
+
+
+    cur_obj_compute_vel_xz();
+    for (k = 0; k < 4; k++) {
+        collisionData.offsetY = 10.0f;
+        collisionData.radius = 75.0f;
+        collisionData.x = (s16) o->oPosX;// + o->oVelX;
+        collisionData.y = (s16) o->oPosY;
+        collisionData.z = (s16) o->oPosZ;// + o->oVelZ;
+
+        numCollisions = find_wall_collisions(&collisionData);
+        if (numCollisions != 0) {
+            o->oPosX = collisionData.x;
+            o->oPosY = collisionData.y;
+            o->oPosZ = collisionData.z;
+
+            for (i = 1; i <= collisionData.numWalls; i++) {
+                wall = collisionData.walls[collisionData.numWalls - i];
+
+                o->oWallAngle = atan2s(wall->normal.z, wall->normal.x);
+                if (abs_angle_diff(o->oWallAngle, o->oMoveAngleYaw) > 0x4000) {
+                    return TRUE;
+                }
+            }
+        }
+
+        cur_obj_move_using_vel_and_gravity();
+    }
+
+    return FALSE;
+}
+
+
+void bhv_ice_cube_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+                o->oAction = 1;
+
+                if (absi((u16)(gMarioState->faceAngle[1]) - (u16)(gMarioState->faceAngle[1] & 0xC000)) < 0x2000) {
+                    o->oMoveAngleYaw = gMarioState->faceAngle[1] & 0xC000;
+                } else {
+                    o->oMoveAngleYaw = (gMarioState->faceAngle[1] & 0xC000) + 0x4000;
+                }
+
+            }
+            break;
+        case 1:
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 4.0f, 0.5f);
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 40.0f, o->oFloatF4);
+            o->oForwardVel = o->oFloatF8 / 4;
+            if (ice_cube_detect_wall()) {
+                o->oAction = 0;
+                o->oForwardVel = 0;
+                o->oFloatF8 = 0;
+                o->oFloatF4 = 0;
+                break;
+            }
+
+            //o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 5.0f, 0.5f);
+            //o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, o->oFloatF4);
+            //CL_Move();
+            spawn_mist_particles_variable(2, -40, 6.0f);
+            break;
+    }
+}
+
+
+
 void bhv_snow_pile_init(void) {
     vec3f_set(&o->oHomeX, -2359.0f, -500.0f, -2184.0f);
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PUSHED_SNOWPILE) {

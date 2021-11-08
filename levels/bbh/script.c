@@ -51,6 +51,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SAND_CRAB, sand_crab_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SNOW_BOX, snow_box_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SNOW_PILE, snow_pile_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ICE_CUBE, ice_cube_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -238,6 +239,7 @@ const LevelScript level_bbh_entry[] = {
 		WARP_NODE(0x93, LEVEL_BBH, 0x03, 0x94, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x94, LEVEL_BBH, 0x03, 0x93, WARP_NO_CHECKPOINT),
 		INSTANT_WARP(0x1, 0x03, 0, 10000, 0),
+		INSTANT_WARP(0x2, 0x03, 0, -10000, 0),
 		OBJECT(MODEL_NONE, 2408, -300, 1559, 0, -110, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 2408, -300, 1559, 0, -110, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_GREEN_COIN, 2358, 737, -1251, 0, 0, 0, 0x00000000, bhvGreenCoin),
@@ -329,6 +331,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, -4123, 1817, -4394, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 7542, 1849, -2332, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -1146, -200, 2160, 0, 0, 0, 0x11000000, bhvHiddenGreenCoinStar),
+		OBJECT(MODEL_ICE_CUBE, -4574, -500, -1941, 0, 0, 0, 0x00000000, bhvIceCube),
 		OBJECT(MODEL_SNOW_BOX, -2685, 2230, -8541, 0, 20, 0, (1 << 24) | (16 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_SNOWFLAKE, 4430, 462, 7376, 0, -27, 0, 0x01000000, bhvSnowflake),
 		OBJECT(MODEL_SNOWFLAKE, 3970, 562, 8264, 0, -27, 0, 0x00000000, bhvSnowflake),
@@ -362,6 +365,8 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_TOKEN, 3678, 4203, -4392, 0, 60, 0, 0x00011A00, bhvToken),
 		OBJECT(MODEL_STAR_CURRENCY, -233, -3070, 1861, 0, 0, 0, 0x0E000000, bhvStar),
 		OBJECT(MODEL_TELEPORTER, -655, -3370, 2198, 0, 0, 0, 0x00930000, bhvFadingWarp),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2331, 11500, -4574, 0, 155, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_ICE_CUBE, 2916, 11500, -6700, 0, 0, 0, 0x00000000, bhvIceCube),
 		TERRAIN(bbh_area_3_collision),
 		ROOMS(bbh_area_3_collision_rooms),
 		MACRO_OBJECTS(bbh_area_3_macro_objs),

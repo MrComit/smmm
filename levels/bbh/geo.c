@@ -34,3 +34,4 @@
 #include "levels/bbh/sand_crab/geo.inc.c"
 #include "levels/bbh/snow_box/geo.inc.c"
 #include "levels/bbh/snow_pile/geo.inc.c"
+#include "levels/bbh/ice_cube/geo.inc.c"

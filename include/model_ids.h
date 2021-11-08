@@ -705,6 +705,7 @@
 #define MODEL_SAND_CRAB           0xF8
 #define MODEL_SNOW_BOX            0xF7
 #define MODEL_SNOW_PILE           0xF6
+#define MODEL_ICE_CUBE            0xF5
 
 
 
