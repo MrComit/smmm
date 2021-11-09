@@ -7999,9 +7999,10 @@ const BehaviorScript bhvFrozenGoomba[] = {
 
 const BehaviorScript bhvIceCube[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(ice_cube_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 75, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SPAWN_OBJ(/*Model*/ MODEL_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
     BEGIN_LOOP(),
