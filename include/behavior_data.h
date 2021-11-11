@@ -685,7 +685,7 @@ extern const BehaviorScript bhvSandCrab[];
 extern const BehaviorScript bhvSnowPile[];
 extern const BehaviorScript bhvFrozenGoomba[];
 extern const BehaviorScript bhvIceCube[];
-
+extern const BehaviorScript bhvIceCubeChild[];
 
 
 
