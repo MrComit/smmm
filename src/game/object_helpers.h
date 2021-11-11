@@ -72,6 +72,7 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
 #ifdef AVOID_UB
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_get_chapter(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_level(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_area(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node, UNUSED void *context);
@@ -80,6 +81,7 @@ Gfx *geo_switch_console(s32 callContext, struct GraphNode *node, UNUSED void *co
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_get_chapter(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_level(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_area(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node, UNUSED void *context);

@@ -460,6 +460,8 @@ void bhv_star_piece_init(void) {
         o->activeFlags = 0;
     }
 
+    o->os16F6 = 0x200;
+
     obj_set_hitbox(o, &sStarPieceHitbox);
 }
 
@@ -482,8 +484,14 @@ void bhv_star_piece_loop(void) {
             cur_obj_enable();
         }
     } else {
+        o->os16F8 += 0x300;
+        o->oGraphYOffset = 20.0f + (sins(o->os16F8) * 20.0f);
         o->oFaceAngleYaw += 0x400;
-        o->oFaceAnglePitch += 0x400;
+        o->oFaceAnglePitch += o->os16F4;
+        o->os16F4 = approach_s16_symmetric(o->os16F4, o->os16F6, 0x20);
+        if (o->oTimer > 30) {
+            o->os16F6 = CL_RandomMinMaxU16(0x300, 0x500);
+        }
     }
 }
 

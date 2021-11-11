@@ -1,7 +1,24 @@
+extern const GeoLayout star_piece_switch_opt1[];
+extern const GeoLayout star_piece_switch_opt2[];
+extern const GeoLayout star_piece_switch_opt3[];
+extern const GeoLayout star_piece_switch_opt4[];
 extern const GeoLayout star_piece_geo[];
-extern Vtx star_piece_StarPiece_mesh_vtx_0[5];
-extern Gfx star_piece_StarPiece_mesh_tri_0[];
-
-extern Gfx star_piece_StarPiece_mesh[];
+extern u8 star_piece_gray_star_i8[];
+extern Vtx star_piece_dl_mesh_layer_1_vtx_0[58];
+extern Gfx star_piece_dl_mesh_layer_1_tri_0[];
+extern Gfx mat_star_piece_Ch1_v4[];
+extern Gfx mat_revert_star_piece_Ch1_v4[];
+extern Gfx mat_star_piece_Ch2_v4[];
+extern Gfx mat_revert_star_piece_Ch2_v4[];
+extern Gfx mat_star_piece_Ch3_v4[];
+extern Gfx mat_revert_star_piece_Ch3_v4[];
+extern Gfx mat_star_piece_Ch4_v4[];
+extern Gfx mat_revert_star_piece_Ch4_v4[];
+extern Gfx mat_star_piece_Ch5_v4[];
+extern Gfx mat_revert_star_piece_Ch5_v4[];
+extern Gfx star_piece_dl_mesh_layer_1[];
+extern Gfx star_piece_dl_mesh_layer_1_mat_override_Ch2_v4_0[];
+extern Gfx star_piece_dl_mesh_layer_1_mat_override_Ch3_v4_1[];
+extern Gfx star_piece_dl_mesh_layer_1_mat_override_Ch4_v4_2[];
+extern Gfx star_piece_dl_mesh_layer_1_mat_override_Ch5_v4_3[];
 extern Gfx star_piece_material_revert_render_settings[];
-

@@ -27,6 +27,7 @@
 #include "spawn_object.h"
 #include "spawn_sound.h"
 #include "actors/group0.h"
+#include "include/course_table.h"
 
 const Lights1 boo_light_1 = gdSPDefLights1(
     0x3C, 0x32, 0x7F,
@@ -411,6 +412,32 @@ Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node) {
 
         // assign the case number for execution.
         switchCase->selectedCase = obj->oBehParams2ndByte;
+    }
+
+    return NULL;
+}
+
+
+//[0] = hub
+s32 sLevelToChapter[COURSE_MAX] = {
+1, 1, 2, 2, 3, 3, 4, 4, 5,
+};
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_get_chapter(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_get_chapter(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // assign the case number for execution.
+        switchCase->selectedCase = sLevelToChapter[gCurrCourseNum] - 1;
     }
 
     return NULL;
