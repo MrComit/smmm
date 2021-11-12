@@ -153,4 +153,10 @@ extern const LevelScript level_bbh_entry[];
 
 #include "levels/bbh/ice_cube/collision_header.h"
 
+#include "levels/bbh/ice_cube_cracked/geo_header.h"
+
+#include "levels/bbh/ice_cube_cracked/collision_header.h"
+
+extern const GeoLayout bbh_ice_chunk_geo_000378[];
+
 #endif

@@ -4076,6 +4076,15 @@ const BehaviorScript bhvRespawner[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvRespawnerTimer[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_respawner_timer_loop),
+    END_LOOP(),
+};
+
+
 const BehaviorScript bhvSmallBully[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -8016,5 +8025,19 @@ const BehaviorScript bhvIceCubeChild[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_frozen_goomba_loop),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvIceCubeCracked[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
+    LOAD_COLLISION_DATA(ice_cube_cracked_collision),
+    SET_HOME(),
+    SET_FLOAT(oFloat100, 4),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_ice_cube_cracked_loop),
     END_LOOP(),
 };

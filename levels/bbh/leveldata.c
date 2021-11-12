@@ -91,3 +91,6 @@
 #include "levels/bbh/snow_pile/collision.inc.c"
 #include "levels/bbh/ice_cube/model.inc.c"
 #include "levels/bbh/ice_cube/collision.inc.c"
+#include "levels/bbh/ice_cube_cracked/model.inc.c"
+#include "levels/bbh/ice_cube_cracked/collision.inc.c"
+#include "levels/bbh/ice_cube_chunk/model.inc.c"

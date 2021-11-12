@@ -52,6 +52,8 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SNOW_BOX, snow_box_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SNOW_PILE, snow_pile_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_CUBE, ice_cube_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ICE_CUBE_CRACKED, ice_cube_cracked_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ICE_CUBE_CHUNK, bbh_ice_chunk_geo_000378), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -321,7 +323,6 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_BLUE_COIN, 6012, 3220, -5447, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, 7790, 2202, 471, 0, 0, 0, 0x0B021B00, bhvBlueCoinSwitch),
 		OBJECT(MODEL_STAR_CURRENCY, -518, 1178, 15884, 0, 0, 0, 0x0D000000, bhvStar),
-		OBJECT(MODEL_STAR_CURRENCY, -1845, -200, 677, 0, 0, 0, 0x10000000, bhvStar),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2289, 1500, -4483, 0, -25, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_TELEPORTER, -301, 878, 16464, 0, 0, 0, 0x00910000, bhvFadingWarp),
 		OBJECT(MODEL_NONE, -7164, -200, -3090, 0, -175, 0, 0x00940000, bhvFadingWarp),
@@ -368,6 +369,10 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_ICE_CUBE, 2874, 11500, -7567, 0, 0, 0, 0x00000000, bhvIceCube),
 		OBJECT(MODEL_ICE_CUBE, 3968, 11500, -8987, 0, 0, 0, 0x00000000, bhvIceCube),
 		OBJECT(MODEL_ICE_CUBE, 2947, 11500, -9515, 0, 0, 0, 0x00000000, bhvIceCube),
+		OBJECT(MODEL_ICE_CUBE_CRACKED, 1076, 12100, -7477, 0, 0, 0, 0x00000000, bhvIceCubeCracked),
+		OBJECT(MODEL_ICE_CUBE_CRACKED, 1737, 12100, -7956, 0, 0, 0, 0x00000000, bhvIceCubeCracked),
+		OBJECT(MODEL_ICE_CUBE_CRACKED, 1064, 12100, -8432, 0, 0, 0, 0x00000000, bhvIceCubeCracked),
+		OBJECT(MODEL_BOO, 2430, 11993, -12926, 0, 0, 0, (5 << 24) | (0xC << 16) | (0x10 << 8), bhvRoomBoo),
 		TERRAIN(bbh_area_3_collision),
 		ROOMS(bbh_area_3_collision_rooms),
 		MACRO_OBJECTS(bbh_area_3_macro_objs),

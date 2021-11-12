@@ -356,6 +356,7 @@ extern const BehaviorScript bhvSmoke[];
 extern const BehaviorScript bhvBobombExplosionBubble[];
 extern const BehaviorScript bhvBobombExplosionBubble3600[];
 extern const BehaviorScript bhvRespawner[];
+extern const BehaviorScript bhvRespawnerTimer[];
 extern const BehaviorScript bhvSmallBully[];
 extern const BehaviorScript bhvBigBully[];
 extern const BehaviorScript bhvBigBullyWithMinions[];
@@ -686,6 +687,7 @@ extern const BehaviorScript bhvSnowPile[];
 extern const BehaviorScript bhvFrozenGoomba[];
 extern const BehaviorScript bhvIceCube[];
 extern const BehaviorScript bhvIceCubeChild[];
+extern const BehaviorScript bhvIceCubeCracked[];
 
 
 

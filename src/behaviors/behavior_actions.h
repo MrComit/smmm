@@ -303,6 +303,7 @@ void bhv_bobomb_bully_death_smoke_init(void);
 void bhv_bobomb_explosion_bubble_init(void);
 void bhv_bobomb_explosion_bubble_loop(void);
 void bhv_respawner_loop(void);
+void bhv_respawner_timer_loop(void);
 void bhv_small_bully_init(void);
 void bhv_bully_loop(void);
 void bhv_big_bully_init(void);
@@ -791,6 +792,7 @@ void bhv_snow_pile_init(void);
 void bhv_ice_cube_loop(void);
 void bhv_frozen_goomba_init(void);
 void bhv_frozen_goomba_loop(void);
+void bhv_ice_cube_cracked_loop(void);
 
 
 

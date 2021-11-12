@@ -35,3 +35,5 @@
 #include "levels/bbh/snow_box/geo.inc.c"
 #include "levels/bbh/snow_pile/geo.inc.c"
 #include "levels/bbh/ice_cube/geo.inc.c"
+#include "levels/bbh/ice_cube_cracked/geo.inc.c"
+#include "levels/bbh/ice_cube_chunk/geo.inc.c"

@@ -1,0 +1,15 @@
+extern const GeoLayout ice_cube_cracked_geo[];
+extern Lights1 ice_cube_cracked_IceCube_001_lights;
+extern Lights1 ice_cube_cracked_IceCubeCrack_lights;
+extern u8 ice_cube_cracked_rgba32_icecube2_rgba32[];
+extern u8 ice_cube_cracked_rgba32_icecubeCracked_rgba32[];
+extern Vtx ice_cube_cracked_IceCubeCracked_mesh_layer_5_vtx_0[25];
+extern Gfx ice_cube_cracked_IceCubeCracked_mesh_layer_5_tri_0[];
+extern Vtx ice_cube_cracked_IceCubeCracked_mesh_layer_5_vtx_1[4];
+extern Gfx ice_cube_cracked_IceCubeCracked_mesh_layer_5_tri_1[];
+extern Gfx mat_ice_cube_cracked_IceCube_001[];
+extern Gfx mat_revert_ice_cube_cracked_IceCube_001[];
+extern Gfx mat_ice_cube_cracked_IceCubeCrack[];
+extern Gfx mat_revert_ice_cube_cracked_IceCubeCrack[];
+extern Gfx ice_cube_cracked_IceCubeCracked_mesh_layer_5[];
+extern Gfx ice_cube_cracked_material_revert_render_settings[];

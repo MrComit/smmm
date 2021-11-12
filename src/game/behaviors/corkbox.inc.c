@@ -48,11 +48,32 @@ void bhv_respawner_loop(void) {
     }
 }
 
+void bhv_respawner_timer_loop(void) {
+    if (o->oTimer > o->oRespawnerMinSpawnDist) {
+        struct Object *spawnedObject = spawn_object(o, o->oRespawnerModelToRespawn,
+                                                    o->oRespawnerBehaviorToRespawn);
+        spawnedObject->oBehParams = o->oBehParams;
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+    }
+}
+
 void create_respawner(s32 model, const BehaviorScript *behToSpawn, s32 minSpawnDist) {
     struct Object *respawner = spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvRespawner, o->oHomeX,
                                                          o->oHomeY, o->oHomeZ, 0, 0, 0);
     respawner->oBehParams = o->oBehParams;
     respawner->oRespawnerModelToRespawn = model;
     respawner->oRespawnerMinSpawnDist = minSpawnDist;
+    respawner->oRespawnerBehaviorToRespawn = behToSpawn;
+}
+
+
+
+
+void create_respawner_timer(s32 model, const BehaviorScript *behToSpawn, s32 timer) {
+    struct Object *respawner = spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvRespawnerTimer, o->oHomeX,
+                                                         o->oHomeY, o->oHomeZ, 0, 0, 0);
+    respawner->oBehParams = o->oBehParams;
+    respawner->oRespawnerModelToRespawn = model;
+    respawner->oRespawnerMinSpawnDist = timer;
     respawner->oRespawnerBehaviorToRespawn = behToSpawn;
 }

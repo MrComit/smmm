@@ -14,6 +14,55 @@ static struct ObjectHitbox sStalactiteHitbox = {
 
 
 
+void bhv_ice_cube_cracked_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            cur_obj_scale((f32) o->oTimer / 15.0f);
+            if (o->oTimer >= 15) {
+                o->oAction = 1;
+                cur_obj_scale(1.0f);
+            }
+            break;
+        case 1:
+            if (gMarioObject->platform == o) {
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY - 20.0f, 4.0f, 4.0f);
+                if (o->oTimer > 1) {
+                    o->oAction = 2;
+                    o->oPosY = o->oHomeY - 20.0f;
+                    o->oHomeY = o->oPosY;
+                }
+            } else {
+                o->oTimer = 0;
+                o->oPosY = approach_f32(o->oPosY, o->oHomeY, 3.0f, 3.0f);
+            }
+            break;
+        case 2:
+            o->oPosY = o->oHomeY + o->oFloat100;
+            o->oFloat100 = -o->oFloat100;
+            if (o->oTimer > 25) {
+                o->oAction = 3;
+                o->oGravity = 3.0f;
+            }
+            break;
+        case 3:
+            /*o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 35.0f, 35.0f);
+            if (o->oPosY == o->oHomeY - 300.0f) {
+                o->oAction = 3;
+                o->oHomeY += 20.0f;
+            }*/
+            if (object_step() & 1) {
+                o->activeFlags = 0;
+                o->oHomeY += 20.0f;
+                create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
+                play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
+                spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
+            }
+
+            break;
+    }
+}
+
+
 void bhv_frozen_goomba_init(void) {
     o->oFaceAngleYaw = random_u16();
     o->oFaceAnglePitch = random_u16();

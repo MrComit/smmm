@@ -114,7 +114,9 @@ void bhv_room_boo_init(void) {
 
 s8 sBooBits[] = {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,}; // ends at 0xF
 
-//BPARAM 1 = NO KEY, SMALL KEY, OR BIG KEY - BPARAM 3 = KEY ID
+//BPARAM 1 = NO KEY, SMALL KEY, OR BIG KEY
+//BPARAM 2 = BOO ID
+//BPARAM 3 = KEY ID/STAR ID
 void bhv_room_boo_loop(void) {
     s32 numObjs;
     if (gMarioCurrentRoom != o->oRoom)
