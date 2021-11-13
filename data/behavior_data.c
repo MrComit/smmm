@@ -8041,3 +8041,29 @@ const BehaviorScript bhvIceCubeCracked[] = {
         CALL_NATIVE(bhv_ice_cube_cracked_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvBombChain[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_bomb_chain_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bomb_chain_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBombOnChain[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, bobomb_seg8_anims_0802396C),
+    ANIMATE(0),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    SCALE(0, 250),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bomb_on_chain_loop),
+    END_LOOP(),
+};

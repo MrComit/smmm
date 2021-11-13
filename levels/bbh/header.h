@@ -159,4 +159,6 @@ extern const LevelScript level_bbh_entry[];
 
 extern const GeoLayout bbh_ice_chunk_geo_000378[];
 
+#include "levels/bbh/bomb_chain/geo_header.h"
+
 #endif

@@ -688,6 +688,9 @@ extern const BehaviorScript bhvFrozenGoomba[];
 extern const BehaviorScript bhvIceCube[];
 extern const BehaviorScript bhvIceCubeChild[];
 extern const BehaviorScript bhvIceCubeCracked[];
+extern const BehaviorScript bhvBombChain[];
+extern const BehaviorScript bhvBombOnChain[];
+
 
 
 

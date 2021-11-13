@@ -708,6 +708,7 @@
 #define MODEL_ICE_CUBE            0xF5
 #define MODEL_ICE_CUBE_CRACKED    0xF4
 #define MODEL_ICE_CUBE_CHUNK      0xF3
+#define MODEL_BOMB_CHAIN          0xF2
 
 
 

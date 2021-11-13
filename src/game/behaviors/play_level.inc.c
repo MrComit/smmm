@@ -14,6 +14,82 @@ static struct ObjectHitbox sStalactiteHitbox = {
 
 
 
+static struct ObjectHitbox sBombOnChainHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 113,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 65,
+    /* height:            */ 113,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+
+void bomb_on_chain_explode(void) {
+    if (o->oTimer < 5) {
+        cur_obj_scale(1.0 + (f32) o->oTimer / 5.0);
+    } else {
+        struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        explosion->oGraphYOffset += 100.0f;
+        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+    }
+}
+
+
+
+void bhv_bomb_on_chain_loop(void) {
+    obj_set_hitbox(o, &sBombOnChainHitbox);
+    if (o->oAction == 0) {
+        cur_obj_scale((f32) o->oTimer / 10.0f);
+        if (o->oTimer >= 25) {
+            o->oAction = 1;
+            cur_obj_scale(2.5f);
+        }
+    } else {
+        o->oFaceAngleRoll = o->parentObj->oFaceAngleRoll + 0x4000;
+        o->oFaceAngleYaw += 0x800;
+    }
+    if (o->oInteractStatus) {
+        bomb_on_chain_explode();
+        o->parentObj->oAction = 0;
+        o->parentObj->oObjF8 = NULL;
+    }
+}
+
+
+void bhv_bomb_chain_init(void) {
+    o->os16F4 = o->oBehParams2ndByte * 0x1000;
+}
+
+
+void bhv_bomb_chain_loop(void) {
+    o->os16F4 += 0x140;
+    o->oFaceAngleRoll = 0x4000 + (0x3000 * sins(o->os16F4));
+    if (gMarioCurrentRoom == o->oRoom && absi(o->oFaceAngleRoll) > 0x2800) {
+        cur_obj_play_sound_2(SOUND_ENV_BOAT_ROCKING1);
+    }
+
+    switch (o->oAction) {
+        case 0:
+            if (gMarioCurrentRoom != o->oRoom) {
+                o->oTimer = 0;
+            }
+
+            if (o->oTimer >= 60) {
+                o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvBombOnChain);
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oObjF8 != NULL)
+                vec3f_set_dist_and_angle(&o->oPosX, &o->oObjF8->oPosX, 2000.0f, o->oFaceAngleRoll + 0x8000, o->oFaceAngleYaw + 0x4000);
+            break;
+    }
+}
+
+
 void bhv_ice_cube_cracked_loop(void) {
     switch (o->oAction) {
         case 0:
