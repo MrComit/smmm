@@ -139,6 +139,7 @@ void bhv_ice_cube_cracked_loop(void) {
 }
 
 
+
 void bhv_frozen_goomba_init(void) {
     o->oFaceAngleYaw = random_u16();
     o->oFaceAnglePitch = random_u16();
@@ -147,7 +148,7 @@ void bhv_frozen_goomba_init(void) {
 
 void bhv_frozen_goomba_loop(void) {
     vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
-    //o->oPosY += 60.0f;
+    o->oPosY += 60.0f;
     o->header.gfx.animInfo.animFrame = 0;
 }
 
@@ -169,17 +170,11 @@ s32 ice_cube_detect_wall(void) {
 
         numCollisions = find_wall_collisions(&collisionData);
         if (numCollisions != 0) {
-
+            o->oPosX = collisionData.x;
+            o->oPosY = collisionData.y;
+            o->oPosZ = collisionData.z;
             for (i = 1; i <= collisionData.numWalls; i++) {
                 wall = collisionData.walls[collisionData.numWalls - i];
-
-                if (wall->object == o->prevObj) {
-                    continue;
-                } else {
-                    o->oPosX = collisionData.x;
-                    o->oPosY = collisionData.y;
-                    o->oPosZ = collisionData.z;
-                }
 
                 o->oWallAngle = atan2s(wall->normal.z, wall->normal.x);
                 if (abs_angle_diff(o->oWallAngle, o->oMoveAngleYaw) > 0x4000) {
@@ -193,6 +188,14 @@ s32 ice_cube_detect_wall(void) {
 
     return FALSE;
 }
+
+void bhv_ice_cube_child_loop(void) {
+    vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
+    if (o->parentObj->oAction == 0) {
+        load_object_collision_model();
+    }
+}
+
 
 
 void bhv_ice_cube_loop(void) {

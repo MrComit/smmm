@@ -8023,8 +8023,7 @@ const BehaviorScript bhvIceCubeChild[] = {
     LOAD_COLLISION_DATA(ice_cube_collision),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
-        CALL_NATIVE(bhv_frozen_goomba_loop),
+        CALL_NATIVE(bhv_ice_cube_child_loop),
     END_LOOP(),
 };
 
