@@ -20,7 +20,7 @@ static struct ObjectHitbox sBombOnChainHitbox = {
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 65,
+    /* radius:            */ 50, //og 65
     /* height:            */ 113,
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
@@ -77,7 +77,7 @@ void bhv_bomb_chain_loop(void) {
                 o->oTimer = 0;
             }
 
-            if (o->oTimer >= 60) {
+            if (o->oTimer >= 90) {
                 o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvBombOnChain);
                 o->oAction = 1;
             }

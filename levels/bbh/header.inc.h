@@ -440,7 +440,7 @@ extern Gfx bbh_dl_Waterfall_mesh_layer_5_tri_0[];
 extern Vtx bbh_dl_Castle_002_mesh_layer_5_vtx_cull[8];
 extern Vtx bbh_dl_Castle_002_mesh_layer_5_vtx_0[43];
 extern Gfx bbh_dl_Castle_002_mesh_layer_5_tri_0[];
-extern Vtx bbh_dl_Castle_002_mesh_layer_5_vtx_1[264];
+extern Vtx bbh_dl_Castle_002_mesh_layer_5_vtx_1[280];
 extern Gfx bbh_dl_Castle_002_mesh_layer_5_tri_1[];
 extern Vtx bbh_dl_Castle_002_mesh_layer_1_vtx_cull[8];
 extern Vtx bbh_dl_Castle_002_mesh_layer_1_vtx_0[106];
