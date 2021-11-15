@@ -2141,7 +2141,7 @@ s32 cur_obj_resolve_wall_collisions(void) {
     return FALSE;
 }
 
-static void cur_obj_update_floor(void) {
+void cur_obj_update_floor(void) {
     struct Surface *floor = cur_obj_update_floor_height_and_get_floor();
     o->oFloor = floor;
 

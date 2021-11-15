@@ -140,10 +140,15 @@ void bhv_ice_cube_cracked_loop(void) {
 
 
 
+s8 sCubesMelt = 0;
+
 void bhv_frozen_goomba_init(void) {
     o->oFaceAngleYaw = random_u16();
     o->oFaceAnglePitch = random_u16();
     o->oFaceAngleRoll = random_u16();
+    sCubesMelt = 0;
+
+    o->parentObj->oObj100 = o;
 }
 
 void bhv_frozen_goomba_loop(void) {
@@ -197,8 +202,11 @@ void bhv_ice_cube_child_loop(void) {
 }
 
 
-
 void bhv_ice_cube_loop(void) {
+    struct Object *obj;
+    if (sCubesMelt == 0xF) {
+        o->oAction = 2;
+    }
     switch (o->oAction) {
         case 0:
             if (o->prevObj->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
@@ -224,10 +232,26 @@ void bhv_ice_cube_loop(void) {
                 break;
             }
 
-            //o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 5.0f, 0.5f);
-            //o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, o->oFloatF4);
-            //CL_Move();
+            cur_obj_update_floor();
+            if (o->oFloorType == SURFACE_CUBE_MELT) {
+                sCubesMelt |= 1 << o->oBehParams2ndByte;
+            } else {
+                sCubesMelt &= ~(1 << o->oBehParams2ndByte);
+            }
+
             spawn_mist_particles_variable(2, -40, 6.0f);
+            break;
+        case 2:
+            o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 0.0f, 0.01f);
+            cur_obj_scale(o->oFloatFC);
+            cur_obj_play_sound_1(SOUND_AIR_BOBOMB_LIT_FUSE);
+            if (o->oFloatFC <= 0.02f) {
+                o->activeFlags = 0;
+                o->prevObj->activeFlags = 0;
+                o->oObj100->activeFlags = 0;
+                obj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+                obj->parentObj = obj;
+            }
             break;
     }
 }

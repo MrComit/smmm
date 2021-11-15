@@ -118,6 +118,7 @@ const GeoLayout bbh_dl_307__Ice_Castle_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Castle_002_mesh_layer_1),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 2742, 12143, -16787, 90, 0, -150, bbh_dl_FancyChair_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 3254, 11619, -11791, 90, 0, 0, bbh_dl_Steam_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

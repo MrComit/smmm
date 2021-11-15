@@ -8008,7 +8008,7 @@ const BehaviorScript bhvIceCube[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_FLOAT(oDrawingDistance, 0x4000),
-    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 75, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_FLOAT(oFloatFC, 1),
     SPAWN_OBJ(/*Model*/ MODEL_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
     SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvIceCubeChild),
     BEGIN_LOOP(),

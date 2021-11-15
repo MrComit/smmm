@@ -10,4 +10,5 @@ extern void scroll_sts_mat_bbh_dl_PurpleLava_layer1();
 extern void scroll_sts_mat_bbh_dl_BooGoo_layer1();
 extern void scroll_bbh_dl_Underglobe_001_mesh_layer_5_vtx_0();
 extern void scroll_bbh_dl_Waterfall_mesh_layer_5_vtx_0();
+extern void scroll_bbh_dl_Steam_mesh_layer_5_vtx_0();
 extern void scroll_bbh();
