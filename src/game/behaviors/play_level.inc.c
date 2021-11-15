@@ -86,8 +86,8 @@ void bhv_bomb_chain_init(void) {
 
 
 void bhv_bomb_chain_loop(void) {
-    o->os16F4 += 0x140;
-    o->oFaceAngleRoll = 0x4000 + (0x3000 * sins(o->os16F4));
+    o->os16F4 += 0x1C0;
+    o->oFaceAngleRoll = 0x4000 + (0x1400 * sins(o->os16F4));
     if (gMarioCurrentRoom == o->oRoom && absi(o->oFaceAngleRoll) > 0x2800) {
         cur_obj_play_sound_2(SOUND_ENV_BOAT_ROCKING1);
     }
@@ -135,6 +135,8 @@ void bhv_ice_cube_cracked_loop(void) {
             }
             break;
         case 2:
+            if (o->oBehParams2ndByte)
+                set_mario_npc_dialog(1);
             o->oPosY = o->oHomeY + o->oFloat100;
             o->oFloat100 = -o->oFloat100;
             if (o->oTimer > 25) {
