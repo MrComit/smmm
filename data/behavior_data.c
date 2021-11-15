@@ -8066,3 +8066,15 @@ const BehaviorScript bhvBombOnChain[] = {
         CALL_NATIVE(bhv_bomb_on_chain_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBigIceCube[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(big_ice_cube_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_big_ice_cube_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

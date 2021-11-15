@@ -27,6 +27,27 @@ static struct ObjectHitbox sBombOnChainHitbox = {
 };
 
 
+void bhv_big_ice_cube_loop(void) {
+    switch (o->oAction) {
+        case 1:
+            create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
+            play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
+            spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
+            play_puzzle_jingle();
+            o->oAction = 2;
+            cur_obj_hide();
+            break;
+        case 2:
+            if (o->oTimer > 30) {
+                gCamera->comitCutscene = 0;
+                o->activeFlags = 0;
+                set_mario_npc_dialog(0);
+            }
+            break;
+    }
+}
+
+
 void bomb_on_chain_explode(void) {
     if (o->oTimer < 5) {
         cur_obj_scale(1.0 + (f32) o->oTimer / 5.0);
@@ -91,6 +112,7 @@ void bhv_bomb_chain_loop(void) {
 
 
 void bhv_ice_cube_cracked_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             cur_obj_scale((f32) o->oTimer / 15.0f);
@@ -126,12 +148,28 @@ void bhv_ice_cube_cracked_loop(void) {
                 o->oAction = 3;
                 o->oHomeY += 20.0f;
             }*/
-            if (object_step() & 1) {
+            obj = cur_obj_nearest_object_with_behavior(bhvBigIceCube);
+            if (object_step() & 1 || (o->oBehParams2ndByte && obj != NULL && o->oPosY <= obj->oPosY + 300.0f)) {
                 o->activeFlags = 0;
                 o->oHomeY += 20.0f;
-                create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
+                if (o->oBehParams2ndByte == 0)
+                    create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
                 play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
                 spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
+
+                if (obj != NULL && o->oBehParams2ndByte && sObjFloor->type == SURFACE_CUBE_MELT) {
+                    obj->oAction = 1;
+                    set_mario_npc_dialog(0);
+                    set_mario_action(gMarioState, ACT_JUMP, 0);
+                    gMarioState->forwardVel = 50.0f;
+                    break;
+                }
+            }
+            if (obj != NULL && o->oBehParams2ndByte && sObjFloor->type == SURFACE_CUBE_MELT) {
+                gCamera->comitCutscene = 13;
+                set_mario_npc_dialog(1);
+                vec3f_set(gMarioState->pos, o->oPosX, o->oPosY + 150.0f, o->oPosZ);
+                gMarioState->faceAngle[1] = 0;
             }
 
             break;
@@ -204,6 +242,7 @@ void bhv_ice_cube_child_loop(void) {
 
 void bhv_ice_cube_loop(void) {
     struct Object *obj;
+    s32 k = 0;
     if (sCubesMelt == 0xF) {
         o->oAction = 2;
     }
@@ -233,10 +272,14 @@ void bhv_ice_cube_loop(void) {
             }
 
             cur_obj_update_floor();
+            k = 1 << o->oBehParams2ndByte;
             if (o->oFloorType == SURFACE_CUBE_MELT) {
-                sCubesMelt |= 1 << o->oBehParams2ndByte;
+                if (!(sCubesMelt & k)) {
+                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                }
+                sCubesMelt |= k;
             } else {
-                sCubesMelt &= ~(1 << o->oBehParams2ndByte);
+                sCubesMelt &= ~k;
             }
 
             spawn_mist_particles_variable(2, -40, 6.0f);

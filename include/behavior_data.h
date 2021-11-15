@@ -690,7 +690,7 @@ extern const BehaviorScript bhvIceCubeChild[];
 extern const BehaviorScript bhvIceCubeCracked[];
 extern const BehaviorScript bhvBombChain[];
 extern const BehaviorScript bhvBombOnChain[];
-
+extern const BehaviorScript bhvBigIceCube[];
 
 
 

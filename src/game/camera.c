@@ -1420,6 +1420,16 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_copy(c->focus, &obj->oPosX);
             c->yaw = c->nextYaw = DEGREES(165);
             break;
+        case 13:
+            obj = cur_obj_nearest_object_with_behavior(bhvBigIceCube);
+            if (obj == NULL) {
+                c->comitCutscene = 0;
+                break;
+            }
+            vec3f_set(c->pos, obj->oPosX, obj->oPosY, obj->oPosZ + 2100.0f);
+            vec3f_set(c->focus, obj->oPosX, obj->oPosY + 200.0f, obj->oPosZ);
+            c->yaw = c->nextYaw = DEGREES(165);
+            break;
     }
 }
 

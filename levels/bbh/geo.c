@@ -38,3 +38,4 @@
 #include "levels/bbh/ice_cube_cracked/geo.inc.c"
 #include "levels/bbh/ice_cube_chunk/geo.inc.c"
 #include "levels/bbh/bomb_chain/geo.inc.c"
+#include "levels/bbh/big_ice_cube/geo.inc.c"
