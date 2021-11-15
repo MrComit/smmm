@@ -674,14 +674,20 @@ static s32 bhv_cmd_begin(void) {
     // Initiate the room if the object is a haunted chair or the mad piano.
     if (!(cur_obj_has_behavior(bhvMario))) {
         bhv_init_room();
+        //UNSUCCESSFUL ATTEMPT AT PAUSING OBJECTS NOT IN ROOM ON FRAME 1
+        //if (gCurrentObject->oRoom != gMarioCurrentRoom) {
+        //        gCurrentObject->activeFlags |= ACTIVE_FLAG_IN_DIFFERENT_ROOM;
+        //        gCurBhvCommand++;
+        //        return BHV_PROC_BREAK;
+        //}
     }
     //if (cur_obj_has_behavior(bhvMadPiano)) {
     //    bhv_init_room();
     //}
     // Set collision distance if the object is a message panel.
-    if (cur_obj_has_behavior(bhvMessagePanel)) {
-        gCurrentObject->oCollisionDistance = 150.0f;
-    }
+    //if (cur_obj_has_behavior(bhvMessagePanel)) {
+    //    gCurrentObject->oCollisionDistance = 150.0f;
+    //}
     gCurBhvCommand++;
     return BHV_PROC_CONTINUE;
 }
