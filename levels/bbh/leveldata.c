@@ -97,3 +97,5 @@
 #include "levels/bbh/bomb_chain/model.inc.c"
 #include "levels/bbh/big_ice_cube/model.inc.c"
 #include "levels/bbh/big_ice_cube/collision.inc.c"
+#include "levels/bbh/red_button/model.inc.c"
+#include "levels/bbh/red_button/collision.inc.c"

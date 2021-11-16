@@ -87,6 +87,8 @@ void bhv_bomb_chain_init(void) {
 
 void bhv_bomb_chain_loop(void) {
     o->os16F4 += 0x1C0;
+    if (o->oBehParams >> 24)
+        o->os16F4 += 0x1C0;
     o->oFaceAngleRoll = 0x4000 + (0x1400 * sins(o->os16F4));
     if (gMarioCurrentRoom == o->oRoom && absi(o->oFaceAngleRoll) > 0x2800) {
         cur_obj_play_sound_2(SOUND_ENV_BOAT_ROCKING1);
@@ -182,6 +184,38 @@ void bhv_ice_cube_cracked_loop(void) {
 
 s8 sCubesMelt = 0;
 
+
+void bhv_red_button_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            cur_obj_scale_over_time(2, 3, 1.0f, 0.2f);
+            if (o->oTimer == 3) {
+                cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (!cur_obj_is_mario_on_platform()) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            cur_obj_scale_over_time(2, 3, 0.2f, 1.0f);
+            if (o->oTimer == 3) {
+                cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                o->oAction = 0;
+            }
+            break;
+    }
+}
+
+
+
 void bhv_frozen_goomba_init(void) {
     o->oFaceAngleYaw = random_u16();
     o->oFaceAnglePitch = random_u16();
@@ -247,6 +281,15 @@ void bhv_ice_cube_loop(void) {
     s32 k = 0;
     if (sCubesMelt == 0xF) {
         o->oAction = 2;
+    } else {
+        obj = cur_obj_nearest_object_with_behavior(bhvRedButton);
+        if (obj != NULL && obj->oAction == 2) {
+            o->oAction = 0;
+            o->oForwardVel = 0;
+            o->oFloatF8 = 0;
+            o->oFloatF4 = 0;
+            vec3f_copy(&o->oPosX, &o->oHomeX);
+        }
     }
     switch (o->oAction) {
         case 0:

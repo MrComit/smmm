@@ -8009,6 +8009,7 @@ const BehaviorScript bhvIceCube[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oFloatFC, 1),
+    SET_HOME(),
     SPAWN_OBJ(/*Model*/ MODEL_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
     SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvIceCubeChild),
     BEGIN_LOOP(),
@@ -8075,6 +8076,18 @@ const BehaviorScript bhvBigIceCube[] = {
     SET_FLOAT(oCollisionDistance, 0x7FFF),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_big_ice_cube_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvRedButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(red_button_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_red_button_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

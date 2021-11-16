@@ -56,6 +56,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_CUBE_CHUNK, bbh_ice_chunk_geo_000378), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOMB_CHAIN, bomb_chain_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_ICE_CUBE, big_ice_cube_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_RED_BUTTON, red_button_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -375,8 +376,8 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_BOMB_CHAIN, 5071, 14852, -11140, 0, 90, 0, (0 << 16), bhvBombChain),
 		OBJECT(MODEL_BOMB_CHAIN, 5671, 14852, -11140, 0, -90, 0, (4 << 16), bhvBombChain),
 		OBJECT(MODEL_BOMB_CHAIN, 4465, 15450, -13840, 0, 90, 0, (4 << 16), bhvBombChain),
-		OBJECT(MODEL_BOMB_CHAIN, 865, 15450, -13840, 0, 90, 0, (14 << 16), bhvBombChain),
-		OBJECT(MODEL_BOMB_CHAIN, 2215, 15450, -13840, 0, -90, 0, (4 << 16), bhvBombChain),
+		OBJECT(MODEL_BOMB_CHAIN, 865, 15450, -13840, 0, 90, 0, (1 << 24) | (14 << 16), bhvBombChain),
+		OBJECT(MODEL_BOMB_CHAIN, 2215, 15450, -13840, 0, -90, 0, (1 << 24) | (4 << 16), bhvBombChain),
 		OBJECT(MODEL_BOMB_CHAIN, 4015, 15450, -13840, 0, -90, 0, (4 << 16), bhvBombChain),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2310, 11500, -4529, 0, -25, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_GOOMBA, 1046, 12400, -11140, 0, 90, 0, 0x00000000, bhvGoomba),
@@ -385,7 +386,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_ICE_CUBE, 5178, 11469, -11585, 0, 0, 0, (3 << 16), bhvIceCube),
 		OBJECT(MODEL_ICE_CUBE, 2487, 11469, -9956, 0, 0, 0, (1 << 16), bhvIceCube),
 		OBJECT(MODEL_ICE_CUBE, 5177, 11469, -9036, 0, 0, 0, (2 << 16), bhvIceCube),
-		OBJECT(MODEL_ICE_CUBE, 3452, 11469, -9036, 0, 0, 0, 0x00000000, bhvIceCube),
+		OBJECT(MODEL_ICE_CUBE, 3528, 11469, -9036, 0, 0, 0, 0x00000000, bhvIceCube),
 		OBJECT(MODEL_ICE_CUBE_CRACKED, 195, 11950, -8282, 0, 0, 0, 0x00000000, bhvIceCubeCracked),
 		OBJECT(MODEL_ICE_CUBE_CRACKED, -485, 13150, -13840, 0, 0, 0, 0x00000000, bhvIceCubeCracked),
 		OBJECT(MODEL_ICE_CUBE_CRACKED, 195, 11950, -7382, 0, 0, 0, 0x00000000, bhvIceCubeCracked),
@@ -409,6 +410,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_KOOPA, 4073, 11752, -16172, 0, 90, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_KOOPA, 3475, 11752, -16463, 0, 90, 0, 0x00000000, bhvKoopa),
 		OBJECT(MODEL_KOOPA, 3387, 11752, -15672, 0, 90, 0, 0x00000000, bhvKoopa),
+		OBJECT(MODEL_RED_BUTTON, 3678, 11501, -9186, 0, 0, 0, 0x00000000, bhvRedButton),
 		OBJECT(MODEL_BOO, 2742, 11993, -16735, 0, 0, 0, (5 << 24) | (0xC << 16) | (0x10 << 8), bhvRoomBoo),
 		TERRAIN(bbh_area_3_collision),
 		ROOMS(bbh_area_3_collision_rooms),

@@ -710,7 +710,7 @@
 #define MODEL_ICE_CUBE_CHUNK      0xF3
 #define MODEL_BOMB_CHAIN          0xF2
 #define MODEL_BIG_ICE_CUBE        0xF1
-
+#define MODEL_RED_BUTTON          0xF0
 
 
 
