@@ -58,6 +58,13 @@ const GeoLayout new_koopa_PhoneArma[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout new_koopa_IcicleArma[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, new_koopa_root_dl_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout new_koopa_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -98,9 +105,12 @@ const GeoLayout new_koopa_geo[] = {
 								GEO_OPEN_NODE(),
 									GEO_SWITCH_CASE(3, geo_switch_level),
 									GEO_OPEN_NODE(),
-										GEO_DISPLAY_LIST(LAYER_OPAQUE, NULL),
+										GEO_NODE_START(),
 										GEO_BRANCH(1, new_koopa_ForkArma),
 										GEO_BRANCH(1, new_koopa_PhoneArma),
+										GEO_BRANCH(1, new_koopa_ForkArma),
+										GEO_BRANCH(1, new_koopa_ForkArma),
+										GEO_BRANCH(1, new_koopa_IcicleArma),
 									GEO_CLOSE_NODE(),
 								GEO_CLOSE_NODE(),
 							GEO_CLOSE_NODE(),
