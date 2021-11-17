@@ -1040,56 +1040,138 @@ u8 ice_cube_cracked_rgba32_icecubeCracked_rgba32[] = {
 	
 };
 
-Vtx ice_cube_cracked_IceCubeCracked_mesh_layer_5_vtx_0[25] = {
+Vtx ice_cube_cracked_dl_mesh_layer_5_vtx_0[20] = {
 	{{{-225, 0, 225},0, {-16, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
 	{{{-225, 150, 225},0, {1008, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-225, 150, -225},0, {1008, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-225, 0, -225},0, {-16, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{225, 0, 225},0, {-16, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{-225, 150, 225},0, {1008, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 0, 225},0, {-16, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{225, 150, 225},0, {1008, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 0, -225},0, {-16, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{225, 0, 225},0, {1008, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{-225, 0, 225},0, {-16, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{225, 0, -225},0, {1008, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
 	{{{-225, 0, -225},0, {-16, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
 	{{{-225, 150, -225},0, {1008, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{225, 150, -225},0, {1008, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{225, 0, -225},0, {-16, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
 	{{{225, 0, -225},0, {-16, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{225, 150, -225},0, {1008, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{225, 150, 225},0, {1008, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{225, 0, 225},0, {-16, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{225, 0, 225},0, {-16, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{225, 150, 225},0, {1008, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{-225, 150, 225},0, {1008, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{-225, 0, 225},0, {-16, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{-225, 0, -225},0, {-16, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{225, 0, -225},0, {1008, 1008},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{225, 0, 225},0, {1008, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{-225, 0, 225},0, {-16, -16},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{156, 0, -156},0, {130, 862},{0xB3, 0xB3, 0xB3, 0xFF}}},
-	{{{156, 0, 156},0, {862, 862},{0xB3, 0xB3, 0xB3, 0xFF}}},
-	{{{0, -236, 0},0, {496, 496},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{-156, 0, 156},0, {862, 130},{0xB3, 0xB3, 0xB3, 0xFF}}},
-	{{{-156, 0, -156},0, {130, 130},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{225, 150, -225},0, {1008, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Gfx ice_cube_cracked_IceCubeCracked_mesh_layer_5_tri_0[] = {
-	gsSPVertex(ice_cube_cracked_IceCubeCracked_mesh_layer_5_vtx_0 + 0, 25, 0),
+Gfx ice_cube_cracked_dl_mesh_layer_5_tri_0[] = {
+	gsSPVertex(ice_cube_cracked_dl_mesh_layer_5_vtx_0 + 0, 20, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 7, 5, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 11, 9, 0),
 	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSP2Triangles(20, 21, 22, 0, 21, 23, 22, 0),
-	gsSP2Triangles(23, 24, 22, 0, 24, 20, 22, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 19, 17, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx ice_cube_cracked_IceCubeCracked_mesh_layer_5_vtx_1[4] = {
+Vtx ice_cube_cracked_dl_mesh_layer_5_vtx_1[4] = {
 	{{{225, 150, -225},0, {-16, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-225, 150, -225},0, {1008, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-225, 150, 225},0, {1008, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{225, 150, 225},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Gfx ice_cube_cracked_IceCubeCracked_mesh_layer_5_tri_1[] = {
-	gsSPVertex(ice_cube_cracked_IceCubeCracked_mesh_layer_5_vtx_1 + 0, 4, 0),
+Gfx ice_cube_cracked_dl_mesh_layer_5_tri_1[] = {
+	gsSPVertex(ice_cube_cracked_dl_mesh_layer_5_vtx_1 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ice_cube_cracked_dl2_mesh_layer_5_vtx_0[5] = {
+	{{{-156, 0, 156},0, {862, 130},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{-156, 0, -156},0, {130, 130},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{0, -236, 0},0, {496, 496},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{156, 0, -156},0, {130, 862},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{156, 0, 156},0, {862, 862},{0xB3, 0xB3, 0xB3, 0xFF}}},
+};
+
+Gfx ice_cube_cracked_dl2_mesh_layer_5_tri_0[] = {
+	gsSPVertex(ice_cube_cracked_dl2_mesh_layer_5_vtx_0 + 0, 5, 0),
+	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
+	gsSP2Triangles(3, 4, 2, 0, 4, 0, 2, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ice_cube_cracked_root_dl_mesh_layer_5_vtx_0[45] = {
+	{{{-113, 97, -225},0, {229, 579},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 97, -225},0, {-38, 1030},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-282, 166, -282},0, {-131, 1123},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 150, -225},0, {-38, 1030},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 97, -112},0, {413, 763},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 97, -225},0, {413, 1030},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 150, -145},0, {-38, 839},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-145, 150, -225},0, {153, 1030},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{113, 97, -225},0, {763, 579},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{145, 150, -225},0, {839, 1030},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 150, -225},0, {1030, 1030},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{282, 166, -282},0, {1123, 1123},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 97, -113},0, {413, 763},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 150, -145},0, {1030, 839},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 97, -225},0, {1030, 1030},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 97, -225},0, {1030, 579},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 97, 113},0, {413, 229},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 97, 225},0, {-38, -38},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-282, 166, 282},0, {-131, -131},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 150, 225},0, {-38, -38},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-113, 97, 225},0, {229, 579},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 97, 225},0, {-38, 579},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-145, 150, 225},0, {153, -38},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 150, 145},0, {-38, 153},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{113, 97, 225},0, {763, 579},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 97, 225},0, {1030, -38},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{282, 166, 282},0, {1123, -131},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 150, 225},0, {1030, -38},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 97, 112},0, {413, 229},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 97, 225},0, {413, -38},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{225, 150, 145},0, {1030, 153},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{145, 150, 225},0, {839, -38},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{0, 0, -225},0, {749, 578},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{225, 0, -225},0, {800, 242},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{154, -125, -154},0, {754, 276},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{225, 0, 0},0, {462, 200},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{0, -125, 0},0, {423, 535},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{0, 0, 225},0, {88, 498},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{154, -125, 154},0, {74, 97},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{225, 0, 225},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-225, 0, 0},0, {392, 862},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{-154, -125, -154},0, {791, 998},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{-225, 0, -225},0, {800, 1008},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-154, -125, 154},0, {97, 800},{0xB3, 0xB3, 0xB3, 0xFF}}},
+	{{{-225, 0, 225},0, {53, 837},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx ice_cube_cracked_root_dl_mesh_layer_5_tri_0[] = {
+	gsSPVertex(ice_cube_cracked_root_dl_mesh_layer_5_vtx_0 + 0, 32, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(2, 4, 3, 0, 5, 4, 2, 0),
+	gsSP2Triangles(4, 6, 3, 0, 7, 0, 3, 0),
+	gsSP2Triangles(8, 9, 10, 0, 11, 8, 10, 0),
+	gsSP2Triangles(11, 10, 12, 0, 10, 13, 12, 0),
+	gsSP2Triangles(14, 11, 12, 0, 15, 8, 11, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
+	gsSP2Triangles(18, 20, 19, 0, 21, 20, 18, 0),
+	gsSP2Triangles(20, 22, 19, 0, 23, 16, 19, 0),
+	gsSP2Triangles(24, 25, 26, 0, 24, 26, 27, 0),
+	gsSP2Triangles(26, 28, 27, 0, 29, 28, 26, 0),
+	gsSP2Triangles(28, 30, 27, 0, 31, 24, 27, 0),
+	gsSPVertex(ice_cube_cracked_root_dl_mesh_layer_5_vtx_0 + 32, 13, 0),
+	gsSP2Triangles(0, 1, 2, 0, 2, 1, 3, 0),
+	gsSP2Triangles(2, 3, 0, 0, 3, 4, 0, 0),
+	gsSP2Triangles(4, 3, 5, 0, 3, 6, 5, 0),
+	gsSP2Triangles(3, 7, 6, 0, 6, 7, 5, 0),
+	gsSP2Triangles(8, 4, 5, 0, 0, 4, 8, 0),
+	gsSP2Triangles(9, 0, 8, 0, 8, 10, 9, 0),
+	gsSP2Triangles(9, 10, 0, 0, 11, 8, 5, 0),
+	gsSP2Triangles(11, 12, 8, 0, 5, 12, 11, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -1140,13 +1222,27 @@ Gfx mat_revert_ice_cube_cracked_IceCubeCrack[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx ice_cube_cracked_IceCubeCracked_mesh_layer_5[] = {
+Gfx ice_cube_cracked_dl_mesh_layer_5[] = {
 	gsSPDisplayList(mat_ice_cube_cracked_IceCube_001),
-	gsSPDisplayList(ice_cube_cracked_IceCubeCracked_mesh_layer_5_tri_0),
+	gsSPDisplayList(ice_cube_cracked_dl_mesh_layer_5_tri_0),
 	gsSPDisplayList(mat_revert_ice_cube_cracked_IceCube_001),
 	gsSPDisplayList(mat_ice_cube_cracked_IceCubeCrack),
-	gsSPDisplayList(ice_cube_cracked_IceCubeCracked_mesh_layer_5_tri_1),
+	gsSPDisplayList(ice_cube_cracked_dl_mesh_layer_5_tri_1),
 	gsSPDisplayList(mat_revert_ice_cube_cracked_IceCubeCrack),
+	gsSPEndDisplayList(),
+};
+
+Gfx ice_cube_cracked_dl2_mesh_layer_5[] = {
+	gsSPDisplayList(mat_ice_cube_cracked_IceCube_001),
+	gsSPDisplayList(ice_cube_cracked_dl2_mesh_layer_5_tri_0),
+	gsSPDisplayList(mat_revert_ice_cube_cracked_IceCube_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx ice_cube_cracked_root_dl_mesh_layer_5[] = {
+	gsSPDisplayList(mat_ice_cube_cracked_IceCube_001),
+	gsSPDisplayList(ice_cube_cracked_root_dl_mesh_layer_5_tri_0),
+	gsSPDisplayList(mat_revert_ice_cube_cracked_IceCube_001),
 	gsSPEndDisplayList(),
 };
 

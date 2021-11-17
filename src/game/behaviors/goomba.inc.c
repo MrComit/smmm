@@ -304,8 +304,12 @@ void bhv_goomba_update(void) {
         // and will not respawn if Mario leaves and re-enters the spawner's radius
         // even though the goomba isn't actually dead.
         if (obj_handle_attacks(&sGoombaHitbox, GOOMBA_ACT_ATTACKED_MARIO,
-                               sGoombaAttackHandlers[o->oGoombaSize & 1]) || o->oFloorType == SURFACE_INSTANT_QUICKSAND) {
+                               sGoombaAttackHandlers[o->oGoombaSize & 1])) {
             mark_goomba_as_dead();
+        }
+
+        if (o->oFloorType == SURFACE_INSTANT_QUICKSAND && o->oPosY - o->oFloorHeight < 30.0f) {
+            o->activeFlags = 0;
         }
 
         cur_obj_move_standard(-78);
