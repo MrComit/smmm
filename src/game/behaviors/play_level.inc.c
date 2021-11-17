@@ -88,7 +88,7 @@ void bhv_bomb_chain_init(void) {
 void bhv_bomb_chain_loop(void) {
     o->os16F4 += 0x1C0;
     if (o->oBehParams >> 24)
-        o->os16F4 += 0x1C0;
+        o->os16F4 += 0x180;
     o->oFaceAngleRoll = 0x4000 + (0x1400 * sins(o->os16F4));
     if (gMarioCurrentRoom == o->oRoom && absi(o->oFaceAngleRoll) > 0x2800) {
         cur_obj_play_sound_2(SOUND_ENV_BOAT_ROCKING1);
