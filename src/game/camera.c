@@ -1430,6 +1430,12 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->focus, obj->oPosX, obj->oPosY + 200.0f, obj->oPosZ);
             c->yaw = c->nextYaw = DEGREES(0);
             break;
+        case 14:
+            vec3f_set(c->pos, m->pos[0] + 350.0f, m->pos[1] + 200.0f, m->pos[2] + 1000.0f);
+            vec3f_set(c->focus, 2149.0f, 13087.0f, -17810.0f);
+            vec3f_get_dist_and_angle(c->focus, c->pos, &pos[0], &pitch, &yaw);
+            c->yaw = c->nextYaw = yaw;
+            break;
     }
 }
 

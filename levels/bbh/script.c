@@ -414,6 +414,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, 3115, 14852, -11140, 0, 90, 0, (3 << 24) | (255 << 16), bhvPoleGrabbing),
 		OBJECT(MODEL_RED_BUTTON, 3678, 11501, -9186, 0, 0, 0, 0x00000000, bhvRedButton),
 		OBJECT(MODEL_BOO, 2742, 11993, -16735, 0, 0, 0, (5 << 24) | (0xC << 16) | (0x10 << 8), bhvRoomBoo),
+		OBJECT(MODEL_SNOW_BOX, 5730, 11751, -16495, 0, 90, 0, (1 << 24) | (18 << 16), bhvBounceBoxes),
 		TERRAIN(bbh_area_3_collision),
 		ROOMS(bbh_area_3_collision_rooms),
 		MACRO_OBJECTS(bbh_area_3_macro_objs),
