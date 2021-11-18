@@ -12,6 +12,7 @@
 #include "game/mario.h"
 #include "game/object_list_processor.h"
 #include "surface_load.h"
+#include "game/puppyprint.h"
 #define o gCurrentObject
 
 s32 unused8038BE90;
@@ -602,6 +603,9 @@ void load_area_terrain(s16 index, s16 *data, s8 *surfaceRooms, s16 *macroObjects
     s16 terrainLoadType;
     s16 *vertexData;
     UNUSED u8 filler[4];
+#if PUPPYPRINT_DEBUG
+    OSTime first = osGetTime();
+#endif
 
     // Initialize the data for this.
     gEnvironmentRegions = NULL;
@@ -650,6 +654,9 @@ void load_area_terrain(s16 index, s16 *data, s8 *surfaceRooms, s16 *macroObjects
 
     gNumStaticSurfaceNodes = gSurfaceNodesAllocated;
     gNumStaticSurfaces = gSurfacesAllocated;
+#if PUPPYPRINT_DEBUG
+    collisionTime[perfIteration] += osGetTime() - first;
+#endif
 }
 
 /**
@@ -800,6 +807,9 @@ void get_optimal_coll_dist(struct Object *this) {
 
 void load_object_collision_model(void) {
     s16 vertexData[600];
+#if PUPPYPRINT_DEBUG
+    OSTime first = osGetTime();
+#endif
 
     s16 *collisionData = gCurrentObject->collisionData;
     f32 marioDist = gCurrentObject->oDistanceToMario;
@@ -837,6 +847,9 @@ void load_object_collision_model(void) {
     } else {
         gCurrentObject->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
     }
+#if PUPPYPRINT_DEBUG
+    collisionTime[perfIteration] += osGetTime()-first;
+#endif
 }
 
 
