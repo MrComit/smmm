@@ -25,6 +25,7 @@
 #include "object_list_processor.h"
 #include "config.h"
 #include "main.h"
+#include "puppyprint.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION

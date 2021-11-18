@@ -4,6 +4,8 @@
 #include "engine/graph_node.h"
 #include "math_util.h"
 #include "surface_collision.h"
+#include "game/puppyprint.h"
+#include "include/config.h"
 
 #include "trig_tables.inc.c"
 

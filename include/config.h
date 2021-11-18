@@ -64,6 +64,9 @@
 #define AUTO_LOD
 
 
+//puppyprint, thx to fazana
+#define PUPPYPRINT
+#define PUPPYPRINT_DEBUG 1
 
 
 #endif // CONFIG_H

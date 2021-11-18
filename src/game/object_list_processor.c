@@ -20,6 +20,8 @@
 #include "profiler.h"
 #include "spawn_object.h"
 #include "save_file.h"
+#include "puppyprint.h"
+#include "include/config.h"
 
 
 /**
@@ -739,6 +741,10 @@ UNUSED static u16 unused_get_elapsed_time(u64 *cycleCounts, s32 index) {
  */
 void update_objects(UNUSED s32 unused) {
     s64 cycleCounts[30];
+#if PUPPYPRINT_DEBUG
+    OSTime first = osGetTime();
+    OSTime colTime = collisionTime[perfIteration];
+#endif
 
     cycleCounts[0] = get_current_clock();
 
@@ -797,4 +803,8 @@ void update_objects(UNUSED s32 unused) {
     }
 
     gPrevFrameObjectCount = gObjectCounter;
+#if PUPPYPRINT_DEBUG
+    profiler_update(behaviourTime, first);
+    behaviourTime[perfIteration] -= collisionTime[perfIteration]+colTime;
+#endif
 }

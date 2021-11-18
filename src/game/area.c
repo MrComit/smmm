@@ -24,6 +24,8 @@
 #include "ingame_menu.h"
 #include "segment2.h"
 #include "dialog_ids.h"
+#include "puppyprint.h"
+#include "include/config.h"
 
 struct SpawnInfo gPlayerSpawnInfos[1];
 struct GraphNode *D_8033A160[0x100];
@@ -438,6 +440,11 @@ void render_game(void) {
             clear_framebuffer(gWarpTransFBSetColor);
         }
     }
+
+
+    #if PUPPYPRINT_DEBUG
+    puppyprint_render_profiler();
+    #endif
 
     D_8032CE74 = NULL;
     D_8032CE78 = NULL;

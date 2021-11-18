@@ -12,6 +12,7 @@
 #include "game/camera.h"
 #include "seq_ids.h"
 #include "dialog_ids.h"
+#include "include/config.h"
 
 #if defined(VERSION_EU) || defined(VERSION_SH)
 #define EU_FLOAT(x) x##f
@@ -2375,6 +2376,9 @@ void play_music(u8 player, u16 seqArgs, u16 fadeTimer) {
 
     // Abort if the queue is already full.
     if (sBackgroundMusicQueueSize == MAX_BACKGROUND_MUSIC_QUEUE_SIZE) {
+#if PUPPYPRINT_DEBUG
+        append_puppyprint_log("Sequence queue full, aborting.");
+#endif
         return;
     }
 

@@ -15,6 +15,8 @@
 #include "sm64.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "puppyprint.h"
+#include "include/config.h"
 
 #define MUSIC_NONE 0xFFFF
 
@@ -333,6 +335,9 @@ void audio_game_loop_tick(void) {
 void thread4_sound(UNUSED void *arg) {
     audio_init();
     sound_init();
+#if PUPPYPRINT_DEBUG
+    OSTime lastTime;
+#endif
 
     // Zero-out unused vector
     vec3f_copy(unused80339DC0, gVec3fZero);
@@ -344,6 +349,11 @@ void thread4_sound(UNUSED void *arg) {
         OSMesg msg;
 
         osRecvMesg(&sSoundMesgQueue, &msg, OS_MESG_BLOCK);
+#if PUPPYPRINT_DEBUG
+        while (TRUE) {
+            lastTime = osGetTime();
+            dmaAudioTime[perfIteration] = 0;
+#endif
         if (gResetTimer < 25) {
             struct SPTask *spTask;
             profiler_log_thread4_time();
@@ -351,7 +361,24 @@ void thread4_sound(UNUSED void *arg) {
             if (spTask != NULL) {
                 dispatch_audio_sptask(spTask);
             }
+#if PUPPYPRINT_DEBUG
+                profiler_update(audioTime, lastTime);
+                audioTime[perfIteration] -= dmaAudioTime[perfIteration];
+                if (benchmarkLoop > 0 && benchOption == 1) {
+                    benchmarkLoop--;
+                    benchMark[benchmarkLoop] = osGetTime() - lastTime;
+                    if (benchmarkLoop == 0) {
+                        puppyprint_profiler_finished();
+                        break;
+                    }
+                } else {
+                    break;
+                }
+#endif
             profiler_log_thread4_time();
         }
+#if PUPPYPRINT_DEBUG
+        }
+#endif
     }
 }

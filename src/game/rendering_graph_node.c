@@ -11,6 +11,7 @@
 #include "shadow.h"
 #include "sm64.h"
 #include "config.h"
+#include "puppyprint.h"
 
 #include <point_lights.h>
 
@@ -1537,6 +1538,9 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
  */
 void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) {
     UNUSED u8 filler[4];
+#if PUPPYPRINT_DEBUG
+    OSTime first = osGetTime();
+#endif
 
     if (node->node.flags & GRAPH_RENDER_ACTIVE) {
         Mtx *initialMatrix;
@@ -1577,4 +1581,8 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         }
         main_pool_free(gDisplayListHeap);
     }
+
+    #if PUPPYPRINT_DEBUG
+    profiler_update(graphTime, first);
+    #endif
 }

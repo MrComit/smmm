@@ -84,6 +84,9 @@
 #endif
 #endif
 
+
+#include "game/puppyprint.h"
+
 #ifdef VERSION_EU
 #define eu_stubbed_printf_0(msg) stubbed_printf(msg)
 #define eu_stubbed_printf_1(msg, a) stubbed_printf(msg, a)
