@@ -1439,10 +1439,6 @@ void fixed_cam_presets(struct Camera *c) {
     }
 }
 
-s8 gLeftCPressed = 0;
-s8 gRightCPressed = 0;
-u8 gLeftCTimer = 0;
-u8 gRightCTimer = 0;
 f32 gDepthOffset2d = 0;
 
 void check_2d_cam(struct Camera *c) {
@@ -1514,69 +1510,14 @@ void mode_8_directions_camera_3d(struct Camera *c) {
     {
     radial_camera_input(c, 0.f);
 
-    if (gRightCPressed) {
-        if (++gRightCTimer > 5) {
-            gRightCPressed = 0;
-            gRightCTimer = 0;
-        }
-    }
-    if (gLeftCPressed) {
-        if (++gLeftCTimer > 5) {
-            gLeftCPressed = 0;
-            gLeftCTimer = 0;
-        }
-    }
-
     if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
         s8DirModeBaseYaw += DEGREES(45);
-        gRightCPressed = 1;
         play_sound_cbutton_side();
     }
     if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
         s8DirModeBaseYaw -= DEGREES(45);
-        gLeftCPressed = 1;
         play_sound_cbutton_side();
     }
-    if (gPlayer1Controller->buttonDown & R_CBUTTONS) {
-        if (!gRightCPressed)
-            s8DirModeBaseYaw += DEGREES(3);
-        if (gRightCPressed && gRightCTimer > 2) {
-            //s8DirModeBaseYaw -= DEGREES(5);
-            gRightCPressed = 0;
-            gRightCTimer = 0;
-        }
-    }
-    if (gPlayer1Controller->buttonDown & L_CBUTTONS) {
-        if (!gLeftCPressed)
-            s8DirModeBaseYaw -= DEGREES(3);
-        if (gLeftCPressed && gLeftCTimer > 2) {
-            //s8DirModeBaseYaw += DEGREES(5);
-            gLeftCPressed = 0;
-            gLeftCTimer = 0;
-        }
-    }
-
-    //ALTERNATIVE CAMERA, KINDA CRINGE
-    /*if (gPlayer1Controller->buttonDown & R_CBUTTONS || gPlayer1Controller->buttonPressed & R_CBUTTONS) {
-        s8DirModeBaseYaw += 0x400;//DEGREES(3);
-        gRightCPressed = 1;
-    } else if (gRightCPressed == 1) {
-        if ((u16)(s8DirModeBaseYaw) - (u16)(s8DirModeBaseYaw & 0xE000) > 0x400) {
-            s8DirModeBaseYaw = (s8DirModeBaseYaw + 0x2000) & 0xE000;
-        }
-        gRightCPressed = 0;
-        play_sound_cbutton_side();
-    }
-    if (gPlayer1Controller->buttonDown & L_CBUTTONS || gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-        s8DirModeBaseYaw -= 0x400;//DEGREES(3);
-        gLeftCPressed = 1;
-    } else if (gLeftCPressed == 1) {
-        if ((u16)(s8DirModeBaseYaw) - (u16)(s8DirModeBaseYaw & 0xE000) > 0x400) {
-            s8DirModeBaseYaw &= 0xE000;
-        }
-        gLeftCPressed = 0;
-        play_sound_cbutton_side();
-    }*/
 
     lakitu_zoom(400.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
