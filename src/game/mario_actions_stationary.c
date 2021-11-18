@@ -1042,7 +1042,7 @@ s32 act_twirl_land(struct MarioState *m) {
 Vec3f sSpawnedTokens[] = {
 {-1831.0f, 160.0f, -6211.0f},
 {-1214.25f, 46.13f, -150.62f},
-{0.0f, 0.0f, 0.0f},
+{-108.0f, 11838.0f, -16714.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
@@ -1080,6 +1080,7 @@ void handle_ground_pound_floor(struct MarioState *m) {
             spawn_token(2, 0x18, sSpawnedTokens[1], 0x4000, 0);
             break;
         case 2:
+            spawn_token(0, 0x1D, sSpawnedTokens[2], 0x2000, 0);
             break;
         case 3:
             break;
