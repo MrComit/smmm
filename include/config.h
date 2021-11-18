@@ -61,7 +61,7 @@
 
 #define WIDE
 #define DISABLE_AA
-
+#define AUTO_LOD
 
 
 

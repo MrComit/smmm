@@ -283,7 +283,12 @@ static void geo_process_level_of_detail(struct GraphNodeLevelOfDetail *node) {
 #endif
 
     if (node->minDistance <= distanceFromCam && distanceFromCam < node->maxDistance) {*/
-	f32 distanceFromCam = -gMatStack[gMatStackIndex][3][2];
+#ifdef AUTO_LOD
+    f32 distanceFromCam = (gIsConsole ? -gMatStack[gMatStackIndex][3][2] : 50);
+#else
+    f32 distanceFromCam = -gMatStack[gMatStackIndex][3][2];
+#endif
+
     if ((f32)node->minDistance <= distanceFromCam && distanceFromCam < (f32)node->maxDistance) {
         if (node->node.children != 0) {
             geo_process_node_and_siblings(node->node.children);
