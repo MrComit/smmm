@@ -60,7 +60,7 @@
 
 
 #define WIDE
-
+#define DISABLE_AA
 
 
 
