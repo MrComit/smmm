@@ -339,7 +339,7 @@ Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *con
         }
         currentGraphNode->fnNode.node.flags = (currentGraphNode->parameter << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
 
-        light2 = segmented_to_virtual(sBooLights[objectGraphNode->oBehParams2ndByte]);
+        light2 = sBooLights[objectGraphNode->oBehParams2ndByte];
         light = segmented_to_virtual(&boo_light_color);
         *light = *light2;
     }
