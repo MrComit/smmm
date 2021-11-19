@@ -110,6 +110,20 @@ const GeoLayout bbh_dl_306__UnderGlobe_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout bbh_dl_2ref_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3438, 9152, -14662, bbh_dl_2ref_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bbh_dl_3Ref_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3229, 7607, -8135, bbh_dl_3Ref_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout bbh_dl_307__Ice_Castle_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -138,6 +152,13 @@ const GeoLayout bbh_dl_307__Ice_Castle_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4298, 12661, -16496, bbh_dl_Paintings_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 469, 12661, -17767, bbh_dl_Paintings_001_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_TRANSPARENT, 3254, 11619, -11791, 90, 0, 0, bbh_dl_Steam_mesh_layer_5),
+		GEO_SWITCH_CASE(2, geo_switch_ice_reflection),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, bbh_dl_2ref_geo),
+			GEO_BRANCH(1, bbh_dl_3Ref_geo),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3229, 7607, -9139, bbh_dl_1Ref_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3174, 11265, -10556, bbh_dl_under_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

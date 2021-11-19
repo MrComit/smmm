@@ -418,6 +418,8 @@ Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node) {
 }
 
 
+
+
 //[0] = hub
 s32 sLevelToChapter[COURSE_MAX] = {
 1, 1, 2, 2, 3, 3, 4, 4, 5,
@@ -520,6 +522,34 @@ Gfx *geo_switch_servants_wall_2(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_ice_reflection(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_ice_reflection(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        if (gMarioState->pos[2] > -7500.0f || gMarioState->pos[2] < -13888.0f) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
 
 
 //! @bug Same issue as geo_switch_anim_state.

@@ -37,6 +37,14 @@ Vec3f sStrayBookPos = {-10783.0f, 186.0f, 3062.0f};
 
 
 void bhv_ice_ceiling_gate_loop(void) {
+    o->oRoom = 7;
+    if (o->oBehParams2ndByte) {
+        if (gMarioState->pos[2] > -7500.0f || gMarioState->pos[2] < -13888.0f) {
+            cur_obj_hide();
+        } else {
+            cur_obj_unhide();
+        }
+    }
     switch (o->oAction) {
         case 0:
             if (gMarioCurrentRoom == o->oRoom) {
