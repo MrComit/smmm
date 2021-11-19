@@ -40,3 +40,4 @@
 #include "levels/bbh/bomb_chain/geo.inc.c"
 #include "levels/bbh/big_ice_cube/geo.inc.c"
 #include "levels/bbh/red_button/geo.inc.c"
+#include "levels/bbh/ice_ceiling_gate/geo.inc.c"

@@ -55,3 +55,5 @@
 
 #include "StarCurrency/model.inc.c"
 #include "held_letter/model.inc.c"
+#include "global_gate/model.inc.c"
+#include "global_gate/collision.inc.c"

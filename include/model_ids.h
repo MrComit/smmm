@@ -609,6 +609,7 @@
 #define MODEL_STAR_CURRENCY       0x3D
 #define MODEL_GREEN_COIN          0x3E
 #define MODEL_HELD_LETTER         0x3F
+#define MODEL_GLOBAL_GATE         0x40
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF
@@ -711,6 +712,9 @@
 #define MODEL_BOMB_CHAIN          0xF2
 #define MODEL_BIG_ICE_CUBE        0xF1
 #define MODEL_RED_BUTTON          0xF0
+#define MODEL_ICE_CEILING_GATE    0xEF
+
+
 
 
 

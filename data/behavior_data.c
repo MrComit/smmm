@@ -8092,3 +8092,32 @@ const BehaviorScript bhvRedButton[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvGlobalGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(global_gate_collision),
+    ADD_FLOAT(oPosY, 300),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l1_room_gate_loop),
+    END_LOOP(),
+    BREAK(),
+};
+
+
+
+const BehaviorScript bhvIceCeilingGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(ice_ceiling_gate_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_ice_ceiling_gate_loop),
+    END_LOOP(),
+    BREAK(),
+};

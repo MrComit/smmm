@@ -169,4 +169,8 @@ extern const GeoLayout bbh_ice_chunk_geo_000378[];
 
 #include "levels/bbh/red_button/collision_header.h"
 
+#include "levels/bbh/ice_ceiling_gate/geo_header.h"
+
+#include "levels/bbh/ice_ceiling_gate/collision_header.h"
+
 #endif

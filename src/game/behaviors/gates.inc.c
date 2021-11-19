@@ -35,6 +35,29 @@ Vec3f sStealerPos[6] = {
 Vec3f sStrayBookPos = {-10783.0f, 186.0f, 3062.0f};
 
 
+
+void bhv_ice_ceiling_gate_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioCurrentRoom == o->oRoom) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (save_file_get_rooms((o->oRoom  + sLevelRoomOffsets[gCurrCourseNum - 1]) / 32) & (1 << ((o->oRoom  + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosZ = approach_f32(o->oPosZ, o->oHomeZ + 4000.0f, 100.0f, 100.0f);
+            if (o->oPosZ == o->oHomeZ)
+                o->activeFlags = 0;
+            break;
+    }
+}
+
+
+
 void bhv_l1_room_gate_loop(void) {
     switch (o->oAction) {
         case 0:

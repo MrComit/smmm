@@ -403,4 +403,8 @@ extern const Gfx haunted_cage_seg5_dl_05010100[];
 
 #include "held_letter/geo_header.h"
 
+#include "global_gate/geo_header.h"
+
+#include "global_gate/collision_header.h"
+
 #endif

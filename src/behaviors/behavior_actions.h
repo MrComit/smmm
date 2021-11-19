@@ -799,6 +799,7 @@ void bhv_bomb_on_chain_loop(void);
 void bhv_ice_cube_child_loop(void);
 void bhv_big_ice_cube_loop(void);
 void bhv_red_button_loop(void);
+void bhv_ice_ceiling_gate_loop(void);
 
 
 

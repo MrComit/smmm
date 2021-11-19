@@ -57,6 +57,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOMB_CHAIN, bomb_chain_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_ICE_CUBE, big_ice_cube_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_BUTTON, red_button_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ICE_CEILING_GATE, ice_ceiling_gate_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -382,9 +383,12 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_BOMB_CHAIN, 4015, 15450, -13840, 0, -90, 0, (4 << 16), bhvBombChain),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2310, 11500, -4529, 0, -25, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1726, 11749, -19225, 0, 155, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_GLOBAL_GATE, 1709, 11749, -19188, 0, -25, 0, 0x00000000, bhvGlobalGate),
+		OBJECT(MODEL_GLOBAL_GATE, 2327, 11500, -4565, 0, 155, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_GOOMBA, 1046, 12400, -11140, 0, 90, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, 6368, 12850, -13840, 0, 90, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -35, 13300, -13840, 0, 90, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_ICE_CEILING_GATE, 3113, 17974, -11125, 0, 0, 0, 0x00000000, bhvIceCeilingGate),
 		OBJECT(MODEL_ICE_CUBE, 5178, 11469, -11585, 0, 0, 0, (3 << 16), bhvIceCube),
 		OBJECT(MODEL_ICE_CUBE, 2487, 11469, -9956, 0, 0, 0, (1 << 16), bhvIceCube),
 		OBJECT(MODEL_ICE_CUBE, 5177, 11469, -9036, 0, 0, 0, (2 << 16), bhvIceCube),
