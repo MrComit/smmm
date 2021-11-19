@@ -61,6 +61,21 @@ void bomb_on_chain_explode(void) {
 
 
 void bhv_bomb_on_chain_loop(void) {
+    if (gMarioState->pos[1] < 12000.0f) {
+        cur_obj_hide();
+        return;
+    } else {
+        cur_obj_unhide();
+    }
+    if (gIsConsole && gCamera->comitCutscene == 0) {
+        if (absf(gMarioState->pos[2] - o->parentObj->oPosZ) > 1500.0f) {
+            cur_obj_hide();
+            return;
+        } else {
+            cur_obj_unhide();
+        }
+    }
+
     obj_set_hitbox(o, &sBombOnChainHitbox);
     if (o->oAction == 0) {
         cur_obj_scale((f32) o->oTimer / 10.0f);
