@@ -598,10 +598,10 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     Mat4 cameraTransform;
     Mtx *rollMtx = alloc_display_list(sizeof(*rollMtx));
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
-    Gfx *setLightsDL = alloc_display_list(sizeof(Gfx) * 3);
+    /*Gfx *setLightsDL = alloc_display_list(sizeof(Gfx) * 3);
     Gfx *levelLightsDL;
     Vec3f probePos = {0, 0, 0};
-    s32 i;
+    s32 i;*/
 
     if (node->fnNode.func != NULL) {
         node->fnNode.func(GEO_CONTEXT_RENDER, &node->fnNode.node, gMatStack[gMatStackIndex]);
@@ -610,7 +610,7 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     make_roll_matrix(rollMtx, node->rollScreen);
 
     gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(rollMtx), G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH);
-    geo_append_display_list(setLightsDL, LAYER_OPAQUE);
+    //geo_append_display_list(setLightsDL, LAYER_OPAQUE);
 
     mtxf_lookat(cameraTransform, node->pos, node->focus, node->roll);
     mtxf_mul(gMatStack[gMatStackIndex + 1], cameraTransform, gMatStack[gMatStackIndex]);
@@ -621,7 +621,7 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     //if (gPlayer1Controller->buttonPressed & L_TRIG)
     //    gPointLightCompatibilityMode ^= 1;
 
-    viewMat = &gMatStack[gMatStackIndex];
+    //viewMat = &gMatStack[gMatStackIndex];
 
     gMatStackFixed[gMatStackIndex] = mtx;
     if (node->fnNode.node.children != 0) {
@@ -633,7 +633,7 @@ void geo_process_camera(struct GraphNodeCamera *node) {
 
 
     // Transform the point light positions into screen space
-    for (i = 0; i < gPointLightCount; i++)
+    /*for (i = 0; i < gPointLightCount; i++)
     {
         Vec3f transformed;
         mtxf_mul_vec3f(gMatStack[gMatStackIndex], gPointLights[i].worldPos, transformed);
@@ -676,7 +676,7 @@ void geo_process_camera(struct GraphNodeCamera *node) {
 
     // Terminate the point lighting DL
     gSPEndDisplayList(setLightsDL++);
-
+    */
     gMatStackIndex--;
 }
 
@@ -1215,7 +1215,7 @@ static s32 obj_is_in_view(struct GraphNodeObject *node, Mat4 matrix) {
 static void geo_process_object(struct Object *node) {
     Mat4 mtxf;
     s32 hasAnimation = (node->header.gfx.node.flags & GRAPH_RENDER_HAS_ANIMATION) != 0;
-    u8 i;
+    //u8 i;
 
     if (node->header.gfx.areaIndex == gCurGraphNodeRoot->areaIndex) {
         if (node->header.gfx.throwMatrix != NULL) {
@@ -1244,7 +1244,7 @@ static void geo_process_object(struct Object *node) {
             Mtx *mtx = alloc_display_list(sizeof(*mtx));
             
             // Create the displaylist to set the active point lights
-            Gfx* pointLightsDl = createPointLightsDl(&node->oPosX, 80.0f);
+            /*Gfx* pointLightsDl = createPointLightsDl(&node->oPosX, 80.0f);
 
             // Put the lights on every layer, this can be optimized in the future
             // It will require some geolayout command to specify which layers this object uses
@@ -1252,7 +1252,7 @@ static void geo_process_object(struct Object *node) {
             for (i = LAYER_FORCE; i <= LAYER_TRANSPARENT_INTER; i++)
             {
                 geo_append_display_list(pointLightsDl, i);
-            }
+            }*/
 
             mtxf_to_mtx(mtx, gMatStack[gMatStackIndex]);
             gMatStackFixed[gMatStackIndex] = mtx;

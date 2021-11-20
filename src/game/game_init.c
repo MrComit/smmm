@@ -142,7 +142,9 @@ void init_rsp(void) {
 
     gSPSetGeometryMode(gDisplayListHead++, G_SHADE | G_SHADING_SMOOTH | G_CULL_BACK | G_LIGHTING);
 
+    gSPNumLights(gDisplayListHead++, NUMLIGHTS_1);
     gSPTexture(gDisplayListHead++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+
 
     // @bug Failing to set the clip ratio will result in warped triangles in F3DEX2
     // without this change: https://jrra.zone/n64/doc/n64man/gsp/gSPClipRatio.htm
@@ -748,7 +750,7 @@ void thread5_game_loop(UNUSED void *arg) {
         // Reset the point light count before running the level script
         // This is because the level script is responsible for calling the function
         // that updates objects, which is where objects that emit light create their point lights
-        gPointLightCount = gAreaPointLightCount;
+        //gPointLightCount = gAreaPointLightCount;
 
         addr = level_script_execute(addr);
 

@@ -1066,7 +1066,7 @@ void cur_obj_update(void) {
     // Advanced lighting engine
     // If this object emits light, is active, is visible, and there are still scene point light slots available,
     // create a point light at this object
-    if ((objFlags & OBJ_FLAG_EMIT_LIGHT) && gPointLightCount < MAX_POINT_LIGHTS)
+    /*if ((objFlags & OBJ_FLAG_EMIT_LIGHT) && gPointLightCount < MAX_POINT_LIGHTS)
     {
         s32 red   = (gCurrentObject->oLightColor >> 24) & 0xFF;
         s32 green = (gCurrentObject->oLightColor >> 16) & 0xFF;
@@ -1087,5 +1087,5 @@ void cur_obj_update(void) {
                        gCurrentObject->oLightLinearFalloff,
                        gCurrentObject->oLightQuadraticFalloff);
         }
-    }
+    }*/
 }
