@@ -8032,7 +8032,7 @@ const BehaviorScript bhvIceCubeChild[] = {
 
 const BehaviorScript bhvIceCubeCracked[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(ice_cube_cracked_collision),
     SET_HOME(),
     SET_FLOAT(oFloat100, 4),

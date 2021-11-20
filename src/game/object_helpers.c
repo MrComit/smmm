@@ -541,7 +541,8 @@ Gfx *geo_switch_ice_reflection(s32 callContext, struct GraphNode *node) {
         // the switch.
 
         // assign the case number for execution.
-        if (gMarioState->pos[2] > -7500.0f || gMarioState->pos[2] < -13888.0f) {
+        if (gMarioState->pos[2] > -7500.0f || gMarioState->pos[2] < -13888.0f || 
+            gMarioState->pos[0] > 5800.0f || gMarioState->pos[0] < 1000.0f) {
             switchCase->selectedCase = 1;
         } else {
             switchCase->selectedCase = 0;
