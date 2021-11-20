@@ -613,13 +613,19 @@ void bhv_stalactite_init(void) {
 
 void bhv_stalactite_loop(void) {
     switch (o->oAction) {
+        case 5:
         case 0:
             o->oPosY = approach_f32(o->oPosY, o->oHomeY, 30.0f, 30.0f);
             if (gMarioState->pos[1] < o->oPosY && absf(o->oPosX - gMarioState->pos[0]) < 125.0f) {
-                if (o->oTimer > 4) {
-                    o->oFaceAngleRoll = 0;
-                    o->oAction = 1;
-                    cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+                cur_obj_update_floor_height();
+                if (o->oFloorHeight < gMarioState->pos[1] + 20.0f) {
+                    if (o->oTimer > 4) {
+                        o->oFaceAngleRoll = 0;
+                        o->oAction = 1;
+                        cur_obj_play_sound_2(SOUND_GENERAL_OPEN_IRON_DOOR);
+                    }
+                } else {
+                    o->oTimer = 0;
                 }
             } else {
                 o->oTimer = 0;

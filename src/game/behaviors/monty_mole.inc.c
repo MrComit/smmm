@@ -153,6 +153,7 @@ static void monty_mole_act_select_hole(void) {
     // Select a hole to pop out of
     if (o->oMontyMoleCurrentHole == NULL) {
         o->oMontyMoleCurrentHole = spawn_object(o, MODEL_DL_MONTY_MOLE_HOLE, bhvMontyMoleHole);
+        o->oMontyMoleCurrentHole->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     }
     //if ((o->oMontyMoleCurrentHole = monty_mole_select_available_hole(minDistToMario)) != NULL) {
         cur_obj_play_sound_2(SOUND_OBJ2_MONTY_MOLE_APPEAR);
@@ -331,6 +332,9 @@ static struct ObjectHitbox sMontyMoleHitbox = {
  */
 void bhv_monty_mole_update(void) {
     // PARTIAL_UPDATE
+    if (gMarioCurrentRoom != o->oRoom) {
+        return;
+    }
 
     o->oDeathSound = SOUND_OBJ_DYING_ENEMY1;
     cur_obj_update_floor_and_walls();
