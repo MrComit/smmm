@@ -14,6 +14,8 @@ Vec3s sLegoColors[] = {
 {0xFF, 0xFF, 0xFF},
 {0x19, 0x6A, 0x19},
 {0xB9, 0x00, 0x03},
+{0x21, 0x72, 0xB5},
+{0xB5, 0x5E, 0x1E},
 };
 
 
@@ -90,14 +92,21 @@ void bhv_shaky_plat_loop(void) {
 
 
 void bhv_lego_piece_init(void) {
-    o->os16F4 = sLegoColors[o->oBehParams2ndByte][0];
-    o->os16F6 = sLegoColors[o->oBehParams2ndByte][1];
-    o->os16F8 = sLegoColors[o->oBehParams2ndByte][2];
+    s16 param = CL_RandomMinMaxU16(0, 4);
+    o->os16F4 = sLegoColors[param][0];
+    o->os16F6 = sLegoColors[param][1];
+    o->os16F8 = sLegoColors[param][2];
 
-    o->oPosX += 1000.0f;
+    o->oPosX += (random_float() - 0.5f) * 2000.0f;
     o->oPosY += 1000.0f;
-    o->oPosZ += 1000.0f;
+    o->oPosZ += (random_float() - 0.5f) * 2000.0f;
     vec3f_copy(&o->oFloatFC, &o->oPosX);
+
+    o->os1610C = o->oFaceAngleYaw;
+    o->os16110 = o->oFaceAnglePitch;
+
+    o->oFaceAngleYaw = random_u16();
+    o->oFaceAnglePitch = random_u16();
 }
 
 void bhv_lego_piece_loop(void) {
@@ -106,54 +115,87 @@ void bhv_lego_piece_loop(void) {
     switch (o->oAction) {
         case 0:
             o->oFaceAngleYaw += 0x200;
-            o->oFaceAngleRoll += 0x200;
             o->oFaceAnglePitch += 0x200;
+
+            if (o->oTimer > 60) {
+                o->os1610E = CL_RandomMinMaxU16(0x40, 0x100);
+                o->oTimer = 0;
+            }
+            o->os16112 = approach_s16_symmetric(o->os16112, o->os1610E, 0x10);
+            o->os16FA += o->os16112;
+            o->oPosX = o->oFloatFC + sins(o->os16FA) * 200.0f;
+            o->oPosZ = o->oFloat104 + coss(o->os16FA) * 100.0f;
+
+
+            if (gMarioState->pos[1] > o->oHomeY + 1000.0f)
+                o->oFloat100 = o->oHomeY - 1000.0f;
+            else
+                o->oFloat100 = o->oHomeY + 1000.0f;
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 50.0f);
 
             CL_dist_between_points(&o->oHomeX, gMarioState->pos, &dist);
             if (dist < 1500.0f) {
+                o->oFloatFC = o->oPosX;
+                o->oFloat104 = o->oPosZ;
                 o->oAction = 1;
-                o->oForwardVel = 100.0f;
+                o->os16FA = o->os16112 = 0;
+                vec3f_get_dist_and_angle(&o->oPosX, &o->oHomeX, &dist, &pitch, &yaw);
+                o->oForwardVel = dist / 15.0f;//100.0f;
             }
             break;
         case 1:
-            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, 0, 0x800);
-            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0, 0x800);
-            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x800);
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->os1610C, 0x800);
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, o->os16110, 0x800);
+            o->oFloat108 = approach_f32_symmetric(o->oFloat108, 1.0f, 0.08f);
+            cur_obj_scale(o->oFloat108);
 
             vec3f_get_dist_and_angle(&o->oPosX, &o->oHomeX, &dist, &pitch, &yaw);
             o->oMoveAnglePitch = pitch;
             o->oMoveAngleYaw = yaw;
             CL_Move_3d();
-            if (dist < 100.0f) {
+            if (dist < o->oForwardVel) {
                 vec3f_copy(&o->oPosX, &o->oHomeX);
-                o->oFaceAngleYaw = (o->oFaceAngleRoll = (o->oFaceAnglePitch = 0));
-                o->oMoveAngleYaw = (o->oMoveAngleRoll = (o->oMoveAnglePitch = 0));
+                o->oFaceAngleYaw = (o->oMoveAngleYaw = o->os1610C);
+                o->oFaceAnglePitch = (o->oMoveAnglePitch = o->os16110);
                 o->oAction = 2;
                 o->oForwardVel = 0; 
                 o->oVelX = (o->oVelZ = 0);
+                o->oFloat108 = 1.0f;
+                cur_obj_scale(o->oFloat108);
             }
             break;
         case 2:
             if (o->oDistanceToMario > 2000.0f && gMarioObject->platform != o) {
                 o->oAction = 3;
-                o->oForwardVel = 100.0f;
+                o->oFloatFC = o->oHomeX + (random_float() - 0.5f) * 2000.0f;
+                o->oFloat104 = o->oHomeZ + (random_float() - 0.5f) * 2000.0f;
+                if (gMarioState->pos[1] > o->oHomeY + 1000.0f)
+                    o->oFloat100 = o->oHomeY - 1000.0f;
+                else
+                    o->oFloat100 = o->oHomeY + 1000.0f;
+                vec3f_get_dist_and_angle(&o->oPosX, &o->oFloatFC, &dist, &pitch, &yaw);
+                o->oForwardVel = dist / 20.0f;
             }
             load_object_collision_model();
             break;
         case 3:
             o->oFaceAngleYaw += 0x200;
-            o->oFaceAngleRoll += 0x200;
             o->oFaceAnglePitch += 0x200;
+
+            o->oFloat108 = approach_f32_symmetric(o->oFloat108, 0.5f, 0.08f);
+            cur_obj_scale(o->oFloat108);
 
             vec3f_get_dist_and_angle(&o->oPosX, &o->oFloatFC, &dist, &pitch, &yaw);
             o->oMoveAnglePitch = pitch;
             o->oMoveAngleYaw = yaw;
             CL_Move_3d();
-            if (dist < 100.0f) {
+            if (dist < o->oForwardVel) {
                 vec3f_copy(&o->oPosX, &o->oFloatFC);
                 o->oAction = 0;
                 o->oForwardVel = 0;
                 o->oVelX = (o->oVelZ = 0);
+                o->oFloat108 = 0.5f;
+                cur_obj_scale(o->oFloat108);
             }
             break;
     }
