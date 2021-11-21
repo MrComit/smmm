@@ -958,16 +958,19 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     f32 baseDist = 1000.f;
     f32 floorHeight;
     Vec3f mPos;
+    s32 check = 0;
     mPos[1] = gMarioState->pos[1];
     mPos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 100.0f);
     mPos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 100.0f);
 
-    if (gPlayer1Controller->buttonDown & U_JPAD) {
+    if (gPlayer1Controller->buttonDown & U_JPAD || 
+        ((gPlayer1Controller->buttonDown & R_TRIG) && (gPlayer1Controller->buttonDown & U_CBUTTONS))) {
         gCliffTimer = 60;
+        check = 1;
     }
 
     floorHeight = find_floor_height(mPos[0], mPos[1], mPos[2]);
-    if (gPlayer1Controller->buttonDown & U_JPAD || (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && 
+    if (check || (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && 
         mPos[1] - floorHeight > 300.0f && floorHeight > FLOOR_LOWER_LIMIT)) {
         if (gCliffTimer > 59)
             gCliffTimer = 59;
@@ -1501,6 +1504,9 @@ void mode_8_directions_camera_2d(struct Camera *c) {
     }
 }
 
+
+u16 sRCounter;
+
 void mode_8_directions_camera_3d(struct Camera *c) {
     Vec3f pos;
     UNUSED u8 filler[8];
@@ -1510,26 +1516,49 @@ void mode_8_directions_camera_3d(struct Camera *c) {
     {
     radial_camera_input(c, 0.f);
 
-    if (gPlayer1Controller->buttonPressed & R_CBUTTONS) {
+    if ((gPlayer1Controller->buttonPressed & L_CBUTTONS) && !(gPlayer1Controller->buttonDown & R_TRIG)) {
+        s8DirModeBaseYaw -= DEGREES(45);
+        play_sound_cbutton_side();
+    } else if ((gPlayer1Controller->buttonPressed & R_CBUTTONS) && !(gPlayer1Controller->buttonDown & R_TRIG)) {
         s8DirModeBaseYaw += DEGREES(45);
         play_sound_cbutton_side();
     }
-    if (gPlayer1Controller->buttonPressed & L_CBUTTONS) {
-        s8DirModeBaseYaw -= DEGREES(45);
-        play_sound_cbutton_side();
+
+    if (gPlayer1Controller->buttonDown & R_TRIG) {
+        if (gPlayer1Controller->buttonDown & L_CBUTTONS) {
+            s8DirModeBaseYaw -= DEGREES(2);
+        } else if (gPlayer1Controller->buttonDown & R_CBUTTONS) {
+            s8DirModeBaseYaw += DEGREES(2);
+        }
+        sRCounter++; // This increses whenever R is held.
+    } else {
+        if (sRCounter > 0 && sRCounter <= 5 && !((gPlayer1Controller->buttonDown & L_CBUTTONS) 
+            || (gPlayer1Controller->buttonDown & R_CBUTTONS) || (gMarioState->action & ACT_FLAG_SWIMMING_OR_FLYING))) {
+            // This centers the camera behind mario. It triggers when you let go of R in less than 5 frames.
+            s8DirModeYawOffset = 0;
+            s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
+            gMarioState->area->camera->yaw = s8DirModeBaseYaw;
+            //play_sound_rbutton_changed();
+        }
+        sRCounter = 0;
+    }
+
+    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+        s8DirModeBaseYaw = (s8DirModeBaseYaw + 0x1000) & 0xE000; // Lock the camera to the nearest 45deg axis
     }
 
     lakitu_zoom(400.f, 0x900);
     c->nextYaw = update_8_directions_camera(c, c->focus, pos);
+    set_camera_height(c, pos[1]);
     c->pos[0] = pos[0];
     c->pos[2] = pos[2];
     sAreaYawChange = sAreaYaw - oldAreaYaw;
-    if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
+    /*if (gPlayer1Controller->buttonPressed & R_TRIG) {
         s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
         c->pos[1] = pos[1];
     } else {
         set_camera_height(c, pos[1]);
-    }
+    }*/
     }
 
     fixed_cam_presets(c);
@@ -3566,22 +3595,8 @@ void update_camera(struct Camera *c) {
         s8DirModeBaseYaw = approach_s16_symmetric(s8DirModeBaseYaw, gMarioState->faceAngle[1] + 0x8000, 0x400);
     }
 
-    /*if (gPlayer1Controller->buttonDown & L_JPAD) {
-        s8DirModeBaseYaw -= 0x80;
-    }
-    if (gPlayer1Controller->buttonDown & R_JPAD) {
-        s8DirModeBaseYaw += 0x80;
-    }*/
-    /*if (gPlayer1Controller->buttonPressed & U_JPAD) {
-        s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
-    }*/
-    if (gPlayer1Controller->buttonPressed & D_JPAD) {
-        if (absi((u16)(s8DirModeBaseYaw) - (u16)(s8DirModeBaseYaw & 0xE000)) < 0x1000) {
-            s8DirModeBaseYaw &= 0xE000;
-        } else {
-            s8DirModeBaseYaw = (s8DirModeBaseYaw & 0xE000) + 0x2000;
-        }
-    }
+
+
 
 }
 
