@@ -19,7 +19,7 @@ extern u8 ccm_dl_book_cover_ci8[];
 extern u8 ccm_dl_book_cover_ci8_pal_rgba16[];
 extern u8 ccm_dl_tv_metal_i8[];
 extern Vtx ccm_dl_Ground_mesh_layer_1_vtx_cull[8];
-extern Vtx ccm_dl_Ground_mesh_layer_1_vtx_0[84];
+extern Vtx ccm_dl_Ground_mesh_layer_1_vtx_0[80];
 extern Gfx ccm_dl_Ground_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_Pole1_mesh_layer_1_vtx_cull[8];
 extern Vtx ccm_dl_Pole1_mesh_layer_1_vtx_0[20];
