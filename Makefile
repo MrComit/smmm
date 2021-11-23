@@ -67,27 +67,6 @@ endif
 
 DEFINES += NO_ERRNO_H=1 NO_GZIP=1
 
-COMPRESS ?= rnc1
-$(eval $(call validate-option,COMPRESS,mio0 yay0 gzip rnc1 rnc2 uncomp))
-ifeq ($(COMPRESS),gzip)
-  DEFINES += GZIP=1
-  LIBZRULE := $(BUILD_DIR)/libz.a
-  LIBZLINK := -lz
-else ifeq ($(COMPRESS),rnc1)
-  DEFINES += RNC1=1
-else ifeq ($(COMPRESS),rnc2)
-  DEFINES += RNC2=1
-else ifeq ($(COMPRESS),yay0)
-  DEFINES += YAY0=1
-else ifeq ($(COMPRESS),mio0)
-  DEFINES += MIO0=1
-else ifeq ($(COMPRESS),uncomp)
-  DEFINES += UNCOMPRESSED=1
-endif
-
-GZIPVER ?= std
-$(eval $(call validate-option,GZIPVER,std libdef))
-
 # VERSION - selects the version of the game to build
 #   jp - builds the 1996 Japanese version
 #   us - builds the 1996 North American version
@@ -202,11 +181,37 @@ ifeq ($(HVQM),1)
   SRC_DIRS += src/hvqm
 endif
 
+
 SMMM_DEBUG ?= 1
-$(eval $(call validate-option,HVQM,0 1))
+$(eval $(call validate-option,SMMM_DEBUG,0 1))
 ifeq ($(SMMM_DEBUG),1)
   DEFINES += SMMM_DEBUG=1
 endif
+
+BUILD_DIR_BASE := build
+# BUILD_DIR is the location where all build artifacts are placed
+BUILD_DIR      := $(BUILD_DIR_BASE)/$(VERSION)_$(CONSOLE)
+
+COMPRESS ?= rnc1
+$(eval $(call validate-option,COMPRESS,mio0 yay0 gzip rnc1 rnc2 uncomp))
+ifeq ($(COMPRESS),gzip)
+  DEFINES += GZIP=1
+  LIBZRULE := $(BUILD_DIR)/libz.a
+  LIBZLINK := -lz
+else ifeq ($(COMPRESS),rnc1)
+  DEFINES += RNC1=1
+else ifeq ($(COMPRESS),rnc2)
+  DEFINES += RNC2=1
+else ifeq ($(COMPRESS),yay0)
+  DEFINES += YAY0=1
+else ifeq ($(COMPRESS),mio0)
+  DEFINES += MIO0=1
+else ifeq ($(COMPRESS),uncomp)
+  DEFINES += UNCOMPRESSED=1
+endif
+
+GZIPVER ?= std
+$(eval $(call validate-option,GZIPVER,std libdef))
 
 # GODDARD - whether to use libgoddard (Mario Head)
 #   1 - includes code in ROM
@@ -486,7 +491,7 @@ libultra: $(BUILD_DIR)/libultra.a
 $(BUILD_DIR)/asm/boot.o:              $(IPL3_RAW_FILES)
 $(BUILD_DIR)/src/game/crash_screen.o: $(CRASH_TEXTURE_C_FILES)
 $(BUILD_DIR)/src/game/version.o:      $(BUILD_DIR)/src/game/version_data.h
-$(BUILD_DIR)/lib/rsp.o:               $(BUILD_DIR)/rsp/rspboot.bin $(BUILD_DIR)/rsp/audio.bin
+$(BUILD_DIR)/lib/aspMain.o:           $(BUILD_DIR)/rsp/audio.bin
 $(SOUND_BIN_DIR)/sound_data.o:        $(SOUND_BIN_DIR)/sound_data.ctl $(SOUND_BIN_DIR)/sound_data.tbl $(SOUND_BIN_DIR)/sequences.bin $(SOUND_BIN_DIR)/bank_sets
 $(BUILD_DIR)/levels/scripts.o:        $(BUILD_DIR)/include/level_headers.h
 
