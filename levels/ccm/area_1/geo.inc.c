@@ -27,7 +27,7 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 21682, -211, 14274, 0, 0, -90, ccm_dl_Plane_003_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 19682, 1511, 13874, 0, 0, -90, ccm_dl_Plane_004_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 19682, 1461, 13874, 0, 0, -90, ccm_dl_Plane_005_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15673, 201, -5842, ccm_dl_Slingshot_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 17643, 201, -4232, ccm_dl_Slingshot_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

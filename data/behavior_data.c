@@ -7735,7 +7735,7 @@ const BehaviorScript bhvLegoPiece[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     LOAD_COLLISION_DATA(lego_piece_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
-    SCALE(0, 50),
+    SCALE(0, 70),
     SET_HOME(),
     CALL_NATIVE(bhv_lego_piece_init),
     BEGIN_LOOP(),

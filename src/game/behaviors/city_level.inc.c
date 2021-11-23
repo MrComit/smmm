@@ -182,7 +182,7 @@ void bhv_lego_piece_loop(void) {
             o->oFaceAngleYaw += 0x200;
             o->oFaceAnglePitch += 0x200;
 
-            o->oFloat108 = approach_f32_symmetric(o->oFloat108, 0.5f, 0.08f);
+            o->oFloat108 = approach_f32_symmetric(o->oFloat108, 0.7f, 0.08f);
             cur_obj_scale(o->oFloat108);
 
             vec3f_get_dist_and_angle(&o->oPosX, &o->oFloatFC, &dist, &pitch, &yaw);
@@ -194,7 +194,7 @@ void bhv_lego_piece_loop(void) {
                 o->oAction = 0;
                 o->oForwardVel = 0;
                 o->oVelX = (o->oVelZ = 0);
-                o->oFloat108 = 0.5f;
+                o->oFloat108 = 0.7f;
                 cur_obj_scale(o->oFloat108);
             }
             break;
