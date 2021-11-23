@@ -89,6 +89,7 @@ const GeoLayout bbh_dl_305__SnowGlobe_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bbh_dl_Platform_mesh_layer_6),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Skybox_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -6453, -138, 6683, 0, 129, 0, bbh_dl_Slingshot_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3, -1500, 0, bbh_dl_Snow_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2525, 1000, -1866, bbh_dl_Snow_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -546, -875, 16143, bbh_dl_Snow_003_mesh_layer_1),

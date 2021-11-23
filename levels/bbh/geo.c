@@ -41,3 +41,4 @@
 #include "levels/bbh/big_ice_cube/geo.inc.c"
 #include "levels/bbh/red_button/geo.inc.c"
 #include "levels/bbh/ice_ceiling_gate/geo.inc.c"
+#include "levels/bbh/rubberband_two/geo.inc.c"

@@ -713,6 +713,7 @@
 #define MODEL_BIG_ICE_CUBE        0xF1
 #define MODEL_RED_BUTTON          0xF0
 #define MODEL_ICE_CEILING_GATE    0xEF
+#define MODEL_RUBBERBAND_TWO      0xEE
 
 
 
