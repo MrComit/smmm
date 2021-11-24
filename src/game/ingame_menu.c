@@ -1194,7 +1194,7 @@ u32 ensure_nonnegative(s16 value) {
     return value;
 }
 
-void s2d_print_string(s16 x, s16 y, const char *str);
+//void s2d_print_string(s16 x, s16 y, const char *str);
 
 #if defined(VERSION_JP)
 void handle_dialog_text_and_pages(s8 colorMode, struct DialogEntry *dialog)

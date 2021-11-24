@@ -144,7 +144,7 @@ TARGET_STRING := smmm
 # UNF - whether to use UNFLoader flashcart library
 #   1 - includes code in ROM
 #   0 - does not 
-UNF ?= 0
+UNF ?= 1
 $(eval $(call validate-option,UNF,0 1))
 ifeq ($(UNF),1)
   DEFINES += UNF=1
@@ -164,7 +164,7 @@ ifeq ($(ISVPRINT),1)
 endif
 
 ifeq ($(USE_DEBUG),1)
-  ULTRALIB := ultra_d
+  ULTRALIB := ultra_rom#ultra_d
   DEFINES += DEBUG=1
 else
   ULTRALIB := ultra_rom
@@ -286,7 +286,7 @@ ACTOR_DIR      := actors
 LEVEL_DIRS     := $(patsubst levels/%,%,$(dir $(wildcard levels/*/header.h)))
 
 # Directories containing source files
-SRC_DIRS += src src/boot src/game src/engine src/behaviors src/audio src/menu src/buffers src/s2d_engine actors levels bin data assets asm lib sound
+SRC_DIRS += src src/boot src/game src/engine src/behaviors src/audio src/menu src/buffers actors levels bin data assets asm lib sound
 LIBZ_SRC_DIRS := src/libz
 BIN_DIRS := bin bin/$(VERSION)
 
@@ -347,8 +347,6 @@ else ifneq ($(call find-command,mips-ld),)
 else
   $(error Unable to detect a suitable MIPS toolchain installed)
 endif
-
-export LD_LIBRARY_PATH=./tools
 
 export LD_LIBRARY_PATH=./tools
 

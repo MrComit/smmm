@@ -15,10 +15,10 @@
 #include "print.h"
 #include "engine/surface_load.h"
 #include "game/object_helpers.h"
-#include "src/s2d_engine/init.h"
+//#include "src/s2d_engine/init.h"
 #include "!COMIT_LIBRARY.h"
-#include "s2d_engine/s2d_draw.h"
-#include "s2d_engine/s2d_print.h"
+//#include "s2d_engine/s2d_draw.h"
+//#include "s2d_engine/s2d_print.h"
 #include "object_list_processor.h"
 #include "puppyprint.h"
 #include "include/config.h"
@@ -530,13 +530,13 @@ void render_hud(void) {
 }
 
 // ...
-void print_s2d_string(s16 x, s16 y, char *str) {
+/*void print_s2d_string(s16 x, s16 y, char *str) {
 	s2d_init();
 	uObjMtx *buffer;
 	buffer = alloc_display_list(0x200 * sizeof(uObjMtx));
 	s2d_print(x, y, str, buffer);
 	s2d_stop();
-}
+}*/
 
 //#include "src/s2d_engine/sprites/room_names.c"
 
@@ -576,13 +576,13 @@ void render_s2d_room_names(void) {
 
 uObjMtx starpiecebuf[0x8];
 
-void s2d_print_starpiece(s16 x, s16 y, s16 idx) {
+/*void s2d_print_starpiece(s16 x, s16 y, s16 idx) {
 	s2d_init();
     call_starpiece_sprite_dl(idx, x, y, &starpiecebuf[idx], idx);
 	s2d_stop();
-}
+}*/
 
-void render_s2d_hud(void) {
+/*void render_s2d_hud(void) {
     s16 i, h;
     //print_text_fmt_int(20, 20, "%d", main_pool_available());
     if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE) {
@@ -608,4 +608,4 @@ void render_s2d_hud(void) {
         }
     }
     //render_s2d_room_names();
-}
+}*/

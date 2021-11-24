@@ -331,12 +331,14 @@ void thread3_main(UNUSED void *arg) {
     setup_mesg_queues();
     alloc_pool();
     load_engine_code_segment();
-#ifndef UNF
-    crash_screen_init();
+#ifdef UNF
+    if (!gIsConsole)
 #endif
+    crash_screen_init();
 
 #ifdef UNF
-    debug_initialize();
+    if (gIsConsole)
+        debug_initialize();
 #endif
 
 #ifdef DEBUG

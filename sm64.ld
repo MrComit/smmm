@@ -133,7 +133,7 @@ SECTIONS
       BUILD_DIR/src/boot*.o(.text);
       BUILD_DIR/src/hvqm*.o(.text);
       BUILD_DIR/src/audio*.o(.text);
-#if defined(ISVPRINT) || defined(UNF)
+#if defined(ISVPRINT)
       */libultra_d.a:*.o(.text);
 #else
       */libultra_rom.a:*.o(.text);
@@ -152,7 +152,7 @@ SECTIONS
       /* data */
       BUILD_DIR/src/boot*.o(.data*);
       BUILD_DIR/src/audio*.o(.data*);
-#if defined(ISVPRINT) || defined(UNF)
+#if defined(ISVPRINT)
       */libultra_d.a:*.o(.data*);
 #else
       */libultra_rom.a:*.o(.data*);
@@ -168,7 +168,7 @@ SECTIONS
       /* rodata */
       BUILD_DIR/src/boot*.o(.rodata*);
       BUILD_DIR/src/audio*.o(.rodata*);
-#if defined(ISVPRINT) || defined(UNF)
+#if defined(ISVPRINT)
       */libultra_d.a:*.o(.rodata*);
 #else
       */libultra_rom.a:*.o(.rodata*);
@@ -179,10 +179,6 @@ SECTIONS
 
       lib/PR/hvqm/hvqm2sp1.o(.rodata*);
 
-      BUILD_DIR/src/s2d_engine*.o(.text*);
-      BUILD_DIR/src/s2d_engine*.o(.data);
-      BUILD_DIR/src/s2d_engine*.o(.rodata*);
-
    }
    END_SEG(main)
    BEGIN_NOLOAD(main)
@@ -190,8 +186,7 @@ SECTIONS
       BUILD_DIR/src/boot*.o(.*bss*);
       BUILD_DIR/src/hvqm*.o(.*bss*);
       BUILD_DIR/src/audio*.o(.*bss*);
-      BUILD_DIR/src/s2d_engine*.o(.bss);
-#if defined(ISVPRINT) || defined(UNF)
+#if defined(ISVPRINT)
       */libultra_d.a:*.o(COMMON);
       */libultra_d.a:*.o(.scommon);
       */libultra_d.a:*.o(.*bss*);
@@ -254,7 +249,6 @@ SECTIONS
    BEGIN_NOLOAD(framebuffers)
    {
       BUILD_DIR/src/buffers/framebuffers.o(.bss*);
-      . = ALIGN(0x100);
    }
    END_NOLOAD(framebuffers)
 
