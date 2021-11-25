@@ -30,8 +30,8 @@ void bhv_garden_mips_init(void) {
     }
 
     o->oInteractionSubtype = INT_SUBTYPE_HOLDABLE_NPC;
-    //o->oGravity = 15.0f;
-    //o->oFriction = 0.89f;
+    o->oGravity = -4.0f;
+    //o->oFriction = 10.0f;
     //o->oBuoyancy = 1.2f;
 
     cur_obj_disable();
@@ -67,34 +67,42 @@ void bhv_garden_mips_init(void) {
             bhv_mips_act_idle();
             break;
     }
-}
+}*/
 
 void bhv_garden_mips_run_loop(void) {
-    // Determine what to do based on MIPS' held status.
+    Vec3f pos;
     switch (o->oHeldState) {
         case HELD_FREE:
-            bhv_garden_mips_free();
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario + 0x8000, 0x100);
+            cur_obj_update_floor_and_walls();
+            pos[1] = o->oPosY;
+            pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
+            pos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 100.0f);
+            if (f32_find_wall_collision(&pos[0], &pos[1], &pos[2], 10.0f, 50.f)) {
+                o->oVelY += 12.0f;
+            }
+            cur_obj_move_standard(0);
             break;
-
         case HELD_HELD:
             bhv_mips_held();
             break;
-
         case HELD_THROWN:
             bhv_mips_thrown();
+            o->os16FA = 0;
             break;
-
         case HELD_DROPPED:
             bhv_mips_dropped();
+            o->os16FA = 0;
             break;
     }
-}*/
+}
 
 
 void bhv_garden_mips_loop(void) {
+    Vec3f pos;
     if (o->os16FA) {
-        //bhv_garden_mips_run_loop();
-        bhv_mips_act_idle();
+        bhv_garden_mips_run_loop();
+        //bhv_mips_act_idle();
         return;
     }
     switch (o->oAction) {
@@ -102,33 +110,46 @@ void bhv_garden_mips_loop(void) {
             if (o->oObjF4->activeFlags == 0) {
                 o->oAction = 1;
                 cur_obj_enable();
-                spawn_mist_particles();
                 cur_obj_init_animation(1);
-                o->oForwardVel = 60.0f;
+                o->oForwardVel = 90.0f;
                 break;
             }
             o->os16F8 += 0x400;
             o->oObjF4->oPosX = o->oObjF4->oHomeX + (sins(o->os16F8) * 3.0f);
             o->oObjF4->oPosZ = o->oObjF4->oHomeZ + (coss(o->os16F8 * 4) * 2.0f);
             if ((o->oTimer & 7) == 0)
-                spawn_mist_particles_variable(1, -50, 4.0f);
+                spawn_mist_particles_variable(1, -60, 4.0f);
             break;
         case 1:
             o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
             if (o->oObjF4 == NULL) {
                 o->os16FA = 1;
                 o->oAction = 0;
+                o->oForwardVel = 40.0f;
                 o->oInteractType = INTERACT_GRABBABLE;
                 break;
             }
             o->oMoveAngleYaw = obj_angle_to_object(o, o->oObjF4);
-            CL_Move();
-            if (dist_between_objects(o, o->oObjF4) < 100.0f) {
+            cur_obj_update_floor_and_walls();
+            pos[1] = o->oPosY;
+            pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
+            pos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 100.0f);
+            if (f32_find_wall_collision(&pos[0], &pos[1], &pos[2], 10.0f, 50.f)) {
+                o->oVelY += 12.0f;
+            }
+            cur_obj_move_standard(0);
+            if (dist_between_objects(o, o->oObjF4) < 200.0f) {
                 cur_obj_disable();
                 vec3f_copy(&o->oPosX, &o->oObjF4->oHomeX);
                 spawn_mist_particles();
                 o->oAction = 0;
             }
+            break;
+        case 4:
+            cur_obj_init_animation(0);
+            spawn_default_star(10668.0f, 379.0f, 8729.0f);
+            o->oAction = 5;
+            o->oInteractType = INTERACT_IGLOO_BARRIER;
             break;
     }
 }

@@ -13,8 +13,10 @@ const GeoLayout ccm_area_1_geo[] = {
 const GeoLayout ccm_dl_101__City_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 20514, -161, 2550, ccm_dl_city_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15126, -161, 8729, ccm_dl_Garden_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 20514, -161, 2550, ccm_dl_Ground_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 14781, 978, 8729, ccm_dl_Garden_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 12648, -136, 8729, ccm_dl_Garden_002_mesh_layer_4),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 20093, -161, 6497),
 		GEO_OPEN_NODE(),
 			GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 0, 250, 0, 0, 0, -90, ccm_dl_Pole1_mesh_layer_1),
@@ -24,6 +26,7 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 24390, 862, 11316, ccm_dl_House_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 18337, 550, 10863, ccm_dl_House_003_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 21182, -252, 12120, 0, 90, -90, ccm_dl_Lego_002_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 8688, -1614, 8729, ccm_dl_morecity_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 21682, -161, 14274, 0, 0, -90, ccm_dl_Plane_002_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 21682, -211, 14274, 0, 0, -90, ccm_dl_Plane_003_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 19682, 1511, 13874, 0, 0, -90, ccm_dl_Plane_004_mesh_layer_1),
@@ -55,6 +58,7 @@ const GeoLayout ccm_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
