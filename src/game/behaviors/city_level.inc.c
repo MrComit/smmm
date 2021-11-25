@@ -19,6 +19,121 @@ Vec3s sLegoColors[] = {
 };
 
 
+
+void bhv_garden_mips_init(void) {
+    u8 starFlags = 1;//save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_NONE));
+    if (starFlags) {
+        o->oBehParams2ndByte = 0;
+        o->oMipsForwardVelocity = 50.0f;
+    } else {
+        o->activeFlags = 0;
+    }
+
+    o->oInteractionSubtype = INT_SUBTYPE_HOLDABLE_NPC;
+    //o->oGravity = 15.0f;
+    //o->oFriction = 0.89f;
+    //o->oBuoyancy = 1.2f;
+
+    cur_obj_disable();
+
+    cur_obj_init_animation(0);
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
+}
+
+/*void bhv_garden_mips_free(void) {
+    switch (o->oAction) {
+        case MIPS_ACT_WAIT_FOR_NEARBY_MARIO:
+            bhv_mips_act_wait_for_nearby_mario();
+            break;
+
+        case MIPS_ACT_FOLLOW_PATH:
+            bhv_mips_act_follow_path();
+            break;
+
+        case MIPS_ACT_WAIT_FOR_ANIMATION_DONE:
+            bhv_mips_act_wait_for_animation_done();
+            break;
+
+        case MIPS_ACT_FALL_DOWN:
+            bhv_mips_act_fall_down();
+            break;
+
+        case MIPS_ACT_IDLE:
+            bhv_mips_act_idle();
+            break;
+    }
+}
+
+void bhv_garden_mips_run_loop(void) {
+    // Determine what to do based on MIPS' held status.
+    switch (o->oHeldState) {
+        case HELD_FREE:
+            bhv_garden_mips_free();
+            break;
+
+        case HELD_HELD:
+            bhv_mips_held();
+            break;
+
+        case HELD_THROWN:
+            bhv_mips_thrown();
+            break;
+
+        case HELD_DROPPED:
+            bhv_mips_dropped();
+            break;
+    }
+}*/
+
+
+void bhv_garden_mips_loop(void) {
+    if (o->os16FA) {
+        //bhv_garden_mips_run_loop();
+        bhv_mips_act_idle();
+        return;
+    }
+    switch (o->oAction) {
+        case 0:
+            if (o->oObjF4->activeFlags == 0) {
+                o->oAction = 1;
+                cur_obj_enable();
+                spawn_mist_particles();
+                cur_obj_init_animation(1);
+                o->oForwardVel = 60.0f;
+                break;
+            }
+            o->os16F8 += 0x400;
+            o->oObjF4->oPosX = o->oObjF4->oHomeX + (sins(o->os16F8) * 3.0f);
+            o->oObjF4->oPosZ = o->oObjF4->oHomeZ + (coss(o->os16F8 * 4) * 2.0f);
+            if ((o->oTimer & 7) == 0)
+                spawn_mist_particles_variable(1, -50, 4.0f);
+            break;
+        case 1:
+            o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
+            if (o->oObjF4 == NULL) {
+                o->os16FA = 1;
+                o->oAction = 0;
+                o->oInteractType = INTERACT_GRABBABLE;
+                break;
+            }
+            o->oMoveAngleYaw = obj_angle_to_object(o, o->oObjF4);
+            CL_Move();
+            if (dist_between_objects(o, o->oObjF4) < 100.0f) {
+                cur_obj_disable();
+                vec3f_copy(&o->oPosX, &o->oObjF4->oHomeX);
+                spawn_mist_particles();
+                o->oAction = 0;
+            }
+            break;
+    }
+}
+
+
 void bhv_level_entrance_init(void) {
     obj_set_hitbox(o, &sLevelEntranceHitbox);
 }
@@ -46,14 +161,14 @@ void bhv_pound_lego_loop(void) {
             if (o->oPosY < o->oHomeY - 100.0f) {
                 spawn_mist_particles();
                 o->activeFlags = 0;
-                count = count_objects_with_behavior(bhvPoundLego);
+                /*count = count_objects_with_behavior(bhvPoundLego);
                 if (count != 1) {
                     spawn_orange_number(6 - count, 0, 50, 0);
                 } else {
                     spawn_default_star(13610.0f, -460.0f, 8520.0f);
                 }
                 play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) 6 - count) << 16),
-                    gGlobalSoundSource);
+                    gGlobalSoundSource);*/
             }
             break;
     }

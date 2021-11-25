@@ -800,6 +800,8 @@ void bhv_ice_cube_child_loop(void);
 void bhv_big_ice_cube_loop(void);
 void bhv_red_button_loop(void);
 void bhv_ice_ceiling_gate_loop(void);
+void bhv_garden_mips_init(void);
+void bhv_garden_mips_loop(void);
 
 
 

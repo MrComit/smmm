@@ -13,6 +13,7 @@ const GeoLayout ccm_area_1_geo[] = {
 const GeoLayout ccm_dl_101__City_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15126, -161, 8729, ccm_dl_Garden_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 20514, -161, 2550, ccm_dl_Ground_mesh_layer_1),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 20093, -161, 6497),
 		GEO_OPEN_NODE(),

@@ -8122,3 +8122,18 @@ const BehaviorScript bhvIceCeilingGate[] = {
     END_LOOP(),
     BREAK(),
 };
+
+
+const BehaviorScript bhvGardenMips[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, mips_seg6_anims_06015634),
+    SET_INT(oInteractType, INTERACT_IGLOO_BARRIER),
+    //DROP_TO_FLOOR(),
+    SET_HITBOX(/*Radius*/ 50, /*Height*/ 75),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_garden_mips_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_garden_mips_loop),
+    END_LOOP(),
+};
