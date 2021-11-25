@@ -30,7 +30,7 @@ void bhv_garden_mips_init(void) {
     }
 
     o->oInteractionSubtype = INT_SUBTYPE_HOLDABLE_NPC;
-    o->oGravity = -4.0f;
+    o->oGravity = -9.0f;
     //o->oFriction = 10.0f;
     //o->oBuoyancy = 1.2f;
 
@@ -45,41 +45,21 @@ void bhv_garden_mips_init(void) {
     vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
 }
 
-/*void bhv_garden_mips_free(void) {
-    switch (o->oAction) {
-        case MIPS_ACT_WAIT_FOR_NEARBY_MARIO:
-            bhv_mips_act_wait_for_nearby_mario();
-            break;
-
-        case MIPS_ACT_FOLLOW_PATH:
-            bhv_mips_act_follow_path();
-            break;
-
-        case MIPS_ACT_WAIT_FOR_ANIMATION_DONE:
-            bhv_mips_act_wait_for_animation_done();
-            break;
-
-        case MIPS_ACT_FALL_DOWN:
-            bhv_mips_act_fall_down();
-            break;
-
-        case MIPS_ACT_IDLE:
-            bhv_mips_act_idle();
-            break;
-    }
-}*/
-
 void bhv_garden_mips_run_loop(void) {
     Vec3f pos;
     switch (o->oHeldState) {
         case HELD_FREE:
+            if (o->oDistanceToMario > 2000.0f)
+                o->oForwardVel = 0;
+            else
+                o->oForwardVel = 50.0f;
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario + 0x8000, 0x100);
             cur_obj_update_floor_and_walls();
             pos[1] = o->oPosY;
             pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
             pos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 100.0f);
             if (f32_find_wall_collision(&pos[0], &pos[1], &pos[2], 10.0f, 50.f)) {
-                o->oVelY += 12.0f;
+                o->oPosY += 50.0f;
             }
             cur_obj_move_standard(0);
             break;
@@ -111,7 +91,7 @@ void bhv_garden_mips_loop(void) {
                 o->oAction = 1;
                 cur_obj_enable();
                 cur_obj_init_animation(1);
-                o->oForwardVel = 90.0f;
+                o->oForwardVel = 70.0f;
                 break;
             }
             o->os16F8 += 0x400;
@@ -135,7 +115,7 @@ void bhv_garden_mips_loop(void) {
             pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
             pos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 100.0f);
             if (f32_find_wall_collision(&pos[0], &pos[1], &pos[2], 10.0f, 50.f)) {
-                o->oVelY += 12.0f;
+                o->oPosY += 50.0f;
             }
             cur_obj_move_standard(0);
             if (dist_between_objects(o, o->oObjF4) < 200.0f) {

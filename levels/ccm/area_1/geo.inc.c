@@ -17,6 +17,7 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15126, -161, 8729, ccm_dl_Garden_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 14781, 978, 8729, ccm_dl_Garden_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 12648, -136, 8729, ccm_dl_Garden_002_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 15126, -161, 8729, ccm_dl_Garden_003_mesh_layer_4),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 20093, -161, 6497),
 		GEO_OPEN_NODE(),
 			GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 0, 250, 0, 0, 0, -90, ccm_dl_Pole1_mesh_layer_1),
