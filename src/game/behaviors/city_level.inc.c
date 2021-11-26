@@ -53,7 +53,7 @@ void bhv_garden_mips_run_loop(void) {
                 o->oForwardVel = 0;
             else
                 o->oForwardVel = 50.0f;
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario + 0x8000, 0x100);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario + 0x8000, 0x400);
             cur_obj_update_floor_and_walls();
             pos[1] = o->oPosY;
             pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
@@ -127,7 +127,7 @@ void bhv_garden_mips_loop(void) {
             break;
         case 4:
             cur_obj_init_animation(0);
-            spawn_default_star(10668.0f, 379.0f, 8729.0f);
+            spawn_default_star(10668.0f, 379.0f, 729.0f);
             o->oAction = 5;
             o->oInteractType = INTERACT_IGLOO_BARRIER;
             break;
@@ -250,7 +250,7 @@ void bhv_lego_piece_loop(void) {
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 50.0f);
 
             CL_dist_between_points(&o->oHomeX, gMarioState->pos, &dist);
-            if (dist < 1500.0f) {
+            if (dist < 2200.0f) {
                 o->oFloatFC = o->oPosX;
                 o->oFloat104 = o->oPosZ;
                 o->oAction = 1;
@@ -281,7 +281,7 @@ void bhv_lego_piece_loop(void) {
             }
             break;
         case 2:
-            if (o->oDistanceToMario > 2000.0f && gMarioObject->platform != o) {
+            if (o->oDistanceToMario > 3000.0f && gMarioObject->platform != o) {
                 o->oAction = 3;
                 o->oFloatFC = o->oHomeX + (random_float() - 0.5f) * 2000.0f;
                 o->oFloat104 = o->oHomeZ + (random_float() - 0.5f) * 2000.0f;
