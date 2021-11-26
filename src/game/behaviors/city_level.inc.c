@@ -21,8 +21,8 @@ Vec3s sLegoColors[] = {
 
 
 void bhv_garden_mips_init(void) {
-    u8 starFlags = 1;//save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(COURSE_NONE));
-    if (starFlags) {
+    u8 starFlags = save_file_get_currency_flags() & (1 << 1);
+    if (!starFlags) {
         o->oBehParams2ndByte = 0;
         o->oMipsForwardVelocity = 50.0f;
     } else {
@@ -250,7 +250,7 @@ void bhv_lego_piece_loop(void) {
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 50.0f);
 
             CL_dist_between_points(&o->oHomeX, gMarioState->pos, &dist);
-            if (dist < 2200.0f) {
+            if (dist < 2500.0f) {
                 o->oFloatFC = o->oPosX;
                 o->oFloat104 = o->oPosZ;
                 o->oAction = 1;
