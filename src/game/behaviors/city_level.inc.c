@@ -274,7 +274,7 @@ void bhv_lego_piece_loop(void) {
                 o->oFaceAngleYaw = (o->oMoveAngleYaw = o->os1610C);
                 o->oFaceAnglePitch = (o->oMoveAnglePitch = o->os16110);
                 o->oAction = 2;
-                o->oForwardVel = 0; 
+                o->oForwardVel = 0;
                 o->oVelX = (o->oVelZ = 0);
                 o->oFloat108 = 1.0f;
                 cur_obj_scale(o->oFloat108);

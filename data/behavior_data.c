@@ -6156,7 +6156,7 @@ const BehaviorScript bhvIntroScene[] = {
 const BehaviorScript bhvLandChunk[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oDrawingDistance, 0x2000),
     SET_HOME(),
     LOAD_COLLISION_DATA(landchunk_collision),
     CALL_NATIVE(bhv_sinking_plat_init),
@@ -7732,9 +7732,9 @@ const BehaviorScript bhvHorizontalPole[] = {
 
 const BehaviorScript bhvLegoPiece[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST)),
     LOAD_COLLISION_DATA(lego_piece_collision),
-    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oDrawingDistance, 0x2000),
     SCALE(0, 70),
     SET_HOME(),
     CALL_NATIVE(bhv_lego_piece_init),

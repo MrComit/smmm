@@ -952,83 +952,94 @@ extern struct MarioState *gMarioState;
 void cur_obj_update(void) {
     UNUSED u8 filler[4];
 
-    s16 objFlags = gCurrentObject->oFlags;
+    s32 objFlags = gCurrentObject->oFlags;
     f32 distanceFromMario;
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
     if (!(gCurrentObject->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
         // Calculate the distance from the object to Mario.
-        if (objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) {
+        if (objFlags & (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST)) {
             gCurrentObject->oDistanceToMario = dist_between_objects(gCurrentObject, gMarioObject);
             distanceFromMario = gCurrentObject->oDistanceToMario;
         } else {
             distanceFromMario = 0.0f;
         }
 
-        // Calculate the angle from the object to Mario.
-        if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO) {
-            gCurrentObject->oAngleToMario = obj_angle_to_object(gCurrentObject, gMarioObject);
-        }
 
-        // If the object's action has changed, reset the action timer.
-        if (gCurrentObject->oAction != gCurrentObject->oPrevAction) {
-            (void) (gCurrentObject->oTimer = 0, gCurrentObject->oSubAction = 0,
-                    gCurrentObject->oPrevAction = gCurrentObject->oAction);
-        }
+        if (!(gIsConsole) || 
+            !(objFlags & OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST && distanceFromMario > gCurrentObject->oDrawingDistance)) {
+            
+            if (gIsConsole)
+                gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
 
-        // Execute the behavior script.
-        gCurBhvCommand = gCurrentObject->curBhvCommand;
+            // Calculate the angle from the object to Mario.
+            if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO) {
+                gCurrentObject->oAngleToMario = obj_angle_to_object(gCurrentObject, gMarioObject);
+            }
 
-        do {
-            bhvCmdProc = BehaviorCmdTable[*gCurBhvCommand >> 24];
-            bhvProcResult = bhvCmdProc();
-        } while (bhvProcResult == BHV_PROC_CONTINUE);
+            // If the object's action has changed, reset the action timer.
+            if (gCurrentObject->oAction != gCurrentObject->oPrevAction) {
+                (void) (gCurrentObject->oTimer = 0, gCurrentObject->oSubAction = 0,
+                        gCurrentObject->oPrevAction = gCurrentObject->oAction);
+            }
 
-        gCurrentObject->curBhvCommand = gCurBhvCommand;
+            // Execute the behavior script.
+            gCurBhvCommand = gCurrentObject->curBhvCommand;
 
-        // Increment the object's timer.
-        if (gCurrentObject->oTimer < 0x3FFFFFFF) {
-            gCurrentObject->oTimer++;
-        }
+            do {
+                bhvCmdProc = BehaviorCmdTable[*gCurBhvCommand >> 24];
+                bhvProcResult = bhvCmdProc();
+            } while (bhvProcResult == BHV_PROC_CONTINUE);
 
-        // If the object's action has changed, reset the action timer.
-        if (gCurrentObject->oAction != gCurrentObject->oPrevAction) {
-            (void) (gCurrentObject->oTimer = 0, gCurrentObject->oSubAction = 0,
-                    gCurrentObject->oPrevAction = gCurrentObject->oAction);
-        }
+            gCurrentObject->curBhvCommand = gCurBhvCommand;
 
-        // Execute various code based on object flags.
-        objFlags = (s16) gCurrentObject->oFlags;
+            // Increment the object's timer.
+            if (gCurrentObject->oTimer < 0x3FFFFFFF) {
+                gCurrentObject->oTimer++;
+            }
 
-        //if (objFlags & OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE) {
-        //    obj_set_face_angle_to_move_angle(gCurrentObject);
-        //}
+            // If the object's action has changed, reset the action timer.
+            if (gCurrentObject->oAction != gCurrentObject->oPrevAction) {
+                (void) (gCurrentObject->oTimer = 0, gCurrentObject->oSubAction = 0,
+                        gCurrentObject->oPrevAction = gCurrentObject->oAction);
+            }
 
-        if (objFlags & OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW) {
-            gCurrentObject->oFaceAngleYaw = gCurrentObject->oMoveAngleYaw;
-        }
+            // Execute various code based on object flags.
+            objFlags = (s16) gCurrentObject->oFlags;
 
-        if (objFlags & OBJ_FLAG_MOVE_XZ_USING_FVEL) {
-            cur_obj_move_xz_using_fvel_and_yaw();
-        }
+            //if (objFlags & OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE) {
+            //    obj_set_face_angle_to_move_angle(gCurrentObject);
+            //}
 
-        if (objFlags & OBJ_FLAG_MOVE_Y_WITH_TERMINAL_VEL) {
-            cur_obj_move_y_with_terminal_vel();
-        }
+            if (objFlags & OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW) {
+                gCurrentObject->oFaceAngleYaw = gCurrentObject->oMoveAngleYaw;
+            }
 
-        if (objFlags & OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT) {
-            obj_build_transform_relative_to_parent(gCurrentObject);
-        }
+            if (objFlags & OBJ_FLAG_MOVE_XZ_USING_FVEL) {
+                cur_obj_move_xz_using_fvel_and_yaw();
+            }
 
-        if (objFlags & OBJ_FLAG_SET_THROW_MATRIX_FROM_TRANSFORM) {
-            obj_set_throw_matrix_from_transform(gCurrentObject);
-        }
+            if (objFlags & OBJ_FLAG_MOVE_Y_WITH_TERMINAL_VEL) {
+                cur_obj_move_y_with_terminal_vel();
+            }
 
-        if (objFlags & OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE) {
-            obj_update_gfx_pos_and_angle(gCurrentObject);
+            if (objFlags & OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT) {
+                obj_build_transform_relative_to_parent(gCurrentObject);
+            }
+
+            if (objFlags & OBJ_FLAG_SET_THROW_MATRIX_FROM_TRANSFORM) {
+                obj_set_throw_matrix_from_transform(gCurrentObject);
+            }
+
+            if (objFlags & OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE) {
+                obj_update_gfx_pos_and_angle(gCurrentObject);
+            }
+        } else if (gIsConsole) {
+            gCurrentObject->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
         }
     }
+
 
     if (objFlags & OBJ_FLAG_DISABLE_ON_ROOM_CLEAR) {
         if (save_file_get_rooms(gCurrentObject->oRoom / 32) & (1 << ((gCurrentObject->oRoom + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
