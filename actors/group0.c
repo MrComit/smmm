@@ -57,3 +57,5 @@
 #include "held_letter/model.inc.c"
 #include "global_gate/model.inc.c"
 #include "global_gate/collision.inc.c"
+#include "horizontal_pole/collision.inc.c"
+#include "horizontal_pole/model.inc.c"

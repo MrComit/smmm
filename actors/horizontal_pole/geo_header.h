@@ -1,0 +1,12 @@
+extern const GeoLayout horizontal_pole_geo[];
+extern Lights1 horizontal_pole_Band_001_lights;
+extern Lights1 horizontal_pole_Pole_001_lights;
+extern Vtx horizontal_pole_HorizontalPole_mesh_layer_1_vtx_cull[8];
+extern Vtx horizontal_pole_HorizontalPole_mesh_layer_1_vtx_0[20];
+extern Gfx horizontal_pole_HorizontalPole_mesh_layer_1_tri_0[];
+extern Vtx horizontal_pole_HorizontalPole_mesh_layer_1_vtx_1[22];
+extern Gfx horizontal_pole_HorizontalPole_mesh_layer_1_tri_1[];
+extern Gfx mat_horizontal_pole_Band_001[];
+extern Gfx mat_horizontal_pole_Pole_001[];
+extern Gfx horizontal_pole_HorizontalPole_mesh_layer_1[];
+extern Gfx horizontal_pole_material_revert_render_settings[];

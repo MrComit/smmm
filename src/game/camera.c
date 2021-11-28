@@ -1543,7 +1543,8 @@ void mode_8_directions_camera_3d(struct Camera *c) {
         sRCounter = 0;
     }
 
-    if (gPlayer1Controller->buttonPressed & D_JPAD) {
+    if (gPlayer1Controller->buttonPressed & D_JPAD || 
+        (gPlayer1Controller->buttonDown & R_TRIG && gPlayer1Controller->buttonPressed & D_CBUTTONS)) {
         s8DirModeBaseYaw = (s8DirModeBaseYaw + 0x1000) & 0xE000; // Lock the camera to the nearest 45deg axis
     }
 

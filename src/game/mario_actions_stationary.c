@@ -907,6 +907,9 @@ s32 act_freefall_land_stop(struct MarioState *m) {
 }
 
 s32 act_triple_jump_land_stop(struct MarioState *m) {
+    if (m->input & INPUT_NONZERO_ANALOG) {
+        return set_mario_action(m, ACT_IDLE, 0);
+    }
     if (check_common_landing_cancels(m, ACT_JUMP)) {
         return TRUE;
     }

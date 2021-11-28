@@ -36,3 +36,4 @@
 #include "StarCurrency/geo.inc.c"
 #include "held_letter/geo.inc.c"
 #include "global_gate/geo.inc.c"
+#include "horizontal_pole/geo.inc.c"
