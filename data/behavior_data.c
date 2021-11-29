@@ -8141,3 +8141,15 @@ const BehaviorScript bhvGardenMips[] = {
         CALL_NATIVE(bhv_garden_mips_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCardboardWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    //LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SET_FLOAT(oDrawingDistance, 0x2000),
+    CALL_NATIVE(bhv_cardboard_wall_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cardboard_wall_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

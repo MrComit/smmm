@@ -1,3 +1,5 @@
+#include "levels/ccm/header.h"
+
 static struct ObjectHitbox sLevelEntranceHitbox = {
     /* interactType: */ INTERACT_BBH_ENTRANCE,
     /* downOffset: */ 0,
@@ -17,6 +19,46 @@ Vec3s sLegoColors[] = {
 {0x21, 0x72, 0xB5},
 {0xB5, 0x5E, 0x1E},
 };
+
+
+static void const *sCardboardCollision[] = {
+    cardboard_wall_collision,
+};
+
+void bhv_cardboard_wall_init(void) {
+    o->collisionData = segmented_to_virtual(sCardboardCollision[o->oBehParams >> 24]);
+}
+
+
+void bhv_cardboard_wall_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            obj = cur_obj_nearest_object_with_behavior(bhvGenericSwitch);
+            if (obj == NULL || obj->oF4) {
+                if (o->oBehParams2ndByte)
+                    o->oAction = 2;
+                else
+                    o->oAction = 1;
+
+            }
+            break;
+        case 1:
+            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, 0x200);
+            if ((s16)o->oFaceAngleRoll == -0x4000) {
+                o->oAction = 3;
+            }
+            break;
+        case 2:
+            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, 0x200);
+            if ((s16)o->oFaceAngleRoll == -0x4000) {
+                o->oAction = 3;
+                cur_obj_shake_screen(1);
+                play_puzzle_jingle();
+            }
+            break;
+    }
+}
 
 
 

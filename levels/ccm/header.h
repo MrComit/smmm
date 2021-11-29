@@ -73,4 +73,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/pound_lego/collision_header.h"
 
+#include "levels/ccm/cardboard_wall/collision_header.h"
+
+#include "levels/ccm/cardboard_wall/geo_header.h"
+
 #endif

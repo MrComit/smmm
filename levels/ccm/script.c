@@ -43,6 +43,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_LEGO_PIECE, lego_piece_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SHAKY_PLAT, shaky_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POUND_LEGO, pound_lego_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CARDBOARD_WALL, cardboard_wall_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -60,6 +61,11 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, 16906, 119, -11094, 0, 0, 0, 0x000C0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -90, 23998, 200, -7093),
 		OBJECT(MODEL_RUBBERBAND, 17643, 119, -12202, 0, -180, 0, 0x00000000, bhvRubberband),
+		OBJECT(MODEL_PURPLE_SWITCH, 24274, -158, 1386, 0, 0, 0, 0x00000000, bhvGenericSwitch),
+		OBJECT(MODEL_CARDBOARD_WALL, 24737, -161, -41, 0, 0, 0, (1 << 16), bhvCardboardWall),
+		OBJECT(MODEL_CARDBOARD_WALL, 24737, -161, -1878, 0, 0, 0, 0x00000000, bhvCardboardWall),
+		OBJECT(MODEL_CARDBOARD_WALL, 24737, -161, -3775, 0, 0, 0, 0x00000000, bhvCardboardWall),
+		OBJECT(MODEL_CARDBOARD_WALL, 24737, -161, -5612, 0, 0, 0, 0x00000000, bhvCardboardWall),
 		OBJECT(MODEL_STAR_CURRENCY, 19854, 1561, 2918, 0, 90, 0, 0x00000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 9980, 221, -1516, 0, 0, 0, (1 << 24), bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 4166, 679, 8690, 0, -180, 0, (2 << 24), bhvStar),

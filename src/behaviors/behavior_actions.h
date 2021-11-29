@@ -802,6 +802,8 @@ void bhv_red_button_loop(void);
 void bhv_ice_ceiling_gate_loop(void);
 void bhv_garden_mips_init(void);
 void bhv_garden_mips_loop(void);
+void bhv_cardboard_wall_init(void);
+void bhv_cardboard_wall_loop(void);
 
 
 
