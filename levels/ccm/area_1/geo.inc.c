@@ -10,15 +10,35 @@ const GeoLayout ccm_area_1_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout ccm_dl_101__City_geo[] = {
+const GeoLayout ccm_dl_bb_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 20514, -161, -5450, ccm_dl_city_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15126, -161, 729, ccm_dl_Garden_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 14781, 978, 729, ccm_dl_Garden_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 12648, -136, 729, ccm_dl_Garden_002_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 15126, -161, 729, ccm_dl_Garden_003_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 14781, 978, 729, ccm_dl_Garden_004_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_cc_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 15126, -161, 729, ccm_dl_cc_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_101__City_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_garden_render),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, ccm_dl_bb_geo),
+			GEO_BRANCH(1, ccm_dl_cc_geo),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 9759, -4357, 3574, ccm_dl_aa_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 20514, -161, -5450, ccm_dl_city_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 15126, -161, 729, ccm_dl_GardenShell_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 18870, 1439, 2863, ccm_dl_House_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 24390, 862, 3316, ccm_dl_House_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 18337, 550, 2863, ccm_dl_House_003_mesh_layer_1),

@@ -44,13 +44,17 @@ void bhv_cardboard_wall_loop(void) {
             }
             break;
         case 1:
-            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, 0x200);
+            o->os16F4 += 4;
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0x800, o->os16F4 / 10);
+            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, o->os16F4);
             if ((s16)o->oFaceAngleRoll == -0x4000) {
                 o->oAction = 3;
             }
             break;
         case 2:
-            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, 0x200);
+            o->os16F4 += 4;
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0x800, o->os16F4 / 10);
+            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, o->os16F4);
             if ((s16)o->oFaceAngleRoll == -0x4000) {
                 o->oAction = 3;
                 cur_obj_shake_screen(1);
