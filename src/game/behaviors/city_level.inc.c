@@ -39,7 +39,7 @@ void bhv_cardboard_wall_loop(void) {
                 if (o->oBehParams2ndByte)
                     o->oAction = 2;
                 else
-                    o->oAction = 1;
+                    o->oAction = 3;
 
             }
             break;
@@ -48,17 +48,31 @@ void bhv_cardboard_wall_loop(void) {
             o->os16F4 = approach_s16_symmetric(o->os16F4, 0x800, o->os16F4 / 10);
             o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, o->os16F4);
             if ((s16)o->oFaceAngleRoll == -0x4000) {
-                o->oAction = 3;
+                if (o->oBehParams2ndByte) {
+                    //cur_obj_shake_screen(1);
+                    set_camera_shake_from_point(1, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
+                    play_puzzle_jingle();
+                    o->oAction = 4;
+                } else {
+                    o->oAction = 5;
+                }
             }
             break;
         case 2:
-            o->os16F4 += 4;
-            o->os16F4 = approach_s16_symmetric(o->os16F4, 0x800, o->os16F4 / 10);
-            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, o->os16F4);
-            if ((s16)o->oFaceAngleRoll == -0x4000) {
-                o->oAction = 3;
-                cur_obj_shake_screen(1);
-                play_puzzle_jingle();
+            set_mario_npc_dialog(1);
+            gCamera->comitCutscene = 15;
+            if (o->oTimer > 25)
+                o->oAction = 1;
+            break;
+        case 3:
+            if (o->oTimer > 25)
+                o->oAction = 1;
+            break;
+        case 4:
+            if (o->oTimer > 30) {
+                set_mario_npc_dialog(0);
+                gCamera->comitCutscene = 0;
+                o->oAction = 5;
             }
             break;
     }
