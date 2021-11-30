@@ -580,6 +580,33 @@ Gfx *geo_switch_garden_render(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+#ifdef AVOID_UB
+Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        if (!gIsConsole || (gMarioState->pos[0] < 20700.0f)) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
 
 //! @bug Same issue as geo_switch_anim_state.
 #ifdef AVOID_UB

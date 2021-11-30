@@ -11,6 +11,56 @@
 
 
 
+void bhv_hidden_horizontal_pole_init(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_POLE_OPEN) {
+        spawn_object(o, MODEL_HORIZONTAL_POLE, bhvHorizontalPole);
+        o->activeFlags = 0;
+    } else {
+        o->oPosY -= 400.0f;
+        cur_obj_hide();
+    }
+
+}
+
+void bhv_hidden_horizontal_pole_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            obj = cur_obj_nearest_object_with_behavior(bhvGenericSwitch);
+            if (obj == NULL || obj->oF4) {
+                set_mario_npc_dialog(1);
+                gCamera->comitCutscene = 16;
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > 15) {
+                cur_obj_unhide();
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
+            if (o->oPosY == o->oHomeY) {
+                o->oAction = 3;
+                set_camera_shake_from_point(1, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
+                play_puzzle_jingle();
+            }
+            break;
+        case 3:
+            if (o->oTimer > 30) {
+                set_mario_npc_dialog(0);
+                gCamera->comitCutscene = 0;
+                spawn_object(o, MODEL_HORIZONTAL_POLE, bhvHorizontalPole);
+                save_file_set_newflags(SAVE_NEW_FLAG_CITY_POLE_OPEN, 0);
+                o->activeFlags = 0;
+            }
+        break;
+    }
+}
+
+
+
 void bhv_horizontal_pole_loop(void) {
     if (o->oPosY - 10.0f < gMarioObject->oPosY
         && gMarioObject->oPosY < o->oPosY + o->hitboxHeight + 30.0f)

@@ -8153,3 +8153,16 @@ const BehaviorScript bhvCardboardWall[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvHiddenHorizontalPole[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_hidden_horizontal_pole_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hidden_horizontal_pole_loop),
+    END_LOOP(),
+};

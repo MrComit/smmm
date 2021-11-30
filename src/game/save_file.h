@@ -114,7 +114,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_NEW_FLAG_FAKE_WALL          /* 0x00001000 */ (1 << 12)
 #define SAVE_NEW_FLAG_UNLOCKED_PLAYSET   /* 0x00002000 */ (1 << 13)
 #define SAVE_NEW_FLAG_PUSHED_SNOWPILE    /* 0x00004000 */ (1 << 14)
-#define SAVE_NEW_FLAG_016                /* 0x00008000 */ (1 << 15)
+#define SAVE_NEW_FLAG_CITY_POLE_OPEN     /* 0x00008000 */ (1 << 15)
 #define SAVE_NEW_FLAG_017                /* 0x00010000 */ (1 << 16)
 #define SAVE_NEW_FLAG_018                /* 0x00020000 */ (1 << 17)
 #define SAVE_NEW_FLAG_019                /* 0x00040000 */ (1 << 18)

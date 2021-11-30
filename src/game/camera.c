@@ -1445,6 +1445,16 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_get_dist_and_angle(c->focus, c->pos, &pos[0], &pitch, &yaw);
             c->yaw = c->nextYaw = yaw;
             break;
+        case 16:
+            obj = cur_obj_nearest_object_with_behavior(bhvHiddenHorizontalPole);
+            if (obj == NULL) {
+                c->comitCutscene = 0;
+                break;
+            }
+            vec3f_set(c->pos, obj->oPosX + 2000.0f, obj->oHomeY + 1500.0f, obj->oPosZ - 2000.0f);
+            vec3f_copy(c->focus, &obj->oHomeX);
+            c->yaw = c->nextYaw = DEGREES(0);
+            break;
     }
 }
 

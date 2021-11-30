@@ -804,6 +804,8 @@ void bhv_garden_mips_init(void);
 void bhv_garden_mips_loop(void);
 void bhv_cardboard_wall_init(void);
 void bhv_cardboard_wall_loop(void);
+void bhv_hidden_horizontal_pole_init(void);
+void bhv_hidden_horizontal_pole_loop(void);
 
 
 
