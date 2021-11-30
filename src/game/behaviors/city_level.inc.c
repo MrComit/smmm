@@ -112,16 +112,32 @@ void bhv_garden_mips_run_loop(void) {
             if (o->oDistanceToMario > 2000.0f)
                 o->oForwardVel = 0;
             else
-                o->oForwardVel = 50.0f;
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario + 0x8000, 0x400);
+                o->oForwardVel = 35.0f;
+            
+            if (o->oTimer > o->os1610A) {
+                o->os1610C = CL_RandomMinMaxU16(1, 20);
+                o->os1610A = CL_RandomMinMaxU16(30, 120);
+            }
+            o->os1610E += (0x20 * o->os1610C);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os1610E - o->oAngleToMario, 0x800);
             cur_obj_update_floor_and_walls();
             pos[1] = o->oPosY;
             pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
             pos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 100.0f);
             if (f32_find_wall_collision(&pos[0], &pos[1], &pos[2], 10.0f, 50.f)) {
                 o->oPosY += 50.0f;
+                cur_obj_reflect_move_angle_off_wall();
             }
             cur_obj_move_standard(0);
+
+            if (o->oPosX < 9400.0f) {
+                o->oPosX = 9400.0f;
+            } else if (o->oPosX > 17600.0f) {
+                o->oPosX = 17600.0f;
+            }
+            if (cur_obj_check_if_near_animation_end() == TRUE) {
+                cur_obj_play_sound_2(SOUND_OBJ_MIPS_RABBIT);
+            }
             break;
         case HELD_HELD:
             bhv_mips_held();
@@ -140,6 +156,7 @@ void bhv_garden_mips_run_loop(void) {
 
 void bhv_garden_mips_loop(void) {
     Vec3f pos;
+    struct Surface *floor;
     if (o->os16FA) {
         bhv_garden_mips_run_loop();
         //bhv_mips_act_idle();
@@ -148,10 +165,21 @@ void bhv_garden_mips_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oObjF4->activeFlags == 0) {
+                if (o->os16110 >= 4) {
+                    o->os16FA = 1;
+                    o->oAction = 0;
+                    o->oForwardVel = 35.0f;
+                    o->oInteractType = INTERACT_GRABBABLE;
+                    cur_obj_enable();
+                    break;
+                }
                 o->oAction = 1;
                 cur_obj_enable();
                 cur_obj_init_animation(1);
                 o->oForwardVel = 70.0f;
+                o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
+                if (o->oObjF4 != NULL)
+                    o->oMoveAngleYaw = obj_angle_to_object(o, o->oObjF4);
                 break;
             }
             o->os16F8 += 0x400;
@@ -161,15 +189,6 @@ void bhv_garden_mips_loop(void) {
                 spawn_mist_particles_variable(1, -60, 4.0f);
             break;
         case 1:
-            o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
-            if (o->oObjF4 == NULL) {
-                o->os16FA = 1;
-                o->oAction = 0;
-                o->oForwardVel = 40.0f;
-                o->oInteractType = INTERACT_GRABBABLE;
-                break;
-            }
-            o->oMoveAngleYaw = obj_angle_to_object(o, o->oObjF4);
             cur_obj_update_floor_and_walls();
             pos[1] = o->oPosY;
             pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
@@ -178,11 +197,34 @@ void bhv_garden_mips_loop(void) {
                 o->oPosY += 50.0f;
             }
             cur_obj_move_standard(0);
-            if (dist_between_objects(o, o->oObjF4) < 200.0f) {
-                cur_obj_disable();
-                vec3f_copy(&o->oPosX, &o->oObjF4->oHomeX);
-                spawn_mist_particles();
+            if (o->oTimer > 60) {
+                o->oAction = 2;
+                o->oForwardVel = 0;
+                o->oVelY = 60.0f;
+                o->oGravity = -5.0f;
+            }
+            break;
+        case 2:
+            CL_Move();
+            if (o->oTimer > 10) {
                 o->oAction = 0;
+                o->os16110++;
+                o->oVelY = 0;
+                o->oGravity = -9.0f;
+
+                spawn_mist_particles();
+                o->oObjF4 = spawn_object(o, MODEL_POUND_LEGO, bhvPoundLego);
+                o->oObjF4->oFaceAngleYaw = 0;
+                do {
+                    o->oObjF4->oPosX = 9200.0f + (8200.0f * random_float());
+                    o->oObjF4->oPosZ = -2000.0f + (5200.0f * random_float());
+                    o->oObjF4->oPosY = find_floor(o->oObjF4->oPosX, o->oObjF4->oPosY + 5000.0f, o->oObjF4->oPosZ, &floor);
+                    vec3f_copy(&o->oObjF4->oHomeX, &o->oObjF4->oPosX);
+                    vec3f_copy(&o->oPosX, &o->oObjF4->oHomeX);
+                } while (floor->type == SURFACE_GENERAL_USE || 
+                        CL_objptr_dist_to_nearest_object_with_behavior(o->oObjF4, bhvPoundLego) < 500.0f);
+
+                cur_obj_disable();
             }
             break;
         case 4:
@@ -206,6 +248,12 @@ void bhv_level_entrance_loop(void) {
             o->activeFlags = 0;
         }
     }
+}
+
+
+
+void bhv_pound_lego_init(void) {
+
 }
 
 

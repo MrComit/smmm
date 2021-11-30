@@ -231,7 +231,7 @@ void bhv_mips_held(void) {
     cur_obj_become_intangible();
 
     // If MIPS hasn't spawned his star yet...
-    if (o->oMipsStarStatus == MIPS_STAR_STATUS_HAVENT_SPAWNED_STAR) {
+    if (o->os16112 == MIPS_STAR_STATUS_HAVENT_SPAWNED_STAR) {
         // Choose dialog based on which MIPS encounter this is.
         if (o->oBehParams2ndByte == 0) {
             dialogID = DIALOG_084;
@@ -244,7 +244,7 @@ void bhv_mips_held(void) {
             if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, dialogID) != 0) {
                 o->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
                 o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
-                o->oMipsStarStatus = MIPS_STAR_STATUS_SHOULD_SPAWN_STAR;
+                o->os16112 = MIPS_STAR_STATUS_SHOULD_SPAWN_STAR;
                 set_mario_npc_dialog(MARIO_DIALOG_STOP);
             }
         }

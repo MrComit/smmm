@@ -441,3 +441,45 @@ s32 CL_cur_obj_get_obj_collision(struct Object *obj) {
     }
     return FALSE;
 }
+
+
+
+struct Object *CL_objptr_find_nearest_object_behavior(struct Object *obj2, const BehaviorScript *behavior, f32 *dist) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    f32 minDist = 0x20000;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj != obj2) {
+                f32 objDist = dist_between_objects(obj2, obj);
+                if (objDist < minDist) {
+                    closestObj = obj;
+                    minDist = objDist;
+                }
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+
+    *dist = minDist;
+    return closestObj;
+}
+
+
+f32 CL_objptr_dist_to_nearest_object_with_behavior(struct Object *obj2, const BehaviorScript *behavior) {
+    struct Object *obj;
+    f32 dist;
+
+    obj = CL_objptr_find_nearest_object_behavior(obj2, behavior, &dist);
+    if (obj == NULL) {
+        dist = 15000.0f;
+    }
+
+    return dist;
+}

@@ -1137,19 +1137,11 @@ position of the big hand.\n\
 Oh, look what I found!\n\
 Here, Mario, catch!"))
 
-DEFINE_DIALOG(DIALOG_084, 1, 3, 30, 200, _("\
-Yeeoww! Unhand me,\n\
-brute! I'm late, so late,\n\
-I must make haste!\n\
-This shiny thing? Mine!\n\
-It's mine. Finders,\n\
-keepers, losers...\n\
-Late, late, late...\n\
-Ouch! Take it then! A\n\
-gift from Bowser, it was.\n\
-Now let me be! I have a\n\
-date! I cannot be late\n\
-for tea!"))
+DEFINE_DIALOG(DIALOG_084, 1, 2, 30, 200, _("\
+Yeeoww! Unhand me, please!\n\
+\n\
+Just take this and leave me\n\
+alone, it's all I have!"))
 
 DEFINE_DIALOG(DIALOG_085, 1, 5, 30, 200, _("\
 You don't stand a ghost\n\
