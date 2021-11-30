@@ -389,6 +389,7 @@ static struct Surface *read_surface_data(s16 *vertexData, s16 **vertexIndices) {
     return surface;
 }
 
+#ifndef ALL_SURFACES_HAVE_FORCE
 /**
  * Returns whether a surface has exertion/moves Mario
  * based on the surface type.
@@ -419,6 +420,7 @@ static s32 surface_has_force(s16 surfaceType) {
     }
     return hasForce;
 }
+#endif
 
 /**
  * Returns whether a surface should have the
@@ -451,7 +453,9 @@ static void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s
     s32 numSurfaces;
     struct Surface *surface;
     s8 room = 0;
+#ifndef ALL_SURFACES_HAVE_FORCE
     s16 hasForce = surface_has_force(surfaceType);
+#endif
     s16 flags = surf_has_no_cam_collision(surfaceType);
 
     numSurfaces = *(*data);
@@ -469,19 +473,26 @@ static void load_static_surfaces(s16 **data, s16 *vertexData, s16 surfaceType, s
             surface->type = surfaceType;
             surface->flags = (s8) flags;
 
+#ifdef ALL_SURFACES_HAVE_FORCE
+            surface->force = *(*data + 3);
+#else
             if (hasForce) {
                 surface->force = *(*data + 3);
             } else {
                 surface->force = 0;
             }
+#endif
 
             add_surface(surface, FALSE);
         }
-
+#ifdef ALL_SURFACES_HAVE_FORCE
+        *data += 4;
+#else
         *data += 3;
         if (hasForce) {
-            (*data)++;
+            *data += 1;
         }
+#endif
     }
 }
 
@@ -555,7 +566,9 @@ u32 get_area_terrain_size(s16 *data) {
     s32 numVertices;
     s32 numRegions;
     s32 numSurfaces;
+#ifndef ALL_SURFACES_HAVE_FORCE
     s16 hasForce;
+#endif
 
     while (!end) {
         terrainLoadType = *data++;
@@ -584,8 +597,12 @@ u32 get_area_terrain_size(s16 *data) {
 
             default:
                 numSurfaces = *data++;
+#ifdef ALL_SURFACES_HAVE_FORCE
+                data += 4 * numSurfaces;
+#else
                 hasForce = surface_has_force(terrainLoadType);
                 data += (3 + hasForce) * numSurfaces;
+#endif
                 break;
         }
     }
@@ -731,7 +748,9 @@ void load_object_surfaces(s16 **data, s16 *vertexData) {
     numSurfaces = *(*data);
     (*data)++;
 
+#ifndef ALL_SURFACES_HAVE_FORCE
     hasForce = surface_has_force(surfaceType);
+#endif
 
     flags = surf_has_no_cam_collision(surfaceType);
     flags |= SURFACE_FLAG_DYNAMIC;
@@ -751,22 +770,30 @@ void load_object_surfaces(s16 **data, s16 *vertexData) {
             surface->object = gCurrentObject;
             surface->type = surfaceType;
 
+#ifdef ALL_SURFACES_HAVE_FORCE
+            surface->force = *(*data + 3);
+#else
             if (hasForce) {
                 surface->force = *(*data + 3);
             } else {
                 surface->force = 0;
             }
+#endif
 
             surface->flags |= flags;
             surface->room = (s8) room;
             add_surface(surface, TRUE);
         }
 
+#ifdef ALL_SURFACES_HAVE_FORCE
+        *data += 4;
+#else
         if (hasForce) {
             *data += 4;
         } else {
             *data += 3;
         }
+#endif
     }
 }
 

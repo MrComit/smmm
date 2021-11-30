@@ -62,7 +62,7 @@
 #define WIDE
 #define DISABLE_AA
 #define AUTO_LOD
-
+#define ALL_SURFACES_HAVE_FORCE
 
 //puppyprint, thx to fazana
 #define PUPPYPRINT
