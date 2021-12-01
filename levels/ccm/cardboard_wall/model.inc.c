@@ -270,18 +270,7 @@ u8 cardboard_wall_cardboard3_ci4_pal_rgba16[] = {
 	0x93, 0x97, 0xa4, 0x1b, 
 };
 
-Vtx cardboard_wall_CBWall_mesh_layer_1_vtx_cull[8] = {
-	{{{-60, 0, 700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-60, 2703, 700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-60, 2703, -700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-60, 0, -700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{0, 0, 700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{0, 2703, 700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{0, 2703, -700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{0, 0, -700},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-};
-
-Vtx cardboard_wall_CBWall_mesh_layer_1_vtx_0[16] = {
+Vtx cardboard_wall_dl_mesh_layer_1_vtx_0[16] = {
 	{{{-60, 0, -700},0, {-2246, -6236},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-60, 0, 700},0, {2737, -6236},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-60, 2703, 700},0, {2737, 4194},{0xFF, 0xFF, 0xFF, 0xFF}}},
@@ -290,24 +279,58 @@ Vtx cardboard_wall_CBWall_mesh_layer_1_vtx_0[16] = {
 	{{{0, 2703, -700},0, {-2246, 4194},{0xCC, 0xCC, 0xCC, 0xFF}}},
 	{{{0, 2703, 700},0, {2737, 4194},{0xCC, 0xCC, 0xCC, 0xFF}}},
 	{{{0, 0, 700},0, {2737, -6236},{0xCC, 0xCC, 0xCC, 0xFF}}},
-	{{{-60, 0, 700},0, {2737, -6236},{0x79, 0x75, 0x73, 0xFF}}},
-	{{{-60, 0, -700},0, {-2246, -6236},{0x79, 0x75, 0x73, 0xFF}}},
-	{{{0, 0, -700},0, {-2246, -6236},{0x79, 0x75, 0x73, 0xFF}}},
-	{{{0, 2703, -700},0, {-2246, 4194},{0x79, 0x75, 0x73, 0xFF}}},
 	{{{-60, 2703, -700},0, {-2246, 4194},{0x79, 0x75, 0x73, 0xFF}}},
-	{{{0, 2703, 700},0, {2737, 4194},{0x79, 0x75, 0x73, 0xFF}}},
 	{{{-60, 2703, 700},0, {2737, 4194},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 2703, 700},0, {2737, 4194},{0x79, 0x75, 0x73, 0xFF}}},
 	{{{0, 0, 700},0, {2737, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{-60, 0, 700},0, {2737, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 0, -700},0, {-2246, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{-60, 0, -700},0, {-2246, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 2703, -700},0, {-2246, 4194},{0x79, 0x75, 0x73, 0xFF}}},
 };
 
-Gfx cardboard_wall_CBWall_mesh_layer_1_tri_0[] = {
-	gsSPVertex(cardboard_wall_CBWall_mesh_layer_1_vtx_0 + 0, 16, 0),
+Gfx cardboard_wall_dl_mesh_layer_1_tri_0[] = {
+	gsSPVertex(cardboard_wall_dl_mesh_layer_1_vtx_0 + 0, 16, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 9, 11, 10, 0),
 	gsSP2Triangles(9, 12, 11, 0, 12, 13, 11, 0),
 	gsSP2Triangles(12, 14, 13, 0, 14, 15, 13, 0),
 	gsSP2Triangles(14, 8, 15, 0, 8, 10, 15, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx cardboard_wall_start_dl2_mesh_layer_1_vtx_0[20] = {
+	{{{-60, 1351, 937},0, {2737, 4194},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{-60, 0, 937},0, {2737, -1021},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 0, 937},0, {2737, -1021},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 1351, 937},0, {2737, 4194},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{-60, 1351, -937},0, {-2246, 4194},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 1351, -937},0, {-2246, 4194},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{-60, 0, -937},0, {-2246, -1021},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 0, -937},0, {-2246, -1021},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{-60, 0, -937},0, {-2246, -1021},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-60, 0, 937},0, {2737, -1021},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-60, 1351, 937},0, {2737, 4194},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-60, 1351, -937},0, {-2246, 4194},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-60, 0, 937},0, {2737, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{-60, 0, -937},0, {-2246, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 0, -937},0, {-2246, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 0, 937},0, {2737, -6236},{0x79, 0x75, 0x73, 0xFF}}},
+	{{{0, 0, -937},0, {-2246, -1021},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{0, 1351, -937},0, {-2246, 4194},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{0, 1351, 937},0, {2737, 4194},{0xCC, 0xCC, 0xCC, 0xFF}}},
+	{{{0, 0, 937},0, {2737, -1021},{0xCC, 0xCC, 0xCC, 0xFF}}},
+};
+
+Gfx cardboard_wall_start_dl2_mesh_layer_1_tri_0[] = {
+	gsSPVertex(cardboard_wall_start_dl2_mesh_layer_1_vtx_0 + 0, 20, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
+	gsSP2Triangles(6, 4, 5, 0, 6, 5, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -343,13 +366,16 @@ Gfx mat_revert_cardboard_wall_Cardboard_002[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx cardboard_wall_CBWall_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(cardboard_wall_CBWall_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
+Gfx cardboard_wall_dl_mesh_layer_1[] = {
 	gsSPDisplayList(mat_cardboard_wall_Cardboard_002),
-	gsSPDisplayList(cardboard_wall_CBWall_mesh_layer_1_tri_0),
+	gsSPDisplayList(cardboard_wall_dl_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_cardboard_wall_Cardboard_002),
+	gsSPEndDisplayList(),
+};
+
+Gfx cardboard_wall_start_dl2_mesh_layer_1[] = {
+	gsSPDisplayList(mat_cardboard_wall_Cardboard_002),
+	gsSPDisplayList(cardboard_wall_start_dl2_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_cardboard_wall_Cardboard_002),
 	gsSPEndDisplayList(),
 };

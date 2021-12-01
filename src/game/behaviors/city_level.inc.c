@@ -23,10 +23,11 @@ Vec3s sLegoColors[] = {
 
 static void const *sCardboardCollision[] = {
     cardboard_wall_collision,
+    cardboard_wall_alt_collision,
 };
 
 void bhv_cardboard_wall_init(void) {
-    o->collisionData = segmented_to_virtual(sCardboardCollision[o->oBehParams >> 24]);
+    o->collisionData = segmented_to_virtual(sCardboardCollision[o->oBehParams2ndByte]);
 }
 
 
@@ -36,7 +37,7 @@ void bhv_cardboard_wall_loop(void) {
         case 0:
             obj = cur_obj_nearest_object_with_behavior(bhvGenericSwitch);
             if (obj == NULL || obj->oF4) {
-                if (o->oBehParams2ndByte)
+                if (o->oBehParams >> 24)
                     o->oAction = 2;
                 else
                     o->oAction = 3;
@@ -48,7 +49,7 @@ void bhv_cardboard_wall_loop(void) {
             o->os16F4 = approach_s16_symmetric(o->os16F4, 0x800, o->os16F4 / 10);
             o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0xC000, o->os16F4);
             if ((s16)o->oFaceAngleRoll == -0x4000) {
-                if (o->oBehParams2ndByte) {
+                if (o->oBehParams >> 24) {
                     //cur_obj_shake_screen(1);
                     set_camera_shake_from_point(1, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
                     play_puzzle_jingle();

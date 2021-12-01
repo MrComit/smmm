@@ -56,3 +56,4 @@
 #include "levels/ccm/pound_lego/collision.inc.c"
 #include "levels/ccm/cardboard_wall/collision.inc.c"
 #include "levels/ccm/cardboard_wall/model.inc.c"
+#include "levels/ccm/cardboard_wall_alt/collision.inc.c"
