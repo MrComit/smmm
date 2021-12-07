@@ -210,6 +210,7 @@ SECTIONS
    {
       BUILD_DIR/src/game*.o(.text);
       BUILD_DIR/src/engine*.o(.text);
+      BUILD_DIR/asm/math.o(.text);
 
       BUILD_DIR/src/behaviors*.o(.text);
       BUILD_DIR/src/usb*.o(.text);

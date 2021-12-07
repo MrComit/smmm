@@ -27,43 +27,57 @@ int gSplineState;
 #endif
 
 /// Copy vector 'src' to 'dest'
-void *vec3f_copy(Vec3f dest, Vec3f src) {
-    dest[0] = src[0];
-    dest[1] = src[1];
-    dest[2] = src[2];
-    return &dest; //! warning: function returns address of local variable
+void vec3f_copy(Vec3f dest, Vec3f src) {
+    register u32 x = ((u32 *) src)[0];
+    register u32 y = ((u32 *) src)[1];
+    register u32 z = ((u32 *) src)[2];
+    ((u32 *) dest)[0] = x;
+    ((u32 *) dest)[1] = y;
+    ((u32 *) dest)[2] = z;
 }
 
 /// Set vector 'dest' to (x, y, z)
-void *vec3f_set(Vec3f dest, f32 x, f32 y, f32 z) {
-    dest[0] = x;
-    dest[1] = y;
-    dest[2] = z;
-    return &dest; //! warning: function returns address of local variable
+inline void vec3f_set(Vec3f dest, f32 x, f32 y, f32 z) {
+    vec3_set(dest, x, y, z);
 }
 
 /// Add vector 'a' to 'dest'
-void *vec3f_add(Vec3f dest, Vec3f a) {
-    dest[0] += a[0];
-    dest[1] += a[1];
-    dest[2] += a[2];
-    return &dest; //! warning: function returns address of local variable
+void vec3f_add(Vec3f dest, Vec3f a) {
+    register f32 *temp = (f32 *)dest;
+    register s32 j;
+    register f32 sum, sum2;
+    for (j = 0; j < 3; j++) {
+        sum = *a;
+        a++;
+        sum2 = *temp;
+        temp++;
+        temp[-1] = (sum + sum2);
+    }
 }
 
 /// Make 'dest' the sum of vectors a and b.
-void *vec3f_sum(Vec3f dest, Vec3f a, Vec3f b) {
-    dest[0] = a[0] + b[0];
-    dest[1] = a[1] + b[1];
-    dest[2] = a[2] + b[2];
-    return &dest; //! warning: function returns address of local variable
+void vec3f_sum(Vec3f dest, Vec3f a, Vec3f b) {
+    register f32 *temp = (f32 *)dest;
+    register s32 j;
+    register f32 x, y;
+    for (j = 0; j < 3; j++) {
+        x = *a;
+        a++;
+        y = *b;
+        b++;
+        *temp = x + y;
+        temp++;
+    }
 }
 
 /// Copy vector src to dest
-void *vec3s_copy(Vec3s dest, Vec3s src) {
-    dest[0] = src[0];
-    dest[1] = src[1];
-    dest[2] = src[2];
-    return &dest; //! warning: function returns address of local variable
+void vec3s_copy(Vec3s dest, Vec3s src) {
+    register s16 x = src[0];
+    register s16 y = src[1];
+    register s16 z = src[2];
+    dest[0] = x;
+    dest[1] = y;
+    dest[2] = z;
 }
 
 /// Set vector 'dest' to (x, y, z)
@@ -151,40 +165,42 @@ void *vec3f_normalize(Vec3f dest) {
 
 #pragma GCC diagnostic pop
 
-/// Copy matrix 'src' to 'dest'
-void mtxf_copy(Mat4 dest, Mat4 src) {
-    register s32 i;
-    register u32 *d = (u32 *) dest;
-    register u32 *s = (u32 *) src;
+struct CopyMe {
+    f32 a[4 * 4];
+};
 
-    for (i = 0; i < 16; i++) {
-        *d++ = *s++;
-    }
+/// Copy matrix 'src' to 'dest'
+void mtxf_copy(register Mat4 dest, register Mat4 src) {
+    *((struct CopyMe *) dest) = *((struct CopyMe *) src);
 }
 
 /**
  * Set mtx to the identity matrix
  */
-void mtxf_identity(Mat4 mtx) {
-    register s32 i;
-    register f32 *dest;
-    // These loops must be one line to match on -O2
-
-    // initialize everything except the first and last cells to 0
-    for (dest = (f32 *) mtx + 1, i = 0; i < 14; dest++, i++) *dest = 0;
-
-    // initialize the diagonal cells to 1
-    for (dest = (f32 *) mtx, i = 0; i < 4; dest += 5, i++) *dest = 1;
+void mtxf_identity(register Mat4 mtx) {
+    s32 i;
+    f32 *dest;
+    for (dest = (f32 *) mtx + 1, i = 0; i < 14; dest++, i++) {
+        *dest = 0;
+    }
+    for (dest = (f32 *) mtx, i = 0; i < 4; dest += 5, i++) {
+        *((u32 *) dest) = 0x3F800000;
+    }
 }
 
 /**
  * Set dest to a translation matrix of vector b
  */
 void mtxf_translate(Mat4 dest, Vec3f b) {
-    mtxf_identity(dest);
-    dest[3][0] = b[0];
-    dest[3][1] = b[1];
-    dest[3][2] = b[2];
+    register s32 i;
+    register f32 *pen;
+    for (pen = (f32 *) dest + 1, i = 0; i < 12; pen++, i++) {
+        *pen = 0;
+    }
+    for (pen = (f32 *) dest, i = 0; i < 4; pen += 5, i++) {
+        *((u32 *) pen) = 0x3F800000;
+    }
+    vec3f_copy(&dest[3][0], &b[0]);
 }
 
 /**
@@ -491,60 +507,46 @@ void mtxf_align_terrain_triangle(Mat4 mtx, Vec3f pos, s16 yaw, f32 radius) {
  * then a.
  */
 void mtxf_mul(Mat4 dest, Mat4 a, Mat4 b) {
-    Mat4 temp;
     register f32 entry0;
     register f32 entry1;
     register f32 entry2;
-
-    // column 0
-    entry0 = a[0][0];
-    entry1 = a[0][1];
-    entry2 = a[0][2];
-    temp[0][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0];
-    temp[0][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1];
-    temp[0][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2];
-
-    // column 1
-    entry0 = a[1][0];
-    entry1 = a[1][1];
-    entry2 = a[1][2];
-    temp[1][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0];
-    temp[1][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1];
-    temp[1][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2];
-
-    // column 2
-    entry0 = a[2][0];
-    entry1 = a[2][1];
-    entry2 = a[2][2];
-    temp[2][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0];
-    temp[2][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1];
-    temp[2][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2];
-
-    // column 3
-    entry0 = a[3][0];
-    entry1 = a[3][1];
-    entry2 = a[3][2];
-    temp[3][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0] + b[3][0];
-    temp[3][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1] + b[3][1];
-    temp[3][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2] + b[3][2];
-
-    temp[0][3] = temp[1][3] = temp[2][3] = 0;
-    temp[3][3] = 1;
-
-    mtxf_copy(dest, temp);
+    register f32 *temp = (f32 *)a;
+    register f32 *temp2 = (f32 *)dest;
+    register f32 *temp3;
+    register s32 i;
+    for (i = 0; i < 16; i++) {
+        entry0 = temp[0];
+        entry1 = temp[1];
+        entry2 = temp[2];
+        temp3 = (f32 *)b;
+        for (; (i & 3) !=3; i++) {
+            *temp2 = entry0 * temp3[0] + entry1 * temp3[4] + entry2 * temp3[8];
+            temp2++;
+            temp3++;
+        }
+        *temp2 = 0;
+        temp += 4;
+        temp2++;
+    }
+    vec3f_add(&dest[3][0], &b[3][0]);
+    ((u32 *) dest)[15] = 0x3F800000;
 }
 
 /**
  * Set matrix 'dest' to 'mtx' scaled by vector s
  */
-void mtxf_scale_vec3f(Mat4 dest, Mat4 mtx, Vec3f s) {
+void mtxf_scale_vec3f(Mat4 dest, Mat4 mtx, register Vec3f s) {
+    register f32 *temp = (f32 *)dest;
+    register f32 *temp2 = (f32 *)mtx;
     register s32 i;
 
     for (i = 0; i < 4; i++) {
-        dest[0][i] = mtx[0][i] * s[0];
-        dest[1][i] = mtx[1][i] * s[1];
-        dest[2][i] = mtx[2][i] * s[2];
-        dest[3][i] = mtx[3][i];
+        temp[0] = temp2[0] * s[0];
+        temp[4] = temp2[4] * s[1];
+        temp[8] = temp2[8] * s[2];
+        temp[12] = temp2[12];
+        temp++;
+        temp2++;
     }
 }
 
@@ -557,10 +559,14 @@ void mtxf_mul_vec3s(Mat4 mtx, Vec3s b) {
     register f32 x = b[0];
     register f32 y = b[1];
     register f32 z = b[2];
-
-    b[0] = x * mtx[0][0] + y * mtx[1][0] + z * mtx[2][0] + mtx[3][0];
-    b[1] = x * mtx[0][1] + y * mtx[1][1] + z * mtx[2][1] + mtx[3][1];
-    b[2] = x * mtx[0][2] + y * mtx[1][2] + z * mtx[2][2] + mtx[3][2];
+    register f32 *temp2 = (f32 *)mtx;
+    register s32 i;
+    register s16 *c = b;
+    for (i = 0; i < 3; i++) {
+        c[0] = (x * temp2[0]) + (y * temp2[4]) + (z * temp2[8]) + temp2[12];
+        c++;
+        temp2++;
+    }
 }
 
 /**
@@ -587,7 +593,7 @@ void mtxf_mul_vec3f(Mat4 mtx, Vec3f in, Vec3f out) {
  * exception. On Wii and Wii U Virtual Console the value will simply be clamped
  * and no crashes occur.
  */
-void mtxf_to_mtx(Mtx *dest, Mat4 src) {
+/*void mtxf_to_mtx(Mtx *dest, Mat4 src) {
     Mat4 temp;
 	register s32 i, j;
 	
@@ -598,7 +604,7 @@ void mtxf_to_mtx(Mtx *dest, Mat4 src) {
 		temp[i][3] = src[i][3];
 	}
 
-	guMtxF2L( temp, dest );
+	guMtxF2L( temp, dest );*/
 /*#ifdef AVOID_UB
     // Avoid type-casting which is technically UB by calling the equivalent
     // guMtxF2L function. This helps little-endian systems, as well.
@@ -617,20 +623,29 @@ void mtxf_to_mtx(Mtx *dest, Mat4 src) {
         *t0++ = GET_LOW_S16_OF_32(asFixedPoint);  // fraction part
     }
 #endif*/
-}
+// }
 
 /**
  * Set 'mtx' to a transformation matrix that rotates around the z axis.
  */
-void mtxf_rotate_xy(Mtx *mtx, s16 angle) {
-    Mat4 temp;
-
-    mtxf_identity(temp);
-    temp[0][0] = coss(angle);
-    temp[0][1] = sins(angle);
-    temp[1][0] = -temp[0][1];
-    temp[1][1] = temp[0][0];
-    mtxf_to_mtx(mtx, temp);
+#define MATENTRY(a, b)                          \
+    ((s16 *) mtx)[a     ] = (((s32) b) >> 16);  \
+    ((s16 *) mtx)[a + 16] = (((s32) b) & 0xFFFF);
+void mtxf_rotate_xy(Mtx *mtx, s32 angle) {
+    register s32 i = coss(angle) * 65536;
+    register s32 j = sins(angle) * 65536;
+    register f32 *temp = (f32 *)mtx;
+    register s32 k;
+    for (k = 0; k < 16; k++) {
+        *temp = 0;
+        temp++;
+    }
+    MATENTRY(0,  i)
+    MATENTRY(1,  j)
+    MATENTRY(4, -j)
+    MATENTRY(5,  i)
+    ((s16 *) mtx)[10] = 1;
+    ((s16 *) mtx)[15] = 1;
 }
 
 /**
@@ -641,17 +656,26 @@ void mtxf_rotate_xy(Mtx *mtx, s16 angle) {
  * objMtx back from screen orientation to world orientation, and then subtracting
  * the camera position.
  */
-void get_pos_from_transform_mtx(Vec3f dest, Mat4 objMtx, Mat4 camMtx) {
-    f32 camX = camMtx[3][0] * camMtx[0][0] + camMtx[3][1] * camMtx[0][1] + camMtx[3][2] * camMtx[0][2];
-    f32 camY = camMtx[3][0] * camMtx[1][0] + camMtx[3][1] * camMtx[1][1] + camMtx[3][2] * camMtx[1][2];
-    f32 camZ = camMtx[3][0] * camMtx[2][0] + camMtx[3][1] * camMtx[2][1] + camMtx[3][2] * camMtx[2][2];
+void get_pos_from_transform_mtx(Vec3f dest, Mat4 objMtx, register Mat4 camMtx) {
+    register s32 i;
+    register f32 *temp1 = (f32 *)dest;
+    register f32 *temp2 = (f32 *)camMtx;
+    f32 y[3];
+    register f32 *x = y;
+    register f32 *temp3 = (f32 *)objMtx;
 
-    dest[0] =
-        objMtx[3][0] * camMtx[0][0] + objMtx[3][1] * camMtx[0][1] + objMtx[3][2] * camMtx[0][2] - camX;
-    dest[1] =
-        objMtx[3][0] * camMtx[1][0] + objMtx[3][1] * camMtx[1][1] + objMtx[3][2] * camMtx[1][2] - camY;
-    dest[2] =
-        objMtx[3][0] * camMtx[2][0] + objMtx[3][1] * camMtx[2][1] + objMtx[3][2] * camMtx[2][2] - camZ;
+    for (i = 0; i < 3; i++) {
+        *x = (temp3[12] - temp2[12]);
+        temp2++;
+        temp3++;
+        x = (f32 *)(((u32)x) + 4);
+    }
+    temp2 -=3;;
+    for (i = 0; i < 3; i++) {
+        *temp1 = x[-3] * temp2[0] + x[-2] * temp2[1] + x[-1] * temp2[2];
+        temp1++;
+        temp2 += 4;
+    }
 }
 
 /**

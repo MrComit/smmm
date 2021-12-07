@@ -41,11 +41,39 @@ extern f32 gCosineTable[];
 
 #define sqr(x) ((x) * (x))
 
-void *vec3f_copy(Vec3f dest, Vec3f src);
-void *vec3f_set(Vec3f dest, f32 x, f32 y, f32 z);
-void *vec3f_add(Vec3f dest, Vec3f a);
-void *vec3f_sum(Vec3f dest, Vec3f a, Vec3f b);
-void *vec3s_copy(Vec3s dest, Vec3s src);
+
+#define vec2_set(dst, x, y) {           \
+    (dst)[0] = (x);                     \
+    (dst)[1] = (y);                     \
+}
+#define vec3_set(dst, x, y, z) {        \
+    vec2_set((dst), (x), (y));          \
+    (dst)[2] = (z);                     \
+}
+#define vec4_set(dst, x, y, z, w) {     \
+    vec3_set((dst), (x), (y), (z));     \
+    (dst)[3] = (w);                     \
+}
+
+#define vec2_copy(dst, src) {           \
+    (dst)[0] = (src)[0];                \
+    (dst)[1] = (src)[1];                \
+}
+#define vec3_copy(dst, src) {           \
+    vec2_copy((dst), (src));            \
+    (dst)[2] = (src)[2];                \
+}
+#define vec4_copy(dst, src) {           \
+    vec3_copy((dst), (src));            \
+    (dst)[3] = (src)[3];                \
+}
+
+
+void vec3f_copy(Vec3f dest, Vec3f src);
+void vec3f_set(Vec3f dest, f32 x, f32 y, f32 z);
+void vec3f_add(Vec3f dest, Vec3f a);
+void vec3f_sum(Vec3f dest, Vec3f a, Vec3f b);
+void vec3s_copy(Vec3s dest, Vec3s src);
 void *vec3s_set(Vec3s dest, s16 x, s16 y, s16 z);
 void *vec3s_add(Vec3s dest, Vec3s a);
 void *vec3s_sum(Vec3s dest, Vec3s a, Vec3s b);
@@ -68,8 +96,13 @@ void mtxf_mul(Mat4 dest, Mat4 a, Mat4 b);
 void mtxf_scale_vec3f(Mat4 dest, Mat4 mtx, Vec3f s);
 void mtxf_mul_vec3s(Mat4 mtx, Vec3s b);
 void mtxf_mul_vec3f(Mat4 mtx, Vec3f in, Vec3f out);
-void mtxf_to_mtx(Mtx *dest, Mat4 src);
-void mtxf_rotate_xy(Mtx *mtx, s16 angle);
+
+extern void mtxf_to_mtx_asm(register void *dest, register void *src);
+inline void mtxf_to_mtx(register void *dest, register void *src) {
+    mtxf_to_mtx_asm(dest, src);
+}
+
+void mtxf_rotate_xy(Mtx *mtx, s32 angle);
 void get_pos_from_transform_mtx(Vec3f dest, Mat4 objMtx, Mat4 camMtx);
 void vec3f_get_dist_and_angle(Vec3f from, Vec3f to, f32 *dist, s16 *pitch, s16 *yaw);
 void vec3f_set_dist_and_angle(Vec3f from, Vec3f to, f32  dist, s16  pitch, s16  yaw);
