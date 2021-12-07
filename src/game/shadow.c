@@ -134,12 +134,12 @@ f32 atan2_deg(f32 a, f32 b) {
 f32 scale_shadow_with_distance(f32 initial, f32 distFromFloor) {
     f32 newScale;
 
-    if (distFromFloor <= 0.0) {
+    if (distFromFloor <= 0.0f) {
         newScale = initial;
-    } else if (distFromFloor >= 600.0) {
-        newScale = initial * 0.5;
+    } else if (distFromFloor >= 600.0f) {
+        newScale = initial * 0.5f;
     } else {
-        newScale = initial * (1.0 - (0.5 * distFromFloor / 600.0));
+        newScale = initial * (1.0f - (0.5f * distFromFloor / 600.0f));
     }
 
     return newScale;
@@ -149,7 +149,7 @@ f32 scale_shadow_with_distance(f32 initial, f32 distFromFloor) {
  * Disable a shadow when its parent object is more than 600 units from the ground.
  */
 f32 disable_shadow_with_distance(f32 shadowScale, f32 distFromFloor) {
-    if (distFromFloor >= 600.0) {
+    if (distFromFloor >= 600.0f) {
         return 0.0f;
     } else {
         return shadowScale;
@@ -159,17 +159,17 @@ f32 disable_shadow_with_distance(f32 shadowScale, f32 distFromFloor) {
 /**
  * Dim a shadow when its parent object is further from the ground.
  */
-u8 dim_shadow_with_distance(u8 solidity, f32 distFromFloor) {
+s32 dim_shadow_with_distance(u8 solidity, f32 distFromFloor) {
     f32 ret;
 
     if (solidity < 121) {
         return solidity;
-    } else if (distFromFloor <= 0.0) {
+    } else if (distFromFloor <= 0.0f) {
         return solidity;
-    } else if (distFromFloor >= 600.0) {
+    } else if (distFromFloor >= 600.0f) {
         return 120;
     } else {
-        ret = ((120 - solidity) * distFromFloor) / 600.0 + (f32) solidity;
+        ret = ((120 - solidity) * distFromFloor) / 600.0f + (f32) solidity;
         return ret;
     }
 }
@@ -202,7 +202,7 @@ f32 get_water_level_below_shadow(struct Shadow *s, struct Surface **waterFloor) 
  * @param overwriteSolidity Flag for whether the existing shadow solidity should
  *                          be dimmed based on its distance to the floor
  */
-s8 init_shadow(struct Shadow *s, f32 xPos, f32 yPos, f32 zPos, s16 shadowScale, u8 overwriteSolidity) {
+s32 init_shadow(struct Shadow *s, f32 xPos, f32 yPos, f32 zPos, s16 shadowScale, u8 overwriteSolidity) {
     f32 waterLevel;
     f32 floorSteepness;
     struct FloorGeometry *floorGeometry;
@@ -235,15 +235,15 @@ s8 init_shadow(struct Shadow *s, f32 xPos, f32 yPos, f32 zPos, s16 shadowScale, 
         } else {
             gShadowAboveCustomWater = FALSE;
             // Assume that the water is flat.
-            s->floorNormalX = 0;
-            s->floorNormalY = 1.0;
-            s->floorNormalZ = 0;
+            s->floorNormalX = 0.0f;
+            s->floorNormalY = 1.0f;
+            s->floorNormalZ = 0.0f;
             s->floorOriginOffset = -waterLevel;
         }
     } else {
         // Don't draw a shadow if the floor is lower than expected possible,
         // or if the y-normal is negative (an unexpected result).
-        if (s->floorHeight < FLOOR_LOWER_LIMIT_SHADOW || floorGeometry->normalY <= 0.0) {
+        if (s->floorHeight < FLOOR_LOWER_LIMIT_SHADOW || floorGeometry->normalY <= 0.0f) {
             return 1;
         }
 
@@ -264,10 +264,10 @@ s8 init_shadow(struct Shadow *s, f32 xPos, f32 yPos, f32 zPos, s16 shadowScale, 
     floorSteepness = sqrtf(s->floorNormalX * s->floorNormalX + s->floorNormalZ * s->floorNormalZ);
 
     // This if-statement avoids dividing by 0.
-    if (floorSteepness == 0.0) {
+    if (floorSteepness == 0.0f) {
         s->floorTilt = 0;
     } else {
-        s->floorTilt = 90.0 - atan2_deg(floorSteepness, s->floorNormalY);
+        s->floorTilt = 90.0f - atan2_deg(floorSteepness, s->floorNormalY);
     }
     return 0;
 }
@@ -386,8 +386,8 @@ void calculate_vertex_xyz(s8 index, struct Shadow s, f32 *xPosVtx, f32 *yPosVtx,
     // This makes xCoordUnit and yCoordUnit each one of -1, 0, or 1.
     get_vertex_coords(index, shadowVertexType, &xCoordUnit, &zCoordUnit);
 
-    halfScale = (xCoordUnit * s.shadowScale) / 2.0;
-    halfTiltedScale = (zCoordUnit * tiltedScale) / 2.0;
+    halfScale = (xCoordUnit * s.shadowScale) / 2.0f;
+    halfTiltedScale = (zCoordUnit * tiltedScale) / 2.0f;
 
     *xPosVtx = (halfTiltedScale * sinf(downwardAngle)) + (halfScale * cosf(downwardAngle)) + s.parentX;
     *zPosVtx = (halfTiltedScale * cosf(downwardAngle)) - (halfScale * sinf(downwardAngle)) + s.parentZ;
@@ -529,7 +529,7 @@ void linearly_interpolate_solidity_negative(struct Shadow *s, u8 initialSolidity
     // This is not necessarily a bug, since this function is only used once,
     // with start == 0.
     if (curr >= start && end >= curr) {
-        s->solidity = ((f32) initialSolidity * (1.0 - (f32)(curr - start) / (end - start)));
+        s->solidity = ((f32) initialSolidity * (1.0f - (f32)(curr - start) / (end - start)));
     } else {
         s->solidity = 0;
     }
@@ -538,7 +538,7 @@ void linearly_interpolate_solidity_negative(struct Shadow *s, u8 initialSolidity
 /**
  * Change a shadow's solidity based on the player's current animation frame.
  */
-s8 correct_shadow_solidity_for_animations(s32 isLuigi, u8 initialSolidity, struct Shadow *shadow) {
+s32 correct_shadow_solidity_for_animations(s32 isLuigi, u8 initialSolidity, struct Shadow *shadow) {
     struct Object *player;
     s8 ret;
     s16 animFrame;
@@ -589,16 +589,16 @@ s8 correct_shadow_solidity_for_animations(s32 isLuigi, u8 initialSolidity, struc
  */
 void correct_lava_shadow_height(struct Shadow *s) {
     if (gCurrLevelNum == LEVEL_BITFS && sSurfaceTypeBelowShadow == SURFACE_BURNING) {
-        if (s->floorHeight < -3000.0) {
-            s->floorHeight = -3062.0;
+        if (s->floorHeight < -3000.0f) {
+            s->floorHeight = -3062.0f;
             gShadowAboveWaterOrLava = TRUE;
-        } else if (s->floorHeight > 3400.0) {
-            s->floorHeight = 3492.0;
+        } else if (s->floorHeight > 3400.0f) {
+            s->floorHeight = 3492.0f;
             gShadowAboveWaterOrLava = TRUE;
         }
     } else if (gCurrLevelNum == LEVEL_LLL && gCurrAreaIndex == 1
                && sSurfaceTypeBelowShadow == SURFACE_BURNING) {
-        s->floorHeight = 5.0;
+        s->floorHeight = 5.0f;
         gShadowAboveWaterOrLava = TRUE;
     }
 }
@@ -720,8 +720,15 @@ Gfx *create_shadow_circle_assuming_flat_ground(f32 xPos, f32 yPos, f32 zPos, s16
     Gfx *displayList;
     struct FloorGeometry *dummy; // only for calling find_floor_height_and_data
     f32 distBelowFloor;
-    f32 floorHeight = find_floor_height_and_data(xPos, yPos, zPos, &dummy);
+    f32 floorHeight;
     f32 radius = shadowScale / 2;
+
+    if (gCurGraphNodeObjectNode->oFloor != NULL) {
+        floorHeight = gCurGraphNodeObjectNode->oFloorHeight;
+    } else {
+        floorHeight = find_floor_height(xPos, yPos, zPos);
+    }
+
 
     if (floorHeight < FLOOR_LOWER_LIMIT_SHADOW) {
         return NULL;
@@ -778,9 +785,13 @@ Gfx *create_shadow_rectangle(f32 halfWidth, f32 halfLength, f32 relY, u8 solidit
  * value is 200. Return 0 if a shadow should be drawn, 1 if not.
  */
 s32 get_shadow_height_solidity(f32 xPos, f32 yPos, f32 zPos, f32 *shadowHeight, u8 *solidity) {
-    struct FloorGeometry *dummy;
     f32 waterLevel;
-    *shadowHeight = find_floor_height_and_data(xPos, yPos, zPos, &dummy);
+
+    if (gCurGraphNodeObjectNode->oFloor != NULL) {
+        *shadowHeight = gCurGraphNodeObjectNode->oFloorHeight;
+    } else {
+        *shadowHeight = find_floor_height(xPos, yPos, zPos);
+    }
 
     if (*shadowHeight < FLOOR_LOWER_LIMIT_SHADOW) {
         return 1;
@@ -816,10 +827,10 @@ Gfx *create_shadow_square(f32 xPos, f32 yPos, f32 zPos, s16 shadowScale, u8 soli
             shadowRadius = shadowScale / 2;
             break;
         case SHADOW_SQUARE_SCALABLE:
-            shadowRadius = scale_shadow_with_distance(shadowScale, distFromShadow) / 2.0;
+            shadowRadius = scale_shadow_with_distance(shadowScale, distFromShadow) / 2.0f;
             break;
         case SHADOW_SQUARE_TOGGLABLE:
-            shadowRadius = disable_shadow_with_distance(shadowScale, distFromShadow) / 2.0;
+            shadowRadius = disable_shadow_with_distance(shadowScale, distFromShadow) / 2.0f;
             break;
         default:
             return NULL;

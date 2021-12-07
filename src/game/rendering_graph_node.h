@@ -11,6 +11,7 @@ extern struct GraphNodePerspective *gCurGraphNodeCamFrustum;
 extern struct GraphNodeCamera *gCurGraphNodeCamera;
 extern struct GraphNodeObject *gCurGraphNodeObject;
 extern struct GraphNodeHeldObject *gCurGraphNodeHeldObject;
+#define gCurGraphNodeObjectNode ((struct Object *)gCurGraphNodeObject)
 extern u16 gAreaUpdateCounter;
 
 // after processing an object, the type is reset to this
