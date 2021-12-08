@@ -97,6 +97,12 @@ extern s8 gGreenCoinsCollected;
 void bhv_green_coin_init(void) {
     struct Object *hiddenRedCoinStar;
 
+    cur_obj_update_floor_height();
+
+    if (gIsConsole || 500.0f < absf(o->oPosY - o->oFloorHeight)) {
+        cur_obj_set_model(MODEL_GREEN_COIN_NO_SHADOW);
+    }
+
     // Set the red coins to have a parent of the closest red coin star.
     hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenGreenCoinStar);
     if (hiddenRedCoinStar != NULL)
