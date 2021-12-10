@@ -79,7 +79,6 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_morecity_001_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_morecity_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Rack_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_Rack_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Rack_002_mesh_layer_1),
