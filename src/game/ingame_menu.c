@@ -2270,6 +2270,7 @@ u8 gTextCourse[][7] = {
 
 
 extern s8 sLevelRoomOffsets[];
+extern s8 gGlobalMarioRoom;
 
 
 void render_pause_my_score_coins(void) {
@@ -2349,7 +2350,7 @@ void render_pause_my_score_coins(void) {
         print_generic_string(CRS_NUM_X1, 157, strCourseNum);
 #endif*/
 
-        actName = segmented_to_virtual(actNameTbl[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]]);
+        actName = segmented_to_virtual(actNameTbl[gGlobalMarioRoom - 1]);
 
         /*if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
@@ -3163,7 +3164,7 @@ s16 render_menus_and_dialogs(void) {
     create_dl_ortho_matrix();
     shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
     if (gMarioCurrentRoom != 0) {
-        if (save_file_get_rooms((gMarioCurrentRoom + sLevelRoomOffsets[gCurrCourseNum - 1]) / 32) & (1 << ((gMarioCurrentRoom  + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
+        if (save_file_get_rooms(gGlobalMarioRoom / 32) & (1 << (gGlobalMarioRoom % 32))) {
             gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);
         } else {
             gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x90, 0x10);
@@ -3263,7 +3264,6 @@ char *sRoomNames[] = {
 };
 
 
-extern s8 sLevelRoomOffsets[];
 s32 gRoomEntryTimer = -1;
 
 void print_name_string(s16 x, s16 y, u8 alpha, const u8 *str) {
@@ -3305,7 +3305,7 @@ void print_room_names(void) {
             y = 255 - ((gRoomEntryTimer - 65) * 10);
         }
 
-        print_name_string(15, 10, y, sRoomNames[(gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]]);
+        print_name_string(15, 10, y, sRoomNames[gGlobalMarioRoom - 1]);
         if (gRoomEntryTimer >= 90) {
             gRoomEntryTimer = -1;
         }

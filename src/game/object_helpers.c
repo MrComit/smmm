@@ -607,6 +607,8 @@ Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+extern s8 sLevelRoomOffsets[];
+extern s8 gGlobalMarioRoom;
 
 //! @bug Same issue as geo_switch_anim_state.
 #ifdef AVOID_UB
@@ -635,7 +637,7 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node) {
                 }
                 sp26 = sp20->room - 1;
                 print_debug_top_down_objectinfo("areainfo %d", sp20->room);
-
+                gGlobalMarioRoom = gMarioCurrentRoom + sLevelRoomOffsets[gCurrCourseNum - 1];
                 if (sp26 >= 0) {
                     switchCase->selectedCase = sp26;
                 }
