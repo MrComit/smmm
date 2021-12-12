@@ -2271,7 +2271,7 @@ u8 gTextCourse[][7] = {
 
 extern s8 sLevelRoomOffsets[];
 extern s8 gGlobalMarioRoom;
-
+extern char *sRoomNames[];
 
 void render_pause_my_score_coins(void) {
 #ifdef VERSION_EU
@@ -2350,14 +2350,14 @@ void render_pause_my_score_coins(void) {
         print_generic_string(CRS_NUM_X1, 157, strCourseNum);
 #endif*/
 
-        actName = segmented_to_virtual(actNameTbl[gGlobalMarioRoom - 1]);
+        //actName = segmented_to_virtual(sRoomNames[gGlobalMarioRoom - 1]);
 
         /*if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
         } else {
             print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
         }*/
-        print_generic_string(ACT_NAME_X, 140, actName);
+        print_generic_string(ACT_NAME_X, 140, sRoomNames[gGlobalMarioRoom - 1]);
 /*#ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
 #endif*/
