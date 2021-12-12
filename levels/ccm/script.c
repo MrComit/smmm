@@ -57,6 +57,7 @@ const LevelScript level_ccm_entry[] = {
 		WARP_NODE(0x0C, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x56, LEVEL_CCM, 0x01, 0x55, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x55, LEVEL_CCM, 0x01, 0x56, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x57, LEVEL_CCM, 0x02, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 23998, 200, -5671, 0, -90, 0, 0x001A0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 23998, 200, -5671, 0, -90, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 18257, 119, -11057, 0, 0, 0, 0x000B0000, bhvFlyingWarp),
@@ -165,6 +166,21 @@ const LevelScript level_ccm_entry[] = {
 		TERRAIN(ccm_area_1_collision),
 		ROOMS(ccm_area_1_collision_rooms),
 		MACRO_OBJECTS(ccm_area_1_macro_objs),
+		STOP_MUSIC(0),
+		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(2, ccm_area_2),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x1A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_CCM, 0x02, 0x1A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, 17861, 39, 0, 0, -90, 0, 0x001A0000, bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, 17861, 39, 0, 0, -90, 0, 0x000A0000, bhvFlyingWarp),
+		TERRAIN(ccm_area_2_collision),
+		ROOMS(ccm_area_2_collision_rooms),
+		MACRO_OBJECTS(ccm_area_2_macro_objs),
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
