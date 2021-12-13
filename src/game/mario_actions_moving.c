@@ -1985,6 +1985,13 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         return TRUE;
     }
 
+    if (m->floor != NULL && m->floor->type == SURFACE_FORCE_JUMP) {
+        set_mario_action(m, ACT_DOUBLE_JUMP, 1);
+        m->forwardVel *= 1.4f;
+        m->vel[1] = 70.0f;
+        return TRUE;
+    }
+
     /* clang-format off */
     switch (m->action) {
         case ACT_WALKING:                  cancel = act_walking(m);                  break;

@@ -36,6 +36,7 @@ const GeoLayout bbh_dl_203__Cave_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Cave_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Cave_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bbh_dl_Cave_004_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_FORCE, bbh_dl_YBackground_001_mesh_layer_0),
 		GEO_DISPLAY_LIST(LAYER_FORCE, bbh_dl_ZBackground_mesh_layer_0),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
