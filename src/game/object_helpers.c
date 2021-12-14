@@ -2487,6 +2487,35 @@ void obj_build_transform_relative_to_parent(struct Object *obj) {
     cur_obj_scale(1.0f);
 }
 
+
+
+void cur_obj_set_throw_matrix_from_transform(void) {
+    if (o->oFlags & OBJ_FLAG_0020) {
+        obj_build_transform_from_pos_and_angle(o, O_POS_INDEX, O_FACE_ANGLE_INDEX);
+        obj_apply_scale_to_transform(o);
+    }
+
+    o->header.gfx.throwMatrix = &o->transform;
+
+    cur_obj_scale(1.0f);
+}
+
+void cur_obj_build_transform_relative_to_parent(void) {
+    struct Object *parent = o->parentObj;
+
+    obj_build_transform_from_pos_and_angle(o, O_PARENT_RELATIVE_POS_INDEX, O_FACE_ANGLE_INDEX);
+    obj_apply_scale_to_transform(o);
+    mtxf_mul(o->transform, o->transform, parent->transform);
+
+    o->oPosX = o->transform[3][0];
+    o->oPosY = o->transform[3][1];
+    o->oPosZ = o->transform[3][2];
+
+    o->header.gfx.throwMatrix = &o->transform;
+
+    cur_obj_scale(1.0f);
+}
+
 void obj_create_transform_from_self(struct Object *obj) {
     obj->oFlags &= ~OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT;
     obj->oFlags |= OBJ_FLAG_SET_THROW_MATRIX_FROM_TRANSFORM;
@@ -2939,7 +2968,7 @@ void bhv_init_room(void) {
     }
 }
 
-void cur_obj_enable_rendering_if_mario_in_room(void) {
+s32 cur_obj_enable_rendering_if_mario_in_room(void) {
     register s32 marioInRoom;
 
     if (o->oRoom != -1 && gMarioCurrentRoom != 0) {
@@ -2968,6 +2997,7 @@ void cur_obj_enable_rendering_if_mario_in_room(void) {
             }
         }
     }
+    return marioInRoom;
 }
 
 s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deathSound, s32 noLootCoins) {

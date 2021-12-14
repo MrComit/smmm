@@ -91,6 +91,17 @@ void obj_update_gfx_pos_and_angle(struct Object *obj) {
     obj->header.gfx.angle[2] = obj->oFaceAngleRoll & 0xFFFF;
 }
 
+
+void cur_obj_update_gfx_pos_and_angle(void) {
+    gCurrentObject->header.gfx.pos[0] = gCurrentObject->oPosX;
+    gCurrentObject->header.gfx.pos[1] = gCurrentObject->oPosY + gCurrentObject->oGraphYOffset;
+    gCurrentObject->header.gfx.pos[2] = gCurrentObject->oPosZ;
+
+    gCurrentObject->header.gfx.angle[0] = gCurrentObject->oFaceAnglePitch & 0xFFFF;
+    gCurrentObject->header.gfx.angle[1] = gCurrentObject->oFaceAngleYaw & 0xFFFF;
+    gCurrentObject->header.gfx.angle[2] = gCurrentObject->oFaceAngleRoll & 0xFFFF;
+}
+
 // Push the address of a behavior command to the object's behavior stack.
 static void cur_obj_bhv_stack_push(uintptr_t bhvAddr) {
     gCurrentObject->bhvStack[gCurrentObject->bhvStackIndex] = bhvAddr;
@@ -949,7 +960,7 @@ extern s8 sLevelRoomOffsets[];
 extern struct MarioState *gMarioState;
 
 // Execute the behavior script of the current object, process the object flags, and other miscellaneous code for updating objects.
-void cur_obj_update(void) {
+/*void cur_obj_update(void) {
     UNUSED u8 filler[4];
 
     s32 objFlags = gCurrentObject->oFlags;
@@ -1048,55 +1059,126 @@ void cur_obj_update(void) {
         }
     }
 
-    //if (objFlags & OBJ_FLAG_MULTIROOM) {
-    //    gCurrentObject->oRoom2 = (gCurrentObject->oBehParams >> 8) & 0xFF;
-    //}
-
     // Handle visibility of object
-    if (gCurrentObject->oRoom != -1) {
-        // If the object is in a room, only show it when Mario is in the room.
-        cur_obj_enable_rendering_if_mario_in_room();
-    } else if ((objFlags & OBJ_FLAG_COMPUTE_DIST_TO_MARIO) && gCurrentObject->collisionData == NULL) {
-        if (!(objFlags & OBJ_FLAG_ACTIVE_FROM_AFAR)) {
-            // If the object has a render distance, check if it should be shown.
-            if (distanceFromMario > gCurrentObject->oDrawingDistance) {
-                // Out of render distance, hide the object.
-                gCurrentObject->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
-                gCurrentObject->activeFlags |= ACTIVE_FLAG_FAR_AWAY;
-            } else if (gCurrentObject->oHeldState == HELD_FREE) {
-                // In render distance (and not being held), show the object.
-                gCurrentObject->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
-                gCurrentObject->activeFlags &= ~ACTIVE_FLAG_FAR_AWAY;
-            }
-        }
-    }
+    cur_obj_enable_rendering_if_mario_in_room();
 
     if (gCurrentObject->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
         gCurrentObject->oFlags &= ~OBJ_FLAG_KICKED_OR_PUNCHED;
     }
-    // Advanced lighting engine
-    // If this object emits light, is active, is visible, and there are still scene point light slots available,
-    // create a point light at this object
-    /*if ((objFlags & OBJ_FLAG_EMIT_LIGHT) && gPointLightCount < MAX_POINT_LIGHTS)
-    {
-        s32 red   = (gCurrentObject->oLightColor >> 24) & 0xFF;
-        s32 green = (gCurrentObject->oLightColor >> 16) & 0xFF;
-        s32 blue  = (gCurrentObject->oLightColor >>  8) & 0xFF;
-        if (gCurrentObject->header.gfx.node.flags & GRAPH_RENDER_ACTIVE)
-        {
-            emit_light(gCurrentObject->header.gfx.pos,
-                       red, green, blue,
-                       gCurrentObject->oLightConstantFalloff,
-                       gCurrentObject->oLightLinearFalloff,
-                       gCurrentObject->oLightQuadraticFalloff);
+}*/
+
+
+
+
+void obj_move_xz_using_fvel_and_yaw(struct Object *obj) {
+    obj->oVelX = obj->oForwardVel * sins(obj->oMoveAngleYaw);
+    obj->oVelZ = obj->oForwardVel * coss(obj->oMoveAngleYaw);
+
+    obj->oPosX += obj->oVelX;
+    obj->oPosZ += obj->oVelZ;
+}
+
+void obj_move_y_with_terminal_vel(struct Object *obj) {
+    if (obj->oVelY < -70.0f) {
+        obj->oVelY = -70.0f;
+    }
+
+    obj->oPosY += obj->oVelY;
+}
+
+void cur_obj_update(void) {
+    struct Object *obj = gCurrentObject;
+    s32 objFlags = obj->oFlags;
+    f32 distanceFromMario;
+    BhvCommandProc bhvCmdProc;
+    s32 bhvProcResult;
+
+
+    // Handle visibility of object
+    if (cur_obj_enable_rendering_if_mario_in_room()) {
+        // Calculate the distance from the object to Mario.
+        if (objFlags & (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST)) {
+            obj->oDistanceToMario = dist_between_objects(obj, gMarioObject);
+            distanceFromMario = obj->oDistanceToMario;
+        } else {
+            distanceFromMario = 0.0f;
         }
-        else if (gMarioState->heldObj == gCurrentObject)
-        {
-            emit_light(gMarioState->marioBodyState->heldObjLastPosition,
-                       red, green, blue,
-                       gCurrentObject->oLightConstantFalloff,
-                       gCurrentObject->oLightLinearFalloff,
-                       gCurrentObject->oLightQuadraticFalloff);
+
+
+        if (!(objFlags & OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST && distanceFromMario > obj->oDrawingDistance) || !gIsConsole) {
+            
+            if (obj->oHeldState == HELD_FREE && gIsConsole)
+                obj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+
+            // Calculate the angle from the object to Mario.
+            if (objFlags & OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO) {
+                obj->oAngleToMario = obj_angle_to_object(obj, gMarioObject);
+            }
+
+            // If the object's action has changed, reset the action timer.
+            if (obj->oAction != obj->oPrevAction) {
+                (void) (obj->oTimer = 0, obj->oSubAction = 0,
+                        obj->oPrevAction = obj->oAction);
+            }
+
+            // Execute the behavior script.
+            gCurBhvCommand = obj->curBhvCommand;
+
+            do {
+                bhvCmdProc = BehaviorCmdTable[*gCurBhvCommand >> 24];
+                bhvProcResult = bhvCmdProc();
+            } while (bhvProcResult == BHV_PROC_CONTINUE);
+
+            obj->curBhvCommand = gCurBhvCommand;
+
+            // Increment the object's timer.
+            if (obj->oTimer < 0x3FFFFFFF) {
+                obj->oTimer++;
+            }
+
+            // If the object's action has changed, reset the action timer.
+            if (obj->oAction != obj->oPrevAction) {
+                (void) (obj->oTimer = 0, obj->oSubAction = 0,
+                        obj->oPrevAction = obj->oAction);
+            }
+
+            // Execute various code based on object flags.
+            objFlags = (s16) obj->oFlags;
+
+            if (objFlags & OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW) {
+                obj->oFaceAngleYaw = obj->oMoveAngleYaw;
+            }
+
+            if (objFlags & OBJ_FLAG_MOVE_XZ_USING_FVEL) {
+                obj_move_xz_using_fvel_and_yaw(obj);
+            }
+
+            if (objFlags & OBJ_FLAG_MOVE_Y_WITH_TERMINAL_VEL) {
+                obj_move_y_with_terminal_vel(obj);
+            }
+
+            if (objFlags & OBJ_FLAG_TRANSFORM_RELATIVE_TO_PARENT) {
+                obj_build_transform_relative_to_parent(obj);
+            }
+
+            if (objFlags & OBJ_FLAG_SET_THROW_MATRIX_FROM_TRANSFORM) {
+                obj_set_throw_matrix_from_transform(obj);
+            }
+
+            if (objFlags & OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE) {
+                obj_update_gfx_pos_and_angle(obj);
+            }
+            
+            if (obj->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+                obj->oFlags &= ~OBJ_FLAG_KICKED_OR_PUNCHED;
+            }
+        } else if (gIsConsole) {
+            obj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
         }
-    }*/
+        if (objFlags & OBJ_FLAG_DISABLE_ON_ROOM_CLEAR) {
+            if (save_file_get_rooms(obj->oRoom / 32) & (1 << ((obj->oRoom + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
+                obj->activeFlags = 0;
+            }
+        }
+    }
 }

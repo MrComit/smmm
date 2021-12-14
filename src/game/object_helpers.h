@@ -228,6 +228,8 @@ void obj_translate_local(struct Object *obj, s16 posIndex, s16 localTranslateInd
 void obj_build_transform_from_pos_and_angle(struct Object *obj, s16 posIndex, s16 angleIndex);
 void obj_set_throw_matrix_from_transform(struct Object *obj);
 void obj_build_transform_relative_to_parent(struct Object *obj);
+void cur_obj_set_throw_matrix_from_transform(void);
+void cur_obj_build_transform_relative_to_parent(void);
 void obj_create_transform_from_self(struct Object *obj);
 void  cur_obj_rotate_face_angle_using_vel(void);
 s32 cur_obj_follow_path(UNUSED s32 unused);
@@ -272,7 +274,7 @@ s32 bit_shift_left(s32 a0);
 s32 cur_obj_mario_far_away(void);
 s32 is_mario_moving_fast_or_in_air(s32 speedThreshold);
 s32 is_item_in_array(s8 item, s8 *array);
-void cur_obj_enable_rendering_if_mario_in_room(void);
+s32 cur_obj_enable_rendering_if_mario_in_room(void);
 s32 cur_obj_set_hitbox_and_die_if_attacked(struct ObjectHitbox *hitbox, s32 deathSound, s32 noLootCoins);
 void obj_explode_and_spawn_coins(f32 sp18, s32 sp1C);
 void obj_set_collision_data(struct Object *obj, const void *segAddr);
