@@ -569,8 +569,14 @@ Gfx *geo_switch_garden_render(s32 callContext, struct GraphNode *node) {
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
 
+
+        //if not console, 0
+        //if console, but within bounds, 0
+        //if console and not within bounds, 1
+
         // assign the case number for execution.
-        if (!gIsConsole || (gMarioState->pos[2] > -4000.0f && gMarioState->pos[2] < 4500.0f)) {
+        if (!gIsConsole || (gMarioState->pos[0] < 20700.0f && gMarioState->pos[2] > -4000.0f && gMarioState->pos[2] < 4500.0f)
+            || (gMarioState->pos[0] >= 20700.0f && gMarioState->pos[2] > 0.0f && gMarioState->pos[2] < 3000.0f)) {
             switchCase->selectedCase = 0;
         } else {
             switchCase->selectedCase = 1;
@@ -606,6 +612,34 @@ Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node) {
 
     return NULL;
 }
+
+#ifdef AVOID_UB
+Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        if (!gIsConsole || gMarioState->pos[0] <= 23050.0f || gMarioState->pos[2] <= -4900.0f) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
 
 extern s8 sLevelRoomOffsets[];
 extern s8 gGlobalMarioRoom;
