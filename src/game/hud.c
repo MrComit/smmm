@@ -470,43 +470,18 @@ void render_hud(void) {
         sPowerMeterStoredHealth = 8;
         sPowerMeterVisibleTimer = 0;
     } else {
-#ifdef VERSION_EU
-        // basically create_dl_ortho_matrix but guOrtho screen width is different
-        Mtx *mtx = alloc_display_list(sizeof(*mtx));
-
-        if (mtx == NULL) {
-            return;
-        }
-
-        create_dl_identity_matrix();
-        guOrtho(mtx, -16.0f, SCREEN_WIDTH + 16, 0, SCREEN_HEIGHT, -10.0f, 10.0f, 1.0f);
-        gSPPerspNormalize(gDisplayListHead++, 0xFFFF);
-        gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx),
-                  G_MTX_PROJECTION | G_MTX_MUL | G_MTX_NOPUSH);
-#else
         create_dl_ortho_matrix();
-#endif
 
         if (gCurrentArea != NULL && gCurrentArea->camera->mode == CAMERA_MODE_INSIDE_CANNON) {
             render_hud_cannon_reticle();
         }
-
-        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_LIVES) {
-        //    render_hud_mario_lives();
-        //}
         if (sCurrPlayMode == 2)
             gHudTopY = 209;
 
         if (gHudTopY < 225 && gCamera->cutscene != CUTSCENE_OPENING)
             render_hud_coins();
 
-        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
-        //    render_hud_stars();
-        //}
-
-        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
-            render_hud_keys();
-        //}
+        render_hud_keys();
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER) {
             render_hud_power_meter();

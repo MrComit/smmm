@@ -294,7 +294,7 @@ void change_area(s32 index) {
 
 void area_update_objects(void) {
     gAreaUpdateCounter++;
-    update_objects(0);
+    update_objects();
 }
 
 /*

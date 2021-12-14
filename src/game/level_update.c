@@ -1037,12 +1037,6 @@ void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
-        if (gCurrCourseNum >= COURSE_MIN) {
-            gHudDisplay.flags |= HUD_DISPLAY_FLAG_COIN_COUNT;
-        } else {
-            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_COIN_COUNT;
-        }
-
         if (gMarioState->action & ACT_FLAG_STATIONARY) {
             if (sTimer2++ > 45) {
                 gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
@@ -1117,25 +1111,17 @@ void update_hud_values(void) {
             if (gHudDisplay.booCoins < gMarioState->numBooCoins) {
                 if (gGlobalTimer & 0x00000001) {
                     gHudDisplay.booCoins += 1;
-                    //gMarioState->numBooCoins = gHudDisplay.booCoins;
                     play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
                 }
             } else if (gHudDisplay.booCoins > gMarioState->numBooCoins) {
                     gHudDisplay.booCoins -= 1;
-                    //gMarioState->numBooCoins = gHudDisplay.booCoins;
                     play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
             }
         }
 
-        //if (gMarioState->numLives > 100) {
-        //    gMarioState->numLives = 100;
-        //}
-        //gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_BOO;
 
 
-        //gHudDisplay.stars = gMarioState->numStars;
         gHudDisplay.lives = gMarioState->numLives;
-        //gHudDisplay.keys = gMarioState->numKeys;
 
         if (numHealthWedges > gHudDisplay.wedges) {
             play_sound(SOUND_MENU_POWER_METER, gGlobalSoundSource);

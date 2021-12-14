@@ -317,7 +317,7 @@ void geo_process_switch(struct GraphNodeSwitchCase *node) {
     }
 }
 
-static void make_roll_matrix(Mtx *mtx, s16 angle) {
+static void make_roll_matrix(Mtx *mtx, s32 angle) {
     Mat4 temp;
 
     mtxf_identity(temp);
@@ -1434,7 +1434,7 @@ void geo_try_process_children(struct GraphNode *node) {
  * be iterated over.
  */
 void geo_process_node_and_siblings(struct GraphNode *firstNode) {
-    s16 iterateChildren = TRUE;
+    s32 iterateChildren = TRUE;
     struct GraphNode *curGraphNode = firstNode;
     struct GraphNode *parent = curGraphNode->parent;
 
@@ -1537,7 +1537,6 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode) {
  * to set up the projection and draw display lists.
  */
 void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) {
-    UNUSED u8 filler[4];
 #if PUPPYPRINT_DEBUG
     OSTime first = osGetTime();
 #endif
