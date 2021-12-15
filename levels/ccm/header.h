@@ -79,4 +79,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/cardboard_wall_alt/collision_header.h"
 
+#include "levels/ccm/racecar/geo_header.h"
+
+#include "levels/ccm/racecar/collision_header.h"
+
 #endif

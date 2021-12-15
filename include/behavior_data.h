@@ -697,7 +697,7 @@ extern const BehaviorScript bhvIceCeilingGate[];
 extern const BehaviorScript bhvGardenMips[];
 extern const BehaviorScript bhvCardboardWall[];
 extern const BehaviorScript bhvHiddenHorizontalPole[];
-
+extern const BehaviorScript bhvRacecar[];
 
 
 

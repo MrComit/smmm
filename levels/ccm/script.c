@@ -44,6 +44,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SHAKY_PLAT, shaky_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POUND_LEGO, pound_lego_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CARDBOARD_WALL, cardboard_wall_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_RACECAR, racecar_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -182,6 +183,8 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, 17861, 39, 0, 0, -90, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_HORIZONTAL_POLE, 14611, 89, 3500, 0, -180, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_HORIZONTAL_POLE, 10034, 23, 8541, 0, -135, 0, 0x00100000, bhvHorizontalPole),
+		OBJECT(MODEL_RACECAR, 12593, -161, 127, 0, -180, 0, (0 << 16), bhvRacecar),
+		OBJECT(MODEL_RACECAR, 13215, -161, 127, 0, 0, 0, (1 << 16), bhvRacecar),
 		TERRAIN(ccm_area_2_collision),
 		ROOMS(ccm_area_2_collision_rooms),
 		MACRO_OBJECTS(ccm_area_2_macro_objs),

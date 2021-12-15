@@ -26,6 +26,26 @@ static void const *sCardboardCollision[] = {
     cardboard_wall_alt_collision,
 };
 
+
+
+void bhv_racecar_init(void) {
+    o->oForwardVel = 15.0f;
+    o->oF4 = o->oFaceAngleYaw;
+}
+
+
+void bhv_racecar_loop(void) {
+    CL_Move();
+    if (o->oTimer > 90) {
+        o->oF4 = o->oMoveAngleYaw + 0x8000;
+        o->oTimer = 0;
+    }
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oF4, 0x400);
+}
+
+
+
+
 void bhv_cardboard_wall_init(void) {
     o->collisionData = segmented_to_virtual(sCardboardCollision[o->oBehParams2ndByte]);
 }

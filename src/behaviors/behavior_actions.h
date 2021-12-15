@@ -807,7 +807,8 @@ void bhv_cardboard_wall_init(void);
 void bhv_cardboard_wall_loop(void);
 void bhv_hidden_horizontal_pole_init(void);
 void bhv_hidden_horizontal_pole_loop(void);
-
+void bhv_racecar_loop(void);
+void bhv_racecar_init(void);
 
 
 

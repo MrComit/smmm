@@ -695,6 +695,7 @@
 #define MODEL_SHAKY_PLAT          0xFD
 #define MODEL_POUND_LEGO          0xFC
 #define MODEL_CARDBOARD_WALL      0xFB
+#define MODEL_RACECAR             0xFA
 
 
 
