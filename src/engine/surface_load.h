@@ -43,5 +43,7 @@ u32 get_area_terrain_size(s16 *data);
 void load_area_terrain(s16 index, s16 *data, s8 *surfaceRooms, s16 *macroObjects);
 void clear_dynamic_surfaces(void);
 void load_object_collision_model(void);
+s16 min_3(s16 a0, s16 a1, s16 a2);
+s16 max_3(s16 a0, s16 a1, s16 a2);
 
 #endif // SURFACE_LOAD_H

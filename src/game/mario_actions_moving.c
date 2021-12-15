@@ -1974,6 +1974,8 @@ s32 check_common_moving_cancels(struct MarioState *m) {
     return FALSE;
 }
 
+
+
 s32 mario_execute_moving_action(struct MarioState *m) {
     s32 cancel;
 
@@ -1989,6 +1991,7 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         set_mario_action(m, ACT_DOUBLE_JUMP, 1);
         m->forwardVel *= 1.4f;
         m->vel[1] = 70.0f;
+        m->faceAngle[1] = (m->faceAngle[1] + 0x1000) & 0xE000;
         return TRUE;
     }
 

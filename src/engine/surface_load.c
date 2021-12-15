@@ -171,7 +171,7 @@ static void add_surface_to_cell(s16 dynamic, s16 cellX, s16 cellZ, struct Surfac
 /**
  * Returns the lowest of three values.
  */
-static s16 min_3(s16 a0, s16 a1, s16 a2) {
+s16 min_3(s16 a0, s16 a1, s16 a2) {
     if (a1 < a0) {
         a0 = a1;
     }
@@ -186,7 +186,7 @@ static s16 min_3(s16 a0, s16 a1, s16 a2) {
 /**
  * Returns the highest of three values.
  */
-static s16 max_3(s16 a0, s16 a1, s16 a2) {
+s16 max_3(s16 a0, s16 a1, s16 a2) {
     if (a1 > a0) {
         a0 = a1;
     }
