@@ -7838,7 +7838,8 @@ const BehaviorScript bhvGreenCoin[] = {
 
 const BehaviorScript bhvHiddenGreenCoinStar[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_MULTIROOM | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_hidden_green_coin_star_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_green_coin_star_loop),
     END_LOOP(),

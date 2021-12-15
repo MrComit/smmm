@@ -130,6 +130,9 @@ void bhv_green_coin_loop(void) {
 }
 
 
+void bhv_hidden_green_coin_star_init(void) {
+    o->oRoom2 = 2;
+}
 
 void bhv_hidden_green_coin_star_loop(void) {
     //gGreenCoinsCollected = o->oHiddenStarTriggerCounter;
