@@ -383,10 +383,11 @@ void (*sChuckyaActions[])(void) = { chuckya_act_0, chuckya_act_1, chuckya_act_2,
 void (*sChuckyaBombActions[])(void) = { chuckya_bomb_act_0, chuckya_bomb_act_1, chuckya_bomb_act_2, chuckya_bomb_act_3 };
 
 void chuckya_move_bomb(void) {
-    cur_obj_update_floor_and_walls();
-    cur_obj_call_action_function(sChuckyaBombActions);
-    if (o->oBehParams2ndByte == 0)
+    if (o->oBehParams2ndByte == 0) {
+        cur_obj_update_floor_and_walls();
         cur_obj_move_standard(-30);
+    }
+    cur_obj_call_action_function(sChuckyaBombActions);
     if (o->oAction == 0) {
         if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f && absf(o->oPosY - gMarioObject->oPosY) < 800.0f) {
             if (o->oTimer > 10) {
