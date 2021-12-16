@@ -1989,9 +1989,12 @@ s32 mario_execute_moving_action(struct MarioState *m) {
 
     if (m->floor != NULL && m->floor->type == SURFACE_FORCE_JUMP) {
         set_mario_action(m, ACT_DOUBLE_JUMP, 1);
-        m->forwardVel *= 1.4f;
-        m->vel[1] = 70.0f;
         m->faceAngle[1] = (m->faceAngle[1] + 0x1000) & 0xE000;
+        m->vel[1] = 70.0f;
+        m->forwardVel *= 1.4f;
+        if (m->forwardVel > 100.0f) {
+            m->forwardVel = 100.0f;
+        }
         return TRUE;
     }
 

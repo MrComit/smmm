@@ -36,7 +36,7 @@ void bhv_racecar_init(void) {
 
 void bhv_racecar_loop(void) {
     CL_Move();
-    if (o->oTimer > 90) {
+    if (o->oTimer > 120) {
         o->oF4 = o->oMoveAngleYaw + 0x8000;
         o->oTimer = 0;
     }
