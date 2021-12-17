@@ -364,7 +364,7 @@ void mario_l_to_levitate(void) {
         gMarioState->pos[1] += 20.0f;
 }
 
-
+extern s16 gEdgeLengths[3];
 /**
  * Mario's primary behavior update function.
  */

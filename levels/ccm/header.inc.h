@@ -275,7 +275,7 @@ extern Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_0[264];
 extern Gfx ccm_dl_Lego_004_mesh_layer_1_tri_0[];
 extern Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_1[73];
 extern Gfx ccm_dl_Lego_004_mesh_layer_1_tri_1[];
-extern Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_2[82];
+extern Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_2[143];
 extern Gfx ccm_dl_Lego_004_mesh_layer_1_tri_2[];
 extern Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_3[111];
 extern Gfx ccm_dl_Lego_004_mesh_layer_1_tri_3[];

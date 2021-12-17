@@ -1975,9 +1975,72 @@ s32 check_common_moving_cancels(struct MarioState *m) {
 }
 
 
+s32 vec3s_get_angle(Vec3s point1, Vec3s point2) {
+    s16 dx = point2[0] - point1[0];
+    s16 dz = point2[2] - point1[2];
+
+    return atan2s((f32)dz, (f32)dx);
+}
+
+s32 min_vec3s_index(Vec3s vec) {
+    s32 index = 0;
+    if (vec[1] < vec[0]) {
+        index = 1;
+    }
+
+    if (vec[2] < vec[index]) {
+        index = 2;
+    }
+
+    return index;
+}
+
+s32 vec3s_get_dist(Vec3s from, Vec3s to) {
+    register f32 x = to[0] - from[0];
+    register f32 y = to[1] - from[1];
+    register f32 z = to[2] - from[2];
+
+    return (s32)sqrtf(x * x + y * y + z * z);
+}
+
+Vec3s sMarioLastFrameMovement = {0};
+u8 sForceEdges[3][2] = {
+    {0, 1},
+    {0, 2},
+    {1, 2},
+};
+
+void set_mario_angle_from_force_jump(struct MarioState *m) {
+    Vec3s edgeLengths, marioPos;
+    Vec3s *verts[3];
+    s16 angleToEdgePoint, moveAngle;
+    s16 index, firstPoint;
+
+    verts[0] = m->floor->vertex1;
+    verts[1] = m->floor->vertex2;
+    verts[2] = m->floor->vertex3;
+
+    edgeLengths[0] = vec3s_get_dist(m->floor->vertex1, m->floor->vertex2);
+    edgeLengths[1] = vec3s_get_dist(m->floor->vertex1, m->floor->vertex3);
+    edgeLengths[2] = vec3s_get_dist(m->floor->vertex2, m->floor->vertex3);
+
+    index = min_vec3s_index(edgeLengths);
+    vec3f_to_vec3s(marioPos, m->pos);
+    angleToEdgePoint = vec3s_get_angle(verts[sForceEdges[index][0]], verts[sForceEdges[index][1]]);
+    moveAngle = vec3s_get_angle(sMarioLastFrameMovement, marioPos);
+    if (absi(moveAngle - angleToEdgePoint) <= 0x4000) {
+        firstPoint = 0;
+    } else {
+        firstPoint = 1;
+    }
+    m->faceAngle[1] = vec3s_get_angle(verts[sForceEdges[index][firstPoint]], verts[sForceEdges[index][firstPoint^1]]);
+}
+
+
 
 s32 mario_execute_moving_action(struct MarioState *m) {
     s32 cancel;
+    Vec3s marioPos;
 
     if (check_common_moving_cancels(m)) {
         return TRUE;
@@ -1989,14 +2052,17 @@ s32 mario_execute_moving_action(struct MarioState *m) {
 
     if (m->floor != NULL && m->floor->type == SURFACE_FORCE_JUMP) {
         set_mario_action(m, ACT_DOUBLE_JUMP, 1);
-        m->faceAngle[1] = (m->faceAngle[1] + 0x1000) & 0xE000;
+        set_mario_angle_from_force_jump(m);
+        //m->faceAngle[1] = (m->faceAngle[1] + 0x1000) & 0xE000;
         m->vel[1] = 70.0f;
-        m->forwardVel *= 1.4f;
+        m->forwardVel = absf(m->forwardVel * 1.4f);
         if (m->forwardVel > 100.0f) {
             m->forwardVel = 100.0f;
         }
         return TRUE;
     }
+    vec3f_to_vec3s(marioPos, m->pos);
+    vec3s_copy(sMarioLastFrameMovement, marioPos);
 
     /* clang-format off */
     switch (m->action) {
