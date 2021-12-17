@@ -12,6 +12,7 @@
 #include "memory.h"
 #include "behavior_data.h"
 #include "rumble_init.h"
+#include "object_list_processor.h"
 
 struct LandingAction {
     s16 numFrames;
@@ -2003,7 +2004,6 @@ s32 vec3s_get_dist(Vec3s from, Vec3s to) {
     return (s32)sqrtf(x * x + y * y + z * z);
 }
 
-Vec3s sMarioLastFrameMovement = {0};
 u8 sForceEdges[3][2] = {
     {0, 1},
     {0, 2},
@@ -2011,10 +2011,9 @@ u8 sForceEdges[3][2] = {
 };
 
 void set_mario_angle_from_force_jump(struct MarioState *m) {
-    Vec3s edgeLengths, marioPos;
+    Vec3s edgeLengths;
     Vec3s *verts[3];
-    s16 angleToEdgePoint, moveAngle;
-    s16 index, firstPoint;
+    s32 moveAngle, index;
 
     verts[0] = m->floor->vertex1;
     verts[1] = m->floor->vertex2;
@@ -2025,22 +2024,20 @@ void set_mario_angle_from_force_jump(struct MarioState *m) {
     edgeLengths[2] = vec3s_get_dist(m->floor->vertex2, m->floor->vertex3);
 
     index = min_vec3s_index(edgeLengths);
-    vec3f_to_vec3s(marioPos, m->pos);
-    angleToEdgePoint = vec3s_get_angle(verts[sForceEdges[index][0]], verts[sForceEdges[index][1]]);
-    moveAngle = vec3s_get_angle(sMarioLastFrameMovement, marioPos);
-    if (absi(moveAngle - angleToEdgePoint) <= 0x4000) {
-        firstPoint = 0;
-    } else {
-        firstPoint = 1;
+    m->faceAngle[1] = vec3s_get_angle(verts[sForceEdges[index][0]], verts[sForceEdges[index][1]]);
+    moveAngle = gMarioObject->oMoveAngleYaw;
+    if (m->forwardVel < 0.0f) {
+        moveAngle = -moveAngle;
     }
-    m->faceAngle[1] = vec3s_get_angle(verts[sForceEdges[index][firstPoint]], verts[sForceEdges[index][firstPoint^1]]);
+    if (absi(moveAngle - m->faceAngle[1]) > 0x4000) {
+        m->faceAngle[1] += 0x8000;
+    }
 }
 
 
 
 s32 mario_execute_moving_action(struct MarioState *m) {
     s32 cancel;
-    Vec3s marioPos;
 
     if (check_common_moving_cancels(m)) {
         return TRUE;
@@ -2061,8 +2058,6 @@ s32 mario_execute_moving_action(struct MarioState *m) {
         }
         return TRUE;
     }
-    vec3f_to_vec3s(marioPos, m->pos);
-    vec3s_copy(sMarioLastFrameMovement, marioPos);
 
     /* clang-format off */
     switch (m->action) {
