@@ -27,6 +27,17 @@ static void const *sCardboardCollision[] = {
 };
 
 
+void bhv_shyguy_boss_init(void) {
+    obj_set_hitbox(o, &sShyguyHitbox);
+    o->oOpacity = 0xFF;
+}
+
+void bhv_shyguy_boss_loop(void) {
+
+
+}
+
+
 
 void bhv_racecar_init(void) {
     o->oForwardVel = 15.0f;
@@ -269,12 +280,6 @@ void bhv_level_entrance_loop(void) {
             o->activeFlags = 0;
         }
     }
-}
-
-
-
-void bhv_pound_lego_init(void) {
-
 }
 
 

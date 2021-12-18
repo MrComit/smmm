@@ -809,7 +809,8 @@ void bhv_hidden_horizontal_pole_init(void);
 void bhv_hidden_horizontal_pole_loop(void);
 void bhv_racecar_loop(void);
 void bhv_racecar_init(void);
-
+void bhv_shyguy_boss_loop(void);
+void bhv_shyguy_boss_init(void);
 
 
 

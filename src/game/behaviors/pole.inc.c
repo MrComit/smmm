@@ -12,9 +12,15 @@
 
 
 void bhv_hidden_horizontal_pole_init(void) {
+    struct Object *obj;
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_POLE_OPEN) {
         spawn_object(o, MODEL_HORIZONTAL_POLE, bhvHorizontalPole);
         o->activeFlags = 0;
+        obj = cur_obj_nearest_object_with_behavior(bhvGenericSwitch);
+        if (obj != NULL) {
+            obj->oAction = 2;
+            obj->header.gfx.scale[1] = 0.2f;
+        }
     } else {
         o->oPosY -= 400.0f;
         cur_obj_hide();
