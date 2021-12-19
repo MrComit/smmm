@@ -652,8 +652,7 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node) {
 #endif
     s16 sp26;
     struct Surface *sp20;
-    UNUSED struct Object *sp1C =
-        (struct Object *) gCurGraphNodeObject; // TODO: change global type to Object pointer
+    struct Object *obj;
     struct GraphNodeSwitchCase *switchCase = (struct GraphNodeSwitchCase *) node;
 
     if (callContext == GEO_CONTEXT_RENDER) {
@@ -668,6 +667,11 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node) {
                 gMarioCurrentRoom = sp20->room;
                 if (sp20->object != NULL && sp20->object->oRoom != 0) {
                     gMarioCurrentRoom = sp20->object->oRoom;
+                }
+                if (gMarioCurrentRoom != gMarioPreviousRoom) {
+                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    if (obj != NULL)
+                        obj->oRoom2 = gMarioCurrentRoom;
                 }
                 sp26 = sp20->room - 1;
                 print_debug_top_down_objectinfo("areainfo %d", sp20->room);
