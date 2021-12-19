@@ -8144,6 +8144,8 @@ const BehaviorScript bhvRacecar[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
     LOAD_COLLISION_DATA(racecar_collision),
     SET_FLOAT(oDrawingDistance, 0x2000),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 200, /*Gravity*/ -150, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    SET_HOME(),
     CALL_NATIVE(bhv_racecar_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_racecar_loop),

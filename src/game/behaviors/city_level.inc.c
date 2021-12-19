@@ -87,14 +87,17 @@ void bhv_shyguy_boss_loop(void) {
 void bhv_racecar_init(void) {
     o->oForwardVel = 15.0f;
     o->oF4 = o->oFaceAngleYaw;
+    o->oFloatF8 = (o->oBehParams >> 24) * 100.0f;
 }
 
 
 void bhv_racecar_loop(void) {
-    CL_Move();
-    if (o->oTimer > 120) {
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(78);
+    //CL_Move();
+    if (cur_obj_lateral_dist_to_home() > o->oFloatF8) {
         o->oF4 = o->oMoveAngleYaw + 0x8000;
-        o->oTimer = 0;
+        vec3f_copy(&o->oHomeX, &o->oPosX);
     }
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oF4, 0x400);
 }
