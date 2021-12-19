@@ -5867,7 +5867,6 @@ const BehaviorScript bhvSnufitBalls[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 10, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
-    CALL_NATIVE(bhv_init_room),
     SET_FLOAT(oGraphYOffset, 10),
     SCALE(/*Unused*/ 0, /*Field*/ 40),
     BEGIN_LOOP(),
@@ -8194,5 +8193,18 @@ const BehaviorScript bhvShyGuyBoss[] = {
     //CALL_NATIVE(bhv_goomba_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_shyguy_boss_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCannonBalls[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 10, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_FLOAT(oGraphYOffset, 10),
+    SCALE(/*Unused*/ 0, /*Field*/ 40),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cannon_balls_loop),
     END_LOOP(),
 };

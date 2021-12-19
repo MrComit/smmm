@@ -1,5 +1,6 @@
 #include "levels/ccm/header.h"
-
+s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction);
+void obj_compute_vel_from_move_pitch(f32 speed);
 static struct ObjectHitbox sLevelEntranceHitbox = {
     /* interactType: */ INTERACT_BBH_ENTRANCE,
     /* downOffset: */ 0,
@@ -10,6 +11,18 @@ static struct ObjectHitbox sLevelEntranceHitbox = {
     /* height: */ 300,
     /* hurtboxRadius: */ 0,
     /* hurtboxHeight: */ 0,
+};
+
+struct ObjectHitbox sCannonBallHitbox = {
+    /* interactType:      */ INTERACT_SNUFIT_BULLET,
+    /* downOffset:        */ 50,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 100,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 100,
+    /* hurtboxHeight:     */ 50,
 };
 
 Vec3s sLegoColors[] = {
@@ -25,6 +38,38 @@ static void const *sCardboardCollision[] = {
     cardboard_wall_collision,
     cardboard_wall_alt_collision,
 };
+
+
+void bhv_cannon_balls_loop(void) {
+    if (o->oTimer > 180) {
+        o->activeFlags = 0;
+    }
+
+    if (o->oGravity == 0.0f) {
+        cur_obj_update_floor_and_walls();
+
+        obj_compute_vel_from_move_pitch(80.0f);
+        if (obj_check_attacks(&sCannonBallHitbox, 1) != 0) {
+            // We hit Mario while he is metal!
+            // Bounce off, and fall until the first check is true.
+            o->oMoveAngleYaw += 0x8000;
+            o->oForwardVel *= 0.05f;
+            o->oVelY = 30.0f;
+            o->oGravity = -4.0f;
+
+            cur_obj_become_intangible();
+        } else if (o->oAction == 1 
+                || (o->oMoveFlags & (OBJ_MOVE_MASK_ON_GROUND | OBJ_MOVE_HIT_WALL))) {
+            o->oDeathSound = -1;
+            obj_die_if_health_non_positive();
+        }
+
+        cur_obj_move_standard(78);
+    } else {
+        cur_obj_move_using_fvel_and_gravity();
+    }
+}
+
 
 
 void bhv_shyguy_boss_init(void) {

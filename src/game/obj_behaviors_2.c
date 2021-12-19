@@ -309,7 +309,7 @@ static s16 obj_get_pitch_to_home(f32 latDistToHome) {
     return atan2s(latDistToHome, o->oPosY - o->oHomeY);
 }
 
-static void obj_compute_vel_from_move_pitch(f32 speed) {
+void obj_compute_vel_from_move_pitch(f32 speed) {
     o->oForwardVel = speed * coss(o->oMoveAnglePitch);
     o->oVelY = speed * -sins(o->oMoveAnglePitch);
 }
@@ -817,7 +817,7 @@ static s32 obj_update_standard_actions(f32 scale) {
     }
 }
 
-static s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction) {
+s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction) {
     s32 attackType;
 
     obj_set_hitbox(o, hitbox);

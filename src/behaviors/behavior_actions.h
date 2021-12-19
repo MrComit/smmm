@@ -811,6 +811,7 @@ void bhv_racecar_loop(void);
 void bhv_racecar_init(void);
 void bhv_shyguy_boss_loop(void);
 void bhv_shyguy_boss_init(void);
+void bhv_cannon_balls_loop(void);
 
 
 

@@ -3179,13 +3179,11 @@ s32 update_in_cannon(UNUSED struct Camera *c, Vec3f focus, Vec3f pos) {
  * sCannonYOffset is used to make the camera rotate down when Mario has just entered the cannon
  */
 void mode_cannon_camera(struct Camera *c) {
-    UNUSED u8 filler[24];
-
     sLakituPitch = 0;
     gCameraMovementFlags &= ~CAM_MOVING_INTO_MODE;
     c->nextYaw = update_in_cannon(c, c->focus, c->pos);
-    if (gPlayer1Controller->buttonPressed & A_BUTTON) {
-        set_camera_mode(c, CAMERA_MODE_BEHIND_MARIO, 1);
+    if (gMarioShotFromCannon == FALSE) {
+        set_camera_mode(c, CAMERA_MODE_8_DIRECTIONS, 1);
         sPanDistance = 0.f;
         sCannonYOffset = 0.f;
         sStatusFlags &= ~CAM_FLAG_BLOCK_SMOOTH_MOVEMENT;
@@ -3400,7 +3398,7 @@ void update_lakitu(struct Camera *c) {
     gLakituState.defMode = c->defMode;
 }
 
-
+extern s8 gGlobalMarioRoom;
 /**
  * The main camera update function.
  * Gets controller input, checks for cutscenes, handles mode changes, and moves the camera
@@ -3494,7 +3492,7 @@ void update_camera(struct Camera *c) {
                 mode_mario_camera(c);
         }*/
     //} else {
-    if (gMarioCurrentRoom != 11) {
+    if (gGlobalMarioRoom != 11 && gGlobalMarioRoom != 39) {
         c->mode = CAMERA_MODE_8_DIRECTIONS;
     }
     
@@ -3509,11 +3507,11 @@ void update_camera(struct Camera *c) {
 
         /*case CAMERA_MODE_WATER_SURFACE:
             mode_water_surface_camera(c);
-            break;
+            break;*/
 
         case CAMERA_MODE_INSIDE_CANNON:
             mode_cannon_camera(c);
-            break;*/
+            break;
 
         case CAMERA_MODE_8_DIRECTIONS:
             mode_8_directions_camera(c);
