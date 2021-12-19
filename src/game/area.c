@@ -225,7 +225,10 @@ void clear_area_graph_nodes(void) {
     }
 }
 
+extern s8 gGreenCoinsCollected;
+
 void load_area(s32 index) {
+    gGreenCoinsCollected = 0;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;
