@@ -85,7 +85,7 @@ void bhv_shyguy_boss_loop(void) {
 
 
 void bhv_racecar_init(void) {
-    o->oForwardVel = 15.0f;
+    o->oForwardVel = 25.0f;
     o->oF4 = o->oFaceAngleYaw;
     o->oFloatF8 = (o->oBehParams >> 24) * 100.0f;
 }
