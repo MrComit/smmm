@@ -558,7 +558,7 @@ s32 act_hold_jump(struct MarioState *m) {
 
     play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, 0);
     common_air_action_step(m, ACT_HOLD_JUMP_LAND, MARIO_ANIM_JUMP_WITH_LIGHT_OBJ,
-                           AIR_STEP_CHECK_LEDGE_GRAB);
+                           0);
     return FALSE;
 }
 
