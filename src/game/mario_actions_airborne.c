@@ -957,14 +957,6 @@ s32 act_ground_pound(struct MarioState *m) {
                 }
             }
             set_camera_shake_from_hit(SHAKE_GROUND_POUND);
-        } else if (stepResult == AIR_STEP_HIT_WALL) {
-            mario_set_forward_vel(m, -16.0f);
-            if (m->vel[1] > 0.0f) {
-                m->vel[1] = 0.0f;
-            }
-
-            m->particleFlags |= PARTICLE_VERTICAL_STAR;
-            set_mario_action(m, ACT_BACKWARD_AIR_KB, 0);
         }
     }
 
