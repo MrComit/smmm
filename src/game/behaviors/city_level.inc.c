@@ -88,6 +88,10 @@ void bhv_racecar_init(void) {
     o->oForwardVel = 25.0f;
     o->oF4 = o->oFaceAngleYaw;
     o->oFloatF8 = (o->oBehParams >> 24) * 100.0f;
+    if ((o->oBehParams >> 8) & 0xFF) {
+        o->oObjFC = spawn_object(o, MODEL_STAR_CURRENCY, bhvStar);
+        o->oObjFC->oBehParams = 0x12 << 24;
+    }
 }
 
 
@@ -100,6 +104,10 @@ void bhv_racecar_loop(void) {
         vec3f_copy(&o->oHomeX, &o->oPosX);
     }
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oF4, 0x400);
+    if (o->oObjFC != NULL) {
+        vec3f_copy(&o->oObjFC->oPosX, &o->oPosX);
+        o->oObjFC->oPosY += 100.0f;
+    }
 }
 
 
