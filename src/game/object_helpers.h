@@ -205,6 +205,7 @@ s32 cur_obj_has_behavior(const BehaviorScript *behavior);
 s32 obj_has_behavior(struct Object *obj, const BehaviorScript *behavior);
 f32 cur_obj_lateral_dist_from_mario_to_home(void);
 f32 cur_obj_lateral_dist_to_home(void);
+f32 cur_obj_dist_to_home(void);
 void cur_obj_set_pos_to_home(void);
 void cur_obj_set_pos_to_home_and_stop(void);
 void cur_obj_shake_y(f32 amount);

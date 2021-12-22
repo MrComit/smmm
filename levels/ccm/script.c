@@ -193,7 +193,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_RACECAR, 17236, 487, -2000, 0, 0, 0, (40 << 24) | (1 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 15986, 527, -2000, 0, 0, 0, (40 << 24) | (0 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 17736, -161, -3000, 0, 0, 0, (60 << 24) | (1 << 16), bhvRacecar),
-		OBJECT(MODEL_RACECAR, 13861, -161, -3800, 0, 90, 0, (10 << 24) | (1 << 16) | (1 << 8), bhvRacecar),
+		OBJECT(MODEL_RACECAR, 12661, 839, -5350, 0, -90, 0, (20 << 24) | (1 << 16) | (1 << 8), bhvRacecar),
 		OBJECT(MODEL_SHYGUY, -5889, 4339, -2500, 0, 90, 0, 0x00000000, bhvShyGuyBoss),
 		OBJECT(MODEL_CANNON_BASE, 7861, 974, -7537, 0, 0, 0, (0x40 << 16), bhvCannon),
 		TERRAIN(ccm_area_2_collision),

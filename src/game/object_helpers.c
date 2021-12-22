@@ -2036,6 +2036,16 @@ f32 cur_obj_lateral_dist_to_home(void) {
     return dist;
 }
 
+f32 cur_obj_dist_to_home(void) {
+    f32 dist;
+    f32 dx = o->oHomeX - o->oPosX;
+    f32 dy = o->oHomeY - o->oPosY;
+    f32 dz = o->oHomeZ - o->oPosZ;
+
+    dist = sqrtf(dx * dx + dy * dy + dz * dz);
+    return dist;
+}
+
 s32 cur_obj_outside_home_square(f32 halfLength) {
     if (o->oHomeX - halfLength > o->oPosX) {
         return TRUE;
