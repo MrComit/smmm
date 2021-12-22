@@ -1,0 +1,11 @@
+extern const GeoLayout city_bridge_geo[];
+extern Lights1 city_bridge_LegoWall_002_layer1_lights;
+extern u8 city_bridge_i8_hd_lego_i4[];
+extern u8 city_bridge_lego_colors2_rgba16[];
+extern Vtx city_bridge_Bridge_001_mesh_layer_1_vtx_cull[8];
+extern Vtx city_bridge_Bridge_001_mesh_layer_1_vtx_0[54];
+extern Gfx city_bridge_Bridge_001_mesh_layer_1_tri_0[];
+extern Gfx mat_city_bridge_LegoWall_002_layer1[];
+extern Gfx mat_revert_city_bridge_LegoWall_002_layer1[];
+extern Gfx city_bridge_Bridge_001_mesh_layer_1[];
+extern Gfx city_bridge_material_revert_render_settings[];

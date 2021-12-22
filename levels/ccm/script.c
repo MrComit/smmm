@@ -46,6 +46,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_POUND_LEGO, pound_lego_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CARDBOARD_WALL, cardboard_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RACECAR, racecar_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CITY_BRIDGE, city_bridge_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -152,6 +153,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_CARDBOARD_WALL, 24737, -161, 1381, 0, 0, 0, (1 << 24), bhvCardboardWall),
 		OBJECT(MODEL_CARDBOARD_WALL, 24737, 2327, -397, 0, 0, 0, (1 << 16), bhvCardboardWall),
 		OBJECT(MODEL_CARDBOARD_WALL, 24737, -161, -4189, 0, 0, 0, 0x00000000, bhvCardboardWall),
+		OBJECT(MODEL_CITY_BRIDGE, 13028, -67, -12223, 0, 0, 0, 0x00000000, bhvCityBridge),
 		OBJECT(MODEL_STAR_CURRENCY, 24026, 3250, -9938, 0, 90, 0, 0x00000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 23016, 139, 507, 0, 0, 0, (4 << 24), bhvStar),
 		OBJECT(MODEL_TELEPORTER, 1132, 379, 579, 0, 90, 0, (0x56 << 16), bhvFadingWarp),

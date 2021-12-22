@@ -696,6 +696,7 @@
 #define MODEL_POUND_LEGO          0xFC
 #define MODEL_CARDBOARD_WALL      0xFB
 #define MODEL_RACECAR             0xFA
+#define MODEL_CITY_BRIDGE         0xF9
 
 
 

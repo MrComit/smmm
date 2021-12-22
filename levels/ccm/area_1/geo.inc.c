@@ -85,7 +85,6 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 			GEO_BRANCH(1, ccm_dl_cc_002_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_aa_002_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Bridge_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_CBWall3_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_city_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_002_mesh_layer_1),

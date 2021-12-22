@@ -700,6 +700,7 @@ extern const BehaviorScript bhvHiddenHorizontalPole[];
 extern const BehaviorScript bhvRacecar[];
 extern const BehaviorScript bhvShyGuyBoss[];
 extern const BehaviorScript bhvCannonBalls[];
+extern const BehaviorScript bhvCityBridge[];
 
 
 

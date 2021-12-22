@@ -40,6 +40,11 @@ static void const *sCardboardCollision[] = {
 };
 
 
+void bhv_city_bridge_init(void) {
+
+}
+
+
 void bhv_cannon_balls_loop(void) {
     if (o->oTimer > 180) {
         o->activeFlags = 0;

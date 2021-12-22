@@ -31,3 +31,4 @@
 #include "levels/ccm/pound_lego/geo.inc.c"
 #include "levels/ccm/cardboard_wall/geo.inc.c"
 #include "levels/ccm/racecar/geo.inc.c"
+#include "levels/ccm/city_bridge/geo.inc.c"

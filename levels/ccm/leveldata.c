@@ -59,3 +59,5 @@
 #include "levels/ccm/cardboard_wall_alt/collision.inc.c"
 #include "levels/ccm/racecar/model.inc.c"
 #include "levels/ccm/racecar/collision.inc.c"
+#include "levels/ccm/city_bridge/model.inc.c"
+#include "levels/ccm/city_bridge/collision.inc.c"
