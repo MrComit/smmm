@@ -701,6 +701,7 @@ extern const BehaviorScript bhvRacecar[];
 extern const BehaviorScript bhvShyGuyBoss[];
 extern const BehaviorScript bhvCannonBalls[];
 extern const BehaviorScript bhvCityBridge[];
+extern const BehaviorScript bhvShootingGalleryHandler[];
 
 
 

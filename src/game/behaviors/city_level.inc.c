@@ -40,6 +40,111 @@ static void const *sCardboardCollision[] = {
 };
 
 
+/*
+ *    SHOOTING GALLERY START
+ */
+
+#define MINIGAME_SECONDS 120
+
+
+
+/*
+ * todo:
+ *      make "formations" - a set amount can appear, the next one only appears X seconds after the last one was destroyed
+ *      formation 1: 3 shyguys
+ *      formation 2: 5 spaced apart goombas
+ *      formation 3: snufits flying in
+ */
+
+void gallery_spawn_enemies(void) {
+    struct Object *obj;
+    /*while (sMGSpawnersRow1[o->os16F8].timeCode != -1 && sMGSpawnersRow1[o->os16F8].timeCode <= (MINIGAME_SECONDS*30 + 1) - o->os16F4) {
+        obj = spawn_object(o, sMGModelSpawnTable[sMGSpawnersRow1[o->os16F8].type], sMGBhvSpawnTable[sMGSpawnersRow1[o->os16F8].type]);
+        if (sMGSpawnersRow1[o->os16F8].type == 2) {
+            obj->oBehParams2ndByte = 1;
+        }
+        vec3f_set(&obj->oPosX, 11366.0f, 8125.00f, sMGRowTable[0]);
+        o->os16F8++;
+    }
+
+
+    while (sMGSpawnersRow2[o->os16FA].timeCode != -1 && sMGSpawnersRow2[o->os16FA].timeCode <= (MINIGAME_SECONDS*30 + 1) - o->os16F4) {
+        obj = spawn_object(o, sMGModelSpawnTable[sMGSpawnersRow2[o->os16FA].type], sMGBhvSpawnTable[sMGSpawnersRow2[o->os16FA].type]);
+        if (sMGSpawnersRow2[o->os16FA].type == 2) {
+            obj->oBehParams2ndByte = 1;
+        }
+        vec3f_set(&obj->oPosX, 11366.0f, 8125.00f, sMGRowTable[1]);
+        o->os16FA++;
+    }
+
+    
+    while (sMGSpawnersRow3[o->os16FC].timeCode != -1 && sMGSpawnersRow3[o->os16FC].timeCode <= (MINIGAME_SECONDS*30 + 1) - o->os16F4) {
+        obj = spawn_object(o, sMGModelSpawnTable[sMGSpawnersRow3[o->os16FC].type], sMGBhvSpawnTable[sMGSpawnersRow3[o->os16FC].type]);
+        if (sMGSpawnersRow3[o->os16FC].type == 2) {
+            obj->oBehParams2ndByte = 1;
+        }
+        vec3f_set(&obj->oPosX, 11366.0f, 8125.00f, sMGRowTable[2]);
+        o->os16FC++;
+    }*/
+}
+
+
+void bhv_gallery_handler_init(void) {
+    o->os16F4 = (MINIGAME_SECONDS*30 + 1);
+}
+
+void bhv_gallery_handler_loop(void) {
+    struct Object *obj;
+    struct MarioState *m = gMarioState;
+    Vec3f pos;
+    switch (o->oAction) {
+        case 0:
+            if (m->action == ACT_IN_CANNON && m->actionState == 2) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            gallery_spawn_enemies();
+
+            o->os16F4--;
+            if (o->os16F4 > 10*30) {
+                if (o->os16F4 % 30 == 0) {
+                    play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+                }
+                o->os16104 = 209;
+                o->os16106 = 20;
+            } else {
+                if (o->os16F4 % 30 == 0 || o->os16F4 % 30 == 15) {
+                    play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+                }
+                o->o100 += 0x1000;
+                o->os16104 = 209 + (sins(o->o100) * 2);
+                o->os16106 = 20 + (coss(o->o100) * 2);
+            }
+
+            print_text_fmt_int(o->os16106, o->os16104, "TIME  %d", o->os16F4 / 30);
+            //print_text_fmt_int(20, 200, "POINTS %d", o->os16F6);
+            //print_text_fmt_int(20, 215, "GOAL %d", MINIGAME_GOAL);
+            if (o->os16F4 <= 0) {
+                o->oAction = 2;
+            }
+            if (m->health < 0x800) {
+                m->health = 0x800;
+            }
+            break;
+        case 2:
+            o->activeFlags = 0;
+            break;
+    }
+}
+
+
+
+/*
+ *    SHOOTING GALLERY END
+ */
+
+
 void bhv_city_bridge_init(void) {
     if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT)) {
         //o->activeFlags = 0;
