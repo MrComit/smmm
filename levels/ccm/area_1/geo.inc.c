@@ -3,9 +3,10 @@
 const GeoLayout ccm_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(2, geo_switch_area),
+		GEO_SWITCH_CASE(3, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ccm_dl_101__City_geo),
+			GEO_BRANCH(1, ccm_dl_102__BlueCoinHouse_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -31,6 +32,7 @@ const GeoLayout ccm_dl_cc_geo[] = {
 const GeoLayout ccm_dl_bb_001_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Black_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_008_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_morecity_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_morecity_001_mesh_layer_1),
@@ -117,6 +119,14 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 0, 0, 1422, ccm_dl_Signs_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Slingshot_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_Table_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_102__BlueCoinHouse_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_005_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

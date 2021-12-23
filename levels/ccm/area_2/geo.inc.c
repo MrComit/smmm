@@ -3,11 +3,12 @@
 const GeoLayout ccm_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(4, geo_switch_area),
+		GEO_SWITCH_CASE(5, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ccm_dl_201__NULL_geo),
-			GEO_BRANCH(1, ccm_dl_202__City2_geo),
-			GEO_BRANCH(1, ccm_dl_203__BooRoom_geo),
+			GEO_BRANCH(1, ccm_dl_202__NULL_geo),
+			GEO_BRANCH(1, ccm_dl_203__City2_geo),
+			GEO_BRANCH(1, ccm_dl_204__BooRoom_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -19,7 +20,14 @@ const GeoLayout ccm_dl_201__NULL_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout ccm_dl_202__City2_geo[] = {
+const GeoLayout ccm_dl_202__NULL_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 65536, ccm_dl_null_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_203__City2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Bridge_002_mesh_layer_1),
@@ -30,7 +38,7 @@ const GeoLayout ccm_dl_202__City2_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout ccm_dl_203__BooRoom_geo[] = {
+const GeoLayout ccm_dl_204__BooRoom_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_003_mesh_layer_1),

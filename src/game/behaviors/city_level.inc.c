@@ -41,7 +41,9 @@ static void const *sCardboardCollision[] = {
 
 
 void bhv_city_bridge_init(void) {
-
+    if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT)) {
+        //o->activeFlags = 0;
+    }
 }
 
 
@@ -519,6 +521,13 @@ void bhv_lego_piece_loop(void) {
             break;
     }
 
+}
+
+
+void bhv_rubber_band_init(void) {
+    if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BAND_BOUGHT)) {
+        //o->activeFlags = 0;
+    }
 }
 
 
