@@ -1176,7 +1176,7 @@ void cur_obj_update(void) {
             obj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
         }
         if (objFlags & OBJ_FLAG_DISABLE_ON_ROOM_CLEAR) {
-            if (save_file_get_rooms(obj->oRoom / 32) & (1 << ((obj->oRoom + sLevelRoomOffsets[gCurrCourseNum - 1]) % 32))) {
+            if (save_file_check_room(obj->oRoom + sLevelRoomOffsets[gCurrCourseNum - 1])) {
                 obj->activeFlags = 0;
             }
         }

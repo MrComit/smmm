@@ -626,7 +626,11 @@ void obj_die_if_health_non_positive(void) {
         }
 
         if ((s32)o->oNumLootCoins < 0) {
-            spawn_object(o, MODEL_BLUE_COIN, bhvMrIBlueCoin);
+            if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
+                spawn_object(o, MODEL_HEART, bhvCollectHeart);
+            } else {
+                spawn_object(o, MODEL_BLUE_COIN, bhvMrIBlueCoin);
+            }
         } else {
             obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
         }

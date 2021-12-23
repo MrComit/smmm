@@ -3492,7 +3492,7 @@ void update_camera(struct Camera *c) {
                 mode_mario_camera(c);
         }*/
     //} else {
-    if (gGlobalMarioRoom != 11 && gGlobalMarioRoom != 39) {
+    if (gGlobalMarioRoom != 11 && gMarioState->action != ACT_IN_CANNON) {
         c->mode = CAMERA_MODE_8_DIRECTIONS;
     }
     

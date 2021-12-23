@@ -667,6 +667,15 @@ void save_file_set_rooms(u32 room) {
     gSaveFileModified = TRUE;
 }
 
+extern s8 gGlobalMarioRoom;
+
+s32 save_file_check_room(s32 room) {
+    return save_file_get_rooms(room / 32) & (1 << (room % 32));
+}
+
+s32 save_file_check_global_room(void) {
+    return save_file_get_rooms(gGlobalMarioRoom / 32) & (1 << (gGlobalMarioRoom % 32));
+}
 
 
 /**

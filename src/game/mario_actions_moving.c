@@ -2019,9 +2019,9 @@ void set_mario_angle_from_force_jump(struct MarioState *m) {
     verts[1] = m->floor->vertex2;
     verts[2] = m->floor->vertex3;
 
-    edgeLengths[0] = vec3s_get_dist(m->floor->vertex1, m->floor->vertex2);
-    edgeLengths[1] = vec3s_get_dist(m->floor->vertex1, m->floor->vertex3);
-    edgeLengths[2] = vec3s_get_dist(m->floor->vertex2, m->floor->vertex3);
+    edgeLengths[0] = vec3s_get_dist(verts[0], verts[1]);
+    edgeLengths[1] = vec3s_get_dist(verts[0], verts[2]);
+    edgeLengths[2] = vec3s_get_dist(verts[1], verts[2]);
 
     index = min_vec3s_index(edgeLengths);
     m->faceAngle[1] = vec3s_get_angle(verts[sForceEdges[index][0]], verts[sForceEdges[index][1]]);

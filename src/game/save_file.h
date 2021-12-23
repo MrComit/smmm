@@ -309,6 +309,8 @@ void save_file_set_keys(u32 key);
 
 u32 save_file_get_rooms(u32 index);
 void save_file_set_rooms(u32 room);
+s32 save_file_check_room(s32 room);
+s32 save_file_check_global_room(void);
 u32 save_file_get_currency_flags(void);
 void save_file_set_currency_flags(u32 flag);
 

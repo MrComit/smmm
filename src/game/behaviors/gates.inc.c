@@ -54,7 +54,7 @@ void bhv_ice_ceiling_gate_loop(void) {
             }
             break;
         case 1:
-            if (save_file_get_rooms(gGlobalMarioRoom / 32) & (1 << (gGlobalMarioRoom % 32))) {
+            if (save_file_check_global_room()) {
                 o->oAction = 2;
             }
             break;
@@ -77,7 +77,7 @@ void bhv_l1_room_gate_loop(void) {
             break;
         case 1:
             o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
-            if (save_file_get_rooms(gGlobalMarioRoom / 32) & (1 << (gGlobalMarioRoom % 32))) {
+            if (save_file_check_global_room()) {
                 o->oAction = 2;
             }
             break;
