@@ -367,22 +367,6 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
-/*void shade_screen_rgba(u8 r, u8 g, u8 b, u8 a) {
-    create_dl_ortho_matrix();
-    create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
-
-    // This is a bit weird. It reuses the dialog text box (width 130, height -80),
-    // so scale to at least fit the screen.
-    create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
-
-    gDPSetEnvColor(gDisplayListHead++, r, g, b, a);
-    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
-    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-    //gWarpTransition.data.red = r;
-    //gWarpTransition.data.green = g;
-    //gWarpTransition.data.blue = b;
-}*/
-
 
 void render_game(void) {
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
