@@ -834,8 +834,8 @@ s32 act_in_cannon(struct MarioState *m) {
             break;
 
         case 2:
-            m->faceAngle[0] -= (s16)(m->controller->stickY * 10.0f);
-            marioObj->oMarioCannonInputYaw -= (s16)(m->controller->stickX * 10.0f);
+            m->faceAngle[0] -= (s16)(m->controller->stickY * 5.0f); //vanilla 10.0f
+            marioObj->oMarioCannonInputYaw -= (s16)(m->controller->stickX * 7.0f); //vanilla 10.0f
 
             if (m->faceAngle[0] > 0x38E3) {
                 m->faceAngle[0] = 0x38E3;
@@ -852,23 +852,8 @@ s32 act_in_cannon(struct MarioState *m) {
             }
 
             m->faceAngle[1] = marioObj->oMarioCannonObjectYaw + marioObj->oMarioCannonInputYaw;
-            if (m->input & INPUT_A_PRESSED) {
-                // m->forwardVel = 100.0f * coss(m->faceAngle[0]);
-
-                // m->vel[1] = 100.0f * sins(m->faceAngle[0]);
-
-                // m->pos[0] += 120.0f * coss(m->faceAngle[0]) * sins(m->faceAngle[1]);
-                // m->pos[1] += 120.0f * sins(m->faceAngle[0]);
-                // m->pos[2] += 120.0f * coss(m->faceAngle[0]) * coss(m->faceAngle[1]);
-
-                // play_sound(SOUND_ACTION_FLYING_FAST, m->marioObj->header.gfx.cameraToObject);
-                // play_sound(SOUND_OBJ_POUNDING_CANNON, m->marioObj->header.gfx.cameraToObject);
-
-                // m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
-
-                // set_mario_action(m, ACT_SHOT_FROM_CANNON, 0);
-                // queue_rumble_data(60, 70);
-                // m->usedObj->oAction = 2;
+            if (++m->actionTimer >= 6 && m->input & INPUT_A_PRESSED) {
+                m->actionTimer = 0;
                 play_sound(SOUND_OBJ_POUNDING_CANNON, m->marioObj->header.gfx.cameraToObject);
                 obj = spawn_object_relative(0, 0, 0, 0, marioObj, MODEL_BOWLING_BALL, bhvCannonBalls);
                 obj->oPosX += 120.0f * coss(m->faceAngle[0]) * sins(m->faceAngle[1]);

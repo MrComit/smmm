@@ -46,7 +46,12 @@ static void const *sCardboardCollision[] = {
 
 #define MINIGAME_SECONDS 120
 
-
+s8 sShyGuyIndex = 0;
+s8 sGoombaIndex = 0;
+s8 sSnufitIndex = 0;
+u32 sShyGuyTimer = 0;
+u32 sGoombaTimer = 0;
+u32 sSnufitTimer = 0;
 
 /*
  * todo:
@@ -54,10 +59,60 @@ static void const *sCardboardCollision[] = {
  *      formation 1: 3 shyguys
  *      formation 2: 5 spaced apart goombas
  *      formation 3: snufits flying in
+
+
+
+        the pseudo code:
+            if (sShyguys[index].type == -1) {
+                break;
+            }
+            if (no shyguys) {
+                shyguytimer++
+            } else {
+                shyguytimer = 0
+            }
+            if (shyguytimer > sShyguys[index].timer)  { //maybe a constant?
+                spawn_shyguys
+                index++
+            }
+
  */
 
 void gallery_spawn_enemies(void) {
     struct Object *obj;
+    if (sShyGuyIndex < 5) {
+        if (cur_obj_nearest_object_with_behavior(bhvShyguy) == NULL) {
+            sShyGuyTimer++;
+        } else {
+            sShyGuyTimer = 0;
+        }
+        if (sShyGuyTimer > 5*30) {
+            spawn_object(o, MODEL_SHYGUY, bhvShyguy);
+            sShyGuyIndex++;
+        }
+    }
+    if (sGoombaIndex < 5) {
+        if (cur_obj_nearest_object_with_behavior(bhvGoomba) == NULL) {
+            sGoombaTimer++;
+        } else {
+            sGoombaTimer = 0;
+        }
+        if (sGoombaTimer > 5*30) {
+            spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+            sGoombaIndex++;
+        }
+    }
+    if (sSnufitIndex < 5) {
+        if (cur_obj_nearest_object_with_behavior(bhvSnufit) == NULL) {
+            sSnufitTimer++;
+        } else {
+            sSnufitTimer = 0;
+        }
+        if (sSnufitTimer > 5*30) {
+            spawn_object(o, MODEL_SNUFIT, bhvSnufit);
+            sSnufitIndex++;
+        }
+    }
     /*while (sMGSpawnersRow1[o->os16F8].timeCode != -1 && sMGSpawnersRow1[o->os16F8].timeCode <= (MINIGAME_SECONDS*30 + 1) - o->os16F4) {
         obj = spawn_object(o, sMGModelSpawnTable[sMGSpawnersRow1[o->os16F8].type], sMGBhvSpawnTable[sMGSpawnersRow1[o->os16F8].type]);
         if (sMGSpawnersRow1[o->os16F8].type == 2) {
@@ -153,9 +208,22 @@ void bhv_city_bridge_init(void) {
 
 
 void bhv_cannon_balls_loop(void) {
+    struct Object *obj;
     if (o->oTimer > 180) {
         o->activeFlags = 0;
     }
+
+    if (cur_obj_dist_to_nearest_object_with_behavior(bhvShyguy) < 150.0f) {
+        obj = cur_obj_nearest_object_with_behavior(bhvShyguy);
+        attack_object(obj, 2);
+    } else if (cur_obj_dist_to_nearest_object_with_behavior(bhvGoomba) < 150.0f) {
+        obj = cur_obj_nearest_object_with_behavior(bhvGoomba);
+        attack_object(obj, 2);
+    } else if (cur_obj_dist_to_nearest_object_with_behavior(bhvSnufit) < 150.0f) {
+        obj = cur_obj_nearest_object_with_behavior(bhvSnufit);
+        attack_object(obj, 2);
+    }
+
 
     if (o->oGravity == 0.0f) {
         cur_obj_update_floor_and_walls();

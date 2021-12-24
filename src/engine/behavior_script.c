@@ -1107,7 +1107,7 @@ void cur_obj_update(void) {
 
         if (!(objFlags & OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST && distanceFromMario > obj->oDrawingDistance) || !gIsConsole) {
             
-            if (obj->oHeldState == HELD_FREE && gIsConsole)
+            if (objFlags & OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST && obj->oHeldState == HELD_FREE && gIsConsole)
                 obj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
 
             // Calculate the angle from the object to Mario.
