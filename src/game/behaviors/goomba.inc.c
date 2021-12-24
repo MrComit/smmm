@@ -8,7 +8,7 @@
 /**
  * Hitbox for goomba.
  */
-static struct ObjectHitbox sGoombaHitbox = {
+struct ObjectHitbox sGoombaHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,

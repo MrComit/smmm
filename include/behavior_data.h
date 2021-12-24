@@ -702,6 +702,9 @@ extern const BehaviorScript bhvShyGuyBoss[];
 extern const BehaviorScript bhvCannonBalls[];
 extern const BehaviorScript bhvCityBridge[];
 extern const BehaviorScript bhvShootingGalleryHandler[];
+extern const BehaviorScript bhvGalleryShyguy[];
+extern const BehaviorScript bhvGalleryGoomba[];
+extern const BehaviorScript bhvGallerySnufit[];
 
 
 

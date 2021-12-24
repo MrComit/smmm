@@ -1,6 +1,7 @@
 #include "levels/ccm/header.h"
 s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction);
 void obj_compute_vel_from_move_pitch(f32 speed);
+
 static struct ObjectHitbox sLevelEntranceHitbox = {
     /* interactType: */ INTERACT_BBH_ENTRANCE,
     /* downOffset: */ 0,
@@ -24,6 +25,31 @@ struct ObjectHitbox sCannonBallHitbox = {
     /* hurtboxRadius:     */ 100,
     /* hurtboxHeight:     */ 50,
 };
+
+struct ObjectHitbox sGalleryGoombaHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
+struct ObjectHitbox sGallerySnufitHitbox = {
+    /* interactType:      */ INTERACT_HIT_FROM_BELOW,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 100,
+    /* height:            */ 60,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 50,
+};
+
 
 Vec3s sLegoColors[] = {
 {0xFF, 0xFF, 0xFF},
@@ -53,94 +79,187 @@ u32 sShyGuyTimer = 0;
 u32 sGoombaTimer = 0;
 u32 sSnufitTimer = 0;
 
+
+Vec3f sShyguyPositions[3] = {
+    {6444.0f, 1150.0f, -10352.0f},
+    {6211.0f, 1150.0f, -10159.0f},
+    {0},
+};
+
 /*
  * todo:
  *      make "formations" - a set amount can appear, the next one only appears X seconds after the last one was destroyed
  *      formation 1: 3 shyguys
  *      formation 2: 5 spaced apart goombas
  *      formation 3: snufits flying in
-
-
-
-        the pseudo code:
-            if (sShyguys[index].type == -1) {
-                break;
-            }
-            if (no shyguys) {
-                shyguytimer++
-            } else {
-                shyguytimer = 0
-            }
-            if (shyguytimer > sShyguys[index].timer)  { //maybe a constant?
-                spawn_shyguys
-                index++
-            }
-
  */
+
+
+void bhv_gallery_snufit_loop(void) {
+    obj_set_hitbox(o, &sGallerySnufitHitbox);
+    o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
+
+    // Face Mario if he is within range.
+    obj_turn_pitch_toward_mario(120.0f, 2000);
+
+    if ((s16) o->oMoveAnglePitch > 0x2000) {
+        o->oMoveAnglePitch = 0x2000;
+    } else if ((s16) o->oMoveAnglePitch < -0x2000) {
+        o->oMoveAnglePitch = -0x2000;
+    }
+
+    cur_obj_rotate_yaw_toward(o->oAngleToMario, 2000);
+
+    o->oFaceAnglePitch = o->oMoveAnglePitch;
+
+    switch (o->oAction) {
+        case SNUFIT_ACT_IDLE:
+            snufit_act_idle();
+            break;
+        case SNUFIT_ACT_SHOOT:
+            snufit_act_shoot();
+            break;
+    }
+
+    // Snufit orbits in a circular motion depending on an internal timer
+    // and vertically off the global timer. The vertical position can be
+    // manipulated using pauses since it uses the global timer.
+    o->oPosX = o->oHomeX + 100.0f * coss(o->oSnufitCircularPeriod);
+    o->oPosY = o->oHomeY + 8.0f * coss(4000 * gGlobalTimer);
+    o->oPosZ = o->oHomeZ + 100.0f * sins(o->oSnufitCircularPeriod);
+
+    o->oSnufitYOffset = -0x20;
+    o->oSnufitZOffset = o->oSnufitRecoil + 180;
+    o->oSnufitBodyScale
+        = (s16)(o->oSnufitBodyBaseScale + 666
+        + o->oSnufitBodyBaseScale * coss(o->oSnufitBodyScalePeriod));
+
+    if (o->oSnufitBodyScale > 1000) {
+        o->oSnufitScale = (o->oSnufitBodyScale - 1000) / 1000.0f + 1.0f;
+        o->oSnufitBodyScale = 1000;
+    } else {
+        o->oSnufitScale = 1.0f;
+    }
+
+    cur_obj_scale(o->oSnufitScale);
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+            spawn_mist_particles();
+            o->activeFlags = 0;
+            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+            interact_coin(gMarioState, 0, o);
+    }
+}
+
+
+void bhv_gallery_goomba_init(void) {
+    obj_set_hitbox(o, &sGalleryGoombaHitbox);
+
+    o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
+    o->oMoveAngleYaw = 0x4000 * random_sign();;
+}
+
+
+void bhv_gallery_goomba_update(void) {
+    f32 animSpeed;
+
+    if (obj_update_standard_actions(o->oGoombaScale)) {
+        o->oGoombaScale = approach_f32_symmetric(o->oGoombaScale, 1.5f, 0.1f);
+        cur_obj_scale(o->oGoombaScale);
+        obj_update_blinking(&o->oGoombaBlinkTimer, 30, 50, 5);
+        cur_obj_update_floor_and_walls();
+
+        if ((animSpeed = o->oForwardVel / o->oGoombaScale * 0.4f) < 1.0f) {
+            animSpeed = 1.0f;
+        }
+
+        cur_obj_init_animation_with_accel_and_sound(0, animSpeed);
+
+        //obj_forward_vel_approach(20.0f * o->oGoombaScale, 0.4f);
+        o->oForwardVel = 6.0f;// * o->oGoombaScale;
+        cur_obj_move_standard(-78);
+
+        if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                spawn_mist_particles();
+                o->activeFlags = 0;
+                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                interact_coin(gMarioState, 0, o);
+        }
+
+    } else {
+        o->oAnimState = 1;
+    }
+}
+
+
+ void bhv_gallery_shyguy_init(void) {
+    obj_set_hitbox(o, &sShyguyHitbox);
+    o->oOpacity = 0xFF;
+    vec3f_copy(&o->oPosX, sShyguyPositions[o->oBehParams2ndByte]);
+}
+
+void bhv_gallery_shyguy_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.1f);
+            if (o->oTimer > 90) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY + 120.0f, 0.1f);
+            if (o->oTimer > 105) {
+                o->oAction = 0;
+            }
+
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                    spawn_mist_particles();
+                    o->activeFlags = 0;
+                    create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                    interact_coin(gMarioState, 0, o);
+            }
+            break;
+    }
+    o->oMoveAngleYaw = o->oAngleToMario;
+    o->oInteractStatus = 0;
+}
 
 void gallery_spawn_enemies(void) {
     struct Object *obj;
     if (sShyGuyIndex < 5) {
-        if (cur_obj_nearest_object_with_behavior(bhvShyguy) == NULL) {
+        if (cur_obj_nearest_object_with_behavior(bhvGalleryShyguy) == NULL) {
             sShyGuyTimer++;
         } else {
             sShyGuyTimer = 0;
         }
         if (sShyGuyTimer > 5*30) {
-            spawn_object(o, MODEL_SHYGUY, bhvShyguy);
+            obj = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
+            obj = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
+            obj->oBehParams2ndByte = 1;
             sShyGuyIndex++;
         }
     }
     if (sGoombaIndex < 5) {
-        if (cur_obj_nearest_object_with_behavior(bhvGoomba) == NULL) {
+        if (cur_obj_nearest_object_with_behavior(bhvGalleryGoomba) == NULL) {
             sGoombaTimer++;
         } else {
             sGoombaTimer = 0;
         }
         if (sGoombaTimer > 5*30) {
-            spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+            spawn_object(o, MODEL_GOOMBA, bhvGalleryGoomba);
             sGoombaIndex++;
         }
     }
     if (sSnufitIndex < 5) {
-        if (cur_obj_nearest_object_with_behavior(bhvSnufit) == NULL) {
+        if (cur_obj_nearest_object_with_behavior(bhvGallerySnufit) == NULL) {
             sSnufitTimer++;
         } else {
             sSnufitTimer = 0;
         }
         if (sSnufitTimer > 5*30) {
-            spawn_object(o, MODEL_SNUFIT, bhvSnufit);
+            spawn_object(o, MODEL_SNUFIT, bhvGallerySnufit);
             sSnufitIndex++;
         }
     }
-    /*while (sMGSpawnersRow1[o->os16F8].timeCode != -1 && sMGSpawnersRow1[o->os16F8].timeCode <= (MINIGAME_SECONDS*30 + 1) - o->os16F4) {
-        obj = spawn_object(o, sMGModelSpawnTable[sMGSpawnersRow1[o->os16F8].type], sMGBhvSpawnTable[sMGSpawnersRow1[o->os16F8].type]);
-        if (sMGSpawnersRow1[o->os16F8].type == 2) {
-            obj->oBehParams2ndByte = 1;
-        }
-        vec3f_set(&obj->oPosX, 11366.0f, 8125.00f, sMGRowTable[0]);
-        o->os16F8++;
-    }
-
-
-    while (sMGSpawnersRow2[o->os16FA].timeCode != -1 && sMGSpawnersRow2[o->os16FA].timeCode <= (MINIGAME_SECONDS*30 + 1) - o->os16F4) {
-        obj = spawn_object(o, sMGModelSpawnTable[sMGSpawnersRow2[o->os16FA].type], sMGBhvSpawnTable[sMGSpawnersRow2[o->os16FA].type]);
-        if (sMGSpawnersRow2[o->os16FA].type == 2) {
-            obj->oBehParams2ndByte = 1;
-        }
-        vec3f_set(&obj->oPosX, 11366.0f, 8125.00f, sMGRowTable[1]);
-        o->os16FA++;
-    }
-
-    
-    while (sMGSpawnersRow3[o->os16FC].timeCode != -1 && sMGSpawnersRow3[o->os16FC].timeCode <= (MINIGAME_SECONDS*30 + 1) - o->os16F4) {
-        obj = spawn_object(o, sMGModelSpawnTable[sMGSpawnersRow3[o->os16FC].type], sMGBhvSpawnTable[sMGSpawnersRow3[o->os16FC].type]);
-        if (sMGSpawnersRow3[o->os16FC].type == 2) {
-            obj->oBehParams2ndByte = 1;
-        }
-        vec3f_set(&obj->oPosX, 11366.0f, 8125.00f, sMGRowTable[2]);
-        o->os16FC++;
-    }*/
 }
 
 
@@ -194,6 +313,49 @@ void bhv_gallery_handler_loop(void) {
 }
 
 
+const BehaviorScript *sGalleryEnemies[3] = {
+    bhvGalleryShyguy, bhvGalleryGoomba, bhvGallerySnufit,
+};
+
+
+void bhv_cannon_balls_loop(void) {
+    s32 i;
+    struct Object *obj;
+    if (o->oTimer > 90) {
+        o->activeFlags = 0;
+    }
+
+    for (i = 0; i < 3; i++) {
+        if (cur_obj_dist_to_nearest_object_with_behavior(sGalleryEnemies[i]) < 200.0f) {
+            obj = cur_obj_nearest_object_with_behavior(sGalleryEnemies[i]);
+            attack_object(obj, 2);
+            o->activeFlags = 0;
+            break;
+        }
+    }
+
+
+    cur_obj_update_floor_and_walls();
+
+    obj_compute_vel_from_move_pitch(200.0f);
+    if (obj_check_attacks(&sCannonBallHitbox, 1) != 0) {
+        // We hit Mario while he is metal!
+        // Bounce off, and fall until the first check is true.
+        o->oMoveAngleYaw += 0x8000;
+        o->oForwardVel *= 0.05f;
+        o->oVelY = 30.0f;
+        o->oGravity = -4.0f;
+
+        cur_obj_become_intangible();
+        o->oDeathSound = -1;
+        obj_die_if_health_non_positive();
+    } else if (o->oMoveFlags & (OBJ_MOVE_MASK_ON_GROUND | OBJ_MOVE_HIT_WALL)) {
+        o->oDeathSound = -1;
+        obj_die_if_health_non_positive();
+    }
+
+    cur_obj_move_standard(78);
+}
 
 /*
  *    SHOOTING GALLERY END
@@ -206,49 +368,6 @@ void bhv_city_bridge_init(void) {
     }
 }
 
-
-void bhv_cannon_balls_loop(void) {
-    struct Object *obj;
-    if (o->oTimer > 180) {
-        o->activeFlags = 0;
-    }
-
-    if (cur_obj_dist_to_nearest_object_with_behavior(bhvShyguy) < 150.0f) {
-        obj = cur_obj_nearest_object_with_behavior(bhvShyguy);
-        attack_object(obj, 2);
-    } else if (cur_obj_dist_to_nearest_object_with_behavior(bhvGoomba) < 150.0f) {
-        obj = cur_obj_nearest_object_with_behavior(bhvGoomba);
-        attack_object(obj, 2);
-    } else if (cur_obj_dist_to_nearest_object_with_behavior(bhvSnufit) < 150.0f) {
-        obj = cur_obj_nearest_object_with_behavior(bhvSnufit);
-        attack_object(obj, 2);
-    }
-
-
-    if (o->oGravity == 0.0f) {
-        cur_obj_update_floor_and_walls();
-
-        obj_compute_vel_from_move_pitch(80.0f);
-        if (obj_check_attacks(&sCannonBallHitbox, 1) != 0) {
-            // We hit Mario while he is metal!
-            // Bounce off, and fall until the first check is true.
-            o->oMoveAngleYaw += 0x8000;
-            o->oForwardVel *= 0.05f;
-            o->oVelY = 30.0f;
-            o->oGravity = -4.0f;
-
-            cur_obj_become_intangible();
-        } else if (o->oAction == 1 
-                || (o->oMoveFlags & (OBJ_MOVE_MASK_ON_GROUND | OBJ_MOVE_HIT_WALL))) {
-            o->oDeathSound = -1;
-            obj_die_if_health_non_positive();
-        }
-
-        cur_obj_move_standard(78);
-    } else {
-        cur_obj_move_using_fvel_and_gravity();
-    }
-}
 
 
 

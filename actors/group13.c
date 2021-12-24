@@ -37,4 +37,4 @@ UNUSED static const u64 binid_5 = 5;
 #include "treasure_chest/model.inc.c"
 UNUSED static const u64 binid_6 = 6;
 
-#include "snufit/model.inc.c"
+//#include "snufit/model.inc.c"

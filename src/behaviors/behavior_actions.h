@@ -816,7 +816,11 @@ void bhv_cannon_balls_loop(void);
 void bhv_city_bridge_init(void);
 void bhv_gallery_handler_init(void);
 void bhv_gallery_handler_loop(void);
-
+void bhv_gallery_shyguy_init(void);
+void bhv_gallery_shyguy_loop(void);
+void bhv_gallery_goomba_init(void);
+void bhv_gallery_goomba_update(void);
+void bhv_gallery_snufit_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

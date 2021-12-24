@@ -376,7 +376,7 @@ static s32 cur_obj_play_sound_at_anim_range(s8 arg0, s8 arg1, u32 sound) {
     return FALSE;
 }
 
-static s16 obj_turn_pitch_toward_mario(f32 targetOffsetY, s16 turnAmount) {
+s16 obj_turn_pitch_toward_mario(f32 targetOffsetY, s16 turnAmount) {
     s16 targetPitch;
 
     o->oPosY -= targetOffsetY;
@@ -400,7 +400,7 @@ s32 approach_f32_ptr(f32 *px, f32 target, f32 delta) {
     return FALSE;
 }
 
-static s32 obj_forward_vel_approach(f32 target, f32 delta) {
+s32 obj_forward_vel_approach(f32 target, f32 delta) {
     return approach_f32_ptr(&o->oForwardVel, target, delta);
 }
 
@@ -532,7 +532,7 @@ static s32 oscillate_toward(s32 *value, f32 *vel, s32 target, f32 velCloseToZero
     return FALSE;
 }
 
-static void obj_update_blinking(s32 *blinkTimer, s16 baseCycleLength, s16 cycleLengthRange,
+void obj_update_blinking(s32 *blinkTimer, s16 baseCycleLength, s16 cycleLengthRange,
                                 s16 blinkLength) {
     if (*blinkTimer != 0) {
         (*blinkTimer)--;
@@ -800,7 +800,7 @@ static void obj_act_squished(f32 baseScale) {
     cur_obj_move_standard(-78);
 }
 
-static s32 obj_update_standard_actions(f32 scale) {
+s32 obj_update_standard_actions(f32 scale) {
     if (o->oAction < 100) {
         return TRUE;
     } else {

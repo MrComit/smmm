@@ -44,6 +44,7 @@ const GeoLayout ccm_dl_204__BooRoom_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ccm_dl_MoreHouses_003_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_006_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 65536, ccm_dl_Rocks_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

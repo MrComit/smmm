@@ -59,3 +59,4 @@
 #include "global_gate/collision.inc.c"
 #include "horizontal_pole/collision.inc.c"
 #include "horizontal_pole/model.inc.c"
+#include "snufit/model.inc.c"

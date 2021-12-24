@@ -14,4 +14,4 @@
 #include "bub/geo.inc.c"
 #include "water_ring/geo.inc.c"
 #include "treasure_chest/geo.inc.c"
-#include "snufit/geo.inc.c"
+//#include "snufit/geo.inc.c"

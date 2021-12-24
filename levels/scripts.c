@@ -115,6 +115,10 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_GREEN_COIN,              green_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_GREEN_COIN_NO_SHADOW,    green_coin_no_shadow_geo),
 
+
+    //made global
+    LOAD_MODEL_FROM_GEO(MODEL_SNUFIT,                  snufit_geo),
+    
     //custom
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA, new_koopa_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SHYGUY, new_shyguy_geo),
@@ -336,7 +340,6 @@ const LevelScript script_func_global_14[] = {
     LOAD_MODEL_FROM_GEO(MODEL_WATER_MINE,              water_mine_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SEAWEED,                 seaweed_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SKEETER,                 skeeter_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_SNUFIT,                  snufit_geo),
     RETURN(),
 };
 

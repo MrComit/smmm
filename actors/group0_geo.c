@@ -37,3 +37,4 @@
 #include "held_letter/geo.inc.c"
 #include "global_gate/geo.inc.c"
 #include "horizontal_pole/geo.inc.c"
+#include "snufit/geo.inc.c"
