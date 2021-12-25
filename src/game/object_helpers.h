@@ -79,6 +79,7 @@ Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node, UNUSED vo
 Gfx *geo_switch_servants_wall_2(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_ice_reflection(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_garden_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_garden_backface_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node, UNUSED void *context);
@@ -92,6 +93,7 @@ Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node, UNUSED vo
 Gfx *geo_switch_servants_wall_2(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_ice_reflection(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_garden_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_garden_backface_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node);

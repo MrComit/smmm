@@ -19,6 +19,7 @@ const GeoLayout ccm_dl_bb_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_Garden_002_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_Garden_003_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Garden_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_Grass_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -53,7 +54,6 @@ const GeoLayout ccm_dl_cc_001_geo[] = {
 const GeoLayout ccm_dl_bb_002_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_GardenShell_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_006_mesh_layer_1),
 	GEO_CLOSE_NODE(),
@@ -63,6 +63,20 @@ const GeoLayout ccm_dl_cc_002_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_cc_002_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_BGardenShell_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_BGardenShell_mesh_layer_4),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_cc_003_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_cc_003_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -87,6 +101,12 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 			GEO_BRANCH(1, ccm_dl_cc_002_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_aa_002_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_garden_backface_render),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, ccm_dl_BGardenShell_geo),
+			GEO_BRANCH(1, ccm_dl_cc_003_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_aa_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_CBWall3_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_city_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_002_mesh_layer_1),
