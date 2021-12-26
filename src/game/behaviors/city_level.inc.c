@@ -41,7 +41,7 @@ struct ObjectHitbox sGalleryGoombaHitbox = {
 struct ObjectHitbox sGallerySnufitHitbox = {
     /* interactType:      */ INTERACT_HIT_FROM_BELOW,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 2,
+    /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
     /* radius:            */ 100,
@@ -96,37 +96,56 @@ Vec3f sShyguyPositions[3] = {
 
 
 void bhv_gallery_snufit_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
     obj_set_hitbox(o, &sGallerySnufitHitbox);
     o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
 
     // Face Mario if he is within range.
-    obj_turn_pitch_toward_mario(120.0f, 2000);
+    //obj_turn_pitch_toward_mario(120.0f, 2000);
 
-    if ((s16) o->oMoveAnglePitch > 0x2000) {
+    /*if ((s16) o->oMoveAnglePitch > 0x2000) {
         o->oMoveAnglePitch = 0x2000;
     } else if ((s16) o->oMoveAnglePitch < -0x2000) {
         o->oMoveAnglePitch = -0x2000;
-    }
+    }*/
+    vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+    o->oMoveAnglePitch = -pitch;
 
     cur_obj_rotate_yaw_toward(o->oAngleToMario, 2000);
 
     o->oFaceAnglePitch = o->oMoveAnglePitch;
 
     switch (o->oAction) {
-        case SNUFIT_ACT_IDLE:
-            snufit_act_idle();
+        case 0:
+            if (o->oTimer > 90) {
+                o->oAction = 1;
+            }
+            o->oSnufitCircularPeriod += 0x100;
+            o->oPosX = o->oHomeX + 300.0f * coss(o->oSnufitCircularPeriod);
             break;
-        case SNUFIT_ACT_SHOOT:
-            snufit_act_shoot();
+        case 1:
+            if (o->oTimer > 5) {
+                o->oSnufitBullets += 3;
+                cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
+                spawn_object_relative(0, 0, -20, 40, o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
+                o->oSnufitRecoil = -30;
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (o->oTimer > 5) {
+                o->oAction = 0;
+            }
             break;
     }
 
     // Snufit orbits in a circular motion depending on an internal timer
     // and vertically off the global timer. The vertical position can be
     // manipulated using pauses since it uses the global timer.
-    o->oPosX = o->oHomeX + 100.0f * coss(o->oSnufitCircularPeriod);
+    // o->oPosX = o->oHomeX + 100.0f * coss(o->oSnufitCircularPeriod);
     o->oPosY = o->oHomeY + 8.0f * coss(4000 * gGlobalTimer);
-    o->oPosZ = o->oHomeZ + 100.0f * sins(o->oSnufitCircularPeriod);
+    // o->oPosZ = o->oHomeZ + 100.0f * sins(o->oSnufitCircularPeriod);
 
     o->oSnufitYOffset = -0x20;
     o->oSnufitZOffset = o->oSnufitRecoil + 180;
@@ -313,8 +332,8 @@ void bhv_gallery_handler_loop(void) {
 }
 
 
-const BehaviorScript *sGalleryEnemies[3] = {
-    bhvGalleryShyguy, bhvGalleryGoomba, bhvGallerySnufit,
+const BehaviorScript *sGalleryEnemies[4] = {
+    bhvGalleryShyguy, bhvGalleryGoomba, bhvGallerySnufit, bhvSnufitBalls,
 };
 
 
@@ -325,10 +344,15 @@ void bhv_cannon_balls_loop(void) {
         o->activeFlags = 0;
     }
 
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < 4; i++) {
         if (cur_obj_dist_to_nearest_object_with_behavior(sGalleryEnemies[i]) < 200.0f) {
             obj = cur_obj_nearest_object_with_behavior(sGalleryEnemies[i]);
-            attack_object(obj, 2);
+            if (i != 3) {
+                attack_object(obj, 2);
+            } else {
+                obj->activeFlags = 0;
+                spawn_mist_particles();
+            }
             o->activeFlags = 0;
             break;
         }

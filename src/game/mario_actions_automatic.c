@@ -834,14 +834,14 @@ s32 act_in_cannon(struct MarioState *m) {
             break;
 
         case 2:
-            m->faceAngle[0] += (s16)(m->controller->stickY * 5.0f); //vanilla 10.0f
+            m->faceAngle[0] -= (s16)(m->controller->stickY * 5.0f); //vanilla 10.0f
             marioObj->oMarioCannonInputYaw -= (s16)(m->controller->stickX * 7.0f); //vanilla 10.0f
 
             if (m->faceAngle[0] > 0x38E3) {
                 m->faceAngle[0] = 0x38E3;
             }
-            if (m->faceAngle[0] < 0) {
-                m->faceAngle[0] = 0;
+            if (m->faceAngle[0] < -0x800) {
+                m->faceAngle[0] = -0x800;
             }
 
             if (marioObj->oMarioCannonInputYaw > 0x2000) {
@@ -864,6 +864,16 @@ s32 act_in_cannon(struct MarioState *m) {
             } else if (m->faceAngle[0] != startFacePitch || m->faceAngle[1] != startFaceYaw) {
                 play_sound(SOUND_MOVING_AIM_CANNON, m->marioObj->header.gfx.cameraToObject);
                 reset_rumble_timers_2(0);
+            }
+
+            if (cur_obj_dist_to_nearest_object_with_behavior(bhvSnufitBalls) < 100.0f) {
+                obj = cur_obj_nearest_object_with_behavior(bhvSnufitBalls);
+                obj->activeFlags = 0;
+                play_sound(SOUND_MARIO_ATTACKED, m->marioObj->header.gfx.cameraToObject);
+                m->hurtCounter += 1 * 4;
+                queue_rumble_data(5, 80);
+                set_camera_shake_from_hit(3);
+                update_mario_sound_and_camera(m);
             }
     }
 
