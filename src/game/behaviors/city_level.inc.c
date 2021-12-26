@@ -72,18 +72,27 @@ static void const *sCardboardCollision[] = {
 
 #define MINIGAME_SECONDS 120
 
-s8 sShyGuyIndex = 0;
-s8 sGoombaIndex = 0;
-s8 sSnufitIndex = 0;
-u32 sShyGuyTimer = 0;
-u32 sGoombaTimer = 0;
-u32 sSnufitTimer = 0;
+struct Object *sGalleryShyguys[4] = {
+    NULL, NULL, NULL, NULL,
+};
 
+struct Object *sGalleryGoombas[5] = {
+    NULL, NULL, NULL, NULL, NULL,
+};
 
-Vec3f sShyguyPositions[3] = {
+struct Object *sGallerySnufits[3] = {
+    NULL, NULL, NULL,
+};
+
+const BehaviorScript *sGalleryEnemies[4] = {
+    bhvGalleryShyguy, bhvGalleryGoomba, bhvGallerySnufit, bhvSnufitBalls,
+};
+
+Vec3f sShyguyPositions[4] = {
     {6444.0f, 1150.0f, -10352.0f},
     {6211.0f, 1150.0f, -10159.0f},
-    {0},
+    {9475.0f, 1450.0f, -10125.0f},
+    {9244.0f, 1450.0f, -10321.0f},
 };
 
 /*
@@ -164,6 +173,7 @@ void bhv_gallery_snufit_loop(void) {
     if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
             spawn_mist_particles();
             o->activeFlags = 0;
+            sGallerySnufits[o->oBehParams2ndByte] = NULL;
             create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
             interact_coin(gMarioState, 0, o);
     }
@@ -200,6 +210,7 @@ void bhv_gallery_goomba_update(void) {
         if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                 spawn_mist_particles();
                 o->activeFlags = 0;
+                sGalleryGoombas[o->oBehParams2ndByte] = NULL;
                 create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
                 interact_coin(gMarioState, 0, o);
         }
@@ -233,6 +244,7 @@ void bhv_gallery_shyguy_loop(void) {
             if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                     spawn_mist_particles();
                     o->activeFlags = 0;
+                    sGalleryShyguys[o->oBehParams2ndByte] = NULL;
                     create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
                     interact_coin(gMarioState, 0, o);
             }
@@ -244,39 +256,62 @@ void bhv_gallery_shyguy_loop(void) {
 
 void gallery_spawn_enemies(void) {
     struct Object *obj;
-    if (sShyGuyIndex < 5) {
-        if (cur_obj_nearest_object_with_behavior(bhvGalleryShyguy) == NULL) {
-            sShyGuyTimer++;
-        } else {
-            sShyGuyTimer = 0;
+
+    if (o->oShyguyIndex == 0) {
+        if (sGalleryShyguys[0] == NULL && sGalleryShyguys[1] == NULL && ++o->oShyguyTimer > 90) {
+            sGalleryShyguys[0] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
+            sGalleryShyguys[1] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
+            sGalleryShyguys[1]->oBehParams2ndByte = 1;
+            o->oShyguyIndex = 1;
+            o->oShyguyTimer = 0;
         }
-        if (sShyGuyTimer > 5*30) {
-            obj = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
-            obj = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
-            obj->oBehParams2ndByte = 1;
-            sShyGuyIndex++;
+    } else {
+        if (sGalleryShyguys[2] == NULL && sGalleryShyguys[3] == NULL && ++o->oShyguyTimer > 90) {
+            sGalleryShyguys[2] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
+            sGalleryShyguys[3] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
+            sGalleryShyguys[2]->oBehParams2ndByte = 2;
+            sGalleryShyguys[3]->oBehParams2ndByte = 3;
+            o->oShyguyIndex = 0;
+            o->oShyguyTimer = 0;
         }
     }
-    if (sGoombaIndex < 5) {
+
+    if (o->oGoombaIndex < 5) {
+        if (++o->oGoombaTimer > 45) {
+            sGalleryGoombas[o->oGoombaIndex] = spawn_object(o, MODEL_GOOMBA, bhvGalleryGoomba);
+            sGalleryGoombas[o->oGoombaIndex]->oBehParams2ndByte = o->oGoombaIndex;
+            o->oGoombaIndex++;
+            o->oGoombaTimer = 0;
+        }
+    } else {
         if (cur_obj_nearest_object_with_behavior(bhvGalleryGoomba) == NULL) {
-            sGoombaTimer++;
-        } else {
-            sGoombaTimer = 0;
-        }
-        if (sGoombaTimer > 5*30) {
-            spawn_object(o, MODEL_GOOMBA, bhvGalleryGoomba);
-            sGoombaIndex++;
+            o->oGoombaIndex = 0;
+            o->oGoombaTimer = -75;
         }
     }
-    if (sSnufitIndex < 5) {
-        if (cur_obj_nearest_object_with_behavior(bhvGallerySnufit) == NULL) {
-            sSnufitTimer++;
-        } else {
-            sSnufitTimer = 0;
+
+    if (o->oSnufitIndex < 3) {
+        if (++o->oSnufitTimer > 120) {
+            sGallerySnufits[o->oSnufitIndex] = spawn_object(o, MODEL_SNUFIT, bhvGallerySnufit);
+            sGallerySnufits[o->oSnufitIndex]->oBehParams2ndByte = o->oSnufitIndex;
+            o->oSnufitIndex++;
+            o->oSnufitTimer = 0;
+
         }
-        if (sSnufitTimer > 5*30) {
-            spawn_object(o, MODEL_SNUFIT, bhvGallerySnufit);
-            sSnufitIndex++;
+    } else {
+        if (cur_obj_nearest_object_with_behavior(bhvGallerySnufit) == NULL) {
+            o->oSnufitIndex = 0;
+            o->oSnufitTimer = -200;
+        }
+    }
+}
+
+void gallery_kill_enemies(void) {
+    s32 i;
+    struct Object *obj;
+    for (i = 0; i < 4; i++) {
+        while ((obj = cur_obj_nearest_object_with_behavior(sGalleryEnemies[i])) != NULL) {
+            obj->activeFlags = 0;
         }
     }
 }
@@ -284,6 +319,11 @@ void gallery_spawn_enemies(void) {
 
 void bhv_gallery_handler_init(void) {
     o->os16F4 = (MINIGAME_SECONDS*30 + 1);
+
+    sGalleryShyguys[0] = NULL; sGalleryShyguys[1] = NULL; sGalleryShyguys[2] = NULL; sGalleryShyguys[3] = NULL;
+    sGalleryGoombas[0] = NULL; sGalleryGoombas[1] = NULL; sGalleryGoombas[2] = NULL; 
+                                sGalleryGoombas[3] = NULL; sGalleryGoombas[4] = NULL;
+    sGallerySnufits[0] = NULL; sGallerySnufits[1] = NULL; sGallerySnufits[2] = NULL;
 }
 
 void bhv_gallery_handler_loop(void) {
@@ -304,18 +344,18 @@ void bhv_gallery_handler_loop(void) {
                 if (o->os16F4 % 30 == 0) {
                     play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
                 }
-                o->os16104 = 209;
-                o->os16106 = 20;
+                o->os16F6 = 209;
+                o->os16F8 = 20;
             } else {
                 if (o->os16F4 % 30 == 0 || o->os16F4 % 30 == 15) {
                     play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
                 }
-                o->o100 += 0x1000;
-                o->os16104 = 209 + (sins(o->o100) * 2);
-                o->os16106 = 20 + (coss(o->o100) * 2);
+                o->os16FA += 0x1000;
+                o->os16F6 = 209 + (sins(o->os16FA) * 2);
+                o->os16F8 = 20 + (coss(o->os16FA) * 2);
             }
 
-            print_text_fmt_int(o->os16106, o->os16104, "TIME  %d", o->os16F4 / 30);
+            print_text_fmt_int(o->os16F8, o->os16F6, "TIME  %d", o->os16F4 / 30);
             //print_text_fmt_int(20, 200, "POINTS %d", o->os16F6);
             //print_text_fmt_int(20, 215, "GOAL %d", MINIGAME_GOAL);
             if (o->os16F4 <= 0) {
@@ -326,16 +366,11 @@ void bhv_gallery_handler_loop(void) {
             }
             break;
         case 2:
+            gallery_kill_enemies();
             o->activeFlags = 0;
             break;
     }
 }
-
-
-const BehaviorScript *sGalleryEnemies[4] = {
-    bhvGalleryShyguy, bhvGalleryGoomba, bhvGallerySnufit, bhvSnufitBalls,
-};
-
 
 void bhv_cannon_balls_loop(void) {
     s32 i;

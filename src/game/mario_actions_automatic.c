@@ -872,7 +872,7 @@ s32 act_in_cannon(struct MarioState *m) {
                 play_sound(SOUND_MARIO_ATTACKED, m->marioObj->header.gfx.cameraToObject);
                 m->hurtCounter += 1 * 4;
                 queue_rumble_data(5, 80);
-                set_camera_shake_from_hit(3);
+                set_camera_shake_from_hit(5);
                 update_mario_sound_and_camera(m);
             }
     }

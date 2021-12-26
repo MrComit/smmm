@@ -1166,6 +1166,19 @@
 
 
 
+
+
+
+/* cannon gallery */
+#define /*0x0FC*/ oShyguyTimer        OBJECT_FIELD_S16(0x1D, 0)
+#define /*0x0FE*/ oGoombaTimer        OBJECT_FIELD_S16(0x1D, 1)
+#define /*0x100*/ oSnufitTimer        OBJECT_FIELD_S16(0x1E, 0)
+#define /*0x102*/ oShyguyIndex        OBJECT_FIELD_S16(0x1E, 1)
+#define /*0x104*/ oGoombaIndex        OBJECT_FIELD_S16(0x1F, 0)
+#define /*0x106*/ oSnufitIndex        OBJECT_FIELD_S16(0x1F, 1)
+
+
+
 /* new boo */
 #define /*0x098*/ oFloat98         OBJECT_FIELD_F32(0x04)
 #define /*0x148*/ o148             OBJECT_FIELD_S16(0x30, 0)
