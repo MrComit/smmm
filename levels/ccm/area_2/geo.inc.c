@@ -45,6 +45,10 @@ const GeoLayout ccm_dl_204__BooRoom_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ccm_dl_MoreHouses_003_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_006_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 65536, ccm_dl_Rocks_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_Rocks_mesh_layer_5),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 0, 0, 65536, ccm_dl_Tall_Grass_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -72,6 +76,7 @@ const GeoLayout ccm_area_2[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ccm_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
