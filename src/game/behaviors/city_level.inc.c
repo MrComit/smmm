@@ -95,6 +95,13 @@ Vec3f sShyguyPositions[4] = {
     {8644.0f, 1450.0f, -10321.0f},
 };
 
+
+Vec3f sSnufitPositions[3] = {
+    {7805.0f, 1890.0f, -10110.0f},
+    {8372.0f, 2000.0f, -10110.0f},
+    {6909.0f, 2190.0f, -10110.0f},
+};
+
 /*
  * todo:
  *      make "formations" - a set amount can appear, the next one only appears X seconds after the last one was destroyed
@@ -130,8 +137,8 @@ void bhv_gallery_snufit_loop(void) {
             if (o->oTimer > 90) {
                 o->oAction = 1;
             }
-            o->oSnufitCircularPeriod += 0x100;
-            o->oPosX = o->oHomeX + 300.0f * coss(o->oSnufitCircularPeriod);
+            o->oSnufitCircularPeriod += 0x20;
+            o->oPosX = o->oHomeX + 300.0f * sins(o->oSnufitCircularPeriod);
             break;
         case 1:
             if (o->oTimer > 5) {
@@ -149,12 +156,8 @@ void bhv_gallery_snufit_loop(void) {
             break;
     }
 
-    // Snufit orbits in a circular motion depending on an internal timer
-    // and vertically off the global timer. The vertical position can be
-    // manipulated using pauses since it uses the global timer.
-    // o->oPosX = o->oHomeX + 100.0f * coss(o->oSnufitCircularPeriod);
-    o->oPosY = o->oHomeY + 8.0f * coss(4000 * gGlobalTimer);
-    // o->oPosZ = o->oHomeZ + 100.0f * sins(o->oSnufitCircularPeriod);
+    o->oFloat110 = (o->oHomeY - 400.0f) + 8.0f * coss(4000 * gGlobalTimer);
+    o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat110, 8.0f);
 
     o->oSnufitYOffset = -0x20;
     o->oSnufitZOffset = o->oSnufitRecoil + 180;
@@ -183,7 +186,7 @@ void bhv_gallery_snufit_loop(void) {
 void bhv_gallery_goomba_init(void) {
     obj_set_hitbox(o, &sGalleryGoombaHitbox);
 
-    o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
+    o->oGravity = -5.0f;
     o->oMoveAngleYaw = 0x4000 * random_sign();;
 }
 
@@ -205,7 +208,7 @@ void bhv_gallery_goomba_update(void) {
 
         //obj_forward_vel_approach(20.0f * o->oGoombaScale, 0.4f);
         o->oForwardVel = 6.0f;// * o->oGoombaScale;
-        cur_obj_move_standard(-78);
+        cur_obj_move_standard(0);
 
         if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                 spawn_mist_particles();
@@ -217,6 +220,11 @@ void bhv_gallery_goomba_update(void) {
 
     } else {
         o->oAnimState = 1;
+    }
+
+    if (o->oPosY < 1000.0f) {
+        o->activeFlags = 0;
+        sGalleryGoombas[o->oBehParams2ndByte] = NULL;
     }
 }
 
@@ -257,15 +265,16 @@ void bhv_gallery_shyguy_loop(void) {
 void gallery_spawn_enemies(void) {
     struct Object *obj;
 
-    if (o->oShyguyIndex == 0) {
+    if (o->oShyguyCount < 8 && o->oShyguyIndex == 0) {
         if (sGalleryShyguys[0] == NULL && sGalleryShyguys[1] == NULL && ++o->oShyguyTimer > 90) {
             sGalleryShyguys[0] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
             sGalleryShyguys[1] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
             sGalleryShyguys[1]->oBehParams2ndByte = 1;
             o->oShyguyIndex = 1;
             o->oShyguyTimer = 0;
+            o->oShyguyCount++;
         }
-    } else {
+    } else if (o->oShyguyCount < 8) {
         if (sGalleryShyguys[2] == NULL && sGalleryShyguys[3] == NULL && ++o->oShyguyTimer > 90) {
             sGalleryShyguys[2] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
             sGalleryShyguys[3] = spawn_object(o, MODEL_SHYGUY, bhvGalleryShyguy);
@@ -273,35 +282,43 @@ void gallery_spawn_enemies(void) {
             sGalleryShyguys[3]->oBehParams2ndByte = 3;
             o->oShyguyIndex = 0;
             o->oShyguyTimer = 0;
+            o->oShyguyCount++;
         }
     }
 
-    if (o->oGoombaIndex < 5) {
-        if (++o->oGoombaTimer > 45) {
-            sGalleryGoombas[o->oGoombaIndex] = spawn_object(o, MODEL_GOOMBA, bhvGalleryGoomba);
-            sGalleryGoombas[o->oGoombaIndex]->oBehParams2ndByte = o->oGoombaIndex;
-            o->oGoombaIndex++;
-            o->oGoombaTimer = 0;
-        }
-    } else {
-        if (cur_obj_nearest_object_with_behavior(bhvGalleryGoomba) == NULL) {
-            o->oGoombaIndex = 0;
-            o->oGoombaTimer = -75;
+    if (o->oGoombaCount < 5) {
+        if (o->oGoombaIndex < 5) {
+            if (++o->oGoombaTimer > 45) {
+                sGalleryGoombas[o->oGoombaIndex] = spawn_object(o, MODEL_GOOMBA, bhvGalleryGoomba);
+                sGalleryGoombas[o->oGoombaIndex]->oBehParams2ndByte = o->oGoombaIndex;
+                o->oGoombaIndex++;
+                o->oGoombaTimer = 0;
+            }
+        } else {
+            if (cur_obj_nearest_object_with_behavior(bhvGalleryGoomba) == NULL) {
+                o->oGoombaIndex = 0;
+                o->oGoombaTimer = -75;
+                o->oGoombaCount++;
+            }
         }
     }
 
-    if (o->oSnufitIndex < 3) {
-        if (++o->oSnufitTimer > 120) {
-            sGallerySnufits[o->oSnufitIndex] = spawn_object(o, MODEL_SNUFIT, bhvGallerySnufit);
-            sGallerySnufits[o->oSnufitIndex]->oBehParams2ndByte = o->oSnufitIndex;
-            o->oSnufitIndex++;
-            o->oSnufitTimer = 0;
+    if (o->oSnufitCount < 4) {
+        if (o->oSnufitIndex < 3) {
+            if (++o->oSnufitTimer > 120) {
+                sGallerySnufits[o->oSnufitIndex] = spawn_object(o, MODEL_SNUFIT, bhvGallerySnufit);
+                sGallerySnufits[o->oSnufitIndex]->oBehParams2ndByte = o->oSnufitIndex;
+                vec3f_copy(&sGallerySnufits[o->oSnufitIndex]->oPosX, sSnufitPositions[o->oSnufitIndex]);
+                o->oSnufitIndex++;
+                o->oSnufitTimer = 0;
 
-        }
-    } else {
-        if (cur_obj_nearest_object_with_behavior(bhvGallerySnufit) == NULL) {
-            o->oSnufitIndex = 0;
-            o->oSnufitTimer = -200;
+            }
+        } else {
+            if (cur_obj_nearest_object_with_behavior(bhvGallerySnufit) == NULL) {
+                o->oSnufitIndex = 0;
+                o->oSnufitTimer = -200;
+                o->oSnufitCount++;
+            }
         }
     }
 }

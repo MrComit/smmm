@@ -1177,7 +1177,9 @@
 #define /*0x104*/ oGoombaIndex        OBJECT_FIELD_S16(0x1F, 0)
 #define /*0x106*/ oSnufitIndex        OBJECT_FIELD_S16(0x1F, 1)
 
-
+#define /*0x108*/ oShyguyCount        OBJECT_FIELD_S16(0x20, 0)
+#define /*0x10A*/ oGoombaCount        OBJECT_FIELD_S16(0x20, 1)
+#define /*0x10C*/ oSnufitCount        OBJECT_FIELD_S16(0x21, 0)
 
 /* new boo */
 #define /*0x098*/ oFloat98         OBJECT_FIELD_F32(0x04)
