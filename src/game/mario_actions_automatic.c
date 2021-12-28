@@ -796,9 +796,13 @@ s32 act_grabbed(struct MarioState *m) {
     return FALSE;
 }
 
+
 s32 act_in_cannon(struct MarioState *m) {
     struct Object *marioObj = m->marioObj;
     struct Object *obj;
+    struct Camera *c = gCamera;
+    f32 dist;
+    s16 pitch, yaw;
     s16 startFacePitch = m->faceAngle[0];
     s16 startFaceYaw = m->faceAngle[1];
 
@@ -855,11 +859,14 @@ s32 act_in_cannon(struct MarioState *m) {
             if (++m->actionTimer >= 8 && m->input & INPUT_A_PRESSED) {
                 m->actionTimer = 0;
                 play_sound(SOUND_OBJ_POUNDING_CANNON, m->marioObj->header.gfx.cameraToObject);
-                obj = spawn_object_relative(0, 0, 0, 0, marioObj, MODEL_BOWLING_BALL, bhvCannonBalls);
-                obj->oPosX += 120.0f * coss(m->faceAngle[0]) * sins(m->faceAngle[1]);
-                obj->oPosY += 120.0f * sins(m->faceAngle[0]);
-                obj->oPosZ += 120.0f * coss(m->faceAngle[0]) * coss(m->faceAngle[1]);
-                obj->oMoveAnglePitch = -m->faceAngle[0];
+                obj = spawn_object(marioObj, MODEL_BOWLING_BALL, bhvCannonBalls);
+                vec3f_copy(&obj->oPosX, c->pos);
+                vec3f_get_dist_and_angle(c->pos, c->focus, &dist, &pitch, &yaw);
+                obj->oMoveAngleYaw = yaw;
+                obj->oMoveAnglePitch = -pitch;//-m->faceAngle[0];
+                obj->oPosX += 120.0f * coss(-pitch) * sins(yaw);
+                obj->oPosY += 120.0f * sins(-pitch);
+                obj->oPosZ += 120.0f * coss(-pitch) * coss(yaw);
                 // return FALSE;
             } else if (m->faceAngle[0] != startFacePitch || m->faceAngle[1] != startFaceYaw) {
                 play_sound(SOUND_MOVING_AIM_CANNON, m->marioObj->header.gfx.cameraToObject);
@@ -874,6 +881,37 @@ s32 act_in_cannon(struct MarioState *m) {
                 queue_rumble_data(5, 80);
                 set_camera_shake_from_hit(5);
                 update_mario_sound_and_camera(m);
+            }
+
+
+            if (cur_obj_nearest_object_with_behavior(bhvShootingGalleryHandler) == NULL) {
+                m->forwardVel = 0;//50.0f * coss(m->faceAngle[0]);
+
+                m->vel[1] = 50.0f;// * sins(m->faceAngle[0]);
+
+                //m->pos[0] += (50.0f + 20.0f) * coss(m->faceAngle[0]) * sins(m->faceAngle[1]);
+                m->pos[1] += (50.0f + 20.0f);// * sins(m->faceAngle[0]);
+                //m->pos[2] += (50.0f + 20.0f) * coss(m->faceAngle[0]) * coss(m->faceAngle[1]);
+
+                play_sound(SOUND_ACTION_FLYING_FAST, m->marioObj->header.gfx.cameraToObject);
+                play_sound(SOUND_OBJ_POUNDING_CANNON, m->marioObj->header.gfx.cameraToObject);
+
+                m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+
+                set_mario_action(m, ACT_SHOT_FROM_CANNON, 0);
+                queue_rumble_data(60, 70);
+                obj = spawn_object(marioObj, MODEL_DL_CANNON_LID, bhvCannonLid);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                vec3f_copy(&obj->oPosX, &m->usedObj->oPosX);
+                obj->oPosY -= 20.0f;
+                obj->oFaceAngleYaw += 0x8000;
+                m->usedObj->activeFlags = 0;
+                m->usedObj == NULL;
+                obj = cur_obj_nearest_object_with_behavior(bhvCannonBarrel);
+                if (obj != NULL) {
+                    obj->activeFlags = 0;
+                }
+                return FALSE;
             }
     }
 

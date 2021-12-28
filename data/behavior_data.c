@@ -8246,3 +8246,16 @@ const BehaviorScript bhvGallerySnufit[] = {
         CALL_NATIVE(bhv_gallery_snufit_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCannonLid[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(cannon_lid_seg8_collision_08004950),
+    SET_HOME(),
+    SCALE(0, 150),
+    CALL_NATIVE(bhv_cannon_lid_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cannon_lid_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

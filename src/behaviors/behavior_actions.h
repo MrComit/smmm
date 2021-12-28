@@ -821,6 +821,8 @@ void bhv_gallery_shyguy_loop(void);
 void bhv_gallery_goomba_init(void);
 void bhv_gallery_goomba_update(void);
 void bhv_gallery_snufit_loop(void);
+void bhv_cannon_lid_init(void);
+void bhv_cannon_lid_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
