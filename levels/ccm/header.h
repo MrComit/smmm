@@ -87,4 +87,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/city_bridge/collision_header.h"
 
+#include "levels/ccm/toy_toad/geo_header.h"
+
+#include "levels/ccm/toy_toad/anim_header.h"
+
 #endif

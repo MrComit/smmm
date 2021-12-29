@@ -61,3 +61,6 @@
 #include "levels/ccm/racecar/collision.inc.c"
 #include "levels/ccm/city_bridge/model.inc.c"
 #include "levels/ccm/city_bridge/collision.inc.c"
+#include "levels/ccm/toy_toad/model.inc.c"
+#include "levels/ccm/toy_toad/anims/data.inc.c"
+#include "levels/ccm/toy_toad/anims/table.inc.c"

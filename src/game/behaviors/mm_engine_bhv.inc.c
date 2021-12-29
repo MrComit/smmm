@@ -501,11 +501,63 @@ void bhv_star_piece_loop(void) {
 }
 
 
+void basic_npc_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                o->oAction = 2;
+            }
+            cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            break;
+        case 2:
+            if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                o->oAction = 0;
+            }
+            break;
+    }
+}
 
-
-
-
-
+void toy_toad_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+                o->os16F4 = o->oMoveAngleYaw;
+                if (o->oAngleToMario - o->oMoveAngleYaw > 0) {
+                    o->os16F8 = 0x600;
+                } else {
+                    o->os16F8 = -0x600;
+                }
+            }
+            break;
+        case 1:
+            if (!(o->os16F6)) {
+                o->oMoveAngleYaw += o->os16F8;
+                if (absi(o->oMoveAngleYaw - o->os16F4) >= 0x10000) {
+                    o->os16F6 = 1;
+                }
+            } else {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
+                if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                    o->oAction = 2;
+                }
+                cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            }
+            break;
+        case 2:
+            if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                o->oAction = 0;
+                o->os16F6 = 0;
+            }
+            break;
+    }
+}
 
 
 void toad_friend_l1_loop(void) {

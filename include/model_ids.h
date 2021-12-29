@@ -698,6 +698,7 @@
 #define MODEL_CARDBOARD_WALL      0xFB
 #define MODEL_RACECAR             0xFA
 #define MODEL_CITY_BRIDGE         0xF9
+#define MODEL_TOY_TOAD            0xF8
 
 
 

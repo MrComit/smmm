@@ -3,12 +3,13 @@
 const GeoLayout ccm_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(5, geo_switch_area),
+		GEO_SWITCH_CASE(6, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ccm_dl_201__NULL_geo),
 			GEO_BRANCH(1, ccm_dl_202__NULL_geo),
 			GEO_BRANCH(1, ccm_dl_203__City2_geo),
 			GEO_BRANCH(1, ccm_dl_204__BooRoom_geo),
+			GEO_BRANCH(1, ccm_dl_205__StarPieceRoom_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -34,6 +35,7 @@ const GeoLayout ccm_dl_203__City2_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_Lego_006_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_006_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_007_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_004_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -49,6 +51,13 @@ const GeoLayout ccm_dl_204__BooRoom_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_Rocks_mesh_layer_5),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 0, 0, 65536, ccm_dl_Tall_Grass_mesh_layer_4),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_205__StarPieceRoom_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_004_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

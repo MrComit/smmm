@@ -47,6 +47,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CARDBOARD_WALL, cardboard_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RACECAR, racecar_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CITY_BRIDGE, city_bridge_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TOY_TOAD, toy_toad_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -172,6 +173,8 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_SHAKY_PLAT, 23773, 1935, 3574, 0, 0, 0, 0x00000000, bhvShakyPlat),
 		OBJECT(MODEL_TOKEN, 23234, 164, -1878, 90, 0, 0, 0x00000000, bhvToken),
 		OBJECT(MODEL_TOKEN, 19759, 2912, -1404, 0, 0, 0, 0x00000000, bhvToken),
+		OBJECT(MODEL_TOY_TOAD, 20985, -161, -6092, 0, 90, 0, 0x00000000, bhvToyToad),
+		OBJECT(MODEL_TOY_TOAD, 21036, -161, -8888, 0, 0, 0, 0x00000000, bhvToyToad),
 		OBJECT(MODEL_BLUE_COIN, 3469, 930, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 3120, 1063, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 4627, 2470, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
@@ -203,6 +206,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_STAR_CURRENCY, 16111, 2776, 0, 0, 0, 0, (0x11 << 24), bhvStar),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7787, 839, -5050, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7937, 839, -5050, 0, -180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7486, 839, 50, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_HORIZONTAL_POLE, 10111, 1089, 1000, 0, -180, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_HORIZONTAL_POLE, 5534, 1023, 6041, 0, -135, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_HORIZONTAL_POLE, 13611, 589, -2730, 0, 90, 0, 0x00100000, bhvHorizontalPole),
@@ -214,7 +218,8 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_SHYGUY, -5889, 4339, -2500, 0, 90, 0, 0x00000000, bhvShyGuyBoss),
 		OBJECT(MODEL_CANNON_BASE, 7861, 1174, -7537, 0, 0, 0, (0x40 << 16), bhvCannon),
 		OBJECT(MODEL_NONE, 7861, 1796, -9805, 0, 0, 0, (0x40 << 16), bhvShootingGalleryHandler),
-		OBJECT(MODEL_BOO, 9081, 859, -6593, 0, -90, 0, (0x5 << 24) | (0xD << 16) | (0x13 << 8), bhvRoomBoo),
+		OBJECT(MODEL_GLOBAL_GATE, 7861, 859, -5090, 0, -180, 0, 0x00000000, bhvGlobalGate),
+		OBJECT(MODEL_BOO, 8961, 1139, -6575, 0, -90, 0, (0x5 << 24) | (0xD << 16) | (0x13 << 8), bhvRoomBoo),
 		TERRAIN(ccm_area_2_collision),
 		ROOMS(ccm_area_2_collision_rooms),
 		MACRO_OBJECTS(ccm_area_2_macro_objs),
