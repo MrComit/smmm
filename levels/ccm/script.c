@@ -48,6 +48,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_RACECAR, racecar_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CITY_BRIDGE, city_bridge_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_TOAD, toy_toad_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BOSS_SHYGUY, boss_shyguy_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -215,7 +216,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_RACECAR, 15986, 527, -2000, 0, 0, 0, (40 << 24) | (0 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 17736, -161, -3000, 0, 0, 0, (60 << 24) | (1 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 12661, 839, -5350, 0, -90, 0, (20 << 24) | (1 << 16) | (1 << 8), bhvRacecar),
-		OBJECT(MODEL_SHYGUY, -5889, 4339, -2500, 0, 90, 0, 0x00000000, bhvShyGuyBoss),
+		OBJECT(MODEL_BOSS_SHYGUY, -11889, 4339, -2500, 0, 90, 0, 0x00000000, bhvShyGuyBoss),
 		OBJECT(MODEL_CANNON_BASE, 7861, 1174, -7537, 0, 0, 0, (0x40 << 16), bhvCannon),
 		OBJECT(MODEL_NONE, 7861, 1796, -9805, 0, 0, 0, (0x40 << 16), bhvShootingGalleryHandler),
 		OBJECT(MODEL_GLOBAL_GATE, 7861, 859, -5090, 0, -180, 0, 0x00000000, bhvGlobalGate),

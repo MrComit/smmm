@@ -64,3 +64,4 @@
 #include "levels/ccm/toy_toad/model.inc.c"
 #include "levels/ccm/toy_toad/anims/data.inc.c"
 #include "levels/ccm/toy_toad/anims/table.inc.c"
+#include "levels/ccm/boss_shyguy/model.inc.c"

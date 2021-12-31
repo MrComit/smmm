@@ -33,3 +33,4 @@
 #include "levels/ccm/racecar/geo.inc.c"
 #include "levels/ccm/city_bridge/geo.inc.c"
 #include "levels/ccm/toy_toad/geo.inc.c"
+#include "levels/ccm/boss_shyguy/geo.inc.c"
