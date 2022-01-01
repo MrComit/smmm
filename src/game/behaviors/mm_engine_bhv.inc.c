@@ -552,8 +552,31 @@ void toy_toad_loop(void) {
             break;
         case 2:
             if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
-                o->oAction = 0;
+                o->oAction = 3;
+            } else {
+                o->os16100 += 0x800;
+                o->oFaceAnglePitch = 0xC00 + (coss(o->os16100) * 0x1000);
+                o->oGraphYOffset = 30.0f + (sins(o->os16100) * 25.0f);
+                o->oPosX = o->oHomeX - 35.0f * sins(o->oFaceAngleYaw) + (15.0f * sins(o->oFaceAngleYaw) * coss(o->os16100));
+                o->oPosZ = o->oHomeZ - 35.0f * coss(o->oFaceAngleYaw) + (15.0f * coss(o->oFaceAngleYaw) * coss(o->os16100));
+                o->oFloatFC = 0.75f + (0.05f * sins(o->os16100));
+                obj_scale(o, o->oFloatFC);
+            }
+            break;
+        case 3:
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x200);
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 3.0f);
+            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oHomeZ, 3.0f);
+            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 0, 6.0f);
+            if (o->oPosX == o->oHomeX && o->oPosZ == o->oHomeZ) {
                 o->os16F6 = 0;
+                o->os16100 = 0;
+                o->oFaceAnglePitch = 0;
+                o->oGraphYOffset = 0;
+                o->oPosX = o->oHomeX;
+                o->oPosZ = o->oHomeZ;
+                o->oFloatFC = 0.75f;
+                obj_scale(o, o->oFloatFC);
             }
             break;
     }
