@@ -112,6 +112,7 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_House_004_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_House_005_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_House_005_mesh_layer_5),
