@@ -176,6 +176,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_TOKEN, 19759, 2912, -1404, 0, 0, 0, 0x00000000, bhvToken),
 		OBJECT(MODEL_TOY_TOAD, 20985, -161, -6092, 0, 90, 0, 0x00000000, bhvToyToad),
 		OBJECT(MODEL_TOY_TOAD, 21036, -161, -8888, 0, 0, 0, 0x00000000, bhvToyToad),
+		OBJECT(MODEL_TOY_TOAD, 17623, -161, -11650, 0, 0, 0, (12 << 24) | (1 << 16), bhvToyToad),
 		OBJECT(MODEL_BLUE_COIN, 3469, 930, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 3120, 1063, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 4627, 2470, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),

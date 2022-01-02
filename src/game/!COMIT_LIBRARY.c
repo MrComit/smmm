@@ -8,6 +8,7 @@
 #include "game/interaction.h"
 #include "game/mario.h"
 #include "engine/surface_collision.h"
+#include "game/ingame_menu.h"
 #define o gCurrentObject
 extern s16 s8DirModeYawOffset;
 
@@ -175,6 +176,19 @@ s32 CL_NPC_Dialog(s32 dialogId) {
         }
     }
     return FALSE;
+}
+
+s32 CL_NPC_Dialog_Options(s32 dialogId) {
+    if (set_mario_npc_dialog(1) == 2) {
+        o->activeFlags |= 0x20; /* bit 5 */
+        create_dialog_box_with_response(dialogId);
+        if (gDialogResponse) {
+            set_mario_npc_dialog(0);
+            o->activeFlags &= ~0x20; /* bit 5 */
+            o->oInteractStatus = 0;
+        }
+    }
+    return gDialogResponse;
 }
 
 //0 = not done, 1 = done, 2 = died

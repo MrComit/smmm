@@ -1816,6 +1816,22 @@ s32 execute_mario_action(UNUSED struct Object *o) {
     return 0;
 }
 
+void calculate_num_currency(void) {
+    u32 saveFlags = save_file_get_newflags(0);
+    u32 stars = CL_count_bits(save_file_get_currency_flags());
+    u32 starPieces = CL_count_bits((save_file_get_star_piece() >> 10) & 0x1F);
+    if (starPieces) {
+        stars -= starPieces;
+    }
+    if (saveFlags & SAVE_NEW_FLAG_CITY_BAND_BOUGHT) {
+        stars -= 2;
+    }
+    if (saveFlags & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT) {
+        stars -= 8;
+    }
+    gMarioState->numStars = stars;
+}
+
 /**************************************************
  *                  INITIALIZATION                *
  **************************************************/
@@ -1915,6 +1931,7 @@ void init_mario_from_save_file(void) {
     m->animList = &gMarioAnimsBuf;
 
     m->numCoins = gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount;
+    calculate_num_currency();
     //m->numStars =
     //    save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
     //m->numKeys = 0;
