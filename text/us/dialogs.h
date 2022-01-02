@@ -165,89 +165,61 @@ the fate of our world is\n\
 in your hands."))
 
 DEFINE_DIALOG(DIALOG_006, 1, 3, 30, 200, _("\
-Hey!!! Don't try to " SCAM_ME
-"You've gotta run\n\
-the whole course.\n\
-Later. Look me up when\n\
-you want to race for\n\
-real."))
+(Welcome to the city! A land\n\
+filled with wonder and\n\
+excitement at every turn!)\n\
+(Would you like to go shopping?\n\
+Or maybe check out the\n\
+garden?)\n\
+(You can even take a ride\n\
+through the air on a giant\n\
+rubberband, if you talk to\n\
+the toad at the east\n\
+end of town!)\n\
+\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_007, 1, 5, 30, 200, _("\
-Hufff...fff...pufff...\n\
-Whoa! You...really...are...\n\
-fast! A human blur!\n\
-Here you go--you've won\n\
-it, fair and square!"))
+DEFINE_DIALOG(DIALOG_007, 1, 2, 30, 200, _("\
+(Something tells me this \n\
+place doesn't serve real food.)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_008, 1, 4, 30, 200, _("\
-BEWARE OF CHAIN CHOMP\n\
-Extreme Danger!\n\
-Get close and press [C]^\n\
-for a better look.\n\
-Scary, huh?\n\
-See the Red Coin on top\n\
-of the stake?\n\
+(We'll need to construct a\n\
+new bridge to get over to the\n\
+other side of the city.)\n\
 \n\
-When you collect eight of\n\
-them, a Power Star will\n\
-appear in the meadow\n\
-across the bridge."))
+(The construction worker\n\
+said it would cost eight star\n\
+coins, BUT I DON'T HAVE THAT\n\
+KIND OF MONEY!!!!)\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_009, 1, 5, 30, 200, _("\
-Long time, no see! Wow,\n\
-have you gotten fast!\n\
-Have you been training\n\
-on the sly, or is it the\n\
-power of the Stars?\n\
-I've been feeling down\n\
-about losing the last\n\
-race. This is my home\n\
-course--how about a\n\
-rematch?\n\
-The goal is in\n\
-Windswept Valley.\n\
-Ready?\n\
-\n\
-//Go//// Don't Go"))
+DEFINE_DIALOG(DIALOG_009, 1, 3, 30, 200, _("\
+(Now that the bridge is \n\
+built, we can visit the\n\
+other side of town!)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_010, 1, 4, 30, 200, _("\
-You've stepped on the\n\
-Wing Cap Switch. Wearing\n\
-the Wing Cap, you can\n\
-soar through the sky.\n\
-Now Wing Caps will pop\n\
-out of all the red blocks\n\
-you find.\n\
-\n\
-Would you like to Save?\n\
+(I'd like to sell you access\n\
+to this here rubber band!)\n\
+(Take a ride on it and you'll\n\
+be launched out of this world!)\n\
+(It's just 2 star coins, what\n\
+do you say?)\n\
 \n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_011, 1, 4, 30, 200, _("\
-You've just stepped on\n\
-the Metal Cap Switch!\n\
-The Metal Cap makes\n\
-Mario invincible.\n\
-Now Metal Caps will\n\
-pop out of all of the\n\
-green blocks you find.\n\
-\n\
-Would you like to Save?\n\
-\n\
-//Yes////No"))
+DEFINE_DIALOG(DIALOG_011, 1, 2, 30, 200, _("\
+(I'm sorry, you don't have\n\
+enough star coins for this.)\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_012, 1, 4, 30, 200, _("\
-You've just stepped on\n\
-the Vanish Cap Switch.\n\
-The Vanish Cap makes\n\
-Mario disappear.\n\
-Now Vanish Caps will pop\n\
-from all of the blue\n\
-blocks you find.\n\
-\n\
-Would you like to Save?\n\
-\n\
-//Yes////No"))
+DEFINE_DIALOG(DIALOG_012, 1, 2, 30, 200, _("\
+(Pleasure doing business\n\
+with you.)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
 You've collected a\n\
@@ -278,31 +250,11 @@ Hop on the shiny shell and\n\
 ride wherever you want to\n\
 go! Shred those enemies!"))
 
-DEFINE_DIALOG(DIALOG_017, 1, 4, 30, 200, _("\
-I'm the Big Bob-omb, lord\n\
-of all blasting matter,\n\
-king of ka-booms the\n\
-world over!\n\
-How dare you scale my\n\
-mountain? By what right\n\
-do you set foot on my\n\
-imperial mountaintop?\n\
-You may have eluded my\n\
-guards, but you'll never\n\
-escape my grasp...\n\
-\n\
-...and you'll never take\n\
-away my Power Star. I\n\
-hereby challenge you,\n\
-Mario!\n\
-If you want the Star I\n\
-hold, you must prove\n\
-yourself in battle.\n\
-\n\
-Can you pick me up from\n\
-the back and hurl me to\n\
-this royal turf? I think\n\
-that you cannot!"))
+DEFINE_DIALOG(DIALOG_017, 1, 3, 30, 200, _("\
+(Can you believe the traffick!\n\
+I'm trying to get to work on\n\
+time!)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
 I'm sleeping because...\n\

@@ -535,6 +535,9 @@ void toy_toad_loop(void) {
                 } else {
                     o->os16F8 = -0x600;
                 }
+                if (o->oBehParams2ndByte == 2 && save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT) {
+                    o->oBehParams = 9 << 24;
+                }
             }
             break;
         case 1:
@@ -546,7 +549,7 @@ void toy_toad_loop(void) {
             } else {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
                 if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
-                    if (o->oBehParams2ndByte && !(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BAND_BOUGHT)) {
+                    if (o->oBehParams2ndByte == 1 && !(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BAND_BOUGHT)) {
                         o->oAction = 4;
                     } else {
                         o->oAction = 2;
@@ -592,14 +595,14 @@ void toy_toad_loop(void) {
                     if (gMarioState->numStars >= 2) {
                         save_file_set_newflags(SAVE_NEW_FLAG_CITY_BAND_BOUGHT, 0);
                         o->oBehParams2ndByte = 0;
+                        o->oBehParams = 12 << 24;
                         o->oAction = 2;
                     } else {
                         o->oBehParams = 11 << 24;
                         o->oAction = 2;
                     }
                 } else {
-                    o->oBehParams = 13 << 24;
-                    o->oAction = 2;
+                    o->oAction = 3;
                 }
             } else {
                 o->os16100 += 0x800;
