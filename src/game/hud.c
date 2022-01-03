@@ -330,14 +330,10 @@ void render_hud_mario_lives(void) {
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    s32 hudY;
-    if (sCurrPlayMode == 2)
-        hudY = 209;
-    else
-        hudY = gHudTopY;
-    print_text(168+30, gHudTopY, "+"); // 'Coin' glyph
-    print_text(184+30, gHudTopY, "*"); // 'X' glyph
-    print_text_fmt_int(198+30, gHudTopY, "%d", gHudDisplay.coins);
+    s32 hudY = gHudTopY;
+    print_text(168+30, hudY, "+"); // 'Coin' glyph
+    print_text(184+30, hudY, "*"); // 'X' glyph
+    print_text_fmt_int(198+30, hudY, "%d", gHudDisplay.coins);
 }
 
 #ifdef VERSION_JP
@@ -351,11 +347,12 @@ void render_hud_coins(void) {
  * Disables "X" glyph when Mario has 100 stars or more.
  */
 void render_hud_stars(void) {
+    s32 hudY = gHudTopY;
     calculate_num_currency();
 
-    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), HUD_TOP_Y, "-"); // 'Star' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), hudY, "-"); // 'Star' glyph
 
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), HUD_TOP_Y, "%d", gMarioState->numStars);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), hudY, "%d", gMarioState->numStars);
 }
 
 /**
@@ -472,15 +469,17 @@ void render_hud(void) {
         if (gCurrentArea != NULL && gCurrentArea->camera->mode == CAMERA_MODE_INSIDE_CANNON) {
             render_hud_cannon_reticle();
         }
-        if (sCurrPlayMode == 2)
+        if (sCurrPlayMode == 2) {
             gHudTopY = 209;
+        }
 
-        if (gHudTopY < 225 && gCamera->cutscene != CUTSCENE_OPENING)
+        if (gHudTopY < 225 && gCamera->cutscene != CUTSCENE_OPENING) {
             render_hud_coins();
+        }
 
         render_hud_keys();
 
-        if (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH) {
+        if (gHudTopY < 225 && (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)) {
             render_hud_stars();
         }
 

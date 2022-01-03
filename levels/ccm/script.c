@@ -187,7 +187,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_BLUE_COIN, 3672, 813, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 3993, 2270, -5376, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 3193, 2170, -4454, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
-		OBJECT(MODEL_BLUE_COIN_SWITCH, 4277, 399, -4915, 0, 90, 0, 0x00000000, bhvBlueCoinSwitch),
+		OBJECT(MODEL_BLUE_COIN_SWITCH, 4277, 399, -4915, 0, 90, 0, (0xB << 24) | (0x2 << 16) | (0x20 << 8), bhvBlueCoinSwitch),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 4827, 379, -4915, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_HORIZONTAL_POLE, 3877, 649, -4915, 0, -90, 0, 0x00100000, bhvHorizontalPole),
 		TERRAIN(ccm_area_1_collision),
