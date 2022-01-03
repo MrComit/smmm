@@ -707,6 +707,7 @@ extern const BehaviorScript bhvGalleryGoomba[];
 extern const BehaviorScript bhvGallerySnufit[];
 extern const BehaviorScript bhvCannonLid[];
 extern const BehaviorScript bhvToyToad[];
+extern const BehaviorScript bhvStarPieceHolder[];
 
 
 

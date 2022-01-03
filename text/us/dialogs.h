@@ -245,10 +245,15 @@ Do you want to Save?\n\
 \n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_016, 1, 3, 30, 200, _("\
-Hop on the shiny shell and\n\
-ride wherever you want to\n\
-go! Shred those enemies!"))
+DEFINE_DIALOG(DIALOG_016, 1, 2, 30, 200, _("\
+(Would you like a buy a piece\n\
+of the Emerald Power Star?)\n\
+(There's only [%] left, so\n\
+you gotta act fast!)\n\
+(It's just 2 star coins, what\n\
+do you say?)\n\
+\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_017, 1, 3, 30, 200, _("\
 (Can you believe the traffick!\n\
@@ -256,15 +261,23 @@ I'm trying to get to work on\n\
 time!)\n\
 ..."))
 
-DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
-I'm sleeping because...\n\
-...I'm sleepy. I don't\n\
-like being disturbed.\n\
-Please walk quietly."))
+DEFINE_DIALOG(DIALOG_018, 1, 3, 30, 200, _("\
+(I'm so sorry, we're all out\n\
+of the Emerald Star Pieces!)\n\
+\n\
+(But you may be able to get\n\
+your hands on some of the\n\
+Golden Power Star, somewhere.)\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
-Shhh! Please walk\n\
-quietly in the hallway!"))
+DEFINE_DIALOG(DIALOG_019, 1, 3, 30, 200, _("\
+(I'm so sorry, we're all out\n\
+of the Emerald Star Pieces!)\n\
+\n\
+(But you may be able to get\n\
+your hands on some of the\n\
+Ruby Power Star, somewhere.)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_020, 1, 7, 95, 150, _("\
 Dear Mario:\n\
@@ -275,12 +288,14 @@ your best interest.\n\
 Yours truly--\n\
 Your New Friend"))
 
-DEFINE_DIALOG(DIALOG_021, 1, 5, 95, 200, _("\
-Welcome.\n\
-No one's home!\n\
-Now " SCRAM "\n\
-and don't come back!\n\
-Gwa ha ha!"))
+DEFINE_DIALOG(DIALOG_021, 1, 3, 95, 200, _("\
+(I'm so sorry, we're all out\n\
+of the Emerald Star Pieces!)\n\
+\n\
+(But you may be able to get\n\
+your hands on some of the\n\
+Topaz Power Star, somewhere.)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_022, 1, 2, 95, 200, _("\
 You don't have the key to\n\
@@ -297,23 +312,34 @@ Power Star from an enemy\n\
 inside one of the castle's\n\
 paintings."))
 
-DEFINE_DIALOG(DIALOG_025, 1, 4, 95, 200, _("\
-It takes the power of\n\
-3 Stars to open this\n\
-door. You need [%] more\n\
-Stars."))
+DEFINE_DIALOG(DIALOG_025, 1, 3, 95, 200, _("\
+(I'm so sorry, we're all out\n\
+of the Emerald Star Pieces!)\n\
+\n\
+(But you may be able to get\n\
+your hands on some of the\n\
+Amethyst Power Star, somewhere.)\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_026, 1, 4, 95, 200, _("\
-It takes the power of\n\
-8 Stars to open this\n\
-door. You need [%] more\n\
-Stars."))
+DEFINE_DIALOG(DIALOG_026, 1, 2, 95, 200, _("\
+(I'm so sorry, we're all out\n\
+of the Emerald Star Pieces!)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_027, 1, 4, 95, 200, _("\
-It takes the power of\n\
-30 Stars to open this\n\
-door. You need [%] more\n\
-Stars."))
+(The legend of the Five\n\
+Power Stars is a great one!)\n\
+(They say that no one has ever\n\
+held all Five at the same time.)\n\
+(The holder would have far too\n\
+much power, so much that they\n\
+had to be divided into pieces,\n\
+and spread across the land.)\n\
+(Many have tried to replicate\n\
+their power, but to no avail.\n\
+These stars are simply one of\n\
+a kind.)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_028, 1, 4, 95, 200, _("\
 It takes the power of\n\

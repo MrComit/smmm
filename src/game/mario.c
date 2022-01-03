@@ -1821,7 +1821,7 @@ void calculate_num_currency(void) {
     u32 stars = CL_count_bits(save_file_get_currency_flags());
     u32 starPieces = CL_count_bits((save_file_get_star_piece() >> 10) & 0x1F);
     if (starPieces) {
-        stars -= starPieces;
+        stars -= starPieces * 2;
     }
     if (saveFlags & SAVE_NEW_FLAG_CITY_BAND_BOUGHT) {
         stars -= 2;

@@ -2347,9 +2347,9 @@ void play_dialog_sound(u8 dialogID) {
 
         // Play music during bowser message that appears when first entering the
         // castle or when trying to enter a door without enough stars
-        if (speaker == BOWS1) {
-            seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_KOOPA_MESSAGE, 0);
-        }
+        // if (speaker == BOWS1) {
+        //     seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_KOOPA_MESSAGE, 0);
+        // }
     }
 
     // "You've stepped on the (Wing|Metal|Vanish) Cap Switch"

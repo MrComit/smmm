@@ -14162,7 +14162,7 @@ Gfx ccm_dl_aa_001_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ccm_dl_Black_mesh_layer_1_vtx_cull[8] = {
+Vtx ccm_dl_Black_001_mesh_layer_1_vtx_cull[8] = {
 	{{{4827, 379, -4840},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{4827, 629, -4840},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{4827, 629, -4990},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -14173,15 +14173,15 @@ Vtx ccm_dl_Black_mesh_layer_1_vtx_cull[8] = {
 	{{{4827, 379, -4990},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
-Vtx ccm_dl_Black_mesh_layer_1_vtx_0[4] = {
+Vtx ccm_dl_Black_001_mesh_layer_1_vtx_0[4] = {
 	{{{4827, 629, -4990},0, {-66, 560},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{4827, 629, -4840},0, {34, 560},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{4827, 379, -4840},0, {34, 380},{0x7F, 0x0, 0x0, 0xFF}}},
 	{{{4827, 379, -4990},0, {-66, 380},{0x7F, 0x0, 0x0, 0xFF}}},
 };
 
-Gfx ccm_dl_Black_mesh_layer_1_tri_0[] = {
-	gsSPVertex(ccm_dl_Black_mesh_layer_1_vtx_0 + 0, 4, 0),
+Gfx ccm_dl_Black_001_mesh_layer_1_tri_0[] = {
+	gsSPVertex(ccm_dl_Black_001_mesh_layer_1_vtx_0 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSPEndDisplayList(),
 };
@@ -15225,81 +15225,6 @@ Gfx ccm_dl_aa_002_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ccm_dl_House_mesh_layer_1_vtx_cull[8] = {
-	{{{17626, -161, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{17626, 4106, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{17626, 4106, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{17626, -161, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{20470, -161, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{20470, 4106, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{20470, 4106, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{20470, -161, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-};
-
-Vtx ccm_dl_House_mesh_layer_1_vtx_0[28] = {
-	{{{17626, -161, 3574},0, {-4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 1261, 3574},0, {-4095, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 1261, 2152},0, {-2047, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, -161, 2152},0, {-2047, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 1261, 2152},0, {0, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, -161, 2152},0, {0, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, -161, 3574},0, {2048, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 1261, 3574},0, {2048, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 1261, 3574},0, {4095, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, -161, 3574},0, {4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, -161, 2152},0, {-2047, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 1261, 2152},0, {-2047, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{20470, 1261, 2152},0, {0, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{20470, -161, 2152},0, {0, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{20470, 1261, 3574},0, {2048, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{20470, -161, 3574},0, {2048, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 1261, 3574},0, {4095, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, -161, 3574},0, {4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 1261, 3574},0, {2048, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 4106, 3574},0, {4095, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 1261, 3574},0, {4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 4106, 3574},0, {2048, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 1261, 2152},0, {0, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{19048, 4106, 2152},0, {0, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 1261, 2152},0, {-2047, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 4106, 2152},0, {-2047, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 1261, 3574},0, {-4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
-	{{{17626, 4106, 3574},0, {-4095, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
-};
-
-Gfx ccm_dl_House_mesh_layer_1_tri_0[] = {
-	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_0 + 0, 28, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
-	gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
-	gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0),
-	gsSP2Triangles(13, 12, 14, 0, 13, 14, 15, 0),
-	gsSP2Triangles(15, 14, 16, 0, 15, 16, 17, 0),
-	gsSP2Triangles(18, 19, 20, 0, 18, 21, 19, 0),
-	gsSP2Triangles(22, 21, 18, 0, 22, 23, 21, 0),
-	gsSP2Triangles(24, 23, 22, 0, 24, 25, 23, 0),
-	gsSP2Triangles(26, 25, 24, 0, 26, 27, 25, 0),
-	gsSPEndDisplayList(),
-};
-
-Vtx ccm_dl_House_mesh_layer_1_vtx_1[8] = {
-	{{{20470, 1261, 2152},0, {6143, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{19048, 1261, 2152},0, {-4095, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{19048, 1261, 3574},0, {-4095, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{20470, 1261, 3574},0, {6143, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{19048, 4106, 2152},0, {6143, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{17626, 4106, 2152},0, {-4095, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{17626, 4106, 3574},0, {-4095, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
-	{{{19048, 4106, 3574},0, {6143, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
-};
-
-Gfx ccm_dl_House_mesh_layer_1_tri_1[] = {
-	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_1 + 0, 8, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx ccm_dl_House_006_mesh_layer_1_vtx_cull[8] = {
 	{{{19048, -161, 729},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{19048, 4284, 729},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -15540,6 +15465,81 @@ Gfx ccm_dl_House_006_mesh_layer_1_tri_1[] = {
 	gsSP2Triangles(22, 23, 24, 0, 22, 24, 25, 0),
 	gsSP2Triangles(26, 27, 28, 0, 26, 28, 29, 0),
 	gsSPVertex(ccm_dl_House_006_mesh_layer_1_vtx_1 + 62, 8, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ccm_dl_House_011_mesh_layer_1_vtx_cull[8] = {
+	{{{17626, -161, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{17626, 4106, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{17626, 4106, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{17626, -161, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{20470, -161, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{20470, 4106, 3574},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{20470, 4106, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{20470, -161, 2152},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx ccm_dl_House_011_mesh_layer_1_vtx_0[28] = {
+	{{{17626, -161, 3574},0, {-4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 1261, 3574},0, {-4095, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 1261, 2152},0, {-2047, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, -161, 2152},0, {-2047, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 1261, 2152},0, {0, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, -161, 2152},0, {0, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, -161, 3574},0, {2048, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 1261, 3574},0, {2048, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 1261, 3574},0, {4095, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, -161, 3574},0, {4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, -161, 2152},0, {-2047, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 1261, 2152},0, {-2047, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{20470, 1261, 2152},0, {0, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{20470, -161, 2152},0, {0, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{20470, 1261, 3574},0, {2048, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{20470, -161, 3574},0, {2048, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 1261, 3574},0, {4095, 2839},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, -161, 3574},0, {4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 1261, 3574},0, {2048, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 4106, 3574},0, {4095, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 1261, 3574},0, {4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 4106, 3574},0, {2048, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 1261, 2152},0, {0, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{19048, 4106, 2152},0, {0, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 1261, 2152},0, {-2047, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 4106, 2152},0, {-2047, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 1261, 3574},0, {-4095, 792},{0x8B, 0x0, 0x2, 0xFF}}},
+	{{{17626, 4106, 3574},0, {-4095, 4887},{0x8B, 0x0, 0x2, 0xFF}}},
+};
+
+Gfx ccm_dl_House_011_mesh_layer_1_tri_0[] = {
+	gsSPVertex(ccm_dl_House_011_mesh_layer_1_vtx_0 + 0, 28, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
+	gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
+	gsSP2Triangles(10, 11, 12, 0, 10, 12, 13, 0),
+	gsSP2Triangles(13, 12, 14, 0, 13, 14, 15, 0),
+	gsSP2Triangles(15, 14, 16, 0, 15, 16, 17, 0),
+	gsSP2Triangles(18, 19, 20, 0, 18, 21, 19, 0),
+	gsSP2Triangles(22, 21, 18, 0, 22, 23, 21, 0),
+	gsSP2Triangles(24, 23, 22, 0, 24, 25, 23, 0),
+	gsSP2Triangles(26, 25, 24, 0, 26, 27, 25, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ccm_dl_House_011_mesh_layer_1_vtx_1[8] = {
+	{{{20470, 1261, 2152},0, {6143, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
+	{{{19048, 1261, 2152},0, {-4095, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
+	{{{19048, 1261, 3574},0, {-4095, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
+	{{{20470, 1261, 3574},0, {6143, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
+	{{{19048, 4106, 2152},0, {6143, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
+	{{{17626, 4106, 2152},0, {-4095, -4095},{0xB9, 0x0, 0x3, 0xFF}}},
+	{{{17626, 4106, 3574},0, {-4095, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
+	{{{19048, 4106, 3574},0, {6143, 6143},{0xB9, 0x0, 0x3, 0xFF}}},
+};
+
+Gfx ccm_dl_House_011_mesh_layer_1_tri_1[] = {
+	gsSPVertex(ccm_dl_House_011_mesh_layer_1_vtx_1 + 0, 8, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSPEndDisplayList(),
@@ -25482,105 +25482,248 @@ Gfx ccm_dl_Tall_Grass_mesh_layer_4_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_cull[8] = {
-	{{{5711, 839, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{5711, 5384, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{5711, 5384, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{5711, 839, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{9261, 839, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{9261, 5384, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{9261, 5384, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{9261, 839, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+Vtx ccm_dl_Black_mesh_layer_1_vtx_0[24] = {
+	{{{5211, 3884, 2400},0, {-16, 1008},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{5211, 3884, -900},0, {-16, -16},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{9761, 3884, -900},0, {1008, -16},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{9761, 3884, 2400},0, {1008, 1008},{0x0, 0x81, 0x0, 0xFF}}},
+	{{{5211, 349, 2400},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{9761, 349, 2400},0, {1008, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{9761, 349, -900},0, {1008, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{5211, 349, -900},0, {-16, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{9761, 3884, 2400},0, {1008, 1008},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{9761, 3884, -900},0, {1008, -16},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{9761, 349, -900},0, {1008, -16},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{9761, 349, 2400},0, {1008, 1008},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{5211, 3884, -900},0, {-16, -16},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{5211, 3884, 2400},0, {-16, 1008},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{5211, 349, 2400},0, {-16, 1008},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{5211, 349, -900},0, {-16, -16},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{9761, 3884, -900},0, {1008, -16},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{5211, 3884, -900},0, {-16, -16},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{5211, 349, -900},0, {-16, -16},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{9761, 349, -900},0, {1008, -16},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{5211, 3884, 2400},0, {-16, 1008},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{9761, 3884, 2400},0, {1008, 1008},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{9761, 349, 2400},0, {1008, 1008},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{5211, 349, 2400},0, {-16, 1008},{0x0, 0x0, 0x81, 0xFF}}},
 };
 
-Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_0[36] = {
-	{{{7561, 1089, 100},0, {-22182, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7561, 849, 100},0, {-22182, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{9261, 849, 100},0, {-14412, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{9261, 1089, 100},0, {-14412, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{9261, 1089, 1400},0, {-8471, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{9261, 849, 1400},0, {-8471, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7561, 849, 1400},0, {-701, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7561, 1089, 1400},0, {-701, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7411, 849, 1400},0, {-15, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+Gfx ccm_dl_Black_mesh_layer_1_tri_0[] = {
+	gsSPVertex(ccm_dl_Black_mesh_layer_1_vtx_0 + 0, 24, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
+	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ccm_dl_DisplaceCase_mesh_layer_5_vtx_cull[8] = {
+	{{{7521, 849, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7521, 1149, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7521, 1149, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7521, 849, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 849, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 1149, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 1149, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 849, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx ccm_dl_DisplaceCase_mesh_layer_5_vtx_0[20] = {
+	{{{7821, 949, 768},0, {86, 825},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{7521, 949, 768},0, {1110, 825},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{7521, 1149, 768},0, {1110, 825},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{7821, 1149, 768},0, {86, 825},{0x0, 0x0, 0x81, 0xFF}}},
+	{{{7521, 1149, 968},0, {-16, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{7821, 1149, 968},0, {1008, 1008},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{7821, 1149, 768},0, {1008, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{7521, 1149, 768},0, {-16, -16},{0x0, 0x7F, 0x0, 0xFF}}},
+	{{{7521, 949, 968},0, {-1621, 825},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{7821, 949, 968},0, {-597, 825},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{7821, 1149, 968},0, {-597, 825},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{7521, 1149, 968},0, {-1621, 825},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{7821, 949, 968},0, {-597, 825},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{7821, 949, 768},0, {86, 825},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{7821, 1149, 768},0, {86, 825},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{7821, 1149, 968},0, {-597, 825},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{7521, 949, 768},0, {-2304, 825},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{7521, 949, 968},0, {-1621, 825},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{7521, 1149, 968},0, {-1621, 825},{0x81, 0x0, 0x0, 0xFF}}},
+	{{{7521, 1149, 768},0, {-2304, 825},{0x81, 0x0, 0x0, 0xFF}}},
+};
+
+Gfx ccm_dl_DisplaceCase_mesh_layer_5_tri_0[] = {
+	gsSPVertex(ccm_dl_DisplaceCase_mesh_layer_5_vtx_0 + 0, 20, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ccm_dl_DisplaceCase_mesh_layer_1_vtx_cull[8] = {
+	{{{7521, 849, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7521, 1149, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7521, 1149, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7521, 849, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 849, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 1149, 968},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 1149, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{7821, 849, 768},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx ccm_dl_DisplaceCase_mesh_layer_1_vtx_0[10] = {
+	{{{7821, 849, 768},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7521, 849, 768},0, {1008, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7521, 949, 768},0, {1110, 1665},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7821, 949, 768},0, {86, 1665},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7821, 849, 968},0, {-699, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7821, 949, 968},0, {-597, 1665},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7521, 849, 968},0, {-1722, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7521, 949, 968},0, {-1621, 1665},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7521, 849, 768},0, {-2405, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7521, 949, 768},0, {-2304, 1665},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx ccm_dl_DisplaceCase_mesh_layer_1_tri_0[] = {
+	gsSPVertex(ccm_dl_DisplaceCase_mesh_layer_1_vtx_0 + 0, 10, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
+	gsSP2Triangles(6, 4, 5, 0, 6, 5, 7, 0),
+	gsSP2Triangles(8, 6, 7, 0, 8, 7, 9, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ccm_dl_DisplaceCase_mesh_layer_1_vtx_1[4] = {
+	{{{7521, 949, 968},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7821, 949, 968},0, {2032, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7821, 949, 768},0, {2032, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7521, 949, 768},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx ccm_dl_DisplaceCase_mesh_layer_1_tri_1[] = {
+	gsSPVertex(ccm_dl_DisplaceCase_mesh_layer_1_vtx_1 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx ccm_dl_House_mesh_layer_1_vtx_cull[8] = {
+	{{{6411, 839, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{6411, 2758, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{6411, 2758, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{6411, 839, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{8561, 839, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{8561, 2758, 1400},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{8561, 2758, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{8561, 839, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx ccm_dl_House_mesh_layer_1_vtx_0[51] = {
 	{{{7411, 1089, 1400},0, {-15, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{5711, 849, 1400},0, {7755, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{5711, 1089, 1400},0, {7755, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{5711, 1089, 100},0, {13696, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{5711, 849, 100},0, {13696, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7411, 849, 100},0, {21466, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 849, 1400},0, {4555, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 1089, 1400},0, {4555, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 849, 1400},0, {-15, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 1089, 1400},0, {-701, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 2758, 1400},0, {-701, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 2758, 1400},0, {-15, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 1089, 1400},0, {4555, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 2758, 1400},0, {4555, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 2758, 1400},0, {-5271, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 1089, 1400},0, {-5271, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 1089, 100},0, {-18983, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 849, 100},0, {-18983, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 849, 100},0, {-14412, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 1089, 100},0, {-14412, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 1089, 1400},0, {-8471, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 849, 1400},0, {-8471, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 2758, 1400},0, {-8471, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 2758, 100},0, {-14412, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 2758, 100},0, {-18983, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 1089, 100},0, {-18983, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 849, 1400},0, {-701, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 1089, 1400},0, {-5271, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{8561, 849, 1400},0, {-5271, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 1089, 100},0, {13696, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 849, 100},0, {18267, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 1089, 100},0, {18267, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 849, 100},0, {13696, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 849, 1400},0, {7755, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 1089, 1400},0, {7755, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 2758, 100},0, {13696, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 1089, 100},0, {18267, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 2758, 100},0, {13696, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 1089, 100},0, {18267, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 2758, 100},0, {18267, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 1089, 1400},0, {7755, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{6411, 2758, 1400},0, {7755, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 2758, 100},0, {21466, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7411, 1089, 100},0, {21466, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7411, 1089, 0},0, {21950, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7411, 839, 0},0, {21950, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{5711, 5384, 100},0, {13696, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{5711, 5384, 1400},0, {7755, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7411, 5384, 1400},0, {-15, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7561, 5384, 1400},0, {-701, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{9261, 5384, 1400},0, {-8471, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{9261, 5384, 100},0, {-14412, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7561, 5384, 100},0, {-22182, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7411, 5384, 100},0, {21466, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 1089, 100},0, {22152, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7561, 5384, 100},0, {22152, -18576},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7561, 2758, 100},0, {22152, -6575},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7411, 1089, 100},0, {21466, 418},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7411, 1089, 0},0, {21466, 902},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 1089, 0},0, {22152, 902},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 1089, 100},0, {22152, 418},{0xFF, 0xFF, 0xFF, 0xFF}}},
-	{{{7561, 1089, 100},0, {22152, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 849, 100},0, {21466, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 839, 0},0, {21950, 2012},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{7411, 1089, 0},0, {21950, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 1089, 0},0, {22152, 1537},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 839, 0},0, {23112, 1537},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 849, 100},0, {23112, 1053},{0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Gfx ccm_dl_Lego_004_mesh_layer_1_tri_0[] = {
-	gsSPVertex(ccm_dl_Lego_004_mesh_layer_1_vtx_0 + 0, 32, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(2, 4, 3, 0, 2, 5, 4, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(7, 6, 8, 0, 7, 8, 9, 0),
-	gsSP2Triangles(9, 8, 10, 0, 9, 10, 11, 0),
-	gsSP2Triangles(10, 12, 11, 0, 10, 13, 12, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(14, 16, 15, 0, 14, 17, 16, 0),
-	gsSP2Triangles(18, 12, 15, 0, 11, 12, 18, 0),
-	gsSP2Triangles(11, 18, 19, 0, 20, 11, 19, 0),
-	gsSP2Triangles(20, 9, 11, 0, 21, 9, 20, 0),
-	gsSP2Triangles(21, 7, 9, 0, 22, 7, 21, 0),
-	gsSP2Triangles(22, 4, 7, 0, 3, 4, 22, 0),
-	gsSP2Triangles(3, 22, 23, 0, 24, 3, 23, 0),
-	gsSP2Triangles(24, 0, 3, 0, 18, 15, 25, 0),
-	gsSP2Triangles(25, 15, 26, 0, 25, 26, 27, 0),
-	gsSP2Triangles(28, 29, 30, 0, 28, 30, 31, 0),
-	gsSPVertex(ccm_dl_Lego_004_mesh_layer_1_vtx_0 + 32, 4, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+Gfx ccm_dl_House_mesh_layer_1_tri_0[] = {
+	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_0 + 0, 32, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(4, 3, 0, 0, 5, 4, 0, 0),
+	gsSP2Triangles(5, 0, 6, 0, 6, 0, 7, 0),
+	gsSP2Triangles(6, 7, 8, 0, 9, 4, 5, 0),
+	gsSP2Triangles(9, 10, 4, 0, 11, 12, 13, 0),
+	gsSP2Triangles(11, 13, 14, 0, 13, 15, 14, 0),
+	gsSP2Triangles(13, 16, 15, 0, 14, 15, 17, 0),
+	gsSP2Triangles(14, 17, 18, 0, 19, 14, 18, 0),
+	gsSP2Triangles(19, 20, 14, 0, 4, 21, 3, 0),
+	gsSP2Triangles(22, 21, 4, 0, 22, 23, 21, 0),
+	gsSP2Triangles(24, 25, 26, 0, 24, 27, 25, 0),
+	gsSP2Triangles(28, 27, 24, 0, 28, 24, 29, 0),
+	gsSP2Triangles(29, 24, 30, 0, 30, 24, 31, 0),
+	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_0 + 32, 19, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 4, 0),
+	gsSP2Triangles(5, 6, 7, 0, 5, 7, 8, 0),
+	gsSP2Triangles(9, 10, 11, 0, 9, 11, 12, 0),
+	gsSP2Triangles(13, 14, 15, 0, 13, 15, 6, 0),
+	gsSP2Triangles(7, 16, 17, 0, 7, 17, 18, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx ccm_dl_Lego_004_mesh_layer_1_vtx_1[20] = {
-	{{{7411, 5384, 100},0, {-2063, -4111},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{5711, 5384, 1400},0, {-14349, 6127},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{5711, 5384, 100},0, {-14349, -4111},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{7411, 5384, 1400},0, {-2063, 6127},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{7561, 5384, 100},0, {-1040, -4111},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{7561, 5384, 1400},0, {-1040, 6127},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{9261, 5384, 100},0, {11246, -4111},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{9261, 5384, 1400},0, {11246, 6127},{0x52, 0x44, 0x33, 0xFF}}},
-	{{{5711, 849, 1400},0, {-7341, 3828},{0xAF, 0xB4, 0xD5, 0xFF}}},
+Vtx ccm_dl_House_mesh_layer_1_vtx_1[20] = {
+	{{{7411, 2758, 100},0, {-2063, -4111},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{6411, 2758, 1400},0, {-14349, 6127},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{6411, 2758, 100},0, {-14349, -4111},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{7411, 2758, 1400},0, {-2063, 6127},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{7561, 2758, 100},0, {-1040, -4111},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{7561, 2758, 1400},0, {-1040, 6127},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{8561, 2758, 100},0, {11246, -4111},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{8561, 2758, 1400},0, {11246, 6127},{0x52, 0x44, 0x33, 0xFF}}},
+	{{{6411, 849, 1400},0, {-4304, 3828},{0xAF, 0xB4, 0xD5, 0xFF}}},
 	{{{7411, 849, 100},0, {34, -1812},{0xE4, 0xF3, 0xAA, 0xFF}}},
-	{{{5711, 849, 100},0, {-7341, -1812},{0xAF, 0xB4, 0xD5, 0xFF}}},
+	{{{6411, 849, 100},0, {-4304, -1812},{0xAF, 0xB4, 0xD5, 0xFF}}},
 	{{{7411, 849, 1400},0, {34, 3828},{0xD5, 0xCB, 0xAD, 0xFF}}},
 	{{{7561, 849, 1400},0, {684, 3828},{0xD5, 0xCB, 0xAD, 0xFF}}},
 	{{{7561, 849, 100},0, {684, -1812},{0xE4, 0xF3, 0xAA, 0xFF}}},
-	{{{9261, 849, 1400},0, {8059, 3828},{0xB7, 0xD5, 0xB2, 0xFF}}},
-	{{{9261, 849, 100},0, {8059, -1812},{0xB7, 0xD5, 0xB2, 0xFF}}},
+	{{{8561, 849, 1400},0, {5022, 3828},{0xB7, 0xD5, 0xB2, 0xFF}}},
+	{{{8561, 849, 100},0, {5022, -1812},{0xB7, 0xD5, 0xB2, 0xFF}}},
 	{{{7411, 849, 100},0, {34, -1812},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 849, 100},0, {684, -1812},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7561, 849, 50},0, {684, -2029},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{7411, 849, 50},0, {34, -2029},{0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Gfx ccm_dl_Lego_004_mesh_layer_1_tri_1[] = {
-	gsSPVertex(ccm_dl_Lego_004_mesh_layer_1_vtx_1 + 0, 20, 0),
+Gfx ccm_dl_House_mesh_layer_1_tri_1[] = {
+	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_1 + 0, 20, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 3, 0, 0, 4, 5, 3, 0),
 	gsSP2Triangles(6, 5, 4, 0, 6, 7, 5, 0),
@@ -26842,13 +26985,13 @@ Gfx ccm_dl_aa_001_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx ccm_dl_Black_mesh_layer_1[] = {
+Gfx ccm_dl_Black_001_mesh_layer_1[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(ccm_dl_Black_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPVertex(ccm_dl_Black_001_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_ccm_dl_Black),
-	gsSPDisplayList(ccm_dl_Black_mesh_layer_1_tri_0),
+	gsSPDisplayList(ccm_dl_Black_001_mesh_layer_1_tri_0),
 	gsSPEndDisplayList(),
 };
 
@@ -26967,20 +27110,6 @@ Gfx ccm_dl_aa_002_mesh_layer_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx ccm_dl_House_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ccm_dl_House_layer1),
-	gsSPDisplayList(ccm_dl_House_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_ccm_dl_House_layer1),
-	gsSPDisplayList(mat_ccm_dl_Lego),
-	gsSPDisplayList(ccm_dl_House_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_ccm_dl_Lego),
-	gsSPEndDisplayList(),
-};
-
 Gfx ccm_dl_House_006_mesh_layer_1[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPVertex(ccm_dl_House_006_mesh_layer_1_vtx_cull + 0, 8, 0),
@@ -26991,6 +27120,20 @@ Gfx ccm_dl_House_006_mesh_layer_1[] = {
 	gsSPDisplayList(mat_revert_ccm_dl_House_layer1),
 	gsSPDisplayList(mat_ccm_dl_Lego),
 	gsSPDisplayList(ccm_dl_House_006_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_ccm_dl_Lego),
+	gsSPEndDisplayList(),
+};
+
+Gfx ccm_dl_House_011_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(ccm_dl_House_011_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_ccm_dl_House_layer1),
+	gsSPDisplayList(ccm_dl_House_011_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_ccm_dl_House_layer1),
+	gsSPDisplayList(mat_ccm_dl_Lego),
+	gsSPDisplayList(ccm_dl_House_011_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_ccm_dl_Lego),
 	gsSPEndDisplayList(),
 };
@@ -27588,16 +27731,46 @@ Gfx ccm_dl_Tall_Grass_mesh_layer_4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx ccm_dl_Lego_004_mesh_layer_1[] = {
+Gfx ccm_dl_Black_mesh_layer_1[] = {
+	gsSPDisplayList(mat_ccm_dl_Black),
+	gsSPDisplayList(ccm_dl_Black_mesh_layer_1_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx ccm_dl_DisplaceCase_mesh_layer_5[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(ccm_dl_Lego_004_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPVertex(ccm_dl_DisplaceCase_mesh_layer_5_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_ccm_dl_Window),
+	gsSPDisplayList(ccm_dl_DisplaceCase_mesh_layer_5_tri_0),
+	gsSPEndDisplayList(),
+};
+
+Gfx ccm_dl_DisplaceCase_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(ccm_dl_DisplaceCase_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_ccm_dl_InRoomWall),
-	gsSPDisplayList(ccm_dl_Lego_004_mesh_layer_1_tri_0),
+	gsSPDisplayList(ccm_dl_DisplaceCase_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_ccm_dl_InRoomWall),
 	gsSPDisplayList(mat_ccm_dl_BooRoomFloor),
-	gsSPDisplayList(ccm_dl_Lego_004_mesh_layer_1_tri_1),
+	gsSPDisplayList(ccm_dl_DisplaceCase_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_ccm_dl_BooRoomFloor),
+	gsSPEndDisplayList(),
+};
+
+Gfx ccm_dl_House_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(ccm_dl_House_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_ccm_dl_InRoomWall),
+	gsSPDisplayList(ccm_dl_House_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_ccm_dl_InRoomWall),
+	gsSPDisplayList(mat_ccm_dl_BooRoomFloor),
+	gsSPDisplayList(ccm_dl_House_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_ccm_dl_BooRoomFloor),
 	gsSPEndDisplayList(),
 };

@@ -824,6 +824,7 @@ void bhv_gallery_goomba_update(void);
 void bhv_gallery_snufit_loop(void);
 void bhv_cannon_lid_init(void);
 void bhv_cannon_lid_loop(void);
+void bhv_star_piece_holder_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

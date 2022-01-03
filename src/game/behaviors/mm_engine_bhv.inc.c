@@ -483,7 +483,7 @@ void bhv_star_piece_loop(void) {
     }
 
     if (o->oBehParams2ndByte == 1) {
-        if (!(save_file_get_boos() & 1)) {
+        if (!(save_file_get_boos() & 1) && gCurrLevelNum == LEVEL_BOB) {
             cur_obj_disable();
         } else {
             cur_obj_enable();
@@ -518,100 +518,6 @@ void basic_npc_loop(void) {
         case 2:
             if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
                 o->oAction = 0;
-            }
-            break;
-    }
-}
-
-void toy_toad_loop(void) {
-    s32 dialogResponse;
-    switch (o->oAction) {
-        case 0:
-            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
-                o->oAction = 1;
-                o->os16F4 = o->oMoveAngleYaw;
-                if (o->oAngleToMario - o->oMoveAngleYaw > 0) {
-                    o->os16F8 = 0x600;
-                } else {
-                    o->os16F8 = -0x600;
-                }
-                if (o->oBehParams2ndByte == 2 && save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT) {
-                    o->oBehParams = 9 << 24;
-                }
-            }
-            break;
-        case 1:
-            if (!(o->os16F6)) {
-                o->oMoveAngleYaw += o->os16F8;
-                if (absi(o->oMoveAngleYaw - o->os16F4) >= 0x10000) {
-                    o->os16F6 = 1;
-                }
-            } else {
-                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
-                if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
-                    if (o->oBehParams2ndByte == 1 && !(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BAND_BOUGHT)) {
-                        o->oAction = 4;
-                    } else {
-                        o->oAction = 2;
-                    }
-                }
-                cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
-            }
-            break;
-        case 2:
-            if (CL_NPC_Dialog(o->oBehParams >> 24)) {
-                o->oAction = 3;
-            } else {
-                o->os16100 += 0x800;
-                o->oFaceAnglePitch = 0xC00 + (coss(o->os16100) * 0x1000);
-                o->oGraphYOffset = 30.0f + (sins(o->os16100) * 25.0f);
-                o->oPosX = o->oHomeX - 35.0f * sins(o->oFaceAngleYaw) + (15.0f * sins(o->oFaceAngleYaw) * coss(o->os16100));
-                o->oPosZ = o->oHomeZ - 35.0f * coss(o->oFaceAngleYaw) + (15.0f * coss(o->oFaceAngleYaw) * coss(o->os16100));
-                o->oFloatFC = 0.75f + (0.05f * sins(o->os16100));
-                obj_scale(o, o->oFloatFC);
-            }
-            break;
-        case 3:
-            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x200);
-            o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 3.0f);
-            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oHomeZ, 3.0f);
-            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 0, 6.0f);
-            if (o->oPosX == o->oHomeX && o->oPosZ == o->oHomeZ) {
-                o->oAction = 0;
-                o->os16F6 = 0;
-                o->os16100 = 0;
-                o->oFaceAnglePitch = 0;
-                o->oGraphYOffset = 0;
-                o->oPosX = o->oHomeX;
-                o->oPosZ = o->oHomeZ;
-                o->oFloatFC = 0.75f;
-                obj_scale(o, o->oFloatFC);
-            }
-            break;
-        case 4:
-            dialogResponse = CL_NPC_Dialog_Options(10);
-            if (dialogResponse) {
-                if (dialogResponse == 1) {
-                    if (gMarioState->numStars >= 2) {
-                        save_file_set_newflags(SAVE_NEW_FLAG_CITY_BAND_BOUGHT, 0);
-                        o->oBehParams2ndByte = 0;
-                        o->oBehParams = 12 << 24;
-                        o->oAction = 2;
-                    } else {
-                        o->oBehParams = 11 << 24;
-                        o->oAction = 2;
-                    }
-                } else {
-                    o->oAction = 3;
-                }
-            } else {
-                o->os16100 += 0x800;
-                o->oFaceAnglePitch = 0xC00 + (coss(o->os16100) * 0x1000);
-                o->oGraphYOffset = 30.0f + (sins(o->os16100) * 25.0f);
-                o->oPosX = o->oHomeX - 35.0f * sins(o->oFaceAngleYaw) + (15.0f * sins(o->oFaceAngleYaw) * coss(o->os16100));
-                o->oPosZ = o->oHomeZ - 35.0f * coss(o->oFaceAngleYaw) + (15.0f * coss(o->oFaceAngleYaw) * coss(o->os16100));
-                o->oFloatFC = 0.75f + (0.05f * sins(o->os16100));
-                obj_scale(o, o->oFloatFC);
             }
             break;
     }

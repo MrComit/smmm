@@ -8204,8 +8204,6 @@ const BehaviorScript bhvShootingGalleryHandler[] = {
 };
 
 
-
-
 const BehaviorScript bhvGalleryShyguy[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -8273,5 +8271,15 @@ const BehaviorScript bhvToyToad[] = {
     CALL_NATIVE(bhv_friend_toad_init),
     BEGIN_LOOP(),
         CALL_NATIVE(toy_toad_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvStarPieceHolder[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    //CALL_NATIVE(bhv_star_piece_holder_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_star_piece_holder_loop),
     END_LOOP(),
 };
