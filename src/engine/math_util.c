@@ -506,30 +506,49 @@ void mtxf_align_terrain_triangle(Mat4 mtx, Vec3f pos, s16 yaw, f32 radius) {
  * The resulting matrix represents first applying transformation b and
  * then a.
  */
+
 void mtxf_mul(Mat4 dest, Mat4 a, Mat4 b) {
+    Mat4 temp;
     register f32 entry0;
     register f32 entry1;
     register f32 entry2;
-    register f32 *temp = (f32 *)a;
-    register f32 *temp2 = (f32 *)dest;
-    register f32 *temp3;
-    register s32 i;
-    for (i = 0; i < 16; i++) {
-        entry0 = temp[0];
-        entry1 = temp[1];
-        entry2 = temp[2];
-        temp3 = (f32 *)b;
-        for (; (i & 3) !=3; i++) {
-            *temp2 = entry0 * temp3[0] + entry1 * temp3[4] + entry2 * temp3[8];
-            temp2++;
-            temp3++;
-        }
-        *temp2 = 0;
-        temp += 4;
-        temp2++;
-    }
-    vec3f_add(&dest[3][0], &b[3][0]);
-    ((u32 *) dest)[15] = 0x3F800000;
+
+    // column 0
+    entry0 = a[0][0];
+    entry1 = a[0][1];
+    entry2 = a[0][2];
+    temp[0][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0];
+    temp[0][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1];
+    temp[0][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2];
+
+    // column 1
+    entry0 = a[1][0];
+    entry1 = a[1][1];
+    entry2 = a[1][2];
+    temp[1][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0];
+    temp[1][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1];
+    temp[1][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2];
+
+    // column 2
+    entry0 = a[2][0];
+    entry1 = a[2][1];
+    entry2 = a[2][2];
+    temp[2][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0];
+    temp[2][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1];
+    temp[2][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2];
+
+    // column 3
+    entry0 = a[3][0];
+    entry1 = a[3][1];
+    entry2 = a[3][2];
+    temp[3][0] = entry0 * b[0][0] + entry1 * b[1][0] + entry2 * b[2][0] + b[3][0];
+    temp[3][1] = entry0 * b[0][1] + entry1 * b[1][1] + entry2 * b[2][1] + b[3][1];
+    temp[3][2] = entry0 * b[0][2] + entry1 * b[1][2] + entry2 * b[2][2] + b[3][2];
+
+    temp[0][3] = temp[1][3] = temp[2][3] = 0;
+    temp[3][3] = 1;
+
+    mtxf_copy(dest, temp);
 }
 
 /**
