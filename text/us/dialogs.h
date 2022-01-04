@@ -341,11 +341,11 @@ These stars are simply one of\n\
 a kind.)\n\
 ..."))
 
-DEFINE_DIALOG(DIALOG_028, 1, 4, 95, 200, _("\
-It takes the power of\n\
-50 Stars to open this\n\
-door. You need [%] more\n\
-Stars."))
+DEFINE_DIALOG(DIALOG_028, 1, 3, 95, 200, _("\
+(You think your daily commute\n\
+is bad? My driveway is just\n\
+a bunch of invisible blocks!)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_029, 1, 5, 95, 200, _("\
 To open the door that\n\
