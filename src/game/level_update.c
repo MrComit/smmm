@@ -33,6 +33,7 @@
 #include "buffers/buffers.h"
 #include "puppyprint.h"
 #include "include/config.h"
+#include "hud.h"
 
 #define PLAY_MODE_NORMAL 0
 #define PLAY_MODE_PAUSED 2
@@ -1028,7 +1029,9 @@ void initiate_delayed_warp(void) {
 }
 
 extern s32 gHudTopY;
-extern s32 gHuds2dX;
+extern s32 gHudStarsX;
+extern s32 sPowerMeterVisibleTimer;
+// extern s32 gHuds2dX;
 s32 gHudLowerTimer = 0;
 s32 gHudLowerTimer2 = 0;
 s32 sTimer2 = 0;
@@ -1050,6 +1053,12 @@ void update_hud_values(void) {
             gHudTopY = approach_s16_symmetric(gHudTopY, 209, 2);
         } else {
             gHudTopY = approach_s16_symmetric(gHudTopY, 225, 2);
+        }
+
+        if (sPowerMeterHUD.animation == POWER_METER_DEEMPHASIZING || sPowerMeterHUD.animation == POWER_METER_VISIBLE) {
+            gHudStarsX = approach_s16_symmetric(gHudStarsX, 72, 6);
+        } else {
+            gHudStarsX = approach_s16_symmetric(gHudStarsX, 22, 6);
         }
 
         if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER && gHudLowerTimer > 150) {

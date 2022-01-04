@@ -69,12 +69,6 @@ void print_fps(s32 x, s32 y) {
 // ------------ END OF FPS COUNER -----------------
 
 
-struct PowerMeterHUD {
-    s8 animation;
-    s16 x;
-    s16 y;
-    f32 unused;
-};
 
 struct UnusedHUDStruct {
     u32 unused1;
@@ -90,7 +84,7 @@ struct CameraHUD {
 // When the HUD is rendered this value is 8, full health.
 static s16 sPowerMeterStoredHealth;
 
-static struct PowerMeterHUD sPowerMeterHUD = {
+struct PowerMeterHUD sPowerMeterHUD = {
     POWER_METER_HIDDEN,
     40,
     166,
@@ -103,7 +97,8 @@ static struct PowerMeterHUD sPowerMeterHUD = {
 s32 sPowerMeterVisibleTimer = 0;
 
 s32 gHudTopY = 209; // default 209, high is 225
-s32 gHuds2dX = 0;
+s32 gHudStarsX = 22;
+// s32 gHuds2dX = 0;
 //UNUSED static struct UnusedHUDStruct sUnusedHUDValues = { 0x00, 0x0A, 0x00 };
 
 static struct CameraHUD sCameraHUD = { CAM_STATUS_NONE };
@@ -164,7 +159,6 @@ void render_power_meter_health_segment(s16 numHealthWedges) {
  */
 void render_dl_power_meter(s16 numHealthWedges) {
     Mtx *mtx = alloc_display_list(sizeof(Mtx));
-    Gfx* dlhead = gDisplayListHead;
 
     if (mtx == NULL) {
         return;
@@ -172,18 +166,17 @@ void render_dl_power_meter(s16 numHealthWedges) {
 
     guTranslate(mtx, (f32) sPowerMeterHUD.x, (f32) sPowerMeterHUD.y, 0);
 
-    gSPMatrix(dlhead++, VIRTUAL_TO_PHYSICAL(mtx++),
+    gSPMatrix(gDisplayListHead++, VIRTUAL_TO_PHYSICAL(mtx++),
               G_MTX_MODELVIEW | G_MTX_MUL | G_MTX_PUSH);
-    gSPDisplayList(dlhead++, &dl_power_meter_base);
+    gSPDisplayList(gDisplayListHead++, &dl_power_meter_base);
 
     if (numHealthWedges != 0) {
-        gSPDisplayList(dlhead++, &dl_power_meter_health_segments_begin);
+        gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_begin);
         render_power_meter_health_segment(numHealthWedges);
-        gSPDisplayList(dlhead++, &dl_power_meter_health_segments_end);
+        gSPDisplayList(gDisplayListHead++, &dl_power_meter_health_segments_end);
     }
 
-    gSPPopMatrix(dlhead++, G_MTX_MODELVIEW);
-    gDisplayListHead = dlhead;
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
 /**
@@ -350,9 +343,9 @@ void render_hud_stars(void) {
     s32 hudY = gHudTopY;
     calculate_num_currency();
 
-    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), hudY, "-"); // 'Star' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(gHudStarsX), hudY, "-"); // 'Star' glyph
 
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), hudY, "%d", gMarioState->numStars);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(gHudStarsX + 16), hudY, "%d", gMarioState->numStars);
 }
 
 /**
