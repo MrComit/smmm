@@ -34,3 +34,5 @@
 #include "levels/ccm/city_bridge/geo.inc.c"
 #include "levels/ccm/toy_toad/geo.inc.c"
 #include "levels/ccm/boss_shyguy/geo.inc.c"
+#include "levels/ccm/block_tower/geo.inc.c"
+#include "levels/ccm/block_piece/geo.inc.c"

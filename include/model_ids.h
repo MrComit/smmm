@@ -700,6 +700,8 @@
 #define MODEL_CITY_BRIDGE         0xF9
 #define MODEL_TOY_TOAD            0xF8
 #define MODEL_BOSS_SHYGUY         0xF7
+#define MODEL_BLOCK_PIECE         0xF6
+#define MODEL_BLOCK_TOWER         0xF5
 
 
 

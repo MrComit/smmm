@@ -93,4 +93,12 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/boss_shyguy/geo_header.h"
 
+#include "levels/ccm/block_tower/geo_header.h"
+
+#include "levels/ccm/block_tower/collision_header.h"
+
+#include "levels/ccm/block_piece/collision_header.h"
+
+#include "levels/ccm/block_piece/geo_header.h"
+
 #endif

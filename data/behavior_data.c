@@ -8300,3 +8300,33 @@ const BehaviorScript bhvBossBulletBill[] = {
         CALL_NATIVE(bhv_boss_bullet_bill_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvBlockPiece[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(block_piece_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_block_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_block_piece_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBlockTower[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(block_tower_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SPAWN_OBJ(/*Model*/ MODEL_BLOCK_PIECE, /*Behavior*/ bhvBlockPiece),
+    CALL_NATIVE(bhv_block_tower_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_block_tower_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

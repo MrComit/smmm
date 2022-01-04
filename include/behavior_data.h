@@ -709,6 +709,8 @@ extern const BehaviorScript bhvCannonLid[];
 extern const BehaviorScript bhvToyToad[];
 extern const BehaviorScript bhvStarPieceHolder[];
 extern const BehaviorScript bhvBossBulletBill[];
+extern const BehaviorScript bhvBlockPiece[];
+extern const BehaviorScript bhvBlockTower[];
 
 
 

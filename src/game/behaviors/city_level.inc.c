@@ -647,10 +647,75 @@ void bhv_city_bridge_init(void) {
  *    BOSS START
  */
 
+void bhv_block_piece_init(void) {
+    o->oObjFC = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
+    if (o->oObjFC == NULL) {
+        o->activeFlags = 0;
+    } else {
+        o->oFaceAngleYaw = obj_angle_to_object(o, o->oObjFC);
+        o->oMoveAngleYaw = o->oFaceAngleYaw + 0x8000;
+    }
+}
+
+void bhv_block_piece_loop(void) {
+    s16 angle;
+    switch(o->oAction) {
+        case 0:
+            o->oForwardVel = 0.0f;
+            angle = gMarioState->faceAngle[1] - o->oFaceAngleYaw;
+            if (gMarioState->wall != NULL && gMarioState->wall->object == o &&
+                angle < 0xA000 && angle > 0x6000) {
+                o->oForwardVel = 4.0f;
+                cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
+                o->oF8++;
+                cur_obj_move_using_fvel_and_gravity();
+            }
+            if (o->oF8 >= 50) {
+                o->oF4 = 1;
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            break;
+    }
+
+
+}
+
+
+void bhv_block_tower_init(void) {
+    o->oObjFC = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
+    if (o->oObjFC == NULL) {
+        o->activeFlags = 0;
+    } else {
+        o->oFaceAngleYaw = obj_angle_to_object(o, o->oObjFC);
+    }
+}
+
+
+void bhv_block_tower_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->prevObj->oF4 == 1) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0x800, 0x40);
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x3000, o->os16F4);
+            if (o->oFaceAnglePitch == 0x3000) {
+                o->activeFlags = 0;
+                set_camera_shake_from_point(3, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
+                spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
+            }
+            break;
+    }
+}
+
 
 void bhv_boss_bullet_bill_init(void) {
     o->oPosY = gMarioState->pos[1] + 60.0f;
-    o->oForwardVel = 35.0f;
+    o->oForwardVel = 50.0f;
 }
 
 

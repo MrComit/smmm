@@ -65,3 +65,7 @@
 #include "levels/ccm/toy_toad/anims/data.inc.c"
 #include "levels/ccm/toy_toad/anims/table.inc.c"
 #include "levels/ccm/boss_shyguy/model.inc.c"
+#include "levels/ccm/block_tower/model.inc.c"
+#include "levels/ccm/block_tower/collision.inc.c"
+#include "levels/ccm/block_piece/collision.inc.c"
+#include "levels/ccm/block_piece/model.inc.c"

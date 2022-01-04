@@ -49,6 +49,8 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CITY_BRIDGE, city_bridge_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_TOAD, toy_toad_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOSS_SHYGUY, boss_shyguy_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BLOCK_PIECE, block_piece_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BLOCK_TOWER, block_tower_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -207,6 +209,9 @@ const LevelScript level_ccm_entry[] = {
 		WARP_NODE(0x57, LEVEL_CCM, 0x01, 0x0D, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 19861, 39, 0, 0, -90, 0, 0x001A0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 19861, 39, 0, 0, -90, 0, 0x000A0000, bhvFlyingWarp),
+		OBJECT(MODEL_BLOCK_TOWER, -11375, 4339, 23, 0, -90, 0, 0x00000000, bhvBlockTower),
+		OBJECT(MODEL_BLOCK_TOWER, -9402, 4339, -3591, 0, -90, 0, 0x00000000, bhvBlockTower),
+		OBJECT(MODEL_BLOCK_TOWER, -11994, 4339, -5322, 0, -90, 0, 0x00000000, bhvBlockTower),
 		OBJECT(MODEL_STAR_CURRENCY, 16111, 2776, 0, 0, 0, 0, (0x11 << 24), bhvStar),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7787, 839, -5050, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7937, 839, -5050, 0, -180, 0, 0x00000000, bhvDoor),
