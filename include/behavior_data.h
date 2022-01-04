@@ -708,6 +708,7 @@ extern const BehaviorScript bhvGallerySnufit[];
 extern const BehaviorScript bhvCannonLid[];
 extern const BehaviorScript bhvToyToad[];
 extern const BehaviorScript bhvStarPieceHolder[];
+extern const BehaviorScript bhvBossBulletBill[];
 
 
 

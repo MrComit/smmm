@@ -643,7 +643,49 @@ void bhv_city_bridge_init(void) {
     }
 }
 
+/*
+ *    BOSS START
+ */
 
+
+void bhv_boss_bullet_bill_init(void) {
+    o->oPosY = gMarioState->pos[1] + 60.0f;
+    o->oForwardVel = 35.0f;
+}
+
+
+void bhv_boss_bullet_bill_loop(void) {
+    CL_Move();
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 70) {
+                cur_obj_update_floor_and_walls();
+            }
+            spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
+            if (o->oTimer < 120) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+            }
+            if (o->oTimer > 300 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+                o->activeFlags = 0;
+                spawn_mist_particles();
+            }
+            if (o->oInteractStatus) {
+                o->oAction = 1;
+                o->oForwardVel = -30.0f;
+                cur_obj_become_intangible();
+            }
+            break;
+        case 1:
+            o->oFaceAnglePitch += 0x1000;
+            o->oFaceAngleRoll += 0x1000;
+            o->oPosY += 20.0f;
+
+            if (o->oTimer > 45) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
 
 
 void bhv_shyguy_boss_init(void) {
@@ -652,9 +694,25 @@ void bhv_shyguy_boss_init(void) {
 }
 
 void bhv_shyguy_boss_loop(void) {
-
-
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 10000.0f) {
+                o->oAction = 1;
+                play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
+            }
+            break;
+        case 1:
+            if (o->oTimer > 60 && o->oDistanceToMario > 5000.0f) {
+                spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
+                o->oTimer = 0;
+            }
+            break;
+    }
 }
+
+/*
+ *    BOSS END
+ */
 
 
 
