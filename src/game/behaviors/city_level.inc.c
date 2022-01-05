@@ -50,6 +50,18 @@ struct ObjectHitbox sGallerySnufitHitbox = {
     /* hurtboxHeight:     */ 50,
 };
 
+struct ObjectHitbox sShyguyBossHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 3,
+    /* numLootCoins:      */ 2,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
 
 Vec3s sLegoColors[] = {
 {0xFF, 0xFF, 0xFF},
@@ -658,13 +670,11 @@ void bhv_block_piece_init(void) {
 }
 
 void bhv_block_piece_loop(void) {
-    s16 angle;
+    struct MarioState *m = gMarioState;
     switch(o->oAction) {
         case 0:
             o->oForwardVel = 0.0f;
-            angle = gMarioState->faceAngle[1] - o->oFaceAngleYaw;
-            if (gMarioState->wall != NULL && gMarioState->wall->object == o &&
-                angle < 0xA000 && angle > 0x6000) {
+            if (m->wall != NULL && m->wall->object == o && m->wall->type == SURFACE_GENERAL_USE) {
                 o->oForwardVel = 4.0f;
                 cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
                 o->oF8++;
@@ -678,8 +688,6 @@ void bhv_block_piece_loop(void) {
         case 1:
             break;
     }
-
-
 }
 
 
@@ -707,6 +715,9 @@ void bhv_block_tower_loop(void) {
                 o->activeFlags = 0;
                 set_camera_shake_from_point(3, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
                 spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
+                if (--o->oObjFC->oHealth <= 0) {
+                    o->oObjFC->oAction = 2;
+                }
             }
             break;
     }
@@ -715,7 +726,7 @@ void bhv_block_tower_loop(void) {
 
 void bhv_boss_bullet_bill_init(void) {
     o->oPosY = gMarioState->pos[1] + 60.0f;
-    o->oForwardVel = 50.0f;
+    o->oForwardVel = 100.0f;
 }
 
 
@@ -726,11 +737,12 @@ void bhv_boss_bullet_bill_loop(void) {
             if (o->oTimer > 70) {
                 cur_obj_update_floor_and_walls();
             }
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, 1.0f);
             spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
             if (o->oTimer < 120) {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
             }
-            if (o->oTimer > 300 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+            if (o->oTimer > 150 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
                 o->activeFlags = 0;
                 spawn_mist_particles();
             }
@@ -754,23 +766,26 @@ void bhv_boss_bullet_bill_loop(void) {
 
 
 void bhv_shyguy_boss_init(void) {
-    obj_set_hitbox(o, &sShyguyHitbox);
+    obj_set_hitbox(o, &sShyguyBossHitbox);
     o->oOpacity = 0xFF;
 }
 
 void bhv_shyguy_boss_loop(void) {
     switch (o->oAction) {
-        case 0:
+        case 0: // PRE FIGHT ACT
             if (o->oDistanceToMario < 10000.0f) {
                 o->oAction = 1;
                 play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
             }
             break;
-        case 1:
+        case 1: // MAIN LOOP
             if (o->oTimer > 60 && o->oDistanceToMario > 5000.0f) {
                 spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
                 o->oTimer = 0;
             }
+            break;
+        case 2: // DEATH ACT
+            o->activeFlags = 0;
             break;
     }
 }
