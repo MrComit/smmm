@@ -831,6 +831,8 @@ void bhv_block_piece_loop(void);
 void bhv_block_piece_init(void);
 void bhv_block_tower_loop(void);
 void bhv_block_tower_init(void);
+void bhv_block_bomb_init(void);
+void bhv_block_bomb_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

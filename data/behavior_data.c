@@ -8330,3 +8330,15 @@ const BehaviorScript bhvBlockTower[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBlockBomb[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_block_bomb_init),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_block_bomb_loop),
+    END_LOOP(),
+};

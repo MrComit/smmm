@@ -12,7 +12,7 @@ const Collision block_piece_collision[] = {
 	COL_TRI_INIT(SURFACE_GENERAL_USE, 2),
 	COL_TRI(0, 1, 2),
 	COL_TRI(0, 2, 3),
-	COL_TRI_INIT(SURFACE_DEFAULT, 8),
+	COL_TRI_INIT(SURFACE_DEFAULT, 10),
 	COL_TRI(3, 2, 4),
 	COL_TRI(3, 4, 5),
 	COL_TRI(5, 4, 6),
@@ -21,6 +21,8 @@ const Collision block_piece_collision[] = {
 	COL_TRI(7, 1, 0),
 	COL_TRI(4, 2, 1),
 	COL_TRI(4, 1, 6),
+	COL_TRI(5, 7, 0),
+	COL_TRI(5, 0, 3),
 	COL_TRI_STOP(),
 	COL_END()
 };

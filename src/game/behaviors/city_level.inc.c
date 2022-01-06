@@ -681,7 +681,6 @@ void bhv_block_piece_loop(void) {
                 cur_obj_move_using_fvel_and_gravity();
             }
             if (o->oF8 >= 50) {
-                o->oF4 = 1;
                 o->oAction = 1;
             }
             break;
@@ -704,7 +703,8 @@ void bhv_block_tower_init(void) {
 void bhv_block_tower_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->prevObj->oF4 == 1) {
+            o->oFaceAnglePitch = 50 * o->prevObj->oF8;
+            if (o->prevObj->oAction == 1) {
                 o->oAction = 1;
             }
             break;
@@ -715,6 +715,7 @@ void bhv_block_tower_loop(void) {
                 o->activeFlags = 0;
                 set_camera_shake_from_point(3, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
                 spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
+                create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
                 if (--o->oObjFC->oHealth <= 0) {
                     o->oObjFC->oAction = 2;
                 }
@@ -765,6 +766,29 @@ void bhv_boss_bullet_bill_loop(void) {
 }
 
 
+
+void bhv_block_bomb_init(void) {
+    vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 400.0f, gMarioState->pos[2]);
+    o->oFaceAngleYaw = random_u16();
+    vec3f_set(o->header.gfx.scale, 0.25f, 0.35f, 0.6f);
+    o->oGraphYOffset = -35.0f;
+}
+
+void bhv_block_bomb_loop(void) {
+    struct Object *explosion;
+    o->oF8 += 0x800;
+    o->oFaceAngleRoll = 0x600 * sins(o->oF8);
+    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 2.0f);
+    o->oPosY -= o->oFloatF4;
+    if (o->oDistanceToMario < 200.0f || object_step() & 1) {
+        explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        explosion->oGraphYOffset += 100.0f;
+        explosion->oIntangibleTimer = 0;
+        o->activeFlags = 0;
+    }
+}
+
+
 void bhv_shyguy_boss_init(void) {
     obj_set_hitbox(o, &sShyguyBossHitbox);
     o->oOpacity = 0xFF;
@@ -779,9 +803,16 @@ void bhv_shyguy_boss_loop(void) {
             }
             break;
         case 1: // MAIN LOOP
-            if (o->oTimer > 60 && o->oDistanceToMario > 5000.0f) {
-                spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
-                o->oTimer = 0;
+            if (o->os16F4 == 1) {
+                if (o->oTimer > 60 && o->oDistanceToMario > 5000.0f) {
+                    spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
+                    o->oTimer = 0;
+                }
+            } else {
+                if (o->oTimer > 60 && o->oDistanceToMario < 5000.0f) {
+                    spawn_object(o, MODEL_BLOCK_PIECE, bhvBlockBomb);
+                    o->oTimer = 0;
+                }
             }
             break;
         case 2: // DEATH ACT
