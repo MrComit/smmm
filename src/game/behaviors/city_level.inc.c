@@ -62,6 +62,18 @@ struct ObjectHitbox sShyguyBossHitbox = {
     /* hurtboxHeight:     */ 40,
 };
 
+struct ObjectHitbox sBlockBombHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 3,
+    /* numLootCoins:      */ 2,
+    /* radius:            */ 200,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 200,
+    /* hurtboxHeight:     */ 50,
+};
+
 
 Vec3s sLegoColors[] = {
 {0xFF, 0xFF, 0xFF},
@@ -768,6 +780,7 @@ void bhv_boss_bullet_bill_loop(void) {
 
 
 void bhv_block_bomb_init(void) {
+    obj_set_hitbox(o, &sBlockBombHitbox);
     vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 400.0f, gMarioState->pos[2]);
     o->oFaceAngleYaw = random_u16();
     vec3f_set(o->header.gfx.scale, 0.25f, 0.35f, 0.6f);
@@ -780,10 +793,10 @@ void bhv_block_bomb_loop(void) {
     o->oFaceAngleRoll = 0x600 * sins(o->oF8);
     o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 2.0f);
     o->oPosY -= o->oFloatF4;
-    if (o->oDistanceToMario < 200.0f || object_step() & 1) {
+    if (o->oInteractStatus || object_step() & 1) {
         explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         explosion->oGraphYOffset += 100.0f;
-        explosion->oIntangibleTimer = 0;
+        explosion->oIntangibleTimer = -1;
         o->activeFlags = 0;
     }
 }
@@ -803,15 +816,14 @@ void bhv_shyguy_boss_loop(void) {
             }
             break;
         case 1: // MAIN LOOP
-            if (o->os16F4 == 1) {
-                if (o->oTimer > 60 && o->oDistanceToMario > 5000.0f) {
-                    spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
-                    o->oTimer = 0;
-                }
-            } else {
-                if (o->oTimer > 60 && o->oDistanceToMario < 5000.0f) {
+            if (++o->os16F4 > 60 && o->oDistanceToMario > 5000.0f) {
+                spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
+                o->os16F4 = 0;
+            }
+            if (o->oHealth < 3) {
+                if (++o->os16F6 > 60 && o->oDistanceToMario < 5000.0f) {
                     spawn_object(o, MODEL_BLOCK_PIECE, bhvBlockBomb);
-                    o->oTimer = 0;
+                    o->os16F6 = 0;
                 }
             }
             break;
