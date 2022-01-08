@@ -829,6 +829,7 @@ void bhv_shyguy_boss_loop(void) {
             break;
         case 2: // DEATH ACT
             o->activeFlags = 0;
+            stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
             break;
     }
 }
