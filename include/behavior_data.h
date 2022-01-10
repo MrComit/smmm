@@ -712,6 +712,7 @@ extern const BehaviorScript bhvBossBulletBill[];
 extern const BehaviorScript bhvBlockPiece[];
 extern const BehaviorScript bhvBlockTower[];
 extern const BehaviorScript bhvBlockBomb[];
+extern const BehaviorScript bhvBossBulletBillCannon[];
 
 
 

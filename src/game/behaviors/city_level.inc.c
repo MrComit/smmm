@@ -747,15 +747,17 @@ void bhv_boss_bullet_bill_loop(void) {
     CL_Move();
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 70) {
+            if (o->oTimer < 15) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+            } else {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
                 cur_obj_update_floor_and_walls();
             }
-            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, 1.0f);
-            spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
-            if (o->oTimer < 120) {
-                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+            if (o->oDistanceToMario < 5000.0f) {
+                o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, 5.0f);
             }
-            if (o->oTimer > 150 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+            spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
+            if (o->oTimer > 75 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
                 o->activeFlags = 0;
                 spawn_mist_particles();
             }
@@ -777,6 +779,25 @@ void bhv_boss_bullet_bill_loop(void) {
     }
 }
 
+
+void bhv_boss_bullet_bill_cannon_init(void) {
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_boss_bullet_bill_cannon_loop(void) {
+    if (o->oObjF4->os16F4 == o->oBehParams2ndByte) {
+        if (o->oTimer > 60 + (count_objects_with_behavior(bhvBossBulletBill) * 30)) {
+            spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
+            o->oTimer = 0;
+        }
+    } else {
+        o->oTimer = 0;
+    }
+}
 
 
 void bhv_block_bomb_init(void) {
@@ -802,6 +823,28 @@ void bhv_block_bomb_loop(void) {
 }
 
 
+
+void shyguy_boss_handle_bulletlist(void) {
+    struct MarioState *m = gMarioState;
+    switch (o->oHealth) {
+        case 3:
+            if (m->pos[0] > -7500.0f) {
+                o->os16F4 = 1;
+            } else if (m->pos[2] > -794.0f) {
+                o->os16F4 = -1;
+            } else {
+                o->os16F4 = 0;
+            }
+            break;
+        case 2:
+            o->os16F4 = -1;
+            break;
+        case 1:
+            o->os16F4 = -1;
+            break;
+    }
+}
+
 void bhv_shyguy_boss_init(void) {
     obj_set_hitbox(o, &sShyguyBossHitbox);
     o->oOpacity = 0xFF;
@@ -816,12 +859,9 @@ void bhv_shyguy_boss_loop(void) {
             }
             break;
         case 1: // MAIN LOOP
-            if (++o->os16F4 > 60 && o->oDistanceToMario > 5000.0f) {
-                spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
-                o->os16F4 = 0;
-            }
-            if (o->oHealth < 3) {
-                if (++o->os16F6 > 60 && o->oDistanceToMario < 5000.0f) {
+            shyguy_boss_handle_bulletlist();
+            if (o->os16F4 == -1) {
+                if (++o->os16F6 > 60) {
                     spawn_object(o, MODEL_BLOCK_PIECE, bhvBlockBomb);
                     o->os16F6 = 0;
                 }

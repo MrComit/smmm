@@ -8301,7 +8301,14 @@ const BehaviorScript bhvBossBulletBill[] = {
     END_LOOP(),
 };
 
-
+const BehaviorScript bhvBossBulletBillCannon[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_boss_bullet_bill_cannon_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boss_bullet_bill_cannon_loop),
+    END_LOOP(),
+};
 
 const BehaviorScript bhvBlockPiece[] = {
     BEGIN(OBJ_LIST_SURFACE),
