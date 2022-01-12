@@ -56,10 +56,10 @@ struct ObjectHitbox sShyguyBossHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 3,
     /* numLootCoins:      */ 2,
-    /* radius:            */ 72,
-    /* height:            */ 50,
-    /* hurtboxRadius:     */ 42,
-    /* hurtboxHeight:     */ 40,
+    /* radius:            */ 72 * 40,
+    /* height:            */ 50 * 100,
+    /* hurtboxRadius:     */ 42 * 40,
+    /* hurtboxHeight:     */ 40 * 100,
 };
 
 struct ObjectHitbox sBlockBombHitbox = {
@@ -671,6 +671,41 @@ void bhv_city_bridge_init(void) {
  *    BOSS START
  */
 
+Vec3f sBossStarts[2] = {
+{-6839.0f, 5807.0f, -4956.0f},
+{-12639.0f, 8166.0f, -13000.0f},
+};
+
+void bhv_toy_shyguy_init(void) {
+    o->oFaceAnglePitch = 0;
+    o->oFloatF4 = sBossStarts[o->oBehParams2ndByte][0];
+    o->oFloatF8 = sBossStarts[o->oBehParams2ndByte][1];
+    o->oFloatFC = sBossStarts[o->oBehParams2ndByte][2];
+
+    o->oFloat100 = absf(o->oFloatF8 - gMarioState->pos[1]) / 60.0f;
+    o->oVelX = (o->oFloatF4 - gMarioState->pos[0]) / 90.0f; 
+    o->oVelZ = (o->oFloatFC - gMarioState->pos[2]) / 90.0f; 
+}
+
+
+void bhv_toy_shyguy_loop(void) { //use 3d moving?
+    switch (o->oAction) {
+        case 0:
+            cur_obj_move_using_vel_and_gravity();
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatF8, o->oFloat100);
+            vec3f_copy(gMarioState->pos, &o->oPosX);
+            if (o->oTimer >= 90) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            break;
+    }
+
+
+}
+
+
 void bhv_block_piece_init(void) {
     o->oObjFC = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
     if (o->oObjFC == NULL) {
@@ -713,6 +748,7 @@ void bhv_block_tower_init(void) {
 
 
 void bhv_block_tower_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             o->oFaceAnglePitch = 50 * o->prevObj->oF8;
@@ -730,6 +766,10 @@ void bhv_block_tower_loop(void) {
                 create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
                 if (--o->oObjFC->oHealth <= 0) {
                     o->oObjFC->oAction = 2;
+                } else {
+                    obj = spawn_object(o, MODEL_SHYGUY, bhvToyShyguy);
+                    obj->oBehParams2ndByte = 2 - o->oObjFC->oHealth;
+                    vec3f_copy(&obj->oPosX, gMarioState->pos);
                 }
             }
             break;
@@ -738,7 +778,7 @@ void bhv_block_tower_loop(void) {
 
 
 void bhv_boss_bullet_bill_init(void) {
-    o->oFloatFC = absf((gMarioState->pos[1] + 60.0f) - o->oPosY) / 10.0f;
+    //o->oFloatFC = absf((gMarioState->pos[1] + 60.0f) - o->oPosY) / 10.0f;
     o->oForwardVel = 100.0f;
 }
 
@@ -749,7 +789,7 @@ void bhv_boss_bullet_bill_loop(void) {
         case 0:
             if (o->oTimer < 15) {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
-                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], o->oFloatFC);
+                //o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], o->oFloatFC);
             } else {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
                 cur_obj_update_floor_and_walls();
@@ -833,13 +873,13 @@ void shyguy_boss_handle_bulletlist(void) {
                 o->os16F4 = 1;
             } else {
                 o->os16F4 = 0;
+                if (m->pos[2] > -794.0f) {
+                    o->os16F6 = 1;
+                } else {
+                    o->os16F6 = 0;
+                }
             }
 
-            if (m->pos[2] > -794.0f) {
-                o->os16F6 = 1;
-            } else {
-                o->os16F6 = 0;
-            }
             break;
         case 2:
             o->os16F4 = 2;
@@ -878,6 +918,10 @@ void bhv_shyguy_boss_loop(void) {
             stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
             break;
     }
+    // if (o->oInteractStatus) {
+    //     push_mario_out_of_object(gMarioState, o, 0.0f);
+    // }
+    o->oInteractStatus = 0;
 }
 
 /*

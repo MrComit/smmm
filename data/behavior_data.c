@@ -8349,3 +8349,17 @@ const BehaviorScript bhvBlockBomb[] = {
         CALL_NATIVE(bhv_block_bomb_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvToyShyguy[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    ANIMATE(0),
+    CALL_NATIVE(bhv_toy_shyguy_init),
+    SET_HOME(),
+    SET_INT(oOpacity, 255),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_toy_shyguy_loop),
+    END_LOOP(),
+};
