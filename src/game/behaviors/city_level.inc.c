@@ -738,7 +738,7 @@ void bhv_block_tower_loop(void) {
 
 
 void bhv_boss_bullet_bill_init(void) {
-    o->oPosY = gMarioState->pos[1] + 60.0f;
+    o->oFloatFC = absf((gMarioState->pos[1] + 60.0f) - o->oPosY) / 10.0f;
     o->oForwardVel = 100.0f;
 }
 
@@ -749,6 +749,7 @@ void bhv_boss_bullet_bill_loop(void) {
         case 0:
             if (o->oTimer < 15) {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], o->oFloatFC);
             } else {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x40);
                 cur_obj_update_floor_and_walls();
@@ -830,14 +831,19 @@ void shyguy_boss_handle_bulletlist(void) {
         case 3:
             if (m->pos[0] > -7500.0f) {
                 o->os16F4 = 1;
-            } else if (m->pos[2] > -794.0f) {
-                o->os16F4 = -1;
             } else {
                 o->os16F4 = 0;
             }
+
+            if (m->pos[2] > -794.0f) {
+                o->os16F6 = 1;
+            } else {
+                o->os16F6 = 0;
+            }
             break;
         case 2:
-            o->os16F4 = -1;
+            o->os16F4 = 2;
+            o->os16F6 = 1;
             break;
         case 1:
             o->os16F4 = -1;
@@ -860,10 +866,10 @@ void bhv_shyguy_boss_loop(void) {
             break;
         case 1: // MAIN LOOP
             shyguy_boss_handle_bulletlist();
-            if (o->os16F4 == -1) {
-                if (++o->os16F6 > 60) {
+            if (o->os16F6 == 1) {
+                if (++o->os16F8 > 60) {
                     spawn_object(o, MODEL_BLOCK_PIECE, bhvBlockBomb);
-                    o->os16F6 = 0;
+                    o->os16F8 = 0;
                 }
             }
             break;
