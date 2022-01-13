@@ -1217,6 +1217,7 @@ s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *s
 s32 gFixedFloorCheck = 0;
 s16 gComitCutsceneAction = 0;
 s16 gComitCutsceneTimer = 0;
+Vec3f gComitCutscenePosVec = {0, 0, 0};
 struct Object *gComitCutsceneObject = NULL;
 extern s32 gRoomEntryTimer;
 
@@ -1464,6 +1465,15 @@ void fixed_cam_presets(struct Camera *c) {
             }
             vec3f_set(c->pos, obj->oPosX + 2000.0f, obj->oHomeY + 1500.0f, obj->oPosZ - 2000.0f);
             vec3f_copy(c->focus, &obj->oHomeX);
+            c->yaw = c->nextYaw = DEGREES(0);
+            break;
+        case 17:
+            if (obj == NULL) {
+                c->comitCutscene = 0;
+                break;
+            }
+            vec3f_copy(c->pos, gComitCutscenePosVec);
+            vec3f_set(c->focus, obj->oPosX, obj->oPosY + 2000.0f, obj->oPosZ);
             c->yaw = c->nextYaw = DEGREES(0);
             break;
     }

@@ -1,6 +1,7 @@
 #include "levels/ccm/header.h"
 s32 obj_check_attacks(struct ObjectHitbox *hitbox, s32 attackedMarioAction);
 void obj_compute_vel_from_move_pitch(f32 speed);
+extern Vec3f gComitCutscenePosVec;
 
 static struct ObjectHitbox sLevelEntranceHitbox = {
     /* interactType: */ INTERACT_BBH_ENTRANCE,
@@ -673,6 +674,12 @@ void bhv_city_bridge_init(void) {
 
 Vec3f sHoldMario = {0, 0, 0};
 
+Vec3f sShyguyBossCutscenes[3] = {
+    {-8700.0f, 8500.0f, -200.0f},
+    {-10700.0f, 8800.0f, -6000.0f},
+    {-8000.0f, 9400.0f, -2700.0f},
+};
+
 Vec3f sBossStarts[2] = {
 {-6839.0f, 5807.0f, -4956.0f},
 {-12639.0f, 8166.0f, -13000.0f},
@@ -708,17 +715,11 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
     struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
-            if (o->oPosY == o->oHomeY) {
-                if (o->oBehParams >> 24) {
-                    o->oAction = 3;
-                } else {
-                    o->oAction = 1;
-                    m->faceAngle[1] = o->oFaceAngleYaw;
+            if (o->oTimer > 20) {
+                o->oAction = 4;
+                if (o->oBehParams >> 24 == 0) {
+                    gCamera->comitCutscene = 0;
                 }
-            }
-            if (o->oBehParams >> 24 == 0) {
-                vec3f_copy(m->pos, sHoldMario);
             }
             break;
         case 1:
@@ -758,6 +759,20 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
             if (o->oTimer >= 90) {
                 o->oAction = 2;
                 o->oHomeY = o->oPosY + 1000.0f;
+            }
+            break;
+        case 4:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
+            if (o->oPosY == o->oHomeY) {
+                if (o->oBehParams >> 24) {
+                    o->oAction = 3;
+                } else {
+                    o->oAction = 1;
+                    m->faceAngle[1] = o->oFaceAngleYaw;
+                }
+            }
+            if (o->oBehParams >> 24 == 0) {
+                vec3f_copy(m->pos, sHoldMario);
             }
             break;
     }
@@ -814,6 +829,9 @@ void bhv_block_tower_loop(void) {
             o->oFaceAnglePitch = 50 * o->prevObj->oF8;
             if (o->prevObj->oAction == 1) {
                 o->oAction = 1;
+                gCamera->comitCutscene = 17;
+                gComitCutsceneObject = o->oObjFC;
+                vec3f_copy(gComitCutscenePosVec, sShyguyBossCutscenes[3 - o->oObjFC->oHealth]);
                 // set_mario_npc_dialog(1);
             }
             break;
