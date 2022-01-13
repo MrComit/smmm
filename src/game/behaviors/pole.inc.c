@@ -8,7 +8,7 @@
  * bhvGiantPole controls the large pole in Whomp's Fortress and differs from
  * other poles because it spawns a yellow ball that rests at its top.
  */
-
+extern struct Object *gComitCutsceneObject;
 
 
 void bhv_hidden_horizontal_pole_init(void) {
@@ -36,6 +36,7 @@ void bhv_hidden_horizontal_pole_loop(void) {
             if (obj == NULL || obj->oF4) {
                 set_mario_npc_dialog(1);
                 gCamera->comitCutscene = 16;
+                gComitCutsceneObject = o;
                 o->oAction = 1;
             }
             break;

@@ -1,6 +1,7 @@
 #include "game/save_file.h"
 #include "buffers/buffers.h"
 extern Vec3s gRoomColors[];
+extern struct Object *gComitCutsceneObject;
 
 static struct ObjectHitbox sStarPieceHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
@@ -242,6 +243,7 @@ void bhv_boocoin_cage_loop(void) {
             if (o->oF4 >= 5) {
                 play_puzzle_jingle();
                 gCamera->comitCutscene = 7 + o->oBehParams2ndByte;
+                gComitCutsceneObject = o;
                 enable_time_stop();
                 o->oAction = 1;
                 o->oObjF8 = spawn_object(o, MODEL_NONE, bhvStaticObject);

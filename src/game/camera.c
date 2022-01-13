@@ -1217,12 +1217,138 @@ s32 move_point_along_spline(Vec3f p, struct CutsceneSplinePoint spline[], s16 *s
 s32 gFixedFloorCheck = 0;
 s16 gComitCutsceneAction = 0;
 s16 gComitCutsceneTimer = 0;
+struct Object *gComitCutsceneObject = NULL;
 extern s32 gRoomEntryTimer;
+
+
+void fixed_cam_cutscene_opening(struct Camera *c) {
+    struct CutsceneSplinePoint *point, *point2;
+    struct MarioState *m = gMarioState;
+    gComitCutsceneTimer++;
+    switch (gComitCutsceneAction) {
+        case 0:
+            if (gComitCutsceneTimer == 250) {
+                m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+                set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
+                m->heldObj = spawn_object(m->marioObj, MODEL_HELD_LETTER, bhvHeldLetter);
+                obj_set_held_state(m->heldObj, bhvCarrySomething3);
+                m->marioBodyState->grabPos = GRAB_POS_LETTER;
+            }
+
+            start_cutscene(c, CUTSCENE_OPENING);
+            point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos);
+            point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc);
+            move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+            if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                //stop_cutscene_and_retrieve_stored_info(c);
+                m->actionArg++;
+                gComitCutsceneAction++;
+                gComitCutsceneTimer = 0;
+                create_dialog_box(DIALOG_020);
+            }
+            break;
+        case 1:
+            vec3f_set(c->pos, 480.0f, -2320.0f, -4740.0f);
+            vec3f_set(c->focus, 495.0f, -2572.0f, -4900.0f);
+            if (gComitCutsceneTimer > 100) {
+                gComitCutsceneTimer = 0;
+                gComitCutsceneAction++;
+            }
+            break;
+        case 2:
+            point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos2);
+            point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc2);
+            move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+            if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                m->actionArg++;
+                gComitCutsceneAction++;
+                gComitCutsceneTimer = 0;
+            }
+            break;
+        case 3:
+            if (gComitCutsceneTimer == 20) {
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+                obj_set_held_state(m->heldObj, bhvCarrySomething4);
+                m->heldObj->activeFlags = 0;
+                m->heldObj = NULL;
+            } else if (gComitCutsceneTimer == 30) {
+                stop_cutscene_and_retrieve_stored_info(c);
+                gComitCutsceneAction++;
+                gComitCutsceneTimer = 0;
+            }
+            break;
+        case 4:
+            if (gComitCutsceneTimer > 10) {
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
+                gComitCutsceneAction = 0;
+                gComitCutsceneTimer = 0;
+                c->comitCutscene = 0;
+            }
+            break;
+    }
+}
+
+void fixed_cam_cutscene_mainhall(struct Camera *c) {
+    struct CutsceneSplinePoint *point, *point2;
+    struct MarioState *m = gMarioState;
+    gComitCutsceneTimer++;
+    switch (gComitCutsceneAction) {
+        case 0:
+            if (gComitCutsceneTimer == 1) {
+                play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
+            }
+
+            if (gComitCutsceneTimer == 31) {
+                point = segmented_to_virtual(bob_area_1_spline_HallPos);
+                point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
+                c->pos[0] = point[0].point[0];
+                c->pos[1] = point[0].point[1];
+                c->pos[2] = point[0].point[2];
+                c->focus[0] = point2[0].point[0];
+                c->focus[1] = point2[0].point[1];
+                c->focus[2] = point2[0].point[2];
+            }
+            if (gComitCutsceneTimer > 30) {
+                gRoomEntryTimer = 64;
+                set_mario_npc_dialog(1);
+                start_cutscene(c, CUTSCENE_MAIN_HALL);
+                point = segmented_to_virtual(bob_area_1_spline_HallPos);
+                point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
+                move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+                if (move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                    gComitCutsceneAction = 1;
+                    gComitCutsceneTimer = 0;
+                }
+            }
+            break;
+        case 1:
+            if (gComitCutsceneTimer == 20) {
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+            } else if (gComitCutsceneTimer == 30) {
+                m->pos[0] = 0.0f;
+                m->pos[2] -= 300.0f;
+                stop_cutscene_and_retrieve_stored_info(c);
+                gComitCutsceneAction = 2;
+                gComitCutsceneTimer = 0;
+            }
+            break;
+        case 2:
+            if (gComitCutsceneTimer > 10) {
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
+                set_mario_npc_dialog(0);
+                gComitCutsceneAction = 0;
+                gComitCutsceneTimer = 0;
+                c->comitCutscene = 0;
+                save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
+            }
+            break;
+    }
+}
+
 
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
-    struct Object *obj;
-    struct CutsceneSplinePoint *point, *point2;
+    struct Object *obj = gComitCutsceneObject;
     Vec3f pos;
     s16 yaw, pitch;
     if (m->floor != NULL && m->floor->type == SURFACE_FIXED_CAM) {
@@ -1235,8 +1361,10 @@ void fixed_cam_presets(struct Camera *c) {
         set_r_button_camera(c);
     }
 
+
     switch (c->comitCutscene) {
         case 0:
+            gComitCutsceneObject = NULL;
             break;
         case 1:
             vec3f_set(c->pos, -5000.0f, m->pos[1] + 600.0f, m->pos[2]);
@@ -1267,7 +1395,6 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = 0xB000;
             break;
         case 7:
-            obj = cur_obj_nearest_object_with_behavior(bhvBooCoinCage);
             if (obj == NULL)
                 break;
             pos[1] = obj->oPosY + 100.0f;
@@ -1278,7 +1405,6 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = 0;
             break;
         case 8:
-            obj = cur_obj_nearest_object_with_behavior(bhvBooCoinCage);
             if (obj == NULL)
                 break;
             pos[1] = obj->oPosY + 100.0f;
@@ -1295,125 +1421,12 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = yaw;
             break;
         case 10:
-            gComitCutsceneTimer++;
-            switch (gComitCutsceneAction) {
-                case 0:
-                    if (gComitCutsceneTimer == 1) {
-                        play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
-                    }
-
-                    if (gComitCutsceneTimer == 31) {
-                        point = segmented_to_virtual(bob_area_1_spline_HallPos);
-                        point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
-                        c->pos[0] = point[0].point[0];
-                        c->pos[1] = point[0].point[1];
-                        c->pos[2] = point[0].point[2];
-                        c->focus[0] = point2[0].point[0];
-                        c->focus[1] = point2[0].point[1];
-                        c->focus[2] = point2[0].point[2];
-                    }
-                    if (gComitCutsceneTimer > 30) {
-                        gRoomEntryTimer = 64;
-                        set_mario_npc_dialog(1);
-                        start_cutscene(c, CUTSCENE_MAIN_HALL);
-                        point = segmented_to_virtual(bob_area_1_spline_HallPos);
-                        point2 = segmented_to_virtual(bob_area_1_spline_HallFocus);
-                        move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-                        if (move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
-                            gComitCutsceneAction = 1;
-                            gComitCutsceneTimer = 0;
-                        }
-                    }
-                    break;
-                case 1:
-                    if (gComitCutsceneTimer == 20) {
-                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
-                    } else if (gComitCutsceneTimer == 30) {
-                        m->pos[0] = 0.0f;
-                        m->pos[2] -= 300.0f;
-                        stop_cutscene_and_retrieve_stored_info(c);
-                        gComitCutsceneAction = 2;
-                        gComitCutsceneTimer = 0;
-                    }
-                    break;
-                case 2:
-                    if (gComitCutsceneTimer > 10) {
-                        play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
-                        set_mario_npc_dialog(0);
-                        gComitCutsceneAction = 0;
-                        gComitCutsceneTimer = 0;
-                        c->comitCutscene = 0;
-                        save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
-                    }
-                    break;
-            }
+            fixed_cam_cutscene_mainhall(c);
             break;
         case 11:
-            gComitCutsceneTimer++;
-            switch (gComitCutsceneAction) {
-                case 0:
-                    if (gComitCutsceneTimer == 250) {
-                        m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
-                        set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
-                        m->heldObj = spawn_object(m->marioObj, MODEL_HELD_LETTER, bhvHeldLetter);
-                        obj_set_held_state(m->heldObj, bhvCarrySomething3);
-                        m->marioBodyState->grabPos = GRAB_POS_LETTER;
-                    }
-
-                    start_cutscene(c, CUTSCENE_OPENING);
-                    point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos);
-                    point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc);
-                    move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-                    if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
-                        //stop_cutscene_and_retrieve_stored_info(c);
-                        m->actionArg++;
-                        gComitCutsceneAction++;
-                        gComitCutsceneTimer = 0;
-                        create_dialog_box(DIALOG_020);
-                    }
-                    break;
-                case 1:
-                    vec3f_set(c->pos, 480.0f, -2320.0f, -4740.0f);
-                    vec3f_set(c->focus, 495.0f, -2572.0f, -4900.0f);
-                    if (gComitCutsceneTimer > 100) {
-                        gComitCutsceneTimer = 0;
-                        gComitCutsceneAction++;
-                    }
-                    break;
-                case 2:
-                    point = segmented_to_virtual(castle_grounds_area_1_spline_OpeningPos2);
-                    point2 = segmented_to_virtual(castle_grounds_area_1_spline_OpeningFoc2);
-                    move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
-                    if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
-                        m->actionArg++;
-                        gComitCutsceneAction++;
-                        gComitCutsceneTimer = 0;
-                    }
-                    break;
-                case 3:
-                    if (gComitCutsceneTimer == 20) {
-                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
-                        obj_set_held_state(m->heldObj, bhvCarrySomething4);
-                        m->heldObj->activeFlags = 0;
-                        m->heldObj = NULL;
-                    } else if (gComitCutsceneTimer == 30) {
-                        stop_cutscene_and_retrieve_stored_info(c);
-                        gComitCutsceneAction++;
-                        gComitCutsceneTimer = 0;
-                    }
-                    break;
-                case 4:
-                    if (gComitCutsceneTimer > 10) {
-                        play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
-                        gComitCutsceneAction = 0;
-                        gComitCutsceneTimer = 0;
-                        c->comitCutscene = 0;
-                    }
-                    break;
-            }
+            fixed_cam_cutscene_opening(c);
             break;
         case 12:
-            obj = cur_obj_nearest_object_with_behavior(bhvSnowPile);
             if (obj == NULL)
                 break;
             pos[0] = -3200.0f;
@@ -1424,7 +1437,6 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = DEGREES(165);
             break;
         case 13:
-            obj = cur_obj_nearest_object_with_behavior(bhvBigIceCube);
             if (obj == NULL) {
                 c->comitCutscene = 0;
                 break;
@@ -1446,7 +1458,6 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = yaw;
             break;
         case 16:
-            obj = cur_obj_nearest_object_with_behavior(bhvHiddenHorizontalPole);
             if (obj == NULL) {
                 c->comitCutscene = 0;
                 break;
@@ -2128,12 +2139,7 @@ void mode_parallel_tracking_camera(struct Camera *c) {
 void mode_fixed_camera(struct Camera *c) {
     struct MarioState *m = gMarioState;
     //vec3f_set(sCastleEntranceOffset, 0.f, 0.f, 0.f);
-    if (gCurrLevelNum == LEVEL_BOB && gMarioCurrentRoom == 11) {
-        vec3f_set(c->pos, -5000.0f, m->pos[1] + 600.0f, m->pos[2]);
-        vec3f_set(c->focus, -9070.0f, m->pos[1], m->pos[2]);
-        c->nextYaw = 0x4000;
-        c->yaw = c->nextYaw;
-    } else if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 4) {
+    if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 4) {
         mode_8_directions_camera(c);
         //c->pos[1] = m->pos[1] + 200.0f;
         //c->focus[1] = m->pos[1];

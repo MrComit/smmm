@@ -1,4 +1,5 @@
 #include "game/object_helpers.h"
+extern struct Object *gComitCutsceneObject;
 
 static struct ObjectHitbox sStalactiteHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
@@ -186,6 +187,7 @@ void bhv_ice_cube_cracked_loop(void) {
             }
             if (obj != NULL && o->oBehParams2ndByte && sObjFloor->type == SURFACE_CUBE_MELT) {
                 gCamera->comitCutscene = 13;
+                gComitCutsceneObject = obj;
                 set_mario_npc_dialog(1);
                 vec3f_set(gMarioState->pos, o->oPosX, o->oPosY + 150.0f, o->oPosZ);
                 gMarioState->faceAngle[1] = 0;
@@ -391,6 +393,7 @@ void bhv_snow_pile_loop(void) {
         case 1:
             set_mario_npc_dialog(1);
             gCamera->comitCutscene = 12;
+            gComitCutsceneObject = o;
             if (o->oTimer < 15) {
                 o->oForwardVel = 10.0f;
                 CL_Move();
