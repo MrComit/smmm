@@ -732,7 +732,8 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
             if (o->oTimer > 60 && o->oPosY < o->oFloatF8) {
                 o->oPosY = o->oFloatF8;
             }
-            vec3f_copy(m->pos, &o->oPosX);
+            vec3f_set(m->pos, approach_f32_symmetric(o->oPosX, o->oFloatF4, o->oVelX), o->oPosY,
+                     approach_f32_symmetric(o->oPosZ, o->oFloatFC, o->oVelZ));
             m->pos[0] += sins(o->oFaceAngleYaw - 0x4000) * 50.0f;
             m->pos[2] += coss(o->oFaceAngleYaw - 0x4000) * 50.0f;
             if (o->oTimer >= 90) {
@@ -743,9 +744,7 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
             break;
         case 2:
             if (o->oBehParams >> 24 == 0 && o->oTimer == 0) {
-                // set_mario_npc_dialog(0);
                 set_mario_action(m, ACT_IDLE, 0);
-                // vec3f_copy(m->pos, sBossStarts[o->oBehParams2ndByte]);
             }
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 40.0f);
             if (o->oPosY == o->oHomeY) {
@@ -914,15 +913,19 @@ void bhv_block_bomb_init(void) {
 }
 
 void bhv_block_bomb_loop(void) {
-    struct Object *explosion;
+    struct Object *obj;
     o->oF8 += 0x800;
     o->oFaceAngleRoll = 0x600 * sins(o->oF8);
     o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 2.0f);
     o->oPosY -= o->oFloatF4;
     if (o->oInteractStatus || object_step() & 1) {
-        explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-        explosion->oGraphYOffset += 100.0f;
-        explosion->oIntangibleTimer = -1;
+        obj = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        obj->oGraphYOffset += 100.0f;
+        obj->oIntangibleTimer = -1;
+        o->activeFlags = 0;
+    }
+    obj = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
+    if (obj == NULL || obj->os16F6 == 0) {
         o->activeFlags = 0;
     }
 }
@@ -951,7 +954,11 @@ void shyguy_boss_handle_bulletlist(void) {
             break;
         case 1:
             o->os16F4 = -1;
+            o->os16F6 = 1;
             break;
+    }
+    if (cur_obj_nearest_object_with_behavior(bhvToyShyguy)) {
+        o->os16F6 = 0;
     }
 }
 
