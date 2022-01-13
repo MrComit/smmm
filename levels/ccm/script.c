@@ -51,6 +51,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOSS_SHYGUY, boss_shyguy_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BLOCK_PIECE, block_piece_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BLOCK_TOWER, block_tower_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TOY_SHYGUY, toy_shyguy_geo),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

@@ -101,4 +101,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/block_piece/geo_header.h"
 
+#include "levels/ccm/toy_shyguy/geo_header.h"
+
+#include "levels/ccm/toy_shyguy/anim_header.h"
+
 #endif

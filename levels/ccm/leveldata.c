@@ -69,3 +69,6 @@
 #include "levels/ccm/block_tower/collision.inc.c"
 #include "levels/ccm/block_piece/collision.inc.c"
 #include "levels/ccm/block_piece/model.inc.c"
+#include "levels/ccm/toy_shyguy/model.inc.c"
+#include "levels/ccm/toy_shyguy/anims/data.inc.c"
+#include "levels/ccm/toy_shyguy/anims/table.inc.c"

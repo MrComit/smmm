@@ -36,3 +36,4 @@
 #include "levels/ccm/boss_shyguy/geo.inc.c"
 #include "levels/ccm/block_tower/geo.inc.c"
 #include "levels/ccm/block_piece/geo.inc.c"
+#include "levels/ccm/toy_shyguy/geo.inc.c"

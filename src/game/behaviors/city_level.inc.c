@@ -671,34 +671,95 @@ void bhv_city_bridge_init(void) {
  *    BOSS START
  */
 
+Vec3f sHoldMario = {0, 0, 0};
+
 Vec3f sBossStarts[2] = {
 {-6839.0f, 5807.0f, -4956.0f},
 {-12639.0f, 8166.0f, -13000.0f},
 };
 
 void bhv_toy_shyguy_init(void) {
+    s16 faceAdd;
     o->oFaceAnglePitch = 0;
     o->oFloatF4 = sBossStarts[o->oBehParams2ndByte][0];
     o->oFloatF8 = sBossStarts[o->oBehParams2ndByte][1];
     o->oFloatFC = sBossStarts[o->oBehParams2ndByte][2];
+    o->oFaceAngleYaw = atan2s(o->oFloatFC - gMarioState->pos[2], o->oFloatF4 - gMarioState->pos[0]);
 
-    o->oFloat100 = absf(o->oFloatF8 - gMarioState->pos[1]) / 60.0f;
-    o->oVelX = (o->oFloatF4 - gMarioState->pos[0]) / 90.0f; 
-    o->oVelZ = (o->oFloatFC - gMarioState->pos[2]) / 90.0f; 
+    o->oFloat100 = o->oFloatF8 - gMarioState->pos[1];
+    o->oVelX = absf(o->oFloatF4 - gMarioState->pos[0]) / 90.0f; 
+    o->oVelZ = absf(o->oFloatFC - gMarioState->pos[2]) / 90.0f; 
+
+    vec3f_copy(&o->oPosX, gMarioState->pos);
+    if (o->oBehParams >> 24) {
+        faceAdd = -0x4000;
+    } else {
+        faceAdd = 0x4000;
+        vec3f_copy(sHoldMario, gMarioState->pos);
+    }
+    o->oPosX += sins(o->oFaceAngleYaw + faceAdd) * 50.0f;
+    o->oPosZ += coss(o->oFaceAngleYaw + faceAdd) * 50.0f;
+    vec3f_copy(&o->oHomeX, &o->oPosX);
+    o->oPosY += 1000.0f;
 }
 
 
 void bhv_toy_shyguy_loop(void) { //use 3d moving?
+    struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
-            cur_obj_move_using_vel_and_gravity();
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatF8, o->oFloat100);
-            vec3f_copy(gMarioState->pos, &o->oPosX);
-            if (o->oTimer >= 90) {
-                o->oAction = 1;
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
+            if (o->oPosY == o->oHomeY) {
+                if (o->oBehParams >> 24) {
+                    o->oAction = 3;
+                } else {
+                    o->oAction = 1;
+                    m->faceAngle[1] = o->oFaceAngleYaw;
+                }
+            }
+            if (o->oBehParams >> 24 == 0) {
+                vec3f_copy(m->pos, sHoldMario);
             }
             break;
         case 1:
+            //cur_obj_move_using_vel_and_gravity();
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oFloatF4, o->oVelX);
+            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloatFC, o->oVelZ);
+            o->os1610A += 0x8000 / 90;
+            o->os16108 += coss(o->os1610A) * (0x8000 / 90);
+            o->oFloat104 = o->oFloatF8 + (sins(o->os16108) * o->oFloat100);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat104, o->oFloat100 / 20);
+            if (o->oTimer > 60 && o->oPosY < o->oFloatF8) {
+                o->oPosY = o->oFloatF8;
+            }
+            vec3f_copy(m->pos, &o->oPosX);
+            m->pos[0] += sins(o->oFaceAngleYaw - 0x4000) * 50.0f;
+            m->pos[2] += coss(o->oFaceAngleYaw - 0x4000) * 50.0f;
+            if (o->oTimer >= 90) {
+                o->oAction = 2;
+                o->oHomeY = o->oPosY + 1000.0f;
+            }
+            set_mario_action(m, ACT_CUTSCENE_JUMP, 0);
+            break;
+        case 2:
+            if (o->oBehParams >> 24 == 0 && o->oTimer == 0) {
+                // set_mario_npc_dialog(0);
+                set_mario_action(m, ACT_IDLE, 0);
+                // vec3f_copy(m->pos, sBossStarts[o->oBehParams2ndByte]);
+            }
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 40.0f);
+            if (o->oPosY == o->oHomeY) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 3:
+            vec3f_copy(&o->oPosX, m->pos);
+            o->oPosX += sins(o->oFaceAngleYaw - 0x4000) * 50.0f;
+            o->oPosZ += coss(o->oFaceAngleYaw - 0x4000) * 50.0f;
+            if (o->oTimer >= 90) {
+                o->oAction = 2;
+                o->oHomeY = o->oPosY + 1000.0f;
+            }
             break;
     }
 
@@ -754,6 +815,7 @@ void bhv_block_tower_loop(void) {
             o->oFaceAnglePitch = 50 * o->prevObj->oF8;
             if (o->prevObj->oAction == 1) {
                 o->oAction = 1;
+                // set_mario_npc_dialog(1);
             }
             break;
         case 1:
@@ -767,9 +829,11 @@ void bhv_block_tower_loop(void) {
                 if (--o->oObjFC->oHealth <= 0) {
                     o->oObjFC->oAction = 2;
                 } else {
-                    obj = spawn_object(o, MODEL_SHYGUY, bhvToyShyguy);
+                    obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
                     obj->oBehParams2ndByte = 2 - o->oObjFC->oHealth;
-                    vec3f_copy(&obj->oPosX, gMarioState->pos);
+                    obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
+                    obj->oBehParams2ndByte = 2 - o->oObjFC->oHealth;
+                    obj->oBehParams = 1 << 24;
                 }
             }
             break;

@@ -702,6 +702,7 @@
 #define MODEL_BOSS_SHYGUY         0xF7
 #define MODEL_BLOCK_PIECE         0xF6
 #define MODEL_BLOCK_TOWER         0xF5
+#define MODEL_TOY_SHYGUY          0xF4
 
 
 
