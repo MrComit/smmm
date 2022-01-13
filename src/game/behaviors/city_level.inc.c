@@ -936,7 +936,7 @@ void bhv_block_bomb_loop(void) {
     o->oFaceAngleRoll = 0x600 * sins(o->oF8);
     o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 2.0f);
     o->oPosY -= o->oFloatF4;
-    if (o->oInteractStatus || object_step() & 1) {
+    if (o->oInteractStatus || object_step() & 1 || o->oTimer > 90) {
         obj = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         obj->oGraphYOffset += 100.0f;
         obj->oIntangibleTimer = -1;
@@ -954,15 +954,16 @@ void shyguy_boss_handle_bulletlist(void) {
     struct MarioState *m = gMarioState;
     switch (o->oHealth) {
         case 3:
-            if (m->pos[0] > -7500.0f) {
+            if (m->pos[0] > -6000.0f) {
                 o->os16F4 = 1;
             } else {
                 o->os16F4 = 0;
-                if (m->pos[2] > -794.0f) {
-                    o->os16F6 = 1;
-                } else {
-                    o->os16F6 = 0;
-                }
+            }
+            
+            if (m->pos[2] > 1336.0f || (m->pos[2] > -794.0f && o->os16F4 == 0)) {
+                o->os16F6 = 1;
+            } else {
+                o->os16F6 = 0;
             }
 
             break;
