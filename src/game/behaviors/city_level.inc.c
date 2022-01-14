@@ -675,8 +675,9 @@ void bhv_city_bridge_init(void) {
 Vec3f sHoldMario = {0, 0, 0};
 
 Vec3f sShyguyBossCutscenes[3] = {
-    {-8700.0f, 8500.0f, -200.0f},
-    {-10700.0f, 8800.0f, -6000.0f},
+    // {-8700.0f, 8500.0f, -200.0f},
+    {-4000.0f, 6000.0f, -700.0f},
+    {-9700.0f, 11800.0f, -7000.0f},
     {-8000.0f, 9400.0f, -2700.0f},
 };
 
@@ -969,11 +970,19 @@ void shyguy_boss_handle_bulletlist(void) {
             break;
         case 2:
             o->os16F4 = 2;
-            o->os16F6 = 1;
+            if (CL_objptr_dist_to_nearest_object_with_behavior(gMarioObject, bhvBlockTower) < 1000.0f) {
+                o->os16F6 = 0;
+            } else {
+                o->os16F6 = 1;
+            }
             break;
         case 1:
             o->os16F4 = -1;
-            o->os16F6 = 1;
+            if (m->pos[2] > 4000.0f || CL_objptr_dist_to_nearest_object_with_behavior(gMarioObject, bhvBlockTower) < 1000.0f) {
+                o->os16F6 = 0;
+            } else {
+                o->os16F6 = 1;
+            }
             break;
     }
     if (cur_obj_nearest_object_with_behavior(bhvToyShyguy)) {
