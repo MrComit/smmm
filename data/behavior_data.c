@@ -8326,7 +8326,7 @@ const BehaviorScript bhvBlockPiece[] = {
 
 const BehaviorScript bhvBlockTower[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(block_tower_collision),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x4000),

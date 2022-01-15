@@ -827,7 +827,16 @@ void bhv_block_tower_loop(void) {
     struct Object *obj;
     switch (o->oAction) {
         case 0:
-            o->oFaceAnglePitch = 50 * o->prevObj->oF8;
+            if (o->prevObj->oF8) {
+                o->oFaceAnglePitch = 50 * o->prevObj->oF8;
+            } else {
+                if (o->oDistanceToMario < 500.0f) {
+                    o->os16F6 += 0x400;
+                } else {
+                    o->os16F6 = approach_s16_symmetric(o->os16F6, 0, 0x100);
+                }
+                o->oFaceAnglePitch = 0x180 * sins(o->os16F6);
+            }
             if (o->prevObj->oAction == 1) {
                 o->oAction = 1;
                 gCamera->comitCutscene = 17;
@@ -846,6 +855,7 @@ void bhv_block_tower_loop(void) {
                 create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
                 if (--o->oObjFC->oHealth <= 0) {
                     o->oObjFC->oAction = 2;
+                    stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
                 } else {
                     obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
                     obj->oBehParams2ndByte = 2 - o->oObjFC->oHealth;
@@ -925,7 +935,7 @@ void bhv_boss_bullet_bill_cannon_loop(void) {
 
 void bhv_block_bomb_init(void) {
     obj_set_hitbox(o, &sBlockBombHitbox);
-    vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 400.0f, gMarioState->pos[2]);
+    vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 600.0f, gMarioState->pos[2]);
     o->oFaceAngleYaw = random_u16();
     vec3f_set(o->header.gfx.scale, 0.25f, 0.35f, 0.6f);
     o->oGraphYOffset = -35.0f;
@@ -935,7 +945,7 @@ void bhv_block_bomb_loop(void) {
     struct Object *obj;
     o->oF8 += 0x800;
     o->oFaceAngleRoll = 0x600 * sins(o->oF8);
-    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 2.0f);
+    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 1.2f);
     o->oPosY -= o->oFloatF4;
     if (o->oInteractStatus || object_step() & 1 || o->oTimer > 90) {
         obj = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
@@ -969,7 +979,11 @@ void shyguy_boss_handle_bulletlist(void) {
 
             break;
         case 2:
-            o->os16F4 = 2;
+            if (m->pos[1] >= 6300.0f && m->pos[0] <= -9600.0f) {
+                o->os16F4 = 2;
+            } else {
+                o->os16F4 = 0;
+            }
             if (CL_objptr_dist_to_nearest_object_with_behavior(gMarioObject, bhvBlockTower) < 1000.0f) {
                 o->os16F6 = 0;
             } else {
@@ -977,7 +991,11 @@ void shyguy_boss_handle_bulletlist(void) {
             }
             break;
         case 1:
-            o->os16F4 = -1;
+            if (m->pos[2] <= -11900.0f && m->pos[0] <= -8900.0f) {
+                o->os16F4 = 3;
+            } else {
+                o->os16F4 = 0;
+            }
             if (m->pos[2] > 4000.0f || CL_objptr_dist_to_nearest_object_with_behavior(gMarioObject, bhvBlockTower) < 1000.0f) {
                 o->os16F6 = 0;
             } else {
@@ -996,6 +1014,7 @@ void bhv_shyguy_boss_init(void) {
 }
 
 void bhv_shyguy_boss_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0: // PRE FIGHT ACT
             if (o->oDistanceToMario < 10000.0f) {
@@ -1013,8 +1032,17 @@ void bhv_shyguy_boss_loop(void) {
             }
             break;
         case 2: // DEATH ACT
-            o->activeFlags = 0;
-            stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.05f, 0.025f);
+            cur_obj_scale(o->header.gfx.scale[0]);
+            if (o->header.gfx.scale[0] == 0.05f) {
+                // gMarioState->numCoins += 100 * (o->oFloat10C + ((f32)o->os16110 / 10));
+                CL_explode_object(o, 1);
+                obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                obj->oBehParams2ndByte = 0x0E;
+                obj->oBehParams = 0x040E0900;
+                gCamera->comitCutscene = 0;
+            }
             break;
     }
     // if (o->oInteractStatus) {
