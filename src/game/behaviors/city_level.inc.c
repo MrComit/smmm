@@ -867,6 +867,7 @@ void bhv_block_tower_loop(void) {
                     o->oObjFC->oAction = 2;
                     stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
                 } else {
+                    o->oObjFC->oAction = 4;
                     obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
                     obj->oBehParams2ndByte = 2 - o->oObjFC->oHealth;
                     obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
@@ -1156,10 +1157,21 @@ void bhv_shyguy_boss_loop(void) {
                     break;
             }
             break;
+        case 4:
+            cur_obj_init_animation(1);
+            if (cur_obj_check_if_at_animation_end()) {
+                o->oAction = 1;
+                cur_obj_init_animation(0);
+            }
+            break;
     }
     // if (o->oInteractStatus) {
     //     push_mario_out_of_object(gMarioState, o, 0.0f);
     // }
+    if (o->oAction != 2) {
+        o->os16FA += 0x400;
+        o->oGraphYOffset = 20.0f + 20.0f * sins(o->os16FA);
+    }
     o->oInteractStatus = 0;
 }
 

@@ -105,4 +105,6 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/toy_shyguy/anim_header.h"
 
+#include "levels/ccm/boss_shyguy/anim_header.h"
+
 #endif

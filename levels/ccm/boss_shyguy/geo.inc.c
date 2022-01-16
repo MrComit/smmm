@@ -7,7 +7,7 @@ const GeoLayout boss_shyguy_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_SCALE(LAYER_FORCE, 16384),
 			GEO_OPEN_NODE(),
-				GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 5000, 0, NULL),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, 0, -88, 0, NULL),
 				GEO_OPEN_NODE(),
 					GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, 0, boss_shyguy_000_offset_001_mesh_layer_1),
 					GEO_OPEN_NODE(),

@@ -72,3 +72,5 @@
 #include "levels/ccm/toy_shyguy/model.inc.c"
 #include "levels/ccm/toy_shyguy/anims/data.inc.c"
 #include "levels/ccm/toy_shyguy/anims/table.inc.c"
+#include "levels/ccm/boss_shyguy/anims/data.inc.c"
+#include "levels/ccm/boss_shyguy/anims/table.inc.c"
