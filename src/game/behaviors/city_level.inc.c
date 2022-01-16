@@ -726,9 +726,9 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
         case 0:
             if (o->oTimer > 20) {
                 o->oAction = 4;
-                if (o->oBehParams >> 24 == 0) {
-                    gCamera->comitCutscene = 0;
-                }
+            }
+            if (o->oBehParams >> 24 == 0) {
+                vec3f_copy(m->pos, sHoldMario);
             }
             break;
         case 1:
@@ -834,7 +834,6 @@ void bhv_block_tower_init(void) {
 
 
 void bhv_block_tower_loop(void) {
-    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->prevObj->oF8) {
@@ -868,11 +867,6 @@ void bhv_block_tower_loop(void) {
                     stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
                 } else {
                     o->oObjFC->oAction = 4;
-                    obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
-                    obj->oBehParams2ndByte = 2 - o->oObjFC->oHealth;
-                    obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
-                    obj->oBehParams2ndByte = 2 - o->oObjFC->oHealth;
-                    obj->oBehParams = 1 << 24;
                 }
             }
             break;
@@ -1124,7 +1118,14 @@ void bhv_shyguy_boss_loop(void) {
             }
             break;
         case 2: // DEATH ACT
-            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.05f, 0.025f);
+            if (o->oTimer == 0) {
+                cur_obj_play_sound_1(SOUND_GENERAL2_BOWSER_EXPLODE);
+            }
+            if (o->oTimer == 35) {
+                cur_obj_init_animation(3);
+            }
+            o->oGraphYOffset += 15.0f;
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.05f, 0.01f);
             cur_obj_scale(o->header.gfx.scale[0]);
             if (o->header.gfx.scale[0] == 0.05f) {
                 gMarioState->numCoins += 100 * (o->oFloat10C + ((f32)o->os16110 / 10));
@@ -1160,8 +1161,23 @@ void bhv_shyguy_boss_loop(void) {
         case 4:
             cur_obj_init_animation(1);
             if (cur_obj_check_if_at_animation_end()) {
+                o->oAction = 5;
+                cur_obj_init_animation(2);
+                obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
+                obj->oBehParams2ndByte = 2 - o->oHealth;
+                obj = spawn_object(o, MODEL_TOY_SHYGUY, bhvToyShyguy);
+                obj->oBehParams2ndByte = 2 - o->oHealth;
+                obj->oBehParams = 1 << 24;
+            }
+            break;
+        case 5:
+            if (cur_obj_check_anim_frame(15)) {
+                cur_obj_play_sound_1(SOUND_OBJ2_BOWSER_ROAR);
+            }
+            if (cur_obj_check_if_at_animation_end()) {
                 o->oAction = 1;
                 cur_obj_init_animation(0);
+                gCamera->comitCutscene = 0;
             }
             break;
     }
