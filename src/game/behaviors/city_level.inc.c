@@ -682,9 +682,17 @@ Vec3f sShyguyBossCutscenes[3] = {
 };
 
 Vec3f sBossStarts[2] = {
-{-6839.0f, 5807.0f, -4956.0f},
-{-12639.0f, 8166.0f, -13000.0f},
+    {-6839.0f, 5807.0f, -4956.0f},
+    {-12639.0f, 8166.0f, -13000.0f},
 };
+
+Vec3f sShyguyBossRespawn[3] = {
+    {-2489.0f, 4339.16f + 100.0f, -2500.0f},
+    {-6839.0f, 5807.0f  + 100.0f, -4956.0f},
+    {-12639.0f, 8166.0f + 100.0f, -13000.0f},
+};
+
+s16 sShyguyBossAngles[3] = {0xC000, 0x8000, 0x4000};
 
 void bhv_toy_shyguy_init(void) {
     s16 faceAdd;
@@ -725,10 +733,12 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
             break;
         case 1:
             //cur_obj_move_using_vel_and_gravity();
-            o->oPosX = approach_f32_symmetric(o->oPosX, o->oFloatF4, o->oVelX);
-            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloatFC, o->oVelZ);
-            o->os1610A += 0x8000 / 90;
-            o->os16108 += coss(o->os1610A) * (0x8000 / 90);
+            if (o->oTimer >= 10) {
+                o->oPosX = approach_f32_symmetric(o->oPosX, o->oFloatF4, o->oVelX);
+                o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloatFC, o->oVelZ);
+            }
+            o->os1610A += 0x8000 / 100;
+            o->os16108 += coss(o->os1610A) * (0x8000 / 100);
             o->oFloat104 = o->oFloatF8 + (sins(o->os16108) * o->oFloat100);
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat104, o->oFloat100 / 20);
             if (o->oTimer > 60 && o->oPosY < o->oFloatF8) {
@@ -738,7 +748,7 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
                      approach_f32_symmetric(o->oPosZ, o->oFloatFC, o->oVelZ));
             m->pos[0] += sins(o->oFaceAngleYaw - 0x4000) * 50.0f;
             m->pos[2] += coss(o->oFaceAngleYaw - 0x4000) * 50.0f;
-            if (o->oTimer >= 90) {
+            if (o->oTimer >= 100) {
                 o->oAction = 2;
                 o->oHomeY = o->oPosY + 1000.0f;
             }
@@ -757,7 +767,7 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
             vec3f_copy(&o->oPosX, m->pos);
             o->oPosX += sins(o->oFaceAngleYaw - 0x4000) * 50.0f;
             o->oPosZ += coss(o->oFaceAngleYaw - 0x4000) * 50.0f;
-            if (o->oTimer >= 90) {
+            if (o->oTimer >= 100) {
                 o->oAction = 2;
                 o->oHomeY = o->oPosY + 1000.0f;
             }
@@ -960,6 +970,42 @@ void bhv_block_bomb_loop(void) {
 }
 
 
+void shyguy_boss_handle_void_out(void) {
+    struct MarioState *m = gMarioState;
+    switch (o->oHealth) {
+        case 3:
+            if (m->pos[1] <= 3000.0f) {
+                if (m->health <= 0x280) {
+                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                    o->oAction = 0;
+                } else {
+                    o->oAction = 3;
+                }
+            }
+            break;
+        case 2:
+            if (m->pos[1] <= 4000.0f) {
+                if (m->health <= 0x280) {
+                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                    o->oAction = 0;
+                } else {
+                    o->oAction = 3;
+                }
+            }
+            break;
+        case 1:
+            if (m->pos[1] <= 7100.0f) {
+                if (m->health <= 0x280) {
+                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                    o->oAction = 0;
+                } else {
+                    o->oAction = 3;
+                }
+            }
+            break;
+    }
+}
+
 
 void shyguy_boss_handle_bulletlist(void) {
     struct MarioState *m = gMarioState;
@@ -1008,13 +1054,57 @@ void shyguy_boss_handle_bulletlist(void) {
     }
 }
 
+
+void shyguy_boss_multiplier_loop(void) {
+    s32 action = FALSE;
+    if (gMarioCurrentRoom == o->oRoom)
+        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
+
+    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C);
+    print_text(184+30, 169+20, ".");
+    print_text_fmt_int(198+30, 169+20, "%d", o->os16110);
+    print_text(212+30, 169+20, "*"); // 'X' glyph
+
+    if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
+        || gMarioState->action == ACT_BURNING_GROUND) {
+        if (o->oKleptoTargetNumber == 0) {
+            action = TRUE;
+            o->oKleptoTargetNumber = 1;
+        }
+    } else {
+        o->oKleptoTargetNumber = 0;
+        action = FALSE;
+    }
+    if (((gMarioState->hurtCounter > 0 && o->os16112 == 0) || action) && o->oFloat10C > 0) {
+        if (o->os16110 == 0) {
+            o->oFloat10C -= 1.0f;
+            o->os16110 = 5;
+        } else {
+            o->os16110 = 0;
+        }
+        o->os16112 = 1;
+    } else if (gMarioState->hurtCounter <= 0) {
+        o->os16112 = 0;
+    }
+
+
+}
+
+
 void bhv_shyguy_boss_init(void) {
     obj_set_hitbox(o, &sShyguyBossHitbox);
     o->oOpacity = 0xFF;
+    o->oFloat10C = 5.0f;
 }
 
+extern s16 s8DirModeBaseYaw;
+
 void bhv_shyguy_boss_loop(void) {
+    struct MarioState *m = gMarioState;
     struct Object *obj;
+    if (o->oAction) {
+        shyguy_boss_multiplier_loop();
+    }
     switch (o->oAction) {
         case 0: // PRE FIGHT ACT
             if (o->oDistanceToMario < 10000.0f) {
@@ -1024,6 +1114,7 @@ void bhv_shyguy_boss_loop(void) {
             break;
         case 1: // MAIN LOOP
             shyguy_boss_handle_bulletlist();
+            shyguy_boss_handle_void_out();
             if (o->os16F6 == 1) {
                 if (++o->os16F8 > 60) {
                     spawn_object(o, MODEL_BLOCK_PIECE, bhvBlockBomb);
@@ -1035,13 +1126,34 @@ void bhv_shyguy_boss_loop(void) {
             o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.05f, 0.025f);
             cur_obj_scale(o->header.gfx.scale[0]);
             if (o->header.gfx.scale[0] == 0.05f) {
-                // gMarioState->numCoins += 100 * (o->oFloat10C + ((f32)o->os16110 / 10));
+                gMarioState->numCoins += 100 * (o->oFloat10C + ((f32)o->os16110 / 10));
                 CL_explode_object(o, 1);
                 obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                 obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 obj->oBehParams2ndByte = 0x0E;
                 obj->oBehParams = 0x040E0900;
                 gCamera->comitCutscene = 0;
+            }
+            break;
+        case 3:
+            switch (o->oTimer) {
+                case 0:
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                    break;
+                case 9:
+                    vec3f_copy(m->pos, sShyguyBossRespawn[3 - o->oHealth]);
+                    set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
+                    m->faceAngle[1] = sShyguyBossAngles[3 - o->oHealth];
+                    set_r_button_camera(gCamera);
+                    s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
+                    m->forwardVel = 0;
+                    vec3f_set(m->vel, 0.0f, 0.0f, 0.0f);
+                    break;
+                case 12:
+                    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
+                    m->hurtCounter = 8;
+                    o->oAction = 1;
+                    break;
             }
             break;
     }
