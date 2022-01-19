@@ -694,6 +694,44 @@ Vec3f sShyguyBossRespawn[3] = {
 
 s16 sShyguyBossAngles[3] = {0xC000, 0x8000, 0x4000};
 
+void boss_toy_toad_check(s32 param) {
+    struct MarioState *m = gMarioState;
+    switch (param) {
+        case 0:
+            if (m->pos[0] < -1600.0f) {
+                o->o104 = 1;
+            }
+            break;
+        case 1:
+            if (m->pos[0] < -9000.0f && m->pos[2] < -800.0f) {
+                o->o104 = 1;
+            }
+            break;
+        case 2:
+            if (m->pos[2] > 4000.0f) {
+                o->o104 = 1;
+            }
+            break;
+    }
+}
+
+void bhv_boss_toy_toad_loop(void) {
+    switch (o->o104) {
+        case 0:
+            boss_toy_toad_check(o->oBehParams >> 24);
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
+            if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                o->o104 = 2;
+            }
+            break;
+        case 2:
+            toy_toad_loop();
+            break;
+    }
+}
+
 void bhv_toy_shyguy_init(void) {
     s16 faceAdd;
     o->oFaceAnglePitch = 0;

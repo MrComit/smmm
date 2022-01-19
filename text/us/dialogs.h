@@ -354,56 +354,25 @@ stairs, you need 70\n\
 Stars.\n\
 Bwa ha ha!"))
 
-DEFINE_DIALOG(DIALOG_030, 1, 6, 30, 200, _("\
-Hello! The Lakitu Bros.,\n\
-cutting in with a live\n\
-update on Mario's\n\
-progress. He's about to\n\
-learn a technique for\n\
-sneaking up on enemies.\n\
-The trick is this: He has\n\
-to walk very slowly in\n\
-order to walk quietly.\n\
+DEFINE_DIALOG(DIALOG_030, 1, 3, 30, 200, _("\
+(The Evil Giant Shyguy Is\n\
+Attacking The City!)\n\
 \n\
-\n\
-\n\
-And wrapping up filming\n\
-techniques reported on\n\
-earlier, you can take a\n\
-look around using [C]> and\n\
-[C]<. Press [C]| to view the\n\
-action from a distance.\n\
-When you can't move the\n\
-camera any farther, the\n\
-buzzer will sound. This is\n\
-the Lakitu Bros.,\n\
-signing off."))
+(Only Mario Can Help Us!\n\
+Dodge Bullet Bills, Knock Down\n\
+The Towers, Save The Day!)\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_031, 1, 5, 30, 200, _("\
-No way! You beat me...\n\
-again!! And I just spent\n\
-my entire savings on\n\
-these new Koopa\n\
-Mach 1 Sprint shoes!\n\
-Here, I guess I have to\n\
-hand over this Star to\n\
-the winner of the race.\n\
-Congrats, Mario!"))
+DEFINE_DIALOG(DIALOG_031, 1, 3, 30, 200, _("\
+(Now's your chance! Push\n\
+the block to knock down\n\
+the tower!)\n\
+..."))
 
-DEFINE_DIALOG(DIALOG_032, 1, 5, 30, 200, _("\
-If you get the Wing Cap,\n\
-you can fly! Put the cap\n\
-on, then do a Triple\n\
-Jump--jump three times\n\
-in a row--to take off.\n\
-You can fly even higher\n\
-if you blast out of a\n\
-cannon wearing the\n\
-Wing Cap!\n\
-\n\
-Use the [C] Buttons to look\n\
-around while flying, and\n\
-press [Z] to land."))
+DEFINE_DIALOG(DIALOG_032, 1, 2, 30, 200, _("\
+(You're almost there!)\n\
+(You can do it!)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
 Ciao! You've reached\n\
