@@ -8375,7 +8375,7 @@ const BehaviorScript bhvBossToyToad[] = {
     SCALE(0, 75),
     SET_HOME(),
     SET_INT(oIntangibleTimer, 0),
-    CALL_NATIVE(bhv_friend_toad_init),
+    CALL_NATIVE(bhv_boss_toy_toad_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_boss_toy_toad_loop),
     END_LOOP(),

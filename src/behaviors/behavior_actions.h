@@ -838,6 +838,7 @@ void bhv_boss_bullet_bill_cannon_init(void);
 void bhv_toy_shyguy_loop(void);
 void bhv_toy_shyguy_init(void);
 void bhv_boss_toy_toad_loop(void);
+void bhv_boss_toy_toad_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

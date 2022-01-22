@@ -694,6 +694,15 @@ Vec3f sShyguyBossRespawn[3] = {
 
 s16 sShyguyBossAngles[3] = {0xC000, 0x8000, 0x4000};
 
+
+void bhv_boss_toy_toad_init(void) {
+    o->oInteractionSubtype = INT_SUBTYPE_NPC;
+    o->oObj108 = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
+    if (o->oObj108 == NULL) {
+        o->activeFlags = 0;
+    }
+}
+
 void boss_toy_toad_check(s32 param) {
     struct MarioState *m = gMarioState;
     switch (param) {
@@ -718,7 +727,9 @@ void boss_toy_toad_check(s32 param) {
 void bhv_boss_toy_toad_loop(void) {
     switch (o->o104) {
         case 0:
-            boss_toy_toad_check(o->oBehParams >> 24);
+            if (o->oObj108->oAction) {
+                boss_toy_toad_check(o->oBehParams >> 24);
+            }
             break;
         case 1:
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
@@ -1140,7 +1151,7 @@ void bhv_shyguy_boss_loop(void) {
     }
     switch (o->oAction) {
         case 0: // PRE FIGHT ACT
-            if (o->oDistanceToMario < 10000.0f) {
+            if (o->oDistanceToMario < 11000.0f) {
                 o->oAction = 1;
                 play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
             }
