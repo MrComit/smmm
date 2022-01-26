@@ -31,6 +31,7 @@ const GeoLayout ccm_dl_202__NULL_geo[] = {
 const GeoLayout ccm_dl_203__City2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Board_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Bridge_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_012_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_004_mesh_layer_1),
