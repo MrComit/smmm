@@ -285,6 +285,29 @@ Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *con
 
 
 
+Gfx *geo_city_window_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+        currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        if (gIsConsole) {
+            gDPSetEnvColor(dlHead++, 0x6C, 0xD4, 0xE1, 0xFF);
+        } else {
+            gDPSetEnvColor(dlHead++, 0x9B, 0xF3, 0xFF, 0x7F);
+        }
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
+
 /**
  * @bug Every geo function declares the 3 parameters of callContext, node, and
  * the matrix array. This one (see also geo_switch_area) doesn't. When executed,
@@ -599,6 +622,38 @@ Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node) {
             switchCase->selectedCase = 0;
         } else {
             switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+#ifdef AVOID_UB
+Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        if (gMarioState->pos[1] <= 2200.0f && gMarioState->pos[0] <= 24700.0f && gMarioState->pos[0] > 23000.0f && 
+            gMarioState->pos[2] >= -4900.0f && gMarioState->pos[2] < 2080.0f) {
+            if (gMarioState->pos[2] >= -3300.0f && gMarioState->pos[2] < 500.0f) {
+                switchCase->selectedCase = 1;
+            } else {
+                switchCase->selectedCase = 2;
+            }
+        } else {
+            switchCase->selectedCase = 0;
         }
     }
 

@@ -44,10 +44,10 @@ const GeoLayout ccm_dl_bb_001_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout ccm_dl_cc_001_geo[] = {
+const GeoLayout ccm_dl_cc_005_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_cc_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_cc_005_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -56,13 +56,15 @@ const GeoLayout ccm_dl_bb_002_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_006_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_011_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_OpaqueWindow_001_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout ccm_dl_cc_002_geo[] = {
+const GeoLayout ccm_dl_cc_001_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_cc_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_OpaqueWindow_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -80,6 +82,31 @@ const GeoLayout ccm_dl_cc_003_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout ccm_dl_bb_003_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_CBWall3_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_013_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_House_013_mesh_layer_5),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 0, 0, 1422, ccm_dl_Signs_mesh_layer_6),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_Signs_002_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_cc_004_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_cc_004_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ccm_dl_dd_004_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_CBWall3_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout ccm_dl_101__City_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -92,13 +119,13 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_SWITCH_CASE(2, geo_switch_city_render),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ccm_dl_bb_001_geo),
-			GEO_BRANCH(1, ccm_dl_cc_001_geo),
+			GEO_BRANCH(1, ccm_dl_cc_005_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_aa_001_mesh_layer_1),
 		GEO_SWITCH_CASE(2, geo_switch_city_strip_render),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ccm_dl_bb_002_geo),
-			GEO_BRANCH(1, ccm_dl_cc_002_geo),
+			GEO_BRANCH(1, ccm_dl_cc_001_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_aa_002_mesh_layer_1),
 		GEO_SWITCH_CASE(2, geo_switch_garden_backface_render),
@@ -107,6 +134,13 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 			GEO_BRANCH(1, ccm_dl_cc_003_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_aa_003_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_city_walls_render),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, ccm_dl_bb_003_geo),
+			GEO_BRANCH(1, ccm_dl_cc_004_geo),
+			GEO_BRANCH(1, ccm_dl_dd_004_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_aa_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_BucketStack_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_CBWall3_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_city_mesh_layer_1),
@@ -115,7 +149,6 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_House_004_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_005_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_House_005_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_007_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_House_009_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_010_mesh_layer_1),
@@ -138,8 +171,6 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_ALPHA, ccm_dl_ShoeShelf_001_mesh_layer_4),
 		GEO_CLOSE_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 0, 0, 1422, ccm_dl_Signs_mesh_layer_6),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_Signs_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Slingshot_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_Table_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Tools_mesh_layer_1),

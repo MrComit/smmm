@@ -69,6 +69,7 @@ Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void
 Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_city_window_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #ifdef AVOID_UB
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node, UNUSED void *context);
@@ -82,6 +83,7 @@ Gfx *geo_switch_garden_render(s32 callContext, struct GraphNode *node, UNUSED vo
 Gfx *geo_switch_garden_backface_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
@@ -96,6 +98,7 @@ Gfx *geo_switch_garden_render(s32 callContext, struct GraphNode *node, UNUSED vo
 Gfx *geo_switch_garden_backface_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node);
 #endif
 void obj_update_pos_from_parent_transformation(Mat4 a0, struct Object *a1);
