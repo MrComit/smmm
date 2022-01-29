@@ -523,6 +523,9 @@ u32 mario_get_terrain_sound_addend(struct MarioState *m) {
  */
 struct Surface *resolve_and_return_wall_collisions(Vec3f pos, f32 offset, f32 radius) {
     struct WallCollisionData collisionData;
+    s16 anglediff;
+    s16 anglediffstore = 0x7FFF;
+    s32 i;
     struct Surface *wall = NULL;
 
     collisionData.x = pos[0];
@@ -532,7 +535,15 @@ struct Surface *resolve_and_return_wall_collisions(Vec3f pos, f32 offset, f32 ra
     collisionData.offsetY = offset;
 
     if (find_wall_collisions(&collisionData)) {
-        wall = collisionData.walls[collisionData.numWalls - 1];
+        wall = collisionData.walls[collisionData.numWalls-1];
+    }
+    for (i = 0; i < collisionData.numWalls; i++) {
+        anglediff = abs_angle_diff(gCurrentObject->oMoveAngleYaw - 0x8000,
+                    atan2s(collisionData.walls[i]->normal.z, collisionData.walls[i]->normal.x));
+        if (anglediff < anglediffstore) {
+            wall = collisionData.walls[i];
+            anglediffstore = anglediff;
+        }
     }
 
     pos[0] = collisionData.x;
