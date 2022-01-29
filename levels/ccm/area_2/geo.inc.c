@@ -44,6 +44,7 @@ const GeoLayout ccm_dl_203__City2_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_009_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_010_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_MoreHouses_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Overhang_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Spikes_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
