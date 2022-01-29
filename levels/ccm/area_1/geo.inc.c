@@ -152,6 +152,7 @@ const GeoLayout ccm_dl_101__City_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_007_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_House_009_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_010_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_014_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Lego_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_Lego_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 1422, ccm_dl_Rack_mesh_layer_1),

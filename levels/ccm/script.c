@@ -229,7 +229,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -14839, 6757, -9331, 0, 90, 0, (2 << 16), bhvBossBulletBillCannon),
 		OBJECT(MODEL_NONE, -7739, 8366, -13350, 0, -90, 0, (3 << 16), bhvBossBulletBillCannon),
 		OBJECT(MODEL_NONE, -7739, 8366, -12650, 0, -90, 0, (3 << 16), bhvBossBulletBillCannon),
-		OBJECT(MODEL_STAR_CURRENCY, 16111, 2776, 0, 0, 0, 0, (0x11 << 24), bhvStar),
+		OBJECT(MODEL_STAR_CURRENCY, 16111, 3396, 0, 0, 0, 0, (0x11 << 24), bhvStar),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7787, 839, -5050, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7937, 839, -5050, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7486, 839, 50, 0, -180, 0, 0x00000000, bhvDoor),

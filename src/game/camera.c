@@ -1482,14 +1482,43 @@ void fixed_cam_presets(struct Camera *c) {
 f32 gDepthOffset2d = 0;
 
 void check_2d_cam(struct Camera *c) {
+    struct MarioState *m = gMarioState;
     if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
         c->comit2dcam = 1;
+    } else if (m->floor != NULL && m->floor->type == SURFACE_2D_CAM) {
+        c->comit2dcam = m->floor->force;
     } else {
         c->comit2dcam = 0;
         gDepthOffset2d = 0;
     }
 }
 
+void cam_controls_2d(struct Camera *c) {
+    if (gPlayer1Controller->buttonDown & R_CBUTTONS) {
+        s8DirModeYawOffset += DEGREES(3);
+        if (s8DirModeYawOffset > DEGREES(45)) {
+            s8DirModeYawOffset = DEGREES(45);
+        }
+    }
+    if (gPlayer1Controller->buttonDown & L_CBUTTONS) {
+        s8DirModeYawOffset -= DEGREES(3);
+        if (s8DirModeYawOffset < -DEGREES(45)) {
+            s8DirModeYawOffset = -DEGREES(45);
+        }
+    }
+    if (gPlayer1Controller->buttonDown & U_CBUTTONS) {
+        gDepthOffset2d -= 50.0f;
+        if (gDepthOffset2d < -1000.0f) {
+            gDepthOffset2d = -1000.0f;
+        }
+    }
+    if (gPlayer1Controller->buttonDown & D_CBUTTONS) {
+        gDepthOffset2d += 50.0f;
+        if (gDepthOffset2d > 1000.0f) {
+            gDepthOffset2d = 1000.0f;
+        }
+    }
+}
 
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
@@ -1503,37 +1532,27 @@ void mode_8_directions_camera_2d(struct Camera *c) {
         case 1:
             s8DirModeBaseYaw = 0;
             gMarioState->pos[2] = 0;
-            if (gPlayer1Controller->buttonDown & R_CBUTTONS) {
-                s8DirModeYawOffset += DEGREES(3);
-                if (s8DirModeYawOffset > DEGREES(45)) {
-                    s8DirModeYawOffset = DEGREES(45);
-                }
-            }
-            if (gPlayer1Controller->buttonDown & L_CBUTTONS) {
-                s8DirModeYawOffset -= DEGREES(3);
-                if (s8DirModeYawOffset < -DEGREES(45)) {
-                    s8DirModeYawOffset = -DEGREES(45);
-                }
-            }
-            if (gPlayer1Controller->buttonDown & U_CBUTTONS) {
-                gDepthOffset2d -= 50.0f;
-                if (gDepthOffset2d < -1000.0f) {
-                    gDepthOffset2d = -1000.0f;
-                }
-            }
-            if (gPlayer1Controller->buttonDown & D_CBUTTONS) {
-                gDepthOffset2d += 50.0f;
-                if (gDepthOffset2d > 1000.0f) {
-                    gDepthOffset2d = 1000.0f;
-                }
-            }
+            cam_controls_2d(c);
             update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = pos[0];
             c->focus[0] = gMarioState->pos[0];
-            //sAreaYawChange = sAreaYaw - oldAreaYaw;
-            c->yaw = c->nextYaw = s8DirModeYawOffset;
+            c->yaw = c->nextYaw = s8DirModeBaseYaw;
             c->pos[2] = 2000.0f + gDepthOffset2d;
             approach_camera_height(c, pos[1] + 300.0f, ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
+            if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
+                s8DirModeYawOffset = 0;
+            }
+            break;
+        case 2:
+            s8DirModeBaseYaw = 0x4000;
+            gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], 16111.0f, 80.0f);
+            cam_controls_2d(c);
+            update_8_directions_camera(c, c->focus, pos);
+            c->pos[2] = pos[2];
+            c->focus[2] = gMarioState->pos[2];
+            c->pos[0] = 18000.0f + gDepthOffset2d;
+            c->yaw = c->nextYaw = s8DirModeBaseYaw;
+            approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;
             }
