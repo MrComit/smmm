@@ -1487,9 +1487,10 @@ void check_2d_cam(struct Camera *c) {
         c->comit2dcam = 1;
     } else if (m->floor != NULL && m->floor->type == SURFACE_2D_CAM) {
         c->comit2dcam = m->floor->force;
-    } else {
+    } else if (c->comit2dcam) {
         c->comit2dcam = 0;
         gDepthOffset2d = 0;
+        s8DirModeBaseYaw = 0;
     }
 }
 
