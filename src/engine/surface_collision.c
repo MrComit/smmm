@@ -215,6 +215,18 @@ s32 find_wall_collisions(struct WallCollisionData *colData) {
     node = gStaticSurfacePartition[cellZ][cellX][SPATIAL_PARTITION_WALLS].next;
     numCollisions += find_wall_collisions_from_list(node, colData);
 
+    // for (cellX = cellXmin; cellX <= cellXmax; cellX++) {
+    //     for (cellZ = cellZmin; cellZ <= cellZmax; cellZ++) {
+    //         // Check for surfaces belonging to objects.
+    //         node = gDynamicSurfacePartition[cellZ][cellX][SPATIAL_PARTITION_WALLS].next;
+    //         numCollisions += find_wall_collisions_from_list(node, colData);
+
+    //         // Check for surfaces that are a part of level geometry.
+    //         node = gStaticSurfacePartition[cellZ][cellX][SPATIAL_PARTITION_WALLS].next;
+    //         numCollisions += find_wall_collisions_from_list(node, colData);
+    //     }
+    // }
+
     // Increment the debug tracker.
     gNumCalls.wall++;
 
