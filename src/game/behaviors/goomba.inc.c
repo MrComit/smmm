@@ -5,6 +5,8 @@
  * The triplet spawner comes before its spawned goombas in processing order.
  */
 
+extern s32 gHideCityGoombas;
+
 /**
  * Hitbox for goomba.
  */
@@ -266,6 +268,14 @@ void bhv_goomba_update(void) {
     // PARTIAL_UPDATE
 
     f32 animSpeed;
+
+    if (gCurrLevelNum == LEVEL_CCM && gCurrAreaIndex == 1) {
+        if (gHideCityGoombas) {
+            cur_obj_hide();
+        } else {
+            cur_obj_unhide();
+        }
+    }
 
     if (obj_update_standard_actions(o->oGoombaScale)) {
         // If this goomba has a spawner and mario moved away from the spawner, unload

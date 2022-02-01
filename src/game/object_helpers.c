@@ -601,6 +601,8 @@ Gfx *geo_switch_city_render(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+s32 gHideCityGoombas = 0;
+
 #ifdef AVOID_UB
 Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSED void *context) {
 #else
@@ -620,8 +622,10 @@ Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node) {
         // assign the case number for execution.
         if (!gIsConsole || gMarioState->pos[0] <= 23050.0f || gMarioState->pos[2] <= -4900.0f) {
             switchCase->selectedCase = 0;
+            gHideCityGoombas = 0;
         } else {
             switchCase->selectedCase = 1;
+            gHideCityGoombas = 1;
         }
     }
 
