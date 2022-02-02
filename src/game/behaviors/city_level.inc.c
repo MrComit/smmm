@@ -1250,11 +1250,11 @@ void bhv_racecar_init(void) {
     o->oForwardVel = 25.0f;
     o->oF4 = o->oFaceAngleYaw;
     o->oFloatF8 = (o->oBehParams >> 24) * 100.0f;
-    if ((o->oBehParams >> 8) & 0xFF) {
+    if (((o->oBehParams >> 8) & 0xFF) == 1) {
         o->oObjFC = spawn_object(o, MODEL_STAR_CURRENCY, bhvStar);
         o->oObjFC->oBehParams = 0x12 << 24;
         o->oFloat100 = 100.0f;
-    } else if (o->oBehParams2ndByte) {
+    } else if (((o->oBehParams >> 8) & 0xFF) == 2) {
         o->oObjFC = cur_obj_nearest_object_with_behavior(bhvToyToad);
         o->oFloat100 = 50.0f;
     } else {
@@ -1277,7 +1277,7 @@ void bhv_racecar_loop(void) {
     if (o->oObjFC != NULL) {
         if (o->oObjFC->activeFlags != 0) {
             vec3f_set(&o->oObjFC->oPosX, o->oPosX, o->oPosY + o->oFloat100, o->oPosZ);
-            if (o->oBehParams2ndByte) {
+            if (((o->oBehParams >> 8) & 0xFF) == 2) {
                 vec3f_copy(&o->oObjFC->oHomeX, &o->oObjFC->oPosX);
                 if (o->oObjFC->oAction == 0) {
                     o->oObjFC->oMoveAngleYaw = approach_s16_symmetric(o->oObjFC->oMoveAngleYaw, o->oMoveAngleYaw, 0x300);
