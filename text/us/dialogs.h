@@ -189,10 +189,14 @@ DEFINE_DIALOG(DIALOG_008, 1, 4, 30, 200, _("\
 new bridge to get over to the\n\
 other side of the city.)\n\
 \n\
-(The construction worker\n\
-said it would cost eight star\n\
-coins, BUT I DON'T HAVE THAT\n\
-KIND OF MONEY!!!!)\n\
+(But the construction worker\n\
+seems to have gotten lost on\n\
+his way over here!)\n\
+\n\
+(Plus, he said it would cost 8\n\
+star coins, BUT I DON'T HAVE\n\
+THAT KIND OF MONEY!!!!)\n\
+\n\
 ..."))
 
 DEFINE_DIALOG(DIALOG_009, 1, 3, 30, 200, _("\
@@ -374,19 +378,15 @@ DEFINE_DIALOG(DIALOG_032, 1, 2, 30, 200, _("\
 (You can do it!)\n\
 ..."))
 
-DEFINE_DIALOG(DIALOG_033, 1, 6, 30, 200, _("\
-Ciao! You've reached\n\
-Princess Toadstool's\n\
-castle via a warp pipe.\n\
-Using the controller is a\n\
-piece of cake. Press [A] to\n\
-jump and [B] to attack.\n\
-Press [B] to read signs,\n\
-too. Use the Control Stick\n\
-in the center of the\n\
-controller to move Mario\n\
-around. Now, head for\n\
-the castle."))
+DEFINE_DIALOG(DIALOG_033, 1, 4, 30, 200, _("\
+(Once I construct this bridge,\n\
+you'll be able to visit the\n\
+other part of the city.)\n\
+\n\
+(To build it, I'll need you to\n\
+give me 8 star coins. Deal?)\n\
+\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
 Good afternoon. The\n\

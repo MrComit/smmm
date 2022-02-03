@@ -8190,7 +8190,6 @@ const BehaviorScript bhvCityBridge[] = {
     CALL_NATIVE(bhv_city_bridge_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_city_bridge_loop),
-        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 

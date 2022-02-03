@@ -126,7 +126,11 @@ void toy_toad_starpiece_loop(u32 starPieces) {
     s32 dialogResponse = CL_NPC_Dialog_Options(DIALOG_016);
     if (dialogResponse) {
         if (dialogResponse == 1) {
+#ifdef SMMM_DEBUG
+            if (gMarioState->numStars >= -20) {
+#else
             if (gMarioState->numStars >= 2) {
+#endif
                 if (starPieces < 5) {
                     o->oObj108 = spawn_object(gMarioObject, MODEL_NONE, bhvStarPiece);
                     o->oObj108->oBehParams = (10 + starPieces) << 24;
@@ -156,10 +160,14 @@ void toy_toad_starpiece_loop(u32 starPieces) {
 
 
 void toy_toad_bridge_loop(void) {
-    s32 dialogResponse = CL_NPC_Dialog_Options(DIALOG_010);
+    s32 dialogResponse = CL_NPC_Dialog_Options(DIALOG_033);
     if (dialogResponse) {
         if (dialogResponse == 1) {
+#ifdef SMMM_DEBUG
             if (gMarioState->numStars >= -20) {
+#else
+            if (gMarioState->numStars >= 8) {
+#endif
                 cur_obj_shake_screen(SHAKE_POS_SMALL);
                 create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
@@ -191,7 +199,7 @@ void toy_toad_rubberband_loop(void) {
     s32 dialogResponse = CL_NPC_Dialog_Options(DIALOG_010);
     if (dialogResponse) {
         if (dialogResponse == 1) {
-            if (gMarioState->numStars >= -20) {
+            if (gMarioState->numStars >= 2) {
                 save_file_set_newflags(SAVE_NEW_FLAG_CITY_BAND_BOUGHT, 0);
                 o->oBehParams2ndByte = 0;
                 o->oBehParams = DIALOG_012 << 24;
@@ -321,13 +329,20 @@ void bhv_toy_toad_loop(void) {
             toy_toad_bridge_loop();
             break;
         case 7:
-            if (o->oTimer > 20) {
-                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x8, 0x00, 0x00, 0x00);
-                save_file_set_newflags(SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT, 0);
-                o->oBehParams2ndByte = 0;
-                o->oAction = 2;
-                play_puzzle_jingle();
-                cur_obj_play_sound_2(SOUND_GENERAL_WALL_EXPLOSION);
+            switch (o->oTimer) {
+                case 20:
+                    cur_obj_play_sound_2(SOUND_GENERAL2_BOBOMB_EXPLOSION);
+                    break;
+                case 40:
+                    cur_obj_play_sound_2(SOUND_GENERAL_WALL_EXPLOSION);
+                    break;
+                case 50:
+                    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x8, 0x00, 0x00, 0x00);
+                    save_file_set_newflags(SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT, 0);
+                    o->oBehParams2ndByte = 0;
+                    o->oAction = 2;
+                    play_puzzle_jingle();
+                    break;
             }
             break;
     }
