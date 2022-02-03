@@ -8189,6 +8189,7 @@ const BehaviorScript bhvCityBridge[] = {
     SET_HOME(),
     CALL_NATIVE(bhv_city_bridge_init),
     BEGIN_LOOP(),
+        CALL_NATIVE(bhv_city_bridge_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
@@ -8268,9 +8269,9 @@ const BehaviorScript bhvToyToad[] = {
     SCALE(0, 75),
     SET_HOME(),
     SET_INT(oIntangibleTimer, 0),
-    CALL_NATIVE(bhv_friend_toad_init),
+    CALL_NATIVE(bhv_toy_toad_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(toy_toad_loop),
+        CALL_NATIVE(bhv_toy_toad_loop),
     END_LOOP(),
 };
 

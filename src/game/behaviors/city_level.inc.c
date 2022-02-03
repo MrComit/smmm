@@ -155,12 +155,43 @@ void toy_toad_starpiece_loop(u32 starPieces) {
 
 
 
+void toy_toad_bridge_loop(void) {
+    s32 dialogResponse = CL_NPC_Dialog_Options(DIALOG_010);
+    if (dialogResponse) {
+        if (dialogResponse == 1) {
+            if (gMarioState->numStars >= -20) {
+                cur_obj_shake_screen(SHAKE_POS_SMALL);
+                create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                o->oBehParams = DIALOG_012 << 24;
+                o->oAction = 7;
+            } else {
+                o->oBehParams = DIALOG_011 << 24;
+                o->oAction = 2;
+            }
+        } else {
+            o->oAction = 3;
+        }
+    } else {
+        o->os16100 += 0x800;
+        o->oFaceAnglePitch = 0xC00 + (coss(o->os16100) * 0x1000);
+        o->oGraphYOffset = 30.0f + (sins(o->os16100) * 25.0f);
+        o->oPosX = o->oHomeX - 35.0f * sins(o->oFaceAngleYaw) + (15.0f * sins(o->oFaceAngleYaw) * coss(o->os16100));
+        o->oPosZ = o->oHomeZ - 35.0f * coss(o->oFaceAngleYaw) + (15.0f * coss(o->oFaceAngleYaw) * coss(o->os16100));
+        o->oFloatFC = 0.75f + (0.05f * sins(o->os16100));
+        obj_scale(o, o->oFloatFC);
+    }
+}
+
+
+
+
 
 void toy_toad_rubberband_loop(void) {
     s32 dialogResponse = CL_NPC_Dialog_Options(DIALOG_010);
     if (dialogResponse) {
         if (dialogResponse == 1) {
-            if (gMarioState->numStars >= 2) {
+            if (gMarioState->numStars >= -20) {
                 save_file_set_newflags(SAVE_NEW_FLAG_CITY_BAND_BOUGHT, 0);
                 o->oBehParams2ndByte = 0;
                 o->oBehParams = DIALOG_012 << 24;
@@ -183,7 +214,18 @@ void toy_toad_rubberband_loop(void) {
     }
 }
 
-void toy_toad_loop(void) {
+void bhv_toy_toad_init(void) {
+    s32 flags = save_file_get_newflags(0);
+    o->oInteractionSubtype = INT_SUBTYPE_NPC;
+
+    if (o->oBehParams2ndByte == 4) {
+        if (flags & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT /*|| !(flags & SAVE_NEW_FLAG_CITY_TOAD_SAVED)*/) {
+            o->activeFlags = 0;
+        }
+    }
+}
+
+void bhv_toy_toad_loop(void) {
     u32 starPieces;
     switch (o->oAction) {
         case 0:
@@ -213,6 +255,8 @@ void toy_toad_loop(void) {
                         o->oAction = 4;
                     } else if (o->oBehParams2ndByte == 3) {
                         o->oAction = 5;
+                    } else if (o->oBehParams2ndByte == 4) {
+                        o->oAction = 6;
                     } else {
                         o->oAction = 2;
                     }
@@ -271,6 +315,19 @@ void toy_toad_loop(void) {
                 } else {
                     o->oBehParams = DIALOG_026 << 24;
                 }
+            }
+            break;
+        case 6:
+            toy_toad_bridge_loop();
+            break;
+        case 7:
+            if (o->oTimer > 20) {
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x8, 0x00, 0x00, 0x00);
+                save_file_set_newflags(SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT, 0);
+                o->oBehParams2ndByte = 0;
+                o->oAction = 2;
+                play_puzzle_jingle();
+                cur_obj_play_sound_2(SOUND_GENERAL_WALL_EXPLOSION);
             }
             break;
     }
@@ -664,7 +721,23 @@ void bhv_cannon_balls_loop(void) {
 
 void bhv_city_bridge_init(void) {
     if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT)) {
-        //o->activeFlags = 0;
+        o->oAction = 1;
+        cur_obj_disable();
+    }
+}
+
+void bhv_city_bridge_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            load_object_collision_model();
+            break;
+        case 1:
+            if (save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT) {
+                o->oAction = 0;
+                cur_obj_enable();
+                spawn_mist_particles();
+            }
+            break;
     }
 }
 
@@ -738,7 +811,7 @@ void bhv_boss_toy_toad_loop(void) {
             }
             break;
         case 2:
-            toy_toad_loop();
+            bhv_toy_toad_loop();
             break;
     }
 }

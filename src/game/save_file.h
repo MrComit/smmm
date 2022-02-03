@@ -117,7 +117,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_NEW_FLAG_CITY_POLE_OPEN     /* 0x00008000 */ (1 << 15)
 #define SAVE_NEW_FLAG_CITY_BAND_BOUGHT   /* 0x00010000 */ (1 << 16)
 #define SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT /* 0x00020000 */ (1 << 17)
-#define SAVE_NEW_FLAG_019                /* 0x00040000 */ (1 << 18)
+#define SAVE_NEW_FLAG_CITY_TOAD_SAVED    /* 0x00040000 */ (1 << 18)
 #define SAVE_NEW_FLAG_020                /* 0x00080000 */ (1 << 19)
 #define SAVE_NEW_FLAG_021                /* 0x00100000 */ (1 << 20)
 #define SAVE_NEW_FLAG_022                /* 0x00200000 */ (1 << 21)
