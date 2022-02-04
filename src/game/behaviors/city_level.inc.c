@@ -91,6 +91,50 @@ static void const *sCardboardCollision[] = {
 };
 
 
+
+void bhv_trapped_toy_toad_init(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_TOAD_SAVED) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_trapped_toy_toad_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 3000.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
+            if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                o->oAction = 2;
+                save_file_set_newflags(SAVE_NEW_FLAG_CITY_TOAD_SAVED, 0);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+            }
+            break;
+        case 2:
+            set_mario_npc_dialog(1);
+            if (o->oTimer > 25) {
+                gMarioState->faceAngle[1] = 0xC000;
+                vec3f_set(gMarioState->pos, 16769.0f, -161.0f, -11600.0f);
+                set_r_button_camera(gCamera);
+                obj = spawn_object(o, MODEL_TOY_TOAD, bhvToyToad);
+                vec3f_set(&obj->oPosX, 16469.0f, -161.0f, -11600.0f);
+                obj->oFaceAngleYaw = 0x4000;
+                obj->oBehParams = (DIALOG_008 << 24) | (4 << 16);
+                obj->oBehParams2ndByte = 4;
+                obj->oInteractStatus = INT_STATUS_INTERACTED;
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x8, 0x00, 0x00, 0x00);
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 void bhv_star_piece_holder_loop(void) {
     s32 i;
     switch (o->oAction) {
@@ -199,7 +243,11 @@ void toy_toad_rubberband_loop(void) {
     s32 dialogResponse = CL_NPC_Dialog_Options(DIALOG_010);
     if (dialogResponse) {
         if (dialogResponse == 1) {
+#ifdef SMMM_DEBUG
+            if (gMarioState->numStars >= -20) {
+#else
             if (gMarioState->numStars >= 2) {
+#endif
                 save_file_set_newflags(SAVE_NEW_FLAG_CITY_BAND_BOUGHT, 0);
                 o->oBehParams2ndByte = 0;
                 o->oBehParams = DIALOG_012 << 24;
@@ -227,7 +275,7 @@ void bhv_toy_toad_init(void) {
     o->oInteractionSubtype = INT_SUBTYPE_NPC;
 
     if (o->oBehParams2ndByte == 4) {
-        if (flags & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT /*|| !(flags & SAVE_NEW_FLAG_CITY_TOAD_SAVED)*/) {
+        if (flags & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT || !(flags & SAVE_NEW_FLAG_CITY_TOAD_SAVED)) {
             o->activeFlags = 0;
         }
     }

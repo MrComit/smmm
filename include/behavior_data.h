@@ -715,6 +715,7 @@ extern const BehaviorScript bhvBlockBomb[];
 extern const BehaviorScript bhvBossBulletBillCannon[];
 extern const BehaviorScript bhvToyShyguy[];
 extern const BehaviorScript bhvBossToyToad[];
+extern const BehaviorScript bhvTrappedToyToad[];
 
 
 

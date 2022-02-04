@@ -388,40 +388,17 @@ give me 8 star coins. Deal?)\n\
 \n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_034, 1, 6, 30, 200, _("\
-Good afternoon. The\n\
-Lakitu Bros., here,\n\
-reporting live from just\n\
-outside the Princess's\n\
-castle.\n\
+DEFINE_DIALOG(DIALOG_034, 1, 3, 30, 200, _("\
+(Mario! You must be here to\n\
+save me!)\n\
 \n\
-Mario has just arrived\n\
-on the scene, and we'll\n\
-be filming the action live\n\
-as he enters the castle\n\
-and pursues the missing\n\
-Power Stars.\n\
-As seasoned cameramen,\n\
-we'll be shooting from the\n\
-recommended angle, but\n\
-you can change the\n\
-camera angle by pressing\n\
-the [C] Buttons.\n\
-If we can't adjust the\n\
-view any further, we'll\n\
-buzz. To take a look at\n\
-the surroundings, stop\n\
-and press [C]^.\n\
+(I was supposed to go construct\n\
+a new bridge for the city, but\n\
+i got trapped up here.)\n\
+(Now I can get to work.)\n\
+(Thank you so much!)\n\
 \n\
-Press [A] to resume play.\n\
-Switch camera modes with\n\
-the [R] Button. Signs along\n\
-the way will review these\n\
-instructions.\n\
-\n\
-For now, reporting live,\n\
-this has been the\n\
-Lakitu Bros."))
+..."))
 
 DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
 There are four camera, or\n\
