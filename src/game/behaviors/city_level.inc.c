@@ -1780,7 +1780,8 @@ void bhv_rubber_band_loop(void) {
     struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 250.0f && save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BAND_BOUGHT) {
+            if (o->oDistanceToMario < 250.0f && 
+                (gCurrLevelNum != LEVEL_CCM || save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BAND_BOUGHT)) {
                 o->oAction = 1; 
                 m->faceAngle[1] = o->oMoveAngleYaw; 
                 set_mario_action(m, ACT_GRABBED, 0);
