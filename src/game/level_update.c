@@ -673,33 +673,34 @@ void warp_credits(void) {
 void check_instant_warp(void) {
     s16 cameraAngle;
     struct Surface *floor;
+    struct MarioState *m = gMarioState;
 
     //if (gCurrLevelNum == LEVEL_CASTLE
     //    && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
     //    return;
     //}
 
-    if ((floor = gMarioState->floor) != NULL && floor->type == SURFACE_INSTANT_WARP_1B) {
+    if ((floor = m->floor) != NULL && floor->type == SURFACE_INSTANT_WARP_1B) {
         if (gCurrentArea->instantWarps != NULL) {
             struct InstantWarp *warp = &gCurrentArea->instantWarps[floor->force];
 
             if (warp->id != 0) {
-                gMarioState->pos[0] += warp->displacement[0];
-                gMarioState->pos[1] += warp->displacement[1];
-                gMarioState->pos[2] += warp->displacement[2];
+                m->pos[0] += warp->displacement[0];
+                m->pos[1] += warp->displacement[1];
+                m->pos[2] += warp->displacement[2];
 
-                gMarioState->marioObj->oPosX = gMarioState->pos[0];
-                gMarioState->marioObj->oPosY = gMarioState->pos[1];
-                gMarioState->marioObj->oPosZ = gMarioState->pos[2];
+                m->marioObj->oPosX = m->pos[0];
+                m->marioObj->oPosY = m->pos[1];
+                m->marioObj->oPosZ = m->pos[2];
 
-                cameraAngle = gMarioState->area->camera->yaw;
+                cameraAngle = m->area->camera->yaw;
 
                 change_area(warp->area);
-                gMarioState->area = gCurrentArea;
+                m->area = gCurrentArea;
 
                 warp_camera(warp->displacement[0], warp->displacement[1], warp->displacement[2]);
 
-                gMarioState->area->camera->yaw = cameraAngle;
+                m->area->camera->yaw = cameraAngle;
             }
         }
     }
