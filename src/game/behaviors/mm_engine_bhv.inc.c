@@ -597,3 +597,8 @@ void bhv_friend_toad_init(void) {
         //o->oOpacity = 81;
         o->oInteractionSubtype = INT_SUBTYPE_NPC;
 }
+
+
+void bhv_bparam1_to_animstate(void) {
+    o->oAnimState = o->oBehParams >> 24;
+}

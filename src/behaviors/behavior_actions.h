@@ -843,6 +843,7 @@ void bhv_boss_toy_toad_loop(void);
 void bhv_boss_toy_toad_init(void);
 void bhv_trapped_toy_toad_loop(void);
 void bhv_trapped_toy_toad_init(void);
+void bhv_bparam1_to_animstate(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
