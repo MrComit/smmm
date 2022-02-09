@@ -22,10 +22,10 @@ void bhv_locked_cage_init(void) {
 
 void bhv_locked_cage_loop(void) {
     if (o->oDistanceToMario < 500.0f) {
-        if (save_file_get_keys() & (1 << o->oBehParams2ndByte)) {
+        if (save_file_get_keys(0) & (1 << o->oBehParams2ndByte)) {
             CL_explode_object(o, 1);
             play_puzzle_jingle();
-            save_file_set_flags(1 << (o->oBehParams2ndByte + 1));
+            save_file_set_keys(1 << o->oBehParams2ndByte, 1);
         }
     }
 }

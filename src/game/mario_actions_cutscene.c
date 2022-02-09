@@ -829,8 +829,8 @@ s32 act_unlocking_key_door(struct MarioState *m) {
     stop_and_set_height_to_floor(m);
 
     if (is_anim_at_end(m)) {
-        save_file_set_flags(1 << (m->usedObj->oBehParams2ndByte + 1));
-        //save_file_set_keys(1 << m->usedObj->oBehParams2ndByte);
+        // save_file_set_flags(1 << (m->usedObj->oBehParams2ndByte + 1));
+        save_file_set_keys(1 << m->usedObj->oBehParams2ndByte, 1);
         //save_file_clear_flags(SAVE_FLAG_HAVE_KEY_2);
         set_mario_action(m, ACT_WALKING, 0);
     }

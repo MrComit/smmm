@@ -134,7 +134,7 @@ void bhv_heavy_switch_loop(void) {
                     if (obj == NULL || obj->oAction == 2) {
                         obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, 2 << 16);
                         if (obj == NULL || obj->oAction == 2) {
-                            if ((save_file_get_keys() & (1 << 6)) == 0 && 
+                            if ((save_file_get_keys(0) & (1 << 6)) == 0 && 
                                 CL_obj_nearest_object_behavior_params(bhvSmallKey, 6 << 16) == NULL) {
                                 obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
                                 obj->oBehParams2ndByte = 6;

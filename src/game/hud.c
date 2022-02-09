@@ -353,7 +353,7 @@ void render_hud_stars(void) {
  */
 void render_hud_keys(void) {
     s16 i;
-    s16 keyCount = CL_count_bits(save_file_get_keys()) - (CL_count_bits(save_file_get_flags() & ~1));
+    s16 keyCount = CL_count_bits(save_file_get_keys(0)) - CL_count_bits(save_file_get_keys(1));
     for (i = 0; i < keyCount; i++) {
         print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(30) - (i * 6), 15, "/"); // unused glyph - beta key
     }

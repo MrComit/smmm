@@ -34,10 +34,10 @@ struct SaveFile
     //u8 courseStars[COURSE_COUNT];
     u32 roomsCleared[4];
     u32 miscChallenges[2];
-    u32 keys;
-    u32 starPieces;
-    u32 boosCaptured;
-    u32 currencyStars;
+    u32 keys[2];
+    u32 starPieces: 25;
+    u32 boosCaptured: 20;
+    u32 currencyStars: 20;
     s32 coinCount;
 
     struct SaveBlockSignature signature;
@@ -304,8 +304,8 @@ u32 save_file_get_star_piece(void);
 void save_file_set_star_piece(u32 piece);
 u32 save_file_get_challenges(u8 index);
 void save_file_set_challenges(u32 challenge);
-u32 save_file_get_keys(void);
-void save_file_set_keys(u32 key);
+u32 save_file_get_keys(u32 page);
+void save_file_set_keys(u32 key, u32 page);
 
 u32 save_file_get_rooms(u32 index);
 void save_file_set_rooms(u32 room);

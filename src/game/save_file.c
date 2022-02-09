@@ -635,15 +635,15 @@ void save_file_set_challenges(u32 challenge) {
 
 
 
-u32 save_file_get_keys(void) {
+u32 save_file_get_keys(u32 page) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }
-    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys;
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys[page];
 }
 
-void save_file_set_keys(u32 key) {
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys |= 1 << key;
+void save_file_set_keys(u32 key, u32 page) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys[page] |= 1 << key;
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }

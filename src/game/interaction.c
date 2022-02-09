@@ -804,7 +804,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         if (isKey == 3) {
             save_file_set_newflags(1 << starKeyIndex, 0);
         } else if (isKey != 0) {
-            save_file_set_keys(starKeyIndex);
+            save_file_set_keys(starKeyIndex, 0);
         } else if (o->oInteractionSubtype & INT_SUBTYPE_CURRENCY){
             //gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
             save_file_set_currency_flags(o->oBehParams >> 24);
@@ -999,7 +999,7 @@ u32 get_door_save_file_flag(struct Object *door) {
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     s16 requiredNumStars = o->oBehParams >> 24;
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
-    u32 keyCount = save_file_get_keys();
+    u32 keyCount = save_file_get_keys(0);
     u32 saveFlags = save_file_get_flags();
     u32 doorAction;
     if (o->oInteractionSubtype & INT_SUBTYPE_BLOCKED_DOOR) {
