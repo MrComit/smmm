@@ -16,6 +16,7 @@ const GeoLayout hmc_dl_101__OpeningHall_geo[] = {
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -20539, 0, 25636, hmc_dl_ArtTest_001_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_Floor3_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -10581, 0, -4937, hmc_dl_OpeningHall_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -10581, 0, -4937, hmc_dl_Stairs_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

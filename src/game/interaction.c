@@ -997,7 +997,7 @@ u32 get_door_save_file_flag(struct Object *door) {
 }
 
 u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
-    s16 requiredNumStars = o->oBehParams >> 24;
+    s16 requiredNumStars = 0;//o->oBehParams >> 24;
     s16 numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
     u32 keyCount = save_file_get_keys(0);
     u32 saveFlags = save_file_get_flags();
@@ -1030,7 +1030,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
         if (numStars >= requiredNumStars) {
             u32 actionArg = should_push_or_pull_door(m, o);
             u32 enterDoorAction;
-            u32 doorSaveFileFlag;
+            // u32 doorSaveFileFlag;
 
             if (actionArg & 0x00000001) {
                 enterDoorAction = ACT_PULLING_DOOR;
@@ -1038,7 +1038,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
                 enterDoorAction = ACT_PUSHING_DOOR;
             }
 
-            doorSaveFileFlag = get_door_save_file_flag(o);
+            // doorSaveFileFlag = get_door_save_file_flag(o);
             m->interactObj = o;
             m->usedObj = o;
 
@@ -1046,9 +1046,9 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
                 enterDoorAction = ACT_ENTERING_STAR_DOOR;
             }
 
-            if (doorSaveFileFlag != 0 && !(save_file_get_flags() & doorSaveFileFlag)) {
-                enterDoorAction = ACT_UNLOCKING_STAR_DOOR;
-            }
+            // if (doorSaveFileFlag != 0 && !(save_file_get_flags() & doorSaveFileFlag)) {
+            //     enterDoorAction = ACT_UNLOCKING_STAR_DOOR;
+            // }
 
             return set_mario_action(m, enterDoorAction, actionArg);
         } else if (!sDisplayingDoorText) {

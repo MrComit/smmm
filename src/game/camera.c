@@ -3963,9 +3963,6 @@ void create_camera(struct GraphNodeCamera *gc, struct AllocOnlyPool *pool) {
  * Copy Lakitu's pos and foc into `gc`
  */
 void update_graph_node_camera(struct GraphNodeCamera *gc) {
-    UNUSED u8 filler[8];
-    UNUSED struct Camera *c = gc->config.camera;
-
     gc->rollScreen = gLakituState.roll;
     vec3f_copy(gc->pos, gLakituState.pos);
     vec3f_copy(gc->focus, gLakituState.focus);
@@ -3974,7 +3971,6 @@ void update_graph_node_camera(struct GraphNodeCamera *gc) {
 
 Gfx *geo_camera_main(s32 callContext, struct GraphNode *g, void *context) {
     struct GraphNodeCamera *gc = (struct GraphNodeCamera *) g;
-    UNUSED Mat4 *unusedMat = context;
 
     switch (callContext) {
         case GEO_CONTEXT_CREATE:

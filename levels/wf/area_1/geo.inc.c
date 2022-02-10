@@ -65,6 +65,8 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Simple_Table_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_ToFloor1_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_ToFloor1_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 2000, wf_dl_ToFloor1_004_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 2000, wf_dl_ToFloor1_005_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 2000, wf_dl_TokenScreen_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
