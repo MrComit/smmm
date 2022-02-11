@@ -430,7 +430,7 @@ extern Gfx wf_dl_HalfPillar_mesh_layer_1_tri_0[];
 extern Vtx wf_dl_Hallway_002_mesh_layer_1_vtx_cull[8];
 extern Vtx wf_dl_Hallway_002_mesh_layer_1_vtx_0[91];
 extern Gfx wf_dl_Hallway_002_mesh_layer_1_tri_0[];
-extern Vtx wf_dl_Hallway_002_mesh_layer_1_vtx_1[178];
+extern Vtx wf_dl_Hallway_002_mesh_layer_1_vtx_1[180];
 extern Gfx wf_dl_Hallway_002_mesh_layer_1_tri_1[];
 extern Vtx wf_dl_Hallway_004_mesh_layer_1_vtx_cull[8];
 extern Vtx wf_dl_Hallway_004_mesh_layer_1_vtx_0[146];

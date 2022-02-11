@@ -93,7 +93,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 7085, 200, -18319, 0, 0, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 7085, 200, -18319, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6601, 200, -8321, 0, -180, 0, (0xE << 16), bhvFlyingWarp),
-		OBJECT(MODEL_NONE, -42, 200, -18784, 0, 0, 0, (0xF << 16), bhvFlyingWarp),
+		OBJECT(MODEL_NONE, -42, 200, -18584, 0, 0, 0, (0xF << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, 0, 7085, 200, -18319),
 		OBJECT(MODEL_BREAKABLE_BOX, 4323, 0, -4961, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 4123, 0, -4961, 0, 0, 0, 0x00000000, bhvBreakableBox),
