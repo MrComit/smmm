@@ -8,4 +8,6 @@ extern void scroll_hmc_dl_Painting_mesh_layer_1_vtx_5();
 extern void scroll_sts_mat_hmc_dl_Parlor1_layer1();
 extern void scroll_sts_mat_hmc_dl_Cons1_layer1();
 extern void scroll_sts_mat_hmc_dl_CreepyEyes_layer1();
+extern void scroll_sts_mat_hmc_dl_Cons3_layer1();
+extern void scroll_sts_mat_hmc_dl_Study1();
 extern void scroll_hmc();

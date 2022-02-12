@@ -30,7 +30,7 @@ void scroll_sts_mat_hmc_dl_BooGoo_layer1() {
 
 void scroll_hmc_dl_Painting_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 4;
+	int count = 6;
 	int width = 64 * 0x20;
 	int height = 32 * 0x20;
 
@@ -52,7 +52,7 @@ void scroll_hmc_dl_Painting_mesh_layer_1_vtx_1() {
 
 void scroll_hmc_dl_Painting_mesh_layer_1_vtx_2() {
 	int i = 0;
-	int count = 4;
+	int count = 6;
 	int width = 64 * 0x20;
 	int height = 32 * 0x20;
 
@@ -175,6 +175,17 @@ void scroll_sts_mat_hmc_dl_CreepyEyes_layer1() {
 	shift_t(mat, 21, PACK_TILESIZE(0, 6));
 };
 
+void scroll_sts_mat_hmc_dl_Cons3_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Cons3_layer1);
+	shift_t(mat, 13, PACK_TILESIZE(0, 6));
+	shift_t(mat, 21, PACK_TILESIZE(0, 7));
+};
+
+void scroll_sts_mat_hmc_dl_Study1() {
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Study1);
+	shift_s(mat, 18, PACK_TILESIZE(0, 1));
+};
+
 void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_WoodFloor_layer1();
 	scroll_sts_mat_hmc_dl_Wall_layer1();
@@ -186,4 +197,6 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_Parlor1_layer1();
 	scroll_sts_mat_hmc_dl_Cons1_layer1();
 	scroll_sts_mat_hmc_dl_CreepyEyes_layer1();
+	scroll_sts_mat_hmc_dl_Cons3_layer1();
+	scroll_sts_mat_hmc_dl_Study1();
 }
