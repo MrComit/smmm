@@ -158,9 +158,6 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
     return dlStart;
 }
 
-s16 sMusicVerts[sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0)[0]][2] = {
-    0,
-};
 
 s32 gMusicFloorDistance;
 
@@ -174,31 +171,18 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
         marioPos[0] -= 8796;
         marioPos[2] -= 14423;
         if (gPlayer1Controller->buttonDown & B_BUTTON) {
-            gMusicFloorDistance = 1200*1200;
+            gMusicFloorDistance = 1200*1200*2;
         } else {
-            gMusicFloorDistance = 500*500;
+            gMusicFloorDistance = 500*500*2;
         }
         vert = segmented_to_virtual(&hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0);
         for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0[0]); i++) {
-            if (sMusicVerts[i][0] == 0 && sMusicVerts[i][1] == 0) {
-                sMusicVerts[i][0] = vert[i].v.ob[0];
-                sMusicVerts[i][1] = vert[i].v.ob[2];
-            }
-            dist = absi((marioPos[0] - sMusicVerts[i][0]) * (marioPos[0] - sMusicVerts[i][0]) + 
-                    (marioPos[2] - sMusicVerts[i][1]) * (marioPos[2] - sMusicVerts[i][1]));
+            dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
+                    (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
             if (dist <= gMusicFloorDistance) {
-                vert[i].v.cn[3] = approach_s16_symmetric(vert[i].v.cn[3], 0xFF, 0x20);
-                if (dist <= gMusicFloorDistance / 4)  {
-                    vert[i].v.ob[0] = marioPos[0];
-                    vert[i].v.ob[2] = marioPos[2];
-                } else {
-                    vert[i].v.ob[0] = sMusicVerts[i][0];
-                    vert[i].v.ob[2] = sMusicVerts[i][1];
-                }
+                vert[i].v.cn[3] = 255 - (((f32)dist / (f32)gMusicFloorDistance) * 255);
             } else if (vert[i].v.cn[3] != 0) {
-                vert[i].v.cn[3] = approach_s16_symmetric(vert[i].v.cn[3], 0, 0x20);
-                vert[i].v.ob[0] = sMusicVerts[i][0];
-                vert[i].v.ob[2] = sMusicVerts[i][1];
+                vert[i].v.cn[3] = 0;
             }
             vert[i].v.tc[0] = vert[i].v.ob[0] * 2;
             vert[i].v.tc[1] = vert[i].v.ob[2] * 2;
