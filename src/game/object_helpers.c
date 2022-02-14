@@ -28,7 +28,7 @@
 #include "spawn_sound.h"
 #include "actors/group0.h"
 #include "include/course_table.h"
-
+#include "levels/hmc/header.inc.h"
 
 
 s8 sBooColors[][3] = {
@@ -158,6 +158,58 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
     return dlStart;
 }
 
+s16 sMusicVerts[sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0)[0]][2] = {
+    0,
+};
+
+s32 gMusicFloorDistance;
+
+Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    s32 i;
+    s32 dist;
+    Vtx *vert;
+    Vec3s marioPos;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        vec3f_to_vec3s(marioPos, gMarioState->pos);
+        marioPos[0] -= 8796;
+        marioPos[2] -= 14423;
+        if (gPlayer1Controller->buttonDown & B_BUTTON) {
+            gMusicFloorDistance = 1200*1200;
+        } else {
+            gMusicFloorDistance = 500*500;
+        }
+        vert = segmented_to_virtual(&hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0);
+        for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0[0]); i++) {
+            if (sMusicVerts[i][0] == 0 && sMusicVerts[i][1] == 0) {
+                sMusicVerts[i][0] = vert[i].v.ob[0];
+                sMusicVerts[i][1] = vert[i].v.ob[2];
+            }
+            dist = absi((marioPos[0] - sMusicVerts[i][0]) * (marioPos[0] - sMusicVerts[i][0]) + 
+                    (marioPos[2] - sMusicVerts[i][1]) * (marioPos[2] - sMusicVerts[i][1]));
+            if (dist <= gMusicFloorDistance) {
+                vert[i].v.cn[3] = approach_s16_symmetric(vert[i].v.cn[3], 0xFF, 0x20);
+                if (dist <= gMusicFloorDistance / 4)  {
+                    vert[i].v.ob[0] = marioPos[0];
+                    vert[i].v.ob[2] = marioPos[2];
+                } else {
+                    vert[i].v.ob[0] = sMusicVerts[i][0];
+                    vert[i].v.ob[2] = sMusicVerts[i][1];
+                }
+            } else if (vert[i].v.cn[3] != 0) {
+                vert[i].v.cn[3] = approach_s16_symmetric(vert[i].v.cn[3], 0, 0x20);
+                vert[i].v.ob[0] = sMusicVerts[i][0];
+                vert[i].v.ob[2] = sMusicVerts[i][1];
+            }
+            vert[i].v.tc[0] = vert[i].v.ob[0] * 2;
+            vert[i].v.tc[1] = vert[i].v.ob[2] * 2;
+        }
+        // print_text_fmt_int(80, 180, "mario x: %d", marioPos[0]);
+        // print_text_fmt_int(80, 140, "mario z: %d", marioPos[2]);
+        // print_text_fmt_int(80, 80, "vert x: %d", vert[0].v.ob[0]);
+        // print_text_fmt_int(80, 40, "vert z: %d", vert[0].v.ob[2]);
+    }
+    return NULL;
+}
 
 
 

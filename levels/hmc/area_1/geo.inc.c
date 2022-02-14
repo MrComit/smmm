@@ -50,6 +50,12 @@ const GeoLayout hmc_dl_103__Hallway_geo[] = {
 const GeoLayout hmc_dl_104__Music_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 8796, 0, 14423),
+		GEO_OPEN_NODE(),
+			GEO_ASM(0, geo_update_music_floor),
+			GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_MUSICFLOOR_mesh_layer_4),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 8796, 0, 14423, hmc_dl_MUSICFLOOR_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_010_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -84,6 +90,7 @@ const GeoLayout hmc_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
