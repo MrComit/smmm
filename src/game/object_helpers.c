@@ -171,21 +171,23 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
         marioPos[0] -= 8796;
         marioPos[2] -= 14423;
         if (gPlayer1Controller->buttonDown & B_BUTTON) {
-            gMusicFloorDistance = 1200*1200*2;
+            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 1000*1000*2, 0x18000, 0x18000);
         } else {
-            gMusicFloorDistance = 500*500*2;
+            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 400*400*2, 0x18000, 0x18000);
         }
         vert = segmented_to_virtual(&hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0);
         for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0[0]); i++) {
             dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
                     (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
             if (dist <= gMusicFloorDistance) {
-                vert[i].v.cn[3] = 255 - (((f32)dist / (f32)gMusicFloorDistance) * 255);
+                vert[i].v.cn[3] = 
+                    approach_s16_symmetric(vert[i].v.cn[3], (((f32)(gMusicFloorDistance - dist) / (f32)gMusicFloorDistance) * 255), 0x8);
             } else if (vert[i].v.cn[3] != 0) {
                 vert[i].v.cn[3] = 0;
             }
-            vert[i].v.tc[0] = vert[i].v.ob[0] * 2;
-            vert[i].v.tc[1] = vert[i].v.ob[2] * 2;
+            // UV generating code
+            // vert[i].v.tc[0] = vert[i].v.ob[0] * 2;
+            // vert[i].v.tc[1] = vert[i].v.ob[2] * 2;
         }
         // print_text_fmt_int(80, 180, "mario x: %d", marioPos[0]);
         // print_text_fmt_int(80, 140, "mario z: %d", marioPos[2]);
