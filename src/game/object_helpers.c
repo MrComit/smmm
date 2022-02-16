@@ -173,15 +173,15 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
         if (gPlayer1Controller->buttonDown & B_BUTTON) {
             gMusicFloorDistance = approach_s32(gMusicFloorDistance, 1000*1000*2, 0x18000, 0x18000);
         } else {
-            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 400*400*2, 0x18000, 0x18000);
+            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 600*600*2, 0x18000, 0x18000);
         }
-        vert = segmented_to_virtual(&hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0);
-        for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_4_vtx_0[0]); i++) {
+        vert = segmented_to_virtual(&hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0);
+        for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {
             dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
                     (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
             if (dist <= gMusicFloorDistance) {
-                vert[i].v.cn[3] = 
-                    approach_s16_symmetric(vert[i].v.cn[3], (((f32)(gMusicFloorDistance - dist) / (f32)gMusicFloorDistance) * 255), 0x8);
+                vert[i].v.cn[3] = (f32)(gMusicFloorDistance - dist) / (f32)(gMusicFloorDistance) * 255;
+                    // approach_s16_symmetric(vert[i].v.cn[3], (((f32)(gMusicFloorDistance - dist) / (f32)gMusicFloorDistance) * 255), 0x8);
             } else if (vert[i].v.cn[3] != 0) {
                 vert[i].v.cn[3] = 0;
             }
