@@ -1,0 +1,6 @@
+#include "anim_die_one.inc.c"
+#include "anim_die_two.inc.c"
+#include "anim_die_three.inc.c"
+#include "anim_die_four.inc.c"
+#include "anim_die_five.inc.c"
+#include "anim_die_six.inc.c"

@@ -63,3 +63,5 @@
 #include "levels/hmc/leveldata.inc.c"
 
 #include "levels/hmc/dice_enemy/model.inc.c"
+#include "levels/hmc/dice_enemy/anims/data.inc.c"
+#include "levels/hmc/dice_enemy/anims/table.inc.c"

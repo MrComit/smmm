@@ -63,8 +63,6 @@ const GeoLayout hmc_dl_105__Game_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Cube_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hmc_dl_Dice_mesh_layer_6),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Dice_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_011_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -92,7 +90,6 @@ const GeoLayout hmc_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hmc_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

@@ -361,7 +361,7 @@ static s32 cur_obj_set_anim_if_at_end(s32 arg0) {
     return FALSE;
 }
 
-static s32 cur_obj_play_sound_at_anim_range(s8 arg0, s8 arg1, u32 sound) {
+s32 cur_obj_play_sound_at_anim_range(s8 arg0, s8 arg1, u32 sound) {
     s32 val04;
 
     if ((val04 = o->header.gfx.animInfo.animAccel / 0x10000) <= 0) {
@@ -469,7 +469,7 @@ static void obj_roll_to_match_yaw_turn(s16 targetYaw, s16 maxRoll, s16 rollSpeed
     obj_face_roll_approach(targetRoll, rollSpeed);
 }
 
-static s16 random_linear_offset(s16 base, s16 range) {
+s16 random_linear_offset(s16 base, s16 range) {
     return base + (s16)(range * random_float());
 }
 
@@ -477,7 +477,7 @@ static s16 random_mod_offset(s16 base, s16 step, s16 mod) {
     return base + step * (random_u16() % mod);
 }
 
-static s16 obj_random_fixed_turn(s16 delta) {
+s16 obj_random_fixed_turn(s16 delta) {
     return o->oMoveAngleYaw + (s16) random_sign() * delta;
 }
 
@@ -593,7 +593,7 @@ static s32 obj_resolve_object_collisions(s32 *targetYaw) {
     return FALSE;
 }
 
-static s32 obj_bounce_off_walls_edges_objects(s32 *targetYaw) {
+s32 obj_bounce_off_walls_edges_objects(s32 *targetYaw) {
     if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
         *targetYaw = cur_obj_reflect_move_angle_off_wall();
     } else if (o->oMoveFlags & OBJ_MOVE_HIT_EDGE) {
@@ -605,7 +605,7 @@ static s32 obj_bounce_off_walls_edges_objects(s32 *targetYaw) {
     return TRUE;
 }
 
-static s32 obj_resolve_collisions_and_turn(s16 targetYaw, s16 turnSpeed) {
+s32 obj_resolve_collisions_and_turn(s16 targetYaw, s16 turnSpeed) {
     obj_resolve_object_collisions(NULL);
 
     if (cur_obj_rotate_yaw_toward(targetYaw, turnSpeed)) {
@@ -878,7 +878,7 @@ static s32 obj_move_for_one_second(s32 endAction) {
  * attack Mario (e.g. fly guy shooting fire or lunging), especially when combined
  * with partial updates.
  */
-static void treat_far_home_as_mario(f32 threshold) {
+void treat_far_home_as_mario(f32 threshold) {
     f32 dx = o->oHomeX - o->oPosX;
     f32 dy = o->oHomeY - o->oPosY;
     f32 dz = o->oHomeZ - o->oPosZ;

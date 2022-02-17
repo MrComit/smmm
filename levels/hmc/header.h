@@ -95,4 +95,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/dice_enemy/geo_header.h"
 
+#include "levels/hmc/dice_enemy/anim_header.h"
+
 #endif
