@@ -274,4 +274,4 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "game/behaviors/master_bedroom.inc.c"
 #include "game/behaviors/city_level.inc.c"
 #include "game/behaviors/play_level.inc.c"
-
+#include "game/behaviors/game_room.inc.c"

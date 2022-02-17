@@ -61,3 +61,5 @@
 #include "levels/hmc/areas/1/movtext.inc.c"
 
 #include "levels/hmc/leveldata.inc.c"
+
+#include "levels/hmc/dice_enemy/model.inc.c"

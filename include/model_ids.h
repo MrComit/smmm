@@ -726,8 +726,8 @@
 #define MODEL_ICE_CEILING_GATE    0xEF
 #define MODEL_RUBBERBAND_TWO      0xEE
 
-
-
+// LEVEL 5 MODELS - 0xFF TO 0xE2 ARE FREE
+#define MODEL_DICE_ENEMY          0xFF
 
 
 
