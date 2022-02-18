@@ -10,6 +10,148 @@ static struct ObjectHitbox sDiceEnemyHitbox = {
     /* hurtboxHeight:     */ 100,
 };
 
+static struct ObjectHitbox sPoolBallHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 70,
+    /* height:            */ 70,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
+Vec3s sPoolBallColors[9] = {
+{0xff, 0xae, 0x01}, // 1
+{0x2b, 0x67, 0xc2}, // 2
+{0xf4, 0x00, 0x10}, // 3
+{0x52, 0x1f, 0x92}, // 4
+{0xf1, 0x5f, 0x00}, // 5
+{0x12, 0x90, 0x26}, // 6
+{0x64, 0x12, 0x00}, // 7
+{0x00, 0x00, 0x00}, // 8
+{0xFF, 0xFF, 0xFF}, // 16
+};
+
+void bhv_pool_cue_init(void) {
+    vec3f_set(&o->oPosX, 5273.0f, 247.0f, 8821.0f);
+}
+
+
+void bhv_pool_cue_loop(void) {
+    Vec3f point;
+    f32 dist;
+    s16 pitch, yaw;
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 30) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 20.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
+            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oHomeZ, 20.0f);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x100);
+            if (o->oPosX == o->oHomeX && o->oPosY == o->oHomeY && o->oPosZ == o->oHomeZ) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->os16F8 += 0x200;
+            o->oFloatF4 = gMarioState->pos[2] + (coss(o->os16F8) * 200.0f);
+            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloatF4, 30.0f);
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 15.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+            vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+            pitch += sins(o->os16F8) * 0x400;
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, yaw, 0x200);
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, -pitch, 0x200);
+
+            if (o->oTimer > 30) {
+                o->oObjFC = CL_nearest_object_with_behavior_and_field(bhvPoolBall, 0x188, o->os16FA << 16);
+                if (o->oObjFC == NULL) {
+                    o->activeFlags = 0;
+                    return;
+                }
+                o->oObjFC->parentObj = o;
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            vec3f_set_dist_and_angle(&o->oPosX, point, 350.0f, -o->oFaceAnglePitch, o->oMoveAngleYaw);
+            if (o->oTimer == 0) {
+                vec3f_get_dist_and_angle(point, &o->oObjFC->oPosX, &o->oFloat100, &pitch, &yaw);
+                o->oFloat100 /= 15.0f;
+            }
+
+            if (o->oTimer <= 25) {
+                vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, yaw, 0x200);
+                o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, -pitch, 0x200);
+
+                o->oObjFC->oPosX = approach_f32_symmetric(o->oObjFC->oPosX, point[0], o->oFloat100);
+                o->oObjFC->oPosY = approach_f32_symmetric(o->oObjFC->oPosY, point[1], o->oFloat100);
+                o->oObjFC->oPosZ = approach_f32_symmetric(o->oObjFC->oPosZ, point[2], o->oFloat100);
+                o->oObjFC->header.gfx.scale[0] = approach_f32_symmetric(o->oObjFC->header.gfx.scale[0], 2.0f, 0.1f);
+                o->oObjFC->header.gfx.scale[2] = o->oObjFC->header.gfx.scale[1] = o->oObjFC->header.gfx.scale[0];
+
+                if (o->oTimer == 25) {
+                    vec3f_get_dist_and_angle(&o->oObjFC->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+                    o->oObjFC->oMoveAnglePitch = pitch;
+                    o->oObjFC->oMoveAngleYaw = yaw;
+                    o->oObjFC->oForwardVel = 65.0f;
+                }
+            } else if (o->oTimer <= 45) {
+                o->oForwardVel = -5.0f;
+                o->oMoveAnglePitch = o->oFaceAnglePitch;
+                CL_Move_3d();
+            } else if (o->oTimer <= 50) {
+                o->oForwardVel = 30.0f;
+                o->oMoveAnglePitch = o->oFaceAnglePitch;
+                CL_Move_3d();
+            } else {
+                o->oObjFC->oAction = 1;
+                o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 5.0f);
+                CL_Move_3d();
+            }
+            break;
+    }
+}
+
+
+void bhv_pool_ball_init(void) {
+    if (o->oBehParams2ndByte > 7) {
+        o->oBehParams2ndByte -= 8;
+        o->oAnimState = 1;
+    }
+    o->os16F4 = sPoolBallColors[o->oBehParams2ndByte][0];
+    o->os16F6 = sPoolBallColors[o->oBehParams2ndByte][1];
+    o->os16F8 = sPoolBallColors[o->oBehParams2ndByte][2];
+}
+
+
+void bhv_pool_ball_loop(void) {
+    if (o->oAction) {
+        o->oFaceAnglePitch += 0x200;
+        obj_set_hitbox(o, &sPoolBallHitbox);
+        CL_Move_3d();
+        cur_obj_update_floor_and_walls();
+        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
+        || o->oInteractStatus & INT_STATUS_INTERACTED || o->oTimer > 60) {
+            // obj_explode_and_spawn_coins(46.0f, 0);
+            create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+            o->parentObj->os16FA++;
+            if (o->parentObj->os16FA == 15) {
+                o->parentObj->os16FA++;
+            }
+            o->parentObj->oAction = 2;
+            o->activeFlags = 0;
+        }
+    }
+}
+
 
 void dice_enemy_move(void) {
     cur_obj_update_floor_and_walls();

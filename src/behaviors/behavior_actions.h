@@ -846,6 +846,10 @@ void bhv_trapped_toy_toad_init(void);
 void bhv_bparam1_to_animstate(void);
 void bhv_dice_enemy_init(void);
 void bhv_dice_enemy_loop(void);
+void bhv_pool_ball_init(void);
+void bhv_pool_ball_loop(void);
+void bhv_pool_cue_init(void);
+void bhv_pool_cue_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

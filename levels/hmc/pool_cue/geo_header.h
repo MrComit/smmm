@@ -1,0 +1,11 @@
+extern const GeoLayout pool_cue_geo[];
+extern Lights1 pool_cue_poolcue_f3d_001_lights;
+extern u8 pool_cue_ci4_pool_cue_ci4[];
+extern u8 pool_cue_ci4_pool_cue_ci4_pal_rgba16[];
+extern Vtx pool_cue_PoolCue_mesh_layer_1_vtx_cull[8];
+extern Vtx pool_cue_PoolCue_mesh_layer_1_vtx_0[16];
+extern Gfx pool_cue_PoolCue_mesh_layer_1_tri_0[];
+extern Gfx mat_pool_cue_poolcue_f3d_001[];
+extern Gfx mat_revert_pool_cue_poolcue_f3d_001[];
+extern Gfx pool_cue_PoolCue_mesh_layer_1[];
+extern Gfx pool_cue_material_revert_render_settings[];
