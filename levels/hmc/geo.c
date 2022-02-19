@@ -27,3 +27,4 @@
 #include "levels/hmc/dice_enemy/geo.inc.c"
 #include "levels/hmc/pool_ball/geo.inc.c"
 #include "levels/hmc/pool_cue/geo.inc.c"
+#include "levels/hmc/pool_barrier/geo.inc.c"

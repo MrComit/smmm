@@ -101,4 +101,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/pool_cue/geo_header.h"
 
+#include "levels/hmc/pool_barrier/geo_header.h"
+
+#include "levels/hmc/pool_barrier/collision_header.h"
+
 #endif

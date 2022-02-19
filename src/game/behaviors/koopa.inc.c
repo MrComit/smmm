@@ -817,7 +817,14 @@ void bhv_koopa_update(void) {
     // PARTIAL_UPDATE
 
     o->oDeathSound = SOUND_OBJ_KOOPA_FLYGUY_DEATH;
-
+    if (gCurrLevelNum == LEVEL_HMC) {
+        if (cur_obj_nearest_object_with_behavior(bhvPoolBarrier)) {
+            cur_obj_disable();
+            return;
+        } else {
+            cur_obj_enable();
+        }
+    }
     //if (o->oKoopaMovementType >= KOOPA_BP_KOOPA_THE_QUICK_BASE) {
     //    koopa_the_quick_update();
     /*} else */if (obj_update_standard_actions(o->oKoopaAgility * 1.5f)) {

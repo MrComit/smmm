@@ -8420,6 +8420,7 @@ const BehaviorScript bhvPoolBall[] = {
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
     SET_INT(oIntangibleTimer, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 70, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_pool_ball_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_pool_ball_loop),
@@ -8434,5 +8435,15 @@ const BehaviorScript bhvPoolCue[] = {
     CALL_NATIVE(bhv_pool_cue_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_pool_cue_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvPoolBarrier[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(pool_barrier_collision),
+    // CALL_NATIVE(bhv_block_tower_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pool_barrier_loop),
     END_LOOP(),
 };

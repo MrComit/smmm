@@ -68,6 +68,7 @@ const GeoLayout hmc_dl_105__Game_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_PingPongTable_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_PingPongTable_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_PoolTable_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ToyBoxes_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_011_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

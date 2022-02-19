@@ -850,6 +850,7 @@ void bhv_pool_ball_init(void);
 void bhv_pool_ball_loop(void);
 void bhv_pool_cue_init(void);
 void bhv_pool_cue_loop(void);
+void bhv_pool_barrier_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
