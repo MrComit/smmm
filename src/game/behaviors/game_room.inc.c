@@ -75,6 +75,7 @@ void bhv_pool_cue_loop(void) {
     Vec3f point;
     f32 dist;
     s16 pitch, yaw;
+    o->oAction = 5; // DEBUG
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 30) {
