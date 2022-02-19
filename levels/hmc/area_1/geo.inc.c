@@ -59,9 +59,29 @@ const GeoLayout hmc_dl_104__Music_Room_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout hmc_dl_bb_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_bb_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_cc_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_cc_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout hmc_dl_105__Game_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_pool_floor),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, hmc_dl_bb_geo),
+			GEO_BRANCH(1, hmc_dl_cc_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_aa_mesh),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Cube_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Paddle_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Painting_mesh_layer_1),

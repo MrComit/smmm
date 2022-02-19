@@ -69,3 +69,5 @@
 #include "levels/hmc/pool_cue/model.inc.c"
 #include "levels/hmc/pool_barrier/model.inc.c"
 #include "levels/hmc/pool_barrier/collision.inc.c"
+#include "levels/hmc/pool_floor/model.inc.c"
+#include "levels/hmc/pool_floor/collision.inc.c"

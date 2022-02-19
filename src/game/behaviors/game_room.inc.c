@@ -34,6 +34,40 @@ Vec3s sPoolBallColors[9] = {
 {0xFF, 0xFF, 0xFF}, // 16
 };
 
+void bhv_pool_floor_init(void) {
+    o->oOpacity = 255;
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoolCue);
+    if (o->oObjF4 == NULL) {
+        o->oAction = 3;
+    }
+}
+
+void bhv_pool_floor_loop(void) {
+    if (o->oOpacity > 0x3F) {
+        load_object_collision_model();
+    }
+    switch (o->oAction) {
+        case 0:
+            if (o->oObjF4->os16FA > 3) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->os16FA = (o->oObjF4->os16FA * 0x40);
+            o->os16F8 += o->os16FA;
+            o->oOpacity = 128 + (127 * coss(o->os16F8));
+            if (o->oObjF4->oAction >= 4) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 0x10);
+            if (o->oOpacity == 255) {
+                o->oAction = 3;
+            }
+            break;
+    }
+}
 
 
 void bhv_pool_barrier_loop(void) {
@@ -67,6 +101,7 @@ void bhv_pool_cue_init(void) {
     vec3f_set(&o->oPosX, 6658.0f, 247.0f, 8292.0f);
     if (cur_obj_nearest_object_with_behavior(bhvPoolBall) == NULL) {
         o->oAction = 5;
+        o->oGraphYOffset = 9.0f;
     }
 }
 
@@ -75,7 +110,7 @@ void bhv_pool_cue_loop(void) {
     Vec3f point;
     f32 dist;
     s16 pitch, yaw;
-    o->oAction = 5; // DEBUG
+    // o->oAction = 5; // DEBUG
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 30) {

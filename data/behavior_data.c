@@ -8447,3 +8447,15 @@ const BehaviorScript bhvPoolBarrier[] = {
         CALL_NATIVE(bhv_pool_barrier_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvPoolFloor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(pool_floor_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_pool_floor_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pool_floor_loop),
+    END_LOOP(),
+};

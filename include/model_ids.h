@@ -731,6 +731,7 @@
 #define MODEL_POOL_BALL           0xFE
 #define MODEL_POOL_CUE            0xFD
 #define MODEL_POOL_BARRIER        0xFC
+#define MODEL_POOL_FLOOR          0xFB
 
 
 

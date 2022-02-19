@@ -44,6 +44,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_POOL_BALL, pool_ball_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POOL_CUE, pool_cue_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POOL_BARRIER, pool_barrier_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_POOL_FLOOR, pool_floor_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -70,6 +71,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_DICE_ENEMY, 7173, 0, 7557, 0, -90, 0, (3 << 16), bhvDiceEnemy),
 		OBJECT(MODEL_DICE_ENEMY, 7171, 0, 7700, 0, -90, 0, (4 << 16), bhvDiceEnemy),
 		OBJECT(MODEL_DICE_ENEMY, 7180, 0, 7836, 0, -90, 0, (5 << 16), bhvDiceEnemy),
+		OBJECT(MODEL_POOL_FLOOR, 4842, 0, 8273, 0, 0, 0, 0x00000000, bhvPoolFloor),
 		OBJECT(MODEL_KOOPA, 7036, 1875, 4042, 0, -90, 0, (0 << 16), bhvKoopa),
 		OBJECT(MODEL_KOOPA, 7339, 1875, 4786, 0, -90, 0, (1 << 16), bhvKoopa),
 		OBJECT(MODEL_KOOPA, 7062, 2250, 6056, 0, -90, 0, (2 << 16), bhvKoopa),

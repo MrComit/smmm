@@ -720,6 +720,7 @@ extern const BehaviorScript bhvDiceEnemy[];
 extern const BehaviorScript bhvPoolBall[];
 extern const BehaviorScript bhvPoolCue[];
 extern const BehaviorScript bhvPoolBarrier[];
+extern const BehaviorScript bhvPoolFloor[];
 
 
 

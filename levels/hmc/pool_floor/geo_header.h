@@ -1,0 +1,17 @@
+extern const GeoLayout pool_floor_geo[];
+extern Lights1 pool_floor_WoodFloorTransparent_001_layer5_lights;
+extern Lights1 pool_floor_CarpetEndDither_layer5_lights;
+extern u8 pool_floor_deepplanks_mixed2_rgba16[];
+extern u8 pool_floor_i4_matt_multitex_i4[];
+extern u8 pool_floor_carpet_end_green_ci8[];
+extern u8 pool_floor_carpet_end_green_ci8_pal_rgba16[];
+extern Vtx pool_floor_floor_mesh_layer_5_vtx_0[17];
+extern Gfx pool_floor_floor_mesh_layer_5_tri_0[];
+extern Vtx pool_floor_floor_mesh_layer_5_vtx_1[4];
+extern Gfx pool_floor_floor_mesh_layer_5_tri_1[];
+extern Gfx mat_pool_floor_WoodFloorTransparent_001_layer5[];
+extern Gfx mat_revert_pool_floor_WoodFloorTransparent_001_layer5[];
+extern Gfx mat_pool_floor_CarpetEndDither_layer5[];
+extern Gfx mat_revert_pool_floor_CarpetEndDither_layer5[];
+extern Gfx pool_floor_floor_mesh_layer_5[];
+extern Gfx pool_floor_material_revert_render_settings[];

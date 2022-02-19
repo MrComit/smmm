@@ -270,14 +270,14 @@ u8 pool_cue_ci4_pool_cue_ci4_pal_rgba16[] = {
 };
 
 Vtx pool_cue_PoolCue_mesh_layer_1_vtx_cull[8] = {
-	{{{-10, -10, 321},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-10, 10, 321},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-10, 10, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-10, -10, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{10, -10, 321},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{10, 10, 321},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{10, 10, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{10, -10, 0},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-15, -15, 327},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-15, 16, 327},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-15, 16, -3},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-15, -15, -3},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{15, -15, 327},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{15, 16, 327},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{15, 16, -3},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{15, -15, -3},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
 Vtx pool_cue_PoolCue_mesh_layer_1_vtx_0[16] = {
@@ -311,6 +311,37 @@ Gfx pool_cue_PoolCue_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx pool_cue_PoolCue_mesh_layer_1_vtx_1[16] = {
+	{{{15, 0, 2},0, {147, 477},{0x90, 0x0, 0x3C, 0xFF}}},
+	{{{0, 0, -3},0, {375, 335},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{0, -15, 2},0, {-81, 477},{0x0, 0x70, 0x3C, 0xFF}}},
+	{{{0, 16, 2},0, {375, 477},{0x0, 0x90, 0x3C, 0xFF}}},
+	{{{-15, 0, 2},0, {603, 477},{0x70, 0x0, 0x3C, 0xFF}}},
+	{{{0, -15, 2},0, {831, 477},{0x0, 0x70, 0x3C, 0xFF}}},
+	{{{0, -15, 2},0, {972, 981},{0x0, 0x70, 0x3C, 0xFF}}},
+	{{{-15, 0, 2},0, {744, 981},{0x70, 0x0, 0x3C, 0xFF}}},
+	{{{0, -9, 327},0, {972, 157},{0x0, 0x67, 0xB6, 0xFF}}},
+	{{{-9, 0, 327},0, {744, 157},{0x67, 0x0, 0xB6, 0xFF}}},
+	{{{0, 16, 2},0, {516, 981},{0x0, 0x90, 0x3C, 0xFF}}},
+	{{{0, 9, 327},0, {516, 157},{0x0, 0x99, 0xB6, 0xFF}}},
+	{{{15, 0, 2},0, {288, 981},{0x90, 0x0, 0x3C, 0xFF}}},
+	{{{9, 0, 327},0, {288, 157},{0x99, 0x0, 0xB6, 0xFF}}},
+	{{{0, -15, 2},0, {60, 981},{0x0, 0x70, 0x3C, 0xFF}}},
+	{{{0, -9, 327},0, {60, 157},{0x0, 0x67, 0xB6, 0xFF}}},
+};
+
+Gfx pool_cue_PoolCue_mesh_layer_1_tri_1[] = {
+	gsSPVertex(pool_cue_PoolCue_mesh_layer_1_vtx_1 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
+	gsSP2Triangles(4, 1, 3, 0, 5, 1, 4, 0),
+	gsSP2Triangles(6, 7, 8, 0, 8, 7, 9, 0),
+	gsSP2Triangles(7, 10, 9, 0, 9, 10, 11, 0),
+	gsSP2Triangles(10, 12, 11, 0, 11, 12, 13, 0),
+	gsSP2Triangles(12, 14, 13, 0, 13, 14, 15, 0),
+	gsSP2Triangles(9, 13, 15, 0, 11, 13, 9, 0),
+	gsSPEndDisplayList(),
+};
+
 
 Gfx mat_pool_cue_poolcue_f3d_001[] = {
 	gsDPPipeSync(),
@@ -341,6 +372,13 @@ Gfx mat_revert_pool_cue_poolcue_f3d_001[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_pool_cue_Black[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
 Gfx pool_cue_PoolCue_mesh_layer_1[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPVertex(pool_cue_PoolCue_mesh_layer_1_vtx_cull + 0, 8, 0),
@@ -349,6 +387,8 @@ Gfx pool_cue_PoolCue_mesh_layer_1[] = {
 	gsSPDisplayList(mat_pool_cue_poolcue_f3d_001),
 	gsSPDisplayList(pool_cue_PoolCue_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_pool_cue_poolcue_f3d_001),
+	gsSPDisplayList(mat_pool_cue_Black),
+	gsSPDisplayList(pool_cue_PoolCue_mesh_layer_1_tri_1),
 	gsSPEndDisplayList(),
 };
 
