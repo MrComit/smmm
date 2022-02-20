@@ -43,7 +43,7 @@ void bhv_pool_floor_init(void) {
 }
 
 void bhv_pool_floor_loop(void) {
-    if (o->oOpacity > 0x3F) {
+    if (o->oOpacity > 0xF) {
         load_object_collision_model();
     }
     switch (o->oAction) {

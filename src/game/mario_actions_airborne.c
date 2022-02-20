@@ -675,12 +675,14 @@ s32 act_twirling(struct MarioState *m) {
 
     if (m->input & INPUT_A_DOWN) {
         yawVelTarget = 0x2000;
+    } else if (m->input & INPUT_Z_DOWN) {
+        yawVelTarget = 0x800;
     } else {
         yawVelTarget = 0x1800;
     }
 
     m->angleVel[1] = approach_s32(m->angleVel[1], yawVelTarget, 0x200, 0x200);
-    m->twirlYaw += m->angleVel[1];
+    m->twirlYaw += 0x3000 - m->angleVel[1];
 
     set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_START_TWIRL : MARIO_ANIM_TWIRL);
     if (is_anim_past_end(m)) {
