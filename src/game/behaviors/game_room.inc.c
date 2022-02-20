@@ -47,12 +47,53 @@ Vec3s sPoolBallColors[9] = {
 };
 
 
+Vec3f sToyMolePositions[3] = {
+{8858.0f, 100.0f, 8386.0f},
+{9483.0f, 100.0f, 8386.0f},
+{9483.0f, 100.0f, 9011.0f},
+};
+
+void bhv_toy_mole_init(void) {
+    o->oPosY -= 250.0f;
+    o->oFaceAngleYaw = random_u16();
+    if (o->oBehParams2ndByte == 3) {
+        o->oObj100 = spawn_object(o, MODEL_STAR_PIECE, bhvStarPiece);
+        o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        o->oObj100->oBehParams = 0x10 << 24;
+        o->oObj100->oBehParams2ndByte = 0;
+        o->oObj100->oRoom = o->oRoom;
+        vec3f_copy(&o->oObj100->oPosX, &o->oPosX);
+    }
+}
+
+
 void bhv_toy_mole_loop(void) {
-    obj_set_hitbox(o, &sToyMoleHitbox);
-    if (cur_obj_was_attacked_or_ground_pounded() != 0) {
-        obj_explode_and_spawn_coins(46.0f, 1);
-        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
-        o->parentObj->activeFlags = 0;
+    switch (o->oAction) {
+        case 0:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
+            if (o->oTimer & 1) {
+                o->oFaceAngleYaw += 0x1000;
+            }
+            if (o->oPosY == o->oHomeY) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oBehParams2ndByte == 3) {
+                o->oObj100->oPosY = o->oPosY + 100.0f;
+                o->oObj100->oRoom = o->oRoom;
+            }
+            obj_set_hitbox(o, &sToyMoleHitbox);
+            if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+                obj_explode_and_spawn_coins(46.0f, 1);
+                create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+                if (o->oBehParams2ndByte < 3) {
+                    o->oObjFC = spawn_object(o, MODEL_TOY_MOLE, bhvToyMole);
+                    o->oObjFC->oBehParams2ndByte = o->oBehParams2ndByte + 1;
+                    vec3f_copy(&o->oObjFC->oPosX, sToyMolePositions[o->oBehParams2ndByte]);
+                }
+            }
+            break;
     }
 }
 
@@ -137,7 +178,7 @@ void bhv_pool_cue_loop(void) {
     Vec3f point;
     f32 dist;
     s16 pitch, yaw;
-    // o->oAction = 5; // DEBUG
+    o->oAction = 5; // DEBUG
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 30) {

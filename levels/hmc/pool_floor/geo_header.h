@@ -5,7 +5,7 @@ extern u8 pool_floor_deepplanks_mixed2_rgba16[];
 extern u8 pool_floor_i4_matt_multitex_i4[];
 extern u8 pool_floor_carpet_end_green_ci8[];
 extern u8 pool_floor_carpet_end_green_ci8_pal_rgba16[];
-extern Vtx pool_floor_floor_mesh_layer_5_vtx_0[17];
+extern Vtx pool_floor_floor_mesh_layer_5_vtx_0[39];
 extern Gfx pool_floor_floor_mesh_layer_5_tri_0[];
 extern Vtx pool_floor_floor_mesh_layer_5_vtx_1[4];
 extern Gfx pool_floor_floor_mesh_layer_5_tri_1[];

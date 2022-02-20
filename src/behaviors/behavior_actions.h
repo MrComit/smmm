@@ -854,6 +854,7 @@ void bhv_pool_barrier_loop(void);
 void bhv_pool_floor_loop(void);
 void bhv_pool_floor_init(void);
 void bhv_toy_mole_loop(void);
+void bhv_toy_mole_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
