@@ -24,6 +24,11 @@ void bhv_collect_star_init(void) {
 
 void bhv_collect_star_loop(void) {
     o->oFaceAngleYaw += 0x400; // originally 0x800
+
+    if (o->oDistanceToMario < 2000.0f) {
+        cur_obj_play_sound_1(SOUND_AIR_PEACH_TWINKLE);
+    }
+
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         o->activeFlags = 0;
         o->oInteractStatus = 0;

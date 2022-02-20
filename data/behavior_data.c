@@ -4627,7 +4627,7 @@ const BehaviorScript bhvVanishCap[] = {
 
 const BehaviorScript bhvStar[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     SET_INT(oInteractionSubtype, INT_SUBTYPE_CURRENCY),
     //SCALE(0, 40),
     CALL_NATIVE(bhv_collect_star_init),
@@ -6811,7 +6811,7 @@ const BehaviorScript bhvToadFriend[] = {
 
 const BehaviorScript bhvStarPiece[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     //SCALE(0, 200),
     CALL_NATIVE(bhv_star_piece_init),
     BEGIN_LOOP(),
