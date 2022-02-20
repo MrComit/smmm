@@ -67,6 +67,9 @@ void bhv_pool_floor_loop(void) {
             }
             break;
     }
+    if (o->oOpacity <= 0xF && gMarioObject->platform == o) {
+        set_mario_action(gMarioState, ACT_FREEFALL, 0);
+    }
 }
 
 
