@@ -71,3 +71,7 @@
 #include "levels/hmc/pool_barrier/collision.inc.c"
 #include "levels/hmc/pool_floor/model.inc.c"
 #include "levels/hmc/pool_floor/collision.inc.c"
+#include "levels/hmc/toy_mole/model.inc.c"
+#include "levels/hmc/toy_mole/collision.inc.c"
+#include "levels/hmc/mole_cage/model.inc.c"
+#include "levels/hmc/mole_cage/collision.inc.c"

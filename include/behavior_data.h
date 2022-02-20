@@ -721,6 +721,8 @@ extern const BehaviorScript bhvPoolBall[];
 extern const BehaviorScript bhvPoolCue[];
 extern const BehaviorScript bhvPoolBarrier[];
 extern const BehaviorScript bhvPoolFloor[];
+extern const BehaviorScript bhvToyMole[];
+extern const BehaviorScript bhvMoleCage[];
 
 
 

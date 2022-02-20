@@ -732,6 +732,8 @@
 #define MODEL_POOL_CUE            0xFD
 #define MODEL_POOL_BARRIER        0xFC
 #define MODEL_POOL_FLOOR          0xFB
+#define MODEL_TOY_MOLE            0xFA
+#define MODEL_MOLE_CAGE           0xF9
 
 
 

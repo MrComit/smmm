@@ -444,6 +444,7 @@ static void boo_act_3(void) {
             case 1:
                 obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
                 obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+                obj->oBehParams = obj->oBehParams2ndByte << 16;
                 obj->oFaceAngleRoll = 0xF000;
                 obj->oFaceAngleYaw = 0;
                 obj->oPosX = o->oHomeX;

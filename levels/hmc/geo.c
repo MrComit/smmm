@@ -29,3 +29,5 @@
 #include "levels/hmc/pool_cue/geo.inc.c"
 #include "levels/hmc/pool_barrier/geo.inc.c"
 #include "levels/hmc/pool_floor/geo.inc.c"
+#include "levels/hmc/toy_mole/geo.inc.c"
+#include "levels/hmc/mole_cage/geo.inc.c"

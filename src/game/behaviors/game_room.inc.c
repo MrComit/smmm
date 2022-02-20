@@ -22,6 +22,18 @@ static struct ObjectHitbox sPoolBallHitbox = {
     /* hurtboxHeight:     */ 70,
 };
 
+struct ObjectHitbox sToyMoleHitbox = {
+    /* interactType:      */ INTERACT_BREAKABLE,
+    /* downOffset:        */ 20,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 100,
+    /* height:            */ 200,
+    /* hurtboxRadius:     */ 100,
+    /* hurtboxHeight:     */ 200,
+};
+
 Vec3s sPoolBallColors[9] = {
 {0xff, 0xae, 0x01}, // 1
 {0x2b, 0x67, 0xc2}, // 2
@@ -33,6 +45,18 @@ Vec3s sPoolBallColors[9] = {
 {0x00, 0x00, 0x00}, // 8
 {0xFF, 0xFF, 0xFF}, // 16
 };
+
+
+void bhv_toy_mole_loop(void) {
+    obj_set_hitbox(o, &sToyMoleHitbox);
+    if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+        obj_explode_and_spawn_coins(46.0f, 1);
+        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+        o->parentObj->activeFlags = 0;
+    }
+}
+
+
 
 void bhv_pool_floor_init(void) {
     o->oOpacity = 255;

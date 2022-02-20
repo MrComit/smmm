@@ -1,0 +1,13 @@
+extern const GeoLayout mole_cage_geo[];
+extern Lights1 mole_cage_Metal_001_lights;
+extern u8 mole_cage_MetalGround_i8[];
+extern u8 mole_cage_keylock_grey_i8[];
+extern Vtx mole_cage_molecage_mesh_layer_1_vtx_cull[8];
+extern Vtx mole_cage_molecage_mesh_layer_1_vtx_0[24];
+extern Gfx mole_cage_molecage_mesh_layer_1_tri_0[];
+extern Vtx mole_cage_molecage_mesh_layer_1_vtx_1[12];
+extern Gfx mole_cage_molecage_mesh_layer_1_tri_1[];
+extern Gfx mat_mole_cage_Metal_001[];
+extern Gfx mat_mole_cage_keylock_v4_001[];
+extern Gfx mole_cage_molecage_mesh_layer_1[];
+extern Gfx mole_cage_material_revert_render_settings[];

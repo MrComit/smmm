@@ -221,6 +221,7 @@ void bhv_boocoin_cage_init(void) {
             obj->oAction = 1;
             obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+            obj->oBehParams = obj->oBehParams2ndByte << 16;
             obj->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             break;
         case 1:
@@ -420,6 +421,10 @@ void bhv_small_key_loop(void) {
     //o->oFaceAngleRoll = -0x4000;
     //o->oGraphYOffset = 165.0f;
     if (o->oAction == 0) {
+        if (o->oBehParams >> 24 == 1) {
+            o->oAction = 1;
+            return;
+        }
         if (o->oTimer == 0)
             o->oVelY = 70.0f;
         spawn_sparkle_particles(3, 200, 80, -60);

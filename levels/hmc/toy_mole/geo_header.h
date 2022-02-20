@@ -1,0 +1,11 @@
+extern const GeoLayout toy_mole_geo[];
+extern Lights1 toy_mole_Mole_lights;
+extern u8 toy_mole_montymoleci4_ci4[];
+extern u8 toy_mole_montymoleci4_ci4_pal_rgba16[];
+extern Vtx toy_mole_Mole_mesh_layer_1_vtx_cull[8];
+extern Vtx toy_mole_Mole_mesh_layer_1_vtx_0[40];
+extern Gfx toy_mole_Mole_mesh_layer_1_tri_0[];
+extern Gfx mat_toy_mole_Mole[];
+extern Gfx mat_revert_toy_mole_Mole[];
+extern Gfx toy_mole_Mole_mesh_layer_1[];
+extern Gfx toy_mole_material_revert_render_settings[];
