@@ -735,6 +735,7 @@
 #define MODEL_TOY_MOLE            0xFA
 #define MODEL_MOLE_CAGE           0xF9
 #define MODEL_PINGPONG_BALL       0xF8
+#define MODEL_PINGPONG_PADDLE     0xF7
 
 
 

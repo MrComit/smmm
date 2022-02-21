@@ -119,4 +119,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/pingpong_ball/geo_header.h"
 
+#include "levels/hmc/pingpong_paddle/geo_header.h"
+
 #endif

@@ -8514,3 +8514,14 @@ const BehaviorScript bhvPingpongBall[] = {
         CALL_NATIVE(bhv_pingpong_ball_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvPingpongPaddle[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_pingpong_ball_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pingpong_paddle_loop),
+    END_LOOP(),
+};

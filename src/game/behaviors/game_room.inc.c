@@ -35,6 +35,18 @@ struct ObjectHitbox sToyMoleHitbox = {
     /* hurtboxHeight:     */ 200,
 };
 
+struct ObjectHitbox sPingpongBallHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 50,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 50,
+    /* hurtboxHeight:     */ 50,
+};
+
 Vec3s sPoolBallColors[9] = {
 {0xff, 0xae, 0x01}, // 1
 {0x2b, 0x67, 0xc2}, // 2
@@ -58,6 +70,7 @@ Vec3f sToyMolePositions[3] = {
 
 void bhv_pingpong_ball_init(void) {
     // o->oObjF4 = o->parentObj;
+    obj_set_hitbox(o, &sPingpongBallHitbox);
     o->oObjF8 = CL_nearest_object_with_behavior_and_field(bhvShyguyPingpong, 0x144, 1);
     if (o->oObjF8 == NULL) {
         o->activeFlags = 0;
@@ -67,9 +80,18 @@ void bhv_pingpong_ball_init(void) {
 }
 
 void pingpong_ball_update(struct Object *obj1, struct Object *obj2) {
-    o->os16FC += 0x20000 / BALL_TRAVEL_FRAMES;
-    o->oFloat100 = 175.0f + (coss(o->os16FC) * 65.0f);//o->oObjF8->oPosY + 150.0f;
-    o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 20.0f);
+    o->oFC += 0x20000 / BALL_TRAVEL_FRAMES;
+    if (o->oFC < 0x8000) {
+        o->oPosY = approach_f32_symmetric(o->oPosY, 115.0f, BALL_TRAVEL_FRAMES / 4);
+    } else if (o->oFC < 0x10000) {
+        o->oPosY = 155.0f + (coss(o->oFC) * 45.0f);
+    } else if (o->oFC < 0x18000) {
+        o->oPosY = approach_f32_symmetric(o->oPosY, 115.0f, BALL_TRAVEL_FRAMES / 4);
+    } else {
+        o->oPosY = 155.0f + (coss(o->oFC) * 45.0f);
+    }
+    // o->oFloat100 = 155.0f + (coss(o->oFC) * 45.0f);//o->oObjF8->oPosY + 150.0f;
+    // o->oPosY = o->oFloat100;//approach_f32_symmetric(o->oPosY, o->oFloat100, 20.0f);
     o->oPosX = approach_f32_symmetric(o->oPosX, obj1->oPosX, 985.0f / BALL_TRAVEL_FRAMES);
     o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat10C, o->oFloat110);
     if (o->oPosX == obj1->oPosX) {
@@ -85,7 +107,7 @@ void pingpong_ball_update(struct Object *obj1, struct Object *obj2) {
         } else {
             obj1->oAction = 3;
             o->oAction ^= 1;
-            o->os16FC = 0;
+            o->oFC = 0;
             if (obj2->oAction != 4) {
                 obj2->oAction = 2;
                 do {
@@ -93,6 +115,8 @@ void pingpong_ball_update(struct Object *obj1, struct Object *obj2) {
                 } while (absi(obj2->os16F8 - obj2->os16FA) < 0x2000);
                 obj2->os16FA = obj2->os16F8;
                 o->oFloat10C = obj2->oHomeZ + (sins(obj2->os16F8) * 180.0f);
+            } else {
+                o->oFloat10C = obj2->oPosZ + (80.0f * sins(obj2->oFaceAngleYaw));
             }
             o->oFloat110 = absf(o->oFloat10C - o->oPosZ) / BALL_TRAVEL_FRAMES;
         }
@@ -111,11 +135,36 @@ void bhv_pingpong_ball_loop(void) {
     if (o->os16104 == 0 && o->oDistanceToMario < 500.0f) {
         o->os16104 = 1;
     }
+    if (o->oInteractStatus) {
+        o->activeFlags = 0;
+        o->oObjF4->oAction = 1;
+        o->oObjF8->oAction = 1;
+        o->oObjF4->oObjF4 = NULL;
+        o->oObjF8->oObjF4 = NULL;
+        spawn_mist_particles();
+    }
+    o->oInteractStatus = 0;
+}
+
+
+void bhv_pingpong_paddle_loop(void) {
+    Vec3f pos;
+    pos[1] = o->oObjF4->oPosY + 50.0f;
+    pos[0] = o->oObjF4->oPosX + (sins(o->oObjF4->oFaceAngleYaw - 0x4000) * 40.0f);
+    pos[2] = o->oObjF4->oPosZ + (coss(o->oObjF4->oFaceAngleYaw - 0x4000) * 40.0f);
+    vec3f_copy(&o->oPosX, pos);
+    o->oFaceAngleYaw = o->oObjF4->oFaceAngleYaw + 0x4000;
+    o->oOpacity = o->oObjF4->oOpacity;
 }
 
 void bhv_shyguy_pingpong_init(void) {
     obj_set_hitbox(o, &sShyguyHitbox);
     o->oMoveAngleYaw = o->oFaceAngleYaw;
+    o->oObj110 = spawn_object(o, MODEL_PINGPONG_PADDLE, bhvPingpongPaddle);
+    o->oObj110->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    o->oObj110->oFaceAngleRoll = 0x4000;
+    o->oObj110->oBehParams2ndByte = o->oBehParams2ndByte;
+    o->oObj110->oObjF4 = o;
 }
 
 void bhv_shyguy_pingpong_loop(void) {
@@ -143,25 +192,40 @@ void bhv_shyguy_pingpong_loop(void) {
             }
             break;
         case 2:
-            o->oPosZ = approach_f32_asymptotic(o->oPosZ, o->oObjF4->oFloat10C, 0.1f);
+            o->oPosZ = approach_f32_asymptotic(o->oPosZ, o->oObjF4->oFloat10C - (80.0f * sins(o->oFaceAngleYaw)), 0.1f);
+
+            if (o->oTimer < BALL_TRAVEL_FRAMES - 5) {
+                o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw - 0x1800, 
+                                    0x1800 / (BALL_TRAVEL_FRAMES - 5));
+            } else {
+                o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw + 0x2800, 
+                                    0x2800 / 5);
+            }
+
             if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                 o->oAction = 4;
-                o->oObjF4->oFloat10C = o->oPosZ;
             }
             break;
         case 3:
             if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                 o->oAction = 4;
-                o->oObjF4->oFloat10C = o->oPosZ;
             }
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw, 0x200);
             break;
         case 4:
+            if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                o->oTimer = 0;
+            }
             if (o->oTimer < 20) {
                 o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToMario, 0x800);
+                o->os1610C += 0x1800;
+                o->oFaceAnglePitch = 0x800 * sins(o->os1610C);
             } else if (o->oTimer < 30) {
                 o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw, 0xC00);
+                o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x200);
             } else {
                 o->oAction = 3;
+                o->os1610C = 0;
             }
             break;
         case 5:
@@ -169,10 +233,12 @@ void bhv_shyguy_pingpong_loop(void) {
             // obj_spawn_loot_blue_coins(o, 1, 20.0f, 70);
             spawn_object(o, MODEL_BLUE_COIN, bhvMrIBlueCoin);
             o->activeFlags = 0;
+            o->oObj110->activeFlags = 0;
             create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
             break;
         case 6:
             o->activeFlags = 0;
+            o->oObj110->activeFlags = 0;
             spawn_object(o, MODEL_SHYGUY, bhvShyguy);
             break;
     }
@@ -308,7 +374,7 @@ void bhv_pool_cue_loop(void) {
     Vec3f point;
     f32 dist;
     s16 pitch, yaw;
-    o->oAction = 5; // DEBUG
+    // o->oAction = 5; // DEBUG
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 30) {

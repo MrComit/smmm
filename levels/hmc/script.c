@@ -48,6 +48,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_MOLE, toy_mole_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MOLE_CAGE, mole_cage_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PINGPONG_BALL, pingpong_ball_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PINGPONG_PADDLE, pingpong_paddle_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -101,8 +102,8 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_POOL_BALL, 6733, 247, 8640, 0, 180, 0, (16 << 16), bhvPoolBall),
 		OBJECT(MODEL_POOL_CUE, 5419, 427, 8273, 0, 18, 0, 0x00000000, bhvPoolCue),
 		OBJECT(MODEL_BOO, 7675, 161, 8494, 0, -180, 0, (0x1 << 24) | (0xF << 16) | (0x9 << 8), bhvRoomBoo),
-		OBJECT(MODEL_SHYGUY, 4302, 150, 4395, 0, 90, 0, (0 << 16), bhvShyguyPingpong),
-		OBJECT(MODEL_SHYGUY, 5288, 150, 4395, 0, -90, 0, (1 << 16), bhvShyguyPingpong),
+		OBJECT(MODEL_SHYGUY, 4302, 160, 4395, 0, 90, 0, (0 << 16), bhvShyguyPingpong),
+		OBJECT(MODEL_SHYGUY, 5288, 160, 4395, 0, -90, 0, (1 << 16), bhvShyguyPingpong),
 		OBJECT(MODEL_SMALL_KEY, 9608, 1875, 5761, 0, 0, 0, (1 << 24) | (8 << 16), bhvSmallKey),
 		OBJECT(MODEL_TOY_MOLE, 9171, 100, 8698, 0, -14, 0, 0x00000000, bhvToyMole),
 		TERRAIN(hmc_area_1_collision),
