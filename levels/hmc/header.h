@@ -117,4 +117,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/mole_cage/collision_header.h"
 
+#include "levels/hmc/pingpong_ball/geo_header.h"
+
 #endif

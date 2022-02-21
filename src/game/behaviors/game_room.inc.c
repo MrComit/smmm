@@ -1,3 +1,4 @@
+#include "game/object_helpers.h"
 static struct ObjectHitbox sDiceEnemyHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -52,6 +53,107 @@ Vec3f sToyMolePositions[3] = {
 {9483.0f, 100.0f, 8386.0f},
 {9483.0f, 100.0f, 9011.0f},
 };
+
+#define BALL_TRAVEL_FRAMES 30
+
+void bhv_pingpong_ball_init(void) {
+    // o->oObjF4 = o->parentObj;
+    o->oObjF8 = CL_nearest_object_with_behavior_and_field(bhvShyguyPingpong, 0x144, 1);
+    if (o->oObjF8 == NULL) {
+        o->activeFlags = 0;
+    } else {
+        o->oObjF8->oObjF4 = o;
+    }
+}
+
+void bhv_pingpong_ball_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->os16FC += 0x20000 / BALL_TRAVEL_FRAMES;
+            o->oFloat100 = 175.0f + (coss(o->os16FC) * 65.0f);//o->oObjF8->oPosY + 150.0f;
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 20.0f);
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oObjF4->oPosX, 985.0f / BALL_TRAVEL_FRAMES);
+            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat10C, o->oFloat110);
+            if (o->oPosX == o->oObjF4->oPosX) {
+                o->oObjF4->oAction = 3;
+                o->oAction = 1;
+                o->os16FC = 0;
+                do {
+                    o->oObjF8->os16F8 = random_u16();
+                } while (absi(o->oObjF8->os16F8 - o->oObjF8->os16FA) < 0x1000);
+                o->oObjF8->os16FA = o->oObjF8->os16F8;
+                o->oObjF8->oAction = 2;
+                o->oFloat10C = o->oObjF8->oHomeZ + (sins(o->oObjF8->os16F8) * 200.0f);
+                o->oFloat110 = absf(o->oFloat10C - o->oPosZ) / BALL_TRAVEL_FRAMES;
+            }
+            break;
+        case 1:
+            o->os16FC += 0x20000 / BALL_TRAVEL_FRAMES;
+            o->oFloat100 = 175.0f + (coss(o->os16FC) * 65.0f);//o->oObjF4->oPosY + 150.0f;
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 20.0f);
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oObjF8->oPosX, 985.0f / BALL_TRAVEL_FRAMES);
+            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat10C, o->oFloat110);
+            if (o->oPosX == o->oObjF8->oPosX) {
+                o->oObjF8->oAction = 3;
+                o->oAction = 0;
+                o->os16FC = 0;
+                do {
+                    o->oObjF4->os16F8 = random_u16();
+                } while (absi(o->oObjF4->os16F8 - o->oObjF4->os16FA) < 0x1000);
+                o->oObjF4->os16FA = o->oObjF4->os16F8;
+                o->oObjF4->oAction = 2;
+                o->oFloat10C = o->oObjF4->oHomeZ + (sins(o->oObjF4->os16F8) * 200.0f);
+                o->oFloat110 = absf(o->oFloat10C - o->oPosZ) / BALL_TRAVEL_FRAMES;
+            }
+            break;
+    }
+    if (o->os16104 == 0 && o->oDistanceToMario < 500.0f) {
+        o->os16104 = 1;
+    }
+}
+
+void bhv_shyguy_pingpong_init(void) {
+    // bhv_shyguy_init();
+}
+
+void bhv_shyguy_pingpong_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 90 && cur_obj_nearest_object_with_behavior(bhvPoolBarrier) == NULL) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer < 30) {
+                break;
+            }
+            if (o->oBehParams2ndByte == 0) {
+                o->oObjF4 = spawn_object(o, MODEL_PINGPONG_BALL, bhvPingpongBall);
+                o->oObjF4->oObjF4 = o;
+            } else if (o->oObjF4 != NULL) {
+                do {
+                    o->os16F8 = random_u16();
+                } while (absi(o->os16F8 - o->os16FA) < 0x1000);
+                o->os16FA = o->os16F8;
+                o->oObjF4->oFloat10C = o->oHomeZ + (sins(o->os16F8) * 200.0f);
+                o->oObjF4->oFloat110 = absf(o->oObjF4->oFloat10C - o->oObjF4->oPosZ) / BALL_TRAVEL_FRAMES;
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oObjF4->oFloat10C, o->oObjF4->oFloat110);
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+    }
+    if (o->oObjF4 != NULL && o->oObjF4->os16104 && o->oOpacity < 255) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x8);
+    }
+    o->oInteractStatus = 0;
+}
+
 
 void bhv_toy_mole_init(void) {
     o->oPosY -= 250.0f;

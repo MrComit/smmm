@@ -31,3 +31,4 @@
 #include "levels/hmc/pool_floor/geo.inc.c"
 #include "levels/hmc/toy_mole/geo.inc.c"
 #include "levels/hmc/mole_cage/geo.inc.c"
+#include "levels/hmc/pingpong_ball/geo.inc.c"

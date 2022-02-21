@@ -75,3 +75,4 @@
 #include "levels/hmc/toy_mole/collision.inc.c"
 #include "levels/hmc/mole_cage/model.inc.c"
 #include "levels/hmc/mole_cage/collision.inc.c"
+#include "levels/hmc/pingpong_ball/model.inc.c"
