@@ -66,45 +66,46 @@ void bhv_pingpong_ball_init(void) {
     }
 }
 
+void pingpong_ball_update(struct Object *obj1, struct Object *obj2) {
+    o->os16FC += 0x20000 / BALL_TRAVEL_FRAMES;
+    o->oFloat100 = 175.0f + (coss(o->os16FC) * 65.0f);//o->oObjF8->oPosY + 150.0f;
+    o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 20.0f);
+    o->oPosX = approach_f32_symmetric(o->oPosX, obj1->oPosX, 985.0f / BALL_TRAVEL_FRAMES);
+    o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat10C, o->oFloat110);
+    if (o->oPosX == obj1->oPosX) {
+        if (obj1->oAction == 4) {
+            obj1->oAction = 5;
+            o->activeFlags = 0;
+            obj2->oAction = 6;
+            obj1->oObjF4 = NULL;
+            obj2->oObjF4 = NULL;
+            if (!gIsConsole) {
+                spawn_mist_particles();
+            }
+        } else {
+            obj1->oAction = 3;
+            o->oAction ^= 1;
+            o->os16FC = 0;
+            if (obj2->oAction != 4) {
+                obj2->oAction = 2;
+                do {
+                    obj2->os16F8 = random_u16();
+                } while (absi(obj2->os16F8 - obj2->os16FA) < 0x2000);
+                obj2->os16FA = obj2->os16F8;
+                o->oFloat10C = obj2->oHomeZ + (sins(obj2->os16F8) * 180.0f);
+            }
+            o->oFloat110 = absf(o->oFloat10C - o->oPosZ) / BALL_TRAVEL_FRAMES;
+        }
+    }
+}
+
 void bhv_pingpong_ball_loop(void) {
     switch (o->oAction) {
         case 0:
-            o->os16FC += 0x20000 / BALL_TRAVEL_FRAMES;
-            o->oFloat100 = 175.0f + (coss(o->os16FC) * 65.0f);//o->oObjF8->oPosY + 150.0f;
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 20.0f);
-            o->oPosX = approach_f32_symmetric(o->oPosX, o->oObjF4->oPosX, 985.0f / BALL_TRAVEL_FRAMES);
-            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat10C, o->oFloat110);
-            if (o->oPosX == o->oObjF4->oPosX) {
-                o->oObjF4->oAction = 3;
-                o->oAction = 1;
-                o->os16FC = 0;
-                do {
-                    o->oObjF8->os16F8 = random_u16();
-                } while (absi(o->oObjF8->os16F8 - o->oObjF8->os16FA) < 0x1000);
-                o->oObjF8->os16FA = o->oObjF8->os16F8;
-                o->oObjF8->oAction = 2;
-                o->oFloat10C = o->oObjF8->oHomeZ + (sins(o->oObjF8->os16F8) * 200.0f);
-                o->oFloat110 = absf(o->oFloat10C - o->oPosZ) / BALL_TRAVEL_FRAMES;
-            }
+            pingpong_ball_update(o->oObjF4, o->oObjF8);
             break;
         case 1:
-            o->os16FC += 0x20000 / BALL_TRAVEL_FRAMES;
-            o->oFloat100 = 175.0f + (coss(o->os16FC) * 65.0f);//o->oObjF4->oPosY + 150.0f;
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat100, 20.0f);
-            o->oPosX = approach_f32_symmetric(o->oPosX, o->oObjF8->oPosX, 985.0f / BALL_TRAVEL_FRAMES);
-            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat10C, o->oFloat110);
-            if (o->oPosX == o->oObjF8->oPosX) {
-                o->oObjF8->oAction = 3;
-                o->oAction = 0;
-                o->os16FC = 0;
-                do {
-                    o->oObjF4->os16F8 = random_u16();
-                } while (absi(o->oObjF4->os16F8 - o->oObjF4->os16FA) < 0x1000);
-                o->oObjF4->os16FA = o->oObjF4->os16F8;
-                o->oObjF4->oAction = 2;
-                o->oFloat10C = o->oObjF4->oHomeZ + (sins(o->oObjF4->os16F8) * 200.0f);
-                o->oFloat110 = absf(o->oFloat10C - o->oPosZ) / BALL_TRAVEL_FRAMES;
-            }
+            pingpong_ball_update(o->oObjF8, o->oObjF4);
             break;
     }
     if (o->os16104 == 0 && o->oDistanceToMario < 500.0f) {
@@ -113,7 +114,8 @@ void bhv_pingpong_ball_loop(void) {
 }
 
 void bhv_shyguy_pingpong_init(void) {
-    // bhv_shyguy_init();
+    obj_set_hitbox(o, &sShyguyHitbox);
+    o->oMoveAngleYaw = o->oFaceAngleYaw;
 }
 
 void bhv_shyguy_pingpong_loop(void) {
@@ -133,19 +135,45 @@ void bhv_shyguy_pingpong_loop(void) {
             } else if (o->oObjF4 != NULL) {
                 do {
                     o->os16F8 = random_u16();
-                } while (absi(o->os16F8 - o->os16FA) < 0x1000);
+                } while (absi(o->os16F8 - o->os16FA) < 0x2000);
                 o->os16FA = o->os16F8;
-                o->oObjF4->oFloat10C = o->oHomeZ + (sins(o->os16F8) * 200.0f);
+                o->oObjF4->oFloat10C = o->oHomeZ + (sins(o->os16F8) * 180.0f);
                 o->oObjF4->oFloat110 = absf(o->oObjF4->oFloat10C - o->oObjF4->oPosZ) / BALL_TRAVEL_FRAMES;
                 o->oAction = 2;
             }
             break;
         case 2:
-            o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oObjF4->oFloat10C, o->oObjF4->oFloat110);
+            o->oPosZ = approach_f32_asymptotic(o->oPosZ, o->oObjF4->oFloat10C, 0.1f);
+            if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                o->oAction = 4;
+                o->oObjF4->oFloat10C = o->oPosZ;
+            }
             break;
         case 3:
+            if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                o->oAction = 4;
+                o->oObjF4->oFloat10C = o->oPosZ;
+            }
             break;
         case 4:
+            if (o->oTimer < 20) {
+                o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToMario, 0x800);
+            } else if (o->oTimer < 30) {
+                o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw, 0xC00);
+            } else {
+                o->oAction = 3;
+            }
+            break;
+        case 5:
+            spawn_mist_particles();
+            // obj_spawn_loot_blue_coins(o, 1, 20.0f, 70);
+            spawn_object(o, MODEL_BLUE_COIN, bhvMrIBlueCoin);
+            o->activeFlags = 0;
+            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+            break;
+        case 6:
+            o->activeFlags = 0;
+            spawn_object(o, MODEL_SHYGUY, bhvShyguy);
             break;
     }
     if (o->oObjF4 != NULL && o->oObjF4->os16104 && o->oOpacity < 255) {

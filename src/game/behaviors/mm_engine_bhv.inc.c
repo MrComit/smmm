@@ -423,6 +423,7 @@ void bhv_small_key_loop(void) {
     if (o->oAction == 0) {
         if (o->oBehParams >> 24 == 1) {
             o->oAction = 1;
+            o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
             return;
         }
         if (o->oTimer == 0)

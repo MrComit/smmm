@@ -198,6 +198,18 @@ void scroll_sts_mat_hmc_dl_WoodFloorTransparent_layer1() {
 	}
 };
 
+void scroll_sts_mat_hmc_dl_WoodFloorOneCycle() {
+	static int intervalTex1 = 3;
+	static int curInterval1 = 3;
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_WoodFloorOneCycle);
+
+	if (--curInterval1 <= 0) {
+		shift_s(mat, -1, PACK_TILESIZE(0, 1));
+		shift_t(mat, -1, PACK_TILESIZE(0, 2));
+		curInterval1 = intervalTex1;
+	}
+};
+
 void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_WoodFloor_layer1();
 	scroll_sts_mat_hmc_dl_Wall_layer1();
@@ -212,4 +224,5 @@ void scroll_hmc() {
 	scroll_hmc_dl_TrophyRoom_007_mesh_layer_1_vtx_4();
 	scroll_sts_mat_hmc_dl_Parlor1_layer1();
 	scroll_sts_mat_hmc_dl_WoodFloorTransparent_layer1();
+	scroll_sts_mat_hmc_dl_WoodFloorOneCycle();
 }
