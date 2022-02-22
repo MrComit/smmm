@@ -2262,7 +2262,7 @@ void cur_obj_set_hurtbox_radius_and_height(f32 radius, f32 height) {
     o->hurtboxHeight = height;
 }
 
-static void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
+void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
                                     const BehaviorScript *coinBehavior,
                                     s16 posJitter, s16 model) {
     s32 i;

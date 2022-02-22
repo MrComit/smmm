@@ -1086,6 +1086,13 @@ void handle_ground_pound_floor(struct MarioState *m) {
             spawn_token(0, 0x1D, sSpawnedTokens[2], 0x2000, 0);
             break;
         case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+            // obj_spawn_loot_coins(gMarioObject, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+            obj = spawn_object(gMarioObject, MODEL_YELLOW_COIN, bhvSingleCoinGetsSpawned);
+            // obj->oPosY += 200.0f;
             break;
     }
     save_file_set_gpflags(1 << index);
