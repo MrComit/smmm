@@ -545,7 +545,7 @@ void dice_enemy_move(void) {
         }
         if (!(o->oGoombaTurningAwayFromWall =
                   obj_bounce_off_walls_edges_objects(&o->oGoombaTargetYaw))) {
-            if (o->oDistanceToMario < 1000.0f) {
+            if (o->oDistanceToMario < 600.0f) {
                 if (o->oTimer > o->os1610E) {
                     o->os1610C = (random_float() - 0.5f) * 0x2000;
                     o->os1610E = CL_RandomMinMaxU16(20, 90);
