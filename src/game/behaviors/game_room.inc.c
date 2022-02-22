@@ -294,9 +294,11 @@ void bhv_toy_mole_loop(void) {
 }
 
 
+s32 gPoolFloorUp = 0;
 
 void bhv_pool_floor_init(void) {
     o->oOpacity = 255;
+    gPoolFloorUp = 0;
     o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoolCue);
     if (o->oObjF4 == NULL) {
         o->oAction = 3;
@@ -304,6 +306,7 @@ void bhv_pool_floor_init(void) {
 }
 
 void bhv_pool_floor_loop(void) {
+    struct Object *obj;
     if (o->oOpacity > 0xF) {
         load_object_collision_model();
     }
@@ -325,6 +328,15 @@ void bhv_pool_floor_loop(void) {
             o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 0x10);
             if (o->oOpacity == 255) {
                 o->oAction = 3;
+                gPoolFloorUp = 1;
+                obj = cur_obj_nearest_object_with_behavior(bhvToyMole);
+                if (obj != NULL) {
+                    obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+                }
+                obj = cur_obj_nearest_object_with_behavior(bhvMoleCage);
+                if (obj != NULL) {
+                    obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+                }
             }
             break;
     }
@@ -443,23 +455,21 @@ void bhv_pool_cue_loop(void) {
                 if (o->oTimer == 25) {
                     o->oObjFC->oMoveAnglePitch = -o->oFaceAnglePitch;
                     o->oObjFC->oMoveAngleYaw = o->oMoveAngleYaw;
+                    o->oMoveAnglePitch = -o->oFaceAnglePitch;
                     o->oObjFC->oForwardVel = 65.0f;
+                    o->oForwardVel = -5.0f;
                 }
-            } else if (o->oTimer <= 35) {
-                o->oForwardVel = -5.0f;
-                o->oMoveAnglePitch = -o->oFaceAnglePitch;
-                CL_Move_3d();
-            } else if (o->oTimer <= 40) {
-                o->oForwardVel = 30.0f;
-                o->oMoveAnglePitch = -o->oFaceAnglePitch;
-                CL_Move_3d();
             } else {
-                o->oObjFC->oAction = 1;
-                o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 5.0f);
-                CL_Move_3d();
-                if (o->oForwardVel == 0) {
-                    o->oAction = 2;
+                if (o->oTimer == 36) {
+                    o->oForwardVel = 30.0f;
+                } else  if (o->oTimer > 40) {
+                    o->oObjFC->oAction = 1;
+                    o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 5.0f);
+                    if (o->oForwardVel == 0) {
+                        o->oAction = 2;
+                    }
                 }
+                CL_Move_3d();
             }
             break;
         case 4:
@@ -476,6 +486,9 @@ void bhv_pool_cue_loop(void) {
 
 
 void bhv_pool_ball_init(void) {
+    if (o->oBehParams2ndByte & 1 && gIsConsole) {
+        cur_obj_hide();
+    }
     if (o->oBehParams2ndByte > 7) {
         o->oBehParams2ndByte -= 8;
         o->oAnimState = 1;
@@ -488,6 +501,9 @@ void bhv_pool_ball_init(void) {
 
 void bhv_pool_ball_loop(void) {
     if (o->oAction) {
+        if (o->oTimer == 0) {
+            cur_obj_unhide();
+        }
         o->oFaceAnglePitch += 0x800;
         obj_set_hitbox(o, &sPoolBallHitbox);
         CL_Move_3d();

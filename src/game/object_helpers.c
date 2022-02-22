@@ -702,6 +702,8 @@ Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+extern s32 gPoolFloorUp;
+
 #ifdef AVOID_UB
 Gfx *geo_switch_pool_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
 #else
@@ -713,21 +715,31 @@ Gfx *geo_switch_pool_floor(s32 callContext, struct GraphNode *node) {
         // move to a local var because GraphNodes are passed in all geo functions.
         // cast the pointer.
         switchCase = (struct GraphNodeSwitchCase *) node;
-        struct Object *obj = cur_obj_nearest_object_with_behavior(bhvPoolFloor);
+        struct Object *obj;
 
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
 
         // assign the case number for execution.
-        if (obj == NULL || obj->oAction == 3) {
+        if (gPoolFloorUp) {
             switchCase->selectedCase = 1;
         } else {
             switchCase->selectedCase = 0;
+            obj = cur_obj_nearest_object_with_behavior(bhvToyMole);
+            if (obj != NULL) {
+                obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            }
+            obj = cur_obj_nearest_object_with_behavior(bhvMoleCage);
+            if (obj != NULL) {
+                obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            }
         }
     }
 
     return NULL;
 }
+
+extern s16 s8DirModeBaseYaw;
 
 #ifdef AVOID_UB
 Gfx *geo_switch_mole_gate(s32 callContext, struct GraphNode *node, UNUSED void *context) {
@@ -745,7 +757,7 @@ Gfx *geo_switch_mole_gate(s32 callContext, struct GraphNode *node) {
         // the switch.
 
         // assign the case number for execution.
-        if (gMarioState->pos[0] < 8795.0f || gMarioState->pos[2] < 8323.0f) {
+        if ((gMarioState->pos[0] < 8795.0f || gMarioState->pos[2] < 8323.0f) && ((u16)s8DirModeBaseYaw > 0x4000)) {
             switchCase->selectedCase = 0;
         } else {
             switchCase->selectedCase = 1;

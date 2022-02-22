@@ -12,4 +12,5 @@ extern void scroll_hmc_dl_TrophyRoom_007_mesh_layer_1_vtx_4();
 extern void scroll_sts_mat_hmc_dl_Parlor1_layer1();
 extern void scroll_sts_mat_hmc_dl_WoodFloorTransparent_layer1();
 extern void scroll_sts_mat_hmc_dl_WoodFloorOneCycle();
+extern void scroll_sts_mat_hmc_dl_Lava_layer1();
 extern void scroll_hmc();

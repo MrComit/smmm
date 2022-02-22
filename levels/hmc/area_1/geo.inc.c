@@ -63,13 +63,15 @@ const GeoLayout hmc_dl_bb_001_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_bb_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_bb_003_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
 const GeoLayout hmc_dl_cc_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_cc_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_cc_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hmc_dl_WhackAMole_001_mesh_layer_6),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -83,7 +85,7 @@ const GeoLayout hmc_dl_bb_geo[] = {
 const GeoLayout hmc_dl_cc_001_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_cc_001_mesh),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_cc_001_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -108,10 +110,8 @@ const GeoLayout hmc_dl_105__Game_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_PingPongTable_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_PoolTable_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ToyBoxes_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ToyBoxes_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_011_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_WhackAMole_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hmc_dl_WhackAMole_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_WhackAMole_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
