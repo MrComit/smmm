@@ -186,8 +186,8 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
                 vert[i].v.cn[3] = 0;
             }
             // UV generating code
-            // vert[i].v.tc[0] = vert[i].v.ob[0] * 2;
-            // vert[i].v.tc[1] = vert[i].v.ob[2] * 2;
+            // vert[i].v.tc[0] = (gMarioState->pos[0] - vert[i].v.ob[0]) * 2;
+            // vert[i].v.tc[1] = (gMarioState->pos[2] - vert[i].v.ob[2]) * 2;
         }
         // print_text_fmt_int(80, 180, "mario x: %d", marioPos[0]);
         // print_text_fmt_int(80, 140, "mario z: %d", marioPos[2]);
