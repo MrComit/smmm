@@ -726,6 +726,8 @@ extern const BehaviorScript bhvMoleCage[];
 extern const BehaviorScript bhvShyguyPingpong[];
 extern const BehaviorScript bhvPingpongBall[];
 extern const BehaviorScript bhvPingpongPaddle[];
+extern const BehaviorScript bhvTrophyPlatSpin[];
+extern const BehaviorScript bhvTrophyPlatRise[];
 
 
 

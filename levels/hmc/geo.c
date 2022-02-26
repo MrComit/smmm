@@ -33,3 +33,4 @@
 #include "levels/hmc/mole_cage/geo.inc.c"
 #include "levels/hmc/pingpong_ball/geo.inc.c"
 #include "levels/hmc/pingpong_paddle/geo.inc.c"
+#include "levels/hmc/trophy_octogon/geo.inc.c"

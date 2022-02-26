@@ -8525,3 +8525,30 @@ const BehaviorScript bhvPingpongPaddle[] = {
         CALL_NATIVE(bhv_pingpong_paddle_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvTrophyPlatSpin[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(trophy_octogon_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        ADD_INT(oFaceAngleYaw, 0x300),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvTrophyPlatRise[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(trophy_octogon_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    SCALE(0, 75),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        // ADD_INT(oFaceAngleYaw, 0x300),
+        CALL_NATIVE(bhv_trophy_plat_rise_loop),
+    END_LOOP(),
+};

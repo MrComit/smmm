@@ -860,6 +860,7 @@ void bhv_shyguy_pingpong_loop(void);
 void bhv_pingpong_ball_loop(void);
 void bhv_pingpong_ball_init(void);
 void bhv_pingpong_paddle_loop(void);
+void bhv_trophy_plat_rise_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
