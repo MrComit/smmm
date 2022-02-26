@@ -50,6 +50,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PINGPONG_BALL, pingpong_ball_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PINGPONG_PADDLE, pingpong_paddle_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_OCTOGON, trophy_octogon_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_RECTANGLE, trophy_rectangle_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -74,6 +75,8 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TROPHY_OCTOGON, -2686, 400, 7189, 0, 23, 0, (32 << 24) | (5 << 16), bhvTrophyPlatRise),
 		OBJECT(MODEL_TROPHY_OCTOGON, -4603, -100, 6876, 0, 0, 0, 0x00000000, bhvTrophyPlatSpin),
 		OBJECT(MODEL_TROPHY_OCTOGON, -3413, -100, 5493, 0, 0, 0, 0x00000000, bhvTrophyPlatSpin),
+		OBJECT(MODEL_TROPHY_RECTANGLE, -2686, -100, 11765, 0, 0, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
+		OBJECT(MODEL_TROPHY_RECTANGLE, -2636, -100, 12390, 0, -165, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3746, 0, 14423, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3746, 0, 8273, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_POOL_BARRIER, 5608, 0, 7118, 0, 0, 0, 0x00000000, bhvPoolBarrier),

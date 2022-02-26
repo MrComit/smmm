@@ -8532,8 +8532,10 @@ const BehaviorScript bhvTrophyPlatSpin[] = {
     OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(trophy_octogon_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_trophy_plat_spin_loop),
         ADD_INT(oFaceAngleYaw, 0x300),
     END_LOOP(),
 };
@@ -8550,5 +8552,20 @@ const BehaviorScript bhvTrophyPlatRise[] = {
         CALL_NATIVE(load_object_collision_model),
         // ADD_INT(oFaceAngleYaw, 0x300),
         CALL_NATIVE(bhv_trophy_plat_rise_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvTrophyRect[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(trophy_rectangle_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    // SCALE(0, 75),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        // ADD_INT(oFaceAngleYaw, 0x300),
+        CALL_NATIVE(bhv_trophy_rect_loop),
     END_LOOP(),
 };

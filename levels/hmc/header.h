@@ -125,4 +125,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/trophy_octogon/collision_header.h"
 
+#include "levels/hmc/trophy_rectangle/geo_header.h"
+
+#include "levels/hmc/trophy_rectangle/collision_header.h"
+
 #endif

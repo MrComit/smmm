@@ -79,3 +79,5 @@
 #include "levels/hmc/pingpong_paddle/model.inc.c"
 #include "levels/hmc/trophy_octogon/model.inc.c"
 #include "levels/hmc/trophy_octogon/collision.inc.c"
+#include "levels/hmc/trophy_rectangle/model.inc.c"
+#include "levels/hmc/trophy_rectangle/collision.inc.c"
