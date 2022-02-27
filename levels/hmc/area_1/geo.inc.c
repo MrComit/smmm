@@ -3,13 +3,14 @@
 const GeoLayout hmc_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(6, geo_switch_area),
+		GEO_SWITCH_CASE(7, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, hmc_dl_101__OpeningHall_geo),
 			GEO_BRANCH(1, hmc_dl_102__Trophy_Room_geo),
 			GEO_BRANCH(1, hmc_dl_103__Hallway_geo),
 			GEO_BRANCH(1, hmc_dl_104__Music_Room_geo),
 			GEO_BRANCH(1, hmc_dl_105__Game_Room_geo),
+			GEO_BRANCH(1, hmc_dl_106__Panic_Room_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -115,6 +116,13 @@ const GeoLayout hmc_dl_105__Game_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_011_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_WhackAMole_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_WhackAMole_mesh_layer_4),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_106__Panic_Room_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_014_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
