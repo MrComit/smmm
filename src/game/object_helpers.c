@@ -189,10 +189,19 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
             // vert[i].v.tc[0] = (gMarioState->pos[0] - vert[i].v.ob[0]) * 2;
             // vert[i].v.tc[1] = (gMarioState->pos[2] - vert[i].v.ob[2]) * 2;
         }
-        // print_text_fmt_int(80, 180, "mario x: %d", marioPos[0]);
-        // print_text_fmt_int(80, 140, "mario z: %d", marioPos[2]);
-        // print_text_fmt_int(80, 80, "vert x: %d", vert[0].v.ob[0]);
-        // print_text_fmt_int(80, 40, "vert z: %d", vert[0].v.ob[2]);
+        // Code for additional points
+        // for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {
+        //     dist = absi(((10586 - 8796) - vert[i].v.ob[0]) * ((10586 - 8796) - vert[i].v.ob[0]) + 
+        //             ((10474 - 14423) - vert[i].v.ob[2]) * ((10474 - 14423) - vert[i].v.ob[2]));
+        //     if (dist <= 600*600*2) {
+        //         s16 add = (1.0f - (f32)(dist) / (600*600*2)) * 255;
+        //         vert[i].v.cn[3] += add;
+        //         if (vert[i].v.cn[3] < add) {
+        //             vert[i].v.cn[3] = 255;
+        //         }
+        //     }
+        // }
+
     }
     return NULL;
 }

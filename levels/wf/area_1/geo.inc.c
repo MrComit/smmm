@@ -3,7 +3,7 @@
 const GeoLayout wf_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(18, geo_switch_area),
+		GEO_SWITCH_CASE(19, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, wf_dl_01__Lounge_geo),
 			GEO_BRANCH(1, wf_dl_02__Bar_geo),
@@ -22,6 +22,7 @@ const GeoLayout wf_area_1_geo[] = {
 			GEO_BRANCH(1, wf_dl_15__Hallway_geo),
 			GEO_BRANCH(1, wf_dl_16__Hallway_geo),
 			GEO_BRANCH(1, wf_dl_17__Play_Room_geo),
+			GEO_BRANCH(1, wf_dl_18__Pool_Room_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -490,6 +491,13 @@ const GeoLayout wf_dl_17__Play_Room_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Playset_mesh_layer_5),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 2000, wf_dl_Table_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_18__Pool_Room_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Hallway_012_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
