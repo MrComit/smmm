@@ -35,3 +35,4 @@
 #include "levels/hmc/pingpong_paddle/geo.inc.c"
 #include "levels/hmc/trophy_octogon/geo.inc.c"
 #include "levels/hmc/trophy_rectangle/geo.inc.c"
+#include "levels/hmc/music_insts/geo.inc.c"

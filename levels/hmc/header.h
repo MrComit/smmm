@@ -129,4 +129,14 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/trophy_rectangle/collision_header.h"
 
+#include "levels/hmc/music_insts/geo_header.h"
+
+#include "levels/hmc/violin_col/collision_header.h"
+
+#include "levels/hmc/drums_col/collision_header.h"
+
+#include "levels/hmc/piano_col/collision_header.h"
+
+#include "levels/hmc/guitar_col/collision_header.h"
+
 #endif

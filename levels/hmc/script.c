@@ -51,6 +51,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PINGPONG_PADDLE, pingpong_paddle_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_OCTOGON, trophy_octogon_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_RECTANGLE, trophy_rectangle_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_INSTS, music_insts_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -81,6 +82,10 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3746, 0, 12498, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3746, 0, 8273, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2946, 0, 6223, 0, -180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_MUSIC_INSTS, 5330, 0, 11091, 0, 90, 0, 0x00000000, bhvMusicInsts),
+		OBJECT(MODEL_MUSIC_INSTS, 7143, 0, 12468, 0, 90, 0, (1 << 16), bhvMusicInsts),
+		OBJECT(MODEL_MUSIC_INSTS, 6056, 0, 15761, 0, 90, 0, (2 << 16), bhvMusicInsts),
+		OBJECT(MODEL_MUSIC_INSTS, 7908, 0, 15593, 0, 135, 0, (3 << 16), bhvMusicInsts),
 		OBJECT(MODEL_POOL_BARRIER, 5608, 0, 7118, 0, 0, 0, 0x00000000, bhvPoolBarrier),
 		OBJECT(MODEL_DICE_ENEMY, 8244, 0, 7430, 0, -90, 0, (0 << 16), bhvDiceEnemy),
 		OBJECT(MODEL_DICE_ENEMY, 8377, 0, 6662, 0, -90, 0, (1 << 16), bhvDiceEnemy),

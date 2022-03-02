@@ -81,3 +81,8 @@
 #include "levels/hmc/trophy_octogon/collision.inc.c"
 #include "levels/hmc/trophy_rectangle/model.inc.c"
 #include "levels/hmc/trophy_rectangle/collision.inc.c"
+#include "levels/hmc/music_insts/model.inc.c"
+#include "levels/hmc/violin_col/collision.inc.c"
+#include "levels/hmc/drums_col/collision.inc.c"
+#include "levels/hmc/piano_col/collision.inc.c"
+#include "levels/hmc/guitar_col/collision.inc.c"
