@@ -160,9 +160,10 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
 
 
 s32 gMusicFloorDistance;
+extern s16 sInstPos[4][2];
 
 Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
-    s32 i;
+    s32 i, k;
     s32 dist;
     Vtx *vert;
     Vec3s marioPos;
@@ -170,10 +171,10 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
         vec3f_to_vec3s(marioPos, gMarioState->pos);
         marioPos[0] -= 8796;
         marioPos[2] -= 14423;
-        if (gPlayer1Controller->buttonDown & B_BUTTON) {
-            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 1000*1000*2, 0x18000, 0x18000);
+        if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_MUSIC_PLATE) {
+            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 3000*3000*2, 0x20000, 0x20000);
         } else {
-            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 600*600*2, 0x18000, 0x18000);
+            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 600*600*2, 0x40000, 0x40000);
         }
         vert = segmented_to_virtual(&hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0);
         for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {
@@ -190,17 +191,19 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
             // vert[i].v.tc[1] = (gMarioState->pos[2] - vert[i].v.ob[2]) * 2;
         }
         // Code for additional points
-        // for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {
-        //     dist = absi(((10586 - 8796) - vert[i].v.ob[0]) * ((10586 - 8796) - vert[i].v.ob[0]) + 
-        //             ((10474 - 14423) - vert[i].v.ob[2]) * ((10474 - 14423) - vert[i].v.ob[2]));
-        //     if (dist <= 600*600*2) {
-        //         s16 add = (1.0f - (f32)(dist) / (600*600*2)) * 255;
-        //         vert[i].v.cn[3] += add;
-        //         if (vert[i].v.cn[3] < add) {
-        //             vert[i].v.cn[3] = 255;
-        //         }
-        //     }
-        // }
+        for (k = 0; k < 4; k++) {
+            for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {
+                dist = absi((sInstPos[k][0] - vert[i].v.ob[0]) * (sInstPos[k][0] - vert[i].v.ob[0]) + 
+                        (sInstPos[k][1] - vert[i].v.ob[2]) * (sInstPos[k][1] - vert[i].v.ob[2]));
+                if (dist <= 600*600*2) {
+                    s16 add = (1.0f - (f32)(dist) / (600*600*2)) * 255;
+                    vert[i].v.cn[3] += add;
+                    if (vert[i].v.cn[3] < add) {
+                        vert[i].v.cn[3] = 255;
+                    }
+                }
+            }
+        }
 
     }
     return NULL;

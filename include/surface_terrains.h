@@ -81,6 +81,7 @@
 #define SURFACE_GENERAL_USE                  0x007F
 #define SURFACE_CUBE_MELT                    0x0080
 #define SURFACE_2D_CAM                       0x0081
+#define SURFACE_MUSIC_PLATE                  0x0082
 
 #define SURFACE_PAINTING_WOBBLE_A6           0x00A6 // Painting wobble (BOB Left)
 #define SURFACE_PAINTING_WOBBLE_A7           0x00A7 // Painting wobble (BOB Middle)
