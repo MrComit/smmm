@@ -174,7 +174,7 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
         if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_MUSIC_PLATE) {
             gMusicFloorDistance = approach_s32(gMusicFloorDistance, 3000*3000*2, 0x20000, 0x20000);
         } else {
-            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 600*600*2, 0x40000, 0x40000);
+            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 900*900*2, 0x40000, 0x40000);
         }
         vert = segmented_to_virtual(&hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0);
         for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {

@@ -30,10 +30,11 @@ void bhv_music_shyguy_loop(void) {
                 o->oAction = 1;
                 seq_player_unlower_volume(0, 60);
                 play_music(0, SEQUENCE_ARGS(4, SEQ_LEVEL_GRASS), 0);
+                // stop_background_music(SEQUENCE_ARGS(4, SEQ_LEVEL_GRASS));
             }
             break;
         case 1:
-                control_music_room();
+            control_music_room();
             break;
     }
 }
