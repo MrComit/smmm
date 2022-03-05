@@ -866,6 +866,8 @@ void bhv_trophy_plat_spin_loop(void);
 void bhv_music_insts_init(void);
 void bhv_music_insts_loop(void);
 void bhv_music_shyguy_loop(void);
+void bhv_music_chase_init(void);
+void bhv_music_chase_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

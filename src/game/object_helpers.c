@@ -161,6 +161,7 @@ Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUS
 
 s32 gMusicFloorDistance;
 extern s16 sInstPos[4][2];
+extern s32 sInstDist[4];
 
 Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     s32 i, k;
@@ -195,8 +196,8 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
             for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {
                 dist = absi((sInstPos[k][0] - vert[i].v.ob[0]) * (sInstPos[k][0] - vert[i].v.ob[0]) + 
                         (sInstPos[k][1] - vert[i].v.ob[2]) * (sInstPos[k][1] - vert[i].v.ob[2]));
-                if (dist <= 600*600*2) {
-                    s16 add = (1.0f - (f32)(dist) / (600*600*2)) * 255;
+                if (dist <= sInstDist[k]) {
+                    s16 add = (1.0f - (f32)(dist) / sInstDist[k]) * 255;
                     vert[i].v.cn[3] += add;
                     if (vert[i].v.cn[3] < add) {
                         vert[i].v.cn[3] = 255;
