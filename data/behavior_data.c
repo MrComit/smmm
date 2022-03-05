@@ -8536,7 +8536,7 @@ const BehaviorScript bhvTrophyPlatSpin[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_trophy_plat_spin_loop),
-        ADD_INT(oFaceAngleYaw, 0x300),
+        ADD_INT(oFaceAngleYaw, 0x200),
     END_LOOP(),
 };
 
@@ -8594,7 +8594,7 @@ const BehaviorScript bhvMusicShyguy[] = {
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     SCALE(/*Unused*/ 0, /*Field*/ 200),
-    SET_INT(oOpacity, 0x6F),
+    SET_INT(oOpacity, 0x40),
     // CALL_NATIVE(bhv_music_shyguy_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_music_shyguy_loop),

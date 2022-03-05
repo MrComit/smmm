@@ -89,6 +89,9 @@ void bhv_music_chase_init(void) {
 
 void bhv_music_chase_loop(void) {
     music_room_chase();
+    if (sMusicInstsChecked == 4) {
+        o->activeFlags = 0;
+    }
     o->oInteractStatus = 0;
 }
 
@@ -114,6 +117,13 @@ void bhv_music_shyguy_loop(void) {
             break;
         case 1:
             control_music_room();
+            if (sMusicInstsChecked == 4) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 15);
+                if (o->oOpacity == 255) {
+                    o->activeFlags = 0;
+                    spawn_object(o, MODEL_SHYGUY, bhvShyguy);
+                }
+            }
             break;
     }
 }
