@@ -1,2 +1,2 @@
-extern void scroll_sts_mat_trophy_octogon_WoodFloorTrophyRoom_layer1();
+extern void scroll_sts_mat_trophy_octogon_WoodFloorTrophyRoom_001_layer1();
 extern void scroll_hmc_level_geo_trophy_octogon();

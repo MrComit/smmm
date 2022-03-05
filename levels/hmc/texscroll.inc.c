@@ -46,8 +46,8 @@ void scroll_sts_mat_hmc_dl_WoodFloorTrophyRoom_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_hmc_dl_WoodFloorTrophyRoom_layer1);
 
 	if (--curInterval1 <= 0) {
-		shift_s(mat, -1, PACK_TILESIZE(0, 1));
-		shift_t(mat, -1, PACK_TILESIZE(0, 2));
+		shift_s(mat, 22, PACK_TILESIZE(0, 1));
+		shift_t(mat, 22, PACK_TILESIZE(0, 2));
 		curInterval1 = intervalTex1;
 	}
 };
