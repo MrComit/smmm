@@ -173,7 +173,7 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
         marioPos[0] -= 8796;
         marioPos[2] -= 14423;
         if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_MUSIC_PLATE) {
-            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 3000*3000*2, 0x20000, 0x20000);
+            gMusicFloorDistance = approach_s32(gMusicFloorDistance, 3000*3000*2, 0x80000, 0x80000);
         } else {
             gMusicFloorDistance = approach_s32(gMusicFloorDistance, 1000*1000*2, 0x40000, 0x40000);
         }
@@ -193,6 +193,9 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
         }
         // Code for additional points
         for (k = 0; k < 4; k++) {
+            if (sInstDist[k] == 0) {
+                continue;
+            }
             for (i = 0; i < sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0) / sizeof(hmc_dl_MUSICFLOOR_mesh_layer_1_vtx_0[0]); i++) {
                 dist = absi((sInstPos[k][0] - vert[i].v.ob[0]) * (sInstPos[k][0] - vert[i].v.ob[0]) + 
                         (sInstPos[k][1] - vert[i].v.ob[2]) * (sInstPos[k][1] - vert[i].v.ob[2]));

@@ -15,4 +15,5 @@ extern void scroll_sts_mat_hmc_dl_Parlor1_layer1();
 extern void scroll_sts_mat_hmc_dl_WoodFloorTransparent_layer1();
 extern void scroll_sts_mat_hmc_dl_WoodFloorOneCycle();
 extern void scroll_sts_mat_hmc_dl_Lava_layer1();
+extern void scroll_sts_mat_hmc_dl_WallDither_layer4();
 extern void scroll_hmc();
