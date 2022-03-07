@@ -3,7 +3,7 @@
 const GeoLayout hmc_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(8, geo_switch_area),
+		GEO_SWITCH_CASE(9, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, hmc_dl_101__OpeningHall_geo),
 			GEO_BRANCH(1, hmc_dl_102__Trophy_Room_geo),
@@ -12,6 +12,7 @@ const GeoLayout hmc_area_1_geo[] = {
 			GEO_BRANCH(1, hmc_dl_105__Game_Room_geo),
 			GEO_BRANCH(1, hmc_dl_106__Panic_Room_geo),
 			GEO_BRANCH(1, hmc_dl_107__Hallway_geo),
+			GEO_BRANCH(1, hmc_dl_108__Foreroom_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -132,10 +133,16 @@ const GeoLayout hmc_dl_106__Panic_Room_geo[] = {
 const GeoLayout hmc_dl_107__Hallway_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2094, 1400, -5515, hmc_dl_ForeroomTest_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4287, 1400, -5718, hmc_dl_TreeHouseTest_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_015_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_TrophyRoom_016_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_HallwayFakeWall_mesh_layer_4),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_108__Foreroom_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Foreroom_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 415, 1400, -13915, hmc_dl_TreeHouseTest_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
