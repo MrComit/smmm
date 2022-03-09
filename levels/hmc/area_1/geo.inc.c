@@ -21,7 +21,6 @@ const GeoLayout hmc_area_1_geo[] = {
 const GeoLayout hmc_dl_101__OpeningHall_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ArtTest_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Floor3_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_OpeningHall_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Plant_001_mesh_layer_1),
