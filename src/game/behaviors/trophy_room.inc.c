@@ -8,12 +8,35 @@ static void const *sForeroomCollision[] = {
 
 void bhv_foreroom_object_init(void) {
     o->collisionData = segmented_to_virtual(sForeroomCollision[o->oBehParams2ndByte]);
+    // o->oOpacity = 255;
 }
 
 
 void bhv_foreroom_object_loop(void) {
-    if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED || cur_obj_is_mario_ground_pounding_platform()) {
-        o->activeFlags = 0;
+    switch (o->oAction) {
+        case 0:
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED || cur_obj_is_mario_ground_pounding_platform()) {
+                o->oAction = 1;
+            }
+            if (o->oDistanceToMario < 800.0f) {
+                if (gIsConsole) {
+                    o->oOpacity = 200 + (o->oDistanceToMario / 800) * 55;
+                } else {
+                    o->oOpacity = 225 + (o->oDistanceToMario / 800) * 30;
+                }
+            } else {
+                o->oOpacity = 255;
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x10);
+            if (o->oOpacity < 0x11) {
+                o->activeFlags = 0;
+                if (gMarioObject->platform == o) {
+                    set_mario_action(gMarioState, ACT_FREEFALL, 0);
+                }
+            }
+            break;
     }
 }
 
