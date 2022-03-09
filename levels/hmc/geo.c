@@ -36,3 +36,4 @@
 #include "levels/hmc/trophy_octogon/geo.inc.c"
 #include "levels/hmc/trophy_rectangle/geo.inc.c"
 #include "levels/hmc/music_insts/geo.inc.c"
+#include "levels/hmc/foreroom_object/geo.inc.c"

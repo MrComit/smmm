@@ -739,6 +739,7 @@
 #define MODEL_TROPHY_OCTOGON      0xF6
 #define MODEL_TROPHY_RECTANGLE    0xF5
 #define MODEL_MUSIC_INSTS         0xF4
+#define MODEL_FOREROOM_OBJECT     0xF3
 
 
 

@@ -732,6 +732,7 @@ extern const BehaviorScript bhvTrophyRect[];
 extern const BehaviorScript bhvMusicInsts[];
 extern const BehaviorScript bhvMusicShyguy[];
 extern const BehaviorScript bhvMusicChase[];
+extern const BehaviorScript bhvForeroomObject[];
 
 
 

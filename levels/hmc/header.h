@@ -139,4 +139,16 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/guitar_col/collision_header.h"
 
+#include "levels/hmc/foreroom_object/geo_header.h"
+
+#include "levels/hmc/foreroom_chair/collision_header.h"
+
+#include "levels/hmc/foreroom_books/collision_header.h"
+
+#include "levels/hmc/foreroom_plant/collision_header.h"
+
+#include "levels/hmc/foreroom_table/collision_header.h"
+
+#include "levels/hmc/foreroom_vase/collision_header.h"
+
 #endif

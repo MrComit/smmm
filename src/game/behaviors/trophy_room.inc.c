@@ -1,3 +1,23 @@
+static void const *sForeroomCollision[] = {
+    foreroom_chair_collision,
+    foreroom_books_collision,
+    foreroom_plant_collision,
+    foreroom_table_collision,
+    foreroom_vase_collision,
+};
+
+void bhv_foreroom_object_init(void) {
+    o->collisionData = segmented_to_virtual(sForeroomCollision[o->oBehParams2ndByte]);
+}
+
+
+void bhv_foreroom_object_loop(void) {
+    if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED || cur_obj_is_mario_ground_pounding_platform()) {
+        o->activeFlags = 0;
+    }
+}
+
+
 void bhv_trophy_plat_spin_loop(void) {
     if (gMarioObject->platform == o) {
         o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 20.0f, 2.0f);
