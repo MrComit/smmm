@@ -151,4 +151,12 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/foreroom_vase/collision_header.h"
 
+#include "levels/hmc/foreroom_lever/geo_header.h"
+
+#include "levels/hmc/foreroom_lever/anim_header.h"
+
+#include "levels/hmc/foreroom_lever/collision_header.h"
+
+#include "levels/hmc/foreroom_wall/collision_header.h"
+
 #endif

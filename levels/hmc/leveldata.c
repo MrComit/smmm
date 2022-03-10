@@ -92,3 +92,8 @@
 #include "levels/hmc/foreroom_plant/collision.inc.c"
 #include "levels/hmc/foreroom_table/collision.inc.c"
 #include "levels/hmc/foreroom_vase/collision.inc.c"
+#include "levels/hmc/foreroom_lever/model.inc.c"
+#include "levels/hmc/foreroom_lever/anims/data.inc.c"
+#include "levels/hmc/foreroom_lever/anims/table.inc.c"
+#include "levels/hmc/foreroom_lever/collision.inc.c"
+#include "levels/hmc/foreroom_wall/collision.inc.c"

@@ -607,6 +607,7 @@ void bhv_room_boo_init(void);
 void bhv_breakable_box_child_loop(void);
 void bhv_l1_gate_loop(void);
 void bhv_lever_loop(void);
+void bhv_lever_init(void);
 void bhv_l1_book_init(void);
 void bhv_l1_book_loop(void);
 void bhv_shyguy_book_steal_loop(void);
@@ -870,6 +871,7 @@ void bhv_music_chase_init(void);
 void bhv_music_chase_loop(void);
 void bhv_foreroom_object_init(void);
 void bhv_foreroom_object_loop(void);
+void bhv_foreroom_lever_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

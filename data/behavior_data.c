@@ -6324,6 +6324,7 @@ const BehaviorScript bhvLever[] = {
     LOAD_COLLISION_DATA(lever_collision),
     SET_INT(oIntangibleTimer, 0),
     SET_HOME(),
+    CALL_NATIVE(bhv_lever_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_lever_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -8626,5 +8627,21 @@ const BehaviorScript bhvForeroomObject[] = {
         CALL_NATIVE(load_object_collision_model),
         // ADD_INT(oFaceAngleYaw, 0x300),
         CALL_NATIVE(bhv_foreroom_object_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvForeroomLever[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, foreroom_lever_anims),
+    ANIMATE(0),
+    LOAD_COLLISION_DATA(foreroom_lever_collision),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_lever_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_foreroom_lever_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

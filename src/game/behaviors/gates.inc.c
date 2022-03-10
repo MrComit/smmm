@@ -90,9 +90,12 @@ void bhv_l1_room_gate_loop(void) {
 }
 
 
-void bhv_lever_loop(void) {
+void bhv_lever_init(void) {
     obj_set_hitbox(o, &sLeverHitbox);
+}
 
+
+void bhv_lever_loop(void) {
     if (o->oF4 == 0) {
         if (save_file_get_newflags(0) & SAVE_NEW_FLAG_MUDROOM_GATE) {
             o->oF4 = 1;

@@ -4,11 +4,47 @@ static void const *sForeroomCollision[] = {
     foreroom_plant_collision,
     foreroom_table_collision,
     foreroom_vase_collision,
+    foreroom_wall_collision,
 };
+
+/* window behav
+
+    init - check newflag, skip to open if so
+    loop - check lever, do opening sequence (with puzzle jingle) if f4 == 1
+
+*/
+
+
+
+void bhv_foreroom_lever_loop(void) {
+    if (o->oF4 == 0) {
+        o->header.gfx.animInfo.animFrame = 0;
+        if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOREROOM_WINDOW) {
+            o->oF4 = 1;
+        }
+        if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+            // play_puzzle_jingle();
+            save_file_set_newflags(SAVE_NEW_FLAG_FOREROOM_WINDOW, 0);
+            o->oF4 = 1;
+        }
+    }
+}
+
 
 void bhv_foreroom_object_init(void) {
     o->collisionData = segmented_to_virtual(sForeroomCollision[o->oBehParams2ndByte]);
     // o->oOpacity = 255;
+    if (gIsConsole) {
+        o->os16F4 = 200;
+    } else {
+        o->os16F4 = 225;
+    }
+
+    if (o->oBehParams2ndByte) {
+        o->os16F4 -= 35;
+    }
+
+    o->os16F6 = 255 - o->os16F4;
 }
 
 
@@ -20,9 +56,9 @@ void bhv_foreroom_object_loop(void) {
             }
             if (o->oDistanceToMario < 800.0f) {
                 if (gIsConsole) {
-                    o->oOpacity = 200 + (o->oDistanceToMario / 800) * 55;
+                    o->oOpacity = o->os16F4 + (o->oDistanceToMario / 800) * o->os16F6;
                 } else {
-                    o->oOpacity = 225 + (o->oDistanceToMario / 800) * 30;
+                    o->oOpacity = o->os16F4 + (o->oDistanceToMario / 800) * o->os16F6;
                 }
             } else {
                 o->oOpacity = 255;
