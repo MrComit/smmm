@@ -65,6 +65,7 @@ const LevelScript level_hmc_entry[] = {
 		WARP_NODE(0xF1, LEVEL_HMC, 0x01, 0x1A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x50, LEVEL_WF, 0x01, 0x0F, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x67, LEVEL_WF, 0x01, 0x05, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x69, LEVEL_HMC, 0x02, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -10581, -2363, 200, 90, 0, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 1096, 200, -4846, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -10581, -2363, 200, 90, 0, 0, (0xA << 16), bhvFlyingWarp),
@@ -133,7 +134,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TOY_MOLE, 9171, 100, 8698, 0, -14, 0, 0x06000000, bhvToyMole),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1096, 0, -5196, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2154, 0, -6496, 0, -90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_FOREROOM_OBJECT, -2024, 0, -5470, 0, 0, 0, (1 << 16), bhvForeroomObject),
+		OBJECT(MODEL_FOREROOM_OBJECT, -2024, 0, -5920, 0, 0, 0, (1 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, -176, 0, -6101, 0, 0, 0, 0x00000000, bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, -544, 0, -7488, 0, 0, 0, (2 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, -1243, 0, -7035, 0, 0, 0, (3 << 16), bhvForeroomObject),
@@ -145,6 +146,21 @@ const LevelScript level_hmc_entry[] = {
 		TERRAIN(hmc_area_1_collision),
 		ROOMS(hmc_area_1_collision_rooms),
 		MACRO_OBJECTS(hmc_area_1_macro_objs),
+		STOP_MUSIC(0),
+		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
+
+	AREA(2, hmc_area_2),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x1A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_HMC, 0x01, 0x1A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, 1485, 200, -8475, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, 1485, 200, -8475, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
+		TERRAIN(hmc_area_2_collision),
+		ROOMS(hmc_area_2_collision_rooms),
+		MACRO_OBJECTS(hmc_area_2_macro_objs),
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
