@@ -54,6 +54,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_INSTS, music_insts_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_OBJECT, foreroom_object_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_LEVER, foreroom_lever_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_WINDOW, foreroom_window_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -139,6 +140,8 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_FOREROOM_OBJECT, 2296, 0, -6046, 0, 0, 0, (4 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, 2896, 0, -7157, 0, 0, 0, (5 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_LEVER, 2996, 0, -7157, 0, -90, 0, 0x00000000, bhvForeroomLever),
+		OBJECT(MODEL_FOREROOM_WINDOW, 1997, 250, -7771, 0, 0, 0, 0x00000000, bhvForeroomWindow),
+		OBJECT(MODEL_FOREROOM_WINDOW, 1021, 250, -7771, 0, -180, 0, (1 << 16), bhvForeroomWindow),
 		TERRAIN(hmc_area_1_collision),
 		ROOMS(hmc_area_1_collision_rooms),
 		MACRO_OBJECTS(hmc_area_1_macro_objs),

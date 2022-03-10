@@ -14,6 +14,40 @@ static void const *sForeroomCollision[] = {
 
 */
 
+void bhv_foreroom_window_init(void) {
+    if (o->oBehParams2ndByte) {
+        o->os16F4 = o->oFaceAngleYaw + 0x3000;
+    } else {
+        o->os16F4 = o->oFaceAngleYaw - 0x3000;
+    }
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOREROOM_WINDOW) {
+        o->oAction = 2;
+        o->oFaceAngleYaw = o->os16F4;
+    }
+}
+
+
+void bhv_foreroom_window_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            obj = cur_obj_nearest_object_with_behavior(bhvForeroomLever);
+            if (obj == NULL || obj->oF4 == 1) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->os16F4, 0xC0);
+            if (o->oFaceAngleYaw == o->os16F4) {
+                o->oAction = 2;
+                if (o->oBehParams2ndByte == 0) {
+                    play_puzzle_jingle();
+                }
+            }
+            break;
+    }
+}
+
 
 
 void bhv_foreroom_lever_loop(void) {

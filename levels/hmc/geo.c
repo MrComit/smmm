@@ -38,3 +38,4 @@
 #include "levels/hmc/music_insts/geo.inc.c"
 #include "levels/hmc/foreroom_object/geo.inc.c"
 #include "levels/hmc/foreroom_lever/geo.inc.c"
+#include "levels/hmc/foreroom_window/geo.inc.c"

@@ -97,3 +97,5 @@
 #include "levels/hmc/foreroom_lever/anims/table.inc.c"
 #include "levels/hmc/foreroom_lever/collision.inc.c"
 #include "levels/hmc/foreroom_wall/collision.inc.c"
+#include "levels/hmc/foreroom_window/model.inc.c"
+#include "levels/hmc/foreroom_window/collision.inc.c"

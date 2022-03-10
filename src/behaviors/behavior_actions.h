@@ -872,6 +872,9 @@ void bhv_music_chase_loop(void);
 void bhv_foreroom_object_init(void);
 void bhv_foreroom_object_loop(void);
 void bhv_foreroom_lever_loop(void);
+void bhv_foreroom_window_init(void);
+void bhv_foreroom_window_loop(void);
+
 
 
 #include "game/!COMIT_LIBRARY.h"

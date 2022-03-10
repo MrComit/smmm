@@ -38338,22 +38338,6 @@ Gfx hmc_dl_Foreroom_mesh_layer_1_tri_6[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx hmc_dl_Foreroom_mesh_layer_5_vtx_0[6] = {
-	{{{1171, 250, -7746},0, {-30387, 325},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{1997, 250, -7746},0, {-30387, 325},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{1997, 1125, -7746},0, {-30387, -2064},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{1171, 1125, -7746},0, {-30387, -2064},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{1021, 250, -7746},0, {-30387, 325},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{1021, 1125, -7746},0, {-30387, -2064},{0x0, 0x0, 0x7F, 0xFF}}},
-};
-
-Gfx hmc_dl_Foreroom_mesh_layer_5_tri_0[] = {
-	gsSPVertex(hmc_dl_Foreroom_mesh_layer_5_vtx_0 + 0, 6, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx hmc_dl_Plant_002_mesh_layer_1_vtx_0[30] = {
 	{{{2610, 242, -5538},0, {546, 782},{0xA2, 0xFE, 0xAA, 0xFF}}},
 	{{{2621, 100, -5542},0, {426, 1008},{0x59, 0x2, 0xA5, 0xFF}}},
@@ -41219,14 +41203,6 @@ Gfx mat_revert_hmc_dl_ForeroomFloor[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_hmc_dl_Window[] = {
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsDPSetEnvColor(197, 254, 223, 127),
-	gsSPEndDisplayList(),
-};
-
 Gfx mat_hmc_dl_TreeHousePainting1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
@@ -42140,12 +42116,6 @@ Gfx hmc_dl_Foreroom_mesh_layer_1[] = {
 	gsSPDisplayList(mat_hmc_dl_BooGoo_layer1),
 	gsSPDisplayList(hmc_dl_Foreroom_mesh_layer_1_tri_6),
 	gsSPDisplayList(mat_revert_hmc_dl_BooGoo_layer1),
-	gsSPEndDisplayList(),
-};
-
-Gfx hmc_dl_Foreroom_mesh_layer_5[] = {
-	gsSPDisplayList(mat_hmc_dl_Window),
-	gsSPDisplayList(hmc_dl_Foreroom_mesh_layer_5_tri_0),
 	gsSPEndDisplayList(),
 };
 
