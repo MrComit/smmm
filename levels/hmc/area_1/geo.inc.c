@@ -140,16 +140,35 @@ const GeoLayout hmc_dl_107__Hallway_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout hmc_dl_BBOutside_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_BBOutside_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_BBOutside_mesh_layer_4),
+		GEO_CLOSE_NODE(),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_CC_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_CC_mesh),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout hmc_dl_108__Foreroom_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Bookshelf_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Couch_008_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Foreroom_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Plant_002_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Plant_002_mesh_layer_4),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Simple_Table_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Vase_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Vase_mesh_layer_4),
+		GEO_SWITCH_CASE(0, geo_switch_foreroom_outside),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, hmc_dl_BBOutside_geo),
+			GEO_BRANCH(1, hmc_dl_CC_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_AA_mesh),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
