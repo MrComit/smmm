@@ -742,6 +742,7 @@
 #define MODEL_FOREROOM_OBJECT     0xF3
 #define MODEL_FOREROOM_LEVER      0xF2
 #define MODEL_FOREROOM_WINDOW     0xF1
+#define MODEL_TIGHT_ROPE          0xF0
 
 
 

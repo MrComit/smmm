@@ -249,6 +249,48 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
     return NULL;
 }
 
+void make_vertex(Vtx *vtx, s32 n, s16 x, s16 y, s16 z, s16 tx, s16 ty, u8 r, u8 g, u8 b, u8 a);
+
+Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *context) {
+    Vtx *vertexBuffer;
+    Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 objectHeight;
+
+    currentGraphNode = node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject;
+
+        currentGraphNode->fnNode.node.flags = 0x400 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
+
+        make_vertex(vertexBuffer, 0, -50, 0, 500, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 1, 50, 0, 500, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 2, -50, 0, 0, 0, 2560, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 3, 50, 0, 0, 2048, 2560, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 4, -50, 0, -500, 0, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 5, 50, 0, -500, 2048, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
+        
+        dlHead = alloc_display_list(sizeof(Gfx) * (6));
+        dlStart = dlHead;
+
+        gSPDisplayList(dlHead++, mat_hmc_dl_TightRope);
+
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 6, 0);
+        gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
+        gSP2Triangles(dlHead++, 2, 3, 4, 0, 3, 4, 5, 0);
+        
+        gSPDisplayList(dlHead++, mat_revert_hmc_dl_TightRope);
+        
+        gSPEndDisplayList(dlHead++);
+    }
+    return dlStart;
+    
+}
+
 
 
 Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {

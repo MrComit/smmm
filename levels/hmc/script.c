@@ -55,6 +55,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_OBJECT, foreroom_object_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_LEVER, foreroom_lever_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_WINDOW, foreroom_window_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TIGHT_ROPE, tight_rope_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -162,6 +163,8 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, 0, -524, 24259, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, -524, 24259, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -413, -674, 27484, 0, -180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_TIGHT_ROPE, 1290, -524, 23399, 0, 0, 0, 0x00000000, bhvStaticObject),
+		OBJECT(MODEL_TIGHT_ROPE, 2371, -524, 22266, 0, 0, 0, 0x00000000, bhvStaticObject),
 		TERRAIN(hmc_area_2_collision),
 		ROOMS(hmc_area_2_collision_rooms),
 		MACRO_OBJECTS(hmc_area_2_macro_objs),
