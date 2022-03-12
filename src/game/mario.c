@@ -794,6 +794,11 @@ static void set_mario_y_vel_based_on_fspeed(struct MarioState *m, f32 initialVel
     if (m->squishTimer != 0 || m->quicksandDepth > 1.0f) {
         m->vel[1] *= 0.5f;
     }
+
+    // Remove this later
+    if (m->floor != NULL && m->floor->type == SURFACE_TIGHT_ROPE) {
+        m->vel[1] *= 1.4f;
+    }
 }
 
 /**
