@@ -1187,8 +1187,7 @@ s32 act_tight_rope(struct MarioState *m) {
         set_mario_action(m, ACT_TIGHT_ROPE_WALKING, 0);
         return TRUE;
     }
-
-    set_mario_animation(m, MARIO_ANIM_TIPTOE);
+    set_mario_anim_with_accel(m, MARIO_ANIM_TIPTOE, 0);
     // m->marioObj->header.gfx.animInfo.animFrame = 0;
 
     stationary_ground_step(m);

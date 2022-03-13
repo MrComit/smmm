@@ -1989,8 +1989,9 @@ s32 act_tight_rope_walking(struct MarioState *m) {
     //     return begin_braking_action(m);
     // }
 
-    // if (analog_stick_held_back(m) && m->forwardVel >= 16.0f) {
-    //     return set_mario_action(m, ACT_TURNING_AROUND, 0);
+    // if (analog_stick_held_back(m) && m->forwardVel >= 4.0f) {
+    //     // return set_mario_action(m, ACT_TURNING_AROUND, 0);
+    //     set_mario_animation(m, MARIO_ANIM_TURNING_PART2);
     // }
 
     // m->actionState = 0;
@@ -2009,10 +2010,6 @@ s32 act_tight_rope_walking(struct MarioState *m) {
             break;
 
         case GROUND_STEP_NONE:
-            // anim_and_audio_for_walk(m);
-            // if (m->intendedMag - m->forwardVel > 16.0f) {
-            //     m->particleFlags |= PARTICLE_DUST;
-            // }
             val04 = m->intendedMag > m->forwardVel ? m->intendedMag : m->forwardVel;
 
             if (val04 < 4.0f) {
@@ -2028,6 +2025,10 @@ s32 act_tight_rope_walking(struct MarioState *m) {
             push_or_sidle_wall(m, startPos);
             m->actionTimer = 0;
             break;
+    }
+
+    if (m->forwardVel < 2.0f) {
+        set_mario_action(m, ACT_TIGHT_ROPE, 0);
     }
 
     check_ledge_climb_down(m);

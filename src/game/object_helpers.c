@@ -251,8 +251,73 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
 
 void make_vertex(Vtx *vtx, s32 n, s16 x, s16 y, s16 z, s16 tx, s16 ty, u8 r, u8 g, u8 b, u8 a);
 
+
+
+	// {{{-6, 0, 6},0, {-16, 2032},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, 0, 6},0, {496, 2032},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, 0, -6},0, {496, -16},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{-6, 0, -6},0, {-16, -16},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{-6, 0, 6},0, {-528, 135152},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{-6, -1000, -6},0, {-16, -28688},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{-6, -1000, 6},0, {-528, -28688},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{-6, 0, -6},0, {-16, 135152},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, -1000, -6},0, {496, -28688},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, 0, -6},0, {496, 135152},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, 0, 6},0, {496, -28688},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{-6, 0, 6},0, {-16, -28688},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{-6, -1000, 6},0, {-16, 135152},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, -1000, 6},0, {496, 135152},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, 0, -6},0, {1008, -28688},{0x88, 0xA3, 0xAF, 0xFF}}},
+	// {{{6, -1000, -6},0, {1008, 135152},{0x88, 0xA3, 0xAF, 0xFF}}},
+
+s16 sBeamOffsets[4][2] = {
+    {19, 506}, {19, -506},
+    {-19, 506}, {-19, -506},
+};
+
+void generate_tight_rope_beam_verts(Vtx *vertexBuffer, struct Object *obj, s16 count) {
+    s16 height = obj->os16F4;
+    s16 xOff = sBeamOffsets[count][0];
+    s16 zOff = sBeamOffsets[count][1];
+    make_vertex(vertexBuffer, 0, -6 + xOff, height, 6 + zOff, -16, 2032, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 1, 6 + xOff, height, 6 + zOff,  496, 2032, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 2, 6 + xOff, height, -6 + zOff, 496, -16, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 3, -6 + xOff, height, -6 + zOff, -16, -16, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 4, -6 + xOff, height, 6 + zOff, -528, 135152, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 5, -6 + xOff, height + -1000, -6 + zOff, -16, -28688, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 6, -6 + xOff, height + -1000, 6 + zOff, -528, -28688, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 7, -6 + xOff, height, -6 + zOff, -16, 135152, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 8, 6 + xOff, height + -1000, -6 + zOff, 496, -28688, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 9, 6 + xOff, height, -6 + zOff, -496, 135152, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 10, 6 + xOff, height, 6 + zOff, 496, -28688, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 11,-6 + xOff, height, 6 + zOff, -16, -28688, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 12,-6 + xOff, height + -1000, 6 + zOff, -16, 135152, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 13, 6 + xOff, height + -1000, 6 + zOff, 496, 135152, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 14, 6 + xOff, height, -6 + zOff, 1008, -28688, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 15, 6 + xOff, height + -1000, -6 + zOff, 1008, 135152, 0x88, 0xA3, 0xAF, 0xF);
+}
+
+Gfx *generate_tight_rope_beams(Gfx *dlHead, Vtx *vertexBuffer, s16 var) {
+    if (var == 1) {
+        gSPDisplayList(dlHead++, mat_hmc_dl_Border);
+    }
+
+    gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 16, 0);
+	gSP2Triangles(dlHead++, 0, 1, 2, 0, 0, 2, 3, 0);
+	gSP2Triangles(dlHead++, 4, 5, 6, 0, 4, 7, 5, 0);
+	gSP2Triangles(dlHead++, 7, 8, 5, 0, 7, 9, 8, 0);
+	gSP2Triangles(dlHead++, 10, 11, 12, 0, 10, 12, 13, 0);
+	gSP2Triangles(dlHead++, 14, 10, 13, 0, 14, 13, 15, 0);
+    
+    if (var == 2) {
+        gSPDisplayList(dlHead++, mat_revert_hmc_dl_Border);
+    }
+    return dlHead;
+}
+
 Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *context) {
     Vtx *vertexBuffer;
+    Vtx *vertexBuffer1, *vertexBuffer2, *vertexBuffer3, *vertexBuffer4;
     Gfx *dlStart, *dlHead;
     struct Object *obj;
     struct GraphNodeGenerated *currentGraphNode;
@@ -280,20 +345,30 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
         make_vertex(vertexBuffer, 1, 25, obj->os16F4, 500, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF);
 
 
-        make_vertex(vertexBuffer, 2, -25, obj->os16F4 / 2, firstPos, 0, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 3, 25, obj->os16F4 / 2, firstPos, 2048, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 2, -25, obj->os16F4 / 3, firstPos, 0, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 3, 25, obj->os16F4 / 3, firstPos, 2048, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
 
         // Central.
         make_vertex(vertexBuffer, 4, -25, 0, obj->os16F6, 0, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 5, 25, 0, obj->os16F6, 2048, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
 
-        make_vertex(vertexBuffer, 6, -25, obj->os16F4 / 2, secondPos, 0, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 7, 25, obj->os16F4 / 2, secondPos, 2048, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 6, -25, obj->os16F4 / 3, secondPos, 0, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 7, 25, obj->os16F4 / 3, secondPos, 2048, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
 
         make_vertex(vertexBuffer, 8, -25, obj->os16F4, -500, 0, uvMax, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 9, 25, obj->os16F4, -500, 2048, uvMax, 0xFF, 0xFF, 0xFF, 0xFF);
         
-        dlHead = alloc_display_list(sizeof(Gfx) * (8));
+
+        vertexBuffer1 = alloc_display_list(16 * sizeof(Vtx));
+        generate_tight_rope_beam_verts(vertexBuffer1, obj, 0);
+        vertexBuffer2 = alloc_display_list(16 * sizeof(Vtx));
+        generate_tight_rope_beam_verts(vertexBuffer2, obj, 1);
+        vertexBuffer3 = alloc_display_list(16 * sizeof(Vtx));
+        generate_tight_rope_beam_verts(vertexBuffer3, obj, 2);
+        vertexBuffer4 = alloc_display_list(16 * sizeof(Vtx));
+        generate_tight_rope_beam_verts(vertexBuffer4, obj, 3);
+
+        dlHead = alloc_display_list(sizeof(Gfx) * (8 + 26));
         dlStart = dlHead;
 
         gSPDisplayList(dlHead++, mat_hmc_dl_TightRope);
@@ -306,6 +381,11 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
         gSP2Triangles(dlHead++, 6, 7, 8, 0, 7, 8, 9, 0);
         
         gSPDisplayList(dlHead++, mat_revert_hmc_dl_TightRope);
+
+        dlHead = generate_tight_rope_beams(dlHead, vertexBuffer1, 1);
+        dlHead = generate_tight_rope_beams(dlHead, vertexBuffer2, 0);
+        dlHead = generate_tight_rope_beams(dlHead, vertexBuffer3, 0);
+        dlHead = generate_tight_rope_beams(dlHead, vertexBuffer4, 2);
         
         gSPEndDisplayList(dlHead++);
     }
