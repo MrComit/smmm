@@ -17,6 +17,7 @@
 #include "surface_terrains.h"
 #include "rumble_init.h"
 #include "object_list_processor.h"
+#include "game_init.h"
 
 s32 check_common_idle_cancels(struct MarioState *m) {
     mario_drop_held_object(m);
@@ -1150,6 +1151,57 @@ s32 act_first_person(struct MarioState *m) {
     return FALSE;
 }
 
+
+
+s32 act_tight_rope(struct MarioState *m) {
+    s32 temp;
+    f32 addedVel = 0.0f;
+    if (m->faceAngle[1] != m->intendedYaw) {
+        m->faceAngle[1] = m->intendedYaw;
+        m->actionState = 1;
+    }
+
+    if (m->input & INPUT_A_PRESSED) {
+        if (m->marioObj->platform != NULL) {
+            addedVel = m->marioObj->platform->oFloat100;
+        }
+        if (addedVel < 10.0f) {
+            set_jumping_action(m, ACT_JUMP, 0);
+        } else {
+            set_jumping_action(m, ACT_TRIPLE_JUMP, 0);
+        }
+        m->vel[1] = (50.0f + addedVel) * 0.7f;
+        return TRUE;
+    }
+
+    if (m->input & INPUT_OFF_FLOOR) {
+        return set_mario_action(m, ACT_FREEFALL, 0);
+    }
+
+    if (m->input & INPUT_NONZERO_ANALOG) {
+        m->faceAngle[1] = (s16) m->intendedYaw;
+        temp = m->actionState;
+        set_mario_action(m, ACT_TIGHT_ROPE_WALKING, 0);
+        m->actionState = temp;
+        return TRUE;
+    }
+
+    set_mario_animation(m, MARIO_ANIM_TIPTOE);
+    // m->marioObj->header.gfx.animInfo.animFrame = 0;
+
+    stationary_ground_step(m);
+
+    if (gPlayer1Controller->buttonDown & (L_JPAD | R_JPAD) || 
+        gPlayer1Controller->buttonPressed & (R_TRIG | U_JPAD | D_JPAD | R_CBUTTONS | L_CBUTTONS)) {
+            m->actionState = 1;
+    }
+
+    return FALSE;
+}
+
+
+
+
 s32 check_common_stationary_cancels(struct MarioState *m) {
     if (m->pos[1] < m->waterLevel - 100) {
         if (m->action == ACT_SPAWN_SPIN_LANDING) {
@@ -1206,6 +1258,7 @@ s32 mario_execute_stationary_action(struct MarioState *m) {
         case ACT_SLIDE_KICK_SLIDE_STOP:   cancel = act_slide_kick_slide_stop(m);            break;
         case ACT_SHOCKWAVE_BOUNCE:        cancel = act_shockwave_bounce(m);                 break;
         case ACT_FIRST_PERSON:            cancel = act_first_person(m);                     break;
+        case ACT_TIGHT_ROPE:              cancel = act_tight_rope(m);                       break;
         case ACT_JUMP_LAND_STOP:          cancel = act_jump_land_stop(m);                   break;
         case ACT_DOUBLE_JUMP_LAND_STOP:   cancel = act_double_jump_land_stop(m);            break;
         case ACT_FREEFALL_LAND_STOP:      cancel = act_freefall_land_stop(m);               break;

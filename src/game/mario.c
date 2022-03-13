@@ -796,9 +796,9 @@ static void set_mario_y_vel_based_on_fspeed(struct MarioState *m, f32 initialVel
     }
 
     // Remove this later
-    if (m->floor != NULL && m->floor->type == SURFACE_TIGHT_ROPE) {
-        m->vel[1] *= 1.4f;
-    }
+    // if (m->floor != NULL && m->floor->type == SURFACE_TIGHT_ROPE) {
+    //     m->vel[1] *= 1.4f;
+    // }
 }
 
 /**
@@ -1344,6 +1344,7 @@ void update_mario_button_inputs(struct MarioState *m) {
  * Updates the joystick intended magnitude.
  */
 void update_mario_joystick_inputs(struct MarioState *m) {
+    struct Object *obj;
     struct Controller *controller = m->controller;
     f32 mag = ((controller->stickMag / 64.0f) * (controller->stickMag / 64.0f)) * 64.0f;
 
@@ -1354,14 +1355,21 @@ void update_mario_joystick_inputs(struct MarioState *m) {
     }
 
     if (m->intendedMag > 0.0f) {
-        // if (m->area->camera->comit2dcam)
-        //     m->intendedYaw = atan2s(-controller->stickY, controller->stickX);
-        // else
-            m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
+        m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
+        if (m->action == ACT_TIGHT_ROPE || m->action == ACT_TIGHT_ROPE_WALKING) {
+            if ((obj = m->marioObj->platform) != NULL) {
+                if ((absi((u16)m->intendedYaw - obj->oFaceAngleYaw) + 0x4000) & 0x8000) {
+                    m->intendedYaw = obj->oFaceAngleYaw + 0x8000;
+                } else {
+                    m->intendedYaw = obj->oFaceAngleYaw;
+                }
+            }
+        }
         m->input |= INPUT_NONZERO_ANALOG;
     } else {
         m->intendedYaw = m->faceAngle[1];
     }
+
 }
 
 /**

@@ -3646,7 +3646,9 @@ void update_camera(struct Camera *c) {
         s8DirModeBaseYaw = approach_s16_symmetric(s8DirModeBaseYaw, gMarioState->faceAngle[1] + 0x8000, 0x400);
     }
 
-
+    if ((gMarioState->action == ACT_TIGHT_ROPE || gMarioState->action == ACT_TIGHT_ROPE_WALKING) && gMarioState->actionState == 0) {
+        s8DirModeBaseYaw = approach_s16_symmetric(s8DirModeBaseYaw, gMarioState->faceAngle[1] + 0x8000, 0x800);
+    }
 
 
 }

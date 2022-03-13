@@ -13,6 +13,7 @@
 #include "behavior_data.h"
 #include "rumble_init.h"
 #include "object_list_processor.h"
+#include "game_init.h"
 
 struct LandingAction {
     s16 numFrames;
@@ -438,7 +439,9 @@ void update_walking_speed(struct MarioState *m) {
 
     if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
         maxTargetSpeed = 24.0f;
-    } else {
+    } else if (m->action == ACT_TIGHT_ROPE_WALKING) {
+        maxTargetSpeed = 16.0f;
+    }  else {
         maxTargetSpeed = 32.0f;
     }
 
@@ -1953,6 +1956,86 @@ s32 act_hold_quicksand_jump_land(struct MarioState *m) {
     return cancel;
 }
 
+
+s32 act_tight_rope_walking(struct MarioState *m) {
+    Vec3f startPos;
+    s32 val14;
+    f32 val04;
+    f32 addedVel = 0.0f;
+    s16 startYaw;
+    if (m->faceAngle[1] != m->intendedYaw) {
+        m->faceAngle[1] = m->intendedYaw;
+        m->actionState = 1;
+    }
+    startYaw = m->faceAngle[1];
+    // mario_drop_held_object(m);
+
+    if (m->input & INPUT_A_PRESSED) {
+        if (m->marioObj->platform != NULL) {
+            addedVel = m->marioObj->platform->oFloat100;
+        }
+        if (addedVel < 10.0f) {
+            set_jumping_action(m, ACT_JUMP, 0);
+        } else {
+            set_jumping_action(m, ACT_TRIPLE_JUMP, 0);
+        }
+        m->vel[1] = (50.0f + addedVel) * 0.7f;
+        return TRUE;
+    }
+
+    // if (m->input & INPUT_UNKNOWN_5) {
+    //     return begin_braking_action(m);
+    // }
+
+    // if (analog_stick_held_back(m) && m->forwardVel >= 16.0f) {
+    //     return set_mario_action(m, ACT_TURNING_AROUND, 0);
+    // }
+
+    // m->actionState = 0;
+
+    vec3f_copy(startPos, m->pos);
+    update_walking_speed(m);
+
+    switch (perform_ground_step(m)) {
+        case GROUND_STEP_LEFT_GROUND:
+            set_mario_action(m, ACT_FREEFALL, 0);
+            set_mario_animation(m, MARIO_ANIM_GENERAL_FALL);
+            break;
+
+        case GROUND_STEP_NONE:
+            // anim_and_audio_for_walk(m);
+            // if (m->intendedMag - m->forwardVel > 16.0f) {
+            //     m->particleFlags |= PARTICLE_DUST;
+            // }
+            val04 = m->intendedMag > m->forwardVel ? m->intendedMag : m->forwardVel;
+
+            if (val04 < 4.0f) {
+                val04 = 4.0f;
+            }
+            if ((val14 = (s32)(val04 * 0x4000)) < 0x1000) {
+                val14 = 0x1000;
+            }
+            set_mario_anim_with_accel(m, MARIO_ANIM_TIPTOE, val14);
+            break;
+
+        case GROUND_STEP_HIT_WALL:
+            push_or_sidle_wall(m, startPos);
+            m->actionTimer = 0;
+            break;
+    }
+
+    check_ledge_climb_down(m);
+    tilt_body_walking(m, startYaw);
+
+    if (gPlayer1Controller->buttonDown & (L_JPAD | R_JPAD) || 
+        gPlayer1Controller->buttonPressed & (R_TRIG | U_JPAD | D_JPAD | R_CBUTTONS | L_CBUTTONS)) {
+            m->actionState = 1;
+    }
+
+    return FALSE;
+}
+
+
 s32 check_common_moving_cancels(struct MarioState *m) {
     if (m->pos[1] < m->waterLevel - 100) {
         return set_water_plunge_action(m);
@@ -2062,6 +2145,7 @@ s32 mario_execute_moving_action(struct MarioState *m) {
     /* clang-format off */
     switch (m->action) {
         case ACT_WALKING:                  cancel = act_walking(m);                  break;
+        case ACT_TIGHT_ROPE_WALKING:       cancel = act_tight_rope_walking(m);       break;
         case ACT_HOLD_WALKING:             cancel = act_hold_walking(m);             break;
         case ACT_HOLD_HEAVY_WALKING:       cancel = act_hold_heavy_walking(m);       break;
         case ACT_TURNING_AROUND:           cancel = act_turning_around(m);           break;

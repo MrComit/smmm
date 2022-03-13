@@ -257,7 +257,6 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
     struct Object *obj;
     struct GraphNodeGenerated *currentGraphNode;
     s32 objectHeight;
-    s32 middleUV;
 
     currentGraphNode = node;
 
@@ -268,23 +267,12 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
 
         vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
 
-        if (gMarioObject->platform == obj) {
-            obj->os16F6 = gMarioState->pos[2] - obj->oPosZ;
-            obj->os16F4 = approach_s16_symmetric(obj->os16F4, -100, 10);
-            middleUV = (s16)((500.0f - (f32)obj->os16F6) / 1000.0f * 5120);
-            obj->os16F8 = approach_s16_symmetric(obj->os16F8, middleUV, 100);
-        } else {
-            obj->os16F6 = approach_s16_symmetric(obj->os16F6, 0, 10);
-            obj->os16F4 = approach_s16_symmetric(obj->os16F4, 0, 10);
-            obj->os16F8 = approach_s16_symmetric(obj->os16F8, 2560, 100);
-        }
-
-        make_vertex(vertexBuffer, 0, -50, 0, 500, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 1, 50, 0, 500, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 2, -50, obj->os16F4, obj->os16F6, 0, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 3, 50, obj->os16F4, obj->os16F6, 2048, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 4, -50, 0, -500, 0, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 5, 50, 0, -500, 2048, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 0, -25, obj->os16F4, 500, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 1, 25, obj->os16F4, 500, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 2, -25, 0, obj->os16F6, 0, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 3, 25, 0, obj->os16F6, 2048, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 4, -25, obj->os16F4, -500, 0, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 5, 25, obj->os16F4, -500, 2048, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
         
         dlHead = alloc_display_list(sizeof(Gfx) * (6));
         dlStart = dlHead;
