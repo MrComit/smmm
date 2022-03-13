@@ -8659,3 +8659,16 @@ const BehaviorScript bhvForeroomWindow[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvTightRope[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(tight_rope_collision),
+    SET_HOME(),
+    CALL_NATIVE(bhv_tight_rope_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_tight_rope_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

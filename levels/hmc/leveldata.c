@@ -100,3 +100,4 @@
 #include "levels/hmc/foreroom_window/model.inc.c"
 #include "levels/hmc/foreroom_window/collision.inc.c"
 #include "levels/hmc/tight_rope/model.inc.c"
+#include "levels/hmc/tight_rope/collision.inc.c"

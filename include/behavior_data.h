@@ -735,6 +735,7 @@ extern const BehaviorScript bhvMusicChase[];
 extern const BehaviorScript bhvForeroomObject[];
 extern const BehaviorScript bhvForeroomLever[];
 extern const BehaviorScript bhvForeroomWindow[];
+extern const BehaviorScript bhvTightRope[];
 
 
 
