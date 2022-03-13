@@ -1177,6 +1177,9 @@ s32 act_tight_rope(struct MarioState *m) {
     if (m->input & INPUT_OFF_FLOOR) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
+    if (m->floor == NULL || m->floor->type != SURFACE_TIGHT_ROPE) {
+        return set_mario_action(m, ACT_FREEFALL, 0);
+    }
 
     if (m->input & INPUT_NONZERO_ANALOG) {
         m->faceAngle[1] = (s16) m->intendedYaw;

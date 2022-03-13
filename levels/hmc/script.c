@@ -164,7 +164,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, 0, -524, 24259, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -413, -674, 27484, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_TIGHT_ROPE, 0, -524, 23478, 0, 0, 0, 0x00000000, bhvTightRope),
-		OBJECT(MODEL_TIGHT_ROPE, -309, -362, 22316, 0, 0, 0, 0x00000000, bhvTightRope),
+		OBJECT(MODEL_TIGHT_ROPE, -309, -362, 22316, 0, 0, 0, (20 << 16), bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, 13, -524, 20598, 0, 0, 0, 0x00000000, bhvTightRope),
 		TERRAIN(hmc_area_2_collision),
 		ROOMS(hmc_area_2_collision_rooms),

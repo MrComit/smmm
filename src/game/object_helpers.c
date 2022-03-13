@@ -257,6 +257,9 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
     struct Object *obj;
     struct GraphNodeGenerated *currentGraphNode;
     s32 objectHeight;
+    s16 firstUVs, secondUVs;
+    s16 firstPos, secondPos;
+    s16 uvMax;
 
     currentGraphNode = node;
 
@@ -267,21 +270,40 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
 
         vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
 
+        uvMax = TIGHT_ROPE_MAX * obj->header.gfx.scale[2];
+        firstPos = (500 + obj->os16F6) / 2;
+        firstUVs = (s16)((500.0f - (f32)firstPos) / 1000.0f * uvMax);
+        secondPos = (obj->os16F6 - 500) / 2;
+        secondUVs = (s16)((500.0f - (f32)secondPos) / 1000.0f * uvMax);
+
         make_vertex(vertexBuffer, 0, -25, obj->os16F4, 500, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 1, 25, obj->os16F4, 500, 2048, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 2, -25, 0, obj->os16F6, 0, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 3, 25, 0, obj->os16F6, 2048, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 4, -25, obj->os16F4, -500, 0, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 5, 25, obj->os16F4, -500, 2048, 5120, 0xFF, 0xFF, 0xFF, 0xFF);
+
+
+        make_vertex(vertexBuffer, 2, -25, obj->os16F4 / 2, firstPos, 0, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 3, 25, obj->os16F4 / 2, firstPos, 2048, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        // Central.
+        make_vertex(vertexBuffer, 4, -25, 0, obj->os16F6, 0, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 5, 25, 0, obj->os16F6, 2048, obj->os16F8, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        make_vertex(vertexBuffer, 6, -25, obj->os16F4 / 2, secondPos, 0, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 7, 25, obj->os16F4 / 2, secondPos, 2048, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        make_vertex(vertexBuffer, 8, -25, obj->os16F4, -500, 0, uvMax, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 9, 25, obj->os16F4, -500, 2048, uvMax, 0xFF, 0xFF, 0xFF, 0xFF);
         
-        dlHead = alloc_display_list(sizeof(Gfx) * (6));
+        dlHead = alloc_display_list(sizeof(Gfx) * (8));
         dlStart = dlHead;
 
         gSPDisplayList(dlHead++, mat_hmc_dl_TightRope);
 
-        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 6, 0);
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 10, 0);
         gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
         gSP2Triangles(dlHead++, 2, 3, 4, 0, 3, 4, 5, 0);
+
+        gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
+        gSP2Triangles(dlHead++, 6, 7, 8, 0, 7, 8, 9, 0);
         
         gSPDisplayList(dlHead++, mat_revert_hmc_dl_TightRope);
         

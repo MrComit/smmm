@@ -1,7 +1,7 @@
 #include "src/game/envfx_snow.h"
 
 const GeoLayout tight_rope_geo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(4096),
 	GEO_OPEN_NODE(),
 		GEO_NODE_START(),
 		GEO_OPEN_NODE(),

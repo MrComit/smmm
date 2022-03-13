@@ -1993,6 +1993,10 @@ s32 act_tight_rope_walking(struct MarioState *m) {
 
     // m->actionState = 0;
 
+    if (m->floor == NULL || m->floor->type != SURFACE_TIGHT_ROPE) {
+        return set_mario_action(m, ACT_FREEFALL, 0);
+    }
+
     vec3f_copy(startPos, m->pos);
     update_walking_speed(m);
 

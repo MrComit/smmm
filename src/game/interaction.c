@@ -1867,6 +1867,7 @@ void pss_end_slide(struct MarioState *m) {
 
 void mario_handle_special_floors(struct MarioState *m) {
     struct Object *obj;
+    s16 temp = FALSE;
     if ((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE) {
         return;
     }
@@ -1910,7 +1911,13 @@ void mario_handle_special_floors(struct MarioState *m) {
                     break;
                 case SURFACE_TIGHT_ROPE:
                     if (m->action != ACT_TIGHT_ROPE && m->action != ACT_TIGHT_ROPE_WALKING) {
+                        if (m->prevAction == ACT_TIGHT_ROPE || m->prevAction == ACT_TIGHT_ROPE_WALKING) {
+                            temp = TRUE;
+                        }
                         set_mario_action(m, ACT_TIGHT_ROPE, 0);
+                        if (temp) {
+                            m->actionState = 1;
+                        }
                         if ((obj = m->floor->object) != NULL) {
                             if ((absi((u16)m->faceAngle[1] - obj->oFaceAngleYaw) + 0x4000) & 0x8000) {
                                 m->faceAngle[1] = obj->oFaceAngleYaw + 0x8000;

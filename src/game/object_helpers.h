@@ -23,6 +23,10 @@ struct ChainSegment {
 #define WATER_DROPLET_FLAG_RAND_ANGLE_INCR_PLUS_8000 0x40
 #define WATER_DROPLET_FLAG_RAND_ANGLE_INCR           0x80 // Unused
 
+
+#define TIGHT_ROPE_MAX 8192
+#define TIGHT_ROPE_HALF (TIGHT_ROPE_MAX / 2)
+
 // Call spawn_water_droplet with this struct to spawn an object.
 struct WaterDropletParams {
     s16 flags; // Droplet spawn flags, see defines above
