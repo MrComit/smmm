@@ -1965,12 +1965,13 @@ s32 act_tight_rope_walking(struct MarioState *m) {
     s16 startYaw;
     if (m->faceAngle[1] != m->intendedYaw) {
         m->faceAngle[1] = m->intendedYaw;
-        m->actionState = 1;
+        gRopeCamera = 1;
     }
     startYaw = m->faceAngle[1];
     // mario_drop_held_object(m);
 
     if (m->input & INPUT_A_PRESSED) {
+        gRopeCamera = 1;
         if (m->marioObj->platform != NULL) {
             addedVel = m->marioObj->platform->oFloat100;
         }
@@ -1979,7 +1980,8 @@ s32 act_tight_rope_walking(struct MarioState *m) {
         } else {
             set_jumping_action(m, ACT_TRIPLE_JUMP, 0);
         }
-        m->vel[1] = (50.0f + addedVel) * 0.7f;
+        m->vel[1] = 30.0f + (addedVel * 1.4f);
+        m->pos[1] += addedVel + 20.0f;
         return TRUE;
     }
 
@@ -2033,7 +2035,7 @@ s32 act_tight_rope_walking(struct MarioState *m) {
 
     if (gPlayer1Controller->buttonDown & (L_JPAD | R_JPAD) || 
         gPlayer1Controller->buttonPressed & (R_TRIG | U_JPAD | D_JPAD | R_CBUTTONS | L_CBUTTONS)) {
-            m->actionState = 1;
+            gRopeCamera = 1;
     }
 
     return FALSE;

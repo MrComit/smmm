@@ -28,7 +28,7 @@ void bhv_tight_rope_loop(void) {
                 } else {
                     o->oFloatFC = -m->vel[1];
                 }
-                // o->oFloat100 = 15.0f;
+                o->oFloat100 = 15.0f;
             }
             if (o->os16F6 != 0 && o->os16F4 == 0) {
                 o->os16F6 = 0;
@@ -39,13 +39,13 @@ void bhv_tight_rope_loop(void) {
             o->oFloatFC -= (o->oHomeY - o->oPosY) / 10.0f;
             o->oPosY -= o->oFloatFC;
             o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 0.0f, 2.0f);
-            if (o->oFloatFC > o->oFloat100) {
-                o->oFloat100 = o->oFloatFC;
+            if (-o->oFloatFC > o->oFloat100) {
+                o->oFloat100 = -o->oFloatFC;
             } else {
-                o->oFloat100 = approach_f32_symmetric(o->oFloat100, o->oFloatFC, 2.0f);
+                o->oFloat100 = approach_f32_symmetric(o->oFloat100, -o->oFloatFC, 2.0f);
             }
-            if (o->oFloat100 > 30.0f) {
-                o->oFloat100 = 30.0f;
+            if (o->oFloat100 > 40.0f) {
+                o->oFloat100 = 40.0f;
             }
             o->os16F4 = o->oHomeY - o->oPosY;
             o->os16F6 = (m->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw) + (m->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw);
@@ -55,6 +55,7 @@ void bhv_tight_rope_loop(void) {
             o->os16F8 = (s16)((500.0f - (f32)o->os16F6) / 1000.0f * TIGHT_ROPE_MAX * o->header.gfx.scale[2]);
             if (gMarioObject->platform != o) {
                 o->oAction = 0;
+                o->oFloat100 = 0.0f;
             }
             break;
     }

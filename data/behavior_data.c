@@ -8663,7 +8663,7 @@ const BehaviorScript bhvForeroomWindow[] = {
 
 const BehaviorScript bhvTightRope[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
     LOAD_COLLISION_DATA(tight_rope_collision),
     SET_HOME(),
     CALL_NATIVE(bhv_tight_rope_init),
