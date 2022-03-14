@@ -42,7 +42,7 @@ void bhv_tight_rope_loop(void) {
             if (-o->oFloatFC > o->oFloat100) {
                 o->oFloat100 = -o->oFloatFC;
             } else {
-                o->oFloat100 = approach_f32_symmetric(o->oFloat100, -o->oFloatFC, 2.0f);
+                o->oFloat100 = approach_f32_symmetric(o->oFloat100, -o->oFloatFC, 0.5f);
             }
             if (o->oFloat100 > 40.0f) {
                 o->oFloat100 = 40.0f;

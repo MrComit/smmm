@@ -336,6 +336,9 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
         vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
 
         uvMax = TIGHT_ROPE_MAX * obj->header.gfx.scale[2];
+        if (uvMax < 0) {
+            uvMax = 0x7FFF;
+        }
         firstPos = (500 + obj->os16F6) / 2;
         firstUVs = (s16)((500.0f - (f32)firstPos) / 1000.0f * uvMax);
         secondPos = (obj->os16F6 - 500) / 2;

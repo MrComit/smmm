@@ -1915,9 +1915,10 @@ void mario_handle_special_floors(struct MarioState *m) {
                 case SURFACE_TIGHT_ROPE:
                     if (m->action != ACT_TIGHT_ROPE && m->action != ACT_TIGHT_ROPE_WALKING) {
                         set_mario_action(m, ACT_TIGHT_ROPE, 0);
-                        if (m->prevAction != ACT_TRIPLE_JUMP_LAND) {
+                        if (m->prevAction != ACT_TRIPLE_JUMP_LAND && m->prevAction != ACT_DIVE_SLIDE) {
                             m->forwardVel = 0.0f;
                         }
+
                         if ((obj = m->floor->object) != NULL) {
                             if ((absi((u16)m->faceAngle[1] - obj->oFaceAngleYaw) + 0x4000) & 0x8000) {
                                 m->faceAngle[1] = obj->oFaceAngleYaw + 0x8000;

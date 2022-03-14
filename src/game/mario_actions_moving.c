@@ -1980,8 +1980,8 @@ s32 act_tight_rope_walking(struct MarioState *m) {
         } else {
             set_jumping_action(m, ACT_TRIPLE_JUMP, 0);
         }
-        m->vel[1] = 30.0f + (addedVel * 1.4f);
-        m->pos[1] += addedVel + 20.0f;
+        m->vel[1] = 40.0f + (addedVel * 1.4f);
+        m->pos[1] += m->vel[1];
         return TRUE;
     }
 

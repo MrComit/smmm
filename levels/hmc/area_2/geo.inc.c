@@ -91,7 +91,7 @@ const GeoLayout hmc_dl_210__PreHouse_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Foreroom_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Foreroom_003_mesh_layer_4),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -3140, -5025, 26142, hmc_dl_Tightrope_mesh_layer_4),
+		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -3140, -5025, 26142),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -65536, 0, 0, 0, 90, 0, hmc_dl_Tree_001_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Tree_001_mesh_layer_4),
