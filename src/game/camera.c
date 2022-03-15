@@ -1559,6 +1559,20 @@ void mode_8_directions_camera_2d(struct Camera *c) {
                 s8DirModeYawOffset = 0;
             }
             break;
+        case 3:
+            s8DirModeBaseYaw = 0;
+            gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], -9646.0f, 80.0f);
+            cam_controls_2d(c);
+            update_8_directions_camera(c, c->focus, pos);
+            c->pos[0] = pos[0];
+            c->focus[0] = gMarioState->pos[0];
+            c->pos[2] = -7000.0f + gDepthOffset2d;
+            c->yaw = c->nextYaw = s8DirModeBaseYaw;
+            approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
+            if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
+                s8DirModeYawOffset = 0;
+            }
+            break;
     }
 }
 
