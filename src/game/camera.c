@@ -1481,6 +1481,7 @@ void fixed_cam_presets(struct Camera *c) {
 }
 
 f32 gDepthOffset2d = 0;
+s8 gCam2dSide = 0;
 
 void check_2d_cam(struct Camera *c) {
     struct MarioState *m = gMarioState;
@@ -1522,24 +1523,76 @@ void cam_controls_2d(struct Camera *c) {
     }
 }
 
+#define MAX_HEIGHT 800.0f
+#define MIN_HEIGHT 0
+
+f32 gCam2dHeight = 0;
+s32 gCam2dHeightTimer = 0;
+
+void set_2dcam_height(struct Camera *c) {
+    struct MarioState *m = gMarioState;
+    f32 curHeight = m->pos[1] - c->pos[1];
+    if (gCam2dHeight <= m->pos[1] + 300.0f) {
+        if (gCam2dHeightTimer++ > 45) {
+            gCam2dHeight = approach_f32_symmetric(gCam2dHeight, m->pos[1] + 300.0f, 20.0f);
+            gCam2dHeightTimer = 46;
+            curHeight = MIN_HEIGHT;
+        }
+    } else {
+        gCam2dHeightTimer = 0;
+    }
+    if (curHeight > MAX_HEIGHT) {
+        gCam2dHeight = m->pos[1] + 300.0f;
+        gCam2dHeightTimer = 0;
+    } else if (curHeight < MIN_HEIGHT) {
+        gCam2dHeight = m->pos[1] - 100.0f;
+    }
+    c->pos[1] = approach_f32_symmetric(c->pos[1], gCam2dHeight, 60.0f);
+}
+
+
 /**
  * A mode that only has 8 camera angles, 45 degrees apart
  */
 
 void mode_8_directions_camera_2d(struct Camera *c) {
+    struct MarioState *m = gMarioState;
     Vec3f pos;
+    f32 height;
     s16 oldAreaYaw = sAreaYaw;
 
     switch (c->comit2dcam) {
         case 1:
             s8DirModeBaseYaw = 0;
-            gMarioState->pos[2] = 0;
+            m->pos[2] = 0;
             cam_controls_2d(c);
             update_8_directions_camera(c, c->focus, pos);
-            c->pos[0] = pos[0];
-            c->focus[0] = gMarioState->pos[0];
+            if (gCam2dSide) {
+                if (m->pos[0] >= c->pos[0] - 150.0f) {
+                    pos[0] = m->pos[0] + 150.0f;
+                } else {
+                    if (m->pos[0] <= c->pos[0] - 300.0f) {
+                        gCam2dSide = 0;
+                    }
+                    pos[0] = c->pos[0];
+                }
+            } else {
+                if (m->pos[0] <= c->pos[0] + 150.0f) {
+                    pos[0] = m->pos[0] - 150.0f;
+                } else {
+                    if (m->pos[0] >= c->pos[0] + 300.0f) {
+                        gCam2dSide = 1;
+                    }
+                    pos[0] = c->pos[0];
+                }
+            }
+            c->pos[0] = approach_f32_symmetric(c->pos[0], pos[0], 60.0f);
+            c->focus[0] = c->pos[0];
             c->yaw = c->nextYaw = s8DirModeBaseYaw;
             c->pos[2] = 2000.0f + gDepthOffset2d;
+            // set_2dcam_height(c);
+            // c->pos[1] = approach_f32_symmetric(c->pos[1], height, 80.0f);
+            // c->focus[1] = c->pos[1];
             approach_camera_height(c, pos[1] + 300.0f, ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;
@@ -1547,11 +1600,11 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             break;
         case 2:
             s8DirModeBaseYaw = 0x4000;
-            gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], 16111.0f, 80.0f);
+            m->pos[0] = approach_f32_symmetric(m->pos[0], 16111.0f, 80.0f);
             cam_controls_2d(c);
             update_8_directions_camera(c, c->focus, pos);
             c->pos[2] = pos[2];
-            c->focus[2] = gMarioState->pos[2];
+            c->focus[2] = m->pos[2];
             c->pos[0] = 18000.0f + gDepthOffset2d;
             c->yaw = c->nextYaw = s8DirModeBaseYaw;
             approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
@@ -1561,13 +1614,14 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             break;
         case 3:
             s8DirModeBaseYaw = 0;
-            gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], -9646.0f, 80.0f);
+            m->pos[2] = approach_f32_symmetric(m->pos[2], -9646.0f, 80.0f);
             cam_controls_2d(c);
             update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = pos[0];
-            c->focus[0] = gMarioState->pos[0];
+            c->focus[0] = m->pos[0];
             c->pos[2] = -7000.0f + gDepthOffset2d;
             c->yaw = c->nextYaw = s8DirModeBaseYaw;
+            // set_2dcam_height(c);
             approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;
