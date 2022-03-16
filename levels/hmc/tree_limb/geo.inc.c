@@ -1,0 +1,28 @@
+#include "src/game/envfx_snow.h"
+
+const GeoLayout tree_limb_geo[] = {
+	GEO_CULLING_RADIUS(4096),
+	GEO_OPEN_NODE(),
+		GEO_NODE_START(),
+		GEO_OPEN_NODE(),
+			GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, 0, tree_limb_end_mesh_layer_1),
+			GEO_OPEN_NODE(),
+				GEO_DISPLAY_LIST(LAYER_OPAQUE, tree_limb_middle_skinned_mesh_layer_1),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, -6, 0, -584, tree_limb_middle_mesh_layer_1),
+				GEO_OPEN_NODE(),
+					GEO_DISPLAY_LIST(LAYER_OPAQUE, tree_limb_tip_skinned_mesh_layer_1),
+					GEO_ANIMATED_PART(LAYER_OPAQUE, -12, 65, -719, tree_limb_tip_mesh_layer_1),
+					GEO_OPEN_NODE(),
+						GEO_ANIMATED_PART(LAYER_TRANSPARENT_INTER, 9, 250, -692, tree_limb_leaves_mesh_layer_7),
+						GEO_OPEN_NODE(),
+							GEO_ASM(0, geo_update_projectile_pos_from_parent),
+						GEO_CLOSE_NODE(),
+					GEO_CLOSE_NODE(),
+				GEO_CLOSE_NODE(),
+			GEO_CLOSE_NODE(),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, tree_limb_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, tree_limb_material_revert_render_settings),
+	GEO_CLOSE_NODE(),
+	GEO_END(),
+};

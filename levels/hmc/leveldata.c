@@ -101,3 +101,7 @@
 #include "levels/hmc/foreroom_window/collision.inc.c"
 #include "levels/hmc/tight_rope/model.inc.c"
 #include "levels/hmc/tight_rope/collision.inc.c"
+#include "levels/hmc/tree_limb/model.inc.c"
+#include "levels/hmc/tree_limb/anims/data.inc.c"
+#include "levels/hmc/tree_limb/anims/table.inc.c"
+#include "levels/hmc/tree_limb/collision.inc.c"

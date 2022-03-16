@@ -167,4 +167,10 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/tight_rope/collision_header.h"
 
+#include "levels/hmc/tree_limb/geo_header.h"
+
+#include "levels/hmc/tree_limb/anim_header.h"
+
+#include "levels/hmc/tree_limb/collision_header.h"
+
 #endif

@@ -636,7 +636,7 @@ extern Gfx hmc_dl_Foreroom_003_mesh_layer_1_tri_13[];
 extern Vtx hmc_dl_Foreroom_003_mesh_layer_4_vtx_0[40];
 extern Gfx hmc_dl_Foreroom_003_mesh_layer_4_tri_0[];
 extern Vtx hmc_dl_Tree_001_mesh_layer_1_vtx_cull[8];
-extern Vtx hmc_dl_Tree_001_mesh_layer_1_vtx_0[510];
+extern Vtx hmc_dl_Tree_001_mesh_layer_1_vtx_0[489];
 extern Gfx hmc_dl_Tree_001_mesh_layer_1_tri_0[];
 extern Vtx hmc_dl_Tree_001_mesh_layer_1_vtx_1[14];
 extern Gfx hmc_dl_Tree_001_mesh_layer_1_tri_1[];

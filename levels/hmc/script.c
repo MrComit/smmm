@@ -56,6 +56,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_LEVER, foreroom_lever_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_WINDOW, foreroom_window_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TIGHT_ROPE, tight_rope_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TREE_LIMB, tree_limb_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -69,11 +70,11 @@ const LevelScript level_hmc_entry[] = {
 		WARP_NODE(0x69, LEVEL_HMC, 0x02, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0E, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		INSTANT_WARP(0, 0x01, 700, 0, -500),
-		OBJECT(MODEL_NONE, -10581, 200, 2363, 0, 0, 0, (0x1A << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, -10581, -2363, 200, 90, 0, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 1096, 200, -4846, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
-		OBJECT(MODEL_NONE, -10581, 200, 2363, 0, 0, 0, (0xA << 16), bhvFlyingWarp),
+		OBJECT(MODEL_NONE, -10581, -2363, 200, 90, 0, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 1096, 200, -4846, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
-		MARIO_POS(0x01, 0, -10581, 200, 2363),
+		MARIO_POS(0x01, 0, -10581, -2363, 200),
 		MARIO_POS(0x01, -180, 1096, 200, -4846),
 		OBJECT(MODEL_NONE, 1509, 200, -7511, 0, 0, 0, (0xE << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -9031, 0, 11348, 0, 90, 0, 0x00000000, bhvDoor),
@@ -175,6 +176,8 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TIGHT_ROPE, -460, -524, 468, 0, -30, 0, 0x00000000, bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, 482, -524, -939, 0, 15, 0, 0x00000000, bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, -159, -524, -2518, 0, 0, 0, 0x00000000, bhvTightRope),
+		OBJECT(MODEL_TREE_LIMB, 1716, -577, 15539, 0, 90, 0, 0x00000000, bhvTreeLimb),
+		OBJECT(MODEL_TREE_LIMB, -284, -577, 11539, 0, -90, 0, 0x00000000, bhvTreeLimb),
 		TERRAIN(hmc_area_2_collision),
 		ROOMS(hmc_area_2_collision_rooms),
 		MACRO_OBJECTS(hmc_area_2_macro_objs),

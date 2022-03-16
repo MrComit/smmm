@@ -4,6 +4,17 @@
 //     *cur = *cur + *curVel;
 // }
 
+
+void bhv_tree_limb_loop(void) {
+    Vec3f pos;
+    if (cur_obj_check_if_at_animation_end()) {
+        o->header.gfx.animInfo.animFrame = 0;
+        o->oTimer = 0;
+    }
+
+}
+
+
 void bhv_tight_rope_init(void) {
     o->header.gfx.scale[2] += (f32)o->oBehParams2ndByte * 0.02f;
     o->os16F8 = TIGHT_ROPE_HALF * o->header.gfx.scale[2];

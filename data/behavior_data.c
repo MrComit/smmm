@@ -8673,3 +8673,27 @@ const BehaviorScript bhvTightRope[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvTreeLimb[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, tree_limb_anims),
+    ANIMATE(0),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_tree_limb_init),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvTreeLimbCol),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_tree_limb_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvTreeLimbCol[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(tree_limb_collision),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

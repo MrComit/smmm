@@ -876,6 +876,7 @@ void bhv_foreroom_window_init(void);
 void bhv_foreroom_window_loop(void);
 void bhv_tight_rope_loop(void);
 void bhv_tight_rope_init(void);
+void bhv_tree_limb_loop(void);
 
 
 

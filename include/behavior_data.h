@@ -736,6 +736,8 @@ extern const BehaviorScript bhvForeroomObject[];
 extern const BehaviorScript bhvForeroomLever[];
 extern const BehaviorScript bhvForeroomWindow[];
 extern const BehaviorScript bhvTightRope[];
+extern const BehaviorScript bhvTreeLimb[];
+extern const BehaviorScript bhvTreeLimbCol[];
 
 
 
