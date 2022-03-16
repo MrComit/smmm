@@ -79,6 +79,22 @@ static s32 clear_move_flag(u32 *, s32);
 
 #define o gCurrentObject
 
+
+
+Gfx *geo_update_projectile_pos_and_angle_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx) {
+    struct Object *sp1C;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        sp1C = (struct Object *) gCurGraphNodeObject; // TODO: change global type to Object pointer
+        if (sp1C->prevObj) {
+            create_transformation_from_matrices(sp1C->prevObj->transform, mtx, *gCurGraphNodeCamera->matrixPtr);
+            sp1C->prevObj->header.gfx.throwMatrix = &sp1C->prevObj->transform;
+        }
+    }
+    return NULL;
+}
+
+
 Gfx *geo_update_projectile_pos_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx) {
     Mat4 sp20;
     struct Object *sp1C;

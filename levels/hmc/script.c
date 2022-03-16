@@ -167,7 +167,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, 0, -524, 24259, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -413, -674, 27484, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_TIGHT_ROPE, 0, -524, 23478, 0, 0, 0, 0x00000000, bhvTightRope),
-		OBJECT(MODEL_TIGHT_ROPE, 13, -269, 17520, 0, 0, 0, (150 << 16), bhvTightRope),
+		OBJECT(MODEL_TIGHT_ROPE, 13, -319, 17520, 0, 0, 0, (150 << 16), bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, -157, -362, 22188, 0, 0, 0, (20 << 16), bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, 13, -714, 20598, 0, 0, 0, 0x00000000, bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, -375, -524, 3577, 0, 0, 0, 0x00000000, bhvTightRope),

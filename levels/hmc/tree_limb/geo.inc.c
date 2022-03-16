@@ -15,7 +15,7 @@ const GeoLayout tree_limb_geo[] = {
 					GEO_OPEN_NODE(),
 						GEO_ANIMATED_PART(LAYER_TRANSPARENT_INTER, 9, 250, -692, tree_limb_leaves_mesh_layer_7),
 						GEO_OPEN_NODE(),
-							GEO_ASM(0, geo_update_projectile_pos_from_parent),
+							GEO_ASM(0, geo_update_projectile_pos_and_angle_from_parent),
 						GEO_CLOSE_NODE(),
 					GEO_CLOSE_NODE(),
 				GEO_CLOSE_NODE(),

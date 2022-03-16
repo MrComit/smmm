@@ -8690,10 +8690,11 @@ const BehaviorScript bhvTreeLimb[] = {
 
 const BehaviorScript bhvTreeLimbCol[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(tree_limb_collision),
     SET_HOME(),
     BEGIN_LOOP(),
+        CALL_NATIVE(bhv_tree_limb_col_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

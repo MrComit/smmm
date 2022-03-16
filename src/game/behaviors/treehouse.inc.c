@@ -5,6 +5,12 @@
 // }
 
 
+void bhv_tree_limb_col_loop(void) {
+    o->header.gfx.throwMatrix = &o->transform;
+    vec3f_copy(&o->oPosX, o->transform[3]);
+}
+
+
 void bhv_tree_limb_loop(void) {
     Vec3f pos;
     if (cur_obj_check_if_at_animation_end()) {
