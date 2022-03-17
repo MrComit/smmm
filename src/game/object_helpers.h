@@ -67,6 +67,7 @@ struct SpawnParticlesInfo {
     /*0x10*/ f32 sizeRange;
 };
 
+Gfx *background_translate(s32 callContext, struct GraphNode *node, UNUSED f32 b[4][4]);
 Gfx *geo_update_projectile_pos_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 Gfx *geo_update_projectile_pos_and_angle_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUSED void *context);

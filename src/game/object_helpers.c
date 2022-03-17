@@ -29,7 +29,11 @@
 #include "actors/group0.h"
 #include "include/course_table.h"
 #include "levels/hmc/header.inc.h"
+#include "levels/bbh/header.inc.h"
 
+extern Mtx *gMatStackFixed[32];
+extern s16 gMatStackIndex;
+extern Mat4 gMatStack[32];
 
 s8 sBooColors[][3] = {
     {0x78, 0x64, 0xFF}, //garage
@@ -79,6 +83,27 @@ static s32 clear_move_flag(u32 *, s32);
 
 #define o gCurrentObject
 
+
+
+Gfx *background_translate(s32 callContext, struct GraphNode *node, UNUSED f32 b[4][4]) {
+    Mat4 mat;
+    Vec3f translation;
+    Mtx *mtx = alloc_display_list(sizeof(*mtx));
+    if (callContext == GEO_CONTEXT_RENDER) {
+#define FARAWAYNESS .99f // the closer to 1 the further away
+        translation[0] = gLakituState.curPos[0] * FARAWAYNESS;
+        translation[1] = gLakituState.curPos[1] * FARAWAYNESS;
+        translation[2] = gLakituState.curPos[2] * FARAWAYNESS;
+        mtxf_translate(mat, translation);
+        mtxf_mul(gMatStack[gMatStackIndex + 1], mat, gMatStack[gMatStackIndex]);
+        gMatStackIndex++;
+        mtxf_to_mtx(mtx, gMatStack[gMatStackIndex]);
+        gMatStackFixed[gMatStackIndex] = mtx;
+        geo_append_display_list(bbh_dl_ZZSky_mesh_layer_0, 0); //DL pointer
+        gMatStackIndex--;
+    }
+    return 0;
+}
 
 
 Gfx *geo_update_projectile_pos_and_angle_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx) {

@@ -90,7 +90,8 @@ const GeoLayout bbh_dl_305__SnowGlobe_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Snow_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_SnowMountain_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_UnderglobeFake_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_FORCE, bbh_dl_ZZZZSkybox_mesh_layer_0),
+		GEO_ASM(0, background_translate),
+		// GEO_DISPLAY_LIST(LAYER_FORCE, bbh_dl_ZZSky_mesh_layer_0),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
