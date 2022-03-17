@@ -105,3 +105,6 @@
 #include "levels/hmc/tree_limb/anims/data.inc.c"
 #include "levels/hmc/tree_limb/anims/table.inc.c"
 #include "levels/hmc/tree_limb/collision.inc.c"
+#include "levels/hmc/blue_owl/model.inc.c"
+#include "levels/hmc/blue_owl/anims/data.inc.c"
+#include "levels/hmc/blue_owl/anims/table.inc.c"

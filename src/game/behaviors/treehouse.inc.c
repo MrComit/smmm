@@ -1,8 +1,45 @@
-// void elastic_approach(f32 *cur, f32 *curVel, f32 goal, f32 speedDown, f32 speedUp) {
-//     f32 diff = goal - *cur;
-//     *curVel = approach_f32_asymptotic(*curVel, diff, *cur < goal ? speedUp : speedDown);
-//     *cur = *cur + *curVel;
-// }
+static struct ObjectHitbox sOwlHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 70,
+    /* height:            */ 100,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 100,
+};
+
+void bhv_blue_owl_init(void) {
+    obj_set_hitbox(o, &sOwlHitbox);
+}
+
+
+void bhv_blue_owl_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 2000.0f) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
+                if (cur_obj_check_if_at_animation_end()) {
+                    cur_obj_init_animation_with_sound(1);
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, 2.0f);
+            CL_Move();
+            if (o->oTimer < 15) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
+                o->oFloatF4 = gMarioState->pos[1] + 20.0f;
+            }
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatF4, 20.0f);
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
 
 
 void bhv_tree_limb_col_loop(void) {

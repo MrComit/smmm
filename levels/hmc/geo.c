@@ -41,3 +41,4 @@
 #include "levels/hmc/foreroom_window/geo.inc.c"
 #include "levels/hmc/tight_rope/geo.inc.c"
 #include "levels/hmc/tree_limb/geo.inc.c"
+#include "levels/hmc/blue_owl/geo.inc.c"

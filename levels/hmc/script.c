@@ -57,6 +57,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_FOREROOM_WINDOW, foreroom_window_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TIGHT_ROPE, tight_rope_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TREE_LIMB, tree_limb_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BLUE_OWL, blue_owl_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -166,6 +167,9 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, 0, -524, 24259, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, -524, 24259, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -413, -674, 27484, 0, -180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_BLUE_OWL, -629, 515, 4461, 0, 26, 0, 0x00000000, bhvBlueOwl),
+		OBJECT(MODEL_BLUE_OWL, 1359, 515, 7151, 0, -43, 0, 0x00000000, bhvBlueOwl),
+		OBJECT(MODEL_BLUE_OWL, 1077, 515, 3927, 0, -43, 0, 0x00000000, bhvBlueOwl),
 		OBJECT(MODEL_TIGHT_ROPE, 0, -524, 23478, 0, 0, 0, 0x00000000, bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, 13, -319, 19268, 0, 0, 0, (100 << 16), bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, -157, -362, 22188, 0, 0, 0, (20 << 16), bhvTightRope),

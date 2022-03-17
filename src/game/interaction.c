@@ -1913,6 +1913,7 @@ void mario_handle_special_floors(struct MarioState *m) {
                     check_lava_boost(m);
                     break;
                 case SURFACE_TIGHT_ROPE:
+                    break;
                     if (m->action != ACT_TIGHT_ROPE && m->action != ACT_TIGHT_ROPE_WALKING) {
                         set_mario_action(m, ACT_TIGHT_ROPE, 0);
                         if (m->prevAction != ACT_TRIPLE_JUMP_LAND && m->prevAction != ACT_DIVE_SLIDE) {
