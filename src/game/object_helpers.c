@@ -318,24 +318,25 @@ s16 sBeamOffsets[4][2] = {
 
 void generate_tight_rope_beam_verts(Vtx *vertexBuffer, struct Object *obj, s16 count) {
     s16 height = obj->os16F4;
+    s16 heightOffset = -16000 - (s16)obj->oPosX; // vanilla -1000
     s16 xOff = sBeamOffsets[count][0];
     s16 zOff = sBeamOffsets[count][1];
-    make_vertex(vertexBuffer, 0, -6 + xOff, height, 6 + zOff, -16, 2032, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 1, 6 + xOff, height, 6 + zOff,  496, 2032, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 2, 6 + xOff, height, -6 + zOff, 496, -16, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 3, -6 + xOff, height, -6 + zOff, -16, -16, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 4, -6 + xOff, height, 6 + zOff, -528, 135152, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 5, -6 + xOff, height + -1000, -6 + zOff, -16, -28688, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 6, -6 + xOff, height + -1000, 6 + zOff, -528, -28688, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 7, -6 + xOff, height, -6 + zOff, -16, 135152, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 8, 6 + xOff, height + -1000, -6 + zOff, 496, -28688, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 9, 6 + xOff, height, -6 + zOff, -496, 135152, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 10, 6 + xOff, height, 6 + zOff, 496, -28688, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 11,-6 + xOff, height, 6 + zOff, -16, -28688, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 12,-6 + xOff, height + -1000, 6 + zOff, -16, 135152, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 13, 6 + xOff, height + -1000, 6 + zOff, 496, 135152, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 14, 6 + xOff, height, -6 + zOff, 1008, -28688, 0x88, 0xA3, 0xAF, 0xF);
-    make_vertex(vertexBuffer, 15, 6 + xOff, height + -1000, -6 + zOff, 1008, 135152, 0x88, 0xA3, 0xAF, 0xF);
+    make_vertex(vertexBuffer, 0, -6 + xOff, height, 6 + zOff, -16, 2032, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 1, 6 + xOff,  height, 6 + zOff,  496, 2032, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 2, 6 + xOff,  height, -6 + zOff, 496, -16, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 3, -6 + xOff, height, -6 + zOff, -16, -16, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 4, -6 + xOff, height, 6 + zOff, -528, 135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 5, -6 + xOff, height + heightOffset, -6 + zOff, -16, -135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 6, -6 + xOff, height + heightOffset, 6 + zOff, -528, -135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 7, -6 + xOff, height, -6 + zOff, -16, 135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 8, 6 + xOff,  height + heightOffset, -6 + zOff, 496, -135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 9, 6 + xOff,  height, -6 + zOff, -496, 135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 10, 6 + xOff, height, 6 + zOff, 496, -135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 11,-6 + xOff, height, 6 + zOff, -16, -135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 12,-6 + xOff, height + heightOffset, 6 + zOff, -16, 135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 13, 6 + xOff, height + heightOffset, 6 + zOff, 496, 135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 14, 6 + xOff, height, -6 + zOff, 1008, -135152, 0x88, 0xA3, 0xAF, 0xFF);
+    make_vertex(vertexBuffer, 15, 6 + xOff, height + heightOffset, -6 + zOff, 1008, 135152, 0x88, 0xA3, 0xAF, 0xFF);
 }
 
 Gfx *generate_tight_rope_beams(Gfx *dlHead, Vtx *vertexBuffer, s16 var) {

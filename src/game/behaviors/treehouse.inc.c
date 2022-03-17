@@ -19,7 +19,7 @@ void bhv_blue_owl_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oDistanceToMario < 2000.0f) {
-                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
+                o->oFaceAngleYaw = o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
                 if (cur_obj_check_if_at_animation_end()) {
                     cur_obj_init_animation_with_sound(1);
                     o->oAction = 1;
@@ -30,10 +30,26 @@ void bhv_blue_owl_loop(void) {
             o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, 2.0f);
             CL_Move();
             if (o->oTimer < 15) {
-                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
+                o->oFaceAngleYaw = o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
                 o->oFloatF4 = gMarioState->pos[1] + 20.0f;
             }
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatF4, 20.0f);
+            if (o->oTimer > 90 && o->oDistanceToMario > 1000.0f) {
+                o->oAction = 2;
+                cur_obj_init_animation_with_sound(0);
+                o->oMoveAngleYaw = cur_obj_angle_to_home();
+                o->oForwardVel = 30.0f;
+            }
+            break;
+        case 2:
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw, 0x400);
+            CL_Move();
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
+            if (o->oTimer > 180) {
+                vec3f_copy(&o->oHomeX, &o->oPosX);
+                o->oForwardVel = 0;
+                o->oAction = 0;
+            }
             break;
     }
     o->oInteractStatus = 0;
