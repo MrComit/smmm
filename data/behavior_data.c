@@ -8705,6 +8705,7 @@ const BehaviorScript bhvBlueOwl[] = {
     LOAD_ANIMATIONS(oAnimations, blue_owl_anims),
     ANIMATE(0),
     SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x1000),
     SET_INT(oIntangibleTimer, 0),
     CALL_NATIVE(bhv_blue_owl_init),
     BEGIN_LOOP(),

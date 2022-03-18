@@ -85,12 +85,19 @@ static s32 clear_move_flag(u32 *, s32);
 
 
 
+void *sBackdrops[] = {
+bbh_dl_ZZSky_mesh_layer_0,
+};
+
+
 Gfx *background_translate(s32 callContext, struct GraphNode *node, UNUSED f32 b[4][4]) {
     Mat4 mat;
     Vec3f translation;
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
+    struct GraphNodeGenerated *currentGraphNode;
     if (callContext == GEO_CONTEXT_RENDER) {
 #define FARAWAYNESS .99f // the closer to 1 the further away
+        currentGraphNode = (struct GraphNodeGenerated *) node;
         translation[0] = gLakituState.curPos[0] * FARAWAYNESS;
         translation[1] = gLakituState.curPos[1] * FARAWAYNESS;
         translation[2] = gLakituState.curPos[2] * FARAWAYNESS;
@@ -99,7 +106,7 @@ Gfx *background_translate(s32 callContext, struct GraphNode *node, UNUSED f32 b[
         gMatStackIndex++;
         mtxf_to_mtx(mtx, gMatStack[gMatStackIndex]);
         gMatStackFixed[gMatStackIndex] = mtx;
-        geo_append_display_list(bbh_dl_ZZSky_mesh_layer_0, 0); //DL pointer
+        geo_append_display_list(sBackdrops[currentGraphNode->parameter], 0); //DL pointer
         gMatStackIndex--;
     }
     return 0;
@@ -318,7 +325,7 @@ s16 sBeamOffsets[4][2] = {
 
 void generate_tight_rope_beam_verts(Vtx *vertexBuffer, struct Object *obj, s16 count) {
     s16 height = obj->os16F4;
-    s16 heightOffset = -16000 - (s16)obj->oPosX; // vanilla -1000
+    s16 heightOffset = -4000 - (s16)obj->oPosX; // vanilla -1000
     s16 xOff = sBeamOffsets[count][0];
     s16 zOff = sBeamOffsets[count][1];
     make_vertex(vertexBuffer, 0, -6 + xOff, height, 6 + zOff, -16, 2032, 0x88, 0xA3, 0xAF, 0xFF);

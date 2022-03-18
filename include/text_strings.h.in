@@ -290,7 +290,7 @@
 #define TEXT_ROOM52 _("Game Room")
 #define TEXT_ROOM53 _("Panic Room")
 #define TEXT_ROOM54 _("Hallway")
-#define TEXT_ROOM55 _("Foreroom")
+#define TEXT_ROOM55 _("Morning Room")
 #define TEXT_ROOM56 _("Theater")
 #define TEXT_ROOM57 _("Outside")
 #define TEXT_ROOM58 _("Unnamed Room C6")

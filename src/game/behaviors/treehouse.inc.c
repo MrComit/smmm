@@ -4,10 +4,10 @@ static struct ObjectHitbox sOwlHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 70,
-    /* height:            */ 100,
-    /* hurtboxRadius:     */ 70,
-    /* hurtboxHeight:     */ 100,
+    /* radius:            */ 120,
+    /* height:            */ 150,
+    /* hurtboxRadius:     */ 120,
+    /* hurtboxHeight:     */ 150,
 };
 
 void bhv_blue_owl_init(void) {
@@ -16,6 +16,12 @@ void bhv_blue_owl_init(void) {
 
 
 void bhv_blue_owl_loop(void) {
+    if (o->oDistanceToMario > o->oDrawingDistance && gIsConsole) {
+        o->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
+    } else {
+        o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+    }
+    
     switch (o->oAction) {
         case 0:
             if (o->oDistanceToMario < 2000.0f) {
@@ -29,9 +35,12 @@ void bhv_blue_owl_loop(void) {
         case 1:
             o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 50.0f, 2.0f);
             CL_Move();
-            if (o->oTimer < 15) {
+            if (o->oTimer < 20) {
                 o->oFaceAngleYaw = o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
                 o->oFloatF4 = gMarioState->pos[1] + 20.0f;
+                if (o->oFloatF4 > o->oHomeY) {
+                    o->oFloatF4 = o->oHomeY;
+                }
             }
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatF4, 20.0f);
             if (o->oTimer > 90 && o->oDistanceToMario > 1000.0f) {
@@ -45,7 +54,7 @@ void bhv_blue_owl_loop(void) {
             o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oMoveAngleYaw, 0x400);
             CL_Move();
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
-            if (o->oTimer > 180) {
+            if (o->oTimer > 120) {
                 vec3f_copy(&o->oHomeX, &o->oPosX);
                 o->oForwardVel = 0;
                 o->oAction = 0;
