@@ -132,8 +132,8 @@ void bhv_collect_heart_loop(void) {
             obj_mark_for_deletion(o);
         }
     }
-    if (gCamera->comit2dcam == 1) {
-        o->oPosZ = 0;
+    if (gCamera->comit2dcam == 1 || gCamera->comit2dcam == 3) {
+        o->oPosZ = o->oHomeZ;
     }
 
     o->oFaceAngleYaw += 0x400;

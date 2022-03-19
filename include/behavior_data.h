@@ -739,7 +739,8 @@ extern const BehaviorScript bhvTightRope[];
 extern const BehaviorScript bhvTreeLimb[];
 extern const BehaviorScript bhvTreeLimbCol[];
 extern const BehaviorScript bhvBlueOwl[];
-
+extern const BehaviorScript bhv2DKoopa[];
+extern const BehaviorScript bhv2DGoomba[];
 
 
 #endif // BEHAVIOR_DATA_H

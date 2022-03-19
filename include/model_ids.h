@@ -747,5 +747,10 @@
 #define MODEL_BLUE_OWL            0xEE
 
 
+// LEVEL 5 MODELS CONT:
+// 0x5B-0x63
+// 0x6C-0x73
+// 0x97-0x9B
+
 
 #endif // MODEL_IDS_H
