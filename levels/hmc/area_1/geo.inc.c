@@ -175,8 +175,8 @@ const GeoLayout hmc_dl_108__Foreroom_geo[] = {
 const GeoLayout hmc_dl_109__Theater_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Foreroom_001_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, hmc_dl_Foreroom_001_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Theater_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, hmc_dl_Theater_mesh_layer_5),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -5104, 250, -9146, 0, -90, 0),
 		GEO_OPEN_NODE(),
 			GEO_SCALE(LAYER_OPAQUE, 41532),
@@ -185,6 +185,7 @@ const GeoLayout hmc_dl_109__Theater_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_SCALE(LAYER_OPAQUE, 41532),
 		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ZBackground_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

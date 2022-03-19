@@ -1618,14 +1618,14 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             cam_controls_2d(c);
             // update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = -3454.0f;
-            if (m->pos[0] + 3454.0f > 500.0f) {
-                height = -3454.0f + 500.0f;
-            } else if (m->pos[0] + 3454.0f < -500.0f) {
-                height = -3454.0f - 500.0f;
+            if (m->pos[0] + 3454.0f > 200.0f) {
+                height = -3454.0f + 200.0f;
+            } else if (m->pos[0] + 3454.0f < -200.0f) {
+                height = -3454.0f - 200.0f;
             } else {
                 height = -3454.0f;
             }
-            c->focus[0] = approach_f32_symmetric(c->focus[0], height, 20.0f);;
+            c->focus[0] = approach_f32_asymptotic(c->focus[0], height, 0.05f);;
             c->pos[2] = -7000.0f + gDepthOffset2d;
             c->pos[1] = 600.0f;
             c->focus[1] = c->pos[1];
