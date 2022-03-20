@@ -741,6 +741,7 @@ extern const BehaviorScript bhvTreeLimbCol[];
 extern const BehaviorScript bhvBlueOwl[];
 extern const BehaviorScript bhv2DKoopa[];
 extern const BehaviorScript bhv2DGoomba[];
+extern const BehaviorScript bhvTheaterScreen[];
 
 
 #endif // BEHAVIOR_DATA_H

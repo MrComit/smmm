@@ -58,6 +58,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TIGHT_ROPE, tight_rope_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TREE_LIMB, tree_limb_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BLUE_OWL, blue_owl_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_THEATER_SCREEN, theater_screen_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -157,7 +158,8 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_KOOPA, -3485, 970, -11146, 0, -90, 0, 0x00000000, bhv2DKoopa),
 		OBJECT(MODEL_KOOPA, -3211, 970, -11146, 0, -90, 0, 0x00000000, bhv2DKoopa),
 		OBJECT(MODEL_FOREROOM_LEVER, 2996, 0, -7157, 0, -90, 0, 0x00000000, bhvForeroomLever),
-		OBJECT(MODEL_NONE, -4954, 300, -11146, 0, -90, 0, (0x24 << 16), bhvFlyingWarp),
+		OBJECT(MODEL_THEATER_SCREEN, -3454, 250, -9386, 0, 0, 0, 0x00000000, bhvTheaterScreen),
+		OBJECT(MODEL_NONE, -4954, 300, -11146, 0, 90, 0, (0x24 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_FOREROOM_WINDOW, 1997, 250, -7771, 0, 0, 0, 0x00000000, bhvForeroomWindow),
 		OBJECT(MODEL_FOREROOM_WINDOW, 1021, 250, -7771, 0, -180, 0, (1 << 16), bhvForeroomWindow),
 		TERRAIN(hmc_area_1_collision),

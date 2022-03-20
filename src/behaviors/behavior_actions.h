@@ -884,6 +884,8 @@ void bhv_2d_goomba_init(void);
 void bhv_2d_goomba_loop(void);
 void bhv_2d_koopa_init(void);
 void bhv_2d_koopa_loop(void);
+void bhv_theater_screen_init(void);
+void bhv_theater_screen_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

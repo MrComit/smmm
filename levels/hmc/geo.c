@@ -42,3 +42,4 @@
 #include "levels/hmc/tight_rope/geo.inc.c"
 #include "levels/hmc/tree_limb/geo.inc.c"
 #include "levels/hmc/blue_owl/geo.inc.c"
+#include "levels/hmc/theater_screen/geo.inc.c"

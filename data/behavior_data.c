@@ -8741,3 +8741,15 @@ const BehaviorScript bhv2DKoopa[] = {
         CALL_NATIVE(bhv_2d_koopa_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvTheaterScreen[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    LOAD_COLLISION_DATA(theater_screen_collision),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_theater_screen_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_theater_screen_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

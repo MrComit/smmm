@@ -177,4 +177,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/blue_owl/anim_header.h"
 
+#include "levels/hmc/theater_screen/geo_header.h"
+
+#include "levels/hmc/theater_screen/collision_header.h"
+
 #endif

@@ -108,3 +108,5 @@
 #include "levels/hmc/blue_owl/model.inc.c"
 #include "levels/hmc/blue_owl/anims/data.inc.c"
 #include "levels/hmc/blue_owl/anims/table.inc.c"
+#include "levels/hmc/theater_screen/model.inc.c"
+#include "levels/hmc/theater_screen/collision.inc.c"
