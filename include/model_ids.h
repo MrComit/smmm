@@ -750,8 +750,12 @@
 
 // LEVEL 5 MODELS CONT:
 // 0x5B-0x63
+
 // 0x6C-0x73
+
 // 0x97-0x9B
+#define MODEL_GOOMBA_2D           0x97
+#define MODEL_KOOPA_2D            0x98
 
 
 #endif // MODEL_IDS_H

@@ -181,4 +181,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/theater_screen/collision_header.h"
 
+#include "levels/hmc/goomba_2d/geo_header.h"
+
+#include "levels/hmc/koopa_2d/geo_header.h"
+
 #endif

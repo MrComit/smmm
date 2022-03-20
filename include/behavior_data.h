@@ -739,8 +739,7 @@ extern const BehaviorScript bhvTightRope[];
 extern const BehaviorScript bhvTreeLimb[];
 extern const BehaviorScript bhvTreeLimbCol[];
 extern const BehaviorScript bhvBlueOwl[];
-extern const BehaviorScript bhv2DKoopa[];
-extern const BehaviorScript bhv2DGoomba[];
+extern const BehaviorScript bhv2DEnemy[];
 extern const BehaviorScript bhvTheaterScreen[];
 
 

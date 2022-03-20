@@ -43,3 +43,5 @@
 #include "levels/hmc/tree_limb/geo.inc.c"
 #include "levels/hmc/blue_owl/geo.inc.c"
 #include "levels/hmc/theater_screen/geo.inc.c"
+#include "levels/hmc/goomba_2d/geo.inc.c"
+#include "levels/hmc/koopa_2d/geo.inc.c"

@@ -8716,31 +8716,19 @@ const BehaviorScript bhvBlueOwl[] = {
 };
 
 
-const BehaviorScript bhv2DGoomba[] = {
+const BehaviorScript bhv2DEnemy[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
-    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     //DROP_TO_FLOOR(),
     // LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
-    CALL_NATIVE(bhv_2d_goomba_init),
+    CALL_NATIVE(bhv_2d_enemy_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_2d_goomba_loop),
+        CALL_NATIVE(bhv_2d_enemy_loop),
     END_LOOP(),
 };
 
-
-const BehaviorScript bhv2DKoopa[] = {
-    BEGIN(OBJ_LIST_PUSHABLE),
-    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    SET_HOME(),
-    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
-    // SCALE(/*Unused*/ 0, /*Field*/ 150),
-    CALL_NATIVE(bhv_2d_koopa_init),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_2d_koopa_loop),
-    END_LOOP(),
-};
 
 const BehaviorScript bhvTheaterScreen[] = {
     BEGIN(OBJ_LIST_SURFACE),

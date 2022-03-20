@@ -1,0 +1,15 @@
+extern const GeoLayout koopa_2d_switch_opt1[];
+extern const GeoLayout koopa_2d_geo[];
+extern u8 koopa_2d_koopa_sprite_1_ci4[];
+extern u8 koopa_2d_koopa_sprite_1_ci4_pal_rgba16[];
+extern u8 koopa_2d_koopa_sprite_2_ci4[];
+extern u8 koopa_2d_koopa_sprite_2_ci4_pal_rgba16[];
+extern Vtx koopa_2d_koopa_mesh_layer_4_vtx_0[4];
+extern Gfx koopa_2d_koopa_mesh_layer_4_tri_0[];
+extern Gfx mat_koopa_2d_Koopa[];
+extern Gfx mat_revert_koopa_2d_Koopa[];
+extern Gfx mat_koopa_2d_Koopa2[];
+extern Gfx mat_revert_koopa_2d_Koopa2[];
+extern Gfx koopa_2d_koopa_mesh_layer_4[];
+extern Gfx koopa_2d_koopa_mesh_layer_4_mat_override_Koopa2_0[];
+extern Gfx koopa_2d_material_revert_render_settings[];

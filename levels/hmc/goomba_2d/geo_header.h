@@ -1,0 +1,13 @@
+extern const GeoLayout goomba_2d_switch_opt1[];
+extern const GeoLayout goomba_2d_geo[];
+extern u8 goomba_2d_goomba_sprite_ci4[];
+extern u8 goomba_2d_goomba_sprite_ci4_pal_rgba16[];
+extern Vtx goomba_2d_goomba_mesh_layer_4_vtx_0[4];
+extern Gfx goomba_2d_goomba_mesh_layer_4_tri_0[];
+extern Gfx mat_goomba_2d_Goomba[];
+extern Gfx mat_revert_goomba_2d_Goomba[];
+extern Gfx mat_goomba_2d_Goomba2[];
+extern Gfx mat_revert_goomba_2d_Goomba2[];
+extern Gfx goomba_2d_goomba_mesh_layer_4[];
+extern Gfx goomba_2d_goomba_mesh_layer_4_mat_override_Goomba2_0[];
+extern Gfx goomba_2d_material_revert_render_settings[];

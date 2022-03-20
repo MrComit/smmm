@@ -2,7 +2,7 @@ struct ObjectHitbox s2DEnemyHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
-    /* health:            */ 0,
+    /* health:            */ 1,
     /* numLootCoins:      */ 1,
     /* radius:            */ 72,
     /* height:            */ 50,
@@ -78,19 +78,29 @@ void bhv_theater_screen_loop(void) {
 }
 
 
-void bhv_2d_goomba_init(void) {
+void bhv_2d_enemy_init(void) {
     obj_set_hitbox(o, &s2DEnemyHitbox);
+    o->oForwardVel = 12.0f;
 }
 
-void bhv_2d_goomba_loop(void) {
-    
-}
-
-
-void bhv_2d_koopa_init(void) {
-    obj_set_hitbox(o, &s2DEnemyHitbox);
-}
-
-void bhv_2d_koopa_loop(void) {
-    
+void bhv_2d_enemy_loop(void) {
+    cur_obj_move_standard(-78);
+    if (o->oMoveFlags & OBJ_MOVE_HIT_EDGE || cur_obj_dist_to_nearest_object_with_behavior(bhv2DEnemy) < 100.0f) {
+        o->oForwardVel *= -1;
+        if (cur_obj_has_model(MODEL_KOOPA_2D)) {
+            o->oFaceAngleYaw += 0x8000;
+        }
+        cur_obj_move_standard(-78);
+    }
+    if (o->oTimer & 0x10) {
+        o->oAnimState ^= 1;
+        o->oTimer = 0;
+    }
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+            spawn_mist_particles();
+            obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+            o->activeFlags = 0;
+            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    }
+    o->oInteractStatus = 0;
 }

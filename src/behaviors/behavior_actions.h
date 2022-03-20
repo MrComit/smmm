@@ -880,10 +880,8 @@ void bhv_tree_limb_loop(void);
 void bhv_tree_limb_col_loop(void);
 void bhv_blue_owl_loop(void);
 void bhv_blue_owl_init(void);
-void bhv_2d_goomba_init(void);
-void bhv_2d_goomba_loop(void);
-void bhv_2d_koopa_init(void);
-void bhv_2d_koopa_loop(void);
+void bhv_2d_enemy_init(void);
+void bhv_2d_enemy_loop(void);
 void bhv_theater_screen_init(void);
 void bhv_theater_screen_loop(void);
 

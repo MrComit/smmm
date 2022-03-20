@@ -110,3 +110,5 @@
 #include "levels/hmc/blue_owl/anims/table.inc.c"
 #include "levels/hmc/theater_screen/model.inc.c"
 #include "levels/hmc/theater_screen/collision.inc.c"
+#include "levels/hmc/goomba_2d/model.inc.c"
+#include "levels/hmc/koopa_2d/model.inc.c"
