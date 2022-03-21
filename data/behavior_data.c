@@ -8732,8 +8732,8 @@ const BehaviorScript bhv2DEnemy[] = {
 
 const BehaviorScript bhvTheaterScreen[] = {
     BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(theater_screen_collision),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
     CALL_NATIVE(bhv_theater_screen_init),
     BEGIN_LOOP(),

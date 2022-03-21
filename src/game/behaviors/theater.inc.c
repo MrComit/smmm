@@ -13,9 +13,48 @@ struct ObjectHitbox s2DEnemyHitbox = {
 
 Vec3f sTheaterRespawn[3] = {
 {-4954.0f, 300.0f, -11146.0f},
-{-4954.0f, 300.0f, -11146.0f},
+{-3354.0f, 150.0f, -11146.0f},
 {-4954.0f, 300.0f, -11146.0f},
 };
+
+#define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
+    spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g));
+    // obj->oRoom = o->oRoom;
+
+
+void spawn_theater_arena(s16 *arena) {
+    switch (*arena) {
+        case 0:
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3790, 100, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3424, 100, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3126, 100, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -5125, 782, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4890, 782, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3790, 970, -11146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3485, 970, -11146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3211, 970, -11146,  0, -90, 0,  bhv2DEnemy)
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+    }
+}
+
+void check_theater_arena(s16 *arena) {
+    switch (*arena) {
+        case 0:
+            if (cur_obj_nearest_object_with_behavior(bhv2DEnemy) == NULL) {
+                *arena = 1;
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+    }
+}
 
 
 void bhv_theater_screen_init(void) {
@@ -27,6 +66,13 @@ void bhv_theater_screen_loop(void) {
     struct MarioState *m = gMarioState;
     switch (o->oAction) {
         case 0:
+            if (o->oRoom == gMarioCurrentRoom) {
+                if (o->oTimer == 1) {
+                    // spawn_theater_arena(&o->os16F4);
+                }
+            } else {
+                o->oTimer = 0;
+            }
             if (m->pos[2] < o->oPosZ) {
                 o->oAction = 1;
                 gCamera->comit2dcam = 3;
@@ -34,15 +80,32 @@ void bhv_theater_screen_loop(void) {
             break;
         case 1:
             gCamera->comit2dcam = 3;
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x8);
-            if (o->oOpacity == 0) {
-                cur_obj_hide();
-                o->oAction = 2;
+            if (o->oSubAction == 0) {
+                cur_obj_unhide();
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
+                if (o->oOpacity == 255) {
+                    if (o->oTimer > 30) {
+                        o->oSubAction = 1;
+                        vec3f_copy(m->pos, sTheaterRespawn[o->os16F4]);
+                        set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
+                        if (o->os16F4 != 0) {
+                            // spawn_theater_arena(&o->os16F4);
+                        }
+                    }
+                } else {
+                    o->oTimer = 0;
+                }
+            } else {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x8);
+                if (o->oOpacity == 0) {
+                    cur_obj_hide();
+                    o->oAction = 2;
+                }
             }
             break;
         case 2:
             gCamera->comit2dcam = 3;
-
+            check_theater_arena(&o->os16F4);
             if (m->pos[1] < -500.0f) {
                 if (m->health <= 0x280) {
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR);
@@ -84,6 +147,7 @@ void bhv_2d_enemy_init(void) {
 }
 
 void bhv_2d_enemy_loop(void) {
+    cur_obj_update_floor_and_walls();
     cur_obj_move_standard(-78);
     if (o->oMoveFlags & OBJ_MOVE_HIT_EDGE || cur_obj_dist_to_nearest_object_with_behavior(bhv2DEnemy) < 100.0f) {
         o->oForwardVel *= -1;
