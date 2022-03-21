@@ -61,6 +61,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_THEATER_SCREEN, theater_screen_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GOOMBA_2D, goomba_2d_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_KOOPA_2D, koopa_2d_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BULLETBILL_2D, bulletbill_2d_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -143,6 +144,9 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_SMALL_KEY, 9608, 1875, 5761, 0, 0, 0, (1 << 24) | (8 << 16), bhvSmallKey),
 		OBJECT(MODEL_TOY_MOLE, 9171, 100, 8698, 0, -14, 0, 0x06000000, bhvToyMole),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1096, 0, -5196, 0, -180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_NONE, -1627, 1491, -11146, 0, -90, 0, 0x00000000, bhvBulletBill2dSpawner),
+		OBJECT(MODEL_NONE, -4875, 1383, -11146, 0, 90, 0, 0x00000000, bhvBulletBill2dSpawner),
+		OBJECT(MODEL_NONE, -5185, 641, -11146, 0, 90, 0, 0x00000000, bhvBulletBill2dSpawner),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2154, 0, -6496, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 250, -9146, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_FOREROOM_OBJECT, -2024, 0, -5920, 0, 0, 0, (1 << 16), bhvForeroomObject),

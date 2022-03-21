@@ -112,3 +112,4 @@
 #include "levels/hmc/theater_screen/collision.inc.c"
 #include "levels/hmc/goomba_2d/model.inc.c"
 #include "levels/hmc/koopa_2d/model.inc.c"
+#include "levels/hmc/bulletbill_2d/model.inc.c"

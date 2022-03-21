@@ -185,4 +185,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/koopa_2d/geo_header.h"
 
+#include "levels/hmc/bulletbill_2d/geo_header.h"
+
 #endif

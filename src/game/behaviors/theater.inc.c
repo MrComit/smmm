@@ -10,6 +10,18 @@ struct ObjectHitbox s2DEnemyHitbox = {
     /* hurtboxHeight:     */ 40,
 };
 
+struct ObjectHitbox s2DBulletBillHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 72,
+    /* height:            */ 30,
+    /* hurtboxRadius:     */ 72,
+    /* hurtboxHeight:     */ 30,
+};
+
 
 Vec3f sTheaterRespawn[3] = {
 {-4954.0f, 300.0f, -11146.0f},
@@ -40,6 +52,9 @@ void spawn_theater_arena(s16 *arena) {
             break;
     }
 }
+
+
+//put the increment at the end of case 1, break; away with there are goombas - have case 0 only check koopas and fall through to case 1
 
 void check_theater_arena(s16 *arena) {
     switch (*arena) {
@@ -137,6 +152,54 @@ void bhv_theater_screen_loop(void) {
                     break;
             }
             break;
+    }
+}
+
+
+void bhv_bulletbill_2d_init(void) {
+    obj_set_hitbox(o, &s2DBulletBillHitbox);
+    o->oForwardVel = 20.0f;
+    o->hitboxDownOffset = -50.0f;
+}
+
+void bhv_bulletbill_2d_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(-78);
+            if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED || o->oTimer > 180) {
+                if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                    o->oAction = 1;
+                    o->oVelY = 7.0f;
+                } else {
+                    o->activeFlags = 0;
+                    spawn_mist_particles();
+                }
+            }
+            break;
+        case 1:
+            o->oFloatF4 += 0.4f;
+            o->oFaceAnglePitch += 0x40;
+            o->oVelY = approach_f32_symmetric(o->oVelY, -40.0f, o->oFloatF4);
+            o->oPosZ = approach_f32_asymptotic(o->oPosZ, -11145.0f + 150.0f, 0.1f);
+            o->oForwardVel = approach_f32_asymptotic(o->oForwardVel, 0.0f, 0.1f);
+            CL_Move();
+            if (o->oPosY < -800.0f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+void bhv_bulletbill_2d_spawner_loop(void) {
+    if (absf(o->oPosY - gMarioState->pos[1]) < 500.0f) {
+        if (o->oTimer > 45) {
+            spawn_object(o, MODEL_BULLETBILL_2D, bhvBulletBill2d);
+            o->oTimer = 0;
+        }
+    } else {
+        o->oTimer = 0;
     }
 }
 

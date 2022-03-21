@@ -884,6 +884,9 @@ void bhv_2d_enemy_init(void);
 void bhv_2d_enemy_loop(void);
 void bhv_theater_screen_init(void);
 void bhv_theater_screen_loop(void);
+void bhv_bulletbill_2d_spawner_loop(void);
+void bhv_bulletbill_2d_init(void);
+void bhv_bulletbill_2d_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

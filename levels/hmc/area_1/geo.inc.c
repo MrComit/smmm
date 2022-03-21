@@ -182,6 +182,7 @@ const GeoLayout hmc_dl_109__Theater_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ZBackground_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ZBackground2_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_ZBackground2_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ZBackground3_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

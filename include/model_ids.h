@@ -756,6 +756,7 @@
 // 0x97-0x9B
 #define MODEL_GOOMBA_2D           0x97
 #define MODEL_KOOPA_2D            0x98
+#define MODEL_BULLETBILL_2D       0x99
 
 
 #endif // MODEL_IDS_H
