@@ -14,8 +14,8 @@ struct ObjectHitbox s2DBoomBoomHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
-    /* health:            */ 1,
-    /* numLootCoins:      */ 1,
+    /* health:            */ 3,
+    /* numLootCoins:      */ 5,
     /* radius:            */ 72*2,
     /* height:            */ 50*2,
     /* hurtboxRadius:     */ 42*2,
@@ -55,7 +55,7 @@ Vec3f sTheaterRespawn[3] = {
 
 void bhv_theater_arena_init(void) {
     o->collisionData = segmented_to_virtual(sTheaterArenaCollision[o->oBehParams2ndByte]);
-    spawn_theater_arena(o->oBehParams2ndByte);
+    // spawn_theater_arena(o->oBehParams2ndByte);
 }
 
 
@@ -153,7 +153,12 @@ void check_theater_arena(s16 *arena) {
             if (cur_obj_nearest_object_with_behavior(bhv2DEnemy) == NULL) {
                 *arena = *arena + 1;
                 // o->oAction = 1;
-                COMIT_OBJECT(MODEL_BOOMBOOM_2D, -3454, 1600, -11146, 0, -90, 0, bhv2DBoomBoom)
+                COMIT_OBJECT(MODEL_BOOMBOOM_2D, -3454, 2200, -11146, 0, -90, 0, bhv2DBoomBoom)
+            }
+            break;
+        case 3:
+            if (cur_obj_nearest_object_with_behavior(bhv2DBoomBoom) == NULL) {
+                o->oAction = 4;
             }
             break;
     }
@@ -246,6 +251,21 @@ void bhv_theater_screen_loop(void) {
                     break;
             }
             break;
+        case 4:
+            gCamera->comit2dcam = 3;
+            if (o->oTimer == 0) {
+                sDelayedWarpOp = 0x10;
+                sDelayedWarpTimer = 20;
+                sSourceWarpNodeId = 0x26;
+                music_changed_through_warp(sSourceWarpNodeId);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+            }
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
+            if (o->oOpacity == 255) {
+                o->activeFlags = 0;
+                spawn_object(o, MODEL_THEATER_SCREEN, bhvTheaterScreenPost);
+            }
+            break;
     }
 }
 
@@ -300,32 +320,95 @@ void bhv_bulletbill_2d_spawner_loop(void) {
 
 void bhv_2d_boomboom_init(void) {
     obj_set_hitbox(o, &s2DBoomBoomHitbox);
-    o->oForwardVel = 8.0f;
+    o->oForwardVel = 5.0f;
 }
 
 void bhv_2d_boomboom_loop(void) {
     cur_obj_update_floor_and_walls();
     cur_obj_move_standard(-78);
-    if (o->oMoveFlags & OBJ_MOVE_HIT_EDGE || cur_obj_dist_to_nearest_object_with_behavior(bhv2DEnemy) < 100.0f) {
-        o->oForwardVel *= -1;
-        if (cur_obj_has_model(MODEL_KOOPA_2D)) {
-            o->oFaceAngleYaw += 0x8000;
-        }
-        cur_obj_move_standard(-78);
+    switch (o->oAction) {
+        case 0:
+            if (o->oPosX - gMarioState->pos[0] > 0) {
+                o->oMoveAngleYaw = 0xC000;
+                if (o->os16F4 == 0) {
+                    o->os16F4 = 1;
+                    o->oForwardVel = 5.0f;
+                    o->oFloatF8 = 0.0f;
+                }
+            } else {
+                o->oMoveAngleYaw = 0x4000;
+                if (o->os16F4) {
+                    o->os16F4 = 0;
+                    o->oForwardVel = 5.0f;
+                    o->oFloatF8 = 0.0f;
+                }
+            }
+            if (o->oMoveFlags & OBJ_MOVE_LEFT_GROUND) {
+                if (o->oPosX - o->oHomeX > 0) {
+                    o->oMoveAngleYaw = 0xC000;
+                } else {
+                    o->oMoveAngleYaw = 0x4000;
+                }
+            }
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 1.0f, 0.08f);
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 13.0f, o->oFloatF8);
+
+            if (o->oTimer & 0x8) {
+                o->oAnimState = (o->oAnimState & 1) ^ 1;
+                o->oTimer = 0;
+            }
+
+            if (o->oHealth < 3) {
+                if (o->oDistanceToMario > 500.0f) {
+                    if (++o->os16F6 > 25) {
+                        o->oAction = 1;
+                        o->oAnimState = 2;
+                        o->oInteractType = INTERACT_DAMAGE;
+                        o->oForwardVel = 0.0f;
+                        o->os16F6 = 0;
+                    }
+                } else {
+                    o->os16F6 = 0;
+                }
+            }
+
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                if (--o->oHealth <= 0) {
+                    spawn_mist_particles();
+                    obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                    o->activeFlags = 0;
+                    create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                } else {
+                    o->oAction = 1;
+                    o->oAnimState = 2;
+                    o->oInteractType = INTERACT_DAMAGE;
+                    o->oForwardVel = 0.0f;
+                    o->os16F6 = 0;
+                }
+            }
+
+            break;
+        case 1:
+            if (o->oAnimState < 4) {
+                if (o->oTimer & 0x4) {
+                    o->oAnimState++;
+                    o->oTimer = 0;
+                }
+            }
+            if (o->oTimer > 20) {
+                o->oVelY = 48.0f;
+                o->oForwardVel = 25.0f;
+                o->oAction = 0;
+                o->oAnimState = 2;
+                o->oFloatF8 = 0.0f;
+                o->oInteractType = INTERACT_BOUNCE_TOP;
+            }
+            break;
     }
-    if (o->oTimer & 0x8) {
-        if (o->oAnimState < 2) {
-            o->oAnimState++;
-        } else {
-            o->oAnimState = 0;
-        }
-        o->oTimer = 0;
-    }
-    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
-            spawn_mist_particles();
-            obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
-            o->activeFlags = 0;
-            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    if (o->oPosX > -2900.0f) {
+        o->oPosX = -2900.0f;
+    } else if (o->oPosX < -4000.0f) {
+        o->oPosX = -4000.0f;
     }
     o->oInteractStatus = 0;
 }

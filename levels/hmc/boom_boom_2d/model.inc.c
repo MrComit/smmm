@@ -342,36 +342,6 @@ Gfx mat_revert_boom_boom_2d_BoomBoom[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_boom_boom_2d_BoomBoom1[] = {
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
-	gsDPSetTextureFilter(G_TF_POINT),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsDPSetTextureLUT(G_TT_RGBA16),
-	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, boom_boom_2d_boomboom_2_ci4_pal_rgba16),
-	gsDPTileSync(),
-	gsDPSetTile(0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
-	gsDPLoadSync(),
-	gsDPLoadTLUTCmd(7, 3),
-	gsDPPipeSync(),
-	gsDPTileSync(),
-	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_16b, 1, boom_boom_2d_boomboom_2_ci4),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
-	gsDPLoadSync(),
-	gsDPLoadBlock(7, 0, 0, 255, 1024),
-	gsDPPipeSync(),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
-	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPEndDisplayList(),
-};
-
-Gfx mat_revert_boom_boom_2d_BoomBoom1[] = {
-	gsDPPipeSync(),
-	gsDPSetTextureFilter(G_TF_BILERP),
-	gsDPSetTextureLUT(G_TT_NONE),
-	gsSPEndDisplayList(),
-};
-
 Gfx mat_boom_boom_2d_BoomBoom2[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
@@ -396,6 +366,36 @@ Gfx mat_boom_boom_2d_BoomBoom2[] = {
 };
 
 Gfx mat_revert_boom_boom_2d_BoomBoom2[] = {
+	gsDPPipeSync(),
+	gsDPSetTextureFilter(G_TF_BILERP),
+	gsDPSetTextureLUT(G_TT_NONE),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_boom_boom_2d_BoomBoom1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
+	gsDPSetTextureFilter(G_TF_POINT),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetTextureLUT(G_TT_RGBA16),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, boom_boom_2d_boomboom_2_ci4_pal_rgba16),
+	gsDPTileSync(),
+	gsDPSetTile(0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadSync(),
+	gsDPLoadTLUTCmd(7, 3),
+	gsDPPipeSync(),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_16b, 1, boom_boom_2d_boomboom_2_ci4),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 255, 1024),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_boom_boom_2d_BoomBoom1[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureFilter(G_TF_BILERP),
 	gsDPSetTextureLUT(G_TT_NONE),
@@ -469,17 +469,17 @@ Gfx boom_boom_2d_boomboom_mesh_layer_4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom1_0[] = {
-	gsSPDisplayList(mat_boom_boom_2d_BoomBoom1),
-	gsSPDisplayList(boom_boom_2d_boomboom_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_boom_boom_2d_BoomBoom1),
-	gsSPEndDisplayList(),
-};
-
-Gfx boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom2_1[] = {
+Gfx boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom2_0[] = {
 	gsSPDisplayList(mat_boom_boom_2d_BoomBoom2),
 	gsSPDisplayList(boom_boom_2d_boomboom_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_boom_boom_2d_BoomBoom2),
+	gsSPEndDisplayList(),
+};
+
+Gfx boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom1_1[] = {
+	gsSPDisplayList(mat_boom_boom_2d_BoomBoom1),
+	gsSPDisplayList(boom_boom_2d_boomboom_mesh_layer_4_tri_0),
+	gsSPDisplayList(mat_revert_boom_boom_2d_BoomBoom1),
 	gsSPEndDisplayList(),
 };
 

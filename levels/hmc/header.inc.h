@@ -614,7 +614,7 @@ extern Vtx hmc_dl_CC_mesh_vtx_0[3];
 extern Gfx hmc_dl_CC_mesh_tri_0[];
 extern Vtx hmc_dl_Theater_mesh_layer_1_vtx_0[47];
 extern Gfx hmc_dl_Theater_mesh_layer_1_tri_0[];
-extern Vtx hmc_dl_Theater_mesh_layer_1_vtx_1[99];
+extern Vtx hmc_dl_Theater_mesh_layer_1_vtx_1[94];
 extern Gfx hmc_dl_Theater_mesh_layer_1_tri_1[];
 extern Vtx hmc_dl_Theater_mesh_layer_1_vtx_2[22];
 extern Gfx hmc_dl_Theater_mesh_layer_1_tri_2[];

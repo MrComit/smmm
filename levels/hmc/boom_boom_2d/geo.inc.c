@@ -3,14 +3,14 @@
 const GeoLayout boom_boom_2d_switch_opt1[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom1_0),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom2_0),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
 const GeoLayout boom_boom_2d_switch_opt2[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom2_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, boom_boom_2d_boomboom_mesh_layer_4_mat_override_BoomBoom1_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

@@ -741,6 +741,7 @@ extern const BehaviorScript bhvTreeLimbCol[];
 extern const BehaviorScript bhvBlueOwl[];
 extern const BehaviorScript bhv2DEnemy[];
 extern const BehaviorScript bhvTheaterScreen[];
+extern const BehaviorScript bhvTheaterScreenPost[];
 extern const BehaviorScript bhvBulletBill2dSpawner[];
 extern const BehaviorScript bhvBulletBill2d[];
 extern const BehaviorScript bhvTheaterArena[];

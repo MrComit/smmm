@@ -63,8 +63,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_KOOPA_2D, koopa_2d_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BULLETBILL_2D, bulletbill_2d_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_THEATER_ARENA, theater_arena_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_BOOMBOOM_2D, boom_boom_2d_geo),
-
+	LOAD_MODEL_FROM_GEO(MODEL_BOOMBOOM_2D, boom_boom_2d_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -79,6 +78,8 @@ const LevelScript level_hmc_entry[] = {
 		WARP_NODE(0x0E, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x23, LEVEL_HMC, 0x01, 0x24, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x24, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x25, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x26, LEVEL_HMC, 0x01, 0x25, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -10581, -2363, 200, 90, 0, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 1096, 200, -4846, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -10581, -2363, 200, 90, 0, 0, (0xA << 16), bhvFlyingWarp),
@@ -156,8 +157,10 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_FOREROOM_OBJECT, 2296, 0, -6046, 0, 0, 0, (4 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, 2896, 0, -7157, 0, 0, 0, (5 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_LEVER, 2996, 0, -7157, 0, -90, 0, 0x00000000, bhvForeroomLever),
+		OBJECT(MODEL_BOO, -3454, 0, -5696, 0, 0, 0, (0x11 << 16), bhvRoomBoo),
 		OBJECT(MODEL_THEATER_SCREEN, -3454, 250, -9386, 0, 0, 0, 0x00000000, bhvTheaterScreen),
 		OBJECT(MODEL_NONE, -4954, 300, -11146, 0, 90, 0, (0x24 << 16), bhvFlyingWarp),
+		OBJECT(MODEL_NONE, -3454, 300, -8421, 0, 0, 0, (0x25 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_FOREROOM_WINDOW, 1997, 250, -7771, 0, 0, 0, 0x00000000, bhvForeroomWindow),
 		OBJECT(MODEL_FOREROOM_WINDOW, 1021, 250, -7771, 0, -180, 0, (1 << 16), bhvForeroomWindow),
 		TERRAIN(hmc_area_1_collision),
