@@ -117,3 +117,4 @@
 #include "levels/hmc/theater_arena1/collision.inc.c"
 #include "levels/hmc/theater_arena2/collision.inc.c"
 #include "levels/hmc/theater_arena3/collision.inc.c"
+#include "levels/hmc/boom_boom_2d/model.inc.c"

@@ -63,6 +63,8 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_KOOPA_2D, koopa_2d_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BULLETBILL_2D, bulletbill_2d_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_THEATER_ARENA, theater_arena_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BOOMBOOM_2D, boom_boom_2d_geo),
+
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

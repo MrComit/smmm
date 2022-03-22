@@ -47,3 +47,4 @@
 #include "levels/hmc/koopa_2d/geo.inc.c"
 #include "levels/hmc/bulletbill_2d/geo.inc.c"
 #include "levels/hmc/theater_arena/geo.inc.c"
+#include "levels/hmc/boom_boom_2d/geo.inc.c"

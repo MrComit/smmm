@@ -10,6 +10,18 @@ struct ObjectHitbox s2DEnemyHitbox = {
     /* hurtboxHeight:     */ 40,
 };
 
+struct ObjectHitbox s2DBoomBoomHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 72*2,
+    /* height:            */ 50*2,
+    /* hurtboxRadius:     */ 42*2,
+    /* hurtboxHeight:     */ 40*2,
+};
+
 struct ObjectHitbox s2DBulletBillHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
@@ -128,6 +140,7 @@ void spawn_theater_arena(s16 arena) {
 //put the increment at the end of case 1, break; away with there are goombas - have case 0 only check koopas and fall through to case 1
 
 void check_theater_arena(s16 *arena) {
+    struct Object *obj;
     switch (*arena) {
         case 0:
         case 1:
@@ -140,6 +153,7 @@ void check_theater_arena(s16 *arena) {
             if (cur_obj_nearest_object_with_behavior(bhv2DEnemy) == NULL) {
                 *arena = *arena + 1;
                 // o->oAction = 1;
+                COMIT_OBJECT(MODEL_BOOMBOOM_2D, -3454, 1600, -11146, 0, -90, 0, bhv2DBoomBoom)
             }
             break;
     }
@@ -281,6 +295,39 @@ void bhv_bulletbill_2d_spawner_loop(void) {
     } else {
         o->oTimer = 0;
     }
+}
+
+
+void bhv_2d_boomboom_init(void) {
+    obj_set_hitbox(o, &s2DBoomBoomHitbox);
+    o->oForwardVel = 8.0f;
+}
+
+void bhv_2d_boomboom_loop(void) {
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(-78);
+    if (o->oMoveFlags & OBJ_MOVE_HIT_EDGE || cur_obj_dist_to_nearest_object_with_behavior(bhv2DEnemy) < 100.0f) {
+        o->oForwardVel *= -1;
+        if (cur_obj_has_model(MODEL_KOOPA_2D)) {
+            o->oFaceAngleYaw += 0x8000;
+        }
+        cur_obj_move_standard(-78);
+    }
+    if (o->oTimer & 0x8) {
+        if (o->oAnimState < 2) {
+            o->oAnimState++;
+        } else {
+            o->oAnimState = 0;
+        }
+        o->oTimer = 0;
+    }
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+            spawn_mist_particles();
+            obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+            o->activeFlags = 0;
+            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    }
+    o->oInteractStatus = 0;
 }
 
 

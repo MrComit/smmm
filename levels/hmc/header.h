@@ -195,4 +195,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/theater_arena3/collision_header.h"
 
+#include "levels/hmc/boom_boom_2d/geo_header.h"
+
 #endif

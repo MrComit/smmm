@@ -758,6 +758,7 @@
 #define MODEL_KOOPA_2D            0x98
 #define MODEL_BULLETBILL_2D       0x99
 #define MODEL_THEATER_ARENA       0x9A
+#define MODEL_BOOMBOOM_2D         0x9B
 
 
 #endif // MODEL_IDS_H
