@@ -684,7 +684,11 @@ static s32 bhv_cmd_begin(void) {
 
     // Initiate the room if the object is a haunted chair or the mad piano.
     if (!(cur_obj_has_behavior(bhvMario))) {
-        bhv_init_room();
+        if (gCurrentObject->parentObj != gCurrentObject) {
+            gCurrentObject->oRoom = gCurrentObject->parentObj->oRoom;
+        } else {
+            bhv_init_room();
+        }
         //UNSUCCESSFUL ATTEMPT AT PAUSING OBJECTS NOT IN ROOM ON FRAME 1
         //if (gCurrentObject->oRoom != gMarioCurrentRoom) {
         //        gCurrentObject->activeFlags |= ACTIVE_FLAG_IN_DIFFERENT_ROOM;

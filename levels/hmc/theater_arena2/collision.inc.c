@@ -1,6 +1,6 @@
 const Collision theater_arena2_collision[] = {
 	COL_INIT(),
-	COL_VERTEX_INIT(74),
+	COL_VERTEX_INIT(78),
 	COL_VERTEX(795, 483, 384),
 	COL_VERTEX(795, 483, 116),
 	COL_VERTEX(-595, 483, 116),
@@ -75,7 +75,11 @@ const Collision theater_arena2_collision[] = {
 	COL_VERTEX(-124, 1143, 116),
 	COL_VERTEX(-124, 1059, 116),
 	COL_VERTEX(-124, 1059, 384),
-	COL_TRI_INIT(SURFACE_DEFAULT, 95),
+	COL_VERTEX(2853, -1150, 2175),
+	COL_VERTEX(2853, -1150, -639),
+	COL_VERTEX(-2781, -1150, -639),
+	COL_VERTEX(-2781, -1150, 2175),
+	COL_TRI_INIT(SURFACE_DEFAULT, 97),
 	COL_TRI(0, 1, 2),
 	COL_TRI(0, 2, 3),
 	COL_TRI(4, 5, 6),
@@ -171,6 +175,8 @@ const Collision theater_arena2_collision[] = {
 	COL_TRI(67, 71, 70),
 	COL_TRI(68, 73, 72),
 	COL_TRI(68, 72, 69),
+	COL_TRI(74, 75, 76),
+	COL_TRI(74, 76, 77),
 	COL_TRI_STOP(),
 	COL_END()
 };
