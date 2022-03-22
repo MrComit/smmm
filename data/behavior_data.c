@@ -8722,7 +8722,7 @@ const BehaviorScript bhv2DEnemy[] = {
     //DROP_TO_FLOOR(),
     // LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
     SET_HOME(),
-    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_2d_enemy_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_2d_enemy_loop),
@@ -8760,5 +8760,18 @@ const BehaviorScript bhvBulletBill2d[] = {
     CALL_NATIVE(bhv_bulletbill_2d_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bulletbill_2d_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvTheaterArena[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    CALL_NATIVE(bhv_theater_arena_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

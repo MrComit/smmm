@@ -113,3 +113,7 @@
 #include "levels/hmc/goomba_2d/model.inc.c"
 #include "levels/hmc/koopa_2d/model.inc.c"
 #include "levels/hmc/bulletbill_2d/model.inc.c"
+#include "levels/hmc/theater_arena/model.inc.c"
+#include "levels/hmc/theater_arena1/collision.inc.c"
+#include "levels/hmc/theater_arena2/collision.inc.c"
+#include "levels/hmc/theater_arena3/collision.inc.c"

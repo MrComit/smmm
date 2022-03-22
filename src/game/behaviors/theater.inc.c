@@ -22,11 +22,17 @@ struct ObjectHitbox s2DBulletBillHitbox = {
     /* hurtboxHeight:     */ 30,
 };
 
+static void const *sTheaterArenaCollision[] = {
+    theater_arena1_collision,
+    theater_arena2_collision,
+    theater_arena3_collision,
+};
+
 
 Vec3f sTheaterRespawn[3] = {
 {-4954.0f, 300.0f, -11146.0f},
 {-3354.0f, 150.0f, -11146.0f},
-{-4954.0f, 300.0f, -11146.0f},
+{-3354.0f, 150.0f, -11146.0f},
 };
 
 #define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
@@ -34,21 +40,70 @@ Vec3f sTheaterRespawn[3] = {
     // obj->oRoom = o->oRoom;
 
 
-void spawn_theater_arena(s16 *arena) {
-    switch (*arena) {
+void bhv_theater_arena_init(void) {
+    o->collisionData = segmented_to_virtual(sTheaterArenaCollision[o->oBehParams2ndByte]);
+    spawn_theater_arena(o->oBehParams2ndByte);
+}
+
+
+
+void spawn_theater_arena(s16 arena) {
+    struct Object *obj;
+    while ((obj = cur_obj_nearest_object_with_behavior(bhvBulletBill2dSpawner)) != NULL) {
+        obj->activeFlags = 0;
+    }
+    switch (arena) {
         case 0:
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3790, 100, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3424, 100, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3126, 100, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -5125, 782, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4890, 782, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -3790, 970, -11146,  0, -90, 0,  bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -3485, 970, -11146,  0, -90, 0,  bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -3211, 970, -11146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3790, 100 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3424, 100 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3126, 100 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -5125, 782 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4890, 782 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3790, 970 + 150, -11146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3485, 970 + 150, -11146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3211, 970 + 150, -11146,  0, -90, 0,  bhv2DEnemy)
             break;
         case 1:
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4801, 341 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4977, 341 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -5137, 341 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2338, 94 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2380, 1064 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2967, 1226 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3247, 1226 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3538, 1226 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3827, 1226 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4117, 1226 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            obj = COMIT_OBJECT(MODEL_NONE, -1627, 1591, -11146, 0, -90, 0, bhvBulletBill2dSpawner)
+            obj->oBehParams2ndByte = 1;
+            obj = COMIT_OBJECT(MODEL_NONE, -4875, 1383, -11146, 0, 90, 0, bhvBulletBill2dSpawner)
+            obj->oBehParams2ndByte = 2;
+            obj = COMIT_OBJECT(MODEL_NONE, -5485, 518, -11146, 0, 90, 0, bhvBulletBill2dSpawner)
+            obj->oBehParams2ndByte = 2;
+		    obj = COMIT_OBJECT(MODEL_TOKEN, -3454, 630, -11146, 0, -180, 0, bhvToken)
+            obj->oBehParams = 22 << 8;
             break;
         case 2:
+            obj = COMIT_OBJECT(MODEL_NONE, -1649, 1270, -11146, 0, -90, 0, bhvBulletBill2dSpawner)
+            obj->oBehParams2ndByte = 1;
+            obj = COMIT_OBJECT(MODEL_NONE, -4982, 455, -11146, 0, 90, 0, bhvBulletBill2dSpawner)
+            obj->oBehParams2ndByte = 2;
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4401, 317 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2508, 952 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2356, 952 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4547, 952 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2512, 317 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3068, 1170 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4553, 317 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -1807, 635 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3872, 1170 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3599, 1170 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -4396, 952 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -2361, 317 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -1955, 635 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3331, 1170 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -4932, 635 + 150, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -5132, 635 + 150, -11146, 0, -90, 0, bhv2DEnemy)
             break;
     }
 }
@@ -59,14 +114,17 @@ void spawn_theater_arena(s16 *arena) {
 void check_theater_arena(s16 *arena) {
     switch (*arena) {
         case 0:
+        case 1:
             if (cur_obj_nearest_object_with_behavior(bhv2DEnemy) == NULL) {
-                *arena = 1;
+                *arena = *arena + 1;
                 o->oAction = 1;
             }
             break;
-        case 1:
-            break;
         case 2:
+            if (cur_obj_nearest_object_with_behavior(bhv2DEnemy) == NULL) {
+                *arena = *arena + 1;
+                o->oAction = 1;
+            }
             break;
     }
 }
@@ -83,7 +141,9 @@ void bhv_theater_screen_loop(void) {
         case 0:
             if (o->oRoom == gMarioCurrentRoom) {
                 if (o->oTimer == 1) {
-                    // spawn_theater_arena(&o->os16F4);
+                    // spawn_theater_arena(0);
+                    o->oObjF8 = COMIT_OBJECT(MODEL_THEATER_ARENA, -3454, -533, -11396, 0, 0, 0, bhvTheaterArena)
+                    o->oObjF8->oRoom = o->oRoom;
                 }
             } else {
                 o->oTimer = 0;
@@ -104,7 +164,12 @@ void bhv_theater_screen_loop(void) {
                         vec3f_copy(m->pos, sTheaterRespawn[o->os16F4]);
                         set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
                         if (o->os16F4 != 0) {
-                            // spawn_theater_arena(&o->os16F4);
+                            if (o->oObjF8) {
+                                o->oObjF8->activeFlags = 0;
+                            }
+                            o->oObjF8 = COMIT_OBJECT(MODEL_THEATER_ARENA, -3454, -533, -11396, 0, 0, 0, bhvTheaterArena)
+                            o->oObjF8->oBehParams2ndByte = o->os16F4;
+                            o->oObjF8->oRoom = o->oRoom;
                         }
                     }
                 } else {
@@ -194,7 +259,7 @@ void bhv_bulletbill_2d_loop(void) {
 
 void bhv_bulletbill_2d_spawner_loop(void) {
     if (absf(o->oPosY - gMarioState->pos[1]) < 500.0f) {
-        if (o->oTimer > 45) {
+        if (o->oTimer > 45 * o->oBehParams2ndByte) {
             spawn_object(o, MODEL_BULLETBILL_2D, bhvBulletBill2d);
             o->oTimer = 0;
         }
@@ -206,7 +271,7 @@ void bhv_bulletbill_2d_spawner_loop(void) {
 
 void bhv_2d_enemy_init(void) {
     obj_set_hitbox(o, &s2DEnemyHitbox);
-    o->oForwardVel = 12.0f;
+    o->oForwardVel = 8.0f;
 }
 
 void bhv_2d_enemy_loop(void) {

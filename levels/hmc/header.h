@@ -187,4 +187,12 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/bulletbill_2d/geo_header.h"
 
+#include "levels/hmc/theater_arena/geo_header.h"
+
+#include "levels/hmc/theater_arena1/collision_header.h"
+
+#include "levels/hmc/theater_arena2/collision_header.h"
+
+#include "levels/hmc/theater_arena3/collision_header.h"
+
 #endif
