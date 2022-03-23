@@ -112,7 +112,7 @@ void bhv_room_boo_init(void) {
     }
 }
 
-s8 sBooBits[] = {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1,}; // ends at 0xF
+s8 sBooBits[] = {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,}; // ends at 0x14
 
 //BPARAM 1 = NO KEY, SMALL KEY, OR BIG KEY
 //BPARAM 2 = BOO ID

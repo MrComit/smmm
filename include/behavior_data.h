@@ -748,6 +748,7 @@ extern const BehaviorScript bhvTheaterArena[];
 extern const BehaviorScript bhv2DBoomBoom[];
 extern const BehaviorScript bhvTomatoThrower[];
 extern const BehaviorScript bhvTomato[];
+extern const BehaviorScript bhvSittingShyguy[];
 
 
 #endif // BEHAVIOR_DATA_H

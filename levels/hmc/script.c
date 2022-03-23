@@ -64,7 +64,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BULLETBILL_2D, bulletbill_2d_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_THEATER_ARENA, theater_arena_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOOMBOOM_2D, boom_boom_2d_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_THEATER_TOMATO, theater_tomato_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_THEATER_TOMATO, theater_tomato_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -159,6 +159,9 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_FOREROOM_OBJECT, 2896, 0, -7157, 0, 0, 0, (5 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_LEVER, 2996, 0, -7157, 0, -90, 0, 0x00000000, bhvForeroomLever),
 		OBJECT(MODEL_BOO, -3454, 0, -5696, 0, 0, 0, (0x11 << 16), bhvRoomBoo),
+		OBJECT(MODEL_SHYGUY, -4183, 67, -8083, 0, -180, 0, 0x00000000, bhvSittingShyguy),
+		OBJECT(MODEL_SHYGUY, -2899, 67, -7683, 0, -180, 0, 0x00000000, bhvSittingShyguy),
+		OBJECT(MODEL_SHYGUY, -4357, 67, -7283, 0, -180, 0, 0x00000000, bhvSittingShyguy),
 		OBJECT(MODEL_THEATER_SCREEN, -3454, 250, -9386, 0, 0, 0, 0x00000000, bhvTheaterScreen),
 		OBJECT(MODEL_NONE, -4954, 300, -11146, 0, 90, 0, (0x24 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, -3454, 300, -8421, 0, 0, 0, (0x25 << 16), bhvFlyingWarp),

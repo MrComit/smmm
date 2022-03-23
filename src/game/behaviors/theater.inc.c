@@ -57,15 +57,15 @@ static void const *sTheaterArenaCollision[] = {
 Vec3f sTheaterRespawn[3] = {
 {-4954.0f, 300.0f, -11146.0f},
 {-3354.0f, 150.0f, -11146.0f},
-{-3354.0f, 150.0f, -11146.0f},
+{-3354.0f, 100.0f, -11146.0f},
 };
 
 
 struct Object *gTomatoObjs[3];
 Vec3f sTomatoPos[3] = {
-    {-3580.0f, 650.0f, -8100.0f},
-    {-3250.0f, 585.0f, -8300.0f},
-    {-3420.0f, 665.0f, -8100.0f},
+    {-3580.0f, 650.0f, -8200.0f},
+    {-3250.0f, 585.0f, -8400.0f},
+    {-3420.0f, 665.0f, -8200.0f},
 };
 
 
@@ -94,41 +94,83 @@ void bhv_tomato_loop(void) {
 }
 
 
+
+void set_tomato_target(s32 type) {
+    s32 x, y, xAdd;
+    s32 cond = FALSE;
+    // s16 rate = 0x4;
+    switch (type) {
+        case 0:
+            if (gMarioScreenX > 100 && gMarioScreenX < 220) {
+                cond = TRUE;
+            } else {
+                xAdd = 160;
+            }
+            break;
+        case 1:
+            if (gMarioScreenX < 120) {
+                cond = TRUE;
+            } else {
+                xAdd = 50;
+            }
+            break;
+        case 2:
+            if (gMarioScreenX > 200) {
+                cond = TRUE;
+            } else {
+                xAdd = 270;
+            }
+            break;
+    }
+
+    if (cond) {
+        x = gMarioScreenX;
+        y = gMarioScreenY;
+    } else {
+        o->os16FC += CL_RandomMinMaxU16(0x180, 0x280);
+        x = xAdd + (sins(o->os16FC) * 50);
+        y = 120 + (coss(o->os16FC) * 75);
+    }
+
+    o->os16F4 = approach_s16_symmetric(o->os16F4, x, 0x4);
+    o->os16F6 = approach_s16_symmetric(o->os16F6, y, 0x4);
+}
+
 void bhv_tomato_thrower_init(void) {
+    s16 pitch, yaw;
+    f32 dist;
     gTomatoObjs[o->oBehParams2ndByte] = o;
     vec3f_copy(&o->oPosX, sTomatoPos[o->oBehParams2ndByte]);
-    o->os16FA = CL_RandomMinMaxU16(70, 90);
+    vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+    o->oFaceAnglePitch = -pitch;
+    o->oFaceAngleYaw = yaw;
+    o->oHomeY = o->oPosY;
+    o->oPosY -= 500.0f;
+    o->os16FA = CL_RandomMinMaxU16(40, 60);
 }
 
 
 void bhv_tomato_thrower_loop(void) {
     s16 pitch, yaw;
     f32 dist;
-    // switch (o->oBehParams2ndByte) {
-    //     case 0: 
-    //         o->os16F4 = gMarioScreenX;
-    //         o->os16F6 = gMarioScreenY;
-    //         break;
-    //     case 1:
-    //         o->os16F4 = gMarioScreenX - 60;
-    //         o->os16F6 = gMarioScreenY;
-    //         break;
-    //     case 2:
-    //         o->os16F4 = gMarioScreenX;
-    //         o->os16F6 = gMarioScreenY - 60;
-    //         break;
-    // }
+    o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 12.0f);
     if (o->oTimer > o->os16FA) {
         spawn_object(o, MODEL_THEATER_TOMATO, bhvTomato);
         o->oTimer = 0;
-        o->os16FA = CL_RandomMinMaxU16(40, 50);
+        o->os16FA = CL_RandomMinMaxU16(40, 60);
     } else if (o->oTimer > 20) {
         o->os16F8 = 20;
-        o->os16F4 = gMarioScreenX;
-        o->os16F6 = gMarioScreenY;
+        set_tomato_target(o->oBehParams2ndByte);
         vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
         o->oFaceAnglePitch = -pitch;
         o->oFaceAngleYaw = yaw;
+    }
+    if (o->parentObj->oOpacity > 100) {
+        o->oTimer = 0;
+        o->os16F8 = 0;
+    }
+    if (absi(o->os16F4 - gMarioScreenX) * absi(o->os16F6 - gMarioScreenY) > 15*15) {
+        o->oTimer = 20;
     }
 }
 
@@ -284,6 +326,9 @@ void bhv_theater_screen_loop(void) {
             if (o->oSubAction == 0) {
                 cur_obj_unhide();
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
+                if ((obj = cur_obj_nearest_object_with_behavior(bhvYellowCoin)) != NULL) {
+                    vec3f_copy(&obj->oPosX, gMarioState->pos);
+                }
                 if (o->oOpacity == 255) {
                     if (o->oTimer > 30) {
                         o->oSubAction = 1;
@@ -351,20 +396,30 @@ void bhv_theater_screen_loop(void) {
             break;
         case 4:
             gCamera->comit2dcam = 3;
-            if (o->oTimer == 0) {
+            if (o->oTimer == 90) {
                 sDelayedWarpOp = 0x10;
                 sDelayedWarpTimer = 20;
                 sSourceWarpNodeId = 0x26;
                 music_changed_through_warp(sSourceWarpNodeId);
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
-            }
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
-            if (o->oOpacity == 255) {
-                o->activeFlags = 0;
-                obj = spawn_object(o, MODEL_THEATER_SCREEN, bhvTheaterScreenPost);
-                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-                while ((obj = cur_obj_nearest_object_with_behavior(bhvBulletBill2dSpawner)) != NULL) {
-                    obj->activeFlags = 0;
+            } else if (o->oTimer >= 90) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
+                if (o->oOpacity == 255) {
+                    o->activeFlags = 0;
+                    obj = spawn_object(o, MODEL_THEATER_SCREEN, bhvTheaterScreenPost);
+                    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvBulletBill2dSpawner)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvTomato)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvTomatoThrower)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvSittingShyguy)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
                 }
             }
             break;
@@ -423,6 +478,11 @@ void bhv_bulletbill_2d_spawner_loop(void) {
 void bhv_2d_boomboom_init(void) {
     obj_set_hitbox(o, &s2DBoomBoomHitbox);
     o->oForwardVel = 5.0f;
+    if (gMarioState->pos[0] > -3450.0f) {
+        o->oPosX = -4000.0f;
+    } else {
+        o->oPosX = -2900.0f;
+    }
 }
 
 void bhv_2d_boomboom_loop(void) {

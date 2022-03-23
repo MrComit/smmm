@@ -980,6 +980,7 @@ const BehaviorScript bhvSingleCoinGetsSpawned[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BILLBOARD(),
     CALL_NATIVE(bhv_coin_init),
+    SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_coin_loop),
@@ -8717,7 +8718,7 @@ const BehaviorScript bhvBlueOwl[] = {
 
 
 const BehaviorScript bhv2DEnemy[] = {
-    BEGIN(OBJ_LIST_PUSHABLE),
+    BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     //DROP_TO_FLOOR(),
     // LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
@@ -8789,7 +8790,7 @@ const BehaviorScript bhvTheaterArena[] = {
 
 
 const BehaviorScript bhv2DBoomBoom[] = {
-    BEGIN(OBJ_LIST_PUSHABLE),
+    BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     //DROP_TO_FLOOR(),
     // LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
@@ -8828,4 +8829,16 @@ const BehaviorScript bhvTomato[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_tomato_loop),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvSittingShyguy[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    ANIMATE(0),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    SET_INT(oOpacity, 255),
+    BREAK(),
 };
