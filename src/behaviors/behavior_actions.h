@@ -891,7 +891,9 @@ void bhv_theater_arena_init(void);
 void bhv_2d_boomboom_loop(void);
 void bhv_2d_boomboom_init(void);
 void bhv_tomato_thrower_loop(void);
-
+void bhv_tomato_thrower_init(void);
+void bhv_tomato_loop(void);
+void bhv_tomato_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

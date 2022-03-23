@@ -244,12 +244,32 @@ Gfx target_rect_mesh[] = {
 
 
 
+extern struct Object *gTomatoObjs[3];
 
-s32 gRenderTarget, gTargetX, gTargetY;
+void render_targets(void) {
+    struct Object *obj1 = gTomatoObjs[0];
+    struct Object *obj2 = gTomatoObjs[1];
+    struct Object *obj3 = gTomatoObjs[2];
+    if (obj1 && obj1->os16F8 > 0) {
+        render_target(obj1);
+        obj1->os16F8--;
+    }
+    if (obj2 && obj2->os16F8 > 0) {
+        render_target(obj2);
+        obj2->os16F8--;
+    }
+    if (obj3 && obj3->os16F8 > 0) {
+        render_target(obj3);
+        obj3->os16F8--;
+    }
 
-void render_target(void) {
-    create_dl_translation_matrix(MENU_MTX_PUSH, (f32)gTargetX, (f32)gTargetY, 0.0f);
-    // create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.0f, 1.0f, 1.0f);
+}
+
+void create_dl_scale_matrix(s8 pushOp, f32 x, f32 y, f32 z);
+
+void render_target(struct Object *obj) {
+    create_dl_translation_matrix(MENU_MTX_PUSH, (f32)obj->os16F4, (f32)obj->os16F6, 0.0f);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.5f, 0.5f, 1.0f);
     gDPSetEnvColor(gDisplayListHead++, 63, 192, 254, 63);
     gSPDisplayList(gDisplayListHead++, &target_rect_mesh);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
@@ -643,9 +663,8 @@ void render_hud(void) {
         }
 
 
-        if(gRenderTarget > 0) {
-            render_target();
-            gRenderTarget--;
+        if (gCurrLevelNum == LEVEL_HMC && sCurrPlayMode == 0) {
+            render_targets();
         }
 
 

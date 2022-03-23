@@ -594,13 +594,12 @@ extern void linear_mtxf_mul_vec3f(Mat4, Vec3f, Vec3f);
 
 
 s32 gMarioScreenX, gMarioScreenY;
-f32 gTomatoTargetX, gTomatoTargetY, gTomatoTargetZ;
 
 void get_mario_screen_coords(void) {
     Vec3s marioPos3s;
 
-    //vec3f_to_vec3s(marioPos3s, gMarioState->pos);
-    vec3s_set(marioPos3s, gTomatoTargetX, gTomatoTargetY, gTomatoTargetZ);
+    vec3f_to_vec3s(marioPos3s, gMarioState->pos);
+    // vec3s_set(marioPos3s, gTomatoTargetX, gTomatoTargetY, gTomatoTargetZ);
 
     marioPos3s[1] += 75;
 

@@ -11,6 +11,18 @@ struct ObjectHitbox s2DEnemyHitbox = {
     /* hurtboxHeight:     */ 40,
 };
 
+struct ObjectHitbox sTomatoHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
 struct ObjectHitbox s2DBoomBoomHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
@@ -48,20 +60,76 @@ Vec3f sTheaterRespawn[3] = {
 {-3354.0f, 150.0f, -11146.0f},
 };
 
+
+struct Object *gTomatoObjs[3];
+Vec3f sTomatoPos[3] = {
+    {-3580.0f, 650.0f, -8100.0f},
+    {-3250.0f, 585.0f, -8300.0f},
+    {-3420.0f, 665.0f, -8100.0f},
+};
+
+
 #define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
     obj = spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g)); \
     obj->oRoom = o->oRoom; \
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
 
+void bhv_tomato_init(void) {
+    obj_set_hitbox(o, &sTomatoHitbox);
+    o->oForwardVel = 60.0f;
+    o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
+    o->oMoveAnglePitch = -o->parentObj->oFaceAnglePitch;
+    o->oPosY += 100.0f;
+}
+
+void bhv_tomato_loop(void) {
+    CL_Move_3d();
+    o->oFaceAngleYaw += 0x200;
+    o->oFaceAngleRoll += 0x400;
+    if (o->oPosZ < -11200.0f || o->oInteractStatus & INT_STATUS_INTERACTED) {
+        o->activeFlags = 0;
+        spawn_mist_particles();
+    }
+}
+
+
+void bhv_tomato_thrower_init(void) {
+    gTomatoObjs[o->oBehParams2ndByte] = o;
+    vec3f_copy(&o->oPosX, sTomatoPos[o->oBehParams2ndByte]);
+    o->os16FA = CL_RandomMinMaxU16(70, 90);
+}
+
 
 void bhv_tomato_thrower_loop(void) {
-    gTomatoTargetX = gMarioObject->oPosX;
-    gTomatoTargetY = gMarioObject->oPosY;
-    gTomatoTargetZ = gMarioObject->oPosZ;
-    gTargetX = gMarioScreenX;
-    gTargetY = gMarioScreenY;
-    gRenderTarget = 30;
+    s16 pitch, yaw;
+    f32 dist;
+    // switch (o->oBehParams2ndByte) {
+    //     case 0: 
+    //         o->os16F4 = gMarioScreenX;
+    //         o->os16F6 = gMarioScreenY;
+    //         break;
+    //     case 1:
+    //         o->os16F4 = gMarioScreenX - 60;
+    //         o->os16F6 = gMarioScreenY;
+    //         break;
+    //     case 2:
+    //         o->os16F4 = gMarioScreenX;
+    //         o->os16F6 = gMarioScreenY - 60;
+    //         break;
+    // }
+    if (o->oTimer > o->os16FA) {
+        spawn_object(o, MODEL_THEATER_TOMATO, bhvTomato);
+        o->oTimer = 0;
+        o->os16FA = CL_RandomMinMaxU16(40, 50);
+    } else if (o->oTimer > 20) {
+        o->os16F8 = 20;
+        o->os16F4 = gMarioScreenX;
+        o->os16F6 = gMarioScreenY;
+        vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+        o->oFaceAnglePitch = -pitch;
+        o->oFaceAngleYaw = yaw;
+    }
 }
 
 
@@ -245,8 +313,9 @@ void bhv_theater_screen_loop(void) {
             check_theater_arena(&o->os16F4);
 
             if (o->os16F6 != o->os16FC) {
-                spawn_object(o, MODEL_SHYGUY, bhvTomatoThrower);
-                o->os16FC = o->os16F6;
+                obj = spawn_object(o, MODEL_SHYGUY, bhvTomatoThrower);
+                obj->oBehParams2ndByte = o->os16FC;
+                o->os16FC++;// = o->os16F6;
             }
 
             if (m->pos[1] < -500.0f) {
@@ -292,7 +361,11 @@ void bhv_theater_screen_loop(void) {
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
             if (o->oOpacity == 255) {
                 o->activeFlags = 0;
-                spawn_object(o, MODEL_THEATER_SCREEN, bhvTheaterScreenPost);
+                obj = spawn_object(o, MODEL_THEATER_SCREEN, bhvTheaterScreenPost);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                while ((obj = cur_obj_nearest_object_with_behavior(bhvBulletBill2dSpawner)) != NULL) {
+                    obj->activeFlags = 0;
+                }
             }
             break;
     }

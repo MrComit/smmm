@@ -746,6 +746,7 @@
 #define MODEL_TREE_LIMB           0xEF
 #define MODEL_BLUE_OWL            0xEE
 #define MODEL_THEATER_SCREEN      0xED
+#define MODEL_THEATER_TOMATO      0xEC
 
 
 // LEVEL 5 MODELS CONT:
