@@ -746,6 +746,7 @@ extern const BehaviorScript bhvBulletBill2dSpawner[];
 extern const BehaviorScript bhvBulletBill2d[];
 extern const BehaviorScript bhvTheaterArena[];
 extern const BehaviorScript bhv2DBoomBoom[];
+extern const BehaviorScript bhvTomatoThrower[];
 
 
 #endif // BEHAVIOR_DATA_H

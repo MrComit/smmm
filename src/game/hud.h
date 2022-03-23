@@ -28,6 +28,9 @@ struct PowerMeterHUD {
     f32 unused;
 };
 
+
+extern s32 gRenderTarget, gTargetX, gTargetY;
+
 extern struct PowerMeterHUD sPowerMeterHUD;
 void set_hud_camera_status(s16 status);
 void render_hud(void);

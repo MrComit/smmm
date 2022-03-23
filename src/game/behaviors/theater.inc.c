@@ -1,3 +1,4 @@
+#include "game/hud.h"
 struct ObjectHitbox s2DEnemyHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
@@ -53,9 +54,20 @@ Vec3f sTheaterRespawn[3] = {
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
 
+
+void bhv_tomato_thrower_loop(void) {
+    gTomatoTargetX = gMarioObject->oPosX;
+    gTomatoTargetY = gMarioObject->oPosY;
+    gTomatoTargetZ = gMarioObject->oPosZ;
+    gTargetX = gMarioScreenX;
+    gTargetY = gMarioScreenY;
+    gRenderTarget = 30;
+}
+
+
 void bhv_theater_arena_init(void) {
     o->collisionData = segmented_to_virtual(sTheaterArenaCollision[o->oBehParams2ndByte]);
-    // spawn_theater_arena(o->oBehParams2ndByte);
+    spawn_theater_arena(o->oBehParams2ndByte);
 }
 
 
@@ -141,19 +153,30 @@ void spawn_theater_arena(s16 arena) {
 
 void check_theater_arena(s16 *arena) {
     struct Object *obj;
+    s16 count = count_objects_with_behavior(bhv2DEnemy);
     switch (*arena) {
         case 0:
-        case 1:
-            if (cur_obj_nearest_object_with_behavior(bhv2DEnemy) == NULL) {
+            if (count == 0) {
                 *arena = *arena + 1;
                 o->oAction = 1;
+            } else if (count <= 4) {
+                o->os16F6 = 1;
+            }
+            break;
+        case 1:
+            if (count == 0) {
+                *arena = *arena + 1;
+                o->oAction = 1;
+            } else if (count <= 5) {
+                o->os16F6 = 2;
             }
             break;
         case 2:
-            if (cur_obj_nearest_object_with_behavior(bhv2DEnemy) == NULL) {
+            if (count == 0) {
                 *arena = *arena + 1;
-                // o->oAction = 1;
                 COMIT_OBJECT(MODEL_BOOMBOOM_2D, -3454, 2200, -11146, 0, -90, 0, bhv2DBoomBoom)
+            } else if (count <= 8) {
+                o->os16F6 = 3;
             }
             break;
         case 3:
@@ -220,6 +243,12 @@ void bhv_theater_screen_loop(void) {
         case 2:
             gCamera->comit2dcam = 3;
             check_theater_arena(&o->os16F4);
+
+            if (o->os16F6 != o->os16FC) {
+                spawn_object(o, MODEL_SHYGUY, bhvTomatoThrower);
+                o->os16FC = o->os16F6;
+            }
+
             if (m->pos[1] < -500.0f) {
                 if (m->health <= 0x280) {
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR);

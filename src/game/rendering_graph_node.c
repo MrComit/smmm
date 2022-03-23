@@ -591,6 +591,26 @@ void emit_light(Vec3f pos, s32 red, s32 green, s32 blue, u32 constantFalloff, u3
 
 extern void linear_mtxf_mul_vec3f(Mat4, Vec3f, Vec3f);
 
+
+
+s32 gMarioScreenX, gMarioScreenY;
+f32 gTomatoTargetX, gTomatoTargetY, gTomatoTargetZ;
+
+void get_mario_screen_coords(void) {
+    Vec3s marioPos3s;
+
+    //vec3f_to_vec3s(marioPos3s, gMarioState->pos);
+    vec3s_set(marioPos3s, gTomatoTargetX, gTomatoTargetY, gTomatoTargetZ);
+
+    marioPos3s[1] += 75;
+
+    mtxf_mul_vec3s(gMatStack[gMatStackIndex], marioPos3s);
+
+    gMarioScreenX = 2 * (0.5f - marioPos3s[0] / (f32)marioPos3s[2]) * (gCurGraphNodeRoot->width);
+    gMarioScreenY = 2 * (0.5f - marioPos3s[1] / (f32)marioPos3s[2]) * (gCurGraphNodeRoot->height);
+}
+
+
 /**
  * Process a camera node.
  */
@@ -632,6 +652,9 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     }
 
 
+    if (gCurrLevelNum == LEVEL_HMC) {
+        get_mario_screen_coords();
+    }
     // Transform the point light positions into screen space
     /*for (i = 0; i < gPointLightCount; i++)
     {
