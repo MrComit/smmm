@@ -159,7 +159,7 @@ void bhv_tomato_thrower_loop(void) {
         o->oTimer = 0;
         o->os16FA = CL_RandomMinMaxU16(40, 60);
     } else if (o->oTimer > 20) {
-        o->os16F8 = 20;
+        o->os16F8 = 1;
         set_tomato_target(o->oBehParams2ndByte);
         vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
         o->oFaceAnglePitch = -pitch;
@@ -172,6 +172,7 @@ void bhv_tomato_thrower_loop(void) {
     if (absi(o->os16F4 - gMarioScreenX) * absi(o->os16F6 - gMarioScreenY) > 15*15) {
         o->oTimer = 20;
     }
+
 }
 
 
