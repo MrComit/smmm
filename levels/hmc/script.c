@@ -65,7 +65,8 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_THEATER_ARENA, theater_arena_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOOMBOOM_2D, boom_boom_2d_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_THEATER_TOMATO, theater_tomato_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_TREEHOUSE_LOG, treehouse_log_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_TREEHOUSE_LOG, treehouse_log_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TREEHOUSE_SPIKE, treehouse_spike_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -205,8 +206,8 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TIGHT_ROPE, -159, -24, -15620, 0, 0, 0, 0x00000000, bhvTightRope),
 		OBJECT(MODEL_TIGHT_ROPE, 285, -224, 554, 0, 0, 0, (40 << 16), bhvTightRope),
 		OBJECT(MODEL_TREE_LIMB, -784, -392, -2563, 0, -90, 0, 0x00000000, bhvTreeLimb),
-		OBJECT(MODEL_WOODEN_SIGNPOST, -2396, -24, -17721, 0, 0, 0, 0x00000000, bhvSpike),
-		OBJECT(MODEL_WOODEN_SIGNPOST, 216, -24, -21408, 0, 90, 0, 0x00000000, bhvSpike),
+		OBJECT(MODEL_TREEHOUSE_SPIKE, -2396, -24, -17721, 0, 0, 0, 0x00000000, bhvSpike),
+		OBJECT(MODEL_TREEHOUSE_SPIKE, 216, -24, -21408, 0, 90, 0, 0x00000000, bhvSpike),
 		OBJECT(MODEL_TREE_LIMB, -19, 1207, -23142, 0, -180, 0, 0x00000000, bhvTreeLimb),
 		TERRAIN(hmc_area_2_collision),
 		ROOMS(hmc_area_2_collision_rooms),

@@ -895,6 +895,7 @@ void bhv_tomato_thrower_init(void);
 void bhv_tomato_loop(void);
 void bhv_tomato_init(void);
 void bhv_spike_loop(void);
+void bhv_spike_init(void);
 void bhv_treehouse_log_init(void);
 void bhv_treehouse_log_loop(void);
 

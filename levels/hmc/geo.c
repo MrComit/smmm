@@ -50,3 +50,4 @@
 #include "levels/hmc/boom_boom_2d/geo.inc.c"
 #include "levels/hmc/theater_tomato/geo.inc.c"
 #include "levels/hmc/treehouse_log/geo.inc.c"
+#include "levels/hmc/treehouse_spike/geo.inc.c"

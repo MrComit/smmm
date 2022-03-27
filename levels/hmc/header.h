@@ -201,4 +201,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/treehouse_log/geo_header.h"
 
+#include "levels/hmc/treehouse_spike/geo_header.h"
+
+#include "levels/hmc/treehouse_spike/anim_header.h"
+
 #endif

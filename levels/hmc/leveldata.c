@@ -120,3 +120,6 @@
 #include "levels/hmc/boom_boom_2d/model.inc.c"
 #include "levels/hmc/theater_tomato/model.inc.c"
 #include "levels/hmc/treehouse_log/model.inc.c"
+#include "levels/hmc/treehouse_spike/model.inc.c"
+#include "levels/hmc/treehouse_spike/anims/data.inc.c"
+#include "levels/hmc/treehouse_spike/anims/table.inc.c"

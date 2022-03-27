@@ -1,3 +1,6 @@
+
+void obj_update_standard_actions(f32 scale);
+
 static struct ObjectHitbox sOwlHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -22,6 +25,27 @@ static struct ObjectHitbox sTreehouseLogHitbox = {
     /* hurtboxHeight:     */ 50,
 };
 
+static struct ObjectHitbox sTreehouseSpikeHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 3,
+    /* radius:            */ 90,
+    /* height:            */ 90,
+    /* hurtboxRadius:     */ 90,
+    /* hurtboxHeight:     */ 90,
+};
+
+static u8 sSpikeAttackHandler[6] = {
+    /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SQUISHED,
+    /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SQUISHED,
+    /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
+};
+
 
 void bhv_treehouse_log_init(void) {
     o->oForwardVel = 20.0f;
@@ -38,6 +62,10 @@ void bhv_treehouse_log_loop(void) {
         create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
         o->activeFlags = 0;
     }
+}
+
+void bhv_spike_init(void) {
+    // obj_set_hitbox(o, &sTreehouseSpikeHitbox);
 }
 
 
@@ -62,6 +90,16 @@ void bhv_spike_loop(void) {
             }
             break;
     }
+
+
+    // if (obj_handle_attacks(&sTreehouseSpikeHitbox, o->oAction, sSpikeAttackHandler)) {
+    //     mark_goomba_as_dead();
+    // }
+    obj_handle_attacks(&sTreehouseSpikeHitbox, o->oAction, sSpikeAttackHandler);
+    obj_update_standard_actions(1.0f);
+    // o->header.gfx.scale[1] = 0.5f;
+    o->oInteractStatus = 0;
+
 }
 
 

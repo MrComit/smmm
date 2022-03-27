@@ -1,0 +1,26 @@
+#include "src/game/envfx_snow.h"
+
+const GeoLayout treehouse_spike_geo[] = {
+	GEO_CULLING_RADIUS(4096),
+	GEO_OPEN_NODE(),
+		GEO_NODE_START(),
+		GEO_OPEN_NODE(),
+			GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, 0, NULL),
+			GEO_OPEN_NODE(),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 24, 0, treehouse_spike_SpikeBody_mesh_layer_1),
+				GEO_OPEN_NODE(),
+					GEO_DISPLAY_LIST(LAYER_OPAQUE, treehouse_spike_SpikeLArm_skinned_mesh_layer_1),
+					GEO_ANIMATED_PART(LAYER_OPAQUE, 45, 47, -6, treehouse_spike_SpikeLArm_mesh_layer_1),
+					GEO_DISPLAY_LIST(LAYER_OPAQUE, treehouse_spike_SpikeLLeg_skinned_mesh_layer_1),
+					GEO_ANIMATED_PART(LAYER_OPAQUE, 23, -24, -11, treehouse_spike_SpikeLLeg_mesh_layer_1),
+					GEO_DISPLAY_LIST(LAYER_OPAQUE, treehouse_spike_SpikeRArm_skinned_mesh_layer_1),
+					GEO_ANIMATED_PART(LAYER_OPAQUE, -45, 47, -6, treehouse_spike_SpikeRArm_mesh_layer_1),
+					GEO_DISPLAY_LIST(LAYER_OPAQUE, treehouse_spike_SpikeRLeg_skinned_mesh_layer_1),
+					GEO_ANIMATED_PART(LAYER_OPAQUE, -22, -24, -10, treehouse_spike_SpikeRLeg_mesh_layer_1),
+				GEO_CLOSE_NODE(),
+			GEO_CLOSE_NODE(),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, treehouse_spike_material_revert_render_settings),
+	GEO_CLOSE_NODE(),
+	GEO_END(),
+};
