@@ -199,4 +199,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/theater_tomato/geo_header.h"
 
+#include "levels/hmc/treehouse_log/geo_header.h"
+
 #endif

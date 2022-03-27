@@ -894,6 +894,9 @@ void bhv_tomato_thrower_loop(void);
 void bhv_tomato_thrower_init(void);
 void bhv_tomato_loop(void);
 void bhv_tomato_init(void);
+void bhv_spike_loop(void);
+void bhv_treehouse_log_init(void);
+void bhv_treehouse_log_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

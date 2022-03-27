@@ -747,6 +747,7 @@
 #define MODEL_BLUE_OWL            0xEE
 #define MODEL_THEATER_SCREEN      0xED
 #define MODEL_THEATER_TOMATO      0xEC
+#define MODEL_TREEHOUSE_LOG       0xEB
 
 
 // LEVEL 5 MODELS CONT:

@@ -10,6 +10,61 @@ static struct ObjectHitbox sOwlHitbox = {
     /* hurtboxHeight:     */ 150,
 };
 
+static struct ObjectHitbox sTreehouseLogHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 180,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 180,
+    /* hurtboxHeight:     */ 50,
+};
+
+
+void bhv_treehouse_log_init(void) {
+    o->oForwardVel = 20.0f;
+    obj_set_hitbox(o, &sTreehouseLogHitbox);
+}
+
+
+void bhv_treehouse_log_loop(void) {
+    o->oFaceAnglePitch += 0x600;
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(-78);
+    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+        obj_explode_and_spawn_coins(46.0f, 0);
+        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_spike_loop(void) {
+    struct Object *obj;
+    f32 x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw + 0x4000));
+    f32 z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw + 0x4000));
+    switch (o->oAction) {
+        case 0:
+            if (x + z < 300.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (x + z >= 300.0f) {
+                o->oAction = 0;
+            }
+            if (o->oTimer > 120) {
+                obj = spawn_object(o, MODEL_TREEHOUSE_LOG, bhvTreehouseLog);
+                obj->oPosY += 100.0f;
+                o->oTimer = 0;
+            }
+            break;
+    }
+}
+
+
 void bhv_blue_owl_init(void) {
     obj_set_hitbox(o, &sOwlHitbox);
 }

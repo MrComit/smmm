@@ -1,0 +1,18 @@
+extern const GeoLayout treehouse_log_geo[];
+extern Lights1 treehouse_log_LogFace_lights;
+extern Lights1 treehouse_log_Log_lights;
+extern u8 treehouse_log_poundable_pole_top_rgba16_ci8[];
+extern u8 treehouse_log_poundable_pole_top_rgba16_ci8_pal_rgba16[];
+extern u8 treehouse_log_poundable_pole_side_rgba16_ci8[];
+extern u8 treehouse_log_poundable_pole_side_rgba16_ci8_pal_rgba16[];
+extern Vtx treehouse_log_Log_mesh_layer_1_vtx_cull[8];
+extern Vtx treehouse_log_Log_mesh_layer_1_vtx_0[16];
+extern Gfx treehouse_log_Log_mesh_layer_1_tri_0[];
+extern Vtx treehouse_log_Log_mesh_layer_1_vtx_1[32];
+extern Gfx treehouse_log_Log_mesh_layer_1_tri_1[];
+extern Gfx mat_treehouse_log_LogFace[];
+extern Gfx mat_revert_treehouse_log_LogFace[];
+extern Gfx mat_treehouse_log_Log[];
+extern Gfx mat_revert_treehouse_log_Log[];
+extern Gfx treehouse_log_Log_mesh_layer_1[];
+extern Gfx treehouse_log_material_revert_render_settings[];
