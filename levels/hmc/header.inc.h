@@ -771,7 +771,7 @@ extern Gfx hmc_dl_ZZTallGrass_001_mesh_layer_1_tri_2[];
 extern Vtx hmc_dl_ZZTallGrass_001_mesh_layer_1_vtx_3[28];
 extern Gfx hmc_dl_ZZTallGrass_001_mesh_layer_1_tri_3[];
 extern Vtx hmc_dl_Tower_mesh_layer_1_vtx_cull[8];
-extern Vtx hmc_dl_Tower_mesh_layer_1_vtx_0[745];
+extern Vtx hmc_dl_Tower_mesh_layer_1_vtx_0[744];
 extern Gfx hmc_dl_Tower_mesh_layer_1_tri_0[];
 extern Vtx hmc_dl_Tower_mesh_layer_1_vtx_1[72];
 extern Gfx hmc_dl_Tower_mesh_layer_1_tri_1[];

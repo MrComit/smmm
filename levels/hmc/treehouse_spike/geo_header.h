@@ -7,7 +7,7 @@ extern u8 treehouse_spike_spike_body_ci8_pal_rgba16[];
 extern u8 treehouse_spike_spike_eye_i8[];
 extern Vtx treehouse_spike_SpikeBody_mesh_layer_1_vtx_0[77];
 extern Gfx treehouse_spike_SpikeBody_mesh_layer_1_tri_0[];
-extern Vtx treehouse_spike_SpikeBody_mesh_layer_1_vtx_1[77];
+extern Vtx treehouse_spike_SpikeBody_mesh_layer_1_vtx_1[64];
 extern Gfx treehouse_spike_SpikeBody_mesh_layer_1_tri_1[];
 extern Vtx treehouse_spike_SpikeBody_mesh_layer_1_vtx_2[20];
 extern Gfx treehouse_spike_SpikeBody_mesh_layer_1_tri_2[];

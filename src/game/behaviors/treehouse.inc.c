@@ -54,13 +54,26 @@ void bhv_treehouse_log_init(void) {
 
 
 void bhv_treehouse_log_loop(void) {
-    o->oFaceAnglePitch += 0x600;
-    cur_obj_update_floor_and_walls();
-    cur_obj_move_standard(-78);
-    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
-        obj_explode_and_spawn_coins(46.0f, 0);
-        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
-        o->activeFlags = 0;
+    switch (o->oAction) {
+        case 0:
+            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 1.0f);
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.033f);
+            cur_obj_scale(o->oFloatF4);
+            if (o->parentObj->header.gfx.animInfo.animFrame == 50) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFaceAnglePitch += 0x600;
+            cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(-78);
+            if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+                obj_explode_and_spawn_coins(46.0f, 0);
+                create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+                o->activeFlags = 0;
+                o->parentObj->prevObj = NULL;
+            }
+            break;
     }
 }
 
@@ -70,23 +83,30 @@ void bhv_spike_init(void) {
 
 
 void bhv_spike_loop(void) {
-    struct Object *obj;
+    // struct Object *obj;
     f32 x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw + 0x4000));
     f32 z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw + 0x4000));
     switch (o->oAction) {
         case 0:
             if (x + z < 300.0f) {
-                o->oAction = 1;
+                if (cur_obj_check_if_at_animation_end()) {
+                    cur_obj_init_animation_with_sound(1);
+                    o->oAction = 1;
+                }
             }
             break;
         case 1:
             if (x + z >= 300.0f) {
                 o->oAction = 0;
             }
-            if (o->oTimer > 120) {
-                obj = spawn_object(o, MODEL_TREEHOUSE_LOG, bhvTreehouseLog);
-                obj->oPosY += 100.0f;
-                o->oTimer = 0;
+
+            if (cur_obj_check_anim_frame(20)) {
+                o->prevObj = spawn_object(o, MODEL_TREEHOUSE_LOG, bhvTreehouseLog);
+                // o->prevObj->oPosY += 100.0f;
+            }
+            if (cur_obj_check_if_at_animation_end()) {
+                o->oAction = 0;
+                cur_obj_init_animation_with_sound(0);
             }
             break;
     }
@@ -98,6 +118,7 @@ void bhv_spike_loop(void) {
     obj_handle_attacks(&sTreehouseSpikeHitbox, o->oAction, sSpikeAttackHandler);
     obj_update_standard_actions(1.0f);
     // o->header.gfx.scale[1] = 0.5f;
+    // print_text_fmt_int(80, 80, "%x", (s32)o->prevObj);
     o->oInteractStatus = 0;
 
 }
