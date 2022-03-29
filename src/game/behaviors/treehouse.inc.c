@@ -19,10 +19,10 @@ static struct ObjectHitbox sTreehouseLogHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 180,
-    /* height:            */ 50,
-    /* hurtboxRadius:     */ 180,
-    /* hurtboxHeight:     */ 50,
+    /* radius:            */ 80,
+    /* height:            */ 54,
+    /* hurtboxRadius:     */ 80,
+    /* hurtboxHeight:     */ 54,
 };
 
 static struct ObjectHitbox sTreehouseSpikeHitbox = {
@@ -49,7 +49,9 @@ static u8 sSpikeAttackHandler[6] = {
 
 void bhv_treehouse_log_init(void) {
     o->oForwardVel = 20.0f;
+    o->oFloatF8 = 45.0f;
     obj_set_hitbox(o, &sTreehouseLogHitbox);
+    // o->hitboxDownOffset = -50.0f;
 }
 
 
@@ -64,9 +66,13 @@ void bhv_treehouse_log_loop(void) {
             }
             break;
         case 1:
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 0.0f, 0.06f);
             o->oFaceAnglePitch += 0x600;
             cur_obj_update_floor_and_walls();
-            cur_obj_move_standard(-78);
+            cur_obj_move_standard(0);
+            if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+                o->oVelY = o->oFloatF8;
+            }
             if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
                 obj_explode_and_spawn_coins(46.0f, 0);
                 create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
@@ -75,6 +81,7 @@ void bhv_treehouse_log_loop(void) {
             }
             break;
     }
+    o->oInteractStatus = 0;
 }
 
 void bhv_spike_init(void) {
@@ -84,11 +91,14 @@ void bhv_spike_init(void) {
 
 void bhv_spike_loop(void) {
     // struct Object *obj;
-    f32 x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw + 0x4000));
-    f32 z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw + 0x4000));
+    f32 x, z, x2, z2;
     switch (o->oAction) {
         case 0:
-            if (x + z < 300.0f) {
+            x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw + 0x4000));
+            z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw + 0x4000));
+            x2 = (gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw);
+            z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw);
+            if (x + z < 500.0f && x2 + z2 > 200.0f) {
                 if (cur_obj_check_if_at_animation_end()) {
                     cur_obj_init_animation_with_sound(1);
                     o->oAction = 1;
@@ -96,9 +106,9 @@ void bhv_spike_loop(void) {
             }
             break;
         case 1:
-            if (x + z >= 300.0f) {
-                o->oAction = 0;
-            }
+            // if (x + z >= 300.0f || x2 + z2 <= 180) {
+            //     o->oAction = 0;
+            // }
 
             if (cur_obj_check_anim_frame(20)) {
                 o->prevObj = spawn_object(o, MODEL_TREEHOUSE_LOG, bhvTreehouseLog);

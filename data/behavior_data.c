@@ -8864,7 +8864,7 @@ const BehaviorScript bhvTreehouseLog[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_HOME(),
     // SET_FLOAT(oGraphYOffset, 30),
-    SCALE(0, 5),
+    // SCALE(0, 5),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_treehouse_log_init),
     SET_INT(oIntangibleTimer, 0),
