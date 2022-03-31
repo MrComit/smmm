@@ -52,17 +52,23 @@ void bhv_treehouse_log_init(void) {
     o->oFloatF8 = 45.0f;
     obj_set_hitbox(o, &sTreehouseLogHitbox);
     // o->hitboxDownOffset = -50.0f;
+    cur_obj_become_intangible();
 }
 
 
 void bhv_treehouse_log_loop(void) {
     switch (o->oAction) {
         case 0:
-            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 1.0f);
-            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.033f);
+            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 1.5f);
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.05f);
             cur_obj_scale(o->oFloatF4);
-            if (o->parentObj->header.gfx.animInfo.animFrame == 50) {
+            if (o->parentObj->header.gfx.animInfo.animFrame == 40) {
                 o->oAction = 1;
+                o->parentObj->oInteractType = INTERACT_BOUNCE_TOP;
+                cur_obj_become_tangible();
+            }
+            if (o->parentObj->activeFlags == 0) {
+                o->activeFlags = 0;
             }
             break;
         case 1:
@@ -99,9 +105,10 @@ void bhv_spike_loop(void) {
             x2 = (gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw);
             z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw);
             if (x + z < 500.0f && x2 + z2 > 200.0f) {
-                if (cur_obj_check_if_at_animation_end()) {
+                if (cur_obj_check_if_at_animation_end() || o->oTimer > 20) {
                     cur_obj_init_animation_with_sound(1);
                     o->oAction = 1;
+
                 }
             }
             break;
@@ -113,6 +120,7 @@ void bhv_spike_loop(void) {
             if (cur_obj_check_anim_frame(20)) {
                 o->prevObj = spawn_object(o, MODEL_TREEHOUSE_LOG, bhvTreehouseLog);
                 // o->prevObj->oPosY += 100.0f;
+                o->oInteractType = INTERACT_DAMAGE;
             }
             if (cur_obj_check_if_at_animation_end()) {
                 o->oAction = 0;
