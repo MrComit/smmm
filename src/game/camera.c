@@ -1614,7 +1614,7 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             break;
         case 3:
             s8DirModeBaseYaw = 0;
-            m->pos[2] = approach_f32_symmetric(m->pos[2], -11145.0f, 80.0f);
+            m->pos[2] = approach_f32_symmetric(m->pos[2], -13145.0f, 80.0f);
             cam_controls_2d(c);
             // update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = -3454.0f;
@@ -1626,7 +1626,7 @@ void mode_8_directions_camera_2d(struct Camera *c) {
                 height = -3454.0f;
             }
             c->focus[0] = approach_f32_asymptotic(c->focus[0], height, 0.05f);;
-            c->pos[2] = -7800.0f;// + gDepthOffset2d;
+            c->pos[2] = -9800.0f;// + gDepthOffset2d;
             c->pos[1] = 900.0f;
             c->focus[1] = c->pos[1] - 100.0f;
             c->yaw = c->nextYaw = s8DirModeBaseYaw;

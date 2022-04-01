@@ -55,17 +55,17 @@ static void const *sTheaterArenaCollision[] = {
 
 
 Vec3f sTheaterRespawn[3] = {
-{-4954.0f, 300.0f, -11146.0f},
-{-3354.0f, 150.0f, -11146.0f},
-{-3354.0f, 100.0f, -11146.0f},
+{-4954.0f, 300.0f, -13146.0f},
+{-3354.0f, 150.0f, -13146.0f},
+{-3354.0f, 100.0f, -13146.0f},
 };
 
 
 struct Object *gTomatoObjs[3];
 Vec3f sTomatoPos[3] = {
-    {-3580.0f, 650.0f, -8200.0f},
-    {-3250.0f, 585.0f, -8400.0f},
-    {-3420.0f, 665.0f, -8200.0f},
+    {-3580.0f, 650.0f, -10200.0f},
+    {-3250.0f, 585.0f, -10400.0f},
+    {-3420.0f, 665.0f, -10200.0f},
 };
 
 
@@ -87,7 +87,7 @@ void bhv_tomato_loop(void) {
     CL_Move_3d();
     o->oFaceAngleYaw += 0x200;
     o->oFaceAngleRoll += 0x400;
-    if (o->oPosZ < -11200.0f || o->oInteractStatus & INT_STATUS_INTERACTED) {
+    if (o->oPosZ < -13200.0f || o->oInteractStatus & INT_STATUS_INTERACTED) {
         o->activeFlags = 0;
         spawn_mist_particles();
     }
@@ -205,56 +205,56 @@ void spawn_theater_arena(s16 arena) {
 
     switch (arena) {
         case 0:
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3790, 100, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3424, 100, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3126, 100, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -5125, 782, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4890, 782, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -3790, 970, -11146,  0, -90, 0,  bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -3485, 970, -11146,  0, -90, 0,  bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -3211, 970, -11146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3790, 100, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3424, 100, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3126, 100, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -5125, 782, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4890, 782, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3790, 970, -13146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3485, 970, -13146,  0, -90, 0,  bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3211, 970, -13146,  0, -90, 0,  bhv2DEnemy)
             break;
         case 1:
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4801, 341, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4977, 341, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -5137, 341, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -2338, 94, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -2380, 1064, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -2967, 1226, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3247, 1226, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3538, 1226, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3827, 1226, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4117, 1226, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_NONE, -1627, 1591, -11146, 0, -90, 0, bhvBulletBill2dSpawner)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4801, 341, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4977, 341, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -5137, 341, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2338, 94, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2380, 1064, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2967, 1226, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3247, 1226, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3538, 1226, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3827, 1226, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4117, 1226, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_NONE, -1627, 1591, -13146, 0, -90, 0, bhvBulletBill2dSpawner)
             obj->oBehParams2ndByte = 1;
-            COMIT_OBJECT(MODEL_NONE, -4875, 1383, -11146, 0, 90, 0, bhvBulletBill2dSpawner)
+            COMIT_OBJECT(MODEL_NONE, -4875, 1383, -13146, 0, 90, 0, bhvBulletBill2dSpawner)
             obj->oBehParams2ndByte = 2;
-            COMIT_OBJECT(MODEL_NONE, -5485, 518, -11146, 0, 90, 0, bhvBulletBill2dSpawner)
+            COMIT_OBJECT(MODEL_NONE, -5485, 518, -13146, 0, 90, 0, bhvBulletBill2dSpawner)
             obj->oBehParams2ndByte = 2;
-		    COMIT_OBJECT(MODEL_TOKEN, -3454, 630, -11146, 0, -180, 0, bhvToken)
+		    COMIT_OBJECT(MODEL_TOKEN, -3454, 630, -13146, 0, -180, 0, bhvToken)
             obj->oBehParams = 22 << 8;
             break;
         case 2:
-            COMIT_OBJECT(MODEL_NONE, -1649, 1270, -11146, 0, -90, 0, bhvBulletBill2dSpawner)
+            COMIT_OBJECT(MODEL_NONE, -1649, 1270, -13146, 0, -90, 0, bhvBulletBill2dSpawner)
             obj->oBehParams2ndByte = 1;
-            COMIT_OBJECT(MODEL_NONE, -4982, 455, -11146, 0, 90, 0, bhvBulletBill2dSpawner)
+            COMIT_OBJECT(MODEL_NONE, -4982, 455, -13146, 0, 90, 0, bhvBulletBill2dSpawner)
             obj->oBehParams2ndByte = 2;
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4401, 317, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -2508, 952, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -2356, 952, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4547, 952, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -2512, 317, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3068, 1170, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4553, 317, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -1707, 635, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3872, 1170, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3599, 1170, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -4396, 952, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -2361, 317, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -2055, 635, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -3331, 1170, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -4932, 635, -11146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -5132, 635, -11146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4401, 317, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2508, 952, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2356, 952, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4547, 952, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -2512, 317, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3068, 1170, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -4553, 317, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -1707, 635, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3872, 1170, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_GOOMBA_2D, -3599, 1170, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -4396, 952, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -2361, 317, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -2055, 635, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -3331, 1170, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -4932, 635, -13146, 0, -90, 0, bhv2DEnemy)
+            COMIT_OBJECT(MODEL_KOOPA_2D, -5132, 635, -13146, 0, -90, 0, bhv2DEnemy)
             break;
     }
 }
@@ -285,7 +285,7 @@ void check_theater_arena(s16 *arena) {
         case 2:
             if (count == 0) {
                 *arena = *arena + 1;
-                COMIT_OBJECT(MODEL_BOOMBOOM_2D, -3454, 2200, -11146, 0, -90, 0, bhv2DBoomBoom)
+                COMIT_OBJECT(MODEL_BOOMBOOM_2D, -3454, 2200, -13146, 0, -90, 0, bhv2DBoomBoom)
             } else if (count <= 8) {
                 o->os16F6 = 3;
             }
@@ -312,7 +312,7 @@ void bhv_theater_screen_loop(void) {
             if (o->oRoom == gMarioCurrentRoom) {
                 if (o->oTimer == 1) {
                     // spawn_theater_arena(0);
-                    o->oObjF8 = COMIT_OBJECT(MODEL_THEATER_ARENA, -3454, -533, -11396, 0, 0, 0, bhvTheaterArena)
+                    o->oObjF8 = COMIT_OBJECT(MODEL_THEATER_ARENA, -3454, -533, -13396, 0, 0, 0, bhvTheaterArena)
                 }
             } else {
                 o->oTimer = 0;
@@ -339,7 +339,7 @@ void bhv_theater_screen_loop(void) {
                             if (o->oObjF8) {
                                 o->oObjF8->activeFlags = 0;
                             }
-                            o->oObjF8 = COMIT_OBJECT(MODEL_THEATER_ARENA, -3454, -533, -11396, 0, 0, 0, bhvTheaterArena)
+                            o->oObjF8 = COMIT_OBJECT(MODEL_THEATER_ARENA, -3454, -533, -13396, 0, 0, 0, bhvTheaterArena)
                             o->oObjF8->oBehParams2ndByte = o->os16F4;
                         }
                     }
@@ -453,7 +453,7 @@ void bhv_bulletbill_2d_loop(void) {
             o->oFloatF4 += 0.4f;
             o->oFaceAnglePitch += 0x40;
             o->oVelY = approach_f32_symmetric(o->oVelY, -40.0f, o->oFloatF4);
-            o->oPosZ = approach_f32_asymptotic(o->oPosZ, -11145.0f + 150.0f, 0.1f);
+            o->oPosZ = approach_f32_asymptotic(o->oPosZ, -13145.0f + 150.0f, 0.1f);
             o->oForwardVel = approach_f32_asymptotic(o->oForwardVel, 0.0f, 0.1f);
             CL_Move();
             if (o->oPosY < -800.0f) {
