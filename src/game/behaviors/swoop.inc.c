@@ -27,7 +27,7 @@ static void swoop_act_idle(void) {
     cur_obj_init_animation_with_sound(1);
 
     approach_f32_ptr(&o->header.gfx.scale[0], 1.0f, 0.05f);
-    if (o->oDistanceToMario < 1500.0f) {
+    if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f) {
         if (cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x400)) {
             cur_obj_play_sound_2(SOUND_OBJ2_SWOOP);
             o->oAction = SWOOP_ACT_MOVE;
@@ -72,7 +72,7 @@ static void swoop_act_move(void) {
                     o->oForwardVel *= 2.0f;
                 }
             } else {
-                obj_y_vel_approach(-10.0f, 0.5f);
+                obj_y_vel_approach(-20.0f, 0.75f);
             }
         } else if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
             // Bounce off a wall and don't bounce again for 30 frames.

@@ -59,10 +59,10 @@ void bhv_treehouse_log_init(void) {
 void bhv_treehouse_log_loop(void) {
     switch (o->oAction) {
         case 0:
-            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 1.5f);
-            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.05f);
+            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 1.0f);
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.033f);
             cur_obj_scale(o->oFloatF4);
-            if (o->parentObj->header.gfx.animInfo.animFrame == 40) {
+            if (o->parentObj->header.gfx.animInfo.animFrame == 50) {
                 o->oAction = 1;
                 o->parentObj->oInteractType = INTERACT_BOUNCE_TOP;
                 cur_obj_become_tangible();
@@ -100,10 +100,13 @@ void bhv_spike_loop(void) {
     f32 x, z, x2, z2;
     switch (o->oAction) {
         case 0:
-            x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw + 0x4000));
-            z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw + 0x4000));
-            x2 = (gMarioState->pos[0] - o->oPosX) * sins(o->oFaceAngleYaw);
-            z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oFaceAngleYaw);
+            if (o->oBehParams2ndByte && o->oDistanceToMario < 2000.0f) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
+            }
+            x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw + 0x4000));
+            z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw + 0x4000));
+            x2 = (gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw);
+            z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw);
             if (x + z < 500.0f && x2 + z2 > 200.0f) {
                 if (cur_obj_check_if_at_animation_end() || o->oTimer > 20) {
                     cur_obj_init_animation_with_sound(1);
@@ -202,6 +205,14 @@ void bhv_blue_owl_loop(void) {
 void bhv_tree_limb_col_loop(void) {
     o->header.gfx.throwMatrix = &o->transform;
     vec3f_copy(&o->oPosX, o->transform[3]);
+}
+
+
+void bhv_tree_limb_init(void) {
+    if (o->oBehParams2ndByte) {
+        // cur_obj_scale(0.8f);
+        // obj_scale(o->prevObj, 1.0f);
+    }
 }
 
 

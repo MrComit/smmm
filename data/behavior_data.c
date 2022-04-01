@@ -8684,8 +8684,8 @@ const BehaviorScript bhvTreeLimb[] = {
     LOAD_ANIMATIONS(oAnimations, tree_limb_anims),
     ANIMATE(0),
     SET_HOME(),
-    // CALL_NATIVE(bhv_tree_limb_init),
     SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvTreeLimbCol),
+    CALL_NATIVE(bhv_tree_limb_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_tree_limb_loop),
     END_LOOP(),
@@ -8846,7 +8846,7 @@ const BehaviorScript bhvSittingShyguy[] = {
 
 const BehaviorScript bhvSpike[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, treehouse_spike_anims),
     ANIMATE(0),
     SET_HOME(),
