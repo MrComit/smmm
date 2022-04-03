@@ -1,5 +1,5 @@
-extern void scroll_sts_mat_hmc_dl_WoodFloor_layer1();
 extern void scroll_sts_mat_hmc_dl_Wall_layer1();
+extern void scroll_sts_mat_hmc_dl_WoodFloor_layer1();
 extern void scroll_sts_mat_hmc_dl_RedWall_layer1();
 extern void scroll_sts_mat_hmc_dl_WoodFloorTrophyRoom_layer1();
 extern void scroll_sts_mat_hmc_dl_BooGoo_layer1();
@@ -16,4 +16,5 @@ extern void scroll_sts_mat_hmc_dl_WoodFloorTransparent_layer1();
 extern void scroll_sts_mat_hmc_dl_WoodFloorOneCycle();
 extern void scroll_sts_mat_hmc_dl_Lava_layer1();
 extern void scroll_sts_mat_hmc_dl_WallDither_layer4();
+extern void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_3();
 extern void scroll_hmc();
