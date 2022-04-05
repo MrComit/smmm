@@ -205,4 +205,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/treehouse_spike/anim_header.h"
 
+#include "levels/hmc/cushion_friend/geo_header.h"
+
+#include "levels/hmc/cushion_friend/collision_header.h"
+
 #endif

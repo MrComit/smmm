@@ -96,7 +96,8 @@ void bhv_tomato_loop(void) {
 
 
 void set_tomato_target(s32 type) {
-    s32 x, y, xAdd;
+    s32 x, y;
+    s32 xAdd = 0;
     s32 cond = FALSE;
     // s16 rate = 0x4;
     switch (type) {

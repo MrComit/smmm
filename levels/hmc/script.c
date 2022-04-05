@@ -67,6 +67,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_THEATER_TOMATO, theater_tomato_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TREEHOUSE_LOG, treehouse_log_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TREEHOUSE_SPIKE, treehouse_spike_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CUSHION_FRIEND, cushion_friend_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -171,7 +172,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, -3454, 300, -10421, 0, 0, 0, (0x25 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_FOREROOM_WINDOW, 1997, 250, -7771, 0, 0, 0, 0x00000000, bhvForeroomWindow),
 		OBJECT(MODEL_FOREROOM_WINDOW, 1021, 250, -7771, 0, -180, 0, (1 << 16), bhvForeroomWindow),
-		OBJECT(MODEL_EXCLAMATION_BOX, -8108, 300, -7251, 0, 0, 0, (3 << 16), bhvExclamationBox),
+		OBJECT(MODEL_CUSHION_FRIEND, -8108, 0, -7251, 0, 0, 0, (3 << 16), bhvCushionShell),
 		TERRAIN(hmc_area_1_collision),
 		ROOMS(hmc_area_1_collision_rooms),
 		MACRO_OBJECTS(hmc_area_1_macro_objs),

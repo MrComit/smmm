@@ -1210,13 +1210,13 @@ s32 act_riding_shell_ground(struct MarioState *m) {
         return set_mario_action(m, ACT_RIDING_SHELL_JUMP, 0);
     }
 
-    if (m->input & INPUT_Z_PRESSED) {
-        mario_stop_riding_object(m);
-        if (m->forwardVel < 24.0f) {
-            mario_set_forward_vel(m, 24.0f);
-        }
-        return set_mario_action(m, ACT_CROUCH_SLIDE, 0);
-    }
+    // if (m->input & INPUT_Z_PRESSED) {
+    //     mario_stop_riding_object(m);
+    //     if (m->forwardVel < 24.0f) {
+    //         mario_set_forward_vel(m, 24.0f);
+    //     }
+    //     return set_mario_action(m, ACT_CROUCH_SLIDE, 0);
+    // }
 
     update_shell_speed(m);
     set_mario_animation(m, m->actionArg == 0 ? MARIO_ANIM_START_RIDING_SHELL : MARIO_ANIM_RIDING_SHELL);

@@ -106,3 +106,45 @@ void bhv_koopa_shell_loop(void) {
 
     o->oInteractStatus = 0;
 }
+
+
+
+void bhv_cushion_shell_loop(void) {
+    struct Object *obj;
+    struct Surface *sp34;
+
+    obj_set_hitbox(o, &sKoopaShellHitbox);
+
+    switch (o->oAction) {
+        case 0:
+            cur_obj_update_floor_and_walls();
+
+            if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+            }
+
+            cur_obj_move_standard(-20);
+            if (o->oTimer & 1) {
+                koopa_shell_spawn_sparkles(10.0f);
+            }
+            break;
+
+        case 1:
+            obj_copy_pos(o, gMarioObject);
+            sp34 = cur_obj_update_floor_height_and_get_floor();
+
+            o->oFaceAngleYaw = gMarioObject->oMoveAngleYaw;
+
+            if (o->oInteractStatus & INT_STATUS_STOP_RIDING) {
+                o->activeFlags = 0;
+                spawn_mist_particles();
+                obj = spawn_object(o, MODEL_CUSHION_FRIEND, bhvCushionShell);
+                vec3f_copy(&obj->oPosX, &o->oHomeX);
+                obj->oFaceAngleYaw = 0;
+            }
+            break;
+    }
+
+    o->oInteractStatus = 0;
+}
+

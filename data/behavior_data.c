@@ -8872,3 +8872,13 @@ const BehaviorScript bhvTreehouseLog[] = {
         CALL_NATIVE(bhv_treehouse_log_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCushionShell[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cushion_shell_loop),
+    END_LOOP(),
+};

@@ -51,3 +51,4 @@
 #include "levels/hmc/theater_tomato/geo.inc.c"
 #include "levels/hmc/treehouse_log/geo.inc.c"
 #include "levels/hmc/treehouse_spike/geo.inc.c"
+#include "levels/hmc/cushion_friend/geo.inc.c"

@@ -751,6 +751,7 @@ extern const BehaviorScript bhvTomato[];
 extern const BehaviorScript bhvSittingShyguy[];
 extern const BehaviorScript bhvSpike[];
 extern const BehaviorScript bhvTreehouseLog[];
+extern const BehaviorScript bhvCushionShell[];
 
 
 #endif // BEHAVIOR_DATA_H

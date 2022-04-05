@@ -899,6 +899,7 @@ void bhv_spike_loop(void);
 void bhv_spike_init(void);
 void bhv_treehouse_log_init(void);
 void bhv_treehouse_log_loop(void);
+void bhv_cushion_shell_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
