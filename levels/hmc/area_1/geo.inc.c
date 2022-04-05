@@ -208,6 +208,7 @@ const GeoLayout hmc_dl_112__NULL_geo[] = {
 const GeoLayout hmc_dl_113__Hallway_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -7734, 0, -7770, hmc_dl_BlueCushion_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

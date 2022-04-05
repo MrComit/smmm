@@ -258,7 +258,33 @@ void scroll_sts_mat_hmc_dl_WallDither_layer4() {
 	}
 };
 
-void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_3() {
+void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_1() {
+	int i = 0;
+	int count = 380;
+	int width = 32 * 0x20;
+	int height = 32 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	static int timeY;
+	float amplitudeY = 0.800000011920929;
+	float frequencyY = 0.10000000149011612;
+	float offsetY = 0.0;
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Hallway_mesh_layer_1_vtx_1);
+
+	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;	timeY += 1;
+}
+
+void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_4() {
 	int i = 0;
 	int count = 4;
 	int width = 64 * 0x20;
@@ -268,7 +294,7 @@ void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_3() {
 	int deltaX;
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Hallway_mesh_layer_1_vtx_3);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Hallway_mesh_layer_1_vtx_4);
 
 	deltaX = (int)(7.5 * 0x20 * random_float() * random_sign()) % width;
 	deltaY = (int)(10.0 * 0x20 * random_float() * random_sign()) % height;
@@ -286,6 +312,59 @@ void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_3() {
 	}
 	currentX += deltaX;	currentY += deltaY;
 }
+
+void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_6() {
+	int i = 0;
+	int count = 32;
+	int width = 64 * 0x20;
+	int height = 64 * 0x20;
+
+	static int currentX = 0;
+	int deltaX;
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Hallway_mesh_layer_1_vtx_6);
+
+	deltaX = (int)(31.630001068115234 * 0x20 * random_float() * random_sign()) % width;
+	deltaY = (int)(33.279998779296875 * 0x20 * random_float() * random_sign()) % height;
+
+	if (absi(currentX) > width) {
+		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
+	}
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[0] += deltaX;
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentX += deltaX;	currentY += deltaY;
+}
+
+void scroll_sts_mat_hmc_dl_WallTransition_layer1() {
+	static int intervalTex0 = 15;
+	static int curInterval0 = 15;
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_WallTransition_layer1);
+
+	if (--curInterval0 <= 0) {
+		shift_s_down(mat, 13, PACK_TILESIZE(0, 20));
+		curInterval0 = intervalTex0;
+	}
+	shift_s(mat, 21, PACK_TILESIZE(0, 5));
+};
+
+void scroll_sts_mat_hmc_dl_Obstacle() {
+	static int intervalTex0 = 2;
+	static int curInterval0 = 2;
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Obstacle);
+
+	if (--curInterval0 <= 0) {
+		shift_s(mat, 11, PACK_TILESIZE(0, 12));
+		shift_t(mat, 11, PACK_TILESIZE(0, 3));
+		curInterval0 = intervalTex0;
+	}
+};
 
 void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_Wall_layer1();
@@ -306,5 +385,9 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_WoodFloorOneCycle();
 	scroll_sts_mat_hmc_dl_Lava_layer1();
 	scroll_sts_mat_hmc_dl_WallDither_layer4();
-	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_3();
+	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_1();
+	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_4();
+	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_6();
+	scroll_sts_mat_hmc_dl_WallTransition_layer1();
+	scroll_sts_mat_hmc_dl_Obstacle();
 }
