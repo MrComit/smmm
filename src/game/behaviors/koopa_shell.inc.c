@@ -115,6 +115,14 @@ void bhv_cushion_shell_loop(void) {
 
     obj_set_hitbox(o, &sKoopaShellHitbox);
 
+    if (gCurrLevelNum == LEVEL_HMC && gMarioCurrentRoom == o->oRoom) {
+        u8 *texture = segmented_to_virtual(&hmc_dl_lightblue_noise3_rgba16);
+        s32 i;
+        for (i = 0; i < 2048; i++) {
+            texture[i] = random_u16() & 0b1111100010111001;
+        }
+    }
+
     switch (o->oAction) {
         case 0:
             cur_obj_update_floor_and_walls();

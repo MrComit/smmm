@@ -315,7 +315,7 @@ void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_4() {
 
 void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_6() {
 	int i = 0;
-	int count = 32;
+	int count = 82;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
