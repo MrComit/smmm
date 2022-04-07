@@ -752,6 +752,8 @@ extern const BehaviorScript bhvSittingShyguy[];
 extern const BehaviorScript bhvSpike[];
 extern const BehaviorScript bhvTreehouseLog[];
 extern const BehaviorScript bhvCushionShell[];
+extern const BehaviorScript bhvStaticTri[];
+extern const BehaviorScript bhvStaticWall[];
 
 
 #endif // BEHAVIOR_DATA_H

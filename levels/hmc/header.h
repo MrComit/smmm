@@ -209,4 +209,12 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/cushion_friend/collision_header.h"
 
+#include "levels/hmc/static_tri/geo_header.h"
+
+#include "levels/hmc/static_tri/collision_header.h"
+
+#include "levels/hmc/static_wall/collision_header.h"
+
+#include "levels/hmc/static_wall/geo_header.h"
+
 #endif

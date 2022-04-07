@@ -900,6 +900,10 @@ void bhv_spike_init(void);
 void bhv_treehouse_log_init(void);
 void bhv_treehouse_log_loop(void);
 void bhv_cushion_shell_loop(void);
+void bhv_static_tri_loop(void);
+void bhv_static_tri_init(void);
+void bhv_static_wall_loop(void);
+void bhv_static_wall_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

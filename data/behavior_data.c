@@ -8875,10 +8875,36 @@ const BehaviorScript bhvTreehouseLog[] = {
 
 const BehaviorScript bhvCushionShell[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN)),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_cushion_shell_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvStaticTri[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(static_tri_collision),
+    SET_HOME(),
+    CALL_NATIVE(bhv_static_tri_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_static_tri_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvStaticWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(static_wall_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_static_wall_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_static_wall_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

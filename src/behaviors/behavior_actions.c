@@ -279,3 +279,4 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "game/behaviors/music_room.inc.c"
 #include "game/behaviors/treehouse.inc.c"
 #include "game/behaviors/theater.inc.c"
+#include "game/behaviors/platforming_hall.inc.c"

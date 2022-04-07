@@ -754,6 +754,8 @@
 
 // LEVEL 5 MODELS CONT:
 // 0x5B-0x63
+#define MODEL_STATIC_TRI          0x5B
+#define MODEL_STATIC_WALL         0x5C
 
 // 0x6C-0x73
 

@@ -52,3 +52,5 @@
 #include "levels/hmc/treehouse_log/geo.inc.c"
 #include "levels/hmc/treehouse_spike/geo.inc.c"
 #include "levels/hmc/cushion_friend/geo.inc.c"
+#include "levels/hmc/static_tri/geo.inc.c"
+#include "levels/hmc/static_wall/geo.inc.c"

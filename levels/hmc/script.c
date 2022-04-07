@@ -68,6 +68,8 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TREEHOUSE_LOG, treehouse_log_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TREEHOUSE_SPIKE, treehouse_spike_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CUSHION_FRIEND, cushion_friend_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_STATIC_TRI, static_tri_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_STATIC_WALL, static_wall_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -173,6 +175,12 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_FOREROOM_WINDOW, 1997, 250, -7771, 0, 0, 0, 0x00000000, bhvForeroomWindow),
 		OBJECT(MODEL_FOREROOM_WINDOW, 1021, 250, -7771, 0, -180, 0, (1 << 16), bhvForeroomWindow),
 		OBJECT(MODEL_CUSHION_FRIEND, -8108, 0, -7251, 0, 0, 0, (3 << 16), bhvCushionShell),
+		OBJECT(MODEL_STATIC_TRI, -10851, -200, -8090, 0, 0, 0, 0x00000000, bhvStaticTri),
+		OBJECT(MODEL_STATIC_TRI, -10851, -200, -9583, 0, -180, 0, 0x00000000, bhvStaticTri),
+		OBJECT(MODEL_STATIC_TRI, -10851, -200, -10927, 0, 0, 0, 0x00000000, bhvStaticTri),
+		OBJECT(MODEL_STATIC_WALL, -9019, -200, -16906, 0, 0, 0, (38 << 16), bhvStaticWall),
+		OBJECT(MODEL_STATIC_WALL, -11832, -200, -18221, 0, 90, 0, (5 << 16), bhvStaticWall),
+		OBJECT(MODEL_STATIC_WALL, -15529, -200, -18221, 0, 90, 0, (5 << 16), bhvStaticWall),
 		TERRAIN(hmc_area_1_collision),
 		ROOMS(hmc_area_1_collision_rooms),
 		MACRO_OBJECTS(hmc_area_1_macro_objs),

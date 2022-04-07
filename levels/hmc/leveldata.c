@@ -125,3 +125,7 @@
 #include "levels/hmc/treehouse_spike/anims/table.inc.c"
 #include "levels/hmc/cushion_friend/model.inc.c"
 #include "levels/hmc/cushion_friend/collision.inc.c"
+#include "levels/hmc/static_tri/model.inc.c"
+#include "levels/hmc/static_tri/collision.inc.c"
+#include "levels/hmc/static_wall/collision.inc.c"
+#include "levels/hmc/static_wall/model.inc.c"

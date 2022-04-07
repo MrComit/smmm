@@ -1,3 +1,4 @@
+#include "levels/hmc/static_wall/texscroll.inc.h"
 #include "levels/hmc/trophy_rectangle/texscroll.inc.h"
 #include "levels/hmc/trophy_octogon/texscroll.inc.h"
 #include "levels/hmc/pool_floor/texscroll.inc.h"
