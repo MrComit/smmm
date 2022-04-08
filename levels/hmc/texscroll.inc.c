@@ -258,6 +258,11 @@ void scroll_sts_mat_hmc_dl_WallDither_layer4() {
 	}
 };
 
+void scroll_sts_mat_hmc_dl_Vase_v4_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Vase_v4_layer1);
+	shift_s(mat, 13, PACK_TILESIZE(0, 4));
+};
+
 void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_1() {
 	int i = 0;
 	int count = 380;
@@ -344,6 +349,7 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_WoodFloorOneCycle();
 	scroll_sts_mat_hmc_dl_Lava_layer1();
 	scroll_sts_mat_hmc_dl_WallDither_layer4();
+	scroll_sts_mat_hmc_dl_Vase_v4_layer1();
 	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_1();
 	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_4();
 	scroll_sts_mat_hmc_dl_WallTransition_layer1();

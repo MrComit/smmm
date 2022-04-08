@@ -129,3 +129,4 @@
 #include "levels/hmc/static_tri/collision.inc.c"
 #include "levels/hmc/static_wall/collision.inc.c"
 #include "levels/hmc/static_wall/model.inc.c"
+#include "levels/hmc/vase_throw/model.inc.c"

@@ -756,6 +756,7 @@
 // 0x5B-0x63
 #define MODEL_STATIC_TRI          0x5B
 #define MODEL_STATIC_WALL         0x5C
+#define MODEL_VASE_THROW          0x5D
 
 // 0x6C-0x73
 

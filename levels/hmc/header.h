@@ -217,4 +217,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/static_wall/geo_header.h"
 
+#include "levels/hmc/vase_throw/geo_header.h"
+
 #endif

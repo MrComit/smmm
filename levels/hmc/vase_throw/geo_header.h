@@ -1,0 +1,17 @@
+extern const GeoLayout vase_throw_geo[];
+extern Lights1 vase_throw_Vase_v4_layer1_lights;
+extern Lights1 vase_throw_OWOFace_lights;
+extern u8 vase_throw_squigglyline_i8[];
+extern u8 vase_throw_spooky_face_ci4[];
+extern u8 vase_throw_spooky_face_ci4_pal_rgba16[];
+extern Vtx vase_throw_Vase_001_mesh_layer_1_vtx_0[105];
+extern Gfx vase_throw_Vase_001_mesh_layer_1_tri_0[];
+extern Vtx vase_throw_Vase_001_mesh_layer_6_vtx_0[9];
+extern Gfx vase_throw_Vase_001_mesh_layer_6_tri_0[];
+extern Gfx mat_vase_throw_Vase_v4_layer1[];
+extern Gfx mat_revert_vase_throw_Vase_v4_layer1[];
+extern Gfx mat_vase_throw_OWOFace[];
+extern Gfx mat_revert_vase_throw_OWOFace[];
+extern Gfx vase_throw_Vase_001_mesh_layer_1[];
+extern Gfx vase_throw_Vase_001_mesh_layer_6[];
+extern Gfx vase_throw_material_revert_render_settings[];

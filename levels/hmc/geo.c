@@ -54,3 +54,4 @@
 #include "levels/hmc/cushion_friend/geo.inc.c"
 #include "levels/hmc/static_tri/geo.inc.c"
 #include "levels/hmc/static_wall/geo.inc.c"
+#include "levels/hmc/vase_throw/geo.inc.c"
