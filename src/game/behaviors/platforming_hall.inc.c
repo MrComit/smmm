@@ -10,6 +10,58 @@ static struct ObjectHitbox sVaseThrowHitbox = {
     /* hurtboxHeight:     */ 175,
 };
 
+
+void plathall_instant_warp(void) {
+    Vec3f camPos;
+    s16 cameraAngle;
+    struct MarioState *m = gMarioState;
+    if (m->floor != NULL && m->floor->type == SURFACE_INSTANT_UPWARP && m->pos[1] - m->floorHeight < 4400.0f) {
+        m->pos[1] += 2700.0f - m->vel[1];
+        m->marioObj->oPosY = m->pos[1];
+
+        cameraAngle = m->area->camera->yaw;
+        camPos[0] = gCamera->pos[0];
+        camPos[1] = gCamera->pos[1] + (2700.0f - m->vel[1]);
+        camPos[2] = gCamera->pos[2];
+        CL_set_camera_pos(camPos, m->pos);
+        gCamera->comitCutscene = 0xFF;
+
+        m->area->camera->yaw = cameraAngle;
+    }
+}
+
+
+void plathall_randomize_textures(void) {
+    u16 *texture = segmented_to_virtual(&hmc_dl_lightblue_noise3_rgba16);
+    s32 i, k;
+    u16 h = CL_RandomMinMaxU16(12, 32);
+    u16 j = CL_RandomMinMaxU16(46, 60);
+    for (i = 0; i < j; i++) {
+        for (k = 0; k < h; k++) {
+            texture[i + (k*32)] = (random_u16() & 0b0011100010111001);
+        }
+    }
+    for (i = j; i < 64; i++) {
+        for (k = 0; k < h; k++) {
+            texture[i + (k*32)] = 0;
+        }  
+    }
+    texture = segmented_to_virtual(&static_tri_i8_static_i8);
+    for (i = 0; i < 2048; i++) {
+        texture[i] = random_u16();
+    }
+}
+
+
+void bhv_plathall_manager_loop(void) {
+    // if (gMarioCurrentRoom == o->oRoom) {
+        plathall_randomize_textures();
+        plathall_instant_warp();
+    // }
+}
+
+
+
 void bhv_vase_throw_init(void) {
     obj_set_hitbox(o, &sVaseThrowHitbox);
     o->os16FA = 0x200 * random_sign();

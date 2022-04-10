@@ -108,26 +108,6 @@ void bhv_koopa_shell_loop(void) {
 }
 
 
-void cushion_randomize_textures(void) {
-    u16 *texture = segmented_to_virtual(&hmc_dl_lightblue_noise3_rgba16);
-    s32 i, k;
-    u16 h = CL_RandomMinMaxU16(12, 32);
-    u16 j = CL_RandomMinMaxU16(46, 60);
-    for (i = 0; i < j; i++) {
-        for (k = 0; k < h; k++) {
-            texture[i + (k*32)] = (random_u16() & 0b0011100010111001);
-        }
-    }
-    for (i = j; i < 64; i++) {
-        for (k = 0; k < h; k++) {
-            texture[i + (k*32)] = 0;
-        }  
-    }
-    texture = segmented_to_virtual(&static_tri_i8_static_i8);
-    for (i = 0; i < 2048; i++) {
-        texture[i] = random_u16();
-    }
-}
 
 
 
@@ -136,10 +116,6 @@ void bhv_cushion_shell_loop(void) {
     struct Surface *sp34;
 
     obj_set_hitbox(o, &sKoopaShellHitbox);
-
-    if (gCurrLevelNum == LEVEL_HMC && gMarioCurrentRoom == o->oRoom) {
-        cushion_randomize_textures();
-    }
 
     switch (o->oAction) {
         case 0:

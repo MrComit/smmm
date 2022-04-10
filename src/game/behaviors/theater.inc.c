@@ -384,7 +384,7 @@ void bhv_theater_screen_loop(void) {
                     break;
                 case 9:
                     vec3f_copy(m->pos, sTheaterRespawn[o->os16F4]);
-                    // CL_set_camera_pos(sTheaterRespawn[o->os16F4]);
+                    // CL_set_camera_pos(sTheaterRespawn[o->os16F4], sTheaterRespawn[o->os16F4]);
                     // angle = (m->faceAngle[1] = mario_angle_to_object(m, o));
                     // s8DirModeYawOffset = (s16)(angle & 0xC000) - 0x4000;
                     set_mario_action(m, ACT_JUMP_LAND_STOP, 0);

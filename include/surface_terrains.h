@@ -56,6 +56,7 @@
 #define SURFACE_SNOWFLAKE_SPAWN              0x003B
 #define SURFACE_SNOWFLAKE_DESPAWN            0x003C
 #define SURFACE_FORCE_JUMP                   0x003D
+#define SURFACE_INSTANT_UPWARP               0x003E
 
 #define SURFACE_BOSS_FIGHT_CAMERA            0x0065 // Wide camera for BOB and WF bosses
 #define SURFACE_CAMERA_FREE_ROAM             0x0066 // Free roam camera for THI and TTC

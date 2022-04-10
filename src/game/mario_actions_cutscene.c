@@ -2744,7 +2744,7 @@ static s32 act_cutscene_jump(struct MarioState *m) {
         camPos[1] = m->pos[1];
         camPos[2] = gLakituState.curPos[2];
         if (gCamera->cutscene == 0)
-            CL_set_camera_pos(camPos);
+            CL_set_camera_pos(camPos, camPos);
     }
     //play_sound_and_spawn_particles(m, SOUND_ACTION_UNSTUCK_FROM_GROUND, 1);
     return FALSE;

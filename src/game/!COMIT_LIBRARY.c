@@ -77,18 +77,18 @@ s16 CL_angle_between_points(Vec3f point1, Vec3f point2) {
 
 extern struct ModeTransitionInfo sModeInfo;
 
-void CL_set_camera_pos(Vec3f pos) {
+void CL_set_camera_pos(Vec3f pos, Vec3f pos2) {
     struct MarioState *marioStates = &gMarioStates[0];
     struct LinearTransitionPoint *start = &sModeInfo.transitionStart;
     struct LinearTransitionPoint *end = &sModeInfo.transitionEnd;
 
     vec3f_copy(gLakituState.curPos, pos);
-    vec3f_copy(gLakituState.curFocus, pos);
+    vec3f_copy(gLakituState.curFocus, pos2);
     vec3f_copy(gLakituState.goalPos, pos);
-    vec3f_copy(gLakituState.goalFocus, pos);
-    vec3f_copy(start->focus, pos);
+    vec3f_copy(gLakituState.goalFocus, pos2);
+    vec3f_copy(start->focus, pos2);
     vec3f_copy(start->pos, pos);
-    vec3f_copy(end->focus, pos);
+    vec3f_copy(end->focus, pos2);
     vec3f_copy(end->pos, pos);
 }
 
@@ -203,7 +203,7 @@ s32 CL_respawn(s16 *timer, Vec3f pos, s16 faceAngle, s16 damage) {
                 break;
             case 9:
                 vec3f_copy(gMarioState->pos, pos);
-                CL_set_camera_pos(pos);
+                CL_set_camera_pos(pos, pos);
                 gMarioState->faceAngle[1] = faceAngle;
                 s8DirModeYawOffset = (s16)(faceAngle & 0xC000) - 0x4000;
                 set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);

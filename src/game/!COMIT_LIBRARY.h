@@ -11,7 +11,7 @@ struct Object *CL_Create_Star_Ptr(f32 sp20, f32 sp24, f32 sp28);
 struct Object *CL_Create_Star_Helper(struct Object *sp30, f32 sp34, f32 sp38, f32 sp3C);
 s16 CL_object_to_point(struct Object *o, Vec3f point);
 s16 CL_angle_between_points(Vec3f point1, Vec3f point2);
-void CL_set_camera_pos(Vec3f pos);
+void CL_set_camera_pos(Vec3f pos, Vec3f pos2);
 struct Object *CL_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u32 params);
 void CL_dist_between_points(Vec3f from, Vec3f to, f32 *dist);
 void CL_lateral_dist_between_points(Vec3f from, Vec3f to, f32 *dist);

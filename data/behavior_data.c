@@ -8923,3 +8923,12 @@ const BehaviorScript bhvVaseThrow[] = {
         CALL_NATIVE(bhv_vase_throw_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvPlatHallManage[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    // OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // CALL_NATIVE(bhv_plathall_manager_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_plathall_manager_loop),
+    END_LOOP(),
+};
