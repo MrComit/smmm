@@ -678,7 +678,7 @@ void check_instant_warp(void) {
     //if (gCurrLevelNum == LEVEL_CASTLE
     //    && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
     //    return;
-    //}
+    // }
 
     if ((floor = m->floor) != NULL && floor->type == SURFACE_INSTANT_WARP_1B) {
         if (gCurrentArea->instantWarps != NULL) {

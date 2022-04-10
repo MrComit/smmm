@@ -20,4 +20,6 @@ extern void scroll_sts_mat_hmc_dl_Vase_v4_layer1();
 extern void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_1();
 extern void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_4();
 extern void scroll_sts_mat_hmc_dl_WallTransition_layer1();
+extern void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0();
+extern void scroll_hmc_dl_Maze_mesh_layer_1_vtx_0();
 extern void scroll_hmc();

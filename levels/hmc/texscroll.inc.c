@@ -265,7 +265,7 @@ void scroll_sts_mat_hmc_dl_Vase_v4_layer1() {
 
 void scroll_hmc_dl_Hallway_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 380;
+	int count = 414;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -330,6 +330,58 @@ void scroll_sts_mat_hmc_dl_WallTransition_layer1() {
 	shift_s(mat, 21, PACK_TILESIZE(0, 5));
 };
 
+void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0() {
+	int i = 0;
+	int count = 243;
+	int width = 32 * 0x20;
+	int height = 32 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	static int timeY;
+	float amplitudeY = 0.800000011920929;
+	float frequencyY = 0.10000000149011612;
+	float offsetY = 0.0;
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Hallway_003_mesh_layer_1_vtx_0);
+
+	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;	timeY += 1;
+}
+
+void scroll_hmc_dl_Maze_mesh_layer_1_vtx_0() {
+	int i = 0;
+	int count = 949;
+	int width = 32 * 0x20;
+	int height = 32 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	static int timeY;
+	float amplitudeY = 0.800000011920929;
+	float frequencyY = 0.10000000149011612;
+	float offsetY = 0.0;
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Maze_mesh_layer_1_vtx_0);
+
+	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;	timeY += 1;
+}
+
 void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_Wall_layer1();
 	scroll_sts_mat_hmc_dl_WoodFloor_layer1();
@@ -353,4 +405,6 @@ void scroll_hmc() {
 	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_1();
 	scroll_hmc_dl_Hallway_mesh_layer_1_vtx_4();
 	scroll_sts_mat_hmc_dl_WallTransition_layer1();
+	scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0();
+	scroll_hmc_dl_Maze_mesh_layer_1_vtx_0();
 }

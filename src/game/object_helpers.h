@@ -74,6 +74,7 @@ Gfx *geo_update_projectile_pos_and_angle_from_parent(s32 callContext, UNUSED str
 Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_layer_transparency_cutout(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_generate_tight_rope(s32 sp40, struct GraphNode *node, void *context);
 Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);

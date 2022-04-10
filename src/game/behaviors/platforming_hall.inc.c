@@ -70,6 +70,7 @@ void bhv_vase_throw_loop(void) {
                     o->oAction = 0;
                     o->oFloatFC = 0.0f;
                     o->os16F8 = 0;
+                    o->oFloatF4 = 0.0f;
                 }
             }
             break;

@@ -322,6 +322,54 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
     return NULL;
 }
 
+
+Vtx *sVanishVerts[] = {
+    &hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0,
+};
+
+s16 sVanishVertCounts[] = {
+    sizeof(hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0) / 16,
+};
+
+
+Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    s32 i;
+    s32 dist;
+    Vtx *vert;
+    Vec3s marioPos;
+    struct GraphNodeGenerated *currentGraphNode;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        vec3f_to_vec3s(marioPos, gMarioState->pos);
+        // marioPos[0] -= 8796;
+        // marioPos[2] -= 14423;
+        vert = segmented_to_virtual(sVanishVerts[currentGraphNode->parameter]);
+        for (i = 0; i < sVanishVertCounts[currentGraphNode->parameter]; i++) {
+            dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
+                    (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
+            if (dist <= 1000*1000*2) {
+                vert[i].v.cn[3] = (f32)(1000*1000*2 - dist) / (f32)(1000*1000*2) * 255;
+            } else if (vert[i].v.cn[3] != 0) {
+                vert[i].v.cn[3] = 0;
+            }
+            // UV generating code
+            // vert[i].v.tc[0] = (gMarioState->pos[0] - vert[i].v.ob[0]) * 2;
+            // vert[i].v.tc[1] = (gMarioState->pos[2] - vert[i].v.ob[2]) * 2;
+        }
+    }
+    return NULL;
+}
+
+
+
+
+
+
+
+
+
+
+
 void make_vertex(Vtx *vtx, s32 n, s16 x, s16 y, s16 z, s16 tx, s16 ty, u8 r, u8 g, u8 b, u8 a);
 
 
