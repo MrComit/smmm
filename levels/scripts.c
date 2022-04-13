@@ -236,8 +236,8 @@ const LevelScript script_func_global_2[] = {
 
 const LevelScript script_func_global_3[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BLARGG,                  blargg_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BULLY,                   bully_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BULLY_BOSS,              bully_boss_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_BULLY,                   bully_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_BULLY_BOSS,              bully_boss_geo),
     RETURN(),
 };
 
@@ -273,6 +273,8 @@ const LevelScript script_func_global_7[] = {
     LOAD_MODEL_FROM_GEO(MODEL_UKIKI,                   ukiki_geo),
     LOAD_MODEL_FROM_GEO(MODEL_FWOOSH,                  fwoosh_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SWOOP,                   swoop_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BULLY,                   bully_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BULLY_BOSS,              bully_boss_geo),
     RETURN(),
 };
 

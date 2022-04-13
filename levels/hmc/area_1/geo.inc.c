@@ -46,8 +46,8 @@ const GeoLayout hmc_dl_102__Trophy_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_006_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_007_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_008_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_012_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_013_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_015_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -222,6 +222,7 @@ const GeoLayout hmc_dl_113__Hallway_geo[] = {
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -23929, 8539, -11491, 0, 90, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -18582, -200, -19142, 0, 90, 0),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Maze_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MazeNoCol_mesh_layer_1),
 		GEO_ASM(0, geo_update_vanish_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Hall_mesh_layer_1),
 	GEO_CLOSE_NODE(),

@@ -29,3 +29,7 @@ UNUSED static const u64 binid_4 = 4;
 #include "swoop/model.inc.c"
 #include "swoop/anims/data.inc.c"
 #include "swoop/anims/table.inc.c"
+
+#include "bully/model.inc.c"
+#include "bully/anims/data.inc.c"
+#include "bully/anims/table.inc.c"

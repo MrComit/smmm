@@ -343,8 +343,8 @@
 
 // group 2
 #define MODEL_BLARGG                      0x54        // blargg_geo
-#define MODEL_BULLY                       0x56        // bully_geo
-#define MODEL_BULLY_BOSS                  0x57        // bully_boss_geo
+// #define MODEL_BULLY                       0x56        // bully_geo
+// #define MODEL_BULLY_BOSS                  0x57        // bully_boss_geo
 
 // group 3
 #define MODEL_WATER_BOMB                  0x54        // water_bomb_geo
@@ -372,6 +372,9 @@
 #define MODEL_UKIKI                       0x56        // ukiki_geo
 #define MODEL_FWOOSH                      0x57        // fwoosh_geo
 #define MODEL_SWOOP                       0x58        // swoop_geo
+#define MODEL_BULLY                       0x59        // bully_geo
+#define MODEL_BULLY_BOSS                  0x5A        // bully_boss_geo
+
 
 // group 7
 #define MODEL_SPINDRIFT                   0x54        // spindrift_geo
@@ -750,7 +753,7 @@
 #define MODEL_TREEHOUSE_LOG       0xEB
 #define MODEL_TREEHOUSE_SPIKE     0xEA
 #define MODEL_CUSHION_FRIEND      0xE9
-
+#define MODEL_SAUNA_GRATE         0xE8
 
 // LEVEL 5 MODELS CONT:
 // 0x5B-0x63

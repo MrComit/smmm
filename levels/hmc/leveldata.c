@@ -130,3 +130,5 @@
 #include "levels/hmc/static_wall/collision.inc.c"
 #include "levels/hmc/static_wall/model.inc.c"
 #include "levels/hmc/vase_throw/model.inc.c"
+#include "levels/hmc/sauna_grate/model.inc.c"
+#include "levels/hmc/sauna_grate/collision.inc.c"

@@ -12,3 +12,4 @@
 #include "fwoosh/geo.inc.c"
 
 #include "swoop/geo.inc.c"
+#include "bully/geo.inc.c"

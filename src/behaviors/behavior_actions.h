@@ -907,6 +907,8 @@ void bhv_static_wall_init(void);
 void bhv_vase_throw_init(void);
 void bhv_vase_throw_loop(void);
 void bhv_plathall_manager_loop(void);
+void bhv_sauna_grate_loop(void);
+void bhv_sauna_grate_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

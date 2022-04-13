@@ -219,4 +219,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/vase_throw/geo_header.h"
 
+#include "levels/hmc/sauna_grate/geo_header.h"
+
+#include "levels/hmc/sauna_grate/collision_header.h"
+
 #endif

@@ -71,6 +71,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_STATIC_TRI, static_tri_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_STATIC_WALL, static_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_VASE_THROW, vase_throw_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SAUNA_GRATE, sauna_grate_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -202,6 +203,10 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_VASE_THROW, -19015, 89, -11557, 0, 0, 0, 0x00000000, bhvVaseThrow),
 		OBJECT(MODEL_VASE_THROW, -20513, 89, -9936, 0, 0, 0, 0x00000000, bhvVaseThrow),
 		OBJECT(MODEL_VASE_THROW, -19134, 89, -3518, 0, 0, 0, 0x00000000, bhvVaseThrow),
+		OBJECT(MODEL_BULLY, -5914, 2800, -813, 0, 0, 0, 0x00000000, bhvSmallBully),
+		OBJECT(MODEL_SAUNA_GRATE, -6827, 2400, -1646, 0, -90, 0, 0x00000000, bhvSaunaGrate),
+		OBJECT(MODEL_SAUNA_GRATE, -5914, 2400, -813, 0, -90, 0, 0x00000000, bhvSaunaGrate),
+		OBJECT(MODEL_SAUNA_GRATE, -5392, 2500, -2344, 0, -90, 0, 0x00000000, bhvSaunaGrate),
 		TERRAIN(hmc_area_1_collision),
 		ROOMS(hmc_area_1_collision_rooms),
 		MACRO_OBJECTS(hmc_area_1_macro_objs),

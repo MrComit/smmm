@@ -179,6 +179,9 @@ void bully_step(void) {
     bully_backup_check(collisionFlags);
     bully_play_stomping_sound();
     obj_check_floor_death(collisionFlags, sObjFloor);
+    if (o->oPosY <= o->oFloorHeight && sObjFloor->object != NULL && obj_has_behavior(sObjFloor->object, bhvSaunaGrate)) {
+        sObjFloor->object->os16F4--;
+    }
 
     if (o->oBullySubtype & BULLY_STYPE_CHILL) {
         if (o->oPosY < 1030.0f) {
@@ -204,7 +207,9 @@ void bully_act_level_death(void) {
             if (o->oBullySubtype == BULLY_STYPE_MINION) {
                 o->parentObj->oBullyKBTimerAndMinionKOCounter++;
             }
-            bully_spawn_coin();
+            if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+                bully_spawn_coin();
+            }
         } else {
             spawn_mist_particles();
 

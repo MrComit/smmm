@@ -756,6 +756,7 @@ extern const BehaviorScript bhvStaticTri[];
 extern const BehaviorScript bhvStaticWall[];
 extern const BehaviorScript bhvVaseThrow[];
 extern const BehaviorScript bhvPlatHallManage[];
+extern const BehaviorScript bhvSaunaGrate[];
 
 
 #endif // BEHAVIOR_DATA_H
