@@ -1219,6 +1219,7 @@ s32 gFixedFloorCheck = 0;
 s16 gComitCutsceneAction = 0;
 s16 gComitCutsceneTimer = 0;
 Vec3f gComitCutscenePosVec = {0, 0, 0};
+Vec3f gComitCutsceneFocVec = {0, 0, 0};
 struct Object *gComitCutsceneObject = NULL;
 extern s32 gRoomEntryTimer;
 
@@ -1476,6 +1477,15 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_copy(c->pos, gComitCutscenePosVec);
             vec3f_set(c->focus, obj->oPosX, obj->oPosY + 2000.0f, obj->oPosZ);
             c->yaw = c->nextYaw = DEGREES(0);
+            break;
+        
+
+
+        case 0xFF:
+            // vec3f_copy(c->pos, gComitCutscenePosVec);
+            // vec3f_copy(c->focus, gComitCutsceneFocVec);
+            CL_set_camera_pos(gComitCutscenePosVec, gComitCutscenePosVec);
+            c->comitCutscene = 0;
             break;
     }
 }

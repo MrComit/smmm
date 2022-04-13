@@ -3,7 +3,7 @@
 const GeoLayout hmc_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(14, geo_switch_area),
+		GEO_SWITCH_CASE(15, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, hmc_dl_101__OpeningHall_geo),
 			GEO_BRANCH(1, hmc_dl_102__Trophy_Room_geo),
@@ -18,6 +18,7 @@ const GeoLayout hmc_area_1_geo[] = {
 			GEO_BRANCH(1, hmc_dl_111__NULL_geo),
 			GEO_BRANCH(1, hmc_dl_112__NULL_geo),
 			GEO_BRANCH(1, hmc_dl_113__Hallway_geo),
+			GEO_BRANCH(1, hmc_dl_114__Sauna_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -208,9 +209,9 @@ const GeoLayout hmc_dl_112__NULL_geo[] = {
 const GeoLayout hmc_dl_113__Hallway_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_005_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -9943, -200, -18221, 0, 90, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -15291, 8539, -23929, 0, 90, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -18170, 8539, -23929, 0, 90, 0),
@@ -223,6 +224,13 @@ const GeoLayout hmc_dl_113__Hallway_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Maze_mesh_layer_1),
 		GEO_ASM(0, geo_update_vanish_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Hall_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_114__Sauna_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Sauna_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

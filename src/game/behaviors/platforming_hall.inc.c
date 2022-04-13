@@ -10,22 +10,20 @@ static struct ObjectHitbox sVaseThrowHitbox = {
     /* hurtboxHeight:     */ 175,
 };
 
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
+
 
 void plathall_instant_warp(void) {
-    Vec3f camPos;
+    Vec3f camPos, camFoc;
     s16 cameraAngle;
     struct MarioState *m = gMarioState;
     if (m->floor != NULL && m->floor->type == SURFACE_INSTANT_UPWARP && m->pos[1] - m->floorHeight < 4400.0f) {
-        m->pos[1] += 2700.0f - m->vel[1];
+        m->pos[1] += 2700.0f;
         m->marioObj->oPosY = m->pos[1];
 
         cameraAngle = m->area->camera->yaw;
-        camPos[0] = gCamera->pos[0];
-        camPos[1] = gCamera->pos[1] + (2700.0f - m->vel[1]);
-        camPos[2] = gCamera->pos[2];
-        CL_set_camera_pos(camPos, m->pos);
-        gCamera->comitCutscene = 0xFF;
-
+        warp_camera(0, 2700.0f, 0);
         m->area->camera->yaw = cameraAngle;
     }
 }
