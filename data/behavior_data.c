@@ -4077,7 +4077,7 @@ const BehaviorScript bhvSmallBully[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
-    DROP_TO_FLOOR(),
+    // DROP_TO_FLOOR(),
     SET_HOME(),
     CALL_NATIVE(bhv_small_bully_init),
     BEGIN_LOOP(),

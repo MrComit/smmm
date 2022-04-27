@@ -30,9 +30,9 @@ void bhv_small_bully_init(void) {
     o->oHomeX = o->oPosX;
     o->oHomeZ = o->oPosZ;
     o->oBehParams2ndByte = BULLY_BP_SIZE_SMALL;
-    o->oGravity = 4.0;
-    o->oFriction = 0.91;
-    o->oBuoyancy = 1.3;
+    o->oGravity = 4.0f;
+    o->oFriction = 0.91f;
+    o->oBuoyancy = 0.0f;
 
     obj_set_hitbox(o, &sSmallBullyHitbox);
 }

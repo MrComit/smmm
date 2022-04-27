@@ -232,6 +232,7 @@ const GeoLayout hmc_dl_114__Sauna_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Sauna_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Sauna_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
