@@ -502,6 +502,83 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
 
 
 
+s32 sLavaWavePos = 0;
+s32 sLavaWaveHeight = 0;
+s16 sLavaSinsTimer = 0;
+
+Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *context) {
+    Vtx *vertexBuffer;
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 objectHeight;
+    s16 firstUVs, secondUVs;
+    s16 firstPos, secondPos;
+    s16 uvMax;
+
+    currentGraphNode = node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+
+        currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
+
+        // uvMax = TIGHT_ROPE_MAX * obj->header.gfx.scale[2];
+        // if (uvMax < 0) {
+        //     uvMax = 0x7FFF;
+        // }
+
+        sLavaSinsTimer += 0xE0;
+        sLavaWavePos = sins(sLavaSinsTimer) * 3500;
+        sLavaWaveHeight = 325 + coss(sLavaSinsTimer * 2) * 125;
+
+
+        firstPos = sLavaWavePos + 500;
+        firstUVs = 2500 * ((f32)(firstPos) / 4000.0f);
+        secondPos = sLavaWavePos - 500;
+        secondUVs = 2500 * ((f32)(secondPos) / 4000.0f);
+
+        make_vertex(vertexBuffer, 0, 1875, 0, 4000, 0, 2500, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 1, -1875, 0, 4000, 3048, 2500, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        make_vertex(vertexBuffer, 2, 1875, 30, firstPos, 0, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 3, -1875, 30, firstPos, 3048, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        // Central.
+        make_vertex(vertexBuffer, 4, 1875, sLavaWaveHeight, sLavaWavePos, 0, 2500 * ((f32)(sLavaWavePos) / 4000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 5, -1875, sLavaWaveHeight, sLavaWavePos, 3048, 2500 * ((f32)(sLavaWavePos) / 4000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
+
+        make_vertex(vertexBuffer, 6, 1875, 30, secondPos, 0, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 7, -1875, 30, secondPos, 3048, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        make_vertex(vertexBuffer, 8, 1875, 0, -4000, 0, -2500, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 9, -1875, 0, -4000, 3048, -2500, 0xFF, 0xFF, 0xFF, 0xFF);
+        
+        dlHead = alloc_display_list(sizeof(Gfx) * (9));
+        dlStart = dlHead;
+
+        gSPDisplayList(dlHead++, mat_hmc_dl_SaunaLavaDyn_layer1);
+
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 10, 0);
+        // gSP2Triangles(dlHead++, 8, 1, 0, 0, 1, 8, 9, 0);
+        gSP2Triangles(dlHead++, 2, 1, 0, 0, 1, 2, 3, 0);
+        gSP2Triangles(dlHead++, 4, 3, 2, 0, 3, 4, 5, 0);
+
+        gSP2Triangles(dlHead++, 6, 5, 4, 0, 5, 6, 7, 0);
+        gSP2Triangles(dlHead++, 8, 7, 6, 0, 7, 8, 9, 0);
+        
+        gSPDisplayList(dlHead++, mat_revert_hmc_dl_SaunaLavaDyn_layer1);
+
+        gSPEndDisplayList(dlHead++);
+    }
+    return dlStart;
+    
+}
+
+
+
+
+
 Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;

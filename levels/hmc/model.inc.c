@@ -361,6 +361,10 @@ Lights1 hmc_dl_SaunaPlat_layer1_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
+Lights1 hmc_dl_SaunaLavaDyn_layer1_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
+
 Lights1 hmc_dl_Border_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
@@ -55552,11 +55556,7 @@ Gfx hmc_dl_Sauna_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx hmc_dl_Sauna_mesh_layer_1_vtx_1[38] = {
-	{{{-704, 2500, -502},0, {-189, -2825},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -502},0, {-2838, -2825},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, 3013},0, {-2838, -342},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, 3013},0, {-189, -342},{0x0, 0x7F, 0x0, 0xFF}}},
+Vtx hmc_dl_Sauna_mesh_layer_1_vtx_1[18] = {
 	{{{-4554, 2500, -821},0, {-2909, -3051},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-8204, 2500, -821},0, {-5487, -3051},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-8204, 2500, -502},0, {-5487, -2825},{0x0, 0x7F, 0x0, 0xFF}}},
@@ -55575,39 +55575,16 @@ Vtx hmc_dl_Sauna_mesh_layer_1_vtx_1[38] = {
 	{{{-4554, 2500, -4806},0, {-2909, -5866},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-4454, 2500, -3048},0, {-2838, -4624},{0x0, 0x7F, 0x0, 0xFF}}},
 	{{{-4454, 2500, -4806},0, {-2838, -5866},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -4806},0, {-189, -5866},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -3048},0, {-189, -4624},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -1291},0, {-2838, -3383},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -1291},0, {-189, -3383},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -1291},0, {-189, -3383},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -1291},0, {-2838, -3383},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -971},0, {-2838, -3157},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -971},0, {-189, -3157},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -821},0, {-189, -3051},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -821},0, {-2838, -3051},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -502},0, {-2838, -2825},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -502},0, {-189, -2825},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -971},0, {-189, -3157},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -971},0, {-2838, -3157},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-4454, 2500, -821},0, {-2838, -3051},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-704, 2500, -821},0, {-189, -3051},{0x0, 0x7F, 0x0, 0xFF}}},
 };
 
 Gfx hmc_dl_Sauna_mesh_layer_1_tri_1[] = {
-	gsSPVertex(hmc_dl_Sauna_mesh_layer_1_vtx_1 + 0, 30, 0),
+	gsSPVertex(hmc_dl_Sauna_mesh_layer_1_vtx_1 + 0, 18, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 15, 13, 0),
-	gsSP2Triangles(12, 16, 15, 0, 12, 17, 16, 0),
-	gsSP2Triangles(17, 18, 16, 0, 17, 19, 18, 0),
-	gsSP2Triangles(20, 19, 17, 0, 20, 21, 19, 0),
-	gsSP2Triangles(20, 22, 21, 0, 20, 23, 22, 0),
-	gsSP2Triangles(24, 23, 20, 0, 24, 25, 23, 0),
-	gsSP2Triangles(26, 27, 28, 0, 26, 28, 29, 0),
-	gsSPVertex(hmc_dl_Sauna_mesh_layer_1_vtx_1 + 30, 8, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 11, 9, 0),
+	gsSP2Triangles(8, 12, 11, 0, 8, 13, 12, 0),
+	gsSP2Triangles(13, 14, 12, 0, 13, 15, 14, 0),
+	gsSP2Triangles(16, 15, 13, 0, 16, 17, 15, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -56265,6 +56242,30 @@ Gfx hmc_dl_Sauna_mesh_layer_4_tri_0[] = {
 	gsSP2Triangles(4, 3, 0, 0, 4, 5, 3, 0),
 	gsSP2Triangles(6, 7, 8, 0, 6, 9, 7, 0),
 	gsSP2Triangles(10, 7, 9, 0, 10, 9, 11, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx hmc_dl_Sauna_001_mesh_layer_1_vtx_cull[8] = {
+	{{{-1875, -2500, 3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-1875, -2500, 3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-1875, -2500, -3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-1875, -2500, -3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{1875, -2500, 3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{1875, -2500, 3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{1875, -2500, -3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{1875, -2500, -3909},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+};
+
+Vtx hmc_dl_Sauna_001_mesh_layer_1_vtx_0[4] = {
+	{{{-1875, -2500, -3909},0, {-2838, -5866},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-1875, -2500, 3909},0, {-2838, -342},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{1875, -2500, 3909},0, {-189, -342},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{1875, -2500, -3909},0, {-189, -5866},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx hmc_dl_Sauna_001_mesh_layer_1_tri_0[] = {
+	gsSPVertex(hmc_dl_Sauna_001_mesh_layer_1_vtx_0 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -70524,6 +70525,42 @@ Gfx mat_revert_hmc_dl_SaunaPlat_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_hmc_dl_SaunaLavaDyn_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, TEXEL1, ENV_ALPHA, TEXEL1, 0, 0, 0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, 1),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_NOOP, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, hmc_dl__32xlava_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 1023, 256),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, hmc_dl_lava_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 256, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(6, 0, 0, 1023, 256),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(1, 0, 0, 124, 124),
+	gsDPSetEnvColor(0, 0, 0, 153),
+	gsSPSetLights1(hmc_dl_SaunaLavaDyn_layer1_lights),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_hmc_dl_SaunaLavaDyn_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_hmc_dl_Border[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
@@ -71979,6 +72016,17 @@ Gfx hmc_dl_Sauna_mesh_layer_4[] = {
 	gsSPDisplayList(mat_hmc_dl_Vent),
 	gsSPDisplayList(hmc_dl_Sauna_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_hmc_dl_Vent),
+	gsSPEndDisplayList(),
+};
+
+Gfx hmc_dl_Sauna_001_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(hmc_dl_Sauna_001_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_hmc_dl_SaunaLavaDyn_layer1),
+	gsSPDisplayList(hmc_dl_Sauna_001_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_hmc_dl_SaunaLavaDyn_layer1),
 	gsSPEndDisplayList(),
 };
 
