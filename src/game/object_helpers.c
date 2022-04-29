@@ -502,20 +502,22 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
 
 
 
-s32 sLavaWavePos = 0;
+s32 sLavaWavePos = 5000;
 s32 sLavaWaveHeight = 0;
 s16 sLavaSinsTimer = 0;
 s16 sLavaHitTimer = 5;
 
 
 void calc_lava_wave_collision(struct MarioState *m) {
+    f32 height;
     if (sLavaHitTimer > 0) {
         sLavaHitTimer--;
         return;
     }
     if (m->pos[0] > -2580 - 1875 && m->pos[0] < -2580 + 1875) {
         if (m->pos[2] < -896.0f + (sLavaWavePos + 500.0f) && m->pos[2] > -896.0f + (sLavaWavePos - 500.0f)) {
-            if (m->pos[1] < 2850.0f) {
+            height = 2500.0f + (sLavaWaveHeight * ((1000.0f - absf(m->pos[2] - (-896.0f + sLavaWavePos)))/1000.0f));
+            if (m->pos[1] < height) {
                 CL_Lava_Boost();
                 sLavaHitTimer = 30;
             }
@@ -530,61 +532,82 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
     Gfx *dlStart, *dlHead;
     struct GraphNodeGenerated *currentGraphNode;
     s32 objectHeight;
-    s16 firstUVs, secondUVs;
-    s16 firstPos, secondPos;
+    s16 firstUVs1, secondUVs1, firstUVs2, secondUVs2;
+    s16 firstPos1, secondPos1, firstPos2, secondPos2;
     s16 uvMax;
 
     currentGraphNode = node;
 
     if (callContext == GEO_CONTEXT_RENDER) {
+        if (sCurrPlayMode != 2) {
+
+        }
 
         currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
 
         vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
 
-        // uvMax = TIGHT_ROPE_MAX * obj->header.gfx.scale[2];
-        // if (uvMax < 0) {
-        //     uvMax = 0x7FFF;
-        // }
+        if (sCurrPlayMode != 2) {
+            // sLavaSinsTimer += 0xE0;
+            sLavaWavePos -= 75;
+            if (sLavaWavePos < -5000) {
+                sLavaWavePos = 5000;
+            }
+            if (sLavaWavePos >= 0) {
+                sLavaWaveHeight = approach_s16_symmetric(sLavaWaveHeight, 450, 2);
+            } else {
+                sLavaWaveHeight = approach_s16_symmetric(sLavaWaveHeight, 325, 2);
+            }
+        }
 
-        sLavaSinsTimer += 0xE0;
-        sLavaWavePos = sins(sLavaSinsTimer) * 3500;
-        sLavaWaveHeight = 325 + coss(sLavaSinsTimer * 2) * 125;
 
+        firstPos1 = sLavaWavePos + 500;
+        secondPos1 = sLavaWavePos - 500;
+        firstPos2 = sLavaWavePos + 300;
+        secondPos2 = sLavaWavePos - 300;
+        firstUVs1 = -2500 * ((f32)(firstPos1) / 5000.0f);
+        secondUVs1 = -2500 * ((f32)(secondPos1) / 5000.0f);
+        firstUVs2 = -2500 * ((f32)(firstPos2) / 5000.0f);
+        secondUVs2 = -2500 * ((f32)(secondPos2) / 5000.0f);
 
-        firstPos = sLavaWavePos + 500;
-        firstUVs = 2500 * ((f32)(firstPos) / 4000.0f);
-        secondPos = sLavaWavePos - 500;
-        secondUVs = 2500 * ((f32)(secondPos) / 4000.0f);
+        make_vertex(vertexBuffer, 0, 1875, 0, 5000, 0, -2500, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 1, -1875, 0, 5000, 3048, -2500, 0xFF, 0xFF, 0xFF, 0xFF);
 
-        make_vertex(vertexBuffer, 0, 1875, 0, 4000, 0, 2500, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 1, -1875, 0, 4000, 3048, 2500, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 2, 1875, 0, firstPos1, 0, firstUVs1, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 3, -1875, 0, firstPos1, 3048, firstUVs1, 0xFF, 0xFF, 0xFF, 0xFF);
 
-        make_vertex(vertexBuffer, 2, 1875, 30, firstPos, 0, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 3, -1875, 30, firstPos, 3048, firstUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 4, 1875, (sLavaWaveHeight * 0.7), firstPos2, 0, firstUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 5, -1875, (sLavaWaveHeight * 0.7), firstPos2, 3048, firstUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
 
         // Central.
-        make_vertex(vertexBuffer, 4, 1875, sLavaWaveHeight, sLavaWavePos, 0, 2500 * ((f32)(sLavaWavePos) / 4000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 5, -1875, sLavaWaveHeight, sLavaWavePos, 3048, 2500 * ((f32)(sLavaWavePos) / 4000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 6, 1875, sLavaWaveHeight, sLavaWavePos, 0, -2500 * ((f32)(sLavaWavePos) / 5000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 7, -1875, sLavaWaveHeight, sLavaWavePos, 3048, -2500 * ((f32)(sLavaWavePos) / 5000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
 
-        make_vertex(vertexBuffer, 6, 1875, 30, secondPos, 0, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 7, -1875, 30, secondPos, 3048, secondUVs, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 8, 1875, (sLavaWaveHeight * 0.7), secondPos2, 0, secondUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 9, -1875, (sLavaWaveHeight * 0.7), secondPos2, 3048, secondUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
 
-        make_vertex(vertexBuffer, 8, 1875, 0, -4000, 0, -2500, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 9, -1875, 0, -4000, 3048, -2500, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 10, 1875, 0, secondPos1, 0, secondUVs1, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 11, -1875, 0, secondPos1, 3048, secondUVs1, 0xFF, 0xFF, 0xFF, 0xFF);
+
+
+        make_vertex(vertexBuffer, 12, 1875, 0, -5000, 0, 2500, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 13, -1875, 0, -5000, 3048, 2500, 0xFF, 0xFF, 0xFF, 0xFF);
         
-        dlHead = alloc_display_list(sizeof(Gfx) * (9));
+        dlHead = alloc_display_list(sizeof(Gfx) * (11));
         dlStart = dlHead;
 
         gSPDisplayList(dlHead++, mat_hmc_dl_SaunaLavaDyn_layer1);
 
-        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 10, 0);
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 14, 0);
         // gSP2Triangles(dlHead++, 8, 1, 0, 0, 1, 8, 9, 0);
         gSP2Triangles(dlHead++, 2, 1, 0, 0, 1, 2, 3, 0);
         gSP2Triangles(dlHead++, 4, 3, 2, 0, 3, 4, 5, 0);
 
         gSP2Triangles(dlHead++, 6, 5, 4, 0, 5, 6, 7, 0);
         gSP2Triangles(dlHead++, 8, 7, 6, 0, 7, 8, 9, 0);
+
+        gSP2Triangles(dlHead++, 10, 9, 8, 0, 9, 10, 11, 0);
+        gSP2Triangles(dlHead++, 12, 11, 10, 0, 11, 12, 13, 0);
         
         gSPDisplayList(dlHead++, mat_revert_hmc_dl_SaunaLavaDyn_layer1);
 
