@@ -132,3 +132,5 @@
 #include "levels/hmc/vase_throw/model.inc.c"
 #include "levels/hmc/sauna_grate/model.inc.c"
 #include "levels/hmc/sauna_grate/collision.inc.c"
+#include "levels/hmc/bully_gate/model.inc.c"
+#include "levels/hmc/bully_gate/collision.inc.c"

@@ -8948,3 +8948,18 @@ const BehaviorScript bhvSaunaGrate[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBullyGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(bully_gate_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_bully_gate_init),
+    // SET_INT(oAnimState, 2),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bully_gate_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
