@@ -505,6 +505,25 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
 s32 sLavaWavePos = 0;
 s32 sLavaWaveHeight = 0;
 s16 sLavaSinsTimer = 0;
+s16 sLavaHitTimer = 5;
+
+
+void calc_lava_wave_collision(struct MarioState *m) {
+    if (sLavaHitTimer > 0) {
+        sLavaHitTimer--;
+        return;
+    }
+    if (m->pos[0] > -2580 - 1875 && m->pos[0] < -2580 + 1875) {
+        if (m->pos[2] < -896.0f + (sLavaWavePos + 500.0f) && m->pos[2] > -896.0f + (sLavaWavePos - 500.0f)) {
+            if (m->pos[1] < 2850.0f) {
+                CL_Lava_Boost();
+                sLavaHitTimer = 30;
+            }
+        }
+    }
+
+}
+
 
 Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *context) {
     Vtx *vertexBuffer;
@@ -570,6 +589,8 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
         gSPDisplayList(dlHead++, mat_revert_hmc_dl_SaunaLavaDyn_layer1);
 
         gSPEndDisplayList(dlHead++);
+
+        calc_lava_wave_collision(gMarioState);
     }
     return dlStart;
     

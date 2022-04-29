@@ -26,6 +26,6 @@ extern void scroll_hmc_dl_Maze_mesh_layer_1_vtx_0();
 extern void scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0();
 extern void scroll_hmc_dl_Sauna_mesh_layer_1_vtx_1();
 extern void scroll_sts_mat_hmc_dl_SaunaLava_layer1();
-extern void scroll_hmc_dl_Sauna_001_mesh_layer_1_vtx_0();
+extern void scroll_hmc_dl_SaunaMat_mesh_layer_1_vtx_0();
 extern void scroll_sts_mat_hmc_dl_SaunaLavaDyn_layer1();
 extern void scroll_hmc();

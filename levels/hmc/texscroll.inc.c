@@ -476,7 +476,7 @@ void scroll_sts_mat_hmc_dl_SaunaLava_layer1() {
 	shift_t(mat, 20, PACK_TILESIZE(0, 1));
 };
 
-void scroll_hmc_dl_Sauna_001_mesh_layer_1_vtx_0() {
+void scroll_hmc_dl_SaunaMat_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 4;
 	int width = 32 * 0x20;
@@ -484,7 +484,7 @@ void scroll_hmc_dl_Sauna_001_mesh_layer_1_vtx_0() {
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Sauna_001_mesh_layer_1_vtx_0);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_SaunaMat_mesh_layer_1_vtx_0);
 
 	deltaY = (int)(-0.5 * 0x20) % height;
 
@@ -539,6 +539,6 @@ void scroll_hmc() {
 	scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0();
 	scroll_hmc_dl_Sauna_mesh_layer_1_vtx_1();
 	scroll_sts_mat_hmc_dl_SaunaLava_layer1();
-	scroll_hmc_dl_Sauna_001_mesh_layer_1_vtx_0();
+	scroll_hmc_dl_SaunaMat_mesh_layer_1_vtx_0();
 	scroll_sts_mat_hmc_dl_SaunaLavaDyn_layer1();
 }

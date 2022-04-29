@@ -236,7 +236,7 @@ const GeoLayout hmc_dl_114__Sauna_geo[] = {
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -2579, 2500, -896),
 		GEO_OPEN_NODE(),
 			GEO_ASM(0, geo_generate_lava_wave),
-			GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Sauna_001_mesh_layer_1),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_SaunaMat_mesh_layer_1),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

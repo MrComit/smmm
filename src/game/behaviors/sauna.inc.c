@@ -22,12 +22,12 @@ void bhv_sauna_grate_loop(void) {
 
     switch (o->os16F4) {
         case 0:
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 320.0f, 2.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 320.0f, 4.0f);
             break;
         case 1:
             break;
         case 2:
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 1.5f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 2.5f);
             break;
     }
     o->oAnimState = o->os16F4;
