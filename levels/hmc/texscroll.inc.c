@@ -265,7 +265,7 @@ void scroll_sts_mat_hmc_dl_Vase_v4_layer1() {
 
 void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 243;
+	int count = 325;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -434,7 +434,7 @@ void scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0() {
 	currentY += deltaY;	timeY += 1;
 }
 
-void scroll_hmc_dl_Sauna_mesh_layer_1_vtx_1() {
+void scroll_hmc_dl_Sauna_mesh_layer_1_vtx_2() {
 	int i = 0;
 	int count = 36;
 	int width = 32 * 0x20;
@@ -452,7 +452,7 @@ void scroll_hmc_dl_Sauna_mesh_layer_1_vtx_1() {
 	float amplitudeY = 0.699999988079071;
 	float frequencyY = 0.20000000298023224;
 	float offsetY = 32.0;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Sauna_mesh_layer_1_vtx_1);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Sauna_mesh_layer_1_vtx_2);
 
 	deltaX = (int)(amplitudeX * frequencyX * coss((frequencyX * timeX + offsetX) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
 	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
@@ -537,7 +537,7 @@ void scroll_hmc() {
 	scroll_hmc_dl_Hallway_005_mesh_layer_1_vtx_5();
 	scroll_hmc_dl_Maze_mesh_layer_1_vtx_0();
 	scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0();
-	scroll_hmc_dl_Sauna_mesh_layer_1_vtx_1();
+	scroll_hmc_dl_Sauna_mesh_layer_1_vtx_2();
 	scroll_sts_mat_hmc_dl_SaunaLava_layer1();
 	scroll_hmc_dl_SaunaMat_mesh_layer_1_vtx_0();
 	scroll_sts_mat_hmc_dl_SaunaLavaDyn_layer1();

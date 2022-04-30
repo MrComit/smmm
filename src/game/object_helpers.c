@@ -506,6 +506,8 @@ s32 sLavaWavePos = 5000;
 s32 sLavaWaveHeight = 0;
 s16 sLavaSinsTimer = 0;
 s16 sLavaHitTimer = 5;
+s16 sLavaBaseLevel = 0;
+s16 sLavaSpread = 500;
 
 
 void calc_lava_wave_collision(struct MarioState *m) {
@@ -514,9 +516,14 @@ void calc_lava_wave_collision(struct MarioState *m) {
         sLavaHitTimer--;
         return;
     }
+    if (m->pos[1] > 1500.0f) {
+        sLavaBaseLevel = 1;
+    } else {
+        sLavaBaseLevel = 0;
+    }
     if (m->pos[0] > -2580 - 1875 && m->pos[0] < -2580 + 1875) {
-        if (m->pos[2] < -896.0f + (sLavaWavePos + 500.0f) && m->pos[2] > -896.0f + (sLavaWavePos - 500.0f)) {
-            height = 2500.0f + (sLavaWaveHeight * ((1000.0f - absf(m->pos[2] - (-896.0f + sLavaWavePos)))/1000.0f));
+        if (m->pos[2] < -896.0f + (sLavaWavePos + sLavaSpread) && m->pos[2] > -896.0f + (sLavaWavePos - sLavaSpread)) {
+            height = 500.0f + (sLavaWaveHeight * ((1000.0f - absf(m->pos[2] - (-896.0f + sLavaWavePos)))/1000.0f));
             if (m->pos[1] < height) {
                 CL_Lava_Boost();
                 sLavaHitTimer = 30;
@@ -534,7 +541,7 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
     s32 objectHeight;
     s16 firstUVs1, secondUVs1, firstUVs2, secondUVs2;
     s16 firstPos1, secondPos1, firstPos2, secondPos2;
-    s16 uvMax;
+    s16 lavabaseheight, baseheightapproach;
 
     currentGraphNode = node;
 
@@ -554,17 +561,29 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
                 sLavaWavePos = 5000;
             }
             if (sLavaWavePos >= 0) {
-                sLavaWaveHeight = approach_s16_symmetric(sLavaWaveHeight, 450, 2);
+                lavabaseheight = 450;
+                if (sLavaBaseLevel) {
+                    lavabaseheight += 1000;
+                }
             } else {
-                sLavaWaveHeight = approach_s16_symmetric(sLavaWaveHeight, 325, 2);
+                lavabaseheight = 325;
             }
+            baseheightapproach = 2;
+            if (sLavaBaseLevel) {
+                baseheightapproach = 20;
+            }
+            sLavaWaveHeight = approach_s16_symmetric(sLavaWaveHeight, lavabaseheight, baseheightapproach);
         }
 
-
-        firstPos1 = sLavaWavePos + 500;
-        secondPos1 = sLavaWavePos - 500;
-        firstPos2 = sLavaWavePos + 300;
-        secondPos2 = sLavaWavePos - 300;
+        if (sLavaBaseLevel) {
+            sLavaSpread = approach_s16_symmetric(sLavaSpread, 800, 20);
+        } else {
+            sLavaSpread = approach_s16_symmetric(sLavaSpread, 500, 20);
+        }
+        firstPos1 = sLavaWavePos + sLavaSpread;
+        secondPos1 = sLavaWavePos - sLavaSpread;
+        firstPos2 = sLavaWavePos + (sLavaSpread * 0.6f);
+        secondPos2 = sLavaWavePos - (sLavaSpread * 0.6f);
         firstUVs1 = -2500 * ((f32)(firstPos1) / 5000.0f);
         secondUVs1 = -2500 * ((f32)(secondPos1) / 5000.0f);
         firstUVs2 = -2500 * ((f32)(firstPos2) / 5000.0f);
