@@ -227,4 +227,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/bully_gate/collision_header.h"
 
+#include "levels/hmc/sauna_rock_rise/geo_header.h"
+
+#include "levels/hmc/sauna_rock_rise/collision_header.h"
+
 #endif

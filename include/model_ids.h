@@ -755,6 +755,7 @@
 #define MODEL_CUSHION_FRIEND      0xE9
 #define MODEL_SAUNA_GRATE         0xE8
 #define MODEL_BULLY_GATE          0xE7
+#define MODEL_SAUNA_ROCK          0xE6
 
 // LEVEL 5 MODELS CONT:
 // 0x5B-0x63

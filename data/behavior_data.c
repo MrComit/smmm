@@ -8963,3 +8963,17 @@ const BehaviorScript bhvBullyGate[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSaunaRockRise[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(sauna_rock_rise_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    // CALL_NATIVE(bhv_sauna_rock_rise_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sauna_rock_rise_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

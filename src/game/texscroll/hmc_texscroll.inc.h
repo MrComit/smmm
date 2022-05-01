@@ -1,3 +1,4 @@
+#include "levels/hmc/sauna_rock_rise/texscroll.inc.h"
 #include "levels/hmc/vase_throw/texscroll.inc.h"
 #include "levels/hmc/static_wall/texscroll.inc.h"
 #include "levels/hmc/trophy_rectangle/texscroll.inc.h"

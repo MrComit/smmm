@@ -1,0 +1,18 @@
+extern const GeoLayout sauna_rock_rise_geo[];
+extern Lights1 sauna_rock_rise_SaunaPlat_layer1_lights;
+extern Lights1 sauna_rock_rise_SaunaLavaDyn_layer1_lights;
+extern u8 sauna_rock_rise_dirty_wood_grey3_i8[];
+extern u8 sauna_rock_rise_ci4_cracked_rocks_i4[];
+extern u8 sauna_rock_rise__32xlava_rgba16[];
+extern u8 sauna_rock_rise_lava_rgba16[];
+extern Vtx sauna_rock_rise_SaunaRockRise_mesh_layer_1_vtx_cull[8];
+extern Vtx sauna_rock_rise_SaunaRockRise_mesh_layer_1_vtx_0[31];
+extern Gfx sauna_rock_rise_SaunaRockRise_mesh_layer_1_tri_0[];
+extern Vtx sauna_rock_rise_SaunaRockRise_mesh_layer_1_vtx_1[14];
+extern Gfx sauna_rock_rise_SaunaRockRise_mesh_layer_1_tri_1[];
+extern Gfx mat_sauna_rock_rise_SaunaPlat_layer1[];
+extern Gfx mat_revert_sauna_rock_rise_SaunaPlat_layer1[];
+extern Gfx mat_sauna_rock_rise_SaunaLavaDyn_layer1[];
+extern Gfx mat_revert_sauna_rock_rise_SaunaLavaDyn_layer1[];
+extern Gfx sauna_rock_rise_SaunaRockRise_mesh_layer_1[];
+extern Gfx sauna_rock_rise_material_revert_render_settings[];

@@ -1,3 +1,14 @@
+extern s16 sLavaBaseLevel;
+
+
+void bhv_sauna_rock_rise_loop(void) {
+    if (sLavaBaseLevel) {
+        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 1000.0f, 50.0f);
+    } else {
+        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 50.0f);
+    }
+}
+
 
 void bhv_bully_gate_init(void) {
     struct Object *obj = NULL;

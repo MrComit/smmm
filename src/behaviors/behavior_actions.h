@@ -911,6 +911,7 @@ void bhv_sauna_grate_loop(void);
 void bhv_sauna_grate_init(void);
 void bhv_bully_gate_loop(void);
 void bhv_bully_gate_init(void);
+void bhv_sauna_rock_rise_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

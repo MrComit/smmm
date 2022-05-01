@@ -73,6 +73,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_VASE_THROW, vase_throw_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SAUNA_GRATE, sauna_grate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BULLY_GATE, bully_gate_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SAUNA_ROCK, sauna_rock_rise_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -208,6 +209,11 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_BULLY, -7222, 712, 1278, 0, 0, 0, 0x00000000, bhvSmallBully),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2579, 2185, 3063, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_BULLY_GATE, -6379, 804, -4806, 0, 0, 0, 0x00000000, bhvBullyGate),
+		OBJECT(MODEL_SAUNA_ROCK, -3926, 500, -1004, 0, 0, 0, 0x00000000, bhvSaunaRockRise),
+		OBJECT(MODEL_SAUNA_ROCK, -1919, 500, -2937, 0, -29, 0, 0x00000000, bhvSaunaRockRise),
+		OBJECT(MODEL_SAUNA_ROCK, -2639, 500, -1904, 0, 83, 0, 0x00000000, bhvSaunaRockRise),
+		OBJECT(MODEL_SAUNA_ROCK, -3071, 500, 1790, 0, 24, 0, 0x00000000, bhvSaunaRockRise),
+		OBJECT(MODEL_SAUNA_ROCK, -1435, 500, 7, 0, 118, 0, 0x00000000, bhvSaunaRockRise),
 		OBJECT(MODEL_SAUNA_GRATE, -5925, 400, 1607, 0, -90, 0, 0x00000000, bhvSaunaGrate),
 		OBJECT(MODEL_SAUNA_GRATE, -5455, 400, 106, 0, -90, 0, 0x00000000, bhvSaunaGrate),
 		OBJECT(MODEL_SAUNA_GRATE, -5352, 400, -2482, 0, -90, 0, (1 << 16), bhvSaunaGrate),

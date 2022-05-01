@@ -516,9 +516,9 @@ void calc_lava_wave_collision(struct MarioState *m) {
         sLavaHitTimer--;
         return;
     }
-    if (m->pos[1] > 1500.0f) {
+    if (m->pos[1] > 1500.0f && m->floorHeight >= 1500.0f) {
         sLavaBaseLevel = 1;
-    } else {
+    } else if (m->pos[1] < 1000.0f && m->floorHeight < 1000.0f) {
         sLavaBaseLevel = 0;
     }
     if (m->pos[0] > -2580 - 1875 && m->pos[0] < -2580 + 1875) {
