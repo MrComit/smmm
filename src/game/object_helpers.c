@@ -503,11 +503,13 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
 
 
 s32 sLavaWavePos = 5000;
-s32 sLavaWaveHeight = 0;
+s32 sLavaWaveHeight = 325;
 s16 sLavaSinsTimer = 0;
 s16 sLavaHitTimer = 5;
 s16 sLavaBaseLevel = 0;
 s16 sLavaSpread = 500;
+s16 sLavaReverse = 0;
+u8 sLavaColor = 0xFF;
 
 
 void calc_lava_wave_collision(struct MarioState *m) {
@@ -516,12 +518,12 @@ void calc_lava_wave_collision(struct MarioState *m) {
         sLavaHitTimer--;
         return;
     }
-    if (m->pos[1] > 1500.0f && m->floorHeight >= 1500.0f) {
-        sLavaBaseLevel = 1;
-    } else if (m->pos[1] < 1000.0f && m->floorHeight < 1000.0f) {
-        sLavaBaseLevel = 0;
-    }
-    if (m->pos[0] > -2580 - 1875 && m->pos[0] < -2580 + 1875) {
+    if (m->pos[0] > -2580 - 1875) {
+        if (m->pos[1] > 1500.0f && m->floorHeight >= 1500.0f) {
+            sLavaBaseLevel = 1;
+        } else if (m->pos[1] < 1000.0f && m->floorHeight < 1000.0f) {
+            sLavaBaseLevel = 0;
+        }
         if (m->pos[2] < -896.0f + (sLavaWavePos + sLavaSpread) && m->pos[2] > -896.0f + (sLavaWavePos - sLavaSpread)) {
             height = 500.0f + (sLavaWaveHeight * ((1000.0f - absf(m->pos[2] - (-896.0f + sLavaWavePos)))/1000.0f));
             if (m->pos[1] < height) {
@@ -529,6 +531,8 @@ void calc_lava_wave_collision(struct MarioState *m) {
                 sLavaHitTimer = 30;
             }
         }
+    } else {
+        sLavaBaseLevel = 0;
     }
 
 }
@@ -546,9 +550,6 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
     currentGraphNode = node;
 
     if (callContext == GEO_CONTEXT_RENDER) {
-        if (sCurrPlayMode != 2) {
-
-        }
 
         currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
 
@@ -556,30 +557,64 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
 
         if (sCurrPlayMode != 2) {
             // sLavaSinsTimer += 0xE0;
-            sLavaWavePos -= 75;
-            if (sLavaWavePos < -5000) {
-                sLavaWavePos = 5000;
-            }
-            if (sLavaWavePos >= 0) {
-                lavabaseheight = 450;
-                if (sLavaBaseLevel) {
-                    lavabaseheight += 1000;
+            if (!sLavaReverse) {
+                sLavaWavePos -= 75;
+                if (sLavaWavePos < -5000) {
+                    if (sLavaBaseLevel) {
+                        sLavaReverse = 1;
+                    } else {
+                        sLavaWavePos = 5000;
+                    }
                 }
             } else {
-                lavabaseheight = 325;
+                sLavaWavePos += 75;
+                if (sLavaWavePos > 5000) {
+                    if (!sLavaBaseLevel) {
+                        sLavaReverse = 0;
+                    } else {
+                        sLavaWavePos = -5000;
+                    }
+                }
             }
-            baseheightapproach = 2;
+
+            if (sLavaWavePos < 1000) {
+                if (!sLavaReverse) {
+                    lavabaseheight = 325;
+                } else {
+                    lavabaseheight = 1300;
+                }
+            } else {
+                if (!sLavaReverse) {
+                    lavabaseheight = 450;
+                } else {
+                    lavabaseheight = 325;
+                }
+            }
+
             if (sLavaBaseLevel) {
-                baseheightapproach = 20;
+                if (!sLavaReverse) {
+                    baseheightapproach = 0;
+                } else {
+                    baseheightapproach = 30;
+                }
+            } else {
+                if (sLavaWaveHeight > 500) {
+                    baseheightapproach = 20;
+                } else {
+                    baseheightapproach = 2;
+                }
             }
             sLavaWaveHeight = approach_s16_symmetric(sLavaWaveHeight, lavabaseheight, baseheightapproach);
+
+            if (sLavaBaseLevel) {
+                sLavaSpread = approach_s16_symmetric(sLavaSpread, 800, 20);
+                sLavaColor = approach_s16_symmetric(sLavaColor, 0, 0x4);
+            } else {
+                sLavaSpread = approach_s16_symmetric(sLavaSpread, 500, 20);
+                sLavaColor = approach_s16_symmetric(sLavaColor, 0xFF, 0x4);
+            }
         }
 
-        if (sLavaBaseLevel) {
-            sLavaSpread = approach_s16_symmetric(sLavaSpread, 800, 20);
-        } else {
-            sLavaSpread = approach_s16_symmetric(sLavaSpread, 500, 20);
-        }
         firstPos1 = sLavaWavePos + sLavaSpread;
         secondPos1 = sLavaWavePos - sLavaSpread;
         firstPos2 = sLavaWavePos + (sLavaSpread * 0.6f);
@@ -595,15 +630,15 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
         make_vertex(vertexBuffer, 2, 1875, 0, firstPos1, 0, firstUVs1, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 3, -1875, 0, firstPos1, 3048, firstUVs1, 0xFF, 0xFF, 0xFF, 0xFF);
 
-        make_vertex(vertexBuffer, 4, 1875, (sLavaWaveHeight * 0.7), firstPos2, 0, firstUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 5, -1875, (sLavaWaveHeight * 0.7), firstPos2, 3048, firstUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 4, 1875, (sLavaWaveHeight * 0.7), firstPos2, 0, firstUVs2, 0xFF, sLavaColor, sLavaColor, 0xFF);
+        make_vertex(vertexBuffer, 5, -1875, (sLavaWaveHeight * 0.7), firstPos2, 3048, firstUVs2, 0xFF, sLavaColor, sLavaColor, 0xFF);
 
         // Central.
-        make_vertex(vertexBuffer, 6, 1875, sLavaWaveHeight, sLavaWavePos, 0, -2500 * ((f32)(sLavaWavePos) / 5000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 7, -1875, sLavaWaveHeight, sLavaWavePos, 3048, -2500 * ((f32)(sLavaWavePos) / 5000.0f), 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 6, 1875, sLavaWaveHeight, sLavaWavePos, 0, -2500 * ((f32)(sLavaWavePos) / 5000.0f), 0xFF, sLavaColor, sLavaColor, 0xFF);
+        make_vertex(vertexBuffer, 7, -1875, sLavaWaveHeight, sLavaWavePos, 3048, -2500 * ((f32)(sLavaWavePos) / 5000.0f), 0xFF, sLavaColor, sLavaColor, 0xFF);
 
-        make_vertex(vertexBuffer, 8, 1875, (sLavaWaveHeight * 0.7), secondPos2, 0, secondUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 9, -1875, (sLavaWaveHeight * 0.7), secondPos2, 3048, secondUVs2, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 8, 1875, (sLavaWaveHeight * 0.7), secondPos2, 0, secondUVs2, 0xFF, sLavaColor, sLavaColor, 0xFF);
+        make_vertex(vertexBuffer, 9, -1875, (sLavaWaveHeight * 0.7), secondPos2, 3048, secondUVs2, 0xFF, sLavaColor, sLavaColor, 0xFF);
 
         make_vertex(vertexBuffer, 10, 1875, 0, secondPos1, 0, secondUVs1, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 11, -1875, 0, secondPos1, 3048, secondUVs1, 0xFF, 0xFF, 0xFF, 0xFF);

@@ -8971,7 +8971,7 @@ const BehaviorScript bhvSaunaRockRise[] = {
     LOAD_COLLISION_DATA(sauna_rock_rise_collision),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x4000),
-    // CALL_NATIVE(bhv_sauna_rock_rise_init),
+    CALL_NATIVE(bhv_sauna_rock_rise_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_sauna_rock_rise_loop),
         CALL_NATIVE(load_object_collision_model),

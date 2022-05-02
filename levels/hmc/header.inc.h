@@ -683,7 +683,7 @@ extern Gfx hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_tri_0[];
 extern Vtx hmc_dl_Sauna_mesh_layer_1_vtx_cull[8];
 extern Vtx hmc_dl_Sauna_mesh_layer_1_vtx_0[343];
 extern Gfx hmc_dl_Sauna_mesh_layer_1_tri_0[];
-extern Vtx hmc_dl_Sauna_mesh_layer_1_vtx_1[380];
+extern Vtx hmc_dl_Sauna_mesh_layer_1_vtx_1[368];
 extern Gfx hmc_dl_Sauna_mesh_layer_1_tri_1[];
 extern Vtx hmc_dl_Sauna_mesh_layer_1_vtx_2[36];
 extern Gfx hmc_dl_Sauna_mesh_layer_1_tri_2[];

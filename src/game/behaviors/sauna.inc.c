@@ -1,11 +1,23 @@
 extern s16 sLavaBaseLevel;
 
+void bhv_sauna_rock_rise_init(void) {
+    o->os16F4 = random_u16();
+    o->oFloatFC = 1000.0f + o->oBehParams2ndByte * 100.0f;
+}
+
 
 void bhv_sauna_rock_rise_loop(void) {
-    if (sLavaBaseLevel) {
-        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 1000.0f, 50.0f);
-    } else {
-        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 50.0f);
+    switch (sLavaBaseLevel) {
+        case 0:
+            o->os16F4 += 0x200;
+            o->oFloatF8 = -10.0f + sins(o->os16F4) * 20.0f;
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatF8, 50.0f);
+            break;
+        case 1:
+            o->os16F4 += 0x200;
+            o->oFloatF8 = o->oFloatFC + (sins(o->os16F4) * 30.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatF8, 50.0f);
+            break;
     }
 }
 
