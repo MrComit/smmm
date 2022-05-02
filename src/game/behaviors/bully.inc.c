@@ -237,9 +237,9 @@ void bhv_bully_loop(void) {
 
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
-            o->oForwardVel = 5.0;
+            o->oForwardVel = 5.0f;
 
-            if (obj_return_home_if_safe(o, o->oHomeX, o->oPosY, o->oHomeZ, 800) == TRUE) {
+            if (obj_return_home_if_safe(o, o->oHomeX, o->oPosY, o->oHomeZ, 200) == TRUE) {
                 o->oAction = BULLY_ACT_CHASE_MARIO;
                 cur_obj_init_animation(1);
             }
@@ -311,7 +311,7 @@ void bhv_big_bully_with_minions_loop(void) {
 
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
-            o->oForwardVel = 5.0;
+            o->oForwardVel = 5.0f;
 
             if (obj_return_home_if_safe(o, o->oHomeX, o->oPosY, o->oHomeZ, 1000) == TRUE) {
                 o->oAction = BULLY_ACT_CHASE_MARIO;

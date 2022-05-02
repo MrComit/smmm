@@ -99,6 +99,7 @@ Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node, UNUSE
 Gfx *geo_switch_pool_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_mole_gate(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_sauna(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
@@ -117,6 +118,7 @@ Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node, UNUSE
 Gfx *geo_switch_pool_floor(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_mole_gate(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_sauna(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node);
 #endif
 void obj_update_pos_from_parent_transformation(Mat4 a0, struct Object *a1);
