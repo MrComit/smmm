@@ -3,7 +3,7 @@ extern Lights1 trophy_octogon_WoodFloorTrophyRoom_001_layer1_lights;
 extern u8 trophy_octogon_deepplanks_redbrown_rgba16[];
 extern u8 trophy_octogon_i4_matt_multitex_i4[];
 extern Vtx trophy_octogon_TrophyOctogon_mesh_layer_1_vtx_cull[8];
-extern Vtx trophy_octogon_TrophyOctogon_mesh_layer_1_vtx_0[28];
+extern Vtx trophy_octogon_TrophyOctogon_mesh_layer_1_vtx_0[45];
 extern Gfx trophy_octogon_TrophyOctogon_mesh_layer_1_tri_0[];
 extern Gfx mat_trophy_octogon_WoodFloorTrophyRoom_001_layer1[];
 extern Gfx mat_revert_trophy_octogon_WoodFloorTrophyRoom_001_layer1[];
