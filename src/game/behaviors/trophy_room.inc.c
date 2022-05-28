@@ -126,6 +126,22 @@ void bhv_trophy_rect_loop(void) {
 }
 
 
+// void bhv_trophy_rect_spin_loop(void) {
+//     switch (o->oAction) {
+//         case 0:
+//             if (o->oTimer > 30) {
+//                 o->os16F4 = o->oFaceAnglePitch + 0x8000;
+//                 o->oAction = 1;
+//             }
+//             break;
+//         case 1:
+//             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, o->os16F4, 0x200);
+//             if (o->oFaceAnglePitch == o->os16F4) {
+//                 o->oAction = 0;
+//             }
+//             break;
+//     }
+// }
 
 void bhv_trophy_plat_rise_loop(void) {
     o->os16F4 += (o->oBehParams >> 24) << 4;

@@ -3,7 +3,7 @@
 const GeoLayout hmc_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(15, geo_switch_area),
+		GEO_SWITCH_CASE(16, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, hmc_dl_101__OpeningHall_geo),
 			GEO_BRANCH(1, hmc_dl_102__Trophy_Room_geo),
@@ -19,6 +19,7 @@ const GeoLayout hmc_area_1_geo[] = {
 			GEO_BRANCH(1, hmc_dl_112__NULL_geo),
 			GEO_BRANCH(1, hmc_dl_113__Hallway_geo),
 			GEO_BRANCH(1, hmc_dl_114__Sauna_geo),
+			GEO_BRANCH(1, hmc_dl_115__Attic_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -276,6 +277,13 @@ const GeoLayout hmc_dl_114__Sauna_geo[] = {
 			GEO_ASM(0, geo_generate_lava_wave),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_SaunaMat_mesh_layer_1),
 		GEO_CLOSE_NODE(),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_115__Attic_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Attic_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
