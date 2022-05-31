@@ -12,7 +12,7 @@ const GeoLayout hmc_area_1_geo[] = {
 			GEO_BRANCH(1, hmc_dl_105__Game_Room_geo),
 			GEO_BRANCH(1, hmc_dl_106__Panic_Room_geo),
 			GEO_BRANCH(1, hmc_dl_107__Hallway_geo),
-			GEO_BRANCH(1, hmc_dl_108__Foreroom_geo),
+			GEO_BRANCH(1, hmc_dl_108__Morning_Room_geo),
 			GEO_BRANCH(1, hmc_dl_109__Theater_geo),
 			GEO_BRANCH(1, hmc_dl_110__NULL_geo),
 			GEO_BRANCH(1, hmc_dl_111__NULL_geo),
@@ -159,7 +159,7 @@ const GeoLayout hmc_dl_CC_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout hmc_dl_108__Foreroom_geo[] = {
+const GeoLayout hmc_dl_108__Morning_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Foreroom_mesh_layer_1),

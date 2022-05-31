@@ -73,6 +73,9 @@ void bhv_l1_room_gate_loop(void) {
         case 0:
             if (gMarioCurrentRoom == o->oRoom) {
                 o->oAction = 1;
+                if (save_file_check_global_room()) {
+                    o->activeFlags = 0;
+                }
             }
             break;
         case 1:

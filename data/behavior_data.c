@@ -8620,7 +8620,7 @@ const BehaviorScript bhvMusicChase[] = {
 
 const BehaviorScript bhvForeroomObject[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    OR_LONG(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR)),
     // LOAD_COLLISION_DATA(trophy_rectangle_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
@@ -8977,3 +8977,4 @@ const BehaviorScript bhvSaunaRockRise[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+

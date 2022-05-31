@@ -79,6 +79,10 @@ void bhv_foreroom_object_init(void) {
     }
 
     o->os16F6 = 255 - o->os16F4;
+
+    if (o->oBehParams2ndByte == 5) {
+        o->oFlags &= ~(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR);
+    }
 }
 
 
