@@ -8978,3 +8978,14 @@ const BehaviorScript bhvSaunaRockRise[] = {
     END_LOOP(),
 };
 
+
+const BehaviorScript bhvFanBlades[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(fan_blades_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        ADD_INT(oFaceAngleYaw, 0x400),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

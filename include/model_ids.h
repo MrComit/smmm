@@ -762,6 +762,7 @@
 #define MODEL_STATIC_TRI          0x5B
 #define MODEL_STATIC_WALL         0x5C
 #define MODEL_VASE_THROW          0x5D
+#define MODEL_FAN_BLADES          0x5E
 
 // 0x6C-0x73
 

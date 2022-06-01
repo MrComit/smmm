@@ -58,3 +58,4 @@
 #include "levels/hmc/sauna_grate/geo.inc.c"
 #include "levels/hmc/bully_gate/geo.inc.c"
 #include "levels/hmc/sauna_rock_rise/geo.inc.c"
+#include "levels/hmc/fan_blades/geo.inc.c"

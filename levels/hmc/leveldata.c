@@ -136,3 +136,5 @@
 #include "levels/hmc/bully_gate/collision.inc.c"
 #include "levels/hmc/sauna_rock_rise/model.inc.c"
 #include "levels/hmc/sauna_rock_rise/collision.inc.c"
+#include "levels/hmc/fan_blades/model.inc.c"
+#include "levels/hmc/fan_blades/collision.inc.c"
