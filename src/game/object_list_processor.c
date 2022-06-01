@@ -651,6 +651,7 @@ void clear_objects(void) {
     gTimeStopState = 0;
     gMarioObject = NULL;
     gMarioCurrentRoom = 0;
+    gGlobalMarioRoom = 0;
 
     for (i = 0; i < 60; i++) {
         gDoorAdjacentRooms[i][0] = 0;

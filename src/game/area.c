@@ -247,6 +247,9 @@ void load_area(s32 index) {
     }
 }
 
+
+extern s8 gGlobalMarioRoom;
+
 void unload_area(void) {
     if (gCurrentArea != NULL) {
         unload_objects_from_area(0, gCurrentArea->index);
@@ -255,6 +258,8 @@ void unload_area(void) {
         gCurrentArea->flags = 0;
         gCurrentArea = NULL;
         gWarpTransition.isActive = FALSE;
+        gMarioCurrentRoom = 0;
+        gGlobalMarioRoom = 0;
     }
 }
 
