@@ -1,0 +1,11 @@
+extern const GeoLayout attic_spire_geo[];
+extern Lights1 attic_spire_SaunaLavaDyn_layer1_lights;
+extern u8 attic_spire__32xlava_rgba16[];
+extern u8 attic_spire_lava_rgba16[];
+extern Vtx attic_spire_AtticLavaSpire_mesh_layer_1_vtx_cull[8];
+extern Vtx attic_spire_AtticLavaSpire_mesh_layer_1_vtx_0[84];
+extern Gfx attic_spire_AtticLavaSpire_mesh_layer_1_tri_0[];
+extern Gfx mat_attic_spire_SaunaLavaDyn_layer1[];
+extern Gfx mat_revert_attic_spire_SaunaLavaDyn_layer1[];
+extern Gfx attic_spire_AtticLavaSpire_mesh_layer_1[];
+extern Gfx attic_spire_material_revert_render_settings[];

@@ -760,6 +760,10 @@ extern const BehaviorScript bhvSaunaGrate[];
 extern const BehaviorScript bhvBullyGate[];
 extern const BehaviorScript bhvSaunaRockRise[];
 extern const BehaviorScript bhvFanBlades[];
+extern const BehaviorScript bhvAtticGrate[];
+extern const BehaviorScript bhvAtticSpire[];
+extern const BehaviorScript bhvAtticBully[];
+extern const BehaviorScript bhvAtticRock[];
 
 
 #endif // BEHAVIOR_DATA_H

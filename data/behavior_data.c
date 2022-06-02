@@ -8990,3 +8990,59 @@ const BehaviorScript bhvFanBlades[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvAtticGrate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(attic_grate_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    // CALL_NATIVE(bhv_sauna_rock_rise_init),
+    BEGIN_LOOP(),
+        // CALL_NATIVE(bhv_sauna_rock_rise_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvAtticSpire[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_attic_spire_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_attic_spire_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvAtticBully[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
+    // DROP_TO_FLOOR(),
+    SET_HOME(),
+    CALL_NATIVE(bhv_small_bully_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_attic_bully_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvAtticRock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(attic_rock_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    // CALL_NATIVE(bhv_sauna_rock_rise_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_attic_rock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

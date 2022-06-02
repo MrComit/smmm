@@ -235,4 +235,14 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/fan_blades/collision_header.h"
 
+#include "levels/hmc/attic_grate/geo_header.h"
+
+#include "levels/hmc/attic_grate/collision_header.h"
+
+#include "levels/hmc/attic_spire/geo_header.h"
+
+#include "levels/hmc/attic_rock/geo_header.h"
+
+#include "levels/hmc/attic_rock/collision_header.h"
+
 #endif

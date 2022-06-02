@@ -138,3 +138,8 @@
 #include "levels/hmc/sauna_rock_rise/collision.inc.c"
 #include "levels/hmc/fan_blades/model.inc.c"
 #include "levels/hmc/fan_blades/collision.inc.c"
+#include "levels/hmc/attic_grate/model.inc.c"
+#include "levels/hmc/attic_grate/collision.inc.c"
+#include "levels/hmc/attic_spire/model.inc.c"
+#include "levels/hmc/attic_rock/model.inc.c"
+#include "levels/hmc/attic_rock/collision.inc.c"

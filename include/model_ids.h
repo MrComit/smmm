@@ -763,6 +763,9 @@
 #define MODEL_STATIC_WALL         0x5C
 #define MODEL_VASE_THROW          0x5D
 #define MODEL_FAN_BLADES          0x5E
+#define MODEL_ATTIC_GRATE         0x5F
+#define MODEL_ATTIC_SPIRE         0x60
+#define MODEL_ATTIC_ROCK          0x61
 
 // 0x6C-0x73
 

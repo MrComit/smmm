@@ -1,0 +1,11 @@
+extern const GeoLayout attic_grate_geo[];
+extern Lights1 attic_grate_Grate_001_layer4_lights;
+extern u8 attic_grate_i8_grate2_i4[];
+extern u8 attic_grate_tv_metal_i8[];
+extern Vtx attic_grate_Attic_001_mesh_layer_4_vtx_cull[8];
+extern Vtx attic_grate_Attic_001_mesh_layer_4_vtx_0[4];
+extern Gfx attic_grate_Attic_001_mesh_layer_4_tri_0[];
+extern Gfx mat_attic_grate_Grate_001_layer4[];
+extern Gfx mat_revert_attic_grate_Grate_001_layer4[];
+extern Gfx attic_grate_Attic_001_mesh_layer_4[];
+extern Gfx attic_grate_material_revert_render_settings[];

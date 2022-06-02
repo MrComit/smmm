@@ -1,0 +1,11 @@
+extern const GeoLayout attic_rock_geo[];
+extern Lights1 attic_rock_SaunaPlat_layer1_lights;
+extern u8 attic_rock_dirty_wood_grey3_i8[];
+extern u8 attic_rock_ci4_cracked_rocks_i4[];
+extern Vtx attic_rock_AtticRock_001_mesh_layer_1_vtx_cull[8];
+extern Vtx attic_rock_AtticRock_001_mesh_layer_1_vtx_0[25];
+extern Gfx attic_rock_AtticRock_001_mesh_layer_1_tri_0[];
+extern Gfx mat_attic_rock_SaunaPlat_layer1[];
+extern Gfx mat_revert_attic_rock_SaunaPlat_layer1[];
+extern Gfx attic_rock_AtticRock_001_mesh_layer_1[];
+extern Gfx attic_rock_material_revert_render_settings[];
