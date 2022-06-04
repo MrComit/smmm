@@ -9021,11 +9021,12 @@ const BehaviorScript bhvAtticSpire[] = {
 
 const BehaviorScript bhvAtticBully[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
     LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
     // DROP_TO_FLOOR(),
     SET_HOME(),
-    CALL_NATIVE(bhv_small_bully_init),
+    CALL_NATIVE(bhv_attic_bully_init),
+    SCALE(0, 200),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_attic_bully_loop),
@@ -9044,5 +9045,25 @@ const BehaviorScript bhvAtticRock[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_attic_rock_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvAtticMovingFlame[] =  {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 640),
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oGraphYOffset, 50),
+    CALL_NATIVE(bhv_attic_moving_flame_init),
+    BEGIN_LOOP(),
+        SET_INT(oInteractStatus, 0),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_attic_moving_flame_loop),
     END_LOOP(),
 };

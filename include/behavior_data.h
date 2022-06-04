@@ -764,6 +764,7 @@ extern const BehaviorScript bhvAtticGrate[];
 extern const BehaviorScript bhvAtticSpire[];
 extern const BehaviorScript bhvAtticBully[];
 extern const BehaviorScript bhvAtticRock[];
+extern const BehaviorScript bhvAtticMovingFlame[];
 
 
 #endif // BEHAVIOR_DATA_H

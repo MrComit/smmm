@@ -916,7 +916,10 @@ void bhv_sauna_rock_rise_init(void);
 void bhv_attic_spire_loop(void);
 void bhv_attic_spire_init(void);
 void bhv_attic_bully_loop(void);
+void bhv_attic_bully_init(void);
 void bhv_attic_rock_loop(void);
+void bhv_attic_moving_flame_loop(void);
+void bhv_attic_moving_flame_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -77,15 +77,15 @@ void bully_act_chase_mario(void) {
     f32 homeZ = o->oHomeZ;
 
     if (o->oTimer < 10) {
-        o->oForwardVel = 3.0;
+        o->oForwardVel = 3.0f;
         obj_turn_toward_object(o, gMarioObject, 16, 0x1000);
     } else if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
-        o->oForwardVel = 20.0;
+        o->oForwardVel = 20.0f;
         if (o->oTimer > 30) {
             o->oTimer = 0;
         }
     } else {
-        o->oForwardVel = 30.0;
+        o->oForwardVel = 30.0f;
         if (o->oTimer > 35) {
             o->oTimer = 0;
         }
@@ -130,7 +130,7 @@ void bully_act_back_up(void) {
     //  conditions are activated. However because its angle is set to its facing angle,
     //  it will walk forward instead of backing up.
 
-    if (o->oTimer == 15) {
+    if (o->oTimer >= 15) {
         o->oMoveAngleYaw = o->oFaceAngleYaw;
         o->oFlags |= OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
         o->oAction = BULLY_ACT_PATROL;

@@ -766,6 +766,7 @@
 #define MODEL_ATTIC_GRATE         0x5F
 #define MODEL_ATTIC_SPIRE         0x60
 #define MODEL_ATTIC_ROCK          0x61
+#define MODEL_ATTIC_BULLY         0x62
 
 // 0x6C-0x73
 

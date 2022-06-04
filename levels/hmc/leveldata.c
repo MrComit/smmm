@@ -143,3 +143,4 @@
 #include "levels/hmc/attic_spire/model.inc.c"
 #include "levels/hmc/attic_rock/model.inc.c"
 #include "levels/hmc/attic_rock/collision.inc.c"
+#include "levels/hmc/attic_bully/model.inc.c"

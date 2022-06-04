@@ -78,6 +78,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_GRATE, attic_grate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_SPIRE, attic_spire_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_ROCK, attic_rock_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_BULLY, attic_bully_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -223,10 +224,15 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_SAUNA_GRATE, -5725, 400, -3898, 0, -90, 0, 0x00000000, bhvSaunaGrate),
 		OBJECT(MODEL_TOKEN, -6379, 824, -5056, 0, 0, 0, (1 << 16) | (0x17 << 8), bhvToken),
 		OBJECT(MODEL_TOKEN, -7082, 2126, -3044, 0, 0, 0, (2 << 16) | (0x18 << 8), bhvToken),
-		OBJECT(MODEL_BULLY, -2579, 5912, 10539, 0, -90, 0, 0x00000000, bhvAtticBully),
+		OBJECT(MODEL_ATTIC_BULLY, -2579, 5912, 11657, 0, -180, 0, 0x00000000, bhvAtticBully),
+		OBJECT(MODEL_RED_FLAME, -2079, 5185, 11388, 0, -90, 0, 0x00000000, bhvAtticMovingFlame),
+		OBJECT(MODEL_RED_FLAME, -4079, 5185, 12388, 0, -90, 0, 0x00000000, bhvAtticMovingFlame),
+		OBJECT(MODEL_RED_FLAME, -3079, 5185, 9388, 0, -90, 0, 0x00000000, bhvAtticMovingFlame),
 		OBJECT(MODEL_ATTIC_GRATE, -579, 5185, 12888, 0, -90, 0, 0x00000000, bhvAtticGrate),
-		OBJECT(MODEL_ATTIC_SPIRE, -1579, 4185, 9888, 0, -90, 0, 0x00000000, bhvAtticSpire),
-		OBJECT(MODEL_ATTIC_SPIRE, -2579, 4185, 11888, 0, -90, 0, 0x00000000, bhvAtticSpire),
+		OBJECT(MODEL_ATTIC_SPIRE, -1579, 4185, 9888, 0, -90, 0, (0 << 16), bhvAtticSpire),
+		OBJECT(MODEL_ATTIC_SPIRE, -4193, 4185, 12896, 0, -90, 0, (3 << 16), bhvAtticSpire),
+		OBJECT(MODEL_ATTIC_SPIRE, -1116, 4185, 12472, 0, -90, 0, (2 << 16), bhvAtticSpire),
+		OBJECT(MODEL_ATTIC_SPIRE, -4362, 4185, 9281, 0, -90, 0, (1 << 16), bhvAtticSpire),
 		OBJECT(MODEL_ATTIC_GRATE, -1579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -2579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
