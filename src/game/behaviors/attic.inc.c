@@ -126,14 +126,28 @@ void attic_bully_step(void) {
     bully_backup_check(collisionFlags);
     bully_play_stomping_sound();
     // obj_check_floor_death(collisionFlags, sObjFloor);
-
+    if (sObjFloor->type == SURFACE_BURNING) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 120, 7);
+        o->oGravity = 0.0f;
+        o->oVelY = 0.0f;
+        if (o->oTimer > 20) {
+            o->oAction = BULLY_ACT_CHASE_MARIO;
+        } else {
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 3.5f);
+        }
+        cur_obj_become_intangible();
+    } else {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 15);
+        o->oGravity = 4.0f;
+        cur_obj_become_tangible();
+    }
 
     obj = cur_obj_nearest_object_with_behavior(bhvAtticSpire);
     if (obj == NULL) {
         return;
     }
     spireHeight = obj->oPosY + (obj->header.gfx.scale[1] * 1000.0f);
-    if (o->oAction != 6 && lateral_dist_between_objects(o, obj) < 250.0f && o->oPosY < spireHeight && o->oPosY >= obj->oPosY) {
+    if (o->oAction != 6 && lateral_dist_between_objects(o, obj) < 300.0f && o->oPosY < spireHeight && o->oPosY >= obj->oPosY) {
         if (--o->oHealth <= 0) {
             o->oAction = BULLY_ACT_LAVA_DEATH;
         } else {
@@ -144,7 +158,7 @@ void attic_bully_step(void) {
             o->oMoveAngleYaw = yaw;
             o->oForwardVel = 50.0f;
             o->oVelY = 80.0f;
-            o->oGravity = -o->oGravity;
+            o->oGravity = -4.0f;
         }
     }
 
@@ -167,7 +181,6 @@ void bhv_attic_bully_loop(void) {
     }
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
-            o->oForwardVel = 12.0f;
             cur_obj_init_animation(1);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
             if (o->oDistanceToMario < 1500.0f) {
@@ -188,6 +201,7 @@ void bhv_attic_bully_loop(void) {
 
             if (o->oDistanceToMario > 2000.0f) {
                 o->oAction = BULLY_ACT_PATROL;
+                o->oForwardVel = 12.0f;
                 cur_obj_init_animation(0);
             }
                 // o->oAction = BULLY_ACT_PATROL;
@@ -202,6 +216,9 @@ void bhv_attic_bully_loop(void) {
 
         case BULLY_ACT_BACK_UP:
             bully_act_back_up();
+            if (o->oAction == BULLY_ACT_PATROL) {
+                o->oForwardVel = 12.0f;
+            }
             attic_bully_step();
             break;
         case 6:

@@ -1592,6 +1592,7 @@ s32 act_dive_slide(struct MarioState *m) {
 }
 
 s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 arg2, s32 arg3, s32 arg4) {
+    f32 velCap;
     s32 animFrame;
 
     if (arg3) {
@@ -1608,11 +1609,16 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 arg2
 #endif
     }
 
-    if (m->forwardVel > 32.0f) {
-        m->forwardVel = 32.0f;
+    if (obj_has_behavior(m->interactObj, bhvAtticBully)) {
+        velCap = 64.0f;
+    } else {
+        velCap = 32.0f;
     }
-    if (m->forwardVel < -32.0f) {
-        m->forwardVel = -32.0f;
+    if (m->forwardVel > velCap) {
+        m->forwardVel = velCap;
+    }
+    if (m->forwardVel < -velCap) {
+        m->forwardVel = -velCap;
     }
 
     animFrame = set_mario_animation(m, animation);

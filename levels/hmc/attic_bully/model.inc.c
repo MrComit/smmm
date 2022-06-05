@@ -873,6 +873,30 @@ Gfx attic_bully_000_offset_005_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx attic_bully_000_offset_005_mesh_layer_1_vtx_1[9] = {
+	{{{75, -18, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{58, 31, -51},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{58, -18, -30},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{95, 31, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{58, -18, 24},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{26, -39, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-23, -19, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-45, 30, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{57, 31, 45},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx attic_bully_000_offset_005_mesh_layer_1_tri_1[] = {
+	gsSPVertex(attic_bully_000_offset_005_mesh_layer_1_vtx_1 + 0, 9, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(4, 3, 0, 0, 5, 4, 0, 0),
+	gsSP2Triangles(5, 0, 2, 0, 5, 2, 6, 0),
+	gsSP2Triangles(2, 7, 6, 0, 2, 1, 7, 0),
+	gsSP2Triangles(3, 7, 1, 0, 3, 8, 7, 0),
+	gsSP2Triangles(4, 8, 3, 0, 6, 8, 4, 0),
+	gsSP2Triangles(5, 6, 4, 0, 6, 7, 8, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx attic_bully_000_offset_008_mesh_layer_1_vtx_0[9] = {
 	{{{56, 28, 46},0, {-16, -16},{0x1A, 0x39, 0x6F, 0xFF}}},
 	{{{-37, 27, 0},0, {-16, -16},{0x8A, 0x30, 0xFB, 0xFF}}},
@@ -894,6 +918,30 @@ Gfx attic_bully_000_offset_008_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(1, 3, 7, 0, 3, 8, 7, 0),
 	gsSP2Triangles(3, 4, 8, 0, 4, 5, 8, 0),
 	gsSP2Triangles(8, 5, 6, 0, 7, 8, 6, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx attic_bully_000_offset_008_mesh_layer_1_vtx_1[9] = {
+	{{{58, 31, 51},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-23, -19, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-45, 30, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{58, -18, 30},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{95, 31, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{57, 31, -45},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{58, -18, -24},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{26, -39, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{75, -18, 0},0, {-16, -16},{0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx attic_bully_000_offset_008_mesh_layer_1_tri_1[] = {
+	gsSPVertex(attic_bully_000_offset_008_mesh_layer_1_vtx_1 + 0, 9, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(4, 3, 0, 0, 5, 4, 0, 0),
+	gsSP2Triangles(5, 0, 2, 0, 2, 6, 5, 0),
+	gsSP2Triangles(2, 1, 6, 0, 1, 7, 6, 0),
+	gsSP2Triangles(3, 7, 1, 0, 8, 7, 3, 0),
+	gsSP2Triangles(4, 8, 3, 0, 5, 8, 4, 0),
+	gsSP2Triangles(5, 6, 8, 0, 6, 7, 8, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -1001,6 +1049,20 @@ Gfx mat_attic_bully_Feet[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_attic_bully_Black[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, 0, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_attic_bully_Black[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_attic_bully_Body[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
@@ -1027,6 +1089,7 @@ Gfx mat_revert_attic_bully_Body[] = {
 Gfx mat_attic_bully_Horns[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, attic_bully_bully_horn_rgba16_ci8_pal_rgba16),
@@ -1049,6 +1112,7 @@ Gfx mat_attic_bully_Horns[] = {
 
 Gfx mat_revert_attic_bully_Horns[] = {
 	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
@@ -1087,12 +1151,18 @@ Gfx mat_revert_attic_bully_Eyes[] = {
 Gfx attic_bully_000_offset_005_mesh_layer_1[] = {
 	gsSPDisplayList(mat_attic_bully_Feet),
 	gsSPDisplayList(attic_bully_000_offset_005_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_attic_bully_Black),
+	gsSPDisplayList(attic_bully_000_offset_005_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_attic_bully_Black),
 	gsSPEndDisplayList(),
 };
 
 Gfx attic_bully_000_offset_008_mesh_layer_1[] = {
 	gsSPDisplayList(mat_attic_bully_Feet),
 	gsSPDisplayList(attic_bully_000_offset_008_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_attic_bully_Black),
+	gsSPDisplayList(attic_bully_000_offset_008_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_attic_bully_Black),
 	gsSPEndDisplayList(),
 };
 

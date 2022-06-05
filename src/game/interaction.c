@@ -486,6 +486,9 @@ u32 bully_knock_back_mario(struct MarioState *mario) {
     mario->forwardVel = sqrtf(marioData.velX * marioData.velX + marioData.velZ * marioData.velZ);
     mario->pos[0] = marioData.posX;
     mario->pos[2] = marioData.posZ;
+    // if (obj_has_behavior(bully, bhvAtticBully)) {
+    //     mario->forwardVel *= 2.0f;
+    // }
 
     bully->oMoveAngleYaw = newBullyYaw;
     bully->oForwardVel = sqrtf(bullyData.velX * bullyData.velX + bullyData.velZ * bullyData.velZ);
@@ -1267,6 +1270,9 @@ u32 interact_bully(struct MarioState *m, UNUSED u32 interactType, struct Object 
         m->forwardVel = -16.0f;
         o->oMoveAngleYaw = m->faceAngle[1];
         o->oForwardVel = 3392.0f / o->hitboxRadius;
+        if (obj_has_behavior(o, bhvAtticBully)) {
+            o->oForwardVel *= 2.0f;
+        }
 
         attack_object(o, interaction);
         bounce_back_from_attack(m, interaction);
