@@ -39,5 +39,6 @@
     "24_big_key": ["26_key"],
     "25_manor_theme": ["27_manor_theme"],
     "26_prof_t_theme": ["27_manor_theme"],
-    "27_generic_boss": ["28_boss"]
+    "27_generic_boss": ["28_boss"],
+    "28_music_room": ["25"]
 }
