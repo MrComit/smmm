@@ -9001,7 +9001,7 @@ const BehaviorScript bhvAtticGrate[] = {
     SET_FLOAT(oCollisionDistance, 0x7FFF),
     // CALL_NATIVE(bhv_sauna_rock_rise_init),
     BEGIN_LOOP(),
-        // CALL_NATIVE(bhv_sauna_rock_rise_loop),
+        CALL_NATIVE(bhv_attic_grate_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
