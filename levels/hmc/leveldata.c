@@ -144,3 +144,5 @@
 #include "levels/hmc/attic_rock/model.inc.c"
 #include "levels/hmc/attic_rock/collision.inc.c"
 #include "levels/hmc/attic_bully/model.inc.c"
+#include "levels/hmc/attic_spike/model.inc.c"
+#include "levels/hmc/attic_spike/collision.inc.c"

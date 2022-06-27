@@ -1,0 +1,16 @@
+extern const GeoLayout attic_spike_geo[];
+extern Lights1 attic_spike_SaunaPlat_001_layer1_lights;
+extern u8 attic_spike_dirty_wood_grey3_i8[];
+extern u8 attic_spike_ci4_cracked_rocks_i4[];
+extern u8 attic_spike_MetalGround_i8[];
+extern Vtx attic_spike_AtticSpike_mesh_layer_1_vtx_cull[8];
+extern Vtx attic_spike_AtticSpike_mesh_layer_1_vtx_0[24];
+extern Gfx attic_spike_AtticSpike_mesh_layer_1_tri_0[];
+extern Vtx attic_spike_AtticSpike_mesh_layer_1_vtx_1[108];
+extern Gfx attic_spike_AtticSpike_mesh_layer_1_tri_1[];
+extern Gfx mat_attic_spike_SaunaPlat_001_layer1[];
+extern Gfx mat_revert_attic_spike_SaunaPlat_001_layer1[];
+extern Gfx mat_attic_spike_MetalSpikes[];
+extern Gfx mat_revert_attic_spike_MetalSpikes[];
+extern Gfx attic_spike_AtticSpike_mesh_layer_1[];
+extern Gfx attic_spike_material_revert_render_settings[];

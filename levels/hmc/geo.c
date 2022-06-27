@@ -63,3 +63,4 @@
 #include "levels/hmc/attic_spire/geo.inc.c"
 #include "levels/hmc/attic_rock/geo.inc.c"
 #include "levels/hmc/attic_bully/geo.inc.c"
+#include "levels/hmc/attic_spike/geo.inc.c"

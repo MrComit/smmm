@@ -14,10 +14,14 @@ static struct ObjectHitbox sAtticBullyHitbox = {
 void bhv_attic_moving_flame_init(void) {
     o->oForwardVel = 15.0f;
     o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
-    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvAtticBully);
-    if (o->oObjF4 == NULL) {
+    o->oObjFC = cur_obj_nearest_object_with_behavior(bhvAtticBully);
+    if (o->oObjFC == NULL) {
         o->activeFlags = 0;
     }
+    // o->os16F4 = 0xFF;
+    // o->os16F6 = 0;
+    // o->os16F8 = 0;
+    o->oF4 = 0xFF0000;
 }
 
 
@@ -36,6 +40,16 @@ void bhv_attic_moving_flame_loop(void) {
             newAngle = CL_RandomMinMaxU16(0, 3) * 0x4000;
         } while (absi(o->oMoveAngleYaw - (u16)newAngle) == 0x8000);
         o->oMoveAngleYaw = newAngle;
+    }
+
+    if (o->oObjFC->oAction == 7) {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x20, 0x2);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x60, 0x4);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, 0xFF, 0x6);
+    } else {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0xFF, 0x6);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0, 0x4);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, 0, 0xFF);
     }
 
     if (o->oPosX > -79.0f) {
@@ -172,6 +186,7 @@ void attic_bully_phase_b(void) {
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os16F6, 0x400);
             if (o->oTimer > 60 && gMarioObject->platform != NULL && !(obj_has_behavior(gMarioObject->platform, bhvAtticRock))) {
                 o->oSubAction = 1;
+                o->oTimer = 0;
                 o->oVelY = 100.0f;
             }
             break;
@@ -189,18 +204,49 @@ void attic_bully_phase_b(void) {
             cur_obj_move_standard(-78);
             if (o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) {
                 if (o->oFloor->object != NULL) {
-                    o->oFloor->object->oAction = 1;
-                    if (++o->os16F4 > 2) {
-                        o->oSubAction = 2;
+                    if (obj_has_behavior(o->oFloor->object, bhvAtticSpike)) {
+                        o->oSubAction = 4;
                         o->oTimer = 0;
+                        cur_obj_init_animation(3);
+                        o->oMoveAngleYaw = cur_obj_angle_to_home();
+                        o->oVelY = 100.0f;
                     } else {
-                        o->oSubAction = 0;
-                        o->oTimer = 0;
+                        o->oFloor->object->oAction = 1;
+                        o->oFloor->object->oObjF8 = o;
+                        if (++o->os16F4 > 2) {
+                            o->oSubAction = 3;
+                            o->oTimer = 0;
+                        } else {
+                            o->oSubAction = 2;
+                            o->oTimer = 0;
+                        }
                     }
                 }
             }
             break;
         case 2:
+            if (o->oTimer > 15) {
+                o->oSubAction = 0;
+                o->oTimer = 0;
+            }
+            break;
+        case 3:
+            break;
+        case 4: // HITS SPIKE
+            dx = absf(o->oHomeX - o->oPosX);
+            dz = absf(o->oHomeZ - o->oPosZ);
+            o->oFloatFC = sqrtf(dx * dx + dz * dz);
+            if (o->oFloatFC < 50.0f) {
+                o->oForwardVel = 0.0f;
+            } else {
+                o->oForwardVel = o->oFloatFC / 30;
+            }
+            cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(-78);
+            if (o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) {
+                o->oSubAction = 3;
+                o->oTimer = 0;
+            }
             break;
     }
 }
@@ -289,11 +335,11 @@ void bhv_attic_bully_loop(void) {
 
 
 
-s8 sSpireSpots[4][7][2] = {
-{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {2, 0}, {0, 2}, {0, 0}},
-{{3, 0}, {3, 1}, {4, 0}, {4, 1}, {2, 1}, {4, 2}, {0, 0}},
-{{0, 3}, {0, 3}, {1, 4}, {1, 4}, {1, 2}, {2, 4}, {0, 0}},
-{{3, 3}, {3, 3}, {4, 4}, {4, 4}, {2, 3}, {3, 2}, {2, 2}},
+s8 sSpireSpots[4][6][2] = {
+{{0, 0}, {0, 1}, {1, 0}, {1, 1}, {2, 0}, {2, 1}},
+{{3, 0}, {3, 1}, {3, 2}, {4, 0}, {4, 1}, {4, 2}},
+{{0, 2}, {1, 2}, {0, 3}, {1, 3}, {0, 4}, {1, 4}},
+{{2, 3}, {2, 4}, {3, 3}, {3, 4}, {4, 3}, {4, 4}},
 };
 s8 sSpiresReady[2] = {0, 0};
 
@@ -316,11 +362,7 @@ void bhv_attic_spire_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 90) {
-                if (o->oBehParams2ndByte != 3) {
-                    o->os16F8 = CL_RandomMinMaxU16(0, 5);
-                } else {
-                    o->os16F8 = CL_RandomMinMaxU16(0, 6);
-                }
+                o->os16F8 = CL_RandomMinMaxU16(0, 5);
 
                 o->oFloatFC = -579.0f - (sSpireSpots[o->oBehParams2ndByte][o->os16F8][0] * 1000.0f);
                 o->oFloat100 = 12888.0f - (sSpireSpots[o->oBehParams2ndByte][o->os16F8][1] * 1000.0f);
@@ -378,9 +420,16 @@ void bhv_attic_spire_loop(void) {
 void bhv_attic_grate_loop(void) {
     switch (o->oAction) {
         case 1:
-            o->oFloatF4 = 5.0f;
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 1000.0f, 7.5f);
-            o->oPosY += (o->oFloatF4 *= -1.0f);
+            o->oPosY += o->oFloatF4;
+            o->oFloatF4 *= -1;
+            if (o->oObjF8 == NULL || o->oObjF8->oSubAction == 1) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 1200.0f, 7.5f);
+            o->oPosY += o->oFloatF4;
+            o->oFloatF4 *= -1;
             break;
     }
 }
