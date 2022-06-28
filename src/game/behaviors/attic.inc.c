@@ -10,6 +10,28 @@ static struct ObjectHitbox sAtticBullyHitbox = {
     /* hurtboxHeight:     */ 225,
 };
 
+s32 attic_bounds(void) {
+    if (o->oPosX > -79.0f) {
+        o->oPosX = -79.0f;
+        return TRUE;
+    }
+
+    if (o->oPosX < -5079.0f) {
+        o->oPosX = -5079.0f;
+        return TRUE;
+    }
+
+    if (o->oPosZ > 13388.0f) {
+        o->oPosZ = 13388.0f;
+        return TRUE;
+    }
+
+    if (o->oPosZ < 8388.0f) {
+        o->oPosZ = 8388.0f;
+        return TRUE;
+    }
+    return FALSE;
+}
 
 void bhv_attic_moving_flame_init(void) {
     // o->oForwardVel = 15.0f;
@@ -67,23 +89,7 @@ void bhv_attic_moving_flame_loop(void) {
             break;
     }
 
-    if (o->oPosX > -79.0f) {
-        o->oPosX = -79.0f;
-        o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
-    }
-
-    if (o->oPosX < -5079.0f) {
-        o->oPosX = -5079.0f;
-        o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
-    }
-
-    if (o->oPosZ > 13388.0f) {
-        o->oPosZ = 13388.0f;
-        o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
-    }
-
-    if (o->oPosZ < 8388.0f) {
-        o->oPosZ = 8388.0f;
+    if (attic_bounds()) {
         o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
     }
 }
@@ -105,6 +111,10 @@ void bhv_attic_rock_loop(void) {
     }
     if (o->oObj100->oAction == 7 /*&& gMarioObject->platform != o*/) {
         o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0x8000, 0x500);
+        if ((u16)o->oFaceAngleRoll != 0x8000 && gMarioObject->platform == o) {
+            set_mario_action(gMarioState, ACT_FREEFALL, 0);
+            gMarioState->vel[1] = 80.0f;
+        }
     } else {
         o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0, 0x500);
     }
@@ -157,6 +167,8 @@ void bhv_bully_flame_loop(void) {
 
 
 void bhv_attic_bully_init(void) {
+    s32 i;
+    struct Object *obj;
     cur_obj_init_animation(0);
 
     o->oHomeX = o->oPosX;
@@ -167,6 +179,14 @@ void bhv_attic_bully_init(void) {
     o->oBuoyancy = 0.0f;
 
     obj_set_hitbox(o, &sAtticBullyHitbox);
+
+
+    spawn_object_relative(0, 500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+    spawn_object_relative(1, -500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+    spawn_object_relative(2, 500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+    spawn_object_relative(3, -500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+    o->os16F6 = 4;
+
 }
 
 
@@ -235,6 +255,9 @@ void attic_bully_phase_b(void) {
             }
             break;
         case 1:
+            if (o->oOpacity != 255) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 9);
+            }
             o->oMoveAngleYaw = o->os16F6;
             dx = absf(gMarioState->pos[0] - o->oPosX);
             dz = absf(gMarioState->pos[2] - o->oPosZ);
@@ -246,6 +269,11 @@ void attic_bully_phase_b(void) {
             }
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(-78);
+            if (o->oPosY < 5184.0f) {
+                o->oSubAction = 5;
+                o->oGravity = 0;
+                o->oVelY = 0;
+            }
             if (o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND) {
                 if (o->oFloor->object != NULL) {
                     if (obj_has_behavior(o->oFloor->object, bhvAtticRock)) {
@@ -255,20 +283,13 @@ void attic_bully_phase_b(void) {
                         o->oMoveAngleYaw = cur_obj_angle_to_home();
                         o->oVelY = 100.0f;
                     } else {
-                        if (++o->os16F4 > 3) {
-                            o->oSubAction = 4;
-                            o->oTimer = 0;
-                            o->os16F4 = 0;
-                            o->oMoveAngleYaw = cur_obj_angle_to_home();
-                            o->oVelY = 100.0f;
-                        } else {
-                            if (o->oFloor->object->oBehParams2ndByte != 1) {
-                                o->oFloor->object->oAction = 1;
-                                o->oFloor->object->oObjF8 = o;
-                            }
-                            o->oSubAction = 2;
-                            o->oTimer = 0;
+                        o->os16F4++;
+                        if (o->oFloor->object->oBehParams2ndByte != 1) {
+                            o->oFloor->object->oAction = 1;
+                            o->oFloor->object->oObjF8 = o;
                         }
+                        o->oSubAction = 2;
+                        o->oTimer = 0;
                     }
                     cur_obj_play_sound_2(SOUND_OBJ2_LARGE_BULLY_ATTACKED);
                 }
@@ -278,6 +299,12 @@ void attic_bully_phase_b(void) {
             if (o->oTimer > 15) {
                 o->oSubAction = 0;
                 o->oTimer = 0;
+                if (o->os16F4 > 2) {
+                    o->oSubAction = 4;
+                    o->os16F4 = 0;
+                    o->oMoveAngleYaw = cur_obj_angle_to_home();
+                    o->oVelY = 100.0f;
+                }
             }
             break;
         case 3:
@@ -302,21 +329,39 @@ void attic_bully_phase_b(void) {
                 cur_obj_init_animation(1);
             }
             break;
+        case 5:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 120, 7);
+            o->oPosY = approach_f32_symmetric(o->oPosY, 5225.0f, 2.0f);
+            o->oMoveAngleYaw = cur_obj_angle_to_home();
+            o->oForwardVel = 35.0f;
+            CL_Move();
+            if (cur_obj_lateral_dist_to_home() < 150.0f) {
+                o->oSubAction = 0;
+                o->oForwardVel = 0;
+                o->oTimer = 0;
+                o->oGravity = -4.0f;
+            }
+            break;
     }
 }
 
 
-
 void bhv_attic_bully_loop(void) {
+    struct Object *obj;
+    s32 i;
     o->oBullyPrevX = o->oPosX;
     // o->oBullyPrevY = o->oPosY;
     o->oBullyPrevZ = o->oPosZ;
+    attic_bounds();
     //! Because this function runs no matter what, Mario is able to interrupt the bully's
     //  death action by colliding with it. Since the bully hitbox is tall enough to collide
     //  with Mario even when it is under a lava floor, this can get the bully stuck OOB
     //  if there is nothing under the lava floor.
     if (o->oAction < 6) {
         bully_check_mario_collision();
+        if (o->oPosY < 5184.0f) {
+            o->oPosY = 5185.0f;
+        }
     }
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
@@ -372,6 +417,13 @@ void bhv_attic_bully_loop(void) {
                 o->prevObj->oObjFC = o;
                 o->oFloat10C = gMarioState->pos[0];
                 o->oFloat110 = gMarioState->pos[2];
+                for (i = 0; i < 3; i++) {
+                    obj = spawn_object(o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                    obj->oPosY = 5185.0f;
+                    obj->oPosX = o->oHomeX + (500.0f * random_sign());
+                    obj->oPosZ = o->oHomeZ + (500.0f * random_sign());
+                    obj->oBehParams2ndByte = o->os16F6++;
+                }
                 // o->oVelY = 100.0f;
                 // o->oForwardVel = 30.0f;
             }
@@ -405,6 +457,11 @@ void bhv_attic_indicator_loop(void) {
         case 0:
             o->oPosX = o->oObjF4->oPosX;
             o->oPosZ = o->oObjF4->oPosZ;
+            if (sSpiresReady[0] == 0b1111) {
+                o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.2f, 0.025f);
+            } else {
+                o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.25f, 0.025f);
+            }
             break;
         case 1:
             o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 0.075f);
@@ -434,6 +491,9 @@ void bhv_attic_spire_loop(void) {
     }
     switch (o->oAction) {
         case 0:
+            if (o->oObj104->oAction == 7) {
+                o->oTimer = 0;
+            }
             if (o->oTimer > 90) {
                 o->os16F8 = CL_RandomMinMaxU16(0, 5);
 
@@ -453,7 +513,7 @@ void bhv_attic_spire_loop(void) {
                 }
             }
             if (sSpiresReady[0] == 0b1111) {
-                if (o->oTimer > 30) {
+                if (o->oTimer > 90) {
                     sSpiresReady[1] |= 1 << o->oBehParams2ndByte;
                     o->oAction = 2;
                     if (sSpiresReady[1] == 0b1111) {
@@ -475,7 +535,7 @@ void bhv_attic_spire_loop(void) {
         case 3:
             // o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 500.0f, 20.0f);
             // break;
-            if (/*o->oTimer > 120 || */ o->oObj104->oAction == 7) {
+            if (o->oTimer > 120 || o->oObj104->oAction == 7) {
                 o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 0.05f);
                 o->oPosY += 50.0f;
                 if (o->header.gfx.scale[1] == 0.0f) {
@@ -505,7 +565,7 @@ void bhv_attic_grate_loop(void) {
         case 1:
             o->oPosY += o->oFloatF4;
             o->oFloatF4 *= -1;
-            if (o->oObjF8 == NULL || o->oObjF8->oSubAction == 1) {
+            if (o->oObjF8 == NULL || o->oObjF8->oSubAction == 1 || o->oObjF8->oAction != 7) {
                 o->oAction = 2;
             }
             break;
@@ -513,6 +573,9 @@ void bhv_attic_grate_loop(void) {
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 1200.0f, 7.5f);
             o->oPosY += o->oFloatF4;
             o->oFloatF4 *= -1;
+            if (o->oPosY == o->oHomeY - 1200.0f) {
+                o->activeFlags = 0;
+            }
             break;
     }
 }
