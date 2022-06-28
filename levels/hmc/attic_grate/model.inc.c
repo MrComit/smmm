@@ -396,27 +396,39 @@ u8 attic_grate_tv_metal_i8[] = {
 	
 };
 
-Vtx attic_grate_Attic_001_mesh_layer_4_vtx_cull[8] = {
-	{{{-500, 0, 500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+Vtx attic_grate_AtticGrate_006_mesh_layer_4_vtx_cull[8] = {
+	{{{-500, -50, 500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-500, 0, 500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{-500, 0, -500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{-500, 0, -500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{500, 0, 500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{-500, -50, -500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{500, -50, 500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{500, 0, 500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 	{{{500, 0, -500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
-	{{{500, 0, -500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
+	{{{500, -50, -500},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
 };
 
-Vtx attic_grate_Attic_001_mesh_layer_4_vtx_0[4] = {
+Vtx attic_grate_AtticGrate_006_mesh_layer_4_vtx_0[12] = {
 	{{{-500, 0, 500},0, {-16, 2536},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{500, 0, 500},0, {20907, 2536},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{500, 0, -500},0, {20907, -18448},{0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-500, 0, -500},0, {-16, -18448},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-500, 0, 500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-500, 0, -500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-500, -50, -500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{500, -50, -500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{500, 0, -500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{500, -50, 500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{500, 0, 500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-500, -50, 500},0, {-16, 2032},{0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Gfx attic_grate_Attic_001_mesh_layer_4_tri_0[] = {
-	gsSPVertex(attic_grate_Attic_001_mesh_layer_4_vtx_0 + 0, 4, 0),
+Gfx attic_grate_AtticGrate_006_mesh_layer_4_tri_0[] = {
+	gsSPVertex(attic_grate_AtticGrate_006_mesh_layer_4_vtx_0 + 0, 12, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 5, 7, 6, 0),
+	gsSP2Triangles(5, 8, 7, 0, 8, 9, 7, 0),
+	gsSP2Triangles(8, 10, 9, 0, 10, 11, 9, 0),
+	gsSP2Triangles(10, 4, 11, 0, 4, 6, 11, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -456,13 +468,13 @@ Gfx mat_revert_attic_grate_Grate_001_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx attic_grate_Attic_001_mesh_layer_4[] = {
+Gfx attic_grate_AtticGrate_006_mesh_layer_4[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(attic_grate_Attic_001_mesh_layer_4_vtx_cull + 0, 8, 0),
+	gsSPVertex(attic_grate_AtticGrate_006_mesh_layer_4_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_attic_grate_Grate_001_layer4),
-	gsSPDisplayList(attic_grate_Attic_001_mesh_layer_4_tri_0),
+	gsSPDisplayList(attic_grate_AtticGrate_006_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_attic_grate_Grate_001_layer4),
 	gsSPEndDisplayList(),
 };

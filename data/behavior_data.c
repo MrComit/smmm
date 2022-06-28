@@ -9100,3 +9100,13 @@ const BehaviorScript bhvBullyFlame[] = {
         CALL_NATIVE(bhv_bully_flame_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvAtticIndicator[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
+    SET_FLOAT(oPosY, 5185),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_attic_indicator_loop),
+    END_LOOP(),
+};

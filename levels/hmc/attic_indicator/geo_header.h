@@ -1,0 +1,11 @@
+extern const GeoLayout attic_indicator_geo[];
+extern Lights1 attic_indicator_LavaWave_001_layer5_lights;
+extern u8 attic_indicator_ia16_lavawave_ia16[];
+extern u8 attic_indicator_lava_rgba16[];
+extern Vtx attic_indicator_AtticSpireIndicator_mesh_layer_5_vtx_cull[8];
+extern Vtx attic_indicator_AtticSpireIndicator_mesh_layer_5_vtx_0[14];
+extern Gfx attic_indicator_AtticSpireIndicator_mesh_layer_5_tri_0[];
+extern Gfx mat_attic_indicator_LavaWave_001_layer5[];
+extern Gfx mat_revert_attic_indicator_LavaWave_001_layer5[];
+extern Gfx attic_indicator_AtticSpireIndicator_mesh_layer_5[];
+extern Gfx attic_indicator_material_revert_render_settings[];

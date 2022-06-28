@@ -399,6 +399,23 @@ s8 sSpireSpots[4][6][2] = {
 };
 s8 sSpiresReady[2] = {0, 0};
 
+
+void bhv_attic_indicator_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosX = o->oObjF4->oPosX;
+            o->oPosZ = o->oObjF4->oPosZ;
+            break;
+        case 1:
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 0.075f);
+            if (o->header.gfx.scale[1] == 0.0f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 void bhv_attic_spire_init(void) {
     o->header.gfx.scale[1] = 0.0f;
     o->oObj104 = cur_obj_nearest_object_with_behavior(bhvAtticBully);
@@ -423,6 +440,8 @@ void bhv_attic_spire_loop(void) {
                 o->oFloatFC = -579.0f - (sSpireSpots[o->oBehParams2ndByte][o->os16F8][0] * 1000.0f);
                 o->oFloat100 = 12888.0f - (sSpireSpots[o->oBehParams2ndByte][o->os16F8][1] * 1000.0f);
                 o->oAction = 1;
+                o->oObj108 = spawn_object(o, MODEL_ATTIC_INDICATOR, bhvAtticIndicator);
+                o->oObj108->oObjF4 = o;
             }
             break;
         case 1:
@@ -434,12 +453,16 @@ void bhv_attic_spire_loop(void) {
                 }
             }
             if (sSpiresReady[0] == 0b1111) {
-                sSpiresReady[1] |= 1 << o->oBehParams2ndByte;
-                o->oAction = 2;
-                if (sSpiresReady[1] == 0b1111) {
-                    sSpiresReady[0] = 0;
-                    sSpiresReady[1] = 0;
+                if (o->oTimer > 30) {
+                    sSpiresReady[1] |= 1 << o->oBehParams2ndByte;
+                    o->oAction = 2;
+                    if (sSpiresReady[1] == 0b1111) {
+                        sSpiresReady[0] = 0;
+                        sSpiresReady[1] = 0;
+                    }
                 }
+            } else {
+                o->oTimer = 0;
             }
             break;
         case 2:
@@ -456,6 +479,10 @@ void bhv_attic_spire_loop(void) {
                 o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 0.05f);
                 o->oPosY += 50.0f;
                 if (o->header.gfx.scale[1] == 0.0f) {
+                    if (o->oObj108 != NULL) {
+                        o->oObj108->oAction = 1;
+                        o->oObj108 = NULL;
+                    }
                     o->oAction = 4;
                     o->oPosY = o->oHomeY;
                 }

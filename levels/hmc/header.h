@@ -251,4 +251,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/attic_spike/collision_header.h"
 
+#include "levels/hmc/attic_indicator/geo_header.h"
+
 #endif

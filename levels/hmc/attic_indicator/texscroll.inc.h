@@ -1,0 +1,2 @@
+extern void scroll_attic_indicator_AtticSpireIndicator_mesh_layer_5_vtx_0();
+extern void scroll_hmc_level_geo_attic_indicator();

@@ -80,6 +80,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_ROCK, attic_rock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_BULLY, attic_bully_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_SPIKE, attic_spike_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_INDICATOR, attic_indicator_geo),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

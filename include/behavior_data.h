@@ -767,6 +767,7 @@ extern const BehaviorScript bhvAtticRock[];
 extern const BehaviorScript bhvAtticMovingFlame[];
 extern const BehaviorScript bhvAtticSpike[];
 extern const BehaviorScript bhvBullyFlame[];
+extern const BehaviorScript bhvAtticIndicator[];
 
 
 #endif // BEHAVIOR_DATA_H
