@@ -32,5 +32,6 @@ extern void scroll_hmc_dl_Steam_001_mesh_layer_5_vtx_0();
 extern void scroll_hmc_dl_SaunaMat_mesh_layer_1_vtx_0();
 extern void scroll_sts_mat_hmc_dl_SaunaLavaDyn_layer1();
 extern void scroll_hmc_dl_Attic_mesh_layer_1_vtx_3();
+extern void scroll_hmc_dl_Attic_002_mesh_layer_5_vtx_0();
 extern void scroll_sts_mat_hmc_dl_Vase_v4_layer1();
 extern void scroll_hmc();

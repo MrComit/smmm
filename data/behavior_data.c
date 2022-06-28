@@ -9044,7 +9044,7 @@ const BehaviorScript bhvAtticRock[] = {
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
-    // CALL_NATIVE(bhv_sauna_rock_rise_init),
+    CALL_NATIVE(bhv_attic_rock_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_attic_rock_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -9083,5 +9083,20 @@ const BehaviorScript bhvAtticSpike[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_attic_rock_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBullyFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 10),
+    SET_FLOAT(oGraphYOffset, 150),
+    CALL_NATIVE(bhv_bully_flame_init),
+    BEGIN_LOOP(),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_bully_flame_loop),
     END_LOOP(),
 };
