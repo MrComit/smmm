@@ -33,6 +33,30 @@ s32 attic_bounds(void) {
     return FALSE;
 }
 
+s32 attic_bounds_flame(void) {
+    if (o->oPosX > -579.0f) {
+        o->oPosX = -579.0f;
+        return TRUE;
+    }
+
+    if (o->oPosX < -4579.0f) {
+        o->oPosX = -4579.0f;
+        return TRUE;
+    }
+
+    if (o->oPosZ > 12888.0f) {
+        o->oPosZ = 12888.0f;
+        return TRUE;
+    }
+
+    if (o->oPosZ < 8888.0f) {
+        o->oPosZ = 8888.0f;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
 void bhv_attic_moving_flame_init(void) {
     // o->oForwardVel = 15.0f;
     o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
@@ -44,6 +68,7 @@ void bhv_attic_moving_flame_init(void) {
     // o->os16F6 = 0;
     // o->os16F8 = 0;
     o->oF4 = 0xFF0000;
+    o->oPosY = 5185.0f;
 }
 
 
@@ -89,7 +114,7 @@ void bhv_attic_moving_flame_loop(void) {
             break;
     }
 
-    if (attic_bounds()) {
+    if (attic_bounds_flame()) {
         o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
     }
     if (o->oObjFC->activeFlags == 0) {
@@ -479,9 +504,8 @@ void bhv_attic_bully_loop(void) {
                 o->oFloat110 = gMarioState->pos[2];
                 for (i = 0; i < 3; i++) {
                     obj = spawn_object(o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-                    obj->oPosY = 5185.0f;
-                    obj->oPosX = o->oHomeX + (500.0f * random_sign());
-                    obj->oPosZ = o->oHomeZ + (500.0f * random_sign());
+                    obj->oPosX = o->oHomeX + (1000.0f * random_sign());
+                    obj->oPosZ = o->oHomeZ + (1000.0f * random_sign());
                     obj->oBehParams2ndByte = o->os16F6++;
                 }
                 // o->oVelY = 100.0f;
@@ -494,10 +518,10 @@ void bhv_attic_bully_loop(void) {
         case 8:
             if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f) {
                 o->oAction = 0;
-                spawn_object_relative(0, 500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-                spawn_object_relative(1, -500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-                spawn_object_relative(2, 500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-                spawn_object_relative(3, -500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                spawn_object_relative(0, 1000, 0, 1000, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                spawn_object_relative(1, -1000, 0, 1000, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                spawn_object_relative(2, 1000, 0, -1000, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                spawn_object_relative(3, -1000, 0, -1000, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
                 o->os16F6 = 4;
                 obj = spawn_object(o, MODEL_ATTIC_WALL, bhvAtticWall);
                 vec3f_copy(&obj->oPosX, &o->oHomeX);

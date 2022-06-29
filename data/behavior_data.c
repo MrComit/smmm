@@ -9063,7 +9063,7 @@ const BehaviorScript bhvAtticMovingFlame[] =  {
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
     SET_INT(oIntangibleTimer, 0),
     SET_FLOAT(oGraphYOffset, 50),
-    DROP_TO_FLOOR(),
+    // DROP_TO_FLOOR(),
     CALL_NATIVE(bhv_attic_moving_flame_init),
     BEGIN_LOOP(),
         SET_INT(oInteractStatus, 0),
