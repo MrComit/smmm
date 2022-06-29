@@ -147,3 +147,5 @@
 #include "levels/hmc/attic_spike/model.inc.c"
 #include "levels/hmc/attic_spike/collision.inc.c"
 #include "levels/hmc/attic_indicator/model.inc.c"
+#include "levels/hmc/attic_wall/model.inc.c"
+#include "levels/hmc/attic_wall/collision.inc.c"

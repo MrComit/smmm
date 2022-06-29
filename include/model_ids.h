@@ -757,6 +757,7 @@
 #define MODEL_BULLY_GATE          0xE7
 #define MODEL_SAUNA_ROCK          0xE6
 #define MODEL_ATTIC_INDICATOR     0xE5
+#define MODEL_ATTIC_WALL          0xE4
 
 // LEVEL 5 MODELS CONT:
 // 0x5B-0x63

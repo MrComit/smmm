@@ -83,7 +83,7 @@ void bhv_attic_moving_flame_loop(void) {
                 o->os16F8 = approach_s16_symmetric(o->os16F8, 0xFF, 0x8);
                 o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 25.0f, 1.0f);
             }
-            if (o->oObjFC->oAction!= 7) {
+            if (o->oObjFC->oAction != 7) {
                 o->oAction = 0;
             }
             break;
@@ -91,6 +91,9 @@ void bhv_attic_moving_flame_loop(void) {
 
     if (attic_bounds()) {
         o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
+    }
+    if (o->oObjFC->activeFlags == 0) {
+        o->activeFlags = 0;
     }
 }
 
@@ -172,6 +175,7 @@ void bhv_attic_bully_init(void) {
     cur_obj_init_animation(0);
 
     o->oHomeX = o->oPosX;
+    o->oHomeY = o->oPosY;
     o->oHomeZ = o->oPosZ;
     // o->oBehParams2ndByte = BULLY_BP_SIZE_SMALL;
     o->oGravity = 4.0f;
@@ -180,13 +184,8 @@ void bhv_attic_bully_init(void) {
 
     obj_set_hitbox(o, &sAtticBullyHitbox);
 
-
-    spawn_object_relative(0, 500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-    spawn_object_relative(1, -500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-    spawn_object_relative(2, 500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-    spawn_object_relative(3, -500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
-    o->os16F6 = 4;
-
+    o->oAction = 8;
+    o->oPosY += 2000.0f;
 }
 
 
@@ -431,6 +430,19 @@ void bhv_attic_bully_loop(void) {
         case 7:
             attic_bully_phase_b();
             break;
+        case 8:
+            if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f) {
+                o->oAction = 0;
+                spawn_object_relative(0, 500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                spawn_object_relative(1, -500, 0, 500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                spawn_object_relative(2, 500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                spawn_object_relative(3, -500, 0, -500, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
+                o->os16F6 = 4;
+                obj = spawn_object(o, MODEL_ATTIC_WALL, bhvAtticWall);
+                vec3f_copy(&obj->oPosX, &o->oHomeX);
+                obj->oObjF4 = o;
+            }
+            break;
         case BULLY_ACT_LAVA_DEATH:
             bully_act_level_death();
             break;
@@ -441,6 +453,25 @@ void bhv_attic_bully_loop(void) {
     }
 }
 
+
+void bhv_attic_wall_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oOpacity != 255) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 10);
+            }
+            if (o->oObjF4->activeFlags == 0) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 6);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
 
 
 s8 sSpireSpots[4][6][2] = {
@@ -488,6 +519,14 @@ void bhv_attic_spire_loop(void) {
             CL_Lava_Boost();
             o->os16F6 = 30;
         }
+    }
+    if (o->oObj104->activeFlags == 0) {
+        o->activeFlags = 0;
+        if (o->oObj108 != NULL) {
+            o->oObj108->oAction = 1;
+        }
+    } else if (o->oObj104->oAction == 8) {
+        return;
     }
     switch (o->oAction) {
         case 0:

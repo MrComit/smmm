@@ -1,3 +1,4 @@
+#include "levels/hmc/attic_wall/texscroll.inc.h"
 #include "levels/hmc/attic_indicator/texscroll.inc.h"
 #include "levels/hmc/attic_spire/texscroll.inc.h"
 #include "levels/hmc/foreroom_object/texscroll.inc.h"

@@ -9111,3 +9111,17 @@ const BehaviorScript bhvAtticIndicator[] = {
         CALL_NATIVE(bhv_attic_indicator_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvAtticWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(attic_wall_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    // CALL_NATIVE(bhv_sauna_rock_rise_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_attic_wall_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

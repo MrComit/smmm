@@ -925,6 +925,7 @@ void bhv_attic_rock_init(void);
 void bhv_bully_flame_init(void);
 void bhv_bully_flame_loop(void);
 void bhv_attic_indicator_loop(void);
+void bhv_attic_wall_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -292,7 +292,6 @@ const GeoLayout hmc_dl_115__Attic_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, hmc_dl_Attic_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_BBOutside_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Z9_007_mesh_layer_4),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, hmc_dl_Attic_002_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

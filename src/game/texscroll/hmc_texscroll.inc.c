@@ -10,6 +10,7 @@
 #include "levels/hmc/foreroom_object/texscroll.inc.c"
 #include "levels/hmc/attic_spire/texscroll.inc.c"
 #include "levels/hmc/attic_indicator/texscroll.inc.c"
+#include "levels/hmc/attic_wall/texscroll.inc.c"
 void scroll_textures_hmc() {
 	scroll_hmc();
 	scroll_hmc_level_geo_pool_barrier();
@@ -22,4 +23,5 @@ void scroll_textures_hmc() {
 	scroll_hmc_level_geo_foreroom_object();
 	scroll_hmc_level_geo_attic_spire();
 	scroll_hmc_level_geo_attic_indicator();
+	scroll_hmc_level_geo_attic_wall();
 }
