@@ -8874,6 +8874,43 @@ const BehaviorScript bhvTreehouseLog[] = {
     END_LOOP(),
 };
 
+
+const BehaviorScript bhvSwoopSpawner[] = {
+    BEGIN(OBJ_LIST_SPAWNER),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_swoop_spawner_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvTreehouseSwoop[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, swoop_seg6_anims_060070D0),
+    ANIMATE(0),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    // SCALE(/*Unused*/ 0, /*Field*/ 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_treehouse_swoop_update),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvTreehouseFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 10),
+    SET_FLOAT(oGraphYOffset, 150),
+    CALL_NATIVE(bhv_treehouse_flame_init),
+    BEGIN_LOOP(),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_treehouse_flame_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvCushionShell[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN)),

@@ -37,6 +37,18 @@ static struct ObjectHitbox sTreehouseSpikeHitbox = {
     /* hurtboxHeight:     */ 90,
 };
 
+static struct ObjectHitbox sTreehouseSwoopHitbox = {
+    /* interactType:      */ INTERACT_HIT_FROM_BELOW,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 100,
+    /* height:            */ 80,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
 static u8 sSpikeAttackHandler[6] = {
     /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
@@ -45,6 +57,82 @@ static u8 sSpikeAttackHandler[6] = {
     /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
     /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
 };
+
+
+Vec3f sTreehouseFlames[2] = {
+{-4829.0f, 425.0f, -17642.0f},
+{1628.0f, 425.0f, -17251.0f},
+};
+
+void bhv_treehouse_flame_init(void) {
+    o->os16F4 = 0x3A;
+    o->os16F6 = 0x2B;
+    o->os16F8 = 0xC3;
+    o->oFloat100 = 0.1f;
+    vec3f_copy(&o->oPosX, sTreehouseFlames[o->oBehParams2ndByte]);
+}
+
+
+void bhv_treehouse_flame_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oFloat100 = approach_f32_symmetric(o->oFloat100, 10.0f, 0.3f);
+            cur_obj_scale(o->oFloat100);
+            if (o->oFloat100 == 10.0f) {
+                o->oAction = 1;
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+            }
+            break;
+    }
+}
+
+
+
+void bhv_treehouse_swoop_update(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    switch (o->oAction) {
+        case 0:
+            obj_set_hitbox(o, &sTreehouseSwoopHitbox);
+            vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+            o->oForwardVel = 40.0f;
+            o->oMoveAngleYaw = yaw;
+            o->oMoveAnglePitch = pitch;
+            o->oAction = 1;
+            break;
+        case 1:
+            CL_Move_3d();
+            cur_obj_update_floor_and_walls();
+
+            if (o->oTimer > 120 || o->oInteractStatus || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oPosY <= o->oFloorHeight) {
+                spawn_mist_particles();
+                // obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                o->activeFlags = 0;
+                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+            }
+            break;
+    }
+}
+
+
+
+void bhv_swoop_spawner_loop(void) {
+    if (o->oAction == 0) {
+        if (o->oTimer > 90 && lateral_dist_between_objects(o, gMarioObject) < 2250.0f) {
+            struct Object *swoop;
+            // cur_obj_play_sound_2(SOUND_OBJ2_SCUTTLEBUG_ALERT);
+            swoop = spawn_object(o, MODEL_SWOOP, bhvTreehouseSwoop);
+            // scuttlebug->oScuttlebugUnkF4 = o->oScuttlebugSpawnerUnkF4;
+            // scuttlebug->oForwardVel = 30.0f;
+            // scuttlebug->oVelY = 80.0f;
+            o->oAction++;
+            // o->oScuttlebugUnkF4 = 1;
+        }
+    } else {
+        // o->oScuttlebugSpawnerUnk88 = 0;
+        o->oAction = 0;
+    }
+}
 
 
 void bhv_treehouse_log_init(void) {
@@ -83,7 +171,7 @@ void bhv_treehouse_log_loop(void) {
                 obj_explode_and_spawn_coins(46.0f, 0);
                 create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
                 o->activeFlags = 0;
-                o->parentObj->prevObj = NULL;
+                o->parentObj->oObjF4 = NULL;
             }
             break;
     }
@@ -96,11 +184,11 @@ void bhv_spike_init(void) {
 
 
 void bhv_spike_loop(void) {
-    // struct Object *obj;
+    struct Object *obj;
     f32 x, z, x2, z2;
     switch (o->oAction) {
         case 0:
-            if (o->oBehParams2ndByte && o->oDistanceToMario < 2000.0f) {
+            if (o->oBehParams2ndByte && o->oDistanceToMario < 2750.0f) {
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
             }
             x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw + 0x4000));
@@ -121,7 +209,7 @@ void bhv_spike_loop(void) {
             // }
 
             if (cur_obj_check_anim_frame(20)) {
-                o->prevObj = spawn_object(o, MODEL_TREEHOUSE_LOG, bhvTreehouseLog);
+                o->oObjF4 = spawn_object(o, MODEL_TREEHOUSE_LOG, bhvTreehouseLog);
                 // o->prevObj->oPosY += 100.0f;
                 o->oInteractType = INTERACT_DAMAGE;
             }
@@ -140,6 +228,10 @@ void bhv_spike_loop(void) {
     obj_update_standard_actions(1.0f);
     // o->header.gfx.scale[1] = 0.5f;
     // print_text_fmt_int(80, 80, "%x", (s32)o->prevObj);
+    if (o->activeFlags == 0 && (o->oBehParams >> 24) & 0xFF) {
+        obj = spawn_object(o, MODEL_ENV_FLAME, bhvTreehouseFlame);
+        obj->oBehParams2ndByte = (o->oBehParams >> 24) - 1;
+    }
     o->oInteractStatus = 0;
 
 }

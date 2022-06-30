@@ -751,6 +751,10 @@ extern const BehaviorScript bhvTomato[];
 extern const BehaviorScript bhvSittingShyguy[];
 extern const BehaviorScript bhvSpike[];
 extern const BehaviorScript bhvTreehouseLog[];
+extern const BehaviorScript bhvSwoopSpawner[];
+extern const BehaviorScript bhvTreehouseSwoop[];
+extern const BehaviorScript bhvTreehouseFlame[];
+
 extern const BehaviorScript bhvCushionShell[];
 extern const BehaviorScript bhvStaticTri[];
 extern const BehaviorScript bhvStaticWall[];
