@@ -754,6 +754,7 @@ extern const BehaviorScript bhvTreehouseLog[];
 extern const BehaviorScript bhvSwoopSpawner[];
 extern const BehaviorScript bhvTreehouseSwoop[];
 extern const BehaviorScript bhvTreehouseFlame[];
+extern const BehaviorScript bhvTreehouseOwl[];
 
 extern const BehaviorScript bhvCushionShell[];
 extern const BehaviorScript bhvStaticTri[];

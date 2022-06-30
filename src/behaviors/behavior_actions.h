@@ -903,6 +903,7 @@ void bhv_swoop_spawner_loop(void);
 void bhv_treehouse_swoop_update(void);
 void bhv_treehouse_flame_init(void);
 void bhv_treehouse_flame_loop(void);
+void bhv_treehouse_owl_loop(void);
 
 void bhv_cushion_shell_loop(void);
 void bhv_static_tri_loop(void);

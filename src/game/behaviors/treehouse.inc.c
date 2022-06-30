@@ -13,6 +13,20 @@ static struct ObjectHitbox sOwlHitbox = {
     /* hurtboxHeight:     */ 150,
 };
 
+
+static struct ObjectHitbox sTreehouseOwlHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 90,
+    /* height:            */ 120,
+    /* hurtboxRadius:     */ 90,
+    /* hurtboxHeight:     */ 120,
+};
+
+
 static struct ObjectHitbox sTreehouseLogHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -235,6 +249,41 @@ void bhv_spike_loop(void) {
     o->oInteractStatus = 0;
 
 }
+
+
+void bhv_treehouse_owl_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            cur_obj_disable();
+            if (CL_nearest_object_with_behavior_and_field(bhvTreehouseFlame, 0x144, o->oBehParams2ndByte)) {
+                o->oAction = 1;
+                cur_obj_enable();
+            }
+            break;
+        case 1:
+            cur_obj_update_floor_and_walls();
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloorHeight, 20.0f);
+            if (o->oPosY == o->oFloorHeight) {
+                o->oAction = 2;
+                obj_set_hitbox(o, &sTreehouseOwlHitbox);
+            }
+            break;
+        case 2:
+            cur_obj_update_floor_and_walls();
+            goomba_act_walk();
+            cur_obj_move_standard(-78);
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                spawn_mist_particles();
+                obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                o->activeFlags = 0;
+                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+            }
+            o->oInteractStatus = 0;
+            break;
+    }
+}
+
+
 
 
 void bhv_blue_owl_init(void) {
