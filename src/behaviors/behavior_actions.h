@@ -899,6 +899,7 @@ void bhv_spike_loop(void);
 void bhv_spike_init(void);
 void bhv_treehouse_log_init(void);
 void bhv_treehouse_log_loop(void);
+void bhv_swoop_spawner_init(void);
 void bhv_swoop_spawner_loop(void);
 void bhv_treehouse_swoop_update(void);
 void bhv_treehouse_flame_init(void);

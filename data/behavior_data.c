@@ -8878,6 +8878,7 @@ const BehaviorScript bhvTreehouseLog[] = {
 const BehaviorScript bhvSwoopSpawner[] = {
     BEGIN(OBJ_LIST_SPAWNER),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_swoop_spawner_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_swoop_spawner_loop),
     END_LOOP(),

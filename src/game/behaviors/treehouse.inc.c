@@ -128,23 +128,28 @@ void bhv_treehouse_swoop_update(void) {
     }
 }
 
-
+void bhv_swoop_spawner_init(void) {
+    o->os16F4 = CL_RandomMinMaxU16(70, 110);
+}
 
 void bhv_swoop_spawner_loop(void) {
+    struct Object *swoop;
     if (o->oAction == 0) {
-        if (o->oTimer > 90 && lateral_dist_between_objects(o, gMarioObject) < 2250.0f) {
-            struct Object *swoop;
-            // cur_obj_play_sound_2(SOUND_OBJ2_SCUTTLEBUG_ALERT);
-            swoop = spawn_object(o, MODEL_SWOOP, bhvTreehouseSwoop);
-            // scuttlebug->oScuttlebugUnkF4 = o->oScuttlebugSpawnerUnkF4;
-            // scuttlebug->oForwardVel = 30.0f;
-            // scuttlebug->oVelY = 80.0f;
-            o->oAction++;
-            // o->oScuttlebugUnkF4 = 1;
+        if (o->oBehParams2ndByte) {
+            if (o->oTimer > o->os16F4 - 25 && gMarioState->pos[1] > 1200.0f && gMarioState->pos[0] < 1964.0f) {
+                swoop = spawn_object(o, MODEL_SWOOP, bhvTreehouseSwoop);
+                o->oAction = 1;
+            }
+        } else {
+            if (o->oTimer > o->os16F4 && lateral_dist_between_objects(o, gMarioObject) < 2250.0f) {
+                swoop = spawn_object(o, MODEL_SWOOP, bhvTreehouseSwoop);
+                o->oAction = 1;
+            }
         }
     } else {
         // o->oScuttlebugSpawnerUnk88 = 0;
         o->oAction = 0;
+        o->os16F4 = CL_RandomMinMaxU16(70, 110);
     }
 }
 
@@ -161,8 +166,13 @@ void bhv_treehouse_log_init(void) {
 void bhv_treehouse_log_loop(void) {
     switch (o->oAction) {
         case 0:
-            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 1.0f);
-            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.033f);
+            if ((o->parentObj->oBehParams >> 24) != 2) {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.033f);
+                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 1.0f);
+            } else {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.033f * 2.0f);
+                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 2.0f);
+            }
             cur_obj_scale(o->oFloatF4);
             if (o->parentObj->header.gfx.animInfo.animFrame == 50) {
                 o->oAction = 1;
@@ -211,7 +221,11 @@ void bhv_spike_loop(void) {
             z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw);
             if (x + z < 500.0f && x2 + z2 > 200.0f) {
                 if (cur_obj_check_if_at_animation_end() || o->oTimer > 20) {
-                    cur_obj_init_animation_with_sound(1);
+                    if ((o->oBehParams >> 24) == 2) {
+                        cur_obj_init_animation_with_accel_and_sound(1, 2.0f);
+                    } else {
+                        cur_obj_init_animation_with_sound(1);
+                    }
                     o->oAction = 1;
 
                 }
@@ -229,7 +243,11 @@ void bhv_spike_loop(void) {
             }
             if (cur_obj_check_if_at_animation_end()) {
                 o->oAction = 0;
-                cur_obj_init_animation_with_sound(0);
+                if ((o->oBehParams >> 24) == 2) {
+                    cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
+                } else {
+                    cur_obj_init_animation_with_sound(0);
+                }
             }
             break;
     }
