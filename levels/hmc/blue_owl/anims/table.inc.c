@@ -3,5 +3,7 @@ const struct Animation *const blue_owl_anims[] = {
 	
 	&blue_owl_anim_owl_swoop_anim,
 
+	&blue_owl_anim_owl_stand_anim,
+
 	NULL,
 };

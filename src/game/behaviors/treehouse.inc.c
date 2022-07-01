@@ -250,13 +250,13 @@ void bhv_spike_loop(void) {
 
 }
 
-
-void bhv_treehouse_owl_loop(void) {
-    switch (o->oAction) {
+void treehouse_owl_hiding(void) {
+    switch (o->oSubAction) {
         case 0:
             cur_obj_disable();
             if (CL_nearest_object_with_behavior_and_field(bhvTreehouseFlame, 0x144, o->oBehParams2ndByte)) {
-                o->oAction = 1;
+                o->oSubAction = 1;
+                o->oGraphYOffset = -190.0f / 2.0f;
                 cur_obj_enable();
             }
             break;
@@ -264,11 +264,16 @@ void bhv_treehouse_owl_loop(void) {
             cur_obj_update_floor_and_walls();
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloorHeight, 20.0f);
             if (o->oPosY == o->oFloorHeight) {
-                o->oAction = 2;
+                o->oAction = 1;
                 obj_set_hitbox(o, &sTreehouseOwlHitbox);
+                cur_obj_init_animation_with_sound(2);
+                o->oForwardVel = 8.5f;
             }
             break;
-        case 2:
+    }
+}
+
+/*
             cur_obj_update_floor_and_walls();
             goomba_act_walk();
             cur_obj_move_standard(-78);
@@ -279,8 +284,81 @@ void bhv_treehouse_owl_loop(void) {
                 create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
             }
             o->oInteractStatus = 0;
+*/
+
+void bhv_treehouse_owl_loop(void) {
+    if (o->oAction != 0) {
+        cur_obj_update_floor_and_walls();
+        cur_obj_move_standard(-78);
+        if (o->oFloor != NULL && o->oFloor->type == SURFACE_INSTANT_QUICKSAND && o->oPosY - o->oFloorHeight < 300.0f) {
+            o->oInteractStatus |= INT_STATUS_INTERACTED | INT_STATUS_WAS_ATTACKED;
+        }
+        if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+            spawn_mist_particles();
+            obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+            o->activeFlags = 0;
+            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+        }
+    }
+    switch (o->oAction) {
+        case 0:
+            treehouse_owl_hiding();
+            break;
+        case 1: // IDLE
+            o->oMoveAngleYaw += 0x280;
+            if (absf(o->oPosY - gMarioState->pos[1]) < 500.0f) {
+                if (++o->os16F4 > 45) {
+                    o->oAction = 2;
+                    o->oForwardVel = 15.0f;
+                    o->oVelY = 15.0f;
+                    o->os16F4 = 0;
+                    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0xC00);
+                    cur_obj_play_sound_2(SOUND_OBJ_GOOMBA_ALERT);
+                }
+            } else {
+                o->os16F4 = 0;
+            }
+            break;
+        case 2: // CHASE MARIO
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
+            if (o->oTimer > 45 && absi(o->oMoveAngleYaw - o->oAngleToMario) < 0x2000) {
+                if (cur_obj_check_if_at_animation_end()) {
+                    cur_obj_init_animation_with_sound(1);
+                    o->oAction = 3;
+                    obj_set_hitbox(o, &sOwlHitbox);
+                    o->oForwardVel = 0.0f;
+                    o->oVelY = 30.0f;
+                    o->oGravity = 0.0f;
+                }
+            }
+            if (absf(o->oPosY - gMarioState->pos[1]) > 750.0f) {
+                if (++o->os16F4 > 45) {
+                    o->oAction = 1;
+                    o->oForwardVel = 8.5f;
+                    o->oMoveAngleYaw += 0xC00;
+                    o->os16F4 = 0;
+                }
+            } else {
+                o->os16F4 = 0;
+            }
+            break;
+        case 3: // SWOOP ATTACK
+            if (o->oTimer < 10) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
+            }
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 60.0f, 1.2f);
+            o->oVelY = approach_f32_symmetric(o->oVelY, -5.0f, 2.8f);
+
+            if (o->oTimer > 120 || o->oInteractStatus || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oPosY <= o->oFloorHeight) {
+                o->oGravity = -4.0f;
+                o->oForwardVel = 8.5f;
+                o->oAction = 1;
+                cur_obj_init_animation_with_sound(2);
+                obj_set_hitbox(o, &sTreehouseOwlHitbox);
+            }
             break;
     }
+    o->oInteractStatus = 0;
 }
 
 
