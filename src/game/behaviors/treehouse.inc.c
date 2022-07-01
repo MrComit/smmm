@@ -20,10 +20,10 @@ static struct ObjectHitbox sTreehouseOwlHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 90,
-    /* height:            */ 120,
-    /* hurtboxRadius:     */ 90,
-    /* hurtboxHeight:     */ 120,
+    /* radius:            */ 75,
+    /* height:            */ 100,
+    /* hurtboxRadius:     */ 75,
+    /* hurtboxHeight:     */ 100,
 };
 
 
@@ -203,7 +203,7 @@ void bhv_spike_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oBehParams2ndByte && o->oDistanceToMario < 2750.0f) {
-                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
             }
             x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw + 0x4000));
             z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw + 0x4000));
@@ -258,6 +258,7 @@ void treehouse_owl_hiding(void) {
                 o->oSubAction = 1;
                 o->oGraphYOffset = -190.0f / 2.0f;
                 cur_obj_enable();
+                o->oMoveAngleYaw = random_u16();
             }
             break;
         case 1:
