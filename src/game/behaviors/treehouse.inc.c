@@ -133,10 +133,11 @@ void bhv_swoop_spawner_init(void) {
 }
 
 void bhv_swoop_spawner_loop(void) {
+    struct MarioState *m = gMarioState;
     struct Object *swoop;
     if (o->oAction == 0) {
         if (o->oBehParams2ndByte) {
-            if (o->oTimer > o->os16F4 - 25 && gMarioState->pos[1] > 1200.0f && gMarioState->pos[0] < 1964.0f) {
+            if (o->oTimer > o->os16F4 - 25 && m->pos[1] > 1200.0f && m->pos[0] < 1964.0f && m->pos[0] > 0.0f) {
                 swoop = spawn_object(o, MODEL_SWOOP, bhvTreehouseSwoop);
                 o->oAction = 1;
             }
@@ -274,7 +275,7 @@ void treehouse_owl_hiding(void) {
             cur_obj_disable();
             if (CL_nearest_object_with_behavior_and_field(bhvTreehouseFlame, 0x144, o->oBehParams2ndByte)) {
                 o->oSubAction = 1;
-                o->oGraphYOffset = -190.0f / 2.0f;
+                o->oGraphYOffset = -120.0f;
                 cur_obj_enable();
                 o->oMoveAngleYaw = random_u16();
             }
