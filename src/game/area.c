@@ -260,6 +260,7 @@ void unload_area(void) {
         gWarpTransition.isActive = FALSE;
         gMarioCurrentRoom = 0;
         gGlobalMarioRoom = 0;
+        gCamera->comitCutscene = 0;
     }
 }
 

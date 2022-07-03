@@ -1364,7 +1364,6 @@ void fixed_cam_presets(struct Camera *c) {
         set_r_button_camera(c);
     }
 
-
     switch (c->comitCutscene) {
         case 0:
             gComitCutsceneObject = NULL;
@@ -1478,13 +1477,13 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->focus, obj->oPosX, obj->oPosY + 2000.0f, obj->oPosZ);
             c->yaw = c->nextYaw = DEGREES(0);
             break;
-        
+        // case 18:        
 
 
         case 0xFF:
-            // vec3f_copy(c->pos, gComitCutscenePosVec);
-            // vec3f_copy(c->focus, gComitCutsceneFocVec);
-            CL_set_camera_pos(gComitCutscenePosVec, gComitCutscenePosVec);
+            vec3f_copy(c->pos, gComitCutscenePosVec);
+            vec3f_copy(c->focus, gComitCutsceneFocVec);
+            // CL_set_camera_pos(gComitCutscenePosVec, gComitCutsceneFocVec);
             c->comitCutscene = 0;
             break;
     }
@@ -3975,6 +3974,7 @@ void init_camera(struct Camera *c) {
     c->yaw = gLakituState.yaw;
     c->nextYaw = gLakituState.yaw;
     s8DirModeBaseYaw = gMarioSpawnInfo->startAngle[1] + 0x8000;
+    c->comitCutscene = 0;
 }
 
 /**

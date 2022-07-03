@@ -1,5 +1,7 @@
 
 void obj_update_standard_actions(f32 scale);
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
 
 static struct ObjectHitbox sOwlHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
@@ -88,6 +90,7 @@ void bhv_treehouse_flame_init(void) {
 
 
 void bhv_treehouse_flame_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             o->oFloat100 = approach_f32_symmetric(o->oFloat100, 10.0f, 0.3f);
@@ -95,6 +98,26 @@ void bhv_treehouse_flame_loop(void) {
             if (o->oFloat100 == 10.0f) {
                 o->oAction = 1;
                 play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+            }
+            break;
+        case 1:
+            if (o->oTimer > 30) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            set_mario_npc_dialog(1);
+            obj = cur_obj_nearest_object_with_behavior(bhvTreehouseOwl);
+            if (obj != NULL) {
+                vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
+                // vec3f_copy(gComitCutscenePosVec, gComitCutsceneFocVec);
+                // gComitCutscenePosVec[1] += 1000.0f;
+                vec3f_set_dist_and_angle(&obj->oPosX, gComitCutscenePosVec, 1500.0f, 0, obj->oFaceAngleYaw);
+            }
+            gCamera->comitCutscene = 0xFF;
+            if (o->oTimer > 75) {
+                o->oAction = 3;
+                set_mario_npc_dialog(0);
             }
             break;
     }
