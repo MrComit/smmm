@@ -305,7 +305,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TREE_LIMB, -784, -392, -2563, 0, -90, 0, 0x00000000, bhvTreeLimb),
 		OBJECT(MODEL_TREE_LIMB, 1227, -392, -6913, 0, 90, 0, 0x00000000, bhvTreeLimb),
 		OBJECT(MODEL_TELEPORTER, -384, -24, -16370, 0, 90, 0, (0x20 << 16) | (3 << 8), bhvFadingWarp),
-		OBJECT(MODEL_NONE, 0, -324, 24366, 0, -180, 0, 0x00210000, bhvFadingWarp),
+		OBJECT(MODEL_NONE, 0, -324, 24366, 0, 0, 0, 0x00210000, bhvFadingWarp),
 		OBJECT(MODEL_GLOBAL_GATE, -159, -24, -16710, 0, -180, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_GOOMBA, -22, -24, -22148, 0, 90, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, 771, -24, -22238, 0, 90, 0, 0x00000000, bhvGoomba),

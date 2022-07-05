@@ -13,37 +13,50 @@ UNUSED static const Lights1 goomba_lights_unused2 = gdSPDefLights1(
 );
 
 // 0x080194D0
+// static const Lights1 goomba_seg8_lights_080194D0 = gdSPDefLights1(
+//     0x15, 0x0b, 0x04,
+//     0x54, 0x2e, 0x10, 0x28, 0x28, 0x28 // DARK BROWN
+// );
+
+// // 0x080194E8
+// static const Lights1 goomba_seg8_lights_080194E8 = gdSPDefLights1(
+//     0x18, 0x0d, 0x04,
+//     0x61, 0x34, 0x13, 0x28, 0x28, 0x28
+// );
+
+
 static const Lights1 goomba_seg8_lights_080194D0 = gdSPDefLights1(
-    0x15, 0x0b, 0x04,
-    0x54, 0x2e, 0x10, 0x28, 0x28, 0x28
+    0x15, 0x15, 0x15,
+    0x50, 0x50, 0x50, 0x28, 0x28, 0x28 // DARK BROWN
 );
 
 // 0x080194E8
 static const Lights1 goomba_seg8_lights_080194E8 = gdSPDefLights1(
-    0x18, 0x0d, 0x04,
-    0x61, 0x34, 0x13, 0x28, 0x28, 0x28
+    0x15, 0x15, 0x15,
+    0x50, 0x50, 0x50, 0x28, 0x28, 0x28
 );
 
+
 // 0x08019500
-static const Lights1 goomba_seg8_lights_08019500 = gdSPDefLights1(
+static const Lights1 goomba_seg8_lights_08019500 = gdSPDefLights1( // UNUSED?
     0x1d, 0x10, 0x08,
     0x77, 0x42, 0x20, 0x28, 0x28, 0x28
 );
 
 // 0x08019518
-static const Lights1 goomba_seg8_lights_08019518 = gdSPDefLights1(
+static const Lights1 goomba_seg8_lights_08019518 = gdSPDefLights1( // UNUSED?
     0x37, 0x2d, 0x13,
-    0xde, 0xb4, 0x4e, 0x28, 0x28, 0x28
+    0xde, 0xb4, 0x4e, 0x28, 0x28, 0x28 // yellow
 );
 
 // 0x08019530
 ALIGNED8 static const Texture goomba_seg8_texture_08019530[] = {
-#include "actors/goomba/goomba_body.rgba16.inc.c"
+#include "actors/goomba/CUSTOM_goomba_body.rgba16.inc.c"
 };
 
 // 0x08019D30
 ALIGNED8 static const Texture goomba_seg8_texture_08019D30[] = {
-#include "actors/goomba/goomba_face.rgba16.inc.c"
+#include "actors/goomba/CUSTOM_goomba_face.rgba16.inc.c"
 };
 
 // 0x0801A530
