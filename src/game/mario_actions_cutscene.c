@@ -1812,6 +1812,7 @@ static s32 act_intro_cutscene(struct MarioState *m) {
             m->actionArg++;
             break;
         case INTRO_CUTSCENE_WAIT:
+            gCamera->comitCutscene = 11;
             break;
         case INTRO_CUTSCENE_LOOK:
             //set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
