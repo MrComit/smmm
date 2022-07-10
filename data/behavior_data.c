@@ -3846,9 +3846,9 @@ const BehaviorScript bhvMessagePanel[] = {
     DROP_TO_FLOOR(),
     SET_HITBOX(/*Radius*/ 150, /*Height*/ 80),
     SET_INT(oWoodenPostTotalMarioAngle, 0),
+    CALL_NATIVE(load_object_static_model),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
-        CALL_NATIVE(load_object_collision_model),
         SET_INT(oInteractStatus, 0),
     END_LOOP(),
 };
@@ -7698,9 +7698,10 @@ const BehaviorScript bhvHorizontalPole[] = {
     SET_HITBOX(/*Radius*/ 180, /*Height*/ 100),
     //CALL_NATIVE(bhv_horizontal_pole_init),
     SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(load_object_static_model),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_horizontal_pole_loop),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
@@ -8583,8 +8584,9 @@ const BehaviorScript bhvMusicInsts[] = {
     SET_HOME(),
     // SCALE(0, 75),
     CALL_NATIVE(bhv_music_insts_init),
+    CALL_NATIVE(load_object_static_model),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
         // ADD_INT(oFaceAngleYaw, 0x300),
         CALL_NATIVE(bhv_music_insts_loop),
     END_LOOP(),
@@ -8644,9 +8646,10 @@ const BehaviorScript bhvForeroomLever[] = {
     SET_INT(oIntangibleTimer, 0),
     SET_HOME(),
     CALL_NATIVE(bhv_lever_init),
+    CALL_NATIVE(load_object_static_model),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_foreroom_lever_loop),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
