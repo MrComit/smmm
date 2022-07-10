@@ -8,7 +8,10 @@
 #include "engine/extended_bounds.h"
 
 
-extern u8 gSurfacePoolError;
+/**
+ * The size of the dynamic surface pool, in bytes.
+ */
+#define DYNAMIC_SURFACE_POOL_SIZE 0x8000
 
 //#define NUM_CELLS       (2 * LEVEL_BOUNDARY_MAX / CELL_SIZE)
 //#define NUM_CELLS_INDEX (NUM_CELLS - 1)
@@ -22,7 +25,8 @@ enum {
     SPATIAL_PARTITION_FLOORS,
     SPATIAL_PARTITION_CEILS,
     SPATIAL_PARTITION_WALLS,
-    SPATIAL_PARTITION_WATER
+    SPATIAL_PARTITION_WATER,
+    NUM_SPATIAL_PARTITIONS
 };
 
 typedef struct SurfaceNode SpatialPartitionCell[4];
@@ -32,9 +36,11 @@ extern s32 unused8038BE90;
 
 extern SpatialPartitionCell gStaticSurfacePartition[NUM_CELLS][NUM_CELLS];
 extern SpatialPartitionCell gDynamicSurfacePartition[NUM_CELLS][NUM_CELLS];
-extern struct SurfaceNode *sSurfaceNodePool;
-extern struct Surface *sSurfacePool;
-extern s16 sSurfacePoolSize;
+extern void *gCurrStaticSurfacePool;
+extern void *gDynamicSurfacePool;
+extern void *gCurrStaticSurfacePoolEnd;
+extern void *gDynamicSurfacePoolEnd;
+extern u32 gTotalStaticSurfaceData;
 
 void alloc_surface_pools(void);
 #ifdef NO_SEGMENTED_MEMORY
@@ -43,6 +49,7 @@ u32 get_area_terrain_size(s16 *data);
 void load_area_terrain(s16 index, s16 *data, s8 *surfaceRooms, s16 *macroObjects);
 void clear_dynamic_surfaces(void);
 void load_object_collision_model(void);
+void load_object_static_model(void);
 s16 min_3(s16 a0, s16 a1, s16 a2);
 s16 max_3(s16 a0, s16 a1, s16 a2);
 

@@ -138,7 +138,7 @@ void puppyprint_calculate_ram_usage(void) {
     // These are a bit hacky, but what can ye do eh?
     // gEffectsMemoryPool is 0x4000, gObjectsMemoryPool is 0x800. Epic C limitations mean I can't just sizeof their values :)
     ramsizeSegment[5] = 0x4000 + 0x800 + 0x4000 + 0x800;
-    ramsizeSegment[6] = (SURFACE_NODE_POOL_SIZE * sizeof(struct SurfaceNode)) + (SURFACE_POOL_SIZE * sizeof(struct Surface));
+    ramsizeSegment[6] = gTotalStaticSurfaceData + DYNAMIC_SURFACE_POOL_SIZE;
     ramsizeSegment[7] = gAudioHeapSize + gAudioInitPoolSize;
     ramsizeSegment[8] = audioPool[0] + audioPool[1] + audioPool[2] + audioPool[3] + audioPool[4] + audioPool[5] +
                         audioPool[6] + audioPool[7] + audioPool[8] + audioPool[9] + audioPool[10] + audioPool[11];

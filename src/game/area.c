@@ -226,9 +226,11 @@ void clear_area_graph_nodes(void) {
 }
 
 extern s8 gGreenCoinsCollected;
+extern u8 sClearAllCells;
 
 void load_area(s32 index) {
     gGreenCoinsCollected = 0;
+    sClearAllCells = TRUE;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
         gCurrAreaIndex = gCurrentArea->index;

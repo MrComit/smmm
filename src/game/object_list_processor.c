@@ -685,6 +685,10 @@ void update_terrain_objects(void) {
     //! This was meant to be +=
     gObjectCounter = update_objects_in_list(&gObjectLists[OBJ_LIST_SURFACE]);
     gObjectCounter += update_objects_in_list(&gObjectLists[OBJ_LIST_DOORS]);
+
+
+    // If the dynamic surface pool has overflowed, throw an error.
+    // assert((uintptr_t)gDynamicSurfacePoolEnd <= (uintptr_t)gDynamicSurfacePool + DYNAMIC_SURFACE_POOL_SIZE, "Dynamic surface pool size exceeded");
 }
 
 /**

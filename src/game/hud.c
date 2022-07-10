@@ -1139,14 +1139,14 @@ void render_hud(void) {
         }
 
 
-        if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES)
-        {
-            print_text(10, 40, "SURFACE POOL FULL");
-        }
-        if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_NODES)
-        {
-            print_text(10, 60, "SURFACE NODE POOL FULL");
-        }
+        // if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES)
+        // {
+        //     print_text(10, 40, "SURFACE POOL FULL");
+        // }
+        // if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_NODES)
+        // {
+        //     print_text(10, 60, "SURFACE NODE POOL FULL");
+        // }
         //print_text_fmt_int(10, 10, "%d", gPointLightCompatibilityMode);
     }
 }
