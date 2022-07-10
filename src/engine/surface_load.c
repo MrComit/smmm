@@ -646,7 +646,7 @@ void load_area_terrain(s16 index, s16 *data, s8 *surfaceRooms, s16 *macroObjects
     gSurfacesAllocated = 0;
     bzero(&sCellsUsed, sizeof(sCellsUsed));
     sNumCellsUsed = 0;
-    sClearAllCells = FALSE;
+    sClearAllCells = TRUE;
 
     clear_static_surfaces();
 
