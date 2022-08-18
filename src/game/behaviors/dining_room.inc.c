@@ -43,13 +43,25 @@ void bhv_shyguy_init(void) {
 }
 
 void bhv_shyguy_loop(void) {
+    struct Object *obj;
     cur_obj_scale(o->oGoombaScale);
     cur_obj_update_floor_and_walls();
     goomba_act_walk();
     cur_obj_move_standard(-78);
     if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
             spawn_mist_particles();
-            obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+            if (o->os16110) {
+                obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+                obj->oBehParams2ndByte = o->oBehParams2ndByte;
+                obj->oBehParams = obj->oBehParams2ndByte << 16;
+                obj->oFaceAngleRoll = 0xF000;
+                obj->oFaceAngleYaw = 0;
+                // obj->oPosX = o->oHomeX;
+                // obj->oPosZ = o->oHomeZ;
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            } else {
+                obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+            }
             o->activeFlags = 0;
             create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
     }

@@ -132,6 +132,7 @@ void bhv_music_shyguy_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 5) {
+                // cur_obj_init_animation_with_sound(2);
                 o->oObjF4 = spawn_object(o, MODEL_MUSIC_BARRIER, bhvMusicBarrier);
                 o->oObjF4->oFaceAngleYaw = 0;
                 vec3f_set(&o->oObjF4->oPosX, 12795.0f, 0.0f, 14423.0f);
@@ -148,7 +149,9 @@ void bhv_music_shyguy_loop(void) {
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 15);
                 if (o->oOpacity == 255) {
                     o->activeFlags = 0;
-                    spawn_object(o, MODEL_SHYGUY, bhvShyguy);
+                    o->oObjF8 = spawn_object(o, MODEL_SHYGUY, bhvShyguy);
+                    o->oObjF8->os16110 = 1;
+                    o->oObjF8->oBehParams2ndByte =  o->oBehParams2ndByte;
                 }
             }
             break;

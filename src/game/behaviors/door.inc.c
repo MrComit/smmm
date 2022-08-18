@@ -46,7 +46,7 @@ void bhv_door_loop(void) {
     s32 sp1C = 0;
     
     if (cur_obj_has_behavior(bhvSmallKeyDoor)) {
-        if (save_file_get_flags() & (1 << o->oBehParams2ndByte + 1)) {
+        if (save_file_get_keys(1) & (1 << o->oBehParams2ndByte)) {
             o->oAnimState = 0;
         }
     }
