@@ -66,3 +66,4 @@
 #include "levels/hmc/attic_spike/geo.inc.c"
 #include "levels/hmc/attic_indicator/geo.inc.c"
 #include "levels/hmc/attic_wall/geo.inc.c"
+#include "levels/hmc/music_barrier/geo.inc.c"

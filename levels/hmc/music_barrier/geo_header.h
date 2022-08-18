@@ -1,0 +1,10 @@
+extern const GeoLayout music_barrier_geo[];
+extern Lights1 music_barrier_GhostBarrier_layer5_lights;
+extern u8 music_barrier_BOOGOO_highcontrast1_i4[];
+extern u8 music_barrier_BOOGOO_highcontrast2_brighterdarks_i4[];
+extern Vtx music_barrier_barrier_mesh_layer_5_vtx_0[8];
+extern Gfx music_barrier_barrier_mesh_layer_5_tri_0[];
+extern Gfx mat_music_barrier_GhostBarrier_layer5[];
+extern Gfx mat_revert_music_barrier_GhostBarrier_layer5[];
+extern Gfx music_barrier_barrier_mesh_layer_5[];
+extern Gfx music_barrier_material_revert_render_settings[];

@@ -80,6 +80,20 @@ void music_room_chase(void) {
 
 }
 
+void bhv_music_barrier_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 150, 4);
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 6);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
 
 void bhv_music_chase_init(void) {
     obj_set_hitbox(o, &sChairHitbox);
@@ -118,6 +132,9 @@ void bhv_music_shyguy_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 5) {
+                o->oObjF4 = spawn_object(o, MODEL_MUSIC_BARRIER, bhvMusicBarrier);
+                o->oObjF4->oFaceAngleYaw = 0;
+                vec3f_set(&o->oObjF4->oPosX, 12795.0f, 0.0f, 14423.0f);
                 o->oAction = 1;
                 seq_player_unlower_volume(0, 60);
                 play_music(0, SEQUENCE_ARGS(4, SEQ_MUSIC_ROOM), 0);
@@ -127,6 +144,7 @@ void bhv_music_shyguy_loop(void) {
         case 1:
             control_music_room();
             if (sMusicInstsChecked == 4) {
+                o->oObjF4->oAction = 1;
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 15);
                 if (o->oOpacity == 255) {
                     o->activeFlags = 0;

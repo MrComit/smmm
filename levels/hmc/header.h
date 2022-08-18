@@ -257,4 +257,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/attic_wall/collision_header.h"
 
+#include "levels/hmc/music_barrier/geo_header.h"
+
+#include "levels/hmc/music_barrier/collision_header.h"
+
 #endif

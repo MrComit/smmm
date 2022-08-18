@@ -729,7 +729,7 @@
 #define MODEL_ICE_CEILING_GATE    0xEF
 #define MODEL_RUBBERBAND_TWO      0xEE
 
-// LEVEL 5 MODELS - 0xFF TO 0xE2 ARE FREE
+// LEVEL 6 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_DICE_ENEMY          0xFF
 #define MODEL_POOL_BALL           0xFE
 #define MODEL_POOL_CUE            0xFD
@@ -758,8 +758,9 @@
 #define MODEL_SAUNA_ROCK          0xE6
 #define MODEL_ATTIC_INDICATOR     0xE5
 #define MODEL_ATTIC_WALL          0xE4
+#define MODEL_MUSIC_BARRIER       0xE3
 
-// LEVEL 5 MODELS CONT:
+// LEVEL 6 MODELS CONT:
 // 0x5B-0x63
 #define MODEL_STATIC_TRI          0x5B
 #define MODEL_STATIC_WALL         0x5C
