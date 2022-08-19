@@ -31,10 +31,10 @@ s8 sMusicRoomVol[4] = {0, 0, 0, 0};
 
 s8 sMusicInstsChecked = 0;
 
-Vec3s sPeepaColors[2] = {
-{0xE8, 0x82, 0xFF},
-{0x87, 0x7E, 0xFF},
-};
+// Vec3s sPeepaColors[2] = {
+// {0xE8, 0x82, 0xFF},
+// {0x87, 0x7E, 0xFF},
+// };
 
 struct ShadowCopy {
     Vec3f pos;
@@ -62,7 +62,9 @@ struct ShadowCopy sMusicChase[CHASE_SIZE] = {
 };
 
 
-void music_room_chase_behind(void) {
+void music_room_chase(void) {
+    f32 dist;
+    s16 pitch, yaw;
     if (o->oFC != sMusicInstsChecked) {
         o->o100 -= 12;
         if (o->o100 < 0)
@@ -73,7 +75,15 @@ void music_room_chase_behind(void) {
     sMusicChase[o->o100].faceAngle = gMarioState->faceAngle[1];
 
     if (o->oTimer > CHASE_SIZE) {
-        vec3f_copy(&o->oPosX, sMusicChase[o->o104].pos);
+        // vec3f_copy(&o->oPosX, sMusicChase[o->o104].pos);
+        vec3f_get_dist_and_angle(&o->oPosX, sMusicChase[o->o104].pos, &dist, &pitch, &yaw);
+        o->oMoveAngleYaw = yaw;
+        if (dist < 100.0f) {
+            vec3f_copy(&o->oPosX, sMusicChase[o->o104].pos);
+        } else {
+            CL_Move();
+            o->oPosY = approach_f32_symmetric(o->oPosY, sMusicChase[o->o104].pos[1], 30.0f);
+        }
         o->oFaceAngleYaw = sMusicChase[o->o104].faceAngle;
     }
 
@@ -85,88 +95,44 @@ void music_room_chase_behind(void) {
 }
 
 
-void music_room_chase_dash(void) {
-    f32 dist;
-    s16 pitch, yawPos, yawHome;
-    switch (o->oAction) {
-        case 0:
-            if ((s16)o->oMoveAngleYaw - o->oAngleToMario > 0) {
-                o->os16FA = 0x600;
-            } else {
-                o->os16FA = -0x600;
-            }
-
-            o->oAction = 1;
-            break;
-        case 1:
-            o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 15.0f);
-            if (absi((s16)o->oMoveAngleYaw - o->oAngleToMario) <= 0x600) {
-                o->oMoveAngleYaw = o->oAngleToMario;
-            } else {
-                o->oMoveAngleYaw += o->os16FA;
-            }
-            // o->oMoveAngleYaw = CL_approach_s16_symmetric_reverse(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
-            if (o->oMoveAngleYaw == o->oAngleToMario) {
-                o->oAction = 2;
-            }
-            break;
-        case 2:
-            if (o->oTimer > 3) {
-                o->oAction = 3;
-                vec3f_copy(&o->oHomeX, &o->oPosX);
-
-            }
-            break;
-        case 3:
-            o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 6.0f);
-            o->oForwardVel = approach_f32_asymptotic(o->oForwardVel, 60.0f, 0.5f);
-            CL_Move();
-            vec3f_get_dist_and_angle(gMarioState->pos, &o->oPosX, &dist, &pitch, &yawPos);
-            vec3f_get_dist_and_angle(gMarioState->pos, &o->oHomeX, &dist, &pitch, &yawHome);
-            if (o->oDistanceToMario > 500.0f && absi(yawPos - yawHome) > 0x4000) {
-                o->oAction = 0;
-                o->oForwardVel = 0;
-            }
-            break;
-    }
-    o->oFaceAngleYaw = o->oMoveAngleYaw;
-}
 
 
 void bhv_music_chase_init(void) {
-    s32 index = 0;
-    if (o->oBehParams2ndByte == 2) {
-        index = 1;
-    }
-    vec3s_copy(&o->os16F4, sPeepaColors[index]);
+    // s32 index = 0;
+    // if (o->oBehParams2ndByte == 2) {
+    //     index = 1;
+    // }
+    // vec3s_copy(&o->os16F4, sPeepaColors[index]);
     obj_set_hitbox(o, &sChairHitbox);
     // o->oOpacity = 170;
     o->oPosY -= 200.0f;
+    o->oForwardVel = 30.0f;
 }
 
 
 void bhv_music_chase_loop(void) {
-    if (o->os16110 == 0) {
-        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
-        if (o->oPosY == o->oHomeY) {
-            o->os16110 = 1;
-        } else {
-            return;
-        }
-    }
-    switch (o->oBehParams2ndByte) {
+    switch (o->oAction) {
         case 0:
-            music_room_chase_behind();
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 210, 6);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
+            if (o->oPosY == o->oHomeY && o->oOpacity == 210) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            music_room_chase();
+
+            if (sMusicInstsChecked == 4) {
+                o->oAction = 2;
+            }
             break;
         case 2:
-            music_room_chase_dash();
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 5);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 500.0f, 15.0f);
+            if (o->oOpacity == 0 || o->oPosY == o->oHomeY - 500.0f) {
+                o->activeFlags = 0;
+            }
             break;
-    }
-    if (sMusicInstsChecked == 4) {
-        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 500.0f, 15.0f);
-        if (o->oPosY == o->oHomeY - 500.0f) {
-            o->activeFlags = 0;
-        }
     }
     o->oInteractStatus = 0;
 }
@@ -241,7 +207,6 @@ void bhv_music_insts_init(void) {
 }
 
 void bhv_music_insts_loop(void) {
-    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->oDistanceToMario < 500.0f) {
@@ -258,9 +223,8 @@ void bhv_music_insts_loop(void) {
             if (o->oOpacity == 255 && sInstDist[o->oBehParams2ndByte] == 720000 && sMusicRoomVol[o->oBehParams2ndByte] == 127) {
                 o->oAction = 2;
                 sMusicInstsChecked++;
-                if (sMusicInstsChecked == 1 || sMusicInstsChecked == 3) {
-                    obj = spawn_object(o, MODEL_MUSIC_PEEPA, bhvMusicChase);
-                    obj->oBehParams2ndByte = sMusicInstsChecked - 1;
+                if (sMusicInstsChecked == 1) {
+                    spawn_object(o, MODEL_MUSIC_PEEPA, bhvMusicChase);
                 }
             }
             break;
