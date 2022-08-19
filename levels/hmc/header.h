@@ -261,4 +261,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/music_barrier/collision_header.h"
 
+#include "levels/hmc/music_peepa/geo_header.h"
+
 #endif

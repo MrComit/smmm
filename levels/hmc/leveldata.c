@@ -151,3 +151,4 @@
 #include "levels/hmc/attic_wall/collision.inc.c"
 #include "levels/hmc/music_barrier/model.inc.c"
 #include "levels/hmc/music_barrier/collision.inc.c"
+#include "levels/hmc/music_peepa/model.inc.c"

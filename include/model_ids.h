@@ -759,6 +759,7 @@
 #define MODEL_ATTIC_INDICATOR     0xE5
 #define MODEL_ATTIC_WALL          0xE4
 #define MODEL_MUSIC_BARRIER       0xE3
+#define MODEL_MUSIC_PEEPA         0xE2
 
 // LEVEL 6 MODELS CONT:
 // 0x5B-0x63

@@ -203,6 +203,68 @@ Gfx *geo_update_layer_transparency_cutout(s32 callContext, struct GraphNode *nod
     return dlStart;
 }
 
+
+Gfx *geo_update_layer_transparency_and_color(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 objectOpacity;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        if (gCurGraphNodeHeldObject != NULL) {
+            objectGraphNode = gCurGraphNodeHeldObject->objNode;
+        }
+
+        objectOpacity = objectGraphNode->oOpacity;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+
+        dlHead = dlStart;
+
+        if (objectOpacity == 0xFF) {
+            if (currentGraphNode->parameter == 20) {
+                currentGraphNode->fnNode.node.flags =
+                0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
+            } else {
+                currentGraphNode->fnNode.node.flags =
+                0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+            }
+
+            objectGraphNode->oAnimState = 0;
+        } else {
+            if (currentGraphNode->parameter == 20) {
+                currentGraphNode->fnNode.node.flags =
+                0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
+            } else {
+                currentGraphNode->fnNode.node.flags =
+                0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+            }
+
+            objectGraphNode->oAnimState = 1;
+
+            // the debug info check was removed in US. so we need to
+            // perform the only necessary check instead of the debuginfo
+            // one.
+            if (currentGraphNode->parameter != 10) {
+                if (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA) {
+                    gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
+                }
+            }
+        }
+
+        gDPSetEnvColor(dlHead++, objectGraphNode->os16F4, objectGraphNode->os16F6, objectGraphNode->os16F8, objectOpacity);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
+
+
 Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;
