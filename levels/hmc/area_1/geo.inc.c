@@ -47,7 +47,6 @@ const GeoLayout hmc_dl_102__Trophy_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_013_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_015_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_016_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_016_mesh),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_018_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -77,7 +76,7 @@ const GeoLayout hmc_dl_bb_001_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_bb_001_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_bb_003_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_bb_003_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -111,13 +110,13 @@ const GeoLayout hmc_dl_105__Game_Room_geo[] = {
 			GEO_BRANCH(1, hmc_dl_bb_001_geo),
 			GEO_BRANCH(1, hmc_dl_cc_002_geo),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_aa_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_aa_mesh_layer_1),
 		GEO_SWITCH_CASE(2, geo_switch_mole_gate),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, hmc_dl_bb_geo),
 			GEO_BRANCH(1, hmc_dl_cc_001_geo),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_aa_001_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_aa_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Chess_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Painting_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_PingPongTable_mesh_layer_1),
@@ -158,7 +157,7 @@ const GeoLayout hmc_dl_BBOutside_geo[] = {
 const GeoLayout hmc_dl_CC_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_CC_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_CC_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -175,7 +174,7 @@ const GeoLayout hmc_dl_108__Morning_Room_geo[] = {
 			GEO_BRANCH(1, hmc_dl_BBOutside_geo),
 			GEO_BRANCH(1, hmc_dl_CC_geo),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_AA_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_AA_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -193,21 +192,21 @@ const GeoLayout hmc_dl_109__Theater_geo[] = {
 const GeoLayout hmc_dl_110__NULL_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_009_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_009_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
 const GeoLayout hmc_dl_111__NULL_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_009_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_009_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
 const GeoLayout hmc_dl_112__NULL_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_009_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_009_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -276,7 +275,7 @@ const GeoLayout hmc_dl_114__Sauna_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_ASaunaGlobal_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_ASaunaGlobal_mesh_layer_4),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Sauna_002_mesh),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Sauna_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -2579, 500, -896),
 		GEO_OPEN_NODE(),
 			GEO_ASM(0, geo_generate_lava_wave),

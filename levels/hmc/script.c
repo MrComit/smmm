@@ -83,7 +83,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_INDICATOR, attic_indicator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_WALL, attic_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_BARRIER, music_barrier_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_PEEPA, music_peepa_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_PEEPA, music_peepa_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -106,9 +106,9 @@ const LevelScript level_hmc_entry[] = {
 		INSTANT_WARP(3, 0x01, -5759, 0, 0),
 		INSTANT_WARP(4, 0x01, 5759, 0, 0),
 		INSTANT_WARP(5, 0x01, 5348, -10739, -7651),
-		OBJECT(MODEL_NONE, 3510, 250, 12492, -2, 90, -2, (0x1A << 16), bhvAirborneDeathWarp),
-		OBJECT(MODEL_NONE, 3510, 250, 12492, -2, 90, -2, (0xA << 16), bhvFlyingWarp),
-		MARIO_POS(0x01, 90, 3510, 250, 12492),
+		OBJECT(MODEL_NONE, -10120, 190, 2456, 0, 0, 0, (0x1A << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, -10120, 190, 2456, 0, 0, 0, (0xA << 16), bhvFlyingWarp),
+		MARIO_POS(0x01, 0, -10120, 190, 2456),
 		OBJECT(MODEL_NONE, 1509, 200, -7511, 0, 0, 0, (0xE << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -9031, 0, 11348, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2146, 0, 11348, 0, 90, 0, 0x00000000, bhvDoor),
@@ -339,7 +339,7 @@ const LevelScript level_hmc_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 90, 3510, 250, 12492),
+	MARIO_POS(0x01, 0, -10120, 190, 2456),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

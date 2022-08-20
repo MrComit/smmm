@@ -540,7 +540,7 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
         dlHead = alloc_display_list(sizeof(Gfx) * (8 + 26));
         dlStart = dlHead;
 
-        gSPDisplayList(dlHead++, mat_hmc_dl_TightRope);
+        gSPDisplayList(dlHead++, mat_hmc_dl_TightRope_001);
 
         gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 10, 0);
         gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
@@ -549,7 +549,7 @@ Gfx *geo_generate_tight_rope(s32 callContext, struct GraphNode *node, void *cont
         gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
         gSP2Triangles(dlHead++, 6, 7, 8, 0, 7, 8, 9, 0);
         
-        gSPDisplayList(dlHead++, mat_revert_hmc_dl_TightRope);
+        gSPDisplayList(dlHead++, mat_revert_hmc_dl_TightRope_001);
 
         dlHead = generate_tight_rope_beams(dlHead, vertexBuffer1, 1);
         dlHead = generate_tight_rope_beams(dlHead, vertexBuffer2, 0);
@@ -712,7 +712,7 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
         dlHead = alloc_display_list(sizeof(Gfx) * (11));
         dlStart = dlHead;
 
-        gSPDisplayList(dlHead++, mat_hmc_dl_SaunaLavaDyn_layer1);
+        gSPDisplayList(dlHead++, mat_hmc_dl_SaunaLavaDyn_001_v5_layer1);
 
         gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 14, 0);
         // gSP2Triangles(dlHead++, 8, 1, 0, 0, 1, 8, 9, 0);
@@ -725,7 +725,7 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
         gSP2Triangles(dlHead++, 10, 9, 8, 0, 9, 10, 11, 0);
         gSP2Triangles(dlHead++, 12, 11, 10, 0, 11, 12, 13, 0);
         
-        gSPDisplayList(dlHead++, mat_revert_hmc_dl_SaunaLavaDyn_layer1);
+        gSPDisplayList(dlHead++, mat_revert_hmc_dl_SaunaLavaDyn_001_v5_layer1);
 
         gSPEndDisplayList(dlHead++);
 
