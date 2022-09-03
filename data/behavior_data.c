@@ -8985,6 +8985,7 @@ const BehaviorScript bhvVaseThrow[] = {
     END_LOOP(),
 };
 
+
 const BehaviorScript bhvPlatHallManage[] = {
     BEGIN(OBJ_LIST_SPAWNER),
     // OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

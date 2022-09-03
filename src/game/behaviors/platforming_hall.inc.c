@@ -129,7 +129,6 @@ void bhv_vase_throw_loop(void) {
 }
 
 
-
 void bhv_static_wall_init(void) {
     o->oFloatF4 = o->oBehParams2ndByte * 100.0f;
 }

@@ -26,6 +26,11 @@ void scroll_sts_mat_hmc_dl_FlowerPetal_002_v4_001_layer1() {
 	shift_t_down(mat, 21, PACK_TILESIZE(0, 2));
 };
 
+void scroll_sts_mat_hmc_dl_Vase_v4_002_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Vase_v4_002_layer1);
+	shift_s(mat, 13, PACK_TILESIZE(0, 4));
+};
+
 void scroll_sts_mat_hmc_dl_WoodFloorTrophyRoom_001_layer1() {
 	static int intervalTex1 = 3;
 	static int curInterval1 = 3;
@@ -263,11 +268,6 @@ void scroll_sts_mat_hmc_dl_WallDither_001_layer4() {
 	}
 };
 
-void scroll_sts_mat_hmc_dl_Vase_v4_002_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Vase_v4_002_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 4));
-};
-
 void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 325;
@@ -481,9 +481,9 @@ void scroll_sts_mat_hmc_dl_SaunaLava_001_v5_layer1() {
 	shift_t(mat, 20, PACK_TILESIZE(0, 1));
 };
 
-void scroll_hmc_dl_Sauna1_001_mesh_layer_1_vtx_4() {
+void scroll_hmc_dl_Sauna1_001_mesh_layer_1_vtx_5() {
 	int i = 0;
-	int count = 30;
+	int count = 47;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -499,7 +499,7 @@ void scroll_hmc_dl_Sauna1_001_mesh_layer_1_vtx_4() {
 	float amplitudeY = 0.699999988079071;
 	float frequencyY = 0.20000000298023224;
 	float offsetY = 32.0;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Sauna1_001_mesh_layer_1_vtx_4);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Sauna1_001_mesh_layer_1_vtx_5);
 
 	deltaX = (int)(amplitudeX * frequencyX * coss((frequencyX * timeX + offsetX) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
 	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
@@ -525,7 +525,7 @@ void scroll_sts_mat_hmc_dl_SaunaLava_002_layer1() {
 
 void scroll_hmc_dl_Steam_001_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 32;
+	int count = 16;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
@@ -636,6 +636,7 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_Wall_001_layer1();
 	scroll_sts_mat_hmc_dl_WoodFloor_001_layer1();
 	scroll_sts_mat_hmc_dl_FlowerPetal_002_v4_001_layer1();
+	scroll_sts_mat_hmc_dl_Vase_v4_002_layer1();
 	scroll_sts_mat_hmc_dl_WoodFloorTrophyRoom_001_layer1();
 	scroll_hmc_dl_TrophyRoom_002_mesh_layer_1_vtx_8();
 	scroll_sts_mat_hmc_dl_RedWall_001_layer1();
@@ -652,7 +653,6 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_WoodFloorOneCycle_001();
 	scroll_sts_mat_hmc_dl_Lava_001_layer1();
 	scroll_sts_mat_hmc_dl_WallDither_001_layer4();
-	scroll_sts_mat_hmc_dl_Vase_v4_002_layer1();
 	scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0();
 	scroll_sts_mat_hmc_dl_WallTransition_001_layer1();
 	scroll_hmc_dl_Hallway_004_mesh_layer_1_vtx_0();
@@ -662,7 +662,7 @@ void scroll_hmc() {
 	scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0();
 	scroll_hmc_dl_ASaunaGlobal_mesh_layer_1_vtx_3();
 	scroll_sts_mat_hmc_dl_SaunaLava_001_v5_layer1();
-	scroll_hmc_dl_Sauna1_001_mesh_layer_1_vtx_4();
+	scroll_hmc_dl_Sauna1_001_mesh_layer_1_vtx_5();
 	scroll_sts_mat_hmc_dl_SaunaLava_002_layer1();
 	scroll_hmc_dl_Steam_001_mesh_layer_5_vtx_0();
 	scroll_hmc_dl_SaunaMat_mesh_layer_1_vtx_0();
