@@ -1609,7 +1609,7 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 arg2
 #endif
     }
 
-    if (obj_has_behavior(m->interactObj, bhvAtticBully)) {
+    if (m->interactObj != NULL && obj_has_behavior(m->interactObj, bhvAtticBully)) {
         velCap = 64.0f;
     } else {
         velCap = 32.0f;
