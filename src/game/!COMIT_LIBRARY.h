@@ -32,6 +32,6 @@ s32 CL_get_room_from_point(Vec3f point);
 struct Object *CL_obj_find_nearest_object_with_behavior_room(struct Object *curObj, const BehaviorScript *behavior, s32 room);
 s32 CL_cur_obj_get_obj_collision(struct Object *obj);
 f32 CL_objptr_dist_to_nearest_object_with_behavior(struct Object *obj2, const BehaviorScript *behavior);
-
+void CL_instantly_warp(f32 x, f32 y, f32 z);
 
 #endif

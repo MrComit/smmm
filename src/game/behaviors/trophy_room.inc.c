@@ -7,6 +7,44 @@ static void const *sForeroomCollision[] = {
     foreroom_wall_collision,
 };
 
+
+void bhv_cushion_friend_loop(void) {
+    struct MarioState *m = gMarioState;
+    switch (o->oAction) {
+        case 0:
+            if (o->oSubAction == 0) {
+                if (m->pos[2] > o->oPosZ + 750.0f) {
+                    o->oSubAction = 1;
+                    o->os16F4++;
+                }
+            } else {
+                if (m->pos[2] < o->oPosZ - 750.0f) {
+                    o->oSubAction = 0;
+                    o->os16F4++;
+                }
+            }
+            if (o->os16F4 >= 5) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (m->pos[2] > 7500.0f && m->pos[2] < 8000.0f) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (CL_NPC_Dialog(3)) {
+                CL_instantly_warp(0, -5000.0f, 0);
+                o->oAction = 3;
+            }
+            break;
+    }
+}
+
+
+
+
+
 /* window behav
 
     init - check newflag, skip to open if so

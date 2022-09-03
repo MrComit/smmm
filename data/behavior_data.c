@@ -9197,3 +9197,15 @@ const BehaviorScript bhvMusicBarrier[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCushionFriend[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN)),
+    LOAD_COLLISION_DATA(cushion_friend_collision),
+    SET_HOME(),
+    // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cushion_friend_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

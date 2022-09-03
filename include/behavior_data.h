@@ -775,6 +775,7 @@ extern const BehaviorScript bhvBullyFlame[];
 extern const BehaviorScript bhvAtticIndicator[];
 extern const BehaviorScript bhvAtticWall[];
 extern const BehaviorScript bhvMusicBarrier[];
+extern const BehaviorScript bhvCushionFriend[];
 
 
 #endif // BEHAVIOR_DATA_H

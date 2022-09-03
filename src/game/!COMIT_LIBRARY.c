@@ -497,3 +497,22 @@ f32 CL_objptr_dist_to_nearest_object_with_behavior(struct Object *obj2, const Be
 
     return dist;
 }
+
+
+void CL_instantly_warp(f32 x, f32 y, f32 z) {
+    s16 cameraAngle;
+    struct MarioState *m = gMarioState;
+    m->pos[0] += x;
+    m->pos[1] += y;
+    m->pos[2] += z;
+
+    m->marioObj->oPosX = m->pos[0];
+    m->marioObj->oPosY = m->pos[1];
+    m->marioObj->oPosZ = m->pos[2];
+
+    cameraAngle = m->area->camera->yaw;
+
+    warp_camera(x, y, z);
+
+    m->area->camera->yaw = cameraAngle;
+}
