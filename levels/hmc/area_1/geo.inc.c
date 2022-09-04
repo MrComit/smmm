@@ -32,7 +32,6 @@ const GeoLayout hmc_dl_101__OpeningHall_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Plant_002_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Stairs_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Cushion_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_CushionCol_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_OpeningHall_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Plant_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Plant_001_mesh_layer_4),

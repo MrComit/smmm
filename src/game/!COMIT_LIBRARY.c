@@ -498,13 +498,25 @@ f32 CL_objptr_dist_to_nearest_object_with_behavior(struct Object *obj2, const Be
     return dist;
 }
 
+s8 gCLInstantWarp = FALSE;
+Vec3f gCLWarpPos = {0};
 
-void CL_instantly_warp(f32 x, f32 y, f32 z) {
+
+void CL_call_warp(f32 x, f32 y, f32 z) {
+    // vec3f_set(gCLWarpPos, x, y, z);
+    gCLWarpPos[0] = x;
+    gCLWarpPos[1] = y;
+    gCLWarpPos[2] = z;
+    gCLInstantWarp = TRUE;
+}
+
+
+void CL_instantly_warp(Vec3f pos) {
     s16 cameraAngle;
     struct MarioState *m = gMarioState;
-    m->pos[0] += x;
-    m->pos[1] += y;
-    m->pos[2] += z;
+    m->pos[0] += pos[0];
+    m->pos[1] += pos[1];
+    m->pos[2] += pos[2];
 
     m->marioObj->oPosX = m->pos[0];
     m->marioObj->oPosY = m->pos[1];
@@ -512,7 +524,9 @@ void CL_instantly_warp(f32 x, f32 y, f32 z) {
 
     cameraAngle = m->area->camera->yaw;
 
-    warp_camera(x, y, z);
+    warp_camera(pos[0], pos[1], pos[2]);
 
     m->area->camera->yaw = cameraAngle;
+    gCLInstantWarp = FALSE;
+    vec3f_set(gCLWarpPos, 0, 0, 0);
 }

@@ -316,22 +316,14 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
     }
 }
 
-
-s8 sL6HallTimer = 0;
-
 void mario_update_friend_l6_loop(struct MarioState *m) {
     // u32 flags = save_file_get_newflags(1);
     // u32 index = CL_count_bits(flags);
     if (gMarioCurrentRoom == 1 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) == 0 && gMarioState->pos[2] > 4000.0f) {
-        sL6HallTimer++;
-        if (sL6HallTimer == 15) {
-            CL_instantly_warp(0, 5000.0f, 0);
-        }
         if (CL_NPC_Dialog(3)) {
             save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
+            CL_call_warp(0, 5000.0f, 0);
         }
-    } else {
-        sL6HallTimer = 0;
     }
 }
 

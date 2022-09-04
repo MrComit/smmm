@@ -34,7 +34,7 @@ void bhv_cushion_friend_loop(void) {
             break;
         case 2:
             if (CL_NPC_Dialog(3)) {
-                CL_instantly_warp(0, -5000.0f, 0);
+                CL_call_warp(0, -5000.0f, 0);
                 o->oAction = 3;
             }
             break;

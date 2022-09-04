@@ -1175,6 +1175,9 @@ s32 play_mode_normal(void) {
 
     warp_area();
     check_instant_warp();
+    if (gCLInstantWarp) {
+        CL_instantly_warp(gCLWarpPos);
+    }
 
     if (sTimerRunning && gHudDisplay.timer < 17999) {
         gHudDisplay.timer++;
