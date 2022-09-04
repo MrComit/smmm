@@ -84,6 +84,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ATTIC_WALL, attic_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_BARRIER, music_barrier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_PEEPA, music_peepa_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_OPENING_WALL, opening_wall_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -114,6 +115,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, 1509, 200, -7511, 0, 0, 0, (0xE << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -9031, 0, 11348, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CUSHION_FRIEND, -9177, 5190, 6783, 0, 0, 0, 0x00000000, bhvCushionFriend),
+		OBJECT(MODEL_OPENING_WALL, -10081, 5000, 12063, 0, 0, 0, 0x00000000, bhvOpeningWall),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2146, 0, 11348, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1096, 0, 3063, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_STAR_PIECE, -8321, 100, 12170, 0, 0, 0, (0xF << 24), bhvStarPiece),

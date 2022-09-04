@@ -152,3 +152,4 @@
 #include "levels/hmc/music_barrier/model.inc.c"
 #include "levels/hmc/music_barrier/collision.inc.c"
 #include "levels/hmc/music_peepa/model.inc.c"
+#include "levels/hmc/opening_wall/model.inc.c"

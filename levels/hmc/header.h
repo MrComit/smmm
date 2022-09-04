@@ -263,4 +263,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/music_peepa/geo_header.h"
 
+#include "levels/hmc/opening_wall/geo_header.h"
+
 #endif

@@ -774,6 +774,7 @@
 #define MODEL_ATTIC_SPIKE         0x63
 
 // 0x6C-0x73
+#define MODEL_OPENING_WALL        0x6C
 
 // 0x97-0x9B
 #define MODEL_GOOMBA_2D           0x97

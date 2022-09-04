@@ -7,9 +7,32 @@ static void const *sForeroomCollision[] = {
     foreroom_wall_collision,
 };
 
+void bhv_opening_wall_loop(void) {
+    switch (o->os16F4) {
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 7);
+            if (o->oOpacity == 0) {
+                cur_obj_hide();
+                o->os16F4 = 0;
+            }
+            break;
+        case 2:
+            cur_obj_unhide();
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 9);
+            if (o->oOpacity == 255) {
+                if (o->os16F6++ == 5) {
+                    CL_call_warp(0, -5000.0f, 0);
+                } else if (o->os16F6 > 10) {
+                    o->activeFlags = 0;
+                }
+            }
+            break;
+    }
+}
 
 void bhv_cushion_friend_loop(void) {
     struct MarioState *m = gMarioState;
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->oSubAction == 0) {
@@ -34,7 +57,11 @@ void bhv_cushion_friend_loop(void) {
             break;
         case 2:
             if (CL_NPC_Dialog(3)) {
-                CL_call_warp(0, -5000.0f, 0);
+                obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
+                if (obj != NULL) {
+                    obj->os16F4 = 2;
+                }
+                // CL_call_warp(0, -5000.0f, 0);
                 o->oAction = 3;
             }
             break;

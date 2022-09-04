@@ -935,7 +935,7 @@ void bhv_attic_indicator_loop(void);
 void bhv_attic_wall_loop(void);
 void bhv_music_barrier_loop(void);
 void bhv_cushion_friend_loop(void);
-
+void bhv_opening_wall_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
