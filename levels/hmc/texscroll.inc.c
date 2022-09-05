@@ -270,7 +270,7 @@ void scroll_sts_mat_hmc_dl_WallDither_002_layer4() {
 
 void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 325;
+	int count = 316;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -308,7 +308,7 @@ void scroll_sts_mat_hmc_dl_WallTransition_002_layer1() {
 
 void scroll_hmc_dl_Hallway_004_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 1056;
+	int count = 1059;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -415,7 +415,7 @@ void scroll_hmc_dl_Maze_mesh_layer_1_vtx_0() {
 
 void scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 472;
+	int count = 456;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 

@@ -32,18 +32,20 @@ void plathall_instant_warp(void) {
 void plathall_randomize_textures(void) {
     u16 *texture = segmented_to_virtual(&hmc_dl_lightblue_noise3_rgba16);
     s32 i, k;
-    u16 h = CL_RandomMinMaxU16(12, 32);
-    u16 j = CL_RandomMinMaxU16(46, 60);
-    for (i = 0; i < j; i++) {
-        for (k = 0; k < h; k++) {
-            texture[i + (k*32)] = (random_u16() & 0b0011100010111001);
+    u16 rand;
+    for (i = 0; i < 32; i++) {
+        for (k = 0; k < 32; k++) {
+            texture[i + k*32] = (random_u16() & 0b0100100110001110) | 0b0011000001100000;
+            rand = random_u16();
+            if (rand < 0x20) {
+                texture[i + k*32] = 0xFFFF;
+            } else if (rand < o->oF4 || 
+               (rand < (o->oF4 * 2) && ((i & 13) == 0 || (k & 25) == 0))) {
+                texture[i + k*32] |= 1;
+            }
         }
     }
-    for (i = j; i < 64; i++) {
-        for (k = 0; k < h; k++) {
-            texture[i + (k*32)] = 0;
-        }  
-    }
+
     texture = segmented_to_virtual(&static_tri_i8_static_i8);
     for (i = 0; i < 2048; i++) {
         texture[i] = random_u16();
@@ -53,6 +55,7 @@ void plathall_randomize_textures(void) {
 
 void bhv_plathall_manager_loop(void) {
     // if (gMarioCurrentRoom == o->oRoom) {
+        o->oF4 = o->oDistanceToMario + 0x4000;
         plathall_randomize_textures();
         plathall_instant_warp();
     // }
