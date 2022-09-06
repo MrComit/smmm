@@ -1,4 +1,5 @@
 #include <ultra64.h>
+#include <PR/os_internal_reg.h>
 
 #include "sm64.h"
 #include "gfx_dimensions.h"
@@ -47,7 +48,8 @@ struct GfxPool *gGfxPool;
 OSContStatus gControllerStatuses[4];
 OSContPad gControllerPads[4];
 u8 gControllerBits;
-u8 gIsConsole;
+u8 gIsConsole = TRUE;
+u8 gCacheEmulated = TRUE;
 u8 gBorderHeight;
 #ifdef EEP
 s8 gEepromProbe;
@@ -381,6 +383,22 @@ void draw_reset_bars(void) {
     osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
 }
 
+void check_cache_emulation() {
+    // Disable interrupts to ensure that nothing evicts the variable from cache while we're using it.
+    u32 saved = __osDisableInt();
+    // Create a variable with an initial value of 1. This value will remain cached.
+    volatile u8 sCachedValue = 1;
+    // Overwrite the variable directly in RDRAM without going through cache.
+    // This should preserve its value of 1 in dcache if dcache is emulated correctly.
+    *(u8*)(K0_TO_K1(&sCachedValue)) = 0;
+    // Read the variable back from dcache, if it's still 1 then cache is emulated correctly.
+    // If it's zero, then dcache is not emulated correctly.
+    gCacheEmulated = sCachedValue;
+    // Restore interrupts
+    __osRestoreInt(saved);
+}
+
+
 /**
  * Initial settings for the first rendered frame.
  */
@@ -388,6 +406,7 @@ void render_init(void) {
     if (IO_READ(DPC_PIPEBUSY_REG) == 0) {
         gIsConsole = 0;
         gBorderHeight = BORDER_HEIGHT_EMULATOR;
+        check_cache_emulation();
     } else {
         gIsConsole = 1;
         gBorderHeight = BORDER_HEIGHT_CONSOLE;
@@ -403,7 +422,8 @@ void render_init(void) {
     exec_display_list(&gGfxPool->spTask);
 
     // Skip incrementing the initial framebuffer index on emulators so that they display immediately as the Gfx task finishes
-    if ((*(volatile u32 *)0xA4100010) != 0) { // Read RDP Clock Register, has a value of zero on emulators
+    // Currently, Ares passes the cache emulation test and has issues with single buffering so disable it there as well.
+    if (gIsConsole || gCacheEmulated) {
         sRenderingFramebuffer++;
     }
     gGlobalTimer++;
@@ -440,8 +460,8 @@ void display_and_vsync(void) {
     osViSwapBuffer((void *) PHYSICAL_TO_VIRTUAL(gPhysicalFramebuffers[sRenderedFramebuffer]));
     profiler_log_thread5_time(THREAD5_END);
     osRecvMesg(&gGameVblankQueue, &gMainReceivedMesg, OS_MESG_BLOCK);
-    // Skip swapping buffers on emulator so that they display immediately as the Gfx task finishes
-    if ((*(volatile u32 *)0xA4100010) != 0) { // Read RDP Clock Register, has a value of zero on emulators
+    // Skip swapping buffers on inaccurate emulators other than VC so that they display immediately as the Gfx task finishes
+    if (gIsConsole || gCacheEmulated) {
         if (++sRenderedFramebuffer == 3) {
             sRenderedFramebuffer = 0;
         }
