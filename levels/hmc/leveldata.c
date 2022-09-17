@@ -153,3 +153,5 @@
 #include "levels/hmc/music_barrier/collision.inc.c"
 #include "levels/hmc/music_peepa/model.inc.c"
 #include "levels/hmc/opening_wall/model.inc.c"
+#include "levels/hmc/bully_trophy/model.inc.c"
+#include "levels/hmc/bully_trophy/collision.inc.c"

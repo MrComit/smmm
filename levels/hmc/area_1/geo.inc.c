@@ -46,6 +46,8 @@ const GeoLayout hmc_dl_102__Trophy_Room_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_BombTrophy_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_CreepyEyes_mesh_layer_1),
+		GEO_ASM(1, geo_update_vanish_floor),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Paintings_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_002_mesh_layer_1),

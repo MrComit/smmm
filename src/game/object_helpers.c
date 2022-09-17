@@ -387,10 +387,12 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
 
 Vtx *sVanishVerts[] = {
     &hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0,
+    &hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1_vtx_0,
 };
 
 s16 sVanishVertCounts[] = {
     sizeof(hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1_vtx_0) / 16,
 };
 
 

@@ -69,3 +69,4 @@
 #include "levels/hmc/music_barrier/geo.inc.c"
 #include "levels/hmc/music_peepa/geo.inc.c"
 #include "levels/hmc/opening_wall/geo.inc.c"
+#include "levels/hmc/bully_trophy/geo.inc.c"

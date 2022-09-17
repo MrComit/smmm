@@ -9219,3 +9219,15 @@ const BehaviorScript bhvOpeningWall[] = {
         CALL_NATIVE(bhv_opening_wall_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvBullyTrophy[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN)),
+    LOAD_COLLISION_DATA(bully_trophy_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    HIDE(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bully_trophy_loop),
+    END_LOOP(),
+};

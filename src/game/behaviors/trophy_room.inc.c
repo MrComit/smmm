@@ -180,6 +180,28 @@ void bhv_foreroom_object_loop(void) {
 }
 
 
+void bhv_bully_trophy_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            // if (save_file_get_boos() & (1 << 0x12)) {
+                o->oAction = 1;
+                cur_obj_unhide();
+                obj = spawn_object(o, MODEL_TOKEN, bhvToken);
+                obj->oBehParams2ndByte = 2;
+                obj->oBehParams = 0x00022200;
+                vec3f_set(&obj->oPosX, -6559.0f, 100.0f, 3950.0f);
+            // }
+            break;
+        case 1:
+            load_object_collision_model();
+            break;
+    }
+}
+
+
+
+
 void bhv_trophy_plat_spin_loop(void) {
     if (gMarioObject->platform == o) {
         o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 20.0f, 2.0f);
