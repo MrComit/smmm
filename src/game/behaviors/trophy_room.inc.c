@@ -30,7 +30,8 @@ void bhv_opening_wall_loop(void) {
     }
 }
 
-void bhv_cushion_friend_loop(void) {
+
+void cushion_friend_opening(void) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
     switch (o->oAction) {
@@ -64,6 +65,88 @@ void bhv_cushion_friend_loop(void) {
                 // CL_call_warp(0, -5000.0f, 0);
                 o->oAction = 3;
             }
+            break;
+    }
+}
+
+#define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
+    obj = spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g)); \
+    obj->oRoom = o->oRoom; \
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+
+
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
+
+void cushion_friend_trophy_one(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            vec3f_set(&o->oPosX, 1500.0f, 0.0f, 12000.0f);
+            if (CL_NPC_Dialog(3)) {
+                o->oAction = 1;
+                vec3f_set(gComitCutscenePosVec, -1919.0f, 2439.0f, 14421.0f);
+                vec3f_set(gComitCutsceneFocVec, -500.0f, 300.0f, 10400.0f);
+            }
+            break;
+        case 1:
+            gCamera->comitCutscene = 0xFF;
+            if (o->oTimer > 20) {
+                COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, bhvTrophyRect)
+                obj->oBehParams = (32 << 24) | (3 << 16);
+                obj->oBehParams2ndByte = 3;
+                COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 8893, 0, -90, 0, bhvTrophyRect)
+                obj->oBehParams = (32 << 24) | (3 << 16);
+                obj->oBehParams2ndByte = 3;
+                COMIT_OBJECT(MODEL_TROPHY_OCTOGON, -455, -100, 6514, 0, -22, 0, bhvTrophyPlatSpin)
+                COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, -100, 5109, 0, 22, 0, bhvTrophyPlatSpin)
+                play_puzzle_jingle();
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            gCamera->comitCutscene = 0xFF;
+            if (o->oTimer > 40) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            if (CL_NPC_Dialog(3)) {
+                o->oAction = 4;
+                save_file_set_newflags(SAVE_TOAD_FLAG_SPAWN_PLATS, 1);
+            }
+            break;
+    }
+}
+
+
+void bhv_cushion_friend_init(void) {
+    struct Object *obj;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_SPAWN_PLATS) {
+        o->oRoom = 2;
+        COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, bhvTrophyRect)
+        obj->oBehParams = (32 << 24) | (3 << 16);
+        obj->oBehParams2ndByte = 3;
+        obj->oRoom = 2;
+        COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 8893, 0, -90, 0, bhvTrophyRect)
+        obj->oBehParams = (32 << 24) | (3 << 16);
+        obj->oBehParams2ndByte = 3;
+        obj->oRoom = 2;
+        COMIT_OBJECT(MODEL_TROPHY_OCTOGON, -455, -100, 6514, 0, -22, 0, bhvTrophyPlatSpin)
+        obj->oRoom = 2;
+        COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, -100, 5109, 0, 22, 0, bhvTrophyPlatSpin)
+        obj->oRoom = 2;
+    }
+}
+
+
+void bhv_cushion_friend_loop(void) {
+    switch (o->oFC) {
+        case 0:
+            cushion_friend_opening();
+            break;
+        case 1:
+            cushion_friend_trophy_one();
             break;
     }
 }

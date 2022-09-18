@@ -319,19 +319,41 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
 
 
 void mario_update_friend_l6_loop(struct MarioState *m) {
-    // u32 flags = save_file_get_newflags(1);
-    // u32 index = CL_count_bits(flags);
+    u32 flags = save_file_get_newflags(1) & ~0b1111;
+    u32 index = CL_count_bits(flags);
     struct Object *obj;
-    if (gMarioCurrentRoom == 1 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) == 0 && gMarioState->pos[2] > 4000.0f) {
-        if (CL_NPC_Dialog(3)) {
-            save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
-            CL_call_warp(0, 5000.0f, 0);
-            obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
-            if (obj != NULL) {
-                obj->os16F4 = 1;
+    switch (index) {
+        case 0:
+            if (gMarioCurrentRoom == 1 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) == 0 && gMarioState->pos[2] > 4000.0f) {
+                if (CL_NPC_Dialog(3)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
+                    CL_call_warp(0, 5000.0f, 0);
+                    obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
+                    if (obj != NULL) {
+                        obj->os16F4 = 1;
+                    }
+                }
+                gCutsceneFocus = gMarioObject;
             }
-        }
-        gCutsceneFocus = gMarioObject;
+            save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
+            break;
+        case 1:
+            // if (save_file_get_rooms(1) & (1 << 20)) {
+                // if (CL_NPC_Dialog(3)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_GAME, 1);
+                    obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                    if (obj != NULL) {
+                        vec3f_set(&obj->oPosX, 1500.0f, 0.0f, 12000.0f);
+                        obj->oRoom = 2;
+                        obj->oFaceAngleYaw = 0xED00;
+                        obj->oFC = 1;
+                        obj->oAction = 0;
+                    }
+                // }
+            // }
+            break;
+        case 3:
+            break;
     }
 }
 
