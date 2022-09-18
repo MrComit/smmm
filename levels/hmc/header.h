@@ -269,4 +269,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/bully_trophy/collision_header.h"
 
+#include "levels/hmc/trophy_elevator/geo_header.h"
+
+#include "levels/hmc/trophy_elevator/collision_header.h"
+
 #endif

@@ -1,3 +1,4 @@
+#include "levels/hmc/trophy_elevator/texscroll.inc.h"
 #include "levels/hmc/opening_wall/texscroll.inc.h"
 #include "levels/hmc/music_barrier/texscroll.inc.h"
 #include "levels/hmc/attic_wall/texscroll.inc.h"

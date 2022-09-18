@@ -180,6 +180,56 @@ void bhv_foreroom_object_loop(void) {
 }
 
 
+void bhv_trophy_elevator_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o || gMarioState->pos[1] - o->oHomeY > 1500.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oSubAction == 0) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 3000.0f, 15.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+                if (o->oPosY == o->oHomeY + 3000.0f) {
+                    o->oSubAction = 1;
+                }
+            } else {
+                if (gMarioState->floor != NULL && gMarioState->floor->object != o) {
+                    if (gMarioState->pos[1] - o->oHomeY < 1500.0f) {
+                        o->oAction = 3;
+                    } else {
+                        o->oAction = 2;
+                    }
+                }
+            }
+            break;
+        case 2:
+            if (gMarioObject->platform == o || gMarioState->pos[1] - o->oHomeY < 1500.0f) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            if (o->oSubAction == 0) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+                if (o->oPosY == o->oHomeY) {
+                    o->oSubAction = 1;
+                }
+            } else {
+                if (gMarioState->floor != NULL && gMarioState->floor->object != o) {
+                    if (gMarioState->pos[1] - o->oHomeY > 1500.0f) {
+                        o->oAction = 1;
+                    } else {
+                        o->oAction = 0;
+                    }
+                }
+            }
+            break;
+    }
+}
+
+
 void bhv_bully_trophy_loop(void) {
     struct Object *obj;
     switch (o->oAction) {

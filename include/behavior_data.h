@@ -778,6 +778,7 @@ extern const BehaviorScript bhvMusicBarrier[];
 extern const BehaviorScript bhvCushionFriend[];
 extern const BehaviorScript bhvOpeningWall[];
 extern const BehaviorScript bhvBullyTrophy[];
+extern const BehaviorScript bhvTrophyElevator[];
 
 
 #endif // BEHAVIOR_DATA_H

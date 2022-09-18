@@ -86,6 +86,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MUSIC_PEEPA, music_peepa_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_OPENING_WALL, opening_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BULLY_TROPHY, bully_trophy_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_ELEVATOR, trophy_elevator_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -120,6 +121,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_BULLY_TROPHY, -6584, 125, 3624, 0, 0, 0, 0x00000000, bhvBullyTrophy),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2146, 0, 11348, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1096, 0, 3063, 0, -180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2579, 5185, 5663, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_STAR_PIECE, -8321, 100, 12170, 0, 0, 0, (0xF << 24), bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -4159, -100, 11500, 0, 0, 0, (0x13 << 24), bhvStarPiece),
 		OBJECT(MODEL_TOKEN, -2777, 57, 3363, 0, 90, 0, (1 << 16) | (0x23 << 8), bhvToken),
@@ -131,9 +133,10 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TROPHY_OCTOGON, 241, -100, 5109, 0, 22, 0, 0x00000000, bhvTrophyPlatSpin),
 		OBJECT(MODEL_TROPHY_RECTANGLE, -2647, -100, 12454, 0, -150, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
 		OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
-		OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 9093, 0, -90, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
+		OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 8893, 0, -90, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
 		OBJECT(MODEL_TROPHY_RECTANGLE, -2486, -100, 9671, 0, -180, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
 		OBJECT(MODEL_TROPHY_RECTANGLE, -2486, -100, 10917, 0, -90, 0, (32 << 24) | (3 << 16), bhvTrophyRect),
+		OBJECT(MODEL_TROPHY_ELEVATOR, -2579, 2085, 4663, 0, 0, 0, 0x00000000, bhvTrophyElevator),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3746, 0, 12498, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3746, 0, 8273, 0, 90, 0, (8 << 16), bhvSmallKeyDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2946, 0, 6223, 0, -180, 0, 0x00000000, bhvDoor),
