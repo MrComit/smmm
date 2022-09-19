@@ -116,13 +116,28 @@ void bhv_cushion_shell_loop(void) {
     struct Surface *sp34;
 
     obj_set_hitbox(o, &sKoopaShellHitbox);
-
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_TROPHY_TWO) {
+        o->activeFlags = 0;
+    }
     switch (o->oAction) {
         case 0:
+            if (o->os16104) {
+                o->oAction = 2;
+            }
+            if (o->oDistanceToMario < 500.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (CL_NPC_Dialog(3)) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
             cur_obj_update_floor_and_walls();
 
             if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-                o->oAction = 1;
+                o->oAction = 3;
             }
 
             cur_obj_move_standard(-20);
@@ -131,7 +146,7 @@ void bhv_cushion_shell_loop(void) {
             }
             break;
 
-        case 1:
+        case 3:
             obj_copy_pos(o, gMarioObject);
             sp34 = cur_obj_update_floor_height_and_get_floor();
 
@@ -141,6 +156,7 @@ void bhv_cushion_shell_loop(void) {
                 o->activeFlags = 0;
                 spawn_mist_particles();
                 obj = spawn_object(o, MODEL_CUSHION_FRIEND, bhvCushionShell);
+                obj->os16104 = 1;
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 obj->oFaceAngleYaw = 0;
             }

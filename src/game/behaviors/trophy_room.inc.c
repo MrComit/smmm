@@ -119,6 +119,42 @@ void cushion_friend_trophy_one(void) {
     }
 }
 
+void cushion_friend_morning_room(void) {
+    switch (o->oAction) {
+        case 0:
+            vec3f_set(&o->oPosX, 1630.0f, 0.0f, -5675.0f);
+            if (gMarioState->pos[2] < -5700.0f || o->oTimer > 100) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (CL_NPC_Dialog(3)) {
+                o->oAction = 2;
+                save_file_set_newflags(SAVE_TOAD_FLAG_MORNING_ROOM, 1);
+            }
+            break;
+    }
+}
+
+void cushion_friend_trophy_two(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oRoom == gMarioCurrentRoom) {
+                cur_obj_unhide();
+            }
+            vec3f_set(&o->oPosX, -2100.0f, 2185.0f, 3800.0f);
+            if (gMarioState->pos[1] > 2000.0f && (gMarioState->pos[2] > 3450.0f || o->oTimer > 100)) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (CL_NPC_Dialog(3)) {
+                o->oAction = 2;
+                save_file_set_newflags(SAVE_TOAD_FLAG_TROPHY_TWO, 1);
+            }
+            break;
+    }
+}
 
 void bhv_cushion_friend_init(void) {
     struct Object *obj;
@@ -147,6 +183,12 @@ void bhv_cushion_friend_loop(void) {
             break;
         case 1:
             cushion_friend_trophy_one();
+            break;
+        case 2:
+            cushion_friend_morning_room();
+            break;
+        case 3:
+            cushion_friend_trophy_two();
             break;
     }
 }
@@ -263,55 +305,71 @@ void bhv_foreroom_object_loop(void) {
 }
 
 
+f32 sTrophyElevatorPos[3] = {0.0f, 3000.0f, -2000.0f};
+
+
 void bhv_trophy_elevator_loop(void) {
-    switch (o->oAction) {
+    f32 target = sTrophyElevatorPos[o->os16F4] + o->oHomeY;
+    if (target != o->oPosY) {
+        o->oPosY = approach_f32_symmetric(o->oPosY, target, 15.0f);
+        cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+        return;
+    }
+
+    if (o->os16F6 == 0 && save_file_get_newflags(1) & SAVE_TOAD_FLAG_TROPHY_TWO) {
+        o->os16F6 = 1;
+    }
+    if (o->os16F8) {
+        if (gMarioState->floor != NULL && gMarioState->floor->object != o) {
+            o->os16F8 = 0;
+        } else {
+            return;
+        }
+    }
+
+    switch (o->os16F4) {
         case 0:
             if (gMarioObject->platform == o || gMarioState->pos[1] - o->oHomeY > 1500.0f) {
-                o->oAction = 1;
+                o->os16F4 = 1;
+                o->os16F8 = 1;
+            }
+
+            if (o->os16F6 && gMarioState->pos[1] - o->oHomeY < -1000.0f) {
+                o->os16F4 = 2;
+                o->os16F8 = 1;
             }
             break;
         case 1:
-            if (o->oSubAction == 0) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 3000.0f, 15.0f);
-                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
-                if (o->oPosY == o->oHomeY + 3000.0f) {
-                    o->oSubAction = 1;
+            if (gMarioObject->platform == o) {
+                if (o->os16F6) {
+                    o->os16F4 = 2;
+                } else {
+                    o->os16F4 = 0;
                 }
-            } else {
-                if (gMarioState->floor != NULL && gMarioState->floor->object != o) {
-                    if (gMarioState->pos[1] - o->oHomeY < 1500.0f) {
-                        o->oAction = 3;
-                    } else {
-                        o->oAction = 2;
-                    }
+
+                o->os16F8 = 1;
+            }
+            if (gMarioState->pos[1] - o->oHomeY < 1500.0f) {
+                if (o->os16F6 && gMarioState->pos[1] - o->oHomeY < -1000.0f) {
+                    o->os16F4 = 2;
+                } else {
+                    o->os16F4 = 0;
                 }
+                o->os16F8 = 1;
             }
             break;
         case 2:
-            if (gMarioObject->platform == o || gMarioState->pos[1] - o->oHomeY < 1500.0f) {
-                o->oAction = 3;
+            if (gMarioObject->platform == o || gMarioState->pos[1] - o->oHomeY > 1500.0f) {
+                o->os16F4 = 1;
+                o->os16F8 = 1;
             }
-            break;
-        case 3:
-            if (o->oSubAction == 0) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
-                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
-                if (o->oPosY == o->oHomeY) {
-                    o->oSubAction = 1;
-                }
-            } else {
-                if (gMarioState->floor != NULL && gMarioState->floor->object != o) {
-                    if (gMarioState->pos[1] - o->oHomeY > 1500.0f) {
-                        o->oAction = 1;
-                    } else {
-                        o->oAction = 0;
-                    }
-                }
+            if (gMarioState->pos[1] - o->oHomeY < 1500.0f && gMarioState->pos[1] - o->oHomeY > -1000.0f) {
+                o->os16F4 = 0;
+                o->os16F8 = 1; 
             }
             break;
     }
 }
-
 
 void bhv_bully_trophy_loop(void) {
     struct Object *obj;

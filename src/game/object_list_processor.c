@@ -353,6 +353,33 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
             // }
             break;
         case 3:
+            if (gMarioCurrentRoom == 7 || gMarioCurrentRoom == 8) {
+                obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                if (obj != NULL && obj->oFC != 2) {
+                    vec3f_set(&obj->oPosX, 1630.0f, 0.0f, -5675.0f);
+                    obj->oRoom = 8;
+                    obj->oFaceAngleYaw = 0x5800;
+                    obj->oFC = 2;
+                    obj->oAction = 0;
+                    obj->oTimer = 0;
+                }  
+            }
+            break;
+        case 4:
+            if (save_file_get_rooms(1) & (1 << 24)) {
+                if (CL_NPC_Dialog(3)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_THEATER, 1);
+                    obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                    if (obj != NULL) {
+                        obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+                        vec3f_set(&obj->oPosX, -2100.0f, 2185.0f, 3800.0f);
+                        obj->oRoom = 2;
+                        obj->oFaceAngleYaw = 0x8C00;
+                        obj->oFC = 3;
+                        obj->oAction = 0;
+                    }
+                }
+            }
             break;
     }
 }
