@@ -8,6 +8,7 @@ static void const *sForeroomCollision[] = {
 };
 
 void bhv_opening_wall_loop(void) {
+    struct Object *obj;
     switch (o->os16F4) {
         case 1:
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 7);
@@ -22,6 +23,11 @@ void bhv_opening_wall_loop(void) {
             if (o->oOpacity == 255) {
                 if (o->os16F6++ == 5) {
                     CL_call_warp(0, -5000.0f, 0);
+                    obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                    if (obj != NULL) {
+                        obj->oPosY -= 5000.0f;
+                        obj->oAction = 3;
+                    }
                 } else if (o->os16F6 > 10) {
                     o->activeFlags = 0;
                 }
@@ -57,13 +63,18 @@ void cushion_friend_opening(void) {
             }
             break;
         case 2:
-            if (CL_NPC_Dialog(3)) {
+            if (CL_NPC_Dialog(DIALOG_036)) {
                 obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
                 if (obj != NULL) {
                     obj->os16F4 = 2;
                 }
                 // CL_call_warp(0, -5000.0f, 0);
-                o->oAction = 3;
+                o->oAction = 4;
+            }
+            break;
+        case 3:
+            if (CL_NPC_Dialog(DIALOG_037)) {
+                o->oAction = 4;
             }
             break;
     }
@@ -83,7 +94,7 @@ void cushion_friend_trophy_one(void) {
     switch (o->oAction) {
         case 0:
             vec3f_set(&o->oPosX, 1500.0f, 0.0f, 12000.0f);
-            if (CL_NPC_Dialog(3)) {
+            if (CL_NPC_Dialog(DIALOG_039)) {
                 o->oAction = 1;
                 vec3f_set(gComitCutscenePosVec, -1919.0f, 2439.0f, 14421.0f);
                 vec3f_set(gComitCutsceneFocVec, -500.0f, 300.0f, 10400.0f);
@@ -108,11 +119,6 @@ void cushion_friend_trophy_one(void) {
             gCamera->comitCutscene = 0xFF;
             if (o->oTimer > 40) {
                 o->oAction = 3;
-            }
-            break;
-        case 3:
-            if (CL_NPC_Dialog(3)) {
-                o->oAction = 4;
                 save_file_set_newflags(SAVE_TOAD_FLAG_SPAWN_PLATS, 1);
             }
             break;
@@ -128,7 +134,7 @@ void cushion_friend_morning_room(void) {
             }
             break;
         case 1:
-            if (CL_NPC_Dialog(3)) {
+            if (CL_NPC_Dialog(DIALOG_040)) {
                 o->oAction = 2;
                 save_file_set_newflags(SAVE_TOAD_FLAG_MORNING_ROOM, 1);
             }
@@ -148,7 +154,7 @@ void cushion_friend_trophy_two(void) {
             }
             break;
         case 1:
-            if (CL_NPC_Dialog(3)) {
+            if (CL_NPC_Dialog(DIALOG_043)) {
                 o->oAction = 2;
                 save_file_set_newflags(SAVE_TOAD_FLAG_TROPHY_TWO, 1);
             }

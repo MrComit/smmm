@@ -22,6 +22,7 @@
 #include "save_file.h"
 #include "puppyprint.h"
 #include "include/config.h"
+#include "dialog_ids.h"
 
 
 /**
@@ -325,7 +326,7 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
     switch (index) {
         case 0:
             if (gMarioCurrentRoom == 1 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) == 0 && gMarioState->pos[2] > 4000.0f) {
-                if (CL_NPC_Dialog(3)) {
+                if (CL_NPC_Dialog(DIALOG_035)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
                     CL_call_warp(0, 5000.0f, 0);
                     obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
@@ -339,7 +340,7 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
             break;
         case 1:
             // if (save_file_get_rooms(1) & (1 << 20)) {
-                // if (CL_NPC_Dialog(3)) {
+                // if (CL_NPC_Dialog(DIALOG_038)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_GAME, 1);
                     obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
                     if (obj != NULL) {
@@ -367,7 +368,7 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
             break;
         case 4:
             if (save_file_get_rooms(1) & (1 << 24)) {
-                if (CL_NPC_Dialog(3)) {
+                if (CL_NPC_Dialog(DIALOG_041)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_THEATER, 1);
                     obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
                     if (obj != NULL) {

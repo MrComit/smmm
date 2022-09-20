@@ -129,7 +129,7 @@ void bhv_cushion_shell_loop(void) {
             }
             break;
         case 1:
-            if (CL_NPC_Dialog(3)) {
+            if (CL_NPC_Dialog(DIALOG_042)) {
                 o->oAction = 2;
             }
             break;

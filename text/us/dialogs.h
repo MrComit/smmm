@@ -400,116 +400,66 @@ i got trapped up here.)\n\
 \n\
 ..."))
 
-DEFINE_DIALOG(DIALOG_035, 1, 5, 30, 200, _("\
-There are four camera, or\n\
-『[C],』 Buttons. Press [C]^\n\
-to look around using the\n\
-Control Stick.\n\
-\n\
-You'll usually see Mario\n\
-through Lakitu's camera.\n\
-It is the camera\n\
-recommended for normal\n\
-play.\n\
-You can change angles by\n\
-pressing [C]>. If you press\n\
-[R], the view switches to\n\
-Mario's camera, which\n\
-is directly behind him.\n\
-Press [R] again to return\n\
-to Lakitu's camera. Press\n\
-[C]| to see Mario from\n\
-afar, using either\n\
-Lakitu's or Mario's view."))
+DEFINE_DIALOG(DIALOG_035, 1, 4, 30, 200, _("\
+Mario! I've marked on your map\n\
+where the paranormal activity\n\
+is coming from.\n\
+Please take a look."))
 
-DEFINE_DIALOG(DIALOG_036, 1, 5, 30, 200, _("\
-OBSERVATION PLATFORM\n\
-Press [C]^ to take a look\n\
-around. Don't miss\n\
-anything!\n\
-\n\
-Press [R] to switch to\n\
-Mario's camera. It\n\
-always follows Mario.\n\
-Press [R] again to switch\n\
-to Lakitu's camera.\n\
-Pause the game and\n\
-switch the mode to 『fix』\n\
-the camera in place while\n\
-holding [R]. Give it a try!"))
+DEFINE_DIALOG(DIALOG_036, 1, 1, 30, 200, _("\
+Psst. Hey there. \n\
+Need a little help?"))
 
-DEFINE_DIALOG(DIALOG_037, 1, 2, 30, 200, _("\
-I win! You lose!\n\
-Ha ha ha ha!\n\
-You're no slouch, but I'm\n\
-a better sledder!\n\
-Better luck next time!"))
+DEFINE_DIALOG(DIALOG_037, 1, 4, 30, 200, _("\
+This place is a little bit\n\
+messed up, but so is the mind\n\
+of it's owner.\n\
+So what do you expect..."))
 
 DEFINE_DIALOG(DIALOG_038, 1, 3, 95, 200, _("\
-Reacting to the Star\n\
-power, the door slowly\n\
-opens."))
+Darn, it was a false reading.\n\
+Alright, I've found the next\n\
+closest activity reading.\n\
+I'll mark it on your map"))
 
-DEFINE_DIALOG(DIALOG_039, 1, 4, 30, 200, _("\
-No visitors allowed,\n\
-by decree of\n\
-the Big Bob-omb\n\
-\n\
-I shall never surrender my\n\
-Stars, for they hold the\n\
-power of the castle in\n\
-their glow.\n\
-They were a gift from\n\
-Bowser, the Koopa King\n\
-himself, and they lie well\n\
-hidden within my realm.\n\
-Not a whisper of their\n\
-whereabouts shall leave\n\
-my lips. Oh, all right,\n\
-perhaps one hint:\n\
-Heed the Star names at\n\
-the beginning of the\n\
-course.\n\
-//--The Big Bob-omb"))
+DEFINE_DIALOG(DIALOG_039, 1, 3, 30, 200, _("\
+No luck eh? \n\
+Maybe you'll find what you're\n\
+looking for over here?"))
 
 DEFINE_DIALOG(DIALOG_040, 1, 3, 30, 200, _("\
-Warning!\n\
-Cold, Cold Crevasse\n\
-Below!"))
+You know you're really doing\n\
+Mr. Sunglasses over there a\n\
+big favor by helping him out.\n\
+I mean who would seriously\n\
+wanna live in a place like this?\n\
+\n\
+These ghosts have treated this\n\
+room in such a monstrous\n\
+manner."))
 
 DEFINE_DIALOG(DIALOG_041, 1, 3, 30, 200, _("\
-I win! You lose!\n\
-Ha ha ha!\n\
-\n\
-That's what you get for\n\
-messin' with Koopa the\n\
-Quick.\n\
-Better luck next time!"))
+Drats, that one wasn't it\n\
+either. The only other place\n\
+to check is the attic.\n\
+If that paranormal activity\n\
+is anywhere in this cursed\n\
+chateau, it's gotta be there!"))
 
-DEFINE_DIALOG(DIALOG_042, 1, 4, 30, 200, _("\
-Caution! Narrow Bridge!\n\
-Cross slowly!\n\
+DEFINE_DIALOG(DIALOG_042, 1, 3, 30, 200, _("\
+Through here is the only way\n\
+to the attic. \n\
 \n\
-\n\
-You can jump to the edge\n\
-of the cliff and hang on,\n\
-and you can climb off the\n\
-edge if you move slowly.\n\
-When you want to let go,\n\
-either press [Z] or press\n\
-the Control Stick in the\n\
-direction of Mario's back.\n\
-To climb up, press Up on\n\
-the Control Stick. To\n\
-scurry up quickly, press\n\
-the [A] Button."))
+Don't worry though, I can\n\
+lend a hand - or, more like\n\
+some feathers.\n\
+Hop on."))
 
-DEFINE_DIALOG(DIALOG_043, 1, 5, 30, 200, _("\
-If you jump and hold the\n\
-[A] Button, you can hang on\n\
-to some objects overhead.\n\
-It's the same as grabbing\n\
-a flying bird!"))
+DEFINE_DIALOG(DIALOG_043, 1, 4, 30, 200, _("\
+This elevator will take you\n\
+to the attic. I'm sure you'll\n\
+find the paranormal activity\n\
+here. 'Rule of 3s' and all."))
 
 DEFINE_DIALOG(DIALOG_044, 1, 5, 95, 200, _("\
 Whooo's there? Whooo\n\
