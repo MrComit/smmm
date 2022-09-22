@@ -366,7 +366,7 @@ extern Gfx hmc_dl_TrophyRoom_002_mesh_layer_1_tri_2[];
 extern Vtx hmc_dl_TrophyRoom_002_mesh_layer_1_vtx_3[17];
 extern Gfx hmc_dl_TrophyRoom_002_mesh_layer_1_tri_3[];
 extern Vtx hmc_dl_TrophyRoom_004_mesh_layer_1_vtx_cull[8];
-extern Vtx hmc_dl_TrophyRoom_004_mesh_layer_1_vtx_0[1642];
+extern Vtx hmc_dl_TrophyRoom_004_mesh_layer_1_vtx_0[1574];
 extern Gfx hmc_dl_TrophyRoom_004_mesh_layer_1_tri_0[];
 extern Vtx hmc_dl_TrophyRoom_004_mesh_layer_1_vtx_1[187];
 extern Gfx hmc_dl_TrophyRoom_004_mesh_layer_1_tri_1[];

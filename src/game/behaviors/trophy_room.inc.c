@@ -387,6 +387,7 @@ void bhv_bully_trophy_loop(void) {
                 obj = spawn_object(o, MODEL_TOKEN, bhvToken);
                 obj->oBehParams2ndByte = 2;
                 obj->oBehParams = 0x00022200;
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 vec3f_set(&obj->oPosX, -6559.0f, 100.0f, 3950.0f);
             // }
             break;
