@@ -225,12 +225,34 @@ const GeoLayout hmc_dl_112__NULL_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout hmc_dl_113__Hallway_geo[] = {
+const GeoLayout hmc_dl_b_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_005_mesh_layer_1),
+		GEO_ASM(0, geo_update_vanish_floor),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Hall_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_c_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Maze_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MazeNoCol_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_113__Hallway_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_plat_hall),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, hmc_dl_b_geo),
+			GEO_BRANCH(1, hmc_dl_c_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_012_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -9943, -200, -18221, 0, 90, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -15291, 8539, -23929, 0, 90, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -18170, 8539, -23929, 0, 90, 0),
@@ -240,10 +262,6 @@ const GeoLayout hmc_dl_113__Hallway_geo[] = {
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -23929, 8539, -23929, 0, 90, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -23929, 8539, -11491, 0, 90, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -18582, -2200, -19142, 0, 90, 0),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Maze_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MazeNoCol_mesh_layer_1),
-		GEO_ASM(0, geo_update_vanish_floor),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Hall_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
