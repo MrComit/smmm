@@ -336,11 +336,11 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
                 }
                 gCutsceneFocus = gMarioObject;
             }
-            save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
+            // save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
             break;
         case 1:
-            // if (save_file_get_rooms(1) & (1 << 20)) {
-                // if (CL_NPC_Dialog(DIALOG_038)) {
+            if (save_file_get_rooms(1) & (1 << 20)) {
+                if (CL_NPC_Dialog(DIALOG_038)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_GAME, 1);
                     obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
                     if (obj != NULL) {
@@ -350,8 +350,8 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
                         obj->oFC = 1;
                         obj->oAction = 0;
                     }
-                // }
-            // }
+                }
+            }
             break;
         case 3:
             if (gMarioCurrentRoom == 7 || gMarioCurrentRoom == 8) {

@@ -470,8 +470,76 @@ Gfx *geo_update_plathall_floor(s32 callContext, struct GraphNode *node, UNUSED v
     return NULL;
 }
 
+Vtx *sOHVerts[] = {
+    &hmc_dl_OpeningHall_001_mesh_layer_1_vtx_0,
+    &hmc_dl_OpeningHall_001_mesh_layer_1_vtx_1,
+    &hmc_dl_OpeningHall_001_mesh_layer_1_vtx_2,
+    &hmc_dl_OpeningHall_001_mesh_layer_1_vtx_3,
+    &hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_0,
+    &hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_1,
+    &hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_2,
+    &hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_3,
+    &hmc_dl_OpeningHallObjects_mesh_layer_4_vtx_0,
+    &hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_0,
+    &hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_1,
+    &hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_2,
+    &hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_3,
+    &hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_4,
+    &hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_0,
+    &hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_1,
+    &hmc_dl_OpeningHallCushions_mesh_layer_1_vtx_0,
+};
+
+s16 sOHVertCounts[] = {
+    sizeof(hmc_dl_OpeningHall_001_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_OpeningHall_001_mesh_layer_1_vtx_1) / 16,
+    sizeof(hmc_dl_OpeningHall_001_mesh_layer_1_vtx_2) / 16,
+    sizeof(hmc_dl_OpeningHall_001_mesh_layer_1_vtx_3) / 16,
+    sizeof(hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_1) / 16,
+    sizeof(hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_2) / 16,
+    sizeof(hmc_dl_OpeningHallObjects_mesh_layer_1_vtx_3) / 16,
+    sizeof(hmc_dl_OpeningHallObjects_mesh_layer_4_vtx_0) / 16,
+    sizeof(hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_1) / 16,
+    sizeof(hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_2) / 16,
+    sizeof(hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_3) / 16,
+    sizeof(hmc_dl_OpeningHallPlants_mesh_layer_1_vtx_4) / 16,
+    sizeof(hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_0) / 16,
+    sizeof(hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_1) / 16,
+    sizeof(hmc_dl_OpeningHallCushions_mesh_layer_1_vtx_0) / 16,
+};
 
 
+Gfx *geo_update_openinghall_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    s32 i, h;
+    s32 dist;
+    Vtx *vert;
+    Vec3s marioPos;
+    struct GraphNodeGenerated *currentGraphNode;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        vec3f_to_vec3s(marioPos, gMarioState->pos);
+        // marioPos[0] -= 8796;
+        // marioPos[2] -= 14423;
+        for (h = 0; h < 17; h++) {
+            vert = segmented_to_virtual(sOHVerts[h]);
+            for (i = 0; i < sOHVertCounts[h]; i++) {
+                dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
+                        (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
+                if (dist <= 5000*5000*2) {
+                    vert[i].v.cn[0] = ((f32)(5000*5000*2 - dist) / (f32)(5000*5000*2) * 255);
+                    vert[i].v.cn[2] = vert[i].v.cn[1] = vert[i].v.cn[0];
+                } else if (vert[i].v.cn[0] != 0) {
+                    vert[i].v.cn[0] = 0;
+                    vert[i].v.cn[1] = 0;
+                    vert[i].v.cn[2] = 0;
+                }
+            }
+        }
+    }
+    return NULL;
+}
 
 
 
