@@ -239,7 +239,13 @@ const GeoLayout hmc_dl_b_geo[] = {
 const GeoLayout hmc_dl_c_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_ASM(3, geo_update_vanish_floor),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_1Maze_mesh_layer_1),
+		GEO_ASM(2, geo_update_plathall_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Maze_mesh_layer_1),
+		GEO_ASM(5, geo_update_vanish_floor),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Maze1NoCol_mesh_layer_1),
+		GEO_ASM(4, geo_update_plathall_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MazeNoCol_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

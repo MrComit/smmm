@@ -388,15 +388,58 @@ Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void
 Vtx *sVanishVerts[] = {
     &hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0,
     &hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1_vtx_0,
+    &hmc_dl_Maze_mesh_layer_1_vtx_0,
+    &hmc_dl_Maze_mesh_layer_1_vtx_2,
+    &hmc_dl_MazeNoCol_mesh_layer_1_vtx_0,
+    &hmc_dl_MazeNoCol_mesh_layer_1_vtx_2,
 };
 
 s16 sVanishVertCounts[] = {
     sizeof(hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0) / 16,
     sizeof(hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_Maze_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_Maze_mesh_layer_1_vtx_2) / 16,
+    sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_2) / 16,
 };
 
+s16 sVanishVertDists[] = {
+    1000,
+    1000,
+    1000,
+    2500,
+    1000,
+    2500,
+};
 
 Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    s32 i;
+    s32 dist, distDefault;
+    Vtx *vert;
+    Vec3s marioPos;
+    struct GraphNodeGenerated *currentGraphNode;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        vec3f_to_vec3s(marioPos, gMarioState->pos);
+        // marioPos[0] -= 8796;
+        // marioPos[2] -= 14423;
+        vert = segmented_to_virtual(sVanishVerts[currentGraphNode->parameter]);
+        distDefault = sVanishVertDists[currentGraphNode->parameter];
+        for (i = 0; i < sVanishVertCounts[currentGraphNode->parameter]; i++) {
+            dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
+                    (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
+            if (dist <= distDefault*distDefault*2) {
+                vert[i].v.cn[3] = (f32)(distDefault*distDefault*2 - dist) / (f32)(distDefault*distDefault*2) * 255;
+            } else if (vert[i].v.cn[3] != 0) {
+                vert[i].v.cn[3] = 0;
+            }
+        }
+    }
+    return NULL;
+}
+
+
+Gfx *geo_update_plathall_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     s32 i;
     s32 dist;
     Vtx *vert;
@@ -411,21 +454,15 @@ Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED voi
         for (i = 0; i < sVanishVertCounts[currentGraphNode->parameter]; i++) {
             dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
                     (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
-            if (dist <= 1000*1000*2) {
-                vert[i].v.cn[3] = (f32)(1000*1000*2 - dist) / (f32)(1000*1000*2) * 255;
+            if (dist <= 2500*2500*2) {
+                vert[i].v.cn[3] = ((f32)(2500*2500*2 - dist) / (f32)(2500*2500*2) * 73);
             } else if (vert[i].v.cn[3] != 0) {
                 vert[i].v.cn[3] = 0;
             }
-            // UV generating code
-            // vert[i].v.tc[0] = (gMarioState->pos[0] - vert[i].v.ob[0]) * 2;
-            // vert[i].v.tc[1] = (gMarioState->pos[2] - vert[i].v.ob[2]) * 2;
         }
     }
     return NULL;
 }
-
-
-
 
 
 
