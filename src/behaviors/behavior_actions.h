@@ -939,6 +939,7 @@ void bhv_cushion_friend_init(void);
 void bhv_opening_wall_loop(void);
 void bhv_bully_trophy_loop(void);
 void bhv_trophy_elevator_loop(void);
+void bhv_plat_hall_wall_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -273,4 +273,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/trophy_elevator/collision_header.h"
 
+#include "levels/hmc/plat_hall_wall/geo_header.h"
+
 #endif

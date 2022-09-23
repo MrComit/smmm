@@ -392,6 +392,8 @@ Vtx *sVanishVerts[] = {
     &hmc_dl_Maze_mesh_layer_1_vtx_2,
     &hmc_dl_MazeNoCol_mesh_layer_1_vtx_0,
     &hmc_dl_MazeNoCol_mesh_layer_1_vtx_2,
+    &hmc_dl_BelowMaze_mesh_layer_1_vtx_0,
+    &hmc_dl_BelowMaze_mesh_layer_1_vtx_1,
 };
 
 s16 sVanishVertCounts[] = {
@@ -401,6 +403,8 @@ s16 sVanishVertCounts[] = {
     sizeof(hmc_dl_Maze_mesh_layer_1_vtx_2) / 16,
     sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_0) / 16,
     sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_2) / 16,
+    sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_0) / 16,
+    sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_1) / 16,
 };
 
 s16 sVanishVertDists[] = {
@@ -409,6 +413,8 @@ s16 sVanishVertDists[] = {
     1000,
     2500,
     1000,
+    2500,
+    2500,
     2500,
 };
 

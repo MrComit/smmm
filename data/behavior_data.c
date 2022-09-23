@@ -9245,3 +9245,12 @@ const BehaviorScript bhvTrophyElevator[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+const BehaviorScript bhvPlatHallWall[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
+    SET_INT(oOpacity, 255),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_plat_hall_wall_loop),
+    END_LOOP(),
+};

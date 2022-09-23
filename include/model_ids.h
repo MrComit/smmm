@@ -777,6 +777,7 @@
 #define MODEL_OPENING_WALL        0x6C
 #define MODEL_BULLY_TROPHY        0x6D
 #define MODEL_TROPHY_ELEVATOR     0x6E
+#define MODEL_PLAT_HALL_WALL      0x6F
 
 // 0x97-0x9B
 #define MODEL_GOOMBA_2D           0x97

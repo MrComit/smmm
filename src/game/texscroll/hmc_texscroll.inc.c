@@ -14,6 +14,7 @@
 #include "levels/hmc/music_barrier/texscroll.inc.c"
 #include "levels/hmc/opening_wall/texscroll.inc.c"
 #include "levels/hmc/trophy_elevator/texscroll.inc.c"
+#include "levels/hmc/plat_hall_wall/texscroll.inc.c"
 void scroll_textures_hmc() {
 	scroll_hmc();
 	scroll_hmc_level_geo_pool_barrier();
@@ -30,4 +31,5 @@ void scroll_textures_hmc() {
 	scroll_hmc_level_geo_music_barrier();
 	scroll_hmc_level_geo_opening_wall();
 	scroll_hmc_level_geo_trophy_elevator();
+	scroll_hmc_level_geo_plat_hall_wall();
 }

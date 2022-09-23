@@ -157,3 +157,4 @@
 #include "levels/hmc/bully_trophy/collision.inc.c"
 #include "levels/hmc/trophy_elevator/model.inc.c"
 #include "levels/hmc/trophy_elevator/collision.inc.c"
+#include "levels/hmc/plat_hall_wall/model.inc.c"

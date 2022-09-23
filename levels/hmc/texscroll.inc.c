@@ -312,9 +312,16 @@ void scroll_sts_mat_hmc_dl_WallDither_002_layer4() {
 	}
 };
 
-void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0() {
+void scroll_sts_mat_hmc_dl_MazeBooGoo_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_MazeBooGoo_layer1);
+	shift_s(mat, 13, PACK_TILESIZE(0, 1));
+	shift_s(mat, 21, PACK_TILESIZE(0, 1));
+	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+};
+
+void scroll_hmc_dl_BelowMaze_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 316;
+	int count = 206;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -324,7 +331,7 @@ void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0() {
 	float amplitudeY = 0.800000011920929;
 	float frequencyY = 0.10000000149011612;
 	float offsetY = 0.0;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Hallway_003_mesh_layer_1_vtx_0);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_BelowMaze_mesh_layer_1_vtx_0);
 
 	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
 
@@ -338,10 +345,48 @@ void scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0() {
 	currentY += deltaY;	timeY += 1;
 }
 
-void scroll_sts_mat_hmc_dl_WallTransition_002_layer1() {
+void scroll_hmc_dl_BelowMaze_mesh_layer_1_vtx_2() {
+	int i = 0;
+	int count = 60;
+	int width = 32 * 0x20;
+	int height = 32 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	static int timeY;
+	float amplitudeY = 0.800000011920929;
+	float frequencyY = 0.10000000149011612;
+	float offsetY = 0.0;
+	Vtx *vertices = segmented_to_virtual(hmc_dl_BelowMaze_mesh_layer_1_vtx_2);
+
+	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;	timeY += 1;
+}
+
+void scroll_sts_mat_hmc_dl_MazeWall_layer1() {
 	static int intervalTex0 = 15;
 	static int curInterval0 = 15;
-	Gfx *mat = segmented_to_virtual(mat_hmc_dl_WallTransition_002_layer1);
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_MazeWall_layer1);
+
+	if (--curInterval0 <= 0) {
+		shift_s_down(mat, 13, PACK_TILESIZE(0, 20));
+		curInterval0 = intervalTex0;
+	}
+	shift_s(mat, 21, PACK_TILESIZE(0, 5));
+};
+
+void scroll_sts_mat_hmc_dl_MazeWallCorrect_layer1() {
+	static int intervalTex0 = 15;
+	static int curInterval0 = 15;
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_MazeWallCorrect_layer1);
 
 	if (--curInterval0 <= 0) {
 		shift_s_down(mat, 13, PACK_TILESIZE(0, 20));
@@ -375,6 +420,18 @@ void scroll_hmc_dl_Hallway_004_mesh_layer_1_vtx_0() {
 	}
 	currentY += deltaY;	timeY += 1;
 }
+
+void scroll_sts_mat_hmc_dl_WallTransition_002_layer1() {
+	static int intervalTex0 = 15;
+	static int curInterval0 = 15;
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_WallTransition_002_layer1);
+
+	if (--curInterval0 <= 0) {
+		shift_s_down(mat, 13, PACK_TILESIZE(0, 20));
+		curInterval0 = intervalTex0;
+	}
+	shift_s(mat, 21, PACK_TILESIZE(0, 5));
+};
 
 void scroll_hmc_dl_Hallway_005_mesh_layer_1_vtx_2() {
 	int i = 0;
@@ -428,18 +485,6 @@ void scroll_hmc_dl_1Maze_mesh_layer_1_vtx_0() {
 	currentY += deltaY;	timeY += 1;
 }
 
-void scroll_sts_mat_hmc_dl_MazeWall_layer1() {
-	static int intervalTex0 = 15;
-	static int curInterval0 = 15;
-	Gfx *mat = segmented_to_virtual(mat_hmc_dl_MazeWall_layer1);
-
-	if (--curInterval0 <= 0) {
-		shift_s_down(mat, 13, PACK_TILESIZE(0, 20));
-		curInterval0 = intervalTex0;
-	}
-	shift_s(mat, 21, PACK_TILESIZE(0, 5));
-};
-
 void scroll_hmc_dl_Maze_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 520;
@@ -492,25 +537,6 @@ void scroll_hmc_dl_Maze_mesh_layer_1_vtx_1() {
 	currentY += deltaY;	timeY += 1;
 }
 
-void scroll_sts_mat_hmc_dl_MazeWallCorrect_layer1() {
-	static int intervalTex0 = 15;
-	static int curInterval0 = 15;
-	Gfx *mat = segmented_to_virtual(mat_hmc_dl_MazeWallCorrect_layer1);
-
-	if (--curInterval0 <= 0) {
-		shift_s_down(mat, 13, PACK_TILESIZE(0, 20));
-		curInterval0 = intervalTex0;
-	}
-	shift_s(mat, 21, PACK_TILESIZE(0, 5));
-};
-
-void scroll_sts_mat_hmc_dl_MazeBooGoo_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_hmc_dl_MazeBooGoo_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
-};
-
 void scroll_hmc_dl_Maze1NoCol_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 4;
@@ -539,7 +565,7 @@ void scroll_hmc_dl_Maze1NoCol_mesh_layer_1_vtx_0() {
 
 void scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 436;
+	int count = 385;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -565,7 +591,7 @@ void scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0() {
 
 void scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 20;
+	int count = 64;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -806,16 +832,17 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_WoodFloorOneCycle_002();
 	scroll_sts_mat_hmc_dl_Lava_002_layer1();
 	scroll_sts_mat_hmc_dl_WallDither_002_layer4();
-	scroll_hmc_dl_Hallway_003_mesh_layer_1_vtx_0();
-	scroll_sts_mat_hmc_dl_WallTransition_002_layer1();
+	scroll_sts_mat_hmc_dl_MazeBooGoo_layer1();
+	scroll_hmc_dl_BelowMaze_mesh_layer_1_vtx_0();
+	scroll_hmc_dl_BelowMaze_mesh_layer_1_vtx_2();
+	scroll_sts_mat_hmc_dl_MazeWall_layer1();
+	scroll_sts_mat_hmc_dl_MazeWallCorrect_layer1();
 	scroll_hmc_dl_Hallway_004_mesh_layer_1_vtx_0();
+	scroll_sts_mat_hmc_dl_WallTransition_002_layer1();
 	scroll_hmc_dl_Hallway_005_mesh_layer_1_vtx_2();
 	scroll_hmc_dl_1Maze_mesh_layer_1_vtx_0();
-	scroll_sts_mat_hmc_dl_MazeWall_layer1();
 	scroll_hmc_dl_Maze_mesh_layer_1_vtx_0();
 	scroll_hmc_dl_Maze_mesh_layer_1_vtx_1();
-	scroll_sts_mat_hmc_dl_MazeWallCorrect_layer1();
-	scroll_sts_mat_hmc_dl_MazeBooGoo_layer1();
 	scroll_hmc_dl_Maze1NoCol_mesh_layer_1_vtx_0();
 	scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_0();
 	scroll_hmc_dl_MazeNoCol_mesh_layer_1_vtx_1();

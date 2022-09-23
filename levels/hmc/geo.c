@@ -71,3 +71,4 @@
 #include "levels/hmc/opening_wall/geo.inc.c"
 #include "levels/hmc/bully_trophy/geo.inc.c"
 #include "levels/hmc/trophy_elevator/geo.inc.c"
+#include "levels/hmc/plat_hall_wall/geo.inc.c"

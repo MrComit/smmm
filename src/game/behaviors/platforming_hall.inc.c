@@ -14,6 +14,23 @@ extern Vec3f gComitCutscenePosVec;
 extern Vec3f gComitCutsceneFocVec;
 
 
+void bhv_plat_hall_wall_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioState->pos[1] < 2000.0f && gMarioState->pos[0] < -16000.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0xA);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 void plathall_instant_warp(void) {
     Vec3f camPos, camFoc;
     s16 cameraAngle;

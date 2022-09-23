@@ -87,6 +87,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_OPENING_WALL, opening_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BULLY_TROPHY, bully_trophy_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_ELEVATOR, trophy_elevator_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PLAT_HALL_WALL, plat_hall_wall_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -108,7 +109,7 @@ const LevelScript level_hmc_entry[] = {
 		INSTANT_WARP(2, 0x01, 0, 0, -5759),
 		INSTANT_WARP(3, 0x01, -5759, 0, 0),
 		INSTANT_WARP(4, 0x01, 5759, 0, 0),
-		INSTANT_WARP(5, 0x01, 5348, -10739, -7651),
+		INSTANT_WARP(5, 0x01, 5348, -10739, -9610),
 		INSTANT_WARP(6, 0x01, 6, -10, -8571),
 		INSTANT_WARP(7, 0x01, -6, 10, 8571),
 		OBJECT(MODEL_NONE, -8503, 300, 11377, -2, 90, -2, (0x1A << 16), bhvAirborneDeathWarp),
@@ -200,6 +201,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_FOREROOM_WINDOW, 1021, 250, -7771, 0, -180, 0, (1 << 16), bhvForeroomWindow),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -8254, 700, -896, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_NONE, -7819, 0, -7246, 0, 0, 0, 0x00000000, bhvPlatHallManage),
+		OBJECT(MODEL_PLAT_HALL_WALL, -18582, -2200, -15342, 0, 0, 0, 0x00000000, bhvPlatHallWall),
 		OBJECT(MODEL_CUSHION_FRIEND, -7819, 0, -7246, 0, 0, 0, (3 << 16), bhvCushionShell),
 		OBJECT(MODEL_STAR_PIECE, -19368, -2150, -6700, 0, 0, 0, (0x12 << 24), bhvStarPiece),
 		OBJECT(MODEL_STATIC_TRI, -11851, -200, -8239, 0, 0, 0, 0x00000000, bhvStaticTri),
