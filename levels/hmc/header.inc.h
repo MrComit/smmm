@@ -672,7 +672,7 @@ extern Vtx hmc_dl_Hallway_005_mesh_layer_1_vtx_4[40];
 extern Gfx hmc_dl_Hallway_005_mesh_layer_1_tri_4[];
 extern Vtx hmc_dl_Hallway_005_mesh_layer_1_vtx_5[10];
 extern Gfx hmc_dl_Hallway_005_mesh_layer_1_tri_5[];
-extern Vtx hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0[86];
+extern Vtx hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0[90];
 extern Gfx hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_tri_0[];
 extern Vtx hmc_dl_1Maze_mesh_layer_1_vtx_0[4];
 extern Gfx hmc_dl_1Maze_mesh_layer_1_tri_0[];

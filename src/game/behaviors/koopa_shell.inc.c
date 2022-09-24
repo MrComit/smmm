@@ -113,7 +113,6 @@ void bhv_koopa_shell_loop(void) {
 
 void bhv_cushion_shell_loop(void) {
     struct Object *obj;
-    struct Surface *sp34;
     struct MarioState *m = gMarioState;
 
     obj_set_hitbox(o, &sKoopaShellHitbox);
@@ -149,7 +148,7 @@ void bhv_cushion_shell_loop(void) {
 
         case 3:
             obj_copy_pos(o, gMarioObject);
-            sp34 = cur_obj_update_floor_height_and_get_floor();
+            cur_obj_update_floor_height_and_get_floor();
 
             o->oFaceAngleYaw = gMarioObject->oMoveAngleYaw;
 
@@ -160,6 +159,9 @@ void bhv_cushion_shell_loop(void) {
                 obj->os16104 = 1;
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 obj->oFaceAngleYaw = 0;
+                if (m->action == ACT_STAR_DANCE_WATER) {
+                    vec3f_set(&obj->oPosX, m->pos[0] + 300.0f, m->pos[1], m->pos[2]);
+                }
             }
 
             if (m->pos[0] > -9000.0f && m->pos[2] > -2000.0f && m->pos[1] <= m->floorHeight) {
@@ -167,7 +169,6 @@ void bhv_cushion_shell_loop(void) {
                 mario_stop_riding_object(m);
                 set_mario_action(m, ACT_JUMP, 0);
                 o->oInteractType = INTERACT_IGLOO_BARRIER;
-
             }
             break;
     }
