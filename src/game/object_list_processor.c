@@ -333,6 +333,11 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
                     if (obj != NULL) {
                         obj->os16F4 = 1;
                     }
+                    obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                    if (obj != NULL) {
+                        obj->oAction = 1;
+                        obj->oPosY += 5000.0f;
+                    }
                 }
                 gCutsceneFocus = gMarioObject;
             }

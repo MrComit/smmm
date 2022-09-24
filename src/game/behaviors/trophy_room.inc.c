@@ -26,7 +26,7 @@ void bhv_opening_wall_loop(void) {
                     obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
                     if (obj != NULL) {
                         obj->oPosY -= 5000.0f;
-                        obj->oAction = 3;
+                        obj->oAction = 4;
                     }
                 } else if (o->os16F6 > 10) {
                     o->activeFlags = 0;
@@ -36,12 +36,13 @@ void bhv_opening_wall_loop(void) {
     }
 }
 
+extern s32 sOHRevert;
 
 void cushion_friend_opening(void) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
     switch (o->oAction) {
-        case 0:
+        case 1:
             if (o->oSubAction == 0) {
                 if (m->pos[2] > o->oPosZ + 750.0f) {
                     o->oSubAction = 1;
@@ -54,27 +55,28 @@ void cushion_friend_opening(void) {
                 }
             }
             if (o->os16F4 >= 5) {
-                o->oAction = 1;
-            }
-            break;
-        case 1:
-            if (m->pos[2] > 7500.0f && m->pos[2] < 8000.0f) {
                 o->oAction = 2;
             }
             break;
         case 2:
+            if (m->pos[2] > 7500.0f && m->pos[2] < 8000.0f) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
             if (CL_NPC_Dialog(DIALOG_036)) {
+                sOHRevert = 1;
                 obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
                 if (obj != NULL) {
                     obj->os16F4 = 2;
                 }
                 // CL_call_warp(0, -5000.0f, 0);
-                o->oAction = 4;
+                o->oAction = 5;
             }
             break;
-        case 3:
+        case 4:
             if (CL_NPC_Dialog(DIALOG_037)) {
-                o->oAction = 4;
+                o->oAction = 5;
             }
             break;
     }

@@ -114,6 +114,7 @@ void bhv_koopa_shell_loop(void) {
 void bhv_cushion_shell_loop(void) {
     struct Object *obj;
     struct Surface *sp34;
+    struct MarioState *m = gMarioState;
 
     obj_set_hitbox(o, &sKoopaShellHitbox);
     if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_TROPHY_TWO) {
@@ -159,6 +160,14 @@ void bhv_cushion_shell_loop(void) {
                 obj->os16104 = 1;
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 obj->oFaceAngleYaw = 0;
+            }
+
+            if (m->pos[0] > -9000.0f && m->pos[2] > -2000.0f && m->pos[1] <= m->floorHeight) {
+                o->oAction = 4;
+                mario_stop_riding_object(m);
+                set_mario_action(m, ACT_JUMP, 0);
+                o->oInteractType = INTERACT_IGLOO_BARRIER;
+
             }
             break;
     }

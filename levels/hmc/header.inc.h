@@ -583,7 +583,7 @@ extern Gfx hmc_dl_Foreroom_mesh_layer_1_tri_7[];
 extern Vtx hmc_dl_Vase_mesh_layer_1_vtx_cull[8];
 extern Vtx hmc_dl_Vase_mesh_layer_1_vtx_0[30];
 extern Gfx hmc_dl_Vase_mesh_layer_1_tri_0[];
-extern Vtx hmc_dl_Vase_mesh_layer_1_vtx_1[126];
+extern Vtx hmc_dl_Vase_mesh_layer_1_vtx_1[118];
 extern Gfx hmc_dl_Vase_mesh_layer_1_tri_1[];
 extern Vtx hmc_dl_Vase_mesh_layer_1_vtx_2[104];
 extern Gfx hmc_dl_Vase_mesh_layer_1_tri_2[];

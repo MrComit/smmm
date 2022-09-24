@@ -30,6 +30,7 @@
 #include "include/course_table.h"
 #include "levels/hmc/header.inc.h"
 #include "levels/bbh/header.inc.h"
+#include "save_file.h"
 
 extern Mtx *gMatStackFixed[32];
 extern s16 gMatStackIndex;
@@ -470,6 +471,8 @@ Gfx *geo_update_plathall_floor(s32 callContext, struct GraphNode *node, UNUSED v
     return NULL;
 }
 
+extern Vtx opening_wall_openingwall_mesh_layer_5_vtx_0[4];
+
 Vtx *sOHVerts[] = {
     &hmc_dl_OpeningHall_001_mesh_layer_1_vtx_0,
     &hmc_dl_OpeningHall_001_mesh_layer_1_vtx_1,
@@ -488,6 +491,7 @@ Vtx *sOHVerts[] = {
     &hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_0,
     &hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_1,
     &hmc_dl_OpeningHallCushions_mesh_layer_1_vtx_0,
+    &opening_wall_openingwall_mesh_layer_5_vtx_0,
 };
 
 s16 sOHVertCounts[] = {
@@ -508,27 +512,40 @@ s16 sOHVertCounts[] = {
     sizeof(hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_0) / 16,
     sizeof(hmc_dl_OpeningHallPlants_mesh_layer_4_vtx_1) / 16,
     sizeof(hmc_dl_OpeningHallCushions_mesh_layer_1_vtx_0) / 16,
+    sizeof(opening_wall_openingwall_mesh_layer_5_vtx_0) / 16,
 };
+
+s32 sOHDist = 15000;
+s32 sOHRevert = 0;
 
 
 Gfx *geo_update_openinghall_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     s32 i, h;
     s32 dist;
+    s32 baseDist;
     Vtx *vert;
     Vec3s marioPos;
     struct GraphNodeGenerated *currentGraphNode;
     if (callContext == GEO_CONTEXT_RENDER) {
         currentGraphNode = (struct GraphNodeGenerated *) node;
         vec3f_to_vec3s(marioPos, gMarioState->pos);
-        // marioPos[0] -= 8796;
-        // marioPos[2] -= 14423;
-        for (h = 0; h < 17; h++) {
+        if (sOHRevert) {
+            sOHDist = approach_s16_symmetric(sOHDist, 15000, 250);
+        } else if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) {
+            sOHDist = approach_s16_symmetric(sOHDist, 3500, 175);
+        }
+        baseDist = sOHDist*sOHDist*2;
+        for (h = 0; h < 18; h++) {
             vert = segmented_to_virtual(sOHVerts[h]);
+            if (h == 17) {
+                marioPos[0] -= -10081;
+                marioPos[2] -= 12063;
+            }
             for (i = 0; i < sOHVertCounts[h]; i++) {
                 dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
                         (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
-                if (dist <= 5000*5000*2) {
-                    vert[i].v.cn[0] = ((f32)(5000*5000*2 - dist) / (f32)(5000*5000*2) * 255);
+                if (dist <= baseDist) {
+                    vert[i].v.cn[0] = ((f32)(baseDist - dist) / (f32)(baseDist) * 255);
                     vert[i].v.cn[2] = vert[i].v.cn[1] = vert[i].v.cn[0];
                 } else if (vert[i].v.cn[0] != 0) {
                     vert[i].v.cn[0] = 0;

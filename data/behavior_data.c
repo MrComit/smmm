@@ -9203,6 +9203,7 @@ const BehaviorScript bhvCushionFriend[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN)),
     LOAD_COLLISION_DATA(cushion_friend_collision),
     SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
     // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_cushion_friend_init),
     BEGIN_LOOP(),
