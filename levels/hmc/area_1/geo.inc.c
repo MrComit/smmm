@@ -158,9 +158,10 @@ const GeoLayout hmc_dl_107__Hallway_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_001_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_HallwayFakeWall_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Plant_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Plant_003_mesh_layer_4),
+		GEO_ASM(0, geo_update_hall_fakewall),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_ZHallwayFakeWall_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

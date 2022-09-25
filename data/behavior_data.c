@@ -9255,3 +9255,14 @@ const BehaviorScript bhvPlatHallWall[] = {
         CALL_NATIVE(bhv_plat_hall_wall_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMazeIndicator[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    //SCALE(0, 200),
+    // CALL_NATIVE(bhv_star_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_maze_indicator_loop),
+    END_LOOP(),
+};

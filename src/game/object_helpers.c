@@ -390,9 +390,9 @@ Vtx *sVanishVerts[] = {
     &hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0,
     &hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1_vtx_0,
     &hmc_dl_Maze_mesh_layer_1_vtx_0,
-    &hmc_dl_Maze_mesh_layer_1_vtx_2,
+    &hmc_dl_Maze_mesh_layer_1_vtx_1,
     &hmc_dl_MazeNoCol_mesh_layer_1_vtx_0,
-    &hmc_dl_MazeNoCol_mesh_layer_1_vtx_2,
+    &hmc_dl_MazeNoCol_mesh_layer_1_vtx_1,
     &hmc_dl_BelowMaze_mesh_layer_1_vtx_0,
     &hmc_dl_BelowMaze_mesh_layer_1_vtx_1,
 };
@@ -401,9 +401,9 @@ s16 sVanishVertCounts[] = {
     sizeof(hmc_dl_MUSICFLOOR_Hall_mesh_layer_1_vtx_0) / 16,
     sizeof(hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1_vtx_0) / 16,
     sizeof(hmc_dl_Maze_mesh_layer_1_vtx_0) / 16,
-    sizeof(hmc_dl_Maze_mesh_layer_1_vtx_2) / 16,
+    sizeof(hmc_dl_Maze_mesh_layer_1_vtx_1) / 16,
     sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_0) / 16,
-    sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_2) / 16,
+    sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_1) / 16,
     sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_0) / 16,
     sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_1) / 16,
 };
@@ -558,6 +558,35 @@ Gfx *geo_update_openinghall_floor(s32 callContext, struct GraphNode *node, UNUSE
     return NULL;
 }
 
+Gfx *geo_update_hall_fakewall(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct MarioState *m = gMarioState;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 opacity;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        if (m->pos[2] > 2000.0f) {
+            opacity = 0xFF;
+        } else if (m->pos[2] < -2500.0f) {
+            opacity = 0xD0;
+        } else {
+            opacity = 0xD0 + (m->pos[2] + 2500.0f) / 4500.0f * 0x2F;
+        }
+
+        currentGraphNode->fnNode.node.flags = 0x400 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+
+        dlHead = dlStart;
+
+        gDPSetEnvColor(dlHead++, 255, 255, 255, opacity);
+        gSPEndDisplayList(dlHead);
+    }
+    return dlStart;
+}
 
 
 
