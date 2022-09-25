@@ -10,6 +10,69 @@ static struct ObjectHitbox sAtticBullyHitbox = {
     /* hurtboxHeight:     */ 225,
 };
 
+void bhv_ghost_barrier_init(void) {
+    if (gCurrLevelNum == LEVEL_BOB && save_file_get_boos() & (1 << 0x12)) {
+        o->activeFlags = 0;
+    }
+}
+
+void bhv_ghost_barrier_loop(void) {
+    if (gCurrLevelNum != LEVEL_HMC) {
+        return;
+    }
+    switch (o->oAction) {
+        case 0:
+            if (save_file_get_boos() & (1 << 0x12) && set_mario_npc_dialog(1)) {
+                o->oAction = 1;
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0x00, 0x00, 0x00);
+                vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
+                vec3f_set(gComitCutscenePosVec, o->oPosX - 1000.0f, o->oPosY + 350.0f, o->oPosZ - 300.0f);
+            }
+            break;
+        case 1:
+            o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+            if (o->oTimer > 5) {
+                gCamera->comitCutscene = 0xFF;
+            }
+            if (o->oTimer > 20) {
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 8, 0x00, 0x00, 0x00);
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+            gCamera->comitCutscene = 0xFF;
+            if (o->oTimer > 25) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x8);
+                if (o->oOpacity == 0) {
+                    play_puzzle_jingle();
+                    o->oAction = 3;
+                }
+            }
+            break;
+        case 3:
+            o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+            gCamera->comitCutscene = 0xFF;
+            if (o->oTimer > 60) {
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+                o->oAction = 4;
+            }
+            break;
+        case 4:
+            o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+            if (o->oTimer <= 10) {
+                gCamera->comitCutscene = 0xFF;
+            }
+            if (o->oTimer > 20) {
+                o->activeFlags = 0;
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 12, 0x00, 0x00, 0x00);
+                set_mario_npc_dialog(0);
+            }
+            break;
+    }
+}
+
+
 s32 attic_bounds(void) {
     if (o->oPosX > -79.0f) {
         o->oPosX = -79.0f;

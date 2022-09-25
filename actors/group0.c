@@ -60,3 +60,5 @@
 #include "horizontal_pole/collision.inc.c"
 #include "horizontal_pole/model.inc.c"
 #include "snufit/model.inc.c"
+#include "garage_wall/model.inc.c"
+#include "garage_wall/collision.inc.c"

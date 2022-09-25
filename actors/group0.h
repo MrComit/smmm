@@ -427,4 +427,8 @@ extern const Gfx snufit_seg6_dl_06009A10[];
 extern const Gfx snufit_seg6_dl_06009B18[];
 extern const Gfx snufit_seg6_dl_06009B68[];
 
+#include "garage_wall/geo_header.h"
+
+#include "garage_wall/collision_header.h"
+
 #endif

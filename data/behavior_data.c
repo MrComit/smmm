@@ -6903,9 +6903,12 @@ const BehaviorScript bhvL1RoomGate[] = {
 const BehaviorScript bhvGhostBarrier[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(ghost_barrier_collision),
+    LOAD_COLLISION_DATA(garage_wall_collision),
+    SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_ghost_barrier_init),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_ghost_barrier_loop),
     END_LOOP(),
 };
 

@@ -616,6 +616,7 @@
 #define MODEL_GLOBAL_GATE         0x41
 #define MODEL_HORIZONTAL_POLE     0x42
 #define MODEL_SNUFIT              0x43        // snufit_geo
+#define MODEL_GARAGE_WALL         0x44
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF
