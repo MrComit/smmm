@@ -47,6 +47,8 @@ const GeoLayout hmc_dl_101__OpeningHall_geo[] = {
 const GeoLayout hmc_dl_102__Trophy_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Attic_003_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, hmc_dl_Attic_003_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_BombTrophy_mesh_layer_1),
 		GEO_ASM(1, geo_update_vanish_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1),
@@ -59,6 +61,7 @@ const GeoLayout hmc_dl_102__Trophy_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_006_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_013_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_015_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_016_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_017_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hmc_dl_TrophyRoom_017_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_018_mesh_layer_1),

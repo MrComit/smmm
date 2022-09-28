@@ -676,9 +676,9 @@ void scroll_sts_mat_hmc_dl_SaunaLavaDyn_001_v5_001_layer1() {
 	shift_t(mat, 21, PACK_TILESIZE(0, 1));
 };
 
-void scroll_hmc_dl_Attic_mesh_layer_1_vtx_3() {
+void scroll_hmc_dl_Attic_mesh_layer_1_vtx_2() {
 	int i = 0;
-	int count = 8;
+	int count = 22;
 	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
@@ -694,7 +694,7 @@ void scroll_hmc_dl_Attic_mesh_layer_1_vtx_3() {
 	float amplitudeY = 0.699999988079071;
 	float frequencyY = 0.20000000298023224;
 	float offsetY = 32.0;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Attic_mesh_layer_1_vtx_3);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Attic_mesh_layer_1_vtx_2);
 
 	deltaX = (int)(amplitudeX * frequencyX * coss((frequencyX * timeX + offsetX) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
 	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
@@ -759,6 +759,6 @@ void scroll_hmc() {
 	scroll_hmc_dl_Steam_001_mesh_layer_5_vtx_0();
 	scroll_hmc_dl_SaunaMat_mesh_layer_1_vtx_0();
 	scroll_sts_mat_hmc_dl_SaunaLavaDyn_001_v5_001_layer1();
-	scroll_hmc_dl_Attic_mesh_layer_1_vtx_3();
+	scroll_hmc_dl_Attic_mesh_layer_1_vtx_2();
 	scroll_sts_mat_hmc_dl_Vase_v4_001_layer1();
 }
