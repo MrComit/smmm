@@ -293,12 +293,12 @@
 #define TEXT_ROOM55 _("Morning Room")
 #define TEXT_ROOM56 _("Theater")
 #define TEXT_ROOM57 _("Outside")
-#define TEXT_ROOM58 _("Unnamed Room C6")
-#define TEXT_ROOM59 _("Unnamed Room C6")
-#define TEXT_ROOM60 _("Unnamed Room C6")
-#define TEXT_ROOM61 _("Unnamed Room C6")
-#define TEXT_ROOM62 _("Unnamed Room C6")
-#define TEXT_ROOM63 _("Unnamed Room C6")
+#define TEXT_ROOM58 _("Outside")
+#define TEXT_ROOM59 _("Treehouse")
+#define TEXT_ROOM60 _("Hallway")
+#define TEXT_ROOM61 _("Sauna")
+#define TEXT_ROOM62 _("Attic")
+#define TEXT_ROOM63 _("Attic")
 
 
 
