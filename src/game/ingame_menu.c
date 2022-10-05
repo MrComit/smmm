@@ -3286,6 +3286,16 @@ static char sRoom60[] = { TEXT_ROOM60 };
 static char sRoom61[] = { TEXT_ROOM61 };
 static char sRoom62[] = { TEXT_ROOM62 };
 static char sRoom63[] = { TEXT_ROOM63 };
+static char sRoom64[] = { TEXT_ROOM64 };
+static char sRoom65[] = { TEXT_ROOM65 };
+static char sRoom66[] = { TEXT_ROOM66 };
+static char sRoom67[] = { TEXT_ROOM67 };
+static char sRoom68[] = { TEXT_ROOM68 };
+static char sRoom69[] = { TEXT_ROOM69 };
+static char sRoom70[] = { TEXT_ROOM70 };
+static char sRoom71[] = { TEXT_ROOM71 };
+static char sRoom72[] = { TEXT_ROOM72 };
+static char sRoom73[] = { TEXT_ROOM73 };
 
 char *sRoomNames[] = {
     sRoom1, sRoom2, sRoom3, sRoom4, sRoom5, sRoom6, sRoom7, sRoom8, sRoom9, sRoom10,
@@ -3294,7 +3304,8 @@ char *sRoomNames[] = {
     sRoom31, sRoom32, sRoom33, sRoom34, sRoom35, sRoom36, sRoom37, sRoom38, sRoom39, sRoom40,
     sRoom41, sRoom42, sRoom43, sRoom44, sRoom45, sRoom46, sRoom47, sRoom48, sRoom49, sRoom50,
     sRoom51, sRoom52, sRoom53, sRoom54, sRoom55, sRoom56, sRoom57, sRoom58, sRoom59, sRoom60,
-    sRoom61, sRoom62, sRoom63,
+    sRoom61, sRoom62, sRoom63, sRoom64, sRoom65, sRoom66, sRoom67, sRoom68, sRoom69, sRoom70,
+    sRoom71, sRoom72, sRoom73,
 };
 
 

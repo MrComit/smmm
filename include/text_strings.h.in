@@ -299,6 +299,16 @@
 #define TEXT_ROOM61 _("Sauna")
 #define TEXT_ROOM62 _("Attic")
 #define TEXT_ROOM63 _("Attic")
+#define TEXT_ROOM64 _("The Corridor")
+#define TEXT_ROOM65 _("Laundry Room")
+#define TEXT_ROOM66 _("Gym")
+#define TEXT_ROOM67 _("Wine Cellar")
+#define TEXT_ROOM68 _("Root Cellar")
+#define TEXT_ROOM69 _("Meat Locker")
+#define TEXT_ROOM70 _("Engine Room")
+#define TEXT_ROOM71 _("Torture Chamber")
+#define TEXT_ROOM72 _("Elevator")
+#define TEXT_ROOM73 _("The Lab")
 
 
 

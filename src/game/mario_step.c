@@ -590,7 +590,7 @@ void apply_gravity(struct MarioState *m) {
 }
 
 
-#define LOW_GRAV_FACTOR 1.7f
+#define LOW_GRAV_FACTOR 1.6f
 
 
 void apply_gravity_low(struct MarioState *m) {
