@@ -11,6 +11,8 @@
 #include "game/area.h"
 #include "object_list_processor.h"
 
+s32 gLowGrav = 0;
+
 static s16 sMovingSandSpeeds[] = { 12, 8, 4, 0 };
 
 struct Surface gWaterSurfacePseudoFloor = {
@@ -690,7 +692,7 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
     m->terrainSoundAddend = mario_get_terrain_sound_addend(m);
 
     if (m->action != ACT_FLYING) {
-        if (gCurrLevelNum == LEVEL_BOB) {
+        if (gCurrLevelNum == LEVEL_LLL /*&& gLowGrav*/) {
             apply_gravity_low(m);
         } else {
             apply_gravity(m);
