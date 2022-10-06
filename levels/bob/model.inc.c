@@ -11379,8 +11379,8 @@ u8 bob_dl_i8_garage_wall_i8[] = {
 	
 };
 
-Gfx bob_dl_cs_metal05_spc_i8_aligner[] = {gsSPEndDisplayList()};
-u8 bob_dl_cs_metal05_spc_i8[] = {
+Gfx bob_dl_garage_floor2_i8_aligner[] = {gsSPEndDisplayList()};
+u8 bob_dl_garage_floor2_i8[] = {
 	0x8d, 0x94, 0x97, 0x94, 0x92, 0x9d, 0xa0, 0x9a, 
 	0x9b, 0x9b, 0x9e, 0xa2, 0x9d, 0x8d, 0x8a, 0x8d, 
 	0x8d, 0x94, 0x96, 0x93, 0x92, 0xa1, 0xa1, 0xa1, 
@@ -45798,7 +45798,7 @@ Gfx mat_bob_dl_GFloor_v4_001[] = {
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
-	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, bob_dl_cs_metal05_spc_i8),
+	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, bob_dl_garage_floor2_i8),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPLoadSync(),
 	gsDPLoadBlock(7, 0, 0, 511, 512),

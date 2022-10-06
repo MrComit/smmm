@@ -20,7 +20,10 @@ const GeoLayout lll_area_1_geo[] = {
 const GeoLayout lll_dl_101__The_Corridor_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_BasementStairs_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Cobwebs_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Corridor_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_Fog_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -96,6 +99,8 @@ const GeoLayout lll_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

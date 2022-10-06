@@ -125,7 +125,7 @@ extern u8 bob_dl_plantStick_ci8_pal_rgba16[];
 extern u8 bob_dl_plantBase_ci8[];
 extern u8 bob_dl_plantBase_ci8_pal_rgba16[];
 extern u8 bob_dl_i8_garage_wall_i8[];
-extern u8 bob_dl_cs_metal05_spc_i8[];
+extern u8 bob_dl_garage_floor2_i8[];
 extern u8 bob_dl_MetalFence_ci8[];
 extern u8 bob_dl_MetalFence_ci8_pal_rgba16[];
 extern u8 bob_dl_OilFloor_ci4[];
