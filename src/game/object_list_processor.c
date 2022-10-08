@@ -24,6 +24,10 @@
 #include "include/config.h"
 #include "dialog_ids.h"
 
+#include "seq_ids.h"
+#include "game_init.h"
+#include "audio/external.h"
+
 
 /**
  * Flags controlling what debug info is displayed.
@@ -399,6 +403,11 @@ void mario_update_toad_friend(struct MarioState *m) {
             break;
         case LEVEL_HMC:
             mario_update_friend_l6_loop(m);
+            break;
+        case LEVEL_LLL:
+            if (gPlayer1Controller->buttonPressed & D_JPAD) {
+                play_music(0, SEQUENCE_ARGS(4, SEQ_BASEMENT), 0);
+            }
             break;
     }
 }

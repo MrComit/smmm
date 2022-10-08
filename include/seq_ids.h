@@ -50,6 +50,7 @@ enum SeqId {
     SEQ_PROF_T,                       // 0x26
     SEQ_GENERIC_BOSS,                 // 0x27
     SEQ_MUSIC_ROOM,                   // 0x28
+    SEQ_BASEMENT,                     // 0x29
     SEQ_COUNT
 };
 
