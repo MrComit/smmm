@@ -788,4 +788,7 @@
 #define MODEL_BOOMBOOM_2D         0x9B
 
 
+// LEVEL 7 MODELS - 0xFF TO 0xE2 ARE FREE
+#define MODEL_CELLAR_BLOCKADE     0xFF
+
 #endif // MODEL_IDS_H

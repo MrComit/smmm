@@ -68,3 +68,6 @@
 #include "levels/lll/areas/2/movtext.inc.c"
 
 #include "levels/lll/leveldata.inc.c"
+
+#include "levels/lll/cellar_blockade/model.inc.c"
+#include "levels/lll/cellar_blockade/collision.inc.c"

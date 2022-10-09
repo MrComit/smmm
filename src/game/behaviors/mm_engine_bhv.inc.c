@@ -186,6 +186,12 @@ void bhv_generic_switch_loop(void) {
 }
 
 
+void bhv_scale_flame_init(void) {
+    if (o->oBehParams2ndByte) {
+        cur_obj_scale((f32)o->oBehParams2ndByte / 10.0f);
+    }
+}
+
 void bhv_env_flame_init(void) {
     o->os16F4 = (o->oBehParams >> 24) & 0xFF;
     o->os16F6 = (o->oBehParams >> 16) & 0xFF;

@@ -1,0 +1,10 @@
+extern const GeoLayout cellar_blockade_geo[];
+extern u8 cellar_blockade_darkwood_ci4[];
+extern u8 cellar_blockade_darkwood_ci4_pal_rgba16[];
+extern Vtx cellar_blockade_Barracade_mesh_layer_1_vtx_cull[8];
+extern Vtx cellar_blockade_Barracade_mesh_layer_1_vtx_0[24];
+extern Gfx cellar_blockade_Barracade_mesh_layer_1_tri_0[];
+extern Gfx mat_cellar_blockade_WoodBar[];
+extern Gfx mat_revert_cellar_blockade_WoodBar[];
+extern Gfx cellar_blockade_Barracade_mesh_layer_1[];
+extern Gfx cellar_blockade_material_revert_render_settings[];

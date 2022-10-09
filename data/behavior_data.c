@@ -1187,6 +1187,7 @@ const BehaviorScript bhvFlame[] = {
     SET_INTERACT_TYPE(INTERACT_FLAME),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
     SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_scale_flame_init),
     BEGIN_LOOP(),
         SET_INT(oInteractStatus, 0),
         ANIMATE_TEXTURE(oAnimState, 2),
@@ -9267,5 +9268,18 @@ const BehaviorScript bhvMazeIndicator[] = {
     // CALL_NATIVE(bhv_star_piece_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_maze_indicator_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCellarBlockade[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR)),
+    LOAD_COLLISION_DATA(cellar_blockade_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cellar_blockade_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

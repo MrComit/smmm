@@ -943,6 +943,8 @@ void bhv_plat_hall_wall_loop(void);
 void bhv_maze_indicator_loop(void);
 void bhv_ghost_barrier_init(void);
 void bhv_ghost_barrier_loop(void);
+void bhv_scale_flame_init(void);
+void bhv_cellar_blockade_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
