@@ -11,7 +11,7 @@ void scroll_sts_mat_lll_dl_CorridorWall_layer1() {
 
 void scroll_lll_dl_Fog_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 18;
+	int count = 20;
 	int width = 32 * 0x20;
 	int height = 128 * 0x20;
 

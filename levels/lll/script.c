@@ -52,7 +52,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_NONE, 751, 0, 8764, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 751, 0, 8764),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -429, 0, 8932, 0, 90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, 5963, 0, -90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3229, 0, 5963, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -429, 0, 1813, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -1187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
@@ -61,7 +61,7 @@ const LevelScript level_lll_entry[] = {
 		TERRAIN(lll_area_1_collision),
 		ROOMS(lll_area_1_collision_rooms),
 		MACRO_OBJECTS(lll_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_MUSIC_ROOM),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_BASEMENT),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
