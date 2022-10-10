@@ -46,3 +46,4 @@
 #include "levels/lll/geo.inc.c"
 
 #include "levels/lll/cellar_blockade/geo.inc.c"
+#include "levels/lll/champagne/geo.inc.c"

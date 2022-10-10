@@ -135,4 +135,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/cellar_blockade/collision_header.h"
 
+#include "levels/lll/champagne/geo_header.h"
+
+#include "levels/lll/champagne/collision_header.h"
+
 #endif

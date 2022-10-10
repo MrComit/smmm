@@ -790,5 +790,6 @@
 
 // LEVEL 7 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_CELLAR_BLOCKADE     0xFF
+#define MODEL_CHAMPAGNE           0xFE
 
 #endif // MODEL_IDS_H

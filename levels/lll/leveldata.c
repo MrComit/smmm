@@ -71,3 +71,5 @@
 
 #include "levels/lll/cellar_blockade/model.inc.c"
 #include "levels/lll/cellar_blockade/collision.inc.c"
+#include "levels/lll/champagne/model.inc.c"
+#include "levels/lll/champagne/collision.inc.c"

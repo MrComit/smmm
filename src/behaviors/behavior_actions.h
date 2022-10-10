@@ -945,6 +945,9 @@ void bhv_ghost_barrier_init(void);
 void bhv_ghost_barrier_loop(void);
 void bhv_scale_flame_init(void);
 void bhv_cellar_blockade_loop(void);
+void bhv_cellar_blockade_init(void);
+void bhv_champagne_loop(void);
+void bhv_champagne_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

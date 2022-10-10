@@ -53,8 +53,6 @@ const GeoLayout lll_dl_104__Wine_Cellar_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_Wine_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, lll_dl_Wine_mesh_layer_7),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_Wine_002_mesh_layer_5),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, lll_dl_Wine_002_mesh_layer_7),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_WineCellar_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_WineCellar_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, lll_dl_WineLogos_001_mesh_layer_7),

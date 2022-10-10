@@ -1484,7 +1484,11 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_copy(c->pos, gComitCutscenePosVec);
             vec3f_copy(c->focus, gComitCutsceneFocVec);
             // CL_set_camera_pos(gComitCutscenePosVec, gComitCutsceneFocVec);
-            c->comitCutscene = 0;
+            if (gComitCutsceneTimer == 0) {
+                c->comitCutscene = 0;
+            } else if (--gComitCutsceneTimer <= 0) {
+                    gComitCutsceneTimer = 0;
+            }
             break;
     }
 }

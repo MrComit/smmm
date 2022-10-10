@@ -782,6 +782,7 @@ extern const BehaviorScript bhvTrophyElevator[];
 extern const BehaviorScript bhvPlatHallWall[];
 extern const BehaviorScript bhvMazeIndicator[];
 extern const BehaviorScript bhvCellarBlockade[];
+extern const BehaviorScript bhvChampagne[];
 
 
 #endif // BEHAVIOR_DATA_H
