@@ -63,6 +63,10 @@ const GeoLayout lll_dl_104__Wine_Cellar_geo[] = {
 const GeoLayout lll_dl_105__Root_Cellar_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2998, 400, 4610, lll_dl_Can_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, lll_dl_Can_mesh_layer_6),
+		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_RootCellar_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
