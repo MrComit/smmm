@@ -73,3 +73,8 @@
 #include "levels/lll/cellar_blockade/collision.inc.c"
 #include "levels/lll/champagne/model.inc.c"
 #include "levels/lll/champagne/collision.inc.c"
+#include "levels/lll/security_cam/collision.inc.c"
+#include "levels/lll/security_cam/model.inc.c"
+#include "levels/lll/security_cam/anims/data.inc.c"
+#include "levels/lll/security_cam/anims/table.inc.c"
+#include "levels/lll/lightbeam/model.inc.c"

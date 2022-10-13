@@ -783,6 +783,7 @@ extern const BehaviorScript bhvPlatHallWall[];
 extern const BehaviorScript bhvMazeIndicator[];
 extern const BehaviorScript bhvCellarBlockade[];
 extern const BehaviorScript bhvChampagne[];
+extern const BehaviorScript bhvSecurityCam[];
 
 
 #endif // BEHAVIOR_DATA_H

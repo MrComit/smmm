@@ -9298,3 +9298,19 @@ const BehaviorScript bhvChampagne[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvSecurityCam[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN)),
+    LOAD_COLLISION_DATA(security_cam_collision),
+    LOAD_ANIMATIONS(oAnimations, security_cam_anims),
+    ANIMATE(0),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_security_cam_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_security_cam_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

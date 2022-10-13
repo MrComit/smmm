@@ -1,5 +1,19 @@
 extern s16 gComitCutsceneTimer;
 
+void bhv_security_cam_init(void) {
+    o->oRoom = 4;
+}
+
+
+void bhv_security_cam_loop(void) {
+    o->os16F6 += 0x200;
+    o->os16F4 = -1335 + (sins(o->os16F6) * 400);
+    print_text_fmt_int(80, 80, "%d", o->os16F4);
+    // o->oFaceAngleYaw = sins(o->os16F6) * 0x2000;
+
+}
+
+
 void bhv_champagne_init(void) {
     o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvCellarBlockade);
     if (o->oObjF4 == NULL) {

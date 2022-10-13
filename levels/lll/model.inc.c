@@ -1,16 +1,16 @@
-Lights1 lll_dl_TroopaDe_lights = gdSPDefLights1(
+Lights1 lll_dl_TroopaDe_001_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 lll_dl_Goombetto_lights = gdSPDefLights1(
+Lights1 lll_dl_Goombetto_003_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 lll_dl_Goombetto_001_lights = gdSPDefLights1(
+Lights1 lll_dl_Goombetto_002_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 lll_dl_TroopaDe_002_lights = gdSPDefLights1(
+Lights1 lll_dl_TroopaDe_003_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
@@ -25998,7 +25998,7 @@ Vtx lll_dl_RootCellar_mesh_layer_1_vtx_cull[8] = {
 	{{{-479, 0, 2682}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
 };
 
-Vtx lll_dl_RootCellar_mesh_layer_1_vtx_0[87] = {
+Vtx lll_dl_RootCellar_mesh_layer_1_vtx_0[88] = {
 	{{{-2304, 0, 6832}, 0, {-16, 1008}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-2304, 250, 6882}, 0, {-16, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-2304, 0, 6882}, 0, {-16, 1008}, {0x53, 0x2C, 0x1C, 0xFF}}},
@@ -26026,22 +26026,32 @@ Vtx lll_dl_RootCellar_mesh_layer_1_vtx_0[87] = {
 	{{{-4229, 1375, 4757}, 0, {4239, -864}, {0x47, 0x18, 0x14, 0xFF}}},
 	{{{-4229, 1500, 2882}, 0, {6553, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
 	{{{-4229, 1500, 4757}, 0, {4239, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 4073, 2882}, 0, {6553, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 4073, 4757}, 0, {4239, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 1375, 4907}, 0, {4079, -864}, {0x47, 0x18, 0x14, 0xFF}}},
 	{{{-4229, 1500, 4907}, 0, {4079, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 4073, 4907}, 0, {4079, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 4073, 4757}, 0, {4239, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 4073, 2882}, 0, {6233, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 1500, 2882}, 0, {6233, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 1500, 4907}, 0, {4079, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 4073, 4757}, 0, {4239, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 4073, 4907}, 0, {4079, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
 	{{{-4229, 1500, 6832}, 0, {2032, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 1500, 6832}, 0, {2032, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 4073, 4907}, 0, {4079, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 4073, 6832}, 0, {2032, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 4073, 6832}, 0, {2032, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
 	{{{-2304, 1500, 6832}, 0, {-16, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-2304, 4073, 6832}, 0, {-16, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-2304, 4073, 6832}, 0, {-16, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
 	{{{-2154, 1500, 6832}, 0, {-175, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-2154, 4073, 6832}, 0, {-175, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-679, 1500, 6832}, 0, {-1957, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-679, 4073, 6832}, 0, {-1957, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-679, 1375, 6832}, 0, {-1957, -864}, {0x47, 0x18, 0x14, 0xFF}}},
+	{{{-2154, 4073, 6832}, 0, {-175, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-679, 1500, 6832}, 0, {-1744, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-679, 4073, 6832}, 0, {-1744, -4535}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-4229, 1375, 6832}, 0, {2032, -864}, {0x47, 0x18, 0x14, 0xFF}}},
+	{{{-4229, 1375, 4907}, 0, {4079, -864}, {0x47, 0x18, 0x14, 0xFF}}},
+	{{{-4229, 935, 6832}, 0, {2032, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
+	{{{-2304, 935, 6832}, 0, {-16, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
+	{{{-2304, 1375, 6832}, 0, {-16, -864}, {0x47, 0x18, 0x14, 0xFF}}},
+	{{{-2304, 1500, 6832}, 0, {-16, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
 	{{{-2154, 1375, 6832}, 0, {-175, -864}, {0x47, 0x18, 0x14, 0xFF}}},
+	{{{-2154, 1500, 6832}, 0, {-175, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
+	{{{-679, 1375, 6832}, 0, {-1957, -864}, {0x47, 0x18, 0x14, 0xFF}}},
+	{{{-679, 1500, 6832}, 0, {-1957, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
 	{{{-679, 935, 6832}, 0, {-1957, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
 	{{{-2154, 935, 6832}, 0, {-175, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
 	{{{-679, 760, 6832}, 0, {-1957, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
@@ -26053,7 +26063,10 @@ Vtx lll_dl_RootCellar_mesh_layer_1_vtx_0[87] = {
 	{{{-2154, 0, 6832}, 0, {-175, 1008}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-679, 0, 6832}, 0, {-1957, 1008}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-2154, 0, 6882}, 0, {-175, 1008}, {0x53, 0x2C, 0x1C, 0xFF}}},
+	{{{-2154, 125, 6832}, 0, {-175, 838}, {0x53, 0x2C, 0x1C, 0xFF}}},
+	{{{-2154, 0, 6882}, 0, {-175, 1008}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-2154, 125, 6882}, 0, {-175, 838}, {0x53, 0x2C, 0x1C, 0xFF}}},
+	{{{-2154, 250, 6832}, 0, {-175, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-2154, 250, 6882}, 0, {-175, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-2304, 250, 6832}, 0, {-16, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-2304, 250, 6882}, 0, {-16, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
@@ -26063,29 +26076,17 @@ Vtx lll_dl_RootCellar_mesh_layer_1_vtx_0[87] = {
 	{{{-4229, 760, 4907}, 0, {4079, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
 	{{{-4229, 250, 4907}, 0, {4079, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-4229, 760, 4757}, 0, {4239, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
-	{{{-4229, 250, 4907}, 0, {4079, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
 	{{{-4229, 250, 4757}, 0, {4239, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
-	{{{-4229, 760, 4757}, 0, {4239, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
-	{{{-4229, 760, 4907}, 0, {4079, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
 	{{{-4229, 935, 4757}, 0, {4239, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
 	{{{-4229, 935, 4907}, 0, {4079, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
 	{{{-4229, 1375, 4757}, 0, {4239, -864}, {0x47, 0x18, 0x14, 0xFF}}},
 	{{{-4229, 1375, 4907}, 0, {4079, -864}, {0x47, 0x18, 0x14, 0xFF}}},
-	{{{-4229, 1500, 4757}, 0, {4239, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 1500, 4907}, 0, {4079, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-4229, 1375, 6832}, 0, {2032, -864}, {0x47, 0x18, 0x14, 0xFF}}},
-	{{{-4229, 1500, 6832}, 0, {2032, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-2304, 1375, 6832}, 0, {-16, -864}, {0x47, 0x18, 0x14, 0xFF}}},
-	{{{-2304, 1500, 6832}, 0, {-16, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-2154, 1375, 6832}, 0, {-175, -864}, {0x47, 0x18, 0x14, 0xFF}}},
-	{{{-2154, 1500, 6832}, 0, {-175, -1034}, {0x46, 0x14, 0x13, 0xFF}}},
-	{{{-2154, 935, 6832}, 0, {-175, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
+	{{{-4229, 935, 6832}, 0, {2032, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
 	{{{-2304, 935, 6832}, 0, {-16, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
 	{{{-2154, 760, 6832}, 0, {-175, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
-	{{{-2304, 760, 6832}, 0, {-16, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
-	{{{-2154, 250, 6832}, 0, {-175, 667}, {0x53, 0x2C, 0x1C, 0xFF}}},
-	{{{-4229, 935, 6832}, 0, {2032, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
-	{{{-4229, 760, 6832}, 0, {2032, -27}, {0x4E, 0x24, 0x18, 0xFF}}},
+	{{{-2154, 935, 6832}, 0, {-175, -265}, {0x4C, 0x21, 0x17, 0xFF}}},
+	{{{-2304, 1375, 6832}, 0, {-16, -864}, {0x47, 0x18, 0x14, 0xFF}}},
+	{{{-2154, 1375, 6832}, 0, {-175, -864}, {0x47, 0x18, 0x14, 0xFF}}},
 };
 
 Gfx lll_dl_RootCellar_mesh_layer_1_tri_0[] = {
@@ -26103,40 +26104,40 @@ Gfx lll_dl_RootCellar_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(20, 19, 21, 0, 20, 21, 22, 0),
 	gsSP2Triangles(22, 21, 23, 0, 22, 23, 24, 0),
 	gsSP2Triangles(24, 23, 25, 0, 24, 25, 26, 0),
-	gsSP2Triangles(26, 25, 27, 0, 26, 27, 28, 0),
-	gsSP2Triangles(29, 26, 28, 0, 29, 28, 30, 0),
-	gsSP1Triangle(31, 29, 30, 0),
+	gsSP2Triangles(27, 24, 26, 0, 27, 26, 28, 0),
+	gsSP2Triangles(28, 26, 29, 0, 26, 30, 29, 0),
+	gsSP1Triangle(26, 31, 30, 0),
 	gsSPVertex(lll_dl_RootCellar_mesh_layer_1_vtx_0 + 32, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
 	gsSP2Triangles(3, 2, 4, 0, 5, 3, 4, 0),
 	gsSP2Triangles(5, 4, 6, 0, 7, 5, 6, 0),
-	gsSP2Triangles(7, 6, 8, 0, 9, 5, 7, 0),
-	gsSP2Triangles(9, 10, 5, 0, 11, 10, 9, 0),
-	gsSP2Triangles(11, 12, 10, 0, 13, 12, 11, 0),
-	gsSP2Triangles(13, 14, 12, 0, 15, 14, 13, 0),
-	gsSP2Triangles(15, 16, 14, 0, 17, 16, 15, 0),
-	gsSP2Triangles(17, 15, 18, 0, 19, 17, 18, 0),
-	gsSP2Triangles(19, 18, 20, 0, 17, 19, 21, 0),
-	gsSP2Triangles(17, 21, 22, 0, 16, 17, 22, 0),
-	gsSP2Triangles(16, 22, 23, 0, 24, 16, 23, 0),
-	gsSP2Triangles(24, 23, 25, 0, 16, 24, 26, 0),
-	gsSP2Triangles(24, 27, 26, 0, 24, 28, 27, 0),
-	gsSP2Triangles(28, 29, 27, 0, 28, 30, 29, 0),
-	gsSP1Triangle(30, 31, 29, 0),
-	gsSPVertex(lll_dl_RootCellar_mesh_layer_1_vtx_0 + 64, 23, 0),
-	gsSP2Triangles(0, 1, 2, 0, 3, 2, 4, 0),
-	gsSP2Triangles(3, 4, 5, 0, 5, 4, 6, 0),
-	gsSP2Triangles(5, 6, 7, 0, 7, 6, 8, 0),
-	gsSP2Triangles(7, 8, 9, 0, 10, 7, 9, 0),
-	gsSP2Triangles(10, 9, 11, 0, 12, 10, 11, 0),
-	gsSP2Triangles(12, 11, 13, 0, 14, 12, 13, 0),
-	gsSP2Triangles(14, 13, 15, 0, 16, 12, 14, 0),
-	gsSP2Triangles(16, 17, 12, 0, 18, 17, 16, 0),
-	gsSP2Triangles(18, 19, 17, 0, 20, 19, 18, 0),
-	gsSP2Triangles(19, 21, 17, 0, 19, 22, 21, 0),
-	gsSP2Triangles(22, 5, 21, 0, 22, 3, 5, 0),
-	gsSP2Triangles(21, 5, 7, 0, 21, 7, 10, 0),
-	gsSP2Triangles(17, 21, 10, 0, 17, 10, 12, 0),
+	gsSP2Triangles(7, 6, 8, 0, 9, 7, 8, 0),
+	gsSP2Triangles(9, 8, 10, 0, 11, 0, 3, 0),
+	gsSP2Triangles(11, 12, 0, 0, 13, 12, 11, 0),
+	gsSP2Triangles(14, 13, 11, 0, 14, 11, 15, 0),
+	gsSP2Triangles(15, 11, 3, 0, 15, 3, 16, 0),
+	gsSP2Triangles(17, 15, 16, 0, 17, 16, 18, 0),
+	gsSP2Triangles(19, 17, 18, 0, 19, 18, 20, 0),
+	gsSP2Triangles(21, 17, 19, 0, 21, 22, 17, 0),
+	gsSP2Triangles(23, 22, 21, 0, 23, 24, 22, 0),
+	gsSP2Triangles(25, 24, 23, 0, 25, 26, 24, 0),
+	gsSP2Triangles(27, 26, 25, 0, 27, 25, 28, 0),
+	gsSP2Triangles(29, 27, 28, 0, 29, 28, 30, 0),
+	gsSP1Triangle(27, 29, 31, 0),
+	gsSPVertex(lll_dl_RootCellar_mesh_layer_1_vtx_0 + 64, 24, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSP2Triangles(3, 2, 4, 0, 5, 3, 4, 0),
+	gsSP2Triangles(5, 4, 6, 0, 3, 5, 7, 0),
+	gsSP2Triangles(5, 8, 7, 0, 5, 9, 8, 0),
+	gsSP2Triangles(9, 10, 8, 0, 9, 11, 10, 0),
+	gsSP2Triangles(11, 12, 10, 0, 11, 13, 12, 0),
+	gsSP2Triangles(10, 12, 14, 0, 10, 14, 15, 0),
+	gsSP2Triangles(15, 14, 16, 0, 15, 16, 17, 0),
+	gsSP2Triangles(18, 15, 17, 0, 8, 15, 18, 0),
+	gsSP2Triangles(7, 8, 18, 0, 7, 18, 19, 0),
+	gsSP2Triangles(20, 7, 19, 0, 20, 19, 21, 0),
+	gsSP2Triangles(21, 19, 22, 0, 21, 22, 23, 0),
+	gsSP2Triangles(3, 7, 20, 0, 8, 10, 15, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -28515,7 +28516,7 @@ Gfx mat_revert_lll_dl_Cobweb[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_WoodBeams[] = {
+Gfx mat_lll_dl_WoodBeams_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28538,14 +28539,14 @@ Gfx mat_lll_dl_WoodBeams[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_WoodBeams[] = {
+Gfx mat_revert_lll_dl_WoodBeams_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Fog_layer5[] = {
+Gfx mat_lll_dl_Fog_001_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL1, 0, SHADE, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28571,7 +28572,7 @@ Gfx mat_lll_dl_Fog_layer5[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_Fog_layer5[] = {
+Gfx mat_revert_lll_dl_Fog_001_layer5[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -28609,7 +28610,7 @@ Gfx mat_revert_lll_dl_Barrel_v3_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_KoopaPaintingBottom[] = {
+Gfx mat_lll_dl_KoopaPaintingBottom_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28626,14 +28627,14 @@ Gfx mat_lll_dl_KoopaPaintingBottom[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_KoopaPaintingBottom[] = {
+Gfx mat_revert_lll_dl_KoopaPaintingBottom_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureFilter(G_TF_BILERP),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_KoopaPaintingTop[] = {
+Gfx mat_lll_dl_KoopaPaintingTop_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28650,7 +28651,7 @@ Gfx mat_lll_dl_KoopaPaintingTop[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_KoopaPaintingTop[] = {
+Gfx mat_revert_lll_dl_KoopaPaintingTop_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureFilter(G_TF_BILERP),
@@ -28687,7 +28688,7 @@ Gfx mat_revert_lll_dl_CellarFloor[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_House_001_layer1[] = {
+Gfx mat_lll_dl_House_002_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28713,7 +28714,7 @@ Gfx mat_lll_dl_House_001_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_House_001_layer1[] = {
+Gfx mat_revert_lll_dl_House_002_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -28721,7 +28722,7 @@ Gfx mat_revert_lll_dl_House_001_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_MetalFence_002[] = {
+Gfx mat_lll_dl_MetalFence_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
@@ -28737,13 +28738,13 @@ Gfx mat_lll_dl_MetalFence_002[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_MetalFence_002[] = {
+Gfx mat_revert_lll_dl_MetalFence_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Metal_001[] = {
+Gfx mat_lll_dl_Metal_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28759,13 +28760,13 @@ Gfx mat_lll_dl_Metal_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_Metal_001[] = {
+Gfx mat_revert_lll_dl_Metal_002[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_FancyBottle[] = {
+Gfx mat_lll_dl_FancyBottle_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28774,13 +28775,13 @@ Gfx mat_lll_dl_FancyBottle[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_FancyBottle[] = {
+Gfx mat_revert_lll_dl_FancyBottle_002[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_WineBottle[] = {
+Gfx mat_lll_dl_WineBottle_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28796,13 +28797,13 @@ Gfx mat_lll_dl_WineBottle[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_WineBottle[] = {
+Gfx mat_revert_lll_dl_WineBottle_002[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_ShyguyChard[] = {
+Gfx mat_lll_dl_ShyguyChard_003[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28825,7 +28826,7 @@ Gfx mat_lll_dl_ShyguyChard[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_ShyguyChard[] = {
+Gfx mat_revert_lll_dl_ShyguyChard_003[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
@@ -28863,7 +28864,7 @@ Gfx mat_revert_lll_dl_BottleLabel[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_TroopaDe[] = {
+Gfx mat_lll_dl_TroopaDe_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -28882,17 +28883,17 @@ Gfx mat_lll_dl_TroopaDe[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(lll_dl_TroopaDe_lights),
+	gsSPSetLights1(lll_dl_TroopaDe_001_lights),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_TroopaDe[] = {
+Gfx mat_revert_lll_dl_TroopaDe_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Goombetto[] = {
+Gfx mat_lll_dl_Goombetto_003[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -28911,11 +28912,11 @@ Gfx mat_lll_dl_Goombetto[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(lll_dl_Goombetto_lights),
+	gsSPSetLights1(lll_dl_Goombetto_003_lights),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_Goombetto[] = {
+Gfx mat_revert_lll_dl_Goombetto_003[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
@@ -28943,7 +28944,7 @@ Gfx mat_revert_lll_dl_CellarWall[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_ShelfWood[] = {
+Gfx mat_lll_dl_ShelfWood_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28966,14 +28967,14 @@ Gfx mat_lll_dl_ShelfWood[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_ShelfWood[] = {
+Gfx mat_revert_lll_dl_ShelfWood_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_ShelfWoodTop[] = {
+Gfx mat_lll_dl_ShelfWoodTop_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 1, TEXEL0, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -28996,14 +28997,14 @@ Gfx mat_lll_dl_ShelfWoodTop[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_ShelfWoodTop[] = {
+Gfx mat_revert_lll_dl_ShelfWoodTop_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Window[] = {
+Gfx mat_lll_dl_Window_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -29011,7 +29012,7 @@ Gfx mat_lll_dl_Window[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Goombetto_001[] = {
+Gfx mat_lll_dl_Goombetto_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -29030,17 +29031,17 @@ Gfx mat_lll_dl_Goombetto_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(lll_dl_Goombetto_001_lights),
+	gsSPSetLights1(lll_dl_Goombetto_002_lights),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_Goombetto_001[] = {
+Gfx mat_revert_lll_dl_Goombetto_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_ShyguyChard_001[] = {
+Gfx mat_lll_dl_ShyguyChard_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29063,14 +29064,14 @@ Gfx mat_lll_dl_ShyguyChard_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_ShyguyChard_001[] = {
+Gfx mat_revert_lll_dl_ShyguyChard_002[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_TroopaDe_002[] = {
+Gfx mat_lll_dl_TroopaDe_003[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -29089,17 +29090,17 @@ Gfx mat_lll_dl_TroopaDe_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(lll_dl_TroopaDe_002_lights),
+	gsSPSetLights1(lll_dl_TroopaDe_003_lights),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_TroopaDe_002[] = {
+Gfx mat_revert_lll_dl_TroopaDe_003[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_GoombaText_001[] = {
+Gfx mat_lll_dl_GoombaText_003[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -29114,7 +29115,7 @@ Gfx mat_lll_dl_GoombaText_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_KoopaText_001[] = {
+Gfx mat_lll_dl_KoopaText_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -29129,7 +29130,7 @@ Gfx mat_lll_dl_KoopaText_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_ShyguyText_001[] = {
+Gfx mat_lll_dl_ShyguyText_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -29181,7 +29182,7 @@ Gfx mat_revert_lll_dl_CharvaarghLogo_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_YoshiBerries[] = {
+Gfx mat_lll_dl_YoshiBerries_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT, TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29197,7 +29198,7 @@ Gfx mat_lll_dl_YoshiBerries[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_YoshiBerries[] = {
+Gfx mat_revert_lll_dl_YoshiBerries_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
@@ -29225,7 +29226,7 @@ Gfx mat_revert_lll_dl_CanLid[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_YoshiText[] = {
+Gfx mat_lll_dl_YoshiText_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29241,13 +29242,13 @@ Gfx mat_lll_dl_YoshiText[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_YoshiText[] = {
+Gfx mat_revert_lll_dl_YoshiText_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_UnshelledKoopa[] = {
+Gfx mat_lll_dl_UnshelledKoopa_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT, TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29263,13 +29264,13 @@ Gfx mat_lll_dl_UnshelledKoopa[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_UnshelledKoopa[] = {
+Gfx mat_revert_lll_dl_UnshelledKoopa_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_KoopaText_002[] = {
+Gfx mat_lll_dl_KoopaText_003[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29285,7 +29286,7 @@ Gfx mat_lll_dl_KoopaText_002[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_KoopaText_002[] = {
+Gfx mat_revert_lll_dl_KoopaText_003[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
@@ -29335,7 +29336,7 @@ Gfx mat_revert_lll_dl_ChompText[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_SyntheticGoomba[] = {
+Gfx mat_lll_dl_SyntheticGoomba_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT, TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29358,14 +29359,14 @@ Gfx mat_lll_dl_SyntheticGoomba[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_SyntheticGoomba[] = {
+Gfx mat_revert_lll_dl_SyntheticGoomba_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_GoombaText[] = {
+Gfx mat_lll_dl_GoombaText_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29381,13 +29382,13 @@ Gfx mat_lll_dl_GoombaText[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_GoombaText[] = {
+Gfx mat_revert_lll_dl_GoombaText_002[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_SuperShrooms[] = {
+Gfx mat_lll_dl_SuperShrooms_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT, TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29403,13 +29404,13 @@ Gfx mat_lll_dl_SuperShrooms[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_SuperShrooms[] = {
+Gfx mat_revert_lll_dl_SuperShrooms_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_ShroomText[] = {
+Gfx mat_lll_dl_ShroomText_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29425,7 +29426,7 @@ Gfx mat_lll_dl_ShroomText[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_ShroomText[] = {
+Gfx mat_revert_lll_dl_ShroomText_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
@@ -29475,7 +29476,7 @@ Gfx mat_revert_lll_dl_DaisyText[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_PeachPlumbs[] = {
+Gfx mat_lll_dl_PeachPlumbs_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT, TEXEL0, SHADE, TEXEL0_ALPHA, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29491,13 +29492,13 @@ Gfx mat_lll_dl_PeachPlumbs[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_PeachPlumbs[] = {
+Gfx mat_revert_lll_dl_PeachPlumbs_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_PeachText[] = {
+Gfx mat_lll_dl_PeachText_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29513,13 +29514,13 @@ Gfx mat_lll_dl_PeachText[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_PeachText[] = {
+Gfx mat_revert_lll_dl_PeachText_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Window_001[] = {
+Gfx mat_lll_dl_Window_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -29527,7 +29528,7 @@ Gfx mat_lll_dl_Window_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Vegetables_layer1[] = {
+Gfx mat_lll_dl_Vegetables_001_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, 0, 0, 0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29553,7 +29554,7 @@ Gfx mat_lll_dl_Vegetables_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_Vegetables_layer1[] = {
+Gfx mat_revert_lll_dl_Vegetables_001_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -29561,7 +29562,7 @@ Gfx mat_revert_lll_dl_Vegetables_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_VertColSolid[] = {
+Gfx mat_lll_dl_VertColSolid_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29569,7 +29570,7 @@ Gfx mat_lll_dl_VertColSolid[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_VertColSolid[] = {
+Gfx mat_revert_lll_dl_VertColSolid_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
@@ -29597,7 +29598,7 @@ Gfx mat_revert_lll_dl_Carrot[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Leaf[] = {
+Gfx mat_lll_dl_Leaf_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
 	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
@@ -29620,14 +29621,14 @@ Gfx mat_lll_dl_Leaf[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_Leaf[] = {
+Gfx mat_revert_lll_dl_Leaf_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_Lettuce_layer7[] = {
+Gfx mat_lll_dl_Lettuce_001_layer7[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, 0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
 	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
@@ -29653,7 +29654,7 @@ Gfx mat_lll_dl_Lettuce_layer7[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_Lettuce_layer7[] = {
+Gfx mat_revert_lll_dl_Lettuce_001_layer7[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -29661,7 +29662,7 @@ Gfx mat_revert_lll_dl_Lettuce_layer7[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_LockerWall[] = {
+Gfx mat_lll_dl_LockerWall_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 0, TEXEL0, 0, SHADE, 0, 0, 0, 0, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29684,14 +29685,14 @@ Gfx mat_lll_dl_LockerWall[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_LockerWall[] = {
+Gfx mat_revert_lll_dl_LockerWall_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_lll_dl_LockerFloor[] = {
+Gfx mat_lll_dl_LockerFloor_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, 0, TEXEL0, 0, SHADE, 0, 0, 0, 0, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -29707,7 +29708,7 @@ Gfx mat_lll_dl_LockerFloor[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_lll_dl_LockerFloor[] = {
+Gfx mat_revert_lll_dl_LockerFloor_001[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
@@ -29745,9 +29746,9 @@ Gfx lll_dl_Corridor_mesh_layer_1[] = {
 	gsSPDisplayList(mat_lll_dl_CorridorWall_layer1),
 	gsSPDisplayList(lll_dl_Corridor_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_lll_dl_CorridorWall_layer1),
-	gsSPDisplayList(mat_lll_dl_WoodBeams),
+	gsSPDisplayList(mat_lll_dl_WoodBeams_001),
 	gsSPDisplayList(lll_dl_Corridor_mesh_layer_1_tri_2),
-	gsSPDisplayList(mat_revert_lll_dl_WoodBeams),
+	gsSPDisplayList(mat_revert_lll_dl_WoodBeams_001),
 	gsSPEndDisplayList(),
 };
 
@@ -29756,9 +29757,9 @@ Gfx lll_dl_Fog_mesh_layer_5[] = {
 	gsSPVertex(lll_dl_Fog_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_Fog_layer5),
+	gsSPDisplayList(mat_lll_dl_Fog_001_layer5),
 	gsSPDisplayList(lll_dl_Fog_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_Fog_layer5),
+	gsSPDisplayList(mat_revert_lll_dl_Fog_001_layer5),
 	gsSPEndDisplayList(),
 };
 
@@ -29802,12 +29803,12 @@ Gfx lll_dl_Painting_mesh_layer_1[] = {
 	gsSPVertex(lll_dl_Painting_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_KoopaPaintingBottom),
+	gsSPDisplayList(mat_lll_dl_KoopaPaintingBottom_001),
 	gsSPDisplayList(lll_dl_Painting_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_KoopaPaintingBottom),
-	gsSPDisplayList(mat_lll_dl_KoopaPaintingTop),
+	gsSPDisplayList(mat_revert_lll_dl_KoopaPaintingBottom_001),
+	gsSPDisplayList(mat_lll_dl_KoopaPaintingTop_001),
 	gsSPDisplayList(lll_dl_Painting_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_KoopaPaintingTop),
+	gsSPDisplayList(mat_revert_lll_dl_KoopaPaintingTop_001),
 	gsSPEndDisplayList(),
 };
 
@@ -29827,12 +29828,12 @@ Gfx lll_dl_Tower_mesh_layer_1[] = {
 	gsSPVertex(lll_dl_Tower_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_House_001_layer1),
+	gsSPDisplayList(mat_lll_dl_House_002_layer1),
 	gsSPDisplayList(lll_dl_Tower_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_House_001_layer1),
-	gsSPDisplayList(mat_lll_dl_Metal_001),
+	gsSPDisplayList(mat_revert_lll_dl_House_002_layer1),
+	gsSPDisplayList(mat_lll_dl_Metal_002),
 	gsSPDisplayList(lll_dl_Tower_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_Metal_001),
+	gsSPDisplayList(mat_revert_lll_dl_Metal_002),
 	gsSPEndDisplayList(),
 };
 
@@ -29841,9 +29842,9 @@ Gfx lll_dl_Tower_mesh_layer_4[] = {
 	gsSPVertex(lll_dl_Tower_mesh_layer_4_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_MetalFence_002),
+	gsSPDisplayList(mat_lll_dl_MetalFence_001),
 	gsSPDisplayList(lll_dl_Tower_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_MetalFence_002),
+	gsSPDisplayList(mat_revert_lll_dl_MetalFence_001),
 	gsSPEndDisplayList(),
 };
 
@@ -29852,12 +29853,12 @@ Gfx lll_dl_Wine_mesh_layer_5[] = {
 	gsSPVertex(lll_dl_Wine_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_FancyBottle),
+	gsSPDisplayList(mat_lll_dl_FancyBottle_002),
 	gsSPDisplayList(lll_dl_Wine_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_FancyBottle),
-	gsSPDisplayList(mat_lll_dl_WineBottle),
+	gsSPDisplayList(mat_revert_lll_dl_FancyBottle_002),
+	gsSPDisplayList(mat_lll_dl_WineBottle_002),
 	gsSPDisplayList(lll_dl_Wine_mesh_layer_5_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_WineBottle),
+	gsSPDisplayList(mat_revert_lll_dl_WineBottle_002),
 	gsSPDisplayList(mat_lll_dl_BottleLabel),
 	gsSPDisplayList(lll_dl_Wine_mesh_layer_5_tri_2),
 	gsSPDisplayList(mat_revert_lll_dl_BottleLabel),
@@ -29869,15 +29870,15 @@ Gfx lll_dl_Wine_mesh_layer_7[] = {
 	gsSPVertex(lll_dl_Wine_mesh_layer_7_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_ShyguyChard),
+	gsSPDisplayList(mat_lll_dl_ShyguyChard_003),
 	gsSPDisplayList(lll_dl_Wine_mesh_layer_7_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_ShyguyChard),
-	gsSPDisplayList(mat_lll_dl_TroopaDe),
+	gsSPDisplayList(mat_revert_lll_dl_ShyguyChard_003),
+	gsSPDisplayList(mat_lll_dl_TroopaDe_001),
 	gsSPDisplayList(lll_dl_Wine_mesh_layer_7_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_TroopaDe),
-	gsSPDisplayList(mat_lll_dl_Goombetto),
+	gsSPDisplayList(mat_revert_lll_dl_TroopaDe_001),
+	gsSPDisplayList(mat_lll_dl_Goombetto_003),
 	gsSPDisplayList(lll_dl_Wine_mesh_layer_7_tri_2),
-	gsSPDisplayList(mat_revert_lll_dl_Goombetto),
+	gsSPDisplayList(mat_revert_lll_dl_Goombetto_003),
 	gsSPEndDisplayList(),
 };
 
@@ -29889,12 +29890,12 @@ Gfx lll_dl_WineCellar_mesh_layer_1[] = {
 	gsSPDisplayList(mat_lll_dl_CellarWall),
 	gsSPDisplayList(lll_dl_WineCellar_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_lll_dl_CellarWall),
-	gsSPDisplayList(mat_lll_dl_ShelfWood),
+	gsSPDisplayList(mat_lll_dl_ShelfWood_001),
 	gsSPDisplayList(lll_dl_WineCellar_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_ShelfWood),
-	gsSPDisplayList(mat_lll_dl_ShelfWoodTop),
+	gsSPDisplayList(mat_revert_lll_dl_ShelfWood_001),
+	gsSPDisplayList(mat_lll_dl_ShelfWoodTop_001),
 	gsSPDisplayList(lll_dl_WineCellar_mesh_layer_1_tri_2),
-	gsSPDisplayList(mat_revert_lll_dl_ShelfWoodTop),
+	gsSPDisplayList(mat_revert_lll_dl_ShelfWoodTop_001),
 	gsSPDisplayList(mat_lll_dl_CellarFloor),
 	gsSPDisplayList(lll_dl_WineCellar_mesh_layer_1_tri_3),
 	gsSPDisplayList(mat_revert_lll_dl_CellarFloor),
@@ -29906,7 +29907,7 @@ Gfx lll_dl_WineCellar_mesh_layer_5[] = {
 	gsSPVertex(lll_dl_WineCellar_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_Window),
+	gsSPDisplayList(mat_lll_dl_Window_001),
 	gsSPDisplayList(lll_dl_WineCellar_mesh_layer_5_tri_0),
 	gsSPEndDisplayList(),
 };
@@ -29916,15 +29917,15 @@ Gfx lll_dl_WineLogos_001_mesh_layer_7[] = {
 	gsSPVertex(lll_dl_WineLogos_001_mesh_layer_7_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_Goombetto_001),
+	gsSPDisplayList(mat_lll_dl_Goombetto_002),
 	gsSPDisplayList(lll_dl_WineLogos_001_mesh_layer_7_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_Goombetto_001),
-	gsSPDisplayList(mat_lll_dl_ShyguyChard_001),
+	gsSPDisplayList(mat_revert_lll_dl_Goombetto_002),
+	gsSPDisplayList(mat_lll_dl_ShyguyChard_002),
 	gsSPDisplayList(lll_dl_WineLogos_001_mesh_layer_7_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_ShyguyChard_001),
-	gsSPDisplayList(mat_lll_dl_TroopaDe_002),
+	gsSPDisplayList(mat_revert_lll_dl_ShyguyChard_002),
+	gsSPDisplayList(mat_lll_dl_TroopaDe_003),
 	gsSPDisplayList(lll_dl_WineLogos_001_mesh_layer_7_tri_2),
-	gsSPDisplayList(mat_revert_lll_dl_TroopaDe_002),
+	gsSPDisplayList(mat_revert_lll_dl_TroopaDe_003),
 	gsSPEndDisplayList(),
 };
 
@@ -29933,11 +29934,11 @@ Gfx lll_dl_WineLogos_001_mesh_layer_6[] = {
 	gsSPVertex(lll_dl_WineLogos_001_mesh_layer_6_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_GoombaText_001),
+	gsSPDisplayList(mat_lll_dl_GoombaText_003),
 	gsSPDisplayList(lll_dl_WineLogos_001_mesh_layer_6_tri_0),
-	gsSPDisplayList(mat_lll_dl_KoopaText_001),
+	gsSPDisplayList(mat_lll_dl_KoopaText_002),
 	gsSPDisplayList(lll_dl_WineLogos_001_mesh_layer_6_tri_1),
-	gsSPDisplayList(mat_lll_dl_ShyguyText_001),
+	gsSPDisplayList(mat_lll_dl_ShyguyText_002),
 	gsSPDisplayList(lll_dl_WineLogos_001_mesh_layer_6_tri_2),
 	gsSPDisplayList(mat_lll_dl_CharvaarghText),
 	gsSPDisplayList(lll_dl_WineLogos_001_mesh_layer_6_tri_3),
@@ -29952,30 +29953,30 @@ Gfx lll_dl_CanYoshi_mesh_layer_1[] = {
 	gsSPVertex(lll_dl_CanYoshi_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_YoshiBerries),
+	gsSPDisplayList(mat_lll_dl_YoshiBerries_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_YoshiBerries),
+	gsSPDisplayList(mat_revert_lll_dl_YoshiBerries_001),
 	gsSPDisplayList(mat_lll_dl_CanLid),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_lll_dl_CanLid),
-	gsSPDisplayList(mat_lll_dl_UnshelledKoopa),
+	gsSPDisplayList(mat_lll_dl_UnshelledKoopa_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_2),
-	gsSPDisplayList(mat_revert_lll_dl_UnshelledKoopa),
+	gsSPDisplayList(mat_revert_lll_dl_UnshelledKoopa_001),
 	gsSPDisplayList(mat_lll_dl_ChainChompChow),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_3),
 	gsSPDisplayList(mat_revert_lll_dl_ChainChompChow),
-	gsSPDisplayList(mat_lll_dl_SyntheticGoomba),
+	gsSPDisplayList(mat_lll_dl_SyntheticGoomba_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_4),
-	gsSPDisplayList(mat_revert_lll_dl_SyntheticGoomba),
-	gsSPDisplayList(mat_lll_dl_SuperShrooms),
+	gsSPDisplayList(mat_revert_lll_dl_SyntheticGoomba_001),
+	gsSPDisplayList(mat_lll_dl_SuperShrooms_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_5),
-	gsSPDisplayList(mat_revert_lll_dl_SuperShrooms),
+	gsSPDisplayList(mat_revert_lll_dl_SuperShrooms_001),
 	gsSPDisplayList(mat_lll_dl_DaisyPeaches),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_6),
 	gsSPDisplayList(mat_revert_lll_dl_DaisyPeaches),
-	gsSPDisplayList(mat_lll_dl_PeachPlumbs),
+	gsSPDisplayList(mat_lll_dl_PeachPlumbs_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_1_tri_7),
-	gsSPDisplayList(mat_revert_lll_dl_PeachPlumbs),
+	gsSPDisplayList(mat_revert_lll_dl_PeachPlumbs_001),
 	gsSPEndDisplayList(),
 };
 
@@ -29984,27 +29985,27 @@ Gfx lll_dl_CanYoshi_mesh_layer_6[] = {
 	gsSPVertex(lll_dl_CanYoshi_mesh_layer_6_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_YoshiText),
+	gsSPDisplayList(mat_lll_dl_YoshiText_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_6_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_YoshiText),
-	gsSPDisplayList(mat_lll_dl_KoopaText_002),
+	gsSPDisplayList(mat_revert_lll_dl_YoshiText_001),
+	gsSPDisplayList(mat_lll_dl_KoopaText_003),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_6_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_KoopaText_002),
+	gsSPDisplayList(mat_revert_lll_dl_KoopaText_003),
 	gsSPDisplayList(mat_lll_dl_ChompText),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_6_tri_2),
 	gsSPDisplayList(mat_revert_lll_dl_ChompText),
-	gsSPDisplayList(mat_lll_dl_GoombaText),
+	gsSPDisplayList(mat_lll_dl_GoombaText_002),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_6_tri_3),
-	gsSPDisplayList(mat_revert_lll_dl_GoombaText),
-	gsSPDisplayList(mat_lll_dl_ShroomText),
+	gsSPDisplayList(mat_revert_lll_dl_GoombaText_002),
+	gsSPDisplayList(mat_lll_dl_ShroomText_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_6_tri_4),
-	gsSPDisplayList(mat_revert_lll_dl_ShroomText),
+	gsSPDisplayList(mat_revert_lll_dl_ShroomText_001),
 	gsSPDisplayList(mat_lll_dl_DaisyText),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_6_tri_5),
 	gsSPDisplayList(mat_revert_lll_dl_DaisyText),
-	gsSPDisplayList(mat_lll_dl_PeachText),
+	gsSPDisplayList(mat_lll_dl_PeachText_001),
 	gsSPDisplayList(lll_dl_CanYoshi_mesh_layer_6_tri_6),
-	gsSPDisplayList(mat_revert_lll_dl_PeachText),
+	gsSPDisplayList(mat_revert_lll_dl_PeachText_001),
 	gsSPEndDisplayList(),
 };
 
@@ -30013,9 +30014,9 @@ Gfx lll_dl_Pantry_mesh_layer_1[] = {
 	gsSPVertex(lll_dl_Pantry_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_ShelfWood),
+	gsSPDisplayList(mat_lll_dl_ShelfWood_001),
 	gsSPDisplayList(lll_dl_Pantry_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_ShelfWood),
+	gsSPDisplayList(mat_revert_lll_dl_ShelfWood_001),
 	gsSPEndDisplayList(),
 };
 
@@ -30024,7 +30025,7 @@ Gfx lll_dl_Pantry_mesh_layer_5[] = {
 	gsSPVertex(lll_dl_Pantry_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_Window_001),
+	gsSPDisplayList(mat_lll_dl_Window_002),
 	gsSPDisplayList(lll_dl_Pantry_mesh_layer_5_tri_0),
 	gsSPEndDisplayList(),
 };
@@ -30040,12 +30041,12 @@ Gfx lll_dl_RootCellar_mesh_layer_1[] = {
 	gsSPDisplayList(mat_lll_dl_CellarFloor),
 	gsSPDisplayList(lll_dl_RootCellar_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_lll_dl_CellarFloor),
-	gsSPDisplayList(mat_lll_dl_ShelfWoodTop),
+	gsSPDisplayList(mat_lll_dl_ShelfWoodTop_001),
 	gsSPDisplayList(lll_dl_RootCellar_mesh_layer_1_tri_2),
-	gsSPDisplayList(mat_revert_lll_dl_ShelfWoodTop),
-	gsSPDisplayList(mat_lll_dl_Vegetables_layer1),
+	gsSPDisplayList(mat_revert_lll_dl_ShelfWoodTop_001),
+	gsSPDisplayList(mat_lll_dl_Vegetables_001_layer1),
 	gsSPDisplayList(lll_dl_RootCellar_mesh_layer_1_tri_3),
-	gsSPDisplayList(mat_revert_lll_dl_Vegetables_layer1),
+	gsSPDisplayList(mat_revert_lll_dl_Vegetables_001_layer1),
 	gsSPEndDisplayList(),
 };
 
@@ -30054,12 +30055,12 @@ Gfx lll_dl_Shelves_mesh_layer_1[] = {
 	gsSPVertex(lll_dl_Shelves_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_ShelfWood),
+	gsSPDisplayList(mat_lll_dl_ShelfWood_001),
 	gsSPDisplayList(lll_dl_Shelves_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_ShelfWood),
-	gsSPDisplayList(mat_lll_dl_ShelfWoodTop),
+	gsSPDisplayList(mat_revert_lll_dl_ShelfWood_001),
+	gsSPDisplayList(mat_lll_dl_ShelfWoodTop_001),
 	gsSPDisplayList(lll_dl_Shelves_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_ShelfWoodTop),
+	gsSPDisplayList(mat_revert_lll_dl_ShelfWoodTop_001),
 	gsSPEndDisplayList(),
 };
 
@@ -30068,7 +30069,7 @@ Gfx lll_dl_Shelves_mesh_layer_5[] = {
 	gsSPVertex(lll_dl_Shelves_mesh_layer_5_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_Window_001),
+	gsSPDisplayList(mat_lll_dl_Window_002),
 	gsSPDisplayList(lll_dl_Shelves_mesh_layer_5_tri_0),
 	gsSPEndDisplayList(),
 };
@@ -30078,9 +30079,9 @@ Gfx lll_dl_Tomatos_mesh_layer_1[] = {
 	gsSPVertex(lll_dl_Tomatos_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_VertColSolid),
+	gsSPDisplayList(mat_lll_dl_VertColSolid_001),
 	gsSPDisplayList(lll_dl_Tomatos_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_VertColSolid),
+	gsSPDisplayList(mat_revert_lll_dl_VertColSolid_001),
 	gsSPEndDisplayList(),
 };
 
@@ -30100,9 +30101,9 @@ Gfx lll_dl_Veggies_mesh_layer_4[] = {
 	gsSPVertex(lll_dl_Veggies_mesh_layer_4_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_Leaf),
+	gsSPDisplayList(mat_lll_dl_Leaf_001),
 	gsSPDisplayList(lll_dl_Veggies_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_Leaf),
+	gsSPDisplayList(mat_revert_lll_dl_Leaf_001),
 	gsSPEndDisplayList(),
 };
 
@@ -30111,9 +30112,9 @@ Gfx lll_dl_Veggies_mesh_layer_7[] = {
 	gsSPVertex(lll_dl_Veggies_mesh_layer_7_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_Lettuce_layer7),
+	gsSPDisplayList(mat_lll_dl_Lettuce_001_layer7),
 	gsSPDisplayList(lll_dl_Veggies_mesh_layer_7_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_Lettuce_layer7),
+	gsSPDisplayList(mat_revert_lll_dl_Lettuce_001_layer7),
 	gsSPEndDisplayList(),
 };
 
@@ -30122,12 +30123,12 @@ Gfx lll_dl_Meat_Locker_mesh_layer_1[] = {
 	gsSPVertex(lll_dl_Meat_Locker_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_lll_dl_LockerWall),
+	gsSPDisplayList(mat_lll_dl_LockerWall_001),
 	gsSPDisplayList(lll_dl_Meat_Locker_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_lll_dl_LockerWall),
-	gsSPDisplayList(mat_lll_dl_LockerFloor),
+	gsSPDisplayList(mat_revert_lll_dl_LockerWall_001),
+	gsSPDisplayList(mat_lll_dl_LockerFloor_001),
 	gsSPDisplayList(lll_dl_Meat_Locker_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_lll_dl_LockerFloor),
+	gsSPDisplayList(mat_revert_lll_dl_LockerFloor_001),
 	gsSPEndDisplayList(),
 };
 

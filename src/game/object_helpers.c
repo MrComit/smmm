@@ -30,6 +30,7 @@
 #include "include/course_table.h"
 #include "levels/hmc/header.inc.h"
 #include "levels/bbh/header.inc.h"
+#include "levels/lll/header.h"
 #include "save_file.h"
 
 extern Mtx *gMatStackFixed[32];
@@ -893,6 +894,86 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
     return dlStart;
     
 }
+
+
+/*
+	{{{-1370, -1335, -337}, 0, {-16, 1008}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-1661, -1335, -169}, 0, {-16, 1008}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-1661, -1335, 169}, 0, {-16, 1008}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{0, 0, 0}, 0, {-16, 1008}, {0xFF, 0x0, 0x0, 0xFF}}},
+	{{{-1078, -1335, -169}, 0, {-16, 1008}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-1078, -1335, 169}, 0, {-16, 1008}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-1370, -1335, 337}, 0, {-16, 1008}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+*/
+
+
+
+
+Gfx *geo_generate_cam_beam(s32 callContext, struct GraphNode *node, void *context) {
+    Vtx *vertexBuffer;
+    Gfx *dlStart, *dlHead;
+    struct Object *obj;
+    struct GraphNodeGenerated *currentGraphNode;
+    s16 height;
+
+    currentGraphNode = node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+
+        currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
+
+        height = obj->os16F4;
+        // MAIN VERT
+        make_vertex(vertexBuffer, 3, 0, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        make_vertex(vertexBuffer, 0, -1370, height, -337, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 1, -1661, height, -169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 2, -1661, height, 169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 4, -1078, height, -169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 5, -1078, height, 169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 6, -1370, height, 337, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        dlHead = alloc_display_list(sizeof(Gfx) * (4));
+        dlStart = dlHead;
+
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 7, 0);
+        gSPDisplayList(dlHead++, lightbeam_LightBeam_mesh);
+
+        // gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 10, 0);
+        // gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
+        // gSP2Triangles(dlHead++, 2, 3, 4, 0, 3, 4, 5, 0);
+
+        // gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
+        // gSP2Triangles(dlHead++, 6, 7, 8, 0, 7, 8, 9, 0);
+        
+        // gSPDisplayList(dlHead++, mat_revert_lightbeam_Beam);
+
+        // dlHead = generate_tight_rope_beams(dlHead, vertexBuffer1, 1);
+        // dlHead = generate_tight_rope_beams(dlHead, vertexBuffer2, 0);
+        // dlHead = generate_tight_rope_beams(dlHead, vertexBuffer3, 0);
+        // dlHead = generate_tight_rope_beams(dlHead, vertexBuffer4, 2);
+        
+        gSPEndDisplayList(dlHead++);
+    }
+    return dlStart;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

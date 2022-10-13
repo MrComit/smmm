@@ -139,4 +139,12 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/champagne/collision_header.h"
 
+#include "levels/lll/security_cam/collision_header.h"
+
+#include "levels/lll/security_cam/geo_header.h"
+
+#include "levels/lll/security_cam/anim_header.h"
+
+#include "levels/lll/lightbeam/header.h"
+
 #endif

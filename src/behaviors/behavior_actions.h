@@ -948,6 +948,8 @@ void bhv_cellar_blockade_loop(void);
 void bhv_cellar_blockade_init(void);
 void bhv_champagne_loop(void);
 void bhv_champagne_init(void);
+void bhv_security_cam_loop(void);
+void bhv_security_cam_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
