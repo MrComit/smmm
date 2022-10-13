@@ -30,7 +30,7 @@ void bhv_champagne_loop(void) {
                 o->oFloat100 = approach_f32_symmetric(o->oFloat100, 100.0f, 2.4f);
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat104, o->oFloat100);
             }
-            o->oFaceAngleRoll -= o->oFloat100 * 82;
+            o->oFaceAngleRoll -= o->oFloat100 * 50;
             if (o->oPosX == o->oFloatF8 && o->oPosY == o->oFloat104) {
                 o->oObjF4->oFC = 1;
                 CL_explode_object(o, 1);
