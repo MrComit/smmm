@@ -1,37 +1,95 @@
 extern s16 gComitCutsceneTimer;
 
-void bhv_security_cam_init(void) {
-    o->oRoom = 4;
+extern s16 s8DirModeBaseYaw;
+s32 security_cam_respawn(Vec3f pos, s16 faceAngle, s16 damage) {
+    if (gMarioState->health <= 0x280) {
+        level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
+        o->oAction = 2;
+        return 0;
+    } else {
+        switch (o->os16FE) {
+            case 0:
+                play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x10, 0x00, 0x00, 0x00);
+                break;
+            case 13:
+                vec3f_copy(gMarioState->pos, pos);
+                CL_set_camera_pos(pos, pos);
+                gMarioState->faceAngle[1] = faceAngle;
+                s8DirModeBaseYaw = (s16)(faceAngle & 0xC000) - 0x4000;
+                set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
+                break;
+            case 16:
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+                gMarioState->hurtCounter = 4 * damage;
+                o->os16FE = 0;
+                return 1;
+                break;
+        }
+    }
+    o->os16FE++;
+    return 0;
 }
 
 
-void bhv_security_cam_loop(void) {
-    Vec3f point;
-    f32 dist;
-    s16 pitch, yaw;
+void bhv_security_cam_init(void) {
+    o->oRoom = 4;
     switch (o->oBehParams2ndByte) {
         case 0:
             o->os16F4 = -1335;
-            o->os16F6 += 0x100;
             o->os16F8 = -1478;
-            o->os16FA = (400 + 1100) + (sins(o->os16F6) * 1100);
             o->os16FC = 300;
             break;
         case 1:
             o->os16F4 = -835;
-            o->os16F6 += 0x100;
             o->os16F8 = -400;
-            o->os16FA = (800 + 1300) + (sins(o->os16F6) * 1300);
             o->os16FC = 500;
+            break;
+        case 2:
+            o->oRoom = 5;
+            break;
+    }
+}
+
+
+void bhv_security_cam_loop(void) {
+    struct Object *obj;
+    Vec3f point;
+    f32 dist, xComp, zComp;
+    s16 pitch, yaw;
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            o->os16F6 += 0x100;
+            o->os16FA = (400 + 1100) + (sins(o->os16F6) * 1100);
+            break;
+        case 1:
+            o->os16F6 += 0x100;
+            o->os16FA = (800 + 1300) + (sins(o->os16F6) * 1300);
             break;
     }
 
-    point[0] = ((f32)o->os16FA * sins(o->oFaceAngleYaw)) + ((f32)o->os16F8 * coss(o->oFaceAngleYaw)) + o->oPosX - 229;
-    point[1] = gMarioState->pos[1];//o->os16F4 + o->oPosY;
-    point[2] = ((f32)o->os16F8 * sins(o->oFaceAngleYaw)) + ((f32)o->os16FA * coss(o->oFaceAngleYaw)) + o->oPosZ - 229;
-    vec3f_get_dist_and_angle(point, gMarioState->pos, &dist, &pitch, &yaw);
-    if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 500) {
-        play_puzzle_jingle();
+    switch (o->oAction) {
+        case 0:
+            xComp = (f32)o->os16F8 - 441.0f;
+            zComp = (f32)o->os16FA + 441.0f;
+            point[0] = (xComp * coss(o->oFaceAngleYaw)) + (zComp * sins(o->oFaceAngleYaw)) + o->oPosX;
+            point[1] = gMarioState->pos[1];//o->os16F4 + o->oPosY;
+            point[2] = (zComp * coss(o->oFaceAngleYaw)) + (xComp * sins(o->oFaceAngleYaw)) + o->oPosZ;
+            vec3f_get_dist_and_angle(point, gMarioState->pos, &dist, &pitch, &yaw);
+
+            if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 300) {
+                // play_puzzle_jingle();
+                o->oAction = 1;
+                CL_get_hit(gMarioState, gMarioObject, 0);
+            }
+            break;
+        case 1:
+            obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+            if (obj != NULL) {
+                if (security_cam_respawn(&obj->oPosX, -obj->oFaceAngleYaw, 2)) {
+                    o->oAction = 0;
+                }
+            }
+            break;
     }
 }
 
