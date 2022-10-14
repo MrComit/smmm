@@ -915,6 +915,8 @@ Gfx *geo_generate_cam_beam(s32 callContext, struct GraphNode *node, void *contex
     struct Object *obj;
     struct GraphNodeGenerated *currentGraphNode;
     s16 height;
+    s16 baseX, baseZ, dist;
+
 
     currentGraphNode = node;
 
@@ -926,15 +928,30 @@ Gfx *geo_generate_cam_beam(s32 callContext, struct GraphNode *node, void *contex
         vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
 
         height = obj->os16F4;
+        baseX = obj->os16F8;
+        baseZ = obj->os16FA;
+        dist = obj->os16FC;
+
         // MAIN VERT
         make_vertex(vertexBuffer, 3, 0, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
 
-        make_vertex(vertexBuffer, 0, -1370, height, -337, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 1, -1661, height, -169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 2, -1661, height, 169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 4, -1078, height, -169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 5, -1078, height, 169, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 6, -1370, height, 337, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        // 1
+        make_vertex(vertexBuffer, 0, baseX + (sins(0x0000) * dist), height, baseZ + (coss(0x0000) * dist), 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        
+        // 5
+        make_vertex(vertexBuffer, 4, baseX + (sins(0x2AAA) * dist), height, baseZ + (coss(0x2AAA) * dist), 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        
+        // 6
+        make_vertex(vertexBuffer, 5, baseX + (sins(0x5554) * dist), height, baseZ + (coss(0x5554) * dist), 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        
+        // 7
+        make_vertex(vertexBuffer, 6, baseX + (sins(0x7FFE) * dist), height, baseZ + (coss(0x7FFE) * dist), 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        
+        // 3
+        make_vertex(vertexBuffer, 2, baseX + (sins(0xAAA8) * dist), height, baseZ + (coss(0xAAA8) * dist), 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        
+        // 2
+        make_vertex(vertexBuffer, 1, baseX + (sins(0xD552) * dist), height, baseZ + (coss(0xD552) * dist), 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
 
         dlHead = alloc_display_list(sizeof(Gfx) * (4));
         dlStart = dlHead;

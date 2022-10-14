@@ -6,11 +6,33 @@ void bhv_security_cam_init(void) {
 
 
 void bhv_security_cam_loop(void) {
-    o->os16F6 += 0x200;
-    o->os16F4 = -1335 + (sins(o->os16F6) * 400);
-    print_text_fmt_int(80, 80, "%d", o->os16F4);
-    // o->oFaceAngleYaw = sins(o->os16F6) * 0x2000;
+    Vec3f point;
+    f32 dist;
+    s16 pitch, yaw;
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            o->os16F4 = -1335;
+            o->os16F6 += 0x100;
+            o->os16F8 = -1478;
+            o->os16FA = (400 + 1100) + (sins(o->os16F6) * 1100);
+            o->os16FC = 300;
+            break;
+        case 1:
+            o->os16F4 = -835;
+            o->os16F6 += 0x100;
+            o->os16F8 = -400;
+            o->os16FA = (800 + 1300) + (sins(o->os16F6) * 1300);
+            o->os16FC = 500;
+            break;
+    }
 
+    point[0] = ((f32)o->os16FA * sins(o->oFaceAngleYaw)) + ((f32)o->os16F8 * coss(o->oFaceAngleYaw)) + o->oPosX - 229;
+    point[1] = gMarioState->pos[1];//o->os16F4 + o->oPosY;
+    point[2] = ((f32)o->os16F8 * sins(o->oFaceAngleYaw)) + ((f32)o->os16FA * coss(o->oFaceAngleYaw)) + o->oPosZ - 229;
+    vec3f_get_dist_and_angle(point, gMarioState->pos, &dist, &pitch, &yaw);
+    if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 500) {
+        play_puzzle_jingle();
+    }
 }
 
 
