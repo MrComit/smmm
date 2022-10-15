@@ -81,8 +81,8 @@ void bhv_security_cam_init(void) {
     o->oRoom = 4;
     switch (o->oBehParams2ndByte) {
         case 0:
-            o->os16F4 = -1335;
-            o->os16F8 = -1478;
+            o->os16F4 = -1635;
+            o->os16F8 = -1078;
             o->os16FC = 300;
             break;
         case 1:
@@ -92,6 +92,9 @@ void bhv_security_cam_init(void) {
             break;
         case 2:
             o->oRoom = 5;
+            o->os16F4 = -2235;
+            o->os16FA = 960;
+            o->os16FC = 400;
             break;
     }
 }
@@ -111,6 +114,10 @@ void bhv_security_cam_loop(void) {
             o->os16F6 += 0x100;
             o->os16FA = (800 + 1300) + (sins(o->os16F6) * 1300);
             break;
+        case 2:
+            o->os16F6 += 0xA0;
+            o->os16F8 = (-300 - 850) + (sins(o->os16F6) * -850);
+            break;
     }
 
     switch (o->oAction) {
@@ -122,7 +129,7 @@ void bhv_security_cam_loop(void) {
             point[2] = (zComp * coss(o->oFaceAngleYaw)) + (xComp * sins(o->oFaceAngleYaw)) + o->oPosZ;
             vec3f_get_dist_and_angle(point, gMarioState->pos, &dist, &pitch, &yaw);
 
-            if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 300) {
+            if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 200) {
                 // play_puzzle_jingle();
                 o->oAction = 1;
                 CL_get_hit(gMarioState, gMarioObject, 0);

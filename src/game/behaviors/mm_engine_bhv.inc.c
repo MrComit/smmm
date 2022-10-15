@@ -46,7 +46,7 @@ struct ObjectHitbox sBooCoinHitbox = {
     /* damageOrCoinValue: */ 0,
     /* health: */ 0,
     /* numLootCoins: */ 0,
-    /* radius: */ 120,
+    /* radius: */ 100,
     /* height: */ 84,
     /* hurtboxRadius: */ 0,
     /* hurtboxHeight: */ 0,
@@ -219,25 +219,31 @@ void bhv_env_flame_loop(void) {
 }
 
 void bhv_boocoin_cage_init(void) {
-    struct Object *obj;
     o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
     switch (o->oBehParams2ndByte) {
         case 0:
-            obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
-            obj->oAction = 1;
-            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-            obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
-            obj->oBehParams = obj->oBehParams2ndByte << 16;
-            obj->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
+            o->oObj100 = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+            o->oObj100->oAction = 1;
+            o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            o->oObj100->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+            o->oObj100->oBehParams = o->oObj100->oBehParams2ndByte << 16;
+            o->oObj100->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             break;
         case 1:
-            obj = spawn_object(o, MODEL_STAR_CURRENCY, bhvStar);
-            obj->oAction = 1;
-            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-            obj->oBehParams = o->oBehParams << 16;
-            obj->oPosY += 80.0f;
-            obj->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
+            o->oObj100 = spawn_object(o, MODEL_STAR_CURRENCY, bhvStar);
+            o->oObj100->oAction = 1;
+            o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            o->oObj100->oBehParams = o->oBehParams << 16;
+            o->oObj100->oPosY += 80.0f;
+            o->oObj100->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             obj_scale(o, 1.8f);
+            break;
+        case 2:
+            o->oObj100 = spawn_object(o, MODEL_STAR_PIECE, bhvStarPiece);
+            o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            o->oObj100->oBehParams = o->oBehParams << 16;
+            o->oObj100->oPosY += 40.0f;
+            o->oObj100->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             break;
     }
     obj_set_hitbox(o, &sBooCoinCageHitbox);
@@ -249,7 +255,13 @@ void bhv_boocoin_cage_loop(void) {
         case 0:
             if (o->oF4 >= 5) {
                 play_puzzle_jingle();
+                if (o->oObj100 != NULL) {
+                    o->oObj100->oIntangibleTimer = 0;
+                }
                 gCamera->comitCutscene = 7 + o->oBehParams2ndByte;
+                if (o->oBehParams2ndByte == 2) {
+                    gCamera->comitCutscene = 7;
+                }
                 gComitCutsceneObject = o;
                 enable_time_stop();
                 o->oAction = 1;
@@ -259,6 +271,10 @@ void bhv_boocoin_cage_loop(void) {
                 o->oFloat108 =  gMarioState->vel[1];
                 o->oFloat10C = gMarioState->forwardVel;
                 set_mario_npc_dialog(1);
+            } else {
+                if (o->oObj100 != NULL) {
+                    o->oObj100->oIntangibleTimer = -1;
+                }
             }
             break;
         case 1:
