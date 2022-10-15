@@ -792,5 +792,6 @@
 #define MODEL_CELLAR_BLOCKADE     0xFF
 #define MODEL_CHAMPAGNE           0xFE
 #define MODEL_SECURITY_CAM        0xFD
+#define MODEL_BASEMENT_SWITCH     0xFC
 
 #endif // MODEL_IDS_H

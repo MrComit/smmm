@@ -394,6 +394,8 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
     }
 }
 
+extern s32 gLowGrav;
+
 void mario_update_toad_friend(struct MarioState *m) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
@@ -407,6 +409,9 @@ void mario_update_toad_friend(struct MarioState *m) {
         case LEVEL_LLL:
             if (gPlayer1Controller->buttonPressed & D_JPAD) {
                 play_music(0, SEQUENCE_ARGS(4, SEQ_BASEMENT), 0);
+            }
+            if (gPlayer1Controller->buttonPressed & L_TRIG) {
+                gLowGrav ^= 1;
             }
             break;
     }

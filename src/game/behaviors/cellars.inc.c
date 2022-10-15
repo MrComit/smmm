@@ -1,6 +1,52 @@
 extern s16 gComitCutsceneTimer;
 
 extern s16 s8DirModeBaseYaw;
+
+
+Vec3s sBasementSwitchCols[5] = {
+{0xCE, 0x00, 0x11}, // CE0011
+{0x1C, 0x19, 0xAF}, // 1C19AF
+{0x25, 0xA2, 0x7C}, // 25A27C
+{0xBD, 0xCB, 0x24}, // BDCB24
+{0x6D, 0x37, 0x11}, // 6D3711
+};
+
+
+void bhv_basement_switch_init(void) {
+    o->os16F4 = sBasementSwitchCols[o->oBehParams2ndByte][0];
+    o->os16F6 = sBasementSwitchCols[o->oBehParams2ndByte][1];
+    o->os16F8 = sBasementSwitchCols[o->oBehParams2ndByte][2];
+    if (save_file_get_newflags(0) & (SAVE_NEW_FLAG_BASEMENT_SWITCH1 << o->oBehParams2ndByte)) {
+        o->oAction = 2;
+        o->header.gfx.scale[1] = 0.2f;
+    }
+}
+
+
+void bhv_basement_switch_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
+                if (lateral_dist_between_objects(o, gMarioObject) < 127.5f) {
+                    o->oAction = 1;
+                    save_file_set_newflags(SAVE_NEW_FLAG_BASEMENT_SWITCH1 << o->oBehParams2ndByte, 0);
+                }
+            }
+            break;
+        case 1:
+            cur_obj_scale_over_time(2, 3, 1.5f, 0.2f);
+            if (o->oTimer == 3) {
+                cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                o->oAction = 2;
+                cur_obj_shake_screen(SHAKE_POS_SMALL);
+                queue_rumble_data(5, 80);
+            }
+            break;
+    }
+}
+
+
+
 s32 security_cam_respawn(Vec3f pos, s16 faceAngle, s16 damage) {
     if (gMarioState->health <= 0x280) {
         level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);

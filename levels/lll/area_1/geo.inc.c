@@ -68,6 +68,7 @@ const GeoLayout lll_dl_105__Root_Cellar_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Pantry_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_Pantry_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_RootCellar_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_ShelfPlat_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Shelves_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_Shelves_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Tomatos_mesh_layer_1),

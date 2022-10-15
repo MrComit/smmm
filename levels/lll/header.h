@@ -147,4 +147,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/lightbeam/header.h"
 
+#include "levels/lll/basement_switch/geo_header.h"
+
+#include "levels/lll/basement_switch/collision_header.h"
+
 #endif

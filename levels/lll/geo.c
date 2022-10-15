@@ -48,3 +48,4 @@
 #include "levels/lll/cellar_blockade/geo.inc.c"
 #include "levels/lll/champagne/geo.inc.c"
 #include "levels/lll/security_cam/geo.inc.c"
+#include "levels/lll/basement_switch/geo.inc.c"

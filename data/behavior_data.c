@@ -9312,3 +9312,17 @@ const BehaviorScript bhvSecurityCam[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBasementSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(basement_switch_collision),
+    SCALE(0, 150),
+    CALL_NATIVE(bhv_basement_switch_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_basement_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

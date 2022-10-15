@@ -44,6 +44,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CELLAR_BLOCKADE, cellar_blockade_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CHAMPAGNE, champagne_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SECURITY_CAM, security_cam_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_SWITCH, basement_switch_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -61,6 +62,10 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -429, 0, 1813, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -1187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_BASEMENT_SWITCH, 651, 0, 5875, 0, 0, 0, (1 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_BASEMENT_SWITCH, 1055, 0, 5875, 0, 0, 0, (2 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_BASEMENT_SWITCH, 1532, 0, 5875, 0, 0, 0, (3 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_BASEMENT_SWITCH, 2051, 0, 5875, 0, 0, 0, (4 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_CELLAR_BLOCKADE, -2223, 140, 6944, 0, 0, 0, 0x00000000, bhvCellarBlockade),
 		OBJECT(MODEL_CHAMPAGNE, -2920, 1536, 7203, 0, 0, 0, 0x00000000, bhvChampagne),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2229, 0, 6882, 0, 0, 0, 0x00000000, bhvDoor),
@@ -68,6 +73,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_SECURITY_CAM, -479, 1366, 6932, 0, 0, 0, 0x00000000, bhvSecurityCam),
 		OBJECT(MODEL_SECURITY_CAM, -4729, 866, 11182, 0, -180, 0, (1 << 16), bhvSecurityCam),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4279, 0, 4832, 0, 90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_BASEMENT_SWITCH, -3929, 1729, 6532, 0, 90, 0, 0x00000000, bhvBasementSwitch),
 		TERRAIN(lll_area_1_collision),
 		ROOMS(lll_area_1_collision_rooms),
 		MACRO_OBJECTS(lll_area_1_macro_objs),

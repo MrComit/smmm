@@ -78,3 +78,5 @@
 #include "levels/lll/security_cam/anims/data.inc.c"
 #include "levels/lll/security_cam/anims/table.inc.c"
 #include "levels/lll/lightbeam/model.inc.c"
+#include "levels/lll/basement_switch/model.inc.c"
+#include "levels/lll/basement_switch/collision.inc.c"

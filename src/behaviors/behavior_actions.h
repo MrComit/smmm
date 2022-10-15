@@ -950,6 +950,8 @@ void bhv_champagne_loop(void);
 void bhv_champagne_init(void);
 void bhv_security_cam_loop(void);
 void bhv_security_cam_init(void);
+void bhv_basement_switch_init(void);
+void bhv_basement_switch_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
