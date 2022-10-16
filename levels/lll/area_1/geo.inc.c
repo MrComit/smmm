@@ -82,9 +82,11 @@ const GeoLayout lll_dl_105__Root_Cellar_geo[] = {
 const GeoLayout lll_dl_106__Meat_Locker_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Crate_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, lll_dl_Crate_001_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Meat_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Meat_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Meat_Locker_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Meat_001_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
