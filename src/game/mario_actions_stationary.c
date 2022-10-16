@@ -1047,7 +1047,7 @@ Vec3f sSpawnedTokens[] = {
 {-1831.0f, 160.0f, -6211.0f},
 {-1214.25f, 46.13f, -150.62f},
 {-108.0f, 11838.0f, -16714.0f},
-{0.0f, 0.0f, 0.0f},
+{-5850.0f, 160.0f, 5280.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
@@ -1094,6 +1094,9 @@ void handle_ground_pound_floor(struct MarioState *m) {
             // obj_spawn_loot_coins(gMarioObject, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
             obj = spawn_object(gMarioObject, MODEL_YELLOW_COIN, bhvSingleCoinGetsSpawned);
             // obj->oPosY += 200.0f;
+            break;
+        case 8:
+            spawn_token(2, 0x25, sSpawnedTokens[3], 0, 0);
             break;
     }
     save_file_set_gpflags(1 << index);
