@@ -107,6 +107,7 @@ Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node, UNUSED
 Gfx *geo_switch_sauna(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_plat_hall(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_meat_locker(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_wine_cellar(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
@@ -128,6 +129,7 @@ Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_sauna(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_plat_hall(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_meat_locker(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_wine_cellar(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_console(s32 callContext, struct GraphNode *node);
 #endif
 void obj_update_pos_from_parent_transformation(Mat4 a0, struct Object *a1);

@@ -81,8 +81,8 @@ void bhv_security_cam_init(void) {
     o->oRoom = 4;
     switch (o->oBehParams2ndByte) {
         case 0:
-            o->os16F4 = -1635;
-            o->os16F8 = -1078;
+            o->os16F4 = -2435;
+            o->os16F8 = -101;
             o->os16FC = 300;
             break;
         case 1:
@@ -112,7 +112,7 @@ void bhv_security_cam_loop(void) {
             break;
         case 1:
             o->os16F6 += 0x100;
-            o->os16FA = (800 + 1300) + (sins(o->os16F6) * 1300);
+            o->os16FA = (600 + 850) + (sins(o->os16F6) * 850);
             break;
         case 2:
             o->os16F6 += 0xA0;
@@ -129,7 +129,7 @@ void bhv_security_cam_loop(void) {
             point[2] = (zComp * coss(o->oFaceAngleYaw)) + (xComp * sins(o->oFaceAngleYaw)) + o->oPosZ;
             vec3f_get_dist_and_angle(point, gMarioState->pos, &dist, &pitch, &yaw);
 
-            if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 200) {
+            if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 800) {
                 // play_puzzle_jingle();
                 o->oAction = 1;
                 CL_get_hit(gMarioState, gMarioObject, 0);
@@ -157,13 +157,13 @@ void bhv_champagne_init(void) {
 void bhv_champagne_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED && gMarioState->faceAngle[1] < 0x6000 && gMarioState->faceAngle[1] > 0x2000) {
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED && gMarioState->faceAngle[1] < -0x2000 && gMarioState->faceAngle[1] > -0x6000) {
                 o->oAction = 1;
                 // o->oObjF4->oFC = 1;
                 o->oFloatF8 = o->oObjF4->oPosX - 300.0f;
                 o->oFloat104 = o->oObjF4->oPosY + 200.0f;
                 vec3f_copy(gComitCutsceneFocVec, &o->oObjF4->oPosX);
-                vec3f_set(gComitCutscenePosVec, -2000.0f, 3400.0f, 9800.0f);
+                vec3f_set(gComitCutscenePosVec, -2500.0f, 3400.0f, 9800.0f);
                 o->oFloatFC = 65.0f;
             }
             break;
@@ -171,7 +171,7 @@ void bhv_champagne_loop(void) {
             set_mario_npc_dialog(1);
             cur_obj_update_floor_and_walls();
             gCamera->comitCutscene = 0xFF;
-            o->oFloatFC = approach_f32_asymptotic(o->oFloatFC, 5.0f, 0.2f);
+            o->oFloatFC = approach_f32_asymptotic(o->oFloatFC, 5.0f, 0.17f);
             o->oPosX = approach_f32_symmetric(o->oPosX, o->oFloatF8, o->oFloatFC);
             if (o->oFloorHeight != o->oHomeY) {
                 o->oFloat100 = approach_f32_symmetric(o->oFloat100, 100.0f, 2.4f);
