@@ -31,6 +31,8 @@ const GeoLayout lll_dl_102__Laundry_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_LaundryRoom_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_LaundryRoom_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -141,7 +143,7 @@ const GeoLayout lll_dl_106__Meat_Locker_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Meat_Locker_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Meat_Locker_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Meat_001_mesh_layer_4),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
