@@ -30,11 +30,9 @@ const GeoLayout lll_dl_101__The_Corridor_geo[] = {
 const GeoLayout lll_dl_102__Laundry_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Dryer_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_LaundryRoom_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_LaundryRoom_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Washer_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

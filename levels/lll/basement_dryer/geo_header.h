@@ -1,0 +1,15 @@
+extern const GeoLayout basement_dryer_geo[];
+extern u8 basement_dryer_washerpanels_i4[];
+extern Vtx basement_dryer_dryer_mesh_layer_1_vtx_0[28];
+extern Gfx basement_dryer_dryer_mesh_layer_1_tri_0[];
+extern Vtx basement_dryer_dryer_mesh_layer_1_vtx_1[4];
+extern Gfx basement_dryer_dryer_mesh_layer_1_tri_1[];
+extern Vtx basement_dryer_lid_mesh_layer_1_vtx_0[8];
+extern Gfx basement_dryer_lid_mesh_layer_1_tri_0[];
+extern Gfx mat_basement_dryer_VertColSolid_001[];
+extern Gfx mat_revert_basement_dryer_VertColSolid_001[];
+extern Gfx mat_basement_dryer_Washer[];
+extern Gfx mat_revert_basement_dryer_Washer[];
+extern Gfx basement_dryer_dryer_mesh_layer_1[];
+extern Gfx basement_dryer_lid_mesh_layer_1[];
+extern Gfx basement_dryer_material_revert_render_settings[];

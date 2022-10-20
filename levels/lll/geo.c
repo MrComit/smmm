@@ -49,3 +49,5 @@
 #include "levels/lll/champagne/geo.inc.c"
 #include "levels/lll/security_cam/geo.inc.c"
 #include "levels/lll/basement_switch/geo.inc.c"
+#include "levels/lll/basement_washer/geo.inc.c"
+#include "levels/lll/basement_dryer/geo.inc.c"

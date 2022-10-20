@@ -9326,3 +9326,32 @@ const BehaviorScript bhvBasementSwitch[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBasementWasher[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(basement_washer_collision),
+    LOAD_ANIMATIONS(oAnimations, basement_washer_anims),
+    // ANIMATE(0),
+    CALL_NATIVE(bhv_basement_washer_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_basement_washer_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvBasementDryer[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(basement_dryer_collision),
+    LOAD_ANIMATIONS(oAnimations, basement_dryer_anims),
+    ANIMATE(1),
+    CALL_NATIVE(bhv_basement_dryer_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_basement_dryer_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

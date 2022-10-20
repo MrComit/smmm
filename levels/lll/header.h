@@ -151,4 +151,16 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/basement_switch/collision_header.h"
 
+#include "levels/lll/basement_washer/geo_header.h"
+
+#include "levels/lll/basement_washer/collision_header.h"
+
+#include "levels/lll/basement_washer/anim_header.h"
+
+#include "levels/lll/basement_dryer/geo_header.h"
+
+#include "levels/lll/basement_dryer/anim_header.h"
+
+#include "levels/lll/basement_dryer/collision_header.h"
+
 #endif

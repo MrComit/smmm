@@ -785,6 +785,8 @@ extern const BehaviorScript bhvCellarBlockade[];
 extern const BehaviorScript bhvChampagne[];
 extern const BehaviorScript bhvSecurityCam[];
 extern const BehaviorScript bhvBasementSwitch[];
+extern const BehaviorScript bhvBasementWasher[];
+extern const BehaviorScript bhvBasementDryer[];
 
 
 #endif // BEHAVIOR_DATA_H

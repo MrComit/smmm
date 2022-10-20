@@ -793,5 +793,7 @@
 #define MODEL_CHAMPAGNE           0xFE
 #define MODEL_SECURITY_CAM        0xFD
 #define MODEL_BASEMENT_SWITCH     0xFC
+#define MODEL_BASEMENT_WASHER     0xFB
+#define MODEL_BASEMENT_DRYER      0xFA
 
 #endif // MODEL_IDS_H

@@ -45,6 +45,8 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CHAMPAGNE, champagne_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SECURITY_CAM, security_cam_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_SWITCH, basement_switch_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_WASHER, basement_washer_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_DRYER, basement_dryer_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -66,6 +68,8 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_BASEMENT_SWITCH, 1055, 0, 5875, 0, 0, 0, (2 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BASEMENT_SWITCH, 1532, 0, 5875, 0, 0, 0, (3 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BASEMENT_SWITCH, 2051, 0, 5875, 0, 0, 0, (4 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_BASEMENT_WASHER, 5270, 0, 4479, 0, 0, 0, 0x00000000, bhvBasementWasher),
+		OBJECT(MODEL_BASEMENT_DRYER, 6131, 0, 6158, 0, 0, 0, 0x00000000, bhvBasementDryer),
 		OBJECT(MODEL_CELLAR_BLOCKADE, -2223, 140, 6944, 0, 0, 0, 0x00000000, bhvCellarBlockade),
 		OBJECT(MODEL_CHAMPAGNE, -2084, 1536, 7203, 0, -180, 0, 0x00000000, bhvChampagne),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2229, 0, 6882, 0, 0, 0, 0x00000000, bhvDoor),
