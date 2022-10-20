@@ -9331,10 +9331,11 @@ const BehaviorScript bhvBasementSwitch[] = {
 const BehaviorScript bhvBasementWasher[] = {
     BEGIN(OBJ_LIST_SURFACE),
     // Floor switch - common:
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
     LOAD_COLLISION_DATA(basement_washer_collision),
     LOAD_ANIMATIONS(oAnimations, basement_washer_anims),
     // ANIMATE(0),
+    SET_FLOAT(oDrawingDistance, 0x4000),
     CALL_NATIVE(bhv_basement_washer_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_basement_washer_loop),
@@ -9345,13 +9346,28 @@ const BehaviorScript bhvBasementWasher[] = {
 const BehaviorScript bhvBasementDryer[] = {
     BEGIN(OBJ_LIST_SURFACE),
     // Floor switch - common:
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_COLLISION_DATA(basement_dryer_collision),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    LOAD_COLLISION_DATA(basement_dryer2_collision),
     LOAD_ANIMATIONS(oAnimations, basement_dryer_anims),
     ANIMATE(1),
+    SET_FLOAT(oDrawingDistance, 0x4000),
     CALL_NATIVE(bhv_basement_dryer_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_basement_dryer_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvClothesShot[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    BILLBOARD(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_clothes_shot_init),
+    SET_INT(oIntangibleTimer, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_clothes_shot_loop),
     END_LOOP(),
 };

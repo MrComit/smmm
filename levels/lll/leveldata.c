@@ -88,3 +88,4 @@
 #include "levels/lll/basement_dryer/anims/data.inc.c"
 #include "levels/lll/basement_dryer/anims/table.inc.c"
 #include "levels/lll/basement_dryer/collision.inc.c"
+#include "levels/lll/basement_dryer2/collision.inc.c"

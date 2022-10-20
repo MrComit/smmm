@@ -787,6 +787,7 @@ extern const BehaviorScript bhvSecurityCam[];
 extern const BehaviorScript bhvBasementSwitch[];
 extern const BehaviorScript bhvBasementWasher[];
 extern const BehaviorScript bhvBasementDryer[];
+extern const BehaviorScript bhvClothesShot[];
 
 
 #endif // BEHAVIOR_DATA_H

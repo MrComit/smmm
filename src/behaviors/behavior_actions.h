@@ -956,6 +956,8 @@ void bhv_basement_washer_init(void);
 void bhv_basement_washer_loop(void);
 void bhv_basement_dryer_init(void);
 void bhv_basement_dryer_loop(void);
+void bhv_clothes_shot_init(void);
+void bhv_clothes_shot_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
