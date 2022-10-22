@@ -1,3 +1,4 @@
+s32 absi(s32 a0);
 struct ObjectHitbox sClothesShotHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
@@ -12,7 +13,7 @@ struct ObjectHitbox sClothesShotHitbox = {
 
 void bhv_clothes_shot_init(void) {
     obj_set_hitbox(o, &sClothesShotHitbox);
-    o->oForwardVel = 25.0f;
+    o->oForwardVel = 30.0f;
     // o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
     // o->oMoveAnglePitch = -o->parentObj->oFaceAnglePitch;
     o->oPosY += 100.0f;
@@ -22,7 +23,9 @@ void bhv_clothes_shot_loop(void) {
     CL_Move();
     o->oFaceAngleYaw += 0x200;
     o->oFaceAngleRoll += 0x400;
-    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+    // if (absi((u16)o->oAngleToMario - (u16)o->oMoveAngleYaw) < 0x2000) {
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
+    // }
 
     if (o->oTimer > 15) {
         cur_obj_update_floor_and_walls();
@@ -33,7 +36,7 @@ void bhv_clothes_shot_loop(void) {
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
         }
 
-        if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
             o->activeFlags = 0;
             spawn_mist_particles();
         }
@@ -66,7 +69,7 @@ void bhv_basement_washer_init(void) {
 void bhv_basement_washer_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 1000.0f && absi(o->oAngleToMario - o->oFaceAngleYaw) < 0x2800) {
+            if (o->oDistanceToMario < 1000.0f && absi((u16)o->oAngleToMario - (u16)o->oFaceAngleYaw) < 0x2800) {
                 if (o->oTimer > 15) {
                     cur_obj_init_animation(1);
                     o->oAction = 1;

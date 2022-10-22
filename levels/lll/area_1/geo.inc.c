@@ -32,8 +32,12 @@ const GeoLayout lll_dl_102__Laundry_Room_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Clothes_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_LaundryRoom_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_LaundryRoom_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Shirts_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4530, 4, 5900, lll_dl_TideToad_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_TideToad_mesh_layer_5),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
