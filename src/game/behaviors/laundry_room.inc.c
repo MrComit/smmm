@@ -17,6 +17,14 @@ void bhv_clothes_shot_init(void) {
     // o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
     // o->oMoveAnglePitch = -o->parentObj->oFaceAnglePitch;
     o->oPosY += 100.0f;
+
+    // o->os16F4 = 0x00;
+    // o->os16F6 = 0xA0;
+    // o->os16F8 = 0xFF;
+    s32 hue = CL_RandomMinMaxU16(0, 360);
+    f32 sat = (random_float() * 0.3f) + 0.7f;
+    f32 val = (random_float() * 0.2f) + 0.8f;
+    CL_HSVtoRGB(hue, sat, val, &o->os16F4, &o->os16F6,  &o->os16F8);
 }
 
 void bhv_clothes_shot_loop(void) {
@@ -69,8 +77,8 @@ void bhv_basement_washer_init(void) {
 void bhv_basement_washer_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 1000.0f && absi((u16)o->oAngleToMario - (u16)o->oFaceAngleYaw) < 0x2800) {
-                if (o->oTimer > 15) {
+            if (o->oDistanceToMario < 1750.0f && absi((u16)o->oAngleToMario - (u16)o->oFaceAngleYaw) < 0x2C00) {
+                if (o->oTimer > 5) {
                     cur_obj_init_animation(1);
                     o->oAction = 1;
                 }
@@ -82,7 +90,7 @@ void bhv_basement_washer_loop(void) {
         case 1:
             if (cur_obj_set_anim_if_at_end(0)) {
                 o->oAction = 2;
-                o->oObjF4 = spawn_object(o, MODEL_GHOSTSAND_BALL, bhvClothesShot);
+                o->oObjF4 = spawn_object(o, MODEL_CLOTHES_BALL, bhvClothesShot);
             }
             break;
         case 2:

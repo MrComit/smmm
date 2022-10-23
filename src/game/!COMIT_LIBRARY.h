@@ -34,7 +34,7 @@ s32 CL_cur_obj_get_obj_collision(struct Object *obj);
 f32 CL_objptr_dist_to_nearest_object_with_behavior(struct Object *obj2, const BehaviorScript *behavior);
 void CL_call_warp(f32 x, f32 y, f32 z);
 void CL_instantly_warp(Vec3f pos);
-
+void CL_HSVtoRGB(s32 Hue, f32 s, f32 v, s16 *red, s16 *green, s16 *blue);
 
 
 

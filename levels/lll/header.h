@@ -165,4 +165,6 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/basement_dryer2/collision_header.h"
 
+#include "levels/lll/clothes_ball/geo_header.h"
+
 #endif

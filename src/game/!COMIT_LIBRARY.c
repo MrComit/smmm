@@ -530,3 +530,39 @@ void CL_instantly_warp(Vec3f pos) {
     gCLInstantWarp = FALSE;
     vec3f_set(gCLWarpPos, 0, 0, 0);
 }
+
+
+void CL_HSVtoRGB(s32 Hue, f32 s, f32 v, s16 *red, s16 *green, s16 *blue) {
+    f32 C = s*v;
+    f32 X = C*(1-abs((Hue % 60)-1));
+    f32 m = v-C;
+    f32 r,g,b;
+    if (Hue < 60) {
+        r = C;
+        g = X;
+        b = 0;
+    } else if (Hue < 120) {
+        r = X;
+        g = C;
+        b = 0;
+    } else if (Hue < 180)  {
+        r = 0;
+        g = C;
+        b = X;
+    } else if (Hue < 240) {
+        r = 0;
+        g = X;
+        b = C;
+    } else if (Hue < 300) {
+        r = X;
+        g = 0;
+        b = C;
+    } else {
+        r = C;
+        g = 0;
+        b = X;
+    }
+    *red = (r+m)*255;
+    *green = (g+m)*255;
+    *blue = (b+m)*255;
+}

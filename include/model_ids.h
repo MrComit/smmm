@@ -795,5 +795,8 @@
 #define MODEL_BASEMENT_SWITCH     0xFC
 #define MODEL_BASEMENT_WASHER     0xFB
 #define MODEL_BASEMENT_DRYER      0xFA
+#define MODEL_CLOTHES_BALL        0xF9
+
+
 
 #endif // MODEL_IDS_H
