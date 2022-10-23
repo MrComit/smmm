@@ -9346,11 +9346,12 @@ const BehaviorScript bhvBasementWasher[] = {
 const BehaviorScript bhvBasementDryer[] = {
     BEGIN(OBJ_LIST_SURFACE),
     // Floor switch - common:
-    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
     LOAD_COLLISION_DATA(basement_dryer2_collision),
     LOAD_ANIMATIONS(oAnimations, basement_dryer_anims),
     ANIMATE(1),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     CALL_NATIVE(bhv_basement_dryer_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_basement_dryer_loop),

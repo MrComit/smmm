@@ -47,7 +47,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_SWITCH, basement_switch_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_WASHER, basement_washer_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_DRYER, basement_dryer_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_CLOTHES_BALL, clothes_ball_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_CLOTHES_BALL, clothes_ball_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

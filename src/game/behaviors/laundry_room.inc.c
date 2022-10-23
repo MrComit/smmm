@@ -44,7 +44,7 @@ void bhv_clothes_shot_loop(void) {
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
         }
 
-        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED) {
+        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED || o->oTimer > 300) {
             o->activeFlags = 0;
             spawn_mist_particles();
         }
