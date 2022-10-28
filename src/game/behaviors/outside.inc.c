@@ -547,10 +547,12 @@ void bhv_poochy_boss_loop(void) {
 
 extern const Collision bounce_box_collision[];
 extern const Collision snow_box_collision[];
+extern const Collision laundry_bounce_box_collision[];
 
 static void const *sBoxCollision[] = {
     bounce_box_collision,
-    snow_box_collision
+    snow_box_collision,
+    laundry_bounce_box_collision,
 };
 
 void bhv_bounce_box_init(void) {

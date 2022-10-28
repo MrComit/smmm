@@ -52,3 +52,4 @@
 #include "levels/lll/basement_washer/geo.inc.c"
 #include "levels/lll/basement_dryer/geo.inc.c"
 #include "levels/lll/clothes_ball/geo.inc.c"
+#include "levels/lll/laundry_bounce_box/geo.inc.c"

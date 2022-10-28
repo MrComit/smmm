@@ -90,3 +90,5 @@
 #include "levels/lll/basement_dryer/collision.inc.c"
 #include "levels/lll/basement_dryer2/collision.inc.c"
 #include "levels/lll/clothes_ball/model.inc.c"
+#include "levels/lll/laundry_bounce_box/model.inc.c"
+#include "levels/lll/laundry_bounce_box/collision.inc.c"

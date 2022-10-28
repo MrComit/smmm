@@ -13,7 +13,7 @@ struct ObjectHitbox sClothesShotHitbox = {
 
 void bhv_clothes_shot_init(void) {
     obj_set_hitbox(o, &sClothesShotHitbox);
-    o->oForwardVel = 30.0f;
+    o->oForwardVel = 24.0f;
     // o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
     // o->oMoveAnglePitch = -o->parentObj->oFaceAnglePitch;
     o->oPosY += 100.0f;
