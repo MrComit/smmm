@@ -32,7 +32,7 @@ void bhv_clothes_shot_loop(void) {
     o->oFaceAngleYaw += 0x200;
     o->oFaceAngleRoll += 0x400;
     // if (absi((u16)o->oAngleToMario - (u16)o->oMoveAngleYaw) < 0x2000) {
-        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x380);
     // }
 
     if (o->oTimer > 15) {
@@ -44,7 +44,7 @@ void bhv_clothes_shot_loop(void) {
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
         }
 
-        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED || o->oTimer > 300) {
+        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oInteractStatus & INT_STATUS_INTERACTED || o->oTimer > 500) {
             o->activeFlags = 0;
             spawn_mist_particles();
         }

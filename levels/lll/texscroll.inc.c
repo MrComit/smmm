@@ -31,10 +31,10 @@ void scroll_lll_dl_Fog_mesh_layer_5_vtx_0() {
 	currentY += deltaY;
 }
 
-void scroll_sts_mat_lll_dl_Fog_001_layer5() {
+void scroll_sts_mat_lll_dl_Fog_002_layer5() {
 	static int intervalTex1 = 3;
 	static int curInterval1 = 3;
-	Gfx *mat = segmented_to_virtual(mat_lll_dl_Fog_001_layer5);
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_Fog_002_layer5);
 
 	if (--curInterval1 <= 0) {
 		shift_s_down(mat, 21, PACK_TILESIZE(0, 1));
@@ -43,10 +43,10 @@ void scroll_sts_mat_lll_dl_Fog_001_layer5() {
 	}
 };
 
-void scroll_sts_mat_lll_dl_LaundryWall() {
+void scroll_sts_mat_lll_dl_LaundryWall_001() {
 	static int intervalTex1 = 2;
 	static int curInterval1 = 2;
-	Gfx *mat = segmented_to_virtual(mat_lll_dl_LaundryWall);
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_LaundryWall_001);
 
 	if (--curInterval1 <= 0) {
 		shift_s(mat, -1, PACK_TILESIZE(0, 1));
@@ -87,10 +87,10 @@ void scroll_sts_mat_lll_dl_CellarWall() {
 	}
 };
 
-void scroll_sts_mat_lll_dl_LockerWall_001() {
+void scroll_sts_mat_lll_dl_LockerWall_002() {
 	static int intervalTex1 = 2;
 	static int curInterval1 = 2;
-	Gfx *mat = segmented_to_virtual(mat_lll_dl_LockerWall_001);
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_LockerWall_002);
 
 	if (--curInterval1 <= 0) {
 		shift_s(mat, -1, PACK_TILESIZE(0, 1));
@@ -101,9 +101,9 @@ void scroll_sts_mat_lll_dl_LockerWall_001() {
 void scroll_lll() {
 	scroll_sts_mat_lll_dl_CorridorWall_layer1();
 	scroll_lll_dl_Fog_mesh_layer_5_vtx_0();
-	scroll_sts_mat_lll_dl_Fog_001_layer5();
-	scroll_sts_mat_lll_dl_LaundryWall();
+	scroll_sts_mat_lll_dl_Fog_002_layer5();
+	scroll_sts_mat_lll_dl_LaundryWall_001();
 	scroll_lll_dl_TideToad_mesh_layer_5_vtx_0();
 	scroll_sts_mat_lll_dl_CellarWall();
-	scroll_sts_mat_lll_dl_LockerWall_001();
+	scroll_sts_mat_lll_dl_LockerWall_002();
 }
