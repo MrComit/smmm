@@ -958,6 +958,8 @@ void bhv_basement_dryer_init(void);
 void bhv_basement_dryer_loop(void);
 void bhv_clothes_shot_init(void);
 void bhv_clothes_shot_loop(void);
+void bhv_dust_bunny_loop(void);
+void bhv_dust_bunny_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

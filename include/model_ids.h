@@ -797,7 +797,7 @@
 #define MODEL_BASEMENT_DRYER      0xFA
 #define MODEL_CLOTHES_BALL        0xF9
 #define MODEL_LAUNDRY_BOUNCE_BOX  0xF8
-
+#define MODEL_DUST_BUNNY          0xF7
 
 
 #endif // MODEL_IDS_H

@@ -92,3 +92,4 @@
 #include "levels/lll/clothes_ball/model.inc.c"
 #include "levels/lll/laundry_bounce_box/model.inc.c"
 #include "levels/lll/laundry_bounce_box/collision.inc.c"
+#include "levels/lll/dust_bunny/model.inc.c"
