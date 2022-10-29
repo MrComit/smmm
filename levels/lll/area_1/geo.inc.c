@@ -76,6 +76,7 @@ const GeoLayout lll_dl_102__Laundry_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Rack_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Rack_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Shirt_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, lll_dl_Shirts_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Shirts_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Socks_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Table_mesh_layer_1),

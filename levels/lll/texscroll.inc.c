@@ -56,7 +56,7 @@ void scroll_sts_mat_lll_dl_LaundryWall_001() {
 
 void scroll_lll_dl_TideToad_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 8;
+	int count = 12;
 	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
