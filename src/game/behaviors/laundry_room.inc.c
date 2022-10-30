@@ -14,11 +14,11 @@ struct ObjectHitbox sClothesShotHitbox = {
 struct ObjectHitbox sDustBunnyHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 1,
+    /* damageOrCoinValue: */ 0,
     /* health:            */ 1,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 75,
-    /* height:            */ 100,
+    /* radius:            */ 125,
+    /* height:            */ 150,
     /* hurtboxRadius:     */ 50,
     /* hurtboxHeight:     */ 75,
 };
@@ -28,12 +28,11 @@ struct ObjectHitbox sDustBunnyHitbox = {
 void bhv_dust_bunny_init(void) {
     obj_set_hitbox(o, &sDustBunnyHitbox);
     if (o->oBehParams2ndByte == 0) {
-        o->oHomeX = 5200.0f;
-        o->oHomeZ = 16329.0f;
+        o->oHomeX = -4800.0f;
     } else {
-        o->oHomeX = 5200.0f;
-        o->oHomeZ = 16329.0f;
+        o->oHomeX = 849.0f;
     }
+    o->oHomeZ = 16329.0f;
 }
 
 
