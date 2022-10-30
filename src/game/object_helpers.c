@@ -57,6 +57,7 @@ s8 sBooColors[][3] = {
     {0x3A, 0x2B, 0xC3}, //treehouse
     {0xFF, 0x85, 0xF9}, //theater
     {0x0, 0x59, 0x0}, //attic
+    {0xD3, 0x8C, 0x00}, //laundry room
     {0xff, 0xff, 0xff},
 };
 
@@ -80,7 +81,8 @@ s8 sBooColorsDark[][3] = {
     {0x3A / 2, 0x2B / 2, 0xC3 / 2}, //treehouse
     {0xFF / 2, 0x85 / 2, 0xF9 / 2}, //theater
     {0x00 / 2, 0x59 / 2, 0x00 / 2}, //attic
-    {0xff / 2, 0xff / 2, 0xff / 2},
+    {0xD3 / 2, 0x8C / 2, 0x00 / 2}, //laundry room
+    {0xff, 0xff, 0xff},
 };
 
 static s8 sBbhStairJiggleOffsets[] = { -8, 8, -4, 4 };
@@ -1697,6 +1699,34 @@ Gfx *geo_switch_wine_cellar(s32 callContext, struct GraphNode *node) {
 
         // assign the case number for execution.
         if (gIsConsole && m->pos[1] > 1300.0f && m->pos[0] > -2200.0f && (u16)gCamera->yaw <= 0x8000) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_laundry_room(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_laundry_room(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    struct MarioState *m = gMarioState;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        if (m->pos[0] < 3000.0f && m->pos[2] > 14000.0f) {
             switchCase->selectedCase = 1;
         } else {
             switchCase->selectedCase = 0;

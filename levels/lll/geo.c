@@ -54,3 +54,6 @@
 #include "levels/lll/clothes_ball/geo.inc.c"
 #include "levels/lll/laundry_bounce_box/geo.inc.c"
 #include "levels/lll/dust_bunny/geo.inc.c"
+#include "levels/lll/laundry_shirts1/geo.inc.c"
+#include "levels/lll/laundry_shirts2/geo.inc.c"
+#include "levels/lll/laundry_shirts3/geo.inc.c"

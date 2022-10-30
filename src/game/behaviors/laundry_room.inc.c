@@ -1,3 +1,4 @@
+#include "levels/lll/header.h"
 s32 absi(s32 a0);
 struct ObjectHitbox sClothesShotHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
@@ -110,6 +111,7 @@ void bhv_clothes_shot_loop(void) {
         cur_obj_update_floor_and_walls();
         if (o->oFloor != NULL && o->oFloorType == SURFACE_GENERAL_USE && o->oFloor->object != NULL) {
             o->oFloor->object->oAction = 1;
+            o->parentObj->oAction = 3;
             o->activeFlags = 0;
             spawn_mist_particles();
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
@@ -123,26 +125,86 @@ void bhv_clothes_shot_loop(void) {
 }
 
 
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
+
+void const *sShirtsCollision[] = {
+    laundry_shirts1_collision,
+    laundry_shirts2_collision,
+    laundry_shirts3_collision,
+};
+
+Vec3f sShirtsPos[3] = {
+    {6413.0f, -15.0f, 8666.0f,},
+    {8944.0f, -15.0f, 8904.0f,},
+    {11860.0f, 520.0f, 7127.0f,},
+};
+
+
+Vec3f sShirtCamPos[3] = {
+    {3141.0f, 1369.0f, 6131.0f},
+    {7827.0f, 1929.0f, 13138.0f},
+    {9848.0f, 1671.0f, 8919.0f},
+};
+
+s32 sShirtModels[3] = {
+    MODEL_SHIRTS1, MODEL_SHIRTS2, MODEL_SHIRTS3
+};
+
+void bhv_laundry_shirts_init(void) {
+    o->oFaceAngleYaw = 0;
+    o->collisionData = segmented_to_virtual(sShirtsCollision[o->oBehParams2ndByte]);
+    vec3f_copy(&o->oPosX, sShirtsPos[o->oBehParams2ndByte]);
+    cur_obj_set_model(sShirtModels[o->oBehParams2ndByte]);
+}
+
+
+void bhv_laundry_shirts_loop(void) {
+    if (o->oTimer > 20 && o->oOpacity != 0xFF) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xFF, 0x6);
+    }
+}
+
 
 void bhv_basement_dryer_init(void) {
-
-
+    if (o->oBehParams2ndByte == 3) {
+        o->oObjF8 = spawn_object(o, MODEL_NONE, bhvRoomObj);
+    }
 }
 
 void bhv_basement_dryer_loop(void) {
     switch (o->oAction) {
         case 1:
             cur_obj_init_animation(0);
-            o->oAction = 2;
+            if (o->oBehParams2ndByte != 3) {
+                if (set_mario_npc_dialog(1)) {
+                    o->oObjF4 = spawn_object(o, MODEL_SHIRTS1, bhvLaundryShirts);
+                    o->oObjF4->oBehParams2ndByte = o->oBehParams2ndByte;
+                    vec3f_copy(gComitCutsceneFocVec, gCamera->pos);
+                    vec3f_copy(gComitCutscenePosVec, gCamera->focus);
+                    o->oAction = 2;
+                }
+            } else {
+                o->oObjF8->activeFlags = 0;
+                o->oAction = 3;
+            }
             o->collisionData = segmented_to_virtual(&basement_dryer_collision);
             break;
+        case 2:
+            gCamera->comitCutscene = 0xFF;
+            gComitCutscenePosVec[0] = approach_f32_asymptotic(gComitCutscenePosVec[0], sShirtCamPos[o->oBehParams2ndByte][0], 0.2f);
+            gComitCutscenePosVec[1] = approach_f32_asymptotic(gComitCutscenePosVec[1], sShirtCamPos[o->oBehParams2ndByte][1], 0.2f);
+            gComitCutscenePosVec[2] = approach_f32_asymptotic(gComitCutscenePosVec[2], sShirtCamPos[o->oBehParams2ndByte][2], 0.2f);
+
+            gComitCutsceneFocVec[0] = approach_f32_asymptotic(gComitCutsceneFocVec[0], sShirtsPos[o->oBehParams2ndByte][0], 0.2f);
+            gComitCutsceneFocVec[1] = approach_f32_asymptotic(gComitCutsceneFocVec[1], sShirtsPos[o->oBehParams2ndByte][1], 0.2f);
+            gComitCutsceneFocVec[2] = approach_f32_asymptotic(gComitCutsceneFocVec[2], sShirtsPos[o->oBehParams2ndByte][2], 0.2f);
+            if (o->oTimer > 90) {
+                o->oAction = 4;
+                set_mario_npc_dialog(0);
+            }
+            break;
     }
-}
-
-
-void bhv_basement_washer_init(void) {
-
-
 }
 
 void bhv_basement_washer_loop(void) {

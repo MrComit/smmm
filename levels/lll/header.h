@@ -173,4 +173,16 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/dust_bunny/geo_header.h"
 
+#include "levels/lll/laundry_shirts1/geo_header.h"
+
+#include "levels/lll/laundry_shirts2/geo_header.h"
+
+#include "levels/lll/laundry_shirts3/geo_header.h"
+
+#include "levels/lll/laundry_shirts1/collision_header.h"
+
+#include "levels/lll/laundry_shirts2/collision_header.h"
+
+#include "levels/lll/laundry_shirts3/collision_header.h"
+
 #endif

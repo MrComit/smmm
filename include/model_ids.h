@@ -798,6 +798,9 @@
 #define MODEL_CLOTHES_BALL        0xF9
 #define MODEL_LAUNDRY_BOUNCE_BOX  0xF8
 #define MODEL_DUST_BUNNY          0xF7
+#define MODEL_SHIRTS1             0xF6
+#define MODEL_SHIRTS2             0xF5
+#define MODEL_SHIRTS3             0xF4
 
 
 #endif // MODEL_IDS_H
