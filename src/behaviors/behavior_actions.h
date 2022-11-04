@@ -961,6 +961,8 @@ void bhv_dust_bunny_loop(void);
 void bhv_dust_bunny_init(void);
 void bhv_laundry_shirts_init(void);
 void bhv_laundry_shirts_loop(void);
+void bhv_gravity_button_init(void);
+void bhv_gravity_button_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

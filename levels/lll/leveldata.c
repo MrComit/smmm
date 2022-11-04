@@ -99,3 +99,5 @@
 #include "levels/lll/laundry_shirts1/collision.inc.c"
 #include "levels/lll/laundry_shirts2/collision.inc.c"
 #include "levels/lll/laundry_shirts3/collision.inc.c"
+#include "levels/lll/gravity_button/model.inc.c"
+#include "levels/lll/gravity_button/collision.inc.c"

@@ -33,4 +33,6 @@ s32 stationary_ground_step(struct MarioState *);
 s32 perform_ground_step(struct MarioState *);
 s32 perform_air_step(struct MarioState *, u32);
 
+extern s32 gLowGrav;
+
 #endif // MARIO_STEP_H

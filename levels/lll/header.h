@@ -185,4 +185,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/laundry_shirts3/collision_header.h"
 
+#include "levels/lll/gravity_button/geo_header.h"
+
+#include "levels/lll/gravity_button/collision_header.h"
+
 #endif

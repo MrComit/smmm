@@ -53,6 +53,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SHIRTS1, laundry_shirts1_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SHIRTS2, laundry_shirts2_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SHIRTS3, laundry_shirts3_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_GRAVITY_BUTTON, gravity_button_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -125,6 +126,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -6229, 200, 6732, 0, 90, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, -5179, 0, 6732, 0, 90, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_NONE, -8305, 520, 5647, 0, 90, 0, (100 << 16), bhvPoleGrabbing),
+		OBJECT(MODEL_GRAVITY_BUTTON, 2738, 314, -3687, 0, 0, 0, 0x00000000, bhvGravityButton),
 		TERRAIN(lll_area_1_collision),
 		ROOMS(lll_area_1_collision_rooms),
 		MACRO_OBJECTS(lll_area_1_macro_objs),

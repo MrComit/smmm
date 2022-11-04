@@ -284,3 +284,4 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "game/behaviors/attic.inc.c"
 #include "game/behaviors/cellars.inc.c"
 #include "game/behaviors/laundry_room.inc.c"
+#include "game/behaviors/engine_room.inc.c"

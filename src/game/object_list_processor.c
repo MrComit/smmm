@@ -410,7 +410,7 @@ void mario_update_toad_friend(struct MarioState *m) {
             if (gPlayer1Controller->buttonPressed & D_JPAD) {
                 play_music(0, SEQUENCE_ARGS(4, SEQ_BASEMENT), 0);
             }
-            if (gPlayer1Controller->buttonPressed & L_TRIG) {
+            if (gPlayer1Controller->buttonPressed & L_TRIG && gPlayer1Controller->buttonDown & Z_TRIG) {
                 gLowGrav ^= 1;
             }
             break;

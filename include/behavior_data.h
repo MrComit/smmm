@@ -791,6 +791,7 @@ extern const BehaviorScript bhvClothesShot[];
 extern const BehaviorScript bhvDustBunny[];
 extern const BehaviorScript bhvLaundryShirts[];
 extern const BehaviorScript bhvRoomObj[];
+extern const BehaviorScript bhvGravityButton[];
 
 
 #endif // BEHAVIOR_DATA_H
