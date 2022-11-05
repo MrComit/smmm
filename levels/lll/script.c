@@ -54,6 +54,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SHIRTS2, laundry_shirts2_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SHIRTS3, laundry_shirts3_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GRAVITY_BUTTON, gravity_button_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_THWOMP_BLOCK, thwomp_block_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -127,6 +128,13 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -5179, 0, 6732, 0, 90, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_NONE, -8305, 520, 5647, 0, 90, 0, (100 << 16), bhvPoleGrabbing),
 		OBJECT(MODEL_GRAVITY_BUTTON, 2738, 314, -3687, 0, 0, 0, 0x00000000, bhvGravityButton),
+		OBJECT(MODEL_THWOMP_BLOCK, 4383, 0, 1762, 0, 0, 0, 0x00000000, bhvThwompBlock),
+		OBJECT(MODEL_THWOMP_BLOCK, 6782, 0, -879, 0, 0, 0, 0x00000000, bhvThwompBlock),
+		OBJECT(MODEL_THWOMP_BLOCK, 7078, 0, 2264, 0, 0, 0, (20 << 16), bhvThwompBlock),
+		OBJECT(MODEL_THWOMP_BLOCK, 9854, -750, 897, 0, 0, 0, (25 << 16), bhvThwompBlock),
+		OBJECT(MODEL_THWOMP_BLOCK, 10604, -750, 897, 0, 0, 0, (25 << 16), bhvThwompBlock),
+		OBJECT(MODEL_THWOMP_BLOCK, 11354, -750, 897, 0, 0, 0, (25 << 16), bhvThwompBlock),
+		OBJECT(MODEL_THWOMP_BLOCK, 12104, -750, 897, 0, 0, 0, (25 << 16), bhvThwompBlock),
 		TERRAIN(lll_area_1_collision),
 		ROOMS(lll_area_1_collision_rooms),
 		MACRO_OBJECTS(lll_area_1_macro_objs),

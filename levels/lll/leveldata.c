@@ -101,3 +101,5 @@
 #include "levels/lll/laundry_shirts3/collision.inc.c"
 #include "levels/lll/gravity_button/model.inc.c"
 #include "levels/lll/gravity_button/collision.inc.c"
+#include "levels/lll/thwomp_block/model.inc.c"
+#include "levels/lll/thwomp_block/collision.inc.c"

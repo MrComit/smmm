@@ -58,3 +58,4 @@
 #include "levels/lll/laundry_shirts2/geo.inc.c"
 #include "levels/lll/laundry_shirts3/geo.inc.c"
 #include "levels/lll/gravity_button/geo.inc.c"
+#include "levels/lll/thwomp_block/geo.inc.c"

@@ -9406,12 +9406,26 @@ const BehaviorScript bhvRoomObj[] = {
 
 const BehaviorScript bhvGravityButton[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
     LOAD_COLLISION_DATA(gravity_button_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     CALL_NATIVE(bhv_gravity_button_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_gravity_button_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvThwompBlock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    LOAD_COLLISION_DATA(thwomp_block_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_thwomp_block_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_thwomp_block_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

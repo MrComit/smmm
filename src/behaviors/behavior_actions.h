@@ -963,6 +963,8 @@ void bhv_laundry_shirts_init(void);
 void bhv_laundry_shirts_loop(void);
 void bhv_gravity_button_init(void);
 void bhv_gravity_button_loop(void);
+void bhv_thwomp_block_loop(void);
+void bhv_thwomp_block_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

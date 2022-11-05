@@ -1,0 +1,13 @@
+extern const GeoLayout thwomp_block_geo[];
+extern u8 thwomp_block_darkmetal_i8[];
+extern u8 thwomp_block_tv_metalblur_i8[];
+extern u8 thwomp_block_thwompface2_ia8[];
+extern Vtx thwomp_block_tb_mesh_layer_1_vtx_0[40];
+extern Gfx thwomp_block_tb_mesh_layer_1_tri_0[];
+extern Vtx thwomp_block_tb_mesh_layer_1_vtx_1[10];
+extern Gfx thwomp_block_tb_mesh_layer_1_tri_1[];
+extern Gfx mat_thwomp_block_ThwompTop[];
+extern Gfx mat_thwomp_block_ThwompBlock_layer1[];
+extern Gfx mat_revert_thwomp_block_ThwompBlock_layer1[];
+extern Gfx thwomp_block_tb_mesh_layer_1[];
+extern Gfx thwomp_block_material_revert_render_settings[];
