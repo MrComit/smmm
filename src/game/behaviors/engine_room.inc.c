@@ -1,9 +1,13 @@
-#define THWOMP_SPEED_FACTOR 0.1f
+#define THWOMP_SPEED_FACTOR 0.05f
 
 void bhv_thwomp_block_init(void) {
     o->os16100 = 0xC000;
+    o->os16FA = CL_RandomMinMaxU16(0, 2);
     if (o->oBehParams2ndByte) {
         o->oFloat104 = o->oBehParams2ndByte * 100.0f;
+        if (o->oBehParams >> 24) {
+            o->oFloat104 += 50.0f;
+        }
     } else {
         o->oFloat104 = 1000.0f;
     }
@@ -11,9 +15,9 @@ void bhv_thwomp_block_init(void) {
 }
 
 void bhv_thwomp_block_loop(void) {
-    switch (o->oAction) {
-        case 0:
-            if (o->oTimer > 30) {
+    if (o->oTimer > 30) {
+        switch (o->oAction) {
+            case 0:
                 o->oPosY += o->oFloat108;
                 if (o->oFloat108 >= o->oFloat104 * THWOMP_SPEED_FACTOR) {
                     o->oFloat108 = o->oFloat104 * THWOMP_SPEED_FACTOR;
@@ -25,12 +29,8 @@ void bhv_thwomp_block_loop(void) {
                     o->oFloat108 = (o->oFloat104 * THWOMP_SPEED_FACTOR) / 32.0f;
                     o->oAction = 1;
                 }
-            } else if (!gLowGrav) {
-                o->oTimer = 0;
-            }
-            break;
-        case 1:
-            if (o->oTimer > 30) {
+                break;
+            case 1:
                 o->oPosY -= o->oFloat108;
                 if (o->oFloat108 >= o->oFloat104 * THWOMP_SPEED_FACTOR) {
                     o->oFloat108 = o->oFloat104 * THWOMP_SPEED_FACTOR;
@@ -42,10 +42,16 @@ void bhv_thwomp_block_loop(void) {
                     o->oFloat108 = (o->oFloat104 * THWOMP_SPEED_FACTOR) / 32.0f;
                     o->oAction = 0;
                 }
-            } else if (!gLowGrav) {
-                o->oTimer = 0;
-            }
-            break;
+                break;
+        }
+    } else if (!gLowGrav) {
+        o->oTimer = 0;
+        if (o->oOpacity) {
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 7);
+        }
+        if (o->os16100 != 0xC000) {
+            o->os16100 = 0xC000;
+        }
     }
     if (gLowGrav) {
         o->os16100 += 0x400;
@@ -75,13 +81,6 @@ void bhv_thwomp_block_loop(void) {
                     o->os16FA = 0;
                 }
                 break;
-        }
-    } else {
-        if (o->oOpacity) {
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 7);
-        }
-        if (o->os16100 != 0xC000) {
-            o->os16100 == 0xC000;
         }
     }
 }
