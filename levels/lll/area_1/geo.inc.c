@@ -237,8 +237,11 @@ const GeoLayout lll_dl_106__Meat_Locker_geo[] = {
 const GeoLayout lll_dl_107__Engine_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_BoogooZone_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_BoogooZone_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_EngineRoom_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Gear_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_EngineRoom_mesh_layer_5),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 9977, 452, 439, lll_dl_Pillars_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

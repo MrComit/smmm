@@ -98,6 +98,13 @@ void scroll_sts_mat_lll_dl_LockerWall_001() {
 	}
 };
 
+void scroll_sts_mat_lll_dl_BooGooContainer_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_BooGooContainer_layer1);
+	shift_s(mat, 13, PACK_TILESIZE(0, 1));
+	shift_s(mat, 21, PACK_TILESIZE(0, 1));
+	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+};
+
 void scroll_sts_mat_lll_dl_BooGoo_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_BooGoo_layer1);
 	shift_s(mat, 13, PACK_TILESIZE(0, 1));
@@ -113,5 +120,6 @@ void scroll_lll() {
 	scroll_lll_dl_TideToad_mesh_layer_5_vtx_0();
 	scroll_sts_mat_lll_dl_CellarWall();
 	scroll_sts_mat_lll_dl_LockerWall_001();
+	scroll_sts_mat_lll_dl_BooGooContainer_layer1();
 	scroll_sts_mat_lll_dl_BooGoo_layer1();
 }

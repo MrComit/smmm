@@ -193,4 +193,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/thwomp_block/collision_header.h"
 
+#include "levels/lll/engine_gear/geo_header.h"
+
+#include "levels/lll/engine_gear/collision_header.h"
+
 #endif

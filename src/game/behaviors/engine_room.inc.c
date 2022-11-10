@@ -1,5 +1,37 @@
 #define THWOMP_SPEED_FACTOR 0.05f
 
+void bhv_engine_gear_init(void) {
+    cur_obj_update_floor_and_walls();
+    o->os16F6 = random_u16();
+    o->oFaceAngleYaw = random_u16();
+}
+
+
+void bhv_engine_gear_loop(void) {
+    if (o->os16F4 != gLowGrav) {
+        o->os16F4 = gLowGrav;
+        o->oFloatF8 = 0.0f;
+    }
+    switch (gLowGrav) {
+        case 0:
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 50.0f, 4.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloorHeight - 50.0f, o->oFloatF8);
+            o->os16100 = approach_s16_symmetric(o->os16100, 0, 0x40);
+            break;
+        default:
+            o->os16F6 += 0x400;
+            o->oFloatFC = sins(o->os16F6) * o->oBehParams2ndByte * 10.0f;
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 30.0f, 1.5f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatFC, o->oFloatF8);
+            o->os16100 = approach_s16_symmetric(o->os16100, 0x400, 0x40);
+            load_object_collision_model();
+            break;
+    }
+    o->oFaceAngleYaw += o->os16100;
+}
+
+
+
 void bhv_thwomp_block_init(void) {
     o->os16100 = 0xC000;
     o->os16FA = CL_RandomMinMaxU16(0, 2);

@@ -1,0 +1,11 @@
+extern const GeoLayout engine_gear_geo[];
+extern Lights1 engine_gear_Gear_layer1_lights;
+extern u8 engine_gear_metal_ci4[];
+extern u8 engine_gear_metal_ci4_pal_rgba16[];
+extern Vtx engine_gear_Gear_001_mesh_layer_1_vtx_cull[8];
+extern Vtx engine_gear_Gear_001_mesh_layer_1_vtx_0[184];
+extern Gfx engine_gear_Gear_001_mesh_layer_1_tri_0[];
+extern Gfx mat_engine_gear_Gear_layer1[];
+extern Gfx mat_revert_engine_gear_Gear_layer1[];
+extern Gfx engine_gear_Gear_001_mesh_layer_1[];
+extern Gfx engine_gear_material_revert_render_settings[];

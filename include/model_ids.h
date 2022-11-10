@@ -803,6 +803,7 @@
 #define MODEL_SHIRTS3             0xF4
 #define MODEL_GRAVITY_BUTTON      0xF3
 #define MODEL_THWOMP_BLOCK        0xF2
+#define MODEL_ENGINE_GEAR         0xF1
 
 
 #endif // MODEL_IDS_H

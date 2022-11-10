@@ -59,3 +59,4 @@
 #include "levels/lll/laundry_shirts3/geo.inc.c"
 #include "levels/lll/gravity_button/geo.inc.c"
 #include "levels/lll/thwomp_block/geo.inc.c"
+#include "levels/lll/engine_gear/geo.inc.c"
