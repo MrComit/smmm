@@ -105,3 +105,5 @@
 #include "levels/lll/thwomp_block/collision.inc.c"
 #include "levels/lll/engine_gear/model.inc.c"
 #include "levels/lll/engine_gear/collision.inc.c"
+#include "levels/lll/power_door/model.inc.c"
+#include "levels/lll/power_door/collision.inc.c"

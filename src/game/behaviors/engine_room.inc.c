@@ -1,5 +1,36 @@
 #define THWOMP_SPEED_FACTOR 0.05f
 
+
+void bhv_power_door_loop(void) {
+    if (o->oBehParams2ndByte) {
+        o->oAction = gLowGrav^1;
+    } else {
+        o->oAction = gLowGrav;
+    }
+    
+    if (gLowGrav) {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x0, 0x6);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x72, 0x6);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, 0xFF, 0x6);
+    } else {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x79, 0x6);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x0, 0x6);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, 0x0, 0x6);
+    }
+
+    switch (o->oAction) {
+        case 0:
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.02f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
+            break;
+        case 1:
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.9f, 0.02f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 900.0f, 30.0f);
+            break;
+    }
+}
+
+
 void bhv_engine_gear_init(void) {
     cur_obj_update_floor_and_walls();
     o->os16F6 = random_u16();
@@ -92,7 +123,7 @@ void bhv_thwomp_block_loop(void) {
             case 0:
                 o->os16F4 = 0xA0;
                 o->os16F6 = 0;
-                o->os16F8 = 0;
+                o->os16F8 = 0x60;
                 if ((u16)o->os16100 == 0xC000) {
                     o->os16FA = 1;
                 }

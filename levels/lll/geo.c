@@ -60,3 +60,4 @@
 #include "levels/lll/gravity_button/geo.inc.c"
 #include "levels/lll/thwomp_block/geo.inc.c"
 #include "levels/lll/engine_gear/geo.inc.c"
+#include "levels/lll/power_door/geo.inc.c"

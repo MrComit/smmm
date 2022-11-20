@@ -9442,3 +9442,16 @@ const BehaviorScript bhvEngineGear[] = {
         CALL_NATIVE(bhv_engine_gear_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvPowerDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    LOAD_COLLISION_DATA(power_door_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_power_door_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_power_door_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
