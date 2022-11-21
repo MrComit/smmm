@@ -8,4 +8,5 @@ extern void scroll_sts_mat_lll_dl_LockerWall_001();
 extern void scroll_sts_mat_lll_dl_BooGooContainer_layer1();
 extern void scroll_sts_mat_lll_dl_EngineWall_layer1();
 extern void scroll_sts_mat_lll_dl_BooGoo_layer1();
+extern void scroll_sts_mat_lll_dl_Buttons_layer1();
 extern void scroll_lll();
