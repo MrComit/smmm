@@ -1036,6 +1036,7 @@ extern s32 sPowerMeterVisibleTimer;
 s32 gHudLowerTimer = 0;
 s32 gHudLowerTimer2 = 0;
 s32 sTimer2 = 0;
+s32 gHudCoinUpdateFast;
 
 void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL) {
@@ -1078,7 +1079,10 @@ void update_hud_values(void) {
 
 
         if (gHudDisplay.coins < gMarioState->numCoins && !(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
-            if (gGlobalTimer & 0x00000001) {
+            if (!gHudCoinUpdateFast && (gMarioState->numCoins - gHudDisplay.coins) > 20) {
+                gHudCoinUpdateFast = TRUE;
+            }
+            if (gGlobalTimer & 0x00000001 || gHudCoinUpdateFast) {
                 u32 coinSound;
                 if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
                     coinSound = SOUND_GENERAL_COIN_WATER;
@@ -1095,6 +1099,8 @@ void update_hud_values(void) {
                 //gGotFileCoinHiScore = 1;
                 gSaveFileModified = TRUE;
             }
+        } else {
+            gHudCoinUpdateFast = FALSE;
         }
 
         if (gHudDisplay.coins > gMarioState->numCoins && !(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
