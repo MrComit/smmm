@@ -58,6 +58,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ENGINE_GEAR, engine_gear_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POWER_DOOR, power_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ENGINE_GATE, engine_gate_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ENGINE_LEVER, engine_lever_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -131,6 +132,8 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -5179, 0, 6732, 0, 90, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_NONE, -8305, 520, 5647, 0, 90, 0, (100 << 16), bhvPoleGrabbing),
 		OBJECT(MODEL_ENGINE_GATE, 2289, 0, -212, 0, 0, 0, 0x00000000, bhvEngineGate),
+		OBJECT(MODEL_ENGINE_LEVER, 2609, 0, 1249, 0, 0, 0, 0x00000000, bhvEngineLever),
+		OBJECT(MODEL_GLOBAL_GATE, 1469, 0, -1187, 0, 90, 0, 0x00000000, bhvEngineSmallGate),
 		OBJECT(MODEL_ENGINE_GEAR, 10213, 346, 1381, 0, 0, 0, (6 << 16), bhvEngineGear),
 		OBJECT(MODEL_ENGINE_GEAR, 9825, 313, 2284, 0, 0, 0, (4 << 16), bhvEngineGear),
 		OBJECT(MODEL_ENGINE_GEAR, 6575, 402, 1308, 0, 0, 0, (6 << 16), bhvEngineGear),

@@ -970,6 +970,8 @@ void bhv_engine_gear_init(void);
 void bhv_power_door_loop(void);
 void bhv_engine_gate_init(void);
 void bhv_engine_gate_loop(void);
+void bhv_engine_small_gate_loop(void);
+void bhv_engine_lever_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

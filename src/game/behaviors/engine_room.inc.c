@@ -1,5 +1,48 @@
 #define THWOMP_SPEED_FACTOR 0.05f
 
+void bhv_engine_lever_loop(void) {
+    struct Object *obj;
+    if (o->oF4 == 0) {
+        o->header.gfx.animInfo.animFrame = 0;
+        if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN) {
+            o->oF4 = 1;
+        }
+        if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+            save_file_set_newflags(SAVE_NEW_FLAG_FOREROOM_WINDOW, 0);
+            o->oF4 = 1;
+            obj = cur_obj_nearest_object_with_behavior(bhvEngineSmallGate);
+            if (obj != NULL) {
+                obj->oF4 = 1;
+            }
+            obj = cur_obj_nearest_object_with_behavior(bhvEngineGate);
+            if (obj != NULL) {
+                obj->oF4 = 1;
+            }
+        }
+    }
+}
+
+void bhv_engine_small_gate_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioCurrentRoom == o->oRoom) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
+            if (o->oF4) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 20.0f, 20.0f);
+            if (o->oPosY == o->oHomeY)
+                o->activeFlags = 0;
+            break;
+    }
+}
+
 
 void bhv_engine_gate_init(void) {
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN) {
@@ -11,7 +54,7 @@ void bhv_engine_gate_init(void) {
 void bhv_engine_gate_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oF4 == 1) {
+            if (o->oF4) {
                 play_puzzle_jingle();
                 o->oAction = 1;
             }

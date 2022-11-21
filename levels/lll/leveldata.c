@@ -109,3 +109,7 @@
 #include "levels/lll/power_door/collision.inc.c"
 #include "levels/lll/engine_gate/model.inc.c"
 #include "levels/lll/engine_gate/collision.inc.c"
+#include "levels/lll/engine_lever/model.inc.c"
+#include "levels/lll/engine_lever/anims/data.inc.c"
+#include "levels/lll/engine_lever/anims/table.inc.c"
+#include "levels/lll/engine_lever/collision.inc.c"
