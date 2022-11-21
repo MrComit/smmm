@@ -201,4 +201,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/power_door/collision_header.h"
 
+#include "levels/lll/engine_gate/geo_header.h"
+
+#include "levels/lll/engine_gate/collision_header.h"
+
 #endif

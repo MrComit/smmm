@@ -795,6 +795,7 @@ extern const BehaviorScript bhvGravityButton[];
 extern const BehaviorScript bhvThwompBlock[];
 extern const BehaviorScript bhvEngineGear[];
 extern const BehaviorScript bhvPowerDoor[];
+extern const BehaviorScript bhvEngineGate[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -805,6 +805,7 @@
 #define MODEL_THWOMP_BLOCK        0xF2
 #define MODEL_ENGINE_GEAR         0xF1
 #define MODEL_POWER_DOOR          0xF0
+#define MODEL_ENGINE_GATE         0xEF
 
 
 #endif // MODEL_IDS_H

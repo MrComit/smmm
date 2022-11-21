@@ -125,7 +125,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_NEW_FLAG_BASEMENT_SWITCH3   /* 0x00800000 */ (1 << 23)
 #define SAVE_NEW_FLAG_BASEMENT_SWITCH4   /* 0x01000000 */ (1 << 24)
 #define SAVE_NEW_FLAG_BASEMENT_SWITCH5   /* 0x02000000 */ (1 << 25)
-#define SAVE_NEW_FLAG_027                /* 0x04000000 */ (1 << 26)
+#define SAVE_NEW_FLAG_ENGINE_GATE_OPEN   /* 0x04000000 */ (1 << 26)
 #define SAVE_NEW_FLAG_028                /* 0x08000000 */ (1 << 27)
 #define SAVE_NEW_FLAG_029                /* 0x10000000 */ (1 << 28)
 #define SAVE_NEW_FLAG_030                /* 0x20000000 */ (1 << 29)
