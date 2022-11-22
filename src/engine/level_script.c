@@ -713,7 +713,7 @@ static void level_cmd_show_dialog(void) {
 
 static void level_cmd_set_music(void) {
     if (sCurrAreaIndex != -1) {
-        if (save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) {
+        if (gCurrLevelNum != LEVEL_BOB || save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) {
             gAreas[sCurrAreaIndex].musicParam = CMD_GET(s16, 2);
             gAreas[sCurrAreaIndex].musicParam2 = CMD_GET(s16, 4);
         }
