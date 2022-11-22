@@ -9,4 +9,5 @@ extern void scroll_sts_mat_lll_dl_BooGooContainer_layer1();
 extern void scroll_sts_mat_lll_dl_EngineWall_layer1();
 extern void scroll_sts_mat_lll_dl_BooGoo_layer1();
 extern void scroll_sts_mat_lll_dl_Buttons_layer1();
+extern void scroll_lll_dl_EngineRoom_002_mesh_layer_5_vtx_0();
 extern void scroll_lll();

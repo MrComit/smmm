@@ -243,6 +243,8 @@ const GeoLayout lll_dl_107__Engine_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_EngineRoom_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_EngineRoom_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_EngineRoom_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_EngineRoom_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_EngineRoom_002_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
