@@ -83,7 +83,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -1187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_BASEMENT_SWITCH, 651, 0, 5875, 0, 0, 0, (1 << 16), bhvBasementSwitch),
-		OBJECT(MODEL_BASEMENT_SWITCH, 1055, 0, 5875, 0, 0, 0, (2 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_BASEMENT_SWITCH, 3079, 0, 408, 0, 0, 0, (2 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BASEMENT_SWITCH, 13050, 1180, 7121, 0, -90, 0, (0 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BASEMENT_SWITCH, 2051, 0, 5875, 0, 0, 0, (4 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BASEMENT_DRYER, 7949, 0, 13525, 0, -180, 0, (1 << 16), bhvBasementDryer),
