@@ -798,6 +798,7 @@ extern const BehaviorScript bhvPowerDoor[];
 extern const BehaviorScript bhvEngineGate[];
 extern const BehaviorScript bhvEngineSmallGate[];
 extern const BehaviorScript bhvEngineLever[];
+extern const BehaviorScript bhvHorizontalPoleNoCol[];
 
 
 #endif // BEHAVIOR_DATA_H

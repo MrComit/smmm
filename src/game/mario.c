@@ -1765,21 +1765,74 @@ void func_sh_8025574C(void) {
     }
 }
 
+
+f32 sTreadmillDisplaceX = 0.0f;
+f32 sTreadmillDisplaceZ = 0.0f;
+s32 sTreadmillDisplace = FALSE;
+
+
+void update_treadmills(struct MarioState *m) {
+    f32 displace;
+    if (m->floor->type == SURFACE_TREADMILL && m->pos[1] <= m->floorHeight) {
+        sTreadmillDisplace = TRUE;
+        if (m->floor->force >> 8) {
+            displace = m->floor->force >> 8;
+        } else {
+            displace = 20.0f;
+        }
+        if (m->floor->force & 1) {
+            displace *= -1.0f;
+        }
+        if (m->floor->force & 2) {
+            m->pos[0] += displace;
+            sTreadmillDisplaceX = displace;
+        } else {
+            m->pos[2] += displace;
+            sTreadmillDisplaceZ = displace;
+        }
+    } else if (sTreadmillDisplace) {
+        if (m->pos[1] <= m->floorHeight || m->action == ACT_GROUND_POUND) {
+            sTreadmillDisplace = FALSE;
+            sTreadmillDisplaceX = 0.0f;
+            sTreadmillDisplaceZ = 0.0f;
+        } else {
+            if (sTreadmillDisplaceX) {
+                m->pos[0] += sTreadmillDisplaceX;
+                // Drag
+                sTreadmillDisplaceX *= 0.97f;
+            }
+            if (sTreadmillDisplaceZ) {
+                m->pos[2] += sTreadmillDisplaceZ;
+                // Drag
+                sTreadmillDisplaceZ *= 0.97f;
+            }
+            if (absf(sTreadmillDisplaceX) < 1.0f && absf(sTreadmillDisplaceZ) < 1.0f) {
+                sTreadmillDisplace = FALSE;
+                sTreadmillDisplaceX = 0.0f;
+                sTreadmillDisplaceZ = 0.0f;
+            }
+        }
+    }
+}
+
+
+
 /**
  * Main function for executing Mario's behavior.
  */
 s32 execute_mario_action(UNUSED struct Object *o) {
+    struct MarioState *m = gMarioState;
     s32 inLoop = TRUE;
 
-    if (gMarioState->action) {
-        gMarioState->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-        mario_reset_bodystate(gMarioState);
-        update_mario_inputs(gMarioState);
-        mario_handle_special_floors(gMarioState);
-        mario_process_interactions(gMarioState);
+    if (m->action) {
+        m->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+        mario_reset_bodystate(m);
+        update_mario_inputs(m);
+        mario_handle_special_floors(m);
+        mario_process_interactions(m);
 
         // If Mario is OOB, stop executing actions.
-        if (gMarioState->floor == NULL) {
+        if (m->floor == NULL) {
             return 0;
         }
 
@@ -1787,66 +1840,68 @@ s32 execute_mario_action(UNUSED struct Object *o) {
         // which can lead to unexpected sub-frame behavior. Could potentially hang
         // if a loop of actions were found, but there has not been a situation found.
         while (inLoop) {
-            switch (gMarioState->action & ACT_GROUP_MASK) {
+            switch (m->action & ACT_GROUP_MASK) {
                 case ACT_GROUP_STATIONARY:
-                    inLoop = mario_execute_stationary_action(gMarioState);
+                    inLoop = mario_execute_stationary_action(m);
                     break;
 
                 case ACT_GROUP_MOVING:
-                    inLoop = mario_execute_moving_action(gMarioState);
+                    inLoop = mario_execute_moving_action(m);
                     break;
 
                 case ACT_GROUP_AIRBORNE:
-                    inLoop = mario_execute_airborne_action(gMarioState);
+                    inLoop = mario_execute_airborne_action(m);
                     break;
 
                 case ACT_GROUP_SUBMERGED:
-                    inLoop = mario_execute_submerged_action(gMarioState);
+                    inLoop = mario_execute_submerged_action(m);
                     break;
 
                 case ACT_GROUP_CUTSCENE:
-                    inLoop = mario_execute_cutscene_action(gMarioState);
+                    inLoop = mario_execute_cutscene_action(m);
                     break;
 
                 case ACT_GROUP_AUTOMATIC:
-                    inLoop = mario_execute_automatic_action(gMarioState);
+                    inLoop = mario_execute_automatic_action(m);
                     break;
 
                 case ACT_GROUP_OBJECT:
-                    inLoop = mario_execute_object_action(gMarioState);
+                    inLoop = mario_execute_object_action(m);
                     break;
             }
         }
 
-        sink_mario_in_quicksand(gMarioState);
-        squish_mario_model(gMarioState);
-        set_submerged_cam_preset_and_spawn_bubbles(gMarioState);
-        update_mario_health(gMarioState);
-        update_mario_info_for_cam(gMarioState);
-        mario_update_hitbox_and_cap_model(gMarioState);
+        sink_mario_in_quicksand(m);
+        squish_mario_model(m);
+        set_submerged_cam_preset_and_spawn_bubbles(m);
+        update_mario_health(m);
+        update_mario_info_for_cam(m);
+        mario_update_hitbox_and_cap_model(m);
 
         // Both of the wind handling portions play wind audio only in
         // non-Japanese releases.
-        //if (gMarioState->floor->type == SURFACE_HORIZONTAL_WIND) {
+        //if (m->floor->type == SURFACE_HORIZONTAL_WIND) {
         if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == -1) {
-            spawn_wind_particles(0, (gMarioState->floor->force << 8));
+            spawn_wind_particles(0, (m->floor->force << 8));
 #ifndef VERSION_JP
-            play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
+            play_sound(SOUND_ENV_WIND2, m->marioObj->header.gfx.cameraToObject);
 #endif
         }
 
-        if (gMarioState->floor->type == SURFACE_VERTICAL_WIND) {
+        if (m->floor->type == SURFACE_VERTICAL_WIND) {
             spawn_wind_particles(1, 0);
 #ifndef VERSION_JP
-            play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
+            play_sound(SOUND_ENV_WIND2, m->marioObj->header.gfx.cameraToObject);
 #endif
         }
 
+        update_treadmills(m);
+
         play_infinite_stairs_music();
-        gMarioState->marioObj->oInteractStatus = 0;
+        m->marioObj->oInteractStatus = 0;
         func_sh_8025574C();
 
-        return gMarioState->particleFlags;
+        return m->particleFlags;
     }
 
     return 0;

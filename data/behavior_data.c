@@ -9499,3 +9499,20 @@ const BehaviorScript bhvEngineLever[] = {
         // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvHorizontalPoleNoCol[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x3000),
+    SET_INT(oInteractType, INTERACT_POLE),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_HORIZONTAL),
+    SET_HITBOX(/*Radius*/ 180, /*Height*/ 100),
+    //CALL_NATIVE(bhv_horizontal_pole_init),
+    SET_INT(oIntangibleTimer, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_horizontal_pole_loop),
+        // CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
