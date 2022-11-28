@@ -89,7 +89,7 @@ void scroll_sts_mat_lll_dl_GymWall_layer1() {
 
 void scroll_lll_dl_Treadmill_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 120;
+	int count = 152;
 	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
