@@ -807,6 +807,7 @@
 #define MODEL_POWER_DOOR          0xF0
 #define MODEL_ENGINE_GATE         0xEF
 #define MODEL_ENGINE_LEVER        0xEE
+#define MODEL_HEAVY_WEIGHT        0xED
 
 
 #endif // MODEL_IDS_H

@@ -63,3 +63,4 @@
 #include "levels/lll/power_door/geo.inc.c"
 #include "levels/lll/engine_gate/geo.inc.c"
 #include "levels/lll/engine_lever/geo.inc.c"
+#include "levels/lll/heavy_weight/geo.inc.c"

@@ -9516,3 +9516,29 @@ const BehaviorScript bhvHorizontalPoleNoCol[] = {
         // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvHeavyWeight[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(heavy_weight_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_heavy_weight_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_heavy_weight_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBikeShyguy[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    ANIMATE(0),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    SET_INT(oOpacity, 255),
+    BREAK(),
+};

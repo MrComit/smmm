@@ -113,3 +113,5 @@
 #include "levels/lll/engine_lever/anims/data.inc.c"
 #include "levels/lll/engine_lever/anims/table.inc.c"
 #include "levels/lll/engine_lever/collision.inc.c"
+#include "levels/lll/heavy_weight/model.inc.c"
+#include "levels/lll/heavy_weight/collision.inc.c"

@@ -1,5 +1,34 @@
 #define THWOMP_SPEED_FACTOR 0.05f
 
+
+void bhv_heavy_weight_loop(void) {
+    if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+        o->os16F4 = 1;
+    } else {
+        o->os16F4 = 0;
+    }
+
+    switch (o->oAction) {
+        case 0:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
+            if (o->oTimer > 60) {
+                o->oAction = 1;
+                o->os16F6 = 0xC000;
+            }
+            break;
+        case 1:
+            o->os16F6 += 0x400;
+            o->oFloatF8 = 200.0f + (sins(o->os16F6) * 200.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatF8, 10.0f);
+            if (o->oTimer > 90) {
+                o->oAction = 0;
+            }
+            break;
+    }
+
+}
+
+
 void bhv_engine_lever_loop(void) {
     struct Object *obj;
     if (o->oF4 == 0) {
