@@ -1,7 +1,12 @@
 #define THWOMP_SPEED_FACTOR 0.05f
 
+void bhv_heavy_weight_init(void) {
+    o->os16FA = CL_RandomMinMaxU16(0, 20);
+}
+
 
 void bhv_heavy_weight_loop(void) {
+    s32 i;
     if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
         o->os16F4 = 1;
     } else {
@@ -11,17 +16,24 @@ void bhv_heavy_weight_loop(void) {
     switch (o->oAction) {
         case 0:
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
-            if (o->oTimer > 60) {
+            if (o->oTimer > 90 + o->os16FA) {
                 o->oAction = 1;
                 o->os16F6 = 0xC000;
             }
             break;
         case 1:
-            o->os16F6 += 0x400;
-            o->oFloatF8 = 200.0f + (sins(o->os16F6) * 200.0f);
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatF8, 10.0f);
-            if (o->oTimer > 90) {
+            o->os16F6 += 0x300;
+            o->oPosY = o->oHomeY + 200.0f + (sins(o->os16F6) * 200.0f);
+            if (o->oTimer > 180) {
                 o->oAction = 0;
+            }
+            if (o->oDistanceToMario < 1200.0f || !gIsConsole) {
+                for (i = 0; i < 3; i++) {
+                    struct Object *wind = spawn_object(o, MODEL_MIST, bhvWind);
+                    wind->oMoveAngleYaw = 0;
+                    wind->oMoveAnglePitch = 1;
+                    wind->oPosY = o->oHomeY - 200.0f;
+                }
             }
             break;
     }

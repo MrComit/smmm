@@ -972,6 +972,7 @@ void bhv_engine_gate_init(void);
 void bhv_engine_gate_loop(void);
 void bhv_engine_small_gate_loop(void);
 void bhv_engine_lever_loop(void);
+void bhv_heavy_weight_init(void);
 void bhv_heavy_weight_loop(void);
 
 

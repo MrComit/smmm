@@ -9520,11 +9520,11 @@ const BehaviorScript bhvHorizontalPoleNoCol[] = {
 
 const BehaviorScript bhvHeavyWeight[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     LOAD_COLLISION_DATA(heavy_weight_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
-    // CALL_NATIVE(bhv_heavy_weight_init),
+    CALL_NATIVE(bhv_heavy_weight_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_heavy_weight_loop),
         CALL_NATIVE(load_object_collision_model),
