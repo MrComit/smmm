@@ -115,3 +115,5 @@
 #include "levels/lll/engine_lever/collision.inc.c"
 #include "levels/lll/heavy_weight/model.inc.c"
 #include "levels/lll/heavy_weight/collision.inc.c"
+#include "levels/lll/leg_press/model.inc.c"
+#include "levels/lll/leg_press/collision.inc.c"

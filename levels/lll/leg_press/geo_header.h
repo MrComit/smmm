@@ -1,0 +1,14 @@
+extern const GeoLayout leg_press_geo[];
+extern u8 leg_press_i8_pad_i8[];
+extern u8 leg_press_shinymetal_scar_i8[];
+extern Vtx leg_press_Press_mesh_layer_1_vtx_cull[8];
+extern Vtx leg_press_Press_mesh_layer_1_vtx_0[20];
+extern Gfx leg_press_Press_mesh_layer_1_tri_0[];
+extern Vtx leg_press_Press_mesh_layer_1_vtx_1[23];
+extern Gfx leg_press_Press_mesh_layer_1_tri_1[];
+extern Gfx mat_leg_press_LegPress[];
+extern Gfx mat_revert_leg_press_LegPress[];
+extern Gfx mat_leg_press_MetalBack[];
+extern Gfx mat_revert_leg_press_MetalBack[];
+extern Gfx leg_press_Press_mesh_layer_1[];
+extern Gfx leg_press_material_revert_render_settings[];

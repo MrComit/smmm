@@ -215,4 +215,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/heavy_weight/collision_header.h"
 
+#include "levels/lll/leg_press/geo_header.h"
+
+#include "levels/lll/leg_press/collision_header.h"
+
 #endif

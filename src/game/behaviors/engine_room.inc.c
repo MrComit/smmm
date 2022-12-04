@@ -1,31 +1,65 @@
 #define THWOMP_SPEED_FACTOR 0.05f
 
+
+void bhv_leg_press_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (!gLowGrav && !cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+                return;
+            }
+            if (o->oTimer > 30) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 667.0f, 10.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+                if (o->oPosY == o->oHomeY + 667.0f) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            if (o->oTimer > 60) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 60.0f);
+                if (o->oPosY == o->oHomeY) {
+                    o->oAction = 0;
+                }
+                cur_obj_play_sound_1(SOUND_OBJ_MAD_PIANO_CHOMPING);
+            }
+            break;
+    }
+}
+
+
 void bhv_heavy_weight_init(void) {
-    o->os16FA = CL_RandomMinMaxU16(0, 20);
+    o->os16FA = CL_RandomMinMaxU16(2, 20);
 }
 
 
 void bhv_heavy_weight_loop(void) {
     s32 i;
-    if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
-        o->os16F4 = 1;
+    if (!gLowGrav) {
+        o->oAction = 0;
+        o->oTimer = 0;
     } else {
-        o->os16F4 = 0;
     }
 
     switch (o->oAction) {
         case 0:
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
-            if (o->oTimer > 90 + o->os16FA) {
+            if (o->oTimer > o->os16FA) {
                 o->oAction = 1;
-                o->os16F6 = 0xC000;
             }
             break;
         case 1:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
+            if (o->oTimer > 90) {
+                o->oAction = 2;
+                o->os16F6 = 0xC000;
+            }
+            break;
+        case 2:
             o->os16F6 += 0x300;
-            o->oPosY = o->oHomeY + 200.0f + (sins(o->os16F6) * 200.0f);
+            o->oPosY = o->oHomeY + 300.0f + (sins(o->os16F6) * 300.0f);
             if (o->oTimer > 180) {
-                o->oAction = 0;
+                o->oAction = 1;
             }
             if (o->oDistanceToMario < 1200.0f || !gIsConsole) {
                 for (i = 0; i < 3; i++) {
