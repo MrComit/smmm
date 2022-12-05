@@ -127,6 +127,7 @@ const GeoLayout lll_dl_103__Gym_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Bench_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Chains_mesh_layer_4),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -4034, 105, 547, 90, 0, 0, lll_dl_Dumbbell_001_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -4034, 105, 547, 90, 0, 0, lll_dl_Dumbbell_002_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -6877, 1917, -4640, 90, 0, 0, lll_dl_DumbbellBridge_mesh_layer_1),

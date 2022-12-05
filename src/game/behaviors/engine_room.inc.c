@@ -1,27 +1,80 @@
 #define THWOMP_SPEED_FACTOR 0.05f
 
+void power_door_update_color(s32 val) {
+    if (val) {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x0, 0x6);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x72, 0x6);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, 0xFF, 0x6);
+    } else {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x79, 0x6);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x0, 0x6);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, 0x0, 0x6);
+    }
+}
+
+
+void bhv_button_door_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            cur_obj_unhide();
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.02f);
+            if (o->oPosY != o->oHomeY) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            }
+            obj = cur_obj_nearest_object_with_behavior(bhvBasementSwitch);
+            if (obj == NULL || obj->oAction != 0) {
+                o->oAction = 1;
+            }
+            power_door_update_color(0);
+            break;
+        case 1:
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.9f, 0.02f);
+            if (o->oPosY != o->oHomeY + 900.0f) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 900.0f, 30.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            } else {
+                cur_obj_hide();
+                o->oAction = 2;
+            }
+            power_door_update_color(1);
+            break;
+    }
+}
+
+void bhv_leg_press_init(void) {
+    if (o->oBehParams2ndByte) {
+        o->oPosY = o->oHomeY + 667.0f;
+        o->oAction = 1;
+    }
+}
 
 void bhv_leg_press_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (!gLowGrav && !cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
-                return;
-            }
             if (o->oTimer > 30) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 667.0f, 10.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 667.0f, 15.0f);
                 cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
                 if (o->oPosY == o->oHomeY + 667.0f) {
-                    o->oAction = 1;
+                    if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+                        o->oAction = 1;
+                    }
                 }
             }
             break;
         case 1:
-            if (o->oTimer > 60) {
+            if (o->oTimer > 75) {
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 60.0f);
+
                 if (o->oPosY == o->oHomeY) {
-                    o->oAction = 0;
+                    if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+                        o->oAction = 0;
+                    }
                 }
-                cur_obj_play_sound_1(SOUND_OBJ_MAD_PIANO_CHOMPING);
+                if (o->oTimer == 75) {
+                    cur_obj_play_sound_1(SOUND_OBJ_MAD_PIANO_CHOMPING);
+                }
             }
             break;
     }
@@ -153,15 +206,7 @@ void bhv_power_door_loop(void) {
         o->oAction = gLowGrav;
     }
     
-    if (gLowGrav) {
-        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x0, 0x6);
-        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x72, 0x6);
-        o->os16F8 = approach_s16_symmetric(o->os16F8, 0xFF, 0x6);
-    } else {
-        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x79, 0x6);
-        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x0, 0x6);
-        o->os16F8 = approach_s16_symmetric(o->os16F8, 0x0, 0x6);
-    }
+    power_door_update_color(gLowGrav);
 
     switch (o->oAction) {
         case 0:

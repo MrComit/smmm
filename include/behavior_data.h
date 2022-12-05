@@ -802,6 +802,7 @@ extern const BehaviorScript bhvHorizontalPoleNoCol[];
 extern const BehaviorScript bhvHeavyWeight[];
 extern const BehaviorScript bhvBikeShyguy[];
 extern const BehaviorScript bhvLegPress[];
+extern const BehaviorScript bhvButtonDoor[];
 
 
 #endif // BEHAVIOR_DATA_H
