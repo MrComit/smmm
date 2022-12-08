@@ -48,15 +48,22 @@ void bhv_leg_press_init(void) {
         o->oPosY = o->oHomeY + 667.0f;
         o->oAction = 1;
     }
+    if (o->oBehParams >> 24) {
+        o->oFloatF4 = 60.0f;
+        o->os16F8 = 15;
+    } else {
+        o->oFloatF4 = 20.0f;
+        o->os16F8 = 90;
+    }
 }
 
 void bhv_leg_press_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 30) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 667.0f, 15.0f);
+            if (o->oTimer > 30 || o->oBehParams >> 24) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 667.0f, o->oFloatF4);
                 cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
-                if (o->oPosY == o->oHomeY + 667.0f) {
+                if (o->oTimer > o->os16F8 && o->oPosY == o->oHomeY + 667.0f) {
                     if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
                         o->oAction = 1;
                     }
@@ -64,10 +71,10 @@ void bhv_leg_press_loop(void) {
             }
             break;
         case 1:
-            if (o->oTimer > 75) {
+            if (o->oTimer > o->os16F8 || o->oBehParams >> 24) {
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 60.0f);
 
-                if (o->oPosY == o->oHomeY) {
+                if (o->oPosY == o->oHomeY && o->oTimer > o->os16F8) {
                     if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
                         o->oAction = 0;
                     }
