@@ -1,4 +1,73 @@
+#include "src/game/tile_scroll.h"
 #define THWOMP_SPEED_FACTOR 0.05f
+
+void reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_1() {
+	int i = 0;
+	int count = 202;
+	int width = 32 * 0x20;
+	int height = 64 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(lll_dl_Treadmill_mesh_layer_1_vtx_1);
+
+	deltaY = (int)(-2.799999952316284 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+void reverse_scroll_sts_mat_lll_dl_Treadmill_layer1() {
+	static int intervalTex0 = 2;
+	static int curInterval0 = 2;
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_Treadmill_layer1);
+
+	if (--curInterval0 <= 0) {
+		shift_t_down(mat, 13, PACK_TILESIZE(0, -1));
+		curInterval0 = intervalTex0;
+	}
+};
+
+void reverse_treadmill_scroll(void) {
+    reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_1();
+    reverse_scroll_sts_mat_lll_dl_Treadmill_layer1();
+}
+
+
+
+s32 gPowerOn = FALSE;
+void bhv_exercise_bike_loop(void) {
+    if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+        gPowerOn = TRUE;
+    } else {
+        gPowerOn = FALSE;
+        reverse_treadmill_scroll();
+    }
+    
+    if (!cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+        if (o->header.gfx.animInfo.animFrame > 0) {
+            o->header.gfx.animInfo.animFrame--;
+        }
+    }
+
+}
+
+void bhv_bike_shyguy_loop(void) {
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+        spawn_mist_particles();
+        obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+        o->activeFlags = 0;
+        create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    }
+    o->oInteractStatus = 0;
+}
+
 
 void power_door_update_color(s32 val) {
     if (val) {
@@ -64,7 +133,7 @@ void bhv_leg_press_loop(void) {
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 667.0f, o->oFloatF4);
                 cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
                 if (o->oTimer > o->os16F8 && o->oPosY == o->oHomeY + 667.0f) {
-                    if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+                    if (gPowerOn) {
                         o->oAction = 1;
                     }
                 }
@@ -75,7 +144,7 @@ void bhv_leg_press_loop(void) {
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 60.0f);
 
                 if (o->oPosY == o->oHomeY && o->oTimer > o->os16F8) {
-                    if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
+                    if (gPowerOn) {
                         o->oAction = 0;
                     }
                 }

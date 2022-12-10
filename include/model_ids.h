@@ -809,6 +809,7 @@
 #define MODEL_ENGINE_LEVER        0xEE
 #define MODEL_HEAVY_WEIGHT        0xED
 #define MODEL_LEG_PRESS           0xEC
+#define MODEL_EXERCISE_BIKE       0xEB
 
 
 #endif // MODEL_IDS_H

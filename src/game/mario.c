@@ -1770,10 +1770,10 @@ f32 sTreadmillDisplaceX = 0.0f;
 f32 sTreadmillDisplaceZ = 0.0f;
 s32 sTreadmillDisplace = FALSE;
 
-
+extern s32 gPowerOn;
 void update_treadmills(struct MarioState *m) {
     f32 displace;
-    if (m->floor->type == SURFACE_TREADMILL && m->pos[1] <= m->floorHeight) {
+    if (gPowerOn && m->floor->type == SURFACE_TREADMILL && m->pos[1] <= m->floorHeight) {
         sTreadmillDisplace = TRUE;
         if (m->floor->force >> 8) {
             displace = m->floor->force >> 8;

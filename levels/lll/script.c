@@ -61,6 +61,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ENGINE_LEVER, engine_lever_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_HEAVY_WEIGHT, heavy_weight_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEG_PRESS, leg_press_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_EXERCISE_BIKE, exercise_bike_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -109,11 +110,13 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_DUST_BUNNY, 126, -271, 16701, 0, -180, 0, (1 << 16), bhvDustBunny),
 		OBJECT(MODEL_GOOMBA, -4030, -271, 16750, 0, -180, 0, (1 << 16), bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -33, -271, 15800, 0, -180, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_SHYGUY, -12868, 1643, -10595, 0, -90, 0, 0x00000000, bhvBikeShyguy),
+		OBJECT(MODEL_EXERCISE_BIKE, -12917, 1400, -10597, 0, 0, 0, 0x00000000, bhvExerciseBike),
 		OBJECT(MODEL_HEAVY_WEIGHT, -11983, 1242, -6199, 0, 0, 0, 0x00000000, bhvHeavyWeight),
 		OBJECT(MODEL_HEAVY_WEIGHT, -13516, 1242, -6419, 0, 90, 0, 0x00000000, bhvHeavyWeight),
 		OBJECT(MODEL_HEAVY_WEIGHT, -14312, -58, 1350, 0, -180, 0, 0x00000000, bhvHeavyWeight),
 		OBJECT(MODEL_HEAVY_WEIGHT, -8323, 42, 515, 0, -180, 0, 0x00000000, bhvHeavyWeight),
-		OBJECT(MODEL_HEAVY_WEIGHT, -6252, 1042, 1599, 0, -180, 0, 0x00000000, bhvHeavyWeight),
+		OBJECT(MODEL_HEAVY_WEIGHT, -6252, 792, 1599, 0, -180, 0, 0x00000000, bhvHeavyWeight),
 		OBJECT(MODEL_NONE, -4867, 733, -6007, 0, 0, 0, 0x00000000, bhvHorizontalPoleNoCol),
 		OBJECT(MODEL_NONE, -4867, 1042, -6649, 0, -180, 0, 0x00000000, bhvHorizontalPoleNoCol),
 		OBJECT(MODEL_NONE, -4867, 1754, -6649, 0, -180, 0, 0x00000000, bhvHorizontalPoleNoCol),

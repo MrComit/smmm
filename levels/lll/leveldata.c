@@ -117,3 +117,7 @@
 #include "levels/lll/heavy_weight/collision.inc.c"
 #include "levels/lll/leg_press/model.inc.c"
 #include "levels/lll/leg_press/collision.inc.c"
+#include "levels/lll/exercise_bike/model.inc.c"
+#include "levels/lll/exercise_bike/collision.inc.c"
+#include "levels/lll/exercise_bike/anims/data.inc.c"
+#include "levels/lll/exercise_bike/anims/table.inc.c"

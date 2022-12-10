@@ -977,6 +977,8 @@ void bhv_heavy_weight_loop(void);
 void bhv_leg_press_loop(void);
 void bhv_leg_press_init(void);
 void bhv_button_door_loop(void);
+void bhv_bike_shyguy_loop(void);
+void bhv_exercise_bike_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

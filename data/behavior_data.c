@@ -9534,13 +9534,31 @@ const BehaviorScript bhvHeavyWeight[] = {
 
 const BehaviorScript bhvBikeShyguy[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
-    ANIMATE(0),
+    ANIMATE(1),
     SET_HOME(),
     SCALE(/*Unused*/ 0, /*Field*/ 150),
     SET_INT(oOpacity, 255),
-    BREAK(),
+    CALL_NATIVE(bhv_shyguy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bike_shyguy_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvExerciseBike[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, exercise_bike_anims),
+    ANIMATE(0),
+    LOAD_COLLISION_DATA(exercise_bike_collision),
+    SET_HOME(),
+    SET_INT(oOpacity, 255),
+    // CALL_NATIVE(bhv_exercise_bike_init),
+    CALL_NATIVE(load_object_static_model),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_exercise_bike_loop),
+    END_LOOP(),
 };
 
 

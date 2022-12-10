@@ -219,4 +219,10 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/leg_press/collision_header.h"
 
+#include "levels/lll/exercise_bike/geo_header.h"
+
+#include "levels/lll/exercise_bike/collision_header.h"
+
+#include "levels/lll/exercise_bike/anim_header.h"
+
 #endif
