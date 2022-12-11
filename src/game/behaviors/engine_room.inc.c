@@ -1,9 +1,10 @@
 #include "src/game/tile_scroll.h"
 #define THWOMP_SPEED_FACTOR 0.05f
 
+
 void reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 202;
+	int count = 170;
 	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
@@ -12,6 +13,28 @@ void reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_1() {
 	Vtx *vertices = segmented_to_virtual(lll_dl_Treadmill_mesh_layer_1_vtx_1);
 
 	deltaY = (int)(-2.799999952316284 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+void reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_2() {
+	int i = 0;
+	int count = 32;
+	int width = 32 * 0x20;
+	int height = 64 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(lll_dl_Treadmill_mesh_layer_1_vtx_2);
+
+	deltaY = (int)(-5.599999904632568 * 0x20) % height;
 
 	if (absi(currentY) > height) {
 		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
@@ -34,9 +57,17 @@ void reverse_scroll_sts_mat_lll_dl_Treadmill_layer1() {
 	}
 };
 
+void reverse_scroll_sts_mat_lll_dl_TreadmillFAST_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_TreadmillFAST_layer1);
+	shift_t_down(mat, 13, PACK_TILESIZE(0, -1));
+};
+
+
 void reverse_treadmill_scroll(void) {
     reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_1();
+    reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_2();
     reverse_scroll_sts_mat_lll_dl_Treadmill_layer1();
+    reverse_scroll_sts_mat_lll_dl_TreadmillFAST_layer1();
 }
 
 
