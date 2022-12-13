@@ -306,9 +306,15 @@
 #define TEXT_ROOM68 _("Root Cellar")
 #define TEXT_ROOM69 _("Meat Locker")
 #define TEXT_ROOM70 _("Engine Room")
-#define TEXT_ROOM71 _("Torture Chamber")
+#define TEXT_ROOM71 _("T-r---e Chamber")
 #define TEXT_ROOM72 _("Elevator")
 #define TEXT_ROOM73 _("The Lab")
+
+
+
+
+
+#define TEXT_CORRUPT _("-!-t!r- c     -R")
 
 
 

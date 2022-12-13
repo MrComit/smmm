@@ -3297,6 +3297,10 @@ static char sRoom71[] = { TEXT_ROOM71 };
 static char sRoom72[] = { TEXT_ROOM72 };
 static char sRoom73[] = { TEXT_ROOM73 };
 
+
+
+static char sRoomCorrupt[] = { TEXT_CORRUPT };
+
 char *sRoomNames[] = {
     sRoom1, sRoom2, sRoom3, sRoom4, sRoom5, sRoom6, sRoom7, sRoom8, sRoom9, sRoom10,
     sRoom11, sRoom12, sRoom13, sRoom14, sRoom15, sRoom16, sRoom17, sRoom18, sRoom19, sRoom20,
@@ -3350,6 +3354,9 @@ void print_room_names(void) {
             y = 255 - ((gRoomEntryTimer - 65) * 10);
         }
 
+        if (gGlobalMarioRoom == 71) {
+            print_name_string(15, 10, y, sRoomCorrupt);
+        }
         print_name_string(15, 10, y, sRoomNames[gGlobalMarioRoom - 1]);
         if (gRoomEntryTimer >= 90) {
             gRoomEntryTimer = -1;
