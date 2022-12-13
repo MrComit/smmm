@@ -138,6 +138,7 @@ const GeoLayout lll_dl_103__Gym_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_LegPress_012_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Locker_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Locker_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -11796, -1999, -6250, lll_dl_Pipes_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -4034, 105, 547, 90, 0, 0, lll_dl_Plates_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 2280, 0, 0, lll_dl_Pullup_Bars_mesh_layer_1),
