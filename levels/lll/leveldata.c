@@ -121,3 +121,5 @@
 #include "levels/lll/exercise_bike/collision.inc.c"
 #include "levels/lll/exercise_bike/anims/data.inc.c"
 #include "levels/lll/exercise_bike/anims/table.inc.c"
+#include "levels/lll/swinging_plat/model.inc.c"
+#include "levels/lll/swinging_plat/collision.inc.c"

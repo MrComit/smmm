@@ -810,6 +810,7 @@
 #define MODEL_HEAVY_WEIGHT        0xED
 #define MODEL_LEG_PRESS           0xEC
 #define MODEL_EXERCISE_BIKE       0xEB
+#define MODEL_SWINGING_PLAT       0xEA
 
 
 #endif // MODEL_IDS_H

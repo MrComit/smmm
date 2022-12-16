@@ -2290,6 +2290,7 @@ u8 gTextCourse[][7] = {
 extern s8 sLevelRoomOffsets[];
 extern s8 gGlobalMarioRoom;
 extern char *sRoomNames[];
+extern char sRoomCorrupt[];
 
 void render_pause_my_score_coins(void) {
 #ifdef VERSION_EU
@@ -2375,6 +2376,9 @@ void render_pause_my_score_coins(void) {
         } else {
             print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
         }*/
+        if (gGlobalMarioRoom == 71) {
+            print_generic_string(ACT_NAME_X, 140, sRoomCorrupt);
+        }
         print_generic_string(ACT_NAME_X, 140, sRoomNames[gGlobalMarioRoom - 1]);
 /*#ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
@@ -3299,7 +3303,7 @@ static char sRoom73[] = { TEXT_ROOM73 };
 
 
 
-static char sRoomCorrupt[] = { TEXT_CORRUPT };
+char sRoomCorrupt[] = { TEXT_CORRUPT };
 
 char *sRoomNames[] = {
     sRoom1, sRoom2, sRoom3, sRoom4, sRoom5, sRoom6, sRoom7, sRoom8, sRoom9, sRoom10,

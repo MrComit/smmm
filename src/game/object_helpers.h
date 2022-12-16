@@ -83,6 +83,7 @@ Gfx *geo_update_hall_fakewall(s32 callContext, struct GraphNode *node, UNUSED vo
 Gfx *geo_generate_tight_rope(s32 sp40, struct GraphNode *node, void *context);
 Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_generate_cam_beam(s32 callContext, struct GraphNode *node, void *context);
+Gfx *geo_generate_plat_chain(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context);

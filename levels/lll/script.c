@@ -62,6 +62,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_HEAVY_WEIGHT, heavy_weight_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEG_PRESS, leg_press_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_EXERCISE_BIKE, exercise_bike_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SWINGING_PLAT, swinging_plat_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -79,9 +80,9 @@ const LevelScript level_lll_entry[] = {
 		INSTANT_WARP(5, 0x01, 11109, -155, -10502),
 		WARP_NODE(0x31, LEVEL_LLL, 0x01, 0x32, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x32, LEVEL_LLL, 0x01, 0x31, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_NONE, 10653, 84, -7654, 0, 90, 0, (0x1A << 16), bhvAirborneDeathWarp),
-		OBJECT(MODEL_NONE, 10653, 84, -7654, 0, 90, 0, (0xA << 16), bhvFlyingWarp),
-		MARIO_POS(0x01, 90, 10653, 84, -7654),
+		OBJECT(MODEL_NONE, 812, 84, -4763, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, 812, 84, -4763, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
+		MARIO_POS(0x01, -180, 812, 84, -4763),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -429, 0, 8932, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3229, 0, 5963, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -429, 0, 1813, 0, 90, 0, 0x00000000, bhvDoor),
@@ -198,6 +199,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_THWOMP_BLOCK, 12499, -400, 263, 0, -180, 0, (18 << 16), bhvThwompBlock),
 		OBJECT(MODEL_ENGINE_GEAR, 9977, 452, 439, 0, 0, 0, (7 << 16), bhvEngineGear),
 		OBJECT(MODEL_TOKEN, 2829, 1442, -462, 0, -180, 0, (1 << 16) | (0x27 << 8), bhvToken),
+		OBJECT(MODEL_SWINGING_PLAT, 3079, 482, -5462, 0, 0, 0, 0x00000000, bhvSwingingPlat),
 		TERRAIN(lll_area_1_collision),
 		ROOMS(lll_area_1_collision_rooms),
 		MACRO_OBJECTS(lll_area_1_macro_objs),
@@ -208,7 +210,7 @@ const LevelScript level_lll_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 90, 10653, 84, -7654),
+	MARIO_POS(0x01, -180, 812, 84, -4763),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),
