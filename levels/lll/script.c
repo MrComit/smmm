@@ -201,6 +201,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_ENGINE_GEAR, 9977, 452, 439, 0, 0, 0, (7 << 16), bhvEngineGear),
 		OBJECT(MODEL_TOKEN, 2829, 1442, -462, 0, -180, 0, (1 << 16) | (0x27 << 8), bhvToken),
 		OBJECT(MODEL_SWINGING_PLAT, 3079, 482, -5462, 0, 0, 0, 0x00000000, bhvSwingingPlat),
+		OBJECT(MODEL_SWINGING_PLAT, 5651, 482, -5335, 0, 45, 0, 0x00000000, bhvSwingingPlat),
 		OBJECT(MODEL_SAWBLADE, 4525, 213, -6682, 0, 0, 0, 0x00000000, bhvSawblade),
 		OBJECT(MODEL_SAWBLADE, 4645, 187, -6203, 0, -110, 0, (1 << 16), bhvSawblade),
 		OBJECT(MODEL_SAWBLADE, 3782, 213, -6302, 0, 90, 0, 0x00000000, bhvSawblade),
