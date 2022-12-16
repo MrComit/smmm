@@ -811,6 +811,7 @@
 #define MODEL_LEG_PRESS           0xEC
 #define MODEL_EXERCISE_BIKE       0xEB
 #define MODEL_SWINGING_PLAT       0xEA
+#define MODEL_SAWBLADE            0xE9
 
 
 #endif // MODEL_IDS_H

@@ -67,3 +67,4 @@
 #include "levels/lll/leg_press/geo.inc.c"
 #include "levels/lll/exercise_bike/geo.inc.c"
 #include "levels/lll/swinging_plat/geo.inc.c"
+#include "levels/lll/sawblade/geo.inc.c"

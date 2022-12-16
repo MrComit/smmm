@@ -52,15 +52,3 @@ Gfx lightbeam_LightBeam_mesh[] = {
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsSPEndDisplayList(),
 };
-
-Gfx chain_Chain_mesh[] = {
-	gsSPDisplayList(mat_lll_dl_Chain),
-	gsSP2Triangles(0, 1, 2, 0, 1, 2, 3, 0),
-	gsSPDisplayList(mat_revert_lll_dl_Chain),
-	gsDPPipeSync(),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPClearGeometryMode(G_TEXTURE_GEN),
-	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
-	gsSPTexture(65535, 65535, 0, 0, 0),
-	gsSPEndDisplayList(),
-};

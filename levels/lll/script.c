@@ -63,6 +63,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_LEG_PRESS, leg_press_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_EXERCISE_BIKE, exercise_bike_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SWINGING_PLAT, swinging_plat_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SAWBLADE, sawblade_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -200,6 +201,9 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_ENGINE_GEAR, 9977, 452, 439, 0, 0, 0, (7 << 16), bhvEngineGear),
 		OBJECT(MODEL_TOKEN, 2829, 1442, -462, 0, -180, 0, (1 << 16) | (0x27 << 8), bhvToken),
 		OBJECT(MODEL_SWINGING_PLAT, 3079, 482, -5462, 0, 0, 0, 0x00000000, bhvSwingingPlat),
+		OBJECT(MODEL_SAWBLADE, 4525, 213, -6682, 0, 0, 0, 0x00000000, bhvSawblade),
+		OBJECT(MODEL_SAWBLADE, 4645, 187, -6203, 0, -110, 0, (1 << 16), bhvSawblade),
+		OBJECT(MODEL_SAWBLADE, 3782, 213, -6302, 0, 90, 0, 0x00000000, bhvSawblade),
 		TERRAIN(lll_area_1_collision),
 		ROOMS(lll_area_1_collision_rooms),
 		MACRO_OBJECTS(lll_area_1_macro_objs),

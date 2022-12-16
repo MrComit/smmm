@@ -1033,15 +1033,15 @@ Gfx *geo_generate_plat_chain(s32 callContext, struct GraphNode *node, void *cont
         // s16 posZ = obj->oPosZ;
 
         //top X
-        make_vertex(vertexBuffer, 0, homeX + 10, homeY + 1200, homeZ, 0, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 1, homeX - 10, homeY + 1200, homeZ, 1024, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 0, homeX + 10, homeY + 1200, homeZ, 0, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 1, homeX - 10, homeY + 1200, homeZ, 1024, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
         //bottom X
         make_vertex(vertexBuffer, 2, 10, 40, 0, 0, -CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 3, -10, 40, 0, 1024, -CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
 
         //top Z
-        make_vertex(vertexBuffer, 4, homeX, homeY + 1200, homeZ + 10, 0, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
-        make_vertex(vertexBuffer, 5, homeX, homeY + 1200, homeZ - 10, 1024, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 4, homeX, homeY + 1200, homeZ + 10, 0, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 5, homeX, homeY + 1200, homeZ - 10, 1024, CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
         //bottom Z
         make_vertex(vertexBuffer, 6, 0, 40, 10, 0, -CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 7, 0, 40, -10, 1024, -CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);

@@ -805,6 +805,7 @@ extern const BehaviorScript bhvExerciseBike[];
 extern const BehaviorScript bhvLegPress[];
 extern const BehaviorScript bhvButtonDoor[];
 extern const BehaviorScript bhvSwingingPlat[];
+extern const BehaviorScript bhvSawblade[];
 
 
 #endif // BEHAVIOR_DATA_H

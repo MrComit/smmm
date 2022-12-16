@@ -4,10 +4,12 @@
 #include "levels/lll/dust_bunny/texscroll.inc.c"
 #include "levels/lll/power_door/texscroll.inc.c"
 #include "levels/lll/swinging_plat/texscroll.inc.c"
+#include "levels/lll/sawblade/texscroll.inc.c"
 void scroll_textures_lll() {
 	scroll_lll();
 	scroll_lll_level_geo_clothes_ball();
 	scroll_lll_level_geo_dust_bunny();
 	scroll_lll_level_geo_power_door();
 	scroll_lll_level_geo_swinging_plat();
+	scroll_lll_level_geo_sawblade();
 }
