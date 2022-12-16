@@ -57,6 +57,7 @@
 #define SURFACE_SNOWFLAKE_DESPAWN            0x003C
 #define SURFACE_FORCE_JUMP                   0x003D
 #define SURFACE_INSTANT_UPWARP               0x003E
+#define SURFACE_PERMA_SHALLOW_QUICKSAND      0x003F
 
 #define SURFACE_BOSS_FIGHT_CAMERA            0x0065 // Wide camera for BOB and WF bosses
 #define SURFACE_CAMERA_FREE_ROAM             0x0066 // Free roam camera for THI and TTC
@@ -176,7 +177,7 @@
 #define SURFACE_WOBBLING_WARP                0x00FD // Pool warp (HMC & DDD)
 #define SURFACE_TRAPDOOR                     0x00FF // Bowser Left trapdoor, has no action defined
 
-#define SURFACE_IS_QUICKSAND(cmd)     (cmd >= 0x21 && cmd < 0x28)   // Doesn't include SURFACE_INSTANT_MOVING_QUICKSAND
+#define SURFACE_IS_QUICKSAND(cmd)     ((cmd >= 0x21 && cmd < 0x28) || cmd == SURFACE_PERMA_SHALLOW_QUICKSAND)   // Doesn't include SURFACE_INSTANT_MOVING_QUICKSAND
 #define SURFACE_IS_NOT_HARD(cmd)      (cmd != SURFACE_HARD && \
                                      !(cmd >= 0x35 && cmd <= 0x37))
 #define SURFACE_IS_PAINTING_WARP(cmd) (cmd >= 0xD3 && cmd < 0xFD)

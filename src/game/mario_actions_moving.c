@@ -235,6 +235,10 @@ s32 update_sliding(struct MarioState *m, f32 stopSpeed) {
         forward *= 0.5f + 0.5f * m->forwardVel / 100.0f;
     }
 
+    if (m->floor->type == SURFACE_PERMA_SHALLOW_QUICKSAND) {
+        return TRUE;
+    }
+
     switch (mario_get_floor_class(m)) {
         case SURFACE_CLASS_VERY_SLIPPERY:
             accel = 10.0f;
