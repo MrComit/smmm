@@ -9603,12 +9603,34 @@ const BehaviorScript bhvSwingingPlat[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvSawblade[] = {
+const BehaviorScript bhvSawbladeMove[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
-    CALL_NATIVE(bhv_sawblade_init),
+    SET_FLOAT(oGraphYOffset, 40),
+    CALL_NATIVE(bhv_sawblade_move_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_sawblade_loop),
+        CALL_NATIVE(bhv_sawblade_move_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvSawbladeShoot[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_sawblade_shoot_init),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 100, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_shoot_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvSawbladeSpawn[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_sawblade_spawn_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_spawn_loop),
     END_LOOP(),
 };

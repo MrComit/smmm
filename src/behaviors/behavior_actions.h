@@ -980,8 +980,11 @@ void bhv_button_door_loop(void);
 void bhv_bike_shyguy_loop(void);
 void bhv_exercise_bike_loop(void);
 void bhv_swinging_plat_loop(void);
-void bhv_sawblade_loop(void);
-void bhv_sawblade_init(void);
+void bhv_sawblade_move_loop(void);
+void bhv_sawblade_move_init(void);
+void bhv_sawblade_shoot_loop(void);
+void bhv_sawblade_shoot_init(void);
+void bhv_sawblade_spawn_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
