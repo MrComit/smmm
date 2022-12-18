@@ -49,11 +49,8 @@ void bhv_sawblade_shoot_loop(void) {
 
 void bhv_sawblade_move_init(void) {
     obj_set_hitbox(o, &sSawbladeHitbox);
-    if ((o->oBehParams >> 24) == 0) {
-        o->oFloatF8 = 500.0f;
-    } else {
-        o->oFloatF8 = (o->oBehParams >> 24) * 10.0f;
-    }
+    o->oFloatF8 = (o->oBehParams >> 24) * 10.0f;
+    CL_drop_to_floor();
 }
 
 
@@ -62,13 +59,16 @@ void bhv_sawblade_move_loop(void) {
     o->os16F4 += 0xC0;
     o->oPosX = o->oHomeX + (sins(o->os16F4) * o->oFloatF8);
     o->oPosZ = o->oHomeZ + (coss(o->os16F4) * o->oFloatF8);
-    o->oFaceAngleYaw = cur_obj_angle_to_home();
-    CL_drop_to_floor();
+    if (o->oBehParams >> 24) {
+        o->oFaceAngleYaw = cur_obj_angle_to_home();
+        CL_drop_to_floor();
+    }
     o->oInteractStatus = 0;
 }
 
 void bhv_swinging_plat_loop(void) {
     o->os16F4 += 0x200;
+    o->oFaceAnglePitch = -sins(o->os16F4) * 0x320;
     o->oFloatF8 = -sins(o->os16F4) * 500.0f;
     o->oPosX = o->oHomeX + (sins(o->os16F4) * 500.0f) * sins(o->oFaceAngleYaw);
     o->oPosZ = o->oHomeZ + (sins(o->os16F4) * 500.0f) * coss(o->oFaceAngleYaw);
@@ -77,15 +77,4 @@ void bhv_swinging_plat_loop(void) {
     f32 riseSqr = (homeD - posD) * (homeD - posD);
     f32 yRise = sqrtf(1440000 - riseSqr);
     o->oPosY = o->oHomeY + (1200.0f - yRise);
-
-    /*distance from pos -> (home + 1200) must = 1200
-    distance formula: (homeX - posX)^2 + x^2 = 1200^2
-        (homeX - posX)^2 + x^2 = 1200^2
-        x = sqr(1440000 - (homeX - posX)^2)
-
-    example: 500
-        500^2 + c^2 = 1200^2
-        c^2 = 1190000
-        1090.8712114635714411502154487373
-    */
 }

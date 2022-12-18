@@ -124,7 +124,7 @@ u32 mario_update_quicksand(struct MarioState *m, f32 sinkingSpeed) {
                 break;
 
             case SURFACE_PERMA_SHALLOW_QUICKSAND:
-                m->quicksandDepth = 11.0f;
+                m->quicksandDepth = 12.0f;
                 break;
 
             case SURFACE_SHALLOW_MOVING_QUICKSAND:
