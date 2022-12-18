@@ -48,23 +48,44 @@ void bhv_sawblade_shoot_loop(void) {
 
 
 void bhv_sawblade_move_init(void) {
+    s16 param = ((o->oBehParams >> 8) & 0xFF);
     obj_set_hitbox(o, &sSawbladeHitbox);
     o->oFloatF8 = (o->oBehParams >> 24) * 10.0f;
+    if (param) {
+        o->os16F6 = param << 4;
+    } else {
+        o->os16F6 = 0x100;
+    }
     CL_drop_to_floor();
+    o->oBehParams2ndByte = CL_RandomMinMaxU16(0, 1);
 }
 
 
 void bhv_sawblade_move_loop(void) {
     // o->oFaceAngleRoll -= 0x400;
-    o->os16F4 += 0xC0;
+    o->os16F4 += o->os16F6;
     o->oPosX = o->oHomeX + (sins(o->os16F4) * o->oFloatF8);
     o->oPosZ = o->oHomeZ + (coss(o->os16F4) * o->oFloatF8);
     if (o->oBehParams >> 24) {
         o->oFaceAngleYaw = cur_obj_angle_to_home();
         CL_drop_to_floor();
     }
+
     o->oInteractStatus = 0;
 }
+
+
+
+void bhv_sawblade_line_loop(void) {
+    o->os16F4 += o->os16F6;
+    o->oPosX = o->oHomeX + (sins(o->os16F4) * o->oFloatF8) * sins(o->oFaceAngleYaw + 0x4000);
+    o->oPosZ = o->oHomeZ + (sins(o->os16F4) * o->oFloatF8) * coss(o->oFaceAngleYaw + 0x4000);
+    CL_drop_to_floor();
+
+    o->oInteractStatus = 0;
+}
+
+
 
 void bhv_swinging_plat_loop(void) {
     o->os16F4 += 0x200;

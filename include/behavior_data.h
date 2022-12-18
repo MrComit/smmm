@@ -806,6 +806,7 @@ extern const BehaviorScript bhvLegPress[];
 extern const BehaviorScript bhvButtonDoor[];
 extern const BehaviorScript bhvSwingingPlat[];
 extern const BehaviorScript bhvSawbladeMove[];
+extern const BehaviorScript bhvSawbladeLine[];
 extern const BehaviorScript bhvSawbladeShoot[];
 extern const BehaviorScript bhvSawbladeSpawn[];
 

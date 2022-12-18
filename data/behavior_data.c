@@ -9614,6 +9614,17 @@ const BehaviorScript bhvSawbladeMove[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvSawbladeLine[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_FLOAT(oGraphYOffset, 40),
+    CALL_NATIVE(bhv_sawblade_move_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_line_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvSawbladeShoot[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

@@ -658,7 +658,7 @@ extern Vtx lll_dl_EngineRoom_002_mesh_layer_5_vtx_cull[8];
 extern Vtx lll_dl_EngineRoom_002_mesh_layer_5_vtx_0[24];
 extern Gfx lll_dl_EngineRoom_002_mesh_layer_5_tri_0[];
 extern Vtx lll_dl_Bones_mesh_layer_1_vtx_cull[8];
-extern Vtx lll_dl_Bones_mesh_layer_1_vtx_0[625];
+extern Vtx lll_dl_Bones_mesh_layer_1_vtx_0[439];
 extern Gfx lll_dl_Bones_mesh_layer_1_tri_0[];
 extern Vtx lll_dl_Bones_mesh_layer_1_vtx_1[58];
 extern Gfx lll_dl_Bones_mesh_layer_1_tri_1[];
