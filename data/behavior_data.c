@@ -9654,7 +9654,7 @@ const BehaviorScript bhvBigSwingingPlat[] = {
     LOAD_COLLISION_DATA(big_swinging_plat_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
-    // CALL_NATIVE(bhv_swinging_plat_init),
+    CALL_NATIVE(bhv_big_swinging_plat_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_big_swinging_plat_loop),
         CALL_NATIVE(load_object_collision_model),

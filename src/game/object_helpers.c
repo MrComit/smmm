@@ -429,6 +429,7 @@ Vtx *sVanishVerts[] = {
     &hmc_dl_MazeNoCol_mesh_layer_1_vtx_1,
     &hmc_dl_BelowMaze_mesh_layer_1_vtx_0,
     &hmc_dl_BelowMaze_mesh_layer_1_vtx_1,
+    &lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0,
 };
 
 s16 sVanishVertCounts[] = {
@@ -440,6 +441,7 @@ s16 sVanishVertCounts[] = {
     sizeof(hmc_dl_MazeNoCol_mesh_layer_1_vtx_1) / 16,
     sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_0) / 16,
     sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_1) / 16,
+    sizeof(lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0) / 16,
 };
 
 s16 sVanishVertDists[] = {
@@ -451,6 +453,7 @@ s16 sVanishVertDists[] = {
     2500,
     2500,
     2500,
+    1000,
 };
 
 Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
@@ -1078,20 +1081,19 @@ Gfx *geo_generate_big_plat_chain(s32 callContext, struct GraphNode *node, void *
 
         vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
 
-        s16 homeX = (obj->oHomeX - obj->oPosX);
         s16 homeY = (obj->oHomeY - obj->oPosY);
         s16 homeZ = (obj->oHomeZ - obj->oPosZ);
 
         //top X
-        make_vertex(vertexBuffer, 0, homeX + 10, homeY + 2400, homeZ, 0, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
-        make_vertex(vertexBuffer, 1, homeX - 10, homeY + 2400, homeZ, 1024, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 0, 0 + 10, homeY + 2400, homeZ, 0, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 1, 0 - 10, homeY + 2400, homeZ, 1024, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
         //bottom X
         make_vertex(vertexBuffer, 2, 10, 40, 0, 0, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 3, -10, 40, 0, 1024, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
 
         //top Z
-        make_vertex(vertexBuffer, 4, homeX, homeY + 2400, homeZ + 10, 0, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
-        make_vertex(vertexBuffer, 5, homeX, homeY + 2400, homeZ - 10, 1024, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 4, 0, homeY + 2400, homeZ + 10, 0, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 5, 0, homeY + 2400, homeZ - 10, 1024, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
         //bottom Z
         make_vertex(vertexBuffer, 6, 0, 40, 10, 0, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
         make_vertex(vertexBuffer, 7, 0, 40, -10, 1024, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
