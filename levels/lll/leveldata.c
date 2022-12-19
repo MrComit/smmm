@@ -124,3 +124,5 @@
 #include "levels/lll/swinging_plat/model.inc.c"
 #include "levels/lll/swinging_plat/collision.inc.c"
 #include "levels/lll/sawblade/model.inc.c"
+#include "levels/lll/big_swinging_plat/model.inc.c"
+#include "levels/lll/big_swinging_plat/collision.inc.c"

@@ -1060,6 +1060,65 @@ Gfx *geo_generate_plat_chain(s32 callContext, struct GraphNode *node, void *cont
 }
 
 
+#define BIG_CHAIN_UV_Y 32767
+
+
+Gfx *geo_generate_big_plat_chain(s32 callContext, struct GraphNode *node, void *context) {
+    Vtx *vertexBuffer;
+    Gfx *dlStart, *dlHead;
+    struct Object *obj;
+    struct GraphNodeGenerated *currentGraphNode;
+
+    currentGraphNode = node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+
+        currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
+
+        s16 homeX = (obj->oHomeX - obj->oPosX);
+        s16 homeY = (obj->oHomeY - obj->oPosY);
+        s16 homeZ = (obj->oHomeZ - obj->oPosZ);
+
+        //top X
+        make_vertex(vertexBuffer, 0, homeX + 10, homeY + 2400, homeZ, 0, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 1, homeX - 10, homeY + 2400, homeZ, 1024, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        //bottom X
+        make_vertex(vertexBuffer, 2, 10, 40, 0, 0, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 3, -10, 40, 0, 1024, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        //top Z
+        make_vertex(vertexBuffer, 4, homeX, homeY + 2400, homeZ + 10, 0, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        make_vertex(vertexBuffer, 5, homeX, homeY + 2400, homeZ - 10, 1024, BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0);
+        //bottom Z
+        make_vertex(vertexBuffer, 6, 0, 40, 10, 0, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 7, 0, 40, -10, 1024, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
+
+
+        dlHead = alloc_display_list(sizeof(Gfx) * (7));
+        dlStart = dlHead;
+
+        gSPDisplayList(dlHead++, mat_lll_dl_Chain);
+
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 8, 0);
+        gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
+        gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
+        
+        gSPDisplayList(dlHead++, mat_revert_lll_dl_Chain);
+        
+        gSPEndDisplayList(dlHead++);
+    }
+    return dlStart;
+    
+}
+
+
+
+
+
+
 
 
 

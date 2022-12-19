@@ -1,3 +1,4 @@
+#include "levels/lll/big_swinging_plat/texscroll.inc.h"
 #include "levels/lll/sawblade/texscroll.inc.h"
 #include "levels/lll/swinging_plat/texscroll.inc.h"
 #include "levels/lll/power_door/texscroll.inc.h"

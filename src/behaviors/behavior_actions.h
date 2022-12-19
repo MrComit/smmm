@@ -986,6 +986,7 @@ void bhv_sawblade_line_loop(void);
 void bhv_sawblade_shoot_loop(void);
 void bhv_sawblade_shoot_init(void);
 void bhv_sawblade_spawn_loop(void);
+void bhv_big_swinging_plat_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

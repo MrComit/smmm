@@ -812,6 +812,7 @@
 #define MODEL_EXERCISE_BIKE       0xEB
 #define MODEL_SWINGING_PLAT       0xEA
 #define MODEL_SAWBLADE            0xE9
+#define MODEL_BIG_SWINGING_PLAT   0xE8
 
 
 #endif // MODEL_IDS_H

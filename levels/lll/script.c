@@ -64,6 +64,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_EXERCISE_BIKE, exercise_bike_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SWINGING_PLAT, swinging_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SAWBLADE, sawblade_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BIG_SWINGING_PLAT, big_swinging_plat_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -199,6 +200,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_THWOMP_BLOCK, 12499, -400, 263, 0, -180, 0, (18 << 16), bhvThwompBlock),
 		OBJECT(MODEL_ENGINE_GEAR, 9977, 452, 439, 0, 0, 0, (7 << 16), bhvEngineGear),
 		OBJECT(MODEL_TOKEN, 2829, 1442, -462, 0, -180, 0, (1 << 16) | (0x27 << 8), bhvToken),
+		OBJECT(MODEL_BIG_SWINGING_PLAT, 11819, 1601, -5377, 0, 0, 0, 0x00000000, bhvBigSwingingPlat),
 		OBJECT(MODEL_SWINGING_PLAT, 3966, 382, -4263, 0, 90, 0, 0x00000000, bhvSwingingPlat),
 		OBJECT(MODEL_SWINGING_PLAT, 5651, 412, -4774, 0, 0, 0, 0x00000000, bhvSwingingPlat),
 		OBJECT(MODEL_SWINGING_PLAT, 7987, 482, -11569, 0, -180, 0, 0x00000000, bhvSwingingPlat),

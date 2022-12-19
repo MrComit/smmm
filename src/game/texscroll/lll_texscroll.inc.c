@@ -5,6 +5,7 @@
 #include "levels/lll/power_door/texscroll.inc.c"
 #include "levels/lll/swinging_plat/texscroll.inc.c"
 #include "levels/lll/sawblade/texscroll.inc.c"
+#include "levels/lll/big_swinging_plat/texscroll.inc.c"
 void scroll_textures_lll() {
 	scroll_lll();
 	scroll_lll_level_geo_clothes_ball();
@@ -12,4 +13,5 @@ void scroll_textures_lll() {
 	scroll_lll_level_geo_power_door();
 	scroll_lll_level_geo_swinging_plat();
 	scroll_lll_level_geo_sawblade();
+	scroll_lll_level_geo_big_swinging_plat();
 }

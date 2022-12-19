@@ -809,6 +809,7 @@ extern const BehaviorScript bhvSawbladeMove[];
 extern const BehaviorScript bhvSawbladeLine[];
 extern const BehaviorScript bhvSawbladeShoot[];
 extern const BehaviorScript bhvSawbladeSpawn[];
+extern const BehaviorScript bhvBigSwingingPlat[];
 
 
 #endif // BEHAVIOR_DATA_H
