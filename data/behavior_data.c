@@ -9327,6 +9327,15 @@ const BehaviorScript bhvBasementSwitch[] = {
 };
 
 
+const BehaviorScript bhvFakeBasementSwitch[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SCALE(0, 150),
+    CALL_NATIVE(bhv_basement_switch_init),
+    BREAK(),
+};
+
+
 const BehaviorScript bhvBasementWasher[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
@@ -9658,5 +9667,49 @@ const BehaviorScript bhvBigSwingingPlat[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_big_swinging_plat_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCrumbleFloor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(crumble_floor_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oFloatF4, 2),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_crumble_floor_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_crumble_floor_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvJumpscareShyguy[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    ANIMATE(1),
+    SET_HOME(),
+    SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_jumpscare_shyguy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_jumpscare_shyguy_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvJSShyguyManager[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    ANIMATE(0),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 250),
+    // SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_js_shyguy_manager_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_js_shyguy_manager_loop),
     END_LOOP(),
 };

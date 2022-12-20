@@ -1474,11 +1474,14 @@ void fixed_cam_presets(struct Camera *c) {
                 break;
             }
             vec3f_copy(c->pos, gComitCutscenePosVec);
-            vec3f_set(c->focus, obj->oPosX, obj->oPosY + 2000.0f, obj->oPosZ);
+            vec3f_set(c->focus, obj->oPosX, obj->oPosY + 1800.0f, obj->oPosZ);
             c->yaw = c->nextYaw = DEGREES(0);
             break;
-        // case 18:        
-
+        case 18:
+            vec3f_set(c->pos, 8900.0f, -1400.0f, m->pos[2] - 2000.0f);
+            vec3f_set(c->focus, 8900.0f, -1600.0f, m->pos[2]);
+            c->yaw = c->nextYaw = DEGREES(180);
+            break;
 
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);

@@ -785,6 +785,7 @@ extern const BehaviorScript bhvCellarBlockade[];
 extern const BehaviorScript bhvChampagne[];
 extern const BehaviorScript bhvSecurityCam[];
 extern const BehaviorScript bhvBasementSwitch[];
+extern const BehaviorScript bhvFakeBasementSwitch[];
 extern const BehaviorScript bhvBasementWasher[];
 extern const BehaviorScript bhvBasementDryer[];
 extern const BehaviorScript bhvClothesShot[];
@@ -810,6 +811,9 @@ extern const BehaviorScript bhvSawbladeLine[];
 extern const BehaviorScript bhvSawbladeShoot[];
 extern const BehaviorScript bhvSawbladeSpawn[];
 extern const BehaviorScript bhvBigSwingingPlat[];
+extern const BehaviorScript bhvCrumbleFloor[];
+extern const BehaviorScript bhvJumpscareShyguy[];
+extern const BehaviorScript bhvJSShyguyManager[];
 
 
 #endif // BEHAVIOR_DATA_H

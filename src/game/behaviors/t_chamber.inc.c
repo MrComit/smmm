@@ -11,6 +11,128 @@ static struct ObjectHitbox sSawbladeHitbox = {
 };
 
 
+
+void bhv_jumpscare_shyguy_init(void) {
+    o->header.gfx.scale[0] = (random_float() + 0.75f) * 3.0f;
+    o->header.gfx.scale[1] = (random_float() + 0.75f) * 3.0f;
+    o->header.gfx.scale[2] = (random_float() + 0.75f) * 3.0f;
+    o->header.gfx.animInfo.animFrame = CL_RandomMinMaxU16(0, 10);
+}
+
+void bhv_jumpscare_shyguy_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 60) {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 25.0f, 0.3f);
+                o->oPosZ -= o->oFloatF4;
+                if (gMarioState->pos[2] < -12500.0f) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x10);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+void spawn_chamber_shyguys(f32 xPos, f32 yPos, f32 zPos) {
+    struct Object *obj;
+    s32 i, k;
+    for (i = 0; i < 3; i++) {
+        for (k = 0; k < 5; k++) {
+            obj = spawn_object(o, MODEL_SHYGUY, bhvJumpscareShyguy);
+            obj->oPosX = xPos - (k * 300.0f);
+            if (i == 1) {
+                obj->oPosX -= 100.0f;
+            }
+            obj->oPosY = yPos + (i * 100.0f);
+            obj->oPosZ = zPos + (i * 150.0f);
+        }
+    }
+}
+
+
+void bhv_js_shyguy_manager_init(void) {
+    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvCrumbleFloor);
+    if (obj != NULL) {
+        vec3f_copy(&o->oFloatF4, &obj->oPosX);
+    }
+    o->oPosY -= 100.0f;
+}
+
+void bhv_js_shyguy_manager_loop(void) {
+    struct Object *obj;
+    struct MarioState *m = gMarioState;
+    f32 dist;
+    switch (o->oAction) {
+        case 0:
+            if (lateral_dist_between_objects(o, gMarioObject) < 200.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x18);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
+
+            m->pos[0] = approach_f32_symmetric(m->pos[0], o->oFloatF4, 80.0f);
+            m->pos[1] = approach_f32_symmetric(m->pos[1], o->oFloatF8, 40.0f);
+            m->pos[2] = approach_f32_symmetric(m->pos[2], o->oFloatFC, 80.0f);
+            CL_dist_between_points(m->pos, &o->oFloatF4, &dist);
+            if (dist < 200.0f) {
+                obj = cur_obj_nearest_object_with_behavior(bhvCrumbleFloor);
+                if (obj != NULL) {
+                    obj->oAction = 1;
+                    o->oAction = 2;
+                    spawn_chamber_shyguys(o->oPosX + 600.0f, o->oPosY - 1700.0f, o->oPosZ);
+                }
+            }
+            break;
+        case 2:
+            if (o->oTimer < 30) {
+                m->pos[0] = approach_f32_symmetric(m->pos[0], o->oFloatF4, 80.0f);
+                m->pos[2] = approach_f32_symmetric(m->pos[2], o->oFloatFC, 80.0f);
+            }
+            if (m->pos[1] < -300.0f) {
+                gCamera->comitCutscene = 18;
+                if ((o->oTimer & 0xF) == 0) {
+                    cur_obj_play_sound_1(SOUND_OBJ_MAD_PIANO_CHOMPING);
+                }
+            }
+            if (m->pos[2] < -12500.0f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+
+
+void bhv_crumble_floor_loop(void) {
+    struct Object *explosion;
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o) {
+                o->oPosY += o->oFloatF4;
+                o->oFloatF4 *= -1;
+            }
+            break;
+        case 1:
+            // CL_explode_object(o, 1);
+            explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+            explosion->oIntangibleTimer = -1;
+            o->activeFlags = 0;
+            break;
+    }
+}
+
+
+
 void bhv_sawblade_spawn_loop(void) {
     f32 m = coss(o->oFaceAngleYaw) / sins(o->oFaceAngleYaw);
     f32 b = o->oPosZ - (o->oPosX * m);
@@ -120,7 +242,7 @@ void bhv_big_swinging_plat_loop(void) {
             }
             break;
         case 1:
-            o->os16F4 += 0x200;
+            o->os16F4 += 0xC0;
             // o->oFaceAnglePitch = -sins(o->os16F4) * 0x640;
             o->oPosZ = o->oHomeZ + sins(o->os16F4) * 1500.0f;
             break;

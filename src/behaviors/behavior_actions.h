@@ -988,6 +988,11 @@ void bhv_sawblade_shoot_init(void);
 void bhv_sawblade_spawn_loop(void);
 void bhv_big_swinging_plat_loop(void);
 void bhv_big_swinging_plat_init(void);
+void bhv_crumble_floor_loop(void);
+void bhv_jumpscare_shyguy_init(void);
+void bhv_jumpscare_shyguy_loop(void);
+void bhv_js_shyguy_manager_init(void);
+void bhv_js_shyguy_manager_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

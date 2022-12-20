@@ -69,3 +69,4 @@
 #include "levels/lll/swinging_plat/geo.inc.c"
 #include "levels/lll/sawblade/geo.inc.c"
 #include "levels/lll/big_swinging_plat/geo.inc.c"
+#include "levels/lll/crumble_floor/geo.inc.c"

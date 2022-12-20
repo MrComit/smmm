@@ -813,6 +813,7 @@
 #define MODEL_SWINGING_PLAT       0xEA
 #define MODEL_SAWBLADE            0xE9
 #define MODEL_BIG_SWINGING_PLAT   0xE8
+#define MODEL_CRUMBLE_FLOOR       0xE7
 
 
 #endif // MODEL_IDS_H
