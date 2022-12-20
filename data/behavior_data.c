@@ -9692,7 +9692,6 @@ const BehaviorScript bhvJumpscareShyguy[] = {
     LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
     ANIMATE(1),
     SET_HOME(),
-    SET_INT(oOpacity, 255),
     CALL_NATIVE(bhv_jumpscare_shyguy_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_jumpscare_shyguy_loop),
@@ -9702,7 +9701,7 @@ const BehaviorScript bhvJumpscareShyguy[] = {
 
 const BehaviorScript bhvJSShyguyManager[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
     ANIMATE(0),
     SET_HOME(),

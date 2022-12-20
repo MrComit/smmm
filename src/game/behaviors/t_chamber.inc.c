@@ -13,6 +13,10 @@ static struct ObjectHitbox sSawbladeHitbox = {
 
 
 void bhv_jumpscare_shyguy_init(void) {
+    o->oObjF8 = cur_obj_nearest_object_with_behavior(bhvJSShyguyManager);
+    if (o->oObjF8 == NULL) {
+        o->activeFlags = 0;
+    }
     o->header.gfx.scale[0] = (random_float() + 0.75f) * 3.0f;
     o->header.gfx.scale[1] = (random_float() + 0.75f) * 3.0f;
     o->header.gfx.scale[2] = (random_float() + 0.75f) * 3.0f;
@@ -20,13 +24,28 @@ void bhv_jumpscare_shyguy_init(void) {
 }
 
 void bhv_jumpscare_shyguy_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 60) {
-                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 25.0f, 0.3f);
+            if (o->oTimer <= 60) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xFF, 0x10);
+            } else {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 0.6f);
                 o->oPosZ -= o->oFloatF4;
-                if (gMarioState->pos[2] < -12500.0f) {
+                if (gMarioState->pos[2] < -13200.0f) {
                     o->oAction = 1;
+                }
+                if (o->oBehParams2ndByte) {
+                    if (gMarioState->pos[2] > o->oPosZ || gMarioState->pos[1] < -2000.0f) {
+                        if (o->oObjF8 != NULL) {
+                            o->oObjF8->oAction = 3;
+                        }
+                        o->oBehParams2ndByte = 0;
+                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0x00, 0x00, 0x00);
+                    }
+                }
+                if (o->oObjF8 == NULL || o->oObjF8->os16100) {
+                    o->activeFlags = 0;
                 }
             }
             break;
@@ -50,6 +69,9 @@ void spawn_chamber_shyguys(f32 xPos, f32 yPos, f32 zPos) {
             if (i == 1) {
                 obj->oPosX -= 100.0f;
             }
+            if ((i | k) == 0) {
+                obj->oBehParams2ndByte = 1;
+            }
             obj->oPosY = yPos + (i * 100.0f);
             obj->oPosZ = zPos + (i * 150.0f);
         }
@@ -58,10 +80,7 @@ void spawn_chamber_shyguys(f32 xPos, f32 yPos, f32 zPos) {
 
 
 void bhv_js_shyguy_manager_init(void) {
-    struct Object *obj = cur_obj_nearest_object_with_behavior(bhvCrumbleFloor);
-    if (obj != NULL) {
-        vec3f_copy(&o->oFloatF4, &obj->oPosX);
-    }
+    vec3f_set(&o->oFloatF4, 8897.0f, 100.0f, -4122.0f);
     o->oPosY -= 100.0f;
 }
 
@@ -73,6 +92,12 @@ void bhv_js_shyguy_manager_loop(void) {
         case 0:
             if (lateral_dist_between_objects(o, gMarioObject) < 200.0f) {
                 o->oAction = 1;
+                cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
+                cur_obj_play_sound_2(SOUND_ACTION_BOUNCE_OFF_OBJECT);
+            } else if (m->pos[1] < -300.0f && cur_obj_nearest_object_with_behavior(bhvCrumbleFloor) == NULL) {
+                o->oAction = 2;
+                o->os16100 = 0;
+                spawn_chamber_shyguys(o->oPosX + 600.0f, o->oHomeY - 1700.0f, o->oPosZ);
             }
             break;
         case 1:
@@ -87,9 +112,10 @@ void bhv_js_shyguy_manager_loop(void) {
                 obj = cur_obj_nearest_object_with_behavior(bhvCrumbleFloor);
                 if (obj != NULL) {
                     obj->oAction = 1;
-                    o->oAction = 2;
-                    spawn_chamber_shyguys(o->oPosX + 600.0f, o->oPosY - 1700.0f, o->oPosZ);
                 }
+                o->oAction = 2;
+                o->os16100 = 0;
+                spawn_chamber_shyguys(o->oPosX + 600.0f, o->oPosY - 1700.0f, o->oPosZ);
             }
             break;
         case 2:
@@ -105,6 +131,21 @@ void bhv_js_shyguy_manager_loop(void) {
             }
             if (m->pos[2] < -12500.0f) {
                 o->activeFlags = 0;
+            }
+            break;
+        case 3:
+            if (o->oTimer > 13) {
+                m->hurtCounter = 4;
+                vec3f_set(m->pos, 10709.0f, 1705.0f, -3420.0f);
+                m->faceAngle[1] = 0xC000;
+                set_r_button_camera(gCamera);
+                s8DirModeBaseYaw = m->faceAngle[1] + 0x8000;
+                gCamera->comitCutscene = 0;
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
+                o->oAction = 0;
+                o->os16100 = 1;
+                o->oOpacity = 0;
+                o->oPosY -= 100.0f;
             }
             break;
     }
@@ -242,7 +283,7 @@ void bhv_big_swinging_plat_loop(void) {
             }
             break;
         case 1:
-            o->os16F4 += 0xC0;
+            o->os16F4 += 0x100;
             // o->oFaceAnglePitch = -sins(o->os16F4) * 0x640;
             o->oPosZ = o->oHomeZ + sins(o->os16F4) * 1500.0f;
             break;
