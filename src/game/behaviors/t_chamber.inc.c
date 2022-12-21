@@ -105,7 +105,7 @@ void bhv_js_shyguy_manager_loop(void) {
     f32 dist;
     switch (o->oAction) {
         case 0:
-            if (lateral_dist_between_objects(o, gMarioObject) < 300.0f) {
+            if (m->pos[1] < 1000.0f && lateral_dist_between_objects(o, gMarioObject) < 300.0f) {
                 o->oAction = 1;
                 cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                 cur_obj_play_sound_2(SOUND_ACTION_BOUNCE_OFF_OBJECT);

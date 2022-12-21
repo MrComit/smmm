@@ -124,7 +124,9 @@ u32 mario_update_quicksand(struct MarioState *m, f32 sinkingSpeed) {
                 break;
 
             case SURFACE_PERMA_SHALLOW_QUICKSAND:
-                m->quicksandDepth = 12.0f;
+                if ((m->quicksandDepth += 4.0f) >= 160.0f) {
+                    return drop_and_set_mario_action(m, ACT_QUICKSAND_DEATH, 0);
+                }
                 break;
 
             case SURFACE_SHALLOW_MOVING_QUICKSAND:

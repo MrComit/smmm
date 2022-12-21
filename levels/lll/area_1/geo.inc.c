@@ -272,6 +272,7 @@ const GeoLayout lll_dl_108__Torture_Chamber_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Bones_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Bones_001_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_GangToad_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_Glow_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_metalball_mesh_layer_1),
 		GEO_ASM(8, geo_update_vanish_floor),
