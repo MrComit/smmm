@@ -823,6 +823,7 @@ const BehaviorScript bhvFadingWarp[] = {
     OR_INT(oFlags, (/*OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | */OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_INT(oInteractType, INTERACT_WARP),
     SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_fading_warp_loop),
         ADD_INT(oFaceAngleYaw, 0x400),
@@ -9673,7 +9674,7 @@ const BehaviorScript bhvBigSwingingPlat[] = {
 
 const BehaviorScript bhvCrumbleFloor[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     LOAD_COLLISION_DATA(crumble_floor_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oFloatF4, 2),

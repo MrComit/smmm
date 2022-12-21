@@ -705,7 +705,7 @@ extern Gfx lll_dl_TortureChamber_001_mesh_layer_4_tri_0[];
 extern Vtx lll_dl_TortureChamber_001_mesh_layer_4_vtx_1[48];
 extern Gfx lll_dl_TortureChamber_001_mesh_layer_4_tri_1[];
 extern Vtx lll_dl_TortureChamberUnder_mesh_layer_1_vtx_cull[8];
-extern Vtx lll_dl_TortureChamberUnder_mesh_layer_1_vtx_0[279];
+extern Vtx lll_dl_TortureChamberUnder_mesh_layer_1_vtx_0[291];
 extern Gfx lll_dl_TortureChamberUnder_mesh_layer_1_tri_0[];
 extern Vtx lll_dl_TortureChamberUnder_mesh_layer_1_vtx_1[44];
 extern Gfx lll_dl_TortureChamberUnder_mesh_layer_1_tri_1[];

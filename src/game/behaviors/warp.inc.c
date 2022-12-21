@@ -31,6 +31,7 @@ void bhv_warp_loop(void) {
 
 
 void fading_warp_active_check(s16 param) {
+    struct Object *obj;
     s32 val = FALSE;
     switch (param) {
         case 1:
@@ -46,6 +47,15 @@ void fading_warp_active_check(s16 param) {
         case 3:
             if (save_file_get_boos() & (1 << 0x10)) {
                 val = TRUE;
+            }
+            break;
+        case 4:
+            obj = cur_obj_nearest_object_with_behavior(bhvBasementSwitch);
+            if (obj == NULL || obj->oAction != 0) {
+                val = TRUE;
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 25.0f);
+            } else {
+                o->oPosY = o->oHomeY + 700.0f;
             }
             break;
     }

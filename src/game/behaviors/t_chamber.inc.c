@@ -79,6 +79,21 @@ void spawn_chamber_shyguys(f32 xPos, f32 yPos, f32 zPos) {
 }
 
 
+void chamber_contain_mario(struct MarioState *m) {
+    if (m->pos[0] < 8100.0f) {
+        m->pos[0] = 8100.0f;
+    } else if (m->pos[0] > 9400.0f) {
+        m->pos[0] = 9400.0f;
+    }
+
+    if (m->pos[2] < -14300.0f) {
+        m->pos[2] = -14300.0f;
+    } else if (m->pos[2] > -13100.0f) {
+        m->pos[2] = -13100.0f;
+    }
+}
+
+
 void bhv_js_shyguy_manager_init(void) {
     vec3f_set(&o->oFloatF4, 8897.0f, 100.0f, -4122.0f);
     o->oPosY -= 100.0f;
@@ -90,7 +105,7 @@ void bhv_js_shyguy_manager_loop(void) {
     f32 dist;
     switch (o->oAction) {
         case 0:
-            if (lateral_dist_between_objects(o, gMarioObject) < 200.0f) {
+            if (lateral_dist_between_objects(o, gMarioObject) < 300.0f) {
                 o->oAction = 1;
                 cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                 cur_obj_play_sound_2(SOUND_ACTION_BOUNCE_OFF_OBJECT);
@@ -129,8 +144,8 @@ void bhv_js_shyguy_manager_loop(void) {
                     cur_obj_play_sound_1(SOUND_OBJ_MAD_PIANO_CHOMPING);
                 }
             }
-            if (m->pos[2] < -12500.0f) {
-                o->activeFlags = 0;
+            if (m->pos[2] < -13200.0f) {
+                o->oAction = 4;
             }
             break;
         case 3:
@@ -146,6 +161,12 @@ void bhv_js_shyguy_manager_loop(void) {
                 o->os16100 = 1;
                 o->oOpacity = 0;
                 o->oPosY -= 100.0f;
+            }
+            break;
+        case 4:
+            chamber_contain_mario(m);
+            if (m->action == ACT_TELEPORT_FADE_OUT) {
+                o->activeFlags = 0;
             }
             break;
     }
