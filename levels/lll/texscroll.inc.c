@@ -43,6 +43,11 @@ void scroll_sts_mat_lll_dl_Fog_001_layer5() {
 	}
 };
 
+void scroll_sts_mat_lll_dl_FlowerPetal_002_v4_001_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_FlowerPetal_002_v4_001_layer1);
+	shift_t_down(mat, 21, PACK_TILESIZE(0, 2));
+};
+
 void scroll_sts_mat_lll_dl_LaundryWall_002() {
 	static int intervalTex1 = 2;
 	static int curInterval1 = 2;
@@ -266,6 +271,7 @@ void scroll_lll() {
 	scroll_sts_mat_lll_dl_CorridorWall_layer1();
 	scroll_lll_dl_Fog_mesh_layer_5_vtx_0();
 	scroll_sts_mat_lll_dl_Fog_001_layer5();
+	scroll_sts_mat_lll_dl_FlowerPetal_002_v4_001_layer1();
 	scroll_sts_mat_lll_dl_LaundryWall_002();
 	scroll_lll_dl_TideToad_mesh_layer_5_vtx_0();
 	scroll_sts_mat_lll_dl_GymWall_layer1();

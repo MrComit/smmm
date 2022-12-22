@@ -1,6 +1,7 @@
 extern void scroll_sts_mat_lll_dl_CorridorWall_layer1();
 extern void scroll_lll_dl_Fog_mesh_layer_5_vtx_0();
 extern void scroll_sts_mat_lll_dl_Fog_001_layer5();
+extern void scroll_sts_mat_lll_dl_FlowerPetal_002_v4_001_layer1();
 extern void scroll_sts_mat_lll_dl_LaundryWall_002();
 extern void scroll_lll_dl_TideToad_mesh_layer_5_vtx_0();
 extern void scroll_sts_mat_lll_dl_GymWall_layer1();
