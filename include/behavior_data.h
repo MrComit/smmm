@@ -815,6 +815,9 @@ extern const BehaviorScript bhvCrumbleFloor[];
 extern const BehaviorScript bhvJumpscareShyguy[];
 extern const BehaviorScript bhvJSShyguyManager[];
 extern const BehaviorScript bhvPowerPlat[];
+extern const BehaviorScript bhvPowerButton[];
+extern const BehaviorScript bhvPowerBar[];
+extern const BehaviorScript bhvEngineButtonGate[];
 
 
 #endif // BEHAVIOR_DATA_H

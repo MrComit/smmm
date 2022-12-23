@@ -113,6 +113,191 @@ void power_door_update_color(s32 val) {
 }
 
 
+Vec3s sPowerButtonCols[3] = {
+{0xFF, 0x01, 0x99}, // magenta
+{0xFF, 0xFF, 0x00}, // yellow
+{0x03, 0x03, 0xFF}, // blue
+};
+
+s32 sPowerButtonsPressed = 0;
+s32 sPowerButtonsReset = FALSE;
+
+
+void bhv_power_bar_init(void) {
+    o->os16F4 = sPowerButtonCols[o->oBehParams2ndByte][0];
+    o->os16F6 = sPowerButtonCols[o->oBehParams2ndByte][1];
+    o->os16F8 = sPowerButtonCols[o->oBehParams2ndByte][2];
+    sPowerButtonsPressed = 0;
+    sPowerButtonsReset = FALSE;
+
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            o->oObjFC = CL_obj_nearest_object_behavior_params(bhvPowerBar, 1 << 16);
+            o->oObj100 = CL_obj_nearest_object_behavior_params(bhvPowerBar, 2 << 16);
+            break;
+        case 1:
+            o->oObjFC = CL_obj_nearest_object_behavior_params(bhvPowerBar, 0);
+            o->oObj100 = CL_obj_nearest_object_behavior_params(bhvPowerBar, 2 << 16);
+            break;
+        case 2:
+            o->oObjFC = CL_obj_nearest_object_behavior_params(bhvPowerBar, 1 << 16);
+            o->oObj100 = CL_obj_nearest_object_behavior_params(bhvPowerBar, 0);
+            break;
+    } 
+
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN2) {
+        o->oAction = 0xFF;
+        o->os16FA = 5;
+    } else {
+        o->os16FA = 0;
+    }
+}
+
+
+void bhv_power_bar_loop(void) {
+    if (o->os16FA == 0) {
+        o->header.gfx.scale[2] = 0.25f;
+    } else if (o->os16FA > 5) {
+        o->os16FA = 5;
+    }
+    o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], (f32)o->os16FA, 0.13f);
+    if (sPowerButtonsReset && o->oBehParams2ndByte == 2 && sPowerButtonsPressed == 0) {
+        sPowerButtonsReset = FALSE;
+    }
+    switch (o->oAction) {
+        case 0:
+            if (o->header.gfx.scale[2] == (f32)(o->os16FA)) {
+                if (o->os16FA >= 5) {
+                    o->oAction = 1;
+                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                } else if (sPowerButtonsPressed == 0b11111) {
+                    sPowerButtonsReset = TRUE;
+                    o->os16FA = 0;
+                    o->oAction = 0;
+                    o->oObjFC->os16FA = 0;
+                    o->oObjFC->oAction = 0;
+                    o->oObj100->os16FA = 0;
+                    o->oObj100->oAction = 0;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                }
+            }
+            break;
+        case 1:
+            break;
+    }
+}
+
+
+void bhv_power_button_init(void) {
+    o->os16F4 = o->os16F6 = o->os16F8 = 0x20;
+
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN2) {
+        o->oAction = 0xFF;
+        o->oPosY = o->oHomeY - 25.0f;
+    }
+}
+
+
+
+void bhv_power_button_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_nearest_object_with_behavior(bhvBikeShyguy) == NULL) {
+                o->oAction = 1;
+                o->oObjFC = CL_obj_nearest_object_behavior_params(bhvPowerBar, 0);
+                if (o->oObjFC == NULL) {
+                    o->activeFlags = 0;
+                }
+            } else {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 25.0f, 4.0f);
+            }
+            break;
+        case 1:
+            o->os16F4 = approach_s16_symmetric(o->os16F4, sPowerButtonCols[o->os16FA][0], 0x6);
+            o->os16F6 = approach_s16_symmetric(o->os16F6, sPowerButtonCols[o->os16FA][1], 0x6);
+            o->os16F8 = approach_s16_symmetric(o->os16F8, sPowerButtonCols[o->os16FA][2], 0x6);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 4.0f);
+
+            if (o->oObjFC->oAction != 0) {
+                o->os16FA++;
+                o->oObjFC = CL_obj_nearest_object_behavior_params(bhvPowerBar, o->os16FA << 16);
+                if (o->oObjFC == NULL) {
+                    o->activeFlags = 0;
+                    return;
+                }
+            }
+
+            if (gMarioObject->platform == o) {
+                o->oAction = 2;
+                o->oObjFC->os16FA += o->oBehParams2ndByte + 1;
+                sPowerButtonsPressed |= (1 << o->oBehParams2ndByte);
+            }
+            break;
+        case 2:
+            o->os16F4 = approach_s16_symmetric(o->os16F4, sPowerButtonCols[o->os16FA][0] / 2, 0x6);
+            o->os16F6 = approach_s16_symmetric(o->os16F6, sPowerButtonCols[o->os16FA][1] / 2, 0x6);
+            o->os16F8 = approach_s16_symmetric(o->os16F8, sPowerButtonCols[o->os16FA][2] / 2, 0x6);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 25.0f, 4.0f);
+
+            if (sPowerButtonsReset && gMarioObject->platform != o) {
+                o->oPosY = o->oHomeY;
+                o->oAction = 1;
+                o->os16FA = 0;
+                o->oObjFC = CL_obj_nearest_object_behavior_params(bhvPowerBar, 0);
+                if (o->oObjFC == NULL) {
+                    o->activeFlags = 0;
+                }
+                sPowerButtonsPressed &= ~(1 << o->oBehParams2ndByte);
+                spawn_mist_particles();
+            }
+            break;
+    }
+}
+
+
+
+
+
+void bhv_engine_button_gate_init(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN2) {
+        o->activeFlags = 0;
+    }
+    o->oObjF4 = CL_obj_nearest_object_behavior_params(bhvPowerBar, 2 << 16);
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+    }
+}
+
+void bhv_engine_button_gate_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioCurrentRoom == o->oRoom) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
+            if (o->oObjF4->oAction != 0) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 20.0f, 20.0f);
+            if (o->oPosY == o->oHomeY) {
+                o->activeFlags = 0;
+                save_file_set_newflags(SAVE_NEW_FLAG_ENGINE_GATE_OPEN2, 0);
+                play_puzzle_jingle();
+            }
+            break;
+    }
+}
+
+
+
+
+
+
+
 void bhv_button_door_loop(void) {
     struct Object *obj;
     switch (o->oAction) {

@@ -67,6 +67,8 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_SWINGING_PLAT, big_swinging_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CRUMBLE_FLOOR, crumble_floor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POWER_PLAT, power_plat_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_POWER_BUTTON, power_button_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_POWER_BAR, power_bar_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -94,6 +96,15 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -429, 0, 1813, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -1187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1629, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_GLOBAL_GATE, 1389, 0, -1187, 0, -90, 0, 0x00000000, bhvEngineButtonGate),
+		OBJECT(MODEL_POWER_BAR, 1379, 150, -1012, 0, 0, 0, (1 << 16), bhvPowerBar),
+		OBJECT(MODEL_POWER_BAR, 1379, 100, -1012, 0, 0, 0, (2 << 16), bhvPowerBar),
+		OBJECT(MODEL_POWER_BUTTON, 303, 0, -2406, 0, 0, 0, (2 << 16), bhvPowerButton),
+		OBJECT(MODEL_POWER_BUTTON, 771, 0, -1648, 0, 0, 0, (4 << 16), bhvPowerButton),
+		OBJECT(MODEL_POWER_BUTTON, 84, 0, -535, 0, 0, 0, 0x00000000, bhvPowerButton),
+		OBJECT(MODEL_POWER_BUTTON, 1172, 0, 516, 0, 0, 0, (1 << 16), bhvPowerButton),
+		OBJECT(MODEL_POWER_BUTTON, -8, 0, 561, 0, 0, 0, (3 << 16), bhvPowerButton),
+		OBJECT(MODEL_POWER_BAR, 1379, 200, -1012, 0, 0, 0, 0x00000000, bhvPowerBar),
 		OBJECT(MODEL_POWER_DOOR, 1429, 0, 5963, 0, 0, 0, (1 << 16), bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 1429, 0, -5187, 0, 0, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_BASEMENT_SWITCH, 13050, 1180, 7121, 0, -90, 0, (0 << 16), bhvBasementSwitch),
@@ -154,7 +165,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_SECURITY_CAM, -4729, 866, 11182, 0, -180, 0, (1 << 16), bhvSecurityCam),
 		OBJECT(MODEL_SECURITY_CAM, -679, 2266, 3482, 0, 0, 0, (2 << 16), bhvSecurityCam),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4279, 0, 4832, 0, 90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_POWER_PLAT, -3779, 0, 6032, 0, 0, 0, 0x00000000, bhvPowerPlat),
+		OBJECT(MODEL_POWER_PLAT, -3779, 0, 5982, 0, 0, 0, 0x00000000, bhvPowerPlat),
 		OBJECT(MODEL_BASEMENT_SWITCH, -3929, 1729, 6532, 0, 90, 0, (3 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BOO_COIN, -5954, 877, 7957, 0, 90, 0, 0x00000000, bhvBooCoin),
 		OBJECT(MODEL_BOO_COIN, -4704, 1500, 6582, 0, 90, 0, 0x00000000, bhvBooCoin),

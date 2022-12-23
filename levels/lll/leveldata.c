@@ -130,3 +130,6 @@
 #include "levels/lll/crumble_floor/model.inc.c"
 #include "levels/lll/power_plat/model.inc.c"
 #include "levels/lll/power_plat/collision.inc.c"
+#include "levels/lll/power_button/model.inc.c"
+#include "levels/lll/power_button/collision.inc.c"
+#include "levels/lll/power_bar/model.inc.c"
