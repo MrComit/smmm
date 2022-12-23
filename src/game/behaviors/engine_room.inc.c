@@ -337,6 +337,26 @@ void bhv_power_door_loop(void) {
 }
 
 
+void bhv_power_plat_loop(void) {
+    if (o->oBehParams2ndByte) {
+        o->oAction = gLowGrav^1;
+    } else {
+        o->oAction = gLowGrav;
+    }
+    
+    power_door_update_color(gLowGrav);
+
+    switch (o->oAction) {
+        case 0:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 12.0f);
+            break;
+        case 1:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 1000.0f, 15.0f);
+            break;
+    }
+}
+
+
 void bhv_engine_gear_init(void) {
     cur_obj_update_floor_and_walls();
     o->os16F6 = random_u16();

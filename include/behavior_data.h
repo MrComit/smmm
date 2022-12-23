@@ -814,6 +814,7 @@ extern const BehaviorScript bhvBigSwingingPlat[];
 extern const BehaviorScript bhvCrumbleFloor[];
 extern const BehaviorScript bhvJumpscareShyguy[];
 extern const BehaviorScript bhvJSShyguyManager[];
+extern const BehaviorScript bhvPowerPlat[];
 
 
 #endif // BEHAVIOR_DATA_H

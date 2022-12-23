@@ -128,3 +128,5 @@
 #include "levels/lll/big_swinging_plat/collision.inc.c"
 #include "levels/lll/crumble_floor/collision.inc.c"
 #include "levels/lll/crumble_floor/model.inc.c"
+#include "levels/lll/power_plat/model.inc.c"
+#include "levels/lll/power_plat/collision.inc.c"

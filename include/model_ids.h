@@ -814,6 +814,7 @@
 #define MODEL_SAWBLADE            0xE9
 #define MODEL_BIG_SWINGING_PLAT   0xE8
 #define MODEL_CRUMBLE_FLOOR       0xE7
+#define MODEL_POWER_PLAT          0xE6
 
 
 #endif // MODEL_IDS_H

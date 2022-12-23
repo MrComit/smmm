@@ -66,6 +66,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SAWBLADE, sawblade_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_SWINGING_PLAT, big_swinging_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CRUMBLE_FLOOR, crumble_floor_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_POWER_PLAT, power_plat_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -92,8 +93,9 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3229, 0, 5963, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -429, 0, 1813, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -1187, 0, -90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_BASEMENT_SWITCH, 3079, 0, 408, 0, 0, 0, (2 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1629, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_POWER_DOOR, 1429, 0, 5963, 0, 0, 0, (1 << 16), bhvPowerDoor),
+		OBJECT(MODEL_POWER_DOOR, 1429, 0, -5187, 0, 0, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_BASEMENT_SWITCH, 13050, 1180, 7121, 0, -90, 0, (0 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BASEMENT_DRYER, 7949, 0, 13525, 0, -180, 0, (1 << 16), bhvBasementDryer),
 		OBJECT(MODEL_BASEMENT_DRYER, 13126, 1131, 11520, 0, -180, 0, (3 << 16), bhvBasementDryer),
@@ -152,6 +154,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_SECURITY_CAM, -4729, 866, 11182, 0, -180, 0, (1 << 16), bhvSecurityCam),
 		OBJECT(MODEL_SECURITY_CAM, -679, 2266, 3482, 0, 0, 0, (2 << 16), bhvSecurityCam),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4279, 0, 4832, 0, 90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_POWER_PLAT, -3779, 0, 6032, 0, 0, 0, 0x00000000, bhvPowerPlat),
 		OBJECT(MODEL_BASEMENT_SWITCH, -3929, 1729, 6532, 0, 90, 0, (3 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_BOO_COIN, -5954, 877, 7957, 0, 90, 0, 0x00000000, bhvBooCoin),
 		OBJECT(MODEL_BOO_COIN, -4704, 1500, 6582, 0, 90, 0, 0x00000000, bhvBooCoin),
@@ -186,6 +189,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_POWER_DOOR, 5449, 350, -1187, 0, 0, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 14374, 350, -212, 0, -90, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 8424, 650, 1688, 0, 180, 0, (1 << 16), bhvPowerDoor),
+		OBJECT(MODEL_BASEMENT_SWITCH, 3079, 0, 408, 0, 0, 0, (2 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_THWOMP_BLOCK, 10374, -400, -1187, 0, 0, 0, (15 << 16), bhvThwompBlock),
 		OBJECT(MODEL_THWOMP_BLOCK, 7374, 350, -1187, 0, 0, 0, (1 << 24) | (7 << 16), bhvThwompBlock),
 		OBJECT(MODEL_THWOMP_BLOCK, 11124, -400, -1187, 0, 0, 0, (15 << 16), bhvThwompBlock),

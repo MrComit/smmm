@@ -239,4 +239,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/crumble_floor/geo_header.h"
 
+#include "levels/lll/power_plat/geo_header.h"
+
+#include "levels/lll/power_plat/collision_header.h"
+
 #endif

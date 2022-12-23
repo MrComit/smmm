@@ -968,6 +968,7 @@ void bhv_thwomp_block_init(void);
 void bhv_engine_gear_loop(void);
 void bhv_engine_gear_init(void);
 void bhv_power_door_loop(void);
+void bhv_power_plat_loop(void);
 void bhv_engine_gate_init(void);
 void bhv_engine_gate_loop(void);
 void bhv_engine_small_gate_loop(void);
