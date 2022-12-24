@@ -167,10 +167,7 @@ void bhv_power_bar_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->header.gfx.scale[2] == (f32)(o->os16FA)) {
-                if (o->os16FA >= 5) {
-                    o->oAction = 1;
-                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
-                } else if (sPowerButtonsPressed == 0b11111) {
+                if (sPowerButtonsPressed == 0b11111 && (o->os16FA < 5 || o->oBehParams2ndByte != 2)) {
                     sPowerButtonsReset = TRUE;
                     o->os16FA = 0;
                     o->oAction = 0;
@@ -179,6 +176,9 @@ void bhv_power_bar_loop(void) {
                     o->oObj100->os16FA = 0;
                     o->oObj100->oAction = 0;
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                } else if (o->os16FA >= 5) {
+                    o->oAction = 1;
+                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
                 }
             }
             break;
