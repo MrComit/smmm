@@ -1000,6 +1000,8 @@ void bhv_power_bar_init(void);
 void bhv_power_bar_loop(void);
 void bhv_engine_button_gate_init(void);
 void bhv_engine_button_gate_loop(void);
+void bhv_colored_gate_init(void);
+void bhv_colored_gate_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

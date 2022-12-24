@@ -9766,3 +9766,16 @@ const BehaviorScript bhvEngineButtonGate[] = {
         CALL_NATIVE(bhv_engine_button_gate_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvColoredGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(colored_gate_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_colored_gate_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_colored_gate_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

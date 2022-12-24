@@ -818,6 +818,7 @@ extern const BehaviorScript bhvPowerPlat[];
 extern const BehaviorScript bhvPowerButton[];
 extern const BehaviorScript bhvPowerBar[];
 extern const BehaviorScript bhvEngineButtonGate[];
+extern const BehaviorScript bhvColoredGate[];
 
 
 #endif // BEHAVIOR_DATA_H

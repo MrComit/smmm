@@ -69,6 +69,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_POWER_PLAT, power_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POWER_BUTTON, power_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_POWER_BAR, power_bar_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_COLORED_GATE, colored_gate_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -100,6 +101,11 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1429, 0, -1187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1629, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_GLOBAL_GATE, 1389, 0, -1187, 0, -90, 0, 0x00000000, bhvEngineButtonGate),
+		OBJECT(MODEL_COLORED_GATE, 500, 0, -7987, 0, 0, 0, 0x00000000, bhvColoredGate),
+		OBJECT(MODEL_COLORED_GATE, 500, 0, -8487, 0, 0, 0, (1 << 16), bhvColoredGate),
+		OBJECT(MODEL_COLORED_GATE, 500, 0, -8987, 0, 0, 0, (2 << 16), bhvColoredGate),
+		OBJECT(MODEL_COLORED_GATE, 500, 0, -9487, 0, 0, 0, (3 << 16), bhvColoredGate),
+		OBJECT(MODEL_COLORED_GATE, 500, 0, -9987, 0, 0, 0, (4 << 16), bhvColoredGate),
 		OBJECT(MODEL_POWER_BAR, 1379, 150, -1012, 0, 0, 0, (1 << 16), bhvPowerBar),
 		OBJECT(MODEL_POWER_BAR, 1379, 100, -1012, 0, 0, 0, (2 << 16), bhvPowerBar),
 		OBJECT(MODEL_POWER_BUTTON, 1021, 0, -2799, 0, -90, 0, (2 << 16), bhvPowerButton),
@@ -157,7 +163,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_LEG_PRESS, -5807, 2000, -10263, 0, 0, 0, (1 << 24) | (1 << 16), bhvLegPress),
 		OBJECT(MODEL_LEG_PRESS, -3475, 0, 2216, 0, 90, 0, (1 << 16), bhvLegPress),
 		OBJECT(MODEL_POWER_DOOR, -4529, 2000, 1173, 0, 0, 0, 0x00000000, bhvButtonDoor),
-		OBJECT(MODEL_BASEMENT_SWITCH, -4829, 2000, 1173, 0, -90, 0, (1 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_BASEMENT_SWITCH, -4829, 2000, 1173, 0, -90, 0, (2 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_TOKEN, -5807, 2211, -10853, 0, 0, 0, (1 << 16) | (0x28 << 8), bhvToken),
 		OBJECT(MODEL_TOKEN, -3922, 2256, -4183, 0, 0, 0, (1 << 16) | (0x29 << 8), bhvToken),
 		OBJECT(MODEL_CELLAR_BLOCKADE, -2223, 140, 6944, 0, 0, 0, 0x00000000, bhvCellarBlockade),
@@ -203,7 +209,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_POWER_DOOR, 5449, 350, -1187, 0, 0, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 14374, 350, -212, 0, -90, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 8424, 650, 1688, 0, 180, 0, (1 << 16), bhvPowerDoor),
-		OBJECT(MODEL_BASEMENT_SWITCH, 3079, 0, 408, 0, 0, 0, (2 << 16), bhvBasementSwitch),
+		OBJECT(MODEL_BASEMENT_SWITCH, 3079, 0, 408, 0, 0, 0, (1 << 16), bhvBasementSwitch),
 		OBJECT(MODEL_THWOMP_BLOCK, 10374, -400, -1187, 0, 0, 0, (15 << 16), bhvThwompBlock),
 		OBJECT(MODEL_THWOMP_BLOCK, 7374, 350, -1187, 0, 0, 0, (1 << 24) | (7 << 16), bhvThwompBlock),
 		OBJECT(MODEL_THWOMP_BLOCK, 11124, -400, -1187, 0, 0, 0, (15 << 16), bhvThwompBlock),

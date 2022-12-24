@@ -817,6 +817,7 @@
 #define MODEL_POWER_PLAT          0xE6
 #define MODEL_POWER_BUTTON        0xE5
 #define MODEL_POWER_BAR           0xE4
+#define MODEL_COLORED_GATE        0xE3
 
 
 #endif // MODEL_IDS_H

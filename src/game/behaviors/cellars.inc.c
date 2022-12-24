@@ -12,6 +12,36 @@ Vec3s sBasementSwitchCols[5] = {
 };
 
 
+void bhv_colored_gate_init(void) {
+    o->os16F4 = sBasementSwitchCols[o->oBehParams2ndByte][0];
+    o->os16F6 = sBasementSwitchCols[o->oBehParams2ndByte][1];
+    o->os16F8 = sBasementSwitchCols[o->oBehParams2ndByte][2];
+    if (save_file_get_newflags(0) & (SAVE_NEW_FLAG_BASEMENT_SWITCH1 << o->oBehParams2ndByte)) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_colored_gate_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (save_file_get_newflags(0) & (SAVE_NEW_FLAG_BASEMENT_SWITCH1 << o->oBehParams2ndByte)) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 600.0f, 30.0f);
+            if (o->oPosY == o->oHomeY + 600.0f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+
+
 void bhv_basement_switch_init(void) {
     o->os16F4 = sBasementSwitchCols[o->oBehParams2ndByte][0];
     o->os16F6 = sBasementSwitchCols[o->oBehParams2ndByte][1];

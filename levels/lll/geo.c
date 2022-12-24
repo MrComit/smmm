@@ -73,3 +73,4 @@
 #include "levels/lll/power_plat/geo.inc.c"
 #include "levels/lll/power_button/geo.inc.c"
 #include "levels/lll/power_bar/geo.inc.c"
+#include "levels/lll/colored_gate/geo.inc.c"

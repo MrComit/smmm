@@ -249,4 +249,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/power_bar/geo_header.h"
 
+#include "levels/lll/colored_gate/geo_header.h"
+
+#include "levels/lll/colored_gate/collision_header.h"
+
 #endif
