@@ -27,13 +27,30 @@ void bhv_colored_gate_loop(void) {
         case 0:
             if (save_file_get_newflags(0) & (SAVE_NEW_FLAG_BASEMENT_SWITCH1 << o->oBehParams2ndByte)) {
                 o->oAction = 1;
+                vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
+                vec3f_set(gComitCutscenePosVec, o->oPosX, 484.0f, -6550.0f);
             }
             break;
         case 1:
-            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 600.0f, 30.0f);
-            if (o->oPosY == o->oHomeY + 600.0f) {
+            if (set_mario_npc_dialog(1)) {
+                gCamera->comitCutscene = 0xFF;
+                if (o->oTimer > 15) {
+                    o->oAction = 2;
+                    play_puzzle_jingle();
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            break;
+        case 2:
+            gCamera->comitCutscene = 0xFF;
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 1200.0f, 15.0f);
+            if (o->oPosY >= o->oHomeY + 600.0f) {
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            }
+            if (o->oPosY >= o->oHomeY + 1200.0f) {
                 o->activeFlags = 0;
+                set_mario_npc_dialog(0);
             }
             break;
     }

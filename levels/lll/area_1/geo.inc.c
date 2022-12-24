@@ -3,7 +3,7 @@
 const GeoLayout lll_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(9, geo_switch_area),
+		GEO_SWITCH_CASE(10, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, lll_dl_101__The_Corridor_geo),
 			GEO_BRANCH(1, lll_dl_102__Laundry_Room_geo),
@@ -13,6 +13,7 @@ const GeoLayout lll_area_1_geo[] = {
 			GEO_BRANCH(1, lll_dl_106__Meat_Locker_geo),
 			GEO_BRANCH(1, lll_dl_107__Engine_Room_geo),
 			GEO_BRANCH(1, lll_dl_108__Torture_Chamber_geo),
+			GEO_BRANCH(1, lll_dl_109__Elevator_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -36,6 +37,7 @@ const GeoLayout lll_dl_101__The_Corridor_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, lll_dl_FloorMats_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_Fog_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Hampers_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_InstantWarp_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, lll_dl_OilFloor_001_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Plant_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Plant_001_mesh_layer_4),
@@ -299,6 +301,14 @@ const GeoLayout lll_dl_108__Torture_Chamber_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_TortureChamber_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_TortureChamber_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_TortureChamberUnder_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout lll_dl_109__Elevator_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Elevator_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_InstantWarp_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
