@@ -29,6 +29,8 @@ const GeoLayout lll_dl_101__The_Corridor_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Cobwebs_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Corridor_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Meat_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Corridor_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, lll_dl_Corridor_001_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Couch_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_DeskLamp_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, lll_dl_FloorMats_mesh_layer_2),

@@ -193,7 +193,7 @@ void bhv_power_button_init(void) {
 
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN2) {
         o->oAction = 0xFF;
-        o->oPosY = o->oHomeY - 25.0f;
+        o->oPosY = o->oHomeY - 45.0f;
     }
 }
 
@@ -209,7 +209,7 @@ void bhv_power_button_loop(void) {
                     o->activeFlags = 0;
                 }
             } else {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 25.0f, 4.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 45.0f, 4.0f);
             }
             break;
         case 1:
@@ -237,7 +237,7 @@ void bhv_power_button_loop(void) {
             o->os16F4 = approach_s16_symmetric(o->os16F4, sPowerButtonCols[o->os16FA][0] / 2, 0x6);
             o->os16F6 = approach_s16_symmetric(o->os16F6, sPowerButtonCols[o->os16FA][1] / 2, 0x6);
             o->os16F8 = approach_s16_symmetric(o->os16F8, sPowerButtonCols[o->os16FA][2] / 2, 0x6);
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 25.0f, 4.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 45.0f, 4.0f);
 
             if (sPowerButtonsReset && gMarioObject->platform != o) {
                 o->oPosY = o->oHomeY;
