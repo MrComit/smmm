@@ -1,3 +1,78 @@
+static struct ObjectHitbox sGhostBullyHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 3,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 115,
+    /* height:            */ 235,
+    /* hurtboxRadius:     */ 105,
+    /* hurtboxHeight:     */ 225,
+};
+
+
+void bhv_ghost_bully_init(void) {
+    o->oForwardVel = 10.0f;
+    obj_set_hitbox(o, &sGhostBullyHitbox);
+}
+
+void bhv_ghost_bully_loop(void) {
+    switch (o->oAction) {
+        case 0: // chase
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
+            o->oFaceAngleYaw = o->oMoveAngleYaw;
+            CL_Move();
+            o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 8.0f);
+            // if (o->oTimer > 180) {
+            //     o->oAction = 1;
+            // }
+            if (o->oTimer > 180 && o->oDistanceToMario < 750.0f) {
+                o->oAction = 3;
+                o->oForwardVel = 40.0f;
+            }
+            break;
+        case 1: // start dash
+            o->oFaceAngleYaw += 0x800;
+            if (o->oTimer > 32) {
+                o->oFaceAngleYaw = o->oMoveAngleYaw;
+                o->oAction = 2;
+                o->oForwardVel = 30.0f;
+            }
+            break;
+        case 2: // dash
+            CL_Move();
+            if (o->oTimer > 45) {
+                o->oAction = 0;
+                o->oForwardVel = 10.0f;
+            }
+            break;
+        case 3: // start slam
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
+            o->oFaceAngleYaw = o->oMoveAngleYaw;
+            CL_Move();
+            o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1] + 500.0f, 30.0f);
+            if (lateral_dist_between_objects(o, gMarioObject) < 100.0f && o->oPosY > gMarioState->pos[1] + 400.0f) {
+                o->oAction = 4;
+            }
+            break;
+        case 4:
+            if (o->oTimer > 15) {
+                o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1], 0.0f, 30.0f);
+                if (o->oInteractStatus) {
+                    o->oTimer = 20;
+                } 
+                if (o->oTimer > 45) {
+                    o->oAction = 0;
+                    o->oForwardVel = 10.0f;
+                }
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
+
 void bhv_elevator_flame_spawn_loop(void) {
     struct Object *obj;
     if (o->oTimer > 45 + o->os16F4) {

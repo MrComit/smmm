@@ -821,6 +821,7 @@ extern const BehaviorScript bhvSawbladeShoot[];
 extern const BehaviorScript bhvSawbladeSpawn[];
 extern const BehaviorScript bhvElevatorFlamesSpawn[];
 extern const BehaviorScript bhvElevatorMovingFlame[];
+extern const BehaviorScript bhvGhostBully[];
 
 
 #endif // BEHAVIOR_DATA_H

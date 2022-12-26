@@ -9810,3 +9810,20 @@ const BehaviorScript bhvElevatorFlamesSpawn[] = {
         CALL_NATIVE(bhv_elevator_flame_spawn_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvGhostBully[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
+    ANIMATE(0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_ghost_bully_init),
+    SCALE(0, 200), //was 350
+    // SET_FLOAT(oForwardVel, 12),
+    SET_INT(oOpacity, 255),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_ghost_bully_loop),
+    END_LOOP(),
+};

@@ -253,4 +253,6 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/colored_gate/collision_header.h"
 
+#include "levels/lll/ghost_bully/geo_header.h"
+
 #endif

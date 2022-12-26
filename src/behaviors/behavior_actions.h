@@ -1005,6 +1005,8 @@ void bhv_colored_gate_loop(void);
 void bhv_elevator_moving_flame_loop(void);
 void bhv_elevator_moving_flame_init(void);
 void bhv_elevator_flame_spawn_loop(void);
+void bhv_ghost_bully_loop(void);
+void bhv_ghost_bully_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

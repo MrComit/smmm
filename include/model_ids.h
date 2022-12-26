@@ -818,6 +818,7 @@
 #define MODEL_POWER_BUTTON        0xE5
 #define MODEL_POWER_BAR           0xE4
 #define MODEL_COLORED_GATE        0xE3
+#define MODEL_GHOST_BULLY         0xE2
 
 
 #endif // MODEL_IDS_H

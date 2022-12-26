@@ -33,7 +33,12 @@ void bhv_dust_bunny_init(void) {
     } else {
         o->oHomeX = 849.0f;
     }
-    o->oHomeZ = 16329.0f;
+    if (o->oBehParams2ndByte != 2) {
+        o->oHomeZ = 16329.0f;
+    } else {
+        o->oHomeX = 500.0f;
+        o->oHomeZ = -12127.0f;
+    }
 }
 
 

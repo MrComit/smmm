@@ -135,3 +135,4 @@
 #include "levels/lll/power_bar/model.inc.c"
 #include "levels/lll/colored_gate/model.inc.c"
 #include "levels/lll/colored_gate/collision.inc.c"
+#include "levels/lll/ghost_bully/model.inc.c"
