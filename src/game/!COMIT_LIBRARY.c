@@ -566,3 +566,11 @@ void CL_HSVtoRGB(s32 Hue, f32 s, f32 v, s16 *red, s16 *green, s16 *blue) {
     *green = (g+m)*255;
     *blue = (b+m)*255;
 }
+
+
+f32 CL_dist_point_to_line(Vec3f point, Vec3f linePoint, s32 lineAngle) {
+    f32 m = coss(lineAngle) / sins(lineAngle);
+    f32 b = linePoint[2] - (linePoint[0] * m);
+    f32 e = absf((m * point[0]) - point[2] + b);
+    return e / sqrtf(m*m + 1);
+}

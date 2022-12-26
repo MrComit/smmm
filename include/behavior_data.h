@@ -808,8 +808,6 @@ extern const BehaviorScript bhvButtonDoor[];
 extern const BehaviorScript bhvSwingingPlat[];
 extern const BehaviorScript bhvSawbladeMove[];
 extern const BehaviorScript bhvSawbladeLine[];
-// extern const BehaviorScript bhvSawbladeShoot[];
-// extern const BehaviorScript bhvSawbladeSpawn[];
 extern const BehaviorScript bhvBigSwingingPlat[];
 extern const BehaviorScript bhvCrumbleFloor[];
 extern const BehaviorScript bhvJumpscareShyguy[];
@@ -819,6 +817,10 @@ extern const BehaviorScript bhvPowerButton[];
 extern const BehaviorScript bhvPowerBar[];
 extern const BehaviorScript bhvEngineButtonGate[];
 extern const BehaviorScript bhvColoredGate[];
+extern const BehaviorScript bhvSawbladeShoot[];
+extern const BehaviorScript bhvSawbladeSpawn[];
+extern const BehaviorScript bhvElevatorFlamesSpawn[];
+extern const BehaviorScript bhvElevatorMovingFlame[];
 
 
 #endif // BEHAVIOR_DATA_H

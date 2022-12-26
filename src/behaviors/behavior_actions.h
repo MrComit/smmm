@@ -984,9 +984,9 @@ void bhv_swinging_plat_loop(void);
 void bhv_sawblade_move_loop(void); 
 void bhv_sawblade_move_init(void);
 void bhv_sawblade_line_loop(void); 
-// void bhv_sawblade_shoot_loop(void);
-// void bhv_sawblade_shoot_init(void);
-// void bhv_sawblade_spawn_loop(void);
+void bhv_sawblade_shoot_loop(void);
+void bhv_sawblade_shoot_init(void);
+void bhv_sawblade_spawn_loop(void);
 void bhv_big_swinging_plat_loop(void);
 void bhv_big_swinging_plat_init(void);
 void bhv_crumble_floor_loop(void);
@@ -1002,6 +1002,9 @@ void bhv_engine_button_gate_init(void);
 void bhv_engine_button_gate_loop(void);
 void bhv_colored_gate_init(void);
 void bhv_colored_gate_loop(void);
+void bhv_elevator_moving_flame_loop(void);
+void bhv_elevator_moving_flame_init(void);
+void bhv_elevator_flame_spawn_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

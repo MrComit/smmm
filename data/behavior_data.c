@@ -9635,28 +9635,6 @@ const BehaviorScript bhvSawbladeLine[] = {
     END_LOOP(),
 };
 
-// const BehaviorScript bhvSawbladeShoot[] = {
-//     BEGIN(OBJ_LIST_GENACTOR),
-//     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-//     SET_HOME(),
-//     CALL_NATIVE(bhv_sawblade_shoot_init),
-//     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 100, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
-//     BEGIN_LOOP(),
-//         CALL_NATIVE(bhv_sawblade_shoot_loop),
-//     END_LOOP(),
-// };
-
-// const BehaviorScript bhvSawbladeSpawn[] = {
-//     BEGIN(OBJ_LIST_GENACTOR),
-//     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-//     SET_HOME(),
-//     // CALL_NATIVE(bhv_sawblade_spawn_init),
-//     BEGIN_LOOP(),
-//         CALL_NATIVE(bhv_sawblade_spawn_loop),
-//     END_LOOP(),
-// };
-
-
 
 const BehaviorScript bhvBigSwingingPlat[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -9777,5 +9755,58 @@ const BehaviorScript bhvColoredGate[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_colored_gate_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvSawbladeShoot[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_sawblade_shoot_init),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 100, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_shoot_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvSawbladeSpawn[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_sawblade_spawn_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_sawblade_spawn_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvElevatorMovingFlame[] =  {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 500), // was 640
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oGraphYOffset, 50),
+    CALL_NATIVE(bhv_elevator_moving_flame_init),
+    BEGIN_LOOP(),
+        SET_INT(oInteractStatus, 0),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        CALL_NATIVE(bhv_elevator_moving_flame_loop),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvElevatorFlamesSpawn[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_sawblade_spawn_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_elevator_flame_spawn_loop),
     END_LOOP(),
 };
