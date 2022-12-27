@@ -71,6 +71,9 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_POWER_BAR, power_bar_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_COLORED_GATE, colored_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOST_BULLY, ghost_bully_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_WALL_GOOMBA, wall_goomba_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_WALL_HAMMERBRO, wall_hammerbro_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_HAMMER, hammer_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -269,6 +272,8 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, 0x00000000, bhvSnufit),
+		OBJECT(MODEL_WALL_GOOMBA, 690, -3000, -13387, 0, 0, 0, 0x00000000, bhvWallGoomba),
+		OBJECT(MODEL_WALL_HAMMERBRO, 162, -3000, -13387, 0, 0, 0, 0x00000000, bhvWallHammerBro),
 		TERRAIN(lll_area_1_collision),
 		ROOMS(lll_area_1_collision_rooms),
 		MACRO_OBJECTS(lll_area_1_macro_objs),

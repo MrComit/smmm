@@ -75,3 +75,6 @@
 #include "levels/lll/power_bar/geo.inc.c"
 #include "levels/lll/colored_gate/geo.inc.c"
 #include "levels/lll/ghost_bully/geo.inc.c"
+#include "levels/lll/wall_goomba/geo.inc.c"
+#include "levels/lll/wall_hammerbro/geo.inc.c"
+#include "levels/lll/hammer/geo.inc.c"

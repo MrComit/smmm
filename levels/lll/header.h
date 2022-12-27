@@ -255,4 +255,10 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/ghost_bully/geo_header.h"
 
+#include "levels/lll/wall_goomba/geo_header.h"
+
+#include "levels/lll/wall_hammerbro/geo_header.h"
+
+#include "levels/lll/hammer/geo_header.h"
+
 #endif

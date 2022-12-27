@@ -821,4 +821,9 @@
 #define MODEL_GHOST_BULLY         0xE2
 
 
+// 0x97-0x9B
+#define MODEL_WALL_GOOMBA         0x97
+#define MODEL_WALL_HAMMERBRO      0x98
+#define MODEL_HAMMER              0x99
+
 #endif // MODEL_IDS_H

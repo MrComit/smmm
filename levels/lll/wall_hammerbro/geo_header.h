@@ -1,0 +1,15 @@
+extern const GeoLayout wall_hammerbro_switch_opt1[];
+extern const GeoLayout wall_hammerbro_geo[];
+extern u8 wall_hammerbro_hammerbros_nohammer_ci4[];
+extern u8 wall_hammerbro_hammerbros_nohammer_ci4_pal_rgba16[];
+extern u8 wall_hammerbro_hammerbros_hammer_ci4[];
+extern u8 wall_hammerbro_hammerbros_hammer_ci4_pal_rgba16[];
+extern Vtx wall_hammerbro_hbro_mesh_layer_6_vtx_0[4];
+extern Gfx wall_hammerbro_hbro_mesh_layer_6_tri_0[];
+extern Gfx mat_wall_hammerbro_HammerBroNoHammer[];
+extern Gfx mat_revert_wall_hammerbro_HammerBroNoHammer[];
+extern Gfx mat_wall_hammerbro_HammerBroHammer[];
+extern Gfx mat_revert_wall_hammerbro_HammerBroHammer[];
+extern Gfx wall_hammerbro_hbro_mesh_layer_6[];
+extern Gfx wall_hammerbro_hbro_mesh_layer_6_mat_override_HammerBroHammer_0[];
+extern Gfx wall_hammerbro_material_revert_render_settings[];

@@ -10,6 +10,58 @@ static struct ObjectHitbox sGhostBullyHitbox = {
     /* hurtboxHeight:     */ 225,
 };
 
+struct ObjectHitbox sHammerHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
+
+void bhv_hammer_init(void) {
+    o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
+    o->oForwardVel = 15.0f + (dist_between_objects(o, gMarioObject) / 100.0f);
+    o->oVelY = 50.0f;
+    o->oGravity = -3.0f;
+    obj_set_hitbox(o, &sHammerHitbox);
+}
+
+
+void bhv_hammer_loop(void) {
+    CL_Move();
+    o->oFaceAnglePitch += 0x1000;
+    if (o->oPosY < -3000.0f || o->oInteractStatus & INT_STATUS_INTERACTED) {
+        o->activeFlags = 0;
+        spawn_mist_particles();
+    }
+}
+
+
+void bhv_wall_goomba_loop(void) {
+
+
+}
+
+
+void bhv_wall_hammerbro_loop(void) {
+    if (o->oTimer & 0x20) {
+        o->oAnimState ^= 1;
+        o->oTimer = 0;
+    }
+    
+    if (o->oAnimState && o->oTimer == 0x10) {
+        spawn_object(o, MODEL_HAMMER, bhvHammer);
+    }
+}
+
+
+
+
 
 void bhv_ghost_bully_init(void) {
     o->oForwardVel = 10.0f;
