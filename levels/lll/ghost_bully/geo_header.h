@@ -3,7 +3,7 @@ extern const GeoLayout ghost_bully_geo[];
 extern Lights1 ghost_bully_Feet_001_lights;
 extern Lights1 ghost_bully_Horns_001_lights;
 extern Lights1 ghost_bully_Face_lights;
-extern u8 ghost_bully_bully_left_side_rgba16_ia16[];
+extern u8 ghost_bully_bully_ghost_left_side_ia8[];
 extern u8 ghost_bully_bully_horn_red_ci8[];
 extern u8 ghost_bully_bully_horn_red_ci8_pal_rgba16[];
 extern u8 ghost_bully_spooky_face_red_ci8[];

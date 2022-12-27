@@ -23,13 +23,13 @@ void bhv_ghost_bully_loop(void) {
             o->oFaceAngleYaw = o->oMoveAngleYaw;
             CL_Move();
             o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 8.0f);
-            // if (o->oTimer > 180) {
-            //     o->oAction = 1;
-            // }
-            if (o->oTimer > 180 && o->oDistanceToMario < 750.0f) {
-                o->oAction = 3;
-                o->oForwardVel = 40.0f;
+            if (o->oTimer > 180) {
+                o->oAction = 1;
             }
+            // if (o->oTimer > 180 && o->oDistanceToMario < 750.0f) {
+            //     o->oAction = 3;
+            //     o->oForwardVel = 40.0f;
+            // }
             break;
         case 1: // start dash
             o->oFaceAngleYaw += 0x800;
@@ -53,11 +53,12 @@ void bhv_ghost_bully_loop(void) {
             o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1] + 500.0f, 30.0f);
             if (lateral_dist_between_objects(o, gMarioObject) < 100.0f && o->oPosY > gMarioState->pos[1] + 400.0f) {
                 o->oAction = 4;
+                o->oFloatFC = gMarioState->pos[1];
             }
             break;
         case 4:
             if (o->oTimer > 15) {
-                o->oPosY = approach_f32(o->oPosY, gMarioState->pos[1], 0.0f, 30.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatFC, 30.0f);
                 if (o->oInteractStatus) {
                     o->oTimer = 20;
                 } 
