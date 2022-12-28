@@ -1008,6 +1008,7 @@ void bhv_elevator_flame_spawn_loop(void);
 void bhv_ghost_bully_loop(void);
 void bhv_ghost_bully_init(void);
 void bhv_wall_goomba_loop(void);
+void bhv_wall_hammerbro_init(void);
 void bhv_wall_hammerbro_loop(void);
 void bhv_hammer_init(void);
 void bhv_hammer_loop(void);

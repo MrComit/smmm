@@ -148,15 +148,15 @@ u8 wall_hammerbro_hammerbros_hammer_ci4_pal_rgba16[] = {
 	0xfe, 0x70, 0x9a, 0x41, 0x9a, 0x40, 
 };
 
-Vtx wall_hammerbro_hbro_mesh_layer_6_vtx_0[4] = {
+Vtx wall_hammerbro_hbro_mesh_layer_4_vtx_0[4] = {
 	{{{-50, 0, 0}, 0, {0, 1024}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{50, 0, 0}, 0, {512, 1024}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{50, 200, 0}, 0, {512, 0}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-50, 200, 0}, 0, {0, 0}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Gfx wall_hammerbro_hbro_mesh_layer_6_tri_0[] = {
-	gsSPVertex(wall_hammerbro_hbro_mesh_layer_6_vtx_0 + 0, 4, 0),
+Gfx wall_hammerbro_hbro_mesh_layer_4_tri_0[] = {
+	gsSPVertex(wall_hammerbro_hbro_mesh_layer_4_vtx_0 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSPEndDisplayList(),
 };
@@ -165,7 +165,7 @@ Gfx wall_hammerbro_hbro_mesh_layer_6_tri_0[] = {
 Gfx mat_wall_hammerbro_HammerBroNoHammer[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
-	gsSPGeometryMode(G_LIGHTING, 0),
+	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
 	gsDPSetTextureFilter(G_TF_POINT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
@@ -188,7 +188,7 @@ Gfx mat_wall_hammerbro_HammerBroNoHammer[] = {
 
 Gfx mat_revert_wall_hammerbro_HammerBroNoHammer[] = {
 	gsDPPipeSync(),
-	gsSPGeometryMode(0, G_LIGHTING),
+	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPSetTextureFilter(G_TF_BILERP),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
@@ -197,7 +197,7 @@ Gfx mat_revert_wall_hammerbro_HammerBroNoHammer[] = {
 Gfx mat_wall_hammerbro_HammerBroHammer[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
-	gsSPGeometryMode(G_LIGHTING, 0),
+	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
 	gsDPSetTextureFilter(G_TF_POINT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
@@ -220,22 +220,22 @@ Gfx mat_wall_hammerbro_HammerBroHammer[] = {
 
 Gfx mat_revert_wall_hammerbro_HammerBroHammer[] = {
 	gsDPPipeSync(),
-	gsSPGeometryMode(0, G_LIGHTING),
+	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPSetTextureFilter(G_TF_BILERP),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx wall_hammerbro_hbro_mesh_layer_6[] = {
+Gfx wall_hammerbro_hbro_mesh_layer_4[] = {
 	gsSPDisplayList(mat_wall_hammerbro_HammerBroNoHammer),
-	gsSPDisplayList(wall_hammerbro_hbro_mesh_layer_6_tri_0),
+	gsSPDisplayList(wall_hammerbro_hbro_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_wall_hammerbro_HammerBroNoHammer),
 	gsSPEndDisplayList(),
 };
 
-Gfx wall_hammerbro_hbro_mesh_layer_6_mat_override_HammerBroHammer_0[] = {
+Gfx wall_hammerbro_hbro_mesh_layer_4_mat_override_HammerBroHammer_0[] = {
 	gsSPDisplayList(mat_wall_hammerbro_HammerBroHammer),
-	gsSPDisplayList(wall_hammerbro_hbro_mesh_layer_6_tri_0),
+	gsSPDisplayList(wall_hammerbro_hbro_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_wall_hammerbro_HammerBroHammer),
 	gsSPEndDisplayList(),
 };

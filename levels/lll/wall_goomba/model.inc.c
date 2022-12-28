@@ -25,7 +25,7 @@ u8 wall_goomba_goomba_sprite_ci4_pal_rgba16[] = {
 	0xfe, 0x71, 
 };
 
-Vtx wall_goomba_WallGoomba_mesh_layer_6_vtx_cull[8] = {
+Vtx wall_goomba_WallGoomba_mesh_layer_4_vtx_cull[8] = {
 	{{{-50, 0, 0}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
 	{{{-50, 100, 0}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
 	{{{-50, 100, 0}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
@@ -36,15 +36,15 @@ Vtx wall_goomba_WallGoomba_mesh_layer_6_vtx_cull[8] = {
 	{{{50, 0, 0}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
 };
 
-Vtx wall_goomba_WallGoomba_mesh_layer_6_vtx_0[4] = {
+Vtx wall_goomba_WallGoomba_mesh_layer_4_vtx_0[4] = {
 	{{{-50, 0, 0}, 0, {0, 512}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{50, 0, 0}, 0, {512, 512}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{50, 100, 0}, 0, {512, 0}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{-50, 100, 0}, 0, {0, 0}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 };
 
-Gfx wall_goomba_WallGoomba_mesh_layer_6_tri_0[] = {
-	gsSPVertex(wall_goomba_WallGoomba_mesh_layer_6_vtx_0 + 0, 4, 0),
+Gfx wall_goomba_WallGoomba_mesh_layer_4_tri_0[] = {
+	gsSPVertex(wall_goomba_WallGoomba_mesh_layer_4_vtx_0 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSPEndDisplayList(),
 };
@@ -53,7 +53,7 @@ Gfx wall_goomba_WallGoomba_mesh_layer_6_tri_0[] = {
 Gfx mat_wall_goomba__2DGoomba[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
-	gsSPGeometryMode(G_LIGHTING, 0),
+	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
 	gsDPSetTextureFilter(G_TF_POINT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
@@ -76,19 +76,19 @@ Gfx mat_wall_goomba__2DGoomba[] = {
 
 Gfx mat_revert_wall_goomba__2DGoomba[] = {
 	gsDPPipeSync(),
-	gsSPGeometryMode(0, G_LIGHTING),
+	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPSetTextureFilter(G_TF_BILERP),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx wall_goomba_WallGoomba_mesh_layer_6[] = {
+Gfx wall_goomba_WallGoomba_mesh_layer_4[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(wall_goomba_WallGoomba_mesh_layer_6_vtx_cull + 0, 8, 0),
+	gsSPVertex(wall_goomba_WallGoomba_mesh_layer_4_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_wall_goomba__2DGoomba),
-	gsSPDisplayList(wall_goomba_WallGoomba_mesh_layer_6_tri_0),
+	gsSPDisplayList(wall_goomba_WallGoomba_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_wall_goomba__2DGoomba),
 	gsSPEndDisplayList(),
 };

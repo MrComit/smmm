@@ -2,6 +2,12 @@
 #define _!COMIT_LIBRARY_H
 
 
+#define CL_PRINT(x, y, z) print_text_fmt_int(80, x*20, y, z);
+
+
+
+
+
 u16 CL_RandomMinMaxU16(u16 min, u16 max);
 void CL_kill_mario();
 u8 CL_run_timer(u16 time);

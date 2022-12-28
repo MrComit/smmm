@@ -12,6 +12,7 @@
 #define o gCurrentObject
 extern s16 s8DirModeYawOffset;
 
+
 //returns random number between min and max inclusive
 u16 CL_RandomMinMaxU16(u16 min, u16 max) {
     u16 num = random_u16();

@@ -1,15 +1,4 @@
-Vtx hammer_Hammer_mesh_layer_1_vtx_cull[8] = {
-	{{{-14, -45, 27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-	{{{-14, 27, 27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-	{{{-14, 27, -27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-	{{{-14, -45, -27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-	{{{14, -45, 27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-	{{{14, 27, 27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-	{{{14, 27, -27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-	{{{14, -45, -27}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
-};
-
-Vtx hammer_Hammer_mesh_layer_1_vtx_0[24] = {
+Vtx hammer_ham_mesh_layer_1_vtx_0[24] = {
 	{{{-9, -45, 9}, 0, {368, 1008}, {0xD9, 0x9D, 0x1, 0xFF}}},
 	{{{-9, 9, 9}, 0, {624, 1008}, {0xFF, 0xB9, 0x1, 0xFF}}},
 	{{{-9, 9, -9}, 0, {624, 752}, {0xFF, 0xB9, 0x1, 0xFF}}},
@@ -36,8 +25,8 @@ Vtx hammer_Hammer_mesh_layer_1_vtx_0[24] = {
 	{{{-14, 27, 27}, 0, {880, 240}, {0x8D, 0x9A, 0x9D, 0xFF}}},
 };
 
-Gfx hammer_Hammer_mesh_layer_1_tri_0[] = {
-	gsSPVertex(hammer_Hammer_mesh_layer_1_vtx_0 + 0, 24, 0),
+Gfx hammer_ham_mesh_layer_1_tri_0[] = {
+	gsSPVertex(hammer_ham_mesh_layer_1_vtx_0 + 0, 24, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
 	gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),
@@ -67,13 +56,9 @@ Gfx mat_revert_hammer_VertColSolid_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx hammer_Hammer_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(hammer_Hammer_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
+Gfx hammer_ham_mesh_layer_1[] = {
 	gsSPDisplayList(mat_hammer_VertColSolid_001),
-	gsSPDisplayList(hammer_Hammer_mesh_layer_1_tri_0),
+	gsSPDisplayList(hammer_ham_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_hammer_VertColSolid_001),
 	gsSPEndDisplayList(),
 };
