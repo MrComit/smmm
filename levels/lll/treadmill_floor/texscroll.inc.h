@@ -1,0 +1,3 @@
+extern void scroll_treadmill_floor_tfloor_mesh_layer_4_vtx_0();
+extern void scroll_treadmill_floor_tfloor_mesh_layer_4_vtx_1();
+extern void scroll_lll_level_geo_treadmill_floor();

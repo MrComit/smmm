@@ -605,6 +605,7 @@ void bhv_teapot_spawn_loop(void);
 void bhv_room_boo_loop(void);
 void bhv_room_boo_init(void);
 void bhv_breakable_box_child_loop(void);
+void bhv_breakable_box_no_child_loop(void);
 void bhv_l1_gate_loop(void);
 void bhv_lever_loop(void);
 void bhv_lever_init(void);
@@ -1012,6 +1013,8 @@ void bhv_wall_hammerbro_init(void);
 void bhv_wall_hammerbro_loop(void);
 void bhv_hammer_init(void);
 void bhv_hammer_loop(void);
+void bhv_elevator_spawn_init(void);
+void bhv_treadmill_floor_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

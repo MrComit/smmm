@@ -139,3 +139,5 @@
 #include "levels/lll/wall_goomba/model.inc.c"
 #include "levels/lll/wall_hammerbro/model.inc.c"
 #include "levels/lll/hammer/model.inc.c"
+#include "levels/lll/treadmill_floor/model.inc.c"
+#include "levels/lll/treadmill_floor/collision.inc.c"

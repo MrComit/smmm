@@ -261,4 +261,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/hammer/geo_header.h"
 
+#include "levels/lll/treadmill_floor/geo_header.h"
+
+#include "levels/lll/treadmill_floor/collision_header.h"
+
 #endif

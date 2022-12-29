@@ -1,0 +1,13 @@
+extern const GeoLayout treadmill_floor_switch_opt1[];
+extern const GeoLayout treadmill_floor_geo[];
+extern u8 treadmill_floor_treadmill_arrow7_i8[];
+extern Vtx treadmill_floor_tfloor_mesh_layer_4_vtx_0[4];
+extern Gfx treadmill_floor_tfloor_mesh_layer_4_tri_0[];
+extern Vtx treadmill_floor_tfloor_mesh_layer_4_vtx_1[4];
+extern Gfx treadmill_floor_tfloor_mesh_layer_4_tri_1[];
+extern Gfx mat_treadmill_floor_ElevatorTreadmillRight[];
+extern Gfx mat_revert_treadmill_floor_ElevatorTreadmillRight[];
+extern Gfx mat_treadmill_floor_ElevatorTreadmillLeft[];
+extern Gfx mat_revert_treadmill_floor_ElevatorTreadmillLeft[];
+extern Gfx treadmill_floor_tfloor_mesh_layer_4[];
+extern Gfx treadmill_floor_material_revert_render_settings[];

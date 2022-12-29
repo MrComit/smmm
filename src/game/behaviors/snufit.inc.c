@@ -208,7 +208,7 @@ void bhv_snufit_balls_loop(void) {
 
             cur_obj_become_intangible();
         } else if (o->oAction == 1 
-                   || (o->oMoveFlags & (OBJ_MOVE_MASK_ON_GROUND | OBJ_MOVE_HIT_WALL))) {
+                   || (o->oMoveFlags & (OBJ_MOVE_LANDED | OBJ_MOVE_HIT_WALL))) { // was OBJ_MOVE_MASK_ON_GROUND instead of landed
             // The Snufit shot Mario and has fulfilled its lonely existance.
             //! The above check could theoretically be avoided by finding a geometric
             //! situation that does not trigger those flags (Water?). If found,

@@ -559,6 +559,7 @@ extern const BehaviorScript bhvTeapot[];
 extern const BehaviorScript bhvBlockedDoor[];
 extern const BehaviorScript bhvRoomBoo[];
 extern const BehaviorScript bhvBreakableBoxChild[];
+extern const BehaviorScript bhvBreakableBoxNoChild[];
 extern const BehaviorScript bhvL1Gate[];
 extern const BehaviorScript bhvLever[];
 extern const BehaviorScript bhvL1Book[];
@@ -825,6 +826,7 @@ extern const BehaviorScript bhvGhostBully[];
 extern const BehaviorScript bhvWallGoomba[];
 extern const BehaviorScript bhvWallHammerBro[];
 extern const BehaviorScript bhvHammer[];
+extern const BehaviorScript bhvTreadmillFloor[];
 
 
 #endif // BEHAVIOR_DATA_H

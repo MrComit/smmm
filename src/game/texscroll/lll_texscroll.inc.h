@@ -1,3 +1,4 @@
+#include "levels/lll/treadmill_floor/texscroll.inc.h"
 #include "levels/lll/wall_hammerbro/texscroll.inc.h"
 #include "levels/lll/wall_goomba/texscroll.inc.h"
 #include "levels/lll/power_bar/texscroll.inc.h"

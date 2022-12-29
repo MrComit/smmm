@@ -23,6 +23,24 @@ struct ObjectHitbox sHammerHitbox = {
 };
 
 
+enum ElevatorHazards {
+    EH_ENEMIES,      // 0x00
+    EH_FLAME,        // 0x01
+    EH_FLAME2,       // 0x02
+    EH_SAWBLADE,     // 0x03
+    EH_SLAM,         // 0x04
+    EH_WALL,         // 0x05
+    EH_WALL2,        // 0x06
+    EH_DUST,         // 0x07
+    EH_ARROW,        // 0x08
+};
+
+
+#define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
+    obj = spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g)); \
+    obj->oRoom = o->oRoom; \
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+
 void bhv_hammer_init(void) {
     o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
     o->oForwardVel = 15.0f + (dist_between_objects(o, gMarioObject) / 100.0f);
@@ -54,10 +72,12 @@ void bhv_wall_goomba_loop(void) {
         dist1 = dist2;
     }
 
-    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || dist1 < 100.0f) {
+    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || dist1 < 100.0f 
+        || cur_obj_dist_to_nearest_object_with_behavior(bhvBreakableBoxNoChild) < 150.0f) {
         o->oMoveAngleYaw += 0x8000;
         cur_obj_move_standard(0);
     }
+
     switch (o->oAction) {
         case 0:
             // if (o->oDistanceToMario < 900.0f) {
@@ -123,20 +143,20 @@ void bhv_wall_hammerbro_loop(void) {
                     o->oMoveAngleYaw += 0x8000;
                 }
                 o->oFaceAngleYaw = o->oMoveAngleYaw + 0x4000;
-                o->oForwardVel = 15.0f;
-                o->oVelY = 15.0f;
+                o->oForwardVel = 20.0f;
+                o->oVelY = 20.0f;
             }
             break;
     }
 
     dist = cur_obj_dist_to_nearest_object_with_behavior(bhvWallGoomba);
-    if (dist < 60.0f) {
+    if (dist < 80.0f) {
         o->oMoveAngleYaw += 0x8000;
         o->oFaceAngleYaw = o->oMoveAngleYaw + 0x4000;
-        do {
+        // do {
             cur_obj_move_standard(-78);
-            dist = cur_obj_dist_to_nearest_object_with_behavior(bhvWallGoomba);
-        } while (dist <= 70.0f);
+        //     dist = cur_obj_dist_to_nearest_object_with_behavior(bhvWallGoomba);
+        // } while (dist <= 70.0f);
     }
     o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 1.0f);
 
@@ -159,8 +179,64 @@ void ghost_bully_bounds_constraint(void) {
     } else if (o->oPosZ > -10937.0f) {
         o->oPosZ = -10937.0f;
     }
-
 }
+
+void ghost_bully_mario_constraint(void) {
+    struct MarioState *m = gMarioState;
+    if (m->pos[0] < -700.0f) {
+        m->pos[0] = -700.0f;
+    }
+
+    if (m->pos[2] < -13337.0f) {
+        m->pos[2] = -13337.0f;
+    }
+}
+
+
+void ghost_bully_spawn_wall_enemies(s32 left) {
+    struct Object *obj;
+
+    COMIT_OBJECT(MODEL_WALL_GOOMBA, -49, -3000, -13397, 0, 0, 0, bhvWallGoomba);
+    COMIT_OBJECT(MODEL_WALL_GOOMBA, 192, -3000, -13397, 0, 0, 0, bhvWallGoomba);
+    COMIT_OBJECT(MODEL_WALL_GOOMBA, -646, -3000, -13397, 0, 0, 0, bhvWallGoomba);
+    COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -406, -3000, -13397, 0, 0, 0, bhvWallHammerBro);
+    COMIT_OBJECT(MODEL_BREAKABLE_BOX, 500, -3000, -13437, 0, -90, 0, bhvBreakableBoxNoChild);
+
+    if (left) {
+        COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -13219, 0, 90, 0, bhvWallGoomba);
+        COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -12691, 0, 90, 0, bhvWallGoomba);
+        COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -12183, 0, 90, 0, bhvWallGoomba);
+        COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -11501, 0, 90, 0, bhvWallGoomba);
+        COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -760, -3000, -12472, 0, 90, 0, bhvWallHammerBro);
+        COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -760, -3000, -11282, 0, 90, 0, bhvWallHammerBro);
+        COMIT_OBJECT(MODEL_BREAKABLE_BOX, -800, -3000, -12976, 0, -90, 0, bhvBreakableBoxNoChild);
+        COMIT_OBJECT(MODEL_BREAKABLE_BOX, -800, -3000, -11969, 0, -90, 0, bhvBreakableBoxNoChild);
+    }
+}
+
+
+void ghost_bully_spawn_enemies(s32 dustBunnies) {
+    struct Object *obj;
+		COMIT_OBJECT(MODEL_NONE, 829, -3000, -12493, 0, 0, 0, bhvGoombaTripletSpawner);
+		COMIT_OBJECT(MODEL_NONE, -250, -2800, -13387, 0, 0, 0, bhvSawbladeSpawn);
+		COMIT_OBJECT(MODEL_NONE, 1250, -2800, -13387, 0, 0, 0, bhvSawbladeSpawn);
+		COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvSnufit);
+		COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvSnufit);
+		COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvSnufit);
+
+    if (dustBunnies) {
+		COMIT_OBJECT(MODEL_DUST_BUNNY, -420, -3000, -12445, 0, -180, 0, bhvDustBunny);
+        obj->oBehParams = 2 << 16;
+        obj->oBehParams2ndByte = 2;
+		COMIT_OBJECT(MODEL_DUST_BUNNY, 1364, -3000, -12395, 0, -180, 0, bhvDustBunny);
+        obj->oBehParams = 2 << 16;
+        obj->oBehParams2ndByte = 2;
+    }
+}
+
+
+
+
 
 
 void bhv_ghost_bully_init(void) {
@@ -169,7 +245,10 @@ void bhv_ghost_bully_init(void) {
 }
 
 void bhv_ghost_bully_loop(void) {
-    ghost_bully_bounds_constraint();
+    if (gMarioCurrentRoom == o->oRoom) {
+        ghost_bully_bounds_constraint();
+        ghost_bully_mario_constraint();
+    }
     switch (o->oAction) {
         case 0: // chase
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
@@ -223,23 +302,22 @@ void bhv_ghost_bully_loop(void) {
             break;
     }
     o->oInteractStatus = 0;
-}
-
-
-
-void bhv_elevator_flame_spawn_loop(void) {
-    struct Object *obj;
-    if (o->oTimer > 45 + o->os16F4) {
-        obj = spawn_object(o, MODEL_ENV_FLAME, bhvElevatorMovingFlame);
-        if (o->os16F6 > 15 && (random_u16() & 1)) {
-            obj->oBehParams2ndByte = 1;
-            obj->oPosX -= 2500.0f;
-        }
-        o->oTimer = 0;
-        o->os16F6++;
-        o->os16F4 = CL_RandomMinMaxU16(0, 25);
+    if (gMarioState->input & INPUT_Z_PRESSED) {
+        o->os16100 |= (1 << EH_ARROW);
+        ghost_bully_spawn_wall_enemies(0);
+        ghost_bully_spawn_enemies(1);
     }
 }
+
+
+void bhv_elevator_spawn_init(void) {
+    o->oObjF8 = cur_obj_nearest_object_with_behavior(bhvGhostBully);
+    if (o->oObjF8 == NULL) {
+        o->activeFlags = 0;
+    }
+}
+
+
 
 void bhv_elevator_moving_flame_init(void) {
     o->os16F4 = 255;
@@ -259,11 +337,49 @@ void bhv_elevator_moving_flame_loop(void) {
     }
 }
 
+void bhv_elevator_flame_spawn_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (o->oObjF8->os16100 & (1 << EH_FLAME)) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > 90 + o->os16F4) { // was 45
+                obj = spawn_object(o, MODEL_ENV_FLAME, bhvElevatorMovingFlame);
+                if (o->oObjF8->os16100 & (1 << EH_FLAME2) && (random_u16() & 1)) {
+                    obj->oBehParams2ndByte = 1;
+                    obj->oPosX -= 2500.0f;
+                }
+                o->oTimer = 0;
+                o->os16F6++;
+                o->os16F4 = CL_RandomMinMaxU16(0, 30); // was max 25
+            }
+
+            if (!(o->oObjF8->os16100 & (1 << EH_FLAME))) {
+                o->oAction = 0;
+            }
+            break;
+    }
+}
 
 void bhv_sawblade_spawn_loop(void) {
-    if (o->oTimer > 45) {
-        spawn_object(o, MODEL_SAWBLADE, bhvSawbladeShoot);
-        o->oTimer = 0;
+    switch (o->oAction) {
+        case 0:
+            if (o->oObjF8->os16100 & (1 << EH_SAWBLADE)) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > 45) {
+                spawn_object(o, MODEL_SAWBLADE, bhvSawbladeShoot);
+                o->oTimer = 0;
+            }
+            if (!(o->oObjF8->os16100 & (1 << EH_SAWBLADE))) {
+                o->oAction = 0;
+            }
+            break;
     }
 }
 
@@ -282,5 +398,22 @@ void bhv_sawblade_shoot_loop(void) {
     if (o->oInteractStatus || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oTimer > 180) {
         spawn_mist_particles();
         o->activeFlags = 0;
+    }
+}
+
+
+void bhv_treadmill_floor_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oObjF8->os16100 & (1 << EH_ARROW)) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oOpacity < 255) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x6);
+            }
+            load_object_collision_model();
+            break;
     }
 }

@@ -22,3 +22,12 @@ void bhv_breakable_box_child_loop(void) {
         o->parentObj->activeFlags = 0;
     }
 }
+
+void bhv_breakable_box_no_child_loop(void) {
+    obj_set_hitbox(o, &sBreakableBoxHitbox);
+    if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+        obj_explode_and_spawn_coins(46.0f, 1);
+        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+        o->activeFlags = 0;
+    }
+}

@@ -1776,6 +1776,22 @@ const BehaviorScript bhvBreakableBoxChild[] = {
     BREAK(),
 };
 
+
+const BehaviorScript bhvBreakableBoxNoChild[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(crate_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 70, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    CALL_NATIVE(spawn_mist_particles),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_breakable_box_no_child_loop),
+    END_LOOP(),
+    BREAK(),
+};
+
+
 const BehaviorScript bhvPushableMetalBox[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
@@ -9774,7 +9790,7 @@ const BehaviorScript bhvSawbladeSpawn[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
-    // CALL_NATIVE(bhv_sawblade_spawn_init),
+    CALL_NATIVE(bhv_elevator_spawn_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_sawblade_spawn_loop),
     END_LOOP(),
@@ -9805,7 +9821,7 @@ const BehaviorScript bhvElevatorFlamesSpawn[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
-    // CALL_NATIVE(bhv_sawblade_spawn_init),
+    CALL_NATIVE(bhv_elevator_spawn_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_elevator_flame_spawn_loop),
     END_LOOP(),
@@ -9848,6 +9864,7 @@ const BehaviorScript bhvWallHammerBro[] = {
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_wall_hammerbro_init),
+    CALL_NATIVE(spawn_mist_particles),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_wall_hammerbro_loop),
     END_LOOP(),
@@ -9863,5 +9880,20 @@ const BehaviorScript bhvHammer[] = {
     SET_INT(oIntangibleTimer, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hammer_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvTreadmillFloor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR)),
+    LOAD_COLLISION_DATA(treadmill_floor_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x4000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_elevator_spawn_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_treadmill_floor_loop),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
