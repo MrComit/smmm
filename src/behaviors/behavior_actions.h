@@ -1015,6 +1015,7 @@ void bhv_hammer_init(void);
 void bhv_hammer_loop(void);
 void bhv_elevator_spawn_init(void);
 void bhv_treadmill_floor_loop(void);
+void bhv_elevator_snufit_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

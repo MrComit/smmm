@@ -18,6 +18,19 @@ struct ObjectHitbox sSnufitHitbox = {
     /* hurtboxHeight:     */ 50,
 };
 
+struct ObjectHitbox sSnufitHitboxOneCoin = {
+    /* interactType:      */ INTERACT_HIT_FROM_BELOW,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 100,
+    /* height:            */ 60,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 50,
+};
+
+
 struct ObjectHitbox sSnufitHitboxNoCoin = {
     /* interactType:      */ INTERACT_HIT_FROM_BELOW,
     /* downOffset:        */ 0,
@@ -177,10 +190,13 @@ void bhv_snufit_loop(void) {
         }
 
         cur_obj_scale(o->oSnufitScale);
-        if (o->oBehParams2ndByte)
+        if (o->oBehParams2ndByte) {
             obj_check_attacks(&sSnufitHitboxNoCoin, o->oAction);
-        else
+        } else if (cur_obj_has_behavior(bhvElevatorSnufit)) {
+            obj_check_attacks(&sSnufitHitboxOneCoin, o->oAction);
+        } else {
             obj_check_attacks(&sSnufitHitbox, o->oAction);
+        }
     }
 }
 
@@ -220,5 +236,23 @@ void bhv_snufit_balls_loop(void) {
         cur_obj_move_standard(78);
     } else {
         cur_obj_move_using_fvel_and_gravity();
+    }
+}
+
+
+void bhv_elevator_snufit_loop(void) {
+    f32 homeY;
+    if (o->os16110 == 0) {
+        o->oPosX = o->oHomeX + 100.0f * coss(o->oSnufitCircularPeriod);
+        o->oPosZ = o->oHomeZ + 100.0f * sins(o->oSnufitCircularPeriod);
+        o->oSnufitCircularPeriod += 400;
+
+        homeY = o->oHomeY + 8.0f * coss(4000 * gGlobalTimer);
+        o->oPosY = approach_f32_symmetric(o->oPosY, homeY, 15.0f);
+        if (o->oPosY == homeY) {
+            o->os16110 = 1;
+        }
+    } else {
+        bhv_snufit_loop();
     }
 }

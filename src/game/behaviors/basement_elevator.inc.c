@@ -217,10 +217,11 @@ void ghost_bully_spawn_wall_enemies(s32 left) {
 
 void ghost_bully_spawn_enemies(s32 dustBunnies) {
     struct Object *obj;
-    COMIT_OBJECT(MODEL_NONE, 829, -3000 + 5000.0f, -12493, 0, 0, 0, bhvGoombaTripletSpawner);
-    COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvSnufit);
-    COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvSnufit);
-    COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvSnufit);
+    COMIT_OBJECT(MODEL_GOOMBA, 829, -3000 + 1000, -12493, 0, 0, 0, bhvGoomba);
+    obj->parentObj = obj;
+    COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvElevatorSnufit);
+    COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvElevatorSnufit);
+    COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvElevatorSnufit);
 
     if (dustBunnies) {
 		COMIT_OBJECT(MODEL_DUST_BUNNY, -420, -3000, -12445, 0, -180, 0, bhvDustBunny);
@@ -237,7 +238,7 @@ void ghost_bully_phases(void) {
     s32 wall2 = 0;
     struct Object *obj;
     s32 goombasDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvGoomba, o->oRoom) == NULL);
-    s32 snufitsDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvSnufit, o->oRoom) == NULL);
+    s32 snufitsDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvElevatorSnufit, o->oRoom) == NULL);
     s32 bunniesDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvDustBunny, o->oRoom) == NULL);
     s32 wallGoombasDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvWallGoomba, o->oRoom) == NULL);
     s32 wallHammerbrosDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvWallHammerBro, o->oRoom) == NULL);
@@ -248,63 +249,93 @@ void ghost_bully_phases(void) {
             break;
         case 1:
             if (o->os16104 > 25*30 || (goombasDead && snufitsDead)) {
-                o->os16102 = 2;
-                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_FLAME2);
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 2;
+                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_FLAME2);
+                }
                 // if (!goombasDead || !snufitsDead) {
                 //     kill_
                 //     obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvGoomba, o->oRoom);
                 //     while (obj != NULL) {
                 //         obj->activeFlags = 0;
                 //     }
-                //     obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvSnufit, o->oRoom);
+                //     obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvElevatorSnufit, o->oRoom);
                 //     while (obj != NULL) {
                 //         obj->activeFlags = 0;
                 //     }
                 // }
+            } else {
+                o->os16108 = 0;
             }
             break;
         case 2:
             if (o->os16104 > 20*30 || (goombasDead && snufitsDead)) {
-                o->os16102 = 3;
-                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SAWBLADE);
-                o->os16100 &= ~(1 << EH_FLAME);
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 3;
+                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SAWBLADE);
+                    o->os16100 &= ~(1 << EH_FLAME);
+                }
+            } else {
+                o->os16108 = 0;
             }
             break;
         case 3:
             if (o->os16104 > 20*30 || (goombasDead && snufitsDead)) {
-                o->os16102 = 4;
-                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SLAM);
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 4;
+                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SLAM);
+                }
+            } else {
+                o->os16108 = 0;
             }
             break;
         case 4:
             if (o->os16104 > 25*30 || (goombasDead && snufitsDead)) {
-                o->os16102 = 5;
-                o->os16100 |= (1 << EH_WALL);
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 5;
+                    o->os16100 |= (1 << EH_WALL) | (1 << EH_FLAME);
+                    o->os16100 &= ~(1 << EH_SAWBLADE);
+                }
+            } else {
+                o->os16108 = 0;
             }
             break;
         case 5:
-            if (o->os16104 > 30*30 || (wallGoombasDead && wallHammerbrosDead)) {
-                o->os16102 = 6;
-                o->os16100 |= (1 << EH_WALL2);
-                if (wallGoombasDead && wallHammerbrosDead) {
-                    o->os16100 |= (1 << EH_WALL);
+            if (wallGoombasDead && wallHammerbrosDead) {
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 6;
+                    o->os16100 |= (1 << EH_WALL2) | (1 << EH_ENEMIES);
+                    if (wallGoombasDead && wallHammerbrosDead) {
+                        o->os16100 |= (1 << EH_WALL);
+                    }
                 }
+            } else {
+                o->os16108 = 0;
             }
             break;
         case 6:
             if (o->os16104 > 30*30 || (wallGoombasDead && wallHammerbrosDead)) {
-                o->os16102 = 7;
-                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_DUST);
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 7;
+                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_DUST) | (1 << EH_SAWBLADE);
+                    o->os16100 &= ~(1 << EH_FLAME);
+                }
+            } else {
+                o->os16108 = 0;
             }
             break;
         case 7:
             if (o->os16104 > 25*30 || (goombasDead && snufitsDead && bunniesDead)) {
-                o->os16102 = 8;
-                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_ARROW);
-                // o->os16100 &= ~(1 << EH_SAWBLADE);
-                if (wallGoombasDead && wallHammerbrosDead) {
-                    o->os16100 |= (1 << EH_WALL);
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 8;
+                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_ARROW);
+                    // o->os16100 &= ~(1 << EH_SAWBLADE);
+                    if (wallGoombasDead && wallHammerbrosDead) {
+                        o->os16100 |= (1 << EH_WALL);
+                    }
                 }
+            } else {
+                o->os16108 = 0;
             }
             break;
         case 8:
@@ -323,7 +354,7 @@ void ghost_bully_phases(void) {
     }
     
     if (o->os16100 & (1 << EH_WALL)) {
-        if (o->os16100 & (1 << EH_WALL)) {
+        if (o->os16100 & (1 << EH_WALL2)) {
             wall2 = 1;
         }
         ghost_bully_spawn_wall_enemies(wall2);
@@ -349,6 +380,7 @@ void bhv_ghost_bully_loop(void) {
         ghost_bully_phases();
         if (o->os16102 != actCheck) {
             o->os16104 = 0;
+            o->os16108 = 0;
         } else {
             o->os16104++;
         }
@@ -400,7 +432,7 @@ void bhv_ghost_bully_loop(void) {
             break;
         case 4:
             if (o->oTimer > 15) {
-                o->oFloat10C = approach_f32_symmetric(o->oFloat10C, 80.0f, 4.0f);
+                o->oFloat10C = approach_f32_symmetric(o->oFloat10C, 80.0f, 8.0f);
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatFC, o->oFloat10C);
                 if (o->oInteractStatus) {
                     o->oTimer = 20;
