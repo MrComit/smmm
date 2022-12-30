@@ -217,12 +217,10 @@ void ghost_bully_spawn_wall_enemies(s32 left) {
 
 void ghost_bully_spawn_enemies(s32 dustBunnies) {
     struct Object *obj;
-		COMIT_OBJECT(MODEL_NONE, 829, -3000, -12493, 0, 0, 0, bhvGoombaTripletSpawner);
-		COMIT_OBJECT(MODEL_NONE, -250, -2800, -13387, 0, 0, 0, bhvSawbladeSpawn);
-		COMIT_OBJECT(MODEL_NONE, 1250, -2800, -13387, 0, 0, 0, bhvSawbladeSpawn);
-		COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvSnufit);
-		COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvSnufit);
-		COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvSnufit);
+    COMIT_OBJECT(MODEL_NONE, 829, -3000 + 5000.0f, -12493, 0, 0, 0, bhvGoombaTripletSpawner);
+    COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvSnufit);
+    COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvSnufit);
+    COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvSnufit);
 
     if (dustBunnies) {
 		COMIT_OBJECT(MODEL_DUST_BUNNY, -420, -3000, -12445, 0, -180, 0, bhvDustBunny);
@@ -235,6 +233,105 @@ void ghost_bully_spawn_enemies(s32 dustBunnies) {
 }
 
 
+void ghost_bully_phases(void) {
+    s32 wall2 = 0;
+    struct Object *obj;
+    s32 goombasDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvGoomba, o->oRoom) == NULL);
+    s32 snufitsDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvSnufit, o->oRoom) == NULL);
+    s32 bunniesDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvDustBunny, o->oRoom) == NULL);
+    s32 wallGoombasDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvWallGoomba, o->oRoom) == NULL);
+    s32 wallHammerbrosDead = (CL_obj_find_nearest_object_with_behavior_room(o, bhvWallHammerBro, o->oRoom) == NULL);
+    switch (o->os16102) {
+        case 0:
+            o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_FLAME);
+            o->os16102 = 1;
+            break;
+        case 1:
+            if (o->os16104 > 25*30 || (goombasDead && snufitsDead)) {
+                o->os16102 = 2;
+                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_FLAME2);
+                // if (!goombasDead || !snufitsDead) {
+                //     kill_
+                //     obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvGoomba, o->oRoom);
+                //     while (obj != NULL) {
+                //         obj->activeFlags = 0;
+                //     }
+                //     obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvSnufit, o->oRoom);
+                //     while (obj != NULL) {
+                //         obj->activeFlags = 0;
+                //     }
+                // }
+            }
+            break;
+        case 2:
+            if (o->os16104 > 20*30 || (goombasDead && snufitsDead)) {
+                o->os16102 = 3;
+                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SAWBLADE);
+                o->os16100 &= ~(1 << EH_FLAME);
+            }
+            break;
+        case 3:
+            if (o->os16104 > 20*30 || (goombasDead && snufitsDead)) {
+                o->os16102 = 4;
+                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SLAM);
+            }
+            break;
+        case 4:
+            if (o->os16104 > 25*30 || (goombasDead && snufitsDead)) {
+                o->os16102 = 5;
+                o->os16100 |= (1 << EH_WALL);
+            }
+            break;
+        case 5:
+            if (o->os16104 > 30*30 || (wallGoombasDead && wallHammerbrosDead)) {
+                o->os16102 = 6;
+                o->os16100 |= (1 << EH_WALL2);
+                if (wallGoombasDead && wallHammerbrosDead) {
+                    o->os16100 |= (1 << EH_WALL);
+                }
+            }
+            break;
+        case 6:
+            if (o->os16104 > 30*30 || (wallGoombasDead && wallHammerbrosDead)) {
+                o->os16102 = 7;
+                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_DUST);
+            }
+            break;
+        case 7:
+            if (o->os16104 > 25*30 || (goombasDead && snufitsDead && bunniesDead)) {
+                o->os16102 = 8;
+                o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_ARROW);
+                // o->os16100 &= ~(1 << EH_SAWBLADE);
+                if (wallGoombasDead && wallHammerbrosDead) {
+                    o->os16100 |= (1 << EH_WALL);
+                }
+            }
+            break;
+        case 8:
+            if (goombasDead && snufitsDead && bunniesDead && wallGoombasDead && wallHammerbrosDead) {
+                o->os16102 = 9;
+                o->os16100 &= ~((1 << EH_ARROW) | (1 << EH_SAWBLADE));
+            }
+            break;
+        case 9:
+            break;
+    }
+
+    if (o->os16100 & (1 << EH_ENEMIES)) {
+        ghost_bully_spawn_enemies(o->os16100 & (1 << EH_DUST));
+        o->os16100 &= ~(1 << EH_ENEMIES);
+    }
+    
+    if (o->os16100 & (1 << EH_WALL)) {
+        if (o->os16100 & (1 << EH_WALL)) {
+            wall2 = 1;
+        }
+        ghost_bully_spawn_wall_enemies(wall2);
+        o->os16100 &= ~(1 << EH_WALL);
+    }
+
+}
+
 
 
 
@@ -245,9 +342,16 @@ void bhv_ghost_bully_init(void) {
 }
 
 void bhv_ghost_bully_loop(void) {
+    s16 actCheck = o->os16102;
     if (gMarioCurrentRoom == o->oRoom) {
         ghost_bully_bounds_constraint();
         ghost_bully_mario_constraint();
+        ghost_bully_phases();
+        if (o->os16102 != actCheck) {
+            o->os16104 = 0;
+        } else {
+            o->os16104++;
+        }
     }
     switch (o->oAction) {
         case 0: // chase
@@ -255,8 +359,14 @@ void bhv_ghost_bully_loop(void) {
             o->oFaceAngleYaw = o->oMoveAngleYaw;
             CL_Move();
             o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 8.0f);
-            if (o->oTimer > 180) {
-                o->oAction = 1;
+            if (o->oTimer > 180 + o->os16106) {
+                o->os16106 = CL_RandomMinMaxU16(0, 45);
+                if (o->os16100 & (1 << EH_SLAM) && (random_u16() & 1) && o->oDistanceToMario < 750.0f) {
+                    o->oAction = 3;
+                    o->oForwardVel = 40.0f;
+                } else {
+                    o->oAction = 1;
+                }
             }
             // if (o->oTimer > 180 && o->oDistanceToMario < 750.0f) {
             //     o->oAction = 3;
@@ -290,23 +400,25 @@ void bhv_ghost_bully_loop(void) {
             break;
         case 4:
             if (o->oTimer > 15) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatFC, 30.0f);
+                o->oFloat10C = approach_f32_symmetric(o->oFloat10C, 80.0f, 4.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatFC, o->oFloat10C);
                 if (o->oInteractStatus) {
                     o->oTimer = 20;
                 } 
                 if (o->oTimer > 45) {
                     o->oAction = 0;
+                    o->oFloat10C = 0.0f;
                     o->oForwardVel = 10.0f;
                 }
             }
             break;
     }
     o->oInteractStatus = 0;
-    if (gMarioState->input & INPUT_Z_PRESSED) {
-        o->os16100 |= (1 << EH_ARROW);
-        ghost_bully_spawn_wall_enemies(0);
-        ghost_bully_spawn_enemies(1);
-    }
+    // if (gMarioState->input & INPUT_Z_PRESSED) {
+    //     o->os16100 |= (1 << EH_ARROW);
+    //     ghost_bully_spawn_wall_enemies(0);
+    //     ghost_bully_spawn_enemies(1);
+    // }
 }
 
 
@@ -414,6 +526,18 @@ void bhv_treadmill_floor_loop(void) {
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x6);
             }
             load_object_collision_model();
+            if (!(o->oObjF8->os16100 & (1 << EH_ARROW))) {
+                o->oAction = 2;
+            }
             break;
+        case 2:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x8);
+            if (o->oOpacity > 100) {
+                load_object_collision_model();
+            } else if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+
     }
 }
