@@ -79,3 +79,4 @@
 #include "levels/lll/wall_hammerbro/geo.inc.c"
 #include "levels/lll/hammer/geo.inc.c"
 #include "levels/lll/treadmill_floor/geo.inc.c"
+#include "levels/lll/elevator_door/geo.inc.c"

@@ -32,6 +32,7 @@
 #include "levels/bbh/header.inc.h"
 #include "levels/lll/header.h"
 #include "save_file.h"
+#include "src/game/tile_scroll.h"
 
 extern Mtx *gMatStackFixed[32];
 extern s16 gMatStackIndex;
@@ -1266,6 +1267,59 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
 
     return dlStart;
 }
+
+Vec3s sElevatorColor = {0xCB, 0x94, 0x29};
+
+void reverse_scroll_sts_mat_lll_dl_ElevatorPillars() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorPillars);
+	shift_s_down(mat, 11, PACK_TILESIZE(0, -45));
+};
+
+void reverse_scroll_sts_mat_lll_dl_ElevatorBG() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorBG);
+	shift_t_down(mat, 18, PACK_TILESIZE(0, -25));
+};
+
+Gfx *geo_set_elevator_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    struct Object *obj, *obj2;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+
+        dlHead = dlStart;
+        currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        obj2 = gCurrentObject;
+        gCurrentObject = gMarioObject;
+        obj = cur_obj_nearest_object_with_behavior(bhvGhostBully);
+        gCurrentObject = obj2;
+        if (obj == NULL || obj->oAction == 0) {
+            sElevatorColor[0] = approach_s16_symmetric(sElevatorColor[0], 0xCB, 0x4);
+            sElevatorColor[1] = approach_s16_symmetric(sElevatorColor[1], 0x94, 0x4);
+            sElevatorColor[2] = approach_s16_symmetric(sElevatorColor[2], 0x29, 0x4);
+            reverse_scroll_sts_mat_lll_dl_ElevatorPillars();
+            reverse_scroll_sts_mat_lll_dl_ElevatorBG();
+        } else {
+            sElevatorColor[0] = approach_s16_symmetric(sElevatorColor[0], 0x8B, 0x4);
+            sElevatorColor[1] = approach_s16_symmetric(sElevatorColor[1], 0x30, 0x4);
+            sElevatorColor[2] = approach_s16_symmetric(sElevatorColor[2], 0x1C, 0x4);
+        }
+            gDPSetEnvColor(dlHead++, sElevatorColor[0], sElevatorColor[1], sElevatorColor[2], 255);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
+
+
+
+
 
 Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     struct Object *objectGraphNode;

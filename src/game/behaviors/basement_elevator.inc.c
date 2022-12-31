@@ -4,10 +4,10 @@ static struct ObjectHitbox sGhostBullyHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 3,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 115,
-    /* height:            */ 235,
-    /* hurtboxRadius:     */ 105,
-    /* hurtboxHeight:     */ 225,
+    /* radius:            */ 70,
+    /* height:            */ 180,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 180,
 };
 
 struct ObjectHitbox sHammerHitbox = {
@@ -42,6 +42,65 @@ enum ElevatorHazards {
     obj = spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g)); \
     obj->oRoom = o->oRoom; \
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+
+
+
+void bhv_elevator_door_init(void) {
+    if (lateral_dist_between_objects(o, gMarioObject) < 500.0f || o->oBehParams2ndByte) {
+        o->oAction = 1;
+        o->oPosY = o->oHomeY + 400.0f;
+        o->header.gfx.scale[2] = 0.8f;
+    }
+}
+
+void bhv_elevator_door_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            cur_obj_unhide();
+            o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], 1.0f, 0.02f);
+            if (o->oPosY != o->oHomeY) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            }
+            if (o->oBehParams2ndByte) {
+                if (cur_obj_nearest_object_with_behavior(bhvGhostBully) == NULL) {
+                    o->oAction = 1;
+                }
+            } else {
+                if (o->oDistanceToMario < 500.0f) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], 0.8f, 0.02f);
+            if (o->oPosY != o->oHomeY + 400.0f) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 400.0f, 15.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            } else {
+                cur_obj_hide();
+            }
+
+            if (o->oBehParams2ndByte) {
+                if (cur_obj_nearest_object_with_behavior(bhvGhostBully) != NULL) {
+                    o->oAction = 0;
+                }
+            } else {
+                if (o->oDistanceToMario > 800.0f) {
+                    o->oAction = 0;
+                }
+            }
+            break;
+    }
+}
+
+
+
+
+
+
+
+
 
 void bhv_hammer_init(void) {
     o->oMoveAngleYaw = obj_angle_to_object(o, gMarioObject);
@@ -204,8 +263,8 @@ void ghost_bully_spawn_wall_enemies(s32 left) {
 
     if (!left) {
         COMIT_OBJECT(MODEL_WALL_GOOMBA, -49, -3000, -13397, 0, 0, 0, bhvWallGoomba);
+        COMIT_OBJECT(MODEL_WALL_GOOMBA, 192, -3000, -13397, 0, 0, 0, bhvWallGoomba);
     }
-    COMIT_OBJECT(MODEL_WALL_GOOMBA, 192, -3000, -13397, 0, 0, 0, bhvWallGoomba);
     COMIT_OBJECT(MODEL_WALL_GOOMBA, -646, -3000, -13397, 0, 0, 0, bhvWallGoomba);
     obj2 = COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -406, -3000, -13397, 0, 0, 0, bhvWallHammerBro);
     COMIT_OBJECT(MODEL_BREAKABLE_BOX, 500, -3000, -13437, 0, -90, 0, bhvBreakableBoxNoChild);
@@ -390,9 +449,11 @@ void bhv_ghost_bully_loop(void) {
             o->os16104++;
         }
     }
+    obj_set_hitbox(o, &sGhostBullyHitbox);
     switch (o->oAction) {
         case 0:
-            o->oAction = 1;
+            if (o->oTimer > 90)
+                o->oAction = 1;
             break;
         case 1: // chase
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);

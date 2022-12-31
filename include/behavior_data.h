@@ -828,6 +828,7 @@ extern const BehaviorScript bhvWallHammerBro[];
 extern const BehaviorScript bhvHammer[];
 extern const BehaviorScript bhvTreadmillFloor[];
 extern const BehaviorScript bhvElevatorSnufit[];
+extern const BehaviorScript bhvElevatorDoor[];
 
 
 #endif // BEHAVIOR_DATA_H

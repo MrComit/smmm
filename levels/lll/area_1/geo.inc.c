@@ -307,7 +307,11 @@ const GeoLayout lll_dl_108__Torture_Chamber_geo[] = {
 const GeoLayout lll_dl_109__Elevator_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_ASM(0, geo_set_elevator_color_env),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_AAAElevator_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Elevator_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, lll_dl_Elevator_001_mesh_layer_2),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_ElevatorBG_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_InstantWarp_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_StuccoWall_mesh_layer_1),
 	GEO_CLOSE_NODE(),

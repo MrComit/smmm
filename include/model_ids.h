@@ -826,5 +826,6 @@
 #define MODEL_WALL_HAMMERBRO      0x98
 #define MODEL_HAMMER              0x99
 #define MODEL_TREADMILL_FLOOR     0x9A
+#define MODEL_ELEVATOR_DOOR       0x9B
 
 #endif // MODEL_IDS_H
