@@ -9802,7 +9802,7 @@ const BehaviorScript bhvElevatorMovingFlame[] =  {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BILLBOARD(),
     SET_HOME(),
-    SCALE(/*Unused*/ 0, /*Field*/ 500), // was 640
+    SCALE(/*Unused*/ 0, /*Field*/ 650), // was 640
     SET_INTERACT_TYPE(INTERACT_FLAME),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
     SET_INT(oIntangibleTimer, 0),
@@ -9864,7 +9864,6 @@ const BehaviorScript bhvWallHammerBro[] = {
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_wall_hammerbro_init),
-    CALL_NATIVE(spawn_mist_particles),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_wall_hammerbro_loop),
     END_LOOP(),

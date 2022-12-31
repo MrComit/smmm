@@ -27,12 +27,14 @@ enum ElevatorHazards {
     EH_ENEMIES,      // 0x00
     EH_FLAME,        // 0x01
     EH_FLAME2,       // 0x02
-    EH_SAWBLADE,     // 0x03
-    EH_SLAM,         // 0x04
-    EH_WALL,         // 0x05
-    EH_WALL2,        // 0x06
-    EH_DUST,         // 0x07
-    EH_ARROW,        // 0x08
+    EH_FLAMEFAST,    // 0x03
+    EH_SAWBLADE,     // 0x04
+    EH_SLAM,         // 0x05
+    EH_WALL,         // 0x06
+    EH_WALL2,        // 0x07
+    EH_DUST,         // 0x08
+    EH_ARROW,        // 0x09
+    EH_SPECIAL,      // 0x0A
 };
 
 
@@ -101,11 +103,17 @@ void bhv_wall_goomba_loop(void) {
 
 void bhv_wall_hammerbro_init(void) {
     o->oMoveAngleYaw = o->oFaceAngleYaw - 0x4000;
+    if (cur_obj_has_model(MODEL_WALL_HAMMERBRO) && o->oObjFC != NULL) {
+        vec3f_copy(&o->oFloat100, &o->oObjFC->oPosX);
+        // o->os16100 = obj_angle_to_object(o, o->oObjFC);
+        spawn_mist_particles();
+    }
 }
 
 
 void bhv_wall_hammerbro_loop(void) {
     f32 dist;
+    s16 pitch, yaw;
     if (o->os16F4++ & 0x20) {
         o->oAnimState ^= 1;
         o->os16F4 = 0;
@@ -120,7 +128,7 @@ void bhv_wall_hammerbro_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 700.0f) {
+            if (o->oObjFC == NULL || o->oObjFC->activeFlags == 0) {
                 o->oAction = 1;
             }
             if ((o->oTimer & 0x1F) == 0) {
@@ -135,11 +143,9 @@ void bhv_wall_hammerbro_loop(void) {
 
             break;
         case 1:
-            if (o->oDistanceToMario > 850.0f) {
-                o->oAction = 0;
-            }
             if ((o->oTimer & 0xF) == 0) {
-                if (absi((o->oMoveAngleYaw & 0xFFFF) - (u16)o->oAngleToMario) > 0x4000) {
+                vec3f_get_dist_and_angle(&o->oPosX, &o->oFloat100, &dist, &pitch, &yaw);
+                if (absi((o->oMoveAngleYaw & 0xFFFF) - (u16)yaw) > 0x4000) {
                     o->oMoveAngleYaw += 0x8000;
                 }
                 o->oFaceAngleYaw = o->oMoveAngleYaw + 0x4000;
@@ -194,23 +200,28 @@ void ghost_bully_mario_constraint(void) {
 
 
 void ghost_bully_spawn_wall_enemies(s32 left) {
-    struct Object *obj;
+    struct Object *obj, *obj2;
 
-    COMIT_OBJECT(MODEL_WALL_GOOMBA, -49, -3000, -13397, 0, 0, 0, bhvWallGoomba);
+    if (!left) {
+        COMIT_OBJECT(MODEL_WALL_GOOMBA, -49, -3000, -13397, 0, 0, 0, bhvWallGoomba);
+    }
     COMIT_OBJECT(MODEL_WALL_GOOMBA, 192, -3000, -13397, 0, 0, 0, bhvWallGoomba);
     COMIT_OBJECT(MODEL_WALL_GOOMBA, -646, -3000, -13397, 0, 0, 0, bhvWallGoomba);
-    COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -406, -3000, -13397, 0, 0, 0, bhvWallHammerBro);
+    obj2 = COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -406, -3000, -13397, 0, 0, 0, bhvWallHammerBro);
     COMIT_OBJECT(MODEL_BREAKABLE_BOX, 500, -3000, -13437, 0, -90, 0, bhvBreakableBoxNoChild);
+    obj2->oObjFC = obj;
 
     if (left) {
-        COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -13219, 0, 90, 0, bhvWallGoomba);
-        COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -12691, 0, 90, 0, bhvWallGoomba);
+        // COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -13219, 0, 90, 0, bhvWallGoomba);
+        // COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -12691, 0, 90, 0, bhvWallGoomba);
         COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -12183, 0, 90, 0, bhvWallGoomba);
         COMIT_OBJECT(MODEL_WALL_GOOMBA, -760, -3000, -11501, 0, 90, 0, bhvWallGoomba);
-        COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -760, -3000, -12472, 0, 90, 0, bhvWallHammerBro);
-        COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -760, -3000, -11282, 0, 90, 0, bhvWallHammerBro);
+        obj2 = COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -760, -3000, -12472, 0, 90, 0, bhvWallHammerBro);
         COMIT_OBJECT(MODEL_BREAKABLE_BOX, -800, -3000, -12976, 0, -90, 0, bhvBreakableBoxNoChild);
+        obj2->oObjFC = obj;
+        obj2 = COMIT_OBJECT(MODEL_WALL_HAMMERBRO, -760, -3000, -11282, 0, 90, 0, bhvWallHammerBro);
         COMIT_OBJECT(MODEL_BREAKABLE_BOX, -800, -3000, -11969, 0, -90, 0, bhvBreakableBoxNoChild);
+        obj2->oObjFC = obj;
     }
 }
 
@@ -221,7 +232,9 @@ void ghost_bully_spawn_enemies(s32 dustBunnies) {
     obj->parentObj = obj;
     COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvElevatorSnufit);
     COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvElevatorSnufit);
-    COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvElevatorSnufit);
+    if (!dustBunnies) {
+        COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvElevatorSnufit);
+    }
 
     if (dustBunnies) {
 		COMIT_OBJECT(MODEL_DUST_BUNNY, -420, -3000, -12445, 0, -180, 0, bhvDustBunny);
@@ -269,11 +282,12 @@ void ghost_bully_phases(void) {
             }
             break;
         case 2:
-            if (o->os16104 > 20*30 || (goombasDead && snufitsDead)) {
-                if (o->os16108++ > 2*30) {
+            if (o->os16104 > 10*30 || (goombasDead && snufitsDead)) {
+                o->os16100 |= (1 << EH_FLAMEFAST) | (1 << EH_SPECIAL);;
+                if (o->os16108++ > 10*30) {
                     o->os16102 = 3;
                     o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SAWBLADE);
-                    o->os16100 &= ~(1 << EH_FLAME);
+                    // o->os16100 &= ~(1 << EH_FLAME);
                 }
             } else {
                 o->os16108 = 0;
@@ -281,70 +295,61 @@ void ghost_bully_phases(void) {
             break;
         case 3:
             if (o->os16104 > 20*30 || (goombasDead && snufitsDead)) {
-                if (o->os16108++ > 2*30) {
+                o->os16100 |= (1 << EH_SLAM);
+                if (o->os16108++ > 5*30) {
                     o->os16102 = 4;
-                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SLAM);
-                }
-            } else {
-                o->os16108 = 0;
-            }
-            break;
-        case 4:
-            if (o->os16104 > 25*30 || (goombasDead && snufitsDead)) {
-                if (o->os16108++ > 2*30) {
-                    o->os16102 = 5;
-                    o->os16100 |= (1 << EH_WALL) | (1 << EH_FLAME);
+                    o->os16100 |= (1 << EH_WALL);
                     o->os16100 &= ~(1 << EH_SAWBLADE);
                 }
             } else {
                 o->os16108 = 0;
             }
             break;
-        case 5:
+        case 4:
             if (wallGoombasDead && wallHammerbrosDead) {
                 if (o->os16108++ > 2*30) {
-                    o->os16102 = 6;
-                    o->os16100 |= (1 << EH_WALL2) | (1 << EH_ENEMIES);
-                    if (wallGoombasDead && wallHammerbrosDead) {
-                        o->os16100 |= (1 << EH_WALL);
-                    }
-                }
-            } else {
-                o->os16108 = 0;
-            }
-            break;
-        case 6:
-            if (o->os16104 > 30*30 || (wallGoombasDead && wallHammerbrosDead)) {
-                if (o->os16108++ > 2*30) {
-                    o->os16102 = 7;
-                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_DUST) | (1 << EH_SAWBLADE);
+                    o->os16102 = 5;
+                    o->os16100 |= (1 << EH_WALL) | (1 << EH_WALL2) | (1 << EH_ENEMIES) | (1 << EH_ARROW) | (1 << EH_SAWBLADE);
                     o->os16100 &= ~(1 << EH_FLAME);
                 }
             } else {
                 o->os16108 = 0;
             }
             break;
-        case 7:
+        case 5:
+            if (o->os16104 > 30*30 || (wallGoombasDead && wallHammerbrosDead)) {
+                if (o->os16108++ > 2*30) {
+                    o->os16102 = 6;
+                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_DUST) | (1 << EH_FLAME);
+                    o->os16100 &= ~(1 << EH_SAWBLADE);
+                }
+            } else {
+                o->os16108 = 0;
+            }
+            break;
+        case 6:
             if (o->os16104 > 25*30 || (goombasDead && snufitsDead && bunniesDead)) {
                 if (o->os16108++ > 2*30) {
-                    o->os16102 = 8;
-                    o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_ARROW);
+                    o->os16102 = 7;
+                    o->os16100 |= (1 << EH_ENEMIES); //| (1 << EH_ARROW);
                     // o->os16100 &= ~(1 << EH_SAWBLADE);
                     if (wallGoombasDead && wallHammerbrosDead) {
                         o->os16100 |= (1 << EH_WALL);
+                        o->os16100 &= ~(1 << EH_WALL2);
                     }
                 }
             } else {
                 o->os16108 = 0;
             }
             break;
-        case 8:
+        case 7:
             if (goombasDead && snufitsDead && bunniesDead && wallGoombasDead && wallHammerbrosDead) {
-                o->os16102 = 9;
-                o->os16100 &= ~((1 << EH_ARROW) | (1 << EH_SAWBLADE));
+                o->os16102 = 8;
+                o->os16100 |= (1 << EH_SPECIAL);
+                o->os16100 &= ~((1 << EH_ARROW) | (1 << EH_SAWBLADE) | (1 << EH_FLAME));
             }
             break;
-        case 9:
+        case 8:
             break;
     }
 
@@ -368,7 +373,7 @@ void ghost_bully_phases(void) {
 
 
 void bhv_ghost_bully_init(void) {
-    o->oForwardVel = 10.0f;
+    o->oForwardVel = 12.0f;
     obj_set_hitbox(o, &sGhostBullyHitbox);
 }
 
@@ -386,51 +391,61 @@ void bhv_ghost_bully_loop(void) {
         }
     }
     switch (o->oAction) {
-        case 0: // chase
+        case 0:
+            o->oAction = 1;
+            break;
+        case 1: // chase
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
             o->oFaceAngleYaw = o->oMoveAngleYaw;
             CL_Move();
             o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 8.0f);
-            if (o->oTimer > 180 + o->os16106) {
+            if (o->oTimer > 90 + o->os16106) { // was 180
                 o->os16106 = CL_RandomMinMaxU16(0, 45);
-                if (o->os16100 & (1 << EH_SLAM) && (random_u16() & 1) && o->oDistanceToMario < 750.0f) {
-                    o->oAction = 3;
+                if (o->os16100 & (1 << EH_SLAM) && (random_u16() & 1) && o->oDistanceToMario < 1000.0f) {
+                    o->oAction = 4;
                     o->oForwardVel = 40.0f;
                 } else {
-                    o->oAction = 1;
+                    o->oAction = 2;
                 }
             }
+            if (o->os16100 & (1 << EH_SPECIAL)) {
+                o->oAction = 6;
+                o->os16100 &= ~(1 << EH_SPECIAL);
+                o->oFloat10C = o->header.gfx.scale[0] + 1.5f;
+                o->os16110 = 0;
+            }
             // if (o->oTimer > 180 && o->oDistanceToMario < 750.0f) {
-            //     o->oAction = 3;
+            //     o->oAction = 4;
             //     o->oForwardVel = 40.0f;
             // }
             break;
-        case 1: // start dash
-            o->oFaceAngleYaw += 0x800;
-            if (o->oTimer > 32) {
-                o->oFaceAngleYaw = o->oMoveAngleYaw;
-                o->oAction = 2;
-                o->oForwardVel = 30.0f;
+        case 2: // start dash
+            o->oFaceAngleYaw += 0xD00;
+            if (o->oTimer > 8 && absi((s16)o->oFaceAngleYaw - o->oAngleToMario) <= 0xD00) {
+                o->oFaceAngleYaw = o->oAngleToMario;
+                o->oMoveAngleYaw = o->oFaceAngleYaw;
+                o->oAction = 3;
+                o->oForwardVel = 45.0f;
             }
             break;
-        case 2: // dash
+        case 3: // dash
             CL_Move();
             if (o->oTimer > 45) {
-                o->oAction = 0;
-                o->oForwardVel = 10.0f;
+                o->oAction = 1;
+                o->oForwardVel = 12.0f;
             }
             break;
-        case 3: // start slam
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x800);
+        case 4: // start slam
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
             o->oFaceAngleYaw = o->oMoveAngleYaw;
             CL_Move();
             o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1] + 500.0f, 30.0f);
             if (lateral_dist_between_objects(o, gMarioObject) < 100.0f && o->oPosY > gMarioState->pos[1] + 400.0f) {
-                o->oAction = 4;
+                o->oAction = 5;
                 o->oFloatFC = gMarioState->pos[1];
             }
             break;
-        case 4:
+        case 5: // slam
             if (o->oTimer > 15) {
                 o->oFloat10C = approach_f32_symmetric(o->oFloat10C, 80.0f, 8.0f);
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatFC, o->oFloat10C);
@@ -438,10 +453,55 @@ void bhv_ghost_bully_loop(void) {
                     o->oTimer = 20;
                 } 
                 if (o->oTimer > 45) {
-                    o->oAction = 0;
+                    o->oAction = 1;
                     o->oFloat10C = 0.0f;
                     o->oForwardVel = 10.0f;
                 }
+            }
+            break;
+        case 6: // pre big dash
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1800);
+            o->oFaceAngleYaw = o->oMoveAngleYaw;
+            o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 30.0f);
+            if (o->oTimer > 45) {
+                o->oAction = 7;
+            }
+            break;
+        case 7: // big dash
+            if (o->os16110 < 3) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1C00);
+                o->oFaceAngleYaw = o->oMoveAngleYaw;
+                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioState->pos[1], 30.0f);
+                if (o->oTimer > 15) {
+                    o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], o->oFloat10C, 0.5f);
+                    o->header.gfx.scale[2] = o->header.gfx.scale[1] = o->header.gfx.scale[0];
+                    cur_obj_shake_screen(SHAKE_POS_SMALL);
+                    if (o->header.gfx.scale[0] == o->oFloat10C) {
+                        cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB_JUMP);
+                        o->os16110++;
+                        o->oFloat10C = o->header.gfx.scale[0] + 1.5f;
+                        o->oTimer = 0;
+                        o->oForwardVel = 80.0f;
+                    }
+                }
+            } else {
+                if (o->oTimer > 20) {
+                    CL_Move();
+                    if (o->oTimer > 65) {
+                        o->oAction = 8;
+                        o->oForwardVel = 12.0f;
+                        o->oFloat10C = o->header.gfx.scale[0] - 4.5f;
+                    }
+                }
+            }
+            break;
+        case 8: // post big dash
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], o->oFloat10C, 0.5f);
+            o->header.gfx.scale[2] = o->header.gfx.scale[1] = o->header.gfx.scale[0];
+            if (o->header.gfx.scale[0] == o->oFloat10C) {
+                o->oFloat10C = 0;
+                o->os16110 = 0;
+                o->oAction = 1;
             }
             break;
     }
@@ -464,19 +524,30 @@ void bhv_elevator_spawn_init(void) {
 
 
 void bhv_elevator_moving_flame_init(void) {
-    o->os16F4 = 255;
-    o->os16F6 = 50;
-    o->os16F8 = 0;
+    struct Object *obj;
+    o->oFloatFC = 12.0f;
+    obj = cur_obj_nearest_object_with_behavior(bhvGhostBully);
+    if (obj != NULL && obj->os16100 & (1 << EH_FLAMEFAST)) {
+        o->oFloatFC += 8.0f;
+    }
+
+    if (o->oBehParams2ndByte) {
+        o->oPosZ += 200.0f;
+        o->os16F4 = 100;
+        o->os16F6 = 100;
+        o->os16F8 = 255;
+        o->oFloatFC *= -1;
+    } else {
+        o->os16F4 = 255;
+        o->os16F6 = 50;
+        o->os16F8 = 0;
+    }
 }
 
 
 void bhv_elevator_moving_flame_loop(void) {
-    if (o->oBehParams2ndByte) {
-        o->oPosX += 15.0f;
-    } else {
-        o->oPosX -= 15.0f;
-    }
-    if (o->oTimer > (s32)(2500.0f / 15.0f)) {
+    o->oPosX -= o->oFloatFC;
+    if (o->oTimer > (s32)(2500.0f / 12.0f)) {
         o->activeFlags = 0;
     }
 }
@@ -496,9 +567,13 @@ void bhv_elevator_flame_spawn_loop(void) {
                     obj->oBehParams2ndByte = 1;
                     obj->oPosX -= 2500.0f;
                 }
+                obj->oPosZ += (random_float() - 0.5f) * 200.0f;
                 o->oTimer = 0;
                 o->os16F6++;
                 o->os16F4 = CL_RandomMinMaxU16(0, 30); // was max 25
+                if (o->oObjF8->os16100 & (1 << EH_FLAMEFAST)) {
+                    o->os16F4 -= 20;
+                }
             }
 
             if (!(o->oObjF8->os16100 & (1 << EH_FLAME))) {
