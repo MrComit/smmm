@@ -269,4 +269,6 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/elevator_door/collision_header.h"
 
+#include "levels/lll/elevator_instantwarp/collision_header.h"
+
 #endif

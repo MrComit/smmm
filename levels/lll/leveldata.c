@@ -143,3 +143,4 @@
 #include "levels/lll/treadmill_floor/collision.inc.c"
 #include "levels/lll/elevator_door/model.inc.c"
 #include "levels/lll/elevator_door/collision.inc.c"
+#include "levels/lll/elevator_instantwarp/collision.inc.c"

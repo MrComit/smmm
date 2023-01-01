@@ -1,0 +1,13 @@
+const Collision elevator_instantwarp_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(4),
+	COL_VERTEX(-175, 0, 0),
+	COL_VERTEX(175, 0, 0),
+	COL_VERTEX(175, 0, -50),
+	COL_VERTEX(-175, 0, -50),
+	COL_TRI_INIT(SURFACE_INSTANT_WARP_1B, 2),
+	COL_TRI_SPECIAL(0, 1, 2, 0x0006),
+	COL_TRI_SPECIAL(0, 2, 3, 0x0006),
+	COL_TRI_STOP(),
+	COL_END()
+};

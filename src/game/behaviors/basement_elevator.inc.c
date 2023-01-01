@@ -46,10 +46,22 @@ enum ElevatorHazards {
 
 
 void bhv_elevator_door_init(void) {
-    if (lateral_dist_between_objects(o, gMarioObject) < 500.0f || o->oBehParams2ndByte) {
+    struct Object *obj;
+    if (lateral_dist_between_objects(o, gMarioObject) < 500.0f || o->oBehParams2ndByte == 1) {
         o->oAction = 1;
         o->oPosY = o->oHomeY + 400.0f;
         o->header.gfx.scale[2] = 0.8f;
+    }
+    if (o->oBehParams2ndByte == 2 && ((o->oBehParams >> 8) & 0xFF) == 0xAB) {
+        if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+            o->os16112 = 1;
+        } else {
+            obj = spawn_object(o, MODEL_NONE, bhvElevatorTeleporter);
+            obj->oPosY = o->oHomeY + 10.0f;
+            // obj->oPosZ += 20.0f;
+            // obj->oRoom = o->oRoom;
+            // obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        }
     }
 }
 
@@ -62,7 +74,7 @@ void bhv_elevator_door_loop(void) {
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
                 cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
             }
-            if (o->oBehParams2ndByte) {
+            if (o->oBehParams2ndByte == 1) {
                 if (cur_obj_nearest_object_with_behavior(bhvGhostBully) == NULL) {
                     o->oAction = 1;
                 }
@@ -81,12 +93,33 @@ void bhv_elevator_door_loop(void) {
                 cur_obj_hide();
             }
 
-            if (o->oBehParams2ndByte) {
+            if (o->oBehParams2ndByte == 1) {
                 if (cur_obj_nearest_object_with_behavior(bhvGhostBully) != NULL) {
                     o->oAction = 0;
                 }
             } else {
                 if (o->oDistanceToMario > 800.0f) {
+                    o->oAction = 0;
+                }
+            }
+            if (o->os16112) {
+                if (absf(o->oPosZ - gMarioState->pos[2]) < 50.0f) {
+                    o->oAction = 2;
+                    sDelayedWarpOp = 0x10;
+                    sDelayedWarpTimer = 12;
+                    sSourceWarpNodeId = (o->oBehParams >> 8) & 0xFF;
+                    // music_changed_through_warp(sSourceWarpNodeId);
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x8, 0x00, 0x00, 0x00);
+                }
+            }
+            break;
+        case 2:
+            if (o->oTimer > 10) {
+                if (lateral_dist_between_objects(o, gMarioObject) < 500.0f || o->oBehParams2ndByte == 1) {
+                    o->oAction = 1;
+                    o->oPosY = o->oHomeY + 400.0f;
+                    o->header.gfx.scale[2] = 0.8f;
+                } else {
                     o->oAction = 0;
                 }
             }

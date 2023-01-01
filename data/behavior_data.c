@@ -9924,3 +9924,13 @@ const BehaviorScript bhvElevatorDoor[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvElevatorTeleporter[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    LOAD_COLLISION_DATA(elevator_instantwarp_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
