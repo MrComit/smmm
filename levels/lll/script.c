@@ -110,6 +110,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1629, 0, -5187, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_ELEVATOR_DOOR, 500, 0, -10837, 0, 0, 0, 0x00000000, bhvElevatorDoor),
 		OBJECT(MODEL_ELEVATOR_DOOR, 500, -3000, -10837, 0, 0, 0, (1 << 16), bhvElevatorDoor),
+		OBJECT(MODEL_ELEVATOR_DOOR, 500, -3000, -10587, 0, 0, 0, 0x00000000, bhvElevatorDoor),
 		OBJECT(MODEL_GLOBAL_GATE, 1389, 0, -1187, 0, -90, 0, 0x00000000, bhvEngineButtonGate),
 		OBJECT(MODEL_COLORED_GATE, 500, 0, -7987, 0, 0, 0, 0x00000000, bhvColoredGate),
 		OBJECT(MODEL_COLORED_GATE, 500, 0, -8487, 0, 0, 0, (1 << 16), bhvColoredGate),

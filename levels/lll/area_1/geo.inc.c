@@ -3,7 +3,7 @@
 const GeoLayout lll_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(10, geo_switch_area),
+		GEO_SWITCH_CASE(11, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, lll_dl_101__The_Corridor_geo),
 			GEO_BRANCH(1, lll_dl_102__Laundry_Room_geo),
@@ -14,6 +14,7 @@ const GeoLayout lll_area_1_geo[] = {
 			GEO_BRANCH(1, lll_dl_107__Engine_Room_geo),
 			GEO_BRANCH(1, lll_dl_108__Torture_Chamber_geo),
 			GEO_BRANCH(1, lll_dl_109__Elevator_geo),
+			GEO_BRANCH(1, lll_dl_110__The_Lab_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -314,6 +315,14 @@ const GeoLayout lll_dl_109__Elevator_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_ElevatorBG_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_InstantWarp_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_StuccoWall_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout lll_dl_110__The_Lab_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Lab_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_LabStairs_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
