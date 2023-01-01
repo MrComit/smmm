@@ -9834,6 +9834,7 @@ const BehaviorScript bhvGhostBully[] = {
     LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
     ANIMATE(0),
     SET_HOME(),
+    HIDE(),
     CALL_NATIVE(bhv_ghost_bully_init),
     SCALE(0, 200), //was 350
     // SET_FLOAT(oForwardVel, 12),

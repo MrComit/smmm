@@ -1,7 +1,3 @@
-Lights1 ghost_bully_Feet_001_lights = gdSPDefLights1(
-	0x24, 0x1, 0x1,
-	0x51,0x5,0x3,0x28,0x28,0x28);
-
 Lights1 ghost_bully_Horns_001_lights = gdSPDefLights1(
 	0x7F, 0x7F, 0x7F,
 	0xFF,0xFF,0xFF,0x28,0x28,0x28);
@@ -589,26 +585,26 @@ u8 ghost_bully_spooky_face_red_ci8_pal_rgba16[] = {
 	
 };
 
-Vtx ghost_bully_000_offset_005_mesh_layer_1_vtx_0[3] = {
-	{{{90, 28, 0}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
-	{{{-37, 27, 0}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
-	{{{55, 28, 41}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
+Vtx ghost_bully_000_offset_005_mesh_layer_5_vtx_0[3] = {
+	{{{43, 28, 12}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
+	{{{27, 28, 12}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
+	{{{38, 28, 17}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
 };
 
-Gfx ghost_bully_000_offset_005_mesh_layer_1_tri_0[] = {
-	gsSPVertex(ghost_bully_000_offset_005_mesh_layer_1_vtx_0 + 0, 3, 0),
+Gfx ghost_bully_000_offset_005_mesh_layer_5_tri_0[] = {
+	gsSPVertex(ghost_bully_000_offset_005_mesh_layer_5_vtx_0 + 0, 3, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSPEndDisplayList(),
 };
 
-Vtx ghost_bully_000_offset_008_mesh_layer_1_vtx_0[3] = {
-	{{{55, 28, -41}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
-	{{{-37, 27, 0}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
-	{{{56, 28, 46}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
+Vtx ghost_bully_000_offset_008_mesh_layer_5_vtx_0[3] = {
+	{{{28, 28, -4}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
+	{{{17, 28, 1}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
+	{{{28, 28, 7}, 0, {-16, -16}, {0xFF, 0x7F, 0x0, 0x0}}},
 };
 
-Gfx ghost_bully_000_offset_008_mesh_layer_1_tri_0[] = {
-	gsSPVertex(ghost_bully_000_offset_008_mesh_layer_1_vtx_0 + 0, 3, 0),
+Gfx ghost_bully_000_offset_008_mesh_layer_5_tri_0[] = {
+	gsSPVertex(ghost_bully_000_offset_008_mesh_layer_5_vtx_0 + 0, 3, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSPEndDisplayList(),
 };
@@ -709,14 +705,6 @@ Gfx ghost_bully_007_offset_mesh_layer_5_tri_0[] = {
 };
 
 
-Gfx mat_ghost_bully_Feet_001[] = {
-	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
-	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(ghost_bully_Feet_001_lights),
-	gsSPEndDisplayList(),
-};
-
 Gfx mat_ghost_bully_Body_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, ENVIRONMENT, 0),
@@ -804,15 +792,17 @@ Gfx mat_revert_ghost_bully_Face[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx ghost_bully_000_offset_005_mesh_layer_1[] = {
-	gsSPDisplayList(mat_ghost_bully_Feet_001),
-	gsSPDisplayList(ghost_bully_000_offset_005_mesh_layer_1_tri_0),
+Gfx ghost_bully_000_offset_005_mesh_layer_5[] = {
+	gsSPDisplayList(mat_ghost_bully_Body_001),
+	gsSPDisplayList(ghost_bully_000_offset_005_mesh_layer_5_tri_0),
+	gsSPDisplayList(mat_revert_ghost_bully_Body_001),
 	gsSPEndDisplayList(),
 };
 
-Gfx ghost_bully_000_offset_008_mesh_layer_1[] = {
-	gsSPDisplayList(mat_ghost_bully_Feet_001),
-	gsSPDisplayList(ghost_bully_000_offset_008_mesh_layer_1_tri_0),
+Gfx ghost_bully_000_offset_008_mesh_layer_5[] = {
+	gsSPDisplayList(mat_ghost_bully_Body_001),
+	gsSPDisplayList(ghost_bully_000_offset_008_mesh_layer_5_tri_0),
+	gsSPDisplayList(mat_revert_ghost_bully_Body_001),
 	gsSPEndDisplayList(),
 };
 

@@ -1280,6 +1280,24 @@ void reverse_scroll_sts_mat_lll_dl_ElevatorBG() {
 	shift_t_down(mat, 18, PACK_TILESIZE(0, -25));
 };
 
+
+
+
+
+void slow_reverse_scroll_sts_mat_lll_dl_ElevatorPillars() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorPillars);
+	shift_s_down(mat, 11, PACK_TILESIZE(0, -22));
+};
+
+void slow_reverse_scroll_sts_mat_lll_dl_ElevatorBG() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorBG);
+	shift_t_down(mat, 18, PACK_TILESIZE(0, -13));
+};
+
+
+
+
+
 Gfx *geo_set_elevator_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct GraphNodeGenerated *currentGraphNode;
@@ -1298,12 +1316,15 @@ Gfx *geo_set_elevator_color_env(s32 callContext, struct GraphNode *node, UNUSED 
         gCurrentObject = gMarioObject;
         obj = cur_obj_nearest_object_with_behavior(bhvGhostBully);
         gCurrentObject = obj2;
-        if (obj == NULL || obj->oAction == 0) {
+        if (obj == NULL || obj->oAction == 0 || obj->oAction == 10 || obj->oAction == 11) {
             sElevatorColor[0] = approach_s16_symmetric(sElevatorColor[0], 0xCB, 0x4);
             sElevatorColor[1] = approach_s16_symmetric(sElevatorColor[1], 0x94, 0x4);
             sElevatorColor[2] = approach_s16_symmetric(sElevatorColor[2], 0x29, 0x4);
             reverse_scroll_sts_mat_lll_dl_ElevatorPillars();
             reverse_scroll_sts_mat_lll_dl_ElevatorBG();
+        } else if (obj->oAction == 9) {
+            slow_reverse_scroll_sts_mat_lll_dl_ElevatorPillars();
+            slow_reverse_scroll_sts_mat_lll_dl_ElevatorBG();
         } else {
             sElevatorColor[0] = approach_s16_symmetric(sElevatorColor[0], 0x8B, 0x4);
             sElevatorColor[1] = approach_s16_symmetric(sElevatorColor[1], 0x30, 0x4);

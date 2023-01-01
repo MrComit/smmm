@@ -287,21 +287,30 @@ void ghost_bully_spawn_wall_enemies(s32 left) {
 
 void ghost_bully_spawn_enemies(s32 dustBunnies) {
     struct Object *obj;
-    COMIT_OBJECT(MODEL_GOOMBA, 829, -3000 + 1000, -12493, 0, 0, 0, bhvGoomba);
-    obj->parentObj = obj;
-    COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvElevatorSnufit);
-    COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvElevatorSnufit);
-    if (!dustBunnies) {
-        COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvElevatorSnufit);
+    s32 snufitCount = count_room_objects_with_behavior(bhvElevatorSnufit, o->oRoom);
+    if (count_room_objects_with_behavior(bhvGoomba, o->oRoom) < 2) {
+        COMIT_OBJECT(MODEL_GOOMBA, 829, -3000 + 1000, -12493, 0, 0, 0, bhvGoomba);
+        obj->parentObj = obj;
+    }
+    if (snufitCount < 3) {
+        COMIT_OBJECT(MODEL_SNUFIT, -404, -2800, -12299, 0, 0, 0, bhvElevatorSnufit);
+        if (snufitCount < 2) {
+            COMIT_OBJECT(MODEL_SNUFIT, 1454, -2800, -12989, 0, 0, 0, bhvElevatorSnufit);
+            if (!dustBunnies) {
+                COMIT_OBJECT(MODEL_SNUFIT, 1371, -2800, -11374, 0, 0, 0, bhvElevatorSnufit);
+            }
+        }
     }
 
     if (dustBunnies) {
-		COMIT_OBJECT(MODEL_DUST_BUNNY, -420, -3000, -12445, 0, -180, 0, bhvDustBunny);
-        obj->oBehParams = 2 << 16;
-        obj->oBehParams2ndByte = 2;
-		COMIT_OBJECT(MODEL_DUST_BUNNY, 1364, -3000, -12395, 0, -180, 0, bhvDustBunny);
-        obj->oBehParams = 2 << 16;
-        obj->oBehParams2ndByte = 2;
+        if (count_room_objects_with_behavior(bhvDustBunny, o->oRoom) < 2) {
+            COMIT_OBJECT(MODEL_DUST_BUNNY, -420, -3000, -12445, 0, -180, 0, bhvDustBunny);
+            obj->oBehParams = 2 << 16;
+            obj->oBehParams2ndByte = 2;
+            COMIT_OBJECT(MODEL_DUST_BUNNY, 1364, -3000, -12395, 0, -180, 0, bhvDustBunny);
+            obj->oBehParams = 2 << 16;
+            obj->oBehParams2ndByte = 2;
+        }
     }
 }
 
@@ -404,8 +413,11 @@ void ghost_bully_phases(void) {
         case 7:
             if (goombasDead && snufitsDead && bunniesDead && wallGoombasDead && wallHammerbrosDead) {
                 o->os16102 = 8;
-                o->os16100 |= (1 << EH_SPECIAL);
+                // o->os16100 |= (1 << EH_SPECIAL);
                 o->os16100 &= ~((1 << EH_ARROW) | (1 << EH_SAWBLADE) | (1 << EH_FLAME));
+                o->oAction = 11;
+                cur_obj_play_sound_1(SOUND_OBJ_BOO_LAUGH_LONG);
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
             }
             break;
         case 8:
@@ -433,7 +445,11 @@ void ghost_bully_phases(void) {
 
 void bhv_ghost_bully_init(void) {
     o->oForwardVel = 12.0f;
+    o->os16102 = -1;
     obj_set_hitbox(o, &sGhostBullyHitbox);
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        o->activeFlags = 0;
+    }
 }
 
 void bhv_ghost_bully_loop(void) {
@@ -453,9 +469,11 @@ void bhv_ghost_bully_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 90)
-                o->oAction = 1;
+                o->oAction = 9;
             break;
         case 1: // chase
+            o->os16112 += 0x400 + (o->os16102 * 0x100);
+            o->oFaceAngleRoll = sins(o->os16112) * (0xC0 * o->os16102);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
             o->oFaceAngleYaw = o->oMoveAngleYaw;
             CL_Move();
@@ -565,6 +583,31 @@ void bhv_ghost_bully_loop(void) {
                 o->oAction = 1;
             }
             break;
+        case 9:
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            if (o->oTimer > 90) {
+                if (o->oTimer < 105) {
+                    cur_obj_shake_screen(SHAKE_POS_SMALL);
+                } else {
+                    o->oAction = 10;
+                }
+            }
+            break;
+        case 10:
+            if (o->oTimer > 30) {
+                o->os16102 = 0;
+                o->oAction = 1;
+                cur_obj_unhide();
+                play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
+            }
+            break;
+        case 11:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 1500.0f, 20.0f);
+            if (o->oPosY == o->oHomeY - 1500.0f) {
+                o->activeFlags = 0;
+                save_file_set_newflags(0, SAVE_NEW_FLAG_ELEVATOR_BOSS);
+            }
+            break;
     }
     o->oInteractStatus = 0;
     // if (gMarioState->input & INPUT_Z_PRESSED) {
@@ -572,6 +615,13 @@ void bhv_ghost_bully_loop(void) {
     //     ghost_bully_spawn_wall_enemies(0);
     //     ghost_bully_spawn_enemies(1);
     // }
+}
+
+
+void check_ghost_bully_death(void) {
+    if (o->oObjF8 == NULL || o->oObjF8->activeFlags == 0) {
+        o->activeFlags = 0;
+    }
 }
 
 
@@ -642,6 +692,7 @@ void bhv_elevator_flame_spawn_loop(void) {
             }
             break;
     }
+    check_ghost_bully_death();
 }
 
 void bhv_sawblade_spawn_loop(void) {
@@ -661,6 +712,7 @@ void bhv_sawblade_spawn_loop(void) {
             }
             break;
     }
+    check_ghost_bully_death();
 }
 
 
@@ -706,6 +758,6 @@ void bhv_treadmill_floor_loop(void) {
                 o->activeFlags = 0;
             }
             break;
-
     }
+    check_ghost_bully_death();
 }
