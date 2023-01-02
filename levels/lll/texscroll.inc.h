@@ -23,4 +23,5 @@ extern void scroll_sts_mat_lll_dl_WoodPlat_layer1();
 extern void scroll_sts_mat_lll_dl_AElevatorWall_layer1();
 extern void scroll_sts_mat_lll_dl_ElevatorPillars();
 extern void scroll_sts_mat_lll_dl_ElevatorBG();
+extern void scroll_sts_mat_lll_dl_BooGooContainerTrans_layer5();
 extern void scroll_lll();

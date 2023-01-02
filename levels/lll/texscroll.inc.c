@@ -299,6 +299,13 @@ void scroll_sts_mat_lll_dl_ElevatorBG() {
 	shift_t_down(mat, 18, PACK_TILESIZE(0, 25));
 };
 
+void scroll_sts_mat_lll_dl_BooGooContainerTrans_layer5() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_BooGooContainerTrans_layer5);
+	shift_s(mat, 13, PACK_TILESIZE(0, 1));
+	shift_s(mat, 21, PACK_TILESIZE(0, 1));
+	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+};
+
 void scroll_lll() {
 	scroll_sts_mat_lll_dl_CorridorWall_layer1();
 	scroll_sts_mat_lll_dl_ElevatorWallFake_layer1();
@@ -325,4 +332,5 @@ void scroll_lll() {
 	scroll_sts_mat_lll_dl_AElevatorWall_layer1();
 	scroll_sts_mat_lll_dl_ElevatorPillars();
 	scroll_sts_mat_lll_dl_ElevatorBG();
+	scroll_sts_mat_lll_dl_BooGooContainerTrans_layer5();
 }

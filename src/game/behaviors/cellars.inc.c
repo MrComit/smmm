@@ -12,6 +12,48 @@ Vec3s sBasementSwitchCols[5] = {
 };
 
 
+void move_colored_gate(s32 gate) {
+    f32 *pos;
+    f32 target;
+
+    switch (gate) {
+        case 0:
+        case 4:
+            pos = &o->oPosY;
+            target = o->oHomeY + 1200.0f;
+            break;
+        case 1:
+            pos = &o->oPosX;
+            target = o->oHomeX - 1200.0f;
+            break;
+        case 2:
+            pos = &o->oPosY;
+            target = o->oHomeY - 1200.0f;
+            break;
+        case 3:
+            pos = &o->oPosX;
+            target = o->oHomeX + 1200.0f;
+            break;
+    }
+
+        *pos = approach_f32_symmetric(*pos, target, 15.0f);
+        if (*pos < target) {
+            if (*pos <= target - 600.0f) {
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            }
+        } else {            
+            if (*pos >= target + 600.0f) {
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            }
+        }
+        if (*pos == target) {
+            o->activeFlags = 0;
+            set_mario_npc_dialog(0);
+        }
+}
+
+
+
 void bhv_colored_gate_init(void) {
     o->os16F4 = sBasementSwitchCols[o->oBehParams2ndByte][0];
     o->os16F6 = sBasementSwitchCols[o->oBehParams2ndByte][1];
@@ -44,14 +86,7 @@ void bhv_colored_gate_loop(void) {
             break;
         case 2:
             gCamera->comitCutscene = 0xFF;
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 1200.0f, 15.0f);
-            if (o->oPosY >= o->oHomeY + 600.0f) {
-                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
-            }
-            if (o->oPosY >= o->oHomeY + 1200.0f) {
-                o->activeFlags = 0;
-                set_mario_npc_dialog(0);
-            }
+            move_colored_gate(o->oBehParams2ndByte);
             break;
     }
 }

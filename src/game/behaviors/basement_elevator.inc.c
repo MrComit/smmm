@@ -52,10 +52,10 @@ void bhv_elevator_door_init(void) {
         o->oPosY = o->oHomeY + 400.0f;
         o->header.gfx.scale[2] = 0.8f;
     }
-    if (o->oBehParams2ndByte == 2 && ((o->oBehParams >> 8) & 0xFF) == 0xAB) {
+    if (o->oBehParams2ndByte == 2) {
         if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
             o->os16112 = 1;
-        } else {
+        } else if (((o->oBehParams >> 8) & 0xFF) == 0xAB) {
             obj = spawn_object(o, MODEL_NONE, bhvElevatorTeleporter);
             obj->oPosY = o->oHomeY + 10.0f;
             // obj->oPosZ += 20.0f;
@@ -66,12 +66,18 @@ void bhv_elevator_door_init(void) {
 }
 
 void bhv_elevator_door_loop(void) {
+    if (o->oBehParams2ndByte == 2 && save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        o->os16112 = 1;
+    } 
     switch (o->oAction) {
         case 0:
             cur_obj_unhide();
             o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], 1.0f, 0.02f);
             if (o->oPosY != o->oHomeY) {
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+                if (o->os16112) {
+                    o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
+                }
                 cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
             }
             if (o->oBehParams2ndByte == 1) {
@@ -96,6 +102,7 @@ void bhv_elevator_door_loop(void) {
             if (o->oBehParams2ndByte == 1) {
                 if (cur_obj_nearest_object_with_behavior(bhvGhostBully) != NULL) {
                     o->oAction = 0;
+                    o->os16112 = 1;
                 }
             } else {
                 if (o->oDistanceToMario > 800.0f) {
