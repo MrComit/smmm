@@ -562,6 +562,7 @@ Gfx mat_golden_crate_GoldenCrate_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, SHADE, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
 	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetAlphaCompare(G_AC_DITHER),
 	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), Z_CMP | Z_UPD | IM_RD | CVG_DST_CLAMP | ZMODE_OPA),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
@@ -580,6 +581,7 @@ Gfx mat_golden_crate_GoldenCrate_layer1[] = {
 Gfx mat_revert_golden_crate_GoldenCrate_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetAlphaCompare(G_AC_NONE),
 	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
