@@ -969,7 +969,7 @@ void render_dialog_box_type(struct DialogEntry *dialog, s8 linesPerBox) {
                 // convert the speed into angle
                 create_dl_rotation_matrix(MENU_MTX_NOPUSH, gDialogBoxOpenTimer * 4.0f, 0, 0, 1.0f);
             }
-            gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 150);
+            gDPSetEnvColor(gDisplayListHead++, 0, 0x18, 0x18, 150);
             break;
         case DIALOG_TYPE_ZOOM: // Renders a dialog white box with zoom
             if (gDialogBoxState == DIALOG_STATE_OPENING || gDialogBoxState == DIALOG_STATE_CLOSING) {
@@ -977,7 +977,8 @@ void render_dialog_box_type(struct DialogEntry *dialog, s8 linesPerBox) {
                                               (40.0 / gDialogBoxScale) - 40, 0);
                 create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.0 / gDialogBoxScale, 1.0 / gDialogBoxScale, 1.0f);
             }
-            gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 150);
+            // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 150);
+            gDPSetEnvColor(gDisplayListHead++, 0, 0x18, 0x18, 150);
             break;
     }
 
@@ -1007,7 +1008,7 @@ void change_and_flash_dialog_text_color_lines(s8 colorMode, s8 lineNum) {
             case DIALOG_TYPE_ROTATE:
                 break;
             case DIALOG_TYPE_ZOOM:
-                gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+                // gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
                 break;
         }
     }
