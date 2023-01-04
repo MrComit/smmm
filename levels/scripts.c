@@ -208,6 +208,11 @@ const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_EXCLAMATION_BOX_OUTLINE, exclamation_box_outline_geo),
     LOAD_MODEL_FROM_GEO(MODEL_EXCLAMATION_BOX,         exclamation_box_geo),
     LOAD_MODEL_FROM_GEO(MODEL_GOOMBA,                  goomba_geo),
+
+    //custom
+    LOAD_MODEL_FROM_GEO(MODEL_GOLDEN_GOOMBA, golden_goomba_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_GOLDEN_CRATE,    golden_crate_geo),
+
     LOAD_MODEL_FROM_DL( MODEL_EXCLAMATION_POINT,       exclamation_box_outline_seg8_dl_08025F08, LAYER_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_SHELL,             koopa_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_METAL_BOX,               metal_box_geo),

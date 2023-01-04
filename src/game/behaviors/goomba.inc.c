@@ -44,7 +44,7 @@ static struct GoombaProperties sGoombaProperties[] = {
 /**
  * Attack handlers for goombas.
  */
-static u8 sGoombaAttackHandlers[][6] = {
+u8 sGoombaAttackHandlers[][6] = {
     // regular and tiny
     {
         /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
@@ -137,7 +137,7 @@ static void goomba_begin_jump(void) {
  * this goomba died. This prevents it from spawning again when mario leaves and
  * comes back.
  */
-static void mark_goomba_as_dead(void) {
+void mark_goomba_as_dead(void) {
     if (o->parentObj != o) {
         set_object_respawn_info_bits(
             o->parentObj, (o->oBehParams2ndByte & GOOMBA_BP_TRIPLET_FLAG_MASK) >> 2);

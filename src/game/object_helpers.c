@@ -33,6 +33,7 @@
 #include "levels/lll/header.h"
 #include "save_file.h"
 #include "src/game/tile_scroll.h"
+#include "actors/common0.h"
 
 extern Mtx *gMatStackFixed[32];
 extern s16 gMatStackIndex;
@@ -554,6 +555,43 @@ Gfx *geo_update_plathall_floor(s32 callContext, struct GraphNode *node, UNUSED v
     }
     return NULL;
 }
+
+
+
+
+Gfx *geo_update_golden_crate(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    s32 i;
+    s32 dist;
+    Vtx *vert;
+    Vec3s marioPos;
+    struct Object *obj;
+    struct GraphNodeGenerated *currentGraphNode;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        obj = (struct Object *) gCurGraphNodeObject;
+        vec3f_to_vec3s(marioPos, gMarioState->pos);
+        marioPos[0] -= obj->oPosX;
+        marioPos[2] -= obj->oPosZ;
+        vert = segmented_to_virtual(&golden_crate_crate_mesh_layer_1_vtx_0);
+        for (i = 0; i < 24; i++) {
+            dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
+                    (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
+            if (dist <= 400*400*2) {
+                vert[i].v.cn[3] = ((f32)(400*400*2 - dist) / (f32)(400*400*2) * 255);
+            } else if (vert[i].v.cn[3] != 0) {
+                vert[i].v.cn[3] = 0;
+            }
+        }
+    }
+    return NULL;
+}
+
+
+
+
+
+
+
 
 extern Vtx opening_wall_openingwall_mesh_layer_5_vtx_0[4];
 

@@ -29,3 +29,4 @@
 #include "koopa_shell/geo.inc.c"
 
 #include "crate/geo.inc.c"
+#include "golden_crate/geo.inc.c"

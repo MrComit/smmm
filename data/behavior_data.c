@@ -4983,6 +4983,18 @@ const BehaviorScript bhvOrangeNumber[] = {
     END_LOOP(),
 };
 
+
+const BehaviorScript bhvOrangeNumberStay[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    CALL_NATIVE(bhv_orange_number_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_orange_number_stay_loop),
+    END_LOOP(),
+};
+
 const BehaviorScript bhvMantaRay[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
@@ -9471,9 +9483,10 @@ const BehaviorScript bhvEngineGear[] = {
 
 const BehaviorScript bhvPowerDoor[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_DONT_CALC_COLL_DIST),
     LOAD_COLLISION_DATA(power_door_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_HOME(),
     // CALL_NATIVE(bhv_power_door_init),
     BEGIN_LOOP(),
@@ -9604,9 +9617,10 @@ const BehaviorScript bhvLegPress[] = {
 
 const BehaviorScript bhvButtonDoor[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_DONT_CALC_COLL_DIST),
     LOAD_COLLISION_DATA(power_door_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_HOME(),
     // CALL_NATIVE(bhv_power_door_init),
     BEGIN_LOOP(),
@@ -9724,9 +9738,10 @@ const BehaviorScript bhvPowerPlat[] = {
 
 const BehaviorScript bhvPowerButton[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(power_button_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_HOME(),
     CALL_NATIVE(bhv_power_button_init),
     BEGIN_LOOP(),
@@ -9914,9 +9929,10 @@ const BehaviorScript bhvElevatorSnufit[] = {
 
 const BehaviorScript bhvElevatorDoor[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_DONT_CALC_COLL_DIST),
     LOAD_COLLISION_DATA(elevator_door_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_HOME(),
     CALL_NATIVE(bhv_elevator_door_init),
     BEGIN_LOOP(),
@@ -9933,4 +9949,33 @@ const BehaviorScript bhvElevatorTeleporter[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvGoldenGoomba[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    //DROP_TO_FLOOR(),
+    LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_golden_goomba_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_golden_goomba_update),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvGoldenCrate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(golden_crate_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 70, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_golden_crate_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_golden_crate_loop),
+    END_LOOP(),
+    BREAK(),
 };

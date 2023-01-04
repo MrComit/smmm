@@ -30,6 +30,13 @@ static const Lights1 goomba_seg8_lights_080194D0 = gdSPDefLights1(
     0x50, 0x50, 0x50, 0x28, 0x28, 0x28 // DARK BROWN
 );
 
+
+
+static const Lights1 goomba_golden_shoe_lights = gdSPDefLights1(
+    0x7F, 0x73, 0x00,
+    0xFF, 0xE6, 0x00, 0x28, 0x28, 0x28 // DARK BROWN
+);
+
 // 0x080194E8
 static const Lights1 goomba_seg8_lights_080194E8 = gdSPDefLights1(
     0x15, 0x15, 0x15,
@@ -58,6 +65,17 @@ ALIGNED8 static const Texture goomba_seg8_texture_08019530[] = {
 ALIGNED8 static const Texture goomba_seg8_texture_08019D30[] = {
 #include "actors/goomba/CUSTOM_goomba_face.rgba16.inc.c"
 };
+
+
+ALIGNED8 static const Texture goomba_golden_body[] = {
+#include "actors/goomba/goomba_body.rgba16.inc.c"
+};
+
+// 0x08019D30
+ALIGNED8 static const Texture goomba_golden_face[] = {
+#include "actors/goomba/CUSTOM_golden_goomba_face.rgba16.inc.c"
+};
+
 
 // 0x0801A530
 ALIGNED8 static const Texture goomba_seg8_texture_0801A530[] = {
@@ -984,5 +1002,109 @@ const Gfx goomba_seg8_dl_0801D360[] = {
 // 0x0801D760 - 0x0801D770
 const Gfx goomba_seg8_dl_0801D760[] = {
     gsSPNumLights(NUMLIGHTS_1),
+    gsSPEndDisplayList(),
+};
+
+
+
+// golden goomba
+const Gfx goomba_golden_body_dl_helper[] = {
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, goomba_golden_body),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
+    gsSPVertex(goomba_seg8_vertex_0801B618, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSPEndDisplayList(),
+};
+
+// 0x0801B690 - 0x0801B700
+const Gfx goomba_golden_body_dl[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsSPClearGeometryMode(G_LIGHTING),
+    //gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPTileSync(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD),
+    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
+    gsSPDisplayList(goomba_golden_body_dl_helper),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    //gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, SHADE, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, SHADE),
+    gsSPSetGeometryMode(G_LIGHTING),
+    gsSPEndDisplayList(),
+};
+
+
+const Gfx goomba_golden_face_dl[] = {
+    gsSPDisplayList(goomba_seg8_dl_0801B560),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, goomba_golden_face),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
+    gsSPBranchList(goomba_seg8_dl_0801B5A0),
+};
+
+
+
+const Gfx goomba_golden_shoe1_dl[] = {
+    gsSPLight(&goomba_golden_shoe_lights.l, 1),
+    gsSPLight(&goomba_golden_shoe_lights.a, 2),
+    //gsDPPipeSync(),
+    //gsDPSetEnvColor(0x54, 0x2e, 0x10, 0xFF),
+    gsSPVertex(goomba_seg8_vertex_0801B700, 16, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
+    gsSP2Triangles( 8,  9, 10, 0x0,  8, 10, 11, 0x0),
+    gsSP2Triangles(12, 13, 14, 0x0, 12, 14, 15, 0x0),
+    gsSPVertex(goomba_seg8_vertex_0801B800, 15, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 4,  5,  3, 0x0,  6,  7,  8, 0x0),
+    gsSP2Triangles( 9, 10, 11, 0x0,  2, 12, 13, 0x0),
+    gsSP2Triangles( 6,  8,  9, 0x0,  6,  9, 11, 0x0),
+    gsSP2Triangles( 2, 13,  4, 0x0,  2,  4,  3, 0x0),
+    gsSP2Triangles( 3,  5, 14, 0x0,  3, 14,  0, 0x0),
+    gsSP2Triangles( 8,  7,  5, 0x0,  8,  5,  4, 0x0),
+    gsSPVertex(goomba_seg8_vertex_0801B8F0, 14, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
+    gsSP2Triangles( 8,  9,  5, 0x0,  8,  5, 10, 0x0),
+    gsSP2Triangles(11, 12,  9, 0x0, 11,  9, 13, 0x0),
+    gsSPVertex(goomba_seg8_vertex_0801B9D0, 8, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
+    gsSP2Triangles( 2,  4,  7, 0x0,  2,  7,  3, 0x0),
+    gsSPEndDisplayList(),
+};
+
+
+const Gfx goomba_golden_shoe2_dl[] = {
+    gsSPLight(&goomba_golden_shoe_lights.l, 1),
+    gsSPLight(&goomba_golden_shoe_lights.a, 2),
+    //gsDPPipeSync(),
+    //gsDPSetEnvColor(0x61, 0x34, 0x13, 0xFF),
+    gsSPVertex(goomba_seg8_vertex_0801BA50, 15, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 1,  4,  5, 0x0,  1,  5,  2, 0x0),
+    gsSP2Triangles( 0,  3,  6, 0x0,  0,  6,  7, 0x0),
+    gsSP2Triangles( 8,  9, 10, 0x0,  8, 10, 11, 0x0),
+    gsSP2Triangles(12, 13,  9, 0x0, 12,  9, 14, 0x0),
+    gsSPVertex(goomba_seg8_vertex_0801BB40, 16, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
+    gsSP2Triangles( 8,  9,  5, 0x0,  8,  5, 10, 0x0),
+    gsSP2Triangles(11, 12,  9, 0x0, 11,  9, 13, 0x0),
+    gsSP2Triangles(13,  8, 14, 0x0, 13, 14, 15, 0x0),
+    gsSPVertex(goomba_seg8_vertex_0801BC40, 16, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 4,  5,  6, 0x0,  0,  7,  1, 0x0),
+    gsSP2Triangles( 2,  8,  3, 0x0,  9, 10, 11, 0x0),
+    gsSP2Triangles( 9,  6, 12, 0x0,  9, 12, 13, 0x0),
+    gsSP2Triangles( 0,  3, 14, 0x0,  0, 14, 15, 0x0),
+    gsSP2Triangles(11,  2,  1, 0x0, 11,  1,  4, 0x0),
+    gsSPVertex(goomba_seg8_vertex_0801BD40, 8, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
     gsSPEndDisplayList(),
 };

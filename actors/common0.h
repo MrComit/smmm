@@ -155,6 +155,14 @@ extern const Gfx goomba_seg8_dl_0801D360[];
 extern const Gfx goomba_seg8_dl_0801D760[];
 extern const struct Animation *const goomba_seg8_anims_0801DA4C[];
 
+// golden goomba
+extern const GeoLayout golden_goomba_geo[];
+extern const Gfx goomba_golden_body_dl[];
+extern const Gfx goomba_golden_face_dl[];
+extern const Gfx goomba_golden_shoe1_dl[];
+extern const Gfx goomba_golden_shoe2_dl[];
+
+
 // heart
 extern const GeoLayout heart_geo[];
 extern const Gfx heart_seg8_dl_0800DFE0[];
@@ -194,5 +202,9 @@ extern const Collision unknown_seg8_collision_080262F8[];
 #include "crate/geo_header.h"
 
 #include "crate/collision_header.h"
+
+#include "golden_crate/collision_header.h"
+
+#include "golden_crate/geo_header.h"
 
 #endif

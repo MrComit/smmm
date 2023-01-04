@@ -1018,6 +1018,11 @@ void bhv_treadmill_floor_loop(void);
 void bhv_elevator_snufit_loop(void);
 void bhv_elevator_door_loop(void);
 void bhv_elevator_door_init(void);
+void bhv_golden_goomba_init(void);
+void bhv_golden_goomba_update(void);
+void bhv_orange_number_stay_loop(void);
+void bhv_golden_crate_init(void);
+void bhv_golden_crate_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

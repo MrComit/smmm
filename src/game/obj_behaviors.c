@@ -798,6 +798,70 @@ void spawn_orange_number_two_digit_scale(u16 behParam, s16 relX, s16 relY, s16 r
     }
 }
 
+
+void spawn_orange_number_three_digit_scale(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale) {
+    struct Object *orangeNumber, *orangeNumber2, *orangeNumber3;
+    s32 behParamMod;
+
+    if (behParam >= 100) {
+        behParamMod = (behParam % 100);
+        orangeNumber = spawn_object_relative(behParamMod % 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber2 = spawn_object_relative(behParamMod / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber3 = spawn_object_relative(behParam / 100, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber->oF4 = 1;
+        orangeNumber2->oF4 = 3;
+        orangeNumber3->oF4 = 2;
+        orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = orangeNumber3->oFloatF8 = dist;
+        obj_scale(orangeNumber, scale);
+        obj_scale(orangeNumber2, scale);
+        obj_scale(orangeNumber3, scale);
+    } else if (behParam >= 10) {
+        orangeNumber = spawn_object_relative(behParam % 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber2 = spawn_object_relative(behParam / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        orangeNumber->oF4 = 1;
+        orangeNumber2->oF4 = 2;
+        orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = dist;
+        obj_scale(orangeNumber, scale);
+        obj_scale(orangeNumber2, scale);
+    } else {
+        orangeNumber = spawn_object_relative(behParam, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumber);
+        obj_scale(orangeNumber, scale);
+    }
+}
+
+
+
+void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale) {
+    struct Object *orangeNumber, *orangeNumber2, *orangeNumber3;
+    s32 behParamMod;
+
+    if (behParam >= 100) {
+        behParamMod = (behParam % 100);
+        orangeNumber = spawn_object_relative(behParamMod % 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
+        orangeNumber2 = spawn_object_relative(behParamMod / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
+        orangeNumber3 = spawn_object_relative(behParam / 100, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
+        orangeNumber->oF4 = 1;
+        orangeNumber2->oF4 = 3;
+        orangeNumber3->oF4 = 2;
+        orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = orangeNumber3->oFloatF8 = dist;
+        obj_scale(orangeNumber, scale);
+        obj_scale(orangeNumber2, scale);
+        obj_scale(orangeNumber3, scale);
+    } else if (behParam >= 10) {
+        orangeNumber = spawn_object_relative(behParam % 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
+        orangeNumber2 = spawn_object_relative(behParam / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
+        orangeNumber->oF4 = 1;
+        orangeNumber2->oF4 = 2;
+        orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = dist;
+        obj_scale(orangeNumber, scale);
+        obj_scale(orangeNumber2, scale);
+    } else {
+        orangeNumber = spawn_object_relative(behParam, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
+        obj_scale(orangeNumber, scale);
+    }
+}
+
+
 /**
  * Unused variables for debug_sequence_tracker.
  */

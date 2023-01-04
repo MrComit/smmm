@@ -2,6 +2,8 @@
 #include "buffers/buffers.h"
 extern Vec3s gRoomColors[];
 extern struct Object *gComitCutsceneObject;
+void spawn_orange_number_three_digit_scale(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale);
+void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale);
 
 static struct ObjectHitbox sStarPieceHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
@@ -77,10 +79,143 @@ struct ObjectHitbox sCollectHeartHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+struct ObjectHitbox sGoldenGoombaHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
+struct ObjectHitbox sGoldenCrateHitbox = {
+    /* interactType:      */ INTERACT_BREAKABLE,
+    /* downOffset:        */ 20,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 75,
+    /* height:            */ 100,
+    /* hurtboxRadius:     */ 75,
+    /* hurtboxHeight:     */ 100,
+};
+
+extern u8 sGoombaAttackHandlers[][6];
 
 Vec3f sPreviousMarioPos = {0, 0, 0};
 
 u8 sTokenCoins[3] = {10, 50, 100};
+
+
+void bhv_golden_crate_init(void) {
+    u8 challenge = (o->oBehParams >> 8) & 0xFF;
+    if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_golden_crate_loop(void) {
+    obj_set_hitbox(o, &sGoldenCrateHitbox);
+    if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+        obj_explode_and_spawn_coins(46.0f, 1);
+        create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+        save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+        spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+    }
+    if (o->oDistanceToMario < 150.0f) {
+        if (o->oTimer > 25) {
+            struct Object *obj = spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+            switch (o->os16F4) {
+                case 0:
+                    obj->oPosY += 70.0f;
+                    o->os16F4 = 1;
+                    break;
+                case 1:
+                    obj->oPosX += 60.0f;
+                    obj->oPosZ -= 60.0f;
+                    o->os16F4 = 2;
+                    break;
+                case 2:
+                    obj->oPosX -= 60.0f;
+                    obj->oPosZ += 60.0f;
+                    o->os16F4 = 3;
+                    break;
+                case 3:
+                    obj->oPosX -= 60.0f;
+                    obj->oPosZ -= 60.0f;
+                    o->os16F4 = 4;
+                    break;
+                case 4:
+                    obj->oPosX += 60.0f;
+                    obj->oPosZ += 60.0f;
+                    o->os16F4 = 0;
+                    break;
+            }
+            o->oTimer = 0;
+        }
+    }
+}
+
+
+void golden_goomba_behavior(void) {
+    f32 animSpeed;
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(-78);
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os16112, 0x800);
+    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+        o->os16112 = o->oWallAngle; 
+    } else {
+        o->os16112 = approach_s16_symmetric(o->os16112, o->oAngleToMario + 0x8000, 0xC00);
+    }
+    // o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 30.0f, 0.5f);
+    o->oForwardVel = 30.0f;
+    cur_obj_init_animation_with_accel_and_sound(0, 10.0f);
+    cur_obj_play_sound_at_anim_range(2, 17, SOUND_OBJ_GOOMBA_WALK);
+    if (obj_handle_attacks(&sGoldenGoombaHitbox, GOOMBA_ACT_ATTACKED_MARIO,
+                            sGoombaAttackHandlers[o->oGoombaSize & 1])) {
+        o->activeFlags = 0;
+    }
+    // CL_PRINT(0, "%x", o->oWallAngle);
+}
+
+
+
+void bhv_golden_goomba_init(void) {
+    bhv_goomba_init();
+    o->os16110 = 3000;
+    o->oForwardVel = 30.0f;
+    o->oMoveAngleYaw = o->oFaceAngleYaw = obj_angle_to_object(o, gMarioObject) + 0x8000;
+    // obj_set_hitbox(o, &sGoldenGoombaHitbox);
+}
+
+
+void bhv_golden_goomba_update(void) {
+    struct Object *coin;
+    f32 scale;
+    s32 spawnCoins;
+    if (o->os16110 % 10 == 0) {
+        scale = (f32)(o->os16110) / 2500.0f;
+        spawn_orange_number_three_digit_scale_stay(o->os16110 / 10, 0, 0, 0, 50.0f * scale, 0.25f + scale);
+    }
+    o->os16110--;
+    golden_goomba_behavior();
+    if (o->activeFlags == 0) {
+        spawnCoins = (o->os16110 / 10) * 0.15f;
+        if (spawnCoins > 15) {
+            spawnCoins = 15;
+        }
+        gMarioState->numCoins += (o->os16110 / 10) - spawnCoins;
+        for (; spawnCoins > 0; spawnCoins--) {
+            coin = spawn_object(o, MODEL_YELLOW_COIN, bhvSingleCoinGetsSpawned);
+            coin->oVelY = 20.0f + (random_float() * 80.0f);
+        }
+    }
+}
+
 
 
 void bhv_collect_heart_init(void) {

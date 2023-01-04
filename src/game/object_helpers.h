@@ -79,6 +79,7 @@ Gfx *geo_update_opacity_and_color(s32 callContext, struct GraphNode *node, UNUSE
 Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_plathall_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_update_golden_crate(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_openinghall_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_hall_fakewall(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_generate_tight_rope(s32 sp40, struct GraphNode *node, void *context);
