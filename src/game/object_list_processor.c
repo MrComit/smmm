@@ -23,7 +23,7 @@
 #include "puppyprint.h"
 #include "include/config.h"
 #include "dialog_ids.h"
-
+#include "print.h"
 #include "seq_ids.h"
 #include "game_init.h"
 #include "audio/external.h"
@@ -439,7 +439,7 @@ void mario_update_room_clear(struct MarioState *m) {
 extern u32 sPoolFreeSpace;
 //#include "src/engine/math_util.h"
 #include <stdio.h>
-void print_text(s32, s32, char*);
+// void print_text(s32, s32, char*);
 
 f32 intDist;
 Vec3f intersect;
@@ -493,12 +493,13 @@ void bhv_mario_update(void) {
 #endif
 
     if (gMarioState->controller->buttonDown & Z_TRIG) {
-        print_text_fmt_int(80, 6*20, "ABCDEF", 0, 0);
-        print_text_fmt_int(80, 5*20, "GHIJKL", 0, 1);
-        print_text_fmt_int(80, 4*20, "MNOPQR", 0, 2);
-        print_text_fmt_int(80, 3*20, "STUVWX", 0, 3);
-        print_text_fmt_int(80, 2*20, "YZ0123", 0, 4);
-        print_text_fmt_int(80, 1*20, "456789", 0, 5);
+        print_text_fmt_int(80, 8*20, "ABCDEF", 0, 0);
+        print_text_fmt_int(80, 7*20, "GHIJKL", 0, 1);
+        print_text_fmt_int(80, 6*20, "MNOPQR", 0, 2);
+        print_text_fmt_int(80, 5*20, "STUVWX", 0, 3);
+        print_text_fmt_int(80, 4*20, "YZ0123", 0, 4);
+        print_text_fmt_int(80, 3*20, "456789", 0, 5);
+        print_text_fmt_int(80, 2*20, ".?!", 0, 0);
     }
 }
 

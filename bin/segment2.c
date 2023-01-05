@@ -208,7 +208,7 @@ ALIGNED8 static const Texture texture_hud_char_double_quote[] = {
 
 
 ALIGNED8 static const Texture texture_hud_char_exclamation[] = {
-#include "textures/segment2/segment2.04C00.rgba16.inc.c"// JP !
+#include "textures/segment2/CUSTOM_segment2.04C00.rgba16.inc.c"// JP !
 };
 
 ALIGNED8 static const Texture texture_hud_char_double_exclamation[] = {
@@ -216,7 +216,7 @@ ALIGNED8 static const Texture texture_hud_char_double_exclamation[] = {
 };
 
 ALIGNED8 static const Texture texture_hud_char_question[] = {
-#include "textures/segment2/segment2.05000.rgba16.inc.c"// JP ?
+#include "textures/segment2/CUSTOM_segment2.05000.rgba16.inc.c"// JP ?
 };
 
 ALIGNED8 static const Texture texture_hud_char_ampersand[] = {
