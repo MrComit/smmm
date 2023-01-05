@@ -410,7 +410,7 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 
 Vec3s sTextPalettes[] = {
     {60, 180, 60}, // green
-    {180, 60, 60}, // red
+    {215, 50, 50}, // red
     {60, 60, 180}, // blue (purple)
     {60, 170, 180}, // teal
     {215, 98, 20}, // orange db620d (180, 115, 60)
