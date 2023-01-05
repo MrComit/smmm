@@ -49,6 +49,11 @@ struct LandingAction sLongJumpLandAction = {
     6, 5, ACT_FREEFALL, ACT_LONG_JUMP_LAND_STOP, ACT_LONG_JUMP, ACT_FREEFALL, ACT_BEGIN_SLIDING,
 };
 
+
+struct LandingAction sLongJumpLandNoZAction = {
+    6, 5, ACT_FREEFALL, ACT_LONG_JUMP_LAND_STOP, ACT_JUMP, ACT_FREEFALL, ACT_BEGIN_SLIDING,
+};
+
 struct LandingAction sDoubleJumpLandAction = {
     4, 5, ACT_FREEFALL, ACT_DOUBLE_JUMP_LAND_STOP, ACT_JUMP, ACT_FREEFALL, ACT_BEGIN_SLIDING,
 };
@@ -1872,12 +1877,18 @@ s32 act_long_jump_land(struct MarioState *m) {
     }
 #endif
 
-    if (!(m->input & INPUT_Z_DOWN)) {
-        m->input &= ~INPUT_A_PRESSED;
-    }
+    // if (!(m->input & INPUT_Z_DOWN)) {
+    //     m->input &= ~INPUT_A_PRESSED;
+    // }
     if (m->floor->type != SURFACE_PERMA_SHALLOW_QUICKSAND) {
-        if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
-            return TRUE;
+        if (m->input & INPUT_Z_DOWN) {
+            if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
+                return TRUE;
+            }
+        } else {
+            if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
+                return TRUE;
+            }
         }
     }
 
