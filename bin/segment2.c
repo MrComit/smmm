@@ -46,152 +46,152 @@ const u8 *const puppyprint_kerning_lut[2][80] = {
 
 
 ALIGNED8 static const Texture texture_hud_char_0[] = {
-#include "textures/segment2/segment2.00000.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00000.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_1[] = {
-#include "textures/segment2/segment2.00200.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00200.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_2[] = {
-#include "textures/segment2/segment2.00400.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00400.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_3[] = {
-#include "textures/segment2/segment2.00600.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00600.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_4[] = {
-#include "textures/segment2/segment2.00800.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00800.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_5[] = {
-#include "textures/segment2/segment2.00A00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00A00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_6[] = {
-#include "textures/segment2/segment2.00C00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00C00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_7[] = {
-#include "textures/segment2/segment2.00E00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.00E00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_8[] = {
-#include "textures/segment2/segment2.01000.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01000.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_9[] = {
-#include "textures/segment2/segment2.01200.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01200.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_A[] = {
-#include "textures/segment2/segment2.01400.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01400.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_B[] = {
-#include "textures/segment2/segment2.01600.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01600.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_C[] = {
-#include "textures/segment2/segment2.01800.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01800.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_D[] = {
-#include "textures/segment2/segment2.01A00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01A00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_E[] = {
-#include "textures/segment2/segment2.01C00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01C00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_F[] = {
-#include "textures/segment2/segment2.01E00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.01E00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_G[] = {
-#include "textures/segment2/segment2.02000.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02000.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_H[] = {
-#include "textures/segment2/segment2.02200.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02200.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_I[] = {
-#include "textures/segment2/segment2.02400.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02400.rgba16.inc.c"
 };
 
 
 ALIGNED8 static const Texture texture_hud_char_J[] = {
-#include "textures/segment2/segment2.02600.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02600.rgba16.inc.c"
 };
 
 
 ALIGNED8 static const Texture texture_hud_char_K[] = {
-#include "textures/segment2/segment2.02800.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02800.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_L[] = {
-#include "textures/segment2/segment2.02A00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02A00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_M[] = {
-#include "textures/segment2/segment2.02C00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02C00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_N[] = {
-#include "textures/segment2/segment2.02E00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.02E00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_O[] = {
-#include "textures/segment2/segment2.03000.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03000.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_P[] = {
-#include "textures/segment2/segment2.03200.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03200.rgba16.inc.c"
 };
 
 
 ALIGNED8 static const Texture texture_hud_char_Q[] = {
-#include "textures/segment2/segment2.03400.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03400.rgba16.inc.c"
 };
 
 
 ALIGNED8 static const Texture texture_hud_char_R[] = {
-#include "textures/segment2/segment2.03600.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03600.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_S[] = {
-#include "textures/segment2/segment2.03800.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03800.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_T[] = {
-#include "textures/segment2/segment2.03A00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03A00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_U[] = {
-#include "textures/segment2/segment2.03C00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03C00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_V[] = {
-#include "textures/segment2/segment2.03E00.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.03E00.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_W[] = {
-#include "textures/segment2/segment2.04000.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.04000.rgba16.inc.c"
 };
 
 
 ALIGNED8 static const Texture texture_hud_char_X[] = {
-#include "textures/segment2/segment2.04200.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.04200.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_Y[] = {
-#include "textures/segment2/segment2.04400.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.04400.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_Z[] = {
-#include "textures/segment2/segment2.04600.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.04600.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_apostrophe[] = {
@@ -228,7 +228,7 @@ ALIGNED8 static const Texture texture_hud_char_percent[] = {
 };
 
 ALIGNED8 static const Texture texture_hud_char_multiply[] = {
-#include "textures/segment2/segment2.05600.rgba16.inc.c"
+#include "textures/segment2/CUSTOM_segment2.05600.rgba16.inc.c"
 };
 
 ALIGNED8 static const Texture texture_hud_char_coin[] = {
@@ -2137,7 +2137,7 @@ const Gfx dl_hud_img_load_tex_block[] = {
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 16 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 4, 2),
     gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (16 - 1) << G_TEXTURE_IMAGE_FRAC),
     gsSPEndDisplayList(),
 };
@@ -2351,7 +2351,7 @@ static const Vtx vertex_billboard_num[] = {
 // 0x0200EFF0 - 0x0200F038
 const Gfx dl_billboard_num_begin[] = {
     gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsDPSetCombineMode(G_CC_FADEA, G_CC_FADEA),
     gsSPClearGeometryMode(G_LIGHTING),
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
     gsSPTexture(0x8000, 0x8000, 0, G_TX_RENDERTILE, G_ON),

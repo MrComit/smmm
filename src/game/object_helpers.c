@@ -1431,6 +1431,33 @@ Gfx *geo_city_window_opacity(s32 callContext, struct GraphNode *node, UNUSED voi
     return dlStart;
 }
 
+extern Vec3s sTextPalettes[];
+
+Gfx *geo_set_number_palette(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    struct Object *obj;
+    s8 r, g, b;
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+        currentGraphNode->fnNode.node.flags = 0x400 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        r = sTextPalettes[obj->oFC][0] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC);
+        g = sTextPalettes[obj->oFC][1] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC + 1);
+        b = sTextPalettes[obj->oFC][2] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC + 2);
+
+        gDPSetEnvColor(dlHead++, r, g, b, 0xFF);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
 
 /**
  * @bug Every geo function declares the 3 parameters of callContext, node, and

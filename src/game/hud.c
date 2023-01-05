@@ -61,7 +61,7 @@ void print_fps(s32 x, s32 y) {
     #ifdef PUPPYPRINT
     print_small_text(x, y, text, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);
     #else
-    print_text(x, y, text);
+    print_text(x, y, text, 0);
     #endif
 
 }
@@ -962,9 +962,9 @@ void render_hud_power_meter(void) {
  * Renders the amount of lives Mario has.
  */
 void render_hud_mario_lives(void) {
-    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), HUD_TOP_Y, ","); // 'Mario Head' glyph
-    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), HUD_TOP_Y, "%d", gHudDisplay.lives);
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(22), HUD_TOP_Y, ",", 0); // 'Mario Head' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(38), HUD_TOP_Y, "*", 0); // 'X' glyph
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), HUD_TOP_Y, "%d", gHudDisplay.lives, 0);
 }
 
 /**
@@ -972,9 +972,9 @@ void render_hud_mario_lives(void) {
  */
 void render_hud_coins(void) {
     s32 hudY = gHudTopY;
-    print_text(168+30, hudY, "+"); // 'Coin' glyph
-    print_text(184+30, hudY, "*"); // 'X' glyph
-    print_text_fmt_int(198+30, hudY, "%d", gHudDisplay.coins);
+    print_text(168+30, hudY, "+", 0); // 'Coin' glyph
+    print_text(184+30, hudY, "*", 0); // 'X' glyph
+    print_text_fmt_int(198+30, hudY, "%d", gHudDisplay.coins, 0);
 }
 
 #ifdef VERSION_JP
@@ -991,9 +991,9 @@ void render_hud_stars(void) {
     s32 hudY = gHudTopY;
     calculate_num_currency();
 
-    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(gHudStarsX), hudY, "-"); // 'Star' glyph
+    print_text(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(gHudStarsX), hudY, "-", 0); // 'Star' glyph
 
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(gHudStarsX + 16), hudY, "%d", gMarioState->numStars);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(gHudStarsX + 16), hudY, "%d", gMarioState->numStars, 0);
 }
 
 /**
@@ -1003,7 +1003,7 @@ void render_hud_keys(void) {
     s16 i;
     s16 keyCount = CL_count_bits(save_file_get_keys(0)) - CL_count_bits(save_file_get_keys(1));
     for (i = 0; i < keyCount; i++) {
-        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(30) - (i * 6), 15, "/"); // unused glyph - beta key
+        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(30) - (i * 6), 15, "/", 0); // unused glyph - beta key
     }
 }
 
@@ -1020,22 +1020,22 @@ void render_hud_timer(void) {
 #ifdef VERSION_EU
     switch (eu_get_language()) {
         case LANGUAGE_ENGLISH:
-            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME");
+            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME", 0);
             break;
         case LANGUAGE_FRENCH:
-            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(155), 185, "TEMPS");
+            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(155), 185, "TEMPS", 0);
             break;
         case LANGUAGE_GERMAN:
-            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "ZEIT");
+            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "ZEIT", 0);
             break;
     }
 #else
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME");
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME", 0);
 #endif
 
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 185, "%0d", timerMins);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 185, "%02d", timerSecs);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%d", timerFracSecs);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 185, "%0d", timerMins, 0);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 185, "%02d", timerSecs, 0);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%d", timerFracSecs, 0);
 
     gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
     render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 32, (*hudLUT)[GLYPH_APOSTROPHE]);
@@ -1141,13 +1141,13 @@ void render_hud(void) {
 
         // if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES)
         // {
-        //     print_text(10, 40, "SURFACE POOL FULL");
+        //     print_text(10, 40, "SURFACE POOL FULL", 0);
         // }
         // if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_NODES)
         // {
-        //     print_text(10, 60, "SURFACE NODE POOL FULL");
+        //     print_text(10, 60, "SURFACE NODE POOL FULL", 0);
         // }
-        //print_text_fmt_int(10, 10, "%d", gPointLightCompatibilityMode);
+        //print_text_fmt_int(10, 10, "%d", gPointLightCompatibilityMode, 0);
     }
 }
 
@@ -1189,7 +1189,7 @@ void render_s2d_room_names(void) {
             gRoomEntryTimer = -1;
         }
     }
-    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]);*/
+    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1], 0);*/
 }
 
 
@@ -1206,7 +1206,7 @@ uObjMtx starpiecebuf[0x8];
 
 /*void render_s2d_hud(void) {
     s16 i, h;
-    //print_text_fmt_int(20, 20, "%d", main_pool_available());
+    //print_text_fmt_int(20, 20, "%d", main_pool_available(), 0);
     if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE) {
         starpiece_chart_bg.b.frameX = approach_s16_symmetric(starpiece_chart_bg.b.frameX, 0<<2, 4<<2);
     } else {

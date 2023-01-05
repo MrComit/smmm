@@ -283,7 +283,7 @@ void bhv_spike_loop(void) {
     obj_handle_attacks(&sTreehouseSpikeHitbox, o->oAction, sSpikeAttackHandler);
     obj_update_standard_actions(1.0f);
     // o->header.gfx.scale[1] = 0.5f;
-    // print_text_fmt_int(80, 80, "%x", (s32)o->prevObj);
+    // print_text_fmt_int(80, 80, "%x", (s32)o->prevObj, 0);
     if (o->activeFlags == 0 && (o->oBehParams >> 24) & 0xFF) {
         obj = spawn_object(o, MODEL_ENV_FLAME, bhvTreehouseFlame);
         obj->oBehParams2ndByte = (o->oBehParams >> 24) - 1;

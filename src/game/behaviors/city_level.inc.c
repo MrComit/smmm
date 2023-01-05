@@ -716,9 +716,9 @@ void bhv_gallery_handler_loop(void) {
                 o->os16F8 = 20 + (coss(o->os16FA) * 2);
             }
 
-            print_text_fmt_int(o->os16F8, o->os16F6, "TIME  %d", o->os16F4 / 30);
-            //print_text_fmt_int(20, 200, "POINTS %d", o->os16F6);
-            //print_text_fmt_int(20, 215, "GOAL %d", MINIGAME_GOAL);
+            print_text_fmt_int(o->os16F8, o->os16F6, "TIME  %d", o->os16F4 / 30, 0);
+            //print_text_fmt_int(20, 200, "POINTS %d", o->os16F6, 0);
+            //print_text_fmt_int(20, 215, "GOAL %d", MINIGAME_GOAL, 0);
             if (o->os16F4 <= 0) {
                 o->oAction = 2;
             }
@@ -1240,10 +1240,10 @@ void shyguy_boss_multiplier_loop(void) {
     if (gMarioCurrentRoom == o->oRoom)
         gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
 
-    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C);
-    print_text(184+30, 169+20, ".");
-    print_text_fmt_int(198+30, 169+20, "%d", o->os16110);
-    print_text(212+30, 169+20, "*"); // 'X' glyph
+    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C, 0);
+    print_text(184+30, 169+20, ".", 0);
+    print_text_fmt_int(198+30, 169+20, "%d", o->os16110, 0);
+    print_text(212+30, 169+20, "*", 0); // 'X' glyph
 
     if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
         || gMarioState->action == ACT_BURNING_GROUND) {

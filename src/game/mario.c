@@ -1291,12 +1291,12 @@ void debug_print_speed_action_normal(struct MarioState *m) {
             ((m->floor->normal.x * m->floor->normal.x) + (m->floor->normal.z * m->floor->normal.z)));
         floor_nY = m->floor->normal.y;
 
-        print_text_fmt_int(210, 88, "ANG %d", (atan2s(floor_nY, steepness) * 180.0f) / 32768.0f);
+        print_text_fmt_int(210, 88, "ANG %d", (atan2s(floor_nY, steepness) * 180.0f) / 32768.0, 0);
 
-        print_text_fmt_int(210, 72, "SPD %d", m->forwardVel);
+        print_text_fmt_int(210, 72, "SPD %d", m->forwardVel, 0);
 
         // STA short for "status," the official action name via SMS map.
-        print_text_fmt_int(210, 56, "STA %x", (m->action & ACT_ID_MASK));
+        print_text_fmt_int(210, 56, "STA %x", (m->action & ACT_ID_MASK), 0);
     }
 }
 

@@ -450,14 +450,14 @@ void shadow_boss_multiplier_loop(void) {
     s32 action = FALSE;
     if (gMarioCurrentRoom == o->oRoom)
         gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
-    //print_text(168+30, 189, "+"); // 'Coin' glyph
-    //print_text(184+30, 189, "*"); // 'X' glyph
-    //print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins);
+    //print_text(168+30, 189, "+", 0); // 'Coin' glyph
+    //print_text(184+30, 189, "*", 0); // 'X' glyph
+    //print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins, 0);
 
-    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C);
-    print_text(184+30, 169+20, ".");
-    print_text_fmt_int(198+30, 169+20, "%d", o->os16110);
-    print_text(212+30, 169+20, "*"); // 'X' glyph
+    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C, 0);
+    print_text(184+30, 169+20, ".", 0);
+    print_text_fmt_int(198+30, 169+20, "%d", o->os16110, 0);
+    print_text(212+30, 169+20, "*", 0); // 'X' glyph
 
     if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
         || gMarioState->action == ACT_BURNING_GROUND) {

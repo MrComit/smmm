@@ -112,11 +112,11 @@ void print_text_array_info(s16 *printState, const char *str, s32 number) {
         if ((printState[DEBUG_PSTATE_Y_CURSOR] < printState[DEBUG_PSTATE_MIN_Y_CURSOR])
             || (printState[DEBUG_PSTATE_MAX_X_CURSOR] < printState[DEBUG_PSTATE_Y_CURSOR])) {
             print_text(printState[DEBUG_PSTATE_X_CURSOR], printState[DEBUG_PSTATE_Y_CURSOR],
-                       "DPRINT OVER");
+                       "DPRINT OVER", 0);
             printState[DEBUG_PSTATE_DISABLED]++; // why not just = TRUE...
         } else {
             print_text_fmt_int(printState[DEBUG_PSTATE_X_CURSOR], printState[DEBUG_PSTATE_Y_CURSOR],
-                               str, number);
+                               str, number, 0);
             printState[DEBUG_PSTATE_Y_CURSOR] += printState[DEBUG_PSTATE_LINE_Y_OFFSET];
         }
     }

@@ -19,13 +19,49 @@ u16 CL_RandomMinMaxU16(u16 min, u16 max) {
     return (num % ((max + 1) - min)) + min;
 }
 
+
+u16 random_u16_seeded(u16 seed) {
+    u16 temp1, temp2;
+
+    if (seed == 22026) {
+        seed = 0;
+    }
+
+    temp1 = (seed & 0x00FF) << 8;
+    temp1 = temp1 ^ seed;
+
+    seed = ((temp1 & 0x00FF) << 8) + ((temp1 & 0xFF00) >> 8);
+
+    temp1 = ((temp1 & 0x00FF) << 1) ^ seed;
+    temp2 = (temp1 >> 1) ^ 0xFF80;
+
+    if ((temp1 & 1) == 0) {
+        if (temp2 == 43605) {
+            seed = 0;
+        } else {
+            seed = temp2 ^ 0x1FF4;
+        }
+    } else {
+        seed = temp2 ^ 0x8180;
+    }
+
+    return seed;
+}
+
+
+u16 CL_RandomMinMaxU16Seeded(u16 min, u16 max, u16 seed) {
+    u16 num = random_u16_seeded(seed);
+    return (num % ((max + 1) - min)) + min;
+}
+
+
 void CL_kill_mario() {
     gMarioState->hurtCounter = 0xFF;
 }
 
 //
 u8 CL_run_timer(u16 timer) {
-    print_text_fmt_int(120, 210, "%d", timer / 30);
+    print_text_fmt_int(120, 210, "%d", timer / 30, 0);
     timer--;
     if (!timer)
         return TRUE;

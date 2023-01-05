@@ -464,7 +464,7 @@ void bhv_mario_update(void) {
         mario_l_to_levitate();
     #endif
 
-    //print_text_fmt_int(20, 80, "%x", sPoolFreeSpace);
+    //print_text_fmt_int(20, 80, "%x", sPoolFreeSpace, 0);
 
     particleFlags = execute_mario_action(gCurrentObject);
 
@@ -491,6 +491,15 @@ void bhv_mario_update(void) {
         gCamera->comitCutscene = 10;
     }
 #endif
+
+    if (gMarioState->controller->buttonDown & Z_TRIG) {
+        print_text_fmt_int(80, 6*20, "ABCDEF", 0, 0);
+        print_text_fmt_int(80, 5*20, "GHIJKL", 0, 1);
+        print_text_fmt_int(80, 4*20, "MNOPQR", 0, 2);
+        print_text_fmt_int(80, 3*20, "STUVWX", 0, 3);
+        print_text_fmt_int(80, 2*20, "YZ0123", 0, 4);
+        print_text_fmt_int(80, 1*20, "456789", 0, 5);
+    }
 }
 
 /**

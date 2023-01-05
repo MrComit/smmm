@@ -281,10 +281,10 @@ void bully_boss_multiplier_loop(void) {
     if (gMarioCurrentRoom == o->oRoom)
         gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
 
-    print_text_fmt_int(168+30, 169+20, "%d", (s32)sBullyMultiplier);
-    print_text(184+30, 169+20, ".");
-    print_text_fmt_int(198+30, 169+20, "%d", sBullyFraction);
-    print_text(212+30, 169+20, "*"); // 'X' glyph
+    print_text_fmt_int(168+30, 169+20, "%d", (s32)sBullyMultiplier, 0);
+    print_text(184+30, 169+20, ".", 0);
+    print_text_fmt_int(198+30, 169+20, "%d", sBullyFraction, 0);
+    print_text(212+30, 169+20, "*", 0); // 'X' glyph
 
     if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
         || gMarioState->action == ACT_BURNING_GROUND) {

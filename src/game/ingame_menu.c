@@ -2249,8 +2249,8 @@ void render_pause_green_coins(void) {
     gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
-    print_text(GREEN_COINS_HUD_X+10, GREEN_COINS_HUD_Y, "*"); // 'X' glyph
-    print_text_fmt_int(GREEN_COINS_HUD_X+24, GREEN_COINS_HUD_Y, "%d", gGreenCoinsCollected);
+    print_text(GREEN_COINS_HUD_X+10, GREEN_COINS_HUD_Y, "*", 0); // 'X' glyph
+    print_text_fmt_int(GREEN_COINS_HUD_X+24, GREEN_COINS_HUD_Y, "%d", gGreenCoinsCollected, 0);
 }
 
 
@@ -3367,5 +3367,5 @@ void print_room_names(void) {
             gRoomEntryTimer = -1;
         }
     }
-    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1]);
+    //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1], 0);
 }

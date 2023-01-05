@@ -16,6 +16,7 @@ struct TextLabel {
     u32 y;
     s16 length;
     char buffer[50];
+    s8 palette;
 };
 
 /**
@@ -165,7 +166,7 @@ void parse_width_field(const char *str, s32 *srcIndex, u8 *width, s8 *zeroPad) {
  * Warning: this fails on too large numbers, because format_integer has bugs
  * related to overflow. For romhacks, prefer sprintf + print_text.
  */
-void print_text_fmt_int(s32 x, s32 y, const char *str, s32 n) {
+void print_text_fmt_int(s32 x, s32 y, const char *str, s32 n, s32 palette) {
     char c = 0;
     s8 zeroPad = FALSE;
     u8 width = 0;
@@ -212,13 +213,16 @@ void print_text_fmt_int(s32 x, s32 y, const char *str, s32 n) {
     }
 
     sTextLabels[sTextLabelsCount]->length = len;
+    sTextLabels[sTextLabelsCount]->palette = palette;
+    
+
     sTextLabelsCount++;
 }
 
 /**
  * Prints text in the colorful lettering at given X, Y coordinates.
  */
-void print_text(s32 x, s32 y, const char *str) {
+void print_text(s32 x, s32 y, const char *str, s32 palette) {
     char c = 0;
     s32 length = 0;
     s32 srcIndex = 0;
@@ -243,13 +247,14 @@ void print_text(s32 x, s32 y, const char *str) {
     }
 
     sTextLabels[sTextLabelsCount]->length = length;
+    sTextLabels[sTextLabelsCount]->palette = palette;
     sTextLabelsCount++;
 }
 
 /**
  * Prints text in the colorful lettering centered at given X, Y coordinates.
  */
-void print_text_centered(s32 x, s32 y, const char *str) {
+void print_text_centered(s32 x, s32 y, const char *str, s32 palette) {
     char c = 0;
     UNUSED s8 unused1 = 0;
     UNUSED s32 unused2 = 0;
@@ -275,6 +280,7 @@ void print_text_centered(s32 x, s32 y, const char *str) {
     sTextLabels[sTextLabelsCount]->length = length;
     sTextLabels[sTextLabelsCount]->x = x - length * 12 / 2;
     sTextLabels[sTextLabelsCount]->y = y;
+    sTextLabels[sTextLabelsCount]->palette = palette;
     sTextLabelsCount++;
 }
 
@@ -401,6 +407,25 @@ void render_textrect(s32 x, s32 y, s32 pos) {
                         (rectY + 15) << 2, G_TX_RENDERTILE, 0, 0, 4 << 10, 1 << 10);
 }
 
+
+Vec3s sTextPalettes[] = {
+    {60, 180, 60}, // green
+    {180, 60, 60}, // red
+    {60, 60, 180}, // blue (purple)
+    {60, 170, 180}, // teal
+    {215, 98, 20}, // orange db620d (180, 115, 60)
+    {180, 60, 163}, // pink
+};
+
+
+s32 glyph_index_is_special(s8 glyphIndex) {
+    if (glyphIndex >= GLYPH_COIN && glyphIndex <= GLYPH_BETA_KEY && glyphIndex != GLYPH_PERIOD) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
 /**
  * Renders the text in sTextLabels on screen at the proper locations by iterating
  * a for loop.
@@ -408,6 +433,7 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 void render_text_labels(void) {
     s32 i;
     s32 j;
+    s16 r, r1, g, g1, b, b1;
     s8 glyphIndex;
     Mtx *mtx;
     Gfx* dlhead = gDisplayListHead;
@@ -426,37 +452,32 @@ void render_text_labels(void) {
     guOrtho(mtx, 0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT, -10.0f, 10.0f, 1.0f);
     gSPPerspNormalize((Gfx *) (dlhead++), 0xFFFF);
     gSPMatrix(dlhead++, VIRTUAL_TO_PHYSICAL(mtx), G_MTX_PROJECTION | G_MTX_LOAD | G_MTX_NOPUSH);
-    gSPDisplayList(dlhead++, dl_hud_img_begin);
+    gSPDisplayList(dlhead++, dl_rgba16_text_begin);
     gDisplayListHead = dlhead;
     for (i = 0; i < sTextLabelsCount; i++) {
+        r = sTextPalettes[sTextLabels[i]->palette][0];
+        g = sTextPalettes[sTextLabels[i]->palette][1];
+        b = sTextPalettes[sTextLabels[i]->palette][2];
         for (j = 0; j < sTextLabels[i]->length; j++) {
             glyphIndex = char_to_glyph_index(sTextLabels[i]->buffer[j]);
-
+            if (glyph_index_is_special(glyphIndex)) {
+                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            } else {
+                r1 = r + CL_RandomMinMaxU16Seeded(0, 40, j + sTextLabels[i]->palette);
+                g1 = g + CL_RandomMinMaxU16Seeded(0, 40, j + sTextLabels[i]->palette + 1);
+                b1 = b + CL_RandomMinMaxU16Seeded(0, 40, j + sTextLabels[i]->palette + 2);
+                gDPSetEnvColor(gDisplayListHead++, r1, g1, b1, 255);
+            }
             if (glyphIndex != GLYPH_SPACE) {
-#ifdef VERSION_EU
-                // Beta Key was removed by EU, so glyph slot reused.
-                // This produces a colorful Ü.
-                if (glyphIndex == GLYPH_BETA_KEY) {
-                    add_glyph_texture(GLYPH_U);
-                    render_textrect(sTextLabels[i]->x, sTextLabels[i]->y, j);
-
-                    add_glyph_texture(GLYPH_UMLAUT);
-                    render_textrect(sTextLabels[i]->x, sTextLabels[i]->y + 3, j);
-                } else {
-                    add_glyph_texture(glyphIndex);
-                    render_textrect(sTextLabels[i]->x, sTextLabels[i]->y, j);
-                }
-#else
                 add_glyph_texture(glyphIndex);
                 render_textrect(sTextLabels[i]->x, sTextLabels[i]->y, j);
-#endif
             }
         }
 
         mem_pool_free(gEffectsMemoryPool, sTextLabels[i]);
     }
 
-    gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
     sTextLabelsCount = 0;
 }

@@ -6583,6 +6583,7 @@ const BehaviorScript bhvPeepaNumber[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BILLBOARD(),
     SET_HOME(),
+    SET_INT(oFC, 1),
     //CALL_NATIVE(bhv_peepa_number_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_peepa_number_loop),

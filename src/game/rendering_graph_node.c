@@ -1598,7 +1598,7 @@ void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor) 
         gCurGraphNodeRoot = NULL;
         if (gShowDebugText) {
             print_text_fmt_int(180, 36, "MEM %d",
-                               gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace);
+                               gDisplayListHeap->totalSpace - gDisplayListHeap->usedSpace, 0);
         }
         main_pool_free(gDisplayListHeap);
     }

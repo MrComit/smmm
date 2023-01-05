@@ -116,16 +116,16 @@ void print_intro_text(void) {
     if ((gGlobalTimer & 31) < 20) {
         if (gControllerBits == 0) {
 #ifdef VERSION_EU
-            print_text_centered(SCREEN_WIDTH / 2, 20, gNoControllerMsg[language]);
+            print_text_centered(SCREEN_WIDTH / 2, 20, gNoControllerMsg[language], 0);
 #else
-            print_text_centered(SCREEN_WIDTH / 2, 20, "NO CONTROLLER");
+            print_text_centered(SCREEN_WIDTH / 2, 20, "NO CONTROLLER", 0);
 #endif
         } else {
 #ifdef VERSION_EU
             print_text(20, 20, "START");
 #else
-            print_text_centered(60, 38, "PRESS");
-            print_text_centered(60, 20, "START");
+            print_text_centered(60, 38, "PRESS", 0);
+            print_text_centered(60, 20, "START", 0);
 #endif
         }
     }

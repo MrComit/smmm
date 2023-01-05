@@ -1821,7 +1821,7 @@ static s32 act_intro_cutscene(struct MarioState *m) {
             m->marioBodyState->headAngle[1] = approach_s16_symmetric(m->marioBodyState->headAngle[1], 0xF000, 0x100);
             //m->marioBodyState->headAngle[1] = approach_s16_symmetric(m->marioBodyState->headAngle[1], 0, 0x200);
             //m->marioBodyState->headAngle[0] = 0;
-            //print_text_fmt_int(80, 80, "%d", m->marioBodyState->headAngle[1]);
+            //print_text_fmt_int(80, 80, "%d", m->marioBodyState->headAngle[1], 0);
             break;
         case INTRO_CUTSCENE_SET_MARIO_TO_IDLE:
             m->marioBodyState->headAngle[0] = 0;

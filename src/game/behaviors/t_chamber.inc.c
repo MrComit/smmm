@@ -323,10 +323,10 @@ void bhv_big_swinging_plat_loop(void) {
 //     //     //dir
 //     //     s32 angle = atan2s(o->oFloat100, o->oFloatFC);
 //     //     o->os16F6 = approach_s16_symmetric(o->os16F6, angle, 0x100);
-//     //     print_text_fmt_int(80, 50, "atan2s %x", o->os16F6);
-//     //     print_text_fmt_int(80, 100, "mag %d", (s32)o->oFloatF8);
-//     //     print_text_fmt_int(80, 140, "x %d", (s32)o->oFloatFC);
-//     //     print_text_fmt_int(80, 180, "z %d", (s32)o->oFloat100);
+//     //     print_text_fmt_int(80, 50, "atan2s %x", o->os16F6, 0);
+//     //     print_text_fmt_int(80, 100, "mag %d", (s32)o->oFloatF8, 0);
+//     //     print_text_fmt_int(80, 140, "x %d", (s32)o->oFloatFC, 0);
+//     //     print_text_fmt_int(80, 180, "z %d", (s32)o->oFloat100, 0);
 //     // }
 //     // f32 dist = approach_f32_symmetric(dist, 1000.0f, (o->oFloatF8 / 30.0f));
 //     // o->oPosX = o->oHomeX + dist * sins(o->os16F6);
@@ -388,8 +388,8 @@ void bhv_big_swinging_plat_loop(void) {
 //             /* slowdown       */ 3.0f);
 //     }
 
-//         print_text_fmt_int(80, 140, "x %d", (s32)o->oFloatF4);
-//         print_text_fmt_int(80, 180, "z %d", (s32)o->oFloatF8);
+//         print_text_fmt_int(80, 140, "x %d", (s32)o->oFloatF4, 0);
+//         print_text_fmt_int(80, 180, "z %d", (s32)o->oFloatF8, 0);
 
 
 //     // f32 homeD = o->oHomeX * sins(o->oFaceAngleYaw) + o->oHomeZ * coss(o->oFaceAngleYaw);

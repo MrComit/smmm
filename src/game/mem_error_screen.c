@@ -54,7 +54,7 @@ Gfx *geo18_display_error_message(u32 run, UNUSED struct GraphNode *sp44, UNUSED 
     if (run) {
         if (gDelayForErrorMessage > 0) {
             // Draw color text title.
-            print_text(10, 210, "ERROR    Need more memory");
+            print_text(10, 210, "ERROR    Need more memory", 0);
 
             // Init generic text rendering
             create_dl_ortho_matrix();

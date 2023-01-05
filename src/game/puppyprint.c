@@ -914,7 +914,7 @@ void render_multi_image(Texture *image, s32 x, s32 y, s32 width, s32 height, UNU
         }
         num /= 2;
         if (num == 1) {
-            print_text(32, 32, "IMAGE WIDTH FAILURE");
+            print_text(32, 32, "IMAGE WIDTH FAILURE", 0);
             return;
         }
     }
@@ -930,7 +930,7 @@ void render_multi_image(Texture *image, s32 x, s32 y, s32 width, s32 height, UNU
         num *= 2;
         maskW++;
         if (maskW == 9) {
-            print_text(32, 32, "WIDTH MASK FAILURE");
+            print_text(32, 32, "WIDTH MASK FAILURE", 0);
             return;
         }
     }
@@ -943,7 +943,7 @@ void render_multi_image(Texture *image, s32 x, s32 y, s32 width, s32 height, UNU
         num *= 2;
         maskH++;
         if (maskH == 9) {
-            print_text(32, 32, "HEIGHT MASK FAILURE");
+            print_text(32, 32, "HEIGHT MASK FAILURE", 0);
             return;
         }
     }
