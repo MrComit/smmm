@@ -1881,14 +1881,9 @@ s32 act_long_jump_land(struct MarioState *m) {
     //     m->input &= ~INPUT_A_PRESSED;
     // }
     if (m->floor->type != SURFACE_PERMA_SHALLOW_QUICKSAND) {
-        if (m->input & INPUT_Z_DOWN) {
-            if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
-                return TRUE;
-            }
-        } else {
-            if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
-                return TRUE;
-            }
+        sLongJumpLandAction.aPressedAction = m->input & INPUT_Z_DOWN ? ACT_LONG_JUMP : ACT_JUMP;
+        if (common_landing_cancels(m, &sLongJumpLandAction, set_jumping_action)) {
+            return TRUE;
         }
     }
 
