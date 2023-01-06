@@ -1439,7 +1439,7 @@ Gfx *geo_set_number_palette(s32 callContext, struct GraphNode *node, UNUSED void
     struct GraphNodeGenerated *currentGraphNode;
     struct Object *obj;
     s32 hue;
-    s8 r, g, b;
+    s16 r, g, b;
     dlStart = NULL;
 
     if (callContext == GEO_CONTEXT_RENDER) {

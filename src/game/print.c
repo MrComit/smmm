@@ -438,8 +438,17 @@ struct HSV *sTextPalettes[] = {
 // };
 
 
-s32 glyph_index_is_special(s8 glyphIndex) {
+s32 glyph_handle_special_palette(s8 glyphIndex, s16 *r, s16 *g, s16 *b) {
     if (glyphIndex >= GLYPH_COIN && glyphIndex <= GLYPH_BETA_KEY && glyphIndex != GLYPH_PERIOD) {
+        if (glyphIndex == GLYPH_COIN || glyphIndex == GLYPH_STAR) {
+            *r = 255;
+            *g = 205;
+            *b = 70;
+        } else {
+            *r = 255;
+            *g = 255;
+            *b = 255;
+        }
         return TRUE;
     } else {
         return FALSE;
@@ -479,13 +488,13 @@ void render_text_labels(void) {
         palette = sTextLabels[i]->palette;
         for (j = 0; j < sTextLabels[i]->length; j++) {
             glyphIndex = char_to_glyph_index(sTextLabels[i]->buffer[j]);
-            if (glyph_index_is_special(glyphIndex)) {
-                gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            if (glyph_handle_special_palette(glyphIndex, &r, &g, &b)) {
+                // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
             } else {
                 hue = sTextPalettes[palette]->hue - 15 + CL_RandomMinMaxU16Seeded(0, 30, j + palette);
                 CL_HSVtoRGB(hue, sTextPalettes[palette]->sat, sTextPalettes[palette]->value, &r, &g, &b);
-                gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);
             }
+            gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);
             if (glyphIndex != GLYPH_SPACE) {
                 add_glyph_texture(glyphIndex);
                 render_textrect(sTextLabels[i]->x, sTextLabels[i]->y, j);

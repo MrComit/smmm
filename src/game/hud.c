@@ -972,9 +972,15 @@ void render_hud_mario_lives(void) {
  */
 void render_hud_coins(void) {
     s32 hudY = gHudTopY;
-    print_text(168+30, hudY, "+", 0); // 'Coin' glyph
-    print_text(184+30, hudY, "*", 0); // 'X' glyph
-    print_text_fmt_int(198+30, hudY, "%d", gHudDisplay.coins, 0);
+	s32 mag = 0;
+	s32 i = gHudDisplay.coins;
+	while (i >= 10) {
+		mag += 14;
+		i /= 10;
+	}
+    print_text(260 - mag, hudY, "+", 0); // 'Coin' glyph
+    print_text(276 - mag, hudY, "*", 0); // 'X' glyph
+    print_text_fmt_int(290 - mag, hudY, "%d", gHudDisplay.coins, 0);
 }
 
 #ifdef VERSION_JP
@@ -1120,7 +1126,7 @@ void render_hud(void) {
 
         render_hud_keys();
 
-        if (gHudTopY < 225 && (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)) {
+        if (gHudTopY < 225 /*&& (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)*/) {
             render_hud_stars();
         }
 
