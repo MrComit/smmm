@@ -571,7 +571,8 @@ void CL_instantly_warp(Vec3f pos) {
 
 void CL_HSVtoRGB(s32 Hue, f32 s, f32 v, s16 *red, s16 *green, s16 *blue) {
     f32 C = s*v;
-    f32 X = C*(1-abs((Hue % 60)-1));
+    f32 h2 = (f32)Hue / 60.0f;
+    f32 X = C*(1.0f-absf((h2 - ((s32)h2 - ((s32)h2 % 2)))-1.0f));
     f32 m = v-C;
     f32 r,g,b;
     if (Hue < 60) {
@@ -603,6 +604,10 @@ void CL_HSVtoRGB(s32 Hue, f32 s, f32 v, s16 *red, s16 *green, s16 *blue) {
     *green = (g+m)*255;
     *blue = (b+m)*255;
 }
+
+
+
+
 
 
 f32 CL_dist_point_to_line(Vec3f point, Vec3f linePoint, s32 lineAngle) {

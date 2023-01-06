@@ -34,6 +34,7 @@
 #include "save_file.h"
 #include "src/game/tile_scroll.h"
 #include "actors/common0.h"
+#include "print.h"
 
 extern Mtx *gMatStackFixed[32];
 extern s16 gMatStackIndex;
@@ -1431,12 +1432,13 @@ Gfx *geo_city_window_opacity(s32 callContext, struct GraphNode *node, UNUSED voi
     return dlStart;
 }
 
-extern Vec3s sTextPalettes[];
+extern struct HSV *sTextPalettes[];
 
 Gfx *geo_set_number_palette(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct GraphNodeGenerated *currentGraphNode;
     struct Object *obj;
+    s32 hue;
     s8 r, g, b;
     dlStart = NULL;
 
@@ -1447,10 +1449,11 @@ Gfx *geo_set_number_palette(s32 callContext, struct GraphNode *node, UNUSED void
         dlHead = dlStart;
         currentGraphNode->fnNode.node.flags = 0x400 | (currentGraphNode->fnNode.node.flags & 0xFF);
 
-        r = sTextPalettes[obj->oFC][0] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC);
-        g = sTextPalettes[obj->oFC][1] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC + 1);
-        b = sTextPalettes[obj->oFC][2] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC + 2);
-
+        // r = sTextPalettes[obj->oFC][0] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC);
+        // g = sTextPalettes[obj->oFC][1] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC + 1);
+        // b = sTextPalettes[obj->oFC][2] + CL_RandomMinMaxU16Seeded(0, 40, obj->oAnimState + obj->oFC + 2);
+        hue = sTextPalettes[obj->oFC]->hue - 15 + CL_RandomMinMaxU16Seeded(0, 30, obj->oAnimState + obj->oFC);
+        CL_HSVtoRGB(hue, sTextPalettes[obj->oFC]->sat, sTextPalettes[obj->oFC]->value, &r, &g, &b);
         gDPSetEnvColor(dlHead++, r, g, b, 0xFF);
         gSPEndDisplayList(dlHead);
     }

@@ -493,6 +493,8 @@ void bhv_mario_update(void) {
 #endif
 
     if (gMarioState->controller->buttonDown & Z_TRIG) {
+        // print_text_fmt_int(50, 8*20, "HELLOWORLD", 0, 0);
+        // print_text_fmt_int(50, 7*20, "LOREMIPSUM", 0, 2);
         print_text_fmt_int(80, 8*20, "ABCDEF", 0, 0);
         print_text_fmt_int(80, 7*20, "GHIJKL", 0, 1);
         print_text_fmt_int(80, 6*20, "MNOPQR", 0, 2);

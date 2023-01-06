@@ -5,7 +5,7 @@
 #include "memory.h"
 #include "print.h"
 #include "segment2.h"
-
+#include "!COMIT_LIBRARY.h"
 /**
  * This file handles printing and formatting the colorful text that
  * appears when printing things such as "PRESS START".
@@ -408,14 +408,34 @@ void render_textrect(s32 x, s32 y, s32 pos) {
 }
 
 
-Vec3s sTextPalettes[] = {
-    {60, 180, 60}, // green
-    {215, 50, 50}, // red
-    {60, 60, 180}, // blue (purple)
-    {60, 170, 180}, // teal
-    {215, 98, 20}, // orange db620d (180, 115, 60)
-    {180, 60, 163}, // pink
+
+
+
+struct HSV sTextPaletteGreen = {120, 0.667f, 0.706f};
+struct HSV sTextPaletteRed = {0, 0.767f, 0.843f};
+struct HSV sTextPaletteBlue = {240, 0.667f, 0.706f};
+struct HSV sTextPaletteTeal = {185, 0.667f, 0.706f};
+struct HSV sTextPaletteOrange = {24, 0.907f, 0.843f};
+struct HSV sTextPalettePink = {309, 0.667f, 0.706f};
+
+struct HSV *sTextPalettes[] = {
+    &sTextPaletteGreen,
+    &sTextPaletteRed,
+    &sTextPaletteBlue,
+    &sTextPaletteTeal,
+    &sTextPaletteOrange,
+    &sTextPalettePink,
 };
+
+
+// Vec3s sTextPalettes[] = {
+//     {60, 180, 60}, // green
+//     {215, 50, 50}, // red
+//     {60, 60, 180}, // blue (purple)
+//     {60, 170, 180}, // teal
+//     {215, 98, 20}, // orange db620d (180, 115, 60)
+//     {180, 60, 163}, // pink
+// };
 
 
 s32 glyph_index_is_special(s8 glyphIndex) {
@@ -433,7 +453,8 @@ s32 glyph_index_is_special(s8 glyphIndex) {
 void render_text_labels(void) {
     s32 i;
     s32 j;
-    s16 r, r1, g, g1, b, b1;
+    s32 hue, palette;
+    s16 r, g, b;
     s8 glyphIndex;
     Mtx *mtx;
     Gfx* dlhead = gDisplayListHead;
@@ -455,18 +476,15 @@ void render_text_labels(void) {
     gSPDisplayList(dlhead++, dl_rgba16_text_begin);
     gDisplayListHead = dlhead;
     for (i = 0; i < sTextLabelsCount; i++) {
-        r = sTextPalettes[sTextLabels[i]->palette][0];
-        g = sTextPalettes[sTextLabels[i]->palette][1];
-        b = sTextPalettes[sTextLabels[i]->palette][2];
+        palette = sTextLabels[i]->palette;
         for (j = 0; j < sTextLabels[i]->length; j++) {
             glyphIndex = char_to_glyph_index(sTextLabels[i]->buffer[j]);
             if (glyph_index_is_special(glyphIndex)) {
                 gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
             } else {
-                r1 = r + CL_RandomMinMaxU16Seeded(0, 40, j + sTextLabels[i]->palette);
-                g1 = g + CL_RandomMinMaxU16Seeded(0, 40, j + sTextLabels[i]->palette + 1);
-                b1 = b + CL_RandomMinMaxU16Seeded(0, 40, j + sTextLabels[i]->palette + 2);
-                gDPSetEnvColor(gDisplayListHead++, r1, g1, b1, 255);
+                hue = sTextPalettes[palette]->hue - 15 + CL_RandomMinMaxU16Seeded(0, 30, j + palette);
+                CL_HSVtoRGB(hue, sTextPalettes[palette]->sat, sTextPalettes[palette]->value, &r, &g, &b);
+                gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);
             }
             if (glyphIndex != GLYPH_SPACE) {
                 add_glyph_texture(glyphIndex);
