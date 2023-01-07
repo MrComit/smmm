@@ -6,6 +6,8 @@
 #include "print.h"
 #include "segment2.h"
 #include "!COMIT_LIBRARY.h"
+#include "area.h"
+#include "course_table.h"
 /**
  * This file handles printing and formatting the colorful text that
  * appears when printing things such as "PRESS START".
@@ -437,8 +439,18 @@ struct HSV *sTextPalettes[] = {
 //     {180, 60, 163}, // pink
 // };
 
+Vec3s sChapterStarPieceColors[5] = {
+ {254, 254, 0},
+ {254, 0, 0},
+ {0, 254, 0},
+ {254, 148, 0},
+ {169, 0, 254},
+};
+
+extern s32 sLevelToChapter[COURSE_MAX];
 
 s32 glyph_handle_special_palette(s8 glyphIndex, s16 *r, s16 *g, s16 *b) {
+    s32 index;
     if (glyphIndex >= GLYPH_COIN && glyphIndex <= GLYPH_BETA_KEY && glyphIndex != GLYPH_PERIOD) {
         if (glyphIndex == GLYPH_COIN || glyphIndex == GLYPH_STAR || glyphIndex == GLYPH_MARIO_HEAD) {
             *r = 255;
@@ -453,6 +465,12 @@ s32 glyph_handle_special_palette(s8 glyphIndex, s16 *r, s16 *g, s16 *b) {
             *g = 255;
             *b = 255;
         }
+        return TRUE;
+    } else if (glyphIndex == GLYPH_TWO_EXCLAMATION) {
+        index = sLevelToChapter[gCurrCourseNum] - 1;
+        *r = sChapterStarPieceColors[index][0];
+        *g = sChapterStarPieceColors[index][1];
+        *b = sChapterStarPieceColors[index][2];
         return TRUE;
     } else {
         return FALSE;

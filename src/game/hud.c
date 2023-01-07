@@ -1151,6 +1151,80 @@ extern int gPointLightCompatibilityMode;
 
 
 
+void render_starpiece_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t) {
+	s32 xl = MAX(0, x);
+	s32 yl = MAX(0, y);
+	s32 xh = MAX(0, x + width - 1);
+	s32 yh = MAX(0, y + height - 1);
+	s = (x < 0) ? s - x : s;
+	t = (y < 0) ? t - y : t;
+	gDPPipeSync(gDisplayListHead++);
+	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
+	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
+	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
+	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
+	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_starpiece_backdrop_image_texture_pal_rgba16));
+	gDPTileSync(gDisplayListHead++);
+	gDPSetTile(gDisplayListHead++, 0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0);
+	gDPLoadSync(gDisplayListHead++);
+	gDPLoadTLUTCmd(gDisplayListHead++, 7, 9);
+	gDPPipeSync(gDisplayListHead++);
+	gDPTileSync(gDisplayListHead++);
+	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_starpiece_backdrop_image_texture));
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_MIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0);
+	gDPLoadSync(gDisplayListHead++);
+	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 1024);
+	gDPPipeSync(gDisplayListHead++);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_MIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0);
+	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 124, 508);
+	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
+	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
+	gDPPipeSync(gDisplayListHead++);
+	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
+	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
+	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
+	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+}
+
+
+s16 sStarPieceRectX = 0;
+
+
+void render_hud_starpieces(void) {
+    s16 i, h;
+    if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE) {
+        sStarPieceRectX = approach_s16_symmetric(sStarPieceRectX, 32, 4);
+    } else {
+        sStarPieceRectX = approach_s16_symmetric(sStarPieceRectX, 0, 4);
+    }
+    if (sCurrPlayMode == 2) {
+        sStarPieceRectX = 32;
+    }
+    if (sStarPieceRectX != 0) {
+        // s2d_init();
+        // gSPDisplayList(gDisplayListHead++, starpiece_chart_bg_dl);
+        // s2d_stop();
+        //h = save_file_get_star_piece();
+        //render_s2d_star_pieces();
+        // s2d_print_starpiece(-20, -20, 0);
+		// u8 *(*cameraLUT)[6] = segmented_to_virtual(&main_hud_camera_lut);
+		// gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
+		render_starpiece_backdrop_image(sStarPieceRectX - 32, 240 - 154 - 28, 32, 128, 0, 0);
+        h = save_file_get_star_piece();
+        for (i = 0; i < 5; i++) {
+            if (h & (1 << i)) {
+				print_text(sStarPieceRectX - 24, 154 - (i * 22), "#", 0);
+                // s2d_print_starpiece((sStarPieceRectX / 5) + 4, 70 + (i * 21), i+1);
+            }
+        }
+		// gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+    }
+    //render_s2d_room_names();
+}
+
 
 
 /**
@@ -1197,6 +1271,8 @@ void render_hud(void) {
         if (gCurrLevelNum == LEVEL_HMC && sCurrPlayMode == 0) {
             render_targets();
         }
+
+		render_hud_starpieces();
 
 
         // if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES)
