@@ -492,26 +492,26 @@ void bhv_mario_update(void) {
     }
 #endif
 
-    if (gMarioState->controller->buttonDown & Z_TRIG) {
-        // print_text_fmt_int(50, 8*20, "HELLO WORLD", 0, 0);
-        // print_text_fmt_int(50, 7*20, "LOREM IPSUM", 0, 1);
-        // print_text_fmt_int(50, 6*20, "CONGRATULATIONS!", 0, 2);
-        // print_text_fmt_int(50, 5*20, "YOU WIN", 0, 3);
-        // print_text_fmt_int(50, 4*20, "SUPER MARIO AND", 0, 4);
-        // print_text_fmt_int(50, 3*20, "THE MONSTROUS MANOR", 0, 5);
-        print_text_fmt_int(50, 8*20, "the quick", 0, 0);
-        print_text_fmt_int(50, 7*20, "red fox", 0, 1);
-        print_text_fmt_int(50, 6*20, "jumped", 0, 2);
-        print_text_fmt_int(50, 5*20, "over the", 0, 3);
-        print_text_fmt_int(50, 4*20, "lazy dog", 0, 4);
-        // print_text_fmt_int(80, 8*20, "ABCDEF", 0, 0);
-        // print_text_fmt_int(80, 7*20, "GHIJKL", 0, 1);
-        // print_text_fmt_int(80, 6*20, "MNOPQR", 0, 2);
-        // print_text_fmt_int(80, 5*20, "STUVWX", 0, 3);
-        // print_text_fmt_int(80, 4*20, "YZ0123", 0, 4);
-        // print_text_fmt_int(80, 3*20, "456789", 0, 5);
-        // print_text_fmt_int(80, 2*20, ".?!", 0, 0);
-    }
+    // if (gMarioState->controller->buttonDown & Z_TRIG) {
+    //     print_text_fmt_int(50, 8*20, "HELLO WORLD", 0, 0);
+    //     print_text_fmt_int(50, 7*20, "LOREM IPSUM", 0, 1);
+    //     print_text_fmt_int(50, 6*20, "CONGRATULATIONS!", 0, 2);
+    //     print_text_fmt_int(50, 5*20, "YOU WIN", 0, 3);
+    //     print_text_fmt_int(50, 4*20, "SUPER MARIO AND", 0, 4);
+    //     print_text_fmt_int(50, 3*20, "THE MONSTROUS MANOR", 0, 5);
+    //     print_text_fmt_int(50, 8*20, "the quick", 0, 0);
+    //     print_text_fmt_int(50, 7*20, "red fox", 0, 1);
+    //     print_text_fmt_int(50, 6*20, "jumped", 0, 2);
+    //     print_text_fmt_int(50, 5*20, "over the", 0, 3);
+    //     print_text_fmt_int(50, 4*20, "lazy dog", 0, 4);
+    //     print_text_fmt_int(80, 8*20, "ABCDEF", 0, 0);
+    //     print_text_fmt_int(80, 7*20, "GHIJKL", 0, 1);
+    //     print_text_fmt_int(80, 6*20, "MNOPQR", 0, 2);
+    //     print_text_fmt_int(80, 5*20, "STUVWX", 0, 3);
+    //     print_text_fmt_int(80, 4*20, "YZ0123", 0, 4);
+    //     print_text_fmt_int(80, 3*20, "456789", 0, 5);
+    //     print_text_fmt_int(80, 2*20, ".?!", 0, 0);
+    // }
 }
 
 /**

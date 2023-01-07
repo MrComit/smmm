@@ -2458,10 +2458,10 @@ const Gfx dl_rgba16_text_end[] = {
 
 // 0x0200EDA8 - 0x0200EDE8
 static const Vtx vertex_text_bg_box[] = {
-    {{{     0,    -80,      0}, 0, {     0,      0}, {0, 0x7f, 0xff, 0xff}}},
-    {{{   130,    -80,      0}, 0, {     0,      0}, {0, 0xff, 0, 0xff}}},
-    {{{   130,      0,      0}, 0, {     0,      0}, {0, 0xff, 0x7f, 0xff}}},
-    {{{     0,      0,      0}, 0, {     0,      0}, {0, 0, 0xff, 0xff}}},
+    {{{     0,    -80,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   130,    -80,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   130,      0,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     0,      0,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
 };
 
 // 0x0200EDE8 - 0x0200EE28
@@ -2471,6 +2471,27 @@ const Gfx dl_draw_text_bg_box[] = {
     gsDPSetCombineMode(G_CC_FADE, G_CC_FADE),
     gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
     gsSPVertex(vertex_text_bg_box, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSPEndDisplayList(),
+};
+
+
+
+
+static const Vtx vertex_text_green_bg_box[] = {
+    {{{     0,    -80,      0}, 0, {     0,      0}, {0, 0x9f, 0xff, 0xff}}},
+    {{{   130,    -80,      0}, 0, {     0,      0}, {0, 0xef, 0, 0xff}}},
+    {{{   130,      0,      0}, 0, {     0,      0}, {0, 0xef, 0x40, 0xff}}},
+    {{{     0,      0,      0}, 0, {     0,      0}, {0, 0x40, 0xef, 0xff}}},
+};
+
+// 0x0200EDE8 - 0x0200EE28
+const Gfx dl_draw_text_green_bg_box[] = {
+    gsDPPipeSync(),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsDPSetCombineMode(G_CC_FADE, G_CC_FADE),
+    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
+    gsSPVertex(vertex_text_green_bg_box, 4, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
     gsSPEndDisplayList(),
 };
