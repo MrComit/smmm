@@ -3187,13 +3187,13 @@ s16 render_menus_and_dialogs(void) {
     // if (gRoomAlpha) {
     //     shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
     // }
-    if (gMarioCurrentRoom != 0) {
-        if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) { //save_file_check_global_room()
-            gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);
-        } else {
-            gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x90, 0x10);
-        }
-    }
+    // if (gMarioCurrentRoom != 0) {
+    //     if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) { //save_file_check_global_room()
+    //         gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);
+    //     } else {
+    //         gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x90, 0x10);
+    //     }
+    // }
 
     if (gMenuMode != MENU_MODE_NONE) {
         switch (gMenuMode) {
