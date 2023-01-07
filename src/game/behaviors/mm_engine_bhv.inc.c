@@ -612,10 +612,20 @@ void bhv_token_init(void) {
     if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
         o->activeFlags = 0;
     }
+    o->os16F4 = o->oFaceAngleYaw;
 }
 
 
 void bhv_token_loop(void) {
+    o->oGraphYOffset = 15.0f + (sins(o->os16F6) * 15.0f);
+    if (o->oDistanceToMario < 350.0f) {
+        o->oFaceAngleYaw += 0x400;
+        o->os16F6 += 0x400;
+    } else {
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0, 0x300);
+        o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->os16F4, 0x300);
+    }
+
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
         o->activeFlags = 0;
