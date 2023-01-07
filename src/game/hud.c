@@ -989,11 +989,11 @@ void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 
 	gDPPipeSync(gDisplayListHead++);
 	gDPTileSync(gDisplayListHead++);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_coin_backdrop_image_texture));
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_CLAMP | G_TX_MIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
 	gDPLoadSync(gDisplayListHead++);
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 256);
 	gDPPipeSync(gDisplayListHead++);
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_MIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
 	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 508, 124);
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
@@ -1045,11 +1045,21 @@ void render_hud_stars(void) {
 /**
  * Renders the amount of keys collected.
  */
+
+s16 sKeyRectHeight = 240;
+
 void render_hud_keys(void) {
     s16 i;
     s16 keyCount = CL_count_bits(save_file_get_keys(0)) - CL_count_bits(save_file_get_keys(1));
+
+	if (keyCount) {
+		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, 208, 3);
+		render_coin_backdrop_image(297 - (keyCount * 6), sKeyRectHeight, 23 + (keyCount * 6), 32, 0, 32);
+	} else {
+		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, 240, 3);
+	}
     for (i = 0; i < keyCount; i++) {
-        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(30) - (i * 6), 15, "/", 0); // unused glyph - beta key
+        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(20) - (i * 6), 213 - sKeyRectHeight, "/", 0); // unused glyph - beta key
     }
 }
 

@@ -444,6 +444,10 @@ s32 glyph_handle_special_palette(s8 glyphIndex, s16 *r, s16 *g, s16 *b) {
             *r = 255;
             *g = 205;
             *b = 70;
+        } else if (glyphIndex == GLYPH_BETA_KEY) {
+            *r = 210;
+            *g = 210;
+            *b = 210;  
         } else {
             *r = 255;
             *g = 255;
