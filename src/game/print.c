@@ -440,7 +440,7 @@ struct HSV *sTextPalettes[] = {
 
 s32 glyph_handle_special_palette(s8 glyphIndex, s16 *r, s16 *g, s16 *b) {
     if (glyphIndex >= GLYPH_COIN && glyphIndex <= GLYPH_BETA_KEY && glyphIndex != GLYPH_PERIOD) {
-        if (glyphIndex == GLYPH_COIN || glyphIndex == GLYPH_STAR) {
+        if (glyphIndex == GLYPH_COIN || glyphIndex == GLYPH_STAR || glyphIndex == GLYPH_MARIO_HEAD) {
             *r = 255;
             *g = 205;
             *b = 70;

@@ -59,7 +59,7 @@ s32 count_room_objects_with_flag(u32 flag, s16 room) {
 void room_boo_multiplier_loop(void) {
     if (gMarioCurrentRoom == o->oRoom)
         gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER | HUD_DISPLAY_FLAG_BOO);
-    print_text(168+30, 189, "+", 0); // 'Coin' glyph
+    print_text(168+30, 189, ",", 0); // 'Coin' glyph
     print_text(184+30, 189, "*", 0); // 'X' glyph
     print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins, 0);
 
