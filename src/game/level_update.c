@@ -1052,9 +1052,9 @@ void update_hud_values(void) {
 
         if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER) {
             gHudLowerTimer++;
-            gHudTopY = approach_s16_symmetric(gHudTopY, 209, 2);
+            gHudTopY = approach_s16_symmetric(gHudTopY, 219, 2);
         } else {
-            gHudTopY = approach_s16_symmetric(gHudTopY, 225, 2);
+            gHudTopY = approach_s16_symmetric(gHudTopY, 235, 2);
         }
 
         if (sPowerMeterHUD.animation == POWER_METER_DEEMPHASIZING || sPowerMeterHUD.animation == POWER_METER_VISIBLE) {

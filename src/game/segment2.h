@@ -67,4 +67,7 @@ extern Gfx dl_billboard_num_7[];
 extern Gfx dl_billboard_num_8[];
 extern Gfx dl_billboard_num_9[];
 
+extern u8 render_coin_backdrop_image_texture[];
+extern u8 render_coin_backdrop_image_texture_pal_rgba16[];
+
 #endif // SEGMENT2_H

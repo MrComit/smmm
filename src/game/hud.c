@@ -96,7 +96,7 @@ struct PowerMeterHUD sPowerMeterHUD = {
 // when the power meter is hidden.
 s32 sPowerMeterVisibleTimer = 0;
 
-s32 gHudTopY = 209; // default 209, high is 225
+s32 gHudTopY = 219; // default 219, high is 235
 s32 gHudStarsX = 22;
 // s32 gHuds2dX = 0;
 //UNUSED static struct UnusedHUDStruct sUnusedHUDValues = { 0x00, 0x0A, 0x00 };
@@ -967,6 +967,44 @@ void render_hud_mario_lives(void) {
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), HUD_TOP_Y, "%d", gHudDisplay.lives, 0);
 }
 
+void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t) {
+	s32 xl = MAX(0, x);
+	s32 yl = MAX(0, y);
+	s32 xh = MAX(0, x + width - 1);
+	s32 yh = MAX(0, y + height - 1);
+	s = (x < 0) ? s - x : s;
+	t = (y < 0) ? t - y : t;
+	gDPPipeSync(gDisplayListHead++);
+	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
+	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
+	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
+	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
+	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
+	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_coin_backdrop_image_texture_pal_rgba16));
+	gDPTileSync(gDisplayListHead++);
+	gDPSetTile(gDisplayListHead++, 0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0);
+	gDPLoadSync(gDisplayListHead++);
+	gDPLoadTLUTCmd(gDisplayListHead++, 7, 10);
+	gDPPipeSync(gDisplayListHead++);
+	gDPTileSync(gDisplayListHead++);
+	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_coin_backdrop_image_texture));
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
+	gDPLoadSync(gDisplayListHead++);
+	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 256);
+	gDPPipeSync(gDisplayListHead++);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
+	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 508, 124);
+	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
+	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
+	gDPPipeSync(gDisplayListHead++);
+	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
+	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
+	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
+	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
+	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+}
+
 /**
  * Renders the amount of coins collected.
  */
@@ -978,9 +1016,11 @@ void render_hud_coins(void) {
 		mag += 14;
 		i /= 10;
 	}
-    print_text(260 - mag, hudY, "+", 0); // 'Coin' glyph
-    print_text(276 - mag, hudY, "*", 0); // 'X' glyph
-    print_text_fmt_int(290 - mag, hudY, "%d", gHudDisplay.coins, 0);
+
+	render_coin_backdrop_image(260 - mag, (219 - hudY), 62 + mag, 32, 0, 0);
+    print_text(270 - mag, hudY, "+", 0); // 'Coin' glyph
+    print_text(286 - mag, hudY, "*", 0); // 'X' glyph
+    print_text_fmt_int(300 - mag, hudY, "%d", gHudDisplay.coins, 0);
 }
 
 #ifdef VERSION_JP
@@ -1099,6 +1139,10 @@ void render_hud_camera_status(void) {
 
 extern int gPointLightCompatibilityMode;
 
+
+
+
+
 /**
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
@@ -1117,16 +1161,16 @@ void render_hud(void) {
             render_hud_cannon_reticle();
         }
         if (sCurrPlayMode == 2) {
-            gHudTopY = 209;
+            gHudTopY = 219;
         }
 
-        if (gHudTopY < 225 && gCamera->cutscene != CUTSCENE_OPENING) {
+        if (gHudTopY < 235 && gCamera->cutscene != CUTSCENE_OPENING) {
             render_hud_coins();
         }
 
         render_hud_keys();
 
-        if (gHudTopY < 225 /*&& (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)*/) {
+        if (gHudTopY < 235 /*&& (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)*/) {
             render_hud_stars();
         }
 
