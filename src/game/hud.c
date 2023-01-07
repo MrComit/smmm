@@ -1213,10 +1213,10 @@ void render_hud_starpieces(void) {
     if (sStarPieceRectX != 0) {
 
 		render_starpiece_backdrop_image(sStarPieceRectX - 32, 240 - 154 - 28, 32, 128, 0, 0);
-        h = 0b1111;//save_file_get_star_piece();
+        h = save_file_get_star_piece();
         for (i = 0; i < 5; i++) {
             if (h & (1 << i)) {
-				print_text(sStarPieceRectX - 24, 154 - (i * 22), "#", 0);
+				print_text(sStarPieceRectX - 25, 154 - (i * 22), "#", 0);
             }
         }
     }

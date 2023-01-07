@@ -1048,6 +1048,9 @@ void update_hud_values(void) {
         if (gMarioState->action & ACT_FLAG_STATIONARY) {
             if (sTimer2++ > 45) {
                 gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
+                if (sTimer2 > 120) {
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
+                }
             }
         } else {
             sTimer2 = 0;
@@ -1075,7 +1078,7 @@ void update_hud_values(void) {
             gHudLowerTimer2++;
         }
 
-        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE && gHudLowerTimer2 > 150) {
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE && gHudLowerTimer2 > 150 && sTimer2 < 120) {
             gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_STAR_PIECE;
             gHudLowerTimer2 = 0;
         }
