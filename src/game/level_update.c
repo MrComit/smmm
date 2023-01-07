@@ -1032,6 +1032,9 @@ void initiate_delayed_warp(void) {
 extern s32 gHudTopY;
 extern s32 gHudStarsX;
 extern s32 sPowerMeterVisibleTimer;
+extern u8 gHudYMax;
+extern u8 gHudYMin;
+
 // extern s32 gHuds2dX;
 s32 gHudLowerTimer = 0;
 s32 gHudLowerTimer2 = 0;
@@ -1052,9 +1055,9 @@ void update_hud_values(void) {
 
         if (gHudDisplay.flags & HUD_DISPLAY_FLAG_LOWER) {
             gHudLowerTimer++;
-            gHudTopY = approach_s16_symmetric(gHudTopY, 219, 2);
+            gHudTopY = approach_s16_symmetric(gHudTopY, gHudYMin, 2);
         } else {
-            gHudTopY = approach_s16_symmetric(gHudTopY, 235, 2);
+            gHudTopY = approach_s16_symmetric(gHudTopY, gHudYMax, 2);
         }
 
         if (sPowerMeterHUD.animation == POWER_METER_DEEMPHASIZING || sPowerMeterHUD.animation == POWER_METER_VISIBLE) {

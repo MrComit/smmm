@@ -98,6 +98,8 @@ s32 sPowerMeterVisibleTimer = 0;
 
 s32 gHudTopY = 219; // default 219, high is 235
 s32 gHudStarsX = 22;
+u8 gHudYMax = 235; // 235 - 8 on console
+u8 gHudYMin = 219; // 219 - 8 on console
 // s32 gHuds2dX = 0;
 //UNUSED static struct UnusedHUDStruct sUnusedHUDValues = { 0x00, 0x0A, 0x00 };
 
@@ -1017,7 +1019,7 @@ void render_hud_coins(void) {
 		i /= 10;
 	}
 
-	render_coin_backdrop_image(260 - mag, (219 - hudY), 62 + mag, 32, 0, 0);
+	render_coin_backdrop_image(260 - mag, (219 - hudY), 60 + mag, 32, 0, 0);
     print_text(270 - mag, hudY, "+", 0); // 'Coin' glyph
     print_text(286 - mag, hudY, "*", 0); // 'X' glyph
     print_text_fmt_int(300 - mag, hudY, "%d", gHudDisplay.coins, 0);
@@ -1046,17 +1048,22 @@ void render_hud_stars(void) {
  * Renders the amount of keys collected.
  */
 
-s16 sKeyRectHeight = 240;
+s16 sKeyRectHeight = 208;
 
 void render_hud_keys(void) {
     s16 i;
     s16 keyCount = CL_count_bits(save_file_get_keys(0)) - CL_count_bits(save_file_get_keys(1));
-
+	s16 heightMin = gIsConsole ? 208 - 8 : 208;
+	s16 heightMax = gIsConsole ? 240 - 8 : 240;
+	s16 height;
 	if (keyCount) {
-		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, 208, 3);
-		render_coin_backdrop_image(297 - (keyCount * 6), sKeyRectHeight, 23 + (keyCount * 6), 32, 0, 32);
+		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, heightMin, 3);
+		// if (!gIsConsole || (sKeyRectHeight >= 208 && sKeyRectHeight >= 208)) {
+		height = gIsConsole ? 208 : sKeyRectHeight;
+		render_coin_backdrop_image(297 - (keyCount * 6), height, 23 + (keyCount * 6), 32, 0, 32);
+		// }
 	} else {
-		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, 240, 3);
+		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, heightMax, 3);
 	}
     for (i = 0; i < keyCount; i++) {
         print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(20) - (i * 6), 213 - sKeyRectHeight, "/", 0); // unused glyph - beta key
@@ -1204,25 +1211,15 @@ void render_hud_starpieces(void) {
         sStarPieceRectX = 32;
     }
     if (sStarPieceRectX != 0) {
-        // s2d_init();
-        // gSPDisplayList(gDisplayListHead++, starpiece_chart_bg_dl);
-        // s2d_stop();
-        //h = save_file_get_star_piece();
-        //render_s2d_star_pieces();
-        // s2d_print_starpiece(-20, -20, 0);
-		// u8 *(*cameraLUT)[6] = segmented_to_virtual(&main_hud_camera_lut);
-		// gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
+
 		render_starpiece_backdrop_image(sStarPieceRectX - 32, 240 - 154 - 28, 32, 128, 0, 0);
-        h = save_file_get_star_piece();
+        h = 0b1111;//save_file_get_star_piece();
         for (i = 0; i < 5; i++) {
             if (h & (1 << i)) {
 				print_text(sStarPieceRectX - 24, 154 - (i * 22), "#", 0);
-                // s2d_print_starpiece((sStarPieceRectX / 5) + 4, 70 + (i * 21), i+1);
             }
         }
-		// gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
     }
-    //render_s2d_room_names();
 }
 
 
@@ -1239,22 +1236,26 @@ void render_hud(void) {
         sPowerMeterStoredHealth = 8;
         sPowerMeterVisibleTimer = 0;
     } else {
+		if (gIsConsole) {
+			gHudYMax = 235 - 8;
+			gHudYMin = 219 - 8;
+		}
         create_dl_ortho_matrix();
 
         if (gCurrentArea != NULL && gCurrentArea->camera->mode == CAMERA_MODE_INSIDE_CANNON) {
             render_hud_cannon_reticle();
         }
         if (sCurrPlayMode == 2) {
-            gHudTopY = 219;
+            gHudTopY = gHudYMin;
         }
 
-        if (gHudTopY < 235 && gCamera->cutscene != CUTSCENE_OPENING) {
+        if (gHudTopY < gHudYMax && gCamera->cutscene != CUTSCENE_OPENING) {
             render_hud_coins();
         }
 
         render_hud_keys();
 
-        if (gHudTopY < 235 /*&& (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)*/) {
+        if (gHudTopY < gHudYMax /*&& (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)*/) {
             render_hud_stars();
         }
 
