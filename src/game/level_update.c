@@ -1038,8 +1038,26 @@ extern u8 gHudYMin;
 // extern s32 gHuds2dX;
 s32 gHudLowerTimer = 0;
 s32 gHudLowerTimer2 = 0;
+s32 gHudLowerTimer3 = 0;
 s32 sTimer2 = 0;
 s32 gHudCoinUpdateFast;
+
+
+s32 should_display_brokenkey(void) {
+    s32 flags = save_file_get_newflags(0);
+    if ((flags & (1 << 7)) && (flags & (1 << 8)) && (flags & (1 << 9))) {
+        if (save_file_get_keys(1) & (1 << 7)) {
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    } else if ((flags & (1 << 7)) || (flags & (1 << 8)) || (flags & (1 << 9))) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
 
 void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL) {
@@ -1051,6 +1069,10 @@ void update_hud_values(void) {
                 if (sTimer2 > 180) {
                     gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
                     gHudLowerTimer2 = 130;
+                    if (should_display_brokenkey()) {
+                        gHudDisplay.flags |= HUD_DISPLAY_FLAG_BROKENKEY;
+                        gHudLowerTimer3 = 130;
+                    }
                 }
             }
         } else {
@@ -1084,6 +1106,10 @@ void update_hud_values(void) {
             gHudLowerTimer2 = 0;
         }
 
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BROKENKEY && gHudLowerTimer3++ > 150) {
+            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_BROKENKEY;
+            gHudLowerTimer3 = 0; 
+        }
 
         if (gHudDisplay.coins < gMarioState->numCoins && !(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
             if (!gHudCoinUpdateFast && (gMarioState->numCoins - gHudDisplay.coins) > 20) {

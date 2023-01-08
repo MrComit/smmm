@@ -769,12 +769,16 @@ u32 interact_water_ring(struct MarioState *m, UNUSED u32 interactType, struct Ob
 }
 
 extern s32 gHudLowerTimer;
+extern s32 gHudLowerTimer2;
+extern s32 gHudLowerTimer3;
+
 
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     u32 starKeyIndex;
     u32 starGrabAction;// = ACT_STAR_DANCE_EXIT;
     u32 noExit = 1;//(o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
     u32 isKey = 0;
+    s32 flags;
     if (o->oInteractionSubtype & INT_SUBTYPE_SMALL_KEY) {
         isKey = 1;
     } else if (o->oInteractionSubtype & INT_SUBTYPE_BIG_KEY) {
@@ -806,6 +810,12 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         starKeyIndex = o->oBehParams2ndByte;
         if (isKey == 3) {
             save_file_set_newflags(1 << starKeyIndex, 0);
+            flags = save_file_get_newflags(0);
+            if (flags & SAVE_NEW_FLAG_BROKEN1 && flags & SAVE_NEW_FLAG_BROKEN2 && flags & SAVE_NEW_FLAG_BROKEN3) {
+                save_file_set_keys(7, 0);
+            }
+            gHudDisplay.flags |= HUD_DISPLAY_FLAG_BROKENKEY;
+            gHudLowerTimer3 = 0;
         } else if (isKey != 0) {
             save_file_set_keys(starKeyIndex, 0);
         } else if (o->oInteractionSubtype & INT_SUBTYPE_CURRENCY){
@@ -815,6 +825,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         } else {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
             save_file_set_star_piece(o->oBehParams >> 24);
+            gHudLowerTimer2 = 0;
         }
         //save_file_collect_star_or_key(m->numCoins, starIndex);
 

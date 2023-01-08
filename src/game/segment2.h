@@ -73,4 +73,13 @@ extern u8 render_coin_backdrop_image_texture_pal_rgba16[];
 extern u8 render_starpiece_backdrop_image_texture[];
 extern u8 render_starpiece_backdrop_image_texture_pal_rgba16[];
 
+extern u8 render_brokenkey_backdrop_image_texture[];
+extern u8 render_brokenkey_backdrop_image_texture_pal_rgba16[];
+extern u8 render_brokenkey_1_image_texture[];
+extern u8 render_brokenkey_1_image_texture_pal_rgba16[];
+extern u8 render_brokenkey_2_image_texture[];
+extern u8 render_brokenkey_2_image_texture_pal_rgba16[];
+extern u8 render_brokenkey_3_image_texture[];
+extern u8 render_brokenkey_3_image_texture_pal_rgba16[];
+
 #endif // SEGMENT2_H
