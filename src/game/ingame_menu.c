@@ -391,10 +391,6 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
     UNUSED s8 mark = DIALOG_MARK_NONE; // unused in EU
     s32 strPos = 0;
     u8 lineNum = 1;
-#ifdef VERSION_EU
-    s16 xCoord = x;
-    s16 yCoord = 240 - y;
-#endif
 
 #ifndef VERSION_EU
     create_dl_translation_matrix(MENU_MTX_PUSH, x, y, 0.0f);
@@ -402,55 +398,6 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
 
     while (str[strPos] != DIALOG_CHAR_TERMINATOR) {
         switch (str[strPos]) {
-#ifdef VERSION_EU
-            case DIALOG_CHAR_SPACE:
-                xCoord += 5;
-                break;
-            case DIALOG_CHAR_NEWLINE:
-                yCoord += 16;
-                xCoord = x;
-                lineNum++;
-                break;
-            case DIALOG_CHAR_LOWER_A_GRAVE:
-            case DIALOG_CHAR_LOWER_A_CIRCUMFLEX:
-            case DIALOG_CHAR_LOWER_A_UMLAUT:
-                render_lowercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('a'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_UPPER_A_UMLAUT: // @bug grave and circumflex (0x64-0x65) are absent here
-                render_uppercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('A'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_LOWER_E_GRAVE:
-            case DIALOG_CHAR_LOWER_E_CIRCUMFLEX:
-            case DIALOG_CHAR_LOWER_E_UMLAUT:
-            case DIALOG_CHAR_LOWER_E_ACUTE:
-                render_lowercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('e'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_UPPER_E_GRAVE:
-            case DIALOG_CHAR_UPPER_E_CIRCUMFLEX:
-            case DIALOG_CHAR_UPPER_E_UMLAUT:
-            case DIALOG_CHAR_UPPER_E_ACUTE:
-                render_uppercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('E'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_LOWER_U_GRAVE:
-            case DIALOG_CHAR_LOWER_U_CIRCUMFLEX:
-            case DIALOG_CHAR_LOWER_U_UMLAUT:
-                render_lowercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('u'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_UPPER_U_UMLAUT: // @bug grave and circumflex (0x84-0x85) are absent here
-                render_uppercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('U'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_LOWER_O_CIRCUMFLEX:
-            case DIALOG_CHAR_LOWER_O_UMLAUT:
-                render_lowercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('o'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_UPPER_O_UMLAUT: // @bug circumflex (0x95) is absent here
-                render_uppercase_diacritic(&xCoord, &yCoord, ASCII_TO_DIALOG('O'), str[strPos] & 0xF);
-                break;
-            case DIALOG_CHAR_LOWER_I_CIRCUMFLEX:
-            case DIALOG_CHAR_LOWER_I_UMLAUT:
-                render_lowercase_diacritic(&xCoord, &yCoord, DIALOG_CHAR_I_NO_DIA, str[strPos] & 0xF);
-                break;
-#else // i.e. not EU
             case DIALOG_CHAR_DAKUTEN:
                 mark = DIALOG_MARK_DAKUTEN;
                 break;
@@ -467,30 +414,17 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
                 render_generic_char(DIALOG_CHAR_PERIOD_OR_HANDAKUTEN);
                 gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
                 break;
-#endif
 
 #if defined(VERSION_US) || defined(VERSION_EU)
             case DIALOG_CHAR_SLASH:
-#ifdef VERSION_EU
-                xCoord += gDialogCharWidths[DIALOG_CHAR_SPACE] * 2;
-#else
                 create_dl_translation_matrix(
                     MENU_MTX_NOPUSH, (f32)(gDialogCharWidths[DIALOG_CHAR_SPACE] * 2), 0.0f, 0.0f);
-#endif
                 break;
             case DIALOG_CHAR_MULTI_THE:
-#ifdef VERSION_EU
-                render_multi_text_string(&xCoord, &yCoord, STRING_THE);
-#else
                 render_multi_text_string(STRING_THE);
-#endif
                 break;
             case DIALOG_CHAR_MULTI_YOU:
-#ifdef VERSION_EU
-                render_multi_text_string(&xCoord, &yCoord, STRING_YOU);
-#else
                 render_multi_text_string(STRING_YOU);
-#endif
                 break;
 #endif
 
@@ -498,16 +432,9 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
             case DIALOG_CHAR_SPACE:
                 create_dl_translation_matrix(MENU_MTX_NOPUSH, CHAR_WIDTH_SPACE, 0.0f, 0.0f);
                 break;
-#ifdef VERSION_JP
-                break; // ? needed to match
-#endif
 #endif
 
             default:
-#ifdef VERSION_EU
-                render_generic_char_at_pos(xCoord, yCoord, str[strPos]);
-                xCoord += gDialogCharWidths[str[strPos]];
-#else
                 render_generic_char(str[strPos]);
                 if (mark != DIALOG_MARK_NONE) {
                     create_dl_translation_matrix(MENU_MTX_PUSH, 5.0f, 5.0f, 0.0f);
@@ -517,7 +444,6 @@ void print_generic_string(s16 x, s16 y, const u8 *str) {
                 }
 
                 create_dl_translation_matrix(MENU_MTX_NOPUSH, CHAR_WIDTH_DEFAULT, 0.0f, 0.0f);
-#endif
 #ifndef VERSION_JP
                 break; // what an odd difference. US (and probably later) versions added a useless break here.
 #endif
@@ -3368,4 +3294,50 @@ void print_room_names(void) {
         }
     }
     //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1], 0);
+}
+
+
+s32 gMultiplierUpper = 5;
+s32 gMultiplierLower = 0;
+s16 gMultiplierAlpha = 0;
+
+void print_multiplier_string(void) {
+    f32 scale = 1.0f;
+    u8 str[4];
+    str[0] = gMultiplierUpper;
+    str[1] = 0x3F;
+    str[2] = gMultiplierLower;
+    str[3] = 0x3B;
+    str[4] = 0xFF;
+    // if (gIsConsole) {
+    //     scale = 1.5f;
+    // }
+    // str[0] = gMultiplierUpper;
+    // str[2] = gMultiplierLower;
+    create_dl_ortho_matrix();
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, 1.0f, 1.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, gMultiplierAlpha);
+    print_generic_string(290 + 1, 175 - 1, str);
+    gDPSetEnvColor(gDisplayListHead++, 0x3b, 0xb3, 0x3b, gMultiplierAlpha);
+    print_generic_string(290, 175, str);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+
+void print_multiplier(void) {
+    if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
+        print_multiplier_string();
+        gMultiplierAlpha = approach_s16_symmetric(gMultiplierAlpha, 255, 8);
+    } else {
+        gMultiplierAlpha = approach_s16_symmetric(gMultiplierAlpha, 0, 8);
+    }
+}
+
+
+void special_print(void) {
+    print_room_names();
+    print_multiplier();
 }

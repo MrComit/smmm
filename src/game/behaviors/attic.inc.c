@@ -272,19 +272,20 @@ void bhv_bully_flame_loop(void) {
 
 
 s16 sBullyBool = 0;
-s16 sBullyFraction = 0;
-f32 sBullyMultiplier = 0.0f;
+// s16 sBullyFraction = 0;
+// f32 sBullyMultiplier = 0.0f;
 
 
 void bully_boss_multiplier_loop(void) {
     s32 action = FALSE;
-    if (gMarioCurrentRoom == o->oRoom)
-        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
+    if (gMarioCurrentRoom == o->oRoom) {
+        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER | HUD_DISPLAY_FLAG_MULTIPLIER);
+    }
 
-    print_text_fmt_int(168+30, 169+20, "%d", (s32)sBullyMultiplier, 0);
-    print_text(184+30, 169+20, ".", 0);
-    print_text_fmt_int(198+30, 169+20, "%d", sBullyFraction, 0);
-    print_text(212+30, 169+20, "*", 0); // 'X' glyph
+    // print_text_fmt_int(168+30, 169+20, "%d", (s32)gMultiplierUpper, 0);
+    // print_text(184+30, 169+20, ".", 0);
+    // print_text_fmt_int(198+30, 169+20, "%d", sBullyFraction, 0);
+    // print_text(212+30, 169+20, "*", 0); // 'X' glyph
 
     if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
         || gMarioState->action == ACT_BURNING_GROUND) {
@@ -296,12 +297,12 @@ void bully_boss_multiplier_loop(void) {
         o->oKleptoTargetNumber = 0;
         action = FALSE;
     }
-    if (((gMarioState->hurtCounter > 0 && sBullyBool == 0) || action) && sBullyMultiplier > 0) {
-        if (sBullyFraction == 0) {
-            sBullyMultiplier -= 1.0f;
-            sBullyFraction = 5;
+    if (((gMarioState->hurtCounter > 0 && sBullyBool == 0) || action) && gMultiplierUpper > 0) {
+        if (gMultiplierLower == 0) {
+            gMultiplierUpper -= 1;
+            gMultiplierLower = 5;
         } else {
-            sBullyFraction = 0;
+            gMultiplierLower = 0;
         }
         sBullyBool = 1;
     } else if (gMarioState->hurtCounter <= 0) {
@@ -329,7 +330,7 @@ void bhv_attic_bully_init(void) {
 
     o->oAction = 8;
     o->oPosY += 2000.0f;
-    sBullyMultiplier = 5.0f;
+    gMultiplierUpper = 5.0f;
 }
 
 
@@ -600,12 +601,13 @@ void bhv_attic_bully_loop(void) {
                 o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.0f, 0.2f);
                 cur_obj_scale(o->header.gfx.scale[0]);
                 if (o->header.gfx.scale[0] == 0.0f) {
-                    gMarioState->numCoins += 100 * (sBullyMultiplier + ((f32)sBullyFraction / 10));
+                    gMarioState->numCoins += 100 * (gMultiplierUpper + ((f32)gMultiplierLower / 10));
                     CL_explode_object(o, 1);
                     obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                     obj->oBehParams2ndByte = 0x12;
                     obj->oBehParams = 0x00120000;
+                    gHudDisplay.flags &=  ~HUD_DISPLAY_FLAG_MULTIPLIER;
                 }
             }
             break;

@@ -396,7 +396,7 @@ void render_game(void) {
         render_text_labels();
         do_cutscene_handler();
         print_displaying_credits_entry();
-        print_room_names();
+        special_print();
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
                       SCREEN_HEIGHT - gBorderHeight);
         //gMenuOptSelectIndex = render_menus_and_dialogs();

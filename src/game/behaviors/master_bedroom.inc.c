@@ -448,16 +448,17 @@ u16 sShadowBossColors[] = {60, 100, 140, 180};
 
 void shadow_boss_multiplier_loop(void) {
     s32 action = FALSE;
-    if (gMarioCurrentRoom == o->oRoom)
-        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
+    if (gMarioCurrentRoom == o->oRoom) {
+        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER | HUD_DISPLAY_FLAG_MULTIPLIER);
+    }
     //print_text(168+30, 189, "+", 0); // 'Coin' glyph
     //print_text(184+30, 189, "*", 0); // 'X' glyph
     //print_text_fmt_int(198+30, 189, "%d", gHudDisplay.booCoins, 0);
 
-    print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C, 0);
-    print_text(184+30, 169+20, ".", 0);
-    print_text_fmt_int(198+30, 169+20, "%d", o->os16110, 0);
-    print_text(212+30, 169+20, "*", 0); // 'X' glyph
+    // print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C, 0);
+    // print_text(184+30, 169+20, ".", 0);
+    // print_text_fmt_int(198+30, 169+20, "%d", o->os16110, 0);
+    // print_text(212+30, 169+20, "*", 0); // 'X' glyph
 
     if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
         || gMarioState->action == ACT_BURNING_GROUND) {
@@ -469,12 +470,12 @@ void shadow_boss_multiplier_loop(void) {
         o->oKleptoTargetNumber = 0;
         action = FALSE;
     }
-    if (((gMarioState->hurtCounter > 0 && o->os16112 == 0) || action) && o->oFloat10C > 0) {
-        if (o->os16110 == 0) {
-            o->oFloat10C -= 1.0f;
-            o->os16110 = 5;
+    if (((gMarioState->hurtCounter > 0 && o->os16112 == 0) || action) && gMultiplierUpper > 0) {
+        if (gMultiplierLower == 0) {
+            gMultiplierUpper -= 1;
+            gMultiplierLower = 5;
         } else {
-            o->os16110 = 0;
+            gMultiplierLower = 0;
         }
         o->os16112 = 1;
     } else if (gMarioState->hurtCounter <= 0) {
@@ -491,7 +492,9 @@ void bhv_shadow_boss_init(void) {
     o->os16F8 = 20;
     //o->os16FA = o->oRoom - 7;
     o->oVelY = 30.0f;
-    o->oFloat10C = 5.0f;
+    // o->oFloat10C = 5.0f;
+    gMultiplierUpper = 5;
+    gMultiplierLower = 0;
     o->oObj100 = cur_obj_nearest_object_with_behavior(bhvMastersPlate);
     if (o->oObj100 == NULL)
         o->activeFlags = 0;
@@ -574,12 +577,17 @@ void bhv_shadow_boss_loop(void) {
             o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 0.1f, 0.05f, 0.05f);
             o->header.gfx.scale[0] = (o->header.gfx.scale[1] = o->header.gfx.scale[2]);
             if (o->header.gfx.scale[2] == 0.1f) {
-                gMarioState->numCoins += 100 * (o->oFloat10C + ((f32)o->os16110 / 10));
+                gMarioState->numCoins += 100 * (gMultiplierUpper + ((f32)gMultiplierLower / 10));
                 CL_explode_object(o, 1);
+                while ((obj = cur_obj_nearest_object_with_behavior(bhvSnufit)) != NULL) {
+                    obj->activeFlags = 0;
+                }
+
                 obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                 obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 obj->oBehParams2ndByte = 0xA;
                 obj->oBehParams = 0x040A0700;
+                gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_MULTIPLIER;
             }
             break;
     }

@@ -1023,6 +1023,9 @@ void render_hud_coins(void) {
     print_text(270 - mag, hudY, "+", 0); // 'Coin' glyph
     print_text(286 - mag, hudY, "*", 0); // 'X' glyph
     print_text_fmt_int(300 - mag, hudY, "%d", gHudDisplay.coins, 0);
+	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+		render_coin_backdrop_image(260, 27, 74, 47, 0, 47);
+	}
 }
 
 #ifdef VERSION_JP
