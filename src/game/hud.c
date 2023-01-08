@@ -976,12 +976,7 @@ void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 
 	s32 yh = MAX(0, y + height - 1);
 	s = (x < 0) ? s - x : s;
 	t = (y < 0) ? t - y : t;
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
-	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_coin_backdrop_image_texture_pal_rgba16));
 	gDPTileSync(gDisplayListHead++);
@@ -991,20 +986,15 @@ void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 
 	gDPPipeSync(gDisplayListHead++);
 	gDPTileSync(gDisplayListHead++);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_coin_backdrop_image_texture));
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_CLAMP | G_TX_MIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_CLAMP | G_TX_MIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 2);
 	gDPLoadSync(gDisplayListHead++);
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 256);
 	gDPPipeSync(gDisplayListHead++);
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_MIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_MIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 2);
 	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 508, 124);
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
-	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
 
@@ -1040,9 +1030,9 @@ void render_hud_coins(void) {
 
 	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
 		if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
-			render_coin_backdrop_image(260 - gBooHudMag, 27, 60 + gBooHudMag, 47, 0, 47);
+			render_coin_backdrop_image(260 - gBooHudMag, 27, 60 + gBooHudMag, 47, 0, 0); // was 47
 		} else {
-			render_coin_backdrop_image(260 + 14, 27, 60 - 14, 47 - 21, 0, 5);
+			render_coin_backdrop_image(260 + 14, 27, 60 - 14, 47 - 21, 0, 0); // was 5
 		}
 	}
 }
@@ -1077,12 +1067,12 @@ void render_hud_keys(void) {
     s16 keyCount = CL_count_bits(save_file_get_keys(0) & ~(1 << 7)) - CL_count_bits(save_file_get_keys(1) & ~(1 << 7));
 	s16 heightMin = gIsConsole ? 208 - 8 : 208;
 	s16 heightMax = gIsConsole ? 240 - 8 : 240;
-	s16 height;
+	// s16 height;
 	if (keyCount) {
 		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, heightMin, 3);
 		// if (!gIsConsole || (sKeyRectHeight >= 208 && sKeyRectHeight >= 208)) {
-		height = gIsConsole ? 208 : sKeyRectHeight;
-		render_coin_backdrop_image(297 - (keyCount * 6), height, 23 + (keyCount * 6), 32, 0, 32);
+		// height = gIsConsole ? 208 : sKeyRectHeight;
+		render_coin_backdrop_image(297 - (keyCount * 6), sKeyRectHeight, 23 + (keyCount * 6), 32, 0, 0); // was 32
 		// }
 	} else {
 		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, heightMax, 3);
@@ -1187,12 +1177,7 @@ void render_starpiece_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s,
 	s32 yh = MAX(0, y + height - 1);
 	s = (x < 0) ? s - x : s;
 	t = (y < 0) ? t - y : t;
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
-	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_starpiece_backdrop_image_texture_pal_rgba16));
 	gDPTileSync(gDisplayListHead++);
@@ -1202,20 +1187,15 @@ void render_starpiece_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s,
 	gDPPipeSync(gDisplayListHead++);
 	gDPTileSync(gDisplayListHead++);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_starpiece_backdrop_image_texture));
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_MIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_MIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 2);
 	gDPLoadSync(gDisplayListHead++);
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 1024);
 	gDPPipeSync(gDisplayListHead++);
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_MIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_MIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 2);
 	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 124, 508);
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
-	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
 
@@ -1252,12 +1232,7 @@ void render_brokenkey_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s,
 	s32 yh = MAX(0, y + height - 1);
 	s = (x < 0) ? s - x : s;
 	t = (y < 0) ? t - y : t;
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
-	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_backdrop_image_texture_pal_rgba16));
 	gDPTileSync(gDisplayListHead++);
@@ -1267,20 +1242,15 @@ void render_brokenkey_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s,
 	gDPPipeSync(gDisplayListHead++);
 	gDPTileSync(gDisplayListHead++);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_backdrop_image_texture));
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPLoadSync(gDisplayListHead++);
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 512);
 	gDPPipeSync(gDisplayListHead++);
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 252, 252);
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
-	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
 void render_brokenkey_1_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t) {
@@ -1290,12 +1260,7 @@ void render_brokenkey_1_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t)
 	s32 yh = MAX(0, y + height - 1);
 	s = (x < 0) ? s - x : s;
 	t = (y < 0) ? t - y : t;
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
-	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_1_image_texture_pal_rgba16));
 	gDPTileSync(gDisplayListHead++);
@@ -1305,20 +1270,15 @@ void render_brokenkey_1_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t)
 	gDPPipeSync(gDisplayListHead++);
 	gDPTileSync(gDisplayListHead++);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_1_image_texture));
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPLoadSync(gDisplayListHead++);
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 512);
 	gDPPipeSync(gDisplayListHead++);
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 252, 252);
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
-	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
 
@@ -1329,12 +1289,7 @@ void render_brokenkey_2_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t)
 	s32 yh = MAX(0, y + height - 1);
 	s = (x < 0) ? s - x : s;
 	t = (y < 0) ? t - y : t;
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
-	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_2_image_texture_pal_rgba16));
 	gDPTileSync(gDisplayListHead++);
@@ -1344,20 +1299,15 @@ void render_brokenkey_2_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t)
 	gDPPipeSync(gDisplayListHead++);
 	gDPTileSync(gDisplayListHead++);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_2_image_texture));
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPLoadSync(gDisplayListHead++);
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 512);
 	gDPPipeSync(gDisplayListHead++);
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 252, 252);
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
-	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
 
@@ -1368,12 +1318,7 @@ void render_brokenkey_3_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t)
 	s32 yh = MAX(0, y + height - 1);
 	s = (x < 0) ? s - x : s;
 	t = (y < 0) ? t - y : t;
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_COPY);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_NONE);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_THRESHOLD);
-	gDPSetBlendColor(gDisplayListHead++, 255, 255, 255, 255);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_RGBA16);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_3_image_texture_pal_rgba16));
 	gDPTileSync(gDisplayListHead++);
@@ -1383,20 +1328,15 @@ void render_brokenkey_3_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t)
 	gDPPipeSync(gDisplayListHead++);
 	gDPTileSync(gDisplayListHead++);
 	gDPSetTextureImage(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 1, segmented_to_virtual(render_brokenkey_3_image_texture));
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPLoadSync(gDisplayListHead++);
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 512);
 	gDPPipeSync(gDisplayListHead++);
-	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0);
+	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 2);
 	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 252, 252);
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
-	gDPPipeSync(gDisplayListHead++);
-	gDPSetCycleType(gDisplayListHead++, G_CYC_1CYCLE);
-	gSPTexture(gDisplayListHead++, 65535, 65535, 0, G_TX_RENDERTILE, G_OFF);
-	gDPSetTexturePersp(gDisplayListHead++, G_TP_PERSP);
-	gDPSetAlphaCompare(gDisplayListHead++, G_AC_NONE);
-	gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
 s32 sBrokenKeyRectY = 240;
@@ -1536,10 +1476,10 @@ void render_s2d_room_names(void) {
 }
 
 
-#include "src/s2d_engine/sprites/starpiece/starpiece.c"
-#include "src/s2d_engine/sprites/starpiece_chart/starpiece_chart.c"
+// #include "src/s2d_engine/sprites/starpiece/starpiece.c"
+// #include "src/s2d_engine/sprites/starpiece_chart/starpiece_chart.c"
 
-uObjMtx starpiecebuf[0x8];
+// uObjMtx starpiecebuf[0x8];
 
 /*void s2d_print_starpiece(s16 x, s16 y, s16 idx) {
 	s2d_init();
