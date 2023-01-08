@@ -54,16 +54,16 @@ s32 count_room_objects_with_flag(u32 flag, s16 room) {
     }
     return count;
 }
-
+extern s32 gBooHudMag;
 
 void room_boo_multiplier_loop(void) {
     if (gMarioCurrentRoom == o->oRoom) {
         gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER | HUD_DISPLAY_FLAG_BOO | HUD_DISPLAY_FLAG_MULTIPLIER);
     }
 
-    print_text(270, 195, ",", 0); // 'Coin' glyph
-    print_text(286, 195, "*", 0); // 'X' glyph
-    print_text_fmt_int(300, 195, "%d", gHudDisplay.booCoins, 0);
+    print_text(270 - gBooHudMag, 195, ",", 0); // 'Coin' glyph
+    print_text(286 - gBooHudMag, 195, "*", 0); // 'X' glyph
+    print_text_fmt_int(300 - gBooHudMag, 195, "%d", gHudDisplay.booCoins, 0);
 
     if (gMarioState->hurtCounter > 0 && o->os16102 == 0 && gMultiplierUpper > 0) {
         if (gMultiplierLower == 0) {

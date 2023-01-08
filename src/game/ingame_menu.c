@@ -3300,9 +3300,15 @@ void print_room_names(void) {
 s32 gMultiplierUpper = 5;
 s32 gMultiplierLower = 0;
 s16 gMultiplierAlpha = 0;
+// s16 gMultiplierBool = 0;
 
-void print_multiplier_string(void) {
+void print_multiplier_string(s32 boss) {
     f32 scale = 1.0f;
+    s16 x = 290;
+    s16 y = 175;
+    if (boss) {
+        y += 20;
+    }
     u8 str[4];
     str[0] = gMultiplierUpper;
     str[1] = 0x3F;
@@ -3319,9 +3325,9 @@ void print_multiplier_string(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, gMultiplierAlpha);
-    print_generic_string(290 + 1, 175 - 1, str);
+    print_generic_string(x + 1, y - 1, str);
     gDPSetEnvColor(gDisplayListHead++, 0x3b, 0xb3, 0x3b, gMultiplierAlpha);
-    print_generic_string(290, 175, str);
+    print_generic_string(x, y, str);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 }
@@ -3329,9 +3335,20 @@ void print_multiplier_string(void) {
 
 void print_multiplier(void) {
     if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
-        print_multiplier_string();
+        // if (gMultiplierBool == FALSE) {
+
+        //     gMultiplierBool = TRUE;
+        // }
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+            print_multiplier_string(0);
+        } else {
+            print_multiplier_string(1);
+        }
         gMultiplierAlpha = approach_s16_symmetric(gMultiplierAlpha, 255, 8);
     } else {
+        gMultiplierUpper = 5;
+        gMultiplierLower = 0;
+        // gMultiplierBool = FALSE;
         gMultiplierAlpha = approach_s16_symmetric(gMultiplierAlpha, 0, 8);
     }
 }
