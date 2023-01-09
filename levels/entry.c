@@ -9,8 +9,9 @@
 
 
 // #ifdef SMMM_DEBUG
-#define TEST_STAGE LEVEL_LLL
+// #define TEST_STAGE LEVEL_WF
 // #endif
+
 
 extern const LevelScript level_main_scripts_entry[];
 const LevelScript level_script_entry[] = {

@@ -1,40 +1,40 @@
-// Skeeter
+// // Skeeter
 
-// Unreferenced light group
-UNUSED static const Lights1 skeeter_lights_unused1 = gdSPDefLights1(
-    0x3f, 0x20, 0x02,
-    0xfc, 0x80, 0x08, 0x28, 0x28, 0x28
-);
+// // Unreferenced light group
+// UNUSED static const Lights1 skeeter_lights_unused1 = gdSPDefLights1(
+//     0x3f, 0x20, 0x02,
+//     0xfc, 0x80, 0x08, 0x28, 0x28, 0x28
+// );
 
-// Unreferenced light group
-UNUSED static const Lights1 skeeter_lights_unused2 = gdSPDefLights1(
-    0x05, 0x05, 0x02,
-    0x15, 0x15, 0x08, 0x28, 0x28, 0x28
-);
+// // Unreferenced light group
+// UNUSED static const Lights1 skeeter_lights_unused2 = gdSPDefLights1(
+//     0x05, 0x05, 0x02,
+//     0x15, 0x15, 0x08, 0x28, 0x28, 0x28
+// );
 
-// Unreferenced light group
-UNUSED static const Lights1 skeeter_lights_unused3 = gdSPDefLights1(
-    0x03, 0x10, 0x29,
-    0x0e, 0x40, 0xa4, 0x28, 0x28, 0x28
-);
+// // Unreferenced light group
+// UNUSED static const Lights1 skeeter_lights_unused3 = gdSPDefLights1(
+//     0x03, 0x10, 0x29,
+//     0x0e, 0x40, 0xa4, 0x28, 0x28, 0x28
+// );
 
-// Unreferenced light group
-UNUSED static const Lights1 skeeter_lights_unused4 = gdSPDefLights1(
-    0x3b, 0x3a, 0x36,
-    0xef, 0xea, 0xd9, 0x28, 0x28, 0x28
-);
+// // Unreferenced light group
+// UNUSED static const Lights1 skeeter_lights_unused4 = gdSPDefLights1(
+//     0x3b, 0x3a, 0x36,
+//     0xef, 0xea, 0xd9, 0x28, 0x28, 0x28
+// );
 
-// Unreferenced light group
-UNUSED static const Lights1 skeeter_lights_unused5 = gdSPDefLights1(
-    0x33, 0x0c, 0x00,
-    0xcf, 0x32, 0x00, 0x28, 0x28, 0x28
-);
+// // Unreferenced light group
+// UNUSED static const Lights1 skeeter_lights_unused5 = gdSPDefLights1(
+//     0x33, 0x0c, 0x00,
+//     0xcf, 0x32, 0x00, 0x28, 0x28, 0x28
+// );
 
-// Unreferenced light group
-UNUSED static const Lights1 skeeter_lights_unused6 = gdSPDefLights1(
-    0x10, 0x29, 0x20,
-    0x42, 0xa5, 0x81, 0x28, 0x28, 0x28
-);
+// // Unreferenced light group
+// UNUSED static const Lights1 skeeter_lights_unused6 = gdSPDefLights1(
+//     0x10, 0x29, 0x20,
+//     0x42, 0xa5, 0x81, 0x28, 0x28, 0x28
+// );
 
 // 0x06000090
 ALIGNED8 static const Texture skeeter_seg6_texture_06000090[] = {
@@ -47,11 +47,11 @@ ALIGNED8 static const Texture skeeter_seg6_texture_06000890[] = {
 };
 
 // 0x06000990
-static const Vtx skeeter_seg6_vertex_06000990[] = {
-    {{{   -44,     45,      0}, 0, {     0,      0}, {0x00, 0xff, 0xd4, 0xff}}},
-    {{{   -44,    -44,      0}, 0, {     0,    990}, {0x00, 0xff, 0xd4, 0xff}}},
-    {{{    45,    -44,      0}, 0, {   990,    990}, {0x00, 0xff, 0xd4, 0xff}}},
-    {{{    45,     45,      0}, 0, {   990,      0}, {0x00, 0xff, 0xd4, 0xff}}},
+static const Vtx skeeter_seg6_vertex_06000990[] = { // 0x00, 0xff, 0xd4
+    {{{   -44,     45,      0}, 0, {     0,      0}, {0x00, 0x7F, 0x58, 0xff}}},
+    {{{   -44,    -44,      0}, 0, {     0,    990}, {0x00, 0x7F, 0x58, 0xff}}},
+    {{{    45,    -44,      0}, 0, {   990,    990}, {0x00, 0x7F, 0x58, 0xff}}},
+    {{{    45,     45,      0}, 0, {   990,      0}, {0x00, 0x7F, 0x58, 0xff}}},
 };
 
 // 0x060009D0 - 0x06000A08
@@ -83,11 +83,11 @@ const Gfx skeeter_seg6_dl_06000A08[] = {
 };
 
 // 0x06000A78
-static const Vtx skeeter_seg6_vertex_06000A78[] = {
-    {{{   -14,     15,      0}, 0, {     0,      0}, {0xff, 0x55, 0x00, 0xff}}},
-    {{{   -14,    -14,      0}, 0, {     0,    990}, {0xff, 0x55, 0x00, 0xff}}},
-    {{{    15,    -14,      0}, 0, {   990,    990}, {0xff, 0x55, 0x00, 0xff}}},
-    {{{    15,     15,      0}, 0, {   990,      0}, {0xff, 0x55, 0x00, 0xff}}},
+static const Vtx skeeter_seg6_vertex_06000A78[] = { // 0xff, 0x55, 0x00
+    {{{   -14,     15,      0}, 0, {     0,      0}, {0x7, 0x55, 0x00, 0xff}}},
+    {{{   -14,    -14,      0}, 0, {     0,    990}, {0x7, 0x55, 0x00, 0xff}}},
+    {{{    15,    -14,      0}, 0, {   990,    990}, {0x7, 0x55, 0x00, 0xff}}},
+    {{{    15,     15,      0}, 0, {   990,      0}, {0x7, 0x55, 0x00, 0xff}}},
 };
 
 // 0x06000AB8 - 0x06000AF0
@@ -225,9 +225,11 @@ const Gfx skeeter_seg6_dl_06000D78[] = {
 };
 
 // 0x06000DE8
-static const Lights1 skeeter_seg6_lights_06000DE8 = gdSPDefLights1(
-    0x7f, 0x55, 0x00,
-    0xff, 0xaa, 0x00, 0x28, 0x28, 0x28
+    // 0x7f, 0x55, 0x00,
+    // 0xff, 0xaa, 0x00, 0x28, 0x28, 0x28
+static const Lights1 skeeter_seg6_lights_06000DE8 = gdSPDefLights1( // FEET
+    0x24, 0x29, 0x0E,
+    0x48, 0x53, 0x1d, 0x28, 0x28, 0x28
 );
 
 // 0x06000E00

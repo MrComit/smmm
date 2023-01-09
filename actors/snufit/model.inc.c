@@ -2,35 +2,46 @@
 
 // 0x060070E0
 ALIGNED8 static const Texture snufit_seg6_texture_060070E0[] = {
-#include "actors/snufit/snufit_body.rgba16.inc.c"
+#include "actors/snufit/CUSTOM_snufit_body.rgba16.inc.c"
 };
 
 // 0x060078E0
 ALIGNED8 static const Texture snufit_seg6_texture_060078E0[] = {
-#include "actors/snufit/snufit_eye.rgba16.inc.c"
+#include "actors/snufit/CUSTOM_snufit_eye.rgba16.inc.c"
 };
 
 // 0x060080E0
 ALIGNED8 static const Texture snufit_seg6_texture_060080E0[] = {
-#include "actors/snufit/snufit_mask_strap.rgba16.inc.c"
+#include "actors/snufit/CUSTOM_snufit_mask_strap.rgba16.inc.c"
 };
 
 // 0x060084E0
 ALIGNED8 static const Texture snufit_seg6_texture_060084E0[] = {
-#include "actors/snufit/snufit_mouth.rgba16.inc.c"
+#include "actors/snufit/CUSTOM_snufit_mouth.rgba16.inc.c"
 };
 
 // 0x06008CE0
+// static const Lights1 snufit_seg6_lights_06008CE0 = gdSPDefLights1(
+//     0x47, 0x47, 0x47,
+//     0xb2, 0xb2, 0xb2, 0x28, 0x28, 0x28
+// );
+
 static const Lights1 snufit_seg6_lights_06008CE0 = gdSPDefLights1(
-    0x47, 0x47, 0x47,
-    0xb2, 0xb2, 0xb2, 0x28, 0x28, 0x28
+    0x13, 0x0f, 0x16,
+    0x26, 0x1e, 0x2C, 0x28, 0x28, 0x28
+);
+// 0x06008CF8
+// static const Lights1 snufit_seg6_lights_06008CF8 = gdSPDefLights1(
+//     0x66, 0x66, 0x66,
+//     0xff, 0xff, 0xff, 0x28, 0x28, 0x28
+// );
+
+
+static const Lights1 snufit_seg6_lights_06008CF8 = gdSPDefLights1(
+    0x13, 0x0f, 0x16,
+    0x26, 0x1e, 0x2C, 0x28, 0x28, 0x28
 );
 
-// 0x06008CF8
-static const Lights1 snufit_seg6_lights_06008CF8 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
 
 // 0x06008D10
 static const Vtx snufit_seg6_vertex_06008D10[] = {
@@ -394,10 +405,17 @@ const Gfx snufit_seg6_dl_06009A10[] = {
 };
 
 // 0x06009A80
+// static const Lights1 snufit_seg6_lights_06009A80 = gdSPDefLights1(
+//     0x65, 0x08, 0x08,
+//     0xfe, 0x14, 0x14, 0x28, 0x28, 0x28
+// );
+
+
 static const Lights1 snufit_seg6_lights_06009A80 = gdSPDefLights1(
-    0x65, 0x08, 0x08,
-    0xfe, 0x14, 0x14, 0x28, 0x28, 0x28
+    0x14, 0x14, 0x14,
+    0x08, 0x08, 0x08, 0x28, 0x28, 0x28
 );
+
 
 // 0x06009A98
 static const Vtx snufit_seg6_vertex_06009A98[] = {
