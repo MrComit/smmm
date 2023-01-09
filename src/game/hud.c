@@ -969,7 +969,7 @@ void render_hud_mario_lives(void) {
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), HUD_TOP_Y, "%d", gHudDisplay.lives, 0);
 }
 
-void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t) {
+void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 t, s32 t2) {
 	s32 xl = MAX(0, x);
 	s32 yl = MAX(0, y);
 	s32 xh = MAX(0, x + width - 1);
@@ -991,7 +991,7 @@ void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 
 	gDPLoadBlock(gDisplayListHead++, 7, 0, 0, 1023, 256);
 	gDPPipeSync(gDisplayListHead++);
 	gDPSetTile(gDisplayListHead++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_MIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 7, 2);
-	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 508, 124);
+	gDPSetTileSize(gDisplayListHead++, 0, 0, 0, 508, 124 + (t2 << 2));
 	gSPScisTextureRectangle(gDisplayListHead++, xl << 2, yl << 2, xh << 2, yh << 2, 0, s << 5, t << 5,  4096, 1024);
 	gDPSetTextureLUT(gDisplayListHead++, G_TT_NONE);
 	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
@@ -1023,16 +1023,16 @@ void render_hud_coins(void) {
 		}
 	}
 
-	render_coin_backdrop_image(260 - mag, (219 - hudY), 60 + mag, 32, 0, 0);
+	render_coin_backdrop_image(260 - mag, (219 - hudY), 60 + mag, 32, 0, 0, 0);
     print_text(270 - mag, hudY, "+", 0); // 'Coin' glyph
     print_text(286 - mag, hudY, "*", 0); // 'X' glyph
     print_text_fmt_int(300 - mag, hudY, "%d", gHudDisplay.coins, 0);
 
 	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
 		if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
-			render_coin_backdrop_image(260 - gBooHudMag, 27, 60 + gBooHudMag, 47, 0, 0); // was 47
+			render_coin_backdrop_image(265 - gBooHudMag, 27, 60 + gBooHudMag, 47, 0, -56 >> 2, 0); // was 47
 		} else {
-			render_coin_backdrop_image(260 + 14, 27, 60 - 14, 47 - 21, 0, 0); // was 5
+			render_coin_backdrop_image(265 + 14, 27, 60 - 14, 47 - 21, 0, 16 >> 2, 0); // was 5
 		}
 	}
 }
@@ -1072,7 +1072,7 @@ void render_hud_keys(void) {
 		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, heightMin, 3);
 		// if (!gIsConsole || (sKeyRectHeight >= 208 && sKeyRectHeight >= 208)) {
 		// height = gIsConsole ? 208 : sKeyRectHeight;
-		render_coin_backdrop_image(297 - (keyCount * 6), sKeyRectHeight, 23 + (keyCount * 6), 32, 0, 0); // was 32
+		render_coin_backdrop_image(297 - (keyCount * 6), sKeyRectHeight, 23 + (keyCount * 6), 32, 0, 32, 32); // was 32
 		// }
 	} else {
 		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, heightMax, 3);
@@ -1200,7 +1200,7 @@ void render_starpiece_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s,
 
 
 s16 sStarPieceRectX = 0;
-
+s32 gGG = 0;
 
 void render_hud_starpieces(void) {
     s16 i, h;
@@ -1214,7 +1214,10 @@ void render_hud_starpieces(void) {
     }
     if (sStarPieceRectX != 0) {
 
-		render_starpiece_backdrop_image(sStarPieceRectX - 32, 240 - 154 - 28, 32, 128, 0, 0);
+		render_starpiece_backdrop_image(sStarPieceRectX - 32, 240 - 154 - 28, 32, 128, (32 - sStarPieceRectX) << 1, 0);
+		if (gMarioState->input & INPUT_Z_DOWN) {
+			gGG++;
+		}
         h = save_file_get_star_piece();
         for (i = 0; i < 5; i++) {
             if (h & (1 << i)) {
