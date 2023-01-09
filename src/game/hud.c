@@ -852,22 +852,22 @@ void animate_power_meter_emphasized(void) {
 static void animate_power_meter_deemphasizing(void) {
     s16 speed = 5;
 
-    if (sPowerMeterHUD.y > 180) {
+    if (sPowerMeterHUD.y > 190) {
         speed = 3;
     }
 
-    if (sPowerMeterHUD.y > 190) {
+    if (sPowerMeterHUD.y > 200) {
         speed = 2;
     }
 
-    if (sPowerMeterHUD.y > 195) {
+    if (sPowerMeterHUD.y > 205) {
         speed = 1;
     }
 
     sPowerMeterHUD.y += speed;
 
-    if (sPowerMeterHUD.y > 200) {
-        sPowerMeterHUD.y = 200;
+    if (sPowerMeterHUD.y > gHudYMin) {
+        sPowerMeterHUD.y = gHudYMin;
         sPowerMeterHUD.animation = POWER_METER_VISIBLE;
     }
 }
@@ -1401,7 +1401,7 @@ void render_hud(void) {
 
         render_hud_keys();
 
-        if (gHudTopY < gHudYMax /*&& (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)*/) {
+        if (gHudTopY < gHudYMax && (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)) {
             render_hud_stars();
         }
 
