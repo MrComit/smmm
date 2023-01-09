@@ -271,46 +271,11 @@ void bhv_bully_flame_loop(void) {
 }
 
 
-s16 sBullyBool = 0;
+// s16 sBullyBool = 0;
 // s16 sBullyFraction = 0;
 // f32 sBullyMultiplier = 0.0f;
 
 
-void bully_boss_multiplier_loop(void) {
-    s32 action = FALSE;
-    if (gMarioCurrentRoom == o->oRoom) {
-        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER | HUD_DISPLAY_FLAG_MULTIPLIER);
-    }
-
-    // print_text_fmt_int(168+30, 169+20, "%d", (s32)gMultiplierUpper, 0);
-    // print_text(184+30, 169+20, ".", 0);
-    // print_text_fmt_int(198+30, 169+20, "%d", sBullyFraction, 0);
-    // print_text(212+30, 169+20, "*", 0); // 'X' glyph
-
-    if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
-        || gMarioState->action == ACT_BURNING_GROUND) {
-        if (o->oKleptoTargetNumber == 0) {
-            action = TRUE;
-            o->oKleptoTargetNumber = 1;
-        }
-    } else {
-        o->oKleptoTargetNumber = 0;
-        action = FALSE;
-    }
-    if (((gMarioState->hurtCounter > 0 && sBullyBool == 0) || action) && gMultiplierUpper > 0) {
-        if (gMultiplierLower == 0) {
-            gMultiplierUpper -= 1;
-            gMultiplierLower = 5;
-        } else {
-            gMultiplierLower = 0;
-        }
-        sBullyBool = 1;
-    } else if (gMarioState->hurtCounter <= 0) {
-        sBullyBool = 0;
-    }
-
-
-}
 
 
 void bhv_attic_bully_init(void) {
@@ -504,7 +469,9 @@ void bhv_attic_bully_loop(void) {
     //  with Mario even when it is under a lava floor, this can get the bully stuck OOB
     //  if there is nothing under the lava floor.
     if (o->oAction != 8) {
-        bully_boss_multiplier_loop();
+        if (gMarioCurrentRoom == o->oRoom) {
+            gHudDisplay.flags |= HUD_DISPLAY_FLAG_MULTIPLIER;
+        }
     }
     if (o->oAction < 6) {
         bully_check_mario_collision();

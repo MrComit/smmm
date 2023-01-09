@@ -3299,29 +3299,54 @@ void print_room_names(void) {
 
 s32 gMultiplierUpper = 5;
 s32 gMultiplierLower = 0;
+s32 gMultiplierBool = 0;
+s32 gMultiplierFlame = 0;
 s16 gMultiplierAlpha = 0;
 // s16 gMultiplierBool = 0;
 
+void calc_multiplier(void) {
+    s32 action = FALSE;
+    if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
+        || gMarioState->action == ACT_BURNING_GROUND) {
+        if (gMultiplierFlame == 0) {
+            action = TRUE;
+            gMultiplierFlame = 1;
+        }
+    } else {
+        gMultiplierFlame = 0;
+        action = FALSE;
+    }
+    if (((gMarioState->hurtCounter > 0 && gMultiplierBool == 0) || action) && gMultiplierUpper > 0) {
+        if (gMultiplierLower == 0) {
+            gMultiplierUpper -= 1;
+            gMultiplierLower = 5;
+        } else {
+            gMultiplierLower = 0;
+        }
+        gMultiplierBool = 1;
+    } else if (gMarioState->hurtCounter <= 0) {
+        gMultiplierBool = 0;
+    }
+}
+
+
 void print_multiplier_string(s32 boss) {
-    f32 scale = 1.0f;
+    u8 str[4];
     s16 x = 290;
-    s16 y = 175;
+    s16 y = 175 - 8;
     if (boss) {
         y += 20;
     }
-    u8 str[4];
+    if (!gIsConsole) {
+        y += 8;
+    }
     str[0] = gMultiplierUpper;
     str[1] = 0x3F;
     str[2] = gMultiplierLower;
     str[3] = 0x3B;
     str[4] = 0xFF;
-    // if (gIsConsole) {
-    //     scale = 1.5f;
-    // }
-    // str[0] = gMultiplierUpper;
-    // str[2] = gMultiplierLower;
+
     create_dl_ortho_matrix();
-    create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, 1.0f, 1.0f);
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
 
     gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, gMultiplierAlpha);
@@ -3345,9 +3370,12 @@ void print_multiplier(void) {
             print_multiplier_string(1);
         }
         gMultiplierAlpha = approach_s16_symmetric(gMultiplierAlpha, 255, 8);
+        calc_multiplier();
     } else {
         gMultiplierUpper = 5;
         gMultiplierLower = 0;
+        gMultiplierBool = 0;
+        gMultiplierFlame = 0;
         // gMultiplierBool = FALSE;
         gMultiplierAlpha = approach_s16_symmetric(gMultiplierAlpha, 0, 8);
     }

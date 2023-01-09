@@ -1235,42 +1235,6 @@ void shyguy_boss_handle_bulletlist(void) {
 }
 
 
-void shyguy_boss_multiplier_loop(void) {
-    s32 action = FALSE;
-    if (gMarioCurrentRoom == o->oRoom) {
-        gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER | HUD_DISPLAY_FLAG_MULTIPLIER);
-    }
-
-    // print_text_fmt_int(168+30, 169+20, "%d", (s32)o->oFloat10C, 0);
-    // print_text(184+30, 169+20, ".", 0);
-    // print_text_fmt_int(198+30, 169+20, "%d", o->os16110, 0);
-    // print_text(212+30, 169+20, "*", 0); // 'X' glyph
-
-    if (gMarioState->action == ACT_BURNING_FALL || gMarioState->action == ACT_BURNING_JUMP 
-        || gMarioState->action == ACT_BURNING_GROUND) {
-        if (o->oKleptoTargetNumber == 0) {
-            action = TRUE;
-            o->oKleptoTargetNumber = 1;
-        }
-    } else {
-        o->oKleptoTargetNumber = 0;
-        action = FALSE;
-    }
-    if (((gMarioState->hurtCounter > 0 && o->os16112 == 0) || action) && gMultiplierUpper > 0) {
-        if (gMultiplierLower == 0) {
-            gMultiplierUpper -= 1;
-            gMultiplierLower = 5;
-        } else {
-            gMultiplierLower = 0;
-        }
-        o->os16112 = 1;
-    } else if (gMarioState->hurtCounter <= 0) {
-        o->os16112 = 0;
-    }
-
-
-}
-
 
 void bhv_shyguy_boss_init(void) {
     obj_set_hitbox(o, &sShyguyBossHitbox);
@@ -1285,7 +1249,9 @@ void bhv_shyguy_boss_loop(void) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
     if (o->oAction) {
-        shyguy_boss_multiplier_loop();
+        if (gMarioCurrentRoom == o->oRoom) {
+            gHudDisplay.flags |= HUD_DISPLAY_FLAG_MULTIPLIER;
+        }
     }
     switch (o->oAction) {
         case 0: // PRE FIGHT ACT

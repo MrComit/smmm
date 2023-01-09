@@ -997,9 +997,6 @@ void render_coin_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s, s32 
 	gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 }
 
-
-s32 gBooHudMag = 0;
-
 /**
  * Renders the amount of coins collected.
  */
@@ -1008,18 +1005,19 @@ void render_hud_coins(void) {
 	s32 mag = 0;
 	s32 i = gHudDisplay.coins;
 	s32 k = gHudDisplay.booCoins;
-	gBooHudMag = 0;
+	s32 booHeight = gIsConsole ? 8 : 0;
+	s32 booMag = 0;
 	while (i >= 10) {
 		mag += 14;
 		i /= 10;
 	}
 	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
 		while (k >= 10) {
-			gBooHudMag += 14;
+			booMag += 14;
 			k /= 10;
 		}
-		if (gBooHudMag > mag) {
-			mag = gBooHudMag;
+		if (booMag > mag) {
+			mag = booMag;
 		}
 	}
 
@@ -1029,10 +1027,14 @@ void render_hud_coins(void) {
     print_text_fmt_int(300 - mag, hudY, "%d", gHudDisplay.coins, 0);
 
 	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
+		gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
 		if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
-			render_coin_backdrop_image(265 - gBooHudMag, 27, 60 + gBooHudMag, 47, 0, -56 >> 2, 0); // was 47
+			render_coin_backdrop_image(265 - booMag, 27 + booHeight, 60 + booMag, 47, 0, -56 >> 2, 0); // was 47
+			print_text(270 - booMag, 195 - booHeight, ",", 0); // 'Coin' glyph
+			print_text(286 - booMag, 195 - booHeight, "*", 0); // 'X' glyph
+			print_text_fmt_int(300 - booMag, 195 - booHeight, "%d", gHudDisplay.booCoins, 0);
 		} else {
-			render_coin_backdrop_image(265 + 14, 27, 60 - 14, 47 - 21, 0, 16 >> 2, 0); // was 5
+			render_coin_backdrop_image(265 + 14, 27 + booHeight, 60 - 14, 47 - 21, 0, 16 >> 2, 0); // was 5
 		}
 	}
 }
