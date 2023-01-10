@@ -25,6 +25,8 @@ void bhv_jumpscare_shyguy_init(void) {
 
 void bhv_jumpscare_shyguy_loop(void) {
     struct Object *obj;
+    o->os16104 += 0x5D1;
+    o->oFaceAnglePitch = 0x888 + (sins(o->os16104 - 0x4000) * 0x888);
     switch (o->oAction) {
         case 0:
             if (o->oTimer <= 60) {

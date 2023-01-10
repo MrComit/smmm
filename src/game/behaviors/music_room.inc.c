@@ -170,6 +170,8 @@ void bhv_music_barrier_loop(void) {
 }
 
 void bhv_music_shyguy_loop(void) {
+    o->os16104 += 0xA00;
+    o->oFaceAnglePitch = 0xC00 + (sins(o->os16104 - 0x4000) * 0xC00);
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 5) {

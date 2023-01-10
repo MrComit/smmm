@@ -90,6 +90,8 @@ void bhv_exercise_bike_loop(void) {
 }
 
 void bhv_bike_shyguy_loop(void) {
+    o->os16104 += 0xBA2;
+    o->oFaceAnglePitch = 0x888 + (sins(o->os16104 - 0x4000) * 0x888);
     if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
         spawn_mist_particles();
         obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);

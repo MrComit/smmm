@@ -71,6 +71,7 @@ void bhv_shyguy_loop(void) {
 
 
 void bhv_shyguy_plate_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (gMarioState->pos[2] > 6000.0f && gMarioState->pos[1] > 950.0f) {
@@ -79,9 +80,9 @@ void bhv_shyguy_plate_loop(void) {
             break;
         case 1:
             if (o->oTimer > 20) {
-                cur_obj_init_anim_and_check_if_end(2);
-            } else if (o->oTimer > 11) {
-                cur_obj_init_anim_and_check_if_end(0);
+                o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0x2000, 0x200);
+            } else {
+                o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x200);
             }
             if (o->oTimer > 30) {
                 o->oAction = 2;
@@ -92,7 +93,8 @@ void bhv_shyguy_plate_loop(void) {
             }
             break;
         case 2:
-            spawn_object(o, MODEL_PLATE, bhvSpinPlate);
+            obj = spawn_object(o, MODEL_PLATE, bhvSpinPlate);
+            obj->oFaceAnglePitch = 0;
             o->oAction = 1;
             if (o->oF4 == 0)
                 o->oF4 = 1;
