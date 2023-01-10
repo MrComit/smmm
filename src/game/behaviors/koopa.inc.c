@@ -106,7 +106,7 @@ static void koopa_play_footstep_sound(s8 animFrame1, s8 animFrame2) {
  * running away.
  */
 static s32 koopa_check_run_from_mario(void) {
-    if (o->oKoopaDistanceToMario < 500.0f
+    if (o->oDistanceToMario < 500.0f
         && abs_angle_diff(o->oKoopaAngleToMario, o->oMoveAngleYaw) < 0x6000) {
         o->oAction = KOOPA_SHELLED_ACT_RUN_FROM_MARIO;
         return TRUE;
@@ -306,6 +306,23 @@ void shelled_koopa_attack_handler(s32 attackType) {
     }
 }
 
+
+void koopa_shelled_act_dead(void) {
+    cur_obj_init_animation_with_sound(2);
+    if (o->oTimer & 1) {
+        o->header.gfx.animInfo.animFrame--;
+    }
+    o->oKleptoYawToTarget += 0x400;
+    o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0 + (sins(o->oKleptoYawToTarget) * 0x400), 0xA00);
+    o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.5f, 0.04f);
+    o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f, 2.0f);
+    o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 1.0f);
+
+    if (CL_nearest_object_with_behavior_and_field(bhvKoopa, 0x108, 0) == NULL) {
+        obj_die_if_health_non_positive();
+    }
+}
+
 /**
  * Update function for both regular and tiny shelled koopa.
  */
@@ -330,8 +347,18 @@ static void koopa_shelled_update(void) {
         case KOOPA_SHELLED_ACT_HIT:
             koopa_shelled_act_hit();
             break;
+        case KOOPA_SHELLED_ACT_DEAD:
+            koopa_shelled_act_dead();
+            break;
     }
 
+    if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        if (!(o->oInteractStatus & INT_STATUS_ATTACKED_MARIO)) {
+            o->o108 = 1;
+            o->oAction = KOOPA_SHELLED_ACT_DEAD;
+            cur_obj_become_intangible();
+        }
+    }
     //if (o->header.gfx.scale[0] > 0.8f) {
     //    obj_handle_attacks(&sKoopaHitbox, o->oAction, sKoopaShelledAttackHandlers);
     //} else {
@@ -340,8 +367,10 @@ static void koopa_shelled_update(void) {
     //    if (o->oAction == KOOPA_SHELLED_ACT_DIE) {
     //        obj_die_if_health_non_positive();
     //    }
-        obj_handle_attacks(&sKoopaHitbox, o->oAction, sKoopaUnshelledAttackHandlers);
+        // obj_handle_attacks(&sKoopaHitbox, o->oAction, sKoopaUnshelledAttackHandlers);
     //}
+    obj_set_hitbox(o, &sKoopaHitbox);
+    o->oInteractStatus = 0;
 
     cur_obj_move_standard(-78);
 }
@@ -821,14 +850,14 @@ void bhv_koopa_update(void) {
         if (cur_obj_nearest_object_with_behavior(bhvPoolBarrier)) {
             cur_obj_disable();
             return;
-        } else {
+        } else if (o->oAction != KOOPA_SHELLED_ACT_DEAD) {
             cur_obj_enable();
         }
     }
     //if (o->oKoopaMovementType >= KOOPA_BP_KOOPA_THE_QUICK_BASE) {
     //    koopa_the_quick_update();
     /*} else */if (obj_update_standard_actions(o->oKoopaAgility * 1.5f)) {
-        o->oKoopaDistanceToMario = o->oDistanceToMario;
+        // o->oKoopaDistanceToMario = o->oDistanceToMario;
         o->oKoopaAngleToMario = o->oAngleToMario;
         //treat_far_home_as_mario(1000.0f);
 
