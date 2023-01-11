@@ -46,52 +46,53 @@ ALIGNED8 static const Texture effect_0B002020[] = {
 };
 
 // 0x0B002820
-ALIGNED8 static const Texture effect_0B002820[] = {
-#include "textures/effect/lava_bubble.02820.rgba16.inc.c"
-};
+// ALIGNED8 static const Texture effect_0B002820[] = {
+// #include "textures/effect/lava_bubble.02820.rgba16.inc.c"
+// };
 
 // 0x0B003020
 ALIGNED8 static const Texture effect_0B003020[] = {
-#include "textures/effect/lava_bubble.03020.rgba16.inc.c"
+#include "textures/effect/CUSTOM_lava_bubble.03020.rgba16.inc.c"
 };
 
 // 0x0B003820
-ALIGNED8 static const Texture effect_0B003820[] = {
-#include "textures/effect/lava_bubble.03820.rgba16.inc.c"
-};
+// ALIGNED8 static const Texture effect_0B003820[] = {
+// #include "textures/effect/lava_bubble.03820.rgba16.inc.c"
+// };
 
 // 0x0B004020
-ALIGNED8 static const Texture effect_0B004020[] = {
-#include "textures/effect/lava_bubble.04020.rgba16.inc.c"
-};
+// ALIGNED8 static const Texture effect_0B004020[] = {
+// #include "textures/effect/lava_bubble.04020.rgba16.inc.c"
+// };
 
 // 0x0B004820
-ALIGNED8 static const Texture effect_0B004820[] = {
-#include "textures/effect/lava_bubble.04820.rgba16.inc.c"
-};
+// ALIGNED8 static const Texture effect_0B004820[] = {
+// #include "textures/effect/lava_bubble.04820.rgba16.inc.c"
+// };
 
 // 0x0B005020
-ALIGNED8 static const Texture effect_0B005020[] = {
-#include "textures/effect/lava_bubble.05020.rgba16.inc.c"
-};
+// ALIGNED8 static const Texture effect_0B005020[] = {
+// #include "textures/effect/lava_bubble.05020.rgba16.inc.c"
+// };
 
 // 0x0B005820
-ALIGNED8 static const Texture effect_0B005820[] = {
-#include "textures/effect/lava_bubble.05820.rgba16.inc.c"
-};
+// ALIGNED8 static const Texture effect_0B005820[] = {
+// #include "textures/effect/lava_bubble.05820.rgba16.inc.c"
+// };
 
 // 0x0B006020
 const Texture *const lava_bubble_ptr_0B006020[] = {
-    effect_0B002020,
-    effect_0B002820,
     effect_0B003020,
-    effect_0B003020,
-    effect_0B003020,
-    effect_0B003820,
-    effect_0B004020,
-    effect_0B004820,
-    effect_0B005020,
-    effect_0B005820,
+    // effect_0B002020,
+    // effect_0B002820,
+    // effect_0B003020,
+    // effect_0B003020,
+    // effect_0B003020,
+    // effect_0B003820,
+    // effect_0B004020,
+    // effect_0B004820,
+    // effect_0B005020,
+    // effect_0B005820,
 };
 
 // Bubble
@@ -161,8 +162,8 @@ const Gfx tiny_bubble_dl_0B006CD8[] = {
 const Gfx tiny_bubble_dl_0B006D38[] = {
     gsDPPipeSync(),
     gsSPClearGeometryMode(G_LIGHTING | G_SHADING_SMOOTH),
-    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
-    gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
+    gsDPSetCombineMode(G_CC_FADEA, G_CC_FADEA),
+    gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsSPEndDisplayList(),
 };

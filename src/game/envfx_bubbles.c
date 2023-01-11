@@ -10,6 +10,8 @@
 #include "engine/behavior_script.h"
 #include "audio/external.h"
 #include "textures.h"
+#include "level_update.h"
+#include "object_list_processor.h"
 
 /**
  * This file implements environment effects that are not snow:
@@ -114,22 +116,22 @@ void envfx_set_lava_bubble_position(s32 index, Vec3s centerPos) {
     s16 centerY = centerPos[1];
     s16 centerZ = centerPos[2];
 
-    (gEnvFxBuffer + index)->xPos = random_float() * 6000.0f - 3000.0f + centerX;
-    (gEnvFxBuffer + index)->zPos = random_float() * 6000.0f - 3000.0f + centerZ;
+    (gEnvFxBuffer + index)->xPos = gMarioState->pos[0] + (random_float() - 0.5f) * 6000.0f;// - 3000.0f + centerX;
+    (gEnvFxBuffer + index)->zPos = gMarioState->pos[2] + (random_float() - 0.5f) * 6000.0f;// - 3000.0f + centerZ;
 
-    if ((gEnvFxBuffer + index)->xPos > 8000) {
-        (gEnvFxBuffer + index)->xPos = 16000 - (gEnvFxBuffer + index)->xPos;
-    }
-    if ((gEnvFxBuffer + index)->xPos < -8000) {
-        (gEnvFxBuffer + index)->xPos = -16000 - (gEnvFxBuffer + index)->xPos;
-    }
+    // if ((gEnvFxBuffer + index)->xPos > 8000) {
+    //     (gEnvFxBuffer + index)->xPos = 16000 - (gEnvFxBuffer + index)->xPos;
+    // }
+    // if ((gEnvFxBuffer + index)->xPos < -8000) {
+    //     (gEnvFxBuffer + index)->xPos = -16000 - (gEnvFxBuffer + index)->xPos;
+    // }
 
-    if ((gEnvFxBuffer + index)->zPos > 8000) {
-        (gEnvFxBuffer + index)->zPos = 16000 - (gEnvFxBuffer + index)->zPos;
-    }
-    if ((gEnvFxBuffer + index)->zPos < -8000) {
-        (gEnvFxBuffer + index)->zPos = -16000 - (gEnvFxBuffer + index)->zPos;
-    }
+    // if ((gEnvFxBuffer + index)->zPos > 8000) {
+    //     (gEnvFxBuffer + index)->zPos = 16000 - (gEnvFxBuffer + index)->zPos;
+    // }
+    // if ((gEnvFxBuffer + index)->zPos < -8000) {
+    //     (gEnvFxBuffer + index)->zPos = -16000 - (gEnvFxBuffer + index)->zPos;
+    // }
 
     floorY =
         find_floor((gEnvFxBuffer + index)->xPos, centerY + 500, (gEnvFxBuffer + index)->zPos, &surface);
@@ -138,8 +140,9 @@ void envfx_set_lava_bubble_position(s32 index, Vec3s centerPos) {
         return;
     }
 
-    if (surface->type == SURFACE_BURNING) {
+    if (surface->type == SURFACE_INSTANT_QUICKSAND && surface->room == gMarioCurrentRoom) {
         (gEnvFxBuffer + index)->yPos = floorY;
+        (gEnvFxBuffer + index)->isAlive = TRUE;
     } else {
         (gEnvFxBuffer + index)->yPos = FLOOR_LOWER_LIMIT_MISC;
     }
@@ -159,14 +162,20 @@ void envfx_update_lava(Vec3s centerPos) {
     UNUSED s16 centerZ = centerPos[2];
 
     for (i = 0; i < sBubbleParticleMaxCount; i++) {
+        (gEnvFxBuffer + i)->animFrame += 1;
+        if ((gEnvFxBuffer + i)->animFrame > 45) {
+            (gEnvFxBuffer + i)->isAlive = FALSE;
+            (gEnvFxBuffer + i)->animFrame = 0;
+        }
         if (!(gEnvFxBuffer + i)->isAlive) {
             envfx_set_lava_bubble_position(i, centerPos);
-            (gEnvFxBuffer + i)->isAlive = TRUE;
-        } else if (!(globalTimer & 1)) {
-            (gEnvFxBuffer + i)->animFrame += 1;
-            if ((gEnvFxBuffer + i)->animFrame > 8) {
-                (gEnvFxBuffer + i)->isAlive = FALSE;
-                (gEnvFxBuffer + i)->animFrame = 0;
+            (gEnvFxBuffer + i)->yPos -= 100.0f;
+            (gEnvFxBuffer + i)->opacity = 210;
+            // (gEnvFxBuffer + i)->isAlive = TRUE;
+        } else /*if (!(globalTimer & 1))*/ {
+            (gEnvFxBuffer + i)->yPos += 5.0f;
+            if ((gEnvFxBuffer + i)->animFrame > 10) {
+                (gEnvFxBuffer + i)->opacity = approach_s16_symmetric((gEnvFxBuffer + i)->opacity, 0, 6);
             }
         }
     }
@@ -324,8 +333,8 @@ s32 envfx_init_bubble(s32 mode) {
             break;
 
         case ENVFX_LAVA_BUBBLES:
-            sBubbleParticleCount = 15;
-            sBubbleParticleMaxCount = 15;
+            sBubbleParticleCount = 10;
+            sBubbleParticleMaxCount = 10;
             break;
 
         case ENVFX_WHIRLPOOL_BUBBLES:
@@ -346,13 +355,13 @@ s32 envfx_init_bubble(s32 mode) {
     bzero(gEnvFxBuffer, sBubbleParticleCount * sizeof(struct EnvFxParticle));
     bzero(gEnvFxBubbleConfig, sizeof(gEnvFxBubbleConfig));
 
-    switch (mode) {
-        case ENVFX_LAVA_BUBBLES:
-            for (i = 0; i < sBubbleParticleCount; i++) {
-                (gEnvFxBuffer + i)->animFrame = random_float() * 7.0f;
-            }
-            break;
-    }
+    // switch (mode) {
+    //     case ENVFX_LAVA_BUBBLES:
+    //         for (i = 0; i < sBubbleParticleCount; i++) {
+    //             (gEnvFxBuffer + i)->animFrame = random_float() * 7.0f;
+    //         }
+    //         break;
+    // }
 
     gEnvFxMode = mode;
     return TRUE;
@@ -375,7 +384,7 @@ void envfx_bubbles_update_switch(s32 mode, Vec3s camTo, Vec3s vertex1, Vec3s ver
         case ENVFX_LAVA_BUBBLES:
             envfx_update_lava(camTo);
             vertex1[0] = 100;  vertex1[1] = 0;   vertex1[2] = 0;
-            vertex2[0] = 0;    vertex2[1] = 150; vertex2[2] = 0;
+            vertex2[0] = 0;    vertex2[1] = 200; vertex2[2] = 0;
             vertex3[0] = -100; vertex3[1] = 0;   vertex3[2] = 0;
             break;
 
@@ -446,7 +455,7 @@ void envfx_set_bubble_texture(s32 mode, s16 index) {
 
         case ENVFX_LAVA_BUBBLES:
             imageArr = segmented_to_virtual(&lava_bubble_ptr_0B006020);
-            frame = (gEnvFxBuffer + index)->animFrame;
+            frame = 0;//(gEnvFxBuffer + index)->animFrame;
             break;
 
         case ENVFX_WHIRLPOOL_BUBBLES:
@@ -487,9 +496,13 @@ Gfx *envfx_update_bubble_particles(s32 mode, UNUSED Vec3s marioPos, Vec3s camFro
     gSPDisplayList(sGfxCursor++, &tiny_bubble_dl_0B006D38);
 
     for (i = 0; i < sBubbleParticleMaxCount; i += 5) {
+        if ((gEnvFxBuffer + i)->isAlive == FALSE) {
+            continue;
+        }
         gDPPipeSync(sGfxCursor++);
         envfx_set_bubble_texture(mode, i);
         append_bubble_vertex_buffer(sGfxCursor++, i, vertex1, vertex2, vertex3, (Vtx *) gBubbleTempVtx);
+        gDPSetEnvColor(sGfxCursor++, 0xb6, 0xef, 0xe5, (gEnvFxBuffer + i)->opacity);
         gSP1Triangle(sGfxCursor++, 0, 1, 2, 0);
         gSP1Triangle(sGfxCursor++, 3, 4, 5, 0);
         gSP1Triangle(sGfxCursor++, 6, 7, 8, 0);
