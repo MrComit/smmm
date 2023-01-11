@@ -12,6 +12,7 @@
 #include "textures.h"
 #include "level_update.h"
 #include "object_list_processor.h"
+#include "game/tile_scroll.h"
 
 /**
  * This file implements environment effects that are not snow:
@@ -163,7 +164,7 @@ void envfx_update_lava(Vec3s centerPos) {
 
     for (i = 0; i < sBubbleParticleMaxCount; i++) {
         (gEnvFxBuffer + i)->animFrame += 1;
-        if ((gEnvFxBuffer + i)->animFrame > 45) {
+        if ((gEnvFxBuffer + i)->animFrame > 60) {
             (gEnvFxBuffer + i)->isAlive = FALSE;
             (gEnvFxBuffer + i)->animFrame = 0;
         }
@@ -174,8 +175,8 @@ void envfx_update_lava(Vec3s centerPos) {
             // (gEnvFxBuffer + i)->isAlive = TRUE;
         } else /*if (!(globalTimer & 1))*/ {
             (gEnvFxBuffer + i)->yPos += 5.0f;
-            if ((gEnvFxBuffer + i)->animFrame > 10) {
-                (gEnvFxBuffer + i)->opacity = approach_s16_symmetric((gEnvFxBuffer + i)->opacity, 0, 6);
+            if ((gEnvFxBuffer + i)->animFrame > 30) {
+                (gEnvFxBuffer + i)->opacity = approach_s16_symmetric((gEnvFxBuffer + i)->opacity, 0, 7);
             }
         }
     }
@@ -383,9 +384,9 @@ void envfx_bubbles_update_switch(s32 mode, Vec3s camTo, Vec3s vertex1, Vec3s ver
 
         case ENVFX_LAVA_BUBBLES:
             envfx_update_lava(camTo);
-            vertex1[0] = 100;  vertex1[1] = 0;   vertex1[2] = 0;
-            vertex2[0] = 0;    vertex2[1] = 200; vertex2[2] = 0;
-            vertex3[0] = -100; vertex3[1] = 0;   vertex3[2] = 0;
+            vertex1[0] = 40;  vertex1[1] = 0;   vertex1[2] = 0;
+            vertex2[0] = 0;    vertex2[1] = 80; vertex2[2] = 0;
+            vertex3[0] = -40; vertex3[1] = 0;   vertex3[2] = 0;
             break;
 
         case ENVFX_WHIRLPOOL_BUBBLES:
@@ -502,7 +503,7 @@ Gfx *envfx_update_bubble_particles(s32 mode, UNUSED Vec3s marioPos, Vec3s camFro
         gDPPipeSync(sGfxCursor++);
         envfx_set_bubble_texture(mode, i);
         append_bubble_vertex_buffer(sGfxCursor++, i, vertex1, vertex2, vertex3, (Vtx *) gBubbleTempVtx);
-        gDPSetEnvColor(sGfxCursor++, 0xb6, 0xef, 0xe5, (gEnvFxBuffer + i)->opacity);
+        gDPSetEnvColor(sGfxCursor++, 0xd2, 0xef, 0xea, (gEnvFxBuffer + i)->opacity);
         gSP1Triangle(sGfxCursor++, 0, 1, 2, 0);
         gSP1Triangle(sGfxCursor++, 3, 4, 5, 0);
         gSP1Triangle(sGfxCursor++, 6, 7, 8, 0);
@@ -512,6 +513,9 @@ Gfx *envfx_update_bubble_particles(s32 mode, UNUSED Vec3s marioPos, Vec3s camFro
 
     gSPDisplayList(sGfxCursor++, &tiny_bubble_dl_0B006AB0);
     gSPEndDisplayList(sGfxCursor++);
+    
+    // Gfx *mat = segmented_to_virtual(tiny_bubble_dl_0B006D68);
+	// shift_s_down(mat, 11, PACK_TILESIZE(0, -2));
 
     return gfxStart;
 }
