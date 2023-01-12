@@ -117,8 +117,8 @@ void envfx_set_lava_bubble_position(s32 index, Vec3s centerPos) {
     s16 centerY = centerPos[1];
     s16 centerZ = centerPos[2];
 
-    (gEnvFxBuffer + index)->xPos = gMarioState->pos[0] + (random_float() - 0.5f) * 4000.0f;// - 3000.0f + centerX;
-    (gEnvFxBuffer + index)->zPos = gMarioState->pos[2] + (random_float() - 0.5f) * 4000.0f;// - 3000.0f + centerZ;
+    (gEnvFxBuffer + index)->xPos = gMarioState->pos[0] + (random_float() - 0.5f) * 2500.0f;// - 3000.0f + centerX;
+    (gEnvFxBuffer + index)->zPos = gMarioState->pos[2] + (random_float() - 0.5f) * 2500.0f;// - 3000.0f + centerZ;
 
     // if ((gEnvFxBuffer + index)->xPos > 8000) {
     //     (gEnvFxBuffer + index)->xPos = 16000 - (gEnvFxBuffer + index)->xPos;
@@ -163,17 +163,18 @@ void envfx_update_lava(Vec3s centerPos) {
     UNUSED s16 centerZ = centerPos[2];
 
     for (i = 0; i < sBubbleParticleMaxCount; i++) {
-        (gEnvFxBuffer + i)->animFrame += 1;
         if ((gEnvFxBuffer + i)->animFrame > 90) {
             (gEnvFxBuffer + i)->isAlive = FALSE;
             (gEnvFxBuffer + i)->animFrame = 0;
         }
-        if (!(gEnvFxBuffer + i)->isAlive) {
+        if ((gEnvFxBuffer + i)->animFrame == 0) {
+            (gEnvFxBuffer + i)->isAlive = FALSE;
+            (gEnvFxBuffer + i)->animFrame += 1;
             envfx_set_lava_bubble_position(i, centerPos);
             (gEnvFxBuffer + i)->yPos -= 100.0f;
             (gEnvFxBuffer + i)->opacity = 210;
-            // (gEnvFxBuffer + i)->isAlive = TRUE;
         } else /*if (!(globalTimer & 1))*/ {
+            (gEnvFxBuffer + i)->animFrame += 1;
             (gEnvFxBuffer + i)->yPos += 5.0f;
             if ((gEnvFxBuffer + i)->animFrame > 75) {
                 (gEnvFxBuffer + i)->opacity = approach_s16_symmetric((gEnvFxBuffer + i)->opacity, 0, 14);
@@ -334,8 +335,8 @@ s32 envfx_init_bubble(s32 mode) {
             break;
 
         case ENVFX_LAVA_BUBBLES:
-            sBubbleParticleCount = 15;
-            sBubbleParticleMaxCount = 15;
+            sBubbleParticleCount = 20;
+            sBubbleParticleMaxCount = 20;
             break;
 
         case ENVFX_WHIRLPOOL_BUBBLES:
@@ -497,18 +498,28 @@ Gfx *envfx_update_bubble_particles(s32 mode, UNUSED Vec3s marioPos, Vec3s camFro
     gSPDisplayList(sGfxCursor++, &tiny_bubble_dl_0B006D38);
 
     for (i = 0; i < sBubbleParticleMaxCount; i += 5) {
-        if ((gEnvFxBuffer + i)->isAlive == FALSE) {
-            continue;
-        }
+        // if ((gEnvFxBuffer + i)->isAlive == FALSE) {
+        //     continue;
+        // }
         gDPPipeSync(sGfxCursor++);
         envfx_set_bubble_texture(mode, i);
         append_bubble_vertex_buffer(sGfxCursor++, i, vertex1, vertex2, vertex3, (Vtx *) gBubbleTempVtx);
         gDPSetEnvColor(sGfxCursor++, 0x98, 0x7a, 0xaa, (gEnvFxBuffer + i)->opacity);
-        gSP1Triangle(sGfxCursor++, 0, 1, 2, 0);
-        gSP1Triangle(sGfxCursor++, 3, 4, 5, 0);
-        gSP1Triangle(sGfxCursor++, 6, 7, 8, 0);
-        gSP1Triangle(sGfxCursor++, 9, 10, 11, 0);
-        gSP1Triangle(sGfxCursor++, 12, 13, 14, 0);
+        if ((gEnvFxBuffer + i)->isAlive) {
+            gSP1Triangle(sGfxCursor++, 0, 1, 2, 0);
+        }
+        if ((gEnvFxBuffer + i + 1)->isAlive) {
+            gSP1Triangle(sGfxCursor++, 3, 4, 5, 0);
+        }
+        if ((gEnvFxBuffer + i + 2)->isAlive) {
+            gSP1Triangle(sGfxCursor++, 6, 7, 8, 0);
+        }
+        if ((gEnvFxBuffer + i + 3)->isAlive) {
+            gSP1Triangle(sGfxCursor++, 9, 10, 11, 0);
+        }
+        if ((gEnvFxBuffer + i + 4)->isAlive) {
+            gSP1Triangle(sGfxCursor++, 12, 13, 14, 0);
+        }
     }
 
     gSPDisplayList(sGfxCursor++, &tiny_bubble_dl_0B006AB0);
