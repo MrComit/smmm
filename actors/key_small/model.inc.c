@@ -1,6 +1,3 @@
-Lights1 key_small_SmallKey_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx key_small_Small_Key_mesh_vtx_cull[8] = {
 	{{{-71, 0, -19},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -239,7 +236,8 @@ Gfx mat_key_small_SmallKey[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(144, 160, 164, 255),
-	gsSPSetLights1(key_small_SmallKey_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

@@ -1,30 +1,9 @@
-Lights1 blue_owl_Belly_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 blue_owl_Eyes_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 blue_owl_Nose_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 blue_owl_Arm1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 blue_owl_Arm2_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 blue_owl_Nails_lights = gdSPDefLights1(
-	0xC, 0xC, 0xC,
-	0x19, 0x19, 0x19, 0x28, 0x28, 0x28);
 
-Lights1 blue_owl_Feet_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx blue_owl_hoot_eyes_blue_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 blue_owl_hoot_eyes_blue_ci8[] = {
@@ -951,7 +930,8 @@ Gfx mat_blue_owl_Belly[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(81, 73, 119, 255),
-	gsSPSetLights1(blue_owl_Belly_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -977,7 +957,8 @@ Gfx mat_blue_owl_Eyes_layer1[] = {
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
 	gsDPSetEnvColor(38, 24, 83, 255),
-	gsSPSetLights1(blue_owl_Eyes_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -994,7 +975,8 @@ Gfx mat_blue_owl_Nose[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(232, 169, 33, 255),
-	gsSPSetLights1(blue_owl_Nose_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -1018,7 +1000,8 @@ Gfx mat_blue_owl_Arm1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(blue_owl_Arm1_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -1049,7 +1032,8 @@ Gfx mat_blue_owl_Arm2[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(blue_owl_Arm2_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -1064,7 +1048,8 @@ Gfx mat_blue_owl_Nails[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(blue_owl_Nails_lights),
+    gsSPLightColor(LIGHT_1, 0x191919ff),
+    gsSPLightColor(LIGHT_2, 0xc0c0cff),
 	gsSPEndDisplayList(),
 };
 
@@ -1073,7 +1058,8 @@ Gfx mat_blue_owl_Feet[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(173, 99, 0, 255),
-	gsSPSetLights1(blue_owl_Feet_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

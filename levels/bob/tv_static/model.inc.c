@@ -1,6 +1,3 @@
-Lights1 tv_static_Light_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx tv_static_i8_static_i4_aligner[] = {gsSPEndDisplayList()};
 u8 tv_static_i8_static_i4[] = {
@@ -344,7 +341,8 @@ Gfx mat_tv_static_Light[] = {
 	gsDPSetCombineLERP(0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(49, 106, 152, 255),
-	gsSPSetLights1(tv_static_Light_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

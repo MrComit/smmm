@@ -40,28 +40,28 @@ extern Mtx *gMatStackFixed[32];
 extern s16 gMatStackIndex;
 extern Mat4 gMatStack[32];
 
-s8 sBooColors[][3] = {
-    {0x78, 0x64, 0xFF}, //garage
-    {0xCB, 0xFF, 0x74}, //dining room
-    {0xA5, 0xA5, 0xFF}, //kitchen
-    {0xd5, 0x4b, 0x1c}, //living room
-    {0xFF, 0x00, 0x00}, //library
-    {0x22, 0xa8, 0x2f},
-    {0xff, 0xdc, 0x47},
-    {0xff, 0xff, 0xff},
-    {0x96, 0x69, 0x00},
-    {0x9D, 0x65, 0xE1},
-    {0x55, 0x00, 0x9B},
-    {0x7D, 0x5B, 0x00}, //cave mole room
-    {0x64, 0xA5, 0xFF}, //ice castle
-    {0xff, 0xff, 0xff}, //shooting gallery
-    {0xff, 0xff, 0xff}, //ch3 boss
-    {0x1f, 0xaf, 0xff}, //game room
-    {0x3A, 0x2B, 0xC3}, //treehouse
-    {0xFF, 0x85, 0xF9}, //theater
-    {0x0, 0x59, 0x0}, //attic
-    {0xD3, 0x8C, 0x00}, //laundry room
-    {0xff, 0xff, 0xff},
+s32 sBooColors[] = {
+    {0x7864FFff}, //garage
+    {0xCBFF74ff}, //dining room
+    {0xA5A5FFff}, //kitchen
+    {0xd54b1cff}, //living room
+    {0xFF0000ff}, //library
+    {0x22a82fff},
+    {0xffdc47ff},
+    {0xffffffff},
+    {0x966900ff},
+    {0x9D65E1ff},
+    {0x55009Bff},
+    {0x7D5B00ff}, //cave mole room
+    {0x64A5FFff}, //ice castle
+    {0xffffffff}, //shooting gallery
+    {0xffffffff}, //ch3 boss
+    {0x1fafffff}, //game room
+    {0x3A2BC3ff}, //treehouse
+    {0xFF85F9ff}, //theater
+    {0x005900ff}, //attic
+    {0xD38C00ff}, //laundry room
+    {0xffffffff},
 };
 
 s8 sBooColorsDark[][3] = {
@@ -129,14 +129,14 @@ Gfx *background_translate(s32 callContext, struct GraphNode *node, UNUSED f32 b[
 
 
 Gfx *geo_update_spike_log(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx) {
-    Mat4 sp20;
+    // Mat4 sp20;
     struct Object *sp1C;
 
     if (callContext == GEO_CONTEXT_RENDER) {
         sp1C = (struct Object *) gCurGraphNodeObject; // TODO: change global type to Object pointer
         if (sp1C->oObjF4 && sp1C->oObjF4->oAction == 0) {
-            create_transformation_from_matrices(sp20, mtx, *gCurGraphNodeCamera->matrixPtr);
-            obj_update_pos_from_parent_transformation(sp20, sp1C->oObjF4);
+            // create_transformation_from_matrices(sp20, mtx, *gCurGraphNodeCamera->matrixPtr);
+            obj_update_pos_from_parent_transformation(mtx, sp1C->oObjF4);
             obj_set_gfx_pos_from_pos(sp1C->oObjF4);
         }
     }
@@ -151,7 +151,8 @@ Gfx *geo_update_projectile_pos_and_angle_from_parent(s32 callContext, UNUSED str
     if (callContext == GEO_CONTEXT_RENDER) {
         sp1C = (struct Object *) gCurGraphNodeObject; // TODO: change global type to Object pointer
         if (sp1C->prevObj) {
-            create_transformation_from_matrices(sp1C->prevObj->transform, mtx, *gCurGraphNodeCamera->matrixPtr);
+            // create_transformation_from_matrices(sp1C->prevObj->transform, mtx, *gCurGraphNodeCamera->matrixPtr);
+            mtxf_copy(sp1C->prevObj->transform, mtx);
             sp1C->prevObj->header.gfx.throwMatrix = &sp1C->prevObj->transform;
         }
     }
@@ -160,14 +161,12 @@ Gfx *geo_update_projectile_pos_and_angle_from_parent(s32 callContext, UNUSED str
 
 
 Gfx *geo_update_projectile_pos_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx) {
-    Mat4 sp20;
     struct Object *sp1C;
 
     if (callContext == GEO_CONTEXT_RENDER) {
         sp1C = (struct Object *) gCurGraphNodeObject; // TODO: change global type to Object pointer
         if (sp1C->prevObj) {
-            create_transformation_from_matrices(sp20, mtx, *gCurGraphNodeCamera->matrixPtr);
-            obj_update_pos_from_parent_transformation(sp20, sp1C->prevObj);
+            obj_update_pos_from_parent_transformation(mtx, sp1C->prevObj);
             obj_set_gfx_pos_from_pos(sp1C->prevObj);
         }
     }
@@ -1382,30 +1381,31 @@ Gfx *geo_set_elevator_color_env(s32 callContext, struct GraphNode *node, UNUSED 
 
 
 Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;
     struct GraphNodeGenerated *currentGraphNode;
     s32 param;
-    Lights1 *light;
+    s32 darkColor;
+    dlStart = NULL;
 
     if (callContext == GEO_CONTEXT_RENDER) {
         objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
         currentGraphNode = (struct GraphNodeGenerated *) node;
+        dlStart = alloc_display_list(sizeof(Gfx) * 5);
+        dlHead = dlStart;
 
         if (gCurGraphNodeHeldObject) {
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
         param = objectGraphNode->oBehParams2ndByte;
         currentGraphNode->fnNode.node.flags = (currentGraphNode->parameter << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
-
-        light = segmented_to_virtual(&boo_light_color);
-        light->a.l.col[0] = light->a.l.colc[0] = sBooColorsDark[param][0];
-        light->a.l.col[1] = light->a.l.colc[1] = sBooColorsDark[param][1];
-        light->a.l.col[2] = light->a.l.colc[2] = sBooColorsDark[param][2];
-        light->l->l.col[0] = light->l->l.colc[0] = sBooColors[param][0];
-        light->l->l.col[1] = light->l->l.colc[1] = sBooColors[param][1];
-        light->l->l.col[2] = light->l->l.colc[2] = sBooColors[param][2];
+        darkColor = (sBooColorsDark[param][0] << 24) | (sBooColorsDark[param][1] << 16) | (sBooColorsDark[param][2] << 8) | 0xFF;
+        gSPNumLights(dlHead++, NUMLIGHTS_1);
+        gSPLightColor(dlHead++, LIGHT_1, sBooColors[param]);
+        gSPLightColor(dlHead++, LIGHT_2, darkColor);
+        gDPSetEnvColor(dlHead++, 255, 255, 255, objectGraphNode->oOpacity);
     }
-    return NULL;
+    return dlStart;
 }
 
 

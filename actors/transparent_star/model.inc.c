@@ -1,10 +1,6 @@
 // Transparent Star
 
 // 0x0302C488
-static const Lights1 transparent_star_seg3_lights_0302C488 = gdSPDefLights1(
-    0x03, 0x05, 0x17,
-    0x1e, 0x32, 0xe6, 0x28, 0x28, 0x28
-);
 
 // 0x0302C4A0
 static const Vtx transparent_star_seg3_vertex_0302C4A0[] = {
@@ -24,8 +20,8 @@ static const Vtx transparent_star_seg3_vertex_0302C4A0[] = {
 
 // 0x0302C560 - 0x0302C620
 const Gfx transparent_star_seg3_dl_0302C560[] = {
-    gsSPLight(&transparent_star_seg3_lights_0302C488.l, 1),
-    gsSPLight(&transparent_star_seg3_lights_0302C488.a, 2),
+    gsSPLightColor(LIGHT_1, 0x1e32e6ff),
+    gsSPLightColor(LIGHT_2, 0x30517ff),
     gsSPVertex(transparent_star_seg3_vertex_0302C4A0, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
     gsSP2Triangles( 2,  1,  4, 0x0,  1,  3,  4, 0x0),

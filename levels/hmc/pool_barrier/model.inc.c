@@ -1,6 +1,3 @@
-Lights1 pool_barrier_GhostBarrier_layer5_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx pool_barrier_BOOGOO_highcontrast1_i4_aligner[] = {gsSPEndDisplayList()};
 u8 pool_barrier_BOOGOO_highcontrast1_i4[] = {
@@ -583,7 +580,8 @@ Gfx mat_pool_barrier_GhostBarrier_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 1),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
-	gsSPSetLights1(pool_barrier_GhostBarrier_layer5_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

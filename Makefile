@@ -85,6 +85,10 @@ else ifeq ($(VERSION),sh)
   DEFINES += VERSION_SH=1
 endif
 
+# FIXLIGHTS - converts light objects to light color commands for assets, needed for vanilla-style lighting
+FIXLIGHTS ?= 1
+
+
 TARGET := smmm
 
 
@@ -334,8 +338,8 @@ DEP_FILES := $(O_FILES:.o=.d) $(LIBZ_O_FILES:.o=.d) $(GODDARD_O_FILES:.o=.d) $(B
 # detect prefix for MIPS toolchain
 ifneq ($(call find-command,mips64-elf-ld),)
   CROSS := mips64-elf-
-else ifneq ($(call find-command,mips-n64-ld),)
-  CROSS := mips-n64-
+#else ifneq ($(call find-command,mips-n64-ld),)
+#  CROSS := mips-n64-
 else ifneq ($(call find-command,mips64-ld),)
   CROSS := mips64-
 else ifneq ($(call find-command,mips-linux-gnu-ld),)
@@ -420,6 +424,7 @@ AIFF_EXTRACT_CODEBOOK := $(TOOLS_DIR)/aiff_extract_codebook
 VADPCM_ENC            := $(TOOLS_DIR)/vadpcm_enc
 EXTRACT_DATA_FOR_MIO  := $(TOOLS_DIR)/extract_data_for_mio
 SKYCONV               := $(TOOLS_DIR)/skyconv
+FIXLIGHTS_PY          := $(TOOLS_DIR)/fixlights.py
 ifeq ($(GZIPVER),std)
 GZIP                  := gzip
 else
@@ -702,6 +707,11 @@ $(BUILD_DIR)/src/game/version_data.h: tools/make_version.sh
 #==============================================================================#
 
 # Compile C code
+ifeq ($(FIXLIGHTS),1)
+# This must not be run multiple times at once, so we run it ahead of time rather than in a rule
+DUMMY != $(FIXLIGHTS_PY) actors
+DUMMY != $(FIXLIGHTS_PY) levels
+endif
 $(BUILD_DIR)/%.o: %.c
 	$(call print,Compiling:,$<,$@)
 	$(V)$(CC) -c $(CFLAGS) -MMD -MF $(BUILD_DIR)/$*.d  -o $@ $<

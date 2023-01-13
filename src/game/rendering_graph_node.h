@@ -32,5 +32,15 @@ void geo_process_node_and_siblings(struct GraphNode *firstNode);
 void geo_process_root(struct GraphNodeRoot *node, Vp *b, Vp *c, s32 clearColor);
 
 extern s32 gMarioScreenX, gMarioScreenY;
+extern Vec3f globalLightDirection;
+
+
+/**
+ * Causes the global light direction to be in world space,
+ * this allows you to have a singular light source that doesn't change with the camera's rotation.
+ * By modifying `globalLightDirection`, you can choose the direction that points TOWARDS the light,
+ * but keep in mind that this direction should be normalized to roughly ~127 if changed.
+ */
+// #define WORLDSPACE_LIGHTING
 
 #endif // RENDERING_GRAPH_NODE_H

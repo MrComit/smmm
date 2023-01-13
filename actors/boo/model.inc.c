@@ -1,16 +1,8 @@
 // Boo
 
 // 0x05009B28
-static const Lights1 boo_light_standard = gdSPDefLights1(
-    0x97, 0x9a, 0xff,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
 
 
-const Lights1 boo_light_color = gdSPDefLights1(
-    0x3C, 0x32, 0x7F,
-    0x78, 0x64, 0xff, 0x28, 0x28, 0x28
-);
 
 
 
@@ -342,7 +334,7 @@ const Gfx boo_seg5_dl_0500C1B0[] = {
 const Gfx boo_dl_helper[] = {
     gsDPPipeSync(),
     gsDPSetCombineMode(G_CC_BLENDRGBFADEA, G_CC_BLENDRGBFADEA),
-    gsSPNumLights(NUMLIGHTS_1),
+    // gsSPNumLights(NUMLIGHTS_1),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
     gsDPTileSync(),
     gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
@@ -358,8 +350,8 @@ const Gfx boo_dl_helper[] = {
 const Gfx boo_dl_color[] = {
     gsDPPipeSync(),
     gsSPDisplayList(boo_dl_helper),
-    gsSPLight(&boo_light_color.l, 1),
-    gsSPLight(&boo_light_color.a, 2),
+    // gsSPLightColor(LIGHT_1, 0x7864ffff),
+    // gsSPLightColor(LIGHT_2, 0x3c327fff),
     gsSPVertex(boo_seg5_vertex_0500B340, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),

@@ -1,6 +1,3 @@
-Lights1 trophy_octogon_WoodFloorTrophyRoom_001_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx trophy_octogon_deepplanks_redbrown_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 trophy_octogon_deepplanks_redbrown_rgba16[] = {
@@ -634,7 +631,8 @@ Gfx mat_trophy_octogon_WoodFloorTrophyRoom_001_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 14, G_TX_WRAP | G_TX_NOMIRROR, 6, 14),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
-	gsSPSetLights1(trophy_octogon_WoodFloorTrophyRoom_001_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

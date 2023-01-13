@@ -1,6 +1,3 @@
-Lights1 foreroom_lever_Lever_001_v4_lights = gdSPDefLights1(
-	0x31, 0x42, 0x48,
-	0x62, 0x85, 0x90, 0x28, 0x28, 0x28);
 
 Gfx foreroom_lever_metal_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 foreroom_lever_metal_ci4[] = {
@@ -544,7 +541,8 @@ Gfx mat_foreroom_lever_Lever_001_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(foreroom_lever_Lever_001_v4_lights),
+    gsSPLightColor(LIGHT_1, 0x628590ff),
+    gsSPLightColor(LIGHT_2, 0x314248ff),
 	gsSPEndDisplayList(),
 };
 

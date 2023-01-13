@@ -1,34 +1,10 @@
-Lights1 boss_koopa_Shell_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 boss_koopa_White_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 boss_koopa_Undershell_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 boss_koopa_Nostrils_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 boss_koopa_Eye_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 boss_koopa_Helmet_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 boss_koopa_NostrilsHelmet_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 boss_koopa_Shoe_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
 Gfx boss_koopa_drybones_shell_back_rgba16_i8_aligner[] = {gsSPEndDisplayList()};
 u8 boss_koopa_drybones_shell_back_rgba16_i8[] = {
@@ -2663,7 +2639,8 @@ Gfx mat_boss_koopa_Shell_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(boss_koopa_Shell_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -2671,7 +2648,8 @@ Gfx mat_boss_koopa_White[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(boss_koopa_White_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -2687,7 +2665,8 @@ Gfx mat_boss_koopa_Undershell_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(boss_koopa_Undershell_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -2703,7 +2682,8 @@ Gfx mat_boss_koopa_Nostrils_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsSPSetLights1(boss_koopa_Nostrils_002_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -2726,7 +2706,8 @@ Gfx mat_boss_koopa_Eye[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(boss_koopa_Eye_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -2748,7 +2729,8 @@ Gfx mat_boss_koopa_Helmet_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(boss_koopa_Helmet_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -2764,7 +2746,8 @@ Gfx mat_boss_koopa_NostrilsHelmet[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(boss_koopa_NostrilsHelmet_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -2780,7 +2763,8 @@ Gfx mat_boss_koopa_Shoe_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(boss_koopa_Shoe_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

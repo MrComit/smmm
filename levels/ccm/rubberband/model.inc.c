@@ -1,6 +1,3 @@
-Lights1 rubberband_Band_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx rubberband_Band_mesh_layer_1_vtx_cull[8] = {
 	{{{-333, -66, -340},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -125,7 +122,8 @@ Gfx mat_rubberband_Band_001[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(118, 86, 61, 255),
-	gsSPSetLights1(rubberband_Band_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

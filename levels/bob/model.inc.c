@@ -1,186 +1,48 @@
-Lights1 bob_dl_Bookshelf_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Dresser_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_MRFloor_v4_001_lights = gdSPDefLights1(
-	0x43, 0x37, 0x2B,
-	0x8C,0x76,0x5E,0x28,0x28,0x28);
 
-Lights1 bob_dl_MRCarpet_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_EHPillar_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_EHTableLegs_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_HallCarpet_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Chair2_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Chair3_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Chair1_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Painting1_001_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Painting2_001_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Leaves_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Stick_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Base_v4_lights = gdSPDefLights1(
-	0x4B, 0x2F, 0x16,
-	0x9B,0x67,0x36,0x28,0x28,0x28);
 
-Lights1 bob_dl_PTable_v4_001_lights = gdSPDefLights1(
-	0x62, 0x3C, 0xD,
-	0xC7,0x7F,0x26,0x28,0x28,0x28);
 
-Lights1 bob_dl_PTableLegs_v4_001_lights = gdSPDefLights1(
-	0x62, 0x3C, 0xD,
-	0xC7,0x7F,0x26,0x28,0x28,0x28);
 
-Lights1 bob_dl_MetalFence_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_OilFloor_f3d_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Wrench_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Tire_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Car_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Window_v4_003_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_CarUnderneath_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Yellow_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Clock_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Vase_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Cabinet_Backdrop_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_DFloor_v4_lights = gdSPDefLights1(
-	0x31, 0x1E, 0x17,
-	0x69,0x45,0x39,0x28,0x28,0x28);
 
-Lights1 bob_dl_Crate2_v4_lights = gdSPDefLights1(
-	0x4F, 0x46, 0x2C,
-	0xA4,0x92,0x61,0x28,0x28,0x28);
 
-Lights1 bob_dl_Cookery_Plate_Diffuse_shader_f3d_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_TableWood_v4_001_lights = gdSPDefLights1(
-	0x65, 0x56, 0x41,
-	0xCD,0xB0,0x89,0x28,0x28,0x28);
 
-Lights1 bob_dl_DarkWood_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Fridge_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Cabinet_Side_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Steam_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_LCarpet_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Couch_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Gray_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Bucket_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_BookSides_003_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_BookSides_002_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_pages_002_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Chandelier_Light_001_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Chandelier_Base_001_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bob_dl_Rope_001_v4_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
 Gfx bob_dl_bookshelf_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 bob_dl_bookshelf_ci4[] = {
@@ -44834,7 +44696,8 @@ Gfx mat_bob_dl_Bookshelf_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 508),
-	gsSPSetLights1(bob_dl_Bookshelf_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -44891,7 +44754,8 @@ Gfx mat_bob_dl_Dresser_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 508),
-	gsSPSetLights1(bob_dl_Dresser_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -44950,7 +44814,8 @@ Gfx mat_bob_dl_MRFloor_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_MRFloor_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0x8c765eff),
+    gsSPLightColor(LIGHT_2, 0x43372bff),
 	gsSPEndDisplayList(),
 };
 
@@ -45013,7 +44878,8 @@ Gfx mat_bob_dl_MRCarpet_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_MRCarpet_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45146,7 +45012,8 @@ Gfx mat_bob_dl_EHPillar_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 508),
-	gsSPSetLights1(bob_dl_EHPillar_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45213,7 +45080,8 @@ Gfx mat_bob_dl_EHTableLegs_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(bob_dl_EHTableLegs_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45242,7 +45110,8 @@ Gfx mat_bob_dl_HallCarpet_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_HallCarpet_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45432,7 +45301,8 @@ Gfx mat_bob_dl_Chair2_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Chair2_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45461,7 +45331,8 @@ Gfx mat_bob_dl_Chair3_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
-	gsSPSetLights1(bob_dl_Chair3_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45490,7 +45361,8 @@ Gfx mat_bob_dl_Chair1_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Chair1_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45541,7 +45413,8 @@ Gfx mat_bob_dl_Painting1_001_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_Painting1_001_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45570,7 +45443,8 @@ Gfx mat_bob_dl_Painting2_001_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_Painting2_001_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45644,7 +45518,8 @@ Gfx mat_bob_dl_Leaves_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_Leaves_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45673,7 +45548,8 @@ Gfx mat_bob_dl_Stick_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 60),
-	gsSPSetLights1(bob_dl_Stick_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45702,7 +45578,8 @@ Gfx mat_bob_dl_Base_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
-	gsSPSetLights1(bob_dl_Base_v4_lights),
+    gsSPLightColor(LIGHT_1, 0x9b6736ff),
+    gsSPLightColor(LIGHT_2, 0x4b2f16ff),
 	gsSPEndDisplayList(),
 };
 
@@ -45731,7 +45608,8 @@ Gfx mat_bob_dl_PTable_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_PTable_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xc77f26ff),
+    gsSPLightColor(LIGHT_2, 0x623c0dff),
 	gsSPEndDisplayList(),
 };
 
@@ -45760,7 +45638,8 @@ Gfx mat_bob_dl_PTableLegs_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(bob_dl_PTableLegs_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xc77f26ff),
+    gsSPLightColor(LIGHT_2, 0x623c0dff),
 	gsSPEndDisplayList(),
 };
 
@@ -45833,7 +45712,8 @@ Gfx mat_bob_dl_MetalFence_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(bob_dl_MetalFence_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45862,7 +45742,8 @@ Gfx mat_bob_dl_OilFloor_f3d_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_OilFloor_f3d_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45884,7 +45765,8 @@ Gfx mat_bob_dl_Wrench_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
-	gsSPSetLights1(bob_dl_Wrench_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45907,7 +45789,8 @@ Gfx mat_bob_dl_Tire_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Tire_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45944,7 +45827,8 @@ Gfx mat_bob_dl_Car_v4[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(31, 39, 55, 255),
-	gsSPSetLights1(bob_dl_Car_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45967,7 +45851,8 @@ Gfx mat_bob_dl_Window_v4_003[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Window_v4_003_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -45996,7 +45881,8 @@ Gfx mat_bob_dl_CarUnderneath_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_CarUnderneath_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46085,7 +45971,8 @@ Gfx mat_bob_dl_Yellow_v4_001[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(87, 58, 17, 255),
-	gsSPSetLights1(bob_dl_Yellow_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46108,7 +45995,8 @@ Gfx mat_bob_dl_Clock_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Clock_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46196,7 +46084,8 @@ Gfx mat_bob_dl_Vase_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Vase_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46232,7 +46121,8 @@ Gfx mat_bob_dl_Cabinet_Backdrop_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_Cabinet_Backdrop_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46291,7 +46181,8 @@ Gfx mat_bob_dl_DFloor_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_DFloor_v4_lights),
+    gsSPLightColor(LIGHT_1, 0x694539ff),
+    gsSPLightColor(LIGHT_2, 0x311e17ff),
 	gsSPEndDisplayList(),
 };
 
@@ -46320,7 +46211,8 @@ Gfx mat_bob_dl_Crate2_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_Crate2_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xa49261ff),
+    gsSPLightColor(LIGHT_2, 0x4f462cff),
 	gsSPEndDisplayList(),
 };
 
@@ -46349,7 +46241,8 @@ Gfx mat_bob_dl_Cookery_Plate_Diffuse_shader_f3d_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Cookery_Plate_Diffuse_shader_f3d_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46378,7 +46271,8 @@ Gfx mat_bob_dl_TableWood_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_TableWood_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xcdb089ff),
+    gsSPLightColor(LIGHT_2, 0x655641ff),
 	gsSPEndDisplayList(),
 };
 
@@ -46407,7 +46301,8 @@ Gfx mat_bob_dl_DarkWood_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_DarkWood_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46537,7 +46432,8 @@ Gfx mat_bob_dl_Fridge_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Fridge_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46566,7 +46462,8 @@ Gfx mat_bob_dl_Cabinet_Side_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Cabinet_Side_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46626,7 +46523,8 @@ Gfx mat_bob_dl_Steam_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(bob_dl_Steam_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46729,7 +46627,8 @@ Gfx mat_bob_dl_LCarpet_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_LCarpet_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46758,7 +46657,8 @@ Gfx mat_bob_dl_Couch_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsSPSetLights1(bob_dl_Couch_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46840,7 +46740,8 @@ Gfx mat_bob_dl_Gray_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Gray_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -46910,7 +46811,8 @@ Gfx mat_bob_dl_Bucket_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(bob_dl_Bucket_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -47030,7 +46932,8 @@ Gfx mat_bob_dl_BookSides_003_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsSPSetLights1(bob_dl_BookSides_003_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -47059,7 +46962,8 @@ Gfx mat_bob_dl_BookSides_002_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsSPSetLights1(bob_dl_BookSides_002_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -47088,7 +46992,8 @@ Gfx mat_bob_dl_pages_002_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
-	gsSPSetLights1(bob_dl_pages_002_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -47147,7 +47052,8 @@ Gfx mat_bob_dl_Chandelier_Light_001_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bob_dl_Chandelier_Light_001_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -47169,7 +47075,8 @@ Gfx mat_bob_dl_Chandelier_Base_001_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(bob_dl_Chandelier_Base_001_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -47320,7 +47227,8 @@ Gfx mat_bob_dl_Rope_001_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 1, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 252),
-	gsSPSetLights1(bob_dl_Rope_001_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

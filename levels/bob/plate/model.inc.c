@@ -1,6 +1,3 @@
-Lights1 plate_Cookery_Plate_Diffuse_shader_f3d_v2_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx plate_plate_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 plate_plate_ci4[] = {
@@ -132,7 +129,8 @@ Gfx mat_plate_Cookery_Plate_Diffuse_shader_f3d_v2_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(plate_Cookery_Plate_Diffuse_shader_f3d_v2_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

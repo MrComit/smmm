@@ -358,29 +358,58 @@ void mtxf_rotate_xyz_and_translate(Mat4 dest, Vec3f b, Vec3s c) {
  * 'angle' rotates the object while still facing the camera.
  */
 void mtxf_billboard(Mat4 dest, Mat4 mtx, Vec3f position, s16 angle) {
-    dest[0][0] = coss(angle);
-    dest[0][1] = sins(angle);
-    dest[0][2] = 0;
-    dest[0][3] = 0;
+    register s32 i;
+    // register f32 sx = scale[0];
+    // register f32 sy = scale[1];
+    // register f32 sz = scale[2];
+    Mat4* cameraMat = &gCameraTransform;
+    for (i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            dest[i][j] = (*cameraMat)[j][i];
+        }
+        dest[i][3] = 0.0f;
+    }
+    if (angle != 0x0) {
+        float m00 = dest[0][0];
+        float m01 = dest[0][1];
+        float m02 = dest[0][2];
+        float m10 = dest[1][0];
+        float m11 = dest[1][1];
+        float m12 = dest[1][2];
+        float cosa = coss(angle);
+        float sina = sins(angle);
+        dest[0][0] = cosa * m00 + sina * m10; 
+        dest[0][1] = cosa * m01 + sina * m11; 
+        dest[0][2] = cosa * m02 + sina * m12;
+        dest[1][0] = -sina * m00 + cosa * m10;
+        dest[1][1] = -sina * m01 + cosa * m11;
+        dest[1][2] = -sina * m02 + cosa * m12;
+    }
+    // for (i = 0; i < 3; i++) {
+    //     dest[0][i] *= sx;
+    //     dest[1][i] *= sy;
+    //     dest[2][i] *= sz;
+    // }
 
-    dest[1][0] = -dest[0][1];
-    dest[1][1] = dest[0][0];
-    dest[1][2] = 0;
-    dest[1][3] = 0;
-
-    dest[2][0] = 0;
-    dest[2][1] = 0;
-    dest[2][2] = 1;
-    dest[2][3] = 0;
-
-    dest[3][0] =
-        mtx[0][0] * position[0] + mtx[1][0] * position[1] + mtx[2][0] * position[2] + mtx[3][0];
-    dest[3][1] =
-        mtx[0][1] * position[0] + mtx[1][1] * position[1] + mtx[2][1] * position[2] + mtx[3][1];
-    dest[3][2] =
-        mtx[0][2] * position[0] + mtx[1][2] * position[1] + mtx[2][2] * position[2] + mtx[3][2];
-    dest[3][3] = 1;
+    // Translation = input translation + position
+    vec3f_copy(dest[3], position);
+    vec3f_add(dest[3], mtx[3]);
+    dest[3][3] = 1.0f;
 }
+
+
+
+void linear_mtxf_mul_vec3f_and_translate(Mat4 m, Vec3f dst, Vec3f v) {
+    s32 i;
+    for (i = 0; i < 3; i++) {
+        dst[i] = ((m[0][i] * v[0])
+                + (m[1][i] * v[1])
+                + (m[2][i] * v[2])
+                +  m[3][i]);
+    }
+}
+
+
 
 /**
  * Set 'dest' to a transformation matrix that aligns an object with the terrain
@@ -675,27 +704,27 @@ void mtxf_rotate_xy(Mtx *mtx, s32 angle) {
  * objMtx back from screen orientation to world orientation, and then subtracting
  * the camera position.
  */
-void get_pos_from_transform_mtx(Vec3f dest, Mat4 objMtx, register Mat4 camMtx) {
-    register s32 i;
-    register f32 *temp1 = (f32 *)dest;
-    register f32 *temp2 = (f32 *)camMtx;
-    f32 y[3];
-    register f32 *x = y;
-    register f32 *temp3 = (f32 *)objMtx;
+// void get_pos_from_transform_mtx(Vec3f dest, Mat4 objMtx, register Mat4 camMtx) {
+//     register s32 i;
+//     register f32 *temp1 = (f32 *)dest;
+//     register f32 *temp2 = (f32 *)camMtx;
+//     f32 y[3];
+//     register f32 *x = y;
+//     register f32 *temp3 = (f32 *)objMtx;
 
-    for (i = 0; i < 3; i++) {
-        *x = (temp3[12] - temp2[12]);
-        temp2++;
-        temp3++;
-        x = (f32 *)(((u32)x) + 4);
-    }
-    temp2 -=3;;
-    for (i = 0; i < 3; i++) {
-        *temp1 = x[-3] * temp2[0] + x[-2] * temp2[1] + x[-1] * temp2[2];
-        temp1++;
-        temp2 += 4;
-    }
-}
+//     for (i = 0; i < 3; i++) {
+//         *x = (temp3[12] - temp2[12]);
+//         temp2++;
+//         temp3++;
+//         x = (f32 *)(((u32)x) + 4);
+//     }
+//     temp2 -=3;;
+//     for (i = 0; i < 3; i++) {
+//         *temp1 = x[-3] * temp2[0] + x[-2] * temp2[1] + x[-1] * temp2[2];
+//         temp1++;
+//         temp2 += 4;
+//     }
+// }
 
 /**
  * Take the vector starting at 'from' pointed at 'to' an retrieve the length

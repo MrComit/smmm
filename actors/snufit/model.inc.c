@@ -21,26 +21,10 @@ ALIGNED8 static const Texture snufit_seg6_texture_060084E0[] = {
 };
 
 // 0x06008CE0
-static const Lights1 snufit_seg6_lights_06008CE0 = gdSPDefLights1(
-    0x47, 0x47, 0x47,
-    0xb2, 0xb2, 0xb2, 0x28, 0x28, 0x28
-);
 
-// static const Lights1 snufit_seg6_lights_06008CE0 = gdSPDefLights1(
-//     0x13, 0x0f, 0x16,
-//     0x26, 0x1e, 0x2C, 0x28, 0x28, 0x28
-// );
 // 0x06008CF8
-static const Lights1 snufit_seg6_lights_06008CF8 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
 
 
-// static const Lights1 snufit_seg6_lights_06008CF8 = gdSPDefLights1(
-//     0x13, 0x0f, 0x16,
-//     0x26, 0x1e, 0x2C, 0x28, 0x28, 0x28
-// );
 
 
 // 0x06008D10
@@ -149,8 +133,8 @@ const Gfx snufit_seg6_dl_060091E0[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, snufit_seg6_texture_060080E0),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&snufit_seg6_lights_06008CE0.l, 1),
-    gsSPLight(&snufit_seg6_lights_06008CE0.a, 2),
+    gsSPLightColor(LIGHT_1, 0x261e2cff),
+    gsSPLightColor(LIGHT_2, 0x130f16ff),
     gsSPVertex(snufit_seg6_vertex_06008D10, 14, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
     gsSP2Triangles( 4,  0,  2, 0x0,  3,  5,  1, 0x0),
@@ -166,8 +150,8 @@ const Gfx snufit_seg6_dl_06009278[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, snufit_seg6_texture_060078E0),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&snufit_seg6_lights_06008CF8.l, 1),
-    gsSPLight(&snufit_seg6_lights_06008CF8.a, 2),
+    gsSPLightColor(LIGHT_1, 0x261e2cff),
+    gsSPLightColor(LIGHT_2, 0x130f16ff),
     gsSPVertex(snufit_seg6_vertex_06008DF0, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  2,  1,  3, 0x0),
     gsSP2Triangles( 2,  3,  4, 0x0,  4,  3,  5, 0x0),
@@ -234,10 +218,6 @@ const Gfx snufit_seg6_dl_06009498[] = {
 };
 
 // 0x06009530
-static const Lights1 snufit_seg6_lights_06009530 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
 
 // 0x06009548
 static const Vtx snufit_seg6_vertex_06009548[] = {
@@ -270,8 +250,8 @@ const Gfx snufit_seg6_dl_06009668[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, snufit_seg6_texture_060080E0),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&snufit_seg6_lights_06009530.l, 1),
-    gsSPLight(&snufit_seg6_lights_06009530.a, 2),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x666666ff),
     gsSPVertex(snufit_seg6_vertex_06009548, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
     gsSP2Triangles( 4,  0,  3, 0x0,  1,  5,  2, 0x0),
@@ -314,10 +294,6 @@ const Gfx snufit_seg6_dl_06009748[] = {
 };
 
 // 0x060097C8
-static const Lights1 snufit_seg6_lights_060097C8 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
 
 // 0x060097E0
 static const Vtx snufit_seg6_vertex_060097E0[] = {
@@ -340,8 +316,8 @@ const Gfx snufit_seg6_dl_060098A0[] = {
     gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, snufit_seg6_texture_060080E0),
     gsDPLoadSync(),
     gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&snufit_seg6_lights_060097C8.l, 1),
-    gsSPLight(&snufit_seg6_lights_060097C8.a, 2),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x666666ff),
     gsSPVertex(snufit_seg6_vertex_060097E0, 12, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  1,  3,  4, 0x0),
     gsSP2Triangles( 1,  4,  2, 0x0,  3,  5,  6, 0x0),
@@ -405,16 +381,8 @@ const Gfx snufit_seg6_dl_06009A10[] = {
 };
 
 // 0x06009A80
-// static const Lights1 snufit_seg6_lights_06009A80 = gdSPDefLights1(
-//     0x65, 0x08, 0x08,
-//     0xfe, 0x14, 0x14, 0x28, 0x28, 0x28
-// );
 
 
-static const Lights1 snufit_seg6_lights_06009A80 = gdSPDefLights1(
-    0x14, 0x14, 0x14,
-    0x08, 0x08, 0x08, 0x28, 0x28, 0x28
-);
 
 
 // 0x06009A98
@@ -431,8 +399,8 @@ static const Vtx snufit_seg6_vertex_06009A98[] = {
 
 // 0x06009B18 - 0x06009B68
 const Gfx snufit_seg6_dl_06009B18[] = {
-    gsSPLight(&snufit_seg6_lights_06009A80.l, 1),
-    gsSPLight(&snufit_seg6_lights_06009A80.a, 2),
+    gsSPLightColor(LIGHT_1, 0x80808ff),
+    gsSPLightColor(LIGHT_2, 0x141414ff),
     gsSPVertex(snufit_seg6_vertex_06009A98, 8, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  2,  3,  0, 0x0),
     gsSP2Triangles( 1,  0,  3, 0x0,  4,  5,  6, 0x0),

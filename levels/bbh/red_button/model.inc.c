@@ -1,10 +1,4 @@
-Lights1 red_button_RedButton_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 red_button_ButtonDecal_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx red_button_RedButton_mesh_layer_1_vtx_0[12] = {
 	{{{-50, 0, 50},0, {368, 1008},{0x99, 0x99, 0x99, 0xFF}}},
@@ -60,7 +54,8 @@ Gfx mat_red_button_RedButton_002[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(254, 0, 0, 255),
-	gsSPSetLights1(red_button_RedButton_002_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -76,7 +71,8 @@ Gfx mat_red_button_ButtonDecal_002[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(254, 0, 108, 255),
-	gsSPSetLights1(red_button_ButtonDecal_002_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

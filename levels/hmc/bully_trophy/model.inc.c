@@ -1,14 +1,5 @@
-Lights1 bully_trophy_GoldTrophy_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bully_trophy_TrophyEyes_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 bully_trophy_Horns_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
 Gfx bully_trophy_spooky_face_red_i8_aligner[] = {gsSPEndDisplayList()};
 u8 bully_trophy_spooky_face_red_i8[] = {
@@ -552,7 +543,8 @@ Gfx mat_bully_trophy_GoldTrophy_002[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, 1, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(255, 221, 0, 255),
-	gsSPSetLights1(bully_trophy_GoldTrophy_002_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -570,7 +562,8 @@ Gfx mat_bully_trophy_TrophyEyes[] = {
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
 	gsDPSetEnvColor(240, 155, 39, 255),
-	gsSPSetLights1(bully_trophy_TrophyEyes_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -600,7 +593,8 @@ Gfx mat_bully_trophy_Horns_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 60),
-	gsSPSetLights1(bully_trophy_Horns_002_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

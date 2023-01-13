@@ -1,50 +1,14 @@
-Lights1 jrb_dl_Wood_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_Dirt_lights = gdSPDefLights1(
-	0x42, 0x42, 0x42,
-	0x85, 0x85, 0x85, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_SolidQuicksand_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_SideVert_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_GrassVert_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_TreeBark_001_lights = gdSPDefLights1(
-	0x24, 0x38, 0x3F,
-	0x49, 0x71, 0x7F, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_Leaves_001_lights = gdSPDefLights1(
-	0x24, 0x38, 0x3F,
-	0x49, 0x71, 0x7F, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_material0_bone_0_png_f3d_lights = gdSPDefLights1(
-	0x73, 0x73, 0x73,
-	0xE7, 0xE7, 0xE7, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_DarkDirt_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_ConservatoryWall_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_SunCol_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 jrb_dl_Pot_v4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx jrb_dl_greenwood_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 jrb_dl_greenwood_ci4[] = {
@@ -11096,7 +11060,8 @@ Gfx mat_jrb_dl_Wood[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 508),
-	gsSPSetLights1(jrb_dl_Wood_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11161,7 +11126,8 @@ Gfx mat_jrb_dl_Dirt[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(jrb_dl_Dirt_lights),
+    gsSPLightColor(LIGHT_1, 0x858585ff),
+    gsSPLightColor(LIGHT_2, 0x424242ff),
 	gsSPEndDisplayList(),
 };
 
@@ -11256,7 +11222,8 @@ Gfx mat_jrb_dl_SolidQuicksand[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(jrb_dl_SolidQuicksand_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11280,7 +11247,8 @@ Gfx mat_jrb_dl_SideVert[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(jrb_dl_SideVert_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11310,7 +11278,8 @@ Gfx mat_jrb_dl_GrassVert[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(jrb_dl_GrassVert_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11365,7 +11334,8 @@ Gfx mat_jrb_dl_TreeBark_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(jrb_dl_TreeBark_001_lights),
+    gsSPLightColor(LIGHT_1, 0x49717fff),
+    gsSPLightColor(LIGHT_2, 0x24383fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11388,7 +11358,8 @@ Gfx mat_jrb_dl_Leaves_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(jrb_dl_Leaves_001_lights),
+    gsSPLightColor(LIGHT_1, 0x49717fff),
+    gsSPLightColor(LIGHT_2, 0x24383fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11402,7 +11373,8 @@ Gfx mat_jrb_dl_material0_bone_0_png_f3d[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(jrb_dl_material0_bone_0_png_f3d_lights),
+    gsSPLightColor(LIGHT_1, 0xe7e7e7ff),
+    gsSPLightColor(LIGHT_2, 0x737373ff),
 	gsSPEndDisplayList(),
 };
 
@@ -11429,7 +11401,8 @@ Gfx mat_jrb_dl_DarkDirt_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
-	gsSPSetLights1(jrb_dl_DarkDirt_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11496,7 +11469,8 @@ Gfx mat_jrb_dl_ConservatoryWall[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_MIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(jrb_dl_ConservatoryWall_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11577,7 +11551,8 @@ Gfx mat_jrb_dl_SunCol[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(254, 192, 14, 255),
-	gsSPSetLights1(jrb_dl_SunCol_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -11601,7 +11576,8 @@ Gfx mat_jrb_dl_Pot_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsSPSetLights1(jrb_dl_Pot_v4_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

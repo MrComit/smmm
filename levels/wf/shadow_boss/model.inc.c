@@ -1,6 +1,3 @@
-Lights1 shadow_boss_BossBody_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx shadow_boss_spooky_face_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 shadow_boss_spooky_face_ci4[] = {
@@ -797,7 +794,8 @@ Gfx mat_shadow_boss_BossBody_001[] = {
 	gsDPSetCombineLERP(1, ENVIRONMENT, SHADE_ALPHA, 0, 0, 0, 0, ENVIRONMENT, 1, ENVIRONMENT, SHADE_ALPHA, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(254, 254, 254, 255),
-	gsSPSetLights1(shadow_boss_BossBody_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

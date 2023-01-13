@@ -1,10 +1,4 @@
-Lights1 sauna_rock_rise_SaunaPlat_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 sauna_rock_rise_SaunaLavaDyn_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx sauna_rock_rise_dirty_wood_grey3_i8_aligner[] = {gsSPEndDisplayList()};
 u8 sauna_rock_rise_dirty_wood_grey3_i8[] = {
@@ -1166,7 +1160,8 @@ Gfx mat_sauna_rock_rise_SaunaPlat_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
-	gsSPSetLights1(sauna_rock_rise_SaunaPlat_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -1202,7 +1197,8 @@ Gfx mat_sauna_rock_rise_SaunaLavaDyn_layer1[] = {
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(1, 0, 0, 124, 124),
 	gsDPSetEnvColor(0, 0, 0, 153),
-	gsSPSetLights1(sauna_rock_rise_SaunaLavaDyn_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

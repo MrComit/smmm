@@ -1,10 +1,4 @@
-Lights1 pool_floor_WoodFloorTransparent_001_layer5_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 pool_floor_CarpetEndDither_layer5_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx pool_floor_deepplanks_mixed2_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 pool_floor_deepplanks_mixed2_rgba16[] = {
@@ -921,7 +915,8 @@ Gfx mat_pool_floor_WoodFloorTransparent_001_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 14, G_TX_WRAP | G_TX_NOMIRROR, 6, 14),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
-	gsSPSetLights1(pool_floor_WoodFloorTransparent_001_layer5_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -957,7 +952,8 @@ Gfx mat_pool_floor_CarpetEndDither_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
-	gsSPSetLights1(pool_floor_CarpetEndDither_layer5_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

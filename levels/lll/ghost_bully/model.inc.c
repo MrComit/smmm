@@ -1,10 +1,4 @@
-Lights1 ghost_bully_Horns_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 ghost_bully_Face_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
 Gfx ghost_bully_bully_ghost_left_side_ia8_aligner[] = {gsSPEndDisplayList()};
 u8 ghost_bully_bully_ghost_left_side_ia8[] = {
@@ -749,7 +743,8 @@ Gfx mat_ghost_bully_Horns_001[] = {
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 60),
 	gsDPSetEnvColor(255, 255, 255, 153),
-	gsSPSetLights1(ghost_bully_Horns_001_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -781,7 +776,8 @@ Gfx mat_ghost_bully_Face[] = {
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 252),
 	gsDPSetEnvColor(255, 255, 255, 102),
-	gsSPSetLights1(ghost_bully_Face_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

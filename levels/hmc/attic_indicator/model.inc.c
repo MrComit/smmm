@@ -1,6 +1,3 @@
-Lights1 attic_indicator_LavaWave_001_layer5_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx attic_indicator_ia16_lavawave_ia16_aligner[] = {gsSPEndDisplayList()};
 u8 attic_indicator_ia16_lavawave_ia16[] = {
@@ -588,7 +585,8 @@ Gfx mat_attic_indicator_LavaWave_001_layer5[] = {
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(1, 0, 0, 124, 124),
 	gsDPSetEnvColor(111, 111, 111, 255),
-	gsSPSetLights1(attic_indicator_LavaWave_001_layer5_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

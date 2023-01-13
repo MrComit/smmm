@@ -1,6 +1,3 @@
-Lights1 l1_cabinet_Cabinet_v3_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx l1_cabinet_cabinet_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 l1_cabinet_cabinet_ci8[] = {
@@ -312,7 +309,8 @@ Gfx mat_l1_cabinet_Cabinet_v3_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsSPSetLights1(l1_cabinet_Cabinet_v3_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

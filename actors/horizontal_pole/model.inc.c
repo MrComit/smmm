@@ -1,10 +1,4 @@
-Lights1 horizontal_pole_Band_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 horizontal_pole_Pole_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx horizontal_pole_HorizontalPole_mesh_layer_1_vtx_cull[8] = {
 	{{{-296, -250, 32},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -104,7 +98,8 @@ Gfx mat_horizontal_pole_Band_001[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(155, 113, 79, 255),
-	gsSPSetLights1(horizontal_pole_Band_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -113,7 +108,8 @@ Gfx mat_horizontal_pole_Pole_001[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(124, 53, 33, 255),
-	gsSPSetLights1(horizontal_pole_Pole_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

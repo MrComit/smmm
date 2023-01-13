@@ -97,13 +97,16 @@ void mtxf_scale_vec3f(Mat4 dest, Mat4 mtx, Vec3f s);
 void mtxf_mul_vec3s(Mat4 mtx, Vec3s b);
 void mtxf_mul_vec3f(Mat4 mtx, Vec3f in, Vec3f out);
 
+void linear_mtxf_mul_vec3f_and_translate(Mat4 m, Vec3f dst, Vec3f v);
+
+
 extern void mtxf_to_mtx_asm(register void *dest, register void *src);
 inline void mtxf_to_mtx(register void *dest, register void *src) {
     mtxf_to_mtx_asm(dest, src);
 }
 
 void mtxf_rotate_xy(Mtx *mtx, s32 angle);
-void get_pos_from_transform_mtx(Vec3f dest, Mat4 objMtx, Mat4 camMtx);
+// void get_pos_from_transform_mtx(Vec3f dest, Mat4 objMtx, Mat4 camMtx);
 void vec3f_get_dist_and_angle(Vec3f from, Vec3f to, f32 *dist, s16 *pitch, s16 *yaw);
 void vec3f_set_dist_and_angle(Vec3f from, Vec3f to, f32  dist, s16  pitch, s16  yaw);
 s32 approach_s32(s32 current, s32 target, s32 inc, s32 dec);

@@ -1,6 +1,3 @@
-Lights1 ice_cube_IceCube_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx ice_cube_rgba32_icecube2_rgba32_aligner[] = {gsSPEndDisplayList()};
 u8 ice_cube_rgba32_icecube2_rgba32[] = {
@@ -571,7 +568,8 @@ Gfx mat_ice_cube_IceCube[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_32b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(ice_cube_IceCube_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

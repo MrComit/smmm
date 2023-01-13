@@ -1,10 +1,4 @@
-Lights1 basement_switch_SwitchEdge_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 basement_switch_Switch_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
 Gfx basement_switch_switch_rim_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 basement_switch_switch_rim_ci4[] = {
@@ -155,7 +149,8 @@ Gfx mat_basement_switch_SwitchEdge_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 1, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 2, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 12),
-	gsSPSetLights1(basement_switch_SwitchEdge_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -181,7 +176,8 @@ Gfx mat_basement_switch_Switch_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_8b, 2, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 124),
-	gsSPSetLights1(basement_switch_Switch_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

@@ -1,6 +1,3 @@
-Lights1 engine_gear_Gear_layer1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
 Gfx engine_gear_metal_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 engine_gear_metal_ci4[] = {
@@ -561,7 +558,8 @@ Gfx mat_engine_gear_Gear_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(engine_gear_Gear_layer1_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

@@ -1,6 +1,3 @@
-Lights1 theater_screen_Screen_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx theater_screen_screen_mesh_layer_1_vtx_0[8] = {
 	{{{-1059, 1059, 0},0, {-8416, -2571},{0x5, 0x6, 0x12, 0xD9}}},
@@ -29,7 +26,8 @@ Gfx mat_theater_screen_Screen_002[] = {
 	gsDPSetCombineLERP(0, 0, 0, SHADE, SHADE, 0, ENVIRONMENT, 0, 0, 0, 0, SHADE, SHADE, 0, ENVIRONMENT, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(theater_screen_Screen_002_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

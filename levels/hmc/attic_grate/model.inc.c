@@ -1,6 +1,3 @@
-Lights1 attic_grate_Grate_001_layer4_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx attic_grate_i8_grate2_i4_aligner[] = {gsSPEndDisplayList()};
 u8 attic_grate_i8_grate2_i4[] = {
@@ -456,7 +453,8 @@ Gfx mat_attic_grate_Grate_001_layer4[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(1, 0, 0, 124, 124),
-	gsSPSetLights1(attic_grate_Grate_001_layer4_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

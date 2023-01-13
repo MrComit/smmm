@@ -1,6 +1,3 @@
-Lights1 lightning_Spinner_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx lightning_burn_smoke_ia8_aligner[] = {gsSPEndDisplayList()};
 u8 lightning_burn_smoke_ia8[] = {
@@ -486,7 +483,8 @@ Gfx mat_lightning_Spinner_001[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, 1, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(173, 87, 0, 255),
-	gsSPSetLights1(lightning_Spinner_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

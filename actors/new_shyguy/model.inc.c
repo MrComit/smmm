@@ -1,10 +1,4 @@
-Lights1 new_shyguy_Shyguy1_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFF,0xFF,0xFF,0x28,0x28,0x28);
 
-Lights1 new_shyguy_Shyguy2_002_lights = gdSPDefLights1(
-	0x7, 0x7, 0x7,
-	0x1A,0x1A,0x1A,0x28,0x28,0x28);
 
 Gfx new_shyguy_shyguy1_black_i8_aligner[] = {gsSPEndDisplayList()};
 u8 new_shyguy_shyguy1_black_i8[] = {
@@ -664,7 +658,8 @@ Gfx mat_new_shyguy_Shyguy1_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(new_shyguy_Shyguy1_002_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -687,7 +682,8 @@ Gfx mat_new_shyguy_Shyguy2_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsSPSetLights1(new_shyguy_Shyguy2_002_lights),
+    gsSPLightColor(LIGHT_1, 0x1a1a1aff),
+    gsSPLightColor(LIGHT_2, 0x70707ff),
 	gsSPEndDisplayList(),
 };
 

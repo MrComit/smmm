@@ -155,10 +155,6 @@ const Gfx dAmpBodyDl[] = {
  * broken model.
  */
 
-UNUSED static const Lights1 dAmpUnused3DLights = gdSPDefLights1(
-    0x33, 0x3f, 0x00,
-    0xcf, 0xff, 0x00, 0x28, 0x28, 0x28
-);
 
 UNUSED static const Vtx dAmpUnused3DVtx01[] = {
     {{{   280,      0,     35}, 0, {     0,      0}, {0x7b, 0xe2, 0x00, 0x00}}},
@@ -369,32 +365,32 @@ UNUSED static const Vtx dAmpUnused3DVtx15[] = {
 };
 
 UNUSED const Gfx dAmpUnused3DElectricDl1[] = {
-    gsSPLight(&dAmpUnused3DLights.l, 1),
-    gsSPLight(&dAmpUnused3DLights.a, 2),
+    gsSPLightColor(LIGHT_1, 0xcfff00ff),
+    gsSPLightColor(LIGHT_2, 0x333f00ff),
     gsSPVertex(dAmpUnused3DVtx01, 6, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSPEndDisplayList(),
 };
 
 UNUSED const Gfx dAmpUnused3DElectricDl2[] = {
-    gsSPLight(&dAmpUnused3DLights.l, 1),
-    gsSPLight(&dAmpUnused3DLights.a, 2),
+    gsSPLightColor(LIGHT_1, 0xcfff00ff),
+    gsSPLightColor(LIGHT_2, 0x333f00ff),
     gsSPVertex(dAmpUnused3DVtx02, 6, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSPEndDisplayList(),
 };
 
 UNUSED const Gfx dAmpUnused3DElectricDl3[] = {
-    gsSPLight(&dAmpUnused3DLights.l, 1),
-    gsSPLight(&dAmpUnused3DLights.a, 2),
+    gsSPLightColor(LIGHT_1, 0xcfff00ff),
+    gsSPLightColor(LIGHT_2, 0x333f00ff),
     gsSPVertex(dAmpUnused3DVtx03, 6, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSPEndDisplayList(),
 };
 
 UNUSED const Gfx dAmpUnused3DElectricDl4[] = {
-    gsSPLight(&dAmpUnused3DLights.l, 1),
-    gsSPLight(&dAmpUnused3DLights.a, 2),
+    gsSPLightColor(LIGHT_1, 0xcfff00ff),
+    gsSPLightColor(LIGHT_2, 0x333f00ff),
     gsSPVertex(dAmpUnused3DVtx04, 6, 0),
     gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
     gsSPEndDisplayList(),

@@ -1,6 +1,3 @@
-Lights1 pingpong_ball_Ball_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx pingpong_ball_Ball_002_mesh_layer_1_vtx_cull[8] = {
 	{{{-9, 0, 11},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -66,7 +63,8 @@ Gfx mat_pingpong_ball_Ball[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(254, 169, 0, 255),
-	gsSPSetLights1(pingpong_ball_Ball_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

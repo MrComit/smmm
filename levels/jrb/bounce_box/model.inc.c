@@ -1,6 +1,3 @@
-Lights1 bounce_box_BounceBox_001_v4_001_lights = gdSPDefLights1(
-	0x64, 0x5E, 0x58,
-	0xC9, 0xBC, 0xB0, 0x28, 0x28, 0x28);
 
 Gfx bounce_box_Glover_2F8595F4_0_0_6B1063BE_ciByRGBA_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 bounce_box_Glover_2F8595F4_0_0_6B1063BE_ciByRGBA_ci4[] = {
@@ -1230,7 +1227,8 @@ Gfx mat_bounce_box_BounceBox_001_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(bounce_box_BounceBox_001_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0xc9bcb0ff),
+    gsSPLightColor(LIGHT_2, 0x645e58ff),
 	gsSPEndDisplayList(),
 };
 

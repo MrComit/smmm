@@ -1,6 +1,3 @@
-Lights1 static_wall_Obstacle_002_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx static_wall_staticwall_mesh_layer_1_vtx_0[62] = {
 	{{{462, 0, 25},0, {4328, -1323},{0x59, 0x33, 0x80, 0x80}}},
@@ -114,7 +111,8 @@ Gfx mat_static_wall_Obstacle_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(static_wall_Obstacle_002_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

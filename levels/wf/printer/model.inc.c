@@ -1,6 +1,3 @@
-Lights1 printer_VertexColored_001_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Gfx printer_i4_marker_i8_aligner[] = {gsSPEndDisplayList()};
 u8 printer_i4_marker_i8[] = {
@@ -640,7 +637,8 @@ Gfx mat_printer_VertexColored_001[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(27, 27, 27, 255),
-	gsSPSetLights1(printer_VertexColored_001_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

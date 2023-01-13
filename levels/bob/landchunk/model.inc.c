@@ -1,6 +1,3 @@
-Lights1 landchunk_EHFloor_001_lights = gdSPDefLights1(
-	0x64, 0x7F, 0x65,
-	0xC9, 0xFE, 0xCB, 0x28, 0x28, 0x28);
 
 Gfx landchunk_RockPattern09_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 landchunk_RockPattern09_ci8[] = {
@@ -685,7 +682,8 @@ Gfx mat_landchunk_EHFloor_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(landchunk_EHFloor_001_lights),
+    gsSPLightColor(LIGHT_1, 0xc9fecbff),
+    gsSPLightColor(LIGHT_2, 0x647f65ff),
 	gsSPEndDisplayList(),
 };
 

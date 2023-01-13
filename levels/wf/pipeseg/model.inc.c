@@ -1,6 +1,3 @@
-Lights1 pipeseg_PipeObj_001_lights = gdSPDefLights1(
-	0x3E, 0x3E, 0x3E,
-	0x7D, 0x7C, 0x7D, 0x28, 0x28, 0x28);
 
 Gfx pipeseg_orangemetalbright_rgba32_aligner[] = {gsSPEndDisplayList()};
 u8 pipeseg_orangemetalbright_rgba32[] = {
@@ -680,7 +677,8 @@ Gfx mat_pipeseg_PipeObj_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_32b, 8, 0, 0, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(pipeseg_PipeObj_001_lights),
+    gsSPLightColor(LIGHT_1, 0x7d7c7dff),
+    gsSPLightColor(LIGHT_2, 0x3e3e3eff),
 	gsSPEndDisplayList(),
 };
 

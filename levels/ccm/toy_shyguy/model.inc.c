@@ -1,14 +1,5 @@
-Lights1 toy_shyguy_Shyguy1_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 toy_shyguy_ShyguyRed_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
-Lights1 toy_shyguy_Grey_lights = gdSPDefLights1(
-	0x4D, 0x4D, 0x4D,
-	0x9A, 0x9A, 0x9A, 0x28, 0x28, 0x28);
 
 Gfx toy_shyguy_shyguy1_ci8_aligner[] = {gsSPEndDisplayList()};
 u8 toy_shyguy_shyguy1_ci8[] = {
@@ -550,7 +541,8 @@ Gfx mat_toy_shyguy_Shyguy1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(toy_shyguy_Shyguy1_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -565,7 +557,8 @@ Gfx mat_toy_shyguy_ShyguyRed[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(192, 0, 32, 255),
-	gsSPSetLights1(toy_shyguy_ShyguyRed_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
@@ -581,7 +574,8 @@ Gfx mat_toy_shyguy_Grey[] = {
 	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, ENVIRONMENT, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetEnvColor(254, 254, 254, 255),
-	gsSPSetLights1(toy_shyguy_Grey_lights),
+    gsSPLightColor(LIGHT_1, 0x9a9a9aff),
+    gsSPLightColor(LIGHT_2, 0x4d4d4dff),
 	gsSPEndDisplayList(),
 };
 

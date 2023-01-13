@@ -1,6 +1,3 @@
-Lights1 theater_tomato_VertColSolid_lights = gdSPDefLights1(
-	0x7F, 0x7F, 0x7F,
-	0xFE, 0xFE, 0xFE, 0x28, 0x28, 0x28);
 
 Vtx theater_tomato_Tomato_mesh_layer_1_vtx_cull[8] = {
 	{{{-29, -12, 27},0, {-16, -16},{0x0, 0x0, 0x0, 0x0}}},
@@ -137,7 +134,8 @@ Gfx mat_theater_tomato_VertColSolid[] = {
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(theater_tomato_VertColSolid_lights),
+    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 

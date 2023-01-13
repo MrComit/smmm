@@ -1,10 +1,4 @@
-Lights1 tree_limb_TreeBark_001_lights = gdSPDefLights1(
-	0x24, 0x38, 0x3F,
-	0x49, 0x71, 0x7F, 0x28, 0x28, 0x28);
 
-Lights1 tree_limb_Leaves_001_lights = gdSPDefLights1(
-	0x24, 0x38, 0x3F,
-	0x49, 0x71, 0x7F, 0x28, 0x28, 0x28);
 
 Gfx tree_limb_tree_bark_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 tree_limb_tree_bark_rgba16[] = {
@@ -700,7 +694,8 @@ Gfx mat_tree_limb_TreeBark_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
 	gsDPSetTileSize(0, 0, 0, 124, 124),
-	gsSPSetLights1(tree_limb_TreeBark_001_lights),
+    gsSPLightColor(LIGHT_1, 0x49717fff),
+    gsSPLightColor(LIGHT_2, 0x24383fff),
 	gsSPEndDisplayList(),
 };
 
@@ -723,7 +718,8 @@ Gfx mat_tree_limb_Leaves_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(tree_limb_Leaves_001_lights),
+    gsSPLightColor(LIGHT_1, 0x49717fff),
+    gsSPLightColor(LIGHT_2, 0x24383fff),
 	gsSPEndDisplayList(),
 };
 

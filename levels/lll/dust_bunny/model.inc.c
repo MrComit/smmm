@@ -1,10 +1,4 @@
-Lights1 dust_bunny_Mips_layer5_lights = gdSPDefLights1(
-	0x62, 0x75, 0x7F,
-	0xC6,0xEB,0xFF,0x28,0x28,0x28);
 
-Lights1 dust_bunny_Nose_lights = gdSPDefLights1(
-	0xE, 0xB, 0x2,
-	0x27,0x21,0xB,0x28,0x28,0x28);
 
 Gfx dust_bunny_mips_eyes_i8_i8_aligner[] = {gsSPEndDisplayList()};
 u8 dust_bunny_mips_eyes_i8_i8[] = {
@@ -866,7 +860,8 @@ Gfx mat_dust_bunny_Mips_layer5[] = {
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 128, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
 	gsDPSetEnvColor(255, 255, 255, 102),
-	gsSPSetLights1(dust_bunny_Mips_layer5_lights),
+    gsSPLightColor(LIGHT_1, 0xc6ebffff),
+    gsSPLightColor(LIGHT_2, 0x62757fff),
 	gsSPEndDisplayList(),
 };
 
@@ -881,7 +876,8 @@ Gfx mat_dust_bunny_Nose[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(dust_bunny_Nose_lights),
+    gsSPLightColor(LIGHT_1, 0x27210bff),
+    gsSPLightColor(LIGHT_2, 0xe0b02ff),
 	gsSPEndDisplayList(),
 };
 

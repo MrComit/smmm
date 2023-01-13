@@ -1,6 +1,3 @@
-Lights1 engine_lever_Lever_001_v4_001_lights = gdSPDefLights1(
-	0x2D, 0x40, 0x45,
-	0x63,0x85,0x91,0x28,0x28,0x28);
 
 Gfx engine_lever_metal_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 engine_lever_metal_ci4[] = {
@@ -544,7 +541,8 @@ Gfx mat_engine_lever_Lever_001_v4_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsSPSetLights1(engine_lever_Lever_001_v4_001_lights),
+    gsSPLightColor(LIGHT_1, 0x638591ff),
+    gsSPLightColor(LIGHT_2, 0x2d4045ff),
 	gsSPEndDisplayList(),
 };
 

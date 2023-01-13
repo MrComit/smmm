@@ -1,6 +1,3 @@
-Lights1 key_broken_BigKey_v4_lights = gdSPDefLights1(
-	0xFE, 0xB1, 0x0,
-	0x3F, 0x2C, 0x0, 0x3F, 0x59, 0x3F);
 
 Gfx key_broken_token_silver_i8_aligner[] = {gsSPEndDisplayList()};
 u8 key_broken_token_silver_i8[] = {
@@ -261,7 +258,8 @@ Gfx mat_key_broken_BigKey_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(key_broken_BigKey_v4_lights),
+    gsSPLightColor(LIGHT_1, 0x3f2c00ff),
+    gsSPLightColor(LIGHT_2, 0xfeb100ff),
 	gsSPEndDisplayList(),
 };
 
