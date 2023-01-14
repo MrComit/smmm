@@ -28,6 +28,7 @@
 #include "seq_ids.h"
 #include "sound_init.h"
 #include "rumble_init.h"
+#include "camera.h"
 
 static struct Object *sIntroWarpPipeObj;
 static struct Object *sEndPeachObj;
@@ -746,21 +747,58 @@ s32 act_death_on_stomach(struct MarioState *m) {
     return FALSE;
 }
 
+extern s16 gCutsceneTimer;
+extern s8 s8DirModeBaseYaw;
+
 s32 act_quicksand_death(struct MarioState *m) {
-    if (m->actionState == 0) {
-        set_mario_animation(m, MARIO_ANIM_DYING_IN_QUICKSAND);
-        set_anim_to_frame(m, 60);
-        m->actionState = 1;
+    struct Object *obj;
+    switch (m->actionState) {
+        case 0:
+            set_mario_animation(m, MARIO_ANIM_DYING_IN_QUICKSAND);
+            set_anim_to_frame(m, 60);
+            m->actionState = 1;
+            break;
+        case 1:
+            if (m->quicksandDepth >= 10.0f) {
+                play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
+            }
+            if ((m->quicksandDepth += 5.0f) >= 60.0f) {
+                if (m->health <= 0x280) {
+                    m->actionState = 3;
+                    level_trigger_warp(m, WARP_OP_DEATH);
+                } else {
+                    m->actionState = 2;
+                }
+            }
+            break;
+        case 2:
+            obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj == NULL) {
+                    return;
+                }
+            switch (m->actionTimer++) {
+                case 0:
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                    break;
+                case 18:
+                    m->faceAngle[1] = obj->oFaceAngleYaw;
+                    // set_r_button_camera(gCamera);
+                    warp_camera(obj->oPosX - m->pos[0], obj->oPosY - m->pos[1], obj->oPosZ - m->pos[2]);
+                    vec3f_copy(m->pos, &obj->oPosX);
+                    s8DirModeBaseYaw = (m->faceAngle[1] + 0x8000) >> 8;
+                    m->forwardVel = 0;
+                    vec3f_set(m->vel, 0.0f, 0.0f, 0.0f);
+                    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+                    m->hurtCounter = 8;
+                    gCamera->cutscene = 0;
+                    gCutsceneTimer = CUTSCENE_STOP;
+                    return set_mario_action(m, ACT_FREEFALL, 0);
+            }
+        case 3:
+            m->quicksandDepth = approach_f32_symmetric(m->quicksandDepth, 180.0f, 5.0f);
+            break;
     }
-    if (m->actionState == 1) {
-        if (m->quicksandDepth >= 100.0f) {
-            play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
-        }
-        if ((m->quicksandDepth += 5.0f) >= 180.0f) {
-            level_trigger_warp(m, WARP_OP_DEATH);
-            m->actionState = 2;
-        }
-    }
+
     stationary_ground_step(m);
     play_sound(SOUND_MOVING_QUICKSAND_DEATH, m->marioObj->header.gfx.cameraToObject);
     return FALSE;
