@@ -643,7 +643,7 @@ void bhv_token_init(void) {
 
 void bhv_token_loop(void) {
     o->oGraphYOffset = 15.0f + (sins(o->os16F6) * 15.0f);
-    if (o->oDistanceToMario < 350.0f) {
+    if (o->oDistanceToMario < 350.0f || (o->oFaceAnglePitch == 0 && o->oFaceAngleRoll == 0 && o->oDistanceToMario < 2000.0f)) {
         o->oFaceAngleYaw += 0x400;
         o->os16F6 += 0x400;
     } else {
