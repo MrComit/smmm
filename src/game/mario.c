@@ -277,17 +277,19 @@ void adjust_sound_for_speed(struct MarioState *m) {
  * Spawns particles if the step sound says to, then either plays a step sound or relevant other sound.
  */
 void play_sound_and_spawn_particles(struct MarioState *m, u32 soundBits, u32 waveParticleType) {
-    if (m->terrainSoundAddend == (SOUND_TERRAIN_WATER << 16)) {
-        if (waveParticleType != 0) {
-            m->particleFlags |= PARTICLE_SHALLOW_WATER_SPLASH;
+    if (m->prevAction != ACT_FREEFALL) {
+        if (m->terrainSoundAddend == (SOUND_TERRAIN_WATER << 16)) {
+            if (waveParticleType != 0) {
+                m->particleFlags |= PARTICLE_SHALLOW_WATER_SPLASH;
+            } else {
+                m->particleFlags |= PARTICLE_SHALLOW_WATER_WAVE;
+            }
         } else {
-            m->particleFlags |= PARTICLE_SHALLOW_WATER_WAVE;
-        }
-    } else {
-        if (m->terrainSoundAddend == (SOUND_TERRAIN_SAND << 16)) {
-            m->particleFlags |= PARTICLE_DIRT;
-        } else if (m->terrainSoundAddend == (SOUND_TERRAIN_SNOW << 16)) {
-            m->particleFlags |= PARTICLE_SNOW;
+            if (m->terrainSoundAddend == (SOUND_TERRAIN_SAND << 16)) {
+                m->particleFlags |= PARTICLE_DIRT;
+            } else if (m->terrainSoundAddend == (SOUND_TERRAIN_SNOW << 16)) {
+                m->particleFlags |= PARTICLE_SNOW;
+            }
         }
     }
 
@@ -1042,6 +1044,7 @@ u32 set_mario_action(struct MarioState *m, u32 action, u32 actionArg) {
     m->actionArg = actionArg;
     m->actionState = 0;
     m->actionTimer = 0;
+    m->coyoteTimer = 0;
 
     return TRUE;
 }

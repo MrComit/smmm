@@ -518,6 +518,11 @@ s32 act_backflip(struct MarioState *m) {
 
 s32 act_freefall(struct MarioState *m) {
     s32 animation;
+    if (m->coyoteTimer++ < 3) {
+        if (m->input & INPUT_A_PRESSED) {
+            return set_jump_from_landing(m);
+        }
+    }
 
     if (m->input & INPUT_B_PRESSED) {
         return set_mario_action(m, ACT_DIVE, 0);
