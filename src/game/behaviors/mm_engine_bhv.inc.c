@@ -478,12 +478,6 @@ void bhv_deathwarp_loop(void) {
     Vec3f pos;
     s16 angle;
     struct MarioState *m = gMarioState;
-    CL_PRINT(2, "%d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0])
-    CL_PRINT(1, "%d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1])
-    CL_PRINT(0, "%d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2])
-    CL_PRINT(5, "%d", (s32)o->oPosX)
-    CL_PRINT(4, "%d", (s32)o->oPosY)
-    CL_PRINT(3, "%d", (s32)o->oPosZ)
     if (o->oTimer != 0 && gMarioCurrentRoom != gMarioPreviousRoom) {
         pos[0] = m->pos[0];
         pos[2] = m->pos[2];
@@ -541,6 +535,11 @@ void bhv_broken_key_loop(void) {
             spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(78);
+            if (o->oMoveFlags & (OBJ_MOVE_ABOVE_DEATH_BARRIER | OBJ_MOVE_ABOVE_LAVA)) {
+                vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 300.0f, gMarioState->pos[2]);
+                o->oVelY = 0.0f;
+                return;
+            }
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND)
                 o->oAction++;
             else if (o->oMoveFlags & OBJ_MOVE_LANDED)
@@ -571,6 +570,11 @@ void bhv_big_key_loop(void) {
         spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
         cur_obj_update_floor_and_walls();
         cur_obj_move_standard(78);
+        if (o->oMoveFlags & (OBJ_MOVE_ABOVE_DEATH_BARRIER | OBJ_MOVE_ABOVE_LAVA)) {
+            vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 300.0f, gMarioState->pos[2]);
+            o->oVelY = 0.0f;
+            return;
+        }
         if (o->oMoveFlags & OBJ_MOVE_ON_GROUND)
             o->oAction++;
         else if (o->oMoveFlags & OBJ_MOVE_LANDED)
@@ -605,6 +609,11 @@ void bhv_small_key_loop(void) {
         spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
         cur_obj_update_floor_and_walls();
         cur_obj_move_standard(78);
+        if (o->oMoveFlags & (OBJ_MOVE_ABOVE_DEATH_BARRIER | OBJ_MOVE_ABOVE_LAVA)) {
+            vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 300.0f, gMarioState->pos[2]);
+            o->oVelY = 0.0f;
+            return;
+        }
         if (o->oMoveFlags & OBJ_MOVE_ON_GROUND)
             o->oAction++;
         else if (o->oMoveFlags & OBJ_MOVE_LANDED)
