@@ -31,6 +31,7 @@
 #include "levels/bob/header.h"
 #include "levels/castle_grounds/header.h"
 #include "interaction.h"
+#include "mario.h"
 
 #define CBUTTON_MASK (U_CBUTTONS | D_CBUTTONS | L_CBUTTONS | R_CBUTTONS)
 
@@ -948,21 +949,18 @@ s32 gCliffTimer = 0;
  * Update the camera during 8 directional mode
  */
 s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
-    UNUSED f32 cenDistX = sMarioCamState->pos[0] - c->areaCenX;
-    UNUSED f32 cenDistZ = sMarioCamState->pos[2] - c->areaCenZ;
+    struct MarioState *m = gMarioState;
     s16 camYaw = s8DirModeBaseYaw + s8DirModeYawOffset;
     s16 pitch = look_down_slopes(camYaw);
     f32 posY;
-    f32 focusY;
-    UNUSED u8 filler[12];
-    f32 yOff = 125.f;
+    f32 focusY;    f32 yOff = 125.f;
     f32 baseDist = 1000.f;
     f32 floorHeight;
     Vec3f mPos;
     s32 check = 0;
-    mPos[1] = gMarioState->pos[1];
-    mPos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 100.0f);
-    mPos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 100.0f);
+    mPos[1] = m->pos[1];
+    mPos[0] = m->pos[0] + (sins(m->faceAngle[1]) * 50.0f);
+    mPos[2] = m->pos[2] + (coss(m->faceAngle[1]) * 50.0f);
 
     if (gPlayer1Controller->buttonDown & U_JPAD || 
         ((gPlayer1Controller->buttonDown & R_TRIG) && (gPlayer1Controller->buttonDown & U_CBUTTONS))) {
@@ -971,8 +969,9 @@ s32 update_8_directions_camera(struct Camera *c, Vec3f focus, Vec3f pos) {
     }
 
     floorHeight = find_floor_height(mPos[0], mPos[1], mPos[2]);
-    if (check || (absf(mPos[1] - gMarioState->floorHeight) < 300.0f && 
-        mPos[1] - floorHeight > 300.0f && floorHeight > FLOOR_LOWER_LIMIT)) {
+    if (check || (absf(mPos[1] - m->floorHeight) < 300.0f && 
+        mPos[1] - floorHeight > 300.0f && floorHeight > FLOOR_LOWER_LIMIT && 
+        m->wall == NULL)) {
         if (gCliffTimer > 59)
             gCliffTimer = 59;
         if (++gCliffTimer > 20) {
