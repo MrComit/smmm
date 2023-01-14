@@ -1202,7 +1202,7 @@ void render_starpiece_backdrop_image(s32 x, s32 y, s32 width, s32 height, s32 s,
 
 
 s16 sStarPieceRectX = 0;
-s32 gGG = 0;
+extern s32 sLevelToChapter[COURSE_MAX];
 
 void render_hud_starpieces(void) {
     s16 i, h;
@@ -1217,10 +1217,7 @@ void render_hud_starpieces(void) {
     if (sStarPieceRectX != 0) {
 
 		render_starpiece_backdrop_image(sStarPieceRectX - 32, 240 - 154 - 28, 32, 128, (32 - sStarPieceRectX) << 1, 0);
-		if (gMarioState->input & INPUT_Z_DOWN) {
-			gGG++;
-		}
-        h = save_file_get_star_piece();
+        h = save_file_get_star_piece() >> ((sLevelToChapter[gCurrCourseNum] - 1) * 5);
         for (i = 0; i < 5; i++) {
             if (h & (1 << i)) {
 				print_text(sStarPieceRectX - 25, 154 - (i * 22), "#", 0);

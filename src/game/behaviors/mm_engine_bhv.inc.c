@@ -463,10 +463,13 @@ void bhv_boo_coin_loop(void) {
 
 void bhv_deathwarp_init(void) {
     if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+        s16 angle = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
         o->oPosX = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0];
         o->oPosY = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1];
         o->oPosZ = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2];
-        //vec3f_copy(gMarioState->pos, &o->oPosX);
+        o->oFaceAngleYaw = o->oMoveAngleYaw = angle;
+        o->oRoom = (gMarioPreviousRoom = gMarioCurrentRoom);
+        vec3f_copy(sPreviousMarioPos, gMarioState->pos);
     }
 
 }
@@ -475,23 +478,36 @@ void bhv_deathwarp_loop(void) {
     Vec3f pos;
     s16 angle;
     struct MarioState *m = gMarioState;
-    if (gMarioCurrentRoom != gMarioPreviousRoom) {
-        angle = atan2s(m->pos[2] - sPreviousMarioPos[2], m->pos[0] - sPreviousMarioPos[0]);
-        if (absi((u16)(angle) - (u16)(angle & 0xE000)) < 0x1000) {
-            angle &= 0xE000;
-        } else {
-            angle = (angle & 0xE000) + 0x2000;
-        }
-        o->oFaceAngleYaw = angle;
-        pos[0] = m->pos[0] + (sins(angle) * 150.0f);
-        pos[2] = m->pos[2] + (coss(angle) * 150.0f);
+    CL_PRINT(2, "%d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0])
+    CL_PRINT(1, "%d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1])
+    CL_PRINT(0, "%d", gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2])
+    CL_PRINT(5, "%d", (s32)o->oPosX)
+    CL_PRINT(4, "%d", (s32)o->oPosY)
+    CL_PRINT(3, "%d", (s32)o->oPosZ)
+    if (o->oTimer != 0 && gMarioCurrentRoom != gMarioPreviousRoom) {
+        pos[0] = m->pos[0];
+        pos[2] = m->pos[2];
         pos[1] = m->pos[1] + 50.0f;
+        if (m->pos[0] == sPreviousMarioPos[0] && m->pos[2] == sPreviousMarioPos[2]) {
+            angle = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
+        } else {
+            angle = atan2s(m->pos[2] - sPreviousMarioPos[2], m->pos[0] - sPreviousMarioPos[0]);
+            if (absi((u16)(angle) - (u16)(angle & 0xE000)) < 0x1000) {
+                angle &= 0xE000;
+            } else {
+                angle = (angle & 0xE000) + 0x2000;
+            }
+            pos[0] += + (sins(angle) * 150.0f);
+            pos[2] += + (coss(angle) * 150.0f);
+        }
+        o->oFaceAngleYaw = o->oMoveAngleYaw = angle;
         vec3f_copy(&o->oPosX, pos);
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = (s16)pos[0];
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)pos[1];
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)pos[2];
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea = gCurrAreaIndex;
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle = angle;
     }
     o->oRoom = (gMarioPreviousRoom = gMarioCurrentRoom);
     vec3f_copy(sPreviousMarioPos, m->pos);

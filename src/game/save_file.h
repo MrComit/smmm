@@ -28,11 +28,12 @@ struct SaveFile
     u8 spawnLevel;
     u8 spawnArea;
     Vec3s spawnPos;
+    s16 spawnAngle;
     u32 newFlags[2];
     u32 flags;
     u32 gpFlags;
     //u8 courseStars[COURSE_COUNT];
-    u32 roomsCleared[4];
+    u32 roomsCleared[3];
     u32 miscChallenges[2];
     u32 keys[2];
     u32 starPieces: 25;

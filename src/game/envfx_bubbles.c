@@ -117,8 +117,8 @@ void envfx_set_lava_bubble_position(s32 index, Vec3s centerPos) {
     s16 centerY = centerPos[1];
     s16 centerZ = centerPos[2];
 
-    (gEnvFxBuffer + index)->xPos = gMarioState->pos[0] + (random_float() - 0.5f) * 2500.0f;// - 3000.0f + centerX;
-    (gEnvFxBuffer + index)->zPos = gMarioState->pos[2] + (random_float() - 0.5f) * 2500.0f;// - 3000.0f + centerZ;
+    (gEnvFxBuffer + index)->xPos = gMarioState->pos[0] + (random_float() - 0.5f) * 2000.0f;// - 3000.0f + centerX;
+    (gEnvFxBuffer + index)->zPos = gMarioState->pos[2] + (random_float() - 0.5f) * 2000.0f;// - 3000.0f + centerZ;
 
     // if ((gEnvFxBuffer + index)->xPos > 8000) {
     //     (gEnvFxBuffer + index)->xPos = 16000 - (gEnvFxBuffer + index)->xPos;
