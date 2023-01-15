@@ -1,15 +1,23 @@
 extern const GeoLayout chandelier_geo[];
-extern Vtx chandelier_DL_ALPHA_mesh_vtx_0[3];
-extern Gfx chandelier_DL_ALPHA_mesh_tri_0[];
-extern Vtx chandelier_DL_OP_mesh_vtx_0[100];
-extern Gfx chandelier_DL_OP_mesh_tri_0[];
-extern Vtx chandelier_DL_OP_mesh_vtx_1[190];
-extern Gfx chandelier_DL_OP_mesh_tri_1[];
-extern Vtx chandelier_DL_OP_RANGE_mesh_vtx_0[223];
-extern Gfx chandelier_DL_OP_RANGE_mesh_tri_0[];
-
-extern Gfx chandelier_DL_ALPHA_mesh[];
-extern Gfx chandelier_DL_OP_mesh[];
-extern Gfx chandelier_DL_OP_RANGE_mesh[];
+extern Lights1 chandelier_Chandelier_Base_001_lights;
+extern Lights1 chandelier_Chandelier_Light_001_lights;
+extern Lights1 chandelier_Rope_002_lights;
+extern u8 chandelier_chandelier_base_rgba16[];
+extern u8 chandelier_chandelier_light_ci8[];
+extern u8 chandelier_chandelier_light_ci8_pal_rgba16[];
+extern u8 chandelier_rope8_ci4[];
+extern u8 chandelier_rope8_ci4_pal_rgba16[];
+extern Vtx chandelier_Chandelier_mesh_layer_1_vtx_0[320];
+extern Gfx chandelier_Chandelier_mesh_layer_1_tri_0[];
+extern Vtx chandelier_Chandelier_mesh_layer_1_vtx_1[195];
+extern Gfx chandelier_Chandelier_mesh_layer_1_tri_1[];
+extern Vtx chandelier_Chandelier_mesh_layer_4_vtx_0[3];
+extern Gfx chandelier_Chandelier_mesh_layer_4_tri_0[];
+extern Gfx mat_chandelier_Chandelier_Base_001[];
+extern Gfx mat_chandelier_Chandelier_Light_001[];
+extern Gfx mat_revert_chandelier_Chandelier_Light_001[];
+extern Gfx mat_chandelier_Rope_002[];
+extern Gfx mat_revert_chandelier_Rope_002[];
+extern Gfx chandelier_Chandelier_mesh_layer_1[];
+extern Gfx chandelier_Chandelier_mesh_layer_4[];
 extern Gfx chandelier_material_revert_render_settings[];
-

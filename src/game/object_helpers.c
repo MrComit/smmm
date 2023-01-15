@@ -3556,7 +3556,7 @@ void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
     struct Surface *floor;
     struct Object *coin;
 
-    if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
+    if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) && !(obj_has_behavior(obj, bhvShyguyBookSteal))) {
         coinBehavior = bhvCollectHeart;
         model = MODEL_HEART;
     }
