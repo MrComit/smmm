@@ -834,6 +834,7 @@ extern const BehaviorScript bhvGoldenGoomba[];
 extern const BehaviorScript bhvOrangeNumberStay[];
 extern const BehaviorScript bhvGoldenCrate[];
 extern const BehaviorScript bhvBigBookshelf[];
+extern const BehaviorScript bhvTableBarrier[];
 
 
 #endif // BEHAVIOR_DATA_H

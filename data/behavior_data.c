@@ -6243,12 +6243,14 @@ const BehaviorScript bhvDiningChair[] = {
 
 const BehaviorScript bhvBlockingChair[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     LOAD_COLLISION_DATA(dining_chair_collision),
     //CALL_NATIVE(bhv_dining_chair_init),
+    CALL_NATIVE(bhv_blocking_chair_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_blocking_chair_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -6287,7 +6289,7 @@ const BehaviorScript bhvTeapot[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
-    SCALE(0, 80),
+    // SCALE(0, 80),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_teapot_init),
     BEGIN_LOOP(),
@@ -9995,4 +9997,14 @@ const BehaviorScript bhvBigBookshelf[] = {
         // CALL_NATIVE(bhv_golden_crate_loop),
     END_LOOP(),
     BREAK(),
+};
+
+
+const BehaviorScript bhvTableBarrier[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_table_barrier_loop),
+    END_LOOP(),
 };

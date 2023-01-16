@@ -1091,8 +1091,14 @@ void handle_ground_pound_floor(struct MarioState *m) {
         case 5:
         case 6:
         case 7:
+        case 10:
             // obj_spawn_loot_coins(gMarioObject, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
             obj = spawn_object(gMarioObject, MODEL_YELLOW_COIN, bhvSingleCoinGetsSpawned);
+            // obj->oPosY += 200.0f;
+            break;
+        case 11:
+            // obj_spawn_loot_coins(gMarioObject, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+            obj = spawn_object(gMarioObject, MODEL_BLUE_COIN, bhvMrIBlueCoin);
             // obj->oPosY += 200.0f;
             break;
         case 8:

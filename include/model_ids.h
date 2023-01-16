@@ -646,6 +646,7 @@
 #define MODEL_L1_LOCK             0xE9
 #define MODEL_GHOST_BARRIER       0xE8
 #define MODEL_BIG_BOOKSHELF       0xE7
+#define MODEL_TABLE_BARRIER       0xE6
 
 
 // LEVEL 2 MODELS - 0xFF TO 0xE2 ARE FREE

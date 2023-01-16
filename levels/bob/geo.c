@@ -45,3 +45,4 @@
 #include "levels/bob/l1_lock/geo.inc.c"
 #include "levels/bob/ghost_barrier/geo.inc.c"
 #include "levels/bob/big_bookshelf/geo.inc.c"
+#include "levels/bob/table_barrier/geo.inc.c"

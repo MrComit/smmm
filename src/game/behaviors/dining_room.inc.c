@@ -137,6 +137,29 @@ void bhv_spin_plate_loop(void) {
 }
 
 
+void bhv_table_barrier_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 180, 4);
+            if (o->oOpacity == 180) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (cur_obj_nearest_object_with_behavior(bhvShyguyChair) == NULL) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 6);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 void shyguy_clamp_mario_on_table(struct MarioState *m) {
     if (m->pos[0] > 7586.0f)
         m->pos[0] = 7586.0f;
@@ -161,7 +184,9 @@ void bhv_shyguy_chair_loop(void) {
                 if (gMarioState->pos[0] > 7002.0f && gMarioState->pos[0] < 7386.0f) {
                     if (gMarioState->pos[2] > 5181.0f && gMarioState->pos[2] < 5565.0f) {
                         o->oAction = 1;
-                        o->oFC = CL_RandomMinMaxU16(65, 95);
+                        o->oFC = 75;
+                        obj = spawn_object(o, MODEL_TABLE_BARRIER, bhvTableBarrier);
+                        obj->oPosY -= 362.0f;
                     }
                 }
             }
@@ -284,20 +309,38 @@ void bhv_dining_chair_loop(void) {
                 create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
                 o->parentObj->oF4++;
                 o->parentObj->oAction = 1;
-                o->parentObj->oFC = CL_RandomMinMaxU16(65, 95);
+                o->parentObj->oFC = CL_RandomMinMaxU16(30, 50);
             }
             break;
     }
 }
 
+
+void bhv_blocking_chair_init(void) {
+    if (save_file_get_rooms(o->oRoom / 32) & (1 << (o->oRoom % 32))) {
+        o->activeFlags = 0;
+    }
+}
+
+
 void bhv_blocking_chair_loop(void) {
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvBlockedDoor);
     if (obj != NULL)
         obj->oF4 = 1;
-    if (save_file_get_rooms(o->oRoom / 32) & (1 << (o->oRoom % 32))) {
-        o->activeFlags = 0;
-        if (obj != NULL)
-            obj->oF4 = 0;
+    switch (o->oAction) {
+        case 0:
+            if (save_file_get_rooms(o->oRoom / 32) & (1 << (o->oRoom % 32))) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 300.0f, 8.0f);
+            if (o->oPosY == o->oHomeY - 300.0f) {
+                o->activeFlags = 0;
+                if (obj != NULL)
+                    obj->oF4 = 0;
+            }
+            break;
     }
 }
 
@@ -351,24 +394,41 @@ void bhv_teapot_init(void) {
     vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
     o->oMoveAnglePitch = pitch;
     o->oMoveAngleYaw = yaw;
-    o->oForwardVel = 52.0f;
     obj_set_hitbox(o, &sTeapotHitbox);
+    cur_obj_become_intangible();
 
 }
 
 void bhv_teapot_loop(void) {
-    CL_Move_3d();
-    cur_obj_update_floor_and_walls();
+    s16 pitch, yaw;
+    f32 dist;
     o->oFaceAngleYaw += 0x1C00;
-    o->oFaceAngleRoll += 0x1C00;
-    o->oFaceAnglePitch += 0x1C00;
-    if (o->oTimer > 30 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
-    || o->oInteractStatus & INT_STATUS_INTERACTED) {
-        spawn_mist_particles_variable(0, 0, 25.0f);
-        spawn_triangle_break_particles(6, 138, 1.0f, 4);
-        create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
-        o->activeFlags = 0;
-        o->parentObj->oAction = 1;
-        o->parentObj->oFC = CL_RandomMinMaxU16(35, 60);
+    switch (o->oAction) {
+        case 0:
+            vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+            o->oMoveAnglePitch = pitch;
+            o->oFaceAnglePitch = -pitch + 0x4000;
+            o->oMoveAngleYaw = yaw;
+            if (o->oTimer > 30) {
+                o->oAction = 1;
+                cur_obj_become_tangible();
+            }
+            break;
+        case 1:
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 52.0f, 3.0f);
+            CL_Move_3d();
+            cur_obj_update_floor_and_walls();
+            // o->oFaceAngleRoll += 0x1C00;
+            // o->oFaceAnglePitch += 0x1C00;
+            if (o->oTimer > 30 || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_ON_GROUND 
+            || o->oInteractStatus & INT_STATUS_INTERACTED) {
+                spawn_mist_particles_variable(0, 0, 25.0f);
+                spawn_triangle_break_particles(6, 138, 1.0f, 4);
+                create_sound_spawner(SOUND_GENERAL_HAUNTED_CHAIR_MOVE);
+                o->activeFlags = 0;
+                o->parentObj->oAction = 1;
+                o->parentObj->oFC = CL_RandomMinMaxU16(35, 60);
+            }
+            break;
     }
 }

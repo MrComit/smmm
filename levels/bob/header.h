@@ -127,4 +127,6 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/big_bookshelf/geo_header.h"
 
+#include "levels/bob/table_barrier/geo_header.h"
+
 #endif

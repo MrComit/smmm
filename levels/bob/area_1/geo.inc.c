@@ -137,11 +137,8 @@ const GeoLayout bob_dl_105__Hallways_geo[] = {
 const GeoLayout bob_dl_106__Dining_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cabinet_001_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cabinet_002_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cabinet_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cabinet_004_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Cabinet_005_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_dl_Cabinet_004_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Dresser_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Hallway_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_MRoomCrate_007_mesh_layer_1),

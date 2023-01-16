@@ -320,8 +320,23 @@ void koopa_shelled_act_dead(void) {
 
     if (CL_nearest_object_with_behavior_and_field(bhvKoopa, 0x108, 0) == NULL) {
         obj_die_if_health_non_positive();
+    } else if (o->oTimer > 240) {
+        o->oAction = KOOPA_SHELLED_ACT_UNDEAD;
     }
 }
+
+void koopa_shelled_act_undead(void) {
+    o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0, 0xC00);
+    o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.5f, 0.08f);
+    o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 0.0f, 4.0f);
+    if (o->oFaceAngleRoll == 0 && o->oGraphYOffset == 0.0f && o->header.gfx.scale[1] == 1.5f) {
+        o->oAction = KOOPA_SHELLED_ACT_WALK;
+        o->o108 = 0;
+        cur_obj_become_tangible();
+    }
+}
+
+
 
 /**
  * Update function for both regular and tiny shelled koopa.
@@ -349,6 +364,9 @@ static void koopa_shelled_update(void) {
             break;
         case KOOPA_SHELLED_ACT_DEAD:
             koopa_shelled_act_dead();
+            break;
+        case KOOPA_SHELLED_ACT_UNDEAD:
+            koopa_shelled_act_undead();
             break;
     }
 

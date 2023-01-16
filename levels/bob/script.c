@@ -66,6 +66,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_L1_LOCK, l1_lock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOST_BARRIER, ghost_barrier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_BOOKSHELF, big_bookshelf_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TABLE_BARRIER, table_barrier_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

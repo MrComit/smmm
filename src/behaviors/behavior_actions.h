@@ -598,6 +598,7 @@ void bhv_shyguy_chair_loop(void);
 void bhv_dining_chair_loop(void);
 void bhv_dining_chair_init(void);
 void bhv_blocking_chair_loop(void);
+void bhv_blocking_chair_init(void);
 void goomba_act_walk(void);
 void bhv_teapot_loop(void);
 void bhv_teapot_init(void);
@@ -1024,6 +1025,7 @@ void bhv_orange_number_stay_loop(void);
 void bhv_golden_crate_init(void);
 void bhv_golden_crate_loop(void);
 void bhv_big_bookshelf_init(void);
+void bhv_table_barrier_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
