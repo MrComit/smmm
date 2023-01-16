@@ -1,0 +1,17 @@
+extern const GeoLayout big_bookshelf_geo[];
+extern Lights1 big_bookshelf_Bookshelf_v4_lights;
+extern u8 big_bookshelf_bookshelf_ci4[];
+extern u8 big_bookshelf_bookshelf_ci4_pal_rgba16[];
+extern u8 big_bookshelf_ci8_books_dark_ci8[];
+extern u8 big_bookshelf_ci8_books_dark_ci8_pal_rgba16[];
+extern Vtx big_bookshelf_BigBookshelf_mesh_layer_1_vtx_cull[8];
+extern Vtx big_bookshelf_BigBookshelf_mesh_layer_1_vtx_0[70];
+extern Gfx big_bookshelf_BigBookshelf_mesh_layer_1_tri_0[];
+extern Vtx big_bookshelf_BigBookshelf_mesh_layer_1_vtx_1[16];
+extern Gfx big_bookshelf_BigBookshelf_mesh_layer_1_tri_1[];
+extern Gfx mat_big_bookshelf_Bookshelf_v4[];
+extern Gfx mat_revert_big_bookshelf_Bookshelf_v4[];
+extern Gfx mat_big_bookshelf_Books_v4[];
+extern Gfx mat_revert_big_bookshelf_Books_v4[];
+extern Gfx big_bookshelf_BigBookshelf_mesh_layer_1[];
+extern Gfx big_bookshelf_material_revert_render_settings[];

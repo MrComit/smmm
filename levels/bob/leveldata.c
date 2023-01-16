@@ -74,3 +74,5 @@
 #include "levels/bob/l1_gate_alt/collision.inc.c"
 #include "levels/bob/ghost_barrier/collision.inc.c"
 #include "levels/bob/ghost_barrier/model.inc.c"
+#include "levels/bob/big_bookshelf/collision.inc.c"
+#include "levels/bob/big_bookshelf/model.inc.c"

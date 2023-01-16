@@ -1023,6 +1023,7 @@ void bhv_golden_goomba_update(void);
 void bhv_orange_number_stay_loop(void);
 void bhv_golden_crate_init(void);
 void bhv_golden_crate_loop(void);
+void bhv_big_bookshelf_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

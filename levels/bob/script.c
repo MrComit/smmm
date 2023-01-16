@@ -65,6 +65,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_KOOPA_BOSS, boss_koopa_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L1_LOCK, l1_lock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GHOST_BARRIER, ghost_barrier_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BIG_BOOKSHELF, big_bookshelf_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -84,6 +85,7 @@ const LevelScript level_bob_entry[] = {
 		WARP_NODE(0x33, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x74, LEVEL_LLL, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x75, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x27, LEVEL_JRB, 0x01, 0x0C, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 0, 150, 10940, 0, 0, 0, 0x000D0000, bhvFlyingWarp),
@@ -155,6 +157,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, -6518, 277, 3479, 0, -180, 0, 0x00000000, bhvBookThrower),
 		OBJECT(MODEL_BREAKABLE_BOX, 5005, 0, 3810, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 5005, 200, 3810, 0, 0, 0, 0x00000000, bhvBreakableBox),
+		OBJECT(MODEL_BIG_BOOKSHELF, 4005, 0, 3910, 0, 0, 0, 0x00000000, bhvBigBookshelf),
 		OBJECT(MODEL_STAR_PIECE, -6718, 100, 9556, 0, 0, 0, 0x03000000, bhvStarPiece),
 		OBJECT(MODEL_DINING_CHAIR, 7773, 0, 5120, 0, -60, 0, 0x00010000, bhvDiningChair),
 		OBJECT(MODEL_DINING_CHAIR, 7195, 0, 4781, 0, 0, 0, 0x00000000, bhvDiningChair),

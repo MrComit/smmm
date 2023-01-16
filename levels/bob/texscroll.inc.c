@@ -5,6 +5,11 @@ void scroll_sts_mat_bob_dl_BooGoo_001_layer1() {
 	shift_t(mat, 21, PACK_TILESIZE(0, 1));
 };
 
+void scroll_sts_mat_bob_dl_Vase_v4_003_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_bob_dl_Vase_v4_003_layer1);
+	shift_s(mat, 13, PACK_TILESIZE(0, 4));
+};
+
 void scroll_bob_dl_KitchenGround_005_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 4;
@@ -66,6 +71,7 @@ void scroll_bob_dl_Steam_mesh_layer_5_vtx_0() {
 
 void scroll_bob() {
 	scroll_sts_mat_bob_dl_BooGoo_001_layer1();
+	scroll_sts_mat_bob_dl_Vase_v4_003_layer1();
 	scroll_bob_dl_KitchenGround_005_mesh_layer_5_vtx_0();
 	scroll_bob_dl_Steam_mesh_layer_5_vtx_0();
 }

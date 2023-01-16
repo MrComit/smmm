@@ -833,6 +833,7 @@ extern const BehaviorScript bhvElevatorTeleporter[];
 extern const BehaviorScript bhvGoldenGoomba[];
 extern const BehaviorScript bhvOrangeNumberStay[];
 extern const BehaviorScript bhvGoldenCrate[];
+extern const BehaviorScript bhvBigBookshelf[];
 
 
 #endif // BEHAVIOR_DATA_H

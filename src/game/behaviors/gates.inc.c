@@ -36,6 +36,12 @@ Vec3f sStealerPos[6] = {
 Vec3f sStrayBookPos = {-10783.0f, 186.0f, 3062.0f};
 
 
+void bhv_big_bookshelf_init(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_EXIT_DOOR) {
+        o->oFaceAngleYaw = 0xC000;
+    }
+}
+
 
 void bhv_ice_ceiling_gate_loop(void) {
     o->oRoom = 7;

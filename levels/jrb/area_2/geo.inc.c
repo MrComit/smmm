@@ -13,10 +13,10 @@ const GeoLayout jrb_area_2_geo[] = {
 const GeoLayout jrb_dl_201__Fall_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(4, 189, -3892, 4070, jrb_dl_Grass_mesh_layer_4),
-		GEO_TRANSLATE_NODE_WITH_DL(1, 19, -6154, 404, jrb_dl_Ground_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(4, 0, 422, 6866, jrb_dl_Moon_mesh_layer_4),
-		GEO_TRANSLATE_NODE_WITH_DL(1, -375, 857, 2881, jrb_dl_Skybox_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_ALPHA, 189, -3892, 4070, 0, 90, 0, jrb_dl_Grass_mesh_layer_4),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 19, -6154, 404, jrb_dl_Ground_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_ALPHA, 0, 422, 6866, 100, 0, 0, jrb_dl_Moon_mesh_layer_4),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -375, 857, 2881, 90, 0, 0, jrb_dl_Skybox_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -42,8 +42,8 @@ const GeoLayout jrb_area_2[] = {
 				GEO_CLOSE_NODE(),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
-		GEO_DISPLAY_LIST(1, jrb_dl_material_revert_render_settings),
-		GEO_DISPLAY_LIST(4, jrb_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, jrb_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, jrb_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

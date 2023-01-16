@@ -18,8 +18,8 @@ void scroll_jrb_dl_Ground_001_mesh_layer_1_vtx_3() {
 		vertices[i].n.tc[1] += deltaY;
 	}
 	currentY += deltaY;
-
 }
+
 void scroll_jrb_dl_Conservatory_mesh_layer_1_vtx_2() {
 	int i = 0;
 	int count = 15;
@@ -40,8 +40,8 @@ void scroll_jrb_dl_Conservatory_mesh_layer_1_vtx_2() {
 		vertices[i].n.tc[1] += deltaY;
 	}
 	currentY += deltaY;
-
 }
+
 void scroll_jrb() {
 	scroll_jrb_dl_Ground_001_mesh_layer_1_vtx_3();
 	scroll_jrb_dl_Conservatory_mesh_layer_1_vtx_2();

@@ -13,8 +13,14 @@
 
 #include "actors/common1.h"
 
+/* Fast64 begin persistent block [includes] */
+/* Fast64 end persistent block [includes] */
+
 #include "make_const_nonconst.h"
 #include "levels/jrb/header.h"
+
+/* Fast64 begin persistent block [scripts] */
+/* Fast64 end persistent block [scripts] */
 
 const LevelScript level_jrb_entry[] = {
 	INIT_LEVEL(),
@@ -47,7 +53,10 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SUNBLOCK_BIG, sunblock_big_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GARDEN_GATE, garden_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_EXIT_WALL, exit_wall_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_GARDEN_HOLES, garden_holes_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_GARDEN_HOLES, garden_holes_geo), 
+
+	/* Fast64 begin persistent block [level commands] */
+	/* Fast64 end persistent block [level commands] */
 
 	AREA(1, jrb_area_1),
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
@@ -56,8 +65,10 @@ const LevelScript level_jrb_entry[] = {
 		WARP_NODE(0x0B, LEVEL_JRB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_JRB, 0x01, 0x0B, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0D, LEVEL_BOB, 0x01, 0x72, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0C, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, -230, 0, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
+		OBJECT(MODEL_NONE, 2098, -230, 3789, 0, -180, 0, 0x000C0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 0, -230, 0),
 		OBJECT(MODEL_DIRT_MOUND, 776, -488, -1265, 0, 0, 0, 0x00000000, bhvDirtMound),
 		OBJECT(MODEL_DIRT_MOUND, 3208, -488, 3931, 0, 0, 0, 0x00000000, bhvDirtMound),
@@ -140,6 +151,8 @@ const LevelScript level_jrb_entry[] = {
 		MACRO_OBJECTS(jrb_area_1_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SPOOKY),
 		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	AREA(2, jrb_area_2),
@@ -163,6 +176,8 @@ const LevelScript level_jrb_entry[] = {
 		MACRO_OBJECTS(jrb_area_2_macro_objs),
 		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SPOOKY),
 		TERRAIN_TYPE(TERRAIN_STONE),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
