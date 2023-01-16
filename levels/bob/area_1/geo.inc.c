@@ -85,6 +85,8 @@ const GeoLayout bob_dl_104__Garage_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Canister_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Garage_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_dl_OilFloor_mesh_layer_6),
+		GEO_ASM(0x7, geo_set_red_painting),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Painting_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_shelves_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Tools_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Truck_mesh_layer_1),

@@ -1461,6 +1461,39 @@ Gfx *geo_set_number_palette(s32 callContext, struct GraphNode *node, UNUSED void
     return dlStart;
 }
 
+f32 sRedPaintingSat = 0.9059f;
+f32 sRedPaintingVal = 0.9176f;
+
+Gfx *geo_set_red_painting(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    struct Object *obj;
+    s32 challenge;
+    s16 r, g, b;
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+        currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        challenge = currentGraphNode->parameter;
+        if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
+            sRedPaintingSat = approach_f32_symmetric(sRedPaintingSat, 0.15f, 0.02f);
+            sRedPaintingVal = approach_f32_symmetric(sRedPaintingVal, 0.4f, 0.013f);
+        } else {
+            sRedPaintingSat = 0.9059f;
+            sRedPaintingVal = 0.9176f;
+        }
+
+        CL_HSVtoRGB(359, sRedPaintingSat, sRedPaintingVal, &r, &g, &b);
+        gDPSetEnvColor(dlHead++, r, g, b, 0xFF);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
 
 /**
  * @bug Every geo function declares the 3 parameters of callContext, node, and

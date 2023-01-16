@@ -259,7 +259,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_SAWBLADE, 3487, 107, -11011, 0, -27, 0, (25 << 24) | (0x20 << 8), bhvSawbladeLine),
 		OBJECT(MODEL_SAWBLADE, 2832, 168, -10312, 0, 24, 0, (20 << 24) | (0x20 << 8), bhvSawbladeLine),
 		OBJECT(MODEL_BASEMENT_SWITCH, 8744, -1894, -13457, 0, 0, 0, (4 << 16), bhvBasementSwitch),
-		OBJECT(MODEL_TOKEN, 13959, 1234, -6757, 0, 0, 0, (1 << 16) | (0x28 << 8), bhvToken),
+		OBJECT(MODEL_TOKEN, 13959, 1234, -6757, 0, 0, 0, (1 << 16) | (0x2A << 8), bhvToken),
 		OBJECT(MODEL_SAWBLADE, 6662, 100, -7114, 0, 90, 0, 0x00000000, bhvSawbladeMove),
 		OBJECT(MODEL_SAWBLADE, 5016, 100, -7227, 0, 51, 0, (1 << 16), bhvSawbladeMove),
 		OBJECT(MODEL_SAWBLADE, 5822, 300, -7378, 0, 6, 0, (50 << 24) | (1 << 16), bhvSawbladeMove),

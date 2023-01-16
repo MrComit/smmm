@@ -94,6 +94,7 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
 Gfx *geo_set_elevator_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_city_window_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_number_palette(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_set_red_painting(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #ifdef AVOID_UB
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node, UNUSED void *context);
