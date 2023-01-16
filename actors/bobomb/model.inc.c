@@ -10,6 +10,17 @@ ALIGNED8 static const Texture bobomb_seg8_texture_0801EA60[] = {
 #include "actors/bobomb/bob-omb_right_side.rgba16.inc.c"
 };
 
+
+// ice left
+ALIGNED8 static const Texture bobomb_ice_left[] = {
+#include "actors/bobomb/CUSTOM_ice_bob-omb_left_side.rgba16.inc.c"
+};
+
+// ice right
+ALIGNED8 static const Texture bobomb_ice_right[] = {
+#include "actors/bobomb/CUSTOM_ice_bob-omb_right_side.rgba16.inc.c"
+};
+
 // 0x0801FA60
 ALIGNED8 static const Texture bobomb_seg8_texture_0801FA60[] = {
 #include "actors/bobomb/bob-omb_buddy_left_side.rgba16.inc.c"
@@ -325,5 +336,39 @@ const Gfx bobomb_seg8_dl_08023480[] = {
     gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
     gsSP2Triangles( 8,  9, 10, 0x0,  8, 10, 11, 0x0),
     gsSP2Triangles( 8, 11, 12, 0x0,  8, 12, 13, 0x0),
+    gsSPEndDisplayList(),
+};
+
+
+
+const Gfx bobomb_ice_helper[] = {
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bobomb_ice_left),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
+    gsSPVertex(bobomb_seg8_vertex_08022BB8, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
+    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bobomb_ice_right),
+    gsDPLoadSync(),
+    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 64 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
+    gsSPVertex(bobomb_seg8_vertex_08022BF8, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
+    gsSPEndDisplayList(),
+};
+
+
+const Gfx bobomb_ice_dl[] = {
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_DECALRGBA, G_CC_DECALRGBA),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsDPTileSync(),
+    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 6, G_TX_NOLOD, G_TX_CLAMP, 5, G_TX_NOLOD),
+    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (64 - 1) << G_TEXTURE_IMAGE_FRAC),
+    gsSPDisplayList(bobomb_ice_helper),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
+    gsDPPipeSync(),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsSPSetGeometryMode(G_LIGHTING),
     gsSPEndDisplayList(),
 };

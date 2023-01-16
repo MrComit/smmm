@@ -14,6 +14,7 @@
 #include "actors/common1.h"
 
 /* Fast64 begin persistent block [includes] */
+extern const GeoLayout ice_bobomb_geo[];
 /* Fast64 end persistent block [includes] */
 
 #include "make_const_nonconst.h"
@@ -67,6 +68,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_GHOST_BARRIER, ghost_barrier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_BOOKSHELF, big_bookshelf_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TABLE_BARRIER, table_barrier_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ICE_BOMB, ice_bobomb_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -192,13 +194,10 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_BURNER, 2252, -9, 2325, 0, 0, 0, 0x00010000, bhvOvenBurner),
 		OBJECT(MODEL_L1_BURNER, 2252, -9, 1925, 0, 0, 0, 0x00000000, bhvOvenBurner),
 		OBJECT(MODEL_L1_CABINET, 506, 471, 6112, 0, 0, 0, 0x00010000, bhvL1Cabinet),
-		OBJECT(MODEL_L1_CABINET, 506, 471, 5772, 0, 0, 0, 0x00000000, bhvL1Cabinet),
-		OBJECT(MODEL_L1_CABINET, 506, 471, 5432, 0, 0, 0, 0x00000000, bhvL1Cabinet),
+		OBJECT(MODEL_L1_CABINET, 506, 471, 5772, 0, 0, 0, (1 << 16), bhvL1Cabinet),
 		OBJECT(MODEL_L1_CABINET, 506, 471, 5092, 0, 0, 0, 0x00010000, bhvL1Cabinet),
-		OBJECT(MODEL_L1_CABINET, 506, 170, 6112, 0, 0, 0, 0x00000000, bhvL1Cabinet),
-		OBJECT(MODEL_L1_CABINET, 506, 170, 5772, 0, 0, 0, 0x00010000, bhvL1Cabinet),
 		OBJECT(MODEL_L1_CABINET, 506, 170, 5432, 0, 0, 0, 0x00000000, bhvL1Cabinet),
-		OBJECT(MODEL_L1_CABINET, 506, 170, 5092, 0, 0, 0, 0x00010000, bhvL1Cabinet),
+		OBJECT(MODEL_L1_CABINET, 506, 170, 5092, 0, 0, 0, 0x00000000, bhvL1Cabinet),
 		OBJECT(MODEL_L1_BURNER, 2452, -9, 3575, 0, 0, 0, 0x00010000, bhvOvenBurner),
 		OBJECT(MODEL_L1_BURNER, 2652, -9, 3125, 0, 0, 0, 0x00010000, bhvOvenBurner),
 		OBJECT(MODEL_L1_BURNER, 1802, -9, 1575, 0, 0, 0, 0x00000000, bhvOvenBurner),
@@ -218,7 +217,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_STAR_PIECE, 748, 833, 8677, 0, 0, 0, 0x02000000, bhvStarPiece),
 		OBJECT(MODEL_STOVE_BUTTON, 2992, 131, 5062, 0, 0, 0, 0x00000000, bhvStoveButton),
 		OBJECT(MODEL_FRYING_PAN, 3071, 269, 4990, 0, 0, 0, 0x00000000, bhvFryingPan),
-		OBJECT(MODEL_TOKEN, 354, 341, 5593, 0, 90, 0, 0x00000800, bhvToken),
+		OBJECT(MODEL_TOKEN, 354, 40, 5593, 0, 90, 0, 0x00000800, bhvToken),
 		OBJECT(MODEL_TOKEN, 402, 690, 4852, 0, 135, 0, 0x00010600, bhvToken),
 		OBJECT(MODEL_GOOMBA, -6135, 0, 6820, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -5748, 0, 7372, 0, 0, 0, 0x00000000, bhvGoomba),

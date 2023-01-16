@@ -18,8 +18,22 @@ void door_animation_and_reset(s32 sp18) {
     }
 }
 
+
+s32 check_warp_door_cutscene(const BehaviorScript *behavior) {
+    if (segmented_to_virtual(bhvDoor) == behavior) {
+        return FALSE;
+    } else if (segmented_to_virtual(bhvBlockedDoor) == behavior) {
+        return FALSE;
+    } else if (segmented_to_virtual(bhvSmallKeyDoor) == behavior) {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+
 void set_door_camera_event(void) {
-    if (segmented_to_virtual(bhvDoor) != o->behavior)
+    if (check_warp_door_cutscene(o->behavior))
         gPlayerCameraState->cameraEvent = CAM_EVENT_DOOR_WARP;
     gPlayerCameraState->usedObj = o;
 }

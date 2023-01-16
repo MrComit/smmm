@@ -1,7 +1,10 @@
 extern const GeoLayout l1_cabinet_geo[];
-extern Vtx l1_cabinet_Cabinet_mesh_vtx_0[24];
-extern Gfx l1_cabinet_Cabinet_mesh_tri_0[];
-
-extern Gfx l1_cabinet_Cabinet_mesh[];
+extern Lights1 l1_cabinet_Cabinet_v3_001_lights;
+extern u8 l1_cabinet_cabinet_ci8[];
+extern u8 l1_cabinet_cabinet_ci8_pal_rgba16[];
+extern Vtx l1_cabinet_Cabinet_mesh_layer_1_vtx_0[109];
+extern Gfx l1_cabinet_Cabinet_mesh_layer_1_tri_0[];
+extern Gfx mat_l1_cabinet_Cabinet_v3_001[];
+extern Gfx mat_revert_l1_cabinet_Cabinet_v3_001[];
+extern Gfx l1_cabinet_Cabinet_mesh_layer_1[];
 extern Gfx l1_cabinet_material_revert_render_settings[];
-

@@ -96,12 +96,18 @@ void bhv_l1_cabinet_loop(void) {
         case 0:
             if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
                 o->oAction = 1;
+                // o->oMoveAngleYaw -= 0x4000;
+                // gMarioState->usedObj = gMarioState->interactObj = o;
+                // set_mario_action(gMarioState, ACT_PULLING_DOOR, 1);
             }
             if (o->oTimer > 1 && o->oObjF4 != NULL) {
                 vec3f_copy(&o->oObjF4->oPosX, &o->oObjF4->oHomeX);
             }
             break;
         case 1:
+            // if (o->oTimer > 16) {
+            //     set_mario_action(gMarioState, ACT_IDLE, 0);
+            // }
             o->oFaceAngleYaw -= 0x4000;
             o->oFaceAngleYaw -= o->oFaceAngleYaw / 20;
             o->oFaceAngleYaw += 0x4000;
@@ -226,7 +232,7 @@ void bhv_fridge_spawner_loop(void) {
             }
             break;
         case 2:
-            obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvIceBobomb);
+            obj = spawn_object(o, MODEL_ICE_BOMB, bhvIceBobomb);
             obj->oMoveAngleYaw = 0x4000;
             obj->oVelY = 30.0f;
             obj->oForwardVel = 13.0f;
@@ -306,14 +312,12 @@ void pan_free_loop(void) {
         case 1:
             vec3f_copy(&o->oObjF4->oPosX, &o->oPosX);
             obj = cur_obj_nearest_object_with_behavior(bhvFridgeSpawner);
-            if (obj == NULL) {
-                o->activeFlags = 0;
-                return;
-            }
-            if (dist_between_objects(o, obj) < 200.0f) {
+            if (obj == NULL || dist_between_objects(o, obj) < 200.0f) {
                 CL_explode_object(o, 1);
-                obj->activeFlags = 0;
                 o->oObjF4->activeFlags = 0;
+                if (obj != NULL) {
+                    obj->activeFlags = 0;
+                }
             }
             break;
     }
