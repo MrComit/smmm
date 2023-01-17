@@ -77,3 +77,5 @@
 #include "levels/bob/big_bookshelf/collision.inc.c"
 #include "levels/bob/big_bookshelf/model.inc.c"
 #include "levels/bob/table_barrier/model.inc.c"
+#include "levels/bob/hallway_fakewall/model.inc.c"
+#include "levels/bob/hallway_fakewall/collision.inc.c"

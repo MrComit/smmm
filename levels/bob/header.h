@@ -129,4 +129,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/table_barrier/geo_header.h"
 
+#include "levels/bob/hallway_fakewall/geo_header.h"
+
+#include "levels/bob/hallway_fakewall/collision_header.h"
+
 #endif

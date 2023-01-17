@@ -12,4 +12,4 @@ void scroll_textures_bob() {
 		
 	scroll_bob_level_geo_ghost_barrier();
 	scroll_bob_level_geo_table_barrier();
-}
+	}

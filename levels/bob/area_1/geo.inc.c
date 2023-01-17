@@ -125,6 +125,7 @@ const GeoLayout bob_dl_105__Hallways_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Hallway_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Hallway_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bob_dl_Hallway_002_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Hallway_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Side_Table_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Side_Table_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Side_Table_002_mesh_layer_1),
@@ -256,6 +257,22 @@ const GeoLayout bob_dl_110__Study_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout bob_dl_bb_002_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Books_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_FancyChair_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Painting_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_cc_002_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_cc_002_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout bob_dl_111__Library_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -266,6 +283,12 @@ const GeoLayout bob_dl_111__Library_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_Library_006_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Library_007_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, bob_dl_Railing_mesh_layer_4),
+		GEO_SWITCH_CASE(2, geo_switch_library),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, bob_dl_bb_002_geo),
+			GEO_BRANCH(1, bob_dl_cc_002_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_aa_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

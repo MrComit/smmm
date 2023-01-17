@@ -648,6 +648,7 @@
 #define MODEL_BIG_BOOKSHELF       0xE7
 #define MODEL_TABLE_BARRIER       0xE6
 #define MODEL_ICE_BOMB            0xE5
+#define MODEL_HALLWAY_FAKEWALL    0xE4
 
 
 // LEVEL 2 MODELS - 0xFF TO 0xE2 ARE FREE

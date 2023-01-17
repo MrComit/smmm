@@ -475,7 +475,9 @@ void bhv_ice_bobomb_loop(void) {
         ice_bobomb_act_explode();
 
     curr_obj_random_blink(&o->oBobombBlinkTimer);
-
+    if (o->header.gfx.animInfo.animFrame == 5 || o->header.gfx.animInfo.animFrame == 16) {
+        cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
+    }
     if (o->oBobombFuseTimer >= 151)
         o->oAction = 1;
     //if (o->oBobombFuseLit == 1) {

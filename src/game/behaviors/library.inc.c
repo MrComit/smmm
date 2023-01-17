@@ -23,6 +23,25 @@ Vec3f sKFlameXPos[2] = {
 };
 
 
+void bhv_flame_decoration_big_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_nearest_object_with_behavior(bhvKoopaBoss) == NULL || !gIsConsole) {
+                o->oAction = 1;
+                cur_obj_unhide();
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 60.0f, 0.5f);
+            o->header.gfx.scale[2] = o->header.gfx.scale[1] = o->header.gfx.scale[0];
+            if (o->header.gfx.scale[0] == 60.0f) {
+                o->oAction = 2;
+            }
+            break;
+    }
+}
+
+
 
 void koopa_boss_move(void) {
     o->oF8 += 0x180;
@@ -57,7 +76,7 @@ void bhv_koopa_boss_init(void) {
     gMultiplierLower = 0;
 }
 
-
+extern f32 gComitCutsceneKoopaBossHeight;
 void bhv_koopa_boss_loop(void) {
     struct Object *obj;
     koopa_boss_clamp_mario();
@@ -72,6 +91,8 @@ void bhv_koopa_boss_loop(void) {
                 o->oKleptoStartPosZ = 300.0f;
                 cur_obj_unhide();
                 set_mario_npc_dialog(1);
+                gCamera->comitCutscene = 1;
+                gComitCutsceneKoopaBossHeight = gMarioState->pos[1];
             }
             break;
         case 1:
@@ -188,6 +209,7 @@ void bhv_koopa_boss_loop(void) {
                 obj->oBehParams = 0x02040100;
                 stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
                 gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_MULTIPLIER;
+                gCamera->comitCutscene = 0;
             }
             break;
     }

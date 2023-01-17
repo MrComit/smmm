@@ -36,6 +36,29 @@ Vec3f sStealerPos[6] = {
 Vec3f sStrayBookPos = {-10783.0f, 186.0f, 3062.0f};
 
 
+
+void bhv_hallway_fakewall_init(void) {
+    o->oOpacity = 255;
+}
+
+void bhv_hallway_fakewall_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 5);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+
 void bhv_big_bookshelf_init(void) {
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_EXIT_DOOR) {
         o->oFaceAngleYaw = 0xC000;

@@ -69,6 +69,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_BOOKSHELF, big_bookshelf_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TABLE_BARRIER, table_barrier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_BOMB, ice_bobomb_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_HALLWAY_FAKEWALL, hallway_fakewall_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -161,6 +162,8 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, 5005, 0, 3810, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BREAKABLE_BOX, 5005, 200, 3810, 0, 0, 0, 0x00000000, bhvBreakableBox),
 		OBJECT(MODEL_BIG_BOOKSHELF, 4005, 0, 3910, 0, 0, 0, 0x00000000, bhvBigBookshelf),
+		OBJECT(MODEL_GOLDEN_CRATE, 5230, 0, 8859, 0, 0, 0, 0x00000000, bhvGoldenCrate),
+		OBJECT(MODEL_HALLWAY_FAKEWALL, 5105, 0, 8859, 0, 0, 0, 0x00000000, bhvHallwayFakeWall),
 		OBJECT(MODEL_STAR_PIECE, -6718, 100, 9556, 0, 0, 0, 0x03000000, bhvStarPiece),
 		OBJECT(MODEL_DINING_CHAIR, 7773, 0, 5120, 0, -60, 0, 0x00010000, bhvDiningChair),
 		OBJECT(MODEL_DINING_CHAIR, 7195, 0, 4781, 0, 0, 0, 0x00000000, bhvDiningChair),

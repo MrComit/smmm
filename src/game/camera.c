@@ -1219,8 +1219,10 @@ s16 gComitCutsceneAction = 0;
 s16 gComitCutsceneTimer = 0;
 Vec3f gComitCutscenePosVec = {0, 0, 0};
 Vec3f gComitCutsceneFocVec = {0, 0, 0};
+f32 gComitCutsceneKoopaBossHeight = 0.0f;
 struct Object *gComitCutsceneObject = NULL;
 extern s32 gRoomEntryTimer;
+
 
 
 void fixed_cam_cutscene_opening(struct Camera *c) {
@@ -1352,6 +1354,7 @@ void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
     struct Object *obj = gComitCutsceneObject;
     Vec3f pos;
+    f32 heightVar;
     s16 yaw, pitch;
     if (m->floor != NULL && m->floor->type == SURFACE_FIXED_CAM) {
         c->comitCutscene = m->floor->force;
@@ -1368,8 +1371,10 @@ void fixed_cam_presets(struct Camera *c) {
             gComitCutsceneObject = NULL;
             break;
         case 1:
-            vec3f_set(c->pos, -5000.0f, m->pos[1] + 600.0f, m->pos[2]);
-            vec3f_set(c->focus, -9070.0f, m->pos[1], m->pos[2]);
+            heightVar = absf(gComitCutsceneKoopaBossHeight - m->pos[1]) / 4.0f;
+            gComitCutsceneKoopaBossHeight = approach_f32_symmetric(gComitCutsceneKoopaBossHeight, m->pos[1], heightVar);
+            vec3f_set(c->pos, -5000.0f, gComitCutsceneKoopaBossHeight + 600.0f, m->pos[2]);
+            vec3f_set(c->focus, -9070.0f, gComitCutsceneKoopaBossHeight, m->pos[2]);
             c->yaw = c->nextYaw = 0x4000;
             break;
         case 2:
@@ -6776,7 +6781,6 @@ struct CameraTrigger sCamRR[] = {
  * to free_roam when Mario is not walking up the tower.
  */
 struct CameraTrigger sCamBOB[] = {
-	{1, cam_bob_tower, -6765, 2895, 17409, 701, 983, 2638, 0xffff},
 	NULL_TRIGGER
 };
 
@@ -7074,9 +7078,10 @@ s16 camera_course_processing(struct Camera *c) {
             b++;
         }
         if (!anyChecked) {
-            if (c->comitCutscene)
+            if (c->comitCutscene) {
                 set_r_button_camera(c);
-            c->comitCutscene = 0;
+                c->comitCutscene = 0;
+            }
         }
     }
 
