@@ -50,6 +50,8 @@ void bhv_remote_loop(void) {
                 obj2 = spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
                 obj2->oPosY -= 50.0f;
                 o->activeFlags = 0;
+                play_sound(SOUND_GENERAL_UNKNOWN3, gGlobalSoundSource);
+                play_sound(SOUND_GENERAL2_PURPLE_SWITCH, gGlobalSoundSource);
             }
             o->oFloatF4 = approach_f32(o->oFloatF4, 1.0f, 0.05f, 0.05f);
             obj_scale(o, o->oFloatF4);
@@ -207,10 +209,16 @@ void bhv_tv_peepa_loop(void) {
             o->oFC += o->o108;
             o->oPosX = o->oHomeX + (324.0f * sins(o->oFC));
             o->oPosZ = o->oHomeZ + (324.0f * coss(o->oFC));
-            
+                if (o->oBehParams2ndByte == 0 && gGlobalTimer % 4 == 0) {
+                    cur_obj_play_sound_2(SOUND_GENERAL_SWISH_AIR);
+                }
             if (o->oTimer > 120) {
                 o->oAction = 3;
                 o->prevObj->activeFlags = 0;
+                if (o->oBehParams2ndByte == 0) {
+                    // cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_SHORT);
+                    play_sound(SOUND_OBJ_BOO_LAUGH_LONG, gGlobalSoundSource);
+                }
                 obj_set_hitbox(o, &sTVPeepaHitbox);
             }
             break;

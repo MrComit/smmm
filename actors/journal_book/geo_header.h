@@ -1,0 +1,16 @@
+extern const GeoLayout journal_book_geo[];
+extern u8 journal_book_journal_cover_ci8[];
+extern u8 journal_book_journal_cover_ci8_pal_rgba16[];
+extern u8 journal_book_bookpage_ci8[];
+extern u8 journal_book_bookpage_ci8_pal_rgba16[];
+extern Vtx journal_book_Journal_mesh_layer_1_vtx_cull[8];
+extern Vtx journal_book_Journal_mesh_layer_1_vtx_0[14];
+extern Gfx journal_book_Journal_mesh_layer_1_tri_0[];
+extern Vtx journal_book_Journal_mesh_layer_1_vtx_1[12];
+extern Gfx journal_book_Journal_mesh_layer_1_tri_1[];
+extern Gfx mat_journal_book_JournalCover[];
+extern Gfx mat_revert_journal_book_JournalCover[];
+extern Gfx mat_journal_book_JournalPage[];
+extern Gfx mat_revert_journal_book_JournalPage[];
+extern Gfx journal_book_Journal_mesh_layer_1[];
+extern Gfx journal_book_material_revert_render_settings[];

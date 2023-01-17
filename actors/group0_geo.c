@@ -39,3 +39,4 @@
 #include "horizontal_pole/geo.inc.c"
 #include "snufit/geo.inc.c"
 #include "garage_wall/geo.inc.c"
+#include "journal_book/geo.inc.c"

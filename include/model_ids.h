@@ -619,6 +619,7 @@
 #define MODEL_GARAGE_WALL         0x44
 #define MODEL_GOLDEN_GOOMBA       0x45
 #define MODEL_GOLDEN_CRATE        0x46
+#define MODEL_JOURNAL_BOOK        0x47
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF

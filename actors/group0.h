@@ -431,4 +431,6 @@ extern const Gfx snufit_seg6_dl_06009B68[];
 
 #include "garage_wall/collision_header.h"
 
+#include "journal_book/geo_header.h"
+
 #endif

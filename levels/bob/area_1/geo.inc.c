@@ -263,6 +263,7 @@ const GeoLayout bob_dl_bb_002_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Books_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_FancyChair_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Painting_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Simple_Table_004_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

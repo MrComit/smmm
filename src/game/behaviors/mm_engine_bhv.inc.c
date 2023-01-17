@@ -110,6 +110,31 @@ Vec3f sPreviousMarioPos = {0, 0, 0};
 u8 sTokenCoins[3] = {10, 50, 100};
 
 
+
+void bhv_journal_book_loop(void) {
+    o->oFaceAngleYaw += 0x600;
+    o->os16F4 += 0x400;
+    o->oGraphYOffset = 20.0f + (sins(o->os16F4) * 20.0f);
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 100.0f) {
+                if (o->os16F8 == 0) {
+                    o->oAction = 1;
+                    o->os16F8 = 1;
+                }
+            } else if (o->os16F8 && o->oDistanceToMario > 150.0f) {
+                o->os16F8 = 0;
+            }
+            break;
+        case 1:
+            if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                o->oAction = 0;
+            }
+            break;
+    }
+}
+
+
 void bhv_golden_crate_init(void) {
     u8 challenge = (o->oBehParams >> 8) & 0xFF;
     if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {

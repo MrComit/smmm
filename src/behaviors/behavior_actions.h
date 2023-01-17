@@ -1029,6 +1029,7 @@ void bhv_table_barrier_loop(void);
 void bhv_flame_decoration_big_loop(void);
 void bhv_hallway_fakewall_init(void);
 void bhv_hallway_fakewall_loop(void);
+void bhv_journal_book_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

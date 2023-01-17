@@ -478,10 +478,10 @@ void bhv_ice_bobomb_loop(void) {
     if (o->header.gfx.animInfo.animFrame == 5 || o->header.gfx.animInfo.animFrame == 16) {
         cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
     }
-    if (o->oBobombFuseTimer >= 151)
+    if (o->oBobombFuseTimer >= 91)
         o->oAction = 1;
     //if (o->oBobombFuseLit == 1) {
-    if (o->oBobombFuseTimer >= 121)
+    if (o->oBobombFuseTimer >= 81)
         dustPeriodMinus1 = 1;
     else
         dustPeriodMinus1 = 7;

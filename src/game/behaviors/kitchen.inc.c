@@ -39,14 +39,17 @@ void bhv_burner_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 105) {
-                if (o->oTimer % 2)
+                if (o->oTimer % 2) {
+                    cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_ALERT);
                     o->oFaceAngleRoll += 0x200;
-                else
+                } else {
                     o->oFaceAngleRoll -= 0x200;
+                }
             }
             if (o->oTimer > 135) {
                 o->oAction = 1;
                 o->oFaceAngleRoll = 0;
+                cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_CLICK);
             }
             break;
         case 1:
@@ -58,14 +61,17 @@ void bhv_burner_loop(void) {
             break;
         case 2:
             if (o->oTimer > 105) {
-                if (o->oTimer % 2)
+                if (o->oTimer % 2) {
                     o->oFaceAngleRoll += 0x200;
-                else
+                    cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_ALERT);
+                } else {
                     o->oFaceAngleRoll -= 0x200;
+                }
             }
             if (o->oTimer > 135) {
                 o->oAction = 3;
                 o->oFaceAngleRoll = 0x8000;
+                cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_CLICK);
             }
             break;
         case 3:
@@ -227,7 +233,7 @@ void bhv_fridge_spawner_loop(void) {
             }
             break;
         case 1:
-            if (o->oTimer > 30) {
+            if (o->oTimer > 60) {
                 o->oAction = 2;
             }
             break;
@@ -235,7 +241,7 @@ void bhv_fridge_spawner_loop(void) {
             obj = spawn_object(o, MODEL_ICE_BOMB, bhvIceBobomb);
             obj->oMoveAngleYaw = 0x4000;
             obj->oVelY = 30.0f;
-            obj->oForwardVel = 13.0f;
+            obj->oForwardVel = 20.0f;
             o->oAction = 1;
             break;
     }

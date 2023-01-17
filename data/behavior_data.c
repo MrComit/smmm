@@ -10025,3 +10025,13 @@ const BehaviorScript bhvHallwayFakeWall[] = {
         CALL_NATIVE(bhv_hallway_fakewall_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvJournalBook[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_journal_book_loop),
+    END_LOOP(),
+};
