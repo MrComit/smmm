@@ -199,12 +199,51 @@ const GeoLayout bob_dl_109__Living_Room_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout bob_dl_bb_001_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_bb_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_cc_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_cc_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_bb_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_bb_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_cc_001_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_cc_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout bob_dl_110__Study_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_study1),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, bob_dl_bb_001_geo),
+			GEO_BRANCH(1, bob_dl_cc_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_aa_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_study2),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, bob_dl_bb_geo),
+			GEO_BRANCH(1, bob_dl_cc_001_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_aa_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, bob_dl_Black_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Board_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, bob_dl_Board_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_BucketStack_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_BucketStack_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_FancyChair_mesh_layer_1),

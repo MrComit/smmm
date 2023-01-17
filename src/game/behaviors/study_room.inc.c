@@ -100,8 +100,12 @@ void bhv_l1_fireplace_loop(void) {
         }
     }
 
-    if (gMarioState->pos[2] < 7800.0f && gMarioState->pos[2] > 7300.0f && gMarioState->pos[0] < -12000.0f) {
+    if (++o->os16F8 > 10 && gMarioState->pos[2] < 7800.0f && gMarioState->pos[2] > 7300.0f && gMarioState->pos[0] < -12000.0f) {
         CL_Lava_Boost();
+        gMarioState->faceAngle[1] = 0x4000;
+        gMarioState->vel[1] = 70.0f;
+        gMarioState->forwardVel = 30.0f;
+        o->os16F8 = 0;
     }    
 }
 
@@ -247,7 +251,8 @@ void bhv_sine_book_loop(void) {
 void bhv_flip_book_init(void) {
     o->oObjF4 = CL_obj_nearest_object_behavior_params(bhvL1Gate, 0x00030000);
     if (o->oObjF4 == NULL) {
-        o->oFaceAnglePitch = 0x8000;
+        // o->oFaceAnglePitch = 0x8000;
+        o->oFaceAngleRoll = 0x7FFF;
         o->oAction = 2;
     }
 }
@@ -257,7 +262,8 @@ void bhv_flip_book_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oObjF4->activeFlags == 0) {
-                o->oFaceAnglePitch = 0x8000;
+                // o->oFaceAnglePitch = 0x8000;
+                o->oFaceAngleRoll = 0x7FFF;
                 o->oAction = 2;
             }
             load_object_collision_model();

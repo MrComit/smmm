@@ -87,6 +87,7 @@ void bhv_blue_coin_switch_init(void) {
  * Update function for bhvBlueCoinSwitch.
  */
 void bhv_blue_coin_switch_loop(void) {
+    struct Object *obj;
     // The switch's model is 1/3 size.
     cur_obj_scale(3.0f);
 
@@ -159,6 +160,9 @@ void bhv_blue_coin_switch_loop(void) {
                 // or after the coins unload after the 240-frame timer expires.
                 if (o->oTimer > o->oF4 + (o->oF8 * 2)) {
                     o->activeFlags = 0;
+                    while ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvHiddenBlueCoin, o->oRoom)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
                     save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
                 }
             }
