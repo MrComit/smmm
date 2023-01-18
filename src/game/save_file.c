@@ -587,6 +587,20 @@ void save_file_set_boos(u32 boo) {
 }
 
 
+u32 save_file_get_golden_goombas(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].goldenGoombas;
+}
+
+void save_file_set_golden_goombas(u32 goomba) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].goldenGoombas |= 1 << goomba;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    gSaveFileModified = TRUE;
+}
+
+
 u32 save_file_get_heavy_object(void) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;

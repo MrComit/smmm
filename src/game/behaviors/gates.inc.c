@@ -39,6 +39,9 @@ Vec3f sStrayBookPos = {-10783.0f, 186.0f, 3062.0f};
 
 void bhv_hallway_fakewall_init(void) {
     o->oOpacity = 255;
+    if (save_file_get_golden_goombas() & 1) {
+        o->activeFlags = 0;
+    }
 }
 
 void bhv_hallway_fakewall_loop(void) {

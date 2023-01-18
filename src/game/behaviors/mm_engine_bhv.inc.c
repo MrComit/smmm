@@ -137,7 +137,7 @@ void bhv_journal_book_loop(void) {
 
 void bhv_golden_crate_init(void) {
     u8 challenge = (o->oBehParams >> 8) & 0xFF;
-    if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
+    if (save_file_get_golden_goombas() & (1 << challenge)) {
         o->activeFlags = 0;
     }
 }
@@ -148,7 +148,8 @@ void bhv_golden_crate_loop(void) {
     if (cur_obj_was_attacked_or_ground_pounded() != 0) {
         obj_explode_and_spawn_coins(46.0f, 1);
         create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
-        save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+        // save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+        save_file_set_golden_goombas((o->oBehParams >> 8) & 0xFF);
         spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
     }
     if (o->oDistanceToMario < 150.0f) {
