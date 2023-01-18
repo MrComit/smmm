@@ -903,7 +903,7 @@ s32 act_unlocking_star_door(struct MarioState *m) {
             break;
         case 3:
             if (is_anim_at_end(m)) {
-                save_file_set_flags(get_door_save_file_flag(m->usedObj));
+                // save_file_set_flags(get_door_save_file_flag(m->usedObj));
                 set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_038);
             }
             break;

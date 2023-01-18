@@ -407,7 +407,7 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
     s32 courseIndex = COURSE_NUM_TO_INDEX(gCurrCourseNum);
 
     s32 starFlag = 1 << starIndex;
-    UNUSED s32 flags = save_file_get_flags();
+    // UNUSED s32 flags = save_file_get_flags();
 
     gLastCompletedCourseNum = courseIndex + 1;
     gLastCompletedStarNum = starIndex + 1;
@@ -434,15 +434,15 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
 
     switch (gCurrLevelNum) {
         case LEVEL_BOWSER_1:
-            if (!(save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR))) {
-                save_file_set_flags(SAVE_FLAG_HAVE_KEY_1);
-            }
+            // if (!(save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_1 | SAVE_FLAG_UNLOCKED_BASEMENT_DOOR))) {
+            //     save_file_set_flags(SAVE_FLAG_HAVE_KEY_1);
+            // }
             break;
 
         case LEVEL_BOWSER_2:
-            if (!(save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR))) {
-                save_file_set_flags(SAVE_FLAG_HAVE_KEY_2);
-            }
+            // if (!(save_file_get_flags() & (SAVE_FLAG_HAVE_KEY_2 | SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR))) {
+            //     save_file_set_flags(SAVE_FLAG_HAVE_KEY_2);
+            // }
             break;
 
         case LEVEL_BOWSER_3:
@@ -457,7 +457,7 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
 }
 
 s32 save_file_exists(s32 fileIndex) {
-    return (gSaveBuffer.files[fileIndex][0].flags & SAVE_FLAG_FILE_EXISTS) != 0;
+    return gSaveBuffer.files[fileIndex][0].ingameTime != 0;
 }
 
 /**
@@ -512,35 +512,35 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse) 
     return save_file_get_course_star_count(fileIndex, COURSE_NUM_TO_INDEX(COURSE_NONE)) + count;
 }
 
-void save_file_set_flags(u32 flags) {
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= (flags | SAVE_FLAG_FILE_EXISTS);
-    gSaveFileModified = TRUE;
-}
+// void save_file_set_flags(u32 flags) {
+//     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= (flags | SAVE_FLAG_FILE_EXISTS);
+//     gSaveFileModified = TRUE;
+// }
 
-void save_file_clear_flags(u32 flags) {
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags &= ~flags;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
-    gSaveFileModified = TRUE;
-}
+// void save_file_clear_flags(u32 flags) {
+//     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags &= ~flags;
+//     gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+//     gSaveFileModified = TRUE;
+// }
 
-u32 save_file_get_flags(void) {
-    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
-        return 0;
-    }
-    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags;
-}
+// u32 save_file_get_flags(void) {
+//     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+//         return 0;
+//     }
+//     return gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags;
+// }
 
 
 
 void save_file_set_newflags(u32 flags, u8 index) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].newFlags[index] |= flags;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
 void save_file_clear_newflags(u32 flags,  u8 index) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].newFlags[index] &= ~flags;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -554,13 +554,13 @@ u32 save_file_get_newflags(u8 index) {
 
 void save_file_set_gpflags(u32 flags) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].gpFlags |= flags;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
 void save_file_clear_gpflags(u32 flags) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].gpFlags &= ~flags;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -582,7 +582,7 @@ u32 save_file_get_boos(void) {
 
 void save_file_set_boos(u32 boo) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured |= 1 << boo;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -599,7 +599,7 @@ void save_file_set_heavy_object(u8 obj, u32 id) {
     id = id << 26;
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured &= ~(3 << (26 + (obj * 2)));
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured |= id;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -614,7 +614,7 @@ u32 save_file_get_star_piece(void) {
 
 void save_file_set_star_piece(u32 piece) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces |= 1 << piece;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -629,7 +629,7 @@ u32 save_file_get_challenges(u8 index) {
 
 void save_file_set_challenges(u32 challenge) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[challenge / 32] |= 1 << (challenge % 32);
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -644,7 +644,7 @@ u32 save_file_get_keys(u32 page) {
 
 void save_file_set_keys(u32 key, u32 page) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys[page] |= 1 << key;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -663,7 +663,7 @@ void save_file_set_rooms(u32 room) {
         index++;
     }
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].roomsCleared[index] |= 1 << room;
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 
@@ -702,7 +702,7 @@ u32 save_file_get_currency_flags(void) {
 void save_file_set_currency_flags(u32 flag) {
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].currencyStars |= 1 << flag;
 
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
+    // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
 }
 

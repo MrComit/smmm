@@ -83,11 +83,11 @@ void bhv_klepto_init(void) {
         o->oKleptoStartPosY = o->oPosY;
         o->oKleptoStartPosZ = o->oPosZ;
 
-        if (save_file_get_flags() & SAVE_FLAG_CAP_ON_KLEPTO) {
-            o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_CAP;
-        } else {
-            o->oAction = KLEPTO_ACT_WAIT_FOR_MARIO;
-        }
+        // if (save_file_get_flags() & SAVE_FLAG_CAP_ON_KLEPTO) {
+        //     o->oAnimState = KLEPTO_ANIM_STATE_HOLDING_CAP;
+        // } else {
+        //     o->oAction = KLEPTO_ACT_WAIT_FOR_MARIO;
+        // }
     }
 }
 
@@ -361,7 +361,7 @@ void bhv_klepto_update(void) {
             cur_obj_play_sound_2(SOUND_OBJ_KLEPTO2);
 
             if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_CAP) {
-                save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO);
+                // save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO);
                 spawn_object(o, MODEL_MARIOS_CAP, bhvNormalCap);
             } else if (o->oAnimState == KLEPTO_ANIM_STATE_HOLDING_STAR) {
                 spawn_default_star(-5550.0f, 300.0f, -930.0f);

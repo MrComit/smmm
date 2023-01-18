@@ -369,7 +369,7 @@ u32 mario_lose_cap_to_enemy(u32 arg) {
     u32 wasWearingCap = FALSE;
     return wasWearingCap;
     if (does_mario_have_normal_cap_on_head(gMarioState)) {
-        save_file_set_flags(arg == 1 ? SAVE_FLAG_CAP_ON_KLEPTO : SAVE_FLAG_CAP_ON_UKIKI);
+        // save_file_set_flags(arg == 1 ? SAVE_FLAG_CAP_ON_KLEPTO : SAVE_FLAG_CAP_ON_UKIKI);
         gMarioState->flags &= ~(MARIO_NORMAL_CAP | MARIO_CAP_ON_HEAD);
         wasWearingCap = TRUE;
     }
@@ -379,7 +379,7 @@ u32 mario_lose_cap_to_enemy(u32 arg) {
 
 void mario_retrieve_cap(void) {
     mario_drop_held_object(gMarioState);
-    save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI);
+    // save_file_clear_flags(SAVE_FLAG_CAP_ON_KLEPTO | SAVE_FLAG_CAP_ON_UKIKI);
     gMarioState->flags &= ~MARIO_CAP_ON_HEAD;
     gMarioState->flags |= MARIO_NORMAL_CAP | MARIO_CAP_IN_HAND;
 }
@@ -911,7 +911,7 @@ u32 interact_warp(struct MarioState *m, UNUSED u32 interactType, struct Object *
 
 u32 interact_warp_door(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     u32 doorAction = 0;
-    u32 saveFlags = save_file_get_flags();
+    u32 saveFlags = 0;//save_file_get_flags();
     s16 warpDoorId = o->oBehParams >> 24;
     u32 actionArg;
 

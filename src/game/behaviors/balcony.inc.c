@@ -14,7 +14,7 @@ static struct ObjectHitbox sLightningHitbox = {
 
 
 void bhv_locked_cage_init(void) {
-    if (save_file_get_flags() & (1 << (o->oBehParams2ndByte + 1))) {
+    if (save_file_get_keys(1) & (1 << o->oBehParams2ndByte)) {
         o->activeFlags = 0;
     }
 }

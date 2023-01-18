@@ -1212,6 +1212,8 @@ s32 play_mode_normal(void) {
         }
     }
 
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].ingameTime++;
+    // CL_PRINT(4, "%d s", gSaveBuffer.files[gCurrSaveFileNum - 1][0].ingameTime / 30)
     warp_area();
     check_instant_warp();
     if (gCLInstantWarp) {

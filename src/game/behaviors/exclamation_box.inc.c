@@ -48,12 +48,12 @@ void bhv_rotating_exclamation_box_loop(void) {
 void exclamation_box_act_0(void) {
     if (o->oBehParams2ndByte < 3) {
         o->oAnimState = o->oBehParams2ndByte;
-        if ((save_file_get_flags() & sCapSaveFlags[o->oBehParams2ndByte])
-            || ((o->oBehParams >> 24) & 0xFF)) {
-            o->oAction = 2;
-        } else {
-            o->oAction = 1;
-        }
+        // if ((save_file_get_flags() & sCapSaveFlags[o->oBehParams2ndByte])
+        //     || ((o->oBehParams >> 24) & 0xFF)) {
+        //     o->oAction = 2;
+        // } else {
+        //     o->oAction = 1;
+        // }
     } else {
         o->oAnimState = 3;
         o->oAction = 2;
@@ -66,11 +66,11 @@ void exclamation_box_act_1(void) {
         spawn_object(o, MODEL_EXCLAMATION_POINT, bhvRotatingExclamationMark);
         cur_obj_set_model(MODEL_EXCLAMATION_BOX_OUTLINE);
     }
-    if ((save_file_get_flags() & sCapSaveFlags[o->oBehParams2ndByte])
-        || ((o->oBehParams >> 24) & 0xFF)) {
-        o->oAction = 2;
-        cur_obj_set_model(MODEL_EXCLAMATION_BOX);
-    }
+    // if ((save_file_get_flags() & sCapSaveFlags[o->oBehParams2ndByte])
+    //     || ((o->oBehParams >> 24) & 0xFF)) {
+    //     o->oAction = 2;
+    //     cur_obj_set_model(MODEL_EXCLAMATION_BOX);
+    // }
 }
 
 void exclamation_box_act_2(void) {

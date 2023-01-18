@@ -182,7 +182,7 @@ void bhv_toad_message_loop(void) {
 }
 
 void bhv_toad_message_init(void) {
-    s32 saveFlags = save_file_get_flags();
+    s32 saveFlags = 0;//save_file_get_flags();
     s32 starCount = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
     s32 dialogId = (gCurrentObject->oBehParams >> 24) & 0xFF;
     s32 enoughStars = TRUE;

@@ -51,10 +51,10 @@ void bhv_mr_blizzard_init(void) {
         o->oMrBlizzardTargetMoveYaw = o->oMoveAngleYaw;
     } else {
         // Cap wearing Mr. Blizzard from SL.
-        if ((o->oBehParams2ndByte != MR_BLIZZARD_STYPE_NO_CAP)
-            && (save_file_get_flags() & SAVE_FLAG_CAP_ON_MR_BLIZZARD)) {
-            o->oAnimState = 1;
-        }
+        // if ((o->oBehParams2ndByte != MR_BLIZZARD_STYPE_NO_CAP)
+        //     && (save_file_get_flags() & SAVE_FLAG_CAP_ON_MR_BLIZZARD)) {
+        //     o->oAnimState = 1;
+        // }
 
         // Mr. Blizzard starts under the floor holding nothing.
         o->oMrBlizzardGraphYOffset = -200.0f;
@@ -205,7 +205,7 @@ static void mr_blizzard_act_death(void) {
             // the save flag and spawn Mario's cap.
             if (o->oAnimState != 0) {
                 struct Object *cap;
-                save_file_clear_flags(SAVE_FLAG_CAP_ON_MR_BLIZZARD);
+                // save_file_clear_flags(SAVE_FLAG_CAP_ON_MR_BLIZZARD);
 
                 cap = spawn_object_relative(0, 5, 105, 0, o, MODEL_MARIOS_CAP, bhvNormalCap);
                 if (cap != NULL) {
