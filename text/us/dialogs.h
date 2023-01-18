@@ -461,57 +461,22 @@ to the attic. I'm sure you'll\n\
 find the paranormal activity\n\
 here. 'Rule of 3s' and all."))
 
-DEFINE_DIALOG(DIALOG_044, 1, 5, 95, 200, _("\
-Whooo's there? Whooo\n\
-woke me up? It's still\n\
-daylight--I should be\n\
-sleeping!\n\
-\n\
-Hey, as long as I'm\n\
-awake, why not take a\n\
-short flight with me?\n\
-Press and hold [A] to grab\n\
-on. Release [A] to let go.\n\
-I'll take you wherever\n\
-you want to go, as long\n\
-as my wings hold out.\n\
-Watch my shadow, and\n\
-grab on."))
+DEFINE_DIALOG(DIALOG_044, 1, 2, 95, 200, _("\
+'Hypothetical Arguments I've\n\
+Won in the Shower - Volume Two'"))
 
-DEFINE_DIALOG(DIALOG_045, 1, 6, 95, 200, _("\
-Whew! I'm just about\n\
-flapped out. You should\n\
-lay off the pasta, Mario!\n\
-That's it for now. Press\n\
-[A] to let go. Okay,\n\
-bye byyyyyyeeee!"))
+DEFINE_DIALOG(DIALOG_045, 1, 5, 95, 200, _("\
+------ FRAME FRENZY ------\n\
+'If you see a painting with a\n\
+red frame, you may want to\n\
+take a closer look. Something\n\
+might not quite match...'"))
 
-DEFINE_DIALOG(DIALOG_046, 1, 5, 30, 200, _("\
-You have to master three\n\
-important jumping\n\
-techniques.\n\
-First try the Triple Jump.\n\
-\n\
-Run fast, then jump three\n\
-times, one, two, three.\n\
-If you time the jumps\n\
-right, you'll hop, skip,\n\
-then jump really high.\n\
-Next, go for distance\n\
-with the Long Jump. Run,\n\
-press [Z] to crouch then [A]\n\
-to jump really far.\n\
-\n\
-To do the Wall Kick, press\n\
-[A] to jump at a wall, then\n\
-jump again when you hit\n\
-the wall.\n\
-\n\
-Got that? Triple Jump,\n\
-Long Jump, Wall Kick.\n\
-Practice, practice,\n\
-practice. You don't stand\n\
-a chance without them."))
+DEFINE_DIALOG(DIALOG_046, 1, 4, 30, 200, _("\
+'How To Be Your Own Boss And\n\
+Get Rich Doing It'\n\
+(There's a bookmark placed in\n\
+page 3.)"))
 
 DEFINE_DIALOG(DIALOG_047, 1, 2, 95, 200, _("\
 Hi! I'll prepare the\n\

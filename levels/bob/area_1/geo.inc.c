@@ -274,6 +274,20 @@ const GeoLayout bob_dl_cc_002_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout bob_dl_bb_003_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_LibraryLowerFloor_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout bob_dl_cc_003_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_cc_003_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout bob_dl_111__Library_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -290,6 +304,12 @@ const GeoLayout bob_dl_111__Library_geo[] = {
 			GEO_BRANCH(1, bob_dl_cc_002_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_aa_002_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_library2),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, bob_dl_bb_003_geo),
+			GEO_BRANCH(1, bob_dl_cc_003_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_aa_003_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
