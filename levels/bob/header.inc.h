@@ -279,7 +279,7 @@ extern Vtx bob_dl_Pillar_mesh_layer_1_vtx_cull[8];
 extern Vtx bob_dl_Pillar_mesh_layer_1_vtx_0[118];
 extern Gfx bob_dl_Pillar_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_Pillar_Tops_mesh_layer_1_vtx_cull[8];
-extern Vtx bob_dl_Pillar_Tops_mesh_layer_1_vtx_0[150];
+extern Vtx bob_dl_Pillar_Tops_mesh_layer_1_vtx_0[180];
 extern Gfx bob_dl_Pillar_Tops_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_Pillar_001_mesh_layer_1_vtx_cull[8];
 extern Vtx bob_dl_Pillar_001_mesh_layer_1_vtx_0[68];

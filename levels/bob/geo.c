@@ -47,3 +47,4 @@
 #include "levels/bob/big_bookshelf/geo.inc.c"
 #include "levels/bob/table_barrier/geo.inc.c"
 #include "levels/bob/hallway_fakewall/geo.inc.c"
+#include "levels/bob/golden_pillar/geo.inc.c"

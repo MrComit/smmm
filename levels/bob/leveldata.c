@@ -79,3 +79,5 @@
 #include "levels/bob/table_barrier/model.inc.c"
 #include "levels/bob/hallway_fakewall/model.inc.c"
 #include "levels/bob/hallway_fakewall/collision.inc.c"
+#include "levels/bob/golden_pillar/model.inc.c"
+#include "levels/bob/golden_pillar/collision.inc.c"

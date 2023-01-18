@@ -70,6 +70,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TABLE_BARRIER, table_barrier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_BOMB, ice_bobomb_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_HALLWAY_FAKEWALL, hallway_fakewall_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_GOLDEN_PILLAR, golden_pillar_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -134,6 +135,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BLUE_COIN, -1572, -191, 19564, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, -1885, -84, 19060, 0, 0, 0, 0x05020000, bhvBlueCoinSwitch),
 		OBJECT(MODEL_CHANDELIER, 741, 685, 17689, 0, 0, 0, 0x00000000, bhvChandelier),
+		OBJECT(MODEL_GOLDEN_PILLAR, -2587, -206, 16608, 0, 0, 0, (1 << 8), bhvGoldenPillar),
 		OBJECT(MODEL_LAND_CHUNK, -2431, -200, 23982, 0, 0, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -2101, -200, 23213, 0, 28, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -1210, -200, 23651, 0, 82, 0, 0x021E0000, bhvLandChunk),
@@ -272,7 +274,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_LOCK, -10652, 2152, 16641, 0, 0, 0, 0x00000000, bhvL1Lock),
 		OBJECT(MODEL_L1_LOCK, -10652, 2452, 17409, 0, 0, 0, 0x00000000, bhvL1Lock),
 		OBJECT(MODEL_JOURNAL_BOOK, 5184, 140, 14418, 0, 0, 0, 0x00000000, bhvJournalBook),
-		OBJECT(MODEL_JOURNAL_BOOK, -9184, 1081, 16125, 0, 0, 0, (1 << 16), bhvJournalBook),
+		OBJECT(MODEL_JOURNAL_BOOK, -8582, 1081, 16199, 0, 0, 0, (1 << 16), bhvJournalBook),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5374, 944, 17158, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -3355, 0, 13808, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5455, 0, 13808, 0, -90, 0, 0x00000000, bhvDoor),

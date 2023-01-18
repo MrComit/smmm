@@ -831,7 +831,7 @@ void spawn_orange_number_three_digit_scale(u16 behParam, s16 relX, s16 relY, s16
 
 
 
-void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale) {
+void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale, s32 palette) {
     struct Object *orangeNumber, *orangeNumber2, *orangeNumber3;
     s32 behParamMod;
 
@@ -843,6 +843,9 @@ void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY
         orangeNumber->oF4 = 1;
         orangeNumber2->oF4 = 3;
         orangeNumber3->oF4 = 2;
+        orangeNumber->oFC = palette;
+        orangeNumber2->oFC = palette;
+        orangeNumber3->oFC = palette;
         orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = orangeNumber3->oFloatF8 = dist;
         obj_scale(orangeNumber, scale);
         obj_scale(orangeNumber2, scale);
@@ -852,11 +855,14 @@ void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY
         orangeNumber2 = spawn_object_relative(behParam / 10, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
         orangeNumber->oF4 = 1;
         orangeNumber2->oF4 = 2;
+        orangeNumber->oFC = palette;
+        orangeNumber2->oFC = palette;
         orangeNumber->oFloatF8 = orangeNumber2->oFloatF8 = dist;
         obj_scale(orangeNumber, scale);
         obj_scale(orangeNumber2, scale);
     } else {
         orangeNumber = spawn_object_relative(behParam, relX, relY, relZ, o, MODEL_NUMBER, bhvOrangeNumberStay);
+        orangeNumber->oFC = palette;
         obj_scale(orangeNumber, scale);
     }
 }

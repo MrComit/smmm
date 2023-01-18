@@ -10028,10 +10028,26 @@ const BehaviorScript bhvHallwayFakeWall[] = {
 
 
 const BehaviorScript bhvJournalBook[] = {
-    BEGIN(OBJ_LIST_DEFAULT),
+    BEGIN(OBJ_LIST_PUSHABLE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_journal_book_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_journal_book_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvGoldenPillar[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(golden_pillar_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    HIDE(),
+    // CALL_NATIVE(bhv_hallway_fakewall_init),
+    BEGIN_LOOP(),
+        // CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_golden_pillar_loop),
     END_LOOP(),
 };

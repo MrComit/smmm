@@ -3,7 +3,7 @@
 extern Vec3s gRoomColors[];
 extern struct Object *gComitCutsceneObject;
 void spawn_orange_number_three_digit_scale(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale);
-void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale);
+void spawn_orange_number_three_digit_scale_stay(u16 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale, s32 palette);
 
 static struct ObjectHitbox sStarPieceHitbox = {
     /* interactType:      */ INTERACT_STAR_OR_KEY,
@@ -103,6 +103,19 @@ struct ObjectHitbox sGoldenCrateHitbox = {
     /* hurtboxHeight:     */ 100,
 };
 
+
+struct ObjectHitbox sJournalHitbox = {
+    /* interactType:      */ INTERACT_IGLOO_BARRIER,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 35,
+    /* height:            */ 35,
+    /* hurtboxRadius:     */ 35,
+    /* hurtboxHeight:     */ 35,
+};
+
 extern u8 sGoombaAttackHandlers[][6];
 
 Vec3f sPreviousMarioPos = {0, 0, 0};
@@ -110,6 +123,36 @@ Vec3f sPreviousMarioPos = {0, 0, 0};
 u8 sTokenCoins[3] = {10, 50, 100};
 
 
+void bhv_golden_pillar_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (save_file_get_boos() & (1 << 4)) {
+                cur_obj_unhide();
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (cur_obj_is_mario_ground_pounding_platform()) {
+                if (!(save_file_get_golden_goombas() & (1 << ((o->oBehParams >> 8) & 0xFF)))) {
+                    save_file_set_golden_goombas((o->oBehParams >> 8) & 0xFF);
+                    play_puzzle_jingle();
+                    obj = spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+                    vec3f_set(&obj->oPosX, -2500.0f, 500.0f, 14000.0f);
+                }
+                o->oAction = 2;
+            }
+        case 2:
+            load_object_collision_model();
+            break;
+    }
+}
+
+
+
+void bhv_journal_book_init(void) {
+    obj_set_hitbox(o, &sJournalHitbox);
+}
 
 void bhv_journal_book_loop(void) {
     o->oFaceAngleYaw += 0x600;
@@ -122,7 +165,7 @@ void bhv_journal_book_loop(void) {
                     o->oAction = 1;
                     o->os16F8 = 1;
                 }
-            } else if (o->os16F8 && o->oDistanceToMario > 150.0f) {
+            } else if (o->os16F8 && o->oDistanceToMario > 250.0f) {
                 o->os16F8 = 0;
             }
             break;
@@ -132,6 +175,7 @@ void bhv_journal_book_loop(void) {
             }
             break;
     }
+    o->oInteractStatus = 0;
 }
 
 
@@ -187,6 +231,25 @@ void bhv_golden_crate_loop(void) {
 }
 
 
+s32 golden_goomba_turn_away_from_doors(void) {
+    struct Object *obj;
+    s32 val = FALSE;
+    if ((obj = cur_obj_nearest_object_with_behavior(bhvDoor)) != NULL && dist_between_objects(o, obj) < 100.0f) {
+        val = TRUE;
+    } else if ((obj = cur_obj_nearest_object_with_behavior(bhvBigKeyDoor)) != NULL && dist_between_objects(o, obj) < 100.0f) {
+        val = TRUE;
+    } else if ((obj = cur_obj_nearest_object_with_behavior(bhvSmallKeyDoor)) != NULL && dist_between_objects(o, obj) < 100.0f) {
+        val = TRUE;
+    } else if ((obj = cur_obj_nearest_object_with_behavior(bhvBlockedDoor)) != NULL && dist_between_objects(o, obj) < 100.0f) {
+        val = TRUE;
+    }
+    if (val) {
+         o->oMoveAngleYaw = o->os16112 = obj_angle_to_object(o, obj) + 0x8000;
+    }
+    return val;
+}
+
+
 void golden_goomba_behavior(void) {
     f32 animSpeed;
     cur_obj_update_floor_and_walls();
@@ -194,7 +257,7 @@ void golden_goomba_behavior(void) {
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os16112, 0x800);
     if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
         o->os16112 = o->oWallAngle; 
-    } else {
+    } else if (!(golden_goomba_turn_away_from_doors())) {
         o->os16112 = approach_s16_symmetric(o->os16112, o->oAngleToMario + 0x8000, 0xC00);
     }
     // o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 30.0f, 0.5f);
@@ -225,7 +288,7 @@ void bhv_golden_goomba_update(void) {
     s32 spawnCoins;
     if (o->os16110 % 10 == 0) {
         scale = (f32)(o->os16110) / 2500.0f;
-        spawn_orange_number_three_digit_scale_stay(o->os16110 / 10, 0, 0, 0, 50.0f * scale, 0.25f + scale);
+        spawn_orange_number_three_digit_scale_stay(o->os16110 / 10, 0, 0, 0, 50.0f * scale, 0.25f + scale, 4);
     }
     o->os16110--;
     golden_goomba_behavior();
