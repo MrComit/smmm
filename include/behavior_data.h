@@ -838,6 +838,7 @@ extern const BehaviorScript bhvTableBarrier[];
 extern const BehaviorScript bhvHallwayFakeWall[];
 extern const BehaviorScript bhvJournalBook[];
 extern const BehaviorScript bhvGoldenPillar[];
+extern const BehaviorScript bhvShowerWall[];
 
 
 #endif // BEHAVIOR_DATA_H

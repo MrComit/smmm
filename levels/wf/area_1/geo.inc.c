@@ -164,11 +164,30 @@ const GeoLayout wf_dl_03__Balcony_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout wf_dl_bb_001_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Steam_mesh_layer_5),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_cc_001_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_cc_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout wf_dl_bb_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_console),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, wf_dl_bb_001_geo),
+			GEO_BRANCH(1, wf_dl_cc_001_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_aa_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Bathroom_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Bathroom_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Bathroom_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, wf_dl_OilFloor_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Pencil_mesh_layer_1),
@@ -179,7 +198,6 @@ const GeoLayout wf_dl_bb_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Sink_001_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Soap_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Soap_001_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Steam_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Toilet_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Toilet_mesh_layer_5),
 	GEO_CLOSE_NODE(),

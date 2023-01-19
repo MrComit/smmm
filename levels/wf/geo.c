@@ -71,3 +71,4 @@
 #include "levels/wf/rising_fist/geo.inc.c"
 #include "levels/wf/fist_indicator/geo.inc.c"
 #include "levels/wf/bedroom_object/geo.inc.c"
+#include "levels/wf/shower_wall/geo.inc.c"

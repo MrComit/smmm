@@ -682,7 +682,15 @@
 #define MODEL_RISING_FIST         0xE6
 #define MODEL_FIST_INDICATOR      0xE5
 #define MODEL_BEDROOM_OBJECT      0xE4
+#define MODEL_SHOWER_WALL         0xE3
 
+
+// LEVEL 2 MODELS CONT:
+// 0x5B-0x63
+
+// 0x6C-0x73
+
+// 0x97-0x9B
 
 
 // LEVEL 3 MODELS - 0xFF TO 0xE2 ARE FREE

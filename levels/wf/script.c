@@ -70,6 +70,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_RISING_FIST, rising_fist_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FIST_INDICATOR, fist_indicator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BEDROOM_OBJECT, bedroom_object_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SHOWER_WALL, shower_wall_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -198,6 +199,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_L2_FALLING_FLOOR, 3597, 0, -12409, 0, 0, 0, 0x00010000, bhvL2RisingFloor),
 		OBJECT(MODEL_BOO, 1404, 139, -13681, 0, 0, 0, 0x01050300, bhvRoomBoo),
 		OBJECT(MODEL_BEDROOM_GATE, 914, 0, -13084, 0, 90, 0, 0x00000000, bhvL2RoomGate),
+		OBJECT(MODEL_SHOWER_WALL, 3286, 0, -13959, 0, 0, 0, 0x00000000, bhvShowerWall),
 		OBJECT(MODEL_NONE, 4574, 1356, -11870, 0, -180, 0, 0x00410100, bhvWarpPipe),
 		OBJECT(MODEL_PIPESEG, 3424, -2339, -12404, 0, 0, 0, 0x00000000, bhvPipeseg),
 		OBJECT(MODEL_SKEETER, 2264, -2456, -13967, 0, -90, 0, 0x00000000, bhvSkeeter),

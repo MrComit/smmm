@@ -275,6 +275,12 @@ void bhv_goomba_update(void) {
         } else {
             cur_obj_unhide();
         }
+    } else if (gCurrLevelNum == LEVEL_WF && o->oRoom == 4) {
+        if (gMarioState->pos[1] <= -100.0f) {
+            cur_obj_hide();
+        } else {
+            cur_obj_unhide();
+        }
     }
 
     if (obj_update_standard_actions(o->oGoombaScale)) {

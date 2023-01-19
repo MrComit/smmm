@@ -49,12 +49,49 @@ Vec3s sPipeRots = {0, 0, 0x4000};
 Vec3s sPipeScales = {29, 32, 27};
 
 
+void bhv_shower_wall_init(void) {
+    if (gIsConsole) {
+        o->oOpacity = 255;
+    } else {
+        o->oOpacity = 150;
+    }
+}
+
+
+void bhv_shower_wall_loop(void) {
+    struct MarioState *m = gMarioState;
+    if (m->pos[1] < -100.0f) {
+        cur_obj_hide();
+        return;
+    } else {
+        cur_obj_unhide();
+    }
+
+    if ((m->pos[1] < 500.0f && m->pos[0] < 3750.0f && m->pos[0] > 2750.0f && m->pos[2] < -14500.0f && m->pos[2] > -15500.0f)
+        || !gIsConsole) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 150, 6);
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0, 12);
+    } else {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 6);
+    }
+    o->os16F4 = 53 - ((255 - o->oOpacity))/2;
+    o->os16F8 = o->os16F6 = o->os16F4;// = o->oOpacity;
+
+}
+
+
 void bhv_octopus_init(void) {
     obj_set_hitbox(o, &sOctopusHitbox);
 }
 
 
 void bhv_octopus_loop(void) {
+    if (gMarioState->pos[1] < -100.0f) {
+        cur_obj_hide();
+        return;
+    } else {
+        cur_obj_unhide();
+    }
     switch (o->oAction) {
         case 0:
             if (o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {

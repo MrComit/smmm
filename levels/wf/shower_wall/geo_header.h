@@ -1,0 +1,13 @@
+extern const GeoLayout shower_wall_ShowerWallIn[];
+extern const GeoLayout shower_wall_switch_opt1_jump_shower_wall_ShowerWallIn[];
+extern const GeoLayout shower_wall_switch_opt1[];
+extern const GeoLayout shower_wall_geo[];
+extern u8 shower_wall_bright_cloud_i8[];
+extern Vtx shower_wall_shower_mesh_layer_1_vtx_0[51];
+extern Gfx shower_wall_shower_mesh_layer_1_tri_0[];
+extern Vtx shower_wall_start_showerIn_mesh_layer_1_vtx_0[30];
+extern Gfx shower_wall_start_showerIn_mesh_layer_1_tri_0[];
+extern Gfx mat_shower_wall_ShowerWall_001[];
+extern Gfx shower_wall_shower_mesh_layer_1[];
+extern Gfx shower_wall_start_showerIn_mesh_layer_1[];
+extern Gfx shower_wall_material_revert_render_settings[];

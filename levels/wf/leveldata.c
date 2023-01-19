@@ -118,3 +118,5 @@
 #include "levels/wf/fist_indicator/model.inc.c"
 #include "levels/wf/bedroom_object/model.inc.c"
 #include "levels/wf/bedroom_object/collision.inc.c"
+#include "levels/wf/shower_wall/model.inc.c"
+#include "levels/wf/shower_wall/collision.inc.c"
