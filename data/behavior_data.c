@@ -6987,6 +6987,7 @@ const BehaviorScript bhvHeavySwitch[] = {
     // Floor switch - common:
     OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(heavyswitch_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_heavy_switch_loop),

@@ -37,6 +37,9 @@ void heavy_object_free_loop(void) {
     object_step();
     if (sObjFloor != NULL && sObjFloor->object != NULL && absf(o->oPosY - o->oFloorHeight) <= 30.0f) {
         o->oObjF4 = sObjFloor->object;
+        if (o->oVelY > 0.0f) {
+            o->oVelY = 0.0f;
+        }
     } else {
         o->oObjF4 = NULL;
     }
@@ -69,7 +72,7 @@ void bhv_heavy_object_init(void) {
     }
     o->oGravity = 2.5;
     o->oFriction = 0.8;
-    o->oBuoyancy = 1.3;
+    // o->oBuoyancy = 1.3;
     obj_set_hitbox(o, &sHeavyHitbox);
 }
 

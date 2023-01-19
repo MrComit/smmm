@@ -1027,7 +1027,6 @@ void render_hud_coins(void) {
     print_text_fmt_int(300 - mag, hudY, "%d", gHudDisplay.coins, 0);
 
 	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
-		gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
 		if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
 			render_coin_backdrop_image(265 - booMag, 27 + booHeight, 60 + booMag, 47, 0, -56 >> 2, 0); // was 47
 			print_text(270 - booMag, 195 - booHeight, ",", 0); // 'Coin' glyph
@@ -1393,7 +1392,10 @@ void render_hud(void) {
 				sBrokenKeyRectY = 176;
 			}
         }
-
+		if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
+			gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
+		}
+		
         if (gHudTopY < gHudYMax && gCamera->cutscene != CUTSCENE_OPENING) {
             render_hud_coins();
         }

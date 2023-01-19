@@ -272,10 +272,10 @@ u8 l2_gate_darkgate_ci8_pal_rgba16[] = {
 };
 
 Vtx l2_gate_GateR_mesh_layer_4_vtx_0[4] = {
-	{{{-705, 0, 0},0, {-1433, 2031},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{705, 0, 0},0, {3716, 2031},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{705, 1247, 0},0, {3716, -1039},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-705, 1247, 0},0, {-1433, -1039},{0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-705, 0, 0}, 0, {-1433, 2031}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{705, 0, 0}, 0, {3716, 2031}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{705, 1247, 0}, 0, {3716, -1039}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-705, 1247, 0}, 0, {-1433, -1039}, {0x0, 0x0, 0x7F, 0xFF}}},
 };
 
 Gfx l2_gate_GateR_mesh_layer_4_tri_0[] = {
@@ -285,9 +285,10 @@ Gfx l2_gate_GateR_mesh_layer_4_tri_0[] = {
 };
 
 
-Gfx mat_l2_gate_Gate_001[] = {
+Gfx mat_l2_gate_Gate_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0),
+	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, l2_gate_darkgate_ci8_pal_rgba16),
@@ -297,28 +298,29 @@ Gfx mat_l2_gate_Gate_001[] = {
 	gsDPLoadTLUTCmd(7, 25),
 	gsDPPipeSync(),
 	gsDPTileSync(),
-	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b, 64, l2_gate_darkgate_ci8),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, 7, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 1, l2_gate_darkgate_ci8),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPLoadSync(),
-	gsDPLoadTile(7, 0, 0, 252, 124),
+	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_MIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-    gsSPLightColor(LIGHT_1, 0xfefefeff),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
     gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_l2_gate_Gate_001[] = {
+Gfx mat_revert_l2_gate_Gate_002[] = {
 	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
 Gfx l2_gate_GateR_mesh_layer_4[] = {
-	gsSPDisplayList(mat_l2_gate_Gate_001),
+	gsSPDisplayList(mat_l2_gate_Gate_002),
 	gsSPDisplayList(l2_gate_GateR_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_l2_gate_Gate_001),
+	gsSPDisplayList(mat_revert_l2_gate_Gate_002),
 	gsSPEndDisplayList(),
 };
 

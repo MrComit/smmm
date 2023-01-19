@@ -463,7 +463,7 @@ here. 'Rule of 3s' and all."))
 
 DEFINE_DIALOG(DIALOG_044, 1, 2, 95, 200, _("\
 'Hypothetical Arguments I've\n\
-Won in the Shower - Volume Two'"))
+Won in the Shower: Volume Two'"))
 
 DEFINE_DIALOG(DIALOG_045, 1, 5, 95, 200, _("\
 ------ FRAME FRENZY ------\n\

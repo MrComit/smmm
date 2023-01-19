@@ -1,10 +1,10 @@
 extern const GeoLayout l2_gate_geo[];
-extern Lights1 l2_gate_Gate_001_lights;
+extern Lights1 l2_gate_Gate_002_lights;
 extern u8 l2_gate_darkgate_ci8[];
 extern u8 l2_gate_darkgate_ci8_pal_rgba16[];
 extern Vtx l2_gate_GateR_mesh_layer_4_vtx_0[4];
 extern Gfx l2_gate_GateR_mesh_layer_4_tri_0[];
-extern Gfx mat_l2_gate_Gate_001[];
-extern Gfx mat_revert_l2_gate_Gate_001[];
+extern Gfx mat_l2_gate_Gate_002[];
+extern Gfx mat_revert_l2_gate_Gate_002[];
 extern Gfx l2_gate_GateR_mesh_layer_4[];
 extern Gfx l2_gate_material_revert_render_settings[];

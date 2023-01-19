@@ -1,5 +1,5 @@
-void scroll_sts_mat_wf_dl_SolidQuicksand_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_wf_dl_SolidQuicksand_layer1);
+void scroll_sts_mat_wf_dl_SolidQuicksand_001_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_wf_dl_SolidQuicksand_001_layer1);
 	shift_s(mat, 13, PACK_TILESIZE(0, 1));
 	shift_s(mat, 21, PACK_TILESIZE(0, 1));
 	shift_t(mat, 21, PACK_TILESIZE(0, 1));
@@ -50,7 +50,7 @@ void scroll_wf_dl_Steam_mesh_layer_5_vtx_0() {
 }
 
 void scroll_wf() {
-	scroll_sts_mat_wf_dl_SolidQuicksand_layer1();
+	scroll_sts_mat_wf_dl_SolidQuicksand_001_layer1();
 	scroll_wf_dl_Hallway_007_mesh_layer_5_vtx_0();
 	scroll_wf_dl_Steam_mesh_layer_5_vtx_0();
 }

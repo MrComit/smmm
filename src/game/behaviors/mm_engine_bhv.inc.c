@@ -117,6 +117,9 @@ struct ObjectHitbox sJournalHitbox = {
 };
 
 extern u8 sGoombaAttackHandlers[][6];
+extern s16 gComitCutsceneTimer;
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
 
 Vec3f sPreviousMarioPos = {0, 0, 0};
 
@@ -137,12 +140,21 @@ void bhv_golden_pillar_loop(void) {
                 if (!(save_file_get_golden_goombas() & (1 << ((o->oBehParams >> 8) & 0xFF)))) {
                     save_file_set_golden_goombas((o->oBehParams >> 8) & 0xFF);
                     play_puzzle_jingle();
-                    obj = spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
-                    vec3f_set(&obj->oPosX, -2500.0f, 500.0f, 14000.0f);
+                    o->oObjF4 = spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+                    vec3f_set(&o->oObjF4->oPosX, -2500.0f, 500.0f, 14000.0f);
+                    gCamera->comitCutscene = 0xFF;
+                    gComitCutsceneTimer = 45;
+                    o->oObjF4->os16110 = 3045;
+                    vec3f_set(gComitCutscenePosVec, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2] + 2000.0f);
+                    vec3f_copy(gComitCutsceneFocVec, &o->oObjF4->oPosX);
                 }
                 o->oAction = 2;
             }
+            // load_object_collision_model();
+            // break;
         case 2:
+            // gCamera->comitCutscene = 0xFF;
+            // set_mario_npc_dialog(1);
             load_object_collision_model();
             break;
     }
@@ -165,7 +177,7 @@ void bhv_journal_book_loop(void) {
                     o->oAction = 1;
                     o->os16F8 = 1;
                 }
-            } else if (o->os16F8 && o->oDistanceToMario > 250.0f) {
+            } else if (o->os16F8 && lateral_dist_between_objects(o, gMarioObject) > 250.0f) {
                 o->os16F8 = 0;
             }
             break;
