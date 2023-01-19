@@ -114,6 +114,13 @@ static void skeeter_act_walk(void) {
 void bhv_skeeter_update(void) {
     o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
     //treat_far_home_as_mario(1000.0f);
+    if (gCurrLevelNum == LEVEL_WF) {
+        if (gMarioState->pos[1] > -100.0f) {
+            cur_obj_hide();
+        } else {
+            cur_obj_unhide();
+        }
+    }
 
     cur_obj_update_floor_and_walls();
 

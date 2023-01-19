@@ -135,6 +135,10 @@ void pipeseg_free_loop(void) {
         o->oObjF4 = NULL;
     }
 
+    if (sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
+        o->oFC = 1;
+    }
+
     if (o->oFC == 1) {
         if (o->oTimer > 200) {
             o->oTimer = 0;
@@ -190,6 +194,11 @@ void bhv_pipeseg_loop(void) {
     switch (o->oHeldState) {
         case HELD_FREE:
             pipeseg_free_loop();
+            if (gMarioState->pos[1] > -100.0f) {
+                cur_obj_hide();
+            } else {
+                cur_obj_unhide();
+            }
             break;
 
         case HELD_HELD:
@@ -199,6 +208,12 @@ void bhv_pipeseg_loop(void) {
         case HELD_DROPPED:
             pipeseg_dropped_loop();
             break;
+    }
+
+    if (gMarioState->pos[1] < -100.0f && gMarioState->pos[1] > -600.0f) {
+        gCamera->comitCutscene = 2;
+    } else {
+        gCamera->comitCutscene = 0;
     }
 }
 

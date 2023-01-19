@@ -1378,8 +1378,6 @@ Gfx *geo_set_elevator_color_env(s32 callContext, struct GraphNode *node, UNUSED 
 
 
 
-
-
 Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;
@@ -2200,6 +2198,100 @@ Gfx *geo_switch_library2(s32 callContext, struct GraphNode *node) {
 
     return NULL;
 }
+
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_bathroom(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_bathroom(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (gMarioState->pos[1] <= -100.0f) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
+// s16 sShowerOpacity[2] = {150, 150};
+
+// #ifdef AVOID_UB
+// Gfx *geo_switch_shower(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+// #else
+// Gfx *geo_switch_shower(s32 callContext, struct GraphNode *node) {
+// #endif
+//     struct GraphNodeSwitchCase *switchCase;
+//     if (callContext == GEO_CONTEXT_RENDER) {
+//         // move to a local var because GraphNodes are passed in all geo functions.
+//         // cast the pointer.
+//         switchCase = (struct GraphNodeSwitchCase *) node;
+
+//         // if the case is greater than the number of cases, set to 0 to avoid overflowing
+//         // the switch.
+//         // assign the case number for execution.
+//         if (gMarioState->pos[1] <= -100.0f) {
+//             switchCase->selectedCase = 1;
+//         } else {
+//             switchCase->selectedCase = 0;
+//         }
+//     }
+
+//     return NULL;
+// }
+
+
+
+// Gfx *geo_set_shower_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+//     Gfx *dlStart, *dlHead;
+//     struct GraphNodeGenerated *currentGraphNode;
+//     s16 param;
+
+//     dlStart = NULL;
+
+//     if (callContext == GEO_CONTEXT_RENDER) {
+//         currentGraphNode = (struct GraphNodeGenerated *) node;
+//         param = currentGraphNode->parameter;
+//         dlStart = alloc_display_list(sizeof(Gfx) * 3);
+
+//         dlHead = dlStart;
+//         if (param == 0) {
+//             if (gMarioState->pos[0] < 3250.0f && gMarioState->pos[2] < -14000.0f) {
+//                 sShowerOpacity[0] = approach_s16_symmetric(sShowerOpacity[0], 255, 0x4);
+//                 sShowerOpacity[1] = approach_s16_symmetric(sShowerOpacity[1], 150, 0x4);
+//             } else {
+//                 sShowerOpacity[0] = approach_s16_symmetric(sShowerOpacity[0], 255, 0x4);
+//                 sShowerOpacity[1] = approach_s16_symmetric(sShowerOpacity[1], 150, 0x4);
+//             }
+//         }
+//         if (!gIsConsole) {
+//             sShowerOpacity[0] = 150;
+//             sShowerOpacity[1] = 150;
+//         }
+
+//         if (sShowerOpacity[param] == 255) {
+//             currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+//         } else {
+//             currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+//         }
+
+//         gDPSetEnvColor(dlHead++, 0xAE, 0xC8, 0xD2, sShowerOpacity[param]);
+//         gSPEndDisplayList(dlHead);
+//     }
+
+//     return dlStart;
+// }
 
 
 

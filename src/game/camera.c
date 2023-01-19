@@ -6869,10 +6869,6 @@ struct CameraTrigger sCamBBH[] = {
  * Each table is terminated with NULL_TRIGGER
  */
 struct CameraTrigger sCamWF[] = {
-	{1, cam_wf_bathroom, 2018, -796, -13061, 580, 496, 580, 0xffff},
-	{1, cam_wf_bathroom, 3505, -796, -12375, 580, 496, 580, 0xffff},
-	{1, cam_wf_bathroom, 3873, -446, -14395, -580, -185, -580, 0x7fff},
-	{1, cam_wf_bathroom, 2198, -707, -15052, -580, -420, -580, 0x7fff},
 	{1, cam_wf_mirror_room, -9098, 789, -19707, 725, 1092, 382, 0xffff},
 	NULL_TRIGGER
 };
