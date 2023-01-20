@@ -271,7 +271,6 @@ const GeoLayout wf_dl_07__Bedroom_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Box_008_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Box_010_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Dresser_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Dresser_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Skateboard_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

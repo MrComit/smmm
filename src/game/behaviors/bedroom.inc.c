@@ -16,12 +16,14 @@ static void const *sBedroomObjectCol[] = {
 void bhv_bedroom_trigger_loop(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject) == 1) {
         play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
-        o->activeFlags = 0;
+        // o->activeFlags = 0;
+        o->oAction = 2;
     }
 }
 
 void bhv_bedroom_object_init(void) {
     o->collisionData = segmented_to_virtual(sBedroomObjectCol[o->oBehParams2ndByte]);
+    o->oOpacity = 255;
 }
 
 
@@ -37,7 +39,14 @@ void bhv_bedroom_object_loop(void) {
             load_object_collision_model();
             break;
         case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 130, 6);
             bhv_bedroom_trigger_loop();
+            break;
+        case 2:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 24);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
             break;
 
     }
