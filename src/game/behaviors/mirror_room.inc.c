@@ -1,6 +1,10 @@
 void bhv_l2_fog_init(void) {
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FOG_KILLED) {
         o->activeFlags = 0;
+        return;
+    }
+    if (gIsConsole) {
+        cur_obj_set_model(MODEL_L2_FOG_CONSOLE);
     }
 }
 
@@ -55,6 +59,9 @@ void bhv_light_button_loop(void) {
     switch (o->oAction) {
         case 0:
             o->oAnimState = 0;
+            if (o->oF4 && o->oBehParams2ndByte == 0) {
+                o->oF4 = 0;
+            }
             break;
         case 1:
             o->oAnimState = 1;
@@ -86,6 +93,13 @@ void bhv_mirror_switch_init(void) {
 
 void bhv_mirror_switch_loop(void) {
     struct Object *obj;
+    if (o->oBehParams2ndByte == 0) {
+        if (gMarioState->pos[2] < -19300.0f && gMarioState->pos[0] < -8500.0f) {
+            gCamera->comitCutscene = 3;
+        } else {
+            gCamera->comitCutscene = 0;
+        }
+    }
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o) {
@@ -107,19 +121,19 @@ void bhv_mirror_switch_loop(void) {
             } else if (gPlayer1Controller->buttonPressed & R_JPAD) {
                 o->os16F4 -= 0x2000;
             }*/
-            if (gPlayer1Controller->buttonDown & L_JPAD) {
+            if (gPlayer1Controller->buttonDown & L_JPAD || gPlayer1Controller->buttonDown & L_CBUTTONS) {
                 o->os16F6 = approach_s16_symmetric(o->os16F6, 0xC0, 0x8);
                 o->os16F4 += o->os16F6;
-                o->os16102++;
-                if (o->os16102 > 30) {
+                o->os16106++;
+                if (o->os16106 > 30) {
                     o->os16F6 = approach_s16_symmetric(o->os16F6, 0x200, 0x20);
                 }
             } else {
                 o->os16F6 = 0x80;
-                o->os16102 = 0;
+                o->os16106 = 0;
             }
             
-            if (gPlayer1Controller->buttonDown & R_JPAD) {
+            if (gPlayer1Controller->buttonDown & R_JPAD || gPlayer1Controller->buttonDown & R_CBUTTONS) {
                 o->os16F8 = approach_s16_symmetric(o->os16F8, 0xC0, 0x8);
                 o->os16F4 -= o->os16F8;
                 o->os16104++;
@@ -131,9 +145,9 @@ void bhv_mirror_switch_loop(void) {
                 o->os16104 = 0;
             }
 
-            if (gPlayer1Controller->buttonPressed & U_JPAD) {
+            if (gPlayer1Controller->buttonPressed & U_JPAD || gPlayer1Controller->buttonPressed & U_CBUTTONS) {
                 o->os16F6 = 0;
-            } else if (gPlayer1Controller->buttonPressed & D_JPAD) {
+            } else if (gPlayer1Controller->buttonPressed & D_JPAD || gPlayer1Controller->buttonPressed & D_CBUTTONS) {
                 o->os16F6 = 1;
             }
 
@@ -235,9 +249,11 @@ void bhv_mirror_light_init(void) {
 }
 
 void bhv_mirror_light_loop(void) {
-    struct Surface *wall;
+    struct Surface *wall = NULL;
     struct Object *obj;
+    f32 length, sin, cos;
     s16 angle;
+    s32 i = 0;
     if (o->oObjF8 != NULL) {
         o->oObjF8->os16FC = 0;
     }
@@ -252,17 +268,41 @@ void bhv_mirror_light_loop(void) {
     }
     switch (o->oAction) {
         case 0:
-            while (o->oSurfF4 == NULL) {
-                o->header.gfx.scale[1] += 0.1f;
-                o->oHomeY = o->oPosY;
-                o->oHomeX = o->oPosX + ((o->header.gfx.scale[1] * 100.0f) * sins(o->oFaceAngleYaw));
-                o->oHomeZ = o->oPosZ + ((o->header.gfx.scale[1] * 100.0f) * coss(o->oFaceAngleYaw));
-                o->oSurfF4 = resolve_and_return_wall_collisions(&o->oHomeX, 0, 40.0f);
-                if (o->oSurfF4 != NULL) {
-                    o->header.gfx.scale[1] -= 0.1f;
+            o->oHomeY = o->oPosY;
+            length = o->header.gfx.scale[1] * 100.0f;
+            sin = sins(o->oFaceAngleYaw);
+            cos = coss(o->oFaceAngleYaw);
+            while (wall == NULL) {
+                length += 100.0f;
+                o->oHomeX = o->oPosX + (length * sin);
+                o->oHomeZ = o->oPosZ + (length * cos);
+                wall = resolve_and_return_wall_collisions(&o->oHomeX, 0, 140.0f);
+                if (wall != NULL) {
+                    length -= 10.0f;
+                    while (o->oSurfF4 == NULL) {
+                        length += 10.0f;
+                        o->oHomeX = o->oPosX + (length * sin);
+                        o->oHomeZ = o->oPosZ + (length * cos);
+                        o->oSurfF4 = resolve_and_return_wall_collisions(&o->oHomeX, 0, 40.0f);
+                        if (o->oSurfF4 != NULL) {
+                            length -= 10.0f;
+                            break;
+                        }
+                        i++;
+                        if (i >= 200) {
+                            return;
+                        }
+                    }
                     break;
                 }
+                i++;
+                if (i >= 200) {
+                    return;
+                }
             }
+            o->header.gfx.scale[1] = length / 100.0f;
+            // o->oSurfF4 = wall;
+
             if (o->oSurfF4->type == SURFACE_MIRROR && (o->oSurfF4->object == NULL || o->oSurfF4->object->os16FC == 0)) {
                 if (o->oSurfF4->object != NULL) {
                     o->oObjF8 = o->oSurfF4->object;

@@ -1385,6 +1385,7 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->pos, -7807.0f, 3300.0f, -16078.0f);
             vec3f_set(c->focus, -7807.0f, 0, -18814.0f);
             c->yaw = c->nextYaw = 0;
+            s8DirModeBaseYaw = 0;
             break;
         case 4:
             vec3f_set(c->pos, 0.0f, m->pos[1] + 1500.0f, 0.0f);
@@ -6869,7 +6870,6 @@ struct CameraTrigger sCamBBH[] = {
  * Each table is terminated with NULL_TRIGGER
  */
 struct CameraTrigger sCamWF[] = {
-	{1, cam_wf_mirror_room, -9098, 789, -19707, 725, 1092, 382, 0xffff},
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamJRB[] = {

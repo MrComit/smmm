@@ -71,6 +71,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_FIST_INDICATOR, fist_indicator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BEDROOM_OBJECT, bedroom_object_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SHOWER_WALL, shower_wall_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_L2_FOG_CONSOLE, l2_fog_console_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -221,7 +222,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SWOOP, -5260, 590, -19905, 0, 0, 0, 0x00000000, bhvSwoop),
 		OBJECT(MODEL_SWOOP, -5604, 590, -17489, 0, 150, 0, 0x00000000, bhvSwoop),
 		OBJECT(MODEL_SWOOP, -1049, 590, -19987, 0, -17, 0, 0x00000000, bhvSwoop),
-		OBJECT(MODEL_TOKEN, -5621, 734, -18709, -90, -180, 0, 0x00000E00, bhvToken),
+		OBJECT(MODEL_TOKEN, -5621, 724, -18709, -90, -180, 0, 0x00000E00, bhvToken),
 		OBJECT(MODEL_STAR_PIECE, -8823, 494, -22481, 0, 90, 0, 0x09000000, bhvStarPiece),
 		OBJECT(MODEL_MIRROR_LIGHT, -9750, 181, -19012, 0, 90, 0, 0x00000000, bhvMirrorLight),
 		OBJECT(MODEL_LIGHT_BUTTON, -5807, 213, -18703, 0, -90, 0, 0x00000000, bhvLightButton),

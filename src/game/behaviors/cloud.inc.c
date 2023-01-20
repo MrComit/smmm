@@ -81,20 +81,20 @@ static void cloud_fwoosh_update(void) {
             o->oCloudFwooshMovementRadius += 0xC8;
 
             // If mario stays nearby for 100 frames, begin blowing
-            if (o->oDistanceToMario < 500.0f && o->header.gfx.scale[0] > 2.4f) {
-                if (o->oTimer > 5 && absi(o->oAngleToMario + 0x8000) < 0x2000) {
+            if (o->oTimer > 45 && o->oDistanceToMario < 500.0f && o->header.gfx.scale[0] > 2.4f) {
+                if (++o->os16104 > 5 && absi((u16)o->oAngleToMario - (u16)o->oMoveAngleYaw) < 0x2000) {
                     o->oCloudBlowing = TRUE;
                     o->oCloudGrowSpeed = 0.14f;
                 }
             } else {
-                o->oTimer = 0;
+                o->os16104 = 0;
             }
 
             o->oCloudCenterX = o->oPosX + 100.0f * coss(o->oCloudFwooshMovementRadius);
             //o->oPosZ = o->oHomeZ + 100.0f * sins(o->oCloudFwooshMovementRadius);
             o->oCloudCenterY = o->oPosY;
             if (o->oDistanceToMario < 1000.0f) {
-                o->oForwardVel = 7.0f;
+                o->oForwardVel = 11.0f;
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x200);
                 CL_Move();
             } else {

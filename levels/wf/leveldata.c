@@ -120,3 +120,4 @@
 #include "levels/wf/bedroom_object/collision.inc.c"
 #include "levels/wf/shower_wall/model.inc.c"
 #include "levels/wf/shower_wall/collision.inc.c"
+#include "levels/wf/l2_fog_console/model.inc.c"

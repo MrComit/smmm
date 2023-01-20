@@ -683,6 +683,7 @@
 #define MODEL_FIST_INDICATOR      0xE5
 #define MODEL_BEDROOM_OBJECT      0xE4
 #define MODEL_SHOWER_WALL         0xE3
+#define MODEL_L2_FOG_CONSOLE      0xE2
 
 
 // LEVEL 2 MODELS CONT:

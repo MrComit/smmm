@@ -3381,8 +3381,96 @@ void print_multiplier(void) {
     }
 }
 
+/* 
+    '^' = 0x50
+    '|' = 0x51
+    '<' = 0x52
+    '>' = 0x53
+*/
+
+s16 gMirrorAlpha = 0;
+
+void print_mirror_string(void) {
+    u8 str1[2];
+    u8 str2[2];
+    u8 str3[2];
+    u8 str4[2];
+    s16 col1 = 0xFF, col2 = 0xFF, col3 = 0xFF, col4 = 0xFF;
+    s16 x = 290;
+    s16 y = 155 - 8;
+    // f32 scale = 2.0f;
+    if (!gIsConsole) {
+        y += 8;
+        // scale -= 0.5f;
+    }
+    str1[0] = 0x50;
+    str2[0] = 0x51;
+    str3[0] = 0x52;
+    str4[0] = 0x53;
+
+    str1[1] = 0xFF;
+    str2[1] = 0xFF;
+    str3[1] = 0xFF;
+    str4[1] = 0xFF;
+    create_dl_ortho_matrix();
+    // create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, 1.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, gMirrorAlpha);
+    print_generic_string(x + 1, y - 1, str1);
+    print_generic_string(x + 1, y - 20 - 1, str2);
+    print_generic_string(x - 10 + 1, y - 10 - 1, str3);
+    print_generic_string(x + 10 + 1, y - 10 - 1, str4);
+
+
+    if (gMarioObject->platform != NULL) {
+        if (gPlayer1Controller->buttonDown & U_JPAD || gPlayer1Controller->buttonDown & U_CBUTTONS) {
+            col1 = 0;
+        }
+        if (gPlayer1Controller->buttonDown & D_JPAD || gPlayer1Controller->buttonDown & D_CBUTTONS) {
+            col2 = 0;
+        }
+        if (gPlayer1Controller->buttonDown & L_JPAD || gPlayer1Controller->buttonDown & L_CBUTTONS) {
+            col3 = 0;
+        }
+        if (gPlayer1Controller->buttonDown & R_JPAD || gPlayer1Controller->buttonDown & R_CBUTTONS) {
+            col4 = 0;
+        }
+    }
+
+    gDPSetEnvColor(gDisplayListHead++, col1, 0xFF, col1, gMirrorAlpha);
+    print_generic_string(x, y, str1);
+
+    gDPSetEnvColor(gDisplayListHead++, col2, 0xFF, col2, gMirrorAlpha);
+    print_generic_string(x, y - 20, str2);
+
+    gDPSetEnvColor(gDisplayListHead++, col3, 0xFF, col3, gMirrorAlpha);
+    print_generic_string(x - 10, y - 10, str3);
+
+    gDPSetEnvColor(gDisplayListHead++, col4, 0xFF, col4, gMirrorAlpha);
+    print_generic_string(x + 10, y - 10, str4);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+
+void print_mirror_controls(void) {
+    if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 6) {
+        if (gCamera->comitCutscene == 3) {
+            gMirrorAlpha = approach_s16_symmetric(gMirrorAlpha, 255, 12);
+        } else {
+            gMirrorAlpha = approach_s16_symmetric(gMirrorAlpha, 0, 8);
+        }
+        if (gMirrorAlpha) {
+            print_mirror_string();
+        }
+    }
+}
+
+
 
 void special_print(void) {
     print_room_names();
     print_multiplier();
+    print_mirror_controls();
 }

@@ -4685,6 +4685,9 @@ s32 cur_obj_enable_rendering_if_mario_in_room(void) {
                 o->oAction = 0;
             }
             if (o->oFlags & OBJ_FLAG_DISABLE_ON_ROOM_EXIT) {
+                if (cur_obj_has_behavior(bhvMirrorLight) && o->oObjF8 != NULL) {
+                    o->oObjF8->os16FC = 0;
+                }
                 o->activeFlags = 0;
             } else {
                 gNumRoomedObjectsNotInMarioRoom++;
