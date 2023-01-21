@@ -689,6 +689,7 @@
 // LEVEL 2 MODELS CONT:
 // 0x5B-0x63
 #define MODEL_L2_CUSHION_FRIEND   0x5B
+#define MODEL_DBLOCK              0x5C
 
 // 0x6C-0x73
 

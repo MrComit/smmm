@@ -123,3 +123,5 @@
 #include "levels/wf/l2_fog_console/model.inc.c"
 #include "levels/wf/l2_cushion_friend/model.inc.c"
 #include "levels/wf/l2_cushion_friend/collision.inc.c"
+#include "levels/wf/dblock/model.inc.c"
+#include "levels/wf/dblock/collision.inc.c"

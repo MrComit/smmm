@@ -12,6 +12,47 @@ static struct ObjectHitbox sHeavyHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+Vec3f sBlockGoal = {5000.0f, 0.0f, -7200.0f};
+
+void bhv_dblock_init(void) {
+    if (save_file_get_golden_goombas() & (1 << ((o->oBehParams >> 8) & 0xFF))) {
+        o->oAction = 1;
+        vec3f_copy(&o->oPosX, sBlockGoal);
+    }
+}
+
+void bhv_dblock_loop(void) {
+    s16 pitch, yaw;
+    f32 dist;
+    switch (o->oAction) {
+        case 0:
+            bhv_pushable_loop();
+            vec3f_get_dist_and_angle(&o->oPosX, sBlockGoal, &dist, &pitch, &yaw);
+            if (dist < 200.0f) {
+                if (o->oTimer > 20) {
+                    if (!(save_file_get_golden_goombas() & (1 << ((o->oBehParams >> 8) & 0xFF)))) {
+                        save_file_set_golden_goombas((o->oBehParams >> 8) & 0xFF);
+                        play_puzzle_jingle();
+                        o->oObjF4 = spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+                        vec3f_set(&o->oObjF4->oPosX, 6600.0f, 750.0f, -7800.0f);
+                    gCamera->comitCutscene = 0xFF;
+                    gComitCutsceneTimer = 45;
+                    o->oObjF4->os16110 = 3045;
+                    vec3f_set(gComitCutscenePosVec, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2]);
+                    vec3f_copy(gComitCutsceneFocVec, &o->oObjF4->oPosX);
+                    }
+                    o->oAction = 1;
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            break;
+        case 1:
+            break;
+    }
+}
+
+
 void bhv_l2_cushion_friend_init(void) {
     if (save_file_get_keys(0) & (1 << 7)) {
         o->activeFlags = 0;
