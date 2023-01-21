@@ -1049,7 +1049,7 @@ Vec3f sSpawnedTokens[] = {
 {-108.0f, 11838.0f, -16714.0f},
 {-5850.0f, 160.0f, 5280.0f},
 {3690.0f, 683.0f, 16950.0f},
-{0.0f, 0.0f, 0.0f},
+{2683.0f, 555.0f, -4934.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
@@ -1106,6 +1106,9 @@ void handle_ground_pound_floor(struct MarioState *m) {
             break;
         case 9:
             spawn_token(1, 0x07, sSpawnedTokens[4], 0, 0xC000);
+            break;
+        case 12:
+            spawn_token(1, 0x15, sSpawnedTokens[5], 0, 0xC000);
             break;
     }
     save_file_set_gpflags(1 << index);

@@ -73,3 +73,4 @@
 #include "levels/wf/bedroom_object/geo.inc.c"
 #include "levels/wf/shower_wall/geo.inc.c"
 #include "levels/wf/l2_fog_console/geo.inc.c"
+#include "levels/wf/l2_cushion_friend/geo.inc.c"

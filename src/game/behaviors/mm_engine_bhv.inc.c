@@ -200,13 +200,15 @@ void bhv_golden_crate_init(void) {
 
 
 void bhv_golden_crate_loop(void) {
+    struct Object *obj;
     obj_set_hitbox(o, &sGoldenCrateHitbox);
     if (cur_obj_was_attacked_or_ground_pounded() != 0) {
         obj_explode_and_spawn_coins(46.0f, 1);
         create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
         // save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
         save_file_set_golden_goombas((o->oBehParams >> 8) & 0xFF);
-        spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+        obj = spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+        obj->oVelY = 20.0f;
     }
     if (o->oDistanceToMario < 150.0f) {
         if (o->oTimer > 25) {
@@ -266,6 +268,10 @@ void golden_goomba_behavior(void) {
     f32 animSpeed;
     cur_obj_update_floor_and_walls();
     cur_obj_move_standard(-78);
+    if (o->oFloor != NULL && o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND &&
+        (o->oFloor->type == SURFACE_INSTANT_QUICKSAND || o->oFloor->type == SURFACE_BURNING || o->oFloor->type == SURFACE_DEATH_PLANE)) {
+            vec3f_set(&o->oPosX, o->oHomeX, o->oHomeY + 500.0f, o->oHomeZ);
+        }
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os16112, 0x800);
     if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
         o->os16112 = o->oWallAngle; 

@@ -7,7 +7,7 @@ void scroll_sts_mat_wf_dl_SolidQuicksand_001_layer1() {
 
 void scroll_wf_dl_Hallway_007_mesh_layer_5_vtx_0() {
 	int i = 0;
-	int count = 78;
+	int count = 74;
 	int width = 64 * 0x20;
 	int height = 32 * 0x20;
 

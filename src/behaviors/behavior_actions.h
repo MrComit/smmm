@@ -1034,6 +1034,7 @@ void bhv_journal_book_init(void);
 void bhv_golden_pillar_loop(void);
 void bhv_shower_wall_loop(void);
 void bhv_shower_wall_init(void);
+void bhv_l2_cushion_friend_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

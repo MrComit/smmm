@@ -6999,9 +6999,10 @@ const BehaviorScript bhvHeavySwitch[] = {
 
 const BehaviorScript bhvL2Gate[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(l2_gate_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
@@ -10061,5 +10062,18 @@ const BehaviorScript bhvShowerWall[] = {
     CALL_NATIVE(bhv_shower_wall_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_shower_wall_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvL2CushionFriend[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(l2_cushion_friend_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    CALL_NATIVE(bhv_l2_cushion_friend_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

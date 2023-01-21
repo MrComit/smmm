@@ -12,6 +12,12 @@ static struct ObjectHitbox sHeavyHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+void bhv_l2_cushion_friend_init(void) {
+    if (save_file_get_keys(0) & (1 << 7)) {
+        o->activeFlags = 0;
+    }
+}
+
 
 void heavy_object_held_loop(void) {
     cur_obj_become_intangible();

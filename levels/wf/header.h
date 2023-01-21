@@ -201,4 +201,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/l2_fog_console/geo_header.h"
 
+#include "levels/wf/l2_cushion_friend/geo_header.h"
+
+#include "levels/wf/l2_cushion_friend/collision_header.h"
+
 #endif
