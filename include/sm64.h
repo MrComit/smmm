@@ -108,6 +108,7 @@
 #define PARTICLE_BREATH               /* 0x00020000 */ (1 << 17)
 #define PARTICLE_TRIANGLE             /* 0x00040000 */ (1 << 18)
 #define PARTICLE_19                   /* 0x00080000 */ (1 << 19)
+#define PARTICLE_GP_MIST_CIRCLE       /* 0x00100000 */ (1 << 20)
 
 #define MODEL_STATE_NOISE_ALPHA 0x180
 #define MODEL_STATE_METAL       0x200

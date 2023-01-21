@@ -841,6 +841,7 @@ extern const BehaviorScript bhvGoldenPillar[];
 extern const BehaviorScript bhvShowerWall[];
 extern const BehaviorScript bhvL2CushionFriend[];
 extern const BehaviorScript bhvDBlock[];
+extern const BehaviorScript bhvGPMistParticleSpawner[];
 
 
 #endif // BEHAVIOR_DATA_H

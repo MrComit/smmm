@@ -1,9 +1,35 @@
 // ground_particles.inc.c
+static struct SpawnParticlesInfo sGPMistParticles = {
+    /* behParam:        */ 3,
+    /* count:           */ 1,
+    /* model:           */ MODEL_MIST,
+    /* offsetY:         */ 20,
+    /* forwardVelBase:  */ 4,
+    /* forwardVelRange: */ 2,
+    /* velYBase:        */ 0,
+    /* velYRange:       */ 0,
+    /* gravity:         */ 0,
+    /* dragStrength:    */ 50,
+    /* sizeBase:        */ 7.0f,
+    /* sizeRange:       */ 1.5f,
+};
+
+
+void bhv_gp_white_puffs_init(void) {
+    clear_particle_flags(ACTIVE_PARTICLE_GP_MIST_CIRCLE);
+    cur_obj_spawn_particles(&sGPMistParticles);
+}
+
+
 
 void bhv_pound_white_puffs_init(void) {
     clear_particle_flags(ACTIVE_PARTICLE_MIST_CIRCLE);
     spawn_mist_from_global();
 }
+
+
+
+
 
 static struct SpawnParticlesInfo sGlobalMistParticles = {
     /* behParam:        */ 3,

@@ -126,6 +126,7 @@
 #define ACTIVE_PARTICLE_BREATH               (1 << 17) // 0x00020000
 #define ACTIVE_PARTICLE_V_STAR               (1 << 18) // 0x00040000
 #define ACTIVE_PARTICLE_TRIANGLE             (1 << 19) // 0x00080000
+#define ACTIVE_PARTICLE_GP_MIST_CIRCLE       (1 << 20) // 0x00100000
 
 /* oAction */
 #define OBJ_ACT_LAVA_DEATH        100

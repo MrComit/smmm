@@ -87,6 +87,7 @@ void bhv_water_mist_loop(void);
 void bhv_water_mist_spawn_loop(void);
 void bhv_water_mist_2_loop(void);
 void bhv_pound_white_puffs_init(void);
+void bhv_gp_white_puffs_init(void);
 void bhv_ground_sand_init(void);
 void bhv_ground_snow_init(void);
 void bhv_wind_loop(void);

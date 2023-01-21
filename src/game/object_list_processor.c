@@ -225,6 +225,7 @@ struct ParticleProperties sParticleTypes[] = {
     { PARTICLE_DIRT,                 ACTIVE_PARTICLE_DIRT,                 MODEL_NONE,                 bhvDirtParticleSpawner },
     { PARTICLE_MIST_CIRCLE,          ACTIVE_PARTICLE_MIST_CIRCLE,          MODEL_NONE,                 bhvMistCircParticleSpawner },
     { PARTICLE_TRIANGLE,             ACTIVE_PARTICLE_TRIANGLE,             MODEL_NONE,                 bhvTriangleParticleSpawner },
+    { PARTICLE_GP_MIST_CIRCLE,       ACTIVE_PARTICLE_GP_MIST_CIRCLE,       MODEL_NONE,                 bhvGPMistParticleSpawner },
     { 0, 0, MODEL_NONE, NULL },
 };
 

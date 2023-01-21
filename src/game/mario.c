@@ -1825,6 +1825,7 @@ void update_treadmills(struct MarioState *m) {
  */
 s32 execute_mario_action(UNUSED struct Object *o) {
     struct MarioState *m = gMarioState;
+    struct Object *obj;
     s32 inLoop = TRUE;
 
     if (m->action) {
@@ -1903,6 +1904,15 @@ s32 execute_mario_action(UNUSED struct Object *o) {
         play_infinite_stairs_music();
         m->marioObj->oInteractStatus = 0;
         func_sh_8025574C();
+
+        if (gGlobalTimer & 16) {
+            obj = gMarioObject->platform;
+            if ((m->pos[1] <= m->floorHeight && m->floor->type == SURFACE_GP_FLOOR && 
+                !(save_file_get_gpflags() & (1 << m->floor->force))) || 
+                (obj != NULL && obj_has_behavior(obj, bhvGoldenPillar) && obj->oAction == 1)) {
+                m->particleFlags |= PARTICLE_GP_MIST_CIRCLE;
+            }
+        } 
 
         return m->particleFlags;
     }

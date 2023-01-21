@@ -1295,6 +1295,15 @@ const BehaviorScript bhvMistCircParticleSpawner[] = {
     DEACTIVATE(),
 };
 
+
+const BehaviorScript bhvGPMistParticleSpawner[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_gp_white_puffs_init),
+    DELAY(1),
+    DEACTIVATE(),
+};
+
 const BehaviorScript bhvDirtParticleSpawner[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     BEGIN(OBJ_LIST_DEFAULT),

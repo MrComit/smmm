@@ -132,7 +132,11 @@ void bhv_golden_pillar_loop(void) {
         case 0:
             if (save_file_get_boos() & (1 << 4)) {
                 cur_obj_unhide();
-                o->oAction = 1;
+                if (save_file_get_golden_goombas() & (1 << ((o->oBehParams >> 8) & 0xFF))) {
+                    o->oAction = 2;
+                } else {
+                    o->oAction = 1;
+                }
             }
             break;
         case 1:
@@ -309,6 +313,9 @@ void bhv_golden_goomba_update(void) {
         spawn_orange_number_three_digit_scale_stay(o->os16110 / 10, 0, 0, 0, 50.0f * scale, 0.25f + scale, 4);
     }
     o->os16110--;
+    if (o->os16110 < 0) {
+        o->os16110 = 0;
+    }
     golden_goomba_behavior();
     if (o->activeFlags == 0) {
         spawnCoins = (o->os16110 / 10) * 0.15f;
