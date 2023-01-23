@@ -153,8 +153,12 @@ void bhv_heavy_gate_loop(void) {
         case 1:
             obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, o->oBehParams2ndByte << 16);
             o->oPosY = approach_f32(o->oPosY, o->oHomeY + 1100.0f, 75.0f, 75.0f);
+            if (o->oPosY == o->oHomeY + 1100.0f) {
+                cur_obj_hide();
+            }
             if (obj == NULL || obj->oAction != 2) {
                 o->oAction = 2;
+                cur_obj_unhide();
             }
             break;
         case 2:
