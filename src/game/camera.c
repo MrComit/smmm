@@ -1503,7 +1503,7 @@ void fixed_cam_presets(struct Camera *c) {
 
 f32 gDepthOffset2d = 0;
 s8 gCam2dSide = 0;
-
+f32 gCam2dAhead = 0.0f;
 
 s32 check_bar_cam(struct Camera *c) {
     struct MarioState *m = gMarioState;
@@ -1540,7 +1540,8 @@ void check_2d_cam(struct Camera *c) {
     } else if (c->comit2dcam) {
         c->comit2dcam = 0;
         gDepthOffset2d = 0;
-        s8DirModeBaseYaw = 0;
+        gCam2dAhead = 0;
+        s8DirModeYawOffset = 0;
     }
 }
 
@@ -1685,40 +1686,25 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             }
             break;
         case 4:
-            // s8DirModeBaseYaw = 0;
-            // m->pos[2] = approach_f32_symmetric(m->pos[2], 1700.0f, 80.0f);
-            // cam_controls_2d(c);
-            // // update_8_directions_camera(c, c->focus, pos);
-            // c->pos[0] = m->pos[0];
-            // // if (m->pos[0] + 3454.0f > 200.0f) {
-            // //     height = -3454.0f + 200.0f;
-            // // } else if (m->pos[0] + 3454.0f < -200.0f) {
-            // //     height = -3454.0f - 200.0f;
-            // // } else {
-            // //     height = -3454.0f;
-            // // }
-            // c->focus[0] = approach_f32_asymptotic(c->focus[0], m->pos[0], 0.05f);;
-            // c->pos[2] = 2100.0f;// + gDepthOffset2d;
-            // c->pos[1] = m->pos[1] + 500.0f;
-            // c->focus[1] = m->pos[1];
-            // c->yaw = c->nextYaw = s8DirModeBaseYaw;
-            // // set_2dcam_height(c);
-            // // approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
-            // if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
-            //     s8DirModeYawOffset = 0;
-            // }
-
-
-
-
             s8DirModeBaseYaw = 0;
             m->pos[2] = approach_f32_symmetric(m->pos[2], 1700.0f, 80.0f);
             cam_controls_2d(c);
             update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = pos[0];
             c->focus[0] = m->pos[0];
-            c->pos[2] = 3600.0f + gDepthOffset2d;
+            if (!(m->action & ACT_FLAG_ON_POLE)) {
+                if (absi(m->faceAngle[1] - 0x4000) < 0x4000) {
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, 200.0f, 20.0f);
+                } else {
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, -200.0f, 20.0f);
+                }
+            }
+            c->pos[0] += gCam2dAhead;
+            c->focus[0] += gCam2dAhead;
+
+            c->pos[2] = 4100.0f + gDepthOffset2d;
             c->yaw = c->nextYaw = s8DirModeBaseYaw;
+            pos[1] += 500.0f;
             approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;
@@ -1731,8 +1717,19 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = pos[0];
             c->focus[0] = m->pos[0];
-            c->pos[2] = 1150.0f - gDepthOffset2d;
+            if (!(m->action & ACT_FLAG_ON_POLE)) {
+                if (absi(m->faceAngle[1] - 0x4000) < 0x4000) {
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, 200.0f, 20.0f);
+                } else {
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, -200.0f, 20.0f);
+                }
+            }
+            c->pos[0] += gCam2dAhead;
+            c->focus[0] += gCam2dAhead;
+
+            c->pos[2] = 850.0f - gDepthOffset2d;
             c->yaw = c->nextYaw = s8DirModeBaseYaw;
+            pos[1] += 500.0f;
             approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;
@@ -1745,8 +1742,19 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             update_8_directions_camera(c, c->focus, pos);
             c->pos[0] = pos[0];
             c->focus[0] = m->pos[0];
-            c->pos[2] = 6300.0f + gDepthOffset2d;
+            if (!(m->action & ACT_FLAG_ON_POLE)) {
+                if (absi(m->faceAngle[1] - 0x4000) < 0x4000) {
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, 200.0f, 20.0f);
+                } else {
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, -200.0f, 20.0f);
+                }
+            }
+            c->pos[0] += gCam2dAhead;
+            c->focus[0] += gCam2dAhead;
+
+            c->pos[2] = 6600.0f + gDepthOffset2d;
             c->yaw = c->nextYaw = s8DirModeBaseYaw;
+            pos[1] += 500.0f;
             approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;
