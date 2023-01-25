@@ -101,7 +101,7 @@ void bhv_l1_fireplace_loop(void) {
     }
 
     if (++o->os16F8 > 10 && gMarioState->pos[2] < 7800.0f && gMarioState->pos[2] > 7300.0f && gMarioState->pos[0] < -12000.0f) {
-        CL_Lava_Boost();
+        CL_Lava_Boost(0);
         gMarioState->faceAngle[1] = 0x4000;
         gMarioState->vel[1] = 70.0f;
         gMarioState->forwardVel = 30.0f;

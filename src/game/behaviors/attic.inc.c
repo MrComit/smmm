@@ -651,7 +651,7 @@ void bhv_attic_spire_init(void) {
 void bhv_attic_spire_loop(void) {
     if (--o->os16F6 <= 0 && gMarioState->pos[1] >= o->oPosY && gMarioState->pos[1] <= o->oPosY + (o->header.gfx.scale[1] * 1000.0f)) {
         if (lateral_dist_between_objects(o, gMarioObject) < 160.0f) {
-            CL_Lava_Boost();
+            CL_Lava_Boost(0);
             o->os16F6 = 30;
         }
     }

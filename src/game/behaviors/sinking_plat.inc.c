@@ -20,10 +20,19 @@ void bhv_lemon_loop(void) {
 
 
 void bhv_l2_lava_loop(void) {
+    s32 arg = 0;
     f32 oldPos = o->oPosY;
     o->oF4 += 0x140;
     o->oPosY = o->oHomeY + (sins(o->oF4) * 75.0f);
     o->oVelY = o->oPosY - oldPos;
+    if (o->oTimer > 10 && gMarioState->pos[1] <= o->oPosY) {
+        if (gMarioState->action == ACT_LAVA_BOOST) {
+            arg = 1;
+        }
+        CL_Lava_Boost(arg);
+        gMarioState->actionArg = 1;
+        o->oTimer = 0;
+    }
 }
 
 

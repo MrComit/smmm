@@ -449,7 +449,7 @@ void koopa_boss_flame_act_2(void) {
     }
     o->o104++;
     if (o->o104 > 10 && absf(o->oPosZ - gMarioState->pos[2]) < 200.0f && gMarioState->pos[1] < 2500.0f) {
-        CL_Lava_Boost();
+        CL_Lava_Boost(0);
         o->o104 = 0;
     }    
 }

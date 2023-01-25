@@ -353,10 +353,22 @@ void CL_scramble_array(u8 *array[], s16 size) {
 }
 
 
-void CL_Lava_Boost(void) {
+void CL_Lava_Boost_Helper(struct MarioState *m, s32 preserveVel) {
+    if (!(m->action & ACT_FLAG_RIDING_SHELL) && m->pos[1] < m->floorHeight + 10.0f) {
+        if (!(m->flags & MARIO_METAL_CAP)) {
+            m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+        }
+
+        update_mario_sound_and_camera(m);
+        drop_and_set_mario_action(m, ACT_LAVA_BOOST, preserveVel);
+    }
+}
+
+
+void CL_Lava_Boost(s32 preserveVel) {
     struct MarioState *m = gMarioState;
     m->floorHeight = m->pos[1];
-    check_lava_boost(m);
+    CL_Lava_Boost_Helper(m, preserveVel);
 }
 
 

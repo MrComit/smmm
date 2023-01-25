@@ -1508,7 +1508,7 @@ f32 gCam2dAhead = 0.0f;
 s32 check_bar_cam(struct Camera *c) {
     struct MarioState *m = gMarioState;
     if (m->pos[2] > 1300.0f) {
-        if (m->pos[2] > 2600.0f) {
+        if (m->pos[2] > 2630.0f) {
             if (m->pos[2] > 4000.0f && m->pos[2] < 4800.0f && m->pos[0] > -2800.0f) {
                 //THIRD
                 c->comit2dcam = 6;
@@ -1518,7 +1518,7 @@ s32 check_bar_cam(struct Camera *c) {
                 c->comit2dcam = 5;
                 return TRUE;
             }
-        } else if (m->pos[0] > -2550.0f && m->pos[0] < 1400.0f) {
+        } else if (m->pos[0] > -2550.0f && m->pos[0] < 1450.0f) {
             //FIRST
             c->comit2dcam = 4;
             return TRUE;

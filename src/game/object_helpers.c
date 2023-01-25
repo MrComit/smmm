@@ -870,7 +870,7 @@ void calc_lava_wave_collision(struct MarioState *m) {
         if (m->pos[2] < -896.0f + (sLavaWavePos + sLavaSpread) && m->pos[2] > -896.0f + (sLavaWavePos - sLavaSpread)) {
             height = 500.0f + (sLavaWaveHeight * ((1000.0f - absf(m->pos[2] - (-896.0f + sLavaWavePos)))/1000.0f));
             if (m->pos[1] < height) {
-                CL_Lava_Boost();
+                CL_Lava_Boost(0);
                 sLavaHitTimer = 30;
             }
         }
@@ -2319,6 +2319,81 @@ Gfx *geo_switch_shower(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+
+#ifdef AVOID_UB
+Gfx *geo_switch_prebar(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_prebar(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (!gIsConsole || ((gCamera->comit2dcam == 0) || (gMarioState->pos[0] > 1500.0f || gMarioState->pos[2] < 1350.0f))) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_postbar(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_postbar(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (!gIsConsole || gMarioState->pos[2] > 500.0f) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_bar_wall(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_bar_wall(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (gCamera->comit2dcam) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
 
 
 extern s8 sLevelRoomOffsets[];

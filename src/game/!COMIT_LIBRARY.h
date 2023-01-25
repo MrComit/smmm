@@ -33,7 +33,7 @@ s16 CL_obj_pitch_to_mario(void);
 void CL_get_hit(struct MarioState *m, struct Object *o, u32 damage);
 void CL_explode_object(struct Object *obj, s16 noDamage);
 void CL_scramble_array(u8 *array[], s16 size);
-void CL_Lava_Boost(void);
+void CL_Lava_Boost(s32 preserveVel);
 struct Object *CL_nearest_object_with_behavior_and_field(const BehaviorScript *behavior, u32 field, u32 param);
 struct Object *CL_objptr_nearest_object_behavior(struct Object *obj2, const BehaviorScript *behavior);
 s32 CL_get_room_from_point(Vec3f point);

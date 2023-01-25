@@ -7020,13 +7020,13 @@ const BehaviorScript bhvL2Gate[] = {
 };
 
 const BehaviorScript bhvL2Lava[] = {
-    BEGIN(OBJ_LIST_SURFACE),
+    BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(l2_lava_collision),
+    // LOAD_COLLISION_DATA(l2_lava_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_l2_lava_loop),
     END_LOOP(),
 };
