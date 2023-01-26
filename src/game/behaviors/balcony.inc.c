@@ -13,6 +13,9 @@ static struct ObjectHitbox sLightningHitbox = {
 };
 
 
+Vec3f sBalconyRespawn = {2796.0f, 2283.0f, 13634.0f};
+
+
 void bhv_locked_cage_init(void) {
     if (save_file_get_keys(1) & (1 << o->oBehParams2ndByte)) {
         o->activeFlags = 0;
@@ -78,15 +81,20 @@ void bhv_lightning_init(void) {
     }
 }
 
+extern s16 s8DirModeBaseYaw;
+
 void bhv_lightning_loop(void) {
+    struct MarioState *m = gMarioState;
     o->oInteractStatus = 0;
     switch (o->oAction) {
         case 0:
             cur_obj_become_intangible();
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 5);
-            if (o->oOpacity == 255) {
-                o->oAction = 1;
-                cur_obj_shake_screen(0);
+            if (o->oTimer > 22) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 9);
+                if (o->oOpacity == 255) {
+                    o->oAction = 1;
+                    cur_obj_shake_screen(0);
+                }
             }
             break;
         case 1:
@@ -107,5 +115,47 @@ void bhv_lightning_loop(void) {
                 o->oAction = 0;
             }
             break;
+    }
+
+    if ((o->oBehParams >> 8) & 0xFF && count_room_objects_with_behavior(bhvSmallKey, o->oRoom)) {
+        if (m->pos[1] > 2100.0f) {
+            if (m->health <= 0x280) {
+                o->os16FA = 2;
+            } else {
+                o->os16FA = 1;
+            }
+        } else if (m->pos[1] <= m->floorHeight && o->os16F8 == 0) {
+            o->os16FA = 0;
+        }
+        // CL_PRINT(4, "%d", o->os16FA)
+        if (o->os16FA && m->pos[1] < 1200.0f) {
+            if (o->os16FA == 2) {
+                level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                o->os16FA = 0;
+            } else {
+                switch (o->os16F8++) {
+                    case 0:
+                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                        break;
+                    case 18:
+                        m->faceAngle[1] = 0xC000;
+                        // set_r_button_camera(gCamera);
+                        warp_camera(sBalconyRespawn[0] - m->pos[0], sBalconyRespawn[1] - m->pos[1], sBalconyRespawn[2] - m->pos[2]);
+                        vec3f_copy(m->pos, sBalconyRespawn);
+                        s8DirModeBaseYaw = (m->faceAngle[1] + 0x8000);
+                        m->forwardVel = 0;
+                        vec3f_set(m->vel, 0.0f, 0.0f, 0.0f);
+                        play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+                        m->hurtCounter = 8;
+                        m->invincTimer = 30;
+                        gCamera->cutscene = 0;
+                        o->os16F8 = 0;
+                        // gCutsceneTimer = CUTSCENE_STOP;
+                        set_mario_action(m, ACT_FREEFALL, 0);
+                }
+            }
+
+
+        }
     }
 }

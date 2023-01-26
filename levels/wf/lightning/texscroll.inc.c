@@ -18,8 +18,8 @@ void scroll_lightning_lightning_mesh_layer_1_vtx_0() {
 		vertices[i].n.tc[1] += deltaY;
 	}
 	currentY += deltaY;
-
 }
+
 void scroll_lightning_lightning_mesh_layer_4_vtx_0() {
 	int i = 0;
 	int count = 24;
@@ -46,10 +46,9 @@ void scroll_lightning_lightning_mesh_layer_4_vtx_0() {
 		vertices[i].n.tc[0] += deltaX;
 		vertices[i].n.tc[1] += deltaY;
 	}
-	currentX += deltaX;
-	currentY += deltaY;
-
+	currentX += deltaX;	currentY += deltaY;
 }
+
 void scroll_wf_level_geo_lightning() {
 	scroll_lightning_lightning_mesh_layer_1_vtx_0();
 	scroll_lightning_lightning_mesh_layer_4_vtx_0();
