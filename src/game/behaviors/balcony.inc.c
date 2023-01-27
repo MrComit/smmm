@@ -68,6 +68,19 @@ void bhv_moving_vine_loop(void) {
 }
 
 
+
+void bhv_floating_plant_init(void) {
+    struct Object *obj;
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FLOATING_PLANT) {
+        obj = spawn_object(o, MODEL_LIGHTNING_SPINNER, bhvLightningSpinner);
+        obj->oRoom = o->oRoom;
+        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    } else {
+        o->activeFlags = 0;
+    }
+}
+
+
 void bhv_lightning_init(void) {
     o->oOpacity = 0;
     obj_set_hitbox(o, &sLightningHitbox);
@@ -83,9 +96,23 @@ void bhv_lightning_init(void) {
 
 extern s16 s8DirModeBaseYaw;
 
+void bhv_lightning_spinner_loop(void) {
+    if (o->oDistanceToMario < o->oDrawingDistance || !gIsConsole) {
+        o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+    } else {
+        o->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
+    }
+}
+
+
 void bhv_lightning_loop(void) {
     struct MarioState *m = gMarioState;
     o->oInteractStatus = 0;
+    if (o->oTimer == 0 && count_room_objects_with_behavior(bhvBooCoinCage, o->oRoom) == 0) {
+        o->oAction = 4;
+        o->oOpacity = 0;
+        cur_obj_disable();
+    }
     switch (o->oAction) {
         case 0:
             cur_obj_become_intangible();
@@ -127,7 +154,7 @@ void bhv_lightning_loop(void) {
         } else if (m->pos[1] <= m->floorHeight && o->os16F8 == 0) {
             o->os16FA = 0;
         }
-        // CL_PRINT(4, "%d", o->os16FA)
+        // CL_PRINT(4, "%x", m->action)
         if (o->os16FA && m->pos[1] < 1200.0f) {
             if (o->os16FA == 2) {
                 level_trigger_warp(m, WARP_OP_WARP_FLOOR);
@@ -146,7 +173,9 @@ void bhv_lightning_loop(void) {
                         m->forwardVel = 0;
                         vec3f_set(m->vel, 0.0f, 0.0f, 0.0f);
                         play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
-                        m->hurtCounter = 8;
+                        if (m->invincTimer == 0 && m->action != ACT_SHOCKED) {
+                            m->hurtCounter = 8;
+                        }
                         m->invincTimer = 30;
                         gCamera->cutscene = 0;
                         o->os16F8 = 0;

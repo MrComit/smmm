@@ -209,4 +209,12 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/dblock/collision_header.h"
 
+#include "levels/wf/lightning_spinner/geo_header.h"
+
+#include "levels/wf/lightning_spinner/anim_header.h"
+
+#include "levels/wf/floating_plant/geo_header.h"
+
+#include "levels/wf/floating_plant/collision_header.h"
+
 #endif

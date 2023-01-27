@@ -125,3 +125,8 @@
 #include "levels/wf/l2_cushion_friend/collision.inc.c"
 #include "levels/wf/dblock/model.inc.c"
 #include "levels/wf/dblock/collision.inc.c"
+#include "levels/wf/lightning_spinner/model.inc.c"
+#include "levels/wf/lightning_spinner/anims/data.inc.c"
+#include "levels/wf/lightning_spinner/anims/table.inc.c"
+#include "levels/wf/floating_plant/model.inc.c"
+#include "levels/wf/floating_plant/collision.inc.c"

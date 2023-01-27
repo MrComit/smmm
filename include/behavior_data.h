@@ -613,6 +613,8 @@ extern const BehaviorScript bhvL2Gate[];
 extern const BehaviorScript bhvL2Lava[];
 extern const BehaviorScript bhvLemon[];
 extern const BehaviorScript bhvLightning[];
+extern const BehaviorScript bhvLightningSpinner[];
+extern const BehaviorScript bhvFloatingPlant[];
 extern const BehaviorScript bhvMovingVine[];
 extern const BehaviorScript bhvBooCoin[];
 extern const BehaviorScript bhvBooCoinCage[];

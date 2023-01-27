@@ -690,6 +690,8 @@
 // 0x5B-0x63
 #define MODEL_L2_CUSHION_FRIEND   0x5B
 #define MODEL_DBLOCK              0x5C
+#define MODEL_LIGHTNING_SPINNER   0x5D
+#define MODEL_FLOATING_PLANT      0x5E
 
 // 0x6C-0x73
 

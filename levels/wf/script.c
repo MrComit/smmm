@@ -74,6 +74,8 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_L2_FOG_CONSOLE, l2_fog_console_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L2_CUSHION_FRIEND, l2_cushion_friend_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_DBLOCK, dblock_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LIGHTNING_SPINNER, lightning_spinner_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_FLOATING_PLANT, floating_plant_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -169,6 +171,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_BOO_COIN, 1073, 2266, 13693, 0, 0, 0, 0x00000000, bhvBooCoin),
 		OBJECT(MODEL_BOO_COIN, 1726, 2316, 11666, 0, 0, 0, 0x00000000, bhvBooCoin),
 		OBJECT(MODEL_BOO_COIN, 40, 2216, 10736, 0, 0, 0, 0x00000000, bhvBooCoin),
+		OBJECT(MODEL_FLOATING_PLANT, -401, 2416, 11984, 0, 0, 0, 0x00000000, bhvFloatingPlant),
 		OBJECT(MODEL_HEART, 3642, 1526, 14263, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_LIGHTNING, 1017, 216, 8638, 0, 0, 0, (1 << 24) | (1 << 8), bhvLightning),
 		OBJECT(MODEL_LIGHTNING, 828, 216, 9617, 0, 0, 0, 0x00010000, bhvLightning),
