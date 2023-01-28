@@ -465,7 +465,7 @@ const GeoLayout wf_dl_14__Master_Bedroom_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_AAA_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Bed_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Bookshelf_003_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Couch_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Couch_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Crate_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Dresser_009_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Light_010_mesh_layer_1),

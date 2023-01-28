@@ -33,6 +33,9 @@ void bhv_l2_lava_loop(void) {
         gMarioState->actionArg = 1;
         o->oTimer = 0;
     }
+    if (((s32)(random_float() * 16.0f)) == 8) {
+        play_sound(SOUND_GENERAL_QUIET_BUBBLE2, gGlobalSoundSource);
+    }
 }
 
 

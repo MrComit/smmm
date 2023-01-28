@@ -48,13 +48,13 @@ Vec3s sMastersFlames[5] = {
 Vec3s sMastersFlamesInterpolate[6] = {
 {0x08, 0x08, 0x08},
 {0x00, 0x1A, 0x02},
-{0x33, 0x00, 0x1F},
-{0x12, 0x00, 0x1A},
-{0x33, 0x1F, 0x00},
-{0x00, 0x33, 0x33},
+{0x38, 0x00, 0x27},
+{0x19, 0x00, 0x26},
+{0x27, 0x1F, 0x00},
+{0x00, 0x33, 0x1F},
 };
 
-s16 sFistTimer[] = {120, 90};
+s16 sFistTimer[] = {90, 45};
 
 /*Vec3f sPlatePositions[] = {
 {-8464.0f, 0.0f, -2932.0f},
@@ -86,6 +86,7 @@ void spawn_snufits(s16 index) {
     s32 i;
     struct Object *obj;
     struct Waypoint *traj;
+    s32 count = count_room_objects_with_behavior(bhvSnufit, o->oRoom);
     if (sSnufitSpots[index] == NULL)
         return;
     CL_scramble_array(&sCoinBits[index], sCoinBitLen[index]);
@@ -97,6 +98,10 @@ void spawn_snufits(s16 index) {
             obj->oPosY = traj->pos[1];
             obj->oPosZ = traj->pos[2];
         } else {
+            if (count >= 5) {
+                continue;
+            }
+            count++;
             obj = spawn_object(o, MODEL_SNUFIT, bhvSnufit);
             obj->oBehParams2ndByte = 1;
             obj->oPosX = traj->pos[0];
@@ -135,12 +140,12 @@ void bhv_fist_spawner_loop(void) {
             o->oObjF4 = spawn_object(o, MODEL_RISING_FIST, bhvRisingFist);
             pos[1] = 0;   
             for (i=0;i<5;i++) {
-                pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 5.0f*(i+1) * gMarioState->forwardVel);
-                pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 5.0f*(i+1) * gMarioState->forwardVel);
+                pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 7.0f*(i+1) * gMarioState->forwardVel);
+                pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 7.0f*(i+1) * gMarioState->forwardVel);
                 find_floor(pos[0], pos[1], pos[2], &floor);
-                if (floor == NULL) {
-                    pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 5.0f*i * gMarioState->forwardVel);
-                    pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 5.0f*i * gMarioState->forwardVel);
+                if (floor == NULL || floor->room != o->oRoom) {
+                    pos[0] = gMarioState->pos[0] + (sins(gMarioState->faceAngle[1]) * 7.0f*i * gMarioState->forwardVel);
+                    pos[2] = gMarioState->pos[2] + (coss(gMarioState->faceAngle[1]) * 7.0f*i * gMarioState->forwardVel);
                     break;
                 }
             }         
@@ -148,7 +153,7 @@ void bhv_fist_spawner_loop(void) {
             o->oObjF4->oPosY += 1000.0f;
             o->oObjF4->oPosY = find_floor_height(o->oObjF4->oPosX, o->oObjF4->oPosY, o->oObjF4->oPosZ);
             o->oObjF4->oFaceAngleYaw = CL_RandomMinMaxU16(0, 0xFFFF);
-            o->oObjF4->oFaceAnglePitch = CL_RandomMinMaxU16(0, 0x1000);
+            o->oObjF4->oFaceAnglePitch = CL_RandomMinMaxU16(0, 0xE00);
             o->oAction = 0;
             break;
     }
@@ -158,7 +163,7 @@ void bhv_fist_spawner_loop(void) {
 }
 
 void bhv_fist_indicator_loop(void) {
-    o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 12);
+    o->oOpacity = approach_f32_symmetric(o->oOpacity, 255, 10);
     if (cur_obj_nearest_object_with_behavior(bhvShadowBoss) == NULL) {
         o->activeFlags = 0;
     }
@@ -173,20 +178,15 @@ void bhv_rising_fist_init(void) {
 }
 
 
-f32 sFistSpeeds[] = {90.0f, 100.0f};
+// f32 sFistSpeeds[] = {90.0f, 100.0f};
 
 
 void bhv_rising_fist_loop(void) {
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
-    s16 index;
     if (obj == NULL) {
         o->activeFlags = 0;
         return;
     }
-    if (obj->oHealth == 1)
-        index = 1;
-    else
-        index = 0;
     switch (o->oAction) {
         case 0:
             if (o->prevObj->oOpacity == 0xFF) {
@@ -195,7 +195,7 @@ void bhv_rising_fist_loop(void) {
             }
             break;
         case 1:
-            o->oGraphYOffset = approach_f32(o->oGraphYOffset, 0.0f, sFistSpeeds[index], sFistSpeeds[index]);
+            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 0.0f, 100.0f);
             if (o->oTimer > 3) {
                 cur_obj_become_tangible();
                 o->prevObj->activeFlags = 0;
@@ -206,7 +206,7 @@ void bhv_rising_fist_loop(void) {
             }
             break;
         case 2:
-            o->oGraphYOffset = approach_f32(o->oGraphYOffset, -500.0f, 50.0f, 50.0f);
+            o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, -500.0f, 50.0f);
             if (o->oGraphYOffset == -500.0f) {
                 o->activeFlags = 0;
             }
@@ -222,6 +222,7 @@ void bhv_light_bubble_init(void) {
         o->activeFlags = 0;
         return;
     }
+    // o->oOpacity = 180;
     o->os16FA = obj->oHealth;
     obj_set_hitbox(o, &sLightBubbleHitbox);
     o->os16F4 = 0x40;
@@ -239,19 +240,27 @@ void bhv_light_bubble_loop(void) {
         case 0:
             o->os16F4 = approach_s16_symmetric(o->os16F4, 0x40, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 180, 0x10);
             obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
             if (obj != NULL && obj->oAction == 4) {
                 o->oAction = 1;
+                o->os16102 = CL_RandomMinMaxU16(0, 25);
             }
             break;
         case 1:
             o->os16F4 = approach_s16_symmetric(o->os16F4, 0xFF, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
+            if (o->oTimer > o->os16102) {
+                o->os16100 += 0x600;
+                o->oOpacity = 130 + (coss(o->os16100 + 0x2000) * 50);
+                o->oGraphYOffset = 15.0f - (coss(o->os16100) * 15.0f);
+            }
             if (o->oInteractStatus) {
                 /*obj2 = */spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
                 //obj2->oPosY -= 50.0f;
                 o->activeFlags = 0;
                 obj->oFC++;
+                cur_obj_play_sound_2(SOUND_GENERAL_QUIET_BUBBLE2);
                 //play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) obj->oF4 - 1) << 16), gGlobalSoundSource);
             }
             break;
@@ -324,13 +333,14 @@ void bhv_master_pressure_plate_loop(void) {
                     obj->oHealth--;
                     obj->oForwardVel = (obj->oVelY = 0);
                     obj->oInteractType = INTERACT_BOUNCE_TOP;
+                    obj->os16110 = 0;
                     cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
                 }
                 if (o->oBehParams2ndByte < 4) {
                     spawn_light_bubbles(o->oBehParams2ndByte);
                 }
             }
-            o->os16F4 = approach_s16_symmetric(o->os16F4, 160, 0x10);
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 240, 0x10);
             o->os16F6 = (o->os16F8 = o->os16F4);
             break;
         case 1:
@@ -362,6 +372,8 @@ void bhv_master_pressure_plate_loop(void) {
             o->oPosY = o->oHomeY - (2.0f*(o->o100 - o->oFC));
             if (o->oFC >= o->o100) {
                 o->oAction = 0;
+                cur_obj_play_sound_2(SOUND_MENU_STAR_SOUND);
+                // cur_obj_play_sound_2(SOUND_GENERAL_BIG_CLOCK);
                 o->oFC = 0;
                 vec3s_set(&o->os16F4, 160, 160, 160);
             }
@@ -476,13 +488,17 @@ void bhv_shadow_boss_loop(void) {
             }
             break;
         case 1:
+            o->os16F4 = approach_s16_asymptotic(o->os16F4, sShadowBossColors[4 - o->oHealth], 0x10);
+            o->os16F8 = (o->os16F6 = o->os16F4);
             handle_shadow_boss_phases(o->oObj100->oBehParams2ndByte);
             break;
         case 2:
             break;
         case 3:
             if (o->oHealth) {
-                o->os16F4 = approach_s16_asymptotic(o->os16F4, sShadowBossColors[4 - o->oHealth], 0x10);
+                o->os16110 += 0x600;
+                o->os16F4 = 110 + (coss(o->os16110) * 70);
+                // o->os16F4 = approach_s16_asymptotic(o->os16F4, sShadowBossColors[4 - o->oHealth], 0x10);
                 o->os16F8 = (o->os16F6 = o->os16F4);
                 cur_obj_update_floor_and_walls();
                 cur_obj_move_standard(-78);

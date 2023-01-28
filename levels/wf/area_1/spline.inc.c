@@ -47,7 +47,7 @@ const Trajectory wf_area_1_spline_Snufit1[] = {
 	TRAJECTORY_END(),
 };
 const Trajectory wf_area_1_spline_Snufit2[] = {
-	TRAJECTORY_POS( 0, -6360, -68, -6290),
+	TRAJECTORY_POS( 0, -6360, 55, -6290),
 	TRAJECTORY_POS( 1, -6947, 55, -6381),
 	TRAJECTORY_POS( 2, -8496, 55, -5189),
 	TRAJECTORY_POS( 3, -5244, 55, -4758),
