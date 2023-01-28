@@ -10142,3 +10142,29 @@ const BehaviorScript bhvDBlock[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvKeyCutscene[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SCALE(0, 30),
+    CALL_NATIVE(bhv_key_cutscene_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_key_cutscene_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvShyguyKeyCutscene[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    // ANIMATE(1),
+    SCALE(0, 125),
+    SET_HOME(),
+    CALL_NATIVE(bhv_shyguy_key_cutscene_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shyguy_key_cutscene_loop),
+    END_LOOP(),
+};

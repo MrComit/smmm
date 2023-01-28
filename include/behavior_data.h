@@ -845,6 +845,8 @@ extern const BehaviorScript bhvShowerWall[];
 extern const BehaviorScript bhvL2CushionFriend[];
 extern const BehaviorScript bhvDBlock[];
 extern const BehaviorScript bhvGPMistParticleSpawner[];
+extern const BehaviorScript bhvKeyCutscene[];
+extern const BehaviorScript bhvShyguyKeyCutscene[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -132,7 +132,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_NEW_FLAG_ELEVATOR_BOSS      /* 0x10000000 */ (1 << 28)
 #define SAVE_NEW_FLAG_FLOATING_PLANT     /* 0x20000000 */ (1 << 29)
 #define SAVE_NEW_FLAG_BAR_CUTSCENE       /* 0x40000000 */ (1 << 30)
-#define SAVE_NEW_FLAG_032                /* 0x80000000 */ (1 << 31)
+#define SAVE_NEW_FLAG_KEY_CUTSCENE       /* 0x80000000 */ (1 << 31)
 
 
 /*

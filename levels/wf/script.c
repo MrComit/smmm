@@ -143,6 +143,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_HEAVY_SWITCH, 3245, -190, -7323, 0, 90, 0, 0x00020000, bhvHeavySwitch),
 		OBJECT(MODEL_JOURNAL_BOOK, -3395, -16, -10704, 0, 0, 0, (DIALOG_053 << 16), bhvJournalBook),
 		OBJECT(MODEL_JOURNAL_BOOK, -133, 2000, -4961, 0, 0, 0, (DIALOG_049 << 16), bhvJournalBook),
+		OBJECT(MODEL_BIG_KEY, -42, 14, -17953, -90, 0, 180, (1 << 16), bhvKeyCutscene),
 		OBJECT(MODEL_LOCKED_CAGE, -3337, 0, -5810, 0, 0, 0, 0x00020000, bhvLockedCage),
 		OBJECT(MODEL_STAR_PIECE, -1685, 2738, 11977, 0, 0, 0, 0x05000000, bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -3832, 102, -11791, 0, 0, 0, 0x07000000, bhvStarPiece),

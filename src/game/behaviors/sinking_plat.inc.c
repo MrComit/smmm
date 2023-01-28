@@ -27,6 +27,7 @@ void bhv_bottled_lava_init(void) {
     o->header.gfx.scale[1] = (f32)o->oBehParams2ndByte;
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_BAR_CUTSCENE) {
         o->activeFlags = 0;
+        return;
     }
 
     if ((o->oBehParams >> 24) == 0) {

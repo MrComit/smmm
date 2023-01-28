@@ -1043,6 +1043,10 @@ void bhv_shower_wall_init(void);
 void bhv_l2_cushion_friend_init(void);
 void bhv_dblock_loop(void);
 void bhv_dblock_init(void);
+void bhv_key_cutscene_init(void);
+void bhv_key_cutscene_loop(void);
+void bhv_shyguy_key_cutscene_init(void);
+void bhv_shyguy_key_cutscene_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
