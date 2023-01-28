@@ -53,6 +53,7 @@ void bhv_printer_loop(void) {
             obj->oMoveAngleYaw = (obj->oFaceAngleYaw = o->oMoveAngleYaw);
             obj->oPosY += 55.0f;
             o->oTimer = 0;
+            cur_obj_play_sound_2(SOUND_OBJ_MRI_SHOOT);
         }
     }
 }
@@ -73,6 +74,7 @@ void bhv_pressure_plate_loop(void) {
             o->oPosY = approach_f32(o->oPosY, o->oHomeY, 2.5f, 2.5f);
             if (gMarioObject->platform == o) {
                 o->oAction = 1;
+                cur_obj_play_sound_1(SOUND_GENERAL_PENDULUM_SWING);
                 sServantsLights = 1;
             }
             gRoomColors[5][0] = approach_s16_symmetric(gRoomColors[5][0], 16, 0x1);

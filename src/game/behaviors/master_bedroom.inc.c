@@ -327,6 +327,7 @@ void bhv_master_pressure_plate_loop(void) {
             o->oPosY = approach_f32(o->oPosY, o->oHomeY, 2.5f, 2.5f);
             if (gMarioObject->platform == o) {
                 o->oAction = 1;
+                cur_obj_play_sound_1(SOUND_GENERAL_PENDULUM_SWING);
                 obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
                 if (obj != NULL) {
                     obj->oAction = 3;

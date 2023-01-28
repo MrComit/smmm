@@ -122,6 +122,7 @@ void bhv_mirror_switch_loop(void) {
                 o->os16F4 -= 0x2000;
             }*/
             if (gPlayer1Controller->buttonDown & L_JPAD || gPlayer1Controller->buttonDown & L_CBUTTONS) {
+                cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
                 o->os16F6 = approach_s16_symmetric(o->os16F6, 0xC0, 0x8);
                 o->os16F4 += o->os16F6;
                 o->os16106++;
@@ -134,6 +135,7 @@ void bhv_mirror_switch_loop(void) {
             }
             
             if (gPlayer1Controller->buttonDown & R_JPAD || gPlayer1Controller->buttonDown & R_CBUTTONS) {
+                cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
                 o->os16F8 = approach_s16_symmetric(o->os16F8, 0xC0, 0x8);
                 o->os16F4 -= o->os16F8;
                 o->os16104++;
@@ -146,8 +148,14 @@ void bhv_mirror_switch_loop(void) {
             }
 
             if (gPlayer1Controller->buttonPressed & U_JPAD || gPlayer1Controller->buttonPressed & U_CBUTTONS) {
+                // if (o->os16F6 != 0) {
+                    cur_obj_play_sound_1(SOUND_OBJ_PIRANHA_PLANT_APPEAR);
+                // }
                 o->os16F6 = 0;
             } else if (gPlayer1Controller->buttonPressed & D_JPAD || gPlayer1Controller->buttonPressed & D_CBUTTONS) {
+                // if (o->os16F6 != 1) {
+                    cur_obj_play_sound_1(SOUND_GENERAL_CASTLE_TRAP_OPEN);
+                // }
                 o->os16F6 = 1;
             }
 

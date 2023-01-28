@@ -119,6 +119,7 @@ void bhv_gushing_water_init(void) {
 
 
 void bhv_gushing_water_loop(void) {
+    cur_obj_play_sound_1(SOUND_ENV_WATERFALL1);
     switch (o->oAction) {
         case 0:
             o->header.gfx.scale[1] = approach_f32(o->header.gfx.scale[1], o->oFloatF4, 0.05f, 0.05f);
@@ -128,6 +129,11 @@ void bhv_gushing_water_loop(void) {
             break;
         case 1:
             break;
+    }
+    if (absf(gMarioState->pos[1] - o->oPosY) < 200.0f) {
+        cur_obj_become_intangible();
+    } else {
+        cur_obj_become_tangible();
     }
     o->hitboxHeight = 1000 * o->header.gfx.scale[1];
     o->oFlags &= ~OBJ_FLAG_HOLDABLE;
@@ -172,7 +178,15 @@ void pipeseg_free_loop(void) {
         o->oObjF4 = NULL;
     }
 
-    if (sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
+    for (i = 0; i < 3; i++) {
+        CL_dist_between_points(&o->oPosX, sPipeSlots[i], &dist);
+        if (dist < 150.0f) {
+            h = 1;
+            break;
+        }
+    }
+
+    if (h == 0 && sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
         o->oFC = 1;
     }
 
@@ -190,13 +204,6 @@ void pipeseg_free_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            for (i = 0; i < 3; i++) {
-                CL_dist_between_points(&o->oPosX, sPipeSlots[i], &dist);
-                if (dist < 150.0f) {
-                    h = 1;
-                    break;
-                }
-            }
             if (h) {
                 vec3f_copy(&o->oPosX, sPipeSlots[i]);
                 o->oMoveAngleYaw = sPipeRots[i];

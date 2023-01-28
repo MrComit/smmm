@@ -1251,7 +1251,7 @@ extern Vtx wf_dl_Master_Bedroom_001_mesh_layer_1_vtx_0[123];
 extern Gfx wf_dl_Master_Bedroom_001_mesh_layer_1_tri_0[];
 extern Vtx wf_dl_Master_Bedroom_001_mesh_layer_1_vtx_1[4];
 extern Gfx wf_dl_Master_Bedroom_001_mesh_layer_1_tri_1[];
-extern Vtx wf_dl_Master_Bedroom_001_mesh_layer_1_vtx_2[24];
+extern Vtx wf_dl_Master_Bedroom_001_mesh_layer_1_vtx_2[28];
 extern Gfx wf_dl_Master_Bedroom_001_mesh_layer_1_tri_2[];
 extern Vtx wf_dl_ToFloor1_002_mesh_layer_1_vtx_0[762];
 extern Gfx wf_dl_ToFloor1_002_mesh_layer_1_tri_0[];

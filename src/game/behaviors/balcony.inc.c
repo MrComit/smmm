@@ -121,11 +121,14 @@ void bhv_lightning_loop(void) {
                 if (o->oOpacity == 255) {
                     o->oAction = 1;
                     cur_obj_shake_screen(0);
+                    cur_obj_play_sound_1(SOUND_GENERAL_GRINDEL_ROLL);
+                    // cur_obj_play_sound_1(SOUND_AIR_AMP_BUZZ);
                 }
             }
             break;
         case 1:
             cur_obj_become_tangible();
+            cur_obj_play_sound_1(SOUND_AIR_AMP_BUZZ);
             if (o->oTimer > 30) {
                 o->oAction = 2;
             }
