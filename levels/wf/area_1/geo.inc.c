@@ -27,11 +27,31 @@ const GeoLayout wf_area_1_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout wf_dl_01__Lounge_geo[] = {
+const GeoLayout wf_dl_bb_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Bookshelf_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Couch_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Hallway_001_mesh_layer_1),
+		GEO_ASM(0x15, geo_set_red_painting),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Painting_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_cc_006_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout wf_dl_01__Lounge_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_lounge),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, wf_dl_bb_geo),
+			GEO_BRANCH(1, wf_dl_cc_006_geo),
+		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, wf_dl_FloorMats_001_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Gate_Indicator_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, wf_dl_Gate_Indicator_001_mesh_layer_2),
@@ -41,8 +61,6 @@ const GeoLayout wf_dl_01__Lounge_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Hallway_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Hallway_007_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, wf_dl_Hallway_008_mesh_layer_4),
-		GEO_ASM(0x15, geo_set_red_painting),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Painting_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Plant_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, wf_dl_Plant_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Simple_Table_003_mesh_layer_1),
@@ -205,7 +223,7 @@ const GeoLayout wf_dl_cc_001_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout wf_dl_bb_geo[] = {
+const GeoLayout wf_dl_bb_004_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_SWITCH_CASE(2, geo_switch_console),
@@ -247,7 +265,7 @@ const GeoLayout wf_dl_04__Bathroom_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_SWITCH_CASE(2, geo_switch_bathroom),
 		GEO_OPEN_NODE(),
-			GEO_BRANCH(1, wf_dl_bb_geo),
+			GEO_BRANCH(1, wf_dl_bb_004_geo),
 			GEO_BRANCH(1, wf_dl_cc_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_aa_002_mesh_layer_1),

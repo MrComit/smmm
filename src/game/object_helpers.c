@@ -2395,6 +2395,31 @@ Gfx *geo_switch_bar_wall(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+#ifdef AVOID_UB
+Gfx *geo_switch_lounge(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_lounge(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (gMarioState->pos[2] < -12500.0f && gIsConsole) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
+
 
 extern s8 sLevelRoomOffsets[];
 extern s8 gGlobalMarioRoom;
