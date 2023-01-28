@@ -611,6 +611,7 @@ extern const BehaviorScript bhvHeavyObject[];
 extern const BehaviorScript bhvHeavySwitch[];
 extern const BehaviorScript bhvL2Gate[];
 extern const BehaviorScript bhvL2Lava[];
+extern const BehaviorScript bhvBottledLava[];
 extern const BehaviorScript bhvLemon[];
 extern const BehaviorScript bhvLightning[];
 extern const BehaviorScript bhvLightningSpinner[];

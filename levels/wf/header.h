@@ -217,4 +217,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/floating_plant/collision_header.h"
 
+#include "levels/wf/bottled_lava/geo_header.h"
+
 #endif

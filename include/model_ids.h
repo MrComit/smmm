@@ -692,6 +692,7 @@
 #define MODEL_DBLOCK              0x5C
 #define MODEL_LIGHTNING_SPINNER   0x5D
 #define MODEL_FLOATING_PLANT      0x5E
+#define MODEL_BOTTLED_LAVA        0x5F
 
 // 0x6C-0x73
 

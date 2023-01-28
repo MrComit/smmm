@@ -76,6 +76,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_DBLOCK, dblock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LIGHTNING_SPINNER, lightning_spinner_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FLOATING_PLANT, floating_plant_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BOTTLED_LAVA, bottled_lava_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -165,6 +166,8 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 3025, -500, 5729, 0, 0, 0, 0x00790000, bhvPoleGrabbing),
 		OBJECT(MODEL_TOKEN, 3452, 10, -472, 0, 99, 0, 0x00000800, bhvToken),
 		OBJECT(MODEL_TOKEN, 2979, 1649, 6360, 0, -180, 0, 0x00020A00, bhvToken),
+		OBJECT(MODEL_BOTTLED_LAVA, -764, 1218, -1965, 0, 27, 0, (80 << 16), bhvBottledLava),
+		OBJECT(MODEL_BOTTLED_LAVA, 2327, 1218, -2173, 0, 0, 0, (80 << 16), bhvBottledLava),
 		OBJECT(MODEL_BOO_COIN, -810, 2266, 14226, 0, 0, 0, 0x00000000, bhvBooCoin),
 		OBJECT(MODEL_HAUNTED_CAGE, 1738, 2800, 7428, 0, 0, 0, 0x00000200, bhvBooCoinCage),
 		OBJECT(MODEL_BOO_COIN, 988, 2291, 15419, 0, 0, 0, 0x00000000, bhvBooCoin),
