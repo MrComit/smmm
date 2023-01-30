@@ -1,0 +1,2 @@
+extern void scroll_sts_mat_standing_sunflower_FlowerPetal_003_layer1();
+extern void scroll_jrb_level_geo_standing_sunflower();

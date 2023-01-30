@@ -44,9 +44,11 @@ void bhv_bottled_lava_init(void) {
 }
 
 void bhv_bottled_lava_loop(void) {
+    struct Object *obj;
     if ((o->oBehParams >> 24) == 0) {
         if (o->oTimer > 15) {
-            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 1.0f);
+            o->oFloat100 = approach_f32_symmetric(o->oFloat100, 3.6f, 0.034f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, o->oFloat100);
             if (o->header.gfx.scale[1] < 3.0f) {
                 o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.0f, 0.2f);
                 o->header.gfx.scale[2] = o->header.gfx.scale[0];
@@ -59,15 +61,25 @@ void bhv_bottled_lava_loop(void) {
         switch (o->oAction) {
             case 0:
                 if (o->oTimer > 15) {
-                    o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 170.0f, 3.0f);
+                    o->oFloat100 = approach_f32_symmetric(o->oFloat100, 10.0f, 0.1f);
+                    o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 170.0f, o->oFloat100);
                     if (o->header.gfx.scale[1] == 170.0f && o->oObjF4->activeFlags == 0) {
                         o->oAction = 1;
+                        o->header.gfx.scale[1] -= 3.0f;
+                        o->oGraphYOffset -= 30.0f;
+                    }
+                    if (o->header.gfx.scale[1] >= 160.0f) {
+                        obj = cur_obj_nearest_object_with_behavior(bhvL2Lava);
+                        if (obj != NULL) {
+                            obj->o100 = 1;
+                        }
                     }
                 }
                 break;
             case 1:
-                o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 3.0f);
-                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, -1700.0f, 30.0f);
+                o->oFloat100 = approach_f32_symmetric(o->oFloat100, 10.0f, 0.1f);
+                o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, o->oFloat100);
+                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, -1700.0f, o->oFloat100 * 10.0f);
                 if (o->header.gfx.scale[1] == 0.0f) {
                     o->activeFlags = 0;
                 }
@@ -90,15 +102,17 @@ void bhv_l2_lava_loop(void) {
     f32 oldPos = o->oPosY;
     switch (o->oAction) {
         case 0:
-            vec3f_set(gComitCutscenePosVec, -800.0f, 2607.0f, 1301.0f);
-            vec3f_set(gComitCutsceneFocVec, 824.0f, 618.0f, -3364.0f);
-            o->oAction = 1;
+            if (gMarioCurrentRoom == o->oRoom) {                
+                vec3f_set(gComitCutscenePosVec, -800.0f, 2607.0f, 1301.0f);
+                vec3f_set(gComitCutsceneFocVec, 824.0f, 618.0f, -3364.0f);
+                o->oAction = 1;
+            }
             break;
         case 1:
             set_mario_npc_dialog(1);
             gCamera->comitCutscene = 0xFF;
-            if (o->oTimer > 70) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 3.1f);
+            if (o->o100) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 9.1f);
                 if (o->oPosY == o->oHomeY) {
                     o->oAction = 2;
                     save_file_set_newflags(SAVE_NEW_FLAG_BAR_CUTSCENE, 0);

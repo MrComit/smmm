@@ -7325,9 +7325,10 @@ const BehaviorScript bhvSunflower[] = {
 
 const BehaviorScript bhvDirtMound[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(dirt_mound_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x4000),
     CALL_NATIVE(bhv_dirt_mound_init),
     SCALE(0, 120),
     BEGIN_LOOP(),

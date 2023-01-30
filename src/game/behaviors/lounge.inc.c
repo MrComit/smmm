@@ -114,9 +114,13 @@ void bhv_shyguy_key_cutscene_loop(void) {
 
 
 void bhv_key_cutscene_init(void) {
+#ifndef SMMM_DEBUG
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_KEY_CUTSCENE) {
+#endif
         o->activeFlags = 0;
+#ifndef SMMM_DEBUG
     }
+#endif
     o->oAnimState = o->oBehParams2ndByte;
 }
 
