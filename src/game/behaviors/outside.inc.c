@@ -267,12 +267,17 @@ void sun_free_loop(void) {
     }
     if (o->os16FC == 1) {
         o->os16FE++;
-        if (o->os16FE > 90) {
+        if (o->os16FE > 10) {
+            o->header.gfx.scale[0] -= 0.05f;
+            o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+        }
+        if (o->os16FE > 30) {
             o->os16FE = 0;
             o->oHeldState = 0;
             vec3f_copy(&o->oPosX, &o->oHomeX);
             o->oFaceAngleYaw = 0;
             o->os16FC = 0;
+            o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0] = 1.0f;
         }
     }
 }

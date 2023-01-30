@@ -10,6 +10,7 @@
 #include "mario_step.h"
 #include "game/area.h"
 #include "object_list_processor.h"
+#include "behavior_data.h"
 
 s32 gLowGrav = 0;
 
@@ -676,6 +677,11 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
         //! On one qf, hit OOB/ceil/wall to store the 2 return value, and continue
         // getting 0s until your last qf. Graze a wall on your last qf, and it will
         // return the stored 2 with a sharply angled reference wall. (some gwks)
+        if (quarterStepResult == AIR_STEP_HIT_WALL) {
+            if (m->usedObj != NULL && obj_has_behavior(m->usedObj, bhvL3Sun)) {
+                quarterStepResult = AIR_STEP_NONE;
+            }
+        }
 
         if (quarterStepResult != AIR_STEP_NONE) {
             stepResult = quarterStepResult;
