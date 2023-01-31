@@ -54,6 +54,7 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_GARDEN_GATE, garden_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_EXIT_WALL, exit_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GARDEN_HOLES, garden_holes_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BUCKET_TOP, bucket_top_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -72,6 +73,10 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_NONE, 0, -230, 0, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 2098, -230, 3789, 0, -180, 0, 0x000C0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 0, -230, 0),
+		OBJECT(MODEL_BUCKET_TOP, -6137, -478, 1162, 0, -110, 0, (1 << 16), bhvBucketTop),
+		OBJECT(MODEL_BUCKET_TOP, -662, -478, 3168, 0, 17, 0, (2 << 16), bhvBucketTop),
+		OBJECT(MODEL_BUCKET_TOP, -2281, -478, -2120, 0, 17, 0, (3 << 16), bhvBucketTop),
+		OBJECT(MODEL_BUCKET_TOP, 822, -478, -2171, 0, 116, 0, 0x00000000, bhvBucketTop),
 		OBJECT(MODEL_DIRT_MOUND, 776, -488, -1265, 0, 0, 0, 0x00000000, bhvDirtMound),
 		OBJECT(MODEL_DIRT_MOUND, 3208, -488, 3931, 0, 0, 0, 0x00000000, bhvDirtMound),
 		OBJECT(MODEL_DIRT_MOUND, -1528, -488, 3343, 0, 0, 0, 0x00000000, bhvDirtMound),

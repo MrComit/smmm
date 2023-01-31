@@ -68,3 +68,5 @@
 #include "levels/jrb/poochy/anims/data.inc.c"
 #include "levels/jrb/poochy/anims/table.inc.c"
 #include "levels/jrb/garden_holes/model.inc.c"
+#include "levels/jrb/bucket_top/model.inc.c"
+#include "levels/jrb/bucket_top/collision.inc.c"

@@ -714,6 +714,7 @@
 #define MODEL_GARDEN_GATE         0xF4
 #define MODEL_EXIT_WALL           0xF3
 #define MODEL_GARDEN_HOLES        0xF2
+#define MODEL_BUCKET_TOP          0xF1
 
 
 // LEVEL 4 MODELS - 0xFF TO 0xE2 ARE FREE

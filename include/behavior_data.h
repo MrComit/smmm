@@ -847,6 +847,7 @@ extern const BehaviorScript bhvDBlock[];
 extern const BehaviorScript bhvGPMistParticleSpawner[];
 extern const BehaviorScript bhvKeyCutscene[];
 extern const BehaviorScript bhvShyguyKeyCutscene[];
+extern const BehaviorScript bhvBucketTop[];
 
 
 #endif // BEHAVIOR_DATA_H

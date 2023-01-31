@@ -7381,9 +7381,10 @@ const BehaviorScript bhvGardenHoles[] = {
 
 const BehaviorScript bhvFlowerWall[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     LOAD_COLLISION_DATA(flower_wall_collision),
     SET_FLOAT(oDrawingDistance, 0x6000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     CALL_NATIVE(bhv_flower_wall_init),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
@@ -7761,9 +7762,10 @@ const BehaviorScript bhvGardenGate[] = {
 
 const BehaviorScript bhvExitWall[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST),
     LOAD_COLLISION_DATA(flower_wall_collision),
     SET_FLOAT(oDrawingDistance, 0x6000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     CALL_NATIVE(bhv_exit_wall_init),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
@@ -10167,5 +10169,19 @@ const BehaviorScript bhvShyguyKeyCutscene[] = {
     CALL_NATIVE(bhv_shyguy_key_cutscene_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_shyguy_key_cutscene_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBucketTop[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(bucket_top_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    // SET_FLOAT(oCollisionDistance, 0x7FFF),
+    CALL_NATIVE(bhv_bucket_top_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bucket_top_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

@@ -183,7 +183,7 @@ void bhv_blue_coin_switch_auto_init(void) {
         sDelayedWarpTimer = 1;
         sSourceWarpNodeId = 0xAB;
         music_changed_through_warp(sSourceWarpNodeId);
-        shade_screen_rgba(0, 0, 0, 255);
+        // shade_screen_rgba(0, 0, 0, 255);
     }
 }
 

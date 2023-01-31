@@ -55,6 +55,61 @@ static struct ObjectHitbox sPelletHitbox = {
 
 s32 sSunflowers = 0;
 
+
+void bhv_bucket_top_init(void) {
+    if (o->oBehParams2ndByte == 0) {
+        o->os16F4 = 1;
+        o->oOpacity = 40;
+    }
+    if ((save_file_get_golden_goombas() & (1 << 3))) {
+        o->oAction = 3;
+        if (o->oBehParams2ndByte < 3) {
+            o->oOpacity = 255;
+        }
+    }
+}
+
+
+void bhv_bucket_top_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (o->os16F4 && cur_obj_is_mario_ground_pounding_platform()) {
+                o->oAction = 1;
+                obj = CL_nearest_object_with_behavior_and_field(bhvBucketTop, 0x144, o->oBehParams2ndByte + 1);
+                if (obj == NULL) {
+                    o->oAction = 2;
+                } else {
+                    o->oAction = 1;
+                    obj->os16F4 = 1;
+                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                }
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 10);
+            if (o->oOpacity == 255) {
+                o->oAction = 3;
+            }
+            break;
+        case 2:
+            if (!(save_file_get_golden_goombas() & (1 << 3))) {
+                save_file_set_golden_goombas(3);
+                play_puzzle_jingle();
+                o->oObjF8 = spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+                vec3f_set(&o->oObjF8->oPosX, -1400.0f, 500.0f, 1200.0f);
+                gCamera->comitCutscene = 0xFF;
+                gComitCutsceneTimer = 45;
+                o->oObjF8->os16110 = 3045;
+                vec3f_set(gComitCutscenePosVec, gMarioState->pos[0] - 500.0f, gMarioState->pos[1] + 1000.0f, gMarioState->pos[2] - 1000.0f);
+                vec3f_copy(gComitCutsceneFocVec, &o->oObjF8->oPosX);
+                o->oAction = 3;
+            }
+            break;
+    }
+}
+
+
 void bhv_sunflower_pellet_init(void) {
     o->oForwardVel = 30.0f;
     obj_set_hitbox(o, &sPelletHitbox);

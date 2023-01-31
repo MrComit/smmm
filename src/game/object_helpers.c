@@ -174,6 +174,42 @@ Gfx *geo_update_projectile_pos_from_parent(s32 callContext, UNUSED struct GraphN
 }
 
 
+Gfx *geo_update_layer_transparency_layer(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 objectOpacity;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        if (gCurGraphNodeHeldObject != NULL) {
+            objectGraphNode = gCurGraphNodeHeldObject->objNode;
+        }
+
+        objectOpacity = objectGraphNode->oOpacity;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+
+        dlHead = dlStart;
+
+        currentGraphNode->fnNode.node.flags = (currentGraphNode->parameter << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
+            if (currentGraphNode->parameter != 10) {
+                if (objectGraphNode->activeFlags & ACTIVE_FLAG_DITHERED_ALPHA) {
+                    gDPSetAlphaCompare(dlHead++, G_AC_DITHER);
+                }
+            }
+
+        gDPSetEnvColor(dlHead++, 255, 255, 255, objectOpacity);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
+
 Gfx *geo_update_layer_transparency_cutout(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;

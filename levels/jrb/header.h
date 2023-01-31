@@ -113,4 +113,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/garden_holes/geo_header.h"
 
+#include "levels/jrb/bucket_top/geo_header.h"
+
+#include "levels/jrb/bucket_top/collision_header.h"
+
 #endif
