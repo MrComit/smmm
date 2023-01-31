@@ -60,12 +60,14 @@ extern Vec3f gComitCutsceneFocVec;
 
 void bhv_bucket_top_init(void) {
     if (o->oBehParams2ndByte == 0) {
-        o->os16F4 = 1;
+        o->oAction = 3;
         o->oOpacity = 40;
+    } else if (o->oBehParams2ndByte == 1) {
+        o->os16F4 = 1;
     }
     if ((save_file_get_golden_goombas() & (1 << 3))) {
         o->oAction = 3;
-        if (o->oBehParams2ndByte < 3) {
+        if (o->oBehParams2ndByte < 4) {
             o->oOpacity = 255;
         }
     }
@@ -447,11 +449,11 @@ void bhv_poochy_boss_init(void) {
 }
 
 void bhv_poochy_boss_loop(void) {
-    s32 jumps;
+    s32 jumps, frame;
     switch (o->oAction) {
         case 0:
             if (save_file_get_newflags(0) & (1 << 8)) {
-                if (o->oTimer > 60) {
+                if (o->oTimer > 90) {
                     o->oAction = 1;
                     cur_obj_enable();
                     o->oObjF4 = spawn_object(o, MODEL_GARDEN_HOLES, bhvGardenHoles);
@@ -491,6 +493,11 @@ void bhv_poochy_boss_loop(void) {
         case 2:
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(-78);
+            // CL_PRINT(2, "%d", o->header.gfx.animInfo.animFrame)
+            frame = o->header.gfx.animInfo.animFrame;
+            if (o->oMoveFlags & OBJ_MOVE_ON_GROUND && frame == 1 || frame == 8 || frame == 16 || frame == 26) {
+                cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK);
+            }
             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x800);
             if (o->os16FA == 0) {
                 o->oForwardVel = approach_f32(o->oForwardVel, 40.0f, 0.5f, 0.5f);
@@ -498,10 +505,15 @@ void bhv_poochy_boss_loop(void) {
                 if (o->oTimer > 90) {
                     o->os16FA = 1;
                     o->oTimer = 0;
+                    cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_ROAR);
                 }
             } else {
                 o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 52.0f, 0.27f);
-                o->os16112 = approach_s16_symmetric(o->os16112, 0x300, 0xC);
+                if (absi((s16)o->oMoveAngleYaw - o->oAngleToMario) < 0x4000) {
+                    o->os16112 = approach_s16_symmetric(o->os16112, 0x300, 0xC);
+                } else {
+                    o->os16112 = approach_s16_symmetric(o->os16112, 0x400, 0xC);
+                }
                 o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, o->os16112);
                 if (o->oDistanceToMario < 1500.0f && ((absi(o->oMoveAngleYaw - o->oAngleToMario) < 0x1000 && o->oTimer > 120) || o->os16F8 != 0)) {
                     jumps = o->oHealth < 3 ? 2 : 0;
@@ -512,6 +524,7 @@ void bhv_poochy_boss_loop(void) {
                         o->oAction = 6;
                         cur_obj_init_animation_with_sound(1);
                     }
+                    cur_obj_play_sound_2(SOUND_OBJ_KING_BOBOMB_JUMP);
                     o->os16112 = 0x80;
                     o->oVelY = 77.0f;
                     o->oForwardVel = 40.0f;
@@ -537,6 +550,7 @@ void bhv_poochy_boss_loop(void) {
                 o->oFaceAnglePitch = 0x4000;
                 o->oPosY -= 200.0f;
                 o->os16F8 = 0;
+                cur_obj_play_sound_2(SOUND_OBJ_BOWSER_WALK);
             }
             if (dist_between_objects(o, gMarioObject) < 400.0f) {
                 CL_get_hit(gMarioState, o, 2);
@@ -561,6 +575,7 @@ void bhv_poochy_boss_loop(void) {
                     set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
                     o->header.gfx.scale[1] = (o->header.gfx.scale[0] = 0.9f);
                     o->header.gfx.scale[2] = 0.6f;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_BOUNCE_TOP);
                 }
             } else {
                 o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[1], 0.8f, 0.02f, 0.02f);
