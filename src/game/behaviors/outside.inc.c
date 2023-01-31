@@ -54,7 +54,9 @@ static struct ObjectHitbox sPelletHitbox = {
 
 
 s32 sSunflowers = 0;
-
+extern s16 gComitCutsceneTimer;
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
 
 void bhv_bucket_top_init(void) {
     if (o->oBehParams2ndByte == 0) {
@@ -409,16 +411,26 @@ void bhv_exit_wall_init(void) {
 void bhv_exit_wall_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (cur_obj_nearest_object_with_behavior(bhvPoochyBoss) == NULL ) {
+            if (cur_obj_nearest_object_with_behavior(bhvPoochyBoss) == NULL) {
                o->oAction = 1;
                play_puzzle_jingle();
+               gCamera->comitCutscene = 0xFF;
+               vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
+               gComitCutsceneFocVec[1] += 500.0f;
+               vec3f_set(gComitCutscenePosVec, o->oPosX, o->oPosY + 1500.0f, o->oPosZ - 2000.0f);
             }
             break;
         case 1:
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 10);
-            if (o->oOpacity < 10) {
-                o->activeFlags = 0;
-                save_file_set_newflags(SAVE_NEW_FLAG_EXIT_DOOR, 0);
+            set_mario_npc_dialog(1);
+            gCamera->comitCutscene = 0xFF;
+            if (o->oTimer > 15) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 8);
+                if (o->oOpacity == 0) {
+                    o->activeFlags = 0;
+                    gComitCutsceneTimer = 30;
+                    set_mario_npc_dialog(0);
+                    save_file_set_newflags(SAVE_NEW_FLAG_EXIT_DOOR, 0);
+                }
             }
             break;
     }
@@ -435,6 +447,7 @@ void bhv_poochy_boss_init(void) {
 }
 
 void bhv_poochy_boss_loop(void) {
+    s32 jumps;
     switch (o->oAction) {
         case 0:
             if (save_file_get_newflags(0) & (1 << 8)) {
@@ -448,20 +461,31 @@ void bhv_poochy_boss_loop(void) {
                     o->oObjF4->oFaceAngleYaw = o->oObjF4->oMoveAngleYaw = 0;
                     o->oObjF4->oFaceAnglePitch = o->oObjF4->oMoveAnglePitch = 0;
                     o->oObjF4->oFaceAngleRoll = o->oObjF4->oMoveAngleRoll = 0;
+                    gCamera->comitCutscene = 0xFF;
+                    vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
+                    vec3f_copy(gComitCutscenePosVec, &o->oPosX);
+                    gComitCutscenePosVec[0] -= 3000.0f;
                 }
             } else {
                 o->oTimer = 0;
             }
             break;
         case 1:
+            set_mario_npc_dialog(1);
+            gCamera->comitCutscene = 0xFF;
+            gComitCutscenePosVec[1] = gComitCutsceneFocVec[1] = o->oPosY;
             cur_obj_move_standard(-78);
             o->oObjF4->oPosY = o->oPosY;
             o->oObjF4->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+                gComitCutsceneTimer = 15;
+                set_mario_npc_dialog(0);
                 o->oAction = 2;
+                o->os16112 = 0x80;
                 o->oObjF4->oPosY = -488.0f;
                 o->oObjF4->oCollisionDistance = 32767.0f;
                 cur_obj_init_animation_with_sound(0);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
             }
             break;
         case 2:
@@ -471,20 +495,24 @@ void bhv_poochy_boss_loop(void) {
             if (o->os16FA == 0) {
                 o->oForwardVel = approach_f32(o->oForwardVel, 40.0f, 0.5f, 0.5f);
                 o->oMoveAngleYaw += 0x100;
-                if (o->oTimer > 180) {
+                if (o->oTimer > 90) {
                     o->os16FA = 1;
+                    o->oTimer = 0;
                 }
             } else {
-                o->oForwardVel = approach_f32(o->oForwardVel, 30.0f, 1.0f, 1.0f);
-                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x180);
-                if (o->oDistanceToMario < 1500.0f && (absi(o->oMoveAngleYaw - o->oAngleToMario) < 0x1000 || o->os16F8 != 0)) {
-                    if (o->os16F8 > (2 - o->oHealth)) {
+                o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 52.0f, 0.27f);
+                o->os16112 = approach_s16_symmetric(o->os16112, 0x300, 0xC);
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, o->os16112);
+                if (o->oDistanceToMario < 1500.0f && ((absi(o->oMoveAngleYaw - o->oAngleToMario) < 0x1000 && o->oTimer > 120) || o->os16F8 != 0)) {
+                    jumps = o->oHealth < 3 ? 2 : 0;
+                    if (o->os16F8 >= jumps) {
                         o->oAction = 3;
                         cur_obj_init_animation_with_sound(1);
                     } else {
                         o->oAction = 6;
                         cur_obj_init_animation_with_sound(1);
                     }
+                    o->os16112 = 0x80;
                     o->oVelY = 77.0f;
                     o->oForwardVel = 40.0f;
                     o->os16FA = 0;
@@ -568,6 +596,7 @@ void bhv_poochy_boss_loop(void) {
             if (o->oTimer > 90) {
                 o->activeFlags = 0;
                 o->oObjF4->activeFlags = 0;
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
             }
             break;
         case 6:
