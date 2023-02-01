@@ -1389,8 +1389,13 @@ void fixed_cam_presets(struct Camera *c) {
             break;
         case 4:
             vec3f_set(c->pos, 0.0f, m->pos[1] + 1500.0f, 0.0f);
-            vec3f_set(c->focus, 0.0f, m->pos[1], 0.0f);
+            if (gIsConsole) {
+                vec3f_set(c->focus, 0.1f, m->pos[1], 5.0f);
+            } else {
+                vec3f_set(c->focus, 0.0f, m->pos[1], 0.0f);
+            }
             c->yaw = c->nextYaw = 0x8000;
+            s8DirModeBaseYaw = 0;
             break;
         case 5:
             c->pos[1] = m->pos[1] + 600.0f;
@@ -6977,7 +6982,6 @@ struct CameraTrigger sCamWF[] = {
 };
 struct CameraTrigger sCamJRB[] = {
 	{1, cam_underground, -1812, -3161, 786, 7486, 2206, 7218, 0xffff},
-	{2, cam_garden_fall, 0, 7759, 0, 6788, 12056, 6788, 0xffff},
 	NULL_TRIGGER
 };
 struct CameraTrigger sCamCastleGrounds[] = {
