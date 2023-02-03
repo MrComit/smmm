@@ -640,7 +640,6 @@ extern const BehaviorScript bhvGardenHoles[];
 extern const BehaviorScript bhvFlowerWall[];
 extern const BehaviorScript bhvDarkPiranha[];
 extern const BehaviorScript bhvL3Sun[];
-extern const BehaviorScript bhvSunblock[];
 extern const BehaviorScript bhvStandingSunflower[];
 extern const BehaviorScript bhvSunflowerPellet[];
 extern const BehaviorScript bhvEnvFlame[];
@@ -663,7 +662,6 @@ extern const BehaviorScript bhvFistSpawner[];
 extern const BehaviorScript bhvBedroomObject[];
 extern const BehaviorScript bhvBrokenKey[];
 extern const BehaviorScript bhvL2RoomGate[];
-extern const BehaviorScript bhvSunblockBig[];
 extern const BehaviorScript bhvGardenGate[];
 extern const BehaviorScript bhvExitWall[];
 extern const BehaviorScript bhvRubberband[];
@@ -848,6 +846,8 @@ extern const BehaviorScript bhvGPMistParticleSpawner[];
 extern const BehaviorScript bhvKeyCutscene[];
 extern const BehaviorScript bhvShyguyKeyCutscene[];
 extern const BehaviorScript bhvBucketTop[];
+extern const BehaviorScript bhvSunblockCol[];
+extern const BehaviorScript bhvSunblockBigCol[];
 
 
 #endif // BEHAVIOR_DATA_H

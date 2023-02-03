@@ -229,6 +229,12 @@ void bhv_dark_piranha_loop(void) {
     struct Object *obj;
     cur_obj_scale(o->oFirePiranhaPlantScale);
 
+    if ((o->oDistanceToMario < 2500.0f && o->oPosY > gMarioState->pos[1] - 800.0f) || !gIsConsole) {
+        cur_obj_unhide();
+    } else {
+        cur_obj_hide();
+    }
+
     switch (o->oAction) {
         case 0:
             dark_piranha_act_hide();
@@ -264,32 +270,24 @@ void bhv_dark_piranha_init(void) {
     //o->oAction = 1;
 }
 
+extern s32 gSunblockOpacity;
 
-
-void bhv_sunblock_loop(void) {
-    struct Object *obj;
+void bhv_sunblock_col_loop(void) {
     switch (o->oAction) {
         case 0:
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0x38, 0xC);
-            obj = cur_obj_nearest_object_with_behavior(bhvL3Sun);
-            if (obj == NULL)
-                o->activeFlags = 0;
-            if (obj->oHeldState == HELD_HELD) {
+            if (gSunblockOpacity != 0x38) {
                 o->oAction = 1;
             }
             break;
         case 1:
             load_object_collision_model();
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xA0, 0x10);
-            obj = cur_obj_nearest_object_with_behavior(bhvL3Sun);
-            if (obj == NULL)
-                o->activeFlags = 0;
-            if (obj->oHeldState != HELD_HELD) {
+            if (gSunblockOpacity == 0x38) {
                 o->oAction = 0;
             }
             break;
     }
 }
+
 
 void sun_held_loop(void) {
     cur_obj_become_intangible();
@@ -323,7 +321,16 @@ void sun_free_loop(void) {
 
     if (sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
         o->os16FC = 1;
+    } 
+    
+    if (o->oPosY > 0.0f && gMarioState->pos[1] < -150.0f) {
+        if (++o->os16110 > 45) {
+            o->os16FC = 1;
+        }
+    } else {
+        o->os16110 = 0;
     }
+
     if (o->os16FC == 1) {
         o->os16FE++;
         if (o->os16FE > 10) {

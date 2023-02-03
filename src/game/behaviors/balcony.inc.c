@@ -149,7 +149,7 @@ void bhv_lightning_loop(void) {
 
     if ((o->oBehParams >> 8) & 0xFF && count_room_objects_with_behavior(bhvSmallKey, o->oRoom)) {
         if (m->pos[1] > 2100.0f) {
-            if (m->health <= 0x280) {
+            if (m->health < 0x300) {
                 o->os16FA = 2;
             } else {
                 o->os16FA = 1;

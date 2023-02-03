@@ -1,3 +1,4 @@
+
 Gfx sunblock_big_sun_symbol2_ci4_aligner[] = {gsSPEndDisplayList()};
 u8 sunblock_big_sun_symbol2_ci4[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -264,48 +265,59 @@ u8 sunblock_big_sun_symbol2_ci4_pal_rgba16[] = {
 	0xfd, 0xc5, 0xfd, 0xc4, 
 };
 
-Vtx sunblock_big_H1_mesh_layer_4_vtx_0[24] = {
-	{{{-270, 0, 270},0, {3828, -351},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-270, 240, 270},0, {3828, 2367},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-270, 240, -270},0, {-1812, 2367},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{-270, 0, -270},0, {-1812, -351},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{270, 0, 270},0, {3828, -351},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-270, 240, 270},0, {-1812, 2367},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-270, 0, 270},0, {-1812, -351},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{270, 240, 270},0, {3828, 2367},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-270, 0, -270},0, {-850, 2866},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{270, 0, 270},0, {2866, -850},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{-270, 0, 270},0, {-850, -850},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{270, 0, -270},0, {2866, 2866},{0x0, 0x81, 0x0, 0xFF}}},
-	{{{270, 240, -270},0, {-850, 2866},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-270, 240, -270},0, {2866, 2866},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-270, 240, 270},0, {2866, -850},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{270, 240, 270},0, {-850, -850},{0x0, 0x7F, 0x0, 0xFF}}},
-	{{{-270, 0, -270},0, {3828, -351},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-270, 240, -270},0, {3828, 2367},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{270, 240, -270},0, {-1812, 2367},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{270, 0, -270},0, {-1812, -351},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{270, 0, -270},0, {3828, -351},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{270, 240, 270},0, {-1812, 2367},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{270, 0, 270},0, {-1812, -351},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{270, 240, -270},0, {3828, 2367},{0x7F, 0x0, 0x0, 0xFF}}},
+Vtx sunblock_big_Sunblock_001_mesh_layer_5_vtx_cull[8] = {
+	{{{-270, 0, 270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{-270, 240, 270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{-270, 240, -270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{-270, 0, -270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{270, 0, 270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{270, 240, 270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{270, 240, -270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{270, 0, -270}, 0, {-16, -16}, {0x0, 0x0, 0x0, 0x0}}},
 };
 
-Gfx sunblock_big_H1_mesh_layer_4_tri_0[] = {
-	gsSPVertex(sunblock_big_H1_mesh_layer_4_vtx_0 + 0, 24, 0),
+Vtx sunblock_big_Sunblock_001_mesh_layer_5_vtx_0[24] = {
+	{{{-270, 0, 270}, 0, {3828, -351}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{-270, 240, 270}, 0, {3828, 2367}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{-270, 240, -270}, 0, {-1812, 2367}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{-270, 0, -270}, 0, {-1812, -351}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{-270, 0, -270}, 0, {3828, -351}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{-270, 240, -270}, 0, {3828, 2367}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{270, 240, -270}, 0, {-1812, 2367}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{270, 0, -270}, 0, {-1812, -351}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{270, 0, -270}, 0, {3828, -351}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{270, 240, -270}, 0, {3828, 2367}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{270, 240, 270}, 0, {-1812, 2367}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{270, 0, 270}, 0, {-1812, -351}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{270, 0, 270}, 0, {3828, -351}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{270, 240, 270}, 0, {3828, 2367}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-270, 240, 270}, 0, {-1812, 2367}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-270, 0, 270}, 0, {-1812, -351}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-270, 0, -270}, 0, {-850, 2866}, {0x0, 0x81, 0x0, 0xFF}}},
+	{{{270, 0, -270}, 0, {2866, 2866}, {0x0, 0x81, 0x0, 0xFF}}},
+	{{{270, 0, 270}, 0, {2866, -850}, {0x0, 0x81, 0x0, 0xFF}}},
+	{{{-270, 0, 270}, 0, {-850, -850}, {0x0, 0x81, 0x0, 0xFF}}},
+	{{{270, 240, -270}, 0, {-850, 2866}, {0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-270, 240, -270}, 0, {2866, 2866}, {0x0, 0x7F, 0x0, 0xFF}}},
+	{{{-270, 240, 270}, 0, {2866, -850}, {0x0, 0x7F, 0x0, 0xFF}}},
+	{{{270, 240, 270}, 0, {-850, -850}, {0x0, 0x7F, 0x0, 0xFF}}},
+};
+
+Gfx sunblock_big_Sunblock_001_mesh_layer_5_tri_0[] = {
+	gsSPVertex(sunblock_big_Sunblock_001_mesh_layer_5_vtx_0 + 0, 24, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 7, 5, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 11, 9, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
 	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
 	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSP2Triangles(20, 21, 22, 0, 20, 23, 21, 0),
+	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
 	gsSPEndDisplayList(),
 };
 
 
-Gfx mat_sunblock_big_Sunblock_001[] = {
+Gfx mat_sunblock_big_Sunblock_002[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0),
+	gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, sunblock_big_sun_symbol2_ci4_pal_rgba16),
@@ -315,26 +327,32 @@ Gfx mat_sunblock_big_Sunblock_001[] = {
 	gsDPLoadTLUTCmd(7, 1),
 	gsDPPipeSync(),
 	gsDPTileSync(),
-	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_8b, 32, sunblock_big_sun_symbol2_ci4),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_8b, 4, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
+	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_16b, 1, sunblock_big_sun_symbol2_ci4),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPLoadSync(),
-	gsDPLoadTile(7, 0, 0, 126, 252),
+	gsDPLoadBlock(7, 0, 0, 1023, 512),
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0, G_TX_CLAMP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_sunblock_big_Sunblock_001[] = {
+Gfx mat_revert_sunblock_big_Sunblock_002[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx sunblock_big_H1_mesh_layer_4[] = {
-	gsSPDisplayList(mat_sunblock_big_Sunblock_001),
-	gsSPDisplayList(sunblock_big_H1_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_sunblock_big_Sunblock_001),
+Gfx sunblock_big_Sunblock_001_mesh_layer_5[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(sunblock_big_Sunblock_001_mesh_layer_5_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_sunblock_big_Sunblock_002),
+	gsSPDisplayList(sunblock_big_Sunblock_001_mesh_layer_5_tri_0),
+	gsSPDisplayList(mat_revert_sunblock_big_Sunblock_002),
 	gsSPEndDisplayList(),
 };
 

@@ -366,7 +366,7 @@ void bhv_theater_screen_loop(void) {
             }
 
             if (m->pos[1] < -500.0f) {
-                if (m->health <= 0x280) {
+                if (m->health < 0x300) {
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                     o->oAction = 4;
                     o->oOpacity = 254;

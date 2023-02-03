@@ -1155,7 +1155,7 @@ void shyguy_boss_handle_void_out(void) {
     switch (o->oHealth) {
         case 3:
             if (m->pos[1] <= 3000.0f) {
-                if (m->health <= 0x280) {
+                if (m->health < 0x300) {
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                     o->oAction = 0;
                 } else {
@@ -1165,7 +1165,7 @@ void shyguy_boss_handle_void_out(void) {
             break;
         case 2:
             if (m->pos[1] <= 4000.0f) {
-                if (m->health <= 0x280) {
+                if (m->health < 0x300) {
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                     o->oAction = 0;
                 } else {
@@ -1175,7 +1175,7 @@ void shyguy_boss_handle_void_out(void) {
             break;
         case 1:
             if (m->pos[1] <= 7100.0f) {
-                if (m->health <= 0x280) {
+                if (m->health < 0x300) {
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                     o->oAction = 0;
                 } else {

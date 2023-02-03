@@ -734,7 +734,6 @@ void bhv_exit_wall_init(void);
 void bhv_exit_wall_loop(void);
 void bhv_sun_loop(void);
 void bhv_sun_init(void);
-void bhv_sunblock_loop(void);
 void bhv_dark_piranha_init(void);
 void bhv_dark_piranha_loop(void);
 void bhv_standing_sunflower_loop(void);
@@ -1049,6 +1048,7 @@ void bhv_shyguy_key_cutscene_init(void);
 void bhv_shyguy_key_cutscene_loop(void);
 void bhv_bucket_top_init(void);
 void bhv_bucket_top_loop(void);
+void bhv_sunblock_col_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

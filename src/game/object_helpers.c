@@ -30,6 +30,7 @@
 #include "include/course_table.h"
 #include "levels/hmc/header.inc.h"
 #include "levels/bbh/header.inc.h"
+#include "levels/jrb/header.inc.h"
 #include "levels/lll/header.h"
 #include "save_file.h"
 #include "src/game/tile_scroll.h"
@@ -1529,6 +1530,39 @@ Gfx *geo_set_red_painting(s32 callContext, struct GraphNode *node, UNUSED void *
     return dlStart;
 }
 
+
+s32 gSunblockOpacity = 0x38;
+
+Gfx *geo_sunblock_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Vtx *verts;
+    s32 i;
+    struct Object *obj;
+    struct GraphNodeGenerated *currentGraphNode;
+
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        obj = cur_obj_nearest_object_with_behavior(bhvL3Sun);
+        if (obj != NULL && obj->oHeldState == HELD_HELD) {
+            gSunblockOpacity = approach_s16_symmetric(gSunblockOpacity, 0xA0, 0xC);
+        } else {
+            gSunblockOpacity = approach_s16_symmetric(gSunblockOpacity, 0x38, 0xC);
+        }
+
+        verts = segmented_to_virtual(&jrb_dl_Sunblock_mesh_layer_5_vtx_0);
+        for (i = 0; i < 412; i++) {
+            verts[i].v.cn[3] = gSunblockOpacity;
+        }
+    }
+
+    return NULL;
+}
+
+
+
+
 /**
  * @bug Every geo function declares the 3 parameters of callContext, node, and
  * the matrix array. This one (see also geo_switch_area) doesn't. When executed,
@@ -2446,6 +2480,31 @@ Gfx *geo_switch_lounge(s32 callContext, struct GraphNode *node) {
         // the switch.
         // assign the case number for execution.
         if (gMarioState->pos[2] < -12500.0f && gIsConsole) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_doghouse(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_doghouse(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (gMarioState->pos[0] < -3000.0f && gIsConsole) {
             switchCase->selectedCase = 1;
         } else {
             switchCase->selectedCase = 0;

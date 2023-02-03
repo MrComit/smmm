@@ -7422,28 +7422,26 @@ const BehaviorScript bhvL3Sun[] = {
     END_LOOP(),
 };
 
-
-const BehaviorScript bhvSunblock[] = {
+const BehaviorScript bhvSunblockCol[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
     LOAD_COLLISION_DATA(sunblock_collision),
-    SET_FLOAT(oDrawingDistance, 0x6000),
-    //CALL_NATIVE(bhv_flower_wall_init),
+    // SET_FLOAT(oDrawingDistance, 0x7FFF),
     BEGIN_LOOP(),
         //CALL_NATIVE(load_object_collision_model),
-        CALL_NATIVE(bhv_sunblock_loop),
+        CALL_NATIVE(bhv_sunblock_col_loop),
     END_LOOP(),
 };
 
-const BehaviorScript bhvSunblockBig[] = {
+
+const BehaviorScript bhvSunblockBigCol[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO),
     LOAD_COLLISION_DATA(sunblock_big_collision),
-    SET_FLOAT(oDrawingDistance, 0x6000),
-    //CALL_NATIVE(bhv_flower_wall_init),
+    // SET_FLOAT(oDrawingDistance, 0x1000),
     BEGIN_LOOP(),
         //CALL_NATIVE(load_object_collision_model),
-        CALL_NATIVE(bhv_sunblock_loop),
+        CALL_NATIVE(bhv_sunblock_col_loop),
     END_LOOP(),
 };
 

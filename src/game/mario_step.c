@@ -661,6 +661,7 @@ void apply_vertical_wind(struct MarioState *m) {
 
 s32 perform_air_step(struct MarioState *m, u32 stepArg) {
     Vec3f intendedPos;
+    struct Object *obj;
     s32 i;
     s32 quarterStepResult;
     s32 stepResult = AIR_STEP_NONE;
@@ -678,7 +679,7 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
         // getting 0s until your last qf. Graze a wall on your last qf, and it will
         // return the stored 2 with a sharply angled reference wall. (some gwks)
         if (quarterStepResult == AIR_STEP_HIT_WALL) {
-            if (m->usedObj != NULL && obj_has_behavior(m->usedObj, bhvL3Sun)) {
+            if (m->interactObj != NULL && obj_has_behavior(m->interactObj, bhvL3Sun) && m->interactObj->oHeldState == HELD_HELD) {
                 quarterStepResult = AIR_STEP_NONE;
             }
         }

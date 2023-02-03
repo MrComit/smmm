@@ -130,7 +130,7 @@ void bhv_basement_switch_loop(void) {
 
 
 s32 security_cam_respawn(Vec3f pos, s16 faceAngle, s16 damage) {
-    if (gMarioState->health <= 0x280) {
+    if (gMarioState->health < 0x300) {
         level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
         o->oAction = 2;
         return 0;

@@ -763,7 +763,7 @@ s32 act_quicksand_death(struct MarioState *m) {
                 play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
             }
             if ((m->quicksandDepth += 5.0f) >= 60.0f) {
-                if (m->health <= 0x280) {
+                if (m->health < 0x300) {
                     m->actionState = 3;
                     level_trigger_warp(m, WARP_OP_DEATH);
                 } else {
