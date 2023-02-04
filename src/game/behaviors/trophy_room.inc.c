@@ -105,21 +105,23 @@ void cushion_friend_trophy_one(void) {
         case 1:
             gCamera->comitCutscene = 0xFF;
             if (o->oTimer > 20) {
-                COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, bhvTrophyRect)
-                obj->oBehParams = (32 << 24) | (3 << 16);
+                COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 1578, 0, 10898, 0, 90, 0, bhvTrophyRect)
+                obj->oBehParams = (32 << 24) | (3 << 16) | (1 << 8);
                 obj->oBehParams2ndByte = 3;
-                COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 8893, 0, -90, 0, bhvTrophyRect)
-                obj->oBehParams = (32 << 24) | (3 << 16);
+                COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 1578, 0, 8893, 0, -90, 0, bhvTrophyRect)
+                obj->oBehParams = (32 << 24) | (3 << 16) | (1 << 8);
                 obj->oBehParams2ndByte = 3;
-                COMIT_OBJECT(MODEL_TROPHY_OCTOGON, -455, -100, 6514, 0, -22, 0, bhvTrophyPlatSpin)
-                COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, -100, 5109, 0, 22, 0, bhvTrophyPlatSpin)
+                COMIT_OBJECT(MODEL_TROPHY_OCTOGON, -455, 1600, 6514, 0, -22, 0, bhvTrophyPlatSpin)
+                obj->oBehParams = 1 << 8;
+                COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, 1600, 5109, 0, 22, 0, bhvTrophyPlatSpin)
+                obj->oBehParams = 1 << 8;
                 play_puzzle_jingle();
                 o->oAction = 2;
             }
             break;
         case 2:
             gCamera->comitCutscene = 0xFF;
-            if (o->oTimer > 40) {
+            if (o->oTimer > 80) {
                 o->oAction = 3;
                 save_file_set_newflags(SAVE_TOAD_FLAG_SPAWN_PLATS, 1);
             }
@@ -383,7 +385,7 @@ void bhv_bully_trophy_loop(void) {
     struct Object *obj;
     switch (o->oAction) {
         case 0:
-            // if (save_file_get_boos() & (1 << 0x12)) {
+            if (save_file_get_boos() & (1 << 0x12)) {
                 o->oAction = 1;
                 cur_obj_unhide();
                 obj = spawn_object(o, MODEL_TOKEN, bhvToken);
@@ -391,7 +393,7 @@ void bhv_bully_trophy_loop(void) {
                 obj->oBehParams = 0x00022200;
                 obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 vec3f_set(&obj->oPosX, -6559.0f, 100.0f, 3950.0f);
-            // }
+            }
             break;
         case 1:
             load_object_collision_model();
@@ -403,10 +405,18 @@ void bhv_bully_trophy_loop(void) {
 
 
 void bhv_trophy_plat_spin_loop(void) {
-    if (gMarioObject->platform == o) {
-        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 20.0f, 2.0f);
+    if ((o->oBehParams >> 8) & 0xFF && o->oAction == 0) {
+        o->oHomeY = approach_f32_symmetric(o->oHomeY, -100.0f, 50.0f);
+        o->oPosY = o->oHomeY;
+        if (o->oHomeY == -100.0f) {
+            o->oAction = 1;
+        }
     } else {
-        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 2.0f);
+        if (gMarioObject->platform == o) {
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 20.0f, 2.0f);
+        } else {
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 2.0f);
+        }
     }
 }
 
@@ -414,6 +424,9 @@ void bhv_trophy_rect_loop(void) {
     o->os16F4 += (o->oBehParams >> 24) << 4;
     o->oPosX = o->oHomeX + sins(o->oFaceAngleYaw + 0x4000) * (sins(o->os16F4) * (o->oBehParams2ndByte * 100.0f));
     o->oPosZ = o->oHomeZ + coss(o->oFaceAngleYaw + 0x4000) *(sins(o->os16F4) * (o->oBehParams2ndByte * 100.0f));
+    if ((o->oBehParams >> 8) & 0xFF) {
+        o->oHomeX = approach_f32_symmetric(o->oHomeX, 578.0f, 30.0f);
+    }
 }
 
 
