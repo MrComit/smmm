@@ -130,6 +130,16 @@ void bhv_key_cutscene_loop(void) {
     // struct Object *obj3;
     switch (o->oAction) {
         case 0:
+            if (o->oTimer == 0) {
+#ifndef SMMM_DEBUG
+                if (save_file_get_newflags(0) & SAVE_NEW_FLAG_KEY_CUTSCENE) {
+#endif
+                    o->activeFlags = 0;
+                    return;
+#ifndef SMMM_DEBUG
+                }
+#endif
+            }
             if (gMarioState->pos[0] < 850.0f) {
                 o->oAction = 1;
                 vec3f_set(gComitCutscenePosVec, 850.0f, 500.0f, -18100.0f);
