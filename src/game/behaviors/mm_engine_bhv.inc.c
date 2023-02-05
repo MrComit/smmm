@@ -310,7 +310,7 @@ void bhv_golden_goomba_update(void) {
     s32 spawnCoins;
     if (o->os16110 % 10 == 0) {
         scale = (f32)(o->os16110) / 2500.0f;
-        spawn_orange_number_three_digit_scale_stay(o->os16110 / 10, 0, 0, 0, 50.0f * scale, 0.25f + scale, 4);
+        spawn_orange_number_three_digit_scale_stay(o->os16110 / 10, 0, 0, 0, 50.0f * scale, 0.25f + scale, 6);
     }
     o->os16110--;
     if (o->os16110 < 0) {

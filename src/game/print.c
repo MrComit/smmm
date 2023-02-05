@@ -419,6 +419,7 @@ struct HSV sTextPaletteBlue = {240, 0.667f, 0.706f};
 struct HSV sTextPaletteTeal = {185, 0.667f, 0.706f};
 struct HSV sTextPaletteOrange = {24, 0.907f, 0.843f};
 struct HSV sTextPalettePink = {309, 0.667f, 0.706f};
+struct HSV sTextPaletteYellow = {60, 0.907f, 0.843f};
 
 struct HSV *sTextPalettes[] = {
     &sTextPaletteGreen,
@@ -427,6 +428,7 @@ struct HSV *sTextPalettes[] = {
     &sTextPaletteTeal,
     &sTextPaletteOrange,
     &sTextPalettePink,
+    &sTextPaletteYellow,
 };
 
 
