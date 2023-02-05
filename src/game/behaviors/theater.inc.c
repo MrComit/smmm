@@ -241,20 +241,20 @@ void spawn_theater_arena(s16 arena) {
             COMIT_OBJECT(MODEL_NONE, -4982, 455, -13146, 0, 90, 0, bhvBulletBill2dSpawner)
             obj->oBehParams2ndByte = 2;
             COMIT_OBJECT(MODEL_GOOMBA_2D, -4401, 317, -13146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -2508, 952, -13146, 0, -90, 0, bhv2DEnemy)
+            // COMIT_OBJECT(MODEL_GOOMBA_2D, -2508, 952, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_GOOMBA_2D, -2356, 952, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_GOOMBA_2D, -4547, 952, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_GOOMBA_2D, -2512, 317, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_GOOMBA_2D, -3068, 1170, -13146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -4553, 317, -13146, 0, -90, 0, bhv2DEnemy)
+            // COMIT_OBJECT(MODEL_GOOMBA_2D, -4553, 317, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_GOOMBA_2D, -1707, 635, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_GOOMBA_2D, -3872, 1170, -13146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_GOOMBA_2D, -3599, 1170, -13146, 0, -90, 0, bhv2DEnemy)
+            // COMIT_OBJECT(MODEL_GOOMBA_2D, -3599, 1170, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_KOOPA_2D, -4396, 952, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_KOOPA_2D, -2361, 317, -13146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -2055, 635, -13146, 0, -90, 0, bhv2DEnemy)
+            // COMIT_OBJECT(MODEL_KOOPA_2D, -2055, 635, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_KOOPA_2D, -3331, 1170, -13146, 0, -90, 0, bhv2DEnemy)
-            COMIT_OBJECT(MODEL_KOOPA_2D, -4932, 635, -13146, 0, -90, 0, bhv2DEnemy)
+            // COMIT_OBJECT(MODEL_KOOPA_2D, -4932, 635, -13146, 0, -90, 0, bhv2DEnemy)
             COMIT_OBJECT(MODEL_KOOPA_2D, -5132, 635, -13146, 0, -90, 0, bhv2DEnemy)
             break;
     }
@@ -367,7 +367,7 @@ void bhv_theater_screen_loop(void) {
         case 2:
             if (o->os16112 < 3 && o->os16FC == 0) {
                 if (o->oTimer < 20) {
-                    print_text(45, 220, "KILL THE ENEMIES", 1);
+                    print_text(45, 208, "KILL THE ENEMIES", 1);
                 } else if (o->oTimer > 30) {
                     o->os16112++;
                     o->oTimer = 0;
@@ -617,10 +617,10 @@ void bhv_2d_enemy_loop(void) {
         o->oTimer = 0;
     }
     if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
-            spawn_mist_particles();
-            obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
-            o->activeFlags = 0;
-            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+        spawn_mist_particles_variable(4, 0, 23.0f);
+        obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+        o->activeFlags = 0;
+        create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
     }
     o->oInteractStatus = 0;
 }

@@ -1,4 +1,3 @@
-
 Gfx pool_barrier_BOOGOO_highcontrast1_i4_aligner[] = {gsSPEndDisplayList()};
 u8 pool_barrier_BOOGOO_highcontrast1_i4[] = {
 	0x2a, 0x50, 0x59, 0x99, 0xce, 0x96, 0x30, 0x00, 
@@ -521,29 +520,29 @@ u8 pool_barrier_BOOGOO_highcontrast2_brighterdarks_i4[] = {
 	
 };
 
-Vtx pool_barrier_barrier_mesh_layer_5_vtx_0[18] = {
-	{{{-1215, 0, -823},0, {-2893, 2459},{0xFF, 0x0, 0x0, 0xF2}}},
-	{{{-1812, 1500, -823},0, {-4050, -443},{0x0, 0x0, 0xFF, 0x0}}},
-	{{{-1812, 0, -823},0, {-4050, 2459},{0xFF, 0x0, 0x0, 0x0}}},
-	{{{-1215, 1500, -823},0, {-2893, -443},{0x0, 0x0, 0xFF, 0xF2}}},
-	{{{-617, 0, -823},0, {-1736, 2459},{0xFF, 0x0, 0x0, 0xF2}}},
-	{{{-617, 1500, -823},0, {-1736, -443},{0x0, 0x0, 0xFF, 0xF2}}},
-	{{{-301, 0, -534},0, {-909, 2459},{0x80, 0x0, 0xFF, 0xF2}}},
-	{{{-301, 1500, -534},0, {-909, -443},{0xFF, 0x0, 0x80, 0xF2}}},
-	{{{301, 0, 534},0, {1465, 2459},{0x80, 0x0, 0xFF, 0xF2}}},
-	{{{301, 1500, 534},0, {1465, -443},{0xFF, 0x0, 0x80, 0xF2}}},
-	{{{301, 0, 816},0, {2009, 2459},{0x0, 0x0, 0xFF, 0xF2}}},
-	{{{301, 1500, 816},0, {2009, -443},{0xFF, 0x0, 0x0, 0xF2}}},
-	{{{301, 0, 1230},0, {2811, 2459},{0x0, 0x0, 0xFF, 0xF2}}},
-	{{{301, 1500, 1230},0, {2811, -443},{0xFF, 0x0, 0x0, 0xF2}}},
-	{{{301, 0, 1718},0, {3754, 2459},{0x0, 0x0, 0xFF, 0xF2}}},
-	{{{301, 1500, 1718},0, {3754, -443},{0xFF, 0x0, 0x0, 0xF2}}},
-	{{{301, 0, 2205},0, {4698, 2459},{0x0, 0x0, 0xFF, 0x0}}},
-	{{{301, 1500, 2205},0, {4698, -443},{0xFF, 0x0, 0x0, 0x0}}},
+Vtx pool_barrier_barrier_mesh_layer_1_vtx_0[18] = {
+	{{{-1215, 0, -823}, 0, {-2893, 2459}, {0xFF, 0x0, 0x0, 0xF2}}},
+	{{{-1812, 1500, -823}, 0, {-4050, -443}, {0x0, 0x0, 0xFF, 0x0}}},
+	{{{-1812, 0, -823}, 0, {-4050, 2459}, {0xFF, 0x0, 0x0, 0x0}}},
+	{{{-1215, 1500, -823}, 0, {-2893, -443}, {0x0, 0x0, 0xFF, 0xF2}}},
+	{{{-617, 0, -823}, 0, {-1736, 2459}, {0xFF, 0x0, 0x0, 0xF2}}},
+	{{{-617, 1500, -823}, 0, {-1736, -443}, {0x0, 0x0, 0xFF, 0xF2}}},
+	{{{-301, 0, -534}, 0, {-909, 2459}, {0x80, 0x0, 0xFF, 0xF2}}},
+	{{{-301, 1500, -534}, 0, {-909, -443}, {0xFF, 0x0, 0x80, 0xF2}}},
+	{{{301, 0, 534}, 0, {1465, 2459}, {0x80, 0x0, 0xFF, 0xF2}}},
+	{{{301, 1500, 534}, 0, {1465, -443}, {0xFF, 0x0, 0x80, 0xF2}}},
+	{{{301, 0, 816}, 0, {2009, 2459}, {0x0, 0x0, 0xFF, 0xF2}}},
+	{{{301, 1500, 816}, 0, {2009, -443}, {0xFF, 0x0, 0x0, 0xF2}}},
+	{{{301, 0, 1230}, 0, {2811, 2459}, {0x0, 0x0, 0xFF, 0xF2}}},
+	{{{301, 1500, 1230}, 0, {2811, -443}, {0xFF, 0x0, 0x0, 0xF2}}},
+	{{{301, 0, 1718}, 0, {3754, 2459}, {0x0, 0x0, 0xFF, 0xF2}}},
+	{{{301, 1500, 1718}, 0, {3754, -443}, {0xFF, 0x0, 0x0, 0xF2}}},
+	{{{301, 0, 2205}, 0, {4698, 2459}, {0x0, 0x0, 0xFF, 0x0}}},
+	{{{301, 1500, 2205}, 0, {4698, -443}, {0xFF, 0x0, 0x0, 0x0}}},
 };
 
-Gfx pool_barrier_barrier_mesh_layer_5_tri_0[] = {
-	gsSPVertex(pool_barrier_barrier_mesh_layer_5_vtx_0 + 0, 18, 0),
+Gfx pool_barrier_barrier_mesh_layer_1_tri_0[] = {
+	gsSPVertex(pool_barrier_barrier_mesh_layer_1_vtx_0 + 0, 18, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 3, 0, 0, 4, 5, 3, 0),
 	gsSP2Triangles(6, 5, 4, 0, 6, 7, 5, 0),
@@ -555,11 +554,24 @@ Gfx pool_barrier_barrier_mesh_layer_5_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx pool_barrier_barrier_mesh_layer_1_vtx_1[4] = {
+	{{{-386, -3033, -1016}, 0, {-3472, 1008}, {0x0, 0x0, 0x0, 0xF2}}},
+	{{{-418, -3033, -935}, 0, {-3472, 1008}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{-418, -3033, -1016}, 0, {-3472, 1008}, {0x0, 0x0, 0x0, 0x0}}},
+	{{{-386, -3033, -935}, 0, {-3472, 1008}, {0x0, 0x0, 0x0, 0xF2}}},
+};
 
-Gfx mat_pool_barrier_GhostBarrier_layer5[] = {
+Gfx pool_barrier_barrier_mesh_layer_1_tri_1[] = {
+	gsSPVertex(pool_barrier_barrier_mesh_layer_1_vtx_1 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSPEndDisplayList(),
+};
+
+
+Gfx mat_pool_barrier_GhostBarrier_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL1, 0, ENVIRONMENT, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
-	gsSPClearGeometryMode(G_CULL_BACK | G_LIGHTING),
+	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetAlphaCompare(G_AC_DITHER),
 	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA), Z_CMP | Z_UPD | CVG_DST_CLAMP | ZMODE_OPA),
@@ -580,24 +592,69 @@ Gfx mat_pool_barrier_GhostBarrier_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 1),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
-    gsSPLightColor(LIGHT_1, 0xfefefeff),
-    gsSPLightColor(LIGHT_2, 0x7f7f7fff),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_pool_barrier_GhostBarrier_layer5[] = {
+Gfx mat_revert_pool_barrier_GhostBarrier_layer1[] = {
 	gsDPPipeSync(),
-	gsSPSetGeometryMode(G_CULL_BACK | G_LIGHTING),
+	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
 	gsDPSetAlphaCompare(G_AC_NONE),
-	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
 
-Gfx pool_barrier_barrier_mesh_layer_5[] = {
-	gsSPDisplayList(mat_pool_barrier_GhostBarrier_layer5),
-	gsSPDisplayList(pool_barrier_barrier_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_pool_barrier_GhostBarrier_layer5),
+Gfx mat_pool_barrier_GhostBarrierConsole_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
+	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetAlphaCompare(G_AC_DITHER),
+	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA), Z_CMP | Z_UPD | CVG_DST_CLAMP | ZMODE_OPA),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_16b, 1, pool_barrier_BOOGOO_highcontrast1_i4),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 1023, 512),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPSetTileSize(0, 0, 0, 252, 252),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_16b, 1, pool_barrier_BOOGOO_highcontrast2_brighterdarks_i4),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 1),
+	gsDPLoadSync(),
+	gsDPLoadBlock(6, 0, 0, 1023, 512),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 1),
+	gsDPSetTileSize(1, 0, 0, 252, 252),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_pool_barrier_GhostBarrierConsole_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
+Gfx pool_barrier_barrier_mesh_layer_1[] = {
+	gsSPDisplayList(mat_pool_barrier_GhostBarrier_layer1),
+	gsSPDisplayList(pool_barrier_barrier_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_pool_barrier_GhostBarrier_layer1),
+	gsSPDisplayList(mat_pool_barrier_GhostBarrierConsole_layer1),
+	gsSPDisplayList(pool_barrier_barrier_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_pool_barrier_GhostBarrierConsole_layer1),
+	gsSPEndDisplayList(),
+};
+
+Gfx pool_barrier_barrier_mesh_layer_1_mat_override_GhostBarrierConsole_0[] = {
+	gsSPDisplayList(mat_pool_barrier_GhostBarrierConsole_layer1),
+	gsSPDisplayList(pool_barrier_barrier_mesh_layer_1_tri_0),
+	gsSPDisplayList(pool_barrier_barrier_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_pool_barrier_GhostBarrierConsole_layer1),
 	gsSPEndDisplayList(),
 };
 

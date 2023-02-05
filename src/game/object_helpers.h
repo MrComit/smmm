@@ -113,6 +113,7 @@ Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSE
 Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_pool_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_mole_gate(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_gameroom(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_sauna(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_plat_hall(s32 callContext, struct GraphNode *node, UNUSED void *context);
@@ -147,6 +148,7 @@ Gfx *geo_switch_city_strip_render(s32 callContext, struct GraphNode *node, UNUSE
 Gfx *geo_switch_city_walls_render(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_pool_floor(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_mole_gate(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_gameroom(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_sauna(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_plat_hall(s32 callContext, struct GraphNode *node);
