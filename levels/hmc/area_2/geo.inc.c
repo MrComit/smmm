@@ -142,6 +142,7 @@ const GeoLayout hmc_dl_212__Tree_House_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -494, 1113, -16615, hmc_dl_Log_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -494, 1113, -16615, hmc_dl_Log_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -494, 1113, -16615, hmc_dl_Tower_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Tower_mesh_layer_4),

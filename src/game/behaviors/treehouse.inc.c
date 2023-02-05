@@ -145,7 +145,7 @@ void bhv_treehouse_swoop_update(void) {
                 spawn_mist_particles();
                 // obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
                 o->activeFlags = 0;
-                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                // create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
             }
             break;
     }

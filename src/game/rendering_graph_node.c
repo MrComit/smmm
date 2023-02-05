@@ -595,11 +595,15 @@ void emit_light(Vec3f pos, s32 red, s32 green, s32 blue, u32 constantFalloff, u3
 
 extern void linear_mtxf_mul_vec3f(Mat4, Vec3f, Vec3f);
 
+extern s16 gMarioCurrentRoom;
+
+Mat4 gCameraTransform;
 
 
 s32 gMarioScreenX, gMarioScreenY;
 
 void get_mario_screen_coords(void) {
+    Mat4 sp20;
     Vec3s marioPos3s;
 
     vec3f_to_vec3s(marioPos3s, gMarioState->pos);
@@ -607,12 +611,14 @@ void get_mario_screen_coords(void) {
 
     marioPos3s[1] += 75;
 
-    mtxf_mul_vec3s(gMatStack[gMatStackIndex], marioPos3s);
+
+
+    mtxf_mul(sp20, gMatStack[gMatStackIndex], gCameraTransform);
+    mtxf_mul_vec3s(sp20, marioPos3s);
 
     gMarioScreenX = 2 * (0.5f - marioPos3s[0] / (f32)marioPos3s[2]) * (gCurGraphNodeRoot->width);
     gMarioScreenY = 2 * (0.5f - marioPos3s[1] / (f32)marioPos3s[2]) * (gCurGraphNodeRoot->height);
 }
-Mat4 gCameraTransform;
 
 Lights1 defaultLight = gdSPDefLights1(
     0x3F, 0x3F, 0x3F, 0xFF, 0xFF, 0xFF, 0x00, 0x00, 0x00
@@ -706,7 +712,7 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     }
 
 
-    if (gCurrLevelNum == LEVEL_HMC) {
+    if (gCurrLevelNum == LEVEL_HMC || gMarioCurrentRoom == 9) {
         get_mario_screen_coords();
     }
     // Transform the point light positions into screen space

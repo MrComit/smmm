@@ -568,6 +568,9 @@ void dice_enemy_move(void) {
                 }
             }
         }
+        if (cur_obj_lateral_dist_to_home() > 1400.0f) {
+            o->oGoombaTargetYaw = approach_s16_symmetric(o->oGoombaTargetYaw, cur_obj_angle_to_home(), 0x800);
+        }
 
         cur_obj_rotate_yaw_toward(o->oGoombaTargetYaw, 0x200 + o->oAnimState * 0x80);
     }

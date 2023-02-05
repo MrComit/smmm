@@ -1307,6 +1307,7 @@ Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *con
 }
 
 
+
 Vec3s gRoomColors[] = {
     {0xFF, 0xFF, 0xFF},
     {0xFF, 0xFF, 0xFF},
