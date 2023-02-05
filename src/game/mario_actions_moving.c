@@ -2039,7 +2039,7 @@ s32 act_tight_rope_walking(struct MarioState *m) {
             if ((val14 = (s32)(val04 * 0x4000)) < 0x1000) {
                 val14 = 0x1000;
             }
-            set_mario_anim_with_accel(m, MARIO_ANIM_TIPTOE, val14);
+            set_mario_anim_with_accel(m, MARIO_ANIM_TIGHTROPE_WALK, val14);
             break;
 
         case GROUND_STEP_HIT_WALL:

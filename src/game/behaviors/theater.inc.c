@@ -269,16 +269,22 @@ void check_theater_arena(s16 *arena) {
     switch (*arena) {
         case 0:
             if (count == 0) {
-                *arena = *arena + 1;
-                o->oAction = 1;
+                if (o->os16112++ > 30) {
+                    *arena = *arena + 1;
+                    o->os16112 = 0;
+                    o->oAction = 1;
+                }
             } else if (count <= 4) {
                 o->os16F6 = 1;
             }
             break;
         case 1:
             if (count == 0) {
-                *arena = *arena + 1;
-                o->oAction = 1;
+                if (o->os16112++ > 30) {
+                    *arena = *arena + 1;
+                    o->os16112 = 0;
+                    o->oAction = 1;
+                }
             } else if (count <= 5) {
                 o->os16F6 = 2;
             }
@@ -328,8 +334,11 @@ void bhv_theater_screen_loop(void) {
             if (o->oSubAction == 0) {
                 cur_obj_unhide();
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
-                if ((obj = cur_obj_nearest_object_with_behavior(bhvYellowCoin)) != NULL) {
-                    vec3f_copy(&obj->oPosX, gMarioState->pos);
+                while ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvYellowCoin, o->oRoom)) != NULL) {
+                    obj->activeFlags = 0;
+                    gMarioState->numBooCoins++;
+                    // vec3f_copy(&obj->oPosX, gMarioState->pos);
+                    // obj->oVelY = 0.0f;
                 }
                 if (o->oOpacity == 255) {
                     if (o->oTimer > 30) {
@@ -356,6 +365,14 @@ void bhv_theater_screen_loop(void) {
             }
             break;
         case 2:
+            if (o->os16112 < 3 && o->os16FC == 0) {
+                if (o->oTimer < 20) {
+                    print_text(45, 220, "KILL THE ENEMIES", 1);
+                } else if (o->oTimer > 30) {
+                    o->os16112++;
+                    o->oTimer = 0;
+                }
+            }
             gCamera->comit2dcam = 3;
             check_theater_arena(&o->os16F4);
 
