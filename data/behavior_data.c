@@ -8633,6 +8633,7 @@ const BehaviorScript bhvTrophyPlatSpin[] = {
     LOAD_COLLISION_DATA(trophy_octogon_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
+    SCALE(0, 90),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_trophy_plat_spin_loop),

@@ -1069,6 +1069,10 @@ void spawn_token(u8 type, u8 index, Vec3f pos, s16 yaw, s16 pitch) {
     play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
 }
 
+extern s16 gComitCutsceneTimer;
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
+
 
 void handle_ground_pound_floor(struct MarioState *m) {
     struct Object *obj;
@@ -1109,6 +1113,19 @@ void handle_ground_pound_floor(struct MarioState *m) {
             break;
         case 12:
             spawn_token(1, 0x15, sSpawnedTokens[5], 0, 0xC000);
+            break;
+        case 13:
+            if (!(save_file_get_golden_goombas() & (1 << 4))) {
+                save_file_set_golden_goombas(4);
+                play_puzzle_jingle();
+                obj = spawn_object(gMarioObject, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+                vec3f_set(&obj->oPosX, 1000.0f, 800.0f, 1000.0f);
+                gCamera->comitCutscene = 0xFF;
+                gComitCutsceneTimer = 45;
+                obj->os16110 = 3045;
+                vec3f_set(gComitCutscenePosVec, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2] + 2000.0f);
+                vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
+            }
             break;
     }
     save_file_set_gpflags(1 << index);
