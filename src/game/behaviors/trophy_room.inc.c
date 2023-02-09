@@ -291,6 +291,7 @@ void bhv_foreroom_object_loop(void) {
         case 0:
             if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED || cur_obj_is_mario_ground_pounding_platform()) {
                 o->oAction = 1;
+                cur_obj_play_sound_1(SOUND_GENERAL_VANISH_SFX);
             }
             if (o->oDistanceToMario < 800.0f) {
                 if (gIsConsole) {

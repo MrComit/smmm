@@ -137,6 +137,7 @@ void bhv_vase_throw_loop(void) {
             if (o->oTimer > 15) {
                 o->oAction = 2;
                 cur_obj_scale(o->oFloat100 = 1.0f);
+                cur_obj_play_sound_1(SOUND_OBJ_EVIL_LAKITU_THROW);
             }
             break;
         case 2:

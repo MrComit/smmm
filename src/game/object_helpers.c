@@ -917,6 +917,8 @@ void calc_lava_wave_collision(struct MarioState *m) {
 
 }
 
+extern f32 gGlobalSoundSource[3];
+
 
 Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *context) {
     Vtx *vertexBuffer;
@@ -992,6 +994,9 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
             } else {
                 sLavaSpread = approach_s16_symmetric(sLavaSpread, 500, 20);
                 sLavaColor = approach_s16_symmetric(sLavaColor, 0xFF, 0x4);
+            }
+            if (((s32)(random_float() * 16.0f)) == 8) {
+                play_sound(SOUND_GENERAL_QUIET_BUBBLE2, gGlobalSoundSource);
             }
         }
 

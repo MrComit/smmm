@@ -202,6 +202,7 @@ void bhv_treehouse_log_loop(void) {
                 o->oAction = 1;
                 o->parentObj->oInteractType = INTERACT_BOUNCE_TOP;
                 cur_obj_become_tangible();
+                cur_obj_play_sound_1(SOUND_OBJ_UNKNOWN4);
             }
             if (o->parentObj->activeFlags == 0) {
                 o->activeFlags = 0;
@@ -214,6 +215,7 @@ void bhv_treehouse_log_loop(void) {
             cur_obj_move_standard(0);
             if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
                 o->oVelY = o->oFloatF8;
+                cur_obj_play_sound_1(SOUND_GENERAL_POUND_ROCK);
             }
             if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
                 obj_explode_and_spawn_coins(46.0f, 0);
@@ -418,7 +420,9 @@ void bhv_blue_owl_loop(void) {
     } else {
         o->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
     }
-    
+    if (o->header.gfx.animInfo.animFrame == 0) {
+        cur_obj_play_sound_2(SOUND_GENERAL_SWISH_WATER);
+    }
     switch (o->oAction) {
         case 0:
             if (o->oDistanceToMario < 2000.0f) {
@@ -439,6 +443,10 @@ void bhv_blue_owl_loop(void) {
                     o->oFloatF4 = o->oHomeY;
                 }
             }
+
+            // if (o->oTimer > 20) {
+            //     cur_obj_play_sound_1(SOUND_GENERAL_SWISH_AIR_2);
+            // }
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatF4, 20.0f);
             if (o->oTimer > 90 && o->oDistanceToMario > 1000.0f) {
                 o->oAction = 2;
@@ -506,6 +514,7 @@ void bhv_tight_rope_loop(void) {
             o->os16F4 = o->oHomeY - o->oPosY;
             // o->os16F8 = approach_s16_symmetric(o->os16F8, 2560, 320);
             if (gMarioObject->platform == o) {
+                cur_obj_play_sound_2(SOUND_ACTION_BOUNCE_OFF_OBJECT);
                 o->oAction = 1;
                 if (m->vel[1] >= 0) {
                     o->oFloatFC = 15.0f;
@@ -539,6 +548,7 @@ void bhv_tight_rope_loop(void) {
             o->os16F8 = (s16)((500.0f - (f32)o->os16F6) / 1000.0f * TIGHT_ROPE_MAX * o->header.gfx.scale[2]);
             if (gMarioObject->platform != o) {
                 o->oAction = 0;
+                cur_obj_play_sound_2(SOUND_ACTION_BOUNCE_OFF_OBJECT);
                 o->oFloat100 = 0.0f;
             }
             break;
