@@ -18,23 +18,23 @@ void bhv_maze_indicator_loop(void) {
     struct MarioState *m = gMarioState;
     switch (o->oBehParams2ndByte) {
         case 0:
-            if (m->pos[2] > -20000.0f) {
+            if (m->pos[2] > -21050.0f) {
                 return;
             }
             break;
         case 1:
-            if (m->pos[0] < -22000.0f) {
+            if (m->pos[0] < -21050.0f) {
                 return;
             }
             break;
         case 2:
-            if (m->pos[2] > -14000.0f) {
+            if (m->pos[2] > -15290.0f) {
                 return;
             }
             break;
     }
-    if (o->oDistanceToMario < 5000.0f) {
-        cur_obj_play_sound_1(SOUND_AIR_PEACH_TWINKLE);
+    if (o->oDistanceToMario < 5000.0f && (o->oTimer % 25) == 0) {
+        cur_obj_play_sound_1(SOUND_GENERAL_UNKNOWN3);
     }
 }
 

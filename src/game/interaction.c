@@ -1843,10 +1843,44 @@ void mario_process_interactions(struct MarioState *m) {
     }
 }
 
+extern s16 gCutsceneTimer;
+extern s8 s8DirModeBaseYaw;
+s32 sDeathFloorTimer = 0;
+
 void check_death_barrier(struct MarioState *m) {
-    if (m->pos[1] < m->floorHeight + 2048.0f) {
-        if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_UNKNOWN_18)) {
-            play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+    struct Object *obj;
+    if (sDeathFloorTimer) {
+        obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+            if (obj == NULL) {
+                sDeathFloorTimer = 0;
+                return;
+            }
+        switch (sDeathFloorTimer++) {
+            case 1:
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                break;
+            case 19:
+                m->faceAngle[1] = obj->oFaceAngleYaw;
+                // set_r_button_camera(gCamera);
+                warp_camera(obj->oPosX - m->pos[0], obj->oPosY - m->pos[1], obj->oPosZ - m->pos[2]);
+                vec3f_copy(m->pos, &obj->oPosX);
+                s8DirModeBaseYaw = (m->faceAngle[1] + 0x8000) >> 8;
+                m->forwardVel = 0;
+                vec3f_set(m->vel, 0.0f, 0.0f, 0.0f);
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+                m->hurtCounter = 8;
+                gCamera->cutscene = 0;
+                gCutsceneTimer = CUTSCENE_STOP;
+                sDeathFloorTimer = 0;
+                return set_mario_action(m, ACT_FREEFALL, 0);
+        }
+    } else if (m->pos[1] < m->floorHeight + 2048.0f) {
+        if (m->health < 0x300) {
+            if (level_trigger_warp(m, WARP_OP_WARP_FLOOR) == 20 && !(m->flags & MARIO_UNKNOWN_18)) {
+                play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+            }
+        } else if (sDeathFloorTimer == 0) {
+            sDeathFloorTimer = 1;
         }
     }
 }
