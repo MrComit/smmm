@@ -59,8 +59,16 @@ void bhv_plat_hall_wall_loop(void) {
 void plathall_instant_warp(void) {
     Vec3f camPos, camFoc;
     s16 cameraAngle;
+    s8 cond = FALSE;
     struct MarioState *m = gMarioState;
-    if (m->floor != NULL && m->floor->type == SURFACE_INSTANT_UPWARP && m->pos[1] - m->floorHeight < 4400.0f) {
+    if (m->floor != NULL && m->floor->type == SURFACE_INSTANT_UPWARP) {
+        if (m->pos[1] - m->floorHeight < 4400.0f) {
+            cond = TRUE;
+        } else if (m->pos[0] > -15200.0f && m->pos[2] > -2000.0f && m->pos[2] < 310.0f && m->pos[1] - m->floorHeight < 5800.0f) {
+            cond = TRUE;
+        }
+    }
+    if (cond) {
         m->pos[1] += 2700.0f;
         m->marioObj->oPosY = m->pos[1];
 

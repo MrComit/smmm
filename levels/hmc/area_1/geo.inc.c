@@ -323,14 +323,33 @@ const GeoLayout hmc_dl_112__NULL_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout hmc_dl_b_001_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Repeats_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout hmc_dl_c_001_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_014_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout hmc_dl_b_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_plat_hall_repeats),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, hmc_dl_b_001_geo),
+			GEO_BRANCH(1, hmc_dl_c_001_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_NULLTri_013_mesh_layer_1),
 		GEO_ASM(7, geo_update_vanish_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_1BelowMaze_mesh_layer_1),
 		GEO_ASM(6, geo_update_plathall_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_BelowMaze_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Hallway_005_mesh_layer_1),
 		GEO_ASM(0, geo_update_vanish_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Hall_mesh_layer_1),

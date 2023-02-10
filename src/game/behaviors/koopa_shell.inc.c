@@ -161,11 +161,13 @@ void bhv_cushion_shell_loop(void) {
                 obj->oFaceAngleYaw = 0;
                 if (m->action == ACT_STAR_DANCE_WATER) {
                     vec3f_set(&obj->oPosX, m->pos[0] + 300.0f, m->pos[1], m->pos[2]);
+                    gMarioPreviousRoom = 0;
                 }
             }
 
             if (m->pos[0] > -9000.0f && m->pos[2] > -2000.0f && m->pos[1] <= m->floorHeight) {
                 o->oAction = 4;
+                gMarioPreviousRoom = 0;
                 mario_stop_riding_object(m);
                 set_mario_action(m, ACT_JUMP, 0);
                 o->oInteractType = INTERACT_IGLOO_BARRIER;
