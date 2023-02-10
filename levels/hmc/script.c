@@ -130,7 +130,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2146, 5185, 11348, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_TELEPORTER, -7681, 5185, 11347, 0, 90, 0, (0x27 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -7681, 150, 11347, 0, -90, 0, (0x28 << 16), bhvFadingWarp),
-		OBJECT(MODEL_HEART, -1968, 2235, 3663, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
+		OBJECT(MODEL_HEART, -2181, 2235, 3663, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_STAR_PIECE, -8321, 100, 12170, 0, 0, 0, (0xF << 24), bhvStarPiece),
 		OBJECT(MODEL_TOKEN, -2777, 57, 3363, 0, 90, 0, (1 << 16) | (0x23 << 8), bhvToken),
 		OBJECT(MODEL_TOKEN, -8131, 5247, 11348, 0, 90, 0, (2 << 16) | (0x24 << 8), bhvToken),

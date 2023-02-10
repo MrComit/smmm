@@ -2547,6 +2547,69 @@ Gfx *geo_switch_doghouse(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+/*
+render 1 if 
+    x less than -6000
+    OR: z less than 9100 and x less than -2000
+*/
+#ifdef AVOID_UB
+Gfx *geo_switch_trophy_one(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_trophy_one(s32 callContext, struct GraphNode *node) {
+#endif
+    struct MarioState *m = gMarioState;
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (m->pos[0] < -6000.0f || (m->pos[0] < -2000.0f && m->pos[2] < 9100.0f) || !gIsConsole) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+/*
+render 2 if
+    x greater than -2000 and z less than 7900
+    OR: z greater than 11950 and x less than -3250
+    OR: x greater than -3250 and z greater than 6600
+*/
+
+#ifdef AVOID_UB
+Gfx *geo_switch_trophy_two(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_trophy_two(s32 callContext, struct GraphNode *node) {
+#endif
+    struct MarioState *m = gMarioState;
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if ((((m->pos[0] > -2000.0f && m->pos[2] < 7900.0f) || (m->pos[0] < -3250.0f && m->pos[2] > 11950.0f) ||
+            (m->pos[0] >= -3250.0f && m->pos[2] > 6600.0f) || (m->pos[0] > -3000.0f && m->pos[2] < 3600.0f)) && 
+            m->pos[1] < 2000.0f) || !gIsConsole) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
 
 
 extern s8 sLevelRoomOffsets[];
