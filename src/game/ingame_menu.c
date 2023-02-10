@@ -3235,13 +3235,15 @@ char sRoomCorrupt[] = { TEXT_CORRUPT };
 char *sRoomNames[] = {
     sRoom1, sRoom2, sRoom3, sRoom4, sRoom5, sRoom6, sRoom7, sRoom8, sRoom9, sRoom10,
     sRoom11, sRoom12, sRoom13, sRoom14, sRoom15, sRoom16, sRoom17, sRoom18, sRoom19, sRoom20,
-    sRoom21, sRoom22, sRoom23, sRoom24, sRoom25, sRoom26, sRoom27, sRoom28, sRoom29, sRoom30,
+    sRoom21, sRoom21, sRoom23, sRoom21, sRoom21, sRoom26, sRoom27, sRoom28, sRoom29, sRoom30,
     sRoom31, sRoom32, sRoom33, sRoom34, sRoom35, sRoom36, sRoom37, sRoom38, sRoom39, sRoom40,
     sRoom41, sRoom42, sRoom43, sRoom44, sRoom45, sRoom46, sRoom47, sRoom48, sRoom49, sRoom50,
-    sRoom51, sRoom52, sRoom53, sRoom54, sRoom55, sRoom56, sRoom57, sRoom58, sRoom59, sRoom60,
-    sRoom61, sRoom62, sRoom63, sRoom64, sRoom65, sRoom66, sRoom67, sRoom68, sRoom69, sRoom70,
+    sRoom51, sRoom52, sRoom53, sRoom54, sRoom55, sRoom56, sRoom57, sRoom57, sRoom59, sRoom60,
+    sRoom61, sRoom62, sRoom62, sRoom64, sRoom65, sRoom66, sRoom67, sRoom68, sRoom69, sRoom70,
     sRoom71, sRoom72, sRoom73,
 };
+
+char *sPrevRoomName;
 
 
 s32 gRoomEntryTimer = -1;
@@ -3270,7 +3272,6 @@ void print_room_names(void) {
     }
     if (gMarioCurrentRoom != gMarioPreviousRoom2) {
         gRoomEntryTimer = 0;
-
     }
     gMarioPreviousRoom2 = gMarioCurrentRoom;
 
@@ -3288,9 +3289,12 @@ void print_room_names(void) {
         if (gGlobalMarioRoom == 71) {
             print_name_string(15, 10, y, sRoomCorrupt);
         }
-        print_name_string(15, 10, y, sRoomNames[gGlobalMarioRoom - 1]);
+        if (sRoomNames[gGlobalMarioRoom - 1] != sPrevRoomName) {
+            print_name_string(15, 10, y, sRoomNames[gGlobalMarioRoom - 1]);
+        }
         if (gRoomEntryTimer >= 90) {
             gRoomEntryTimer = -1;
+            sPrevRoomName = sRoomNames[gGlobalMarioRoom - 1];
         }
     }
     //print_text_fmt_int(20, 20, "%d", (gMarioCurrentRoom - 1) + sLevelRoomOffsets[gCurrCourseNum - 1], 0);

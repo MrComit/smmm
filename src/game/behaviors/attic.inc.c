@@ -141,6 +141,10 @@ void bhv_attic_moving_flame_init(void) {
 
 void bhv_attic_moving_flame_loop(void) {
     s16 newAngle;
+    if (o->oObjFC->activeFlags == 0) {
+        o->activeFlags = 0;
+        return;
+    }
     CL_Move();
     if (cur_obj_lateral_dist_to_home() >= 1000.0f) {
         o->oPosX = o->oHomeX + 1000.0f * sins(o->oMoveAngleYaw);
@@ -180,9 +184,6 @@ void bhv_attic_moving_flame_loop(void) {
     if (attic_bounds_flame()) {
         o->oMoveAngleYaw = CL_RandomMinMaxU16(0, 3) * 0x4000;
     }
-    if (o->oObjFC->activeFlags == 0) {
-        o->activeFlags = 0;
-    }
 }
 
 
@@ -197,7 +198,10 @@ void bhv_attic_rock_init(void) {
 void bhv_attic_rock_loop(void) {
     f32 spireHeight;
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvAtticSpire);
-    if (o->oObj100->oAction == 7 /*&& gMarioObject->platform != o*/) {
+    if (o->oObj100 != NULL && o->oObj100->activeFlags == 0) {
+        o->oObj100 = NULL;
+    }
+    if (o->oObj100 != NULL && o->oObj100->oAction == 7 /*&& gMarioObject->platform != o*/) {
         o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0x8000, 0x500);
         if ((u16)o->oFaceAngleRoll != 0x8000 && gMarioObject->platform == o) {
             set_mario_action(gMarioState, ACT_FREEFALL, 0);
@@ -276,12 +280,28 @@ void bhv_bully_flame_loop(void) {
 // f32 sBullyMultiplier = 0.0f;
 
 
-
+#define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
+    obj = spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g)); \
+    obj->oRoom = o->oRoom; \
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
 void bhv_attic_bully_init(void) {
     s32 i;
     struct Object *obj;
     cur_obj_init_animation(0);
+
+    if (save_file_get_boos() & (1 << 0x12)) {
+        o->activeFlags = 0;
+        return;
+    }
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -3529, 6400, 9938, 0, -90, 0, bhvYellowCoin)
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -3629, 6400, 9838, 0, -90, 0, bhvYellowCoin)
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -3529, 6400, 11838, 0, 0, 0, bhvYellowCoin)
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -3629, 6400, 11938, 0, 0, 0, bhvYellowCoin)
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -1629, 6400, 11838, 0, 90, 0, bhvYellowCoin)
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -1529, 6400, 11938, 0, 90, 0, bhvYellowCoin)
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -1529, 6400, 9838, 0, 0, 0, bhvYellowCoin)
+    COMIT_OBJECT(MODEL_YELLOW_COIN, -1629, 6400, 9938, 0, 0, 0, bhvYellowCoin)
 
     o->oHomeX = o->oPosX;
     o->oHomeY = o->oPosY;
@@ -464,10 +484,7 @@ void bhv_attic_bully_loop(void) {
     // o->oBullyPrevY = o->oPosY;
     o->oBullyPrevZ = o->oPosZ;
     attic_bounds();
-    //! Because this function runs no matter what, Mario is able to interrupt the bully's
-    //  death action by colliding with it. Since the bully hitbox is tall enough to collide
-    //  with Mario even when it is under a lava floor, this can get the bully stuck OOB
-    //  if there is nothing under the lava floor.
+
     if (o->oAction != 8) {
         if (gMarioCurrentRoom == o->oRoom) {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_MULTIPLIER;
@@ -557,6 +574,7 @@ void bhv_attic_bully_loop(void) {
                 obj = spawn_object(o, MODEL_ATTIC_WALL, bhvAtticWall);
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 obj->oObjF4 = o;
+                cur_obj_unhide();
                 play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
             }
             break;
@@ -655,13 +673,15 @@ void bhv_attic_spire_loop(void) {
             o->os16F6 = 30;
         }
     }
-    if (o->oObj104->activeFlags == 0) {
-        o->oAction = 5;
-        if (o->oObj108 != NULL) {
-            o->oObj108->oAction = 1;
+    if (o->oAction != 5) {
+        if (o->oObj104->activeFlags == 0) {
+            o->oAction = 5;
+            if (o->oObj108 != NULL) {
+                o->oObj108->oAction = 1;
+            }
+        } else if (o->oObj104->oAction == 8) {
+            return;
         }
-    } else if (o->oObj104->oAction == 8) {
-        return;
     }
     switch (o->oAction) {
         case 0:

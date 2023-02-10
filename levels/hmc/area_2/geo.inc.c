@@ -101,6 +101,7 @@ const GeoLayout hmc_dl_210__PreHouse_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Z5_mesh_layer_4),
 		GEO_CLOSE_NODE(),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_Z6_mesh_layer_1),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_Z6_001_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_Z7_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Z8_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Z8_001_mesh_layer_4),
@@ -112,6 +113,7 @@ const GeoLayout hmc_dl_210__PreHouse_geo[] = {
 const GeoLayout hmc_dl_211__PreHouse2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_Tree_001_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_Tree_002_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 0, 90, 0, hmc_dl_Tree_003_mesh_layer_1),
 		GEO_OPEN_NODE(),

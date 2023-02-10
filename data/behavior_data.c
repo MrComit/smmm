@@ -9187,6 +9187,7 @@ const BehaviorScript bhvAtticBully[] = {
     // SET_HOME(),
     CALL_NATIVE(bhv_attic_bully_init),
     SCALE(0, 350),
+    HIDE(),
     SET_FLOAT(oForwardVel, 12),
     SET_INT(oOpacity, 255),
     BEGIN_LOOP(),
