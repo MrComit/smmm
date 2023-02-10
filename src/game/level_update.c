@@ -1041,7 +1041,7 @@ s32 gHudLowerTimer2 = 0;
 s32 gHudLowerTimer3 = 0;
 s32 sTimer2 = 0;
 s32 gHudCoinUpdateFast;
-
+s32 gHudCoinUpdateFaster;
 
 s32 should_display_brokenkey(void) {
     s32 flags = save_file_get_newflags(0);
@@ -1115,6 +1115,9 @@ void update_hud_values(void) {
             if (!gHudCoinUpdateFast && (gMarioState->numCoins - gHudDisplay.coins) > 20) {
                 gHudCoinUpdateFast = TRUE;
             }
+            if (!gHudCoinUpdateFaster && (gMarioState->numCoins - gHudDisplay.coins) >= 100) {
+                gHudCoinUpdateFaster = TRUE;
+            }
             if (gGlobalTimer & 0x00000001 || gHudCoinUpdateFast) {
                 u32 coinSound;
                 if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
@@ -1127,6 +1130,13 @@ void update_hud_values(void) {
                 gHudLowerTimer = 0;
 
                 gHudDisplay.coins += 1;
+                if (gHudCoinUpdateFaster) {
+                    if ((gMarioState->numCoins - gHudDisplay.coins) >= 2) {
+                        gHudDisplay.coins += 1;
+                    } else {
+                        gHudCoinUpdateFaster = FALSE;
+                    }
+                }
                 gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount = gHudDisplay.coins;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
                 //gGotFileCoinHiScore = 1;
@@ -1134,6 +1144,7 @@ void update_hud_values(void) {
             }
         } else {
             gHudCoinUpdateFast = FALSE;
+            gHudCoinUpdateFaster = FALSE;
         }
 
         if (gHudDisplay.coins > gMarioState->numCoins && !(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) {
