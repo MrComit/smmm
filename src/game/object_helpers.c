@@ -2020,6 +2020,34 @@ Gfx *geo_switch_gameroom(s32 callContext, struct GraphNode *node) {
 
 
 #ifdef AVOID_UB
+Gfx *geo_switch_attic(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_attic(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+    struct Object *obj;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        obj = cur_obj_nearest_object_with_behavior(bhvAtticWall);
+        // assign the case number for execution.
+        if (obj == NULL || obj->oOpacity != 255 || !gIsConsole) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+
+#ifdef AVOID_UB
 Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node, UNUSED void *context) {
 #else
 Gfx *geo_switch_foreroom_outside(s32 callContext, struct GraphNode *node) {

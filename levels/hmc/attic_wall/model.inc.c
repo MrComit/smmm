@@ -521,22 +521,22 @@ u8 attic_wall_lava_rgba16[] = {
 };
 
 Vtx attic_wall_wall_mesh_layer_5_vtx_0[16] = {
-	{{{2500, 0, 2500},0, {-10283, -549},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{2500, 3778, -2500},0, {-5150, 1798},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{2500, 0, -2500},0, {-5150, -549},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{2500, 3778, 2500},0, {-10283, 1798},{0x81, 0x0, 0x0, 0xFF}}},
-	{{{2500, 0, -2500},0, {-5150, -549},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{2500, 3778, -2500},0, {-5150, 1798},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-2500, 3778, -2500},0, {-16, 1798},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-2500, 0, -2500},0, {-16, -549},{0x0, 0x0, 0x7F, 0xFF}}},
-	{{{-2500, 0, 2500},0, {-15417, -549},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{2500, 3778, 2500},0, {-10283, 1798},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{2500, 0, 2500},0, {-10283, -549},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-2500, 3778, 2500},0, {-15417, 1798},{0x0, 0x0, 0x81, 0xFF}}},
-	{{{-2500, 0, -2500},0, {-16, -549},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-2500, 3778, -2500},0, {-16, 1798},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-2500, 3778, 2500},0, {5118, 1798},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{-2500, 0, 2500},0, {5118, -549},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{{2500, 0, 2500}, 0, {-10283, -549}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 3778, -2500}, 0, {-5150, 1798}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 0, -2500}, 0, {-5150, -549}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 3778, 2500}, 0, {-10283, 1798}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 0, -2500}, 0, {-5150, -549}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{2500, 3778, -2500}, 0, {-5150, 1798}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-2500, 3778, -2500}, 0, {-16, 1798}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-2500, 0, -2500}, 0, {-16, -549}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-2500, 0, 2500}, 0, {-15417, -549}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{2500, 3778, 2500}, 0, {-10283, 1798}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{2500, 0, 2500}, 0, {-10283, -549}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{-2500, 3778, 2500}, 0, {-15417, 1798}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{-2500, 0, -2500}, 0, {-16, -549}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-2500, 3778, -2500}, 0, {-16, 1798}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-2500, 3778, 2500}, 0, {5118, 1798}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-2500, 0, 2500}, 0, {5118, -549}, {0x7F, 0x0, 0x0, 0xFF}}},
 };
 
 Gfx attic_wall_wall_mesh_layer_5_tri_0[] = {
@@ -548,8 +548,36 @@ Gfx attic_wall_wall_mesh_layer_5_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx attic_wall_start_wallC_mesh_layer_1_vtx_0[16] = {
+	{{{2500, 0, 2500}, 0, {-10283, -549}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 3778, -2500}, 0, {-5150, 1798}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 0, -2500}, 0, {-5150, -549}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 3778, 2500}, 0, {-10283, 1798}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{2500, 0, -2500}, 0, {-5150, -549}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{2500, 3778, -2500}, 0, {-5150, 1798}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-2500, 3778, -2500}, 0, {-16, 1798}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-2500, 0, -2500}, 0, {-16, -549}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-2500, 0, 2500}, 0, {-15417, -549}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{2500, 3778, 2500}, 0, {-10283, 1798}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{2500, 0, 2500}, 0, {-10283, -549}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{-2500, 3778, 2500}, 0, {-15417, 1798}, {0x0, 0x0, 0x81, 0xFF}}},
+	{{{-2500, 0, -2500}, 0, {-16, -549}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-2500, 3778, -2500}, 0, {-16, 1798}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-2500, 3778, 2500}, 0, {5118, 1798}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{-2500, 0, 2500}, 0, {5118, -549}, {0x7F, 0x0, 0x0, 0xFF}}},
+};
 
-Gfx mat_attic_wall_LavaWave_layer5[] = {
+Gfx attic_wall_start_wallC_mesh_layer_1_tri_0[] = {
+	gsSPVertex(attic_wall_start_wallC_mesh_layer_1_vtx_0 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
+	gsSP2Triangles(8, 9, 10, 0, 8, 11, 9, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsSPEndDisplayList(),
+};
+
+
+Gfx mat_attic_wall_LavaWave_001_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
 	gsDPSetCycleType(G_CYC_2CYCLE),
@@ -574,17 +602,59 @@ Gfx mat_attic_wall_LavaWave_layer5[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_attic_wall_LavaWave_layer5[] = {
+Gfx mat_revert_attic_wall_LavaWave_001_layer5[] = {
 	gsDPPipeSync(),
 	gsDPSetCycleType(G_CYC_1CYCLE),
 	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_attic_wall_LavaWaveConsole_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, PRIMITIVE, TEXEL0_ALPHA, PRIMITIVE, 0, 0, 0, ENVIRONMENT, COMBINED, 0, TEXEL0, 0, 0, 0, 0, COMBINED),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetAlphaCompare(G_AC_DITHER),
+	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA), Z_CMP | Z_UPD | CVG_DST_CLAMP | ZMODE_OPA),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_16b_LOAD_BLOCK, 1, attic_wall_ia16_lavawave_ia16),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(7, 0, 0, 1023, 256),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_IA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsDPTileSync(),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, attic_wall_lava_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 256, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPLoadSync(),
+	gsDPLoadBlock(6, 0, 0, 1023, 256),
+	gsDPPipeSync(),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(1, 0, 0, 124, 124),
+	gsDPSetPrimColor(0, 0, 255, 183, 99, 255),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_attic_wall_LavaWaveConsole_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
 Gfx attic_wall_wall_mesh_layer_5[] = {
-	gsSPDisplayList(mat_attic_wall_LavaWave_layer5),
+	gsSPDisplayList(mat_attic_wall_LavaWave_001_layer5),
 	gsSPDisplayList(attic_wall_wall_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_attic_wall_LavaWave_layer5),
+	gsSPDisplayList(mat_revert_attic_wall_LavaWave_001_layer5),
+	gsSPEndDisplayList(),
+};
+
+Gfx attic_wall_start_wallC_mesh_layer_1[] = {
+	gsSPDisplayList(mat_attic_wall_LavaWaveConsole_layer1),
+	gsSPDisplayList(attic_wall_start_wallC_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_attic_wall_LavaWaveConsole_layer1),
 	gsSPEndDisplayList(),
 };
 
