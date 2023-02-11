@@ -175,9 +175,18 @@ void bhv_basement_dryer_init(void) {
     if (o->oBehParams2ndByte == 3) {
         o->oObjF8 = spawn_object(o, MODEL_NONE, bhvRoomObj);
     }
+    if (!gIsConsole) {
+        o->oDrawingDistance = 0x7FFF;
+    }
 }
 
 void bhv_basement_dryer_loop(void) {
+    if (o->oPosY < 1000.0f && gMarioState->pos[1] > 1000.0f && !gIsConsole) {
+        cur_obj_hide();
+    } else {
+        cur_obj_unhide();
+    }
+
     switch (o->oAction) {
         case 1:
             cur_obj_init_animation(0);
@@ -212,7 +221,20 @@ void bhv_basement_dryer_loop(void) {
     }
 }
 
+
+void bhv_basement_washer_init(void) {
+    if (!gIsConsole) {
+        o->oDrawingDistance = 0x7FFF;
+    }
+}
+
 void bhv_basement_washer_loop(void) {
+    if (o->oPosY < 1000.0f && gMarioState->pos[1] > 1000.0f && !gIsConsole) {
+        cur_obj_hide();
+    } else {
+        cur_obj_unhide();
+    }
+
     switch (o->oAction) {
         case 0:
             if (o->oDistanceToMario < 1750.0f && absi((u16)o->oAngleToMario - (u16)o->oFaceAngleYaw) < 0x2C00) {
