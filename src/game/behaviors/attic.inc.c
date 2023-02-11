@@ -11,7 +11,7 @@ static struct ObjectHitbox sAtticBullyHitbox = {
 };
 
 void bhv_ghost_barrier_init(void) {
-    if (gCurrLevelNum == LEVEL_BOB && save_file_get_boos() & (1 << 0x12)) {
+    if (save_file_get_boos() & (1 << 0x12)) {
         o->activeFlags = 0;
     }
 }
@@ -22,7 +22,7 @@ void bhv_ghost_barrier_loop(void) {
     }
     switch (o->oAction) {
         case 0:
-            if (save_file_get_boos() & (1 << 0x12) && set_mario_npc_dialog(1)) {
+            if (o->oTimer != 0 && save_file_get_boos() & (1 << 0x12) && set_mario_npc_dialog(1)) {
                 o->oAction = 1;
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0x00, 0x00, 0x00);
                 vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
@@ -229,6 +229,7 @@ void bhv_attic_rock_loop(void) {
                 o->oAction = 3;
                 o->oVelY = 0;
                 o->oFloatF4 = 0;
+                return;
             }
             spireHeight = obj->oPosY + (obj->header.gfx.scale[1] * 1000.0f);
             if (o->oPosY < spireHeight) {
@@ -760,6 +761,8 @@ void bhv_attic_spire_loop(void) {
             o->oPosY += 50.0f;
             if (o->header.gfx.scale[1] == 0.0f) {
                 o->activeFlags = 0;
+                // cur_obj_hide();
+                // o->oAction = 6;
             }
             break;
     }
