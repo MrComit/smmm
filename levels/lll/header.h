@@ -271,4 +271,6 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/elevator_instantwarp/collision_header.h"
 
+#include "levels/lll/shyguy_group/geo_header.h"
+
 #endif

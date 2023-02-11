@@ -76,6 +76,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_HAMMER, hammer_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TREADMILL_FLOOR, treadmill_floor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ELEVATOR_DOOR, elevator_door_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SHYGUY_GROUP, shyguy_group_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

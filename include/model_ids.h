@@ -843,6 +843,10 @@
 #define MODEL_COLORED_GATE        0xE3
 #define MODEL_GHOST_BULLY         0xE2
 
+// 0x6C-0x73
+#define MODEL_SHYGUY_GROUP        0x6C
+
+
 
 // 0x97-0x9B
 #define MODEL_WALL_GOOMBA         0x97
@@ -850,5 +854,8 @@
 #define MODEL_HAMMER              0x99
 #define MODEL_TREADMILL_FLOOR     0x9A
 #define MODEL_ELEVATOR_DOOR       0x9B
+
+
+
 
 #endif // MODEL_IDS_H

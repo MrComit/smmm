@@ -407,12 +407,14 @@ void mario_update_toad_friend(struct MarioState *m) {
         case LEVEL_HMC:
             mario_update_friend_l6_loop(m);
             break;
+#ifdef SMMM_DEBUG
         case LEVEL_LLL:
             //TEMP
             if (gPlayer1Controller->buttonPressed & L_TRIG && gPlayer1Controller->buttonDown & Z_TRIG) {
                 gLowGrav ^= 1;
             }
             break;
+#endif
     }
 }
 
@@ -485,6 +487,9 @@ void bhv_mario_update(void) {
 
         i++;
     }
+    // if (gPlayer1Controller->buttonPressed & L_TRIG) {
+    //     save_file_erase(0);
+    // }
     mario_update_toad_friend(gMarioState);
     mario_update_room_clear(gMarioState);
 

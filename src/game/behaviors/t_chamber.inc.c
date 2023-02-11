@@ -17,9 +17,14 @@ void bhv_jumpscare_shyguy_init(void) {
     if (o->oObjF8 == NULL) {
         o->activeFlags = 0;
     }
-    o->header.gfx.scale[0] = (random_float() + 0.75f) * 3.0f;
-    o->header.gfx.scale[1] = (random_float() + 0.75f) * 3.0f;
-    o->header.gfx.scale[2] = (random_float() + 0.75f) * 3.0f;
+    if (!gIsConsole) {
+        o->header.gfx.scale[0] = (random_float() + 0.75f) * 3.0f;
+        o->header.gfx.scale[1] = (random_float() + 0.75f) * 3.0f;
+        o->header.gfx.scale[2] = (random_float() + 0.75f) * 3.0f;
+    } else {
+        o->header.gfx.scale[0] = 1.0f;
+        o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+    }
     o->header.gfx.animInfo.animFrame = CL_RandomMinMaxU16(0, 10);
 }
 
@@ -65,17 +70,30 @@ void spawn_chamber_shyguys(f32 xPos, f32 yPos, f32 zPos) {
     struct Object *obj;
     s32 i, k;
     for (i = 0; i < 3; i++) {
-        for (k = 0; k < 5; k++) {
-            obj = spawn_object(o, MODEL_SHYGUY, bhvJumpscareShyguy);
-            obj->oPosX = xPos - (k * 300.0f);
-            if (i == 1) {
-                obj->oPosX -= 100.0f;
+        if (!gIsConsole) {
+            for (k = 0; k < 5; k++) {
+                obj = spawn_object(o, MODEL_SHYGUY, bhvJumpscareShyguy);
+                obj->oPosX = xPos - (k * 300.0f);
+                if (i == 1) {
+                    obj->oPosX -= 100.0f;
+                }
+                if ((i | k) == 0) {
+                    obj->oBehParams2ndByte = 1;
+                }
+                obj->oPosY = yPos + (i * 100.0f);
+                obj->oPosZ = zPos + (i * 150.0f);
             }
-            if ((i | k) == 0) {
-                obj->oBehParams2ndByte = 1;
-            }
-            obj->oPosY = yPos + (i * 100.0f);
-            obj->oPosZ = zPos + (i * 150.0f);
+        } else {
+                obj = spawn_object(o, MODEL_SHYGUY_GROUP, bhvJumpscareShyguy);
+                // obj->oPosX = xPos - (k * 300.0f);
+                if (i == 1) {
+                    obj->oPosX -= 100.0f;
+                }
+                if (i == 0) {
+                    obj->oBehParams2ndByte = 1;
+                }
+                obj->oPosY = yPos + (i * 100.0f);
+                obj->oPosZ = zPos + (i * 150.0f);
         }
     }
 }

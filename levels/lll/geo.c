@@ -80,3 +80,4 @@
 #include "levels/lll/hammer/geo.inc.c"
 #include "levels/lll/treadmill_floor/geo.inc.c"
 #include "levels/lll/elevator_door/geo.inc.c"
+#include "levels/lll/shyguy_group/geo.inc.c"
