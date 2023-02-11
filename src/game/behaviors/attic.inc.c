@@ -198,6 +198,13 @@ void bhv_attic_rock_init(void) {
 void bhv_attic_rock_loop(void) {
     f32 spireHeight;
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvAtticSpire);
+
+    if (o->oBehParams2ndByte) {
+        if (((s32)(random_float() * 16.0f)) == 8) {
+            play_sound(SOUND_GENERAL_QUIET_BUBBLE2, gGlobalSoundSource);
+        }
+    }
+
     if (o->oObj100 != NULL && o->oObj100->activeFlags == 0) {
         o->oObj100 = NULL;
     }
