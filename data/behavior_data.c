@@ -9153,16 +9153,16 @@ const BehaviorScript bhvFanBlades[] = {
 
 const BehaviorScript bhvAtticGrate[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     LOAD_COLLISION_DATA(attic_grate_collision),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_FLOAT(oFloatF4, 5),
-    // CALL_NATIVE(bhv_sauna_rock_rise_init),
+    CALL_NATIVE(bhv_attic_grate_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_attic_grate_loop),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
@@ -9199,7 +9199,7 @@ const BehaviorScript bhvAtticBully[] = {
 
 const BehaviorScript bhvAtticRock[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     LOAD_COLLISION_DATA(attic_rock_collision),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x4000),
@@ -9207,7 +9207,7 @@ const BehaviorScript bhvAtticRock[] = {
     CALL_NATIVE(bhv_attic_rock_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_attic_rock_loop),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 

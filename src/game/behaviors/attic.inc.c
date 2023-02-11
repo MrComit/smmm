@@ -201,6 +201,11 @@ void bhv_attic_rock_loop(void) {
     if (o->oObj100 != NULL && o->oObj100->activeFlags == 0) {
         o->oObj100 = NULL;
     }
+
+    if (o->oDistanceToMario < 850.0f || (o->oObj100 != NULL && lateral_dist_between_objects(o, o->oObj100) < 800.0f)) {
+        load_object_collision_model();
+    }
+
     if (o->oObj100 != NULL && o->oObj100->oAction == 7 /*&& gMarioObject->platform != o*/) {
         o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0x8000, 0x500);
         if ((u16)o->oFaceAngleRoll != 0x8000 && gMarioObject->platform == o) {
@@ -759,9 +764,23 @@ void bhv_attic_spire_loop(void) {
             break;
     }
 }
+f32 lateral_dist_between_objects(struct Object *obj1, struct Object *obj2);
 
+void bhv_attic_grate_init(void) {
+    o->oObj104 = cur_obj_nearest_object_with_behavior(bhvAtticBully);
+}
 
 void bhv_attic_grate_loop(void) {
+    // f32 dist;
+    if (o->oObj104 != NULL && o->oObj104->activeFlags == 0) {
+        o->oObj104 == NULL;
+    }
+    if (o->oDistanceToMario < 850.0f || (o->oObj104 != NULL && lateral_dist_between_objects(o, o->oObj104) < 800.0f)) {
+        load_object_collision_model();
+    }
+    // if (o->oBehParams2ndByte) {
+    //     CL_PRINT(2, "%d", (s32)lateral_dist_between_objects(o, o->oObj104));
+    // }
     switch (o->oAction) {
         case 1:
             o->oPosY += o->oFloatF4;

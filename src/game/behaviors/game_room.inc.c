@@ -379,6 +379,9 @@ void bhv_pool_cue_init(void) {
         o->oAction = 5;
         o->oGraphYOffset = 9.0f;
     }
+    if (save_file_check_room(o->oRoom + sLevelRoomOffsets[gCurrCourseNum - 1])) {
+        o->activeFlags = 0;
+    }
 }
 
 
