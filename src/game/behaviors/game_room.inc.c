@@ -105,6 +105,7 @@ void pingpong_ball_update(struct Object *obj1, struct Object *obj2) {
                 spawn_mist_particles();
             }
         } else {
+            cur_obj_play_sound_1(SOUND_MENU_CLICK_CHANGE_VIEW);
             obj1->oAction = 3;
             o->oAction ^= 1;
             o->oFC = 0;
@@ -506,6 +507,7 @@ void bhv_pool_ball_loop(void) {
     if (o->oAction) {
         if (o->oTimer == 0) {
             cur_obj_unhide();
+            cur_obj_play_sound_1(SOUND_MENU_CLICK_CHANGE_VIEW);
         }
         o->oFaceAnglePitch += 0x800;
         obj_set_hitbox(o, &sPoolBallHitbox);
