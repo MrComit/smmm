@@ -666,6 +666,13 @@ void bhv_engine_gear_init(void) {
 
 
 void bhv_engine_gear_loop(void) {
+    if (o->oBehParams >> 24 && gIsConsole) {
+        if (gMarioState->pos[2] < -100.0f || gMarioState->pos[0] < 10000.0f) {
+            cur_obj_unhide();
+        } else {
+            cur_obj_hide();
+        }
+    }
     if (o->os16F4 != gLowGrav) {
         o->os16F4 = gLowGrav;
         o->oFloatF8 = 0.0f;
