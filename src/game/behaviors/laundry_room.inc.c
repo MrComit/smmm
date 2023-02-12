@@ -237,7 +237,7 @@ void bhv_basement_washer_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 1750.0f && absi((u16)o->oAngleToMario - (u16)o->oFaceAngleYaw) < 0x2C00) {
+            if (o->oDistanceToMario < 1750.0f && absi(o->oAngleToMario - (s16)o->oFaceAngleYaw) < 0x2C00) {
                 if (o->oTimer > 5) {
                     cur_obj_init_animation(1);
                     o->oAction = 1;

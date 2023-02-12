@@ -422,7 +422,7 @@ extern Vtx lll_dl_Table_mesh_layer_1_vtx_cull[8];
 extern Vtx lll_dl_Table_mesh_layer_1_vtx_0[64];
 extern Gfx lll_dl_Table_mesh_layer_1_tri_0[];
 extern Vtx lll_dl_TideToad_mesh_layer_1_vtx_cull[8];
-extern Vtx lll_dl_TideToad_mesh_layer_1_vtx_0[56];
+extern Vtx lll_dl_TideToad_mesh_layer_1_vtx_0[94];
 extern Gfx lll_dl_TideToad_mesh_layer_1_tri_0[];
 extern Vtx lll_dl_TideToad_mesh_layer_1_vtx_1[80];
 extern Gfx lll_dl_TideToad_mesh_layer_1_tri_1[];
