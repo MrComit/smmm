@@ -194,7 +194,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_SECURITY_CAM, -1856, 2466, 6932, 0, 0, 0, 0x00000000, bhvSecurityCam),
 		OBJECT(MODEL_SECURITY_CAM, -4729, 866, 11182, 0, -180, 0, (1 << 16), bhvSecurityCam),
 		OBJECT(MODEL_SECURITY_CAM, -679, 2266, 3482, 0, 0, 0, (2 << 16), bhvSecurityCam),
-		OBJECT(MODEL_SMALL_KEY, -4437, 1436, 8244, 0, 0, 0, (1 << 24) | (0xA << 16), bhvSmallKey),
+		OBJECT(MODEL_SMALL_KEY, -4583, 1436, 8244, 0, 90, 0, (1 << 24) | (0xA << 16), bhvSmallKey),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4279, 0, 4832, 0, 90, 0, (0xA << 16), bhvSmallKeyDoor),
 		OBJECT(MODEL_JOURNAL_BOOK, -1479, 434, 3982, 0, 0, 0, (DIALOG_051 << 16), bhvJournalBook),
 		OBJECT(MODEL_POWER_PLAT, -3779, 0, 5982, 0, 0, 0, 0x00000000, bhvPowerPlat),

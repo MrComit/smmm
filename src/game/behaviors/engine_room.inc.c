@@ -123,6 +123,52 @@ Vec3s sPowerButtonCols[3] = {
 
 s32 sPowerButtonsPressed = 0;
 s32 sPowerButtonsReset = FALSE;
+s32 sPowerButtonPatternCheck = 0;
+
+void detect_power_button_pattern(void) {
+    // struct Object *obj;
+    switch (sPowerButtonPatternCheck) {
+        case 0:
+            if (sPowerButtonsPressed == 0b00100) {
+                sPowerButtonPatternCheck = 1;
+            }
+            break;
+        case 1:
+            if (sPowerButtonsPressed == 0b00110) {
+                sPowerButtonPatternCheck = 2;
+            }
+            break;
+        case 2:
+            if (sPowerButtonsPressed == 0b00111) {
+                sPowerButtonPatternCheck = 3;
+            }
+            break;
+        case 3:
+            if (sPowerButtonsPressed == 0b01111) {
+                sPowerButtonPatternCheck = 4;
+            }
+            break;
+        case 4:
+            if (sPowerButtonsPressed == 0b11111) {
+                sPowerButtonPatternCheck = 5;
+            }
+            break;
+        // case 5:
+        //     if (o->oTimer > 30 && !(save_file_get_golden_goombas() & (1 << 7))) {
+        //         save_file_set_golden_goombas(7);
+        //         play_puzzle_jingle();
+        //         obj = spawn_object(gMarioObject, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+        //         vec3f_set(&obj->oPosX, 500.0f, 800.0f, 500.0f);
+        //         gCamera->comitCutscene = 0xFF;
+        //         gComitCutsceneTimer = 45;
+        //         obj->os16110 = 3045;
+        //         vec3f_set(gComitCutscenePosVec, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2] - 250.0f);
+        //         vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
+        //     }
+        //     sPowerButtonPatternCheck = 6;
+        //     break;
+    }
+}
 
 
 void bhv_power_bar_init(void) {
@@ -157,6 +203,7 @@ void bhv_power_bar_init(void) {
 
 
 void bhv_power_bar_loop(void) {
+    struct Object *obj;
     if (o->os16FA == 0) {
         o->header.gfx.scale[2] = 0.25f;
     } else if (o->os16FA > 5) {
@@ -165,6 +212,9 @@ void bhv_power_bar_loop(void) {
     o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], (f32)o->os16FA, 0.13f);
     if (sPowerButtonsReset && o->oBehParams2ndByte == 2 && sPowerButtonsPressed == 0) {
         sPowerButtonsReset = FALSE;
+    }
+    if (o->oBehParams2ndByte == 2) {
+        detect_power_button_pattern();
     }
     switch (o->oAction) {
         case 0:
@@ -185,6 +235,20 @@ void bhv_power_bar_loop(void) {
             }
             break;
         case 1:
+            if (o->oBehParams2ndByte == 2 && sPowerButtonPatternCheck == 5 && o->oTimer > 60) {
+                if (!(save_file_get_golden_goombas() & (1 << 7))) {
+                    save_file_set_golden_goombas(7);
+                    play_puzzle_jingle();
+                    obj = spawn_object(gMarioObject, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+                    vec3f_set(&obj->oPosX, 500.0f, 800.0f, 500.0f);
+                    gCamera->comitCutscene = 0xFF;
+                    gComitCutsceneTimer = 45;
+                    obj->os16110 = 3045;
+                    vec3f_set(gComitCutscenePosVec, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2] - 250.0f);
+                    vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
+                }
+                o->oAction = 2;
+            }
             break;
     }
 }
@@ -249,6 +313,7 @@ void bhv_power_button_loop(void) {
                 if (o->oObjFC == NULL) {
                     o->activeFlags = 0;
                 }
+                sPowerButtonPatternCheck = 0;
                 sPowerButtonsPressed &= ~(1 << o->oBehParams2ndByte);
                 spawn_mist_particles();
             }

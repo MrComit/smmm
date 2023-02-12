@@ -1116,7 +1116,7 @@ void handle_ground_pound_floor(struct MarioState *m) {
             break;
         case 13:
             if (!(save_file_get_golden_goombas() & (1 << 6))) {
-                save_file_set_golden_goombas(4);
+                save_file_set_golden_goombas(6);
                 play_puzzle_jingle();
                 obj = spawn_object(gMarioObject, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
                 vec3f_set(&obj->oPosX, 1000.0f, 800.0f, 1000.0f);
