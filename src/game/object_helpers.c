@@ -515,6 +515,7 @@ Vtx *sVanishVerts[] = {
     &hmc_dl_BelowMaze_mesh_layer_1_vtx_0,
     &hmc_dl_BelowMaze_mesh_layer_1_vtx_1,
     &lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0,
+    &lll_dl_MUSICFLOOR_Cellar_mesh_layer_1_vtx_0,
 };
 
 s16 sVanishVertCounts[] = {
@@ -527,6 +528,7 @@ s16 sVanishVertCounts[] = {
     sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_0) / 16,
     sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_1) / 16,
     sizeof(lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0) / 16,
+    sizeof(lll_dl_MUSICFLOOR_Cellar_mesh_layer_1_vtx_0) / 16,
 };
 
 s16 sVanishVertDists[] = {
@@ -538,6 +540,7 @@ s16 sVanishVertDists[] = {
     2500,
     2500,
     2500,
+    1000,
     1000,
 };
 

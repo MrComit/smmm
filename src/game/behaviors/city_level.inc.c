@@ -1152,37 +1152,25 @@ void bhv_block_bomb_loop(void) {
 
 void shyguy_boss_handle_void_out(void) {
     struct MarioState *m = gMarioState;
+    f32 yPos;
     switch (o->oHealth) {
         case 3:
-            if (m->pos[1] <= 3000.0f) {
-                if (m->health < 0x300) {
-                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
-                    o->oAction = 0;
-                } else {
-                    o->oAction = 3;
-                }
-            }
+            yPos = 3000.0f;
             break;
         case 2:
-            if (m->pos[1] <= 4000.0f) {
-                if (m->health < 0x300) {
-                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
-                    o->oAction = 0;
-                } else {
-                    o->oAction = 3;
-                }
-            }
+            yPos = 4000.0f;
             break;
         case 1:
-            if (m->pos[1] <= 7100.0f) {
-                if (m->health < 0x300) {
-                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
-                    o->oAction = 0;
-                } else {
-                    o->oAction = 3;
-                }
-            }
+            yPos = 7100.0f;
             break;
+    }
+    if (m->pos[1] <= yPos) {
+        if (m->health < 0x300) {
+            level_trigger_warp(m, WARP_OP_WARP_FLOOR_OBJECT);
+            o->oAction = 0;
+        } else {
+            o->oAction = 3;
+        }
     }
 }
 

@@ -218,6 +218,8 @@ const GeoLayout lll_dl_104__Wine_Cellar_geo[] = {
 			GEO_BRANCH(1, lll_dl_b_001_geo),
 			GEO_BRANCH(1, lll_dl_c_001_geo),
 		GEO_CLOSE_NODE(),
+		GEO_ASM(9, geo_update_vanish_floor),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_MUSICFLOOR_Cellar_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Stairs_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 65042, 1113, -16615, lll_dl_Tower_mesh_layer_1),

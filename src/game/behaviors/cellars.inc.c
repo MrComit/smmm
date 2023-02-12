@@ -130,29 +130,23 @@ void bhv_basement_switch_loop(void) {
 
 
 s32 security_cam_respawn(Vec3f pos, s16 faceAngle, s16 damage) {
-    if (gMarioState->health < 0x300) {
-        level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
-        o->oAction = 2;
-        return 0;
-    } else {
-        switch (o->os16FE) {
-            case 0:
-                play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x10, 0x00, 0x00, 0x00);
-                break;
-            case 13:
-                vec3f_copy(gMarioState->pos, pos);
-                CL_set_camera_pos(pos, pos);
-                gMarioState->faceAngle[1] = faceAngle;
-                s8DirModeBaseYaw = (s16)(faceAngle & 0xC000) - 0x4000;
-                set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
-                break;
-            case 16:
-                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
-                gMarioState->hurtCounter = 4 * damage;
-                o->os16FE = 0;
-                return 1;
-                break;
-        }
+    switch (o->os16FE) {
+        case 0:
+            play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x10, 0x00, 0x00, 0x00);
+            break;
+        case 13:
+            vec3f_copy(gMarioState->pos, pos);
+            CL_set_camera_pos(pos, pos);
+            gMarioState->faceAngle[1] = faceAngle;
+            s8DirModeBaseYaw = (s16)(faceAngle & 0xC000) - 0x4000;
+            set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
+            break;
+        case 16:
+            play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+            gMarioState->hurtCounter = 4 * damage;
+            o->os16FE = 0;
+            return 1;
+            break;
     }
     o->os16FE++;
     return 0;
@@ -187,6 +181,7 @@ void bhv_security_cam_loop(void) {
     Vec3f point;
     f32 dist, xComp, zComp;
     s16 pitch, yaw;
+    s16 floorType;
     switch (o->oBehParams2ndByte) {
         case 0:
             o->os16F6 += 0x100;
@@ -211,17 +206,22 @@ void bhv_security_cam_loop(void) {
             point[2] = (zComp * coss(o->oFaceAngleYaw)) + (xComp * sins(o->oFaceAngleYaw)) + o->oPosZ;
             vec3f_get_dist_and_angle(point, gMarioState->pos, &dist, &pitch, &yaw);
 
-            if ((s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 800) {
+            if (o->oTimer > 15 && (s16)dist < o->os16FC && absi((s16)gMarioState->pos[1] - (o->os16F4 + o->oPosY)) < 300) {
                 // play_puzzle_jingle();
                 o->oAction = 1;
                 CL_get_hit(gMarioState, gMarioObject, 0);
             }
             break;
         case 1:
-            obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
-            if (obj != NULL) {
-                if (security_cam_respawn(&obj->oPosX, -obj->oFaceAngleYaw, 2)) {
-                    o->oAction = 0;
+            if (gMarioState->health < 0x300) {
+                level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR_OBJECT);
+                o->oAction = 0;
+            } else {
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    if (security_cam_respawn(&obj->oPosX, -obj->oFaceAngleYaw, 2)) {
+                        o->oAction = 0;
+                    }
                 }
             }
             break;

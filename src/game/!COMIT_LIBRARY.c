@@ -231,7 +231,7 @@ s32 CL_NPC_Dialog_Options(s32 dialogId) {
 //0 = not done, 1 = done, 2 = died
 s32 CL_respawn(s16 *timer, Vec3f pos, s16 faceAngle, s16 damage) {
     if (gMarioState->health <= 0x280) {
-        level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR);
+        level_trigger_warp(gMarioState, WARP_OP_WARP_FLOOR_OBJECT);
         return 2;
     } else {
         switch (*timer) {

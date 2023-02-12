@@ -160,7 +160,7 @@ void bhv_lightning_loop(void) {
         // CL_PRINT(4, "%x", m->action)
         if (o->os16FA && m->pos[1] < 1200.0f) {
             if (o->os16FA == 2) {
-                level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                level_trigger_warp(m, WARP_OP_WARP_FLOOR_OBJECT);
                 o->os16FA = 0;
             } else {
                 switch (o->os16F8++) {
