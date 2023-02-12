@@ -138,6 +138,9 @@ Gfx *geo_switch_trophy_two(s32 callContext, struct GraphNode *node, UNUSED void 
 Gfx *geo_switch_plat_hall_repeats(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_laundry_backwall(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_laundry_backwall2(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_gym_one(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_gym_two(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_gym_three(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node);
@@ -179,6 +182,9 @@ Gfx *geo_switch_trophy_two(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_plat_hall_repeats(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_laundry_backwall(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_laundry_backwall2(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_gym_one(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_gym_two(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_gym_three(s32 callContext, struct GraphNode *node);
 #endif
 void obj_update_pos_from_parent_transformation(Mat4 a0, struct Object *a1);
 void obj_apply_scale_to_matrix(struct Object *obj, Mat4 dst, Mat4 src);
