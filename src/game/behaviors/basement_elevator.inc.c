@@ -47,12 +47,13 @@ enum ElevatorHazards {
 
 void bhv_elevator_door_init(void) {
     struct Object *obj;
+    o->os16110 = 0;
     if (lateral_dist_between_objects(o, gMarioObject) < 500.0f || o->oBehParams2ndByte == 1) {
         o->oAction = 1;
         o->oPosY = o->oHomeY + 400.0f;
         o->header.gfx.scale[2] = 0.8f;
     }
-    if (o->oBehParams2ndByte == 2) {
+    if (o->oBehParams2ndByte == 2 || o->oBehParams2ndByte == 3) {
         if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
             o->os16112 = 1;
         } else if (((o->oBehParams >> 8) & 0xFF) == 0xAB) {
@@ -66,7 +67,7 @@ void bhv_elevator_door_init(void) {
 }
 
 void bhv_elevator_door_loop(void) {
-    if (o->oBehParams2ndByte == 2 && save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+    if ((o->oBehParams2ndByte == 2 || o->oBehParams2ndByte == 3) && save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
         o->os16112 = 1;
     } 
     switch (o->oAction) {
@@ -102,7 +103,7 @@ void bhv_elevator_door_loop(void) {
             if (o->oBehParams2ndByte == 1) {
                 if (cur_obj_nearest_object_with_behavior(bhvGhostBully) != NULL) {
                     o->oAction = 0;
-                    o->os16112 = 1;
+                    // o->os16112 = 1;
                 }
             } else {
                 if (o->oDistanceToMario > 800.0f) {
@@ -111,12 +112,20 @@ void bhv_elevator_door_loop(void) {
             }
             if (o->os16112) {
                 if (absf(o->oPosZ - gMarioState->pos[2]) < 50.0f) {
-                    o->oAction = 2;
-                    sDelayedWarpOp = 0x10;
-                    sDelayedWarpTimer = 12;
-                    sSourceWarpNodeId = (o->oBehParams >> 8) & 0xFF;
-                    // music_changed_through_warp(sSourceWarpNodeId);
-                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x8, 0x00, 0x00, 0x00);
+                    if (o->os16110 == 0) {
+                        o->oAction = 2;
+                        sDelayedWarpOp = 0x10;
+                        sDelayedWarpTimer = 12;
+                        sSourceWarpNodeId = (o->oBehParams >> 8) & 0xFF;
+                        // music_changed_through_warp(sSourceWarpNodeId);
+                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x8, 0x00, 0x00, 0x00);
+                    }
+                } else if (o->oBehParams2ndByte == 3) {
+                    if (gMarioState->pos[2] < o->oPosZ) {
+                        o->os16110 = 1;
+                    } else {
+                        o->os16110 = 0;
+                    }
                 }
             }
             break;
@@ -197,6 +206,7 @@ void bhv_wall_goomba_loop(void) {
     if (o->oPosY < o->oHomeY - 150.0f) {
         o->activeFlags = 0;
         create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+        gMarioState->numCoins++;
     }
 }
 
@@ -268,6 +278,7 @@ void bhv_wall_hammerbro_loop(void) {
     if (o->oPosY < o->oHomeY - 150.0f) {
         o->activeFlags = 0;
         create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+        gMarioState->numCoins++;
     }
 }
 
@@ -494,6 +505,10 @@ void bhv_ghost_bully_init(void) {
 
 void bhv_ghost_bully_loop(void) {
     s16 actCheck = o->os16102;
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        o->activeFlags = 0;
+        return;
+    }
     if (gMarioCurrentRoom == o->oRoom) {
         ghost_bully_bounds_constraint();
         ghost_bully_mario_constraint();
@@ -645,7 +660,8 @@ void bhv_ghost_bully_loop(void) {
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 1500.0f, 20.0f);
             if (o->oPosY == o->oHomeY - 1500.0f) {
                 o->activeFlags = 0;
-                save_file_set_newflags(0, SAVE_NEW_FLAG_ELEVATOR_BOSS);
+                save_file_set_newflags(SAVE_NEW_FLAG_ELEVATOR_BOSS, 0);
+                gMarioState->numCoins += 100;
             }
             break;
     }
@@ -666,6 +682,10 @@ void check_ghost_bully_death(void) {
 
 
 void bhv_elevator_spawn_init(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        o->activeFlags = 0;
+        return;
+    }
     o->oObjF8 = cur_obj_nearest_object_with_behavior(bhvGhostBully);
     if (o->oObjF8 == NULL) {
         o->activeFlags = 0;
@@ -705,6 +725,10 @@ void bhv_elevator_moving_flame_loop(void) {
 
 void bhv_elevator_flame_spawn_loop(void) {
     struct Object *obj;
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        o->activeFlags = 0;
+        return;
+    }
     switch (o->oAction) {
         case 0:
             if (o->oObjF8->os16100 & (1 << EH_FLAME)) {
@@ -736,6 +760,10 @@ void bhv_elevator_flame_spawn_loop(void) {
 }
 
 void bhv_sawblade_spawn_loop(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        o->activeFlags = 0;
+        return;
+    }
     switch (o->oAction) {
         case 0:
             if (o->oObjF8->os16100 & (1 << EH_SAWBLADE)) {
@@ -775,6 +803,10 @@ void bhv_sawblade_shoot_loop(void) {
 
 
 void bhv_treadmill_floor_loop(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        o->activeFlags = 0;
+        return;
+    }
     switch (o->oAction) {
         case 0:
             if (o->oObjF8->os16100 & (1 << EH_ARROW)) {
