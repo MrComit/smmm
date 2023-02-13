@@ -9422,6 +9422,16 @@ const BehaviorScript bhvBasementSwitch[] = {
 };
 
 
+const BehaviorScript bhvBasementSwitchSpawn[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_basement_switch_spawn_init),
+    BREAK(),
+    DEACTIVATE(),
+};
+
+
 const BehaviorScript bhvFakeBasementSwitch[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),

@@ -2191,6 +2191,44 @@ Gfx *geo_switch_wine_cellar(s32 callContext, struct GraphNode *node) {
 }
 
 
+void hide_objects_with_behavior_and_room(const BehaviorScript *behavior, s32 room) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj->oRoom == room) {
+                obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+}
+
+void unhide_objects_with_behavior_and_room(const BehaviorScript *behavior, s32 room) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj->oRoom == room) {
+                obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+}
+
+
+
 #ifdef AVOID_UB
 Gfx *geo_switch_laundry_room(s32 callContext, struct GraphNode *node, UNUSED void *context) {
 #else
@@ -2210,7 +2248,11 @@ Gfx *geo_switch_laundry_room(s32 callContext, struct GraphNode *node) {
         // assign the case number for execution.
         if (m->pos[0] < 3000.0f && m->pos[2] > 14000.0f) {
             switchCase->selectedCase = 1;
+            unhide_objects_with_behavior_and_room(bhvDustBunny, gMarioCurrentRoom);
+            unhide_objects_with_behavior_and_room(bhvBounceBoxes, gMarioCurrentRoom);
         } else {
+            hide_objects_with_behavior_and_room(bhvDustBunny, gMarioCurrentRoom);
+            hide_objects_with_behavior_and_room(bhvBounceBoxes, gMarioCurrentRoom);
             switchCase->selectedCase = 0;
         }
     }

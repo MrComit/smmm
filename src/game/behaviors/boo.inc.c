@@ -495,6 +495,16 @@ static void boo_act_3(void) {
                 //obj->oBehParams2ndByte = 0;
                 //obj->oBehParams = ((o->oBehParams >> 8) & 0xFF) << 24;
                 break;
+            case 6:
+                obj = spawn_object(o, MODEL_BASEMENT_SWITCH, bhvBasementSwitch);
+                obj->oBehParams2ndByte = 0;
+                obj->oBehParams = 1 << 24;
+                obj->oFaceAngleYaw = 0xC000;
+                obj->oFaceAnglePitch = 0;
+                obj->oFaceAngleRoll = 0;
+                vec3f_set(&obj->oPosX, 8040.0f, 1000.0f, 8679.0f);
+                obj->oHomeY = obj->oPosY;
+                break;
         }
     }
 }

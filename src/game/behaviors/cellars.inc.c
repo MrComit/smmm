@@ -93,6 +93,15 @@ void bhv_colored_gate_loop(void) {
 
 
 
+void bhv_basement_switch_spawn_init(void) {
+    struct Object *obj;
+    if (save_file_get_boos() & (1 << 0x13)) {
+        obj = spawn_object(o, MODEL_BASEMENT_SWITCH, bhvBasementSwitch);
+        obj->oRoom = o->oRoom;
+        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    }
+}
+
 
 void bhv_basement_switch_init(void) {
     o->os16F4 = sBasementSwitchCols[o->oBehParams2ndByte][0];
@@ -106,6 +115,11 @@ void bhv_basement_switch_init(void) {
 
 
 void bhv_basement_switch_loop(void) {
+    if ((o->oBehParams >> 24) & 0xFF) {
+        if (o->oPosY != o->oHomeY - 1000.0f) {
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 1000.0f, 30.0f);
+        }
+    }
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
