@@ -166,7 +166,8 @@ void bhv_hammer_loop(void) {
     o->oFaceAnglePitch += 0x1000;
     if (o->oPosY < -3000.0f || o->oInteractStatus & INT_STATUS_INTERACTED) {
         o->activeFlags = 0;
-        spawn_mist_particles();
+        // spawn_mist_particles();
+        spawn_mist_particles_variable(4, 0, 23.0f);
     }
 }
 
@@ -809,7 +810,8 @@ void bhv_sawblade_shoot_loop(void) {
     CL_Move();
     cur_obj_update_floor_and_walls();
     if (o->oInteractStatus || o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oTimer > 180) {
-        spawn_mist_particles();
+        // spawn_mist_particles();
+        spawn_mist_particles_variable(4, 0, 23.0f);
         o->activeFlags = 0;
     }
 }

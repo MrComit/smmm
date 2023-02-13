@@ -344,6 +344,16 @@ void scroll_sts_mat_lll_dl_WoodPlat_layer1() {
 	}
 };
 
+void scroll_sts_mat_lll_dl_ElevatorBG() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorBG);
+	shift_t_down(mat, 18, PACK_TILESIZE(0, 25));
+};
+
+void scroll_sts_mat_lll_dl_ElevatorPillars() {
+	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorPillars);
+	shift_s_down(mat, 11, PACK_TILESIZE(0, 45));
+};
+
 void scroll_sts_mat_lll_dl_AElevatorWall_layer1() {
 	static int intervalTex1 = 2;
 	static int curInterval1 = 2;
@@ -353,16 +363,6 @@ void scroll_sts_mat_lll_dl_AElevatorWall_layer1() {
 		shift_s(mat, -1, PACK_TILESIZE(0, 1));
 		curInterval1 = intervalTex1;
 	}
-};
-
-void scroll_sts_mat_lll_dl_ElevatorPillars() {
-	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorPillars);
-	shift_s_down(mat, 11, PACK_TILESIZE(0, 45));
-};
-
-void scroll_sts_mat_lll_dl_ElevatorBG() {
-	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorBG);
-	shift_t_down(mat, 18, PACK_TILESIZE(0, 25));
 };
 
 void scroll_sts_mat_lll_dl_BooGooContainerTrans_layer5() {
@@ -398,8 +398,8 @@ void scroll_lll() {
 	scroll_sts_mat_lll_dl_BooGooContainer_layer1();
 	scroll_sts_mat_lll_dl_ChamberWall_layer1();
 	scroll_sts_mat_lll_dl_WoodPlat_layer1();
-	scroll_sts_mat_lll_dl_AElevatorWall_layer1();
-	scroll_sts_mat_lll_dl_ElevatorPillars();
 	scroll_sts_mat_lll_dl_ElevatorBG();
+	scroll_sts_mat_lll_dl_ElevatorPillars();
+	scroll_sts_mat_lll_dl_AElevatorWall_layer1();
 	scroll_sts_mat_lll_dl_BooGooContainerTrans_layer5();
 }
