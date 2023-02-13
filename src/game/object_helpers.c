@@ -5008,13 +5008,19 @@ s32 cur_obj_is_mario_ground_pounding_platform(void) {
 }
 
 void spawn_mist_particles(void) {
-    spawn_mist_particles_variable(0, 0, 46.0f);
-    // spawn_mist_particles_variable(4, 0, 33.0f);
+    if (!gIsConsole) {
+        spawn_mist_particles_variable(0, 0, 46.0f);
+    } else {
+        spawn_mist_particles_variable(4, 0, 33.0f);
+    }
 }
 
 void spawn_mist_particles_with_sound(u32 sp18) {
-    spawn_mist_particles_variable(0, 0, 46.0f);
-    // spawn_mist_particles_variable(4, 0, 33.0f);
+    if (!gIsConsole) {
+        spawn_mist_particles_variable(0, 0, 46.0f);
+    } else {
+        spawn_mist_particles_variable(4, 0, 33.0f);
+    }
     create_sound_spawner(sp18);
 }
 
