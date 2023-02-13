@@ -263,6 +263,7 @@ void bhv_champagne_loop(void) {
             if (o->oPosX == o->oFloatF8 && o->oPosY == o->oFloat104) {
                 o->oObjF4->oFC = 1;
                 CL_explode_object(o, 1);
+                cur_obj_play_sound_1(SOUND_PEACH_MARIO);
                 play_puzzle_jingle();
             }
             break;

@@ -174,7 +174,8 @@ void bhv_ice_cube_cracked_loop(void) {
                 o->oHomeY += 20.0f;
                 if (o->oBehParams2ndByte == 0)
                     create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
-                play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
+                // play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
+                cur_obj_play_sound_1(SOUND_PEACH_MARIO);
                 spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
 
                 if (obj != NULL && o->oBehParams2ndByte && sObjFloor->type == SURFACE_CUBE_MELT) {
