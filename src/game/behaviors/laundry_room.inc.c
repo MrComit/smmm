@@ -189,6 +189,9 @@ void bhv_basement_dryer_loop(void) {
 
     switch (o->oAction) {
         case 1:
+            if (o->oTimer == 0) {
+                cur_obj_play_sound_1(SOUND_GENERAL_CLOSE_IRON_DOOR);
+            }
             cur_obj_init_animation(0);
             if (o->oBehParams2ndByte != 3) {
                 if (set_mario_npc_dialog(1)) {
@@ -241,6 +244,7 @@ void bhv_basement_washer_loop(void) {
                 if (o->oTimer > 5) {
                     cur_obj_init_animation(1);
                     o->oAction = 1;
+                    cur_obj_play_sound_1(SOUND_GENERAL_OPEN_IRON_DOOR);
                 }
             } else {
                 o->oTimer = 0;

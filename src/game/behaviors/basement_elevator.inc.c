@@ -378,11 +378,13 @@ void ghost_bully_phases(void) {
         case 0:
             o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_FLAME);
             o->os16102 = 1;
+            cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
             break;
         case 1:
             if (o->os16104 > 25*30 || (goombasDead && snufitsDead)) {
                 if (o->os16108++ > 2*30) {
                     o->os16102 = 2;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                     o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_FLAME2);
                 }
                 // if (!goombasDead || !snufitsDead) {
@@ -405,6 +407,7 @@ void ghost_bully_phases(void) {
                 o->os16100 |= (1 << EH_FLAMEFAST) | (1 << EH_SPECIAL);;
                 if (o->os16108++ > 10*30) {
                     o->os16102 = 3;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                     o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_SAWBLADE);
                     // o->os16100 &= ~(1 << EH_FLAME);
                 }
@@ -417,6 +420,7 @@ void ghost_bully_phases(void) {
                 o->os16100 |= (1 << EH_SLAM);
                 if (o->os16108++ > 5*30) {
                     o->os16102 = 4;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                     o->os16100 |= (1 << EH_WALL);
                     o->os16100 &= ~(1 << EH_SAWBLADE);
                 }
@@ -428,6 +432,7 @@ void ghost_bully_phases(void) {
             if (wallGoombasDead && wallHammerbrosDead) {
                 if (o->os16108++ > 2*30) {
                     o->os16102 = 5;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                     o->os16100 |= (1 << EH_WALL) | (1 << EH_WALL2) | (1 << EH_ENEMIES) | (1 << EH_ARROW) | (1 << EH_SAWBLADE);
                     o->os16100 &= ~(1 << EH_FLAME);
                 }
@@ -439,6 +444,7 @@ void ghost_bully_phases(void) {
             if (o->os16104 > 30*30 || (wallGoombasDead && wallHammerbrosDead)) {
                 if (o->os16108++ > 2*30) {
                     o->os16102 = 6;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                     o->os16100 |= (1 << EH_ENEMIES) | (1 << EH_DUST) | (1 << EH_FLAME);
                     o->os16100 &= ~(1 << EH_SAWBLADE);
                 }
@@ -450,6 +456,7 @@ void ghost_bully_phases(void) {
             if (o->os16104 > 25*30 || (goombasDead && snufitsDead && bunniesDead)) {
                 if (o->os16108++ > 2*30) {
                     o->os16102 = 7;
+                    cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
                     o->os16100 |= (1 << EH_ENEMIES); //| (1 << EH_ARROW);
                     // o->os16100 &= ~(1 << EH_SAWBLADE);
                     if (wallGoombasDead && wallHammerbrosDead) {
@@ -540,6 +547,7 @@ void bhv_ghost_bully_loop(void) {
                     o->oForwardVel = 40.0f;
                 } else {
                     o->oAction = 2;
+                    cur_obj_play_sound_1(SOUND_ACTION_TWIRL);
                 }
             }
             if (o->os16100 & (1 << EH_SPECIAL)) {
@@ -563,6 +571,7 @@ void bhv_ghost_bully_loop(void) {
             }
             break;
         case 3: // dash
+            cur_obj_play_sound_1(SOUND_MOVING_FLYING);
             CL_Move();
             if (o->oTimer > 45) {
                 o->oAction = 1;
@@ -580,6 +589,9 @@ void bhv_ghost_bully_loop(void) {
             }
             break;
         case 5: // slam
+            if (o->oTimer == 30) {
+                cur_obj_play_sound_1(SOUND_OBJ_THWOMP);
+            }
             if (o->oTimer > 15) {
                 o->oFloat10C = approach_f32_symmetric(o->oFloat10C, 80.0f, 8.0f);
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatFC, o->oFloat10C);
@@ -621,6 +633,7 @@ void bhv_ghost_bully_loop(void) {
             } else {
                 if (o->oTimer > 20) {
                     CL_Move();
+                    cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
                     if (o->oTimer > 65) {
                         o->oAction = 8;
                         o->oForwardVel = 12.0f;
