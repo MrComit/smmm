@@ -119,6 +119,9 @@ void bhv_goomba_init(void) {
     o->oDamageOrCoinValue = sGoombaProperties[o->oGoombaSize].damage;
 
     o->oGravity = -8.0f / 3.0f * o->oGoombaScale;
+    if (gCurrLevelNum == LEVEL_CCM) {
+        cur_obj_set_model(MODEL_TOY_GOOMBA);
+    }
 }
 
 /**

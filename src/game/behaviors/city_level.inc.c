@@ -438,6 +438,7 @@ void bhv_cannon_lid_init(void) {
     o->oPosX -= 300.0f;
     o->oPosY -= 180.0f;
     o->header.gfx.scale[0] = 0.5f;
+    o->oRoom = 4;
 }
 
 void bhv_cannon_lid_loop(void) {

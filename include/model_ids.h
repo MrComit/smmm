@@ -717,7 +717,7 @@
 #define MODEL_BUCKET_TOP          0xF1
 
 
-// LEVEL 4 MODELS - 0xFF TO 0xE2 ARE FREE
+// LEVEL 4 MODELS - 0xFF TO 0xE3 ARE FREE
 #define MODEL_RUBBERBAND          0xFF
 #define MODEL_LEGO_PIECE          0xFE
 #define MODEL_SHAKY_PLAT          0xFD
@@ -733,7 +733,13 @@
 
 
 
-// LEVEL 5 MODELS - 0xFF TO 0xE2 ARE FREE
+// LEVEL 4 + 5
+
+#define MODEL_TOY_GOOMBA     0xE2
+
+
+
+// LEVEL 5 MODELS - 0xFF TO 0xE3 ARE FREE
 #define MODEL_FAKE_WALL           0xFF
 #define MODEL_BOMB_ROCK           0xFE
 #define MODEL_UNSTABLE_ROCK       0xFD
