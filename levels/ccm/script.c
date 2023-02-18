@@ -169,6 +169,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, 4177, 579, 729, 0, -90, 0, (0x55 << 16), bhvFadingWarp),
 		OBJECT(MODEL_TELEPORTER, 24177, -101, 40, 0, -90, 0, (0x59 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 22515, 39, -397, 0, 90, 0, (0x58 << 16), bhvFadingWarp),
+		OBJECT(MODEL_GOLDEN_CRATE, -11427, 779, 6983, 0, 0, 0, (8 << 8), bhvGoldenCrate),
 		OBJECT(MODEL_NONE, 21329, -161, 1196, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 21643, -161, -3639, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 3896, 379, -2666, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
