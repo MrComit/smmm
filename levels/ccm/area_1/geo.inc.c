@@ -54,8 +54,6 @@ const GeoLayout ccm_dl_cc_005_geo[] = {
 const GeoLayout ccm_dl_bb_002_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_004_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ccm_dl_House_004_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_006_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_010_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_011_mesh_layer_1),

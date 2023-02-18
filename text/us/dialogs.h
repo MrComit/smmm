@@ -241,7 +241,7 @@ Do you want to Save?\n\
 \n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_015, 1, 3, 30, 200, _("\
 You've collected a Star Coin!\n\
 Exchange them for goods and\n\
 services from other civilians.\n\
@@ -627,34 +627,17 @@ to fly up, press forward\n\
 to nose down, and press [Z]\n\
 to land."))
 
-DEFINE_DIALOG(DIALOG_065, 1, 6, 30, 200, _("\
-Swimming Lessons!\n\
-Tap [A] to do the breast\n\
-stroke. If you time the\n\
-taps right, you'll swim\n\
-fast.\n\
+DEFINE_DIALOG(DIALOG_065, 1, 3, 30, 200, _("\
+(One of my favorite things to\n\
+do here is go visit the shop on\n\
+the other side of town.)\n\
+(They have the coolest looking\n\
+triangle shaped jewels!)\n\
 \n\
-Press and hold [A] to do a\n\
-slow, steady flutter kick.\n\
-Press Up on the Control\n\
-Stick to dive, and pull\n\
-back on the stick to head\n\
-for the surface.\n\
-To jump out of the water,\n\
-hold Down on the Control\n\
-Stick, then press [A].\n\
-Easy as pie, right?\n\
-\n\
-\n\
-But remember:\n\
-Mario can't breathe under\n\
-the water! Return to the\n\
-surface for air when the\n\
-Power Meter runs low.\n\
-\n\
-And one last thing: You\n\
-can't open doors that\n\
-are underwater."))
+(I wouldn't dream of buying\n\
+them though. I don't have that\n\
+kind of money.)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_066, 1, 5, 30, 200, _("\
 Mario, it's Peach!\n\
