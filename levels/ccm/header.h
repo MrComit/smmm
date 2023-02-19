@@ -111,4 +111,8 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/boss_graphic/geo_header.h"
 
+#include "levels/ccm/city_bridge2/geo_header.h"
+
+#include "levels/ccm/city_bridge2/collision_header.h"
+
 #endif

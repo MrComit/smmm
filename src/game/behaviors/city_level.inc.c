@@ -805,6 +805,36 @@ void bhv_city_bridge_loop(void) {
     }
 }
 
+void bhv_city_bridge2_init(void) {
+    if (cur_obj_nearest_object_with_behavior(bhvShyGuyBoss) == NULL) {
+        o->oF4 = 1;
+    }
+}
+
+
+void bhv_city_bridge2_loop(void) {
+    struct Object *obj;
+    if (o->oF4) {
+        cur_obj_unhide();
+        load_object_collision_model();
+        if (o->oF8 == 0) {
+            o->oF8 = 1;
+            obj = CL_obj_nearest_object_behavior_params(bhvLegoPiece, 0x00FF0000);
+            if (obj != NULL) {
+                obj->activeFlags = 0;
+            }
+            obj = CL_obj_nearest_object_behavior_params(bhvLegoPiece, 0x00FF0000);
+            if (obj != NULL) {
+                obj->activeFlags = 0;
+            }
+        }
+    } else {
+        cur_obj_hide();
+    }
+}
+
+
+
 /*
  *    BOSS START
  */
@@ -1300,6 +1330,11 @@ void bhv_shyguy_boss_loop(void) {
                 obj->oBehParams = 0x040E0900;
                 gCamera->comitCutscene = 0;
                 gHudDisplay.flags &=  ~HUD_DISPLAY_FLAG_MULTIPLIER;
+                vec3f_set(gMarioState->pos, o->oPosX + 2500.0f, o->oHomeY, o->oPosZ);
+                obj = cur_obj_nearest_object_with_behavior(bhvCityBridge2);
+                if (obj != NULL) {
+                    obj->oF4 = 1;
+                }
             }
             break;
         case 3:

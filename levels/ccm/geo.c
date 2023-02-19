@@ -39,3 +39,4 @@
 #include "levels/ccm/toy_shyguy/geo.inc.c"
 #include "levels/ccm/city_toy_goomba/geo.inc.c"
 #include "levels/ccm/boss_graphic/geo.inc.c"
+#include "levels/ccm/city_bridge2/geo.inc.c"

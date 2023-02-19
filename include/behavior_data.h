@@ -850,6 +850,7 @@ extern const BehaviorScript bhvBucketTop[];
 extern const BehaviorScript bhvSunblockCol[];
 extern const BehaviorScript bhvSunblockBigCol[];
 extern const BehaviorScript bhvBossGraphic[];
+extern const BehaviorScript bhvCityBridge2[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -67,6 +67,15 @@ void fading_warp_active_check(s16 param) {
                 o->oPosY = o->oHomeY + 700.0f;
             }
             break;
+        case 6:
+            obj = cur_obj_nearest_object_with_behavior(bhvCityBridge2);
+            if (obj != NULL && obj->oF4) {
+                val = TRUE;
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+            } else {
+                o->oPosY = o->oHomeY + 700.0f;
+            }
+            break;
     }
     if (val) {
         cur_obj_enable();

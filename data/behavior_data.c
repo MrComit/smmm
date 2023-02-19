@@ -10208,3 +10208,16 @@ const BehaviorScript bhvBossGraphic[] = {
     DEACTIVATE(),
     BREAK(),
 };
+
+
+const BehaviorScript bhvCityBridge2[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(city_bridge2_collision),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    // SET_FLOAT(oCollisionDistance, 0x7FFF),
+    CALL_NATIVE(bhv_city_bridge2_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_city_bridge2_loop),
+    END_LOOP(),
+};
