@@ -1091,7 +1091,7 @@ void bhv_block_tower_loop(void) {
                 if (obj->oAnimState != 2) {
                     vec3f_set(&obj->oPosX, o->oPosX, o->oPosY + 1500.0f, o->oPosZ);
                 } else {
-                    vec3f_set(&obj->oPosX, o->oObjFC->oPosX + 1500.0f, o->oObjFC->oPosY + 1500.0f, o->oObjFC->oPosZ);
+                    vec3f_set(&obj->oPosX, o->oObjFC->oPosX + 1500.0f, o->oObjFC->oPosY + 1750.0f, o->oObjFC->oPosZ);
                 }
 
                 if (--o->oObjFC->oHealth <= 0) {
