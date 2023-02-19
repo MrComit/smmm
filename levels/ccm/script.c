@@ -265,7 +265,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_HORIZONTAL_POLE, 13611, 589, -2730, 0, 90, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_RACECAR, 15986, -161, 3000, 0, -180, 0, (60 << 24) | (0 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 16861, 87, -2000, 0, 0, 0, (40 << 24) | (1 << 16) | (2 << 8), bhvRacecar),
-		OBJECT(MODEL_RACECAR, 15611, 127, -2000, 0, 0, 0, (40 << 24) | (1 << 16), bhvRacecar),
+		OBJECT(MODEL_RACECAR, 15611, 127, -2000, 0, 0, 0, (40 << 24) | (1 << 16) | (3 << 8), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 17736, -161, -3000, 0, 0, 0, (60 << 24) | (1 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 12661, 839, -5350, 0, -90, 0, (20 << 24) | (1 << 8), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 19611, -211, -1604, 0, 0, 0, (29 << 24) | (1 << 16), bhvRacecar),

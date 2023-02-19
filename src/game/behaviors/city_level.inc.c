@@ -1373,12 +1373,15 @@ void bhv_racecar_init(void) {
     } else if (((o->oBehParams >> 8) & 0xFF) == 2) {
         o->oObjFC = cur_obj_nearest_object_with_behavior(bhvToyToad);
         o->oFloat100 = 50.0f;
-    } else {
+    } else if (((o->oBehParams >> 8) & 0xFF) != 3) {
         o->oObjFC = spawn_object(o, MODEL_HEART, bhvCollectHeart);
         o->oObjFC->oF4 = 1;
         o->oFloat100 = 50.0f;
     }
 }
+
+extern Vec3f sSpawnedTokens[];
+void spawn_token(u8 type, u8 index, Vec3f pos, s16 yaw, s16 pitch);
 
 
 void bhv_racecar_loop(void) {
@@ -1389,6 +1392,15 @@ void bhv_racecar_loop(void) {
         o->oF4 = o->oMoveAngleYaw + 0x8000;
         vec3f_copy(&o->oHomeX, &o->oPosX);
     }
+
+    if (((o->oBehParams >> 8) & 0xFF) == 3) {
+        if (o->os16112 == 0 && !(save_file_get_challenges(0x2C / 32) & (1 << (0x2C % 32))) 
+            && cur_obj_is_mario_ground_pounding_platform()) {
+            o->os16112 = 1;
+            spawn_token(1, 0x2C, sSpawnedTokens[6], 0, 0);
+        }
+    }
+
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oF4, 0x400);
     if (o->oObjFC != NULL) {
         if (o->oObjFC->activeFlags != 0) {
@@ -1400,7 +1412,7 @@ void bhv_racecar_loop(void) {
                 }
             }
         } else {
-            o->oObjFC == NULL;
+            o->oObjFC = NULL;
         }
     }
 }
