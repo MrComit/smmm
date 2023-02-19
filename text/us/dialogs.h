@@ -639,31 +639,10 @@ them though. I don't have that\n\
 kind of money.)\n\
 ..."))
 
-DEFINE_DIALOG(DIALOG_066, 1, 5, 30, 200, _("\
-Mario, it's Peach!\n\
-Please be careful! Bowser\n\
-is so wicked! He will try\n\
-to burn you with his\n\
-horrible flame breath.\n\
-Run around behind and\n\
-grab him by the tail with\n\
-the [B] Button. Once you\n\
-grab hold, swing him\n\
-around in great circles.\n\
-Rotate the Control Stick\n\
-to go faster and faster.\n\
-The faster you swing him,\n\
-the farther he'll fly.\n\
-\n\
-Use the [C] Buttons to look\n\
-around, Mario. You have\n\
-to throw Bowser into one\n\
-of the bombs in the four\n\
-corners.\n\
-Aim well, then press [B]\n\
-again to launch Bowser.\n\
-Good luck, Mario! Our\n\
-fate is in your hands."))
+DEFINE_DIALOG(DIALOG_066, 1, 2, 30, 200, _("\
+(You did it! I knew we could\n\
+count on you Mario!)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_067, 1, 5, 30, 200, _("\
 Tough luck, Mario!\n\

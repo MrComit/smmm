@@ -10199,3 +10199,12 @@ const BehaviorScript bhvBucketTop[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBossGraphic[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    DELAY(30),
+    DEACTIVATE(),
+    BREAK(),
+};

@@ -844,7 +844,7 @@ void boss_toy_toad_check(s32 param) {
     struct MarioState *m = gMarioState;
     switch (param) {
         case 0:
-            if (m->pos[0] < -1600.0f) {
+            if (m->pos[0] < -1600.0f && o->oObj108 != NULL && o->oObj108->oAction == 1) {
                 o->o104 = 1;
             }
             break;
@@ -854,7 +854,7 @@ void boss_toy_toad_check(s32 param) {
             }
             break;
         case 2:
-            if (m->pos[2] > 4000.0f) {
+            if (m->pos[2] > 4300.0f && m->pos[0] < -7400.0f) {
                 o->o104 = 1;
             }
             break;
@@ -865,16 +865,22 @@ void bhv_boss_toy_toad_loop(void) {
     switch (o->o104) {
         case 0:
             if (o->oObj108->oAction) {
-                boss_toy_toad_check(o->oBehParams >> 24);
+                boss_toy_toad_check(o->oBehParams2ndByte);
             }
             break;
         case 1:
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
-            if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+            if (CL_NPC_Dialog(o->oBehParams >> 24)) {
                 o->o104 = 2;
+                o->oBehParams2ndByte = 0;
             }
             break;
         case 2:
+            if (o->os1610C == 0 && (o->oObj108 == NULL || o->oObj108->activeFlags == 0)) {
+                o->oObj108 = 0;
+                o->os1610C = 1;
+                o->oBehParams = (DIALOG_066 << 24);
+            }
             bhv_toy_toad_loop();
             break;
     }
@@ -1020,6 +1026,7 @@ void bhv_block_tower_init(void) {
 
 
 void bhv_block_tower_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->prevObj->oF8) {
@@ -1048,6 +1055,15 @@ void bhv_block_tower_loop(void) {
                 set_camera_shake_from_point(3, gCamera->pos[0], gCamera->pos[1], gCamera->pos[2]);
                 spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, 4);
                 create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
+
+                obj = spawn_object(o, MODEL_BOSS_GRAPHIC, bhvBossGraphic);
+                obj->oAnimState = (3 - o->oObjFC->oHealth);
+                if (obj->oAnimState != 2) {
+                    vec3f_set(&obj->oPosX, o->oPosX, o->oPosY + 1500.0f, o->oPosZ);
+                } else {
+                    vec3f_set(&obj->oPosX, o->oObjFC->oPosX + 1500.0f, o->oObjFC->oPosY + 1500.0f, o->oObjFC->oPosZ);
+                }
+
                 if (--o->oObjFC->oHealth <= 0) {
                     o->oObjFC->oAction = 2;
                     stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
@@ -1223,6 +1239,7 @@ void shyguy_boss_handle_bulletlist(void) {
     }
 }
 
+Vec3f sShyguyIntroCutscene = {1981.0f, 9931.0f, -5775.0f};
 
 
 void bhv_shyguy_boss_init(void) {
@@ -1245,8 +1262,13 @@ void bhv_shyguy_boss_loop(void) {
     switch (o->oAction) {
         case 0: // PRE FIGHT ACT
             if (o->oDistanceToMario < 11000.0f) {
-                o->oAction = 1;
+                o->oAction = 5;
                 play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
+                gCamera->comitCutscene = 17;
+                gComitCutsceneObject = o;
+                set_mario_npc_dialog(1);
+                cur_obj_init_animation(2);
+                vec3f_copy(gComitCutscenePosVec, sShyguyIntroCutscene);
             }
             break;
         case 1: // MAIN LOOP

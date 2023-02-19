@@ -53,6 +53,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BLOCK_TOWER, block_tower_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_SHYGUY, toy_shyguy_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_GOOMBA, city_toy_goomba_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BOSS_GRAPHIC, boss_graphic_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -225,9 +226,9 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_BLOCK_TOWER, -10183, 4839, -2500, 0, -90, 0, 0x00000000, bhvBlockTower),
 		OBJECT(MODEL_BLOCK_TOWER, -12839, 8166, 360, 0, -90, 0, 0x00000000, bhvBlockTower),
 		OBJECT(MODEL_BLOCK_TOWER, -11994, 7366, -5322, 0, -90, 0, 0x00000000, bhvBlockTower),
-		OBJECT(MODEL_TOY_TOAD, -2704, 4339, -3252, 0, 45, 0, (DIALOG_030 << 16), bhvBossToyToad),
-		OBJECT(MODEL_TOY_TOAD, -10806, 4839, -2167, 0, 45, 0, (1 << 24) | (DIALOG_031 << 16), bhvBossToyToad),
-		OBJECT(MODEL_TOY_TOAD, -8245, 8166, 5299, 0, -180, 0, (2 << 24) | (DIALOG_032 << 16), bhvBossToyToad),
+		OBJECT(MODEL_TOY_TOAD, -2704, 4339, -3252, 0, 45, 0, (DIALOG_030 << 24), bhvBossToyToad),
+		OBJECT(MODEL_TOY_TOAD, -10806, 4839, -2167, 0, 45, 0, (DIALOG_031 << 24) | (1 << 16), bhvBossToyToad),
+		OBJECT(MODEL_TOY_TOAD, -8245, 8166, 5299, 0, -180, 0, (DIALOG_032 << 24) | (2 << 16), bhvBossToyToad),
 		OBJECT(MODEL_NONE, -7539, 5039, 660, 0, 90, 0, (1 << 16), bhvBossBulletBillCannon),
 		OBJECT(MODEL_NONE, -7539, 5039, 60, 0, 90, 0, (1 << 16), bhvBossBulletBillCannon),
 		OBJECT(MODEL_NONE, -11459, 6807, -12250, 0, 0, 0, (2 << 16), bhvBossBulletBillCannon),

@@ -849,6 +849,7 @@ extern const BehaviorScript bhvShyguyKeyCutscene[];
 extern const BehaviorScript bhvBucketTop[];
 extern const BehaviorScript bhvSunblockCol[];
 extern const BehaviorScript bhvSunblockBigCol[];
+extern const BehaviorScript bhvBossGraphic[];
 
 
 #endif // BEHAVIOR_DATA_H
