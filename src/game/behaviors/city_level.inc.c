@@ -1532,9 +1532,14 @@ void bhv_cardboard_wall_loop(void) {
     }
 }
 
+#define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
+    obj = spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g)); \
+    obj->oRoom = o->oRoom; \
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
 
 void bhv_garden_mips_init(void) {
+    struct Object *obj;
     u8 starFlags = save_file_get_currency_flags() & (1 << 1);
     if (!starFlags) {
         o->oBehParams2ndByte = 0;
@@ -1551,11 +1556,15 @@ void bhv_garden_mips_init(void) {
     cur_obj_disable();
 
     cur_obj_init_animation(0);
-    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
-    if (o->oObjF4 == NULL) {
-        o->activeFlags = 0;
-        return;
-    }
+    COMIT_OBJECT(MODEL_POUND_LEGO, 10399, -161, 2839, 0, 0, 0, bhvPoundLego)
+    o->oObjF4 = obj;
+    o->oObjF4->oBehParams = 0x01000000;
+    // o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
+    // if (o->oObjF4 == NULL) {
+    //     o->activeFlags = 0;
+    //     return;
+    // }
+    vec3f_copy(&o->oObjF4->oHomeX, &o->oObjF4->oPosX);
     vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
 }
 
@@ -1619,7 +1628,7 @@ void bhv_garden_mips_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oObjF4->activeFlags == 0) {
-                if (o->os16110 >= 4) {
+                if (o->os16110 >= 3) {
                     o->os16FA = 1;
                     o->oAction = 0;
                     o->oForwardVel = 35.0f;
@@ -1651,6 +1660,9 @@ void bhv_garden_mips_loop(void) {
                 o->oPosY += 50.0f;
             }
             cur_obj_move_standard(0);
+            if ((o->oTimer & 7) == 0) {
+                cur_obj_play_sound_2(SOUND_OBJ_MIPS_RABBIT);
+            }
             if (o->oTimer > 60) {
                 o->oAction = 2;
                 o->oForwardVel = 0;
@@ -1685,6 +1697,7 @@ void bhv_garden_mips_loop(void) {
             cur_obj_init_animation(0);
             spawn_default_star(10668.0f, 379.0f, 729.0f);
             o->oAction = 5;
+            o->os16FA = 0;
             o->oInteractType = INTERACT_IGLOO_BARRIER;
             break;
     }
