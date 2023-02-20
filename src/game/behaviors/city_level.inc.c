@@ -815,6 +815,16 @@ void bhv_city_bridge2_init(void) {
 void bhv_city_bridge2_loop(void) {
     struct Object *obj;
     if (o->oF4) {
+        if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_BROKEN3)) {
+            if (gMarioState->pos[0] > -9250.0f) {
+                gMarioState->pos[0] = -9250.0f;
+            }
+            if (gMarioState->pos[2] > -900.0f) {
+                gMarioState->pos[2] = -900.0f;
+            } else if (gMarioState->pos[2] < -4100.0f) {
+                gMarioState->pos[2] = -4100.0f;
+            }
+        }
         cur_obj_unhide();
         load_object_collision_model();
         if (o->oF8 == 0) {
@@ -894,7 +904,10 @@ void boss_toy_toad_check(s32 param) {
 void bhv_boss_toy_toad_loop(void) {
     switch (o->o104) {
         case 0:
-            if (o->oObj108->oAction) {
+            if (o->oObj108 == NULL || o->oObj108->activeFlags == 0) {
+                o->oObj108 = NULL;
+                o->o104 = 2;
+            } else if (o->oObj108->oAction) {
                 boss_toy_toad_check(o->oBehParams2ndByte);
             }
             break;
@@ -907,7 +920,7 @@ void bhv_boss_toy_toad_loop(void) {
             break;
         case 2:
             if (o->os1610C == 0 && (o->oObj108 == NULL || o->oObj108->activeFlags == 0)) {
-                o->oObj108 = 0;
+                o->oObj108 = NULL;
                 o->os1610C = 1;
                 o->oBehParams = (DIALOG_066 << 24);
             }
@@ -1057,6 +1070,10 @@ void bhv_block_tower_init(void) {
 
 void bhv_block_tower_loop(void) {
     struct Object *obj;
+    if (o->oObjFC == NULL || o->oObjFC->activeFlags == 0) {
+        o->activeFlags = 0;
+        return;
+    }
     switch (o->oAction) {
         case 0:
             if (o->prevObj->oF8) {
@@ -1159,6 +1176,10 @@ void bhv_boss_bullet_bill_cannon_init(void) {
 
 
 void bhv_boss_bullet_bill_cannon_loop(void) {
+    if (o->oObjF4 == NULL || o->oObjF4->activeFlags == 0) {
+        o->activeFlags = 0;
+        return;
+    }
     if (o->oObjF4->os16F4 == o->oBehParams2ndByte) {
         if (o->oTimer > 60 + (count_objects_with_behavior(bhvBossBulletBill) * 30)) {
             spawn_object(o, MODEL_BULLET_BILL, bhvBossBulletBill);
@@ -1277,6 +1298,9 @@ void bhv_shyguy_boss_init(void) {
     o->oOpacity = 0xFF;
     gMultiplierUpper = 5;
     gMultiplierLower = 0;
+    if (save_file_get_boos() & (1 << 0x0E)) {
+        o->activeFlags = 0;
+    }
 }
 
 extern s16 s8DirModeBaseYaw;
