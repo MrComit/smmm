@@ -799,6 +799,7 @@ void bhv_collect_heart_loop(void);
 void bhv_sand_mound_loop(void);
 void bhv_sand_mound_init(void);
 void bhv_sand_crab_loop(void);
+void bhv_sand_crab_init(void);
 void bhv_snow_pile_loop(void);
 void bhv_snow_pile_init(void);
 void bhv_ice_cube_loop(void);

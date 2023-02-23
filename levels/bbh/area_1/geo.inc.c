@@ -28,6 +28,7 @@ const GeoLayout bbh_dl_101__Oasis_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_PIllars_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Plats_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Rope_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 131072, 0, 0, bbh_dl_Sign_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Slingshot_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bbh_dl_Tunnel_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, bbh_dl_Water_mesh_layer_5),

@@ -429,6 +429,13 @@ void bhv_snow_pile_loop(void) {
 
 static struct Object *sMoundObjs[4][4] = {NULL};
 
+void bhv_sand_crab_init(void) {
+    o->os16F4 = o->oBehParams2ndByte % 4;
+    o->os16F6 = o->oBehParams2ndByte / 4;
+    o->oPosX = sMoundObjs[o->os16F4][o->os16F6]->oPosX;
+    o->oPosZ = sMoundObjs[o->os16F4][o->os16F6]->oPosZ;
+}
+
 void bhv_sand_crab_loop(void) {
     if (sMoundObjs[0][0] == NULL) {
         return;
@@ -438,7 +445,7 @@ void bhv_sand_crab_loop(void) {
     o->os16F6 = o->oBehParams2ndByte / 4;
     sMoundObjs[o->os16F4][o->os16F6]->os16FA = 0;
 
-    if (gMarioState->wall != NULL && gMarioState->wall->object == o) {
+    if (gMarioState->wall != NULL && gMarioState->wall->object == o && gMarioState->flags & MARIO_UNKNOWN_31) {
         switch (gMarioState->wall->force) {
             case 0:
                 if (o->oBehParams2ndByte <= 3) {
@@ -447,6 +454,12 @@ void bhv_sand_crab_loop(void) {
                 }
                 o->oBehParams2ndByte -= 4;
                 if (sMoundObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4]->os16F8 == 0) {
+                    o->oBehParams2ndByte += 4;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+
+                if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
                     o->oBehParams2ndByte += 4;
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
                     break;
@@ -463,6 +476,12 @@ void bhv_sand_crab_loop(void) {
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
                     break;
                 }
+
+                if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
+                    o->oBehParams2ndByte += 1;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
                 break;
             case 2:
                 if (o->oBehParams2ndByte >= 12) {
@@ -471,6 +490,12 @@ void bhv_sand_crab_loop(void) {
                 }
                 o->oBehParams2ndByte += 4;
                 if (sMoundObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4]->os16F8 == 0) {
+                    o->oBehParams2ndByte -= 4;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
+
+                if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
                     o->oBehParams2ndByte -= 4;
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
                     break;
@@ -487,15 +512,22 @@ void bhv_sand_crab_loop(void) {
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
                     break;
                 }
+
+                if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
+                    o->oBehParams2ndByte -= 1;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                    break;
+                }
                 break;
         }
+        o->oMoveAngleYaw = obj_angle_to_object(o, sMoundObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4]);
     }
 
     o->os16F4 = o->oBehParams2ndByte % 4;
     o->os16F6 = o->oBehParams2ndByte / 4;
     sMoundObjs[o->os16F4][o->os16F6]->os16FA = 1;
-    o->oPosX = approach_f32_symmetric(o->oPosX, sMoundObjs[o->os16F4][o->os16F6]->oPosX, 20.0f);
-    o->oPosZ = approach_f32_symmetric(o->oPosZ, sMoundObjs[o->os16F4][o->os16F6]->oPosZ, 20.0f);
+    o->oPosX = approach_f32_symmetric(o->oPosX, sMoundObjs[o->os16F4][o->os16F6]->oPosX, absf(20.0f * sins(o->oMoveAngleYaw)));
+    o->oPosZ = approach_f32_symmetric(o->oPosZ, sMoundObjs[o->os16F4][o->os16F6]->oPosZ, absf(20.0f * coss(o->oMoveAngleYaw)));
 }
 
 

@@ -8045,6 +8045,7 @@ const BehaviorScript bhvSandCrab[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(sand_crab_collision),
+    CALL_NATIVE(bhv_sand_crab_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_sand_crab_loop),
         CALL_NATIVE(load_object_collision_model),
