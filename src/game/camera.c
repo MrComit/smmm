@@ -1621,33 +1621,24 @@ void mode_8_directions_camera_2d(struct Camera *c) {
             m->pos[2] = 0;
             cam_controls_2d(c);
             update_8_directions_camera(c, c->focus, pos);
-            if (gCam2dSide) {
-                if (m->pos[0] >= c->pos[0] - 150.0f) {
-                    pos[0] = m->pos[0] + 150.0f;
+
+            c->pos[0] = pos[0];
+            c->focus[0] = m->pos[0];
+            if (!(m->action & ACT_FLAG_ON_POLE)) {
+                if (absi(m->faceAngle[1] - 0x4000) < 0x4000) {
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, 200.0f, 20.0f);
                 } else {
-                    if (m->pos[0] <= c->pos[0] - 300.0f) {
-                        gCam2dSide = 0;
-                    }
-                    pos[0] = c->pos[0];
-                }
-            } else {
-                if (m->pos[0] <= c->pos[0] + 150.0f) {
-                    pos[0] = m->pos[0] - 150.0f;
-                } else {
-                    if (m->pos[0] >= c->pos[0] + 300.0f) {
-                        gCam2dSide = 1;
-                    }
-                    pos[0] = c->pos[0];
+                    gCam2dAhead = approach_f32_symmetric(gCam2dAhead, -200.0f, 20.0f);
                 }
             }
-            c->pos[0] = approach_f32_symmetric(c->pos[0], pos[0], 60.0f);
-            c->focus[0] = c->pos[0];
+            c->pos[0] += gCam2dAhead;
+            c->focus[0] += gCam2dAhead;
+
             c->yaw = c->nextYaw = s8DirModeBaseYaw;
             c->pos[2] = 2000.0f + gDepthOffset2d;
-            // set_2dcam_height(c);
-            // c->pos[1] = approach_f32_symmetric(c->pos[1], height, 80.0f);
-            // c->focus[1] = c->pos[1];
-            approach_camera_height(c, pos[1] + 300.0f, ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
+
+            pos[1] += 250.0f;
+            approach_camera_height(c, pos[1], ABS(c->pos[1] - (pos[1] + 300.0f)) / 20);
             if (gPlayer1Controller->buttonPressed & R_TRIG && c->cutscene == 0) {
                 s8DirModeYawOffset = 0;
             }
