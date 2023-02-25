@@ -92,6 +92,8 @@ void bhv_red_coin_loop(void) {
     }
 }
 
+s16 sGreenStarSpawned[2] = {0, 0};
+
 
 extern s8 gGreenCoinsCollected;
 void bhv_green_coin_init(void) {
@@ -131,6 +133,23 @@ void bhv_green_coin_loop(void) {
 
 void bhv_hidden_green_coin_star_init(void) {
     o->oRoom2 = 2;
+    gGreenCoinsCollected = 0;
+    o->oHiddenStarTriggerCounter = 0;
+    if (save_file_get_currency_flags() & (1 << (o->oBehParams >> 24))) {
+        o->activeFlags = 0;
+    } else {
+        if (gCurrAreaIndex == 1) {
+            if (sGreenStarSpawned[0]) {
+                o->oAction = 1;
+                o->oHiddenStarTriggerCounter = sGreenStarSpawned[0];
+            }
+        } else {
+            if (sGreenStarSpawned[1]) {
+                o->oAction = 1;
+                o->oHiddenStarTriggerCounter = sGreenStarSpawned[1];
+            }
+        }
+    }
 }
 
 void bhv_hidden_green_coin_star_loop(void) {
@@ -145,7 +164,12 @@ void bhv_hidden_green_coin_star_loop(void) {
             if (o->oTimer > 2) {
                 spawn_default_star(o->oPosX, o->oPosY, o->oPosZ);
                 spawn_mist_particles();
-                o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+                o->oAction = 2;
+                if (gCurrAreaIndex == 1) {
+                    sGreenStarSpawned[0] = o->oHiddenStarTriggerCounter;
+                } else {
+                    sGreenStarSpawned[1] = o->oHiddenStarTriggerCounter;
+                }
             }
             break;
     }

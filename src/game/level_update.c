@@ -615,14 +615,19 @@ void warp_area(void) {
     }
 }
 
+
+extern s16 sGreenStarSpawned[2];
+
 // used for warps between levels
 void warp_level(void) {
     gCurrLevelNum = sWarpDest.levelNum;
 
     level_control_timer(TIMER_CONTROL_HIDE);
-
     load_area(sWarpDest.areaIdx);
     init_mario_after_warp();
+    
+    sGreenStarSpawned[0] = 0;
+    sGreenStarSpawned[1] = 0;
 }
 
 void warp_credits(void) {
