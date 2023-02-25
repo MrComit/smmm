@@ -1051,7 +1051,7 @@ Vec3f sSpawnedTokens[] = {
 {3690.0f, 683.0f, 16950.0f},
 {2683.0f, 555.0f, -4934.0f},
 {16240.0f, -130.0f, 0.0f},
-{0.0f, 0.0f, 0.0f},
+{-2350.0f, -335.0f, -5075.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
 {0.0f, 0.0f, 0.0f},
@@ -1139,6 +1139,9 @@ void handle_ground_pound_floor(struct MarioState *m) {
                 vec3f_set(gComitCutscenePosVec, gMarioState->pos[0] + 500.0f, gMarioState->pos[1] + 700.0f, gMarioState->pos[2] + 1200.0f);
                 vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
             }
+            break;
+        case 15:
+            spawn_token(2, 0x2D, sSpawnedTokens[7], 0, 0x0000);
             break;
     }
     save_file_set_gpflags(1 << index);

@@ -29,7 +29,7 @@
 #include "actors/group0.h"
 #include "include/course_table.h"
 #include "levels/hmc/header.inc.h"
-#include "levels/bbh/header.inc.h"
+#include "levels/bbh/header.h"
 #include "levels/jrb/header.inc.h"
 #include "levels/lll/header.h"
 #include "save_file.h"
@@ -100,7 +100,7 @@ static s32 clear_move_flag(u32 *, s32);
 
 
 void *sBackdrops[] = {
-bbh_dl_ZZSky_mesh_layer_0,
+a3_sky_ZZSky_mesh,
 };
 
 

@@ -103,3 +103,4 @@
 #include "levels/bbh/ice_ceiling_gate/collision.inc.c"
 #include "levels/bbh/rubberband_two/model.inc.c"
 #include "levels/bbh/play_toy_goomba/model.inc.c"
+#include "levels/bbh/a3_sky/model.inc.c"
