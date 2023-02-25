@@ -803,6 +803,7 @@ void bhv_sand_crab_init(void);
 void bhv_snow_pile_loop(void);
 void bhv_snow_pile_init(void);
 void bhv_ice_cube_loop(void);
+void bhv_ice_cube_init(void);
 void bhv_frozen_goomba_init(void);
 void bhv_frozen_goomba_loop(void);
 void bhv_ice_cube_cracked_loop(void);

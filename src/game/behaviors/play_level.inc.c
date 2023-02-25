@@ -232,6 +232,7 @@ void bhv_red_button_loop(void) {
     }
 }
 
+extern const struct Animation *const goomba_seg8_anims_0801DA4C[];
 
 
 void bhv_frozen_goomba_init(void) {
@@ -239,14 +240,34 @@ void bhv_frozen_goomba_init(void) {
     o->oFaceAnglePitch = random_u16();
     o->oFaceAngleRoll = random_u16();
     sCubesMelt = 0;
-
+    if (cur_obj_has_model(MODEL_TOY_GOOMBA)) {
+        o->oAnimations = &goomba_seg8_anims_0801DA4C;
+    } else {
+        o->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+    }
     o->parentObj->oObj100 = o;
 }
 
 void bhv_frozen_goomba_loop(void) {
     vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
-    o->oPosY += 60.0f;
+    if (cur_obj_has_model(MODEL_TOY_GOOMBA)) {
+        o->oPosY += 60.0f;
+    }
     o->header.gfx.animInfo.animFrame = 0;
+}
+
+
+void bhv_ice_cube_init(void) {
+    struct Object *obj;
+    if (o->oBehParams2ndByte & 1) {
+        obj = spawn_object_at_origin(o, 0, MODEL_TOY_GOOMBA, bhvFrozenGoomba);
+    } else {
+        obj = spawn_object_at_origin(o, 0, MODEL_BLUE_COIN, bhvFrozenGoomba);
+        obj->oOpacity = 255;
+    }
+    obj_copy_pos_and_angle(obj, o);
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    o->prevObj = obj;
 }
 
 
@@ -288,7 +309,7 @@ s32 ice_cube_detect_wall(void) {
 
 void bhv_ice_cube_child_loop(void) {
     vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
-    if (o->parentObj->oAction == 0) {
+    if (o->parentObj->oAction == 1) {
         load_object_collision_model();
     }
 }
@@ -297,12 +318,13 @@ void bhv_ice_cube_child_loop(void) {
 void bhv_ice_cube_loop(void) {
     struct Object *obj;
     s32 k = 0;
+    s16 x, z;
     if (sCubesMelt == 0xF) {
-        o->oAction = 2;
+        o->oAction = 3;
     } else {
         obj = cur_obj_nearest_object_with_behavior(bhvRedButton);
-        if (obj != NULL && obj->oAction == 2) {
-            o->oAction = 0;
+        if (obj != NULL && obj->oAction == 2 && o->oAction != 0 && o->oAction != 4) {
+            o->oAction = 1;
             o->oForwardVel = 0;
             o->oFloatF8 = 0;
             o->oFloatF4 = 0;
@@ -311,8 +333,41 @@ void bhv_ice_cube_loop(void) {
     }
     switch (o->oAction) {
         case 0:
+            if (o->oTimer == 0) {
+                o->oObj108 = CL_nearest_object_with_behavior_and_field(bhvIceCubeCracked, 0x144, 1);
+                if (o->oObj108 == NULL) {
+                    o->activeFlags = 0;
+                    break;
+                }
+            }
+            x = z = 75.0f;
+            if (o->oBehParams2ndByte & 1) {
+                x = -75.0f;
+            }
+            if (o->oBehParams2ndByte & 2) {
+                z = -75.0f;
+            }
+            vec3f_set(&o->oPosX, o->oObj108->oPosX + x, o->oObj108->oPosY - 30.0f, o->oObj108->oPosZ + z);
+
+            if (o->oObj108->activeFlags == 0) {
+                o->oAction = 4;
+                o->oVelY = 20.0f;
+                o->oGravity = -1.0f;
+                if (o->oBehParams2ndByte & 1) {
+                    o->oVelX = -25.0f;
+                } else {
+                    o->oVelX = 25.0f;
+                }
+                if (o->oBehParams2ndByte & 2) {
+                    o->oVelZ = 30.0f;
+                } else {
+                    o->oVelZ = 35.0f;
+                }
+            }
+            break;
+        case 1:
             if (o->prevObj->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
-                o->oAction = 1;
+                o->oAction = 2;
 
                 if (absi((u16)(gMarioState->faceAngle[1]) - (u16)(gMarioState->faceAngle[1] & 0xC000)) < 0x2000) {
                     o->oMoveAngleYaw = gMarioState->faceAngle[1] & 0xC000;
@@ -322,12 +377,12 @@ void bhv_ice_cube_loop(void) {
 
             }
             break;
-        case 1:
+        case 2:
             o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 4.0f, 0.5f);
             o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 40.0f, o->oFloatF4);
             o->oForwardVel = o->oFloatF8 / 4;
             if (ice_cube_detect_wall()) {
-                o->oAction = 0;
+                o->oAction = 1;
                 o->oForwardVel = 0;
                 o->oFloatF8 = 0;
                 o->oFloatF4 = 0;
@@ -347,16 +402,29 @@ void bhv_ice_cube_loop(void) {
 
             spawn_mist_particles_variable(2, -40, 6.0f);
             break;
-        case 2:
-            o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 0.0f, 0.01f);
+        case 3:
+            o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 0.0f, 0.013f);
             cur_obj_scale(o->oFloatFC);
             cur_obj_play_sound_1(SOUND_AIR_BOBOMB_LIT_FUSE);
             if (o->oFloatFC <= 0.02f) {
                 o->activeFlags = 0;
                 o->prevObj->activeFlags = 0;
                 o->oObj100->activeFlags = 0;
-                obj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
-                obj->parentObj = obj;
+                if (o->oBehParams2ndByte & 1) {
+                    obj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+                    obj->parentObj = obj;
+                } else {
+                    obj = spawn_object(o, MODEL_BLUE_COIN, bhvMrIBlueCoin);
+                }
+            }
+            break;
+        case 4:
+            cur_obj_move_using_vel_and_gravity();
+            if (o->oTimer > 25) {
+                o->oVelX = o->oVelY = o->oVelZ = 0.0f;
+                o->oGravity = 0.0f;
+                o->oAction = 1;
+                vec3f_copy(&o->oPosX, &o->oHomeX);
             }
             break;
     }

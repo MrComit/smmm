@@ -8070,7 +8070,7 @@ const BehaviorScript bhvSnowPile[] = {
 const BehaviorScript bhvFrozenGoomba[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
+    // LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
     SET_HOME(),
     CALL_NATIVE(bhv_frozen_goomba_init),
     BEGIN_LOOP(),
@@ -8085,7 +8085,8 @@ const BehaviorScript bhvIceCube[] = {
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oFloatFC, 1),
     SET_HOME(),
-    SPAWN_OBJ(/*Model*/ MODEL_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
+    // SPAWN_OBJ(/*Model*/ MODEL_TOY_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
+    CALL_NATIVE(bhv_ice_cube_init),
     SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvIceCubeChild),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_ice_cube_loop),
