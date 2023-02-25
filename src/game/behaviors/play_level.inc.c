@@ -102,6 +102,20 @@ void bhv_bomb_chain_init(void) {
 
 
 void bhv_bomb_chain_loop(void) {
+    if (gMarioState->pos[1] < 12000.0f) {
+        cur_obj_hide();
+        return;
+    } else {
+        cur_obj_unhide();
+    }
+    if (gIsConsole && gCamera->comitCutscene == 0) {
+        if (absf(gMarioState->pos[2] - o->parentObj->oPosZ) > 1500.0f) {
+            cur_obj_hide();
+            return;
+        } else {
+            cur_obj_unhide();
+        }
+    }
     o->os16F4 += 0x1C0;
     if (o->oBehParams >> 24)
         o->os16F4 += 0x180;
@@ -109,6 +123,7 @@ void bhv_bomb_chain_loop(void) {
     if (gMarioCurrentRoom == o->oRoom && absi(o->oFaceAngleRoll) > 0x2800) {
         cur_obj_play_sound_2(SOUND_ENV_BOAT_ROCKING1);
     }
+
 
     switch (o->oAction) {
         case 0:
@@ -131,6 +146,11 @@ void bhv_bomb_chain_loop(void) {
 
 void bhv_ice_cube_cracked_loop(void) {
     struct Object *obj;
+    if (o->oDistanceToMario < 3000.0f || !gIsConsole) {
+        cur_obj_unhide();
+    } else {
+        cur_obj_hide();
+    }
     switch (o->oAction) {
         case 0:
             cur_obj_scale((f32) o->oTimer / 15.0f);

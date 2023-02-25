@@ -345,6 +345,14 @@ static void koopa_shelled_update(void) {
     cur_obj_update_floor_and_walls();
     obj_update_blinking(&o->oKoopaBlinkTimer, 20, 50, 4);
 
+    if (gCurrLevelNum == LEVEL_BBH) {
+        if (o->oDistanceToMario < 5000.0f || !gIsConsole) {
+            cur_obj_unhide();
+        } else {
+            cur_obj_hide();
+        }
+    }
+
     switch (o->oAction) {
         case KOOPA_SHELLED_ACT_STOPPED:
             koopa_shelled_act_stopped();
