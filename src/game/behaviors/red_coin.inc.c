@@ -136,7 +136,7 @@ void bhv_hidden_green_coin_star_init(void) {
     gGreenCoinsCollected = 0;
     o->oHiddenStarTriggerCounter = 0;
     if (save_file_get_currency_flags() & (1 << (o->oBehParams >> 24))) {
-        o->activeFlags = 0;
+        o->oAction = 2;
     } else {
         if (gCurrAreaIndex == 1) {
             if (sGreenStarSpawned[0]) {

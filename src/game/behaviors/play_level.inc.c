@@ -432,8 +432,18 @@ static struct Object *sMoundObjs[4][4] = {NULL};
 void bhv_sand_crab_init(void) {
     o->os16F4 = o->oBehParams2ndByte % 4;
     o->os16F6 = o->oBehParams2ndByte / 4;
-    o->oPosX = sMoundObjs[o->os16F4][o->os16F6]->oPosX;
-    o->oPosZ = sMoundObjs[o->os16F4][o->os16F6]->oPosZ;
+    if (sMoundObjs[o->os16F4][o->os16F6] == NULL) {
+        if ((o->oBehParams >> 24) == 1 && !(save_file_get_currency_flags() & (1 << 8))) {
+            o->oBehParams = 8 << 24;
+            spawn_default_star(o->oPosX - 879.0f, o->oPosY + 450.0f, o->oPosZ + 662.0f);
+        }
+    } else {
+        o->oPosX = sMoundObjs[o->os16F4][o->os16F6]->oPosX;
+        o->oPosZ = sMoundObjs[o->os16F4][o->os16F6]->oPosZ;
+    }
+
+    // if (save_file_get_currency_flags() & (1 << 8)) {
+    // }
 }
 
 void bhv_sand_crab_loop(void) {
@@ -443,6 +453,9 @@ void bhv_sand_crab_loop(void) {
 
     o->os16F4 = o->oBehParams2ndByte % 4;
     o->os16F6 = o->oBehParams2ndByte / 4;
+    if (sMoundObjs[o->os16F4][o->os16F6] == NULL) {
+        return;
+    }
     sMoundObjs[o->os16F4][o->os16F6]->os16FA = 0;
 
     if (gMarioState->wall != NULL && gMarioState->wall->object == o && gMarioState->flags & MARIO_UNKNOWN_31) {
@@ -525,6 +538,9 @@ void bhv_sand_crab_loop(void) {
 
     o->os16F4 = o->oBehParams2ndByte % 4;
     o->os16F6 = o->oBehParams2ndByte / 4;
+    if (sMoundObjs[o->os16F4][o->os16F6] == NULL) {
+        return;
+    }
     sMoundObjs[o->os16F4][o->os16F6]->os16FA = 1;
     o->oPosX = approach_f32_symmetric(o->oPosX, sMoundObjs[o->os16F4][o->os16F6]->oPosX, absf(20.0f * sins(o->oMoveAngleYaw)));
     o->oPosZ = approach_f32_symmetric(o->oPosZ, sMoundObjs[o->os16F4][o->os16F6]->oPosZ, absf(20.0f * coss(o->oMoveAngleYaw)));
@@ -595,6 +611,11 @@ void bhv_sand_mound_init(void) {
     if (o->os16F8) {
         o->oAction = 2;
         o->oPosY -= 150.0f;
+    }
+
+    if (save_file_get_currency_flags() & (1 << 8)) {
+        o->activeFlags = 0;
+        sMoundObjs[o->os16F4][o->os16F6] = NULL;
     }
 }
 
@@ -691,6 +712,10 @@ void bhv_snowflake_init(void) {
         o->oF8 = 155;
     else
         o->oF8 = 255;
+    
+    if (save_file_get_currency_flags() & (1 << 0xD)) {
+        o->activeFlags = 0;
+    }
 }
 
 void bhv_snowflake_loop(void) {
@@ -724,8 +749,8 @@ void bhv_snowflake_loop(void) {
                 o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.1f);
             }
             if (save_file_get_currency_flags() & (1 << 0xD)) {
-                    o->oAction = 3;
-                }
+                o->oAction = 3;
+            }
             break;
         case 3:
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, o->oF8 / 20);

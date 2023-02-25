@@ -14,9 +14,8 @@ static struct ObjectHitbox sCollectStarHitbox = {
 
 void bhv_collect_star_init(void) {
     s8 starId = (o->oBehParams >> 24) & 0xFF;
-    u8 currentLevelStarFlags = save_file_get_currency_flags();;
 
-    if (currentLevelStarFlags & (1 << starId)) {
+    if (save_file_get_currency_flags() & (1 << starId)) {
         o->activeFlags = 0;
     }
     obj_set_hitbox(o, &sCollectStarHitbox);
