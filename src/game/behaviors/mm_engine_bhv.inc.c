@@ -591,6 +591,7 @@ void bhv_deathwarp_init(void) {
 void bhv_deathwarp_loop(void) {
     Vec3f pos;
     s16 angle;
+    struct Surface *floor;
     struct MarioState *m = gMarioState;
     if (o->oTimer != 0 && gMarioCurrentRoom != gMarioPreviousRoom) {
         pos[0] = m->pos[0];
@@ -607,6 +608,11 @@ void bhv_deathwarp_loop(void) {
             }
             pos[0] += + (sins(angle) * 150.0f);
             pos[2] += + (coss(angle) * 150.0f);
+        }
+        find_floor(pos[0], pos[1], pos[2], &floor);
+        if (floor == NULL || floor->type == SURFACE_INSTANT_QUICKSAND 
+            || floor->type == SURFACE_BURNING || floor->type == SURFACE_DEATH_PLANE) {
+                return;
         }
         o->oFaceAngleYaw = o->oMoveAngleYaw = angle;
         vec3f_copy(&o->oPosX, pos);
