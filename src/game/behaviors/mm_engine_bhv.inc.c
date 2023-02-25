@@ -772,6 +772,7 @@ void bhv_token_loop(void) {
     }
 
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        cur_obj_play_sound_1(SOUND_PEACH_THANKS_TO_YOU);
         spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
         o->activeFlags = 0;
         save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
