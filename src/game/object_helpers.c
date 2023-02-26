@@ -3007,6 +3007,58 @@ Gfx *geo_switch_engine_last(s32 callContext, struct GraphNode *node) {
 }
 
 
+#ifdef AVOID_UB
+Gfx *geo_switch_ice_backroom(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_ice_backroom(s32 callContext, struct GraphNode *node) {
+#endif
+    struct MarioState *m = gMarioState;
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (m->pos[2] < -14500.0f || !gIsConsole) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+
+#ifdef AVOID_UB
+Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node) {
+#endif
+    struct MarioState *m = gMarioState;
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (m->pos[2] > -13500.0f || m->pos[2] < -14500.0f || m->pos[0] < 3000.0f || m->pos[1] < 13000.0f || !gIsConsole) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+
 extern s8 sLevelRoomOffsets[];
 extern s8 gGlobalMarioRoom;
 

@@ -81,7 +81,7 @@ void bhv_bomb_on_chain_loop(void) {
         cur_obj_unhide();
     }
     if (gIsConsole && gCamera->comitCutscene == 0) {
-        if (absf(gMarioState->pos[2] - o->parentObj->oPosZ) > 1500.0f) {
+        if (lateral_dist_between_objects(o, gMarioObject) > 1600.0f) {
             cur_obj_hide();
             return;
         } else {
