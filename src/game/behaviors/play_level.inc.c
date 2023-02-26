@@ -49,6 +49,18 @@ void bhv_big_ice_cube_loop(void) {
 }
 
 
+
+extern const struct Animation *const bobomb_seg8_anims_0802396C[];
+
+void bhv_bomb_on_chain_init(void) {
+    if (!gIsConsole) {
+        o->oAnimations = &bobomb_seg8_anims_0802396C;
+        geo_obj_init_animation(&o->header.gfx, &o->oAnimations[0]);
+    } else {
+        o->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+    }
+}
+
 void bomb_on_chain_explode(void) {
     if (o->oTimer < 5) {
         cur_obj_scale(1.0 + (f32) o->oTimer / 5.0);
@@ -132,7 +144,11 @@ void bhv_bomb_chain_loop(void) {
             }
 
             if (o->oTimer >= 90) {
-                o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvBombOnChain);
+                if (gIsConsole) {
+                    o->oObjF8 = spawn_object(o, MODEL_CONSOLE_BOMB, bhvBombOnChain);
+                } else {
+                    o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvBombOnChain);
+                }
                 o->oAction = 1;
             }
             break;

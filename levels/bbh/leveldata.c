@@ -104,3 +104,4 @@
 #include "levels/bbh/rubberband_two/model.inc.c"
 #include "levels/bbh/play_toy_goomba/model.inc.c"
 #include "levels/bbh/a3_sky/model.inc.c"
+#include "levels/bbh/console_bomb/model.inc.c"

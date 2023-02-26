@@ -60,6 +60,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_CEILING_GATE, ice_ceiling_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RUBBERBAND_TWO, rubberband_two_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_GOOMBA, play_toy_goomba_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CONSOLE_BOMB, console_bomb_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

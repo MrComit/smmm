@@ -1,0 +1,14 @@
+extern const GeoLayout console_bomb_geo[];
+extern u8 console_bomb_bob_omb_left_side_rgba16_ia16[];
+extern u8 console_bomb_bob_omb_right_side_rgba16_ia16[];
+extern Vtx console_bomb_BobOmb_mesh_layer_4_vtx_cull[8];
+extern Vtx console_bomb_BobOmb_mesh_layer_4_vtx_0[4];
+extern Gfx console_bomb_BobOmb_mesh_layer_4_tri_0[];
+extern Vtx console_bomb_BobOmb_mesh_layer_4_vtx_1[4];
+extern Gfx console_bomb_BobOmb_mesh_layer_4_tri_1[];
+extern Gfx mat_console_bomb_Bomb1[];
+extern Gfx mat_revert_console_bomb_Bomb1[];
+extern Gfx mat_console_bomb_Bomb2[];
+extern Gfx mat_revert_console_bomb_Bomb2[];
+extern Gfx console_bomb_BobOmb_mesh_layer_4[];
+extern Gfx console_bomb_material_revert_render_settings[];

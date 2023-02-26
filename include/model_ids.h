@@ -760,6 +760,7 @@
 #define MODEL_RED_BUTTON          0xF0
 #define MODEL_ICE_CEILING_GATE    0xEF
 #define MODEL_RUBBERBAND_TWO      0xEE
+#define MODEL_CONSOLE_BOMB        0xED
 
 // LEVEL 6 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_DICE_ENEMY          0xFF

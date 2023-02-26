@@ -179,4 +179,6 @@ extern const GeoLayout bbh_ice_chunk_geo_000378[];
 
 #include "levels/bbh/a3_sky/header.h"
 
+#include "levels/bbh/console_bomb/geo_header.h"
+
 #endif

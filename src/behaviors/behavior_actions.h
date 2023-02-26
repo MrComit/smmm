@@ -809,6 +809,7 @@ void bhv_frozen_goomba_loop(void);
 void bhv_ice_cube_cracked_loop(void);
 void bhv_bomb_chain_loop(void);
 void bhv_bomb_chain_init(void);
+void bhv_bomb_on_chain_init(void);
 void bhv_bomb_on_chain_loop(void);
 void bhv_ice_cube_child_loop(void);
 void bhv_big_ice_cube_loop(void);
