@@ -284,6 +284,8 @@ void bhv_goomba_update(void) {
         } else {
             cur_obj_unhide();
         }
+    } else if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
+        o->oPosZ = 0.0f;
     }
 
     if (obj_update_standard_actions(o->oGoombaScale)) {
