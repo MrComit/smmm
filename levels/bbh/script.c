@@ -160,8 +160,6 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_SAND_MOUND, 3316, 0, -3090, 0, -40, 0, (1 << 24) | (14 << 16), bhvSandMound),
 		OBJECT(MODEL_SAND_MOUND, 2550, 0, -3733, 0, -40, 0, (1 << 24) | (12 << 16), bhvSandMound),
 		OBJECT(MODEL_SAND_MOUND, 3699, 0, -2769, 0, -40, 0, (1 << 24) | (15 << 16), bhvSandMound),
-		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, -4095, 0, -431, 0, 0, 0, 0x00800000, bhvWarpPipe),
-		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, -4028, 0, 136, 0, 0, 0, 0x00810000, bhvWarpPipe),
 		OBJECT(MODEL_PURPLE_SWITCH, 6211, 2089, -564, 0, 111, 0, 0x01000000, bhvGenericSwitch),
 		OBJECT(MODEL_TOKEN, -1171, 809, 5156, 0, -14, 0, 0x00001900, bhvToken),
 		OBJECT(MODEL_NONE, -311, 320, -5575, 0, 0, 0, 0x00000000, bhvWaterfallSoundLoop),
