@@ -626,15 +626,19 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                 break;
 
             case 80:
-                enable_time_stop();
-                if (isKey == 4)
-                    dialogID = DIALOG_015;
-                else if (isKey == 0)
-                    dialogID = DIALOG_013;
-                else
-                    dialogID = DIALOG_014;
-                create_dialog_box_with_response(dialogID);
-                dialogID = 0;
+                if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+                    gDialogResponse = DIALOG_RESPONSE_NO;
+                } else {
+                    enable_time_stop();
+                    if (isKey == 4)
+                        dialogID = DIALOG_015;
+                    else if (isKey == 0)
+                        dialogID = DIALOG_013;
+                    else
+                        dialogID = DIALOG_014;
+                    create_dialog_box_with_response(dialogID);
+                    dialogID = 0;
+                }
                 m->actionState = 1;
                 break;
         }
