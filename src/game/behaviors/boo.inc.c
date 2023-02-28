@@ -21,6 +21,23 @@ static s16 sCourtyardBooTripletPositions[][3] = {
     { -210, 70, -210 },
 };
 
+extern s32 gDialogResponse;
+
+
+void bhv_boo_save_prompt_loop(void) {
+    s32 dialogResponse = CL_NPC_Dialog_Options(o->oBehParams2ndByte);
+    if (gDialogResponse != DIALOG_RESPONSE_NONE) {
+        if (gDialogResponse == DIALOG_RESPONSE_YES) {
+            save_file_do_save(gCurrSaveFileNum - 1);
+            play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+        }
+        disable_time_stop();
+        enable_background_sound();
+        o->activeFlags = 0;
+        set_mario_npc_dialog(0);
+    }
+}
+
 static void boo_stop(void) {
     o->oForwardVel = 0.0f;
     o->oVelY = 0.0f;
@@ -504,6 +521,12 @@ static void boo_act_3(void) {
                 obj->oFaceAngleRoll = 0;
                 vec3f_set(&obj->oPosX, 8040.0f, 1000.0f, 8679.0f);
                 obj->oHomeY = obj->oPosY;
+                break;
+            default:
+                obj = spawn_object(o, MODEL_NONE, bhvBooSavePrompt);
+                obj->oBehParams2ndByte = DIALOG_060;
+                // play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+                play_course_clear();
                 break;
         }
     }

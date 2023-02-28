@@ -1057,6 +1057,7 @@ void bhv_sunblock_col_loop(void);
 void bhv_attic_grate_init(void);
 void bhv_city_bridge2_init(void);
 void bhv_city_bridge2_loop(void);
+void bhv_boo_save_prompt_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

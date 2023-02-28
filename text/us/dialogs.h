@@ -557,34 +557,10 @@ Her parents must be\n\
 worried sick!"))
 
 DEFINE_DIALOG(DIALOG_060, 1, 4, 30, 200, _("\
-ATTENTION!\n\
-Read Before Diving In!\n\
+You defeated a boo!\n\
+Do you want to save?\n\
 \n\
-\n\
-If you stay under the\n\
-water for too long, you'll\n\
-run out of oxygen.\n\
-\n\
-Return to the surface for\n\
-air or find an air bubble\n\
-or coins to breathe while\n\
-underwater.\n\
-Press [A] to swim. Hold [A]\n\
-to swim slow and steady.\n\
-Tap [A] with smooth timing\n\
-to gain speed.\n\
-Press Up on the\n\
-Control Stick and press [A]\n\
-to dive.\n\
-\n\
-Press Down on the Control\n\
-Stick and press [A] to\n\
-return to the surface.\n\
-\n\
-Hold Down and press [A]\n\
-while on the surface near\n\
-the edge of the water to\n\
-jump out."))
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_061, 1, 4, 30, 200, _("\
 BRRR! Frostbite Danger!\n\

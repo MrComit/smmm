@@ -10224,3 +10224,12 @@ const BehaviorScript bhvCityBridge2[] = {
         CALL_NATIVE(bhv_city_bridge2_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBooSavePrompt[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boo_save_prompt_loop),
+    END_LOOP(),
+};
