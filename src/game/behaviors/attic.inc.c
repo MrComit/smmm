@@ -298,6 +298,8 @@ void bhv_bully_flame_loop(void) {
     obj->oRoom = o->oRoom; \
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
+extern s32 gBossPrecoins;
+
 void bhv_attic_bully_init(void) {
     s32 i;
     struct Object *obj;
@@ -579,6 +581,7 @@ void bhv_attic_bully_loop(void) {
         case 8:
             if (lateral_dist_between_objects(o, gMarioObject) < 1500.0f) {
                 o->oAction = 0;
+                gBossPrecoins = gMarioState->numCoins;
                 spawn_object_relative(0, 1000, 0, 1000, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
                 spawn_object_relative(1, -1000, 0, 1000, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);
                 spawn_object_relative(2, 1000, 0, -1000, o, MODEL_ENV_FLAME, bhvAtticMovingFlame);

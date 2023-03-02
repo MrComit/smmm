@@ -45,6 +45,7 @@
 #define WARP_TYPE_CHANGE_LEVEL 1
 #define WARP_TYPE_CHANGE_AREA 2
 #define WARP_TYPE_SAME_AREA 3
+#define WARP_TYPE_RESPAWN 4
 
 #define WARP_NODE_F0 0xF0
 #define WARP_NODE_DEATH 0xF1
@@ -481,20 +482,6 @@ void reset_objects_in_room(s32 room, struct SpawnInfo *spawnInfo) {
 }
 
 
-void reset_level(s16 level, s16 room) {
-    switch (level) {
-        case LEVEL_BOB:
-            if (room == 11) {
-                reset_objects_in_room(room, gCurrentArea->objectSpawnInfos);
-            }
-            break;
-        case LEVEL_WF:
-            break;
-    }
-}
-
-
-
 
 extern s16 s8DirModeBaseYaw;
 
@@ -515,8 +502,13 @@ void init_mario_after_warp(void) {
             init_door_warp(&gPlayerSpawnInfos[0], sWarpDest.arg);
         }
 
-        if (sWarpDest.type == WARP_TYPE_CHANGE_LEVEL || sWarpDest.type == WARP_TYPE_CHANGE_AREA) {
+        if (sWarpDest.type == WARP_TYPE_CHANGE_LEVEL || sWarpDest.type == WARP_TYPE_CHANGE_AREA 
+            || sWarpDest.type == WARP_TYPE_RESPAWN) {
             gPlayerSpawnInfos[0].areaIndex = sWarpDest.areaIdx;
+            if (sWarpDest.type == WARP_TYPE_RESPAWN) {
+                vec3s_copy(gMarioSpawnInfo->startPos, gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos);
+                gMarioSpawnInfo->startAngle[1] = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
+            }
             load_mario_area();
         }
 
@@ -551,12 +543,12 @@ void init_mario_after_warp(void) {
             play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             break;
         case MARIO_SPAWN_AIRBORNE_DEATH:
-            if (sWarpDest.nodeId == WARP_NODE_DEATH) {
-                gMarioState->faceAngle[1] = spawnNode->object->oFaceAngleYaw;
-                s8DirModeBaseYaw = spawnNode->object->oFaceAngleYaw + 0x8000;
-                //reset_objects_in_room(gMarioCurrentRoom, gCurrentArea->objectSpawnInfos);
-                reset_level(gCurrLevelNum, gMarioCurrentRoom);
-            }
+            // if (sWarpDest.nodeId == WARP_NODE_DEATH) {
+            //     gMarioState->faceAngle[1] = spawnNode->object->oFaceAngleYaw;
+            //     s8DirModeBaseYaw = spawnNode->object->oFaceAngleYaw + 0x8000;
+            //     //reset_objects_in_room(gMarioCurrentRoom, gCurrentArea->objectSpawnInfos);
+            //     reset_level(gCurrLevelNum, gMarioCurrentRoom);
+            // }
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
             break;
         default:
@@ -756,6 +748,38 @@ s16 music_changed_through_warp(s16 arg) {
 #endif
 }
 
+s32 gMarioDeathRoom = 0;
+
+s32 in_boss_room(s16 level, s16 room) {
+    switch (level) {
+        case LEVEL_BOB:
+            if (room == 11) {
+                return TRUE;
+            }
+        case LEVEL_WF:
+            if (room == 14) {
+                return TRUE;
+            }
+        case LEVEL_CCM:
+            if (room == 3) {
+                return TRUE;
+            }
+        case LEVEL_HMC:
+            if (room == 15) {
+                return TRUE;
+            }
+        case LEVEL_LLL:
+            if (room == 9) {
+                return TRUE;
+            }
+    }
+    gMarioDeathRoom = 0;
+    return FALSE;
+    // if (val) {
+    //     reset_objects_in_room(room, gCurrentArea->objectSpawnInfos);
+    // }
+}
+
 /**
  * Set the current warp type and destination level/area/node.
  */
@@ -764,6 +788,9 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 arg3) {
         sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
     } else if (destLevel != gCurrLevelNum) {
         sWarpDest.type = WARP_TYPE_CHANGE_LEVEL;
+    } else if ((sSourceWarpNodeId == 0xF0 || sSourceWarpNodeId == 0xF1) && in_boss_room(gCurrLevelNum, gMarioCurrentRoom)) {
+        sWarpDest.type = WARP_TYPE_RESPAWN;
+        gMarioDeathRoom = gMarioCurrentRoom;
     } else if (destArea != gCurrentArea->index) {
         sWarpDest.type = WARP_TYPE_CHANGE_AREA;
     } else {
@@ -1026,7 +1053,7 @@ void initiate_delayed_warp(void) {
                                   warpNode->node.destNode, sDelayedWarpArg);
 
                     check_if_should_set_warp_checkpoint(&warpNode->node);
-                    if (sWarpDest.type != WARP_TYPE_CHANGE_LEVEL) {
+                    if (sWarpDest.type != WARP_TYPE_CHANGE_LEVEL && sWarpDest.type != WARP_TYPE_RESPAWN) {
                         level_set_transition(2, NULL);
                     }
                     break;
@@ -1255,7 +1282,7 @@ s32 play_mode_normal(void) {
     // If either initiate_painting_warp or initiate_delayed_warp initiated a
     // warp, change play mode accordingly.
     if (sCurrPlayMode == PLAY_MODE_NORMAL) {
-        if (sWarpDest.type == WARP_TYPE_CHANGE_LEVEL) {
+        if (sWarpDest.type == WARP_TYPE_CHANGE_LEVEL || sWarpDest.type == WARP_TYPE_RESPAWN) {
             set_play_mode(PLAY_MODE_CHANGE_LEVEL);
         } else if (sTransitionTimer != 0) {
             set_play_mode(PLAY_MODE_CHANGE_AREA);

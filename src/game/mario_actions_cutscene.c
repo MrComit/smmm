@@ -1238,6 +1238,11 @@ s32 act_death_exit(struct MarioState *m) {
     return FALSE;
 }
 
+s32 in_boss_room(s16 level, s16 room);
+s32 gBossPrecoins = 0;
+extern s32 gMarioDeathRoom;
+
+
 s32 act_unused_death_exit(struct MarioState *m) {
     if (launch_mario_until_land(m, ACT_FREEFALL_LAND_STOP, MARIO_ANIM_GENERAL_FALL, 0.0f)) {
 #ifdef VERSION_JP
@@ -1259,6 +1264,15 @@ s32 act_unused_death_exit(struct MarioState *m) {
                 m->numCoins -= 10;
             else
                 m->numCoins = 0;
+            
+            if (in_boss_room(gCurrLevelNum, gMarioDeathRoom)) {
+                if (gBossPrecoins > 10) {
+                    m->numCoins = gBossPrecoins - 10;
+                } else {
+                    m->numCoins = 0;
+                }
+                gBossPrecoins = 0;
+            }
         }
 
     }

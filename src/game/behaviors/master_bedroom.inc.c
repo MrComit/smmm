@@ -458,6 +458,7 @@ void handle_shadow_boss_phases(s16 phase) {
 
 u16 sShadowBossColors[] = {60, 100, 140, 180};
 
+extern s32 gBossPrecoins;
 
 void bhv_shadow_boss_init(void) {
     obj_set_hitbox(o, &sShadowBossHitbox);
@@ -485,6 +486,7 @@ void bhv_shadow_boss_loop(void) {
         case 0:
             if (gMarioState->pos[0] < -6000.0f && gMarioState->pos[2] > -6500.0f) {
                 o->oAction = 1;
+                gBossPrecoins = gMarioState->numCoins;
                 o->oForwardVel = 8.0f;
             }
             break;

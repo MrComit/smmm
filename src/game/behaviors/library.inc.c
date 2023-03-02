@@ -69,6 +69,8 @@ void koopa_boss_clamp_mario(void) {
     }
 }
 
+extern s32 gBossPrecoins;
+
 void bhv_koopa_boss_init(void) {
     o->oHealth = 2;
     // o->oFloat10C = 5.0f;
@@ -88,6 +90,7 @@ void bhv_koopa_boss_loop(void) {
             cur_obj_hide();
             if (gMarioState->pos[2] > 18000.0f && gMarioCurrentRoom == o->oRoom) {
                 o->oAction = 1;
+                gBossPrecoins = gMarioState->numCoins;
                 o->oKleptoStartPosZ = 300.0f;
                 cur_obj_unhide();
                 set_mario_npc_dialog(1);

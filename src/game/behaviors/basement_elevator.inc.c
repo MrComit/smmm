@@ -500,7 +500,7 @@ void ghost_bully_phases(void) {
 
 
 
-
+extern s32 gBossPrecoins;
 
 void bhv_ghost_bully_init(void) {
     o->oForwardVel = 12.0f;
@@ -509,6 +509,7 @@ void bhv_ghost_bully_init(void) {
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
         o->activeFlags = 0;
     }
+    cur_obj_become_intangible();
 }
 
 void bhv_ghost_bully_loop(void) {
@@ -531,8 +532,10 @@ void bhv_ghost_bully_loop(void) {
     obj_set_hitbox(o, &sGhostBullyHitbox);
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 90)
+            if (o->oTimer > 90) {
                 o->oAction = 9;
+                gBossPrecoins = gMarioState->numCoins;
+            }
             break;
         case 1: // chase
             o->os16112 += 0x400 + (o->os16102 * 0x100);
@@ -667,6 +670,7 @@ void bhv_ghost_bully_loop(void) {
                 o->os16102 = 0;
                 o->oAction = 1;
                 cur_obj_unhide();
+                cur_obj_become_tangible();
                 play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
             }
             break;

@@ -1292,6 +1292,7 @@ void shyguy_boss_handle_bulletlist(void) {
 
 Vec3f sShyguyIntroCutscene = {1981.0f, 9931.0f, -5775.0f};
 
+extern s32 gBossPrecoins;
 
 void bhv_shyguy_boss_init(void) {
     obj_set_hitbox(o, &sShyguyBossHitbox);
@@ -1317,6 +1318,7 @@ void bhv_shyguy_boss_loop(void) {
         case 0: // PRE FIGHT ACT
             if (o->oDistanceToMario < 11000.0f) {
                 o->oAction = 5;
+                gBossPrecoins = gMarioState->numCoins;
                 play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
                 gCamera->comitCutscene = 17;
                 gComitCutsceneObject = o;
