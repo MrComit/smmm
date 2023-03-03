@@ -165,7 +165,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_LEMON, 1870, -175, 1753, 0, 0, 0, 0x01640000, bhvLemon),
 		OBJECT(MODEL_NONE, 2789, -500, 1615, 0, 0, 0, 0x00790000, bhvPoleGrabbing),
 		OBJECT(MODEL_NONE, 3025, -500, 5729, 0, 0, 0, 0x00790000, bhvPoleGrabbing),
-		OBJECT(MODEL_TOKEN, 3452, 10, -472, 0, 99, 0, 0x00000800, bhvToken),
+		OBJECT(MODEL_TOKEN, 3452, 10, -472, 0, 99, 0, 0x00001800, bhvToken),
 		OBJECT(MODEL_TOKEN, 2979, 1649, 6360, 0, -180, 0, 0x00020A00, bhvToken),
 		OBJECT(MODEL_BOTTLED_LAVA, -764, 1218, -1965, 0, 27, 0, (80 << 16), bhvBottledLava),
 		OBJECT(MODEL_BOTTLED_LAVA, 2327, 1218, -2173, 0, 0, 0, (80 << 16), bhvBottledLava),

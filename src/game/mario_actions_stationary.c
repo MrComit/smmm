@@ -1085,7 +1085,7 @@ void handle_ground_pound_floor(struct MarioState *m) {
             spawn_token(1, 0x16, sSpawnedTokens[0], 0, 0);
             break;
         case 1:
-            spawn_token(2, 0x18, sSpawnedTokens[1], 0x4000, 0);
+            spawn_token(2, 0x22, sSpawnedTokens[1], 0x4000, 0); // WAS 0x18
             break;
         case 2:
             spawn_token(0, 0x1D, sSpawnedTokens[2], 0x2000, 0);
@@ -1106,7 +1106,7 @@ void handle_ground_pound_floor(struct MarioState *m) {
             // obj->oPosY += 200.0f;
             break;
         case 8:
-            spawn_token(2, 0x25, sSpawnedTokens[3], 0, 0);
+            spawn_token(2, 0x2E, sSpawnedTokens[3], 0, 0); // WAS 0x25
             break;
         case 9:
             spawn_token(1, 0x07, sSpawnedTokens[4], 0, 0xC000);

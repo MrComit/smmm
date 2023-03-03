@@ -233,7 +233,7 @@ void spawn_theater_arena(s16 arena) {
             COMIT_OBJECT(MODEL_NONE, -5485, 518, -13146, 0, 90, 0, bhvBulletBill2dSpawner)
             obj->oBehParams2ndByte = 2;
 		    COMIT_OBJECT(MODEL_TOKEN, -3454, 630, -13146, 0, -180, 0, bhvToken)
-            obj->oBehParams = 22 << 8;
+            obj->oBehParams = 0x28 << 8;
             break;
         case 2:
             COMIT_OBJECT(MODEL_NONE, -1649, 1270, -13146, 0, -90, 0, bhvBulletBill2dSpawner)
