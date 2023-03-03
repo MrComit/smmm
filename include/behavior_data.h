@@ -852,6 +852,8 @@ extern const BehaviorScript bhvSunblockBigCol[];
 extern const BehaviorScript bhvBossGraphic[];
 extern const BehaviorScript bhvCityBridge2[];
 extern const BehaviorScript bhvBooSavePrompt[];
+extern const BehaviorScript bhvCastlePlant[];
+extern const BehaviorScript bhvDirtPile[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -1,0 +1,11 @@
+extern const GeoLayout plant_grow_geo[];
+extern Lights1 plant_grow_BigVine_lights;
+extern u8 plant_grow_plantvine_ci8[];
+extern u8 plant_grow_plantvine_ci8_pal_rgba16[];
+extern Vtx plant_grow_FloatingPlant_mesh_layer_1_vtx_cull[8];
+extern Vtx plant_grow_FloatingPlant_mesh_layer_1_vtx_0[32];
+extern Gfx plant_grow_FloatingPlant_mesh_layer_1_tri_0[];
+extern Gfx mat_plant_grow_BigVine[];
+extern Gfx mat_revert_plant_grow_BigVine[];
+extern Gfx plant_grow_FloatingPlant_mesh_layer_1[];
+extern Gfx plant_grow_material_revert_render_settings[];

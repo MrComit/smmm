@@ -126,6 +126,63 @@ Vec3f sPreviousMarioPos = {0, 0, 0};
 u8 sTokenCoins[3] = {10, 50, 100};
 
 
+
+// void bhv_dirt_pile_init(void)
+void bhv_dirt_pile_loop(void) {
+    struct MarioState *m = gMarioState;
+    struct Object *obj;
+    s32 whichSide = 0;
+    switch (o->oAction) {
+        case 0:
+            if (m->wall != NULL && m->wall->object == o && m->flags & MARIO_UNKNOWN_31) {
+                o->oForwardVel = 10.0f;
+                o->oMoveAngleYaw = (s16)((o->oAngleToMario - 0x8000) + 0x2000) & 0xC000;
+                CL_Move();
+                m->pos[0] += o->oVelX;
+                m->pos[2] += o->oVelZ;
+                if (cur_obj_lateral_dist_to_home() > 300.0f) {
+                    o->oAction = 1;
+                    obj = cur_obj_nearest_object_with_behavior(bhvCastlePlant);
+                    if (obj != NULL) {
+                        obj->oAction = 1;
+                        play_puzzle_jingle();
+                        save_file_set_newflags(SAVE_NEW_FLAG_FLOATING_PLANT, 0);
+                    }
+                }
+            }
+            break;
+    }
+}
+
+
+void bhv_castle_plant_init(void) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FLOATING_PLANT) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_castle_plant_loop(void) {
+    switch (o->oAction) {
+        case 1:
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 0.5f);
+            o->oPosY += o->oFloatF4;
+            if (o->oPosY - o->oHomeY > 5000.0f) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY += 30.0f;
+            o->header.gfx.scale[0] -= 0.02f;
+            o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+            if (o->header.gfx.scale[0] < 0.05f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 void bhv_golden_pillar_loop(void) {
     struct Object *obj;
     switch (o->oAction) {

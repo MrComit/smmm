@@ -40,6 +40,8 @@ const LevelScript level_castle_grounds_entry[] = {
 	JUMP_LINK(script_func_global_16), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_WARP_PIPE, warp_pipe_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_GROUNDS_CASTLE_DOOR, castle_door_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PLANT_GROW, plant_grow_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_DIRT_PILE, dirt_pile_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -62,6 +64,8 @@ const LevelScript level_castle_grounds_entry[] = {
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, 156, -2573, -6010, 0, 0, 0, 0x00840000, bhvWarpPipe),
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, 156, -2573, -6410, 0, 0, 0, 0x00850000, bhvWarpPipe),
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, 156, -2573, -6810, 0, 0, 0, 0x00860000, bhvWarpPipe),
+		OBJECT(MODEL_PLANT_GROW, -2299, -2761, -12148, 0, 0, 0, 0x00000000, bhvCastlePlant),
+		OBJECT(MODEL_DIRT_PILE, -2299, -2761, -12148, 0, 0, 0, 0x00000000, bhvDirtPile),
 		TERRAIN(castle_grounds_area_1_collision),
 		ROOMS(castle_grounds_area_1_collision_rooms),
 		MACRO_OBJECTS(castle_grounds_area_1_macro_objs),

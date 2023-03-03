@@ -10233,3 +10233,28 @@ const BehaviorScript bhvBooSavePrompt[] = {
         CALL_NATIVE(bhv_boo_save_prompt_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvCastlePlant[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    SCALE(0, 75),
+    CALL_NATIVE(bhv_castle_plant_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_castle_plant_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvDirtPile[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    LOAD_COLLISION_DATA(dirt_pile_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_castle_plant_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_dirt_pile_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

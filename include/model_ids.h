@@ -621,6 +621,12 @@
 #define MODEL_GOLDEN_CRATE        0x46
 #define MODEL_JOURNAL_BOOK        0x47
 
+
+// CASTLE GROUNDS
+#define MODEL_PLANT_GROW          0xFF
+#define MODEL_DIRT_PILE           0xFE
+
+
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_LAND_CHUNK          0xFF
 #define MODEL_CHANDELIER          0xFE

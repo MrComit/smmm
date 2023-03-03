@@ -1,0 +1,16 @@
+extern const GeoLayout dirt_pile_geo[];
+extern u8 dirt_pile_darkdirt_ci4[];
+extern u8 dirt_pile_darkdirt_ci4_pal_rgba16[];
+extern Vtx dirt_pile_Dirt_pile_mesh_layer_1_vtx_cull[8];
+extern Vtx dirt_pile_Dirt_pile_mesh_layer_1_vtx_0[28];
+extern Gfx dirt_pile_Dirt_pile_mesh_layer_1_tri_0[];
+extern Vtx dirt_pile_Dirt_pile_mesh_layer_5_vtx_cull[8];
+extern Vtx dirt_pile_Dirt_pile_mesh_layer_5_vtx_0[24];
+extern Gfx dirt_pile_Dirt_pile_mesh_layer_5_tri_0[];
+extern Gfx mat_dirt_pile_Snow_002[];
+extern Gfx mat_revert_dirt_pile_Snow_002[];
+extern Gfx mat_dirt_pile_SnowFade_002[];
+extern Gfx mat_revert_dirt_pile_SnowFade_002[];
+extern Gfx dirt_pile_Dirt_pile_mesh_layer_1[];
+extern Gfx dirt_pile_Dirt_pile_mesh_layer_5[];
+extern Gfx dirt_pile_material_revert_render_settings[];
