@@ -351,6 +351,10 @@ s8 char_to_glyph_index(char c) {
         return GLYPH_BETA_KEY; // beta key, JP only. Reused for Ü in EU.
     }
 
+    if (c == '{') {
+        return GLYPH_GEAR; // beta key, JP only. Reused for Ü in EU.
+    }
+
     return GLYPH_SPACE;
 }
 
@@ -453,7 +457,7 @@ extern s32 sLevelToChapter[COURSE_MAX];
 
 s32 glyph_handle_special_palette(s8 glyphIndex, s16 *r, s16 *g, s16 *b) {
     s32 index;
-    if (glyphIndex >= GLYPH_COIN && glyphIndex <= GLYPH_BETA_KEY && glyphIndex != GLYPH_PERIOD) {
+    if ((glyphIndex >= GLYPH_COIN && glyphIndex <= GLYPH_BETA_KEY && glyphIndex != GLYPH_PERIOD) || glyphIndex == GLYPH_GEAR) {
         if (glyphIndex == GLYPH_COIN || glyphIndex == GLYPH_STAR) { // old: || glyphIndex == GLYPH_MARIO_HEAD
             *r = 255;
             *g = 205;

@@ -86,6 +86,15 @@ static unsigned char sCMarioC[] = { TEXT_FILE_MARIO_C };
 static u8 sCTextBaseAlpha = 0;
 
 s16 sFileHeights[3] = {80, 32, -18};
+s16 sCFMode = 0;
+
+enum CFModes {
+    CF_NORMAL = 0,
+    CF_ERASE  = 1,
+    CF_COPY1 = 2,
+    CF_COPY2 = 3,
+    CF_OPTIONS = 4
+};
 
 
 s32 C_check_clicked_button(s16 x, s16 y, f32 depth) {
@@ -121,6 +130,16 @@ s32 C_check_clicked_file_button(s16 y, f32 depth) {
 }
 
 
+void bhv_cs_side_button_loop(void) {
+    if (C_check_clicked_file_button(sFileHeights[o->oBehParams2ndByte], 200.0f)) {
+        // play_puzzle_jingle();
+        // sSelectedFileNum = o->oBehParams2ndByte + 1;
+        sClickPos[0] = -10000;
+        sClickPos[1] = -10000;
+    }
+}
+
+
 void bhv_cs_button_loop(void) {
     // if (!o->oBehParams2ndByte) {
     //     print_text_fmt_int(20, 80, "%d", sClickPos[0], 0);
@@ -146,6 +165,15 @@ void bhv_cs_button_manager_init(void) {
     obj->oBehParams2ndByte = 1;
     obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSButton, -200, -140, 0, 0, 0, 0);
     obj->oBehParams2ndByte = 2;
+
+    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSideButton, 560, 190, 0, 0, 0, 0);
+    obj->header.gfx.scale[1] = 0.8f;
+    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSideButton, 560, 25, 0, 0, 0, 0);
+    obj->oBehParams2ndByte = 1;
+    obj->header.gfx.scale[1] = 0.8f;
+    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSideButton, 708, -140, 0, 0, 0, 0);
+    obj->oBehParams2ndByte = 2;
+    obj->header.gfx.scale[1] = 0.6f;
 }
 
 void print_file_chapter(s8 file, s16 x, s16 y) {
@@ -172,8 +200,6 @@ void print_file_coin_count(s8 file, s16 x, s16 y) {
 
 
 void print_save_info(s32 file) {
-    unsigned char textMadeBy[] = { TEXT_MADEBY };
-    unsigned char text2023[] = { TEXT_2023 };
     s16 xBase = 32;
     s16 yBase;
     // create_dl_ortho_matrix();
@@ -199,10 +225,6 @@ void print_save_info(s32 file) {
     // gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
     print_file_chapter(file, xBase, yBase - 16);
-    if (file == 0) {
-        print_generic_string(220, 30, textMadeBy);
-        print_generic_string(276, 16, text2023);
-    }
     // gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
 }
@@ -213,6 +235,8 @@ void print_save_info(s32 file) {
 void print_CF_strings(void) {
     // Print "SELECT FILE" text
     unsigned char textNewFile[] = { TEXT_NEWFILE };
+    unsigned char textMadeBy[] = { TEXT_MADEBY };
+    unsigned char text2023[] = { TEXT_2023 };
     create_dl_ortho_matrix();
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
@@ -253,6 +277,13 @@ void print_CF_strings(void) {
         // print_generic_string(80, 175 - 6, textNewFile);
         print_text(53, 79 - 6, "NEW FILE", 2);
     }
+    
+    print_text(253, 175 - 6, "COPY", 6);
+    print_text(252, 127 - 6, "ERASE", 1);
+    print_text(294, 79 - 6 - 1, "{", 5);
+
+    print_generic_string(220, 30, textMadeBy);
+    print_generic_string(276, 16, text2023);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     // Print menu names
