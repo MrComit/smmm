@@ -854,6 +854,9 @@ extern const BehaviorScript bhvCityBridge2[];
 extern const BehaviorScript bhvBooSavePrompt[];
 extern const BehaviorScript bhvCastlePlant[];
 extern const BehaviorScript bhvDirtPile[];
+extern const BehaviorScript bhvCSBackground[];
+extern const BehaviorScript bhvCSButton[];
+extern const BehaviorScript bhvCSButtonManager[];
 
 
 #endif // BEHAVIOR_DATA_H

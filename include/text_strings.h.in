@@ -149,10 +149,10 @@
 #define TEXT_COPY_FILE _("COPY FILE")
 #define TEXT_ERASE_FILE _("ERASE FILE")
 #define TEXT_SOUND_SELECT _("SOUND SELECT")
-#define TEXT_FILE_MARIO_A _("MARIO A")
-#define TEXT_FILE_MARIO_B _("MARIO B")
-#define TEXT_FILE_MARIO_C _("MARIO C")
-#define TEXT_FILE_MARIO_D _("MARIO D")
+#define TEXT_FILE_MARIO_A _("Mario A")
+#define TEXT_FILE_MARIO_B _("Mario B")
+#define TEXT_FILE_MARIO_C _("Mario C")
+#define TEXT_FILE_MARIO_D _("Mario D")
 
 // Menu Options
 #define TEXT_SCORE _("SCORE")
@@ -312,6 +312,10 @@
 #define TEXT_ROOM74 _("The Lab")
 
 
+
+#define TEXT_CHAPTER _("Chapter")
+#define TEXT_MADEBY _("Made by MrComit")
+#define TEXT_2023 _("2023")
 
 
 

@@ -398,6 +398,22 @@ void save_file_reload(void) {
     gSaveFileModified = FALSE;
 }
 
+
+s32 get_chapter_from_save_data(s32 saveFile) {
+    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        return 5;
+    } else if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) {
+        return 4;
+    } else if (save_file_get_boos() & (1 << 0x0A)) {
+        return 3;
+    } else if (save_file_get_boos() & (1 << 0x04)) {
+        return 2;
+    }
+
+    return 1;
+}
+
+
 /**
  * Update the current save file after collecting a star or a key.
  * If coin score is greater than the current high score, update it.

@@ -74,7 +74,7 @@ static f32 sCursorPos[] = {0, 0};
 static s16 sCursorClickingTimer = 0;
 
 // Equal to sCursorPos if the cursor gets clicked, {-10000, -10000} otherwise.
-static s16 sClickPos[] = {-10000, -10000};
+s16 sClickPos[] = {-10000, -10000};
 
 // Used for determining which file has been selected during copying and erasing.
 static s8 sSelectedFileIndex = -1;
@@ -2788,12 +2788,12 @@ static void print_file_select_strings(void) {
     create_dl_ortho_matrix();
     switch (sSelectedButtonID) {
         case MENU_BUTTON_NONE:
-#ifdef VERSION_EU
-            // Ultimately calls print_main_menu_strings, but prints main language strings first.
-            print_main_lang_strings();
-#else
+// #ifdef VERSION_EU
+//             // Ultimately calls print_main_menu_strings, but prints main language strings first.
+//             print_main_lang_strings();
+// #else
             print_main_menu_strings();
-#endif
+// #endif
             break;
         case MENU_BUTTON_SCORE:
             print_score_menu_strings();
@@ -2837,12 +2837,15 @@ static void print_file_select_strings(void) {
     }
 }
 
+void print_CF_strings(void);
+
 /**
  * Geo function that prints file select strings and the cursor.
  */
 Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 mtx) {
     if (callContext == GEO_CONTEXT_RENDER) {
-        print_file_select_strings();
+        // print_file_select_strings();
+        print_CF_strings();
         print_menu_cursor();
     }
     return NULL;

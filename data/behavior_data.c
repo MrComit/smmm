@@ -10258,3 +10258,35 @@ const BehaviorScript bhvDirtPile[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvCSBackground[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    CALL_NATIVE(bhv_cs_bg_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_cs_bg_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvCSButton[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    // CALL_NATIVE(bhv_menu_button_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_cs_button_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvCSButtonManager[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_SET_THROW_MATRIX_FROM_TRANSFORM | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    CALL_NATIVE(bhv_cs_button_manager_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        // CALL_NATIVE(bhv_cs_button_manager_loop),
+    END_LOOP(),
+};

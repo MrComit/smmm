@@ -49,4 +49,8 @@ extern const u8 eu_course_strings_de_table[];
 extern const LevelScript level_main_menu_entry_1[];
 extern const LevelScript level_main_menu_entry_2[];
 
+#include "levels/menu/bg_manor/geo_header.h"
+
+#include "levels/menu/file_button/geo_header.h"
+
 #endif

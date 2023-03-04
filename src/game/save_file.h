@@ -285,6 +285,7 @@ void save_file_set_cap_pos(s16 x, s16 y, s16 z);
 s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
+s32 get_chapter_from_save_data(s32 saveFile);
 
 #ifdef WIDE
 u8 save_file_get_widescreen_mode(void);

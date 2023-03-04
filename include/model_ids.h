@@ -622,6 +622,13 @@
 #define MODEL_JOURNAL_BOOK        0x47
 
 
+
+// FILE SELECT
+#define MODEL_BG_MANOR            0xFF
+#define MODEL_FILE_BUTTON         0xFE
+
+
+
 // CASTLE GROUNDS
 #define MODEL_PLANT_GROW          0xFF
 #define MODEL_DIRT_PILE           0xFE

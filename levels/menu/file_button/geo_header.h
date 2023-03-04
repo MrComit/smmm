@@ -1,0 +1,10 @@
+extern const GeoLayout file_button_geo[];
+extern u8 file_button_file2_ci4[];
+extern u8 file_button_file2_ci4_pal_rgba16[];
+extern Vtx file_button_FileButton_mesh_layer_4_vtx_cull[8];
+extern Vtx file_button_FileButton_mesh_layer_4_vtx_0[4];
+extern Gfx file_button_FileButton_mesh_layer_4_tri_0[];
+extern Gfx mat_file_button_FileButton[];
+extern Gfx mat_revert_file_button_FileButton[];
+extern Gfx file_button_FileButton_mesh_layer_4[];
+extern Gfx file_button_material_revert_render_settings[];
