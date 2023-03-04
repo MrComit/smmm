@@ -76,6 +76,7 @@ CHALLENGES STATE:
 
 extern struct SaveBuffer gSaveBuffer;
 extern s16 sClickPos[];
+extern s8 sSelectedFileNum;
 
 
 static unsigned char sCSelectFile[] = { TEXT_SELECT_FILE };
@@ -84,6 +85,7 @@ static unsigned char sCMarioB[] = { TEXT_FILE_MARIO_B };
 static unsigned char sCMarioC[] = { TEXT_FILE_MARIO_C };
 static u8 sCTextBaseAlpha = 0;
 
+s16 sFileHeights[3] = {80, 32, -18};
 
 
 s32 C_check_clicked_button(s16 x, s16 y, f32 depth) {
@@ -102,7 +104,34 @@ s32 C_check_clicked_button(s16 x, s16 y, f32 depth) {
 }
 
 
+
+s32 C_check_clicked_file_button(s16 y, f32 depth) {
+    f32 a = 52.4213;
+    // f32 newX = ((f32) x * 160.0) / (a * depth);
+    f32 newY = ((f32) y * 120.0) / (a * 3 / 4 * depth);
+    // s16 maxX = newX + 78.0f;
+    // s16 minX = newX - 78.0f;
+    s16 maxY = newY + 21.0f;
+    s16 minY = newY - 21.0f;
+
+    if (sClickPos[0] < 22  && -135 < sClickPos[0] && sClickPos[1] < y && (y - 40) < sClickPos[1]) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+
 void bhv_cs_button_loop(void) {
+    // if (!o->oBehParams2ndByte) {
+    //     print_text_fmt_int(20, 80, "%d", sClickPos[0], 0);
+    //     print_text_fmt_int(120, 80, "%d", sClickPos[1], 0);
+    // }
+    if (C_check_clicked_file_button(sFileHeights[o->oBehParams2ndByte], 200.0f)) {
+        // play_puzzle_jingle();
+        sSelectedFileNum = o->oBehParams2ndByte + 1;
+        sClickPos[0] = -10000;
+        sClickPos[1] = -10000;
+    }
     // print_save_info(o->oBehParams2ndByte);
     // print_text_fmt_int(80, 80, "%d", (s32)o->oPosY, 0);
     // o->oPosX = -180;
