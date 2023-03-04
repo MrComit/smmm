@@ -176,9 +176,9 @@ void print_save_info(s32 file) {
     unsigned char text2023[] = { TEXT_2023 };
     s16 xBase = 32;
     s16 yBase;
-    create_dl_ortho_matrix();
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
+    // create_dl_ortho_matrix();
+    // gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
     switch (file) {
         case 0:
             yBase = 175;
@@ -203,7 +203,7 @@ void print_save_info(s32 file) {
         print_generic_string(220, 30, textMadeBy);
         print_generic_string(276, 16, text2023);
     }
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    // gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
 }
 
@@ -212,6 +212,7 @@ void print_save_info(s32 file) {
 
 void print_CF_strings(void) {
     // Print "SELECT FILE" text
+    unsigned char textNewFile[] = { TEXT_NEWFILE };
     create_dl_ortho_matrix();
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
@@ -226,9 +227,34 @@ void print_CF_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
 
-    print_save_info(0);
-    print_save_info(1);
-    print_save_info(2);
+    // create_dl_ortho_matrix();
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
+    if (save_file_exists(SAVE_FILE_A) == TRUE) {
+        print_save_info(0);
+    } else {
+        // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+        // print_generic_string(80, 175 - 6, textNewFile);
+        print_text(53, 175 - 6, "NEW FILE", 0);
+    }
+
+    if (save_file_exists(SAVE_FILE_B) == TRUE) {
+        print_save_info(1);
+    } else {
+        // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+        // print_generic_string(80, 175 - 6, textNewFile);
+        print_text(53, 127 - 6, "NEW FILE", 3);
+    }
+
+    if (save_file_exists(SAVE_FILE_C) == TRUE) {
+        print_save_info(2);
+    } else {
+        // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+        // print_generic_string(80, 175 - 6, textNewFile);
+        print_text(53, 79 - 6, "NEW FILE", 2);
+    }
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     // Print menu names
     // gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);

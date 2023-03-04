@@ -316,6 +316,7 @@
 #define TEXT_CHAPTER _("Chapter")
 #define TEXT_MADEBY _("Made by MrComit")
 #define TEXT_2023 _("2023")
+#define TEXT_NEWFILE _("New File")
 
 
 

@@ -398,22 +398,18 @@ void save_file_reload(void) {
     gSaveFileModified = FALSE;
 }
 
-s32 sTempSave = 0;
 s32 get_chapter_from_save_data(s32 saveFile) {
     s8 val = 1;
-    sTempSave = gCurrSaveFileNum;
-    gCurrSaveFileNum = saveFile + 1;
-    if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+    if (gSaveBuffer.files[saveFile][0].newFlags[0] & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
         val = 5;
-    } else if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) {
+    } else if (gSaveBuffer.files[saveFile][0].newFlags[1] & SAVE_TOAD_FLAG_ENTER_L6) {
         val = 4;
-    } else if (save_file_get_boos() & (1 << 0x0A)) {
+    } else if ((gSaveBuffer.files[saveFile][0].boosCaptured & 0x03FFFFFF) & (1 << 0x0A)) {
         val = 3;
-    } else if (save_file_get_newflags(0) & SAVE_NEW_FLAG_KEY_CUTSCENE) {
+    } else if (gSaveBuffer.files[saveFile][0].newFlags[0] & SAVE_NEW_FLAG_KEY_CUTSCENE) {
         val = 2;
     }
 
-    gCurrSaveFileNum = sTempSave;
     return val;
 }
 
