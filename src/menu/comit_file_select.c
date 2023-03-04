@@ -133,7 +133,7 @@ void bhv_cs_side_button_loop(void) {
     if (C_check_clicked_button(200, minX, sFileHeights[o->oBehParams2ndByte] - subtract, o->header.gfx.scale[1], 200.0f)) {
         // play_puzzle_jingle();
         // sSelectedFileNum = o->oBehParams2ndByte + 1;
-
+        play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
         switch (o->oBehParams2ndByte) {
             case 0:
                 if (sCFMode != CF_COPY1 && sCFMode != CF_COPY2) {
@@ -158,6 +158,14 @@ void bhv_cs_side_button_loop(void) {
         sClickPos[0] = -10000;
         sClickPos[1] = -10000;
     }
+
+    if (o->oBehParams2ndByte == 0) {
+        if (sCFMode == CF_COPY1) {
+
+        }
+    }
+
+
 }
 
 void bhv_erase_prompt_loop(void) {
@@ -191,6 +199,7 @@ void bhv_cs_button_loop(void) {
         switch (sCFMode) {
             case CF_NORMAL:
                 sSelectedFileNum = o->oBehParams2ndByte + 1;
+                play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
                 break;
             case CF_ERASE:
                 if (save_file_exists(o->oBehParams2ndByte)) {
@@ -203,8 +212,25 @@ void bhv_cs_button_loop(void) {
                 }
                 break;
             case CF_COPY1:
+                if (save_file_exists(o->oBehParams2ndByte)) {
+                    obj = CL_nearest_object_with_behavior_and_field(bhvCSSideButton, 0x144, 0);
+                    if (obj != NULL) {
+                        obj->os16F4 = o->oBehParams2ndByte;
+                    }
+                    play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+                    sCFMode = CF_COPY2;
+                } else {
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                }
                 break;
             case CF_COPY2:
+                obj = CL_nearest_object_with_behavior_and_field(bhvCSSideButton, 0x144, 0);
+                if (obj != NULL) {
+                    play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+                    save_file_copy(obj->os16F4, o->oBehParams2ndByte);
+                    obj->os16F4 = 0;
+                }
+                sCFMode = CF_NORMAL;
                 break;
         }
         sClickPos[0] = -10000;
