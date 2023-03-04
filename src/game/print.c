@@ -352,7 +352,7 @@ s8 char_to_glyph_index(char c) {
     }
 
     if (c == '{') {
-        return GLYPH_GEAR; // beta key, JP only. Reused for Ü in EU.
+        return GLYPH_GEAR;
     }
 
     return GLYPH_SPACE;
@@ -424,6 +424,7 @@ struct HSV sTextPaletteTeal = {185, 0.667f, 0.706f};
 struct HSV sTextPaletteOrange = {24, 0.907f, 0.843f};
 struct HSV sTextPalettePink = {309, 0.667f, 0.706f};
 struct HSV sTextPaletteYellow = {60, 0.907f, 0.843f};
+struct HSV sTextPaletteWhite = {0, 0.0f, 1.0f};
 
 struct HSV *sTextPalettes[] = {
     &sTextPaletteGreen,
@@ -433,6 +434,7 @@ struct HSV *sTextPalettes[] = {
     &sTextPaletteOrange,
     &sTextPalettePink,
     &sTextPaletteYellow,
+    &sTextPaletteWhite,
 };
 
 
@@ -519,7 +521,7 @@ void render_text_labels(void) {
             if (glyph_handle_special_palette(glyphIndex, &r, &g, &b)) {
                 // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
             } else {
-                hue = sTextPalettes[palette]->hue - 15 + CL_RandomMinMaxU16Seeded(0, 30, j + palette);
+                hue = sTextPalettes[palette]->hue - 12 + CL_RandomMinMaxU16Seeded(0, 24, j + palette);
                 CL_HSVtoRGB(hue, sTextPalettes[palette]->sat, sTextPalettes[palette]->value, &r, &g, &b);
             }
             gDPSetEnvColor(gDisplayListHead++, r, g, b, 255);

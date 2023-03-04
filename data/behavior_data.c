@@ -10292,6 +10292,16 @@ const BehaviorScript bhvCSSideButton[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvCSErasePrompt[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    // CALL_NATIVE(bhv_menu_button_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_erase_prompt_loop),
+    END_LOOP(),
+};
+
 
 const BehaviorScript bhvCSButtonManager[] = {
     BEGIN(OBJ_LIST_LEVEL),

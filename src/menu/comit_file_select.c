@@ -97,16 +97,10 @@ enum CFModes {
 };
 
 
-s32 C_check_clicked_button(s16 x, s16 y, f32 depth) {
-    f32 a = 52.4213;
-    f32 newX = ((f32) x * 160.0) / (a * depth);
-    f32 newY = ((f32) y * 120.0) / (a * 3 / 4 * depth);
-    s16 maxX = newX + 25.0f;
-    s16 minX = newX - 25.0f;
-    s16 maxY = newY + 21.0f;
-    s16 minY = newY - 21.0f;
+s32 C_check_clicked_button(s16 maxX, s16 minX, s16 y, f32 yScale, f32 depth) {
+    s32 yRange = (40 * yScale);
 
-    if (sClickPos[0] < maxX && minX < sClickPos[0] && sClickPos[1] < maxY && minY < sClickPos[1]) {
+    if (sClickPos[0] < maxX  && minX < sClickPos[0] && sClickPos[1] < y && (y - yRange) < sClickPos[1]) {
         return TRUE;
     }
     return FALSE;
@@ -114,43 +108,111 @@ s32 C_check_clicked_button(s16 x, s16 y, f32 depth) {
 
 
 
-s32 C_check_clicked_file_button(s16 y, f32 depth) {
-    f32 a = 52.4213;
-    // f32 newX = ((f32) x * 160.0) / (a * depth);
-    f32 newY = ((f32) y * 120.0) / (a * 3 / 4 * depth);
-    // s16 maxX = newX + 78.0f;
-    // s16 minX = newX - 78.0f;
-    s16 maxY = newY + 21.0f;
-    s16 minY = newY - 21.0f;
+// s32 C_check_clicked_file_button(s16 y, f32 depth) {
+//     f32 a = 52.4213;
+//     // f32 newX = ((f32) x * 160.0) / (a * depth);
+//     f32 newY = ((f32) y * 120.0) / (a * 3 / 4 * depth);
+//     // s16 maxX = newX + 78.0f;
+//     // s16 minX = newX - 78.0f;
+//     s16 maxY = newY + 21.0f;
+//     s16 minY = newY - 21.0f;
 
-    if (sClickPos[0] < 22  && -135 < sClickPos[0] && sClickPos[1] < y && (y - 40) < sClickPos[1]) {
-        return TRUE;
-    }
-    return FALSE;
-}
+//     if (sClickPos[0] < 22  && -135 < sClickPos[0] && sClickPos[1] < y && (y - 40) < sClickPos[1]) {
+//         return TRUE;
+//     }
+//     return FALSE;
+// }
 
 
 void bhv_cs_side_button_loop(void) {
-    if (C_check_clicked_file_button(sFileHeights[o->oBehParams2ndByte], 200.0f)) {
+    s32 subtract = (40 - (40 * o->header.gfx.scale[1])) / 2; 
+    s32 minX = o->oBehParams2ndByte == 2 ? 125 : 85;
+    if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
+        return;
+    }
+    if (C_check_clicked_button(200, minX, sFileHeights[o->oBehParams2ndByte] - subtract, o->header.gfx.scale[1], 200.0f)) {
         // play_puzzle_jingle();
         // sSelectedFileNum = o->oBehParams2ndByte + 1;
+
+        switch (o->oBehParams2ndByte) {
+            case 0:
+                if (sCFMode != CF_COPY1 && sCFMode != CF_COPY2) {
+                    sCFMode = CF_COPY1;
+                } else {
+                    sCFMode = CF_NORMAL;
+                }
+                break;
+            case 1:
+                if (sCFMode != CF_ERASE) {
+                    sCFMode = CF_ERASE;
+                } else {
+                    sCFMode = CF_NORMAL;
+                }
+                break;
+            case 2:
+                sCFMode = CF_OPTIONS;
+                break;
+        }
+
+
         sClickPos[0] = -10000;
         sClickPos[1] = -10000;
+    }
+}
+
+void bhv_erase_prompt_loop(void) {
+    if (sClickPos[1] <= 18 && sClickPos[1] >= -8) {
+        if (sClickPos[0] <= 80 && sClickPos[0] >= 56) {
+            play_sound(SOUND_MARIO_WAAAOOOW, gGlobalSoundSource);
+            save_file_erase(o->oBehParams2ndByte);
+            sCFMode = CF_NORMAL;
+            o->activeFlags = 0;
+        }
+
+        if (sClickPos[0] <= 122 && sClickPos[0] >= 100) {
+
+            o->activeFlags = 0;
+        }
     }
 }
 
 
 void bhv_cs_button_loop(void) {
+    struct Object *obj;
     // if (!o->oBehParams2ndByte) {
     //     print_text_fmt_int(20, 80, "%d", sClickPos[0], 0);
     //     print_text_fmt_int(120, 80, "%d", sClickPos[1], 0);
     // }
-    if (C_check_clicked_file_button(sFileHeights[o->oBehParams2ndByte], 200.0f)) {
+    if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
+        return;
+    }
+    if (C_check_clicked_button(22, -135, sFileHeights[o->oBehParams2ndByte], o->header.gfx.scale[1], 200.0f)) {
         // play_puzzle_jingle();
-        sSelectedFileNum = o->oBehParams2ndByte + 1;
+        switch (sCFMode) {
+            case CF_NORMAL:
+                sSelectedFileNum = o->oBehParams2ndByte + 1;
+                break;
+            case CF_ERASE:
+                if (save_file_exists(o->oBehParams2ndByte)) {
+                    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSErasePrompt, 0, 0, 500, 0, 0, 0);
+                    obj->oBehParams2ndByte = o->oBehParams2ndByte;
+                    obj->header.gfx.scale[1] = 0.35f;
+                    obj->header.gfx.scale[0] = 1.2f;
+                } else {
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                }
+                break;
+            case CF_COPY1:
+                break;
+            case CF_COPY2:
+                break;
+        }
         sClickPos[0] = -10000;
         sClickPos[1] = -10000;
     }
+    // if (o->oF4) {
+    //     print_erase_menu_prompt(90, 190);
+    // }
     // print_save_info(o->oBehParams2ndByte);
     // print_text_fmt_int(80, 80, "%d", (s32)o->oPosY, 0);
     // o->oPosX = -180;
@@ -230,6 +292,32 @@ void print_save_info(s32 file) {
 }
 
 
+void print_erase_prompt(void) {
+    unsigned char areYouSure[] = { TEXT_AREYOUSURE };
+    print_generic_string(44, 112, areYouSure);
+}
+
+
+void print_top_text(s32 mode) {
+    switch (mode) {
+        case CF_NORMAL:
+            print_text(90, 225 - 15, "SELECT FILE", 7);
+            break;
+        case CF_ERASE:
+            print_text(40, 225 - 15, "SELECT FILE TO ERASE", 7);
+            break;
+        case CF_COPY1:
+            print_text(45, 225 - 15, "SELECT FILE TO COPY", 7);
+            break;
+        case CF_COPY2:
+            print_text(16, 225 - 15, "SELECT FILE TO OVERWRITE", 7);
+            break;
+        // case CF_OPTIONS:
+        //     print_text(90, 225 - 15, "SELECT FILE", 7);
+        //     break;
+    }
+}
+
 
 
 void print_CF_strings(void) {
@@ -237,18 +325,20 @@ void print_CF_strings(void) {
     unsigned char textNewFile[] = { TEXT_NEWFILE };
     unsigned char textMadeBy[] = { TEXT_MADEBY };
     unsigned char text2023[] = { TEXT_2023 };
+    print_top_text(sCFMode);
     create_dl_ortho_matrix();
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
-    print_hud_lut_string(HUD_LUT_DIFF, 93, 15, sCSelectFile);
+    // gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
+    // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
+    // print_hud_lut_string(HUD_LUT_DIFF, 93, 15, sCSelectFile);
     // print_text(93, 20, sCSelectFile, 0);
+
 
     // Print file star counts
     // print_save_file_star_count(SAVE_FILE_A, SAVEFILE_X1, 78);
     // print_save_file_star_count(SAVE_FILE_B, SAVEFILE_X2, 78);
     // print_save_file_star_count(SAVE_FILE_C, SAVEFILE_X1, 118);
     // print_save_file_star_count(SAVE_FILE_A, SAVEFILE_X2, 118);
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
+    // gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
 
     // create_dl_ortho_matrix();
@@ -267,7 +357,9 @@ void print_CF_strings(void) {
     } else {
         // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
         // print_generic_string(80, 175 - 6, textNewFile);
-        print_text(53, 127 - 6, "NEW FILE", 3);
+        if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) == NULL && !cur_obj_has_behavior(bhvCSErasePrompt)) {
+            print_text(53, 127 - 6, "NEW FILE", 3);
+        }
     }
 
     if (save_file_exists(SAVE_FILE_C) == TRUE) {
@@ -278,10 +370,29 @@ void print_CF_strings(void) {
         print_text(53, 79 - 6, "NEW FILE", 2);
     }
     
-    print_text(253, 175 - 6, "COPY", 6);
-    print_text(252, 127 - 6, "ERASE", 1);
-    print_text(294, 79 - 6 - 1, "{", 5);
 
+
+    if (sCFMode != CF_COPY1 && sCFMode != CF_COPY2) {
+        print_text(253, 175 - 6 - 1, "COPY", 6);
+    } else {
+        print_text(253, 175 - 6 - 1, "BACK", 7);
+    }
+
+    if (sCFMode != CF_ERASE) {
+        print_text(252, 127 - 6 - 1, "ERASE", 1);
+    } else {
+        if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) == NULL && !cur_obj_has_behavior(bhvCSErasePrompt)) {
+            print_text(252, 127 - 6 - 1, "BACK", 7);
+        }
+    }
+
+    if (sCFMode != CF_OPTIONS) {
+        print_text(294, 79 - 6 - 1, "{", 5);
+    }
+
+    if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL || cur_obj_has_behavior(bhvCSErasePrompt)) {
+        print_erase_prompt();
+    }
     print_generic_string(220, 30, textMadeBy);
     print_generic_string(276, 16, text2023);
 

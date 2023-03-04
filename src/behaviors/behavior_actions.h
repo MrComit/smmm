@@ -1065,6 +1065,7 @@ void bhv_cs_bg_init(void);
 void bhv_cs_bg_loop(void);
 void bhv_cs_button_loop(void);
 void bhv_cs_side_button_loop(void);
+void bhv_erase_prompt_loop(void);
 void bhv_cs_button_manager_init(void);
 
 
