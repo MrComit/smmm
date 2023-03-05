@@ -522,7 +522,6 @@ void init_mario_after_warp(void) {
     reset_camera(gCurrentArea->camera);
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
-
     switch (marioSpawnType) {
         case MARIO_SPAWN_UNKNOWN_03:
             play_transition(WARP_TRANSITION_FADE_FROM_STAR, 0x10, 0x00, 0x00, 0x00);
@@ -882,7 +881,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                 sSourceWarpNodeId = WARP_NODE_F0;
                 gSavedCourseNum = COURSE_NONE;
                 val04 = FALSE;
-                play_transition(WARP_TRANSITION_FADE_INTO_STAR, 0x14, 0x00, 0x00, 0x00);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0x14, 0x00, 0x00, 0x00);
                 break;
 
             case WARP_OP_CREDITS_END:
@@ -1004,7 +1003,7 @@ void initiate_delayed_warp(void) {
             warp_special(-9);
         } else if (gCurrDemoInput != NULL) {
             if (sDelayedWarpOp == WARP_OP_DEMO_END) {
-                warp_special(-8);
+                warp_special(-2);
             } else {
                 warp_special(-2);
             }
@@ -1248,15 +1247,20 @@ s32 play_mode_normal(void) {
     if (gCurrDemoInput != NULL) {
         print_intro_text();
         if (gPlayer1Controller->buttonPressed & END_DEMO) {
+            // gCurrDemoInput = NULL;
+            // save_file_reload();
             level_trigger_warp(gMarioState,
                                gCurrLevelNum == LEVEL_PSS ? WARP_OP_DEMO_END : WARP_OP_DEMO_NEXT);
         } else if (!gWarpTransition.isActive && sDelayedWarpOp == WARP_OP_NONE
                    && (gPlayer1Controller->buttonPressed & START_BUTTON)) {
+            // gCurrDemoInput = NULL;
+            // save_file_reload();
             level_trigger_warp(gMarioState, WARP_OP_DEMO_NEXT);
         }
+    } else {
+        gSaveBuffer.files[gCurrSaveFileNum - 1][0].ingameTime++;
     }
 
-    gSaveBuffer.files[gCurrSaveFileNum - 1][0].ingameTime++;
     // CL_PRINT(4, "%d s", gSaveBuffer.files[gCurrSaveFileNum - 1][0].ingameTime / 30)
     warp_area();
     check_instant_warp();
@@ -1480,6 +1484,7 @@ s32 init_level(void) {
 #ifdef SMMM_DEBUG
         if (gCurrDemoInput != NULL) {
             set_mario_action(gMarioState, ACT_IDLE, 0);
+            val4 = 1;
         } else if (gDebugLevelSelect == 0) {
             if (gMarioState->action != ACT_UNINITIALIZED) {
                     set_mario_action(gMarioState, ACT_IDLE, 0);
@@ -1489,6 +1494,7 @@ s32 init_level(void) {
 #else
         if (gCurrDemoInput != NULL) {
             set_mario_action(gMarioState, ACT_IDLE, 0);
+            val4 = 1;
         } else if (gDebugLevelSelect == 0) {
             if (gMarioState->action != ACT_UNINITIALIZED) {
                 if (save_file_exists(gCurrSaveFileNum - 1)) {
@@ -1510,6 +1516,8 @@ s32 init_level(void) {
 
         if (gCurrDemoInput == NULL) {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
+        } else {
+            play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
         }
     }
     if (gCurrDemoInput == NULL) {
@@ -1571,7 +1579,7 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     sDelayedWarpOp = WARP_OP_NONE;
     gNeverEnteredCastle = !save_file_exists(gCurrSaveFileNum - 1);
 
-    if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+    if (gCurrDemoInput == NULL && gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
         levelNum = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel;
     }
 

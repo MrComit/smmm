@@ -38,7 +38,7 @@ static s16 sPlayMarioGreeting = TRUE;
 static s16 sPlayMarioGameOver = TRUE;
 #endif
 
-#define PRESS_START_DEMO_TIMER 800
+#define PRESS_START_DEMO_TIMER 1 // 800 is vanilla
 
 /**
  * Run the demo timer on the PRESS START screen after a number of frames.
@@ -49,7 +49,7 @@ s32 run_level_id_or_demo(s32 level) {
     gCurrDemoInput = NULL;
 
     if (level == LEVEL_NONE) {
-        if (!gPlayer1Controller->buttonDown && !gPlayer1Controller->stickMag) {
+        // if (!gPlayer1Controller->buttonDown && !gPlayer1Controller->stickMag) {
             // start the demo. 800 frames has passed while
             // player is idle on PRESS START screen.
             if ((++sDemoCountdown) == PRESS_START_DEMO_TIMER) {
@@ -67,13 +67,13 @@ s32 run_level_id_or_demo(s32 level) {
                 // Use the first 4 bytes to store level ID,
                 // then use the rest of the values for inputs
                 gCurrDemoInput = ((struct DemoInput *) gDemoInputsBuf.bufTarget) + 1;
-                level = (s8)((struct DemoInput *) gDemoInputsBuf.bufTarget)->timer;
+                level = LEVEL_CASTLE_GROUNDS;//(s8)((struct DemoInput *) gDemoInputsBuf.bufTarget)->timer;
                 gCurrSaveFileNum = 1;
                 gCurrActNum = 1;
             }
-        } else { // activity was detected, so reset the demo countdown.
-            sDemoCountdown = 0;
-        }
+        // } else { // activity was detected, so reset the demo countdown.
+        //     sDemoCountdown = 0;
+        // }
     }
     return level;
 }
@@ -157,14 +157,14 @@ s32 intro_regular(void) {
     // so Mario greets the player. After that, he will always say
     // "press start to play" when it goes back to the title screen
     // (using SAVE AND QUIT)
-    if (sPlayMarioGreeting == TRUE) {
-        if (gGlobalTimer < 129) {
-            play_sound(SOUND_MARIO_HELLO, gGlobalSoundSource);
-        } else {
-            play_sound(SOUND_MARIO_PRESS_START_TO_PLAY, gGlobalSoundSource);
-        }
-        sPlayMarioGreeting = FALSE;
-    }
+    // if (sPlayMarioGreeting == TRUE) {
+    //     if (gGlobalTimer < 129) {
+    //         play_sound(SOUND_MARIO_HELLO, gGlobalSoundSource);
+    //     } else {
+    //         play_sound(SOUND_MARIO_PRESS_START_TO_PLAY, gGlobalSoundSource);
+    //     }
+    //     sPlayMarioGreeting = FALSE;
+    // }
 #endif
     print_intro_text();
 

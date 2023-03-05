@@ -596,8 +596,8 @@ void run_demo_inputs(void) {
             u16 startPushed = gControllers[0].controllerData->button & START_BUTTON;
 
             // Perform the demo inputs by assigning the current button mask and the stick inputs.
-            gControllers[0].controllerData->stick_x = gCurrDemoInput->rawStickX;
-            gControllers[0].controllerData->stick_y = gCurrDemoInput->rawStickY;
+            gControllers[0].controllerData->stick_x = 0;//gCurrDemoInput->rawStickX;
+            gControllers[0].controllerData->stick_y = 0;//gCurrDemoInput->rawStickY;
 
             // To assign the demo input, the button information is stored in
             // an 8-bit mask rather than a 16-bit mask. this is because only
@@ -606,8 +606,8 @@ void run_demo_inputs(void) {
             // upper 4 bits (A, B, Z, and Start) and shift then left by 8 to
             // match the correct input mask. We then add this to the masked
             // lower 4 bits to get the correct button mask.
-            gControllers[0].controllerData->button =
-                ((gCurrDemoInput->buttonMask & 0xF0) << 8) + ((gCurrDemoInput->buttonMask & 0xF));
+            gControllers[0].controllerData->button = 0;
+                //((gCurrDemoInput->buttonMask & 0xF0) << 8) + ((gCurrDemoInput->buttonMask & 0xF));
 
             // If start was pushed, put it into the demo sequence being input to end the demo.
             gControllers[0].controllerData->button |= startPushed;

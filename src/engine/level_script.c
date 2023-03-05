@@ -671,7 +671,7 @@ static void level_cmd_set_mario_start_pos(void) {
     vec3s_set(gMarioSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
 
 
-    if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+    if (gCurrDemoInput == NULL && gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
         gMarioSpawnInfo->areaIndex = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea;
         vec3s_copy(gMarioSpawnInfo->startPos, gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos);
         gMarioSpawnInfo->startAngle[1] = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;

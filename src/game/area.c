@@ -113,7 +113,7 @@ void print_intro_text(void) {
 #ifdef VERSION_EU
     s32 language = eu_get_language();
 #endif
-    if ((gGlobalTimer & 31) < 20) {
+    // if ((gGlobalTimer & 31) < 20) {
         if (gControllerBits == 0) {
 #ifdef VERSION_EU
             print_text_centered(SCREEN_WIDTH / 2, 20, gNoControllerMsg[language], 0);
@@ -124,11 +124,12 @@ void print_intro_text(void) {
 #ifdef VERSION_EU
             print_text(20, 20, "START");
 #else
-            print_text_centered(60, 38, "PRESS", 0);
-            print_text_centered(60, 20, "START", 0);
+            // print_text_centered(60, 38, "PRESS", 0);
+            // print_text_centered(60, 20, "START", 0);
+            print_text_centered(90, 15, "PRESS START", 0);
 #endif
         }
-    }
+    // }
 }
 
 u32 get_mario_spawn_type(struct Object *o) {

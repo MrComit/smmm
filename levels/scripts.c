@@ -165,7 +165,8 @@ static const LevelScript script_L2[] = {
 };
 
 static const LevelScript goto_mario_head_regular[] = {
-    EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_mario_head_regular),
+    // CALL(/*arg*/ 0, /*func*/ lvl_reset_demo),
+    EXIT_AND_EXECUTE(/*seg*/ 0x14, _menuSegmentRomStart, _menuSegmentRomEnd, level_main_menu_entry_1),
 };
 
 static const LevelScript goto_mario_head_dizzy[] = {

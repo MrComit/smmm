@@ -1372,6 +1372,13 @@ void render_hud_broken_key(void) {
 void render_hud(void) {
     s16 hudDisplayFlags = gHudDisplay.flags;
 
+	if (gCurrDemoInput != NULL) {
+		if (gMarioObject != NULL) {
+			gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0];
+		}
+		return;
+	}
+
     if (hudDisplayFlags == HUD_DISPLAY_NONE) {
         sPowerMeterHUD.animation = POWER_METER_HIDDEN;
         sPowerMeterStoredHealth = 8;

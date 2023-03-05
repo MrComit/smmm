@@ -2864,6 +2864,8 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
 #ifdef VERSION_EU
     s8 fileNum;
 #endif
+    gCurrDemoInput = NULL;
+    save_file_reload();
     sSelectedButtonID = MENU_BUTTON_NONE;
     sCurrentMenuLevel = MENU_LAYER_MAIN;
     sTextBaseAlpha = 0;
