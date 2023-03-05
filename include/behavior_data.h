@@ -856,6 +856,7 @@ extern const BehaviorScript bhvCastlePlant[];
 extern const BehaviorScript bhvDirtPile[];
 extern const BehaviorScript bhvCSBackground[];
 extern const BehaviorScript bhvCSButton[];
+extern const BehaviorScript bhvCSSubButton[];
 extern const BehaviorScript bhvCSSideButton[];
 extern const BehaviorScript bhvCSErasePrompt[];
 extern const BehaviorScript bhvCSButtonManager[];

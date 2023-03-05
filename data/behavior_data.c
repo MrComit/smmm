@@ -10274,12 +10274,25 @@ const BehaviorScript bhvCSBackground[] = {
 const BehaviorScript bhvCSButton[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
-    // CALL_NATIVE(bhv_menu_button_init),
+    CALL_NATIVE(bhv_cs_button_init),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_cs_button_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvCSSubButton[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_cs_button_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_cs_sub_button_loop),
+    END_LOOP(),
+};
+
 
 
 const BehaviorScript bhvCSSideButton[] = {

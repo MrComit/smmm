@@ -377,6 +377,7 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
     play_transition(transType, time, red, green, blue);
 }
 
+s32 sShouldRenderCursor = FALSE;
 
 void render_game(void) {
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
@@ -396,6 +397,9 @@ void render_game(void) {
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         render_text_labels();
+        if (sShouldRenderCursor) {
+            print_menu_cursor();
+        }
         do_cutscene_handler();
         print_displaying_credits_entry();
         special_print();

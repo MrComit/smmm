@@ -68,7 +68,7 @@ static u8 sTextBaseAlpha = 0;
 
 // 2D position of the cursor on the screen.
 // sCursorPos[0]: X | sCursorPos[1]: Y
-static f32 sCursorPos[] = {0, 0};
+f32 sCursorPos[] = {0, 0};
 
 // Determines which graphic to use for the cursor.
 static s16 sCursorClickingTimer = 0;
@@ -1691,6 +1691,8 @@ void handle_controller_cursor_input(void) {
     }
 }
 
+extern s32 sShouldRenderCursor;
+
 /**
  * Prints the cursor (Mario Hand, different to the one in the Mario screen)
  * and loads it's controller inputs in handle_controller_cursor_input
@@ -1714,6 +1716,7 @@ void print_menu_cursor(void) {
             sCursorClickingTimer = 0;
         }
     }
+    sShouldRenderCursor = FALSE;
 }
 
 /**
@@ -2846,7 +2849,8 @@ Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct Grap
     if (callContext == GEO_CONTEXT_RENDER) {
         // print_file_select_strings();
         print_CF_strings();
-        print_menu_cursor();
+        // print_menu_cursor();
+        sShouldRenderCursor = TRUE;
     }
     return NULL;
 }
@@ -2866,24 +2870,27 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
     // Place the cursor over the save file that was being played.
     // gCurrSaveFileNum is 1 by default when the game boots, as such
     // the cursor will point on Mario A save file.
-    switch (gCurrSaveFileNum) {
-        case 1: // File A
-            sCursorPos[0] = -94.0f;
-            sCursorPos[1] = 46.0f;
-            break;
-        case 2: // File B
-            sCursorPos[0] = 24.0f;
-            sCursorPos[1] = 46.0f;
-            break;
-        case 3: // File C
-            sCursorPos[0] = -94.0f;
-            sCursorPos[1] = 5.0f;
-            break;
-        case 4: // File D
-            sCursorPos[0] = 24.0f;
-            sCursorPos[1] = 5.0f;
-            break;
-    }
+    // switch (gCurrSaveFileNum) {
+    //     case 1: // File A
+    //         sCursorPos[0] = -94.0f;
+    //         sCursorPos[1] = 46.0f;
+    //         break;
+    //     case 2: // File B
+    //         sCursorPos[0] = 24.0f;
+    //         sCursorPos[1] = 46.0f;
+    //         break;
+    //     case 3: // File C
+    //         sCursorPos[0] = -94.0f;
+    //         sCursorPos[1] = 5.0f;
+    //         break;
+    //     case 4: // File D
+    //         sCursorPos[0] = 24.0f;
+    //         sCursorPos[1] = 5.0f;
+    //         break;
+    // }
+    sCursorPos[0] = 0.0f;
+    sCursorPos[1] = 0.0f;
+
     sClickPos[0] = -10000;
     sClickPos[1] = -10000;
     sCursorClickingTimer = 0;

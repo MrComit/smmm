@@ -76,6 +76,7 @@ CHALLENGES STATE:
 
 extern struct SaveBuffer gSaveBuffer;
 extern s16 sClickPos[];
+extern f32 sCursorPos[];
 extern s8 sSelectedFileNum;
 
 
@@ -130,6 +131,16 @@ void bhv_cs_side_button_loop(void) {
     if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
         return;
     }
+
+    if (sCursorPos[0] < 200 && sCursorPos[0] > minX && sCursorPos[1] < sFileHeights[o->oBehParams2ndByte] - subtract
+        && sCursorPos[1] > sFileHeights[o->oBehParams2ndByte] - (40 - o->header.gfx.scale[1])) {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.05f, 0.00625);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], o->oFloatF8 * 1.15f, o->oFloatFC);
+        } else {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.00625f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], o->oFloatF8, o->oFloatFC);
+        }
+
     if (C_check_clicked_button(200, minX, sFileHeights[o->oBehParams2ndByte] - subtract, o->header.gfx.scale[1], 200.0f)) {
         // play_puzzle_jingle();
         // sSelectedFileNum = o->oBehParams2ndByte + 1;
@@ -172,18 +183,36 @@ void bhv_erase_prompt_loop(void) {
     if (sClickPos[1] <= 18 && sClickPos[1] >= -8) {
         if (sClickPos[0] <= 80 && sClickPos[0] >= 56) {
             play_sound(SOUND_MARIO_WAAAOOOW, gGlobalSoundSource);
+            play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
             save_file_erase(o->oBehParams2ndByte);
             sCFMode = CF_NORMAL;
             o->activeFlags = 0;
         }
 
         if (sClickPos[0] <= 122 && sClickPos[0] >= 100) {
-
+            play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
             o->activeFlags = 0;
         }
     }
 }
 
+
+void bhv_cs_sub_button_loop(void) {
+    if (o->oF4 == 0) {
+        o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 20.0f);
+    } else {
+        o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX + 350.0f, 25.0f);
+    }
+}
+
+extern s32 sShouldRenderCursor;
+
+void bhv_cs_button_init(void) {
+    o->oObjF8 = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSubButton, -255, (s16)o->oPosY, -10, 0, 0, 0);
+    // o->oObjF8->header.gfx.scale[1] = 0.8f;
+    o->oObjF8->header.gfx.scale[0] = 0.7f;
+    o->oObjF8->oBehParams2ndByte = o->oBehParams2ndByte;
+}
 
 void bhv_cs_button_loop(void) {
     struct Object *obj;
@@ -194,12 +223,29 @@ void bhv_cs_button_loop(void) {
     if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
         return;
     }
-    if (C_check_clicked_button(22, -135, sFileHeights[o->oBehParams2ndByte], o->header.gfx.scale[1], 200.0f)) {
+
+    // if (sCFMode == CF_NORMAL) {
+    if (sCursorPos[0] < -14 && sCursorPos[1] < sFileHeights[o->oBehParams2ndByte] 
+        && sCursorPos[1] > sFileHeights[o->oBehParams2ndByte] - 40) {
+            if (sCFMode == CF_NORMAL && save_file_exists(o->oBehParams2ndByte)) {
+                o->oObjF8->oF4 = 1;
+            }
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.88f, 0.01f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.1f, 0.0125f);
+        } else {
+            o->oObjF8->oF4 = 0;
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.8f, 0.01f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.0f, 0.0125f);
+        }
+    // }
+
+    if (C_check_clicked_button(-14, -135, sFileHeights[o->oBehParams2ndByte], o->header.gfx.scale[1], 200.0f)) {
         // play_puzzle_jingle();
         switch (sCFMode) {
             case CF_NORMAL:
                 sSelectedFileNum = o->oBehParams2ndByte + 1;
                 play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+                sShouldRenderCursor = FALSE;
                 break;
             case CF_ERASE:
                 if (save_file_exists(o->oBehParams2ndByte)) {
@@ -207,6 +253,7 @@ void bhv_cs_button_loop(void) {
                     obj->oBehParams2ndByte = o->oBehParams2ndByte;
                     obj->header.gfx.scale[1] = 0.35f;
                     obj->header.gfx.scale[0] = 1.2f;
+                    play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
                 } else {
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
                 }
@@ -248,20 +295,101 @@ void bhv_cs_button_loop(void) {
 
 void bhv_cs_button_manager_init(void) {
     struct Object *obj;
-    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSButton, -200, 190, 0, 0, 0, 0);
-    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSButton, -200, 25, 0, 0, 0, 0);
+    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSButton, -255, 190, 0, 0, 0, 0);
+    obj->header.gfx.scale[0] = 0.8f;
+    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSButton, -255, 25, 0, 0, 0, 0);
+    obj->header.gfx.scale[0] = 0.8f;
     obj->oBehParams2ndByte = 1;
-    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSButton, -200, -140, 0, 0, 0, 0);
+    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSButton, -255, -140, 0, 0, 0, 0);
+    obj->header.gfx.scale[0] = 0.8f;
     obj->oBehParams2ndByte = 2;
 
     obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSideButton, 560, 190, 0, 0, 0, 0);
     obj->header.gfx.scale[1] = 0.8f;
+    obj->oFloatF8 = obj->header.gfx.scale[1];
+    obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
     obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSideButton, 560, 25, 0, 0, 0, 0);
     obj->oBehParams2ndByte = 1;
     obj->header.gfx.scale[1] = 0.8f;
+    obj->oFloatF8 = obj->header.gfx.scale[1];
+    obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
     obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSideButton, 708, -140, 0, 0, 0, 0);
     obj->oBehParams2ndByte = 2;
     obj->header.gfx.scale[1] = 0.6f;
+    obj->oFloatF8 = obj->header.gfx.scale[1];
+    obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
+}
+
+
+s16 sSubInfoAlpha[3] = {0, 0, 0};
+
+
+
+void print_play_time(s8 file, s16 x, s16 y) {
+    unsigned char hoursText[10];
+    unsigned char minsText[3];
+    unsigned char secsText[3];
+    unsigned char milisText[3];
+    unsigned char timeSting[25];
+    s32 i = 0;
+    s32 time = gSaveBuffer.files[file][0].ingameTime;
+    s32 hours, minutes, seconds;
+    hours = time / 108000;
+    time %= 108000;
+    minutes = time / 1800;
+    time %= 1800;
+    seconds = time / 30;
+    time = (f32)((time % 30) / 30.0f) * 100;
+
+
+    int_to_str(hours, hoursText);
+    int_to_str(minutes, minsText);
+    int_to_str(seconds, secsText);
+    int_to_str(time, milisText);
+
+    while (hoursText[i] != 0xFF) {
+        timeSting[i] = hoursText[i];
+        i++;
+    }
+
+    timeSting[i++] = 0xE6;
+
+    if (minsText[1] == 0xFF) {
+        timeSting[i++] = 0;
+        timeSting[i++] = minsText[0];
+    } else {
+        timeSting[i++] = minsText[0];
+        timeSting[i++] = minsText[1];
+    }
+
+    timeSting[i++] = 0xE6;
+
+    if (secsText[1] == 0xFF) {
+        timeSting[i++] = 0;
+        timeSting[i++] = secsText[0];
+    } else {
+        timeSting[i++] = secsText[0];
+        timeSting[i++] = secsText[1];
+    }
+
+    timeSting[i++] = 0x3F;
+
+    if (milisText[1] == 0xFF) {
+        timeSting[i++] = 0;
+        timeSting[i++] = milisText[0];
+    } else {
+        timeSting[i++] = milisText[0];
+        timeSting[i++] = milisText[1];
+    }
+    timeSting[i] = 0xFF;
+
+    print_generic_string(x, y, timeSting);
+    // print_generic_string(x + 40, y - 16, minsText);
+    // print_generic_string(x + 40, y - 32, secsText);
+    // print_generic_string(x + 40, y - 48, milisText);
+    // print_text_fmt_int(80, 80, "%x", (s16)secsText[0], 1);
+    // print_text_fmt_int(80, 50, "%x", (s16)secsText[1], 1);
+    // print_text_fmt_int(80, 20, "%x", (s16)secsText[2], 1);
 }
 
 void print_file_chapter(s8 file, s16 x, s16 y) {
@@ -276,16 +404,45 @@ void print_file_chapter(s8 file, s16 x, s16 y) {
 
 
 void print_file_coin_count(s8 file, s16 x, s16 y) {
-    unsigned char coinScoreText[20];
-    unsigned char textCoin[] = { TEXT_COIN };
-    // Print "[coin] x"
-    print_generic_string(x + 30, y, textCoin);
-    // Print coin score
-    int_to_str(gSaveBuffer.files[file][0].coinCount, coinScoreText);
-    print_generic_string(x + 38, y, coinScoreText);
+    // unsigned char coinScoreText[20];
+    // unsigned char textCoin[] = { TEXT_COIN };
+    // // Print "[coin] x"
+    // print_generic_string(x + 30, y, textCoin);
+    // // Print coin score
+    // int_to_str(gSaveBuffer.files[file][0].coinCount, coinScoreText);
+    // print_generic_string(x + 38, y, coinScoreText);
+    s32 coins = gSaveBuffer.files[file][0].coinCount;
+    s32 subtract = coins > 9999 ? 14 : 0;
+    if (coins < 100000) {
+        print_text(x - subtract, y, "+", 0); // 'Coin' glyph
+        print_text(x + 16 - subtract, y, "*", 7); // 'X' glyph
+        print_text_fmt_int(x + 30 - subtract, y, "%d", coins, 7);
+    } else {
+        print_text(x - subtract, y, "+", 0); // 'Coin' glyph
+        // print_text(x + 16 - subtract, y, "*", 7); // 'X' glyph
+        print_text_fmt_int(x + 16 - subtract, y, "%d", coins, 7);
+    }
 }
 
-
+void print_file_sub_info(s8 file, s16 x, s16 y) {
+    struct Object *obj = CL_nearest_object_with_behavior_and_field(bhvCSSubButton, 0x144, file);
+    if (obj == NULL) {
+        if (cur_obj_has_behavior(bhvCSSubButton)) {
+            obj = o;
+        }
+    }
+    if (obj != NULL) {
+        if (obj->oF4 == 1 && obj->oPosX >= obj->oHomeX + 200.0f) {
+            sSubInfoAlpha[file] = approach_s16_symmetric(sSubInfoAlpha[file], 255, 20);
+        } else if (obj->oF4 == 0 && obj->oPosX <= obj->oHomeX + 300.0f){
+            sSubInfoAlpha[file] = approach_s16_symmetric(sSubInfoAlpha[file], 0, 75);
+        }
+        if (sSubInfoAlpha[file] > 10) {
+            print_file_chapter(file, x, y + 8);
+            print_play_time(file, x, y - 8);
+        }
+    }
+}
 
 void print_save_info(s32 file) {
     s16 xBase = 32;
@@ -295,24 +452,30 @@ void print_save_info(s32 file) {
     // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
     switch (file) {
         case 0:
-            yBase = 175;
-            print_generic_string(xBase, yBase, sCMarioA);
+            yBase = 175 - 7;
+            print_text(xBase - 2, yBase, "A", 0);
+            // print_generic_string(xBase, yBase, sCMarioA);
             break;
         case 1:
-            yBase = 127;
-            print_generic_string(xBase, yBase, sCMarioB);
+            yBase = 127 - 7;
+            print_text(xBase - 2, yBase, "B", 3);
+            // print_generic_string(xBase, yBase, sCMarioB);
             break;
         case 2:
-            yBase = 79;
-            print_generic_string(xBase, yBase, sCMarioC);
+            yBase = 79 - 7;
+            print_text(xBase - 2, yBase, "C", 2);
+            // print_generic_string(xBase, yBase, sCMarioC);
             break;
     }
-    print_file_coin_count(file, xBase + 20, yBase);
+    print_file_coin_count(file, xBase + 30, yBase);
     // gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);
 
     // gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
-    print_file_chapter(file, xBase, yBase - 16);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sSubInfoAlpha[file]);
+    print_file_sub_info(file, xBase + 125, yBase);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
+    // print_file_chapter(file, xBase, yBase - 16);
     // gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
 }
@@ -375,16 +538,16 @@ void print_CF_strings(void) {
     } else {
         // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
         // print_generic_string(80, 175 - 6, textNewFile);
-        print_text(53, 175 - 6, "NEW FILE", 0);
+        print_text(37, 175 - 6, "NEW FILE", 0);
     }
 
-    if (save_file_exists(SAVE_FILE_B) == TRUE) {
-        print_save_info(1);
-    } else {
-        // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
-        // print_generic_string(80, 175 - 6, textNewFile);
-        if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) == NULL && !cur_obj_has_behavior(bhvCSErasePrompt)) {
-            print_text(53, 127 - 6, "NEW FILE", 3);
+    if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) == NULL && !cur_obj_has_behavior(bhvCSErasePrompt)) {
+        if (save_file_exists(SAVE_FILE_B) == TRUE) {
+            print_save_info(1);
+        } else {
+            // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+            // print_generic_string(80, 175 - 6, textNewFile);
+            print_text(37, 127 - 6, "NEW FILE", 3);
         }
     }
 
@@ -393,7 +556,7 @@ void print_CF_strings(void) {
     } else {
         // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
         // print_generic_string(80, 175 - 6, textNewFile);
-        print_text(53, 79 - 6, "NEW FILE", 2);
+        print_text(37, 79 - 6, "NEW FILE", 2);
     }
     
 
