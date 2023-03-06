@@ -690,10 +690,30 @@ Gfx target_target_mesh[] = {
 
 
 
+#include "game/logo/model.inc.c"
+#include "game/logo/header.h"
 
+s16 sLogoOpacity = 0;
+s16 sLogoTimer = 0;
 
-
-
+void render_logo(void) {
+	create_dl_ortho_matrix();
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160.0f, 150.0f, 0.0f);
+    // if (gIsConsole) {
+    //     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.25f, 1.25f, 1.0f);
+    // }
+	if (sLogoTimer > 70) {
+		sLogoOpacity += 3;
+		if (sLogoOpacity > 255) {
+			sLogoOpacity = 255;
+		}
+	} else {
+		sLogoTimer++;
+	}
+    gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, sLogoOpacity);
+    gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
 
 
 
@@ -1373,6 +1393,7 @@ void render_hud(void) {
     s16 hudDisplayFlags = gHudDisplay.flags;
 
 	if (gCurrDemoInput != NULL) {
+		render_logo();
 		if (gMarioObject != NULL) {
 			gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0];
 			set_mario_npc_dialog(1);
