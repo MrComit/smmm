@@ -1350,6 +1350,19 @@ void fixed_cam_cutscene_mainhall(struct Camera *c) {
 }
 
 
+
+void main_menu_cutscene_outside(struct Camera *c) {
+    struct CutsceneSplinePoint *point, *point2;
+    struct MarioState *m = gMarioState;
+    start_cutscene(c, CUTSCENE_OPENING);
+    point = segmented_to_virtual(castle_grounds_area_1_spline_MainMenuPos);
+    point2 = segmented_to_virtual(castle_grounds_area_1_spline_MainMenuFoc);
+    move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+    move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+}
+
+
+
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
     struct Object *obj = gComitCutsceneObject;
@@ -1492,7 +1505,9 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->focus, 8900.0f, -1600.0f, m->pos[2]);
             c->yaw = c->nextYaw = DEGREES(180);
             break;
-
+        case 19: // MAIN MENU OUTSIDE
+            main_menu_cutscene_outside(c);
+            break;
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);
             vec3f_copy(c->focus, gComitCutsceneFocVec);

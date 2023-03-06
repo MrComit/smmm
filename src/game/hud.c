@@ -1375,6 +1375,10 @@ void render_hud(void) {
 	if (gCurrDemoInput != NULL) {
 		if (gMarioObject != NULL) {
 			gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0];
+			set_mario_npc_dialog(1);
+		}
+		if (gCamera != NULL) {
+			gCamera->comitCutscene = 19;
 		}
 		return;
 	}

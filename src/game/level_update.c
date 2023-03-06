@@ -1092,7 +1092,7 @@ s32 should_display_brokenkey(void) {
 
 
 void update_hud_values(void) {
-    if (gCurrCreditsEntry == NULL) {
+    if (gCurrCreditsEntry == NULL && gCurrDemoInput == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
         if (gMarioState->action & ACT_FLAG_STATIONARY && gCamera->comitCutscene == 0) {

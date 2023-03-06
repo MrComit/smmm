@@ -613,9 +613,9 @@ void run_demo_inputs(void) {
             gControllers[0].controllerData->button |= startPushed;
 
             // Run the current demo input's timer down. if it hits 0, advance the demo input list.
-            if (--gCurrDemoInput->timer == 0) {
-                gCurrDemoInput++;
-            }
+            // if (--gCurrDemoInput->timer == 0) {
+            //     gCurrDemoInput++;
+            // }
         }
     }
 }

@@ -6,6 +6,8 @@ extern const u8 castle_grounds_area_1_collision_rooms[];
 extern const MacroObject castle_grounds_area_1_macro_objs[];
 #include "src/game/camera.h"
 
+extern struct CutsceneSplinePoint castle_grounds_area_1_spline_MainMenuFoc[];
+extern struct CutsceneSplinePoint castle_grounds_area_1_spline_MainMenuPos[];
 extern struct CutsceneSplinePoint castle_grounds_area_1_spline_OpeningFoc[];
 extern struct CutsceneSplinePoint castle_grounds_area_1_spline_OpeningFoc2[];
 extern struct CutsceneSplinePoint castle_grounds_area_1_spline_OpeningPos[];
