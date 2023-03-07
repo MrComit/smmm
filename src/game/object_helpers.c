@@ -3061,6 +3061,9 @@ Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node) {
 
 extern s8 sLevelRoomOffsets[];
 extern s8 gGlobalMarioRoom;
+extern s32 gMenuCutscene;
+
+s32 sMenuRooms[] = {1, 2, 1, 1, 2, 1};
 
 //! @bug Same issue as geo_switch_anim_state.
 #ifdef AVOID_UB
@@ -3101,6 +3104,10 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node) {
         }
     } else {
         switchCase->selectedCase = 0;
+    }
+    if (gCurrDemoInput != NULL) {
+        gMarioCurrentRoom = sMenuRooms[gMenuCutscene];
+        switchCase->selectedCase = gMarioCurrentRoom - 1;
     }
 
     return NULL;

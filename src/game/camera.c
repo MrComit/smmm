@@ -29,6 +29,10 @@
 #include "engine/graph_node.h"
 #include "level_table.h"
 #include "levels/bob/header.h"
+#include "levels/wf/header.h"
+#include "levels/ccm/header.h"
+#include "levels/hmc/header.h"
+#include "levels/lll/header.h"
 #include "levels/castle_grounds/header.h"
 #include "interaction.h"
 #include "mario.h"
@@ -1350,18 +1354,43 @@ void fixed_cam_cutscene_mainhall(struct Camera *c) {
 }
 
 
-
-void main_menu_cutscene_outside(struct Camera *c) {
+void main_menu_cutscenes(struct Camera *c, s32 cutscene) {
     struct CutsceneSplinePoint *point, *point2;
     struct MarioState *m = gMarioState;
+    // return;
     start_cutscene(c, CUTSCENE_OPENING);
-    point = segmented_to_virtual(castle_grounds_area_1_spline_MainMenuPos);
-    point2 = segmented_to_virtual(castle_grounds_area_1_spline_MainMenuFoc);
+    switch (cutscene) {
+        case 0:
+            point = segmented_to_virtual(castle_grounds_area_1_spline_MainMenuPos);
+            point2 = segmented_to_virtual(castle_grounds_area_1_spline_MainMenuFoc);
+            break;
+        case 1:
+            // gMarioCurrentRoom = 2;
+            point = segmented_to_virtual(bob_area_1_spline_MenuPos);
+            point2 = segmented_to_virtual(bob_area_1_spline_MenuFoc);
+            break;
+        case 2:
+            point = segmented_to_virtual(wf_area_1_spline_MenuPos);
+            point2 = segmented_to_virtual(wf_area_1_spline_MenuFoc);
+            break;
+        case 3:
+            point = segmented_to_virtual(ccm_area_1_spline_MenuPos);
+            point2 = segmented_to_virtual(ccm_area_1_spline_MenuFoc);
+            break;
+        case 4:
+            point = segmented_to_virtual(hmc_area_1_spline_MenuPos);
+            point2 = segmented_to_virtual(hmc_area_1_spline_MenuFoc);
+            break;
+        case 5:
+            point = segmented_to_virtual(lll_area_1_spline_MenuPos);
+            point2 = segmented_to_virtual(lll_area_1_spline_MenuFoc);
+            break;
+    }
     move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
     move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
 }
 
-
+s32 gMenuCutscene = 0;
 
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
@@ -1506,7 +1535,7 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = DEGREES(180);
             break;
         case 19: // MAIN MENU OUTSIDE
-            main_menu_cutscene_outside(c);
+            main_menu_cutscenes(c, gMenuCutscene);
             break;
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);

@@ -35,6 +35,10 @@ extern const GeoLayout lll_area_1[];
 extern const Collision lll_area_1_collision[];
 extern const u8 lll_area_1_collision_rooms[];
 extern const MacroObject lll_area_1_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint lll_area_1_spline_MenuFoc[];
+extern struct CutsceneSplinePoint lll_area_1_spline_MenuPos[];
 extern Lights1 lll_dl_OilFloor_f3d_v4_001_lights;
 extern Lights1 lll_dl_Goombetto_002_lights;
 extern Lights1 lll_dl_Goombetto_003_lights;

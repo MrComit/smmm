@@ -3475,7 +3475,9 @@ void print_mirror_controls(void) {
 
 
 void special_print(void) {
-    print_room_names();
-    print_multiplier();
-    print_mirror_controls();
+    if (gCurrDemoInput == NULL) {
+        print_room_names();
+        print_multiplier();
+        print_mirror_controls();
+    }
 }

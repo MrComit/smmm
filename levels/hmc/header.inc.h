@@ -42,6 +42,10 @@ extern const GeoLayout hmc_area_1[];
 extern const Collision hmc_area_1_collision[];
 extern const u8 hmc_area_1_collision_rooms[];
 extern const MacroObject hmc_area_1_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint hmc_area_1_spline_MenuFoc[];
+extern struct CutsceneSplinePoint hmc_area_1_spline_MenuPos[];
 extern const GeoLayout hmc_area_2_geo[];
 extern const GeoLayout hmc_dl_201__NULL_geo[];
 extern const GeoLayout hmc_dl_202__NULL_geo[];

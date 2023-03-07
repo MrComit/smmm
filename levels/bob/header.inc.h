@@ -29,6 +29,8 @@ extern const MacroObject bob_area_1_macro_objs[];
 
 extern struct CutsceneSplinePoint bob_area_1_spline_HallFocus[];
 extern struct CutsceneSplinePoint bob_area_1_spline_HallPos[];
+extern struct CutsceneSplinePoint bob_area_1_spline_MenuFoc[];
+extern struct CutsceneSplinePoint bob_area_1_spline_MenuPos[];
 extern Lights1 bob_dl_Bookshelf_v4_lights;
 extern Lights1 bob_dl_Dresser_v4_lights;
 extern Lights1 bob_dl_MRFloor_v4_001_lights;

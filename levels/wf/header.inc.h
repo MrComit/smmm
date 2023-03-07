@@ -39,6 +39,10 @@ extern const GeoLayout wf_area_1[];
 extern const Collision wf_area_1_collision[];
 extern const u8 wf_area_1_collision_rooms[];
 extern const MacroObject wf_area_1_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint wf_area_1_spline_MenuFoc[];
+extern struct CutsceneSplinePoint wf_area_1_spline_MenuPos[];
 extern const Trajectory wf_area_1_spline_Bubbles1[];
 extern const Trajectory wf_area_1_spline_Bubbles2[];
 extern const Trajectory wf_area_1_spline_Bubbles3[];

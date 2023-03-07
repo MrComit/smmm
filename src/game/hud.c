@@ -703,7 +703,7 @@ void render_logo(void) {
     //     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.25f, 1.25f, 1.0f);
     // }
 	if (sLogoTimer > 70) {
-		sLogoOpacity += 3;
+		sLogoOpacity += 4;
 		if (sLogoOpacity > 255) {
 			sLogoOpacity = 255;
 		}

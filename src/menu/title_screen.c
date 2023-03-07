@@ -15,6 +15,7 @@
 #include "seq_ids.h"
 #include "sm64.h"
 #include "title_screen.h"
+#include "game/!COMIT_LIBRARY.h"
 
 /**
  * @file title_screen.c
@@ -37,6 +38,45 @@ static u16 sDemoCountdown = 0;
 static s16 sPlayMarioGreeting = TRUE;
 static s16 sPlayMarioGameOver = TRUE;
 #endif
+
+s32 sMenuCutsceneLevelTable[] = {LEVEL_CASTLE_GROUNDS, LEVEL_BOB, LEVEL_WF, LEVEL_CCM, LEVEL_HMC, LEVEL_LLL};
+
+// s32 gMenuLevel = LEVEL_CASTLE_GROUNDS;
+extern s32 gMenuCutscene;
+
+
+extern struct SaveBuffer gSaveBuffer;
+
+s32 main_menu_check_l7(s32 save) {
+    if (gSaveBuffer.files[save][0].newFlags[0] & (SAVE_NEW_FLAG_BASEMENT_SWITCH1 | SAVE_NEW_FLAG_BASEMENT_SWITCH2 |
+        SAVE_NEW_FLAG_BASEMENT_SWITCH3 | SAVE_NEW_FLAG_BASEMENT_SWITCH4 | SAVE_NEW_FLAG_BASEMENT_SWITCH5)) {
+            return TRUE;
+        }
+    return FALSE;
+}
+
+
+s32 main_menu_get_which_cutscene(void) {
+    s16 maxA = save_file_exists(0) ? get_chapter_from_save_data(0) : 0;
+    s16 maxB = save_file_exists(1) ? get_chapter_from_save_data(1) : 0;
+    s16 maxC = save_file_exists(2) ? get_chapter_from_save_data(2) : 0;
+    s32 max = max_3(maxA, maxB, maxC);
+    u16 seed;
+    if (main_menu_check_l7(0) || main_menu_check_l7(1) || main_menu_check_l7(2)) {
+        max += 1;
+    }
+
+    //todo
+    //add rng to pick a number between 0 and max
+    //connect it to level id
+    //only run at startup
+
+    seed = random_u16_seeded((u16)gSaveBuffer.files[0][0].ingameTime 
+                            + (u16)gSaveBuffer.files[1][0].ingameTime + (u16)gSaveBuffer.files[2][0].ingameTime);
+
+    return CL_RandomMinMaxU16Seeded(0, max, seed);
+}
+
 
 #define PRESS_START_DEMO_TIMER 1 // 800 is vanilla
 
@@ -67,9 +107,11 @@ s32 run_level_id_or_demo(s32 level) {
                 // Use the first 4 bytes to store level ID,
                 // then use the rest of the values for inputs
                 gCurrDemoInput = ((struct DemoInput *) gDemoInputsBuf.bufTarget) + 1;
-                level = LEVEL_CASTLE_GROUNDS;//(s8)((struct DemoInput *) gDemoInputsBuf.bufTarget)->timer;
+                // level = LEVEL_CASTLE_GROUNDS;//(s8)((struct DemoInput *) gDemoInputsBuf.bufTarget)->timer;
                 gCurrSaveFileNum = 1;
                 gCurrActNum = 1;
+                gMenuCutscene = 5;//main_menu_get_which_cutscene();
+                level = sMenuCutsceneLevelTable[gMenuCutscene];
             }
         // } else { // activity was detected, so reset the demo countdown.
         //     sDemoCountdown = 0;
