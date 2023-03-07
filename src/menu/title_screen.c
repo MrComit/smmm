@@ -71,8 +71,13 @@ s32 main_menu_get_which_cutscene(void) {
     //connect it to level id
     //only run at startup
 
-    seed = random_u16_seeded((u16)gSaveBuffer.files[0][0].ingameTime 
-                            + (u16)gSaveBuffer.files[1][0].ingameTime + (u16)gSaveBuffer.files[2][0].ingameTime);
+    seed = random_u16_seeded(gSaveBuffer.menuData[0].menuRNG + random_u16());
+    gSaveBuffer.menuData[0].menuRNG = seed & 0xFF;
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+    // seed = CL_RandomMinMaxU16Seeded(0, max, seed);
+    // seed = random_u16_seeded((u16)gSaveBuffer.files[0][0].ingameTime 
+    //                         + (u16)gSaveBuffer.files[1][0].ingameTime + (u16)gSaveBuffer.files[2][0].ingameTime);
 
     return CL_RandomMinMaxU16Seeded(0, max, seed);
 }
@@ -110,7 +115,7 @@ s32 run_level_id_or_demo(s32 level) {
                 // level = LEVEL_CASTLE_GROUNDS;//(s8)((struct DemoInput *) gDemoInputsBuf.bufTarget)->timer;
                 gCurrSaveFileNum = 1;
                 gCurrActNum = 1;
-                gMenuCutscene = 5;//main_menu_get_which_cutscene();
+                gMenuCutscene = main_menu_get_which_cutscene();
                 level = sMenuCutsceneLevelTable[gMenuCutscene];
             }
         // } else { // activity was detected, so reset the demo countdown.

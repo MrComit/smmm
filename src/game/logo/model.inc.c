@@ -34089,10 +34089,11 @@ Gfx logo_Plane_mesh_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_logo_Logo[] = {
+Gfx mat_logo_Logo_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 512, logo__512x256_logo12_rgba16),
@@ -34105,9 +34106,10 @@ Gfx mat_logo_Logo[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_logo_Logo[] = {
+Gfx mat_revert_logo_Logo_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
 	gsSPEndDisplayList(),
 };
 
@@ -34116,9 +34118,9 @@ Gfx logo_Plane_mesh[] = {
 	gsSPVertex(logo_Plane_mesh_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_logo_Logo),
+	gsSPDisplayList(mat_logo_Logo_layer1),
 	gsSPDisplayList(logo_Plane_mesh_tri_0),
-	gsSPDisplayList(mat_revert_logo_Logo),
+	gsSPDisplayList(mat_revert_logo_Logo_layer1),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
