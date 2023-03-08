@@ -1689,6 +1689,25 @@ Gfx *geo_switch_level(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+extern s32 gMenuCutscene;
+
+#ifdef AVOID_UB
+Gfx *geo_switch_menu(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_menu(s32 callContext, struct GraphNode *node) {
+#endif
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // assign the case number for execution.
+        switchCase->selectedCase = gMenuCutscene;
+    }
+
+    return NULL;
+}
+
 
 
 #ifdef AVOID_UB

@@ -72,7 +72,7 @@ s32 main_menu_get_which_cutscene(void) {
     //only run at startup
 
     seed = random_u16_seeded(gSaveBuffer.menuData[0].menuRNG + random_u16());
-    gSaveBuffer.menuData[0].menuRNG = seed & 0xFF;
+    gSaveBuffer.menuData[0].menuRNG = seed;
     gMainMenuDataModified = TRUE;
     save_main_menu_data();
     // seed = CL_RandomMinMaxU16Seeded(0, max, seed);

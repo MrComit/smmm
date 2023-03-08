@@ -613,14 +613,10 @@ void print_CF_strings(void) {
 
 
 
-
-
-
-
-
 void bhv_cs_bg_init(void) {
     gCurrentObject->oFaceAngleYaw = 0x8000;
     gCurrentObject->oMenuButtonScale = 9.0f;
+    // o->oAnimState = 1;
 }
 
 /**

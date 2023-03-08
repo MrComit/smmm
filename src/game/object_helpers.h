@@ -103,6 +103,7 @@ Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node, UNUSED void *co
 Gfx *geo_switch_get_chapter(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_level(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_area(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_menu(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_servants_wall_2(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_ice_reflection(s32 callContext, struct GraphNode *node, UNUSED void *context);
@@ -155,6 +156,7 @@ Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_get_chapter(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_level(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_area(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_menu(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_servants_wall(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_servants_wall_2(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_ice_reflection(s32 callContext, struct GraphNode *node, UNUSED void *context);

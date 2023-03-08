@@ -692,6 +692,8 @@ Gfx target_target_mesh[] = {
 
 #include "game/logo/model.inc.c"
 #include "game/logo/header.h"
+// #include "game/logo_console/model.inc.c"
+// #include "game/logo_console/header.h"
 
 s16 sLogoOpacity = 0;
 s16 sLogoTimer = 0;
@@ -711,7 +713,13 @@ void render_logo(void) {
 		sLogoTimer++;
 	}
     gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, sLogoOpacity);
-    gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
+	if (!gIsConsole) {
+    	gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
+	} else {
+		// gDPPipeSync(gDisplayListHead++);
+    	gSPDisplayList(gDisplayListHead++, &logo_console_PlaneConsole_mesh);
+    	// gSPDisplayList(gDisplayListHead++, &logo_console_material_revert_render_settings);
+	}
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 

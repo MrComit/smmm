@@ -88,3 +88,4 @@ UNUSED static const u64 binid_22 = 22;
 
 
 #include "token/model.inc.c"
+#include "logo_console/model.inc.c"
