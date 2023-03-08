@@ -217,8 +217,8 @@ void bhv_cs_button_init(void) {
 void bhv_cs_button_loop(void) {
     struct Object *obj;
     // if (!o->oBehParams2ndByte) {
-    //     print_text_fmt_int(20, 80, "%d", sClickPos[0], 0);
-    //     print_text_fmt_int(120, 80, "%d", sClickPos[1], 0);
+    //     print_text_fmt_int(20, 90, "%d", sClickPos[0], 0);
+    //     print_text_fmt_int(120, 90, "%d", sClickPos[1], 0);
     // }
     if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
         return;
@@ -611,12 +611,20 @@ void print_CF_strings(void) {
 }
 
 
+s16 sCursorButtonPos[3][2][2] = {
+    { {-73, 60}, {108, 60}, },
+    { {-73, 12}, {108, 12}, },
+    { {-73, -38}, {128, -38}, },
+};
+s8 sDPADCursorLocation[2] = {-1, -1}; 
+
 
 
 void bhv_cs_bg_init(void) {
     gCurrentObject->oFaceAngleYaw = 0x8000;
     gCurrentObject->oMenuButtonScale = 9.0f;
     // o->oAnimState = 1;
+    cur_obj_scale(9.0f);
 }
 
 /**
@@ -624,7 +632,42 @@ void bhv_cs_bg_init(void) {
  * Properly scales the background in the main menu.
  */
 void bhv_cs_bg_loop(void) {
-    cur_obj_scale(9.0f);
+    if (sDPADCursorLocation[0] == -1 || sDPADCursorLocation[1] == -1) {
+        if (gPlayer1Controller->buttonPressed & (R_JPAD | L_JPAD | D_JPAD | U_JPAD)) {
+            sDPADCursorLocation[0] = 0;
+            sDPADCursorLocation[1] = 0;
+            sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+            sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+        }
+    } else {
+        if (gPlayer1Controller->buttonPressed & R_JPAD) {
+            if (sDPADCursorLocation[0] != 1) {
+                sDPADCursorLocation[0] = 1;
+                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            }
+        } else if (gPlayer1Controller->buttonPressed & L_JPAD) {
+            if (sDPADCursorLocation[0] != 0) {
+                sDPADCursorLocation[0] = 0;
+                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            }
+        }
+
+        if (gPlayer1Controller->buttonPressed & D_JPAD) {
+            if (sDPADCursorLocation[1] != 2) {
+                sDPADCursorLocation[1]++;
+                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            }
+        } else if (gPlayer1Controller->buttonPressed & U_JPAD) {
+            if (sDPADCursorLocation[1] != 0) {
+                sDPADCursorLocation[1]--;
+                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            }
+        }
+    }
 }
 
 
