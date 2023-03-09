@@ -3152,6 +3152,18 @@ s16 render_menus_and_dialogs(void) {
     return index;
 }
 
+
+
+
+
+
+
+
+#include "game/logo/model.inc.c"
+#include "game/logo/header.h"
+
+
+
 //#include "src/s2d_engine/sprites/room_names.c"
 
 static char sRoom1[] = { TEXT_ROOM1 };
@@ -3473,11 +3485,41 @@ void print_mirror_controls(void) {
 }
 
 
+s16 sLogoOpacity = 0;
+s16 sLogoTimer = 0;
+
+void render_logo(void) {
+	// create_dl_ortho_matrix();
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160.0f, 150.0f, 0.0f);
+    // if (gIsConsole) {
+    //     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.25f, 1.25f, 1.0f);
+    // }
+	if (sLogoTimer > 70) {
+		sLogoOpacity += 4;
+		if (sLogoOpacity > 255) {
+			sLogoOpacity = 255;
+		}
+	} else {
+		sLogoTimer++;
+	}
+    gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, sLogoOpacity);
+	if (!gIsConsole) {
+    	gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
+	} else {
+		// gDPPipeSync(gDisplayListHead++);
+    	gSPDisplayList(gDisplayListHead++, &logo_console_PlaneConsole_mesh);
+    	// gSPDisplayList(gDisplayListHead++, &logo_console_material_revert_render_settings);
+	}
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
 
 void special_print(void) {
     if (gCurrDemoInput == NULL) {
         print_room_names();
         print_multiplier();
         print_mirror_controls();
+    } else {
+        render_logo();
     }
 }
