@@ -714,13 +714,8 @@ void render_logo(void) {
 		sLogoTimer++;
 	}
     gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, sLogoOpacity);
-	if (gIsConsole) {
-    	gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
-	} else {
-		// gDPPipeSync(gDisplayListHead++);
-    	gSPDisplayList(gDisplayListHead++, &logo_console_PlaneConsole_mesh);
-    	// gSPDisplayList(gDisplayListHead++, &logo_console_material_revert_render_settings);
-	}
+    gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
+    // gSPDisplayList(gDisplayListHead++, &logo_console_PlaneConsole_mesh);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
