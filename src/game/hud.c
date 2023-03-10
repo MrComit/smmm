@@ -653,7 +653,8 @@ Gfx target_target_mesh_tri_0[] = {
 Gfx mat_target_Target_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, ENVIRONMENT, 0),
-	gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
+	// gsDPSetRenderMode(G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2),
+	gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPTileSync(),
 	gsDPSetTextureImage(G_IM_FMT_IA, G_IM_SIZ_8b_LOAD_BLOCK, 1, target_ia8_target_ia8),
@@ -690,38 +691,38 @@ Gfx target_target_mesh[] = {
 
 
 
-// #include "game/logo/model.inc.c"
-// #include "game/logo/header.h"
+#include "game/logo/model.inc.c"
+#include "game/logo/header.h"
 // #include "game/logo_console/model.inc.c"
 // #include "game/logo_console/header.h"
 
-// s16 sLogoOpacity = 0;
-// s16 sLogoTimer = 0;
+s16 sLogoOpacity = 0;
+s16 sLogoTimer = 0;
 
-// void render_logo(void) {
-// 	create_dl_ortho_matrix();
-//     create_dl_translation_matrix(MENU_MTX_PUSH, 160.0f, 150.0f, 0.0f);
-//     // if (gIsConsole) {
-//     //     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.25f, 1.25f, 1.0f);
-//     // }
-// 	if (sLogoTimer > 70) {
-// 		sLogoOpacity += 4;
-// 		if (sLogoOpacity > 255) {
-// 			sLogoOpacity = 255;
-// 		}
-// 	} else {
-// 		sLogoTimer++;
-// 	}
-//     gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, sLogoOpacity);
-// 	if (!gIsConsole) {
-//     	gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
-// 	} else {
-// 		// gDPPipeSync(gDisplayListHead++);
-//     	gSPDisplayList(gDisplayListHead++, &logo_console_PlaneConsole_mesh);
-//     	// gSPDisplayList(gDisplayListHead++, &logo_console_material_revert_render_settings);
-// 	}
-//     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-// }
+void render_logo(void) {
+	create_dl_ortho_matrix();
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160.0f, 150.0f, 0.0f);
+    // if (gIsConsole) {
+    //     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.25f, 1.25f, 1.0f);
+    // }
+	if (sLogoTimer > 70) {
+		sLogoOpacity += 4;
+		if (sLogoOpacity > 255) {
+			sLogoOpacity = 255;
+		}
+	} else {
+		sLogoTimer++;
+	}
+    gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, sLogoOpacity);
+	if (gIsConsole) {
+    	gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
+	} else {
+		// gDPPipeSync(gDisplayListHead++);
+    	gSPDisplayList(gDisplayListHead++, &logo_console_PlaneConsole_mesh);
+    	// gSPDisplayList(gDisplayListHead++, &logo_console_material_revert_render_settings);
+	}
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
 
 
 
@@ -1401,7 +1402,7 @@ void render_hud(void) {
     s16 hudDisplayFlags = gHudDisplay.flags;
 
 	if (gCurrDemoInput != NULL) {
-		// render_logo();
+		render_logo();
 		if (gMarioObject != NULL) {
 			gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0];
 			set_mario_npc_dialog(1);
