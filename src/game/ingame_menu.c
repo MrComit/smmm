@@ -3101,10 +3101,10 @@ s16 render_course_complete_screen(void) {
 #include "game/logo/header.h"
 
 static const Vtx vertex_map_border[] = {
-    {{{     3500,  -500, 3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{   3500,    -500, -3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{   -3500,   -500, 3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{     -3500, -500, -3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     5000,  -500, 4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   5000,    -500, -4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   -5000,   -500, 4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     -5000, -500, -4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
 };
 
 
@@ -3139,7 +3139,6 @@ struct MapObject gMapObjectPool[30];
 struct MapObject *gCurrentMapObject;
 
 #define mo gCurrentMapObject
-
 
 s32 get_map_from_level(void) {
     switch (gCurrLevelNum) {
@@ -3228,12 +3227,67 @@ struct MapObject *spawn_map_object(f32 x, f32 z, Gfx *dl, s32 room) {
 }
 
 
+void spawn_map_1(void) {
+    spawn_map_object(0, 2824, map_l1_1MUDROOM_mesh_layer_1, 1);
+    spawn_map_object(0, 1993, map_l1_2MAINHALL_mesh_layer_1, 2);
+    spawn_map_object(455, 1383,  map_l1_3PARLOR_mesh_layer_1, 3);
+    spawn_map_object(465, 1665,  map_l1_4GARAGE_mesh_layer_1, 4);
+    spawn_map_object(-145, 685,  map_l1_5HALLWAYS_mesh_layer_1, 5);
+    spawn_map_object(717, 536, map_l1_6DINING_mesh_layer_1, 6);
+    spawn_map_object(230, 449, map_l1_7KITCHEN_mesh_layer_1, 7);
+    spawn_map_object(78, 438, map_l1_8PANTRY_mesh_layer_1, 8);
+    spawn_map_object(-569, 723,  map_l1_9LIVING_mesh_layer_1, 9);
+    spawn_map_object(-1021, 865, map_l1_10STUDY_mesh_layer_1, 10);
+    spawn_map_object(-844, 1475, map_l1_11LIBRARY_mesh_layer_1, 11);
+    spawn_map_object(-471, 1381, map_l1_12HALLWAY2_mesh_layer_1, 12);
+    spawn_map_object(15, 1166, map_l1_13HALLWAY3_mesh_layer_1, 13);
+    spawn_map_object(-238, 1166, map_l1_14TREASURY_mesh_layer_1, 14);
+}
+void spawn_map_2(void) {
+}
+void spawn_map_3(void) {
+}
+void spawn_map_4(void) {
+}
+void spawn_map_5(void) {
+}
+void spawn_map_6(void) {
+}
+void spawn_map_7(void) {
+}
+void spawn_map_8(void) {
+}
+void spawn_map_9(void) {
+}
+void spawn_map_10(void) {
+}
+void spawn_map_11(void) {
+}
+void spawn_map_12(void) {
+}
+
+static void (*MapObjectsSpawnTable[])(void) = {
+    spawn_map_1,
+    spawn_map_2,
+    spawn_map_3,
+    spawn_map_4,
+    spawn_map_5,
+    spawn_map_6,
+    spawn_map_7,
+    spawn_map_8,
+    spawn_map_9,
+    spawn_map_10,
+    spawn_map_11,
+    spawn_map_12,
+};
+
 
 void spawn_map_objects(s32 map) {
-    spawn_map_object(0.0f, -500.0f, test_map_TestMap_mesh, 1);
-    spawn_map_object(0.0f, 500.0f, test_map_TestMap_mesh, 2);
-    spawn_map_object(-500.0f, 0.0f, test_map_TestMap_mesh, 3);
-    spawn_map_object(500.0f, 0.0f, test_map_TestMap_mesh, 4);
+    // spawn_map_object(0.0f, -500.0f, test_map_TestMap_mesh, 1);
+    // spawn_map_object(0.0f, 500.0f, test_map_TestMap_mesh, 2);
+    // spawn_map_object(-500.0f, 0.0f, test_map_TestMap_mesh, 3);
+    // spawn_map_object(500.0f, 0.0f, test_map_TestMap_mesh, 4);
+    MapObjectsSpawnTable[0]();
 }
 
 
@@ -3274,7 +3328,7 @@ void render_map_background(void) {
 void render_map_object(f32 x, f32 z, Gfx *dl) {
     Vec3f pos;
     Vec3s angle;
-    vec3s_set(angle, 0x300, 0, 0x200);
+    vec3s_set(angle, 0xFF00, 0, 0xFF00);
     vec3f_set(pos, x, -26000.0f, z);
     mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
@@ -3303,6 +3357,9 @@ void render_map_objects(void) {
             } else {
                 gDPSetEnvColor(gDisplayListHead++, 40 + sameRoom, 40 + sameRoom, 20 + (sameRoom / 2), 255);
             }
+            if (mo->flags & 2) {
+                gDPSetEnvColor(gDisplayListHead++, 200, 180, 50, 255);
+            }
 
             render_map_object(mo->x, mo->z, mo->dl);
         }
@@ -3310,23 +3367,33 @@ void render_map_objects(void) {
 }
 
 
-void render_map_screen(void) {
+void update_map_screen(void) {
     if (absf(gPlayer1Controller->stickX) > 10.0f) {
-        gMapCamOffset[0] -= gPlayer1Controller->stickX / 3.0f;
+        gMapCamOffset[0] += gPlayer1Controller->stickX / 3.0f;
+        if (gMapCamOffset[0] > 3000.0f) {
+            gMapCamOffset[0] = 3000.0f;
+        } else if (gMapCamOffset[0] < -3000.0f) {
+            gMapCamOffset[0] = -3000.0f;
+        }
     }
     if (absf(gPlayer1Controller->stickY) > 10.0f) {
-        gMapCamOffset[2] += gPlayer1Controller->stickY / 3.0f;
+        gMapCamOffset[2] -= gPlayer1Controller->stickY / 3.0f;
+        if (gMapCamOffset[2] > 3000.0f) {
+            gMapCamOffset[2] = 3000.0f;
+        } else if (gMapCamOffset[2] < -3000.0f) {
+            gMapCamOffset[2] = -3000.0f;
+        }
     }
     if (gPlayer1Controller->buttonDown & (U_JPAD | U_CBUTTONS)) {
         gMapCamOffset[1] -= 50.0f;
-        if (gMapCamOffset[1] < -700.0f) {
-            gMapCamOffset[1] = -700.0f;
+        if (gMapCamOffset[1] < -500.0f) {
+            gMapCamOffset[1] = -500.0f;
         }
     }
     if (gPlayer1Controller->buttonDown & (D_JPAD | D_CBUTTONS)) {
         gMapCamOffset[1] += 50.0f;
-        if (gMapCamOffset[1] > 1000.0f) {
-            gMapCamOffset[1] = 1000.0f;
+        if (gMapCamOffset[1] > 1600.0f) {
+            gMapCamOffset[1] = 1600.0f;
         }
     }
 

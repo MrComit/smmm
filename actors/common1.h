@@ -308,4 +308,6 @@ extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 
 #include "test_map/header.h"
 
+#include "map_l1/geo_header.h"
+
 #endif

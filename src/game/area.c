@@ -396,7 +396,7 @@ void render_game(void) {
         if (gMenuOptSelectIndex != MENU_OPT_MAP) {
             render_hud();
         } else {
-            render_map_screen();
+            update_map_screen();
         }
         gMenuOptSelectIndex = render_menus_and_dialogs();
 
