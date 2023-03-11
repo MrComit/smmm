@@ -43,15 +43,15 @@ Gfx test_map_TestMap_mesh_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_test_map_Gray[] = {
+Gfx mat_test_map_Body[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(0, 0, 0, PRIMITIVE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, PRIMITIVE, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_test_map_Gray[] = {
+Gfx mat_revert_test_map_Body[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsSPEndDisplayList(),
@@ -74,9 +74,9 @@ Gfx mat_revert_test_map_Border_layer1[] = {
 };
 
 Gfx test_map_TestMap_mesh[] = {
-	gsSPDisplayList(mat_test_map_Gray),
+	gsSPDisplayList(mat_test_map_Body),
 	gsSPDisplayList(test_map_TestMap_mesh_tri_0),
-	gsSPDisplayList(mat_revert_test_map_Gray),
+	gsSPDisplayList(mat_revert_test_map_Body),
 	gsSPDisplayList(mat_test_map_Border_layer1),
 	gsSPDisplayList(test_map_TestMap_mesh_tri_1),
 	gsSPDisplayList(mat_revert_test_map_Border_layer1),

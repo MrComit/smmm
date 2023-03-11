@@ -3121,7 +3121,7 @@ const Gfx dl_draw_map_border[] = {
 extern s16 gMatStackIndex;
 extern Mat4 gMatStack[32];
 
-f32 gMapCamOffset[2] = {0.0f, 0.0f};
+f32 gMapCamOffset[3] = {0.0f, 0.0f, 0.0f};
 
 
 struct MapObject {
@@ -3198,6 +3198,11 @@ struct MapObject *spawn_map_object(f32 x, f32 z, Gfx *dl, s32 room) {
             mo = &gMapObjectPool[i];
             mo->x = x;
             mo->z = z;
+            if (room == gMarioCurrentRoom) {
+                gMapCamOffset[0] = x;
+                gMapCamOffset[2] = z;
+            }
+
             mo->levelRoom = room;
             mo->globalRoom = room + sLevelRoomOffsets[gCurrCourseNum - 1];
             mo->dl = dl;
@@ -3246,6 +3251,7 @@ void init_map(void) {
     map = 0;
     gMapCamOffset[0] = 0.0f;
     gMapCamOffset[1] = 0.0f;
+    gMapCamOffset[2] = 0.0f;
     spawn_map_objects(map);
 }
 
@@ -3268,7 +3274,7 @@ void render_map_background(void) {
 void render_map_object(f32 x, f32 z, Gfx *dl) {
     Vec3f pos;
     Vec3s angle;
-    vec3s_set(angle, 0xFC00, 0, 0x200);
+    vec3s_set(angle, 0x300, 0, 0x200);
     vec3f_set(pos, x, -26000.0f, z);
     mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
@@ -3281,28 +3287,23 @@ void render_map_object(f32 x, f32 z, Gfx *dl) {
 
 void render_map_objects(void) {
     s32 i;
-    s32 cleared;
+    s32 sameRoom = 0;
     for (i = 0; i < 30; i++) {
         if (gMapObjectPool[i].dl != NULL) {
             mo = &gMapObjectPool[i];
-            if (mo->flags & 1) {
-                cleared = TRUE;
-            } else {
-                cleared = FALSE;
-            }
             if (mo->levelRoom == gMarioCurrentRoom) {
-                if (cleared) {
-                    gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
-                } else {
-                    gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
-                }
+                sameRoom = 50;
+                gDPSetPrimColor(gDisplayListHead++, 0, 0, 215, 230, 215, 255);
             } else {
-                if (cleared) {
-                    gDPSetEnvColor(gDisplayListHead++, 20, 20, 20, 255);
-                } else {
-                    gDPSetEnvColor(gDisplayListHead++, 100, 0, 0, 255);
-                }
+                sameRoom = 0;
+                gDPSetPrimColor(gDisplayListHead++, 0, 0, 80, 80, 80, 255);
             }
+            if (mo->flags & 1) {
+                gDPSetEnvColor(gDisplayListHead++, 20 + (sameRoom / 2), 40 + sameRoom, 20 + (sameRoom / 2), 255);
+            } else {
+                gDPSetEnvColor(gDisplayListHead++, 40 + sameRoom, 40 + sameRoom, 20 + (sameRoom / 2), 255);
+            }
+
             render_map_object(mo->x, mo->z, mo->dl);
         }
     }
@@ -3314,8 +3315,21 @@ void render_map_screen(void) {
         gMapCamOffset[0] -= gPlayer1Controller->stickX / 3.0f;
     }
     if (absf(gPlayer1Controller->stickY) > 10.0f) {
-        gMapCamOffset[1] += gPlayer1Controller->stickY / 3.0f;
+        gMapCamOffset[2] += gPlayer1Controller->stickY / 3.0f;
     }
+    if (gPlayer1Controller->buttonDown & (U_JPAD | U_CBUTTONS)) {
+        gMapCamOffset[1] -= 50.0f;
+        if (gMapCamOffset[1] < -700.0f) {
+            gMapCamOffset[1] = -700.0f;
+        }
+    }
+    if (gPlayer1Controller->buttonDown & (D_JPAD | D_CBUTTONS)) {
+        gMapCamOffset[1] += 50.0f;
+        if (gMapCamOffset[1] > 1000.0f) {
+            gMapCamOffset[1] = 1000.0f;
+        }
+    }
+
 
     render_map_background();
     render_map_objects();
@@ -3379,12 +3393,12 @@ s16 render_menus_and_dialogs(void) {
                 break;
             case MENU_MODE_MAP:
                 // render_map_screen();
-                gCamera->pos[0] = 0.0f;
-                gCamera->pos[1] = 0.0f;
-                gCamera->pos[2] = 0.0f;
-                gCamera->focus[0] = 10.0f;
-                gCamera->focus[1] = 10.0f;
-                gCamera->focus[2] = 10.0f;
+                // gCamera->pos[0] = 0.0f;
+                // gCamera->pos[1] = 0.0f;
+                // gCamera->pos[2] = 0.0f;
+                // gCamera->focus[0] = 10.0f;
+                // gCamera->focus[1] = 10.0f;
+                // gCamera->focus[2] = 10.0f;
                 if (gPlayer1Controller->buttonPressed & L_TRIG) {
                     index = MENU_OPT_NONE;
                     gMenuMode = MENU_MODE_RENDER_PAUSE_SCREEN;
