@@ -127,6 +127,7 @@ s32 gDialogResponse = DIALOG_RESPONSE_NONE;
 
 
 
+void init_map(void);
 void spawn_map_objects(s32 map);
 void despawn_map_objects(void);
 
@@ -2717,7 +2718,7 @@ s16 render_pause_courses_and_castle(void) {
     // #endif
     if (gPlayer1Controller->buttonPressed & L_TRIG) {
         gMenuMode = MENU_MODE_MAP;
-        spawn_map_objects(0);
+        init_map();
     }
 
     if (gDialogTextAlpha < 250) {
@@ -3099,11 +3100,6 @@ s16 render_course_complete_screen(void) {
 }
 #include "game/logo/header.h"
 
-
-f32 gMapCamOffset[2] = {0.0f, 0.0f};
-
-
-
 static const Vtx vertex_map_border[] = {
     {{{     3500,  -500, 3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
     {{{   3500,    -500, -3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
@@ -3125,17 +3121,133 @@ const Gfx dl_draw_map_border[] = {
 extern s16 gMatStackIndex;
 extern Mat4 gMatStack[32];
 
+f32 gMapCamOffset[2] = {0.0f, 0.0f};
+
+
+struct MapObject {
+    s8 levelRoom;
+    s8 globalRoom;
+    s16 flags; // 0x1 = cleared, 0x2 = current quest/goal room, 0x4 = has unkilled boo, 0x8 = has keys, 0x10 = boss room
+    // s8 items; // 
+    f32 x;
+    f32 z;
+    Gfx *dl;
+    struct MapObject *prev;
+};
+
+struct MapObject gMapObjectPool[30];
+struct MapObject *gCurrentMapObject;
+
+#define mo gCurrentMapObject
+
+
+s32 get_map_from_level(void) {
+    switch (gCurrLevelNum) {
+        case LEVEL_BOB:
+            return 0;
+            break;
+        case LEVEL_WF:
+            return 1;
+            break;
+        case LEVEL_JRB:
+            return 2;
+            break;
+        case LEVEL_CCM:
+            if (gCurrAreaIndex == 1) {
+                return 3;
+            } else {
+                return 4;
+            }
+            break;
+        case LEVEL_BBH:
+            if (gCurrAreaIndex == 1) {
+                return 5;
+            } else if (gCurrAreaIndex == 2) {
+                return 6;
+            } else {
+                return 7;
+            }
+            break;
+        case LEVEL_HMC:
+            if (gCurrAreaIndex == 1) {
+                return 8;
+            } else {
+                return 9;
+            }
+            break;
+        case LEVEL_LLL:
+            return 10;
+            break;
+        case LEVEL_SSL:
+            return 11;
+            break;
+    }
+    return 0;
+}
+
+
+struct MapObject *spawn_map_object(f32 x, f32 z, Gfx *dl, s32 room) {
+    s32 i;
+    for (i = 0; i < 30; i++) {
+        if (gMapObjectPool[i].dl == NULL) {
+            if (mo != NULL) {
+                gMapObjectPool[i].prev = mo;
+            } else {
+                gMapObjectPool[i].prev = &gMapObjectPool[i];
+            }
+            mo = &gMapObjectPool[i];
+            mo->x = x;
+            mo->z = z;
+            mo->levelRoom = room;
+            mo->globalRoom = room + sLevelRoomOffsets[gCurrCourseNum - 1];
+            mo->dl = dl;
+
+            // 0x1 = cleared, 0x2 = current quest/goal room, 0x4 = has unkilled boo, 0x8 = has keys, 0x10 = boss room
+            if (save_file_check_room(room)) {
+                mo->flags |= 1;
+            }
+            //current quest/goal room:
+
+            //has unkilled boo:
+
+            //has keys:
+
+            //boss room:
+            if (mo->globalRoom == 11 || mo->globalRoom == 28 || mo->globalRoom == 39 
+                || mo->globalRoom == 63 || mo->globalRoom == 73) {
+                    mo->flags |= 0x10;
+                } 
+            break;
+        }
+    }
+}
+
+
 
 void spawn_map_objects(s32 map) {
-    gMapCamOffset[0] = 0.0f;
-    gMapCamOffset[1] = 0.0f;
+    spawn_map_object(0.0f, -500.0f, test_map_TestMap_mesh, 1);
+    spawn_map_object(0.0f, 500.0f, test_map_TestMap_mesh, 2);
+    spawn_map_object(-500.0f, 0.0f, test_map_TestMap_mesh, 3);
+    spawn_map_object(500.0f, 0.0f, test_map_TestMap_mesh, 4);
 }
 
 
 void despawn_map_objects(void) {
-    
+    s32 i;
+    for (i = 0; i < 30; i++) {
+        if (gMapObjectPool[i].dl != NULL) {
+            gMapObjectPool[i].dl = NULL;
+        }
+    }
 }
 
+void init_map(void) {
+    s32 map = get_map_from_level();
+    map = 0;
+    gMapCamOffset[0] = 0.0f;
+    gMapCamOffset[1] = 0.0f;
+    spawn_map_objects(map);
+}
 
 void render_map_background(void) {
     Vec3f pos;
@@ -3156,7 +3268,7 @@ void render_map_background(void) {
 void render_map_object(f32 x, f32 z, Gfx *dl) {
     Vec3f pos;
     Vec3s angle;
-    vec3s_set(angle, 0x100, 0, 0x180);
+    vec3s_set(angle, 0xFC00, 0, 0x200);
     vec3f_set(pos, x, -26000.0f, z);
     mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
@@ -3166,6 +3278,35 @@ void render_map_object(f32 x, f32 z, Gfx *dl) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
+
+void render_map_objects(void) {
+    s32 i;
+    s32 cleared;
+    for (i = 0; i < 30; i++) {
+        if (gMapObjectPool[i].dl != NULL) {
+            mo = &gMapObjectPool[i];
+            if (mo->flags & 1) {
+                cleared = TRUE;
+            } else {
+                cleared = FALSE;
+            }
+            if (mo->levelRoom == gMarioCurrentRoom) {
+                if (cleared) {
+                    gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
+                } else {
+                    gDPSetEnvColor(gDisplayListHead++, 255, 255, 0, 255);
+                }
+            } else {
+                if (cleared) {
+                    gDPSetEnvColor(gDisplayListHead++, 20, 20, 20, 255);
+                } else {
+                    gDPSetEnvColor(gDisplayListHead++, 100, 0, 0, 255);
+                }
+            }
+            render_map_object(mo->x, mo->z, mo->dl);
+        }
+    }
+}
 
 
 void render_map_screen(void) {
@@ -3177,15 +3318,16 @@ void render_map_screen(void) {
     }
 
     render_map_background();
+    render_map_objects();
 
-    gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
-    render_map_object(0.0f, -500.0f, test_map_TestMap_mesh);
-    gDPSetEnvColor(gDisplayListHead++, 0, 255, 255, 255);
-    render_map_object(0.0f, 500.0f, test_map_TestMap_mesh);
-    gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
-    render_map_object(500.0f, 0.0f, test_map_TestMap_mesh);
-    gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, 255);
-    render_map_object(-500.0f, 0.0f, test_map_TestMap_mesh);
+    // gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
+    // render_map_object(0.0f, -500.0f, test_map_TestMap_mesh);
+    // gDPSetEnvColor(gDisplayListHead++, 0, 255, 255, 255);
+    // render_map_object(0.0f, 500.0f, test_map_TestMap_mesh);
+    // gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
+    // render_map_object(500.0f, 0.0f, test_map_TestMap_mesh);
+    // gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, 255);
+    // render_map_object(-500.0f, 0.0f, test_map_TestMap_mesh);
 }
 
 
@@ -3246,12 +3388,14 @@ s16 render_menus_and_dialogs(void) {
                 if (gPlayer1Controller->buttonPressed & L_TRIG) {
                     index = MENU_OPT_NONE;
                     gMenuMode = MENU_MODE_RENDER_PAUSE_SCREEN;
+                    despawn_map_objects();
                 } else if (gPlayer1Controller->buttonPressed & START_BUTTON) {
                     index = MENU_OPT_DEFAULT;
                     level_set_transition(0, NULL);
                     play_sound(SOUND_MENU_PAUSE_2, gGlobalSoundSource);
                     gMenuMode = MENU_MODE_NONE;
                     gDialogBoxState = DIALOG_STATE_OPENING;
+                    despawn_map_objects();
                 } else {
                     index = MENU_OPT_MAP;
                 }
