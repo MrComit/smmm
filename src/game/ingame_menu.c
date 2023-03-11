@@ -126,6 +126,12 @@ u8 gMenuHoldKeyTimer = 0;
 s32 gDialogResponse = DIALOG_RESPONSE_NONE;
 
 
+
+void spawn_map_objects(s32 map);
+void despawn_map_objects(void);
+
+
+
 void create_dl_identity_matrix(void) {
     Mtx *matrix = (Mtx *) alloc_display_list(sizeof(Mtx));
     Gfx* dlhead = gDisplayListHead;
@@ -2706,9 +2712,13 @@ s16 render_pause_courses_and_castle(void) {
             break;
     }
 
-    #if defined(WIDE)
-        render_widescreen_setting();
-    #endif
+    // #if defined(WIDE)
+    //     render_widescreen_setting();
+    // #endif
+    if (gPlayer1Controller->buttonPressed & L_TRIG) {
+        gMenuMode = MENU_MODE_MAP;
+        spawn_map_objects(0);
+    }
 
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;
@@ -3087,6 +3097,96 @@ s16 render_course_complete_screen(void) {
 
     return MENU_OPT_NONE;
 }
+#include "game/logo/header.h"
+
+
+f32 gMapCamOffset[2] = {0.0f, 0.0f};
+
+
+
+static const Vtx vertex_map_border[] = {
+    {{{     3500,  -500, 3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   3500,    -500, -3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   -3500,   -500, 3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     -3500, -500, -3500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+};
+
+
+const Gfx dl_draw_map_border[] = {
+    gsDPPipeSync(),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsDPSetCombineMode(G_CC_FADE, G_CC_FADE),
+    gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
+    gsSPVertex(vertex_map_border, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  3,  2,  1, 0x0),
+    gsSPEndDisplayList(),
+};
+
+extern s16 gMatStackIndex;
+extern Mat4 gMatStack[32];
+
+
+void spawn_map_objects(s32 map) {
+    gMapCamOffset[0] = 0.0f;
+    gMapCamOffset[1] = 0.0f;
+}
+
+
+void despawn_map_objects(void) {
+    
+}
+
+
+void render_map_background(void) {
+    Vec3f pos;
+    Vec3s angle;
+    vec3s_set(angle, 0, 0, 0);
+    vec3f_set(pos, 0.0f, -26000.0f, 0.0f);
+    mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
+    Mtx *mtx = alloc_display_list(sizeof(*mtx));
+    mtxf_to_mtx(mtx, gMatStack[gMatStackIndex + 1]);
+    gSPMatrix(gDisplayListHead++, mtx, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gDPSetEnvColor(gDisplayListHead++, 20, 20, 0, 255);
+    gSPDisplayList(gDisplayListHead++, dl_draw_map_border);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
+
+void render_map_object(f32 x, f32 z, Gfx *dl) {
+    Vec3f pos;
+    Vec3s angle;
+    vec3s_set(angle, 0x100, 0, 0x180);
+    vec3f_set(pos, x, -26000.0f, z);
+    mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
+    Mtx *mtx = alloc_display_list(sizeof(*mtx));
+    mtxf_to_mtx(mtx, gMatStack[gMatStackIndex + 1]);
+    gSPMatrix(gDisplayListHead++, mtx, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+    gSPDisplayList(gDisplayListHead++, dl);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
+
+void render_map_screen(void) {
+    if (absf(gPlayer1Controller->stickX) > 10.0f) {
+        gMapCamOffset[0] -= gPlayer1Controller->stickX / 3.0f;
+    }
+    if (absf(gPlayer1Controller->stickY) > 10.0f) {
+        gMapCamOffset[1] += gPlayer1Controller->stickY / 3.0f;
+    }
+
+    render_map_background();
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
+    render_map_object(0.0f, -500.0f, test_map_TestMap_mesh);
+    gDPSetEnvColor(gDisplayListHead++, 0, 255, 255, 255);
+    render_map_object(0.0f, 500.0f, test_map_TestMap_mesh);
+    gDPSetEnvColor(gDisplayListHead++, 255, 0, 0, 255);
+    render_map_object(500.0f, 0.0f, test_map_TestMap_mesh);
+    gDPSetEnvColor(gDisplayListHead++, 255, 0, 255, 255);
+    render_map_object(-500.0f, 0.0f, test_map_TestMap_mesh);
+}
 
 
 void shade_screen_rgba(u8 r, u8 g, u8 b, u8 a) {
@@ -3134,6 +3234,27 @@ s16 render_menus_and_dialogs(void) {
                 break;
             case MENU_MODE_UNUSED_3:
                 index = render_course_complete_screen();
+                break;
+            case MENU_MODE_MAP:
+                // render_map_screen();
+                gCamera->pos[0] = 0.0f;
+                gCamera->pos[1] = 0.0f;
+                gCamera->pos[2] = 0.0f;
+                gCamera->focus[0] = 10.0f;
+                gCamera->focus[1] = 10.0f;
+                gCamera->focus[2] = 10.0f;
+                if (gPlayer1Controller->buttonPressed & L_TRIG) {
+                    index = MENU_OPT_NONE;
+                    gMenuMode = MENU_MODE_RENDER_PAUSE_SCREEN;
+                } else if (gPlayer1Controller->buttonPressed & START_BUTTON) {
+                    index = MENU_OPT_DEFAULT;
+                    level_set_transition(0, NULL);
+                    play_sound(SOUND_MENU_PAUSE_2, gGlobalSoundSource);
+                    gMenuMode = MENU_MODE_NONE;
+                    gDialogBoxState = DIALOG_STATE_OPENING;
+                } else {
+                    index = MENU_OPT_MAP;
+                }
                 break;
         }
 
@@ -3479,7 +3600,7 @@ void print_mirror_controls(void) {
 
 
 void special_print(void) {
-    if (gCurrDemoInput == NULL) {
+    if (gCurrDemoInput == NULL && gMenuOptSelectIndex != MENU_OPT_MAP) {
         print_room_names();
         print_multiplier();
         print_mirror_controls();

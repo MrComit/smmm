@@ -393,7 +393,11 @@ void render_game(void) {
         //    set_warp_transition_rgb(0, 0, 0);
         //    gWarpTransition.time = 0;
         //}
-        render_hud();
+        if (gMenuOptSelectIndex != MENU_OPT_MAP) {
+            render_hud();
+        } else {
+            render_map_screen();
+        }
         gMenuOptSelectIndex = render_menus_and_dialogs();
 
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);

@@ -306,4 +306,6 @@ extern const Collision wooden_signpost_seg3_collision_0302DD80[];
 
 #include "logo_console/header.h"
 
+#include "test_map/header.h"
+
 #endif

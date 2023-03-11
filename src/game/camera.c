@@ -4132,6 +4132,9 @@ void init_camera(struct Camera *c) {
     c->comitCutscene = 0;
 }
 
+
+extern f32 gMapCamOffset[2];
+
 /**
  * Zooms out the camera if paused and the level is 'outside', as determined by sZoomOutAreaMasks.
  *
@@ -4163,13 +4166,22 @@ void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
         if (sFramesPaused >= 2) {
             if (sZoomOutAreaMasks[areaMaskIndex] & areaBit) {
 
-                camera->focus[0] = gCamera->areaCenX;
-                camera->focus[1] = (sMarioCamState->pos[1] + gCamera->areaCenY) / 2;
-                camera->focus[2] = gCamera->areaCenZ;
-                vec3f_get_dist_and_angle(camera->focus, sMarioCamState->pos, &dist, &pitch, &yaw);
-                vec3f_set_dist_and_angle(sMarioCamState->pos, camera->pos, 6000.f, 0x1000, yaw);
-                if (gCurrLevelNum != LEVEL_THI) {
-                    find_in_bounds_yaw_wdw_bob_thi(camera->pos, camera->focus, 0);
+                if (gMenuOptSelectIndex != MENU_OPT_MAP) {
+                    camera->focus[0] = gCamera->areaCenX;
+                    camera->focus[1] = (sMarioCamState->pos[1] + gCamera->areaCenY) / 2;
+                    camera->focus[2] = gCamera->areaCenZ;
+                    vec3f_get_dist_and_angle(camera->focus, sMarioCamState->pos, &dist, &pitch, &yaw);
+                    vec3f_set_dist_and_angle(sMarioCamState->pos, camera->pos, 6000.f, 0x1000, yaw);
+                    if (gCurrLevelNum != LEVEL_THI) {
+                        find_in_bounds_yaw_wdw_bob_thi(camera->pos, camera->focus, 0);
+                    }
+                } else {
+                    camera->pos[0] = gMapCamOffset[0];
+                    camera->pos[1] = -25000.0f;
+                    camera->pos[2] = gMapCamOffset[1];
+                    camera->focus[0] = gMapCamOffset[0];
+                    camera->focus[1] = -25500.0f;
+                    camera->focus[2] = 80.0f + gMapCamOffset[1];
                 }
             }
         } else {

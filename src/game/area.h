@@ -114,6 +114,7 @@ enum MenuOption {
     MENU_OPT_1,
     MENU_OPT_2,
     MENU_OPT_3,
+    MENU_OPT_MAP,
     MENU_OPT_DEFAULT = MENU_OPT_1,
 
     // Course Pause Menu
