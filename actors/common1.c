@@ -91,3 +91,4 @@ UNUSED static const u64 binid_22 = 22;
 #include "logo_console/model.inc.c"
 #include "test_map/model.inc.c"
 #include "map_l1/model.inc.c"
+// #include "map_overlay/model.inc.c"

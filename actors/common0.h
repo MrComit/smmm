@@ -208,4 +208,6 @@ extern const Collision unknown_seg8_collision_080262F8[];
 
 #include "golden_crate/geo_header.h"
 
+#include "map_overlay/header.h"
+
 #endif

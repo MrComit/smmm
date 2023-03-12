@@ -4177,7 +4177,7 @@ void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
                     }
                 } else {
                     camera->pos[0] = gMapCamOffset[0];
-                    camera->pos[1] = -25000.0f + gMapCamOffset[1];
+                    camera->pos[1] = -24500.0f + gMapCamOffset[1];
                     camera->pos[2] = gMapCamOffset[2];
                     camera->focus[0] = gMapCamOffset[0];
                     camera->focus[1] = -28000.0f;

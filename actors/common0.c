@@ -84,3 +84,5 @@ UNUSED static const u64 binid_18 = 18;
 #include "crate/collision.inc.c"
 #include "golden_crate/collision.inc.c"
 #include "golden_crate/model.inc.c"
+
+#include "map_overlay/model.inc.c"

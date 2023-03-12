@@ -26,6 +26,7 @@
 #include "config.h"
 #include "main.h"
 #include "puppyprint.h"
+#include "actors/common0.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -3318,7 +3319,7 @@ void render_map_background(void) {
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
     mtxf_to_mtx(mtx, gMatStack[gMatStackIndex + 1]);
     gSPMatrix(gDisplayListHead++, mtx, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
-    gDPSetEnvColor(gDisplayListHead++, 20, 20, 0, 255);
+    gDPSetEnvColor(gDisplayListHead++, 0x09, 0x10, 0x13, 255);
     gSPDisplayList(gDisplayListHead++, dl_draw_map_border);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
@@ -3368,8 +3369,12 @@ void render_map_objects(void) {
 
 
 void update_map_screen(void) {
+    f32 div = 3.0f;
+    if (gPlayer1Controller->buttonDown & (Z_TRIG | R_TRIG)) {
+        div = 1.0f;
+    }
     if (absf(gPlayer1Controller->stickX) > 10.0f) {
-        gMapCamOffset[0] += gPlayer1Controller->stickX / 3.0f;
+        gMapCamOffset[0] += gPlayer1Controller->stickX / div;
         if (gMapCamOffset[0] > 3000.0f) {
             gMapCamOffset[0] = 3000.0f;
         } else if (gMapCamOffset[0] < -3000.0f) {
@@ -3377,7 +3382,7 @@ void update_map_screen(void) {
         }
     }
     if (absf(gPlayer1Controller->stickY) > 10.0f) {
-        gMapCamOffset[2] -= gPlayer1Controller->stickY / 3.0f;
+        gMapCamOffset[2] -= gPlayer1Controller->stickY / div;
         if (gMapCamOffset[2] > 3000.0f) {
             gMapCamOffset[2] = 3000.0f;
         } else if (gMapCamOffset[2] < -3000.0f) {
@@ -3386,8 +3391,8 @@ void update_map_screen(void) {
     }
     if (gPlayer1Controller->buttonDown & (U_JPAD | U_CBUTTONS)) {
         gMapCamOffset[1] -= 50.0f;
-        if (gMapCamOffset[1] < -500.0f) {
-            gMapCamOffset[1] = -500.0f;
+        if (gMapCamOffset[1] < -800.0f) {
+            gMapCamOffset[1] = -800.0f;
         }
     }
     if (gPlayer1Controller->buttonDown & (D_JPAD | D_CBUTTONS)) {
@@ -3400,6 +3405,16 @@ void update_map_screen(void) {
 
     render_map_background();
     render_map_objects();
+
+
+    create_dl_ortho_matrix();
+    create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
+    // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
+
+    Gfx* dlhead = gDisplayListHead;
+    gSPDisplayList(dlhead++, map_overlay_Overlay_mesh);
+    gSPPopMatrix(dlhead++, G_MTX_MODELVIEW);
+    gDisplayListHead = dlhead;
 
     // gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
     // render_map_object(0.0f, -500.0f, test_map_TestMap_mesh);
