@@ -311,6 +311,7 @@
 #define TEXT_ROOM73 _("Elevator")
 #define TEXT_ROOM74 _("The Lab")
 
+#define TEXT_CORRUPT _("-!-t!r- c     -R")
 
 
 #define TEXT_CHAPTER _("Chapter")
@@ -318,10 +319,9 @@
 #define TEXT_2023 _("2023")
 #define TEXT_NEWFILE _("New File")
 #define TEXT_AREYOUSURE _("Are you sure?                      Yes      No")
+#define TEXT_HUD_L_MAP _("[L]   Room Manager")
 
 
-
-#define TEXT_CORRUPT _("-!-t!r- c     -R")
 
 
 

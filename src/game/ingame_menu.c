@@ -53,6 +53,7 @@ u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
 u8 textPressL[] = { TEXT_HUD_PRESS_L };
 #endif
+u8 textLRoomManager[] = { TEXT_HUD_L_MAP };
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2719,6 +2720,11 @@ s16 render_pause_courses_and_castle(void) {
     // #if defined(WIDE)
     //     render_widescreen_setting();
     // #endif
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    print_generic_string(20, 210, textLRoomManager);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     if (gPlayer1Controller->buttonPressed & L_TRIG) {
         gMenuMode = MENU_MODE_MAP;
         init_map();

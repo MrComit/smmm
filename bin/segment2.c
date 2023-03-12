@@ -3409,6 +3409,11 @@ ALIGNED8 static const Texture texture_font_char_us_button_R[] = {
 #include "textures/segment2/font_graphics.06EC0.ia4.inc.c"
 };
 
+
+ALIGNED8 static const Texture texture_font_char_us_button_L[] = {
+#include "textures/segment2/CUSTOM_font_graphics_big_L.ia4.inc.c"
+};
+
 ALIGNED8 static const Texture texture_font_char_us_button_C_up[] = {
 #include "textures/segment2/font_graphics.06F00.ia4.inc.c"
 };
@@ -3591,7 +3596,7 @@ const Texture *const main_font_lut[] = {
                   0x0,               0x0,               0x0,               0x0,
     texture_font_char_us_button_C_up, texture_font_char_us_button_C_down, texture_font_char_us_button_C_left, texture_font_char_us_button_C_right,
     texture_font_char_us_button_A, texture_font_char_us_button_B, texture_font_char_us_button_C, texture_font_char_us_button_Z,
-    texture_font_char_us_button_R,               0x0,               0x0,               0x0,
+    texture_font_char_us_button_R, texture_font_char_us_button_L,          0x0,               0x0,
                   0x0,               0x0,               0x0,               0x0,
                   0x0,               0x0,               0x0,               0x0,
                   0x0,               0x0,               0x0,               0x0,
