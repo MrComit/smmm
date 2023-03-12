@@ -145,3 +145,4 @@
 #include "levels/lll/elevator_door/collision.inc.c"
 #include "levels/lll/elevator_instantwarp/collision.inc.c"
 #include "levels/lll/shyguy_group/model.inc.c"
+#include "levels/lll/map_l7/model.inc.c"

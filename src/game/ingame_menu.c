@@ -31,6 +31,7 @@
 #include "actors/boocoin/geo_header.h"
 #include "levels/wf/header.h"
 #include "levels/jrb/header.h"
+#include "levels/lll/header.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -3337,7 +3338,21 @@ void spawn_map_5(void) {
 }
 void spawn_map_6(void) {
 }
+
+
 void spawn_map_7(void) {
+    spawn_map_object(75, 41, map_l7_1CORRIDOR_mesh_layer_1, 1);
+    spawn_map_object(828, 879, map_l7_2LAUNDRY_mesh_layer_1, 2);
+    spawn_map_object(-874, -354, map_l7_3GYM_mesh_layer_1, 3);
+    spawn_map_object(-260, 906, map_l7_4WINE_mesh_layer_1, 4);
+    spawn_map_object(-245, 486, map_l7_5ROOT_mesh_layer_1, 5);
+    spawn_map_object(-645, 471, map_l7_6MEAT_mesh_layer_1, 6);
+    spawn_map_object(813, 34, map_l7_7ENGINE_mesh_layer_1, 7);
+    spawn_map_object(885, -923, map_l7_8CHAMBER_mesh_layer_1, 8);
+    spawn_map_object(50, -1194, map_l7_9ELEVATOR_mesh_layer_1, 9);
+    spawn_map_object(-331, -1053, map_l7_10LAB_mesh_layer_1, 10);
+
+    spawn_map_key(-428, 483, 0xA);
 }
 void spawn_map_8(void) {
 }

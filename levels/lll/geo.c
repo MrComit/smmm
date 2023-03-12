@@ -81,3 +81,4 @@
 #include "levels/lll/treadmill_floor/geo.inc.c"
 #include "levels/lll/elevator_door/geo.inc.c"
 #include "levels/lll/shyguy_group/geo.inc.c"
+#include "levels/lll/map_l7/geo.inc.c"
