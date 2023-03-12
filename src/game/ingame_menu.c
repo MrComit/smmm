@@ -30,6 +30,7 @@
 #include "behavior_data.h"
 #include "actors/boocoin/geo_header.h"
 #include "levels/wf/header.h"
+#include "levels/jrb/header.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -3323,7 +3324,12 @@ void spawn_map_2(void) {
     spawn_map_key(455, -1031, 6);
     spawn_map_key(-4, -1918, 7);
 }
+
 void spawn_map_3(void) {
+    spawn_map_object(-136, 77, map_l3_1GARDEN_mesh_layer_1, 1);
+    spawn_map_object(-809, -363, map_l3_2DOG_mesh_layer_1, 2);
+    spawn_map_object(391, 965, map_l3_3UNDER_mesh_layer_1, 3);
+    spawn_map_object(-363, 749, map_l3_4CONS_mesh_layer_1, 4);
 }
 void spawn_map_4(void) {
 }

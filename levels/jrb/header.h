@@ -117,4 +117,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/bucket_top/collision_header.h"
 
+#include "levels/jrb/map_l3/geo_header.h"
+
 #endif

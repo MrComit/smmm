@@ -38,3 +38,4 @@
 #include "levels/jrb/exit_wall/geo.inc.c"
 #include "levels/jrb/garden_holes/geo.inc.c"
 #include "levels/jrb/bucket_top/geo.inc.c"
+#include "levels/jrb/map_l3/geo.inc.c"
