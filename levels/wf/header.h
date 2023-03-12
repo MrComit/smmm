@@ -219,4 +219,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/bottled_lava/geo_header.h"
 
+#include "levels/wf/map_l2/geo_header.h"
+
 #endif

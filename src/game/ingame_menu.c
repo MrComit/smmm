@@ -29,6 +29,7 @@
 #include "actors/common0.h"
 #include "behavior_data.h"
 #include "actors/boocoin/geo_header.h"
+#include "levels/wf/header.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -3191,42 +3192,20 @@ s32 get_map_from_level(void) {
     switch (gCurrLevelNum) {
         case LEVEL_BOB:
             return 0;
-            break;
         case LEVEL_WF:
             return 1;
-            break;
         case LEVEL_JRB:
             return 2;
-            break;
         case LEVEL_CCM:
-            if (gCurrAreaIndex == 1) {
-                return 3;
-            } else {
-                return 4;
-            }
-            break;
+            return 3;
         case LEVEL_BBH:
-            if (gCurrAreaIndex == 1) {
-                return 5;
-            } else if (gCurrAreaIndex == 2) {
-                return 6;
-            } else {
-                return 7;
-            }
-            break;
+            return 4;
         case LEVEL_HMC:
-            if (gCurrAreaIndex == 1) {
-                return 8;
-            } else {
-                return 9;
-            }
-            break;
+            return 5;
         case LEVEL_LLL:
-            return 10;
-            break;
+            return 6;
         case LEVEL_SSL:
-            return 11;
-            break;
+            return 7;
     }
     return 0;
 }
@@ -3254,7 +3233,7 @@ struct MapObject *spawn_map_object(f32 x, f32 z, Gfx *dl, s32 room) {
             mo->dl = dl;
 
             // 0x1 = cleared, 0x2 = current quest/goal room, 0x4 = has unkilled boo, 0x8 = has keys, 0x10 = boss room
-            if (save_file_check_room(room)) {
+            if (save_file_check_room(mo->globalRoom)) {
                 mo->flags |= 1;
             }
             //current quest/goal room:
@@ -3314,7 +3293,35 @@ void spawn_map_1(void) {
     spawn_map_key(0, 1271, 1);
     spawn_map_key(-140, 1166, 31);
 }
+
+
+
 void spawn_map_2(void) {
+    spawn_map_object(21, -802, map_l2_1LOUNGE_mesh_layer_1, 1);
+    spawn_map_object(46, 137, map_l2_2BAR_mesh_layer_1, 2);
+    spawn_map_object(104, 1434, map_l2_3BALCONY_mesh_layer_1, 3);
+    spawn_map_object(292, -1383, map_l2_4BATHROOM_mesh_layer_1, 4);
+    spawn_map_object(-321, -1870, map_l2_5DEN_mesh_layer_1, 5);
+    spawn_map_object(-781, -1870, map_l2_6MIRROR_mesh_layer_1, 6);
+    spawn_map_object(-547, -1029, map_l2_7BED1_mesh_layer_1, 7);
+    spawn_map_object(-547, -1239, map_l2_8BED2_mesh_layer_1, 8);
+    spawn_map_object(-397, -1203, map_l2_9WARDROBE_mesh_layer_1, 9);
+    spawn_map_object(-757, -1239, map_l2_10BED3_mesh_layer_1, 10);
+    spawn_map_object(-757, -1029, map_l2_11BED4_mesh_layer_1, 11);
+    spawn_map_object(1001, -278, map_l2_12SERV_mesh_layer_1, 12);
+    spawn_map_object(1810, -313, map_l2_13OFFICE_mesh_layer_1, 13);
+    spawn_map_object(-692, -496, map_l2_14MASTERBED_mesh_layer_1, 14);
+    spawn_map_object(-352, -362, map_l2_15HALL_mesh_layer_1, 15);
+    spawn_map_object(610, -1031, map_l2_16HALL2_mesh_layer_1, 16);
+    spawn_map_object(662, -780, map_l2_17PLAY_mesh_layer_1, 17);
+    spawn_map_object(662, -1238, map_l2_18POOL_mesh_layer_1, 18);
+
+    spawn_map_key(-324, -577, 2);
+    spawn_map_key(-66, -1795, 3);
+    spawn_map_key(396, -283, 4);
+    spawn_map_key(-547, -708, 5);
+    spawn_map_key(455, -1031, 6);
+    spawn_map_key(-4, -1918, 7);
 }
 void spawn_map_3(void) {
 }
@@ -3328,14 +3335,6 @@ void spawn_map_7(void) {
 }
 void spawn_map_8(void) {
 }
-void spawn_map_9(void) {
-}
-void spawn_map_10(void) {
-}
-void spawn_map_11(void) {
-}
-void spawn_map_12(void) {
-}
 
 static void (*MapObjectsSpawnTable[])(void) = {
     spawn_map_1,
@@ -3346,10 +3345,6 @@ static void (*MapObjectsSpawnTable[])(void) = {
     spawn_map_6,
     spawn_map_7,
     spawn_map_8,
-    spawn_map_9,
-    spawn_map_10,
-    spawn_map_11,
-    spawn_map_12,
 };
 
 
@@ -3358,7 +3353,7 @@ void spawn_map_objects(s32 map) {
     // spawn_map_object(0.0f, 500.0f, test_map_TestMap_mesh, 2);
     // spawn_map_object(-500.0f, 0.0f, test_map_TestMap_mesh, 3);
     // spawn_map_object(500.0f, 0.0f, test_map_TestMap_mesh, 4);
-    MapObjectsSpawnTable[0]();
+    MapObjectsSpawnTable[map]();
 }
 
 
@@ -3388,7 +3383,7 @@ void despawn_map_keys(void) {
 
 void init_map(void) {
     s32 map = get_map_from_level();
-    map = 0;
+    // map = 0;
     gMapCamOffset[0] = 0.0f;
     gMapCamOffset[1] = 0.0f;
     gMapCamOffset[2] = 0.0f;

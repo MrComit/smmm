@@ -78,3 +78,4 @@
 #include "levels/wf/lightning_spinner/geo.inc.c"
 #include "levels/wf/floating_plant/geo.inc.c"
 #include "levels/wf/bottled_lava/geo.inc.c"
+#include "levels/wf/map_l2/geo.inc.c"
