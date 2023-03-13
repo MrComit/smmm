@@ -275,4 +275,6 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/plat_hall_wall/geo_header.h"
 
+#include "levels/hmc/map_l6/geo_header.h"
+
 #endif

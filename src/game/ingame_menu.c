@@ -32,6 +32,7 @@
 #include "levels/wf/header.h"
 #include "levels/jrb/header.h"
 #include "levels/lll/header.h"
+#include "levels/hmc/header.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -3336,7 +3337,30 @@ void spawn_map_4(void) {
 }
 void spawn_map_5(void) {
 }
+
+
+
+
 void spawn_map_6(void) {
+    spawn_map_object( -1473, 390, map_l6_1OPEN_mesh_layer_1, 1);
+    spawn_map_object( -757, 608, map_l6_2TROPHY_mesh_layer_1, 2);
+    spawn_map_object( -170, 726, map_l6_3HALL_mesh_layer_1, 3);
+    spawn_map_object( 415, 1126, map_l6_4MUSIC_mesh_layer_1, 4);
+    spawn_map_object( 215, 316, map_l6_5GAME_mesh_layer_1, 5);
+    spawn_map_object( -170, 226, map_l6_6PANIC_mesh_layer_1, 6);
+    spawn_map_object( -355, -423, map_l6_7HALL2_mesh_layer_1, 7);
+    spawn_map_object( -425, -965, map_l6_8MORNING_mesh_layer_1, 8);
+    spawn_map_object( -810, -1255, map_l6_9THEATER_mesh_layer_1, 9);
+    spawn_map_object( 1711, 1209, map_l6_10PRE1_mesh_layer_1, 10);
+    spawn_map_object( 1711, 2, map_l6_11PRE2_mesh_layer_1, 11);
+    spawn_map_object( 1744, -984,  map_l6_12TREE_mesh_layer_1, 12);
+    spawn_map_object( -1872, -999, map_l6_13HALL3_mesh_layer_1, 13);
+    spawn_map_object( -910, -406, map_l6_14SAUNA_mesh_layer_1, 14);
+    spawn_map_object( -723, 1781, map_l6_15ATTIC_mesh_layer_1, 15);
+    spawn_map_object( -195, 1802, map_l6_16ATTIC2_mesh_layer_1, 16);
+
+    spawn_map_key(-90, 511, 8);
+    spawn_map_key(423, 502, 9);
 }
 
 
