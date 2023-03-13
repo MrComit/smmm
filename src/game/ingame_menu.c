@@ -31,8 +31,10 @@
 #include "actors/boocoin/geo_header.h"
 #include "levels/wf/header.h"
 #include "levels/jrb/header.h"
-#include "levels/lll/header.h"
+#include "levels/ccm/header.h"
+#include "levels/bbh/header.h"
 #include "levels/hmc/header.h"
+#include "levels/lll/header.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -3333,13 +3335,25 @@ void spawn_map_3(void) {
     spawn_map_object(391, 965, map_l3_3UNDER_mesh_layer_1, 3);
     spawn_map_object(-363, 749, map_l3_4CONS_mesh_layer_1, 4);
 }
+
+
 void spawn_map_4(void) {
+    spawn_map_object(519, 1464, map_l4_1CITY_mesh_layer_1, 1);
+    spawn_map_object(674, 345, map_l4_2BCH_mesh_layer_1, 2);
+    spawn_map_object(1689, -1227, map_l4_3CITY2_mesh_layer_1, 3);
+    spawn_map_object(2352, -449, map_l4_4BOO_mesh_layer_1, 4);
+    spawn_map_object(1250, -487, map_l4_5STAR_mesh_layer_1, 5);
 }
+
 void spawn_map_5(void) {
+    spawn_map_object(-584, 527, map_l5_1OASIS_mesh_layer_1, 1);
+    spawn_map_object(-1111, 231, map_l5_2TUNNEL_mesh_layer_1, 2);
+    spawn_map_object(608, 1106, map_l5_3CAVE_mesh_layer_1, 3);
+    spawn_map_object(304, 1446, map_l5_4CBOO_mesh_layer_1, 4);
+    spawn_map_object(762, -660, map_l5_5SNOW_mesh_layer_1, 5);
+    spawn_map_object(525, 359, map_l5_6UNDER_mesh_layer_1, 6);
+    spawn_map_object(1942, -1452, map_l5_7CASTLE_mesh_layer_1, 7);
 }
-
-
-
 
 void spawn_map_6(void) {
     spawn_map_object( -1473, 390, map_l6_1OPEN_mesh_layer_1, 1);

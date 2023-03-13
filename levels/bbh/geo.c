@@ -44,3 +44,4 @@
 #include "levels/bbh/rubberband_two/geo.inc.c"
 #include "levels/bbh/play_toy_goomba/geo.inc.c"
 #include "levels/bbh/console_bomb/geo.inc.c"
+#include "levels/bbh/map_l5/geo.inc.c"

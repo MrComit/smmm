@@ -4164,25 +4164,26 @@ void zoom_out_if_paused_and_outside(struct GraphNodeCamera *camera) {
     }
     if (gCameraMovementFlags & CAM_MOVE_PAUSE_SCREEN) {
         if (sFramesPaused >= 2) {
-            if (sZoomOutAreaMasks[areaMaskIndex] & areaBit) {
+            if (gMenuOptSelectIndex == MENU_OPT_MAP) {
+            // if (sZoomOutAreaMasks[areaMaskIndex] & areaBit) {
 
-                if (gMenuOptSelectIndex != MENU_OPT_MAP) {
-                    camera->focus[0] = gCamera->areaCenX;
-                    camera->focus[1] = (sMarioCamState->pos[1] + gCamera->areaCenY) / 2;
-                    camera->focus[2] = gCamera->areaCenZ;
-                    vec3f_get_dist_and_angle(camera->focus, sMarioCamState->pos, &dist, &pitch, &yaw);
-                    vec3f_set_dist_and_angle(sMarioCamState->pos, camera->pos, 6000.f, 0x1000, yaw);
-                    if (gCurrLevelNum != LEVEL_THI) {
-                        find_in_bounds_yaw_wdw_bob_thi(camera->pos, camera->focus, 0);
-                    }
-                } else {
+                // if (gMenuOptSelectIndex != MENU_OPT_MAP) {
+                //     camera->focus[0] = gCamera->areaCenX;
+                //     camera->focus[1] = (sMarioCamState->pos[1] + gCamera->areaCenY) / 2;
+                //     camera->focus[2] = gCamera->areaCenZ;
+                //     vec3f_get_dist_and_angle(camera->focus, sMarioCamState->pos, &dist, &pitch, &yaw);
+                //     vec3f_set_dist_and_angle(sMarioCamState->pos, camera->pos, 6000.f, 0x1000, yaw);
+                //     if (gCurrLevelNum != LEVEL_THI) {
+                //         find_in_bounds_yaw_wdw_bob_thi(camera->pos, camera->focus, 0);
+                //     }
+                // } else {
                     camera->pos[0] = gMapCamOffset[0];
                     camera->pos[1] = -24500.0f + gMapCamOffset[1];
                     camera->pos[2] = gMapCamOffset[2];
                     camera->focus[0] = gMapCamOffset[0];
                     camera->focus[1] = -28000.0f;
                     camera->focus[2] = -1.0f + gMapCamOffset[2];
-                }
+                // }
             }
         } else {
             sFramesPaused++;
@@ -11480,7 +11481,7 @@ u8 sDanceCutsceneIndexTable[][4] = {
 u8 sZoomOutAreaMasks[] = {
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 0, 0, 0, 0), // Unused         | Unused
-	ZOOMOUT_AREA_MASK(1, 0, 1, 0, 1, 1, 0, 0), // BBH            | CCM
+	ZOOMOUT_AREA_MASK(1, 1, 1, 0, 1, 1, 0, 0), // BBH            | CCM
 	ZOOMOUT_AREA_MASK(0, 0, 0, 0, 1, 1, 0, 0), // CASTLE_INSIDE  | HMC
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SSL            | BOB
 	ZOOMOUT_AREA_MASK(1, 0, 0, 0, 1, 0, 0, 0), // SL             | WDW

@@ -78,3 +78,4 @@
 #include "levels/ccm/boss_graphic/model.inc.c"
 #include "levels/ccm/city_bridge2/model.inc.c"
 #include "levels/ccm/city_bridge2/collision.inc.c"
+#include "levels/ccm/map_l4/model.inc.c"

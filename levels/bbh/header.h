@@ -181,4 +181,6 @@ extern const GeoLayout bbh_ice_chunk_geo_000378[];
 
 #include "levels/bbh/console_bomb/geo_header.h"
 
+#include "levels/bbh/map_l5/geo_header.h"
+
 #endif
