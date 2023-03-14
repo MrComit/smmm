@@ -1426,14 +1426,17 @@ void render_hud_manager_icon(void) {
 			dist = obj->oDistanceToMario;
 		}
 		if (dist < 1500.0f) {
-			sManagerHue = 120;
+			sManagerHue = approach_s16_symmetric(sManagerHue, 120, 8);
 		} else if (dist < 5000.0f) {
-			sManagerHue = 60;
+			sManagerHue = approach_s16_symmetric(sManagerHue, 60, 8);
 		} else {
-			sManagerHue = 0;
+			sManagerHue = approach_s16_symmetric(sManagerHue, 0, 8);
 		}
-		CL_HSVtoRGB(sManagerHue, 1.0f, 1.0f, &sManagerEnv[0], &sManagerEnv[1], &sManagerEnv[2]);
-		CL_HSVtoRGB(sManagerHue, 1.0f, 1.0f, &sManagerPrim[0], &sManagerPrim[1], &sManagerPrim[2]);
+
+		sManagerSins += 0x400;
+		sManagerV[0] = 0.8f + (sins(sManagerSins) * 0.2f);
+		CL_HSVtoRGB(sManagerHue, 0.9f, 0.9f, &sManagerEnv[0], &sManagerEnv[1], &sManagerEnv[2]);
+		CL_HSVtoRGB(sManagerHue, 1.0f, sManagerV[0], &sManagerPrim[0], &sManagerPrim[1], &sManagerPrim[2]);
 	}
 
 	create_dl_translation_matrix(MENU_MTX_PUSH, 192, sManagerYPos, 0);
