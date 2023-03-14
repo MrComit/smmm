@@ -1243,6 +1243,8 @@ void basic_update(UNUSED s16 *arg) {
     }
 }
 
+extern s32 gPauseHudFirstFrame;
+
 s32 play_mode_normal(void) {
     if (gCurrDemoInput != NULL) {
         print_intro_text();
@@ -1295,6 +1297,7 @@ s32 play_mode_normal(void) {
             cancel_rumble();
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;
             set_play_mode(PLAY_MODE_PAUSED);
+            gPauseHudFirstFrame = 0;
         }
     }
 

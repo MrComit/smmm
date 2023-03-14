@@ -1448,6 +1448,9 @@ void render_hud_manager_icon(void) {
 }
 
 
+s32 gPauseHudFirstFrame = 0;
+
+
 /**
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
@@ -1513,7 +1516,7 @@ void render_hud(void) {
 			gHudDisplay.flags |= HUD_DISPLAY_FLAG_LOWER;
 		}
 		
-        if (gHudTopY < gHudYMax && gCamera->cutscene != CUTSCENE_OPENING) {
+        if (gHudTopY < gHudYMax && gCamera->cutscene != CUTSCENE_OPENING && sCurrPlayMode != 2) {
             render_hud_coins();
         }
 
@@ -1540,7 +1543,15 @@ void render_hud(void) {
 			render_hud_broken_key();
 		}
 
-		render_hud_starpieces();
+		if (sCurrPlayMode != 2) {
+			render_hud_starpieces();
+		}
+
+		if (sCurrPlayMode == 2 && gPauseHudFirstFrame < 2) {
+			render_hud_starpieces();
+			render_hud_coins();
+			gPauseHudFirstFrame++;
+		}
 
 
         // if (gSurfacePoolError & NOT_ENOUGH_ROOM_FOR_SURFACES)

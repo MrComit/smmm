@@ -1525,6 +1525,7 @@ void handle_special_dialog_text(s16 dialogID) { // dialog ID tables, in order
 }
 
 s16 gMenuMode = MENU_MODE_NONE;
+s16 gMapModeInit = 0;
 
 u8 gEndCutsceneStrEn0[] = { TEXT_FILE_MARIO_EXCLAMATION };
 u8 gEndCutsceneStrEn1[] = { TEXT_POWER_STARS_RESTORED };
@@ -2236,51 +2237,19 @@ extern char *sRoomNames[];
 extern char sRoomCorrupt[];
 
 void render_pause_my_score_coins(void) {
-#ifdef VERSION_EU
-    u8 textMyScore[][10] = {
-        { TEXT_MY_SCORE },
-        { TEXT_MY_SCORE_FR },
-        { TEXT_MY_SCORE_DE }
-    };
-#else
-    u8 textCourse[] = { TEXT_COURSE };
-    u8 textMyScore[] = { TEXT_MY_SCORE };
-#endif
-    u8 textStar[] = { TEXT_STAR };
-    u8 textUnfilledStar[] = { TEXT_UNFILLED_STAR };
-
     u8 strCourseNum[4];
     void **courseNameTbl;
     u8 *courseName;
     void **actNameTbl;
     u8 *actName;
     u8 courseIndex;
-    u8 starFlags;
+    s32 roomX;
 
-#ifndef VERSION_EU
     courseNameTbl = segmented_to_virtual(seg2_course_name_table);
     actNameTbl = segmented_to_virtual(seg2_act_name_table);
-#endif
 
     courseIndex = COURSE_NUM_TO_INDEX(gCurrCourseNum);
-    starFlags = save_file_get_star_flags(gCurrSaveFileNum - 1, COURSE_NUM_TO_INDEX(gCurrCourseNum));
 
-#ifdef VERSION_EU
-    switch (gInGameLanguage) {
-        case LANGUAGE_ENGLISH:
-            actNameTbl = segmented_to_virtual(act_name_table_eu_en);
-            courseNameTbl = segmented_to_virtual(course_name_table_eu_en);
-            break;
-        case LANGUAGE_FRENCH:
-            actNameTbl = segmented_to_virtual(act_name_table_eu_fr);
-            courseNameTbl = segmented_to_virtual(course_name_table_eu_fr);
-            break;
-        case LANGUAGE_GERMAN:
-            actNameTbl = segmented_to_virtual(act_name_table_eu_de);
-            courseNameTbl = segmented_to_virtual(course_name_table_eu_de);
-            break;
-    }
-#endif
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
@@ -2295,10 +2264,10 @@ void render_pause_my_score_coins(void) {
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)
-        && save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0) {
-        print_generic_string(MYSCORE_X, 121, LANGUAGE_ARRAY(textMyScore));
-    }
+    // if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)
+    //     && save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0) {
+    //     print_generic_string(MYSCORE_X, 121, LANGUAGE_ARRAY(textMyScore));
+    // }
 
     courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
 
@@ -2319,10 +2288,11 @@ void render_pause_my_score_coins(void) {
         } else {
             print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
         }*/
-        if (gGlobalMarioRoom == 71) {
-            print_generic_string(ACT_NAME_X, 140, sRoomCorrupt);
+        roomX = get_str_x_pos_from_center(160, sRoomNames[gGlobalMarioRoom - 1], 0.0f);
+        if (gGlobalMarioRoom == 72) {
+            print_generic_string(roomX, 140, sRoomCorrupt);
         }
-        print_generic_string(ACT_NAME_X, 140, sRoomNames[gGlobalMarioRoom - 1]);
+        print_generic_string(roomX, 140, sRoomNames[gGlobalMarioRoom - 1]);
 /*#ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
 #endif*/
@@ -2405,27 +2375,9 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
 #endif
 
 void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
-#ifdef VERSION_EU
-    u8 textContinue[][10] = {
-        { TEXT_CONTINUE },
-        { TEXT_CONTINUE_FR },
-        { TEXT_CONTINUE_DE }
-    };
-    u8 textExitCourse[][15] = {
-        { TEXT_EXIT_COURSE },
-        { TEXT_EXIT_COURSE_FR },
-        { TEXT_EXIT_COURSE_DE }
-    };
-    u8 textCameraAngleR[][24] = {
-        { TEXT_CAMERA_ANGLE_R },
-        { TEXT_CAMERA_ANGLE_R_FR },
-        { TEXT_CAMERA_ANGLE_R_DE }
-    };
-#else
     u8 textContinue[] = { TEXT_CONTINUE };
     u8 textExitCourse[] = { TEXT_EXIT_COURSE };
     u8 textCameraAngleR[] = { TEXT_CAMERA_ANGLE_R };
-#endif
 
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 3);
 
@@ -2446,9 +2398,9 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
         gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
     }
 
-    if (*index == MENU_OPT_CAMERA_ANGLE_R) {
-        render_pause_camera_options(x - 42, y - 42, &gDialogCameraAngleIndex, 110);
-    }
+    // if (*index == MENU_OPT_CAMERA_ANGLE_R) {
+    //     render_pause_camera_options(x - 42, y - 42, &gDialogCameraAngleIndex, 110);
+    // }
 }
 
 void render_pause_castle_menu_box(s16 x, s16 y) {
@@ -2674,16 +2626,20 @@ s16 render_pause_courses_and_castle(void) {
             if (gGreenCoinsCollected)
                 render_pause_green_coins();
 
-            if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
-                render_pause_course_options(99, 93, &gDialogLineNum, 15);
-            }
+            // if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
+            //     render_pause_course_options(99, 93, &gDialogLineNum, 15);
+            // }
 
-#ifdef VERSION_EU
-            if (gPlayer3Controller->buttonPressed & (A_BUTTON | Z_TRIG | START_BUTTON))
-#else
+            create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
+            // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
+            gSPDisplayList(gDisplayListHead++, map_overlay_Overlay_mesh);
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+            render_hud_starpieces();
+            render_hud_coins();
+
             if (gPlayer3Controller->buttonPressed & A_BUTTON
                 || gPlayer3Controller->buttonPressed & START_BUTTON)
-#endif
             {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_PAUSE_2, gGlobalSoundSource);
@@ -2733,11 +2689,12 @@ s16 render_pause_courses_and_castle(void) {
     if (gCurrCourseNum > 0 && gCurrCourseNum <= 8 && saveFlag) {
         gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-        print_generic_string(20, 210, textLRoomManager);
+        print_generic_string(26, 206, textLRoomManager);
 
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
         if (gPlayer1Controller->buttonPressed & L_TRIG) {
             gMenuMode = MENU_MODE_MAP;
+            gMapModeInit = 0;
             init_map();
         }
     }
@@ -3772,6 +3729,10 @@ s16 render_menus_and_dialogs(void) {
                 index = render_course_complete_screen();
                 break;
             case MENU_MODE_MAP:
+                if (gMapModeInit == 0) {
+                    index = render_pause_courses_and_castle();
+                    gMapModeInit = 1;
+                }
                 // render_map_screen();
                 // gCamera->pos[0] = 0.0f;
                 // gCamera->pos[1] = 0.0f;
@@ -3782,6 +3743,7 @@ s16 render_menus_and_dialogs(void) {
                 if (gPlayer1Controller->buttonPressed & L_TRIG) {
                     index = MENU_OPT_NONE;
                     gMenuMode = MENU_MODE_RENDER_PAUSE_SCREEN;
+                    gMapModeInit = 0;
                     despawn_map_objects();
                     despawn_map_keys();
                 } else if (gPlayer1Controller->buttonPressed & START_BUTTON) {
@@ -3789,6 +3751,7 @@ s16 render_menus_and_dialogs(void) {
                     level_set_transition(0, NULL);
                     play_sound(SOUND_MENU_PAUSE_2, gGlobalSoundSource);
                     gMenuMode = MENU_MODE_NONE;
+                    gMapModeInit = 0;
                     gDialogBoxState = DIALOG_STATE_OPENING;
                     despawn_map_objects();
                     despawn_map_keys();
@@ -3953,7 +3916,7 @@ void print_room_names(void) {
             y = 255 - ((gRoomEntryTimer - 65) * 10);
         }
 
-        if (gGlobalMarioRoom == 71) {
+        if (gGlobalMarioRoom == 72) {
             print_name_string(15, 10, y, sRoomCorrupt);
         }
         if (sRoomNames[gGlobalMarioRoom - 1] != sPrevRoomName) {
