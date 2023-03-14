@@ -912,13 +912,22 @@ void toad_friend_l1_loop(void) {
             case 0:
                 if (o->oF4 == 1) {
                     set_mario_npc_dialog(1);
-                    CL_Move();
-                    o->oForwardVel = 22.0f;
-                    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
-                    o->oFaceAngleYaw = o->oMoveAngleYaw + 0x2000;
-                    if (o->oDistanceToMario < 150.0f) {
-                        o->oAction = 2;
-                        play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                    if (o->oTimer > 15) {
+                        CL_Move();
+                        if (o->oDistanceToMario > 300.0f) {
+                            o->oForwardVel = 75.0f;
+                        } else {
+                            o->oForwardVel = 27.0f;
+                        }
+                        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+                        o->oFaceAngleYaw = o->oMoveAngleYaw + 0x2000;
+                        if (o->oDistanceToMario < 150.0f) {
+                            o->oAction = 2;
+                            o->oMoveAngleYaw = o->oAngleToMario - 0x2000;
+                            o->oFaceAngleYaw = o->oMoveAngleYaw;
+                            play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 20, 0, 0, 0);
+                            play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                        }
                     }
                 } else {
                     if (o->oInteractStatus == INT_STATUS_INTERACTED)
@@ -935,13 +944,15 @@ void toad_friend_l1_loop(void) {
                 cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
                 break;
             case 2:
-                if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
-                    if (o->oF4 == 1) {
-                        o->oBehParams2ndByte = 5;
+                if (o->oTimer > 12) {
+                    if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                        if (o->oF4 == 1) {
+                            o->oBehParams2ndByte = 5;
+                        }
+                        o->oF4 = 2;
+                        o->oAction = 0;
+                        stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
                     }
-                    o->oF4 = 2;
-                    o->oAction = 0;
-                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
                 }
                 break;
         }

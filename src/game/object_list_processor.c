@@ -274,6 +274,7 @@ void spawn_particle(u32 activeParticleFlag, s16 model, const BehaviorScript *beh
 }
 
 Vec3f sToadFriendWarp1 = {438.67, 0, 11512.5};
+s32 sToadFriendSubAct = 0;
 
 void mario_update_friend_l1_loop(struct MarioState *m) {
     u32 flags = save_file_get_newflags(1);
@@ -287,6 +288,8 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
                 if (obj->oF4 == 0) {
                     obj->oF4 = 1;
                     obj->oBehParams2ndByte = 0;
+                    obj->oTimer = 0;
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 16, 0, 0, 0);
                 }
                 if (obj->oF4 == 2) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_INTRODUCTION, 1);
@@ -295,24 +298,83 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
             break;
         case 1:
             if (gMarioCurrentRoom == 4) {
-                if (CL_NPC_Dialog(1)) {
-                    save_file_set_newflags(SAVE_TOAD_FLAG_FOUND_FIRST_BOO, 1);
-                    vec3f_copy(&obj->oPosX, sToadFriendWarp1);
-                    obj->oRoom = 13;
+                if (sToadFriendSubAct < 50) {
+                    if (!(gTimeStopState & TIME_STOP_ENABLED)) {
+                        sToadFriendSubAct++;
+                    }
+                } else if (sToadFriendSubAct == 50) {
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
+                    sToadFriendSubAct = 51;
+                    set_mario_npc_dialog(1);
+                } else if (sToadFriendSubAct == 51) {
+                    set_mario_npc_dialog(1);
+                    if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+                        gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
+                        sToadFriendSubAct = 52;
+                    }
+                } else {
+                    if (CL_NPC_Dialog(1)) {
+                        save_file_set_newflags(SAVE_TOAD_FLAG_FOUND_FIRST_BOO, 1);
+                        vec3f_copy(&obj->oPosX, sToadFriendWarp1);
+                        obj->oRoom = 13;
+                        stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                        sToadFriendSubAct = 0;
+                    }
                 }
             }
             break;
         case 2:
             if (gMarioCurrentRoom == 6) {
-                if (CL_NPC_Dialog(2)) {
-                    save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_DINING, 1);
+                if (sToadFriendSubAct < 20) {
+                    if (!(gTimeStopState & TIME_STOP_ENABLED)) {
+                        sToadFriendSubAct++;
+                    }
+                } else if (sToadFriendSubAct == 20) {
+                    enable_time_stop();
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
+                    sToadFriendSubAct = 21;
+                    set_mario_npc_dialog(1);
+                } else if (sToadFriendSubAct == 21) {
+                    set_mario_npc_dialog(1);
+                    if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+                        gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
+                        sToadFriendSubAct = 22;
+                    }
+                } else {                
+                    if (CL_NPC_Dialog(2)) {
+                        save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_DINING, 1);
+                        stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                        sToadFriendSubAct = 0;
+                        disable_time_stop();
+                    }
                 }
             }
             break;
         case 3:
             if (gMarioCurrentRoom == 6 && save_file_get_rooms(0) & (1 << 6)) {
-                if (CL_NPC_Dialog(3)) {
-                    save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_DINING, 1);
+                if (sToadFriendSubAct < 100) {
+                    if (!(gTimeStopState & TIME_STOP_ENABLED)) {
+                        sToadFriendSubAct++;
+                    }
+                } else if (sToadFriendSubAct == 100) {
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
+                    sToadFriendSubAct = 101;
+                    set_mario_npc_dialog(1);
+                } else if (sToadFriendSubAct == 101) {
+                    set_mario_npc_dialog(1);
+                    if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+                        gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
+                        sToadFriendSubAct = 102;
+                    }
+                } else {                
+                    if (CL_NPC_Dialog(3)) {
+                        save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_DINING, 1);
+                        stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                        sToadFriendSubAct = 0;
+                    }
                 }
             }
             break;
@@ -331,34 +393,68 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
     switch (index) {
         case 0:
             if (gMarioCurrentRoom == 1 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) == 0 && gMarioState->pos[2] > 4000.0f) {
-                if (CL_NPC_Dialog(DIALOG_035)) {
-                    save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
-                    CL_call_warp(0, 5000.0f, 0);
-                    obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
-                    if (obj != NULL) {
-                        obj->os16F4 = 1;
+                if (sToadFriendSubAct == 0) {
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
+                    sToadFriendSubAct = 1;
+                    set_mario_npc_dialog(1);
+                } else if (sToadFriendSubAct == 1) {
+                    set_mario_npc_dialog(1);
+                    if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+                        gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
+                        sToadFriendSubAct = 2;
                     }
-                    obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
-                    if (obj != NULL) {
-                        obj->oAction = 1;
-                        obj->oPosY += 5000.0f;
+                } else {
+                    if (CL_NPC_Dialog(DIALOG_035)) {
+                        save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
+                        CL_call_warp(0, 5000.0f, 0);
+                        obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
+                        if (obj != NULL) {
+                            obj->os16F4 = 1;
+                        }
+                        obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                        if (obj != NULL) {
+                            obj->oAction = 1;
+                            obj->oPosY += 5000.0f;
+                        }
+                        stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                        sToadFriendSubAct = 0;
                     }
+                    gCutsceneFocus = gMarioObject;
                 }
-                gCutsceneFocus = gMarioObject;
             }
             // save_file_set_newflags(SAVE_TOAD_FLAG_ENTER_L6, 1);
             break;
         case 1:
-            if (save_file_get_rooms(1) & (1 << 20)) {
-                if (CL_NPC_Dialog(DIALOG_038)) {
-                    save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_GAME, 1);
-                    obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
-                    if (obj != NULL) {
-                        vec3f_set(&obj->oPosX, 1500.0f, 0.0f, 12000.0f);
-                        obj->oRoom = 2;
-                        obj->oFaceAngleYaw = 0xED00;
-                        obj->oFC = 1;
-                        obj->oAction = 0;
+            if (save_file_get_rooms(1) & (1 << 21)) {
+                if (sToadFriendSubAct < 50) {
+                    if (!(gTimeStopState & TIME_STOP_ENABLED)) {
+                        sToadFriendSubAct++;
+                    }
+                } else if (sToadFriendSubAct == 50) {
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
+                    sToadFriendSubAct = 51;
+                    set_mario_npc_dialog(1);
+                } else if (sToadFriendSubAct == 51) {
+                    set_mario_npc_dialog(1);
+                    if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+                        gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
+                        sToadFriendSubAct = 52;
+                    }
+                } else {                
+                    if (CL_NPC_Dialog(DIALOG_038)) {
+                        save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_GAME, 1);
+                        obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                        if (obj != NULL) {
+                            vec3f_set(&obj->oPosX, 1500.0f, 0.0f, 12000.0f);
+                            obj->oRoom = 2;
+                            obj->oFaceAngleYaw = 0xED00;
+                            obj->oFC = 1;
+                            obj->oAction = 0;
+                        }
+                        stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                        sToadFriendSubAct = 0;
                     }
                 }
             }
@@ -377,18 +473,37 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
             }
             break;
         case 4:
-            if (save_file_get_rooms(1) & (1 << 24)) {
-                if (CL_NPC_Dialog(DIALOG_041)) {
-                    save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_THEATER, 1);
-                    obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
-                    if (obj != NULL) {
-                        obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
-                        vec3f_set(&obj->oPosX, -2100.0f, 2185.0f, 3800.0f);
-                        obj->oRoom = 2;
-                        obj->oFaceAngleYaw = 0x8C00;
-                        obj->oFC = 3;
-                        obj->oAction = 0;
+            if (save_file_get_rooms(1) & (1 << 25)) {
+                if (sToadFriendSubAct < 50) {
+                    if (!(gTimeStopState & TIME_STOP_ENABLED)) {
+                        sToadFriendSubAct++;
                     }
+                } else if (sToadFriendSubAct == 50) {
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
+                    sToadFriendSubAct = 51;
+                    set_mario_npc_dialog(1);
+                } else if (sToadFriendSubAct == 51) {
+                    set_mario_npc_dialog(1);
+                    if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+                        gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
+                        sToadFriendSubAct = 52;
+                    }
+                } else {       
+                    if (CL_NPC_Dialog(DIALOG_041)) {
+                        save_file_set_newflags(SAVE_TOAD_FLAG_CLEAR_THEATER, 1);
+                        obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
+                        if (obj != NULL) {
+                            obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+                            vec3f_set(&obj->oPosX, -2100.0f, 2185.0f, 3800.0f);
+                            obj->oRoom = 2;
+                            obj->oFaceAngleYaw = 0x8C00;
+                            obj->oFC = 3;
+                            obj->oAction = 0;
+                        }
+                        stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                        sToadFriendSubAct = 0;
+                    }         
                 }
             }
             break;

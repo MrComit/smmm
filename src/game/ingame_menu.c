@@ -60,6 +60,7 @@ u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
 u8 textPressL[] = { TEXT_HUD_PRESS_L };
 #endif
 u8 textLRoomManager[] = { TEXT_HUD_L_MAP };
+u8 textAButton[] = { TEXT_A_BUTTON };
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2646,6 +2647,7 @@ s8 gHudFlash = 0;
 
 s16 render_pause_courses_and_castle(void) {
     s16 index;
+    s16 saveFlag;
 
 #ifdef VERSION_EU
     gInGameLanguage = eu_get_language();
@@ -2726,14 +2728,20 @@ s16 render_pause_courses_and_castle(void) {
     // #if defined(WIDE)
     //     render_widescreen_setting();
     // #endif
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-    print_generic_string(20, 210, textLRoomManager);
+    saveFlag = save_file_get_newflags(1) & SAVE_TOAD_FLAG_INTRODUCTION;
+#ifdef SMMM_DEBUG
+    saveFlag = 1;
+#endif
+    if (gCurrCourseNum > 0 && gCurrCourseNum <= 8 && saveFlag) {
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+        print_generic_string(20, 210, textLRoomManager);
 
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
-    if (gPlayer1Controller->buttonPressed & L_TRIG) {
-        gMenuMode = MENU_MODE_MAP;
-        init_map();
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+        if (gPlayer1Controller->buttonPressed & L_TRIG) {
+            gMenuMode = MENU_MODE_MAP;
+            init_map();
+        }
     }
 
     if (gDialogTextAlpha < 250) {

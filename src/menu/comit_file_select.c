@@ -198,6 +198,11 @@ void bhv_erase_prompt_loop(void) {
 
 
 void bhv_cs_sub_button_loop(void) {
+    if (o->oPosX == o->oHomeX) {
+        cur_obj_hide();
+    } else {
+        cur_obj_unhide();
+    }
     if (o->oF4 == 0) {
         o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 20.0f);
     } else {

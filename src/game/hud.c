@@ -22,6 +22,8 @@
 #include "object_list_processor.h"
 #include "puppyprint.h"
 #include "include/config.h"
+#include "engine/math_util.h"
+// #include "text_strings.h.in"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -106,6 +108,7 @@ u8 gHudYMin = 219; // 219 - 8 on console
 static struct CameraHUD sCameraHUD = { CAM_STATUS_NONE };
 
 
+extern u8 textAButton[];
 
 
 
@@ -690,6 +693,7 @@ Gfx target_target_mesh[] = {
 };
 
 
+#include "map_data/manager_model.inc.c"
 
 #include "game/logo/model.inc.c"
 #include "game/logo/header.h"
@@ -1389,6 +1393,44 @@ void render_hud_broken_key(void) {
 }
 
 
+Vec3s sManagerPrim = {255, 255, 255};
+Vec3s sManagerEnv = {255, 255, 255};
+s16 sManagerYPos = 0;
+s16 sManagerHue = 0;
+f32 sManagerV[2] = {1.0f, 1.0f};
+s16 sManagerSins = 0;
+
+void render_hud_manager_icon(void) {
+	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_CALL) {
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
+        print_generic_string(192 + 32 - 8 + 1, 38 + sManagerYPos - 1, textAButton);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+        print_generic_string(192 + 32 - 8, 38 + sManagerYPos, textAButton);
+
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+		sManagerSins += 0xC00;
+		sManagerV[0] = 0.75f + (sins(sManagerSins) * 0.25f);
+		sManagerV[1] = 0.75f + (coss(sManagerSins) * 0.25f);
+		sManagerHue = (coss(sManagerSins / 2) * 15.0f);
+		// CL_HSVtoRGB(sManagerHue, 1.0f, 1.0f, &sManagerEnv[0], &sManagerEnv[1], &sManagerEnv[2]);
+		CL_HSVtoRGB(200 + sManagerHue, 1.0f, sManagerV[1], &sManagerEnv[0], &sManagerEnv[1], &sManagerEnv[2]);
+		CL_HSVtoRGB(120 + sManagerHue, 1.0f, sManagerV[0], &sManagerPrim[0], &sManagerPrim[1], &sManagerPrim[2]);
+	} else if (gHudDisplay.flags & HUD_DISPLAY_FLAG_TRACKER) {
+		vec3s_set(sManagerEnv, 255, 0, 0);
+		vec3s_copy(sManagerPrim, sManagerEnv);
+	}
+
+	create_dl_translation_matrix(MENU_MTX_PUSH, 192, sManagerYPos, 0);
+
+	gDPSetEnvColor(gDisplayListHead++, sManagerEnv[0], sManagerEnv[1], sManagerEnv[2], 255);
+	gDPSetPrimColor(gDisplayListHead++, 0, 0, sManagerPrim[0], sManagerPrim[1], sManagerPrim[2], 255);
+	gSPDisplayList(gDisplayListHead++, manager_hud_MANAGER_mesh);
+	gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
 /**
  * Render HUD strings using hudDisplayFlags with it's render functions,
  * excluding the cannon reticle which detects a camera preset for it.
@@ -1418,6 +1460,19 @@ void render_hud(void) {
 			gHudYMin = 219 - 8;
 		}
         create_dl_ortho_matrix();
+
+		if (gHudDisplay.flags & (HUD_DISPLAY_FLAG_TRACKER | HUD_DISPLAY_FLAG_CALL)) {
+			sManagerYPos = approach_s16_symmetric(sManagerYPos, 0, 4);
+		} else {
+			sManagerYPos = approach_s16_symmetric(sManagerYPos, -48, 4);
+		}
+		if (sManagerYPos > -48) {
+			render_hud_manager_icon();
+		} else {
+			vec3s_set(sManagerPrim, 0, 0, 0);
+			vec3s_set(sManagerEnv, 0, 0, 0);
+			sManagerSins = 0;
+		}
 
         if (gCurrentArea != NULL && gCurrentArea->camera->mode == CAMERA_MODE_INSIDE_CANNON) {
             render_hud_cannon_reticle();
