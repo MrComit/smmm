@@ -24,6 +24,7 @@
 #include "include/config.h"
 #include "engine/math_util.h"
 // #include "text_strings.h.in"
+#include "behavior_data.h"
 
 /* @file hud.c
  * This file implements HUD rendering and power meter animations.
@@ -1401,6 +1402,8 @@ f32 sManagerV[2] = {1.0f, 1.0f};
 s16 sManagerSins = 0;
 
 void render_hud_manager_icon(void) {
+	struct Object *obj;
+	f32 dist = 5000.0f;;
 	if (gHudDisplay.flags & HUD_DISPLAY_FLAG_CALL) {
         gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
         gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 255);
@@ -1418,8 +1421,19 @@ void render_hud_manager_icon(void) {
 		CL_HSVtoRGB(200 + sManagerHue, 1.0f, sManagerV[1], &sManagerEnv[0], &sManagerEnv[1], &sManagerEnv[2]);
 		CL_HSVtoRGB(120 + sManagerHue, 1.0f, sManagerV[0], &sManagerPrim[0], &sManagerPrim[1], &sManagerPrim[2]);
 	} else if (gHudDisplay.flags & HUD_DISPLAY_FLAG_TRACKER) {
-		vec3s_set(sManagerEnv, 255, 0, 0);
-		vec3s_copy(sManagerPrim, sManagerEnv);
+		obj = CL_obj_find_nearest_object_with_behavior_room(gMarioObject, bhvStarPiece, gMarioCurrentRoom);
+		if (obj != NULL) {
+			dist = obj->oDistanceToMario;
+		}
+		if (dist < 1500.0f) {
+			sManagerHue = 120;
+		} else if (dist < 5000.0f) {
+			sManagerHue = 60;
+		} else {
+			sManagerHue = 0;
+		}
+		CL_HSVtoRGB(sManagerHue, 1.0f, 1.0f, &sManagerEnv[0], &sManagerEnv[1], &sManagerEnv[2]);
+		CL_HSVtoRGB(sManagerHue, 1.0f, 1.0f, &sManagerPrim[0], &sManagerPrim[1], &sManagerPrim[2]);
 	}
 
 	create_dl_translation_matrix(MENU_MTX_PUSH, 192, sManagerYPos, 0);
@@ -1460,6 +1474,15 @@ void render_hud(void) {
 			gHudYMin = 219 - 8;
 		}
         create_dl_ortho_matrix();
+
+		// check if mario has starpiece tracker
+		// if (0) {
+			if (CL_obj_find_nearest_object_with_behavior_room(gCurrentObject, bhvStarPiece, gMarioCurrentRoom)) {
+				gHudDisplay.flags |= HUD_DISPLAY_FLAG_TRACKER;
+			} else {
+				gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_TRACKER;
+			}
+		// }
 
 		if (gHudDisplay.flags & (HUD_DISPLAY_FLAG_TRACKER | HUD_DISPLAY_FLAG_CALL)) {
 			sManagerYPos = approach_s16_symmetric(sManagerYPos, 0, 4);
