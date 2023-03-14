@@ -139,8 +139,6 @@ s32 gDialogResponse = DIALOG_RESPONSE_NONE;
 
 
 void init_map(void);
-void spawn_map_objects(s32 map);
-void despawn_map_objects(void);
 
 
 
@@ -3156,6 +3154,9 @@ struct MapObject gMapObjectPool[30];
 struct MapObject *gCurrentMapObject;
 struct MapKey *gCurrentMapKey;
 
+s32 sCurrGoalLevel;
+s32 sCurrGoalRoom;
+
 #define mo gCurrentMapObject
 
 
@@ -3250,6 +3251,9 @@ struct MapObject *spawn_map_object(f32 x, f32 z, Gfx *dl, s32 room) {
                 mo->flags |= 1;
             }
             //current quest/goal room:
+            if (gCurrLevelNum == sCurrGoalLevel && sCurrGoalRoom == room) {
+                mo->flags |= 2;
+            }
 
             //has unkilled boo:
             if (CL_obj_find_nearest_object_with_behavior_room(gCurrentObject, bhvRoomBoo, room)) {
@@ -3448,9 +3452,76 @@ void despawn_map_keys(void) {
     }
 }
 
+
+void set_goal_level_and_room(void) {
+    s32 flags = save_file_get_newflags(0);
+    s32 boos = save_file_get_boos();
+    if (flags & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
+        sCurrGoalLevel = LEVEL_LLL;
+        sCurrGoalRoom = 10;
+    } else if (gCurrLevelNum == LEVEL_LLL) {
+        sCurrGoalLevel = LEVEL_LLL;
+        sCurrGoalRoom = 9;
+    } else if (boos & (1 << 0x12)) {
+        sCurrGoalLevel = LEVEL_BOB;
+        sCurrGoalRoom = 4;
+    } else if (save_file_get_rooms(1) & (1 << 25)) {
+        sCurrGoalLevel = LEVEL_HMC;
+        sCurrGoalRoom = 15;
+    } else if (save_file_get_rooms(1) & (1 << 21)) {
+        sCurrGoalLevel = LEVEL_HMC;
+        sCurrGoalRoom = 9;
+    } else if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) {
+        sCurrGoalLevel = LEVEL_HMC;
+        sCurrGoalRoom = 5;
+    } else if (boos & (1 << 0xE)) {
+        sCurrGoalLevel = LEVEL_WF;
+        sCurrGoalRoom = 1;
+    } else if (flags & SAVE_NEW_FLAG_CITY_TOAD_SAVED) {
+        sCurrGoalLevel = LEVEL_CCM;
+        sCurrGoalRoom = 3;
+    } else if (save_file_get_rooms(1) & (1 << 16)) {
+        sCurrGoalLevel = LEVEL_BBH;
+        sCurrGoalRoom = 7;
+    } else if (flags & SAVE_NEW_FLAG_CITY_BAND_BOUGHT) {
+        if (gCurrLevelNum == LEVEL_CCM) {
+            sCurrGoalLevel = LEVEL_CCM;
+            sCurrGoalRoom = 1;
+        } else {
+            sCurrGoalLevel = LEVEL_BBH;
+            sCurrGoalRoom = 7;
+        }
+    } else if (boos & (1 << 0xA)) {
+        if (gCurrLevelNum == LEVEL_CCM) {
+            sCurrGoalLevel = LEVEL_CCM;
+            sCurrGoalRoom = 1;
+        } else {
+            sCurrGoalLevel = LEVEL_WF;
+            sCurrGoalRoom = 17;
+        }
+    } else if (flags & SAVE_NEW_FLAG_KEY_CUTSCENE) {
+        sCurrGoalLevel = LEVEL_WF;
+        sCurrGoalRoom = 14;
+    } else if (boos & (1 << 4)) {
+        if (gCurrLevelNum == LEVEL_BOB) {
+            sCurrGoalLevel = LEVEL_BOB;
+            sCurrGoalRoom = 13;
+        } else {
+            sCurrGoalLevel = LEVEL_WF;
+            sCurrGoalRoom = 1;
+        }
+    } else {
+        sCurrGoalLevel = LEVEL_BOB;
+        sCurrGoalRoom = 11;
+    }
+}
+
+
+
 void init_map(void) {
     s32 map = get_map_from_level();
     // map = 0;
+    set_goal_level_and_room();
     gMapCamOffset[0] = 0.0f;
     gMapCamOffset[1] = 0.0f;
     gMapCamOffset[2] = 0.0f;
