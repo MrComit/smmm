@@ -3617,6 +3617,40 @@ void render_map_key(f32 x, f32 z, s8 id) {
 }
 
 
+extern Vec3s sBasementSwitchCols[5];
+
+void render_map_switch(f32 x, f32 z, s8 id) {
+    Vec3f pos;
+    // Vec3f scale;
+    Vec3s angle;
+    if (save_file_get_newflags(0) & (SAVE_NEW_FLAG_BASEMENT_SWITCH1 << id)) {
+        return;
+    }
+
+    vec3s_set(angle, 0, 0, 0);
+    vec3f_set(pos, x, -25985.0f, z);
+    // vec3f_set(scale, 0.5f, 0.5f, 0.5f);
+    mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
+    // mtxf_scale_vec3f(gMatStack[gMatStackIndex + 1], gMatStack[gMatStackIndex + 1], scale);
+    Mtx *mtx = alloc_display_list(sizeof(*mtx));
+    mtxf_to_mtx(mtx, gMatStack[gMatStackIndex + 1]);
+    gSPMatrix(gDisplayListHead++, mtx, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+
+    gDPSetEnvColor(gDisplayListHead++, sBasementSwitchCols[id][0], sBasementSwitchCols[id][1], sBasementSwitchCols[id][2], 255);
+    gSPDisplayList(gDisplayListHead++, switch_icon_Switch_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
+void render_map_switches(void) {
+    render_map_switch(828, 879, 0);
+    render_map_switch(325, 24, 1);
+    render_map_switch(-494, 80, 2);
+    render_map_switch(-373, 633, 3);
+    render_map_switch(948, -415, 4);
+}
+
+
 void render_map_keys(void) {
     s32 i;
     for (i = 0; i < 10; i++) {
@@ -3666,6 +3700,9 @@ void update_map_screen(void) {
     render_map_background();
     render_map_objects();
     render_map_keys();
+    if (gCurrLevelNum == LEVEL_LLL) {
+        render_map_switches();
+    }
 
 
     create_dl_ortho_matrix();
