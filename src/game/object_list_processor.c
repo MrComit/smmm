@@ -428,7 +428,7 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
         case 1:
             if (save_file_get_rooms(1) & (1 << 21)) {
                 if (sToadFriendSubAct < 50) {
-                    if (!(gTimeStopState & TIME_STOP_ENABLED)) {
+                    if (!(gTimeStopState & TIME_STOP_ENABLED) && (cur_obj_nearest_object_with_behavior(bhvBooSavePrompt) == NULL)) {
                         sToadFriendSubAct++;
                     }
                 } else if (sToadFriendSubAct == 50) {
@@ -475,7 +475,7 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
         case 4:
             if (save_file_get_rooms(1) & (1 << 25)) {
                 if (sToadFriendSubAct < 50) {
-                    if (!(gTimeStopState & TIME_STOP_ENABLED)) {
+                    if (!(gTimeStopState & TIME_STOP_ENABLED) && (cur_obj_nearest_object_with_behavior(bhvBooSavePrompt) == NULL)) {
                         sToadFriendSubAct++;
                     }
                 } else if (sToadFriendSubAct == 50) {
