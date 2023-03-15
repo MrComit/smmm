@@ -320,7 +320,8 @@
 #define TEXT_NEWFILE _("New File")
 #define TEXT_AREYOUSURE _("Are you sure?                      Yes      No")
 #define TEXT_HUD_L_MAP _("[L]   Room Manager")
-#define TEXT_HUD_R_OPTIONS _("[R]   Options")
+#define TEXT_HUD_R_OPTIONS _("[R]  Options")
+#define TEXT_HUD_R_BACK _("[R]    Back")
 #define TEXT_A_BUTTON _("[A]")
 #define TEXT_CURR_OBJ _("Current Objective: ")
 
@@ -352,6 +353,18 @@
 #define TEXT_OBJ11 _("NULL")
 #define TEXT_OBJ12 _("NULL")
 #define TEXT_OBJ13 _("NULL")
+
+
+
+
+#define TEXT_OPTIONS _("Options")
+#define TEXT_MUSIC_ON _("Music On")
+#define TEXT_MUSIC_OFF _("Music Off")
+#define TEXT_TRACKER_ON _("Tracker On")
+#define TEXT_TRACKER_OFF _("Tracker Off")
+#define TEXT_RCAM _("Slow Camera Sensitivity")
+// #define TEXT_ON _("On")
+// #define TEXT_OFF _("Off")
 
 
 

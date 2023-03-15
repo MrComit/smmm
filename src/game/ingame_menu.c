@@ -61,6 +61,7 @@ u8 textPressL[] = { TEXT_HUD_PRESS_L };
 #endif
 u8 textLRoomManager[] = { TEXT_HUD_L_MAP };
 u8 textROptions[] = { TEXT_HUD_R_OPTIONS };
+u8 textRBack[] = { TEXT_HUD_R_BACK };
 u8 textAButton[] = { TEXT_A_BUTTON };
 u8 textCurrObj[] = { TEXT_CURR_OBJ };
 
@@ -1528,6 +1529,8 @@ void handle_special_dialog_text(s16 dialogID) { // dialog ID tables, in order
 
 s16 gMenuMode = MENU_MODE_NONE;
 s16 gMapModeInit = 0;
+s16 gMenuROptions = 0;
+s8 gDialogOptionsIndex = 1;
 
 u8 gEndCutsceneStrEn0[] = { TEXT_FILE_MARIO_EXCLAMATION };
 u8 gEndCutsceneStrEn1[] = { TEXT_POWER_STARS_RESTORED };
@@ -2407,6 +2410,58 @@ void render_pause_my_score_coins(void) {
     #define Y_VAL7 2
 #endif
 
+
+
+#define OPT_X 160
+#define OPT_Y 140
+#define CENTER_X ((OPT_X + 28) + (OPT_X + 124)) / 2
+
+
+
+void render_pause_options(void) {
+    u8 textOptions[] = { TEXT_OPTIONS };
+    u8 textMusicOn[] = { TEXT_MUSIC_ON };
+    u8 textMusicOff[] = { TEXT_MUSIC_OFF };
+    // u8 textRCAM[] = { TEXT_RCAM };
+    u8 textTrackerOn[] = { TEXT_TRACKER_ON };
+    u8 textTrackerOff[] = { TEXT_TRACKER_OFF };
+    // u8 textOn[] = { TEXT_ON };
+    // u8 textOff[] = { TEXT_OFF };
+    s32 x;
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogOptionsIndex, 1, 2);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+
+    x = get_str_x_pos_from_center(OPT_X, textOptions, 1.0f);
+    print_generic_string(x, OPT_Y + 15, textOptions);
+    x = get_str_x_pos_from_center(OPT_X, textMusicOn, 1.0f);
+    print_generic_string(x, OPT_Y - 15, textMusicOn);
+    // x = get_str_x_pos_from_center(OPT_X, textRCAM, 1.0f);
+    // print_generic_string(x, OPT_Y - 30, textRCAM);
+    x = get_str_x_pos_from_center(OPT_X, textTrackerOn, 1.0f);
+    print_generic_string(x, OPT_Y - 30, textTrackerOn);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, OPT_X - 48, OPT_Y + 16 - (gDialogOptionsIndex * 15), 0);
+    create_dl_rotation_matrix(MENU_MTX_NOPUSH, 180.0f, 0, 0, 1.0f);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, OPT_X + 48, OPT_Y - (gDialogOptionsIndex * 15), 0);
+    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
+
+
+
+
+
+
 void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
     u8 textLakituMario[] = { TEXT_LAKITU_MARIO };
     u8 textLakituStop[] = { TEXT_LAKITU_STOP };
@@ -2707,10 +2762,16 @@ s16 render_pause_courses_and_castle(void) {
 
         case DIALOG_STATE_VERTICAL:
             shade_screen();
-            render_pause_my_score_coins();
+            if (gMenuROptions) {
+                render_pause_options();
+            } else {
+                render_pause_my_score_coins();
+            }
+            
             render_pause_red_coins();
-            if (gGreenCoinsCollected)
+            if (gGreenCoinsCollected) {
                 render_pause_green_coins();
+            }
 
             // if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
             //     render_pause_course_options(99, 93, &gDialogLineNum, 15);
@@ -2774,7 +2835,11 @@ s16 render_pause_courses_and_castle(void) {
 #endif
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-    print_generic_string(238, 190, textROptions);
+    if (gMenuROptions) {
+        print_generic_string(243, 190, textRBack);
+    } else {
+        print_generic_string(243, 190, textROptions);
+    }
     if (gCurrCourseNum > 0 && gCurrCourseNum <= 8 && saveFlag) {
         print_generic_string(24, 206, textLRoomManager);
 
@@ -2783,6 +2848,10 @@ s16 render_pause_courses_and_castle(void) {
             gMapModeInit = 0;
             init_map();
         }
+    }
+    if (gPlayer1Controller->buttonPressed & R_TRIG) {
+        gMenuROptions ^= 1;
+        gDialogOptionsIndex = 1;
     }
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 

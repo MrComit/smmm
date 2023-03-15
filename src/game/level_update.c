@@ -1244,6 +1244,7 @@ void basic_update(UNUSED s16 *arg) {
 }
 
 extern s32 gPauseHudFirstFrame;
+extern s16 gMenuROptions;
 
 s32 play_mode_normal(void) {
     if (gCurrDemoInput != NULL) {
@@ -1298,6 +1299,7 @@ s32 play_mode_normal(void) {
             gCameraMovementFlags |= CAM_MOVE_PAUSE_SCREEN;
             set_play_mode(PLAY_MODE_PAUSED);
             gPauseHudFirstFrame = 0;
+            gMenuROptions = 0;
         }
     }
 
