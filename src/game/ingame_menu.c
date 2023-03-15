@@ -2371,19 +2371,14 @@ void render_pause_my_score_coins(void) {
             print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
         }*/
         centerX = get_str_x_pos_from_center(160, sLevelNames[gCurrCourseNum - 1], 0.0f);
-        print_generic_string(centerX, 206, sLevelNames[gCurrCourseNum - 1]);
+        print_generic_string(centerX, 156, sLevelNames[gCurrCourseNum - 1]);
 
         centerX = get_str_x_pos_from_center(160, sRoomNames[gGlobalMarioRoom - 1], 0.0f);
         if (gGlobalMarioRoom == 72) {
-            print_generic_string(centerX, 190, sRoomCorrupt);
+            print_generic_string(centerX, 140, sRoomCorrupt);
         }
-        print_generic_string(centerX, 190, sRoomNames[gGlobalMarioRoom - 1]);
+        print_generic_string(centerX, 140, sRoomNames[gGlobalMarioRoom - 1]);
 
-        print_generic_string(24, 34, textCurrObj);
-
-        objective = get_current_objective();
-        centerX = get_str_x_pos_from_center(211 - 4, sObjectives[objective], 0.0f);
-        print_generic_string(centerX, 34, sObjectives[objective]);
 /*#ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
 #endif*/
@@ -3722,6 +3717,7 @@ void render_map_keys(void) {
 
 
 void update_map_screen(void) {
+    s32 objective, centerX;
     f32 div = 3.0f;
     if (gPlayer1Controller->buttonDown & (Z_TRIG | R_TRIG)) {
         div = 1.0f;
@@ -3769,9 +3765,17 @@ void update_map_screen(void) {
     // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.6f, 3.4f, 1.0f);
 
     Gfx* dlhead = gDisplayListHead;
-    gSPDisplayList(dlhead++, map_overlay_Overlay_mesh);
+    gSPDisplayList(dlhead++, map_overlay_2_OverlayForMap_mesh);
     gSPPopMatrix(dlhead++, G_MTX_MODELVIEW);
     gDisplayListHead = dlhead;
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+    print_generic_string(24 - 8, 216, textCurrObj);
+    objective = get_current_objective();
+    centerX = get_str_x_pos_from_center(211 - 4 - 4, sObjectives[objective], 0.0f);
+    print_generic_string(centerX, 216, sObjectives[objective]);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
     // gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
     // render_map_object(0.0f, -500.0f, test_map_TestMap_mesh);
