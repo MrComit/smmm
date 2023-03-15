@@ -60,7 +60,9 @@ u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
 u8 textPressL[] = { TEXT_HUD_PRESS_L };
 #endif
 u8 textLRoomManager[] = { TEXT_HUD_L_MAP };
+u8 textROptions[] = { TEXT_HUD_R_OPTIONS };
 u8 textAButton[] = { TEXT_A_BUTTON };
+u8 textCurrObj[] = { TEXT_CURR_OBJ };
 
 extern u8 gLastCompletedCourseNum;
 extern u8 gLastCompletedStarNum;
@@ -2236,6 +2238,85 @@ extern s8 gGlobalMarioRoom;
 extern char *sRoomNames[];
 extern char sRoomCorrupt[];
 
+
+static char sLevel1[] = { TEXT_L1 };
+static char sLevel2[] = { TEXT_L2 };
+static char sLevel3[] = { TEXT_L3 };
+static char sLevel4[] = { TEXT_L4 };
+static char sLevel5[] = { TEXT_L5 };
+static char sLevel6[] = { TEXT_L6 };
+static char sLevel7[] = { TEXT_L7 };
+static char sLevel8[] = { TEXT_L8 };
+
+char *sLevelNames[] = {
+    sLevel1, sLevel2, sLevel3, sLevel4, sLevel5, sLevel6, sLevel7, sLevel8
+};
+
+
+
+static char sObj1[] = { TEXT_OBJ1 };
+static char sObj2[] = { TEXT_OBJ2 };
+static char sObj3[] = { TEXT_OBJ3 };
+static char sObj4[] = { TEXT_OBJ4 };
+static char sObj5[] = { TEXT_OBJ5 };
+static char sObj6[] = { TEXT_OBJ6 };
+static char sObj7[] = { TEXT_OBJ7 };
+static char sObj8[] = { TEXT_OBJ8 };
+static char sObj9[] = { TEXT_OBJ9 };
+static char sObj10[] = { TEXT_OBJ10 };
+static char sObj11[] = { TEXT_OBJ11 };
+static char sObj12[] = { TEXT_OBJ12 };
+static char sObj13[] = { TEXT_OBJ13 };
+
+char *sObjectives[] = {
+    sObj1, sObj2, sObj3, sObj4, sObj5, sObj6, sObj7, sObj8, sObj9, sObj10, sObj11, sObj12, sObj13
+};
+
+
+
+
+
+s32 get_current_objective(void) {
+    s32 flags = save_file_get_newflags(0);
+    s32 boos = save_file_get_boos();
+    if (gCurrLevelNum == LEVEL_LLL) {
+        return 9;
+    } else if (boos & (1 << 0x12)) {
+        return 8;
+    } else if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) {
+        return 7;
+    } else if (flags & SAVE_NEW_FLAG_BROKEN1 && flags & SAVE_NEW_FLAG_BROKEN2 && flags & SAVE_NEW_FLAG_BROKEN3) {
+        return 6;
+    } else if (flags & SAVE_NEW_FLAG_CITY_TOAD_SAVED) {
+        return 3;
+    } else if (flags & SAVE_NEW_FLAG_CITY_BAND_BOUGHT) {
+        return 5;
+    } else if (boos & (1 << 0xA)) {
+        if (gCurrLevelNum == LEVEL_CCM) {
+            return 4;
+        } else {
+            return 3;
+        }
+    } else if (flags & SAVE_NEW_FLAG_KEY_CUTSCENE) {
+        return 3;
+    } else if (boos & (1 << 4)) {
+        if (gCurrLevelNum == LEVEL_BOB) {
+            return 1;
+        } else {
+            return 2;
+        }
+    } else {
+        return 0;
+    }
+}
+
+
+
+
+
+
+
+
 void render_pause_my_score_coins(void) {
     u8 strCourseNum[4];
     void **courseNameTbl;
@@ -2243,7 +2324,8 @@ void render_pause_my_score_coins(void) {
     void **actNameTbl;
     u8 *actName;
     u8 courseIndex;
-    s32 roomX;
+    s32 centerX;
+    s32 objective;
 
     courseNameTbl = segmented_to_virtual(seg2_course_name_table);
     actNameTbl = segmented_to_virtual(seg2_act_name_table);
@@ -2288,11 +2370,20 @@ void render_pause_my_score_coins(void) {
         } else {
             print_generic_string(TXT_STAR_X, 140, textUnfilledStar);
         }*/
-        roomX = get_str_x_pos_from_center(160, sRoomNames[gGlobalMarioRoom - 1], 0.0f);
+        centerX = get_str_x_pos_from_center(160, sLevelNames[gCurrCourseNum - 1], 0.0f);
+        print_generic_string(centerX, 206, sLevelNames[gCurrCourseNum - 1]);
+
+        centerX = get_str_x_pos_from_center(160, sRoomNames[gGlobalMarioRoom - 1], 0.0f);
         if (gGlobalMarioRoom == 72) {
-            print_generic_string(roomX, 140, sRoomCorrupt);
+            print_generic_string(centerX, 190, sRoomCorrupt);
         }
-        print_generic_string(roomX, 140, sRoomNames[gGlobalMarioRoom - 1]);
+        print_generic_string(centerX, 190, sRoomNames[gGlobalMarioRoom - 1]);
+
+        print_generic_string(24, 34, textCurrObj);
+
+        objective = get_current_objective();
+        centerX = get_str_x_pos_from_center(211 - 4, sObjectives[objective], 0.0f);
+        print_generic_string(centerX, 34, sObjectives[objective]);
 /*#ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);
 #endif*/
@@ -2686,18 +2777,19 @@ s16 render_pause_courses_and_castle(void) {
 #ifdef SMMM_DEBUG
     saveFlag = 1;
 #endif
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    print_generic_string(238, 190, textROptions);
     if (gCurrCourseNum > 0 && gCurrCourseNum <= 8 && saveFlag) {
-        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-        print_generic_string(26, 206, textLRoomManager);
+        print_generic_string(24, 206, textLRoomManager);
 
-        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
         if (gPlayer1Controller->buttonPressed & L_TRIG) {
             gMenuMode = MENU_MODE_MAP;
             gMapModeInit = 0;
             init_map();
         }
     }
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;
@@ -3431,9 +3523,19 @@ void set_goal_level_and_room(void) {
     } else if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) {
         sCurrGoalLevel = LEVEL_HMC;
         sCurrGoalRoom = 5;
-    } else if (boos & (1 << 0xE)) {
-        sCurrGoalLevel = LEVEL_WF;
-        sCurrGoalRoom = 1;
+    } else if (flags & SAVE_NEW_FLAG_BROKEN1 && flags & SAVE_NEW_FLAG_BROKEN3) {
+        if (flags & SAVE_NEW_FLAG_BROKEN2) {
+            sCurrGoalLevel = LEVEL_WF;
+            sCurrGoalRoom = 1;
+        } else {
+            if (gCurrLevelNum == LEVEL_WF) {
+                sCurrGoalLevel = LEVEL_WF;
+                sCurrGoalRoom = 5;
+            } else {
+                sCurrGoalLevel = LEVEL_JRB;
+                sCurrGoalRoom = 1;
+            }
+        }
     } else if (flags & SAVE_NEW_FLAG_CITY_TOAD_SAVED) {
         sCurrGoalLevel = LEVEL_CCM;
         sCurrGoalRoom = 3;
