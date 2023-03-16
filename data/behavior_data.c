@@ -10281,6 +10281,15 @@ const BehaviorScript bhvCSButton[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvCSOptionsButton[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    CALL_NATIVE(bhv_cs_options_button_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_cs_options_button_loop),
+    END_LOOP(),
+};
 
 const BehaviorScript bhvCSSubButton[] = {
     BEGIN(OBJ_LIST_LEVEL),

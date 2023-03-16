@@ -2864,6 +2864,7 @@ s8 gHudFlash = 0;
 s16 render_pause_courses_and_castle(void) {
     s16 index;
     s16 saveFlag;
+    s16 optionsY = 190;
 
 #ifdef VERSION_EU
     gInGameLanguage = eu_get_language();
@@ -2876,20 +2877,20 @@ s16 render_pause_courses_and_castle(void) {
             level_set_transition(-1, NULL);
             play_sound(SOUND_MENU_PAUSE, gGlobalSoundSource);
 
-            if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
+            // if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
                 change_dialog_camera_angle();
                 gDialogBoxState = DIALOG_STATE_VERTICAL;
-            } else {
-                highlight_last_course_complete_stars();
-                gDialogBoxState = DIALOG_STATE_HORIZONTAL;
-            }
+            // } else {
+            //     highlight_last_course_complete_stars();
+            //     gDialogBoxState = DIALOG_STATE_HORIZONTAL;
+            // }
             break;
 
         case DIALOG_STATE_VERTICAL:
             shade_screen();
             if (gMenuROptions) {
                 render_pause_options();
-            } else {
+            } else if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
                 render_pause_my_score_coins();
             }
             
@@ -2909,6 +2910,7 @@ s16 render_pause_courses_and_castle(void) {
 
             render_hud_starpieces();
             render_hud_coins();
+            render_hud_keys();
 
             if (gPlayer3Controller->buttonPressed & A_BUTTON
                 || gPlayer3Controller->buttonPressed & START_BUTTON)
@@ -2960,10 +2962,17 @@ s16 render_pause_courses_and_castle(void) {
 #endif
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+
+    if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+        optionsY -= 38;
+    } else if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
+        optionsY -= 16;
+    }
+
     if (gMenuROptions) {
-        print_generic_string(243, 190, textRBack);
+        print_generic_string(243, optionsY, textRBack);
     } else {
-        print_generic_string(243, 190, textROptions);
+        print_generic_string(243, optionsY, textROptions);
     }
     if (gCurrCourseNum > 0 && gCurrCourseNum <= 8 && saveFlag) {
         print_generic_string(24, 206, textLRoomManager);

@@ -1522,9 +1522,11 @@ void render_hud(void) {
             render_hud_coins();
         }
 
-        render_hud_keys();
+		if (sCurrPlayMode != 2) {
+        	render_hud_keys();
+		}
 
-        if (gHudTopY < gHudYMax && (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)) {
+        if (sCurrPlayMode != 2 && gHudTopY < gHudYMax && (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)) {
             render_hud_stars();
         }
 
@@ -1552,6 +1554,7 @@ void render_hud(void) {
 		if (sCurrPlayMode == 2 && gPauseHudFirstFrame < 2) {
 			render_hud_starpieces();
 			render_hud_coins();
+			render_hud_keys();
 			gPauseHudFirstFrame++;
 		}
 

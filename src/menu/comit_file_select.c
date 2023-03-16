@@ -89,6 +89,8 @@ static u8 sCTextBaseAlpha = 0;
 s16 sFileHeights[3] = {80, 32, -18};
 s16 sCFMode = 0;
 
+s16 sOptionsHeights[3] = {90, 35, -20};
+
 enum CFModes {
     CF_NORMAL = 0,
     CF_ERASE  = 1,
@@ -125,11 +127,63 @@ s32 C_check_clicked_button(s16 maxX, s16 minX, s16 y, f32 yScale, f32 depth) {
 // }
 
 
+void bhv_cs_options_button_init(void) {
+
+}
+
+
+void bhv_cs_options_button_loop(void) {
+    s32 sensitivity;
+    if (sCursorPos[0] < 32 && sCursorPos[0] > -92 && sCursorPos[1] < sOptionsHeights[o->oBehParams2ndByte]
+        && sCursorPos[1] > sOptionsHeights[o->oBehParams2ndByte] - 45) {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.84f, 0.005f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.26f, 0.0075f);
+        } else {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.8f, 0.005f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.2f, 0.0075f);
+        }
+
+    if (C_check_clicked_button(32, -92, sOptionsHeights[o->oBehParams2ndByte], o->header.gfx.scale[1], 200.0f)) {
+        // play_puzzle_jingle();
+        // sSelectedFileNum = o->oBehParams2ndByte + 1;
+        play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+        switch (o->oBehParams2ndByte) {
+            case 0:
+                save_file_set_options(SAVE_OPTION_MUSIC);
+                break;
+            case 1:
+                save_file_set_options(SAVE_OPTION_TRACKER);
+                break;
+            case 2:
+                sensitivity = save_file_get_sensitivity();
+                if (sensitivity < 5) {
+                    sensitivity++;
+                } else {
+                    sensitivity = 1;
+                }
+                save_file_set_sensitivity(sensitivity);
+                break;
+        }
+
+
+        sClickPos[0] = -10000;
+        sClickPos[1] = -10000;
+    }
+}
+
+
 void bhv_cs_side_button_loop(void) {
+    struct Object *obj;
     s32 subtract = (40 - (40 * o->header.gfx.scale[1])) / 2; 
     s32 minX = o->oBehParams2ndByte == 2 ? 125 : 85;
     if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
         return;
+    }
+    if (sCFMode == CF_OPTIONS && o->oBehParams2ndByte != 2) {
+        cur_obj_hide();
+        return;
+    } else {
+        cur_obj_unhide();
     }
 
     if (sCursorPos[0] < 200 && sCursorPos[0] > minX && sCursorPos[1] < sFileHeights[o->oBehParams2ndByte] - subtract
@@ -161,7 +215,25 @@ void bhv_cs_side_button_loop(void) {
                 }
                 break;
             case 2:
-                sCFMode = CF_OPTIONS;
+                if (sCFMode != CF_OPTIONS) {
+                    sCFMode = CF_OPTIONS;
+                    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSOptionsButton, -100, 210, 0, 0, 0, 0);
+                    obj->header.gfx.scale[0] = 0.8f;
+                    obj->header.gfx.scale[1] = 1.2f;
+                    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSOptionsButton, -100, 25, 0, 0, 0, 0);
+                    obj->header.gfx.scale[0] = 0.8f;
+                    obj->header.gfx.scale[1] = 1.2f;
+                    obj->oBehParams2ndByte = 1;
+                    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSOptionsButton, -100, -160, 0, 0, 0, 0);
+                    obj->header.gfx.scale[0] = 0.8f;
+                    obj->header.gfx.scale[1] = 1.2f;
+                    obj->oBehParams2ndByte = 2;
+                } else {
+                    sCFMode = CF_NORMAL;
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvCSOptionsButton)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
+                }
                 break;
         }
 
@@ -221,6 +293,12 @@ void bhv_cs_button_init(void) {
 
 void bhv_cs_button_loop(void) {
     struct Object *obj;
+    if (sCFMode == CF_OPTIONS) {
+        cur_obj_hide();
+        return;
+    } else {
+        cur_obj_unhide();
+    }
     // if (!o->oBehParams2ndByte) {
     //     print_text_fmt_int(20, 90, "%d", sClickPos[0], 0);
     //     print_text_fmt_int(120, 90, "%d", sClickPos[1], 0);
@@ -506,19 +584,69 @@ void print_top_text(s32 mode) {
         case CF_COPY2:
             print_text(16, 225 - 15, "SELECT FILE TO OVERWRITE", 7);
             break;
-        // case CF_OPTIONS:
-        //     print_text(90, 225 - 15, "SELECT FILE", 7);
-        //     break;
+        case CF_OPTIONS:
+            print_text(104, 225 - 15, "OPTIONS", 7);
+            break;
     }
+}
+
+
+u8 textFileRCAM[20] = { TEXT_RCAM_P2 };
+
+
+#define OPTIONS_X 130
+#define OPTIONS_Y 176
+
+
+void print_options(void) {
+    u8 textMusicOn[] = { TEXT_MUSIC_ON };
+    u8 textMusicOff[] = { TEXT_MUSIC_OFF };
+    u8 textTrackerOn[] = { TEXT_TRACKER_ON };
+    u8 textTrackerOff[] = { TEXT_TRACKER_OFF };
+    u8 textFileRCAMP1[30] = { TEXT_RCAM_P1 };
+    s16 x;
+    s16 y2 = 0;
+    s32 flags = save_file_get_options();
+    s8 musicCheck = (flags & SAVE_OPTION_MUSIC) != FALSE;
+    s8 trackerCheck = (flags & SAVE_OPTION_TRACKER) != FALSE;
+    s8 camCheck = save_file_get_sensitivity();
+
+    if (!musicCheck) {
+        x = get_str_x_pos_from_center(OPTIONS_X, textMusicOn, 1.0f);
+        print_generic_string(x, OPTIONS_Y - y2, textMusicOn);
+    } else {
+        x = get_str_x_pos_from_center(OPTIONS_X, textMusicOff, 1.0f);
+        print_generic_string(x, OPTIONS_Y - y2, textMusicOff);
+    }
+    y2 += 54;
+
+    if (!trackerCheck) {
+        x = get_str_x_pos_from_center(OPTIONS_X, textTrackerOn, 1.0f);
+        print_generic_string(x, OPTIONS_Y - y2, textTrackerOn);
+    } else {
+        x = get_str_x_pos_from_center(OPTIONS_X, textTrackerOff, 1.0f);
+        print_generic_string(x, OPTIONS_Y - y2, textTrackerOff);
+    }
+    y2 += 54;
+
+    textFileRCAM[18] = camCheck;
+    textFileRCAM[19] = 0xFF;
+
+    x = get_str_x_pos_from_center(OPTIONS_X, textFileRCAMP1, 1.0f);
+    print_generic_string(x, OPTIONS_Y - y2 + 8, textFileRCAMP1);
+    x = get_str_x_pos_from_center(OPTIONS_X, textFileRCAM, 1.0f);
+    print_generic_string(x, OPTIONS_Y - y2 - 8, textFileRCAM);
+
 }
 
 
 
 void print_CF_strings(void) {
     // Print "SELECT FILE" text
-    unsigned char textNewFile[] = { TEXT_NEWFILE };
+    // unsigned char textNewFile[] = { TEXT_NEWFILE };
     unsigned char textMadeBy[] = { TEXT_MADEBY };
     unsigned char text2023[] = { TEXT_2023 };
+    unsigned char textArrow[] = { TEXT_ARROW };
     print_top_text(sCFMode);
     create_dl_ortho_matrix();
     // gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
@@ -538,55 +666,66 @@ void print_CF_strings(void) {
     // create_dl_ortho_matrix();
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
-    if (save_file_exists(SAVE_FILE_A) == TRUE) {
-        print_save_info(0);
-    } else {
-        // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
-        // print_generic_string(80, 175 - 6, textNewFile);
-        print_text(37, 175 - 6, "NEW FILE", 0);
-    }
 
-    if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) == NULL && !cur_obj_has_behavior(bhvCSErasePrompt)) {
-        if (save_file_exists(SAVE_FILE_B) == TRUE) {
-            print_save_info(1);
+    if (sCFMode != CF_OPTIONS) {
+        if (save_file_exists(SAVE_FILE_A) == TRUE) {
+            print_save_info(0);
         } else {
             // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
             // print_generic_string(80, 175 - 6, textNewFile);
-            print_text(37, 127 - 6, "NEW FILE", 3);
+            print_text(37, 175 - 6, "NEW FILE", 0);
         }
-    }
 
-    if (save_file_exists(SAVE_FILE_C) == TRUE) {
-        print_save_info(2);
-    } else {
-        // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
-        // print_generic_string(80, 175 - 6, textNewFile);
-        print_text(37, 79 - 6, "NEW FILE", 2);
-    }
-    
-
-
-    if (sCFMode != CF_COPY1 && sCFMode != CF_COPY2) {
-        print_text(253, 175 - 6 - 1, "COPY", 6);
-    } else {
-        print_text(253, 175 - 6 - 1, "BACK", 7);
-    }
-
-    if (sCFMode != CF_ERASE) {
-        print_text(252, 127 - 6 - 1, "ERASE", 1);
-    } else {
         if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) == NULL && !cur_obj_has_behavior(bhvCSErasePrompt)) {
-            print_text(252, 127 - 6 - 1, "BACK", 7);
+            if (save_file_exists(SAVE_FILE_B) == TRUE) {
+                print_save_info(1);
+            } else {
+                // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+                // print_generic_string(80, 175 - 6, textNewFile);
+                print_text(37, 127 - 6, "NEW FILE", 3);
+            }
         }
-    }
 
-    if (sCFMode != CF_OPTIONS) {
+        if (save_file_exists(SAVE_FILE_C) == TRUE) {
+            print_save_info(2);
+        } else {
+            // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+            // print_generic_string(80, 175 - 6, textNewFile);
+            print_text(37, 79 - 6, "NEW FILE", 2);
+        }
+        
+
+
+        if (sCFMode != CF_COPY1 && sCFMode != CF_COPY2) {
+            print_text(253, 175 - 6 - 1, "COPY", 6);
+        } else {
+            print_text(253, 175 - 6 - 1, "BACK", 7);
+        }
+
+        if (sCFMode != CF_ERASE) {
+            print_text(252, 127 - 6 - 1, "ERASE", 1);
+        } else {
+            if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) == NULL && !cur_obj_has_behavior(bhvCSErasePrompt)) {
+                print_text(252, 127 - 6 - 1, "BACK", 7);
+            }
+        }
+
+        //options
         print_text(294, 79 - 6 - 1, "{", 5);
+        if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL || cur_obj_has_behavior(bhvCSErasePrompt)) {
+            print_erase_prompt();
+        }
+    } else {
+        print_options();
+        //options
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, sCTextBaseAlpha);
+        print_generic_string(294 + 6 + 1, 79 - 6 - 1 - 1, textArrow);
+        gDPSetEnvColor(gDisplayListHead++, 0x52, 0x52, 0x52, sCTextBaseAlpha);
+        print_generic_string(294 + 6, 79 - 6 - 1, textArrow);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
     }
 
-    if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL || cur_obj_has_behavior(bhvCSErasePrompt)) {
-        print_erase_prompt();
-    }
+
     print_generic_string(220, 30, textMadeBy);
     print_generic_string(276, 16, text2023);
 
@@ -621,6 +760,14 @@ s16 sCursorButtonPos[3][2][2] = {
     { {-73, 12}, {108, 12}, },
     { {-73, -38}, {128, -38}, },
 };
+
+
+s16 sCursorButtonOptionsPos[3][2][2] = {
+    { {-46, 66}, {128, -38}, },
+    { {-46, 12}, {128, -38}, },
+    { {-46, -42}, {128, -38}, },
+};
+
 s8 sDPADCursorLocation[2] = {-1, -1}; 
 
 
@@ -641,35 +788,60 @@ void bhv_cs_bg_loop(void) {
         if (gPlayer1Controller->buttonPressed & (R_JPAD | L_JPAD | D_JPAD | U_JPAD)) {
             sDPADCursorLocation[0] = 0;
             sDPADCursorLocation[1] = 0;
-            sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
-            sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            if (sCFMode != CF_OPTIONS) {
+                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            } else {
+                sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            }
         }
     } else {
         if (gPlayer1Controller->buttonPressed & R_JPAD) {
             if (sDPADCursorLocation[0] != 1) {
                 sDPADCursorLocation[0] = 1;
-                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
-                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                if (sCFMode != CF_OPTIONS) {
+                    sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else {
+                    sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                }
             }
         } else if (gPlayer1Controller->buttonPressed & L_JPAD) {
             if (sDPADCursorLocation[0] != 0) {
                 sDPADCursorLocation[0] = 0;
-                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
-                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                if (sCFMode != CF_OPTIONS) {
+                    sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else {
+                    sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                }
             }
         }
 
         if (gPlayer1Controller->buttonPressed & D_JPAD) {
             if (sDPADCursorLocation[1] != 2) {
                 sDPADCursorLocation[1]++;
-                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
-                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                if (sCFMode != CF_OPTIONS) {
+                    sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else {
+                    sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                }
             }
         } else if (gPlayer1Controller->buttonPressed & U_JPAD) {
             if (sDPADCursorLocation[1] != 0) {
                 sDPADCursorLocation[1]--;
-                sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
-                sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                if (sCFMode != CF_OPTIONS) {
+                    sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else {
+                    sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
+                    sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                }
             }
         }
     }

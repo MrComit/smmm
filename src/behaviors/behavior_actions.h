@@ -1069,6 +1069,8 @@ void bhv_cs_sub_button_loop(void);
 void bhv_cs_side_button_loop(void);
 void bhv_erase_prompt_loop(void);
 void bhv_cs_button_manager_init(void);
+void bhv_cs_options_button_init(void);
+void bhv_cs_options_button_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

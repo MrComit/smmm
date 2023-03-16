@@ -363,6 +363,9 @@
 #define TEXT_TRACKER_ON _("Tracker On")
 #define TEXT_TRACKER_OFF _("Tracker Off")
 #define TEXT_RCAM _("[R] Camera Adjustment Speed: ")
+#define TEXT_RCAM_P1 _("[R] Camera")
+#define TEXT_RCAM_P2 _("Adjustment Speed: ")
+#define TEXT_ARROW _(">")
 // #define TEXT_ON _("On")
 // #define TEXT_OFF _("Off")
 
