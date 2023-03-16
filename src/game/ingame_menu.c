@@ -137,6 +137,8 @@ s8 gDialogLineNum = 1;
 s8 gLastDialogResponse = 0;
 u8 gMenuHoldKeyIndex = 0;
 u8 gMenuHoldKeyTimer = 0;
+u8 gMenuHoldKeyIndex2 = 0;
+u8 gMenuHoldKeyTimer2 = 0;
 s32 gDialogResponse = DIALOG_RESPONSE_NONE;
 
 
@@ -722,6 +724,79 @@ void handle_menu_scrolling(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8
         gMenuHoldKeyTimer = 0;
     }
 }
+
+
+
+
+
+
+
+
+
+void handle_menu_scrolling2(s8 scrollDirection, s8 *currentIndex, s8 minIndex, s8 maxIndex) {
+    u8 index = 0;
+
+    if (scrollDirection == MENU_SCROLL_VERTICAL) {
+        if (gPlayer3Controller->rawStickY > 60) {
+            index++;
+        }
+
+        if (gPlayer3Controller->rawStickY < -60) {
+            index += 2;
+        }
+    } else if (scrollDirection == MENU_SCROLL_HORIZONTAL) {
+        if (gPlayer3Controller->rawStickX > 60) {
+            index += 2;
+        }
+
+        if (gPlayer3Controller->rawStickX < -60) {
+            index++;
+        }
+    }
+
+    if (((index ^ gMenuHoldKeyIndex2) & index) == 2) {
+        if (*currentIndex == maxIndex) {
+            //! Probably originally a >=, but later replaced with an == and an else statement.
+            *currentIndex = maxIndex;
+        } else {
+            play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
+            (*currentIndex)++;
+        }
+    }
+
+    if (((index ^ gMenuHoldKeyIndex2) & index) == 1) {
+        if (*currentIndex == minIndex) {
+            // Same applies to here as above
+        } else {
+            play_sound(SOUND_MENU_CHANGE_SELECT, gGlobalSoundSource);
+            (*currentIndex)--;
+        }
+    }
+
+    if (gMenuHoldKeyTimer2 == 10) {
+        gMenuHoldKeyTimer2 = 8;
+        gMenuHoldKeyIndex2 = 0;
+    } else {
+        gMenuHoldKeyTimer2++;
+        gMenuHoldKeyIndex2 = index;
+    }
+
+    if ((index & 3) == 0) {
+        gMenuHoldKeyTimer2 = 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 // EU has both get_str_x_pos_from_center and get_str_x_pos_from_center_scale
 // JP, US and Shindou only implement one or the other
@@ -2414,76 +2489,93 @@ void render_pause_my_score_coins(void) {
 
 #define OPT_X 160
 #define OPT_Y 140
-#define CENTER_X ((OPT_X + 28) + (OPT_X + 124)) / 2
 
+
+u8 textRCAM[30] = { TEXT_RCAM };
 
 
 void render_pause_options(void) {
     u8 textOptions[] = { TEXT_OPTIONS };
     u8 textMusicOn[] = { TEXT_MUSIC_ON };
     u8 textMusicOff[] = { TEXT_MUSIC_OFF };
-    // u8 textRCAM[] = { TEXT_RCAM };
     u8 textTrackerOn[] = { TEXT_TRACKER_ON };
     u8 textTrackerOff[] = { TEXT_TRACKER_OFF };
     // u8 textOn[] = { TEXT_ON };
     // u8 textOff[] = { TEXT_OFF };
     s32 x;
+    s32 y2 = 15;
+    s32 x2 = 32;
     s32 flags = save_file_get_options();
     s8 musicCheck = (flags & SAVE_OPTION_MUSIC) != FALSE;
     s8 trackerCheck = (flags & SAVE_OPTION_TRACKER) != FALSE;
-    s8 musicC2, trackerC2;
-    handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogOptionsIndex, 1, 2);
+    s8 camCheck = save_file_get_sensitivity();
+    s8 musicC2, trackerC2, camC2;
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogOptionsIndex, 1, 3);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     x = get_str_x_pos_from_center(OPT_X, textOptions, 1.0f);
-    print_generic_string(x, OPT_Y + 15, textOptions);
+    print_generic_string(x, OPT_Y + y2, textOptions);
 
     if (!musicCheck) {
         x = get_str_x_pos_from_center(OPT_X, textMusicOn, 1.0f);
-        print_generic_string(x, OPT_Y - 15, textMusicOn);
+        print_generic_string(x, OPT_Y - y2, textMusicOn);
     } else {
         x = get_str_x_pos_from_center(OPT_X, textMusicOff, 1.0f);
-        print_generic_string(x, OPT_Y - 15, textMusicOff);
+        print_generic_string(x, OPT_Y - y2, textMusicOff);
     }
+    y2 += 15;
 
     if (!trackerCheck) {
         x = get_str_x_pos_from_center(OPT_X, textTrackerOn, 1.0f);
-        print_generic_string(x, OPT_Y - 30, textTrackerOn);
+        print_generic_string(x, OPT_Y - y2, textTrackerOn);
     } else {
         x = get_str_x_pos_from_center(OPT_X, textTrackerOff, 1.0f);
-        print_generic_string(x, OPT_Y - 30, textTrackerOff);
+        print_generic_string(x, OPT_Y - y2, textTrackerOff);
     }
-    // x = get_str_x_pos_from_center(OPT_X, textRCAM, 1.0f);
-    // print_generic_string(x, OPT_Y - 30, textRCAM);
+    y2 += 15;
+
+    textRCAM[27] = camCheck;
+    textRCAM[28] = 0xFF;
+
+    x = get_str_x_pos_from_center(OPT_X, textRCAM, 1.0f);
+    print_generic_string(x, OPT_Y - y2, textRCAM);
 
     switch (gDialogOptionsIndex) {
         case 1:
             musicC2 = musicCheck;
-            handle_menu_scrolling(MENU_SCROLL_HORIZONTAL, &musicCheck, 0, 1);
+            handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &musicCheck, 0, 1);
             if (musicC2 != musicCheck) {
                 save_file_set_options(SAVE_OPTION_MUSIC);
             }
             break;
         case 2:
             trackerC2 = trackerCheck;
-            handle_menu_scrolling(MENU_SCROLL_HORIZONTAL, &trackerCheck, 0, 1);
+            handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &trackerCheck, 0, 1);
             if (trackerC2 != trackerCheck) {
                 save_file_set_options(SAVE_OPTION_TRACKER);
+            }
+            break;
+        case 3:
+            x2 = 80;
+            camC2 = camCheck;
+            handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &camCheck, 1, 5);
+            if (camC2 != camCheck) {
+                save_file_set_sensitivity(camCheck);
             }
             break;
     }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
-    create_dl_translation_matrix(MENU_MTX_PUSH, OPT_X - 48, OPT_Y + 16 - (gDialogOptionsIndex * 15), 0);
+    create_dl_translation_matrix(MENU_MTX_PUSH, OPT_X - x2, OPT_Y + 16 - (gDialogOptionsIndex * 15), 0);
     create_dl_rotation_matrix(MENU_MTX_NOPUSH, 180.0f, 0, 0, 1.0f);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
     gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
-    create_dl_translation_matrix(MENU_MTX_PUSH, OPT_X + 48, OPT_Y - (gDialogOptionsIndex * 15), 0);
+    create_dl_translation_matrix(MENU_MTX_PUSH, OPT_X + x2, OPT_Y - (gDialogOptionsIndex * 15), 0);
     gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }

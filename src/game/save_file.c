@@ -793,6 +793,19 @@ s32 save_file_get_cap_pos(Vec3s capPos) {
 }
 
 
+u8 save_file_get_sensitivity(void) {
+    if (gSaveBuffer.menuData[0].camSens == 0) {
+        gSaveBuffer.menuData[0].camSens = 3;
+    }
+    return gSaveBuffer.menuData[0].camSens;
+}
+
+void save_file_set_sensitivity(u16 sens) {
+    gSaveBuffer.menuData[0].camSens = sens;
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
 
 u8 save_file_get_options(void) {
     return gSaveBuffer.menuData[0].options;

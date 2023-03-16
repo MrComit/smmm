@@ -1806,10 +1806,13 @@ void mode_8_directions_camera_2d(struct Camera *c) {
 
 u16 sRCounter;
 
+s32 sCamSpeeds[5] = {DEGREES(0.5f), DEGREES(1), DEGREES(2), DEGREES(3), DEGREES(4)};
+
 void mode_8_directions_camera_3d(struct Camera *c) {
     Vec3f pos;
     UNUSED u8 filler[8];
     s16 oldAreaYaw = sAreaYaw;
+    s32 speed;
 
     if (c->cutscene == 0) 
     {
@@ -1824,10 +1827,11 @@ void mode_8_directions_camera_3d(struct Camera *c) {
     }
 
     if (gPlayer1Controller->buttonDown & R_TRIG) {
+        speed = sCamSpeeds[save_file_get_sensitivity() - 1];
         if (gPlayer1Controller->buttonDown & L_CBUTTONS) {
-            s8DirModeBaseYaw -= DEGREES(2);
+            s8DirModeBaseYaw -= speed; // was DEGREES(2)
         } else if (gPlayer1Controller->buttonDown & R_CBUTTONS) {
-            s8DirModeBaseYaw += DEGREES(2);
+            s8DirModeBaseYaw += speed;
         }
         sRCounter++; // This increses whenever R is held.
     } else {

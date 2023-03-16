@@ -362,7 +362,7 @@
 #define TEXT_MUSIC_OFF _("Music Off")
 #define TEXT_TRACKER_ON _("Tracker On")
 #define TEXT_TRACKER_OFF _("Tracker Off")
-#define TEXT_RCAM _("Slow Camera Sensitivity")
+#define TEXT_RCAM _("[R] Camera Adjustment Speed: ")
 // #define TEXT_ON _("On")
 // #define TEXT_OFF _("Off")
 
