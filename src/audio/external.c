@@ -13,6 +13,8 @@
 #include "seq_ids.h"
 #include "dialog_ids.h"
 #include "include/config.h"
+#include "game/save_file.h"
+
 
 #if defined(VERSION_EU) || defined(VERSION_SH)
 #define EU_FLOAT(x) x##f
@@ -1717,7 +1719,11 @@ static void update_game_sound(void) {
         channelIndex += sMaxChannelsForSoundBank[bank] - sUsedChannelsForSoundBank[bank];
     }
 
-    //gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = 0.0f;
+    if (save_file_get_options() & SAVE_OPTION_MUSIC) {
+        gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = 0.0f;
+    } else {
+        gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = gSequencePlayers[SEQ_PLAYER_LEVEL].volume;
+    }
 }
 
 /**

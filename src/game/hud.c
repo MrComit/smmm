@@ -1482,13 +1482,15 @@ void render_hud(void) {
         create_dl_ortho_matrix();
 
 		// check if mario has starpiece tracker
-		// if (0) {
+		if (!(save_file_get_options() & SAVE_OPTION_TRACKER)) {
 			if (CL_obj_find_nearest_object_with_behavior_room(gCurrentObject, bhvStarPiece, gMarioCurrentRoom)) {
 				gHudDisplay.flags |= HUD_DISPLAY_FLAG_TRACKER;
 			} else {
 				gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_TRACKER;
 			}
-		// }
+		} else {
+			gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_TRACKER;
+		}
 
 		if (gHudDisplay.flags & (HUD_DISPLAY_FLAG_TRACKER | HUD_DISPLAY_FLAG_CALL)) {
 			sManagerYPos = approach_s16_symmetric(sManagerYPos, 0, 4);

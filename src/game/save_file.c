@@ -792,6 +792,26 @@ s32 save_file_get_cap_pos(Vec3s capPos) {
     return FALSE;
 }
 
+
+
+u8 save_file_get_options(void) {
+    return gSaveBuffer.menuData[0].options;
+}
+
+void save_file_set_options(u16 flag) {
+    if (gSaveBuffer.menuData[0].options & flag) {
+        gSaveBuffer.menuData[0].options &= ~flag;
+    } else {
+        gSaveBuffer.menuData[0].options |= flag;
+    }
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
+
+
+
 void save_file_set_sound_mode(u16 mode) {
     set_sound_mode(mode);
     gSaveBuffer.menuData[0].soundMode = mode;

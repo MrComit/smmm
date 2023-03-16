@@ -2428,6 +2428,10 @@ void render_pause_options(void) {
     // u8 textOn[] = { TEXT_ON };
     // u8 textOff[] = { TEXT_OFF };
     s32 x;
+    s32 flags = save_file_get_options();
+    s8 musicCheck = (flags & SAVE_OPTION_MUSIC) != FALSE;
+    s8 trackerCheck = (flags & SAVE_OPTION_TRACKER) != FALSE;
+    s8 musicC2, trackerC2;
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogOptionsIndex, 1, 2);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
@@ -2435,12 +2439,41 @@ void render_pause_options(void) {
 
     x = get_str_x_pos_from_center(OPT_X, textOptions, 1.0f);
     print_generic_string(x, OPT_Y + 15, textOptions);
-    x = get_str_x_pos_from_center(OPT_X, textMusicOn, 1.0f);
-    print_generic_string(x, OPT_Y - 15, textMusicOn);
+
+    if (!musicCheck) {
+        x = get_str_x_pos_from_center(OPT_X, textMusicOn, 1.0f);
+        print_generic_string(x, OPT_Y - 15, textMusicOn);
+    } else {
+        x = get_str_x_pos_from_center(OPT_X, textMusicOff, 1.0f);
+        print_generic_string(x, OPT_Y - 15, textMusicOff);
+    }
+
+    if (!trackerCheck) {
+        x = get_str_x_pos_from_center(OPT_X, textTrackerOn, 1.0f);
+        print_generic_string(x, OPT_Y - 30, textTrackerOn);
+    } else {
+        x = get_str_x_pos_from_center(OPT_X, textTrackerOff, 1.0f);
+        print_generic_string(x, OPT_Y - 30, textTrackerOff);
+    }
     // x = get_str_x_pos_from_center(OPT_X, textRCAM, 1.0f);
     // print_generic_string(x, OPT_Y - 30, textRCAM);
-    x = get_str_x_pos_from_center(OPT_X, textTrackerOn, 1.0f);
-    print_generic_string(x, OPT_Y - 30, textTrackerOn);
+
+    switch (gDialogOptionsIndex) {
+        case 1:
+            musicC2 = musicCheck;
+            handle_menu_scrolling(MENU_SCROLL_HORIZONTAL, &musicCheck, 0, 1);
+            if (musicC2 != musicCheck) {
+                save_file_set_options(SAVE_OPTION_MUSIC);
+            }
+            break;
+        case 2:
+            trackerC2 = trackerCheck;
+            handle_menu_scrolling(MENU_SCROLL_HORIZONTAL, &trackerCheck, 0, 1);
+            if (trackerC2 != trackerCheck) {
+                save_file_set_options(SAVE_OPTION_TRACKER);
+            }
+            break;
+    }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 

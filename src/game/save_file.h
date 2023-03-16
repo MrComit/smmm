@@ -58,6 +58,7 @@ struct MainMenuSaveData {
     // on the high score screen.
     // u32 coinScoreAges[NUM_SAVE_FILES]; - 96 bits
     u16 menuRNG;
+    u16 options;
     u8 soundMode: 2;
 
 #ifdef WIDE
@@ -96,6 +97,13 @@ extern s8 gLevelToCourseNumTable[];
 
 
 
+/*
+ * !!!!!!!!!!!!!!!!!!!!!!!!!
+ *       OPTIONS FLAGS
+ * !!!!!!!!!!!!!!!!!!!!!!!!!
+ */
+#define SAVE_OPTION_MUSIC                /* 0x00000001 */ (1 << 0)
+#define SAVE_OPTION_TRACKER              /* 0x00000001 */ (1 << 1)
 
 /*
  * !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -287,6 +295,9 @@ s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
 s32 get_chapter_from_save_data(s32 saveFile);
+
+u8 save_file_get_options(void);
+void save_file_set_options(u16 flag);
 
 #ifdef WIDE
 u8 save_file_get_widescreen_mode(void);
