@@ -332,7 +332,10 @@ const GeoLayout bob_dl_113__Hallway_3_geo[] = {
 const GeoLayout bob_dl_114__Treasury_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_MainHall_014_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_CoinStack_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_dl_CoinStack_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Crystals_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Treasury_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

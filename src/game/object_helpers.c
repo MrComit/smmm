@@ -616,6 +616,9 @@ Gfx *geo_update_golden_crate(s32 callContext, struct GraphNode *node, UNUSED voi
         for (i = 0; i < 24; i++) {
             dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
                     (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
+            if (((obj->oBehParams >> 8) & 0xFF) == 10 || ((obj->oBehParams >> 8) & 0xFF) == 11) {
+                dist = 0;
+            }
             if (dist <= 400*400*2) {
                 vert[i].v.cn[3] = ((f32)(400*400*2 - dist) / (f32)(400*400*2) * 255);
             } else if (vert[i].v.cn[3] != 0) {

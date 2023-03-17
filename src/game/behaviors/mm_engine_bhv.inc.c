@@ -269,6 +269,7 @@ void bhv_golden_crate_loop(void) {
         // save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
         save_file_set_golden_goombas((o->oBehParams >> 8) & 0xFF);
         obj = spawn_object(o, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+        obj->oBehParams = o->oBehParams;
         obj->oVelY = 20.0f;
     }
     if (o->oDistanceToMario < 150.0f) {
@@ -327,6 +328,12 @@ s32 golden_goomba_turn_away_from_doors(void) {
 
 void golden_goomba_behavior(void) {
     f32 animSpeed;
+    if (((o->oBehParams >> 8) & 0xFF) == 10 || ((o->oBehParams >> 8) & 0xFF) == 11) {
+        o->oForwardVel = 0.0f;
+        if (o->os16110 <= 2999) {
+            o->os16110 = 3009;
+        }
+    }
     cur_obj_update_floor_and_walls();
     cur_obj_move_standard(-78);
     if (o->oFloor != NULL && o->oMoveFlags & OBJ_MOVE_MASK_ON_GROUND &&

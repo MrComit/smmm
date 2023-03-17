@@ -10334,3 +10334,14 @@ const BehaviorScript bhvCSButtonManager[] = {
         // CALL_NATIVE(bhv_cs_button_manager_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFiveBlueCoinsSpawn[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_REPEAT(10),
+        DELAY(2),
+        SPAWN_CHILD(/*Model*/ MODEL_BLUE_COIN, /*Behavior*/ bhvMrIBlueCoin),
+    END_REPEAT(),
+    DEACTIVATE(),
+};
