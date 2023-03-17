@@ -631,65 +631,56 @@ swing ME around! A wimp\n\
 like you won't throw me\n\
 out of here! Never! Ha!"))
 
-DEFINE_DIALOG(DIALOG_068, 1, 5, 30, 200, _("\
-It's Lethal Lava Land!\n\
-If you catch fire or fall\n\
-into a pool of flames,\n\
-you'll be hopping mad, but\n\
-don't lose your cool.\n\
-You can still control\n\
-Mario--just try to keep\n\
-calm!"))
+DEFINE_DIALOG(DIALOG_068, 1, 4, 30, 200, _("\
+Mario! I've developed a new\n\
+tool for your Room Manager.\n\
+It's called the Star Piece\n\
+Tracker.\n\
+It helps you locate star pieces\n\
+when you're in the same room\n\
+as one.\n\
+\n\
+Red means it's far away, yellow\n\
+means you're getting closer, and\n\
+green means it's right under your\n\
+nose!\n\
+This should help you find all the\n\
+fragmented star pieces. If you'd\n\
+rather not use it though, you can\n\
+turn it off in the Options menu."))
 
-DEFINE_DIALOG(DIALOG_069, 1, 6, 30, 200, _("\
-Sometimes you'll bump into\n\
-invisible walls at the\n\
-edges of the painting\n\
-worlds. If you hit a wall\n\
-while flying, you'll bounce\n\
-back."))
+DEFINE_DIALOG(DIALOG_069, 1, 5, 30, 200, _("\
+Mario! Great work taking care\n\
+of those pesky Boos. \n\
+For your trouble, here's a\n\
+little present: some coins!\n\
+500, to be exact.\n\
+Keep it up! I'm counting on you."))
 
 DEFINE_DIALOG(DIALOG_070, 1, 5, 30, 200, _("\
-You can return to the\n\
-castle's main hall at any\n\
-time from the painting\n\
-worlds where the enemies\n\
-live.\n\
-Just stop, stand still,\n\
-press Start to pause the\n\
-game, then select\n\
-『Exit Course.』\n\
+Mario! Now that you've\n\
+captured so many Boos, I\n\
+finally figured out how to\n\
+modify the coin multiplier!\n\
 \n\
-You don't have to collect\n\
-all Power Stars in one\n\
-course before going on to\n\
-the next.\n\
-\n\
-Return later, when you're\n\
-more experienced, to pick\n\
-up difficult ones.\n\
-\n\
-\n\
-Whenever you find a Star,\n\
-a hint for finding the\n\
-next one will appear on\n\
-the course's start screen.\n\
-\n\
-You can, however, collect\n\
-any of the remaining\n\
-Stars next. You don't\n\
-have to recover the one\n\
-described by the hint."))
+From now on, instead of\n\
+starting at 5.0, it'll start\n\
+at 8.0! I'll accept my thank\n\
+you note in pen... Haha, just\n\
+kidding of course!"))
 
 DEFINE_DIALOG(DIALOG_071, 1, 3, 30, 200, _("\
-Danger Ahead!\n\
-Beware of the strange\n\
-cloud! Don't inhale!\n\
-If you feel faint, run for\n\
-higher ground and fresh\n\
-air!\n\
-Circle: Shelter\n\
-Arrow: Entrance-Exit"))
+Mario! You've done it!\n\
+You've captured every Boo in\n\
+this place!\n\
+As a token of my gratitude,\n\
+here's the key to my Treasury\n\
+\n\
+The room is on the first floor,\n\
+to the left of the staircase\n\
+leading to floor two.\n\
+Everything in there is yours,\n\
+Mario."))
 
 DEFINE_DIALOG(DIALOG_072, 1, 5, 30, 200, _("\
 High winds ahead!\n\

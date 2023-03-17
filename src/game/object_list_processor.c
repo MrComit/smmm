@@ -546,14 +546,14 @@ void mario_update_manager_upgrades(struct MarioState *m) {
     switch (boos) {
         case 5:
             if (!(flags & SAVE_TOAD_FLAG_TRACKER_1)) {
-                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_068)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_TRACKER_1, 1);
                 }
             }
             break;
         case 10:
             if (!(flags & SAVE_TOAD_FLAG_COINS_2)) {
-                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_069)) {
                     m->numCoins += 500;
                     save_file_set_newflags(SAVE_TOAD_FLAG_COINS_2, 1);
                 }
@@ -561,14 +561,14 @@ void mario_update_manager_upgrades(struct MarioState *m) {
             break;
         case 15:
             if (!(flags & SAVE_TOAD_FLAG_MULTI_3)) {
-                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_070)) {
                     save_file_set_newflags(SAVE_TOAD_FLAG_MULTI_3, 1);
                 }
             }
             break;
         case 20:
             if (!(flags & SAVE_TOAD_FLAG_TREASURE_4)) {
-                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_071)) {
                     obj = spawn_object(gMarioObject, MODEL_BIG_KEY, bhvBigKey);
                     obj->oBehParams2ndByte = 15;
                     obj->oFaceAngleRoll = 0xF000;
