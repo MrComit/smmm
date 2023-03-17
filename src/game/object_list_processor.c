@@ -277,7 +277,7 @@ Vec3f sToadFriendWarp1 = {438.67, 0, 11512.5};
 s32 sToadFriendSubAct = 0;
 
 void mario_update_friend_l1_loop(struct MarioState *m) {
-    u32 flags = save_file_get_newflags(1);
+    u32 flags = save_file_get_newflags(1) & ~0xF0000000;
     u32 index = CL_count_bits(flags);
     struct Object *obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvToadFriend);
     if (obj == NULL)
@@ -387,7 +387,7 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
 
 
 void mario_update_friend_l6_loop(struct MarioState *m) {
-    u32 flags = save_file_get_newflags(1) & ~0b1111;
+    u32 flags = (save_file_get_newflags(1) & ~0b1111) & ~0xF0000000;
     u32 index = CL_count_bits(flags);
     struct Object *obj;
     switch (index) {
@@ -510,6 +510,81 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
     }
 }
 
+s32 sToadUpgradeAct = 0;
+
+s32 mario_update_manager_upgrade_action(struct MarioState *m, s32 dialogId) {
+    if (sToadUpgradeAct < 50) {
+        if (!(gTimeStopState & TIME_STOP_ENABLED) && (cur_obj_nearest_object_with_behavior(bhvBooSavePrompt) == NULL)) {
+            sToadUpgradeAct++;
+        }
+    } else if (sToadUpgradeAct == 50) {
+        play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+        gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
+        sToadUpgradeAct = 51;
+        set_mario_npc_dialog(1);
+    } else if (sToadUpgradeAct == 51) {
+        set_mario_npc_dialog(1);
+        if (gPlayer1Controller->buttonPressed & A_BUTTON) {
+            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
+            sToadUpgradeAct = 52;
+        }
+    } else {                
+        if (CL_NPC_Dialog(dialogId)) {
+            stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+            sToadUpgradeAct = 0;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+
+void mario_update_manager_upgrades(struct MarioState *m) {
+    struct Object *obj;
+    s32 boos = CL_count_bits(save_file_get_boos());
+    s32 flags = save_file_get_newflags(1);
+    switch (boos) {
+        case 5:
+            if (!(flags & SAVE_TOAD_FLAG_TRACKER_1)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_TRACKER_1, 1);
+                }
+            }
+            break;
+        case 10:
+            if (!(flags & SAVE_TOAD_FLAG_COINS_2)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                    m->numCoins += 500;
+                    save_file_set_newflags(SAVE_TOAD_FLAG_COINS_2, 1);
+                }
+            }
+            break;
+        case 15:
+            if (!(flags & SAVE_TOAD_FLAG_MULTI_3)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                    save_file_set_newflags(SAVE_TOAD_FLAG_MULTI_3, 1);
+                }
+            }
+            break;
+        case 20:
+            if (!(flags & SAVE_TOAD_FLAG_TREASURE_4)) {
+                if (mario_update_manager_upgrade_action(m, DIALOG_038)) {
+                    obj = spawn_object(gMarioObject, MODEL_BIG_KEY, bhvBigKey);
+                    obj->oBehParams2ndByte = 15;
+                    obj->oFaceAngleRoll = 0xF000;
+                    obj->oFaceAngleYaw = 0;
+                    obj->oPosX = m->pos[0];
+                    obj->oPosZ = m->pos[2];
+                    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                    obj->oAnimState = 1;
+                    save_file_set_newflags(SAVE_TOAD_FLAG_TREASURE_4, 1);
+                }
+
+            }
+            break;
+    }
+}
+
 extern s32 gLowGrav;
 
 void mario_update_toad_friend(struct MarioState *m) {
@@ -531,6 +606,7 @@ void mario_update_toad_friend(struct MarioState *m) {
             break;
 #endif
     }
+    mario_update_manager_upgrades(m);
 }
 
 s8 sLevelRoomOffsets[] = {0, 14, 32, 36, 41, 48, 64, 0, 0, 0, 0,};

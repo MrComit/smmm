@@ -1297,7 +1297,11 @@ extern s32 gBossPrecoins;
 void bhv_shyguy_boss_init(void) {
     obj_set_hitbox(o, &sShyguyBossHitbox);
     o->oOpacity = 0xFF;
-    gMultiplierUpper = 5;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MULTI_3) {
+        gMultiplierUpper = 8;
+    } else {
+        gMultiplierUpper = 5;
+    }
     gMultiplierLower = 0;
     if (save_file_get_boos() & (1 << 0x0E)) {
         o->activeFlags = 0;

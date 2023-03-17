@@ -74,7 +74,11 @@ extern s32 gBossPrecoins;
 void bhv_koopa_boss_init(void) {
     o->oHealth = 2;
     // o->oFloat10C = 5.0f;
-    gMultiplierUpper = 5;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MULTI_3) {
+        gMultiplierUpper = 8;
+    } else {
+        gMultiplierUpper = 5;
+    }
     gMultiplierLower = 0;
 }
 

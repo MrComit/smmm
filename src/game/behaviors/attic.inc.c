@@ -330,7 +330,11 @@ void bhv_attic_bully_init(void) {
 
     o->oAction = 8;
     o->oPosY += 2000.0f;
-    gMultiplierUpper = 5.0f;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MULTI_3) {
+        gMultiplierUpper = 8;
+    } else {
+        gMultiplierUpper = 5;
+    }
 }
 
 

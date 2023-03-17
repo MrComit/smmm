@@ -468,7 +468,11 @@ void bhv_shadow_boss_init(void) {
     //o->os16FA = o->oRoom - 7;
     o->oVelY = 30.0f;
     // o->oFloat10C = 5.0f;
-    gMultiplierUpper = 5;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MULTI_3) {
+        gMultiplierUpper = 8;
+    } else {
+        gMultiplierUpper = 5;
+    }
     gMultiplierLower = 0;
     o->oObj100 = cur_obj_nearest_object_with_behavior(bhvMastersPlate);
     if (o->oObj100 == NULL)

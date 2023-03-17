@@ -178,10 +178,10 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_TOAD_FLAG_026               /* 0x02000000 */ (1 << 25)
 #define SAVE_TOAD_FLAG_027               /* 0x04000000 */ (1 << 26)
 #define SAVE_TOAD_FLAG_028               /* 0x08000000 */ (1 << 27)
-#define SAVE_TOAD_FLAG_029               /* 0x10000000 */ (1 << 28)
-#define SAVE_TOAD_FLAG_030               /* 0x20000000 */ (1 << 29)
-#define SAVE_TOAD_FLAG_031               /* 0x40000000 */ (1 << 30)
-#define SAVE_TOAD_FLAG_032               /* 0x80000000 */ (1 << 31)
+#define SAVE_TOAD_FLAG_TRACKER_1         /* 0x10000000 */ (1 << 28)
+#define SAVE_TOAD_FLAG_COINS_2           /* 0x20000000 */ (1 << 29)
+#define SAVE_TOAD_FLAG_MULTI_3           /* 0x40000000 */ (1 << 30)
+#define SAVE_TOAD_FLAG_TREASURE_4        /* 0x80000000 */ (1 << 31)
 
 
 

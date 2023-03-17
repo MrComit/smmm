@@ -2510,7 +2510,8 @@ void render_pause_options(void) {
     s8 trackerCheck = (flags & SAVE_OPTION_TRACKER) != FALSE;
     s8 camCheck = save_file_get_sensitivity();
     s8 musicC2, trackerC2, camC2;
-    handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogOptionsIndex, 1, 3);
+    s32 hasTracker = save_file_get_newflags(1) & SAVE_TOAD_FLAG_TRACKER_1;
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogOptionsIndex, 1, hasTracker != 0 ? 3 : 2);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
@@ -2527,14 +2528,16 @@ void render_pause_options(void) {
     }
     y2 += 15;
 
-    if (!trackerCheck) {
-        x = get_str_x_pos_from_center(OPT_X, textTrackerOn, 1.0f);
-        print_generic_string(x, OPT_Y - y2, textTrackerOn);
-    } else {
-        x = get_str_x_pos_from_center(OPT_X, textTrackerOff, 1.0f);
-        print_generic_string(x, OPT_Y - y2, textTrackerOff);
+    if (hasTracker) {
+        if (!trackerCheck) {
+            x = get_str_x_pos_from_center(OPT_X, textTrackerOn, 1.0f);
+            print_generic_string(x, OPT_Y - y2, textTrackerOn);
+        } else {
+            x = get_str_x_pos_from_center(OPT_X, textTrackerOff, 1.0f);
+            print_generic_string(x, OPT_Y - y2, textTrackerOff);
+        }
+        y2 += 15;
     }
-    y2 += 15;
 
     textRCAM[27] = camCheck;
     textRCAM[28] = 0xFF;
@@ -2551,10 +2554,19 @@ void render_pause_options(void) {
             }
             break;
         case 2:
-            trackerC2 = trackerCheck;
-            handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &trackerCheck, 0, 1);
-            if (trackerC2 != trackerCheck) {
-                save_file_set_options(SAVE_OPTION_TRACKER);
+            if (hasTracker) {
+                trackerC2 = trackerCheck;
+                handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &trackerCheck, 0, 1);
+                if (trackerC2 != trackerCheck) {
+                    save_file_set_options(SAVE_OPTION_TRACKER);
+                }
+            } else {
+                x2 = 80;
+                camC2 = camCheck;
+                handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &camCheck, 1, 5);
+                if (camC2 != camCheck) {
+                    save_file_set_sensitivity(camCheck);
+                }
             }
             break;
         case 3:
@@ -3555,7 +3567,7 @@ void spawn_map_1(void) {
 
     spawn_map_key(395, 793, 0);
     spawn_map_key(0, 1271, 1);
-    spawn_map_key(-140, 1166, 31);
+    spawn_map_key(-140, 1166, 15);
 }
 
 
@@ -4315,7 +4327,11 @@ void print_multiplier(void) {
         gMultiplierAlpha = approach_s16_symmetric(gMultiplierAlpha, 255, 8);
         calc_multiplier();
     } else {
-        gMultiplierUpper = 5;
+        if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MULTI_3) {
+            gMultiplierUpper = 8;
+        } else {
+            gMultiplierUpper = 5;
+        }
         gMultiplierLower = 0;
         gMultiplierBool = 0;
         gMultiplierFlame = 0;

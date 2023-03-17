@@ -84,7 +84,11 @@ void bhv_room_boo_init(void) {
     bhv_boo_init();
     //o->activeFlags = 0;
     // o->oFloatF4 = 5.0f;
-    gMultiplierUpper = 5;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MULTI_3) {
+        gMultiplierUpper = 8;
+    } else {
+        gMultiplierUpper = 5;
+    }
     gMultiplierLower = 0;
     gMarioState->numBooCoins = 0;
     if (save_file_get_boos() & (1 << o->oBehParams2ndByte)) {

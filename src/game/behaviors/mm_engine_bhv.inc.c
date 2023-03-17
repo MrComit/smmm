@@ -733,6 +733,16 @@ void bhv_broken_key_loop(void) {
 }
 
 void bhv_big_key_loop(void) {
+    if (o->oAnimState == 1) {
+        obj_set_hitbox(o, &sSmallKeyHitbox);
+        o->oPosX = gMarioState->pos[0];
+        o->oPosY = gMarioState->pos[1];
+        o->oPosZ = gMarioState->pos[2];
+        if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+            o->activeFlags = 0;
+            o->oInteractStatus = 0;
+        }
+    }
     cur_obj_scale(0.3f);
     if (o->oAngleVelYaw > 0x400)
         o->oAngleVelYaw -= 0x100;
