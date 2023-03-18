@@ -482,37 +482,159 @@ DEFINE_DIALOG(DIALOG_047, 1, 2, 95, 200, _("\
 Hi! I'll prepare the\n\
 cannon for you!"))
 
-DEFINE_DIALOG(DIALOG_048, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_048, 1, 6, 30, 200, _("\
 Journal Entry 01\n\
-conditions! Please enter"))
+June 7th, 2033.\n\
+Today I start work on my most\n\
+ambitious invention to date.\n\
+In only a few months time,\n\
+there will be no more Bowser.\n\
+No more Kamek, no more \n\
+Koopalings, no more Broodals,\n\
+no more Cackletta, or Fawful,\n\
+or Shroobs or any of the\n\
+glorified insects that have\n\
+plagued this kingdom. \n\
+No more princess kidnapping,\n\
+and no more treacherous\n\
+journeys for Mario to risk his\n\
+life on. \n\
+There will be... peace."))
 
 DEFINE_DIALOG(DIALOG_049, 1, 5, 30, 200, _("\
 Journal Entry 02\n\
-Use it to jump from wall"))
+June 13th, 2033.\n\
+It's always the same. The\n\
+princess gets captured, Mario\n\
+travels through 8 different\n\
+worlds, he takes down Bowser\n\
+- peace at last! \n\
+All is right in the world...\n\
+until next season when it\n\
+happens all over again.\n\
+I can hardly stand to think\n\
+about it these days, let alone\n\
+watch it happen.\n\
+It's maddening to watch the\n\
+status quo perpetuate itself\n\
+like this while everyone just\n\
+sits back and... accepts it.\n\
+Well I don't, something has to\n\
+change."))
 
-DEFINE_DIALOG(DIALOG_050, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_050, 1, 5, 30, 200, _("\
 Journal Entry 03\n\
-Or press [Z] while in the"))
+June 15th, 2033.\n\
+I've had my first big\n\
+breakthrough - who would've\n\
+thought just adding a couple of\n\
+neutrons and protons would've\n\
+been so easy! \n\
+Now that I have these elements,\n\
+I can begin to move forward with\n\
+my first big experiment."))
 
 DEFINE_DIALOG(DIALOG_051, 1, 6, 30, 200, _("\
 Journal Entry 04\n\
-Left on the Control Stick."))
+June 18th, 2033.\n\
+My experiment was a success!\n\
+I simply thought of an image,\n\
+and out came a painting of it,\n\
+framed and everything!\n\
+I almost feel a sense of guilt\n\
+from how powerful this \n\
+technology truly is. In a matter\n\
+of seconds I was able create\n\
+what would've taken an ordinary\n\
+person days.\n\
+With this tool in the wrong\n\
+hands, serious irreparable\n\
+damage could be caused. But in\n\
+my hands? Bowser doesn't stand\n\
+a ghost of a chance.\n\
+\n\
+Now comes the fun part - \n\
+testing the limitations of\n\
+this invention."))
 
-DEFINE_DIALOG(DIALOG_052, 1, 5, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_052, 1, 6, 30, 200, _("\
 Journal Entry 05\n\
-Somersault, run, do a"))
+July 2nd, 2033. \n\
+Today I made a new friend.\n\
+Well, he's technically me.\n\
+But it still counts! He's so\n\
+much fun to hang around.\n\
+He wrote that part, not me.\n\
+Well, it was written by ME but\n\
+not ME ME. Oh there I go\n\
+explaining myself again, as if\n\
+anyone else is gonna read this.\n\
+\n\
+I'm just writing this for me.\n\
+And also me I suppose."))
 
 DEFINE_DIALOG(DIALOG_053, 1, 5, 30, 200, _("\
 Journal Entry 06\n\
-course, a red number will"))
+July 6th, 2033.\n\
+I ran into a bit of a setback.\n\
+I got a bit too bold with my\n\
+experiments and, well, let's\n\
+just say that 40,000 coins\n\
+worth of ectoplasm is now\n\
+contaminated by some comically\n\
+large lemon slices. Oops!\n\
+\n\
+Well, it's times like these\n\
+that I keep myself focused on\n\
+the goal at hand. The road to\n\
+success is filled with failure\n\
+- but you must trudge on!\n\
+Keep your eye on the prize."))
 
 DEFINE_DIALOG(DIALOG_054, 1, 5, 30, 200, _("\
 Journal Entry 07\n\
-up, press forward on the"))
+July 13th, 2033.\n\
+In just a matter of days,\n\
+the greatest and most\n\
+revolutionary invention I have\n\
+ever made (and will ever make)\n\
+will be completed, and it's \n\
+getting almost impossible to\n\
+contain my excitement.\n\
+\n\
+This must have been what \n\
+Leonartoad da Vinci felt when\n\
+he was putting the finishing\n\
+touches onto the Goomba Lisa."))
 
-DEFINE_DIALOG(DIALOG_055, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_055, 1, 5, 30, 200, _("\
 Journal Entry 08\n\
-howzit goin'? Step right"))
+July 15th, 2033.\n\
+It's finally complete. My\n\
+portal to the Thought Realm.\n\
+\n\
+Once I turn it on, I will be\n\
+able to seamlessly transform\n\
+my thoughts into matter.\n\
+\n\
+\n\
+Any idea, any plan, any\n\
+invention hypothetically\n\
+possible or impossible will\n\
+be at my fingertips.\n\
+\n\
+There is simply no goal that\n\
+will be out of my reach - \n\
+and it is then that I will\n\
+be able to take down\n\
+Bowser once and for all.\n\
+There wont be any continues,\n\
+and there wont be a sequel,\n\
+he will be DEAD and neither\n\
+him nor any of his minions\n\
+will be able to wreak havoc\n\
+over the Mushroom Kingdom\n\
+ever again!"))
 
 DEFINE_DIALOG(DIALOG_056, 1, 6, 30, 200, _("\
 You brrrr-oke my record!\n\
