@@ -649,6 +649,7 @@ void mario_l_to_levitate(void) {
 }
 
 extern s16 gEdgeLengths[3];
+extern s32 gStarPieceReward;
 /**
  * Mario's primary behavior update function.
  */
@@ -690,6 +691,17 @@ void bhv_mario_update(void) {
     }
 #endif
 
+
+    if (gStarPieceReward >= 0) {
+        if (gStarPieceReward == 120) {
+            gMarioState->numCoins += 1000;
+        }
+        gStarPieceReward--;
+        if ((gStarPieceReward / 15) & 1) {
+            print_text(10, 30, "ALL STAR PIECES COLLECTED", 1);
+            print_text(50, 10, "+1000 COINS", 1);
+        }
+    }
     // if (gMarioState->controller->buttonDown & Z_TRIG) {
     //     print_text_fmt_int(50, 8*20, "HELLO WORLD", 0, 0);
     //     print_text_fmt_int(50, 7*20, "LOREM IPSUM", 0, 1);

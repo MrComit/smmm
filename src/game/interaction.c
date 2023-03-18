@@ -772,12 +772,14 @@ extern s32 gHudLowerTimer;
 extern s32 gHudLowerTimer2;
 extern s32 gHudLowerTimer3;
 
+s32 gStarPieceReward = -1;
 
 u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     u32 starKeyIndex;
     u32 starGrabAction;// = ACT_STAR_DANCE_EXIT;
     u32 noExit = 1;//(o->oInteractionSubtype & INT_SUBTYPE_NO_EXIT) != 0;
     u32 isKey = 0;
+    s32 index;
     s32 flags;
     if (o->oInteractionSubtype & INT_SUBTYPE_SMALL_KEY) {
         isKey = 1;
@@ -825,6 +827,12 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         } else {
             gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
             save_file_set_star_piece(o->oBehParams >> 24);
+            index = (o->oBehParams >> 24) - ((o->oBehParams >> 24) % 5);
+            index = ((1 << index++) | (1 << index++) | (1 << index++) | (1 << index++) | (1 << index));
+            flags = save_file_get_star_piece();
+            if ((flags & index) == index) {
+                gStarPieceReward = 120;
+            }
             gHudLowerTimer2 = 0;
         }
         //save_file_collect_star_or_key(m->numCoins, starIndex);
