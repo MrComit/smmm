@@ -545,6 +545,7 @@ static void boo_act_3(void) {
                 play_course_clear();
                 break;
         }
+        gHudDisplay.flags |= HUD_DISPLAY_FLAG_BOO_COUNT;
         if (o->oBehParams2ndByte == 4 || o->oBehParams2ndByte == 0xA || o->oBehParams2ndByte == 0xE) {
             play_course_clear();
             obj = spawn_object(o, MODEL_NONE, bhvChapterEndPrompt);

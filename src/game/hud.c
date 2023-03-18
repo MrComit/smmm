@@ -766,6 +766,7 @@ void render_targets(void) {
 }
 
 void create_dl_scale_matrix(s8 pushOp, f32 x, f32 y, f32 z);
+void create_dl_rotation_matrix(s8 pushOp, f32 a, f32 x, f32 y, f32 z);
 
 void render_target(struct Object *obj) {
     create_dl_translation_matrix(MENU_MTX_PUSH, (f32)obj->os16F4, (f32)obj->os16F6, 0.0f);
@@ -1067,6 +1068,64 @@ void render_hud_coins(void) {
 	}
 }
 
+
+
+
+s32 gHudTopYBoos = 219;
+
+void render_hud_boos(void) {
+	s32 boos = CL_count_bits(save_file_get_boos());
+	s32 palette = (boos >= 20) ? 6 : 1;
+
+	if (boos == 0) {
+		gHudTopYBoos = gHudYMax;
+		return;
+	}
+
+    if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO_COUNT) {
+        gHudTopYBoos = approach_s16_symmetric(gHudTopYBoos, gHudYMin, 2);
+    } else {
+        gHudTopYBoos = approach_s16_symmetric(gHudTopYBoos, gHudYMax, 2);
+		if (gHudTopYBoos >= gHudYMax) {
+			return;
+		}
+    }
+
+	create_dl_translation_matrix(MENU_MTX_PUSH, 190, gHudTopYBoos + 31, 0);
+	create_dl_rotation_matrix(MENU_MTX_NOPUSH, 180.0f, 0.0f, 0.0f, 1.0f);
+	if (boos > 9) {
+		create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.25f, 1.0f, 1.0f);
+		create_dl_translation_matrix(MENU_MTX_PUSH, -12, 0, 0);
+	}
+
+	gDPSetEnvColor(gDisplayListHead++, 0x04, 0x18, 0x22, 255);
+	gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x04, 0x18, 0x22, 255);
+	gSPDisplayList(gDisplayListHead++, manager_hud_MANAGER_mesh);
+	gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    print_text(270 - 130, gHudTopYBoos, "}", 0); // 'Boo' glyph
+    print_text(286 - 130, gHudTopYBoos, "*", palette); // 'X' glyph
+    print_text_fmt_int(300 - 130, gHudTopYBoos, "%d", boos, palette);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #ifdef VERSION_JP
 #define HUD_STARS_X 73
 #else
@@ -1234,6 +1293,12 @@ extern s32 sLevelToChapter[COURSE_MAX];
 
 void render_hud_starpieces(void) {
     s16 i, h;
+
+	if (save_file_get_star_piece() == 0) {
+		sStarPieceRectX = 0;
+		return;
+	}
+
     if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE) {
         sStarPieceRectX = approach_s16_symmetric(sStarPieceRectX, 32, 4);
     } else {
@@ -1510,6 +1575,7 @@ void render_hud(void) {
         }
         if (sCurrPlayMode == 2) {
             gHudTopY = gHudYMin;
+			gHudTopYBoos = gHudYMin;
 			if (should_display_brokenkey()) {
 				sBrokenKeyRectY = 176;
 			}
@@ -1521,6 +1587,10 @@ void render_hud(void) {
         if (gHudTopY < gHudYMax && gCamera->cutscene != CUTSCENE_OPENING && sCurrPlayMode != 2) {
             render_hud_coins();
         }
+
+		if (sCurrPlayMode != 2) {
+			render_hud_boos();
+		}
 
 		if (sCurrPlayMode != 2) {
         	render_hud_keys();
@@ -1554,6 +1624,7 @@ void render_hud(void) {
 		if (sCurrPlayMode == 2 && gPauseHudFirstFrame < 2) {
 			render_hud_starpieces();
 			render_hud_coins();
+			render_hud_boos();
 			render_hud_keys();
 			gPauseHudFirstFrame++;
 		}

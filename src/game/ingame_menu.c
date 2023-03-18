@@ -2922,6 +2922,7 @@ s16 render_pause_courses_and_castle(void) {
 
             render_hud_starpieces();
             render_hud_coins();
+            render_hud_boos();
             render_hud_keys();
 
             if (gPlayer3Controller->buttonPressed & A_BUTTON

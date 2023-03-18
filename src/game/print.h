@@ -16,6 +16,7 @@
 #define GLYPH_AMPERSAND       39
 #define GLYPH_PERCENT         40
 #define GLYPH_GEAR            41 // custom
+#define GLYPH_BOO             42 // custom
 #define GLYPH_MULTIPLY        50
 #define GLYPH_COIN            51
 #define GLYPH_MARIO_HEAD      52

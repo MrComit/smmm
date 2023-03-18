@@ -1100,6 +1100,7 @@ void update_hud_values(void) {
                 gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
                 if (sTimer2 > 180) {
                     gHudDisplay.flags |= HUD_DISPLAY_FLAG_STAR_PIECE;
+                    gHudDisplay.flags |= HUD_DISPLAY_FLAG_BOO_COUNT;
                     gHudLowerTimer2 = 130;
                     if (should_display_brokenkey()) {
                         gHudDisplay.flags |= HUD_DISPLAY_FLAG_BROKENKEY;
@@ -1129,12 +1130,12 @@ void update_hud_values(void) {
             gHudLowerTimer = 0;
         }
 
-        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE) {
+        if (gHudDisplay.flags & (HUD_DISPLAY_FLAG_STAR_PIECE | HUD_DISPLAY_FLAG_BOO_COUNT)) {
             gHudLowerTimer2++;
         }
 
-        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_STAR_PIECE && gHudLowerTimer2 > 150 && sTimer2 < 180) {
-            gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_STAR_PIECE;
+        if (gHudDisplay.flags & (HUD_DISPLAY_FLAG_STAR_PIECE | HUD_DISPLAY_FLAG_BOO_COUNT) && gHudLowerTimer2 > 150 && sTimer2 < 180) {
+            gHudDisplay.flags &= ~(HUD_DISPLAY_FLAG_STAR_PIECE | HUD_DISPLAY_FLAG_BOO_COUNT);
             gHudLowerTimer2 = 0;
         }
 
