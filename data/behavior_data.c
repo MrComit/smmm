@@ -10234,6 +10234,14 @@ const BehaviorScript bhvBooSavePrompt[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvChapterEndPrompt[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_chapter_end_prompt_loop),
+    END_LOOP(),
+};
+
 
 const BehaviorScript bhvCastlePlant[] = {
     BEGIN(OBJ_LIST_DEFAULT),
@@ -10336,7 +10344,7 @@ const BehaviorScript bhvCSButtonManager[] = {
 };
 
 
-const BehaviorScript bhvFiveBlueCoinsSpawn[] = {
+const BehaviorScript bhvTenBlueCoinsSpawn[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     BEGIN_REPEAT(10),

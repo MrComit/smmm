@@ -793,6 +793,19 @@ s32 save_file_get_cap_pos(Vec3s capPos) {
 }
 
 
+
+u8 save_file_get_menu_challenges(void) {
+    return gSaveBuffer.menuData[0].challenges;
+}
+
+void save_file_set_menu_challenges(u16 challenge) {
+    gSaveBuffer.menuData[0].challenges |= challenge;
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
+
 u8 save_file_get_sensitivity(void) {
     if (gSaveBuffer.menuData[0].camSens == 0) {
         gSaveBuffer.menuData[0].camSens = 3;

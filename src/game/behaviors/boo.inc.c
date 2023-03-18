@@ -24,6 +24,22 @@ static s16 sCourtyardBooTripletPositions[][3] = {
 extern s32 gDialogResponse;
 
 
+void bhv_chapter_end_prompt_loop(void) {
+    vec3f_copy(&o->oPosX, gMarioState->pos);
+    if (o->oTimer > 10 && CL_NPC_Dialog(o->oBehParams2ndByte)) {
+        save_file_set_menu_challenges(1 << o->oF4);
+
+        disable_time_stop();
+        enable_background_sound();
+        // o->activeFlags = 0;
+        set_mario_npc_dialog(0);
+    }
+    if (save_file_get_menu_challenges() & (1 << o->oF4)) {
+        o->activeFlags = 0;
+    }
+}
+
+
 void bhv_boo_save_prompt_loop(void) {
     s32 dialogResponse = CL_NPC_Dialog_Options(o->oBehParams2ndByte);
     if (gDialogResponse != DIALOG_RESPONSE_NONE) {
@@ -528,6 +544,18 @@ static void boo_act_3(void) {
                 // play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
                 play_course_clear();
                 break;
+        }
+        if (o->oBehParams2ndByte == 4 || o->oBehParams2ndByte == 0xA || o->oBehParams2ndByte == 0xE) {
+            play_course_clear();
+            obj = spawn_object(o, MODEL_NONE, bhvChapterEndPrompt);
+            obj->oBehParams2ndByte = DIALOG_061;
+            if (o->oBehParams2ndByte == 4) {
+                obj->oF4 = 0;
+            } else if (o->oBehParams2ndByte == 0xA) {
+                obj->oF4 = 1;
+            } else if (o->oBehParams2ndByte == 0xE) {
+                obj->oF4 = 2;
+            }
         }
     }
 }

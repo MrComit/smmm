@@ -563,10 +563,10 @@ Do you want to save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_061, 1, 4, 30, 200, _("\
-BRRR! Frostbite Danger!\n\
-Do not swim here.\n\
-I'm serious.\n\
-/--The Penguin"))
+You've completed this chapter!\n\
+The challenge for this chapter\n\
+is now available in the file\n\
+select menu."))
 
 DEFINE_DIALOG(DIALOG_062, 1, 3, 30, 200, _("\
 Hidden inside the green\n\

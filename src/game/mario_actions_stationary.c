@@ -1144,10 +1144,10 @@ void handle_ground_pound_floor(struct MarioState *m) {
             spawn_token(2, 0x2D, sSpawnedTokens[7], 0, 0x0000);
             break;
         case 16:
-            spawn_object(gMarioObject, MODEL_NONE, bhvFiveBlueCoinsSpawn);
+            spawn_object(gMarioObject, MODEL_NONE, bhvTenBlueCoinsSpawn);
             break;
         case 17:
-            spawn_object(gMarioObject, MODEL_NONE, bhvFiveBlueCoinsSpawn);
+            spawn_object(gMarioObject, MODEL_NONE, bhvTenBlueCoinsSpawn);
             break;
     }
     save_file_set_gpflags(1 << index);

@@ -513,6 +513,7 @@ void bhv_ghost_bully_init(void) {
 }
 
 void bhv_ghost_bully_loop(void) {
+    struct Object *obj;
     s16 actCheck = o->os16102;
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ELEVATOR_BOSS) {
         o->activeFlags = 0;
@@ -680,6 +681,11 @@ void bhv_ghost_bully_loop(void) {
                 o->activeFlags = 0;
                 save_file_set_newflags(SAVE_NEW_FLAG_ELEVATOR_BOSS, 0);
                 gMarioState->numCoins += 100;
+
+                play_course_clear();
+                obj = spawn_object(o, MODEL_NONE, bhvChapterEndPrompt);
+                obj->oBehParams2ndByte = DIALOG_061;
+                obj->oF4 = 3;
             }
             break;
     }

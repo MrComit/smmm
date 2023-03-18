@@ -60,6 +60,7 @@ struct MainMenuSaveData {
     u16 menuRNG;
     u8 options;
     u8 camSens;
+    u8 challenges;
     u8 soundMode: 2;
 
 #ifdef WIDE
@@ -296,6 +297,8 @@ s32 save_file_get_cap_pos(Vec3s capPos);
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
 s32 get_chapter_from_save_data(s32 saveFile);
+u8 save_file_get_menu_challenges(void);
+void save_file_set_menu_challenges(u16 challenge);
 u8 save_file_get_sensitivity(void);
 void save_file_set_sensitivity(u16 sens);
 u8 save_file_get_options(void);
