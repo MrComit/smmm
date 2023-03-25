@@ -14,8 +14,11 @@ const GeoLayout ssl_dl_101__Opening_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OpeningGround_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Pillar_003_mesh_layer_1),
 		GEO_ASM(0, geo_mind_static),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_Static_mesh_layer_2),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_Z93Paintings_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Z94Painting_010_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -43,6 +46,7 @@ const GeoLayout ssl_area_1[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
