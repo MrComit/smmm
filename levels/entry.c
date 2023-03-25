@@ -9,7 +9,7 @@
 
 
 // #ifdef SMMM_DEBUG
-// #define TEST_STAGE LEVEL_WF
+// #define TEST_STAGE LEVEL_SSL
 // #endif
 
 
@@ -23,7 +23,8 @@ const LevelScript level_script_entry[] = {
     EXECUTE(/*seg*/ 0x15, _scriptsSegmentRomStart, _scriptsSegmentRomEnd, level_main_scripts_entry),
     #else
     SET_REG(0),
-    EXECUTE(/*seg*/ 0x14, /*script*/ _introSegmentRomStart, /*scriptEnd*/ _introSegmentRomEnd, /*entry*/ level_intro_splash_screen),
+    EXECUTE(/*seg*/ 0x14, /*script*/ _introSegmentRomStart, /*scriptEnd*/ _introSegmentRomEnd, /*entry*/ level_intro_mario_head_regular),
+    // EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_mario_head_regular),
     #endif
     JUMP(/*target*/ level_script_entry),
 };
