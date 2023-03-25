@@ -21,6 +21,7 @@
 #define BACKGROUND_GREEN_SKY        7
 #define BACKGROUND_ABOVE_CLOUDS     8
 #define BACKGROUND_PURPLE_SKY       9
+#define BACKGROUND_L8_SKY           3
 
 // geo layout macros
 

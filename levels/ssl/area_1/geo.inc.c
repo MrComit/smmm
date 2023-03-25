@@ -14,6 +14,8 @@ const GeoLayout ssl_dl_101__Opening_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OpeningGround_mesh_layer_1),
+		GEO_ASM(0, geo_mind_static),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_Static_mesh_layer_2),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -24,7 +26,7 @@ const GeoLayout ssl_area_1[] = {
 		GEO_OPEN_NODE(),
 			GEO_NODE_ORTHO(100.0000),
 			GEO_OPEN_NODE(),
-				GEO_BACKGROUND(BACKGROUND_GREEN_SKY, geo_skybox_main),
+				GEO_BACKGROUND(BACKGROUND_L8_SKY, geo_skybox_main),
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_ZBUFFER(1),
@@ -40,6 +42,7 @@ const GeoLayout ssl_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };

@@ -863,6 +863,7 @@ extern const BehaviorScript bhvCSErasePrompt[];
 extern const BehaviorScript bhvCSButtonManager[];
 extern const BehaviorScript bhvTenBlueCoinsSpawn[];
 extern const BehaviorScript bhvChapterEndPrompt[];
+extern const BehaviorScript bhvFloorPeepa[];
 
 
 #endif // BEHAVIOR_DATA_H

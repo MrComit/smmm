@@ -10353,3 +10353,15 @@ const BehaviorScript bhvTenBlueCoinsSpawn[] = {
     END_REPEAT(),
     DEACTIVATE(),
 };
+
+const BehaviorScript bhvFloorPeepa[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SCALE(0, 130),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_floor_peepa_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_floor_peepa_loop),
+    END_LOOP(),
+};

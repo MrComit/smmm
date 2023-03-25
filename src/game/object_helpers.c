@@ -1573,6 +1573,23 @@ Gfx *geo_sunblock_opacity(s32 callContext, struct GraphNode *node, UNUSED void *
 }
 
 
+extern u8 ssl_dl_i8_static_i8[];
+
+Gfx *geo_mind_static(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // currentGraphNode = (struct GraphNodeGenerated *) node;
+        // currentGraphNode->fnNode.node.flags = 0x200 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        u16 *texture = segmented_to_virtual(&ssl_dl_i8_static_i8);
+        s32 i;
+        for (i = 0; i < 2048; i++) {
+            texture[i] = CL_RandomMinMaxU16(0x2000, 0xD000);
+            // texture[i] = random_u16();
+        }
+    }
+    return NULL;
+}
+
+
 
 
 /**
