@@ -24,5 +24,11 @@ void bhv_floor_peepa_loop(void) {
     o->oFaceAnglePitch = sins(o->os16F6) * 0x400;
     o->oFaceAngleYaw += 0x500;
 
+    if (o->oPosY <= o->oHomeY - 300.0f + (100.0f * o->oBehParams2ndByte)) {
+        cur_obj_hide();
+    } else {
+        cur_obj_unhide();
+    }
+
     o->oInteractStatus = 0;
 }
