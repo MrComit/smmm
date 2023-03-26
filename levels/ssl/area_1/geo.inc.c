@@ -13,6 +13,8 @@ const GeoLayout ssl_area_1_geo[] = {
 const GeoLayout ssl_dl_101__Opening_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_BG2_mesh_layer_2),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_BG2_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OpeningGround_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Pillar_003_mesh_layer_1),
 		GEO_ASM(0, geo_mind_static),
