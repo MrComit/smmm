@@ -36,6 +36,8 @@ const LevelScript level_ssl_entry[] = {
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
 	JUMP_LINK(script_func_global_1), 
 	JUMP_LINK(script_func_global_10), 
+	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CASTLE_DOOR, castle_door_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR, key_door_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -47,7 +49,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -21859, 385, 24269, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -21859, 385, 24269, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, -180, -21859, 385, 24269),
-		OBJECT(MODEL_PEEPA, -18913, 1307, 19110, 0, -90, 0, 0x00000000, bhvFloorPeepa),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -19963, 2068, 7128, 0, 0, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_PEEPA, -18913, 1307, 19110, 0, -90, 0, (1 << 24), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -18913, 1107, 19110, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -18913, 907, 19110, 0, -90, 0, (2 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19590, 1752, 16965, 0, -90, 0, 0x00000000, bhvFloorPeepa),

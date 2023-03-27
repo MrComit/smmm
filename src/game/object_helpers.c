@@ -1576,17 +1576,32 @@ Gfx *geo_sunblock_opacity(s32 callContext, struct GraphNode *node, UNUSED void *
 extern u8 ssl_dl_i8_static_i8[];
 
 Gfx *geo_mind_static(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    struct Object *obj;
+    dlStart = NULL;
+
     if (callContext == GEO_CONTEXT_RENDER) {
-        // currentGraphNode = (struct GraphNodeGenerated *) node;
-        // currentGraphNode->fnNode.node.flags = 0x200 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+        obj = CL_obj_nearest_object_behavior_params(bhvFloorPeepa, 1 << 24);
+        if (obj == NULL) {
+            return NULL;
+        }
+        currentGraphNode->fnNode.node.flags = 0x600 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
         u16 *texture = segmented_to_virtual(&ssl_dl_i8_static_i8);
         s32 i;
         for (i = 0; i < 2048; i++) {
             texture[i] = CL_RandomMinMaxU16(0x2000, 0xD000);
             // texture[i] = random_u16();
         }
+
+        gDPSetEnvColor(dlHead++, 255, 255, 255, obj->oOpacity);
+        gSPEndDisplayList(dlHead);
     }
-    return NULL;
+    return dlStart;
 }
 
 
