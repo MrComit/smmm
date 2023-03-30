@@ -8,6 +8,9 @@ const GeoLayout ssl_area_1_geo[] = {
 			GEO_BRANCH(1, ssl_dl_101__Opening_geo),
 			GEO_BRANCH(1, ssl_dl_102__Art_Gallery_geo),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -21859, 385, 24269, 0, -180, 0),
+		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -21859, 385, 24269, 0, -180, 0),
+		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -21859, 385, 24269, 0, -180, 0),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -30,7 +33,8 @@ const GeoLayout ssl_dl_101__Opening_geo[] = {
 const GeoLayout ssl_dl_102__Art_Gallery_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Cube_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_ArtGallery_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Red_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
