@@ -10,6 +10,7 @@
 #include "src/game/texscroll/ccm_texscroll.inc.h"
 #include "src/game/texscroll/hmc_texscroll.inc.h"
 #include "src/game/texscroll/lll_texscroll.inc.h"
+#include "src/game/texscroll/ssl_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif
