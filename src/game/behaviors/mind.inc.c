@@ -44,13 +44,14 @@ void bhv_painting_enemy_loop(void) {
             if (o->oDistanceToMario < 1000.0f) {
                 o->oAction = 1;
                 if (o->oBehParams2ndByte == 0) {
-                    spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+                    obj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
                 } else {
                     obj = spawn_object(o, MODEL_KOOPA, bhvKoopa);
                     obj->oPosX += 50.0f;
                     obj->oPosZ += 50.0f;
                     obj->oPosY = o->oPosY;
                 }
+                obj->oFaceAngleYaw = obj->oMoveAngleYaw += 0x8000;
                 o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
             }
             break;

@@ -34,6 +34,7 @@ const GeoLayout ssl_dl_102__Art_Gallery_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_ArtGallery_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_MovingBlocks_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Paintings_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
