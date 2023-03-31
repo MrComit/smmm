@@ -1,0 +1,16 @@
+extern const GeoLayout painting_enemy_switch_opt1[];
+extern const GeoLayout painting_enemy_geo[];
+extern u8 painting_enemy_i8_gradient_sphere_i8[];
+extern u8 painting_enemy_goomba_painting_ia8[];
+extern u8 painting_enemy_koopa_painting_ia8[];
+extern Vtx painting_enemy_bg_mesh_layer_1_vtx_0[4];
+extern Gfx painting_enemy_bg_mesh_layer_1_tri_0[];
+extern Vtx painting_enemy_penemy_mesh_layer_6_vtx_0[4];
+extern Gfx painting_enemy_penemy_mesh_layer_6_tri_0[];
+extern Gfx mat_painting_enemy_EHPaintingBackdrop_v4[];
+extern Gfx mat_painting_enemy_GoombaPainting_v4_001[];
+extern Gfx mat_painting_enemy_KoopaPainting_v4_001[];
+extern Gfx painting_enemy_bg_mesh_layer_1[];
+extern Gfx painting_enemy_penemy_mesh_layer_6[];
+extern Gfx painting_enemy_penemy_mesh_layer_6_mat_override_KoopaPainting_v4_001_0[];
+extern Gfx painting_enemy_material_revert_render_settings[];

@@ -879,5 +879,8 @@
 
 
 
+// LEVEL 8 MODELS - 0xFF TO 0xE2 ARE FREE
+#define MODEL_PAINTING_ENEMY      0xFF
+
 
 #endif // MODEL_IDS_H

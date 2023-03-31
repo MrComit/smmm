@@ -51,3 +51,6 @@
 #include "levels/ssl/areas/2/movtext.inc.c"
 
 #include "levels/ssl/leveldata.inc.c"
+
+#include "levels/ssl/painting_enemy/model.inc.c"
+#include "levels/ssl/painting_enemy/collision.inc.c"

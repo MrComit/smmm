@@ -27,3 +27,5 @@
 #include "levels/ssl/areas/3/geo.inc.c"
 
 #include "levels/ssl/geo.inc.c"
+
+#include "levels/ssl/painting_enemy/geo.inc.c"

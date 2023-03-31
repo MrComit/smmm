@@ -84,6 +84,10 @@ void bhv_koopa_init(void) {
     //} else {
         o->oKoopaAgility = 1.0f;
     //}
+
+    if (gCurrLevelNum != LEVEL_SSL || gMarioCurrentRoom != 2) {
+        CL_drop_to_floor();
+    }
 }
 
 /**

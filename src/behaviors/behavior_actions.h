@@ -1074,6 +1074,8 @@ void bhv_cs_options_button_loop(void);
 void bhv_chapter_end_prompt_loop(void);
 void bhv_floor_peepa_init(void);
 void bhv_floor_peepa_loop(void);
+void bhv_painting_enemy_init(void);
+void bhv_painting_enemy_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

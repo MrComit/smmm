@@ -38,6 +38,7 @@ const LevelScript level_ssl_entry[] = {
 	JUMP_LINK(script_func_global_10), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CASTLE_DOOR, castle_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR, key_door_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PAINTING_ENEMY, painting_enemy_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -65,6 +66,13 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, -19720, 2268, 10759, 0, -90, 0, 0x00000000, bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19720, 2068, 10759, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19720, 1868, 10759, 0, -90, 0, (2 << 16), bhvFloorPeepa),
+		OBJECT(MODEL_BOO, -19708, 2068, 3440, 0, 180, 0, (20 << 16), bhvRoomBoo),
+		OBJECT(MODEL_PAINTING_ENEMY, -17463, 3955, 7039, 0, 0, 0, 0x00000000, bhvPaintingEnemy),
+		OBJECT(MODEL_PAINTING_ENEMY, -18002, 2467, 6290, 0, 90, 0, 0x00000000, bhvPaintingEnemy),
+		OBJECT(MODEL_PAINTING_ENEMY, -22925, 2467, 6790, 0, -90, 0, 0x00000000, bhvPaintingEnemy),
+		OBJECT(MODEL_PAINTING_ENEMY, -22506, 2467, 1282, 0, 180, 0, (1 << 16), bhvPaintingEnemy),
+		OBJECT(MODEL_PAINTING_ENEMY, -21177, 2467, 1290, 0, 180, 0, (1 << 16), bhvPaintingEnemy),
+		OBJECT(MODEL_PAINTING_ENEMY, -21839, 2467, 809, 0, 180, 0, (1 << 16), bhvPaintingEnemy),
 		TERRAIN(ssl_area_1_collision),
 		ROOMS(ssl_area_1_collision_rooms),
 		MACRO_OBJECTS(ssl_area_1_macro_objs),
