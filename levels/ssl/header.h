@@ -92,4 +92,10 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/painting_enemy/collision_header.h"
 
+#include "levels/ssl/boogoo_goomba/geo_header.h"
+
+#include "levels/ssl/boogoo_koopa/geo_header.h"
+
+#include "levels/ssl/boogoo_shyguy/geo_header.h"
+
 #endif

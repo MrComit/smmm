@@ -39,6 +39,9 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CASTLE_DOOR, castle_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR, key_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTING_ENEMY, painting_enemy_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BG_GOOMBA, boogoo_goomba_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BG_KOOPA, boogoo_koopa_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BG_SHYGUY, boogoo_shyguy_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

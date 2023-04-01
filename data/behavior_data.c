@@ -10401,7 +10401,7 @@ const BehaviorScript bhvMiniShyguy[] = {
     // ANIMATE(0),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
-    SCALE(/*Unused*/ 0, /*Field*/ 50),
+    SCALE(/*Unused*/ 0, /*Field*/ 100),
     CALL_NATIVE(bhv_mini_shyguy_init),
     CALL_NATIVE(bhv_goomba_init),
     BEGIN_LOOP(),

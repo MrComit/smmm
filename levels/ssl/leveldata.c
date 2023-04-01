@@ -54,3 +54,6 @@
 
 #include "levels/ssl/painting_enemy/model.inc.c"
 #include "levels/ssl/painting_enemy/collision.inc.c"
+#include "levels/ssl/boogoo_goomba/model.inc.c"
+#include "levels/ssl/boogoo_koopa/model.inc.c"
+#include "levels/ssl/boogoo_shyguy/model.inc.c"

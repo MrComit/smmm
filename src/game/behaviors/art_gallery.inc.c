@@ -25,7 +25,7 @@ void bhv_mini_shyguy_init(void) {
 
 void bhv_mini_shyguy_loop(void) {
     struct Object *obj;
-    cur_obj_scale(o->oGoombaScale);
+    // cur_obj_scale(o->oGoombaScale);
     cur_obj_update_floor_and_walls();
     // goomba_act_walk();
     if (o->oDistanceToMario < 1000.0f) {
@@ -58,7 +58,7 @@ void bhv_painting_enemy_respawn_loop(void) {
             yDif = absf(gMarioState->pos[1] - o->oPosY);
             if (gMarioState->pos[0] < -20000.0f && d < 500.0f && yDif < 500.0f && o->oTimer > 20) {
                 o->oAction = 1;
-                obj = spawn_object(o, MODEL_SHYGUY, bhvMiniShyguy);
+                obj = spawn_object(o, MODEL_BG_SHYGUY, bhvMiniShyguy);
                 obj->parentObj = obj;
                 obj->oFaceAngleYaw = obj->oMoveAngleYaw += 0x8000;
                 // o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
@@ -118,9 +118,9 @@ void bhv_painting_enemy_loop(void) {
             if (o->oDistanceToMario < 1000.0f) {
                 o->oAction = 1;
                 if (o->oBehParams2ndByte == 0) {
-                    obj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
+                    obj = spawn_object(o, MODEL_BG_GOOMBA, bhvGoomba);
                 } else {
-                    obj = spawn_object(o, MODEL_KOOPA, bhvKoopa);
+                    obj = spawn_object(o, MODEL_BG_KOOPA, bhvKoopa);
                     obj->oPosX += 50.0f;
                     obj->oPosZ += 50.0f;
                     obj->oPosY = o->oPosY;

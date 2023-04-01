@@ -383,6 +383,42 @@ Gfx *geo_update_opacity_and_color(s32 callContext, struct GraphNode *node, UNUSE
     return dlStart;
 }
 
+Vec3s sBooGooColors[4] = {
+    {0x9F, 0x00, 0x00},
+    {0x9F, 0x00, 0x00},
+    {0x9F, 0x00, 0x00},
+    {0x9F, 0x00, 0x00},
+};
+
+
+Gfx *geo_update_boogoo_color(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 index = 0;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        switch (gMarioCurrentRoom) {
+            case 2:
+                index = 0;
+                break;
+        }
+
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+
+        currentGraphNode->fnNode.node.flags = (1 /*currentGraphNode->parameter*/ << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        gDPSetEnvColor(dlHead++, sBooGooColors[index][0], sBooGooColors[index][1], sBooGooColors[index][2], 255);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
 
 
 Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUSED void *context) {

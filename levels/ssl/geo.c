@@ -29,3 +29,6 @@
 #include "levels/ssl/geo.inc.c"
 
 #include "levels/ssl/painting_enemy/geo.inc.c"
+#include "levels/ssl/boogoo_goomba/geo.inc.c"
+#include "levels/ssl/boogoo_koopa/geo.inc.c"
+#include "levels/ssl/boogoo_shyguy/geo.inc.c"
