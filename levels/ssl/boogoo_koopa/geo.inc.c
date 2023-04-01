@@ -94,6 +94,13 @@ const GeoLayout boogoo_koopa_DCue[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout boogoo_koopa_EPaintBrush[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, boogoo_koopa_root_brush_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout boogoo_koopa_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -143,7 +150,7 @@ const GeoLayout boogoo_koopa_geo[] = {
 										GEO_BRANCH(1, boogoo_koopa_CIcicleArma),
 										GEO_BRANCH(1, boogoo_koopa_DCue),
 										GEO_BRANCH(1, boogoo_koopa_AForkArma),
-										GEO_BRANCH(1, boogoo_koopa_AForkArma),
+										GEO_BRANCH(1, boogoo_koopa_EPaintBrush),
 									GEO_CLOSE_NODE(),
 								GEO_CLOSE_NODE(),
 							GEO_CLOSE_NODE(),

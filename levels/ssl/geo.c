@@ -32,3 +32,4 @@
 #include "levels/ssl/boogoo_goomba/geo.inc.c"
 #include "levels/ssl/boogoo_koopa/geo.inc.c"
 #include "levels/ssl/boogoo_shyguy/geo.inc.c"
+#include "levels/ssl/paintbrush/geo.inc.c"

@@ -42,6 +42,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BG_GOOMBA, boogoo_goomba_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_KOOPA, boogoo_koopa_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_SHYGUY, boogoo_shyguy_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PAINTBRUSH, paintbrush_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -74,6 +75,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_STAR_PIECE, -22234, 150, 25775, 0, 0, 0, (0x17 << 24), bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -22589, 150, 25775, 0, 0, 0, (0x18 << 24), bhvStarPiece),
 		OBJECT(MODEL_BOO, -19880, 2068, 2301, 0, 180, 0, (20 << 16), bhvRoomBoo),
+		OBJECT(MODEL_PAINTBRUSH, -24339, 2289, 3585, 0, 0, 0, 0x00000000, bhvPaintbrush),
 		OBJECT(MODEL_PAINTING_ENEMY, -17463, 3955, 7078, 0, 0, 0, 0x00000000, bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -17963, 2467, 6290, 0, 90, 0, 0x00000000, bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -22963, 2467, 5533, 0, -90, 0, 0x00000000, bhvPaintingEnemy),
@@ -82,6 +84,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PAINTING_ENEMY, -16963, 2467, 2847, 0, 90, 0, (1 << 16), bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -22963, 2467, 6790, 0, -90, 0, 0x00000000, bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -24463, 2467, 3413, 0, -90, 0, (2 << 16), bhvPaintingEnemyRespawn),
+		OBJECT(MODEL_SHYGUY, -24339, 2213, 3630, 0, -180, 0, 0x00000000, bhvShyguyPainter),
 		OBJECT(MODEL_STAR_PIECE, -19948, 2018, 4299, 0, 0, 0, (0x14 << 24), bhvStarPiece),
 		TERRAIN(ssl_area_1_collision),
 		ROOMS(ssl_area_1_collision_rooms),

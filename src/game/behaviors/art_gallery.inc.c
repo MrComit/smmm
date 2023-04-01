@@ -44,6 +44,73 @@ void bhv_mini_shyguy_loop(void) {
     o->oInteractStatus = 0;
 }
 
+void bhv_painter_shyguy_init(void) {
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPaintingEnemyRespawn);
+    obj_set_hitbox(o, &sShyguyHitbox);
+    o->os16106 = -0x400;
+}
+
+void bhv_painter_shyguy_loop(void) {
+    struct Object *obj;
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+
+    if (o->oDistanceToMario < 1500.0f) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 200, 4);
+    }
+
+    if (o->oObjF4->oAction == 0 && o->os16FA++ <= 20) {
+        o->os16104 += 0x10000 / 20;
+        // o->oFaceAnglePitch = 0xC00 + (sins(o->os16104 - 0x4000) * 0xC00);
+        o->os16106 = -0x400 + (sins(o->os16104) * -0x1C00);
+    }
+
+    o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, o->os16106, absi(o->oFaceAnglePitch - o->os16106) / 3);
+
+    if (o->oObjF4->oAction == 1) {
+        o->os16FA = 1;
+    }
+
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+        spawn_mist_particles();
+        obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+        o->activeFlags = 0;
+        create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+        obj = cur_obj_nearest_object_with_behavior(bhvPaintbrush);
+        if (obj != NULL) {
+            obj->activeFlags = 0;
+        }
+        o->oObjF4->o104 = 1;
+    }
+    o->oInteractStatus = 0;
+}
+
+
+void bhv_paintbrush_init(void) {
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPaintingEnemyRespawn);
+    o->os16106 = 0x400;
+}
+
+
+void bhv_paintbrush_loop(void) {
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    if (o->oObjF4->oAction == 0 && o->os16FA++ <= 20) {
+        o->os16F8 += 0x10000 / 20;
+        o->os16106 = 0x400 + (sins(o->os16F8) * 0x1C00);
+    }
+
+    o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, o->os16106, absi(o->oFaceAnglePitch - o->os16106) / 3);
+
+    if (o->oObjF4->oAction == 1) {
+        o->os16FA = 1;
+    }
+}
+
 
 
 void bhv_painting_enemy_respawn_loop(void) {
@@ -56,7 +123,7 @@ void bhv_painting_enemy_respawn_loop(void) {
             e1 = absf((m * gMarioState->pos[0]) - gMarioState->pos[2] + b);
             d = e1 / sqrtf(m*m + 1);
             yDif = absf(gMarioState->pos[1] - o->oPosY);
-            if (gMarioState->pos[0] < -20000.0f && d < 500.0f && yDif < 500.0f && o->oTimer > 20) {
+            if (gMarioState->pos[0] < -21000.0f && d < 500.0f && yDif < 500.0f && o->oTimer > 20) {
                 o->oAction = 1;
                 obj = spawn_object(o, MODEL_BG_SHYGUY, bhvMiniShyguy);
                 obj->parentObj = obj;
@@ -76,7 +143,12 @@ void bhv_painting_enemy_respawn_loop(void) {
             CL_HSVtoRGB(o->os16FA, o->oFloatFC, o->oFloat100, &o->os16F4, &o->os16F6, &o->os16F8);
 
             if (o->oTimer > 25) {
-                o->oAction = 0;
+                if (o->o104) {
+                    o->oAction = 2;
+                    o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
+                } else {
+                    o->oAction = 0;
+                }
             }
             break;
     }

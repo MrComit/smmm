@@ -884,6 +884,7 @@
 #define MODEL_BG_GOOMBA           0xFE
 #define MODEL_BG_KOOPA            0xFD
 #define MODEL_BG_SHYGUY           0xFC
+#define MODEL_PAINTBRUSH          0xFB
 
 
 #endif // MODEL_IDS_H

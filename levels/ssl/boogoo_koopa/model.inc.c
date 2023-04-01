@@ -3454,6 +3454,78 @@ Gfx boogoo_koopa_root_root_paddle_mesh_layer_1_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
+Vtx boogoo_koopa_root_brush_mesh_layer_1_vtx_0[16] = {
+	{{{17, 28, 3}, 0, {147, 1956}, {0x31, 0x75, 0x0, 0xFF}}},
+	{{{0, 28, -14}, 0, {-81, 1956}, {0x2D, 0x6E, 0xD3, 0xFF}}},
+	{{{0, 35, 3}, 0, {375, 1387}, {0x0, 0x7F, 0x0, 0xFF}}},
+	{{{0, 28, 19}, 0, {375, 1956}, {0x0, 0x75, 0x31, 0xFF}}},
+	{{{-17, 28, 3}, 0, {603, 1956}, {0xCF, 0x75, 0x0, 0xFF}}},
+	{{{0, 28, -14}, 0, {831, 1956}, {0xD3, 0x6E, 0xD3, 0xFF}}},
+	{{{12, -155, 2}, 0, {288, 2556}, {0x7F, 0x8, 0xFE, 0xFF}}},
+	{{{0, -155, -10}, 0, {60, 2556}, {0x5A, 0x3, 0xA6, 0xFF}}},
+	{{{0, 28, -11}, 0, {60, 3972}, {0x5A, 0x0, 0xA6, 0xFF}}},
+	{{{12, 28, 2}, 0, {288, 3972}, {0x7F, 0x0, 0x0, 0xFF}}},
+	{{{0, -155, 14}, 0, {516, 2556}, {0x7, 0x19, 0x7C, 0xFF}}},
+	{{{0, 28, 14}, 0, {516, 3972}, {0x0, 0x0, 0x7F, 0xFF}}},
+	{{{-12, 28, 2}, 0, {744, 3972}, {0x81, 0x0, 0x0, 0xFF}}},
+	{{{-12, -155, 2}, 0, {744, 2556}, {0x86, 0x23, 0xFE, 0xFF}}},
+	{{{0, 28, -11}, 0, {972, 3972}, {0xA6, 0x0, 0xA6, 0xFF}}},
+	{{{0, -155, -10}, 0, {972, 2556}, {0xA7, 0x15, 0xA7, 0xFF}}},
+};
+
+Gfx boogoo_koopa_root_brush_mesh_layer_1_tri_0[] = {
+	gsSPVertex(boogoo_koopa_root_brush_mesh_layer_1_vtx_0 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
+	gsSP2Triangles(4, 3, 2, 0, 5, 4, 2, 0),
+	gsSP2Triangles(6, 7, 8, 0, 6, 8, 9, 0),
+	gsSP2Triangles(10, 6, 9, 0, 10, 9, 11, 0),
+	gsSP2Triangles(12, 10, 11, 0, 12, 13, 10, 0),
+	gsSP2Triangles(14, 13, 12, 0, 14, 15, 13, 0),
+	gsSPEndDisplayList(),
+};
+
+Vtx boogoo_koopa_root_brush_mesh_layer_1_vtx_1[24] = {
+	{{{10, -182, 5}, 0, {288, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{1, -182, 14}, 0, {516, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{-7, -193, 3}, 0, {288, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{-8, -182, 5}, 0, {744, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{-7, -193, 3}, 0, {516, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{1, -182, -4}, 0, {60, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{-7, -193, 3}, 0, {60, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{1, -182, -4}, 0, {972, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{-7, -193, 3}, 0, {744, 627}, {0xFF, 0x0, 0x0, 0xC3}}},
+	{{{-12, -155, 2}, 0, {744, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{0, -155, -10}, 0, {972, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-2, -167, -13}, 0, {972, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{-19, -167, 3}, 0, {744, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{1, -182, -4}, 0, {972, 627}, {0xFF, 0x0, 0x0, 0xFF}}},
+	{{{-8, -182, 5}, 0, {744, 627}, {0xFF, 0x0, 0x0, 0xFF}}},
+	{{{-2, -167, 19}, 0, {516, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{1, -182, 14}, 0, {516, 627}, {0xFF, 0x0, 0x0, 0xFF}}},
+	{{{14, -167, 3}, 0, {288, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{10, -182, 5}, 0, {288, 627}, {0xFF, 0x0, 0x0, 0xFF}}},
+	{{{-2, -167, -13}, 0, {60, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{1, -182, -4}, 0, {60, 627}, {0xFF, 0x0, 0x0, 0xFF}}},
+	{{{0, -155, -10}, 0, {60, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{12, -155, 2}, 0, {288, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+	{{{0, -155, 14}, 0, {516, 627}, {0xFF, 0xFF, 0xFF, 0xFF}}},
+};
+
+Gfx boogoo_koopa_root_brush_mesh_layer_1_tri_1[] = {
+	gsSPVertex(boogoo_koopa_root_brush_mesh_layer_1_vtx_1 + 0, 24, 0),
+	gsSP2Triangles(0, 1, 2, 0, 1, 3, 4, 0),
+	gsSP2Triangles(5, 0, 6, 0, 3, 7, 8, 0),
+	gsSP2Triangles(9, 10, 11, 0, 9, 11, 12, 0),
+	gsSP2Triangles(12, 11, 13, 0, 12, 13, 14, 0),
+	gsSP2Triangles(15, 12, 14, 0, 15, 14, 16, 0),
+	gsSP2Triangles(17, 15, 16, 0, 17, 16, 18, 0),
+	gsSP2Triangles(19, 17, 18, 0, 19, 18, 20, 0),
+	gsSP2Triangles(21, 17, 19, 0, 21, 22, 17, 0),
+	gsSP2Triangles(22, 15, 17, 0, 22, 23, 15, 0),
+	gsSP2Triangles(23, 12, 15, 0, 23, 9, 12, 0),
+	gsSPEndDisplayList(),
+};
+
 Vtx boogoo_koopa_000_offset_009_mesh_layer_1_vtx_0[10] = {
 	{{{52, 10, -17}, 0, {-504, 1040}, {0xFF, 0xFF, 0xFF, 0xFF}}},
 	{{{53, -11, -17}, 0, {601, 2551}, {0xFF, 0xFF, 0xFF, 0xFF}}},
@@ -3749,6 +3821,20 @@ Gfx mat_revert_boogoo_koopa_TableWood_001[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_boogoo_koopa_BrushEnd[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_boogoo_koopa_BrushEnd[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsSPEndDisplayList(),
+};
+
 Gfx boogoo_koopa_000_offset_001_mesh_layer_1[] = {
 	gsSPDisplayList(mat_boogoo_koopa_BooGooObj_layer1),
 	gsSPDisplayList(boogoo_koopa_000_offset_001_mesh_layer_1_tri_0),
@@ -3873,6 +3959,16 @@ Gfx boogoo_koopa_root_root_paddle_mesh_layer_1[] = {
 	gsSPDisplayList(mat_boogoo_koopa_TableWood_001),
 	gsSPDisplayList(boogoo_koopa_root_root_paddle_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_boogoo_koopa_TableWood_001),
+	gsSPEndDisplayList(),
+};
+
+Gfx boogoo_koopa_root_brush_mesh_layer_1[] = {
+	gsSPDisplayList(mat_boogoo_koopa_poolcue_f3d_001),
+	gsSPDisplayList(boogoo_koopa_root_brush_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_boogoo_koopa_poolcue_f3d_001),
+	gsSPDisplayList(mat_boogoo_koopa_BrushEnd),
+	gsSPDisplayList(boogoo_koopa_root_brush_mesh_layer_1_tri_1),
+	gsSPDisplayList(mat_revert_boogoo_koopa_BrushEnd),
 	gsSPEndDisplayList(),
 };
 
