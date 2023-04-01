@@ -865,6 +865,8 @@ extern const BehaviorScript bhvTenBlueCoinsSpawn[];
 extern const BehaviorScript bhvChapterEndPrompt[];
 extern const BehaviorScript bhvFloorPeepa[];
 extern const BehaviorScript bhvPaintingEnemy[];
+extern const BehaviorScript bhvPaintingEnemyRespawn[];
+extern const BehaviorScript bhvMiniShyguy[];
 
 
 #endif // BEHAVIOR_DATA_H

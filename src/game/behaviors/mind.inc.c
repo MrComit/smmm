@@ -11,60 +11,6 @@ static struct ObjectHitbox sFloorPeepaHitbox = {
 };
 
 
-// Vec3s sPaintingEnemyCols[2] = {
-//     {0xC7, 0xB4, 0xAD}, // h 16, s 0.13, v 0.78
-//     {0xA3, 0xCE, 0xA4}, // h 121, s 0.20, v 0.80
-// };
-
-
-void bhv_painting_enemy_init(void) {
-    // o->os16F4 = sPaintingEnemyCols[o->oBehParams2ndByte][0];
-    // o->os16F6 = sPaintingEnemyCols[o->oBehParams2ndByte][1];
-    // o->os16F8 = sPaintingEnemyCols[o->oBehParams2ndByte][2];
-    // o->oAnimState = 1;//o->oBehParams2ndByte;
-    if (o->oBehParams2ndByte) {
-        o->oOpacity = 254;
-        o->os16FA = 121;
-    } else {
-        o->oOpacity = 255;
-        o->os16FA = 16;
-    }
-    o->oFloatFC = 0.16f;
-    o->oFloat100 = 0.8f;
-
-    CL_HSVtoRGB(o->os16FA, o->oFloatFC, o->oFloat100, &o->os16F4, &o->os16F6, &o->os16F8);
-}
-
-
-
-void bhv_painting_enemy_loop(void) {
-    struct Object *obj;
-    switch (o->oAction) {
-        case 0:
-            if (o->oDistanceToMario < 1000.0f) {
-                o->oAction = 1;
-                if (o->oBehParams2ndByte == 0) {
-                    obj = spawn_object(o, MODEL_GOOMBA, bhvGoomba);
-                } else {
-                    obj = spawn_object(o, MODEL_KOOPA, bhvKoopa);
-                    obj->oPosX += 50.0f;
-                    obj->oPosZ += 50.0f;
-                    obj->oPosY = o->oPosY;
-                }
-                obj->oFaceAngleYaw = obj->oMoveAngleYaw += 0x8000;
-                o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
-            }
-            break;
-        case 1:
-            o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 0.0f, 0.01f);
-            o->oFloat100 = approach_f32_symmetric(o->oFloat100, 0.0f, 0.05f);
-
-            CL_HSVtoRGB(o->os16FA, o->oFloatFC, o->oFloat100, &o->os16F4, &o->os16F6, &o->os16F8);
-            break;
-    }
-}
-
-
 
 
 
