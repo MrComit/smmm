@@ -885,6 +885,7 @@
 #define MODEL_BG_KOOPA            0xFD
 #define MODEL_BG_SHYGUY           0xFC
 #define MODEL_PAINTBRUSH          0xFB
+#define MODEL_PAINTING_BRICK      0xFA
 
 
 #endif // MODEL_IDS_H

@@ -10436,3 +10436,17 @@ const BehaviorScript bhvShyguyPainter[] = {
         CALL_NATIVE(bhv_painter_shyguy_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvPaintingBrick[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(painting_brick_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_painting_brick_init),
+    HIDE(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_painting_brick_loop),
+    END_LOOP(),
+};

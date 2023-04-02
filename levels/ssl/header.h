@@ -100,4 +100,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/paintbrush/geo_header.h"
 
+#include "levels/ssl/painting_brick/geo_header.h"
+
+#include "levels/ssl/painting_brick/collision_header.h"
+
 #endif

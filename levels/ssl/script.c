@@ -43,6 +43,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BG_KOOPA, boogoo_koopa_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_SHYGUY, boogoo_shyguy_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTBRUSH, paintbrush_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PAINTING_BRICK, painting_brick_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -76,6 +77,18 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_STAR_PIECE, -22589, 150, 25775, 0, 0, 0, (0x18 << 24), bhvStarPiece),
 		OBJECT(MODEL_BOO, -19880, 2068, 2301, 0, 180, 0, (20 << 16), bhvRoomBoo),
 		OBJECT(MODEL_PAINTBRUSH, -24339, 2289, 3585, 0, 0, 0, 0x00000000, bhvPaintbrush),
+		OBJECT(MODEL_PAINTING_BRICK, -22054, 2672, 617, 0, 0, 0, (80 << 24), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -21158, 2865, 617, 0, 0, 0, (110 << 24) | (1 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -20000, 3159, 1103, 0, 90, 0, (60 << 24) | (2 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -18642, 3159, 1103, 0, -90, 0, (105 << 24) | (3 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17471, 3304, 1617, 0, 0, 0, (4 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17002, 3479, 2497, 0, -90, 0, (5 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17002, 3406, 3455, 0, -90, 0, (140 << 24) | (6 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17002, 3726, 3943, 0, -90, 0, (7 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17002, 4239, 4740, 0, -90, 0, (160 << 24) | (8 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17002, 3429, 4810, 0, -90, 0, (140 << 24) | (8 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17002, 3266, 5622, 0, -90, 0, (100 << 24) | (9 << 16), bhvPaintingBrick),
+		OBJECT(MODEL_PAINTING_BRICK, -17002, 4079, 4740, 0, -90, 0, (160 << 24) | (8 << 16), bhvPaintingBrick),
 		OBJECT(MODEL_PAINTING_ENEMY, -17463, 3955, 7078, 0, 0, 0, 0x00000000, bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -17963, 2467, 6290, 0, 90, 0, 0x00000000, bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -22963, 2467, 5533, 0, -90, 0, 0x00000000, bhvPaintingEnemy),

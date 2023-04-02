@@ -17,6 +17,41 @@ static struct ObjectHitbox sMiniShyguyHitbox = {
 // };
 
 
+void bhv_painting_brick_init(void) {
+    if ((o->oBehParams >> 24) == 0) {
+        o->oFloatF4 = 800.0f;
+    } else {
+        o->oFloatF4 = (u8)(o->oBehParams >> 24) * 10.0f;
+    }
+}
+
+void bhv_painting_brick_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            obj = CL_nearest_object_with_behavior_and_field(bhvPaintingBrick, 0x144, (o->oBehParams2ndByte - 1));
+            if (obj == NULL || obj->oAction == 2) {
+                if (o->oDistanceToMario < o->oFloatF4) {
+                    o->oAction = 1;
+                    o->oForwardVel = 20.0f;
+                    cur_obj_unhide();
+                }
+            }
+            break;
+        case 1:
+            CL_Move();
+            if (o->oTimer >= 23) {
+                o->oAction = 2;
+            }
+            load_object_collision_model();
+            break;
+        case 2:
+            load_object_collision_model();
+            break;
+    }
+}
+
+
 void bhv_mini_shyguy_init(void) {
     obj_set_hitbox(o, &sMiniShyguyHitbox);
     o->oOpacity = 0xFF;

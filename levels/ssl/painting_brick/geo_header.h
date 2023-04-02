@@ -1,0 +1,10 @@
+extern const GeoLayout painting_brick_geo[];
+extern u8 painting_brick_ci4_redbricks2_ci4[];
+extern u8 painting_brick_ci4_redbricks2_ci4_pal_rgba16[];
+extern Vtx painting_brick_MovingBlocks_001_mesh_layer_1_vtx_cull[8];
+extern Vtx painting_brick_MovingBlocks_001_mesh_layer_1_vtx_0[16];
+extern Gfx painting_brick_MovingBlocks_001_mesh_layer_1_tri_0[];
+extern Gfx mat_painting_brick_ArtBricks[];
+extern Gfx mat_revert_painting_brick_ArtBricks[];
+extern Gfx painting_brick_MovingBlocks_001_mesh_layer_1[];
+extern Gfx painting_brick_material_revert_render_settings[];

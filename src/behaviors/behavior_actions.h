@@ -1083,6 +1083,8 @@ void bhv_paintbrush_init(void);
 void bhv_paintbrush_loop(void);
 void bhv_painter_shyguy_init(void);
 void bhv_painter_shyguy_loop(void);
+void bhv_painting_brick_init(void);
+void bhv_painting_brick_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
