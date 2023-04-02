@@ -51,7 +51,7 @@ void bhv_painting_teleport_loop(void) {
             }
             break;
         case 2:
-            if (o->oTimer > 60) {
+            if (o->oTimer > 20 && o->oDistanceToMario > 300.0f) {
                 o->oAction = 0;
             }
             break;
