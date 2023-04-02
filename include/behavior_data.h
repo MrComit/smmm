@@ -870,6 +870,7 @@ extern const BehaviorScript bhvMiniShyguy[];
 extern const BehaviorScript bhvPaintbrush[];
 extern const BehaviorScript bhvShyguyPainter[];
 extern const BehaviorScript bhvPaintingBrick[];
+extern const BehaviorScript bhvPaintingTeleport[];
 
 
 #endif // BEHAVIOR_DATA_H

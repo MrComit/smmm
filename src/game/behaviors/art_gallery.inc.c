@@ -17,6 +17,49 @@ static struct ObjectHitbox sMiniShyguyHitbox = {
 // };
 
 
+
+void bhv_painting_teleport_init(void) {
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPaintingTeleport);
+}
+
+
+void bhv_painting_teleport_loop(void) {
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+
+    switch (o->oAction) {
+        case 0:
+            if (o->oDistanceToMario < 100.0f) {
+                o->oAction = 1;
+                o->oObjF4->oAction = 2;
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0xFF, 0xFF, 0xFF);
+                play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+            }
+            break;
+        case 1:
+            if (o->oTimer == 8) {
+                vec3f_copy(gMarioState->pos, &o->oObjF4->oPosX);
+                gMarioState->faceAngle[1] = o->oObjF4->oFaceAngleYaw;
+                gMarioState->pos[0] += 100.0f * sins(gMarioState->faceAngle[1]);
+                gMarioState->pos[2] += 100.0f * coss(gMarioState->faceAngle[1]);
+            }
+            if (o->oTimer > 15) {
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0xFF, 0xFF, 0xFF);
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (o->oTimer > 60) {
+                o->oAction = 0;
+            }
+            break;
+    }
+}
+
+
+
 void bhv_painting_brick_init(void) {
     if ((o->oBehParams >> 24) == 0) {
         o->oFloatF4 = 800.0f;

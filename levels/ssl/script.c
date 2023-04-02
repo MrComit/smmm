@@ -97,6 +97,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PAINTING_ENEMY, -16963, 2467, 2847, 0, 90, 0, (1 << 16), bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -22963, 2467, 6790, 0, -90, 0, 0x00000000, bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -24463, 2467, 3413, 0, -90, 0, (2 << 16), bhvPaintingEnemyRespawn),
+		OBJECT(MODEL_NONE, -19321, 3289, 628, 0, 0, 0, 0x00000000, bhvPaintingTeleport),
+		OBJECT(MODEL_NONE, -21525, 2220, 7228, 0, -180, 0, (1 << 16), bhvPaintingTeleport),
 		OBJECT(MODEL_SHYGUY, -24339, 2213, 3630, 0, -180, 0, 0x00000000, bhvShyguyPainter),
 		OBJECT(MODEL_STAR_PIECE, -19948, 2018, 4299, 0, 0, 0, (0x14 << 24), bhvStarPiece),
 		TERRAIN(ssl_area_1_collision),

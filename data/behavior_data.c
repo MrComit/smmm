@@ -10450,3 +10450,14 @@ const BehaviorScript bhvPaintingBrick[] = {
         CALL_NATIVE(bhv_painting_brick_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvPaintingTeleport[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_painting_teleport_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_painting_teleport_loop),
+    END_LOOP(),
+};
