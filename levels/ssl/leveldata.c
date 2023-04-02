@@ -60,3 +60,4 @@
 #include "levels/ssl/paintbrush/model.inc.c"
 #include "levels/ssl/painting_brick/model.inc.c"
 #include "levels/ssl/painting_brick/collision.inc.c"
+#include "levels/ssl/cage_goo/model.inc.c"

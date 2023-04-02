@@ -1087,6 +1087,8 @@ void bhv_painting_brick_init(void);
 void bhv_painting_brick_loop(void);
 void bhv_painting_teleport_init(void);
 void bhv_painting_teleport_loop(void);
+void bhv_boogoo_cage_init(void);
+void bhv_boogoo_cage_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

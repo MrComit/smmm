@@ -104,4 +104,6 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/painting_brick/collision_header.h"
 
+#include "levels/ssl/cage_goo/geo_header.h"
+
 #endif

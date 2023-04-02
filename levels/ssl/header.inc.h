@@ -126,7 +126,7 @@ extern Vtx ssl_dl_ArtGallery_mesh_layer_1_vtx_1[255];
 extern Gfx ssl_dl_ArtGallery_mesh_layer_1_tri_1[];
 extern Vtx ssl_dl_ArtGallery_mesh_layer_1_vtx_2[63];
 extern Gfx ssl_dl_ArtGallery_mesh_layer_1_tri_2[];
-extern Vtx ssl_dl_ArtGallery_mesh_layer_1_vtx_3[170];
+extern Vtx ssl_dl_ArtGallery_mesh_layer_1_vtx_3[183];
 extern Gfx ssl_dl_ArtGallery_mesh_layer_1_tri_3[];
 extern Vtx ssl_dl_BlackBox_mesh_layer_1_vtx_cull[8];
 extern Vtx ssl_dl_BlackBox_mesh_layer_1_vtx_0[24];

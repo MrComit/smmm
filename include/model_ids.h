@@ -886,6 +886,7 @@
 #define MODEL_BG_SHYGUY           0xFC
 #define MODEL_PAINTBRUSH          0xFB
 #define MODEL_PAINTING_BRICK      0xFA
+#define MODEL_CAGE_GOO            0xF9
 
 
 #endif // MODEL_IDS_H

@@ -34,3 +34,4 @@
 #include "levels/ssl/boogoo_shyguy/geo.inc.c"
 #include "levels/ssl/paintbrush/geo.inc.c"
 #include "levels/ssl/painting_brick/geo.inc.c"
+#include "levels/ssl/cage_goo/geo.inc.c"
