@@ -10490,3 +10490,18 @@ const BehaviorScript bhvCageGoo[] = {
     //     CALL_NATIVE(bhv_boogoo_cage_loop),
     // END_LOOP(),
 };
+
+
+const BehaviorScript bhvBoogooObject[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_COLLISION_DATA(ag_boogoo_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_boogoo_object_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boogoo_object_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

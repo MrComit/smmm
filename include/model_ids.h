@@ -887,6 +887,7 @@
 #define MODEL_PAINTBRUSH          0xFB
 #define MODEL_PAINTING_BRICK      0xFA
 #define MODEL_CAGE_GOO            0xF9
+#define MODEL_AG_BOOGOO           0xF8
 
 
 #endif // MODEL_IDS_H

@@ -45,6 +45,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTBRUSH, paintbrush_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTING_BRICK, painting_brick_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CAGE_GOO, cage_goo_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AG_BOOGOO, ag_boogoo_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -76,6 +77,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_STAR_PIECE, -21772, 150, 25775, 0, 0, 0, (0x16 << 24), bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -22234, 150, 25775, 0, 0, 0, (0x17 << 24), bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -22589, 150, 25775, 0, 0, 0, (0x18 << 24), bhvStarPiece),
+		OBJECT(MODEL_AG_BOOGOO, -19732, 2274, 4079, 0, 0, 0, 0x00000000, bhvBoogooObject),
 		OBJECT(MODEL_HAUNTED_CAGE, -19321, 2068, 1313, 0, 180, 0, (20 << 16), bhvBoogooCage),
 		OBJECT(MODEL_PAINTBRUSH, -24339, 2289, 3585, 0, 0, 0, 0x00000000, bhvPaintbrush),
 		OBJECT(MODEL_PAINTING_BRICK, -22054, 2672, 617, 0, 0, 0, (80 << 24), bhvPaintingBrick),

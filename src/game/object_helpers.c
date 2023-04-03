@@ -421,6 +421,48 @@ Gfx *geo_update_boogoo_color(s32 callContext, struct GraphNode *node, UNUSED voi
 
 
 
+Gfx *geo_update_boogoo_object(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    s32 index = 0;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject;
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        if (gCurGraphNodeHeldObject != NULL) {
+            objectGraphNode = gCurGraphNodeHeldObject->objNode;
+        }
+
+        switch (gMarioCurrentRoom) {
+            case 2:
+                index = 0;
+                break;
+        }
+
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+
+
+        if (objectGraphNode->oOpacity == 0xFF) {
+            currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+            objectGraphNode->oAnimState = 0;
+        } else {
+            currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+            objectGraphNode->oAnimState = 1;
+        }
+
+        gDPSetEnvColor(dlHead++, sBooGooColors[index][0], sBooGooColors[index][1], sBooGooColors[index][2], objectGraphNode->oOpacity);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
+
 Gfx *geo_update_layer_transparency(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;

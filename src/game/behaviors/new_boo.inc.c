@@ -1,3 +1,4 @@
+#include "levels/ssl/header.h"
 static struct ObjectHitbox sBooCageHitbox = {
     /* interactType: */ INTERACT_IGLOO_BARRIER,
     /* downOffset: */ 0,
@@ -142,11 +143,12 @@ void bhv_boogoo_cage_init(void) {
     obj_set_hitbox(o, &sBooCageHitbox);
     o->oObjFC = spawn_object(o, MODEL_CAGE_GOO, bhvCageGoo);
     o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-    o->oObjFC->header.gfx.scale[1] = 1.0f;
+    o->oObjFC->header.gfx.scale[1] = 0.0f;
 }
 
 
 void bhv_boogoo_cage_loop(void) {
+    struct Object *obj;
     s32 numObjs;
     if (gMarioCurrentRoom != o->oRoom)
         return;
@@ -161,7 +163,7 @@ void bhv_boogoo_cage_loop(void) {
                 o->oObjFC->header.gfx.scale[1] = 1.0f - (numObjs * 0.067f);
                 // o->oOpacity = 255 - (17 * numObjs);
             }
-            if (numObjs <= 2) {
+            if (numObjs <= 3) {
                 o->oUnk1A8 = 1;
             }
             break;
@@ -170,6 +172,10 @@ void bhv_boogoo_cage_loop(void) {
             // o->oOpacity = 255;
             o->oObjFC->header.gfx.scale[1] = 1.0f;
             play_puzzle_jingle();
+            obj = cur_obj_nearest_object_with_behavior(bhvBoogooObject);
+            if (obj != NULL && obj->oRoom == o->oRoom) {
+                obj->oFC = 1;
+            }
             break;
         case 2:
             o->header.gfx.scale[0] += 0.1f;
@@ -187,5 +193,26 @@ void bhv_boogoo_cage_loop(void) {
 
     if (sBooBits[o->oBehParams2ndByte]) {
         room_boo_multiplier_loop();
+    }
+}
+
+
+
+static void const *sBGObjectCollision[] = {
+    ag_boogoo_collision,
+};
+
+void bhv_boogoo_object_init(void) {
+   o->collisionData = segmented_to_virtual(sBGObjectCollision[o->oBehParams2ndByte]);
+}
+
+
+
+void bhv_boogoo_object_loop(void) {
+    if (o->oFC) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 4);
+        if (o->oOpacity == 0) {
+            o->activeFlags = 0;
+        }
     }
 }

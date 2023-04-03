@@ -78,6 +78,7 @@ Gfx *geo_update_layer_transparency_cutout2(s32 callContext, struct GraphNode *no
 Gfx *geo_update_layer_transparency_and_color(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_opacity_and_color(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_boogoo_color(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_update_boogoo_object(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_music_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_update_plathall_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);

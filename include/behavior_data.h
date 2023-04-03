@@ -873,6 +873,7 @@ extern const BehaviorScript bhvPaintingBrick[];
 extern const BehaviorScript bhvPaintingTeleport[];
 extern const BehaviorScript bhvBoogooCage[];
 extern const BehaviorScript bhvCageGoo[];
+extern const BehaviorScript bhvBoogooObject[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -1,0 +1,13 @@
+extern const GeoLayout ag_boogoo_switch_opt1[];
+extern const GeoLayout ag_boogoo_geo[];
+extern u8 ag_boogoo_BOOGOO1_i4[];
+extern u8 ag_boogoo_BOOGOO2_i4[];
+extern Vtx ag_boogoo_agb_mesh_layer_1_vtx_0[181];
+extern Gfx ag_boogoo_agb_mesh_layer_1_tri_0[];
+extern Gfx mat_ag_boogoo_BooGooObject_layer1[];
+extern Gfx mat_revert_ag_boogoo_BooGooObject_layer1[];
+extern Gfx mat_ag_boogoo_BooGooObjectTrans_layer1[];
+extern Gfx mat_revert_ag_boogoo_BooGooObjectTrans_layer1[];
+extern Gfx ag_boogoo_agb_mesh_layer_1[];
+extern Gfx ag_boogoo_agb_mesh_layer_1_mat_override_BooGooObjectTrans_0[];
+extern Gfx ag_boogoo_material_revert_render_settings[];
