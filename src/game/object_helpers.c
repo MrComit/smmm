@@ -385,10 +385,24 @@ Gfx *geo_update_opacity_and_color(s32 callContext, struct GraphNode *node, UNUSE
 
 Vec3s sBooGooColors[4] = {
     {0x9F, 0x00, 0x00},
-    {0x9F, 0x00, 0x00},
+    {0xCC, 0x29, 0x7A},
     {0x9F, 0x00, 0x00},
     {0x9F, 0x00, 0x00},
 };
+
+
+s32 get_l8_boogoo_index(void) {
+    s32 index = 0;
+        switch (gMarioCurrentRoom) {
+            case 2:
+                index = 0;
+                break;
+            case 3:
+                index = 1;
+                break;
+        }
+    return index;
+}
 
 
 Gfx *geo_update_boogoo_color(s32 callContext, struct GraphNode *node, UNUSED void *context) {
@@ -401,11 +415,7 @@ Gfx *geo_update_boogoo_color(s32 callContext, struct GraphNode *node, UNUSED voi
     if (callContext == GEO_CONTEXT_RENDER) {
         currentGraphNode = (struct GraphNodeGenerated *) node;
 
-        switch (gMarioCurrentRoom) {
-            case 2:
-                index = 0;
-                break;
-        }
+        index = get_l8_boogoo_index();
 
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;
@@ -437,11 +447,7 @@ Gfx *geo_update_boogoo_object(s32 callContext, struct GraphNode *node, UNUSED vo
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
 
-        switch (gMarioCurrentRoom) {
-            case 2:
-                index = 0;
-                break;
-        }
+        index = get_l8_boogoo_index();
 
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;
