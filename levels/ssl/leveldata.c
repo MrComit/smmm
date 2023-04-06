@@ -63,3 +63,5 @@
 #include "levels/ssl/cage_goo/model.inc.c"
 #include "levels/ssl/ag_boogoo/collision.inc.c"
 #include "levels/ssl/ag_boogoo/model.inc.c"
+#include "levels/ssl/bg_asteroid/model.inc.c"
+#include "levels/ssl/bg_asteroid/collision.inc.c"

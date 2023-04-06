@@ -36,3 +36,4 @@
 #include "levels/ssl/painting_brick/geo.inc.c"
 #include "levels/ssl/cage_goo/geo.inc.c"
 #include "levels/ssl/ag_boogoo/geo.inc.c"
+#include "levels/ssl/bg_asteroid/geo.inc.c"

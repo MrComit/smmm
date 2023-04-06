@@ -110,4 +110,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/ag_boogoo/geo_header.h"
 
+#include "levels/ssl/bg_asteroid/geo_header.h"
+
+#include "levels/ssl/bg_asteroid/collision_header.h"
+
 #endif

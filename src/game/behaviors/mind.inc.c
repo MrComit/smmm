@@ -11,7 +11,28 @@ static struct ObjectHitbox sFloorPeepaHitbox = {
 };
 
 
+void bhv_bg_asteroid_init(void) {
+    o->oFloatF8 = o->oBehParams2ndByte * 10.0f;
+    if (o->oBehParams2ndByte == 0) {
+        o->oFloatF8 = 700.0f;
+    }
+    o->os16F4 = (o->oBehParams >> 24) << 8;
+}
 
+
+
+void bhv_bg_asteroid_loop(void) {
+    o->os16F4 += 0x100;
+    o->oPosX = o->oHomeX + (sins(o->os16F4) * o->oFloatF8 * sins(o->oFaceAngleYaw));
+    o->oPosZ = o->oHomeZ + (sins(o->os16F4) * o->oFloatF8 * coss(o->oFaceAngleYaw));
+}
+
+
+void bhv_bg_asteroid_grow_loop(void) {
+    o->os16F4 += 0x100;
+    o->header.gfx.scale[0] = 1.0f + (0.4f * sins(o->os16F4));
+    cur_obj_scale(o->header.gfx.scale[0]);
+}
 
 
 

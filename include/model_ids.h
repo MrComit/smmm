@@ -888,6 +888,7 @@
 #define MODEL_PAINTING_BRICK      0xFA
 #define MODEL_CAGE_GOO            0xF9
 #define MODEL_AG_BOOGOO           0xF8
+#define MODEL_BG_ASTEROID         0xF7
 
 
 #endif // MODEL_IDS_H

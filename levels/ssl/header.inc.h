@@ -176,7 +176,7 @@ extern Gfx ssl_dl_ArtWall_mesh_layer_1_tri_0[];
 extern Vtx ssl_dl_ArtWall_mesh_layer_1_vtx_1[4];
 extern Gfx ssl_dl_ArtWall_mesh_layer_1_tri_1[];
 extern Vtx ssl_dl_Boogoo_mesh_layer_1_vtx_cull[8];
-extern Vtx ssl_dl_Boogoo_mesh_layer_1_vtx_0[552];
+extern Vtx ssl_dl_Boogoo_mesh_layer_1_vtx_0[513];
 extern Gfx ssl_dl_Boogoo_mesh_layer_1_tri_0[];
 extern Vtx ssl_dl_GardenCircle_mesh_layer_1_vtx_cull[8];
 extern Vtx ssl_dl_GardenCircle_mesh_layer_1_vtx_0[273];

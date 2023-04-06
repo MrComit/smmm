@@ -46,6 +46,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTING_BRICK, painting_brick_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CAGE_GOO, cage_goo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_AG_BOOGOO, ag_boogoo_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BG_ASTEROID, bg_asteroid_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -105,6 +106,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -21525, 2220, 7228, 0, -180, 0, (1 << 16), bhvPaintingTeleport),
 		OBJECT(MODEL_SHYGUY, -24339, 2213, 3630, 0, -180, 0, 0x00000000, bhvShyguyPainter),
 		OBJECT(MODEL_STAR_PIECE, -19948, 2018, 4299, 0, 0, 0, (0x14 << 24), bhvStarPiece),
+		OBJECT(MODEL_BG_ASTEROID, -19711, 2846, -7011, 0, 90, 0, 0x00000000, bhvBGAsteroid),
+		OBJECT(MODEL_BG_ASTEROID, -18730, 2824, -9684, 0, 90, 0, 0x00000000, bhvBGAsteroidGrow),
 		OBJECT(MODEL_PEEPA, -19707, 2858, -5636, 0, -90, 0, (1 << 24), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19707, 2658, -5636, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19707, 2458, -5636, 0, -90, 0, (2 << 16), bhvFloorPeepa),

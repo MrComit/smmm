@@ -1,0 +1,13 @@
+extern const GeoLayout bg_asteroid_switch_opt1[];
+extern const GeoLayout bg_asteroid_geo[];
+extern u8 bg_asteroid_BOOGOO1_i4[];
+extern u8 bg_asteroid_BOOGOO2_i4[];
+extern Vtx bg_asteroid_bga_mesh_layer_1_vtx_0[31];
+extern Gfx bg_asteroid_bga_mesh_layer_1_tri_0[];
+extern Gfx mat_bg_asteroid_BooGooObject_layer1[];
+extern Gfx mat_revert_bg_asteroid_BooGooObject_layer1[];
+extern Gfx mat_bg_asteroid_BooGooObjectTrans_layer1[];
+extern Gfx mat_revert_bg_asteroid_BooGooObjectTrans_layer1[];
+extern Gfx bg_asteroid_bga_mesh_layer_1[];
+extern Gfx bg_asteroid_bga_mesh_layer_1_mat_override_BooGooObjectTrans_0[];
+extern Gfx bg_asteroid_material_revert_render_settings[];
