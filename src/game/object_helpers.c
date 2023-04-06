@@ -1658,6 +1658,7 @@ Gfx *geo_sunblock_opacity(s32 callContext, struct GraphNode *node, UNUSED void *
 
 
 extern u8 ssl_dl_i8_static_i8[];
+struct Object *sTempObj;
 
 Gfx *geo_mind_static(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
@@ -1669,7 +1670,10 @@ Gfx *geo_mind_static(s32 callContext, struct GraphNode *node, UNUSED void *conte
         currentGraphNode = (struct GraphNodeGenerated *) node;
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;
-        obj = CL_obj_nearest_object_behavior_params(bhvFloorPeepa, 1 << 24);
+        sTempObj = o;
+        o = gMarioObject;
+        obj = CL_obj_nearest_object_behavior_params(bhvFloorPeepa, 1 << 24);\
+        o = sTempObj;
         if (obj == NULL) {
             return NULL;
         }
