@@ -796,6 +796,7 @@ s32 act_quicksand_death(struct MarioState *m) {
                     m->hurtCounter = 8;
                     gCamera->cutscene = 0;
                     gCutsceneTimer = CUTSCENE_STOP;
+                    m->wall = NULL;
                     return set_mario_action(m, ACT_FREEFALL, 0);
             }
         case 3:
@@ -803,7 +804,14 @@ s32 act_quicksand_death(struct MarioState *m) {
             break;
     }
 
-    stationary_ground_step(m);
+    if (m->actionArg && (m->prevAction & ACT_GROUP_MASK) == ACT_GROUP_AIRBORNE) {
+        m->vel[0] = 0.0f;
+        m->vel[1] = 0.0f;
+        m->vel[2] = 0.0f;
+        perform_air_step(m, 0);
+    } else {
+        stationary_ground_step(m);
+    }
     play_sound(SOUND_MOVING_QUICKSAND_DEATH, m->marioObj->header.gfx.cameraToObject);
     return FALSE;
 }

@@ -2030,6 +2030,10 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
     // if (mario_update_quicksand(m, 0.5f)) {
     //     return TRUE;
     // }
+    if (m->wall != NULL && m->wall->type == SURFACE_INSTANT_QUICKSAND_WALL) {
+        update_mario_sound_and_camera(m);
+        return drop_and_set_mario_action(m, ACT_QUICKSAND_DEATH, 1);
+    }
 
     //play_far_fall_sound(m);
 

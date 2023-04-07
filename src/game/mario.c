@@ -1621,12 +1621,19 @@ void mario_reset_bodystate(struct MarioState *m) {
  */
 void sink_mario_in_quicksand(struct MarioState *m) {
     struct Object *o = m->marioObj;
+    s16 wallAngle;
 
     if (o->header.gfx.throwMatrix) {
         (*o->header.gfx.throwMatrix)[3][1] -= m->quicksandDepth;
     }
 
-    o->header.gfx.pos[1] -= m->quicksandDepth;
+    if (m->wall != NULL && m->action == ACT_QUICKSAND_DEATH && m->actionArg) {
+        wallAngle = atan2s(m->wall->normal.z, m->wall->normal.x);
+        o->header.gfx.pos[0] -= m->quicksandDepth * sins(wallAngle);
+        o->header.gfx.pos[2] -= m->quicksandDepth * coss(wallAngle);
+    } else {
+        o->header.gfx.pos[1] -= m->quicksandDepth;
+    }
 }
 
 /**
