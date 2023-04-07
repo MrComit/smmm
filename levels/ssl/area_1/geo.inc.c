@@ -52,7 +52,6 @@ const GeoLayout ssl_dl_103__Outside2_geo[] = {
 		GEO_ASM(0, geo_mind_static),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_2Static_001_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_ArtWall_mesh_layer_1),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -16670, 4921, -16151, 90, 0, 0, ssl_dl_Boogoo_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_GardenCircle_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_GardenCircle_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_001_mesh_layer_1),

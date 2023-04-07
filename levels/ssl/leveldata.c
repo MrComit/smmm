@@ -65,3 +65,5 @@
 #include "levels/ssl/ag_boogoo/model.inc.c"
 #include "levels/ssl/bg_asteroid/model.inc.c"
 #include "levels/ssl/bg_asteroid/collision.inc.c"
+#include "levels/ssl/o2_boogoo/model.inc.c"
+#include "levels/ssl/o2_boogoo/collision.inc.c"

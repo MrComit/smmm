@@ -887,8 +887,20 @@
 #define MODEL_PAINTBRUSH          0xFB
 #define MODEL_PAINTING_BRICK      0xFA
 #define MODEL_CAGE_GOO            0xF9
-#define MODEL_AG_BOOGOO           0xF8
-#define MODEL_BG_ASTEROID         0xF7
+#define MODEL_BG_ASTEROID         0xF8
+
+
+// LEVEL 8 MODELS CONT:
+// 0x5B-0x63
+#define MODEL_AG_BOOGOO           0x5B
+#define MODEL_O2_BOOGOO           0x5C
+
+// 0x6C-0x73
+
+
+// 0x97-0x9B
+
+
 
 
 #endif // MODEL_IDS_H

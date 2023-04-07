@@ -200,6 +200,7 @@ void bhv_boogoo_cage_loop(void) {
 
 static void const *sBGObjectCollision[] = {
     ag_boogoo_collision,
+    o2_boogoo_collision,
 };
 
 void bhv_boogoo_object_init(void) {

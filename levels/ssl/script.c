@@ -47,6 +47,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CAGE_GOO, cage_goo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_AG_BOOGOO, ag_boogoo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_ASTEROID, bg_asteroid_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_O2_BOOGOO, o2_boogoo_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -123,6 +124,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_BG_ASTEROID, -9250, 4941, -10462, 0, -75, 0, 0x00000000, bhvBGAsteroidGrow),
 		OBJECT(MODEL_BG_ASTEROID, -9448, 5166, -14611, 0, 19, 0, 0x00000000, bhvBGAsteroidGrow),
 		OBJECT(MODEL_HAUNTED_CAGE, -16283, 4876, -13517, 0, 180, 0, (21 << 16), bhvBoogooCage),
+		OBJECT(MODEL_O2_BOOGOO, -15732, 6503, -21987, 0, 0, 0, (1 << 16), bhvBoogooObject),
 		OBJECT(MODEL_BG_GOOMBA, -17417, 7353, -16833, 0, 180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, -19954, 6792, -12199, 0, 180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, -8381, 4021, -9448, 0, 180, 0, 0x00000000, bhvGoomba),
