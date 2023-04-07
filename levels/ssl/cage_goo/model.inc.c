@@ -578,7 +578,6 @@ Gfx mat_cage_goo_BooGooCage_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(1, 0, 0, 252, 252),
-	gsDPSetEnvColor(188, 0, 0, 255),
 	gsSPEndDisplayList(),
 };
 

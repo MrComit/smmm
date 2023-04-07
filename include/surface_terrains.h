@@ -86,6 +86,7 @@
 #define SURFACE_MUSIC_PLATE                  0x0082
 #define SURFACE_TIGHT_ROPE                   0x0083
 #define SURFACE_TREADMILL                    0x0084
+#define SURFACE_INSTANT_QUICKSAND_WALL       0x0085
 
 #define SURFACE_PAINTING_WOBBLE_A6           0x00A6 // Painting wobble (BOB Left)
 #define SURFACE_PAINTING_WOBBLE_A7           0x00A7 // Painting wobble (BOB Middle)

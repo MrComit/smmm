@@ -160,6 +160,11 @@ u32 mario_update_quicksand(struct MarioState *m, f32 sinkingSpeed) {
                 m->quicksandDepth = 0.0f;
                 break;
         }
+
+        // if (m->wall != NULL && m->wall->type == SURFACE_INSTANT_QUICKSAND_WALL) {
+        //     update_mario_sound_and_camera(m);
+        //     return drop_and_set_mario_action(m, ACT_QUICKSAND_DEATH, 1);
+        // }
     }
 
     return FALSE;

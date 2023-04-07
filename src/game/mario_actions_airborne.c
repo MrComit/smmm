@@ -2027,6 +2027,10 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
         return TRUE;
     }
 
+    // if (mario_update_quicksand(m, 0.5f)) {
+    //     return TRUE;
+    // }
+
     //play_far_fall_sound(m);
 
     /* clang-format off */
