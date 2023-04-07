@@ -11,6 +11,18 @@ static struct ObjectHitbox sBooCageHitbox = {
     /* hurtboxHeight: */ 0,
 };
 
+static struct ObjectHitbox sJustCageHitbox = {
+    /* interactType: */ INTERACT_IGLOO_BARRIER,
+    /* downOffset: */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health: */ 0,
+    /* numLootCoins: */ 0,
+    /* radius: */ 80,
+    /* height: */ 120,
+    /* hurtboxRadius: */ 0,
+    /* hurtboxHeight: */ 0,
+};
+
 /*struct Object *CL_obj_nearest_object_behavior_params(const BehaviorScript *behavior, u32 params) {
     uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
     struct Object *closestObj = NULL;
@@ -140,7 +152,7 @@ void bhv_room_boo_loop(void) {
 void bhv_boogoo_cage_init(void) {
     bhv_room_boo_init();
     o->header.gfx.scale[1] = 1.4f;
-    obj_set_hitbox(o, &sBooCageHitbox);
+    obj_set_hitbox(o, &sJustCageHitbox);
     o->oObjFC = spawn_object(o, MODEL_CAGE_GOO, bhvCageGoo);
     o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     o->oObjFC->header.gfx.scale[1] = 0.0f;

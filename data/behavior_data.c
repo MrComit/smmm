@@ -10469,7 +10469,7 @@ const BehaviorScript bhvBoogooCage[] = {
     SET_INT(oIntangibleTimer, 0),
     SET_HOME(),
     // SET_INT(oDamageOrCoinValue, 2),
-    SET_HITBOX(/*Radius*/ 100, /*Height*/ 80),
+    // SET_HITBOX(/*Radius*/ 100, /*Height*/ 80),
     // SET_FLOAT(oGraphYOffset, 30),
     // SPAWN_OBJ(/*Model*/ MODEL_HAUNTED_CAGE, /*Behavior*/ bhvBooCage),
     // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),

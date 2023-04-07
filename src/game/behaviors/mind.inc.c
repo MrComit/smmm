@@ -40,7 +40,7 @@ void bhv_bg_asteroid_loop(void) {
 void bhv_bg_asteroid_grow_loop(void) {
     struct Object *obj;
     o->os16F4 += 0x100;
-    o->header.gfx.scale[0] = 1.0f + (0.4f * sins(o->os16F4));
+    o->header.gfx.scale[0] = 0.8f + (0.4f * sins(o->os16F4));
     cur_obj_scale(o->header.gfx.scale[0]);
 
     obj = CL_obj_nearest_object_behavior_params(bhvBoogooObject, 1 << 16);
