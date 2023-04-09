@@ -48,6 +48,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_AG_BOOGOO, ag_boogoo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_ASTEROID, bg_asteroid_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_O2_BOOGOO, o2_boogoo_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SPINNING_PLAT, spinning_plat_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -138,6 +139,13 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, -21848, 6595, -8922, 0, -90, 0, 0x00000000, bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -21848, 6395, -8922, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -21848, 6195, -8922, 0, -90, 0, (2 << 16), bhvFloorPeepa),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2735, 5687, -14800, 0, 0, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_SPINNING_PLAT, 4275, 5759, -20961, 0, 0, 0, 0x00000000, bhvSpinningPlat),
+		OBJECT(MODEL_SPINNING_PLAT, 7395, 6243, -19337, 0, 0, 0, 0x00000000, bhvSpinningPlat),
+		OBJECT(MODEL_SPINNING_PLAT, 8084, 6243, -18073, 0, 0, 0, 0x00000000, bhvSpinningPlat),
+		OBJECT(MODEL_SPINNING_PLAT, 9575, 6243, -18125, 0, 0, 0, 0x00000000, bhvSpinningPlat),
+		OBJECT(MODEL_SPINNING_PLAT, 23296, 7111, -19177, 0, 0, 0, 0x00000000, bhvSpinningPlat),
+		OBJECT(MODEL_SPINNING_PLAT, 24250, 7111, -22248, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		TERRAIN(ssl_area_1_collision),
 		ROOMS(ssl_area_1_collision_rooms),
 		MACRO_OBJECTS(ssl_area_1_macro_objs),

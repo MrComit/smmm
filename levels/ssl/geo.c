@@ -38,3 +38,4 @@
 #include "levels/ssl/ag_boogoo/geo.inc.c"
 #include "levels/ssl/bg_asteroid/geo.inc.c"
 #include "levels/ssl/o2_boogoo/geo.inc.c"
+#include "levels/ssl/spinning_plat/geo.inc.c"

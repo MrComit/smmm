@@ -3,12 +3,13 @@
 const GeoLayout ssl_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(5, geo_switch_area),
+		GEO_SWITCH_CASE(6, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ssl_dl_101__Opening_geo),
 			GEO_BRANCH(1, ssl_dl_102__Art_Gallery_geo),
 			GEO_BRANCH(1, ssl_dl_103__Outside2_geo),
 			GEO_BRANCH(1, ssl_dl_104__The_Mind_Palace_geo),
+			GEO_BRANCH(1, ssl_dl_105__Outside3_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -21859, 385, 24269, 0, -180, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -21859, 385, 24269, 0, -180, 0),
@@ -60,6 +61,7 @@ const GeoLayout ssl_dl_103__Outside2_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_GardenCircle_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_GardenCircle_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_TallGrass_001_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -69,6 +71,15 @@ const GeoLayout ssl_dl_104__The_Mind_Palace_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3093, 5687, -11834, ssl_dl_Cage_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_MindPalace_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_105__Outside3_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_003_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_PalaceWall_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 4226, 5782, -20886, ssl_dl_TrophyOctogon_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

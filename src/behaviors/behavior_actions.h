@@ -1094,6 +1094,7 @@ void bhv_boogoo_object_loop(void);
 void bhv_bg_asteroid_init(void);
 void bhv_bg_asteroid_loop(void);
 void bhv_bg_asteroid_grow_loop(void);
+void bhv_spinning_plat_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
