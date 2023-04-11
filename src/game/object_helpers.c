@@ -1369,16 +1369,17 @@ Gfx *geo_dynamic_spinning_plat(s32 callContext, struct GraphNode *node, void *co
         // aCoss = coss(obj->oFaceAngleYaw);
 
         verts = segmented_to_virtual(&spinning_plat_splat_mesh_layer_1_vtx_0);
+
+        bcopy(verts, vertexBuffer, 61 * sizeof(Vtx));
         for (i = 0; i < 61; i++) {
-            x = verts[i].v.tc[0] - 496;
-            y = verts[i].v.tc[1] - 496;
+            x = vertexBuffer[i].v.tc[0] - 496;
+            y = vertexBuffer[i].v.tc[1] - 496;
             angle = atan2s(y, x) + obj->oFaceAngleYaw;
             mag = sqrtf(x * x + y * y);
-            x = mag * sins(angle);
-            y = mag * coss(angle);
-            make_vertex(vertexBuffer, i, verts[i].v.ob[0], verts[i].v.ob[1], verts[i].v.ob[2], x, 
-                        y, verts[i].v.cn[0], verts[i].v.cn[1], verts[i].v.cn[2], verts[i].v.cn[3]);
-            // verts += 1;
+            vertexBuffer[i].v.tc[0] = mag * sins(angle);
+            vertexBuffer[i].v.tc[1] = mag * coss(angle);
+            // make_vertex(vertexBuffer, i, verts[i].v.ob[0], verts[i].v.ob[1], verts[i].v.ob[2], x, 
+            //             y, verts[i].v.cn[0], verts[i].v.cn[1], verts[i].v.cn[2], verts[i].v.cn[3]);
         }
         dlHead = alloc_display_list(sizeof(Gfx) * (8));
         dlStart = dlHead;
