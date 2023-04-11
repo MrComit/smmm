@@ -8,6 +8,7 @@
 #include "levels/ssl/o2_boogoo/texscroll.inc.c"
 #include "levels/ssl/texscroll.inc.c"
 #include "levels/ssl/spinning_plat/texscroll.inc.c"
+#include "levels/ssl/big_spinning_plat/texscroll.inc.c"
 void scroll_textures_ssl() {
 		scroll_ssl_level_geo_boogoo_goomba();
 	scroll_ssl_level_geo_boogoo_koopa();
@@ -18,4 +19,5 @@ void scroll_textures_ssl() {
 	scroll_ssl_level_geo_o2_boogoo();
 	scroll_ssl();
 	scroll_ssl_level_geo_spinning_plat();
+	scroll_ssl_level_geo_big_spinning_plat();
 }

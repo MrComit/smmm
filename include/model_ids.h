@@ -889,6 +889,7 @@
 #define MODEL_CAGE_GOO            0xF9
 #define MODEL_BG_ASTEROID         0xF8
 #define MODEL_SPINNING_PLAT       0xF7
+#define MODEL_BIG_SPINNING_PLAT   0xF6
 
 
 // LEVEL 8 MODELS CONT:

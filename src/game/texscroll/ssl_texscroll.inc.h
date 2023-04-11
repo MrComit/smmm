@@ -1,3 +1,4 @@
+#include "levels/ssl/big_spinning_plat/texscroll.inc.h"
 #include "levels/ssl/spinning_plat/texscroll.inc.h"
 #include "levels/ssl/texscroll.inc.h"
 #include "levels/ssl/o2_boogoo/texscroll.inc.h"

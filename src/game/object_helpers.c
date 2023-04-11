@@ -1334,7 +1334,7 @@ Gfx *geo_generate_big_plat_chain(s32 callContext, struct GraphNode *node, void *
 }
 
 
-extern Vtx spinning_plat_splat_mesh_layer_1_vtx_0[46];
+extern Vtx spinning_plat_splat_mesh_layer_1_vtx_0[61];
 extern Gfx spinning_plat_tris1[];
 extern Gfx spinning_plat_tris2[];
 extern Gfx mat_spinning_plat_WoodFloorTrophyRoom_002_v5_layer1[];
@@ -1404,6 +1404,74 @@ Gfx *geo_dynamic_spinning_plat(s32 callContext, struct GraphNode *node, void *co
     
 }
 
+
+extern Vtx big_spinning_plat_bsplat_mesh_layer_1_vtx_0[63];
+extern Gfx big_spinning_plat_tris1[];
+extern Gfx big_spinning_plat_tris2[];
+
+Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void *context) {
+    s32 i;
+    s16 angle, x, y;
+    f32 mag;
+    Vtx *verts;
+    Vtx *vertexBuffer;
+    f32 aSins, aCoss;
+    Gfx *dlStart, *dlHead;
+    struct Object *obj;
+    struct GraphNodeGenerated *currentGraphNode;
+
+    currentGraphNode = node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+
+        currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        vertexBuffer = alloc_display_list(63 * sizeof(Vtx));
+
+        // make_vertex(vertexBuffer, 7, 0, 40, -10, 1024, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        // make_spinning_plat_verts(vertexBuffer, 0, 32, obj->oFaceAngleYaw);
+        // make_spinning_plat_verts(vertexBuffer2, 32, 32 + 14, obj->oFaceAngleYaw);
+        
+        // aSins = sins(obj->oFaceAngleYaw);
+        // aCoss = coss(obj->oFaceAngleYaw);
+
+        verts = segmented_to_virtual(&big_spinning_plat_bsplat_mesh_layer_1_vtx_0);
+
+        bcopy(verts, vertexBuffer, 63 * sizeof(Vtx));
+        for (i = 0; i < 61; i++) {
+            x = vertexBuffer[i].v.tc[0] - 496;
+            y = vertexBuffer[i].v.tc[1] - 496;
+            angle = atan2s(y, x) + obj->oFaceAngleYaw;
+            mag = sqrtf(x * x + y * y);
+            vertexBuffer[i].v.tc[0] = mag * sins(angle);
+            vertexBuffer[i].v.tc[1] = mag * coss(angle);
+            // make_vertex(vertexBuffer, i, verts[i].v.ob[0], verts[i].v.ob[1], verts[i].v.ob[2], x, 
+            //             y, verts[i].v.cn[0], verts[i].v.cn[1], verts[i].v.cn[2], verts[i].v.cn[3]);
+        }
+        dlHead = alloc_display_list(sizeof(Gfx) * (8));
+        dlStart = dlHead;
+
+
+
+
+        gSPDisplayList(dlHead++, mat_spinning_plat_WoodFloorTrophyRoom_002_v5_layer1);
+
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 32, 0);
+        gSPDisplayList(dlHead++, big_spinning_plat_tris1);
+        gSPVertex(dlHead++, vertexBuffer + 32, 31, 0);
+        gSPDisplayList(dlHead++, big_spinning_plat_tris2);
+        // gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
+        // gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
+        
+        gSPDisplayList(dlHead++, mat_revert_spinning_plat_WoodFloorTrophyRoom_002_v5_layer1);
+        
+        gSPEndDisplayList(dlHead++);
+    }
+    return dlStart;
+    
+}
 
 
 

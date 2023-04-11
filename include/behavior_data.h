@@ -877,6 +877,7 @@ extern const BehaviorScript bhvBoogooObject[];
 extern const BehaviorScript bhvBGAsteroid[];
 extern const BehaviorScript bhvBGAsteroidGrow[];
 extern const BehaviorScript bhvSpinningPlat[];
+extern const BehaviorScript bhvBigSpinningPlat[];
 
 
 #endif // BEHAVIOR_DATA_H

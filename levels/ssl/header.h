@@ -122,4 +122,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/spinning_plat/collision_header.h"
 
+#include "levels/ssl/big_spinning_plat/geo_header.h"
+
+#include "levels/ssl/big_spinning_plat/collision_header.h"
+
 #endif

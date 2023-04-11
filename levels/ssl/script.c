@@ -49,6 +49,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BG_ASTEROID, bg_asteroid_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_O2_BOOGOO, o2_boogoo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SPINNING_PLAT, spinning_plat_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BIG_SPINNING_PLAT, big_spinning_plat_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -140,6 +141,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, -21848, 6395, -8922, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -21848, 6195, -8922, 0, -90, 0, (2 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2735, 5687, -14800, 0, 0, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_BIG_SPINNING_PLAT, 16618, 6737, -19688, 0, 0, 0, 0x00000000, bhvBigSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 4275, 5759, -20961, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 7395, 6243, -19337, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 8084, 6243, -18073, 0, 0, 0, 0x00000000, bhvSpinningPlat),

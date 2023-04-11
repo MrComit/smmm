@@ -69,3 +69,5 @@
 #include "levels/ssl/o2_boogoo/collision.inc.c"
 #include "levels/ssl/spinning_plat/model.inc.c"
 #include "levels/ssl/spinning_plat/collision.inc.c"
+#include "levels/ssl/big_spinning_plat/model.inc.c"
+#include "levels/ssl/big_spinning_plat/collision.inc.c"

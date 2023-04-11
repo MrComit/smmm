@@ -91,6 +91,7 @@ Gfx *geo_generate_cam_beam(s32 callContext, struct GraphNode *node, void *contex
 Gfx *geo_generate_plat_chain(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_generate_big_plat_chain(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_dynamic_spinning_plat(s32 callContext, struct GraphNode *node, void *context);
+Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context);
