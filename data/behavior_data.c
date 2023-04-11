@@ -10561,6 +10561,6 @@ const BehaviorScript bhvBigSpinningPlat[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_spinning_plat_loop),
-        ADD_INT(oFaceAngleYaw, 0x180),
+        ADD_INT(oFaceAngleYaw, 0x120),
     END_LOOP(),
 };
