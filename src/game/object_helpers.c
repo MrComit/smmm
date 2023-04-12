@@ -1405,19 +1405,20 @@ Gfx *geo_dynamic_spinning_plat(s32 callContext, struct GraphNode *node, void *co
 }
 
 
-extern Vtx big_spinning_plat_bsplat_mesh_layer_1_vtx_0[314];
+extern Vtx big_spinning_plat_bsplat_mesh_layer_1_vtx_0[315];
+extern Vtx big_spinning_plat_bsplat_mesh_layer_1_vtx_0_copy[315];
 extern Gfx big_spinning_plat_bsplat_mesh_layer_1_tri_0[];
 // extern Vtx *big_spin_plat_verts[];
 // extern Gfx big_spinning_plat_tris1[];
 // extern Gfx big_spinning_plat_tris2[];
-s16 sPrevYaw = 0;
+// s16 sPrevYaw = 0;
 
 Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void *context) {
     s32 i;
     s16 angle, x, y;
     f32 mag;
     Vtx *verts;
-    // Vtx *vertexBuffer;
+    Vtx *verts2;
     // f32 aSins, aCoss;
     // Gfx *dlStart, *dlHead;
     struct Object *obj;
@@ -1441,19 +1442,19 @@ Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void
         // aCoss = coss(obj->oFaceAngleYaw);
 
         verts = segmented_to_virtual(&big_spinning_plat_bsplat_mesh_layer_1_vtx_0);
-
-        // bcopy(verts, vertexBuffer, 314 * sizeof(Vtx));
-        for (i = 0; i < 314; i++) {
-            x = verts[i].v.tc[0] - 496;
-            y = verts[i].v.tc[1] - 496;
-            angle = atan2s(y, x) + (obj->oFaceAngleYaw - sPrevYaw);
+        verts2 = segmented_to_virtual(&big_spinning_plat_bsplat_mesh_layer_1_vtx_0_copy);
+        bcopy(verts, verts2, 315 * sizeof(Vtx));
+        for (i = 0; i < 315; i++) {
+            x = verts2[i].v.tc[0] - 496;
+            y = verts2[i].v.tc[1] - 496;
+            angle = atan2s(y, x) + obj->oFaceAngleYaw;
             mag = sqrtf(x * x + y * y);
-            verts[i].v.tc[0] = mag * sins(angle) + 496;
-            verts[i].v.tc[1] = mag * coss(angle) + 496;
+            verts2[i].v.tc[0] = mag * sins(angle) + 496;
+            verts2[i].v.tc[1] = mag * coss(angle) + 496;
             // make_vertex(vertexBuffer, i, verts[i].v.ob[0], verts[i].v.ob[1], verts[i].v.ob[2], x, 
             //             y, verts[i].v.cn[0], verts[i].v.cn[1], verts[i].v.cn[2], verts[i].v.cn[3]);
         }
-        sPrevYaw = obj->oFaceAngleYaw;
+        // sPrevYaw = obj->oFaceAngleYaw;
         // dlHead = alloc_display_list(sizeof(Gfx) * (8));
         // dlStart = dlHead;
 

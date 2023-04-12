@@ -77,6 +77,7 @@ const GeoLayout ssl_dl_104__The_Mind_Palace_geo[] = {
 const GeoLayout ssl_dl_105__Outside3_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_BGRocks_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_PalaceWall_mesh_layer_1),
 	GEO_CLOSE_NODE(),
