@@ -1350,6 +1350,7 @@ void update_mario_joystick_inputs(struct MarioState *m) {
     struct Object *obj;
     struct Controller *controller = m->controller;
     u16 dist;
+    s16 angle;
     f32 mag = ((controller->stickMag / 64.0f) * (controller->stickMag / 64.0f)) * 64.0f;
 
     if (m->squishTimer == 0) {
@@ -1357,6 +1358,12 @@ void update_mario_joystick_inputs(struct MarioState *m) {
     } else {
         m->intendedMag = mag / 8.0f;
     }
+
+
+    // angle = atan2s(controller->stickY, controller->stickX);
+    // angle += 0xB820;
+    // controller->stickX = sins(angle);
+    // controller->stickY = coss(angle);
 
     if (m->intendedMag > 0.0f) {
         m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
