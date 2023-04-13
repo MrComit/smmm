@@ -62,6 +62,7 @@ const GeoLayout ssl_dl_205__Outside3_geo[] = {
 const GeoLayout ssl_dl_206__The_Laboratory_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_Antenna_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Lab_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 13133, 7774, -10212, ssl_dl_Lab_001_mesh_layer_1),
 		GEO_OPEN_NODE(),

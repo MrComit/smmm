@@ -890,6 +890,7 @@
 #define MODEL_BG_ASTEROID         0xF8
 #define MODEL_SPINNING_PLAT       0xF7
 #define MODEL_BIG_SPINNING_PLAT   0xF6
+#define MODEL_ANTENNA_BALL        0xF5
 
 
 // LEVEL 8 MODELS CONT:

@@ -1343,6 +1343,9 @@ void update_mario_button_inputs(struct MarioState *m) {
     }
 }
 
+
+s32 gJoystickSwitch = 0;
+
 /**
  * Updates the joystick intended magnitude.
  */
@@ -1359,11 +1362,12 @@ void update_mario_joystick_inputs(struct MarioState *m) {
         m->intendedMag = mag / 8.0f;
     }
 
-
-    // angle = atan2s(controller->stickY, controller->stickX);
-    // angle += 0xB820;
-    // controller->stickX = sins(angle);
-    // controller->stickY = coss(angle);
+    if (gCurrLevelNum == LEVEL_SSL && gMarioCurrentRoom == 6 && gJoystickSwitch) {
+        angle = atan2s(controller->stickY, controller->stickX);
+        angle += gJoystickSwitch;
+        controller->stickX = sins(angle);
+        controller->stickY = coss(angle);
+    }
 
     if (m->intendedMag > 0.0f) {
         m->intendedYaw = atan2s(-controller->stickY, controller->stickX) + m->area->camera->yaw;
