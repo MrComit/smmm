@@ -179,6 +179,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_SPINNING_PLAT, -12425, 6243, -8125, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 1296, 7111, -9177, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 2250, 7111, -12248, 0, 0, 0, 0x00000000, bhvSpinningPlat),
+		OBJECT(MODEL_HAUNTED_CAGE, 18724, 7311, -11707, 0, 0, 0, (22 << 16), bhvBoogooCage),
 		OBJECT(MODEL_MR_I, 7603, 7311, -12007, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 10517, 7311, -12568, 0, -90, 0, 0x00000000, bhvMrI),
 		TERRAIN(ssl_area_2_collision),
