@@ -1,4 +1,128 @@
 extern s32 gJoystickSwitch;
+static struct ObjectHitbox sSuncubeHitbox = {
+    /* interactType:      */ INTERACT_GRABBABLE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 90,
+    /* height:            */ 140,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+
+
+Vec3f sSuncubeSpots[2] = {
+    {18293.0f, 7311.0f, -12995.0f},
+    {18293.0f, 7311.0f, -10420.0f},
+};
+
+
+void suncube_held_loop(void) {
+    cur_obj_become_intangible();
+    o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    o->oFC = 0;
+    cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
+
+    // o->os16F4 = approach_s16_symmetric(o->os16F4, 0xFF, 0x10);
+    // o->os16F6 = approach_s16_symmetric(o->os16F6, 0xBD, 0x10);
+    // o->os16FA = o->header.gfx.animInfo.animFrame;
+}
+
+void suncube_dropped_loop(void) {
+    cur_obj_get_dropped();
+    cur_obj_become_tangible();
+
+    o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+    //cur_obj_init_animation(0);
+
+    //o->oFC = 1;
+    o->oHeldState = 0;
+    //o->oAction = 0;
+}
+
+
+void suncube_free_loop(void) {
+    object_step();
+    o->header.gfx.animInfo.animFrame = o->os16FA;
+    o->os16F4 = approach_s16_symmetric(o->os16F4, 0x99, 0x10);
+    o->os16F6 = approach_s16_symmetric(o->os16F6, 0x71, 0x10);
+
+    if (sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
+        o->os16FC = 1;
+    } 
+
+    if (sObjFloor != NULL && sObjFloor->type == SURFACE_SUNCUBE_FLOOR) {
+        o->oAction = 1;
+        o->oInteractType = INTERACT_IGLOO_BARRIER;
+        vec3f_copy(&o->oPosX, sSuncubeSpots[sObjFloor->force]);
+        o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
+        o->oFloat10C = 1.0f;
+    }
+    
+    if (o->oPosY > 0.0f && gMarioState->pos[1] < -150.0f) {
+        if (++o->os16110 > 45) {
+            o->os16FC = 1;
+        }
+    } else {
+        o->os16110 = 0;
+    }
+
+    if (o->os16FC == 1) {
+        o->os16FE++;
+        if (o->os16FE > 10) {
+            o->header.gfx.scale[0] -= 0.05f;
+            o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+        }
+        if (o->os16FE > 30) {
+            o->os16FE = 0;
+            o->oHeldState = 0;
+            vec3f_copy(&o->oPosX, &o->oHomeX);
+            o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
+            o->os16FC = 0;
+            o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0] = 1.0f;
+        }
+    }
+}
+
+
+
+void bhv_suncube_init(void) {
+    o->oGravity = 2.5;
+    o->oFriction = 0.8;
+    o->oBuoyancy = 1.3;
+    o->os16F4 = 0x99;
+    o->os16F6 = 0x71;
+    o->os16F8 = 0;
+    o->os16FA = 0;
+    obj_set_hitbox(o, &sSuncubeHitbox);
+}
+
+
+
+void bhv_suncube_loop(void) {
+    if (o->oAction) {
+        o->oFloat10C = approach_f32_symmetric(o->oFloat10C, 2.0f, 0.05f);
+        cur_obj_scale(o->oFloat10C);
+    } else {
+        switch (o->oHeldState) {
+            case HELD_FREE:
+                suncube_free_loop();
+                break;
+
+            case HELD_HELD:
+                suncube_held_loop();
+                break;
+            case HELD_THROWN:
+            case HELD_DROPPED:
+                suncube_dropped_loop();
+                break;
+        }
+    }
+}
+
+
 
 void bhv_antenna_ball_init(void) {
     o->os16F4 = 0x30;
@@ -10,7 +134,7 @@ void bhv_antenna_ball_init(void) {
 void bhv_antenna_ball_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (gMarioState->pos[0] > 11000.0f && gMarioState->pos[0] < 17500.0f) {
+            if (gMarioState->pos[0] > 11000.0f && gMarioState->pos[0] < 17650.0f) {
                 o->oAction = 1;
                 if (o->oBehParams2ndByte) {
                     gJoystickSwitch = CL_RandomMinMaxU16(0x1800, 0xE800);

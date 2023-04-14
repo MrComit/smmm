@@ -72,3 +72,4 @@
 #include "levels/ssl/big_spinning_plat/model.inc.c"
 #include "levels/ssl/big_spinning_plat/collision.inc.c"
 #include "levels/ssl/antenna_ball/model.inc.c"
+#include "levels/ssl/suncube/model.inc.c"

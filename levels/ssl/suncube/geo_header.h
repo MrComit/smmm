@@ -1,0 +1,10 @@
+extern const GeoLayout suncube_geo[];
+extern u8 suncube_sun_symbol2_ci4[];
+extern u8 suncube_sun_symbol2_ci4_pal_rgba16[];
+extern Vtx suncube_SunCube_mesh_layer_4_vtx_cull[8];
+extern Vtx suncube_SunCube_mesh_layer_4_vtx_0[14];
+extern Gfx suncube_SunCube_mesh_layer_4_tri_0[];
+extern Gfx mat_suncube_SunCube[];
+extern Gfx mat_revert_suncube_SunCube[];
+extern Gfx suncube_SunCube_mesh_layer_4[];
+extern Gfx suncube_material_revert_render_settings[];

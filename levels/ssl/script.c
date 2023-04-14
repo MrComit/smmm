@@ -54,6 +54,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SPINNING_PLAT, spinning_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_SPINNING_PLAT, big_spinning_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ANTENNA_BALL, antenna_ball_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_SUNCUBE, suncube_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -73,9 +74,9 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, -19590, 1752, 16965, 0, -90, 0, 0x00000000, bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19590, 1552, 16965, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19590, 1352, 16965, 0, -90, 0, (2 << 16), bhvFloorPeepa),
-		OBJECT(MODEL_PEEPA, -21305, 1752, 15347, 0, -90, 0, 0x00000000, bhvFloorPeepa),
-		OBJECT(MODEL_PEEPA, -21305, 1552, 15347, 0, -90, 0, (1 << 16), bhvFloorPeepa),
-		OBJECT(MODEL_PEEPA, -21305, 1352, 15347, 0, -90, 0, (2 << 16), bhvFloorPeepa),
+		OBJECT(MODEL_PEEPA, -21306, 1752, 15347, 0, -90, 0, 0x00000000, bhvFloorPeepa),
+		OBJECT(MODEL_PEEPA, -21306, 1552, 15347, 0, -90, 0, (1 << 16), bhvFloorPeepa),
+		OBJECT(MODEL_PEEPA, -21306, 1352, 15347, 0, -90, 0, (2 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19659, 2268, 12723, 0, -90, 0, 0x00000000, bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19659, 2068, 12723, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19659, 1868, 12723, 0, -90, 0, (2 << 16), bhvFloorPeepa),
@@ -188,6 +189,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MR_I, 16981, 7311, -15688, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 16981, 7311, -7726, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 14932, 7311, -10229, 0, -90, 0, 0x00000000, bhvMrI),
+		OBJECT(MODEL_SUNCUBE, 14493, 7311, -15838, 0, 0, 0, 0x00000000, bhvSuncube),
+		OBJECT(MODEL_SUNCUBE, 14493, 7311, -7576, 0, 0, 0, (1 << 16), bhvSuncube),
 		TERRAIN(ssl_area_2_collision),
 		ROOMS(ssl_area_2_collision_rooms),
 		MACRO_OBJECTS(ssl_area_2_macro_objs),

@@ -881,6 +881,7 @@ extern const BehaviorScript bhvBigSpinningPlat[];
 extern const BehaviorScript bhvAntennaBall[];
 extern const BehaviorScript bhvDizzyParticleSpawner[];
 extern const BehaviorScript bhvDizzyTriangle[];
+extern const BehaviorScript bhvSuncube[];
 
 
 #endif // BEHAVIOR_DATA_H

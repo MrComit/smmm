@@ -128,4 +128,6 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/antenna_ball/geo_header.h"
 
+#include "levels/ssl/suncube/geo_header.h"
+
 #endif

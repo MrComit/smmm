@@ -58,6 +58,7 @@
 #define SURFACE_FORCE_JUMP                   0x003D
 #define SURFACE_INSTANT_UPWARP               0x003E
 #define SURFACE_PERMA_SHALLOW_QUICKSAND      0x003F
+// skip 0x40-0x44
 
 #define SURFACE_BOSS_FIGHT_CAMERA            0x0065 // Wide camera for BOB and WF bosses
 #define SURFACE_CAMERA_FREE_ROAM             0x0066 // Free roam camera for THI and TTC
@@ -87,6 +88,7 @@
 #define SURFACE_TIGHT_ROPE                   0x0083
 #define SURFACE_TREADMILL                    0x0084
 #define SURFACE_INSTANT_QUICKSAND_WALL       0x0085
+#define SURFACE_SUNCUBE_FLOOR                0x0086
 
 #define SURFACE_PAINTING_WOBBLE_A6           0x00A6 // Painting wobble (BOB Left)
 #define SURFACE_PAINTING_WOBBLE_A7           0x00A7 // Painting wobble (BOB Middle)
