@@ -1367,6 +1367,7 @@ void update_mario_joystick_inputs(struct MarioState *m) {
         angle += gJoystickSwitch;
         controller->stickX = sins(angle);
         controller->stickY = coss(angle);
+        m->particleFlags |= PARTICLE_DIZZY;
     }
 
     if (m->intendedMag > 0.0f) {

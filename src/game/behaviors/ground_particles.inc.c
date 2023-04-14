@@ -1,4 +1,5 @@
 // ground_particles.inc.c
+// #include "include/sm64.h"
 static struct SpawnParticlesInfo sGPMistParticles = {
     /* behParam:        */ 3,
     /* count:           */ 1,
@@ -13,6 +14,58 @@ static struct SpawnParticlesInfo sGPMistParticles = {
     /* sizeBase:        */ 7.0f,
     /* sizeRange:       */ 1.5f,
 };
+
+
+void bhv_dizzy_triangle_init(void) {
+    o->oAnimState = 4;
+    o->oFloatF8 = 0.01f;
+    cur_obj_scale(0.01f);
+    o->oFaceAnglePitch = o->os16F4;
+    o->oFaceAngleRoll = o->os16F4;
+    o->oFaceAngleYaw = o->os16F4;
+}
+
+
+void bhv_dizzy_triangle_loop(void) {
+    o->os16F4 += 0x300;
+    o->oPosY = gMarioState->pos[1] + 163.0f;
+    o->oPosX = gMarioState->pos[0] + (40.0f * sins(o->os16F4));
+    o->oPosZ = gMarioState->pos[2] + (40.0f * coss(o->os16F4));
+    o->oFaceAnglePitch += 0x600;
+    o->oFaceAngleRoll += 0x600;
+    o->oFaceAngleYaw += 0x600;
+    if (!(gMarioState->particleFlags & PARTICLE_DIZZY)) {
+        o->oFloatF8 -= 0.02f;
+        cur_obj_scale(o->oFloatF8);
+        if (o->oFloatF8 < 0.03f) {
+            o->activeFlags = 0;
+        }
+    } else {
+        o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 0.16f, 0.02f);
+        cur_obj_scale(o->oFloatF8);  
+    }
+}
+
+
+void bhv_dizzy_particle_spawn_init(void) {
+    o->oObjF4 = spawn_object(o, MODEL_CARTOON_STAR, bhvDizzyTriangle);
+    o->oObjF4->parentObj = o;
+    o->oObjF8 = spawn_object(o, MODEL_CARTOON_STAR, bhvDizzyTriangle);
+    o->oObjF8->parentObj = o;
+    o->oObjF8->os16F4 = 0x5555;
+    o->oObjFC = spawn_object(o, MODEL_CARTOON_STAR, bhvDizzyTriangle);
+    o->oObjFC->parentObj = o;
+    o->oObjFC->os16F4 = 0xAAAA;
+}
+
+
+
+void bhv_dizzy_particle_spawn_loop(void) {
+    if (!(gMarioState->particleFlags & PARTICLE_DIZZY)) {
+        o->activeFlags = 0;
+        clear_particle_flags(ACTIVE_PARTICLE_DIZZY);
+    }
+}
 
 
 void bhv_gp_white_puffs_init(void) {

@@ -1304,6 +1304,27 @@ const BehaviorScript bhvGPMistParticleSpawner[] = {
     DEACTIVATE(),
 };
 
+
+const BehaviorScript bhvDizzyParticleSpawner[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_dizzy_particle_spawn_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_dizzy_particle_spawn_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvDizzyTriangle[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_dizzy_triangle_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_dizzy_triangle_loop),
+    END_LOOP(),
+};
+
+
 const BehaviorScript bhvDirtParticleSpawner[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     BEGIN(OBJ_LIST_DEFAULT),

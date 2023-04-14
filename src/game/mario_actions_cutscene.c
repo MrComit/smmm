@@ -2816,6 +2816,21 @@ static s32 act_cutscene_jump(struct MarioState *m) {
 }
 
 
+static s32 act_cutscene_dizzy(struct MarioState *m) {
+    m->forwardVel = 0.0f;
+    m->vel[0] = m->vel[2] = 0.0f;
+    // m->particleFlags |= PARTICLE_DIZZY;
+    if (perform_air_step(m, 0) == AIR_STEP_LANDED) {
+        set_mario_animation(m, MARIO_ANIM_DYING_FALL_OVER);
+        if ((m->actionTimer++ > 10 && m->actionTimer <= 20 && m->actionTimer & 2) || (m->actionTimer > 20 && m->actionTimer & 1)) {
+            gMarioObject->header.gfx.animInfo.animFrame--;
+        }
+        if (m->actionTimer > 45) {
+            set_mario_action(m, ACT_IDLE, 0);
+        }
+    }
+    return FALSE;
+}
 
 
 s32 mario_execute_cutscene_action(struct MarioState *m) {
@@ -2879,6 +2894,7 @@ s32 mario_execute_cutscene_action(struct MarioState *m) {
         case ACT_FEET_STUCK_IN_GROUND:       cancel = act_feet_stuck_in_ground(m);       break;
         case ACT_PUTTING_ON_CAP:             cancel = act_putting_on_cap(m);             break;
         case ACT_CUTSCENE_JUMP:              cancel = act_cutscene_jump(m);              break;
+        case ACT_CUTSCENE_DIZZY:             cancel = act_cutscene_dizzy(m);             break;
     }
     /* clang-format on */
 
