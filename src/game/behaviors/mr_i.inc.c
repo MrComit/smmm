@@ -44,12 +44,16 @@ void bhv_mr_i_particle_loop(void) {
 
 void spawn_mr_i_particle(void) {
     struct Object *particle;
-    f32 sp18 = o->header.gfx.scale[1];
+    particle = spawn_object_relative(0, 0, 50, 40, o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
+    // particle->oFaceAnglePitch = particle->oMoveAnglePitch = o->oFaceAnglePitch - 0x4000;
+    // f32 sp18 = o->header.gfx.scale[1];
 
-    particle = spawn_object(o, MODEL_PURPLE_MARBLE, bhvMrIParticle);
-    particle->oPosY += 50.0f * sp18;
-    particle->oPosX += sins(o->oMoveAngleYaw) * 90.0f * sp18;
-    particle->oPosZ += coss(o->oMoveAngleYaw) * 90.0f * sp18;
+    // particle = spawn_object(o, MODEL_PURPLE_MARBLE, bhvMrIParticle);
+    // particle->oPosY += 50.0f * sp18;
+    // particle->oPosX += sins(o->oMoveAngleYaw) * 90.0f * sp18;
+    // particle->oPosZ += coss(o->oMoveAngleYaw) * 90.0f * sp18;
+
+    // particle->oRoom = o->oRoom;
 
     cur_obj_play_sound_2(SOUND_OBJ_MRI_SHOOT);
 }
@@ -154,8 +158,13 @@ void mr_i_act_3(void) {
 }
 
 void mr_i_act_2(void) {
+    f32 rand = 50.0f;
     s16 sp1E = o->oMoveAngleYaw;
     s16 sp1C;
+
+    if (gMarioState->heldObj != NULL) {
+        rand = 30.0f;
+    }
 
     if (o->oTimer == 0) {
         if (o->oBehParams2ndByte != 0) {
@@ -211,18 +220,18 @@ void mr_i_act_2(void) {
             o->oMrIUnk110 = 1;
         }
 
-        if (o->oMrIUnk104 == o->oMrIUnk108 + 20) {
+        if (o->oMrIUnk104 >= o->oMrIUnk108 + 20) {
             spawn_mr_i_particle();
             o->oMrIUnk104 = 0;
-            o->oMrIUnk108 = (s32)(random_float() * 50.0f + 50.0f);
+            o->oMrIUnk108 = (s32)(random_float() * rand + rand);
         }
         o->oMrIUnk104++;
     } else {
         o->oMrIUnk104 = 0;
-        o->oMrIUnk108 = (s32)(random_float() * 50.0f + 50.0f);
+        o->oMrIUnk108 = (s32)(random_float() * rand + rand);
     }
 
-    if (o->oDistanceToMario > 800.0f) {
+    if (o->oDistanceToMario > 800.0f && gMarioState->heldObj == NULL) {
         o->oAction = 1;
     }
 }
@@ -231,6 +240,11 @@ void mr_i_act_1(void) {
     s16 sp1E = obj_angle_to_object(o, gMarioObject);
     s16 sp1C = abs_angle_diff(o->oMoveAngleYaw, sp1E);
     s16 sp1A = abs_angle_diff(o->oMoveAngleYaw, gMarioObject->oFaceAngleYaw);
+
+    if (gMarioState->heldObj != NULL && obj_has_behavior(gMarioState->heldObj, bhvSuncube)) {
+        o->oAction = 2;
+    }
+
 
     if (o->oTimer == 0) {
         cur_obj_become_tangible();
@@ -280,7 +294,7 @@ void mr_i_act_0(void) {
         cur_obj_set_pos_to_home();
     }
 
-    if (o->oDistanceToMario < 1500.0f) {
+    if (o->oDistanceToMario < 7000.0f) { // was 1500.0f
         o->oAction = 1;
     }
 }
@@ -309,7 +323,7 @@ void bhv_mr_i_loop(void) {
     cur_obj_call_action_function(sMrIActions);
 
     if (o->oAction != 3) {
-        if ((o->oDistanceToMario > 3000.0f) || (o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) {
+        if ((o->oDistanceToMario > 8000.0f) || (o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM)) { // was 3000.0f
             o->oAction = 0;
         }
     }
