@@ -44,6 +44,7 @@ void suncube_dropped_loop(void) {
 
 
 void suncube_free_loop(void) {
+    struct Object *obj;
     object_step();
     o->header.gfx.animInfo.animFrame = o->os16FA;
     o->os16F4 = approach_s16_symmetric(o->os16F4, 0x99, 0x10);
@@ -55,10 +56,19 @@ void suncube_free_loop(void) {
 
     if (sObjFloor != NULL && sObjFloor->type == SURFACE_SUNCUBE_FLOOR) {
         o->oAction = 1;
+        o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
         o->oInteractType = INTERACT_IGLOO_BARRIER;
         vec3f_copy(&o->oPosX, sSuncubeSpots[sObjFloor->force]);
         o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
         o->oFloat10C = 1.0f;
+        play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+        obj = cur_obj_nearest_object_with_behavior(bhvSuncube);
+        if (obj == NULL || obj->oAction == 1) {
+            obj = CL_nearest_object_with_behavior_and_field(bhvAntennaBall, 0x144, 1);
+            if (obj != NULL) {
+                obj->os16110 = 1;
+            }
+        }
     }
     
     if (o->oPosY > 0.0f && gMarioState->pos[1] < -150.0f) {
@@ -132,15 +142,33 @@ void bhv_antenna_ball_init(void) {
 
 
 void bhv_antenna_ball_loop(void) {
+    struct Object *obj;
+    struct MarioState *m = gMarioState;
+    if (o->oBehParams2ndByte) {
+        obj = o;
+    } else {
+        obj = CL_nearest_object_with_behavior_and_field(bhvAntennaBall, 0x144, 1);
+        if (obj == NULL) {
+            o->activeFlags = 0;
+            return;
+        }
+    }
     switch (o->oAction) {
         case 0:
-            if (gMarioState->pos[0] > 11000.0f && gMarioState->pos[0] < 17650.0f) {
+            if (m->pos[0] > 11000.0f && m->pos[0] < 17650.0f && m->heldObj == NULL && m->floor->type != SURFACE_INSTANT_QUICKSAND) {
                 o->oAction = 1;
                 if (o->oBehParams2ndByte) {
                     gJoystickSwitch = CL_RandomMinMaxU16(0x1800, 0xE800);
-                    // gMarioState->particleFlags |= PARTICLE_DIZZY;
-                    set_mario_action(gMarioState, ACT_CUTSCENE_DIZZY, 0);
-                    // set_mario_animation(gMarioState, MARIO_ANIM_DYING_FALL_OVER);
+                    // m->particleFlags |= PARTICLE_DIZZY;
+                    set_mario_action(m, ACT_CUTSCENE_DIZZY, 0);
+                    // set_mario_animation(m, MARIO_ANIM_DYING_FALL_OVER);
+                }
+            }
+            if (obj != NULL && obj->os16110) {
+                o->oAction = 2;
+                if (o->oBehParams2ndByte) {
+                    gJoystickSwitch = 0;
+                    // m->particleFlags &= ~PARTICLE_DIZZY;
                 }
             }
             o->os16F4 = approach_s16_symmetric(o->os16F4, 0x30, 0x6);
@@ -149,18 +177,31 @@ void bhv_antenna_ball_loop(void) {
             o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 1.0f, 0.025f);
             break;
         case 1:
-            if (gMarioState->pos[0] < 10500.0f || gMarioState->pos[0] > 18000.0f) {
+            if (m->pos[0] < 10500.0f || m->pos[0] > 18000.0f || m->heldObj != NULL) {
                 o->oAction = 0;
                 if (o->oBehParams2ndByte) {
                     gJoystickSwitch = 0;
-                    // gMarioState->particleFlags &= ~PARTICLE_DIZZY;
+                    // m->particleFlags &= ~PARTICLE_DIZZY;
                 }
             }
-            // set_mario_animation(gMarioState, MARIO_ANIM_DYING_FALL_OVER);
+            if (obj != NULL && obj->os16110) {
+                o->oAction = 2;
+                if (o->oBehParams2ndByte) {
+                    gJoystickSwitch = 0;
+                    // m->particleFlags &= ~PARTICLE_DIZZY;
+                }
+            }
+            // set_mario_animation(m, MARIO_ANIM_DYING_FALL_OVER);
             o->os16F4 = approach_s16_symmetric(o->os16F4, 0x0, 0x6);
             o->os16F6 = approach_s16_symmetric(o->os16F6, 0xB0, 0x6);
             o->os16F8 = approach_s16_symmetric(o->os16F8, 0xFF, 0x7);
             o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 1.5f, 0.025f);
+            break;
+        case 2:
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0x0, 0x3);
+            o->os16F6 = approach_s16_symmetric(o->os16F6, 0x0, 0x3);
+            o->os16F8 = approach_s16_symmetric(o->os16F8, 0x0, 0x4);
+            o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 0.5f, 0.01f);
             break;
     }
     cur_obj_scale(o->oFloatFC);
