@@ -130,4 +130,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/suncube/geo_header.h"
 
+#include "levels/ssl/lab_bg/geo_header.h"
+
+#include "levels/ssl/lab_bg/collision_header.h"
+
 #endif

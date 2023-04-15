@@ -898,6 +898,7 @@
 // 0x5B-0x63
 #define MODEL_AG_BOOGOO           0x5B
 #define MODEL_O2_BOOGOO           0x5C
+#define MODEL_LAB_BOOGOO          0x5D
 
 // 0x6C-0x73
 

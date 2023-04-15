@@ -158,7 +158,8 @@ void bhv_antenna_ball_loop(void) {
             if (m->pos[0] > 11000.0f && m->pos[0] < 17650.0f && m->heldObj == NULL && m->floor->type != SURFACE_INSTANT_QUICKSAND) {
                 o->oAction = 1;
                 if (o->oBehParams2ndByte) {
-                    gJoystickSwitch = CL_RandomMinMaxU16(0x1800, 0xE800);
+                    // gJoystickSwitch = CL_RandomMinMaxU16(0x1800, 0xE800);
+                    gJoystickSwitch = 0x8000;
                     // m->particleFlags |= PARTICLE_DIZZY;
                     set_mario_action(m, ACT_CUTSCENE_DIZZY, 0);
                     // set_mario_animation(m, MARIO_ANIM_DYING_FALL_OVER);

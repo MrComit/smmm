@@ -1,0 +1,13 @@
+extern const GeoLayout lab_bg_switch_opt1[];
+extern const GeoLayout lab_bg_geo[];
+extern u8 lab_bg_BOOGOO1_i4[];
+extern u8 lab_bg_BOOGOO2_i4[];
+extern Vtx lab_bg_lgb_mesh_layer_1_vtx_0[113];
+extern Gfx lab_bg_lgb_mesh_layer_1_tri_0[];
+extern Gfx mat_lab_bg_BooGooObject_layer1[];
+extern Gfx mat_revert_lab_bg_BooGooObject_layer1[];
+extern Gfx mat_lab_bg_BooGooObjectTrans_layer1[];
+extern Gfx mat_revert_lab_bg_BooGooObjectTrans_layer1[];
+extern Gfx lab_bg_lgb_mesh_layer_1[];
+extern Gfx lab_bg_lgb_mesh_layer_1_mat_override_BooGooObjectTrans_0[];
+extern Gfx lab_bg_material_revert_render_settings[];

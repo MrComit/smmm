@@ -163,14 +163,14 @@ void mr_i_act_2(void) {
     s16 sp1C;
 
     if (gMarioState->heldObj != NULL) {
-        rand = 30.0f;
+        rand = 60.0f;
     }
 
     if (o->oTimer == 0) {
         if (o->oBehParams2ndByte != 0) {
             o->oMrIUnkF4 = 200;
         } else {
-            o->oMrIUnkF4 = 120;
+            o->oMrIUnkF4 = 240; // was 120
         }
         o->oMrIUnkFC = 0;
         o->oMrIUnk100 = 0;
@@ -220,7 +220,7 @@ void mr_i_act_2(void) {
             o->oMrIUnk110 = 1;
         }
 
-        if (o->oMrIUnk104 >= o->oMrIUnk108 + 20) {
+        if (o->oMrIUnk104 >= o->oMrIUnk108 + 20 && o->oDistanceToMario > 800.0f) {
             spawn_mr_i_particle();
             o->oMrIUnk104 = 0;
             o->oMrIUnk108 = (s32)(random_float() * rand + rand);

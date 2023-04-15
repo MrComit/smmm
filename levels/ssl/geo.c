@@ -42,3 +42,4 @@
 #include "levels/ssl/big_spinning_plat/geo.inc.c"
 #include "levels/ssl/antenna_ball/geo.inc.c"
 #include "levels/ssl/suncube/geo.inc.c"
+#include "levels/ssl/lab_bg/geo.inc.c"
