@@ -75,3 +75,5 @@
 #include "levels/ssl/suncube/model.inc.c"
 #include "levels/ssl/lab_bg/model.inc.c"
 #include "levels/ssl/lab_bg/collision.inc.c"
+#include "levels/ssl/o1_bg/model.inc.c"
+#include "levels/ssl/o1_bg/collision.inc.c"

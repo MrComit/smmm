@@ -1103,6 +1103,7 @@ void bhv_dizzy_triangle_init(void);
 void bhv_dizzy_triangle_loop(void);
 void bhv_suncube_init(void);
 void bhv_suncube_loop(void);
+void bhv_boogoo_object_nocage_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -134,4 +134,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/lab_bg/collision_header.h"
 
+#include "levels/ssl/o1_bg/geo_header.h"
+
+#include "levels/ssl/o1_bg/collision_header.h"
+
 #endif

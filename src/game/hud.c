@@ -1074,7 +1074,7 @@ void render_hud_coins(void) {
 s32 gHudTopYBoos = 219;
 
 void render_hud_boos(void) {
-	s32 boos = CL_count_bits(save_file_get_boos());
+	s32 boos = CL_count_bits(save_file_get_boos() & 0xFFFFF);
 	s32 palette = (boos >= 20) ? 6 : 1;
 
 	if (boos == 0) {

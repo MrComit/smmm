@@ -1,0 +1,17 @@
+const Collision o1_bg_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(6),
+	COL_VERTEX(125, -57, -211),
+	COL_VERTEX(-160, -57, -154),
+	COL_VERTEX(-5, 284, 17),
+	COL_VERTEX(-23, -57, 221),
+	COL_VERTEX(184, -57, 104),
+	COL_VERTEX(-221, -57, 93),
+	COL_TRI_INIT(SURFACE_INSTANT_QUICKSAND, 4),
+	COL_TRI(0, 1, 2),
+	COL_TRI(3, 4, 2),
+	COL_TRI(1, 5, 2),
+	COL_TRI(5, 3, 2),
+	COL_TRI_STOP(),
+	COL_END()
+};

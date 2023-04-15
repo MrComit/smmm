@@ -199,6 +199,8 @@ void bhv_boogoo_cage_loop(void) {
             if (o->header.gfx.scale[0] > 3.0f) {
                 CL_explode_object(o, 1);
                 CL_explode_object(o->oObjFC, 1);
+                save_file_set_boos(o->oBehParams2ndByte);
+                o->oUnk1A8 = 3;
             }
             break;
     }
@@ -214,6 +216,7 @@ static void const *sBGObjectCollision[] = {
     ag_boogoo_collision,
     o2_boogoo_collision,
     lab_bg_collision,
+    o1_bg_collision,
 };
 
 void bhv_boogoo_object_init(void) {
@@ -224,6 +227,20 @@ void bhv_boogoo_object_init(void) {
 
 void bhv_boogoo_object_loop(void) {
     if (o->oFC) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 4);
+        if (o->oOpacity == 0) {
+            o->activeFlags = 0;
+        }
+    }
+}
+
+
+s32 get_l8_boogoo_index(void);
+
+void bhv_boogoo_object_nocage_loop(void) {
+    s32 cage = save_file_get_boos();
+    s32 index = (o->oBehParams >> 24);//get_l8_boogoo_index();
+    if (cage & (1 << (index + 20))) {
         o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 4);
         if (o->oOpacity == 0) {
             o->activeFlags = 0;

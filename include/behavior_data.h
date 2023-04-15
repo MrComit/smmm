@@ -882,6 +882,7 @@ extern const BehaviorScript bhvAntennaBall[];
 extern const BehaviorScript bhvDizzyParticleSpawner[];
 extern const BehaviorScript bhvDizzyTriangle[];
 extern const BehaviorScript bhvSuncube[];
+extern const BehaviorScript bhvBoogooObjectNoCage[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -1149,6 +1149,19 @@ void handle_ground_pound_floor(struct MarioState *m) {
         case 17:
             spawn_object(gMarioObject, MODEL_NONE, bhvTenBlueCoinsSpawn);
             break;
+        case 18:
+            if (!(save_file_get_golden_goombas() & (1 << 12))) {
+                save_file_set_golden_goombas(12);
+                play_puzzle_jingle();
+                obj = spawn_object(gMarioObject, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
+                vec3f_set(&obj->oPosX, 12000.0f, 7800.0f, -9000.0f);
+                gCamera->comitCutscene = 0xFF;
+                gComitCutsceneTimer = 45;
+                obj->os16110 = 3045;
+                vec3f_set(gComitCutscenePosVec, gMarioState->pos[0] + 500.0f, gMarioState->pos[1] + 700.0f, gMarioState->pos[2] - 1200.0f);
+                vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
+            }
+            break;
     }
     save_file_set_gpflags(1 << index);
 }

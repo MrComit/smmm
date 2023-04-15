@@ -394,6 +394,7 @@ Vec3s sBooGooColors[4] = {
 s32 get_l8_boogoo_index(void) {
     s32 index = 0;
         switch (gMarioCurrentRoom) {
+            case 1:
             case 2:
                 index = 0;
                 break;

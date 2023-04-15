@@ -10527,6 +10527,20 @@ const BehaviorScript bhvBoogooObject[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvBoogooObjectNoCage[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_COLLISION_DATA(ag_boogoo_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_boogoo_object_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_boogoo_object_nocage_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 
 const BehaviorScript bhvBGAsteroid[] = {
     BEGIN(OBJ_LIST_SURFACE),
@@ -10599,8 +10613,8 @@ const BehaviorScript bhvAntennaBall[] = {
 const BehaviorScript bhvSuncube[] = {
     BEGIN(OBJ_LIST_DESTRUCTIVE),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, l3_sun_anims),
-    ANIMATE(0),
+    // LOAD_ANIMATIONS(oAnimations, l3_sun_anims),
+    // ANIMATE(0),
     SET_INT(oIntangibleTimer, 0),
     SET_HOME(),
     CALL_NATIVE(bhv_suncube_init),

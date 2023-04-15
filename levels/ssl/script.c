@@ -56,6 +56,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ANTENNA_BALL, antenna_ball_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SUNCUBE, suncube_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_LAB_BOOGOO, lab_bg_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_O1_BOOGOO, o1_bg_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -69,6 +70,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -1358, 6347, -11675, 0, 90, 0, (0xA << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, 90, -1358, 6347, -11675),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -19963, 2068, 7128, 0, 0, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_O1_BOOGOO, -20163, 157, 25243, 0, 0, 0, (3 << 16), bhvBoogooObjectNoCage),
 		OBJECT(MODEL_PEEPA, -18913, 1307, 19110, 0, -90, 0, (1 << 24), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -18913, 1107, 19110, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -18913, 907, 19110, 0, -90, 0, (2 << 16), bhvFloorPeepa),
@@ -84,6 +86,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, -19720, 2268, 10759, 0, -90, 0, 0x00000000, bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19720, 2068, 10759, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19720, 1868, 10759, 0, -90, 0, (2 << 16), bhvFloorPeepa),
+		OBJECT(MODEL_STAR_PIECE, -20200, 157, 25259, 0, 0, 0, (0x14 << 24), bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -21279, 150, 25775, 0, 0, 0, (0x15 << 24), bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -21772, 150, 25775, 0, 0, 0, (0x16 << 24), bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -22234, 150, 25775, 0, 0, 0, (0x17 << 24), bhvStarPiece),
@@ -115,7 +118,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -19321, 3289, 628, 0, 0, 0, 0x00000000, bhvPaintingTeleport),
 		OBJECT(MODEL_NONE, -21525, 2220, 7228, 0, -180, 0, (1 << 16), bhvPaintingTeleport),
 		OBJECT(MODEL_SHYGUY, -24339, 2213, 3630, 0, -180, 0, 0x00000000, bhvShyguyPainter),
-		OBJECT(MODEL_STAR_PIECE, -19948, 2018, 4299, 0, 0, 0, (0x14 << 24), bhvStarPiece),
+		OBJECT(MODEL_TOKEN, -19948, 2018, 4299, 0, 0, 0, (0x37 << 8), bhvToken),
 		OBJECT(MODEL_BG_ASTEROID, -19949, 2884, -11665, 0, 124, 0, (10 << 16), bhvBGAsteroid),
 		OBJECT(MODEL_BG_ASTEROID, -15468, 4803, -8033, 0, 101, 0, (45 << 16), bhvBGAsteroid),
 		OBJECT(MODEL_BG_ASTEROID, -15369, 5003, -5297, 0, -97, 0, (50 << 16), bhvBGAsteroid),
