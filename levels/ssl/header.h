@@ -138,4 +138,12 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/o1_bg/collision_header.h"
 
+#include "levels/ssl/mind_mound/geo_header.h"
+
+#include "levels/ssl/mind_mound/collision_header.h"
+
+#include "levels/ssl/mind_mound_block/collision_header.h"
+
+#include "levels/ssl/mind_mound_block/geo_header.h"
+
 #endif

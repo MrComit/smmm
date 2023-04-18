@@ -44,3 +44,5 @@
 #include "levels/ssl/suncube/geo.inc.c"
 #include "levels/ssl/lab_bg/geo.inc.c"
 #include "levels/ssl/o1_bg/geo.inc.c"
+#include "levels/ssl/mind_mound/geo.inc.c"
+#include "levels/ssl/mind_mound_block/geo.inc.c"

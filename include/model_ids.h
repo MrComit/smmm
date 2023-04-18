@@ -892,6 +892,8 @@
 #define MODEL_BIG_SPINNING_PLAT   0xF6
 #define MODEL_ANTENNA_BALL        0xF5
 #define MODEL_SUNCUBE             0xF4
+#define MODEL_MIND_MOUND          0xF3
+#define MODEL_MIND_MOUND_BLOCK    0xF2
 
 
 // LEVEL 8 MODELS CONT:

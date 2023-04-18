@@ -3,7 +3,7 @@
 const GeoLayout ssl_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(7, geo_switch_area),
+		GEO_SWITCH_CASE(8, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ssl_dl_201__NULL_geo),
 			GEO_BRANCH(1, ssl_dl_202__NULL_geo),
@@ -11,6 +11,7 @@ const GeoLayout ssl_area_2_geo[] = {
 			GEO_BRANCH(1, ssl_dl_204__The_Mind_Palace_geo),
 			GEO_BRANCH(1, ssl_dl_205__Outside3_geo),
 			GEO_BRANCH(1, ssl_dl_206__The_Laboratory_geo),
+			GEO_BRANCH(1, ssl_dl_207__Outside4_geo),
 		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -75,6 +76,14 @@ const GeoLayout ssl_dl_206__The_Laboratory_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_Lab_001_mesh_layer_2),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 13133, 7774, -10212, ssl_dl_Lab_002_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_207__Outside4_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_PalaceWall_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

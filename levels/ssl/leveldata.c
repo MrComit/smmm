@@ -77,3 +77,7 @@
 #include "levels/ssl/lab_bg/collision.inc.c"
 #include "levels/ssl/o1_bg/model.inc.c"
 #include "levels/ssl/o1_bg/collision.inc.c"
+#include "levels/ssl/mind_mound/model.inc.c"
+#include "levels/ssl/mind_mound/collision.inc.c"
+#include "levels/ssl/mind_mound_block/collision.inc.c"
+#include "levels/ssl/mind_mound_block/model.inc.c"
