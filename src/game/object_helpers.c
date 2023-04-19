@@ -419,7 +419,11 @@ Gfx *geo_update_boogoo_color(s32 callContext, struct GraphNode *node, UNUSED voi
     if (callContext == GEO_CONTEXT_RENDER) {
         currentGraphNode = (struct GraphNodeGenerated *) node;
 
-        index = get_l8_boogoo_index();
+        if (currentGraphNode->parameter == 0) {
+            index = get_l8_boogoo_index();
+        } else {
+            index = currentGraphNode->parameter - 1;
+        }
 
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;

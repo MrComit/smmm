@@ -452,9 +452,9 @@
 // group 17
 //#define MODEL_SWOOP                       0x64        // swoop_geo
 #define MODEL_SCUTTLEBUG                  0x65        // scuttlebug_geo
-#define MODEL_MR_I_IRIS                   0x66        // mr_i_iris_geo
-#define MODEL_MR_I                        0x67        // mr_i_geo
-#define MODEL_DORRIE                      0x68        // dorrie_geo
+#define MODEL_MR_I_IRIS                   0x67        // mr_i_iris_geo // WAS 0X66
+#define MODEL_MR_I                        0x68        // mr_i_geo // WAS 0X67
+#define MODEL_DORRIE                      0x69        // dorrie_geo
 
 // other models
 #define MODEL_YELLOW_COIN                 0x74        // yellow_coin_geo
@@ -894,6 +894,7 @@
 #define MODEL_SUNCUBE             0xF4
 #define MODEL_MIND_MOUND          0xF3
 #define MODEL_MIND_MOUND_BLOCK    0xF2
+#define MODEL_MIND_MIPS           0xF1
 
 
 // LEVEL 8 MODELS CONT:

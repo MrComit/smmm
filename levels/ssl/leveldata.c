@@ -81,3 +81,4 @@
 #include "levels/ssl/mind_mound/collision.inc.c"
 #include "levels/ssl/mind_mound_block/collision.inc.c"
 #include "levels/ssl/mind_mound_block/model.inc.c"
+#include "levels/ssl/mind_mips/model.inc.c"

@@ -12,6 +12,7 @@
 #include "levels/ssl/lab_bg/texscroll.inc.c"
 #include "levels/ssl/o1_bg/texscroll.inc.c"
 #include "levels/ssl/mind_mound/texscroll.inc.c"
+#include "levels/ssl/mind_mips/texscroll.inc.c"
 void scroll_textures_ssl() {
 		scroll_ssl_level_geo_boogoo_goomba();
 	scroll_ssl_level_geo_boogoo_koopa();
@@ -26,4 +27,5 @@ void scroll_textures_ssl() {
 	scroll_ssl_level_geo_lab_bg();
 	scroll_ssl_level_geo_o1_bg();
 	scroll_ssl_level_geo_mind_mound();
+	scroll_ssl_level_geo_mind_mips();
 }

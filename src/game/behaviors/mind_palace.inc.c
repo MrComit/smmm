@@ -1,5 +1,207 @@
 static struct Object *sMIPSObjs[4][4] = {NULL};
 
+
+
+void bhv_mind_mips_init(void) {
+    struct Object *obj;
+    u8 starFlags = 0;//save_file_get_currency_flags() & (1 << 1);
+    if (!starFlags) {
+        o->oBehParams2ndByte = 0;
+        o->oMipsForwardVelocity = 50.0f;
+    } else {
+        o->activeFlags = 0;
+    }
+
+    o->oInteractionSubtype = INT_SUBTYPE_HOLDABLE_NPC;
+    o->oGravity = -9.0f;
+    //o->oFriction = 10.0f;
+    //o->oBuoyancy = 1.2f;
+
+    cur_obj_disable();
+
+    cur_obj_init_animation(0);
+    // COMIT_OBJECT(MODEL_POUND_LEGO, 10399, -161, 2839, 0, 0, 0, bhvPoundLego)
+    // o->oObjF4 = obj;
+    // o->oObjF4->oBehParams = 0x01000000;
+    o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 0);
+    // o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
+    // if (o->oObjF4 == NULL) {
+    //     o->activeFlags = 0;
+    //     return;
+    // }
+    // vec3f_copy(&o->oObjF4->oHomeX, &o->oObjF4->oPosX);
+    vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
+}
+
+void bhv_mind_mips_run_loop(void) {
+    Vec3f pos;
+    switch (o->oHeldState) {
+        case HELD_FREE:
+            if (o->oDistanceToMario > 2000.0f)
+                o->oForwardVel = 0;
+            else
+                o->oForwardVel = 35.0f;
+            
+            if (o->oTimer > o->os1610A) {
+                o->os1610C = CL_RandomMinMaxU16(1, 20);
+                o->os1610A = CL_RandomMinMaxU16(30, 120);
+            }
+            o->os1610E += (0x20 * o->os1610C);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os1610E - o->oAngleToMario, 0x800);
+            cur_obj_update_floor_and_walls();
+            pos[1] = o->oPosY;
+            pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
+            pos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 100.0f);
+            if (f32_find_wall_collision(&pos[0], &pos[1], &pos[2], 10.0f, 50.f)) {
+                o->oPosY += 50.0f;
+                cur_obj_reflect_move_angle_off_wall();
+            }
+            cur_obj_move_standard(0);
+
+            if (o->oPosX < -16600.0f) {
+                o->oPosX = -16600.0f;
+            } else if (o->oPosX > -14100.0f) {
+                o->oPosX = -14100.0f;
+            }
+            if (o->oPosZ < -4400.0f) {
+                o->oPosZ = -4400.0f;
+            } else if (o->oPosZ > -1900.0f) {
+                o->oPosZ = -1900.0f;
+            }
+
+            if (cur_obj_check_if_near_animation_end() == TRUE) {
+                cur_obj_play_sound_2(SOUND_OBJ_MIPS_RABBIT);
+            }
+            break;
+        case HELD_HELD:
+            bhv_mips_held();
+            break;
+        case HELD_THROWN:
+            bhv_mips_thrown();
+            o->os16FA = 0;
+            break;
+        case HELD_DROPPED:
+            bhv_mips_dropped();
+            o->os16FA = 0;
+            break;
+    }
+}
+
+
+void bhv_mind_mips_loop(void) {
+    struct Object *obj;
+    Vec3f pos;
+    struct Surface *floor;
+    if (o->os16FA) {
+        bhv_mind_mips_run_loop();
+        //bhv_mips_act_idle();
+        return;
+    }
+    switch (o->oAction) {
+        case 0:
+            if (o->oObjF4->oAction != 0) {
+                // if (o->os16110 >= 3) {
+                //     o->os16FA = 1;
+                //     o->oAction = 0;
+                //     o->oForwardVel = 35.0f;
+                //     o->oInteractType = INTERACT_GRABBABLE;
+                //     cur_obj_enable();
+                //     break;
+                // }
+                o->oAction = 1;
+                cur_obj_enable();
+                cur_obj_init_animation(1);
+                o->oForwardVel = 25.0f;
+                o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 0);
+                if (o->oObjF4 != NULL) {
+                    o->oMoveAngleYaw = obj_angle_to_object(o, o->oObjF4);
+                } else {
+                    while ((o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 2)) != NULL) {
+                        o->oObjF4->activeFlags = 0;
+                    }
+                    while ((o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 3)) != NULL) {
+                        o->oObjF4->activeFlags = 0;
+                    }
+                    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvMindMoundBlock);
+                    if (o->oObjF4 != NULL) {
+                        o->oObjF4->oAction = 2;
+                    }
+                    o->os16FA = 1;
+                    o->oAction = 0;
+                    o->oForwardVel = 35.0f;
+                    o->oInteractType = INTERACT_GRABBABLE;
+                    cur_obj_enable();
+                }
+                break;
+            }
+            o->os16F8 += 0x400;
+            o->oObjF4->oPosX = o->oObjF4->oHomeX + (sins(o->os16F8) * 3.0f);
+            o->oObjF4->oPosZ = o->oObjF4->oHomeZ + (coss(o->os16F8 * 4) * 2.0f);
+            if ((o->oTimer & 7) == 0)
+                spawn_mist_particles_variable(1, -60, 4.0f);
+            break;
+        case 1:
+            cur_obj_update_floor_and_walls();
+            pos[1] = o->oPosY;
+            pos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 100.0f);
+            pos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 100.0f);
+            if (f32_find_wall_collision(&pos[0], &pos[1], &pos[2], 10.0f, 50.f)) {
+                o->oPosY += 50.0f;
+            }
+            cur_obj_move_standard(0);
+            if ((o->oTimer & 7) == 0) {
+                cur_obj_play_sound_2(SOUND_OBJ_MIPS_RABBIT);
+            }
+            if (o->oTimer > 15) {
+                o->oAction = 2;
+                o->oForwardVel = 0;
+                o->oVelY = 40.0f;
+                o->oGravity = -5.0f;
+            }
+            break;
+        case 2:
+            CL_Move();
+            if (o->oTimer > 10) {
+                o->oAction = 0;
+                // o->os16110++;
+                o->oVelY = 0;
+                o->oGravity = -9.0f;
+
+                spawn_mist_particles();
+                // o->oObjF4 = spawn_object(o, MODEL_POUND_LEGO, bhvPoundLego);
+                // o->oObjF4->oFaceAngleYaw = 0;
+                // do {
+                //     o->oObjF4->oPosX = 9200.0f + (8200.0f * random_float());
+                //     o->oObjF4->oPosZ = -2000.0f + (5200.0f * random_float());
+                //     o->oObjF4->oPosY = find_floor(o->oObjF4->oPosX, o->oObjF4->oPosY + 5000.0f, o->oObjF4->oPosZ, &floor);
+                //     vec3f_copy(&o->oObjF4->oHomeX, &o->oObjF4->oPosX);
+                //     vec3f_copy(&o->oPosX, &o->oObjF4->oHomeX);
+                // } while (floor->type == SURFACE_GENERAL_USE || 
+                //         CL_objptr_dist_to_nearest_object_with_behavior(o->oObjF4, bhvPoundLego) < 500.0f);
+                vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
+                cur_obj_disable();
+            }
+            break;
+        case 4:
+            cur_obj_init_animation(0);
+            // spawn_default_star(10668.0f, 379.0f, 729.0f);
+            obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
+            obj->oBehParams2ndByte = 11;
+            obj->oBehParams = 11 << 16;
+            obj->oFaceAngleRoll = 0xF000;
+            obj->oFaceAngleYaw = 0;
+            obj->oPosX = o->oHomeX;
+            obj->oPosZ = o->oHomeZ;
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            o->oAction = 5;
+            o->os16FA = 0;
+            o->oInteractType = INTERACT_IGLOO_BARRIER;
+            break;
+    }
+}
+
+
+
 void bhv_mind_mound_block_init(void) {
     o->os16F4 = o->oBehParams2ndByte % 4;
     o->os16F6 = o->oBehParams2ndByte / 4;
@@ -17,6 +219,45 @@ void bhv_mind_mound_block_init(void) {
 }
 
 void bhv_mind_mound_block_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oMoveAngleYaw = 0x8000;
+            if (gMarioState->wall != NULL && gMarioState->wall->object == o && gMarioState->flags & MARIO_UNKNOWN_31
+                && gMarioState->wall->force == 1) {
+                o->oForwardVel = 10.0f;
+                CL_Move();
+                gMarioState->pos[0] += o->oVelX;
+                gMarioState->pos[2] += o->oVelZ;
+                // if (o->oPosY - find_floor_height(o->oPosX, o->oPosY, o->oPosZ) > 100.0f) {
+                //     o->oAction = 3;
+                // }
+                if (absf(o->oPosZ - o->oHomeZ) > 574.0f) {
+                    o->oAction = 3;
+                }
+            }
+            break;
+        case 1:
+            mind_mound_block_act_1();
+            break;
+        case 2:
+            break;
+        case 3:
+            o->oFloat110 = approach_f32_symmetric(o->oFloat110, 70.0f, 3.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, 5637.0f, o->oFloat110);
+            if (o->oPosY == 5637.0f) {
+                o->oAction = 1;
+                if (sMIPSObjs[3][0] != NULL) {
+                    sMIPSObjs[3][0]->os16FA = 1;
+                    sMIPSObjs[3][0]->oAction = 1;
+                }
+                bhv_mind_mound_block_init();
+                play_puzzle_jingle();
+            }
+            break;
+    }
+}
+
+void mind_mound_block_act_1(void) {
     struct Object *obj;
     if (sMIPSObjs[0][0] == NULL) {
         return;

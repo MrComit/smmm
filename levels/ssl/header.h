@@ -146,4 +146,6 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/mind_mound_block/geo_header.h"
 
+#include "levels/ssl/mind_mips/geo_header.h"
+
 #endif

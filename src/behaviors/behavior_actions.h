@@ -1108,6 +1108,8 @@ void bhv_mind_mound_init(void);
 void bhv_mind_mound_loop(void);
 void bhv_mind_mound_block_init(void);
 void bhv_mind_mound_block_loop(void);
+void bhv_mind_mips_init(void);
+void bhv_mind_mips_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

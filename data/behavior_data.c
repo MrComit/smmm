@@ -10642,9 +10642,26 @@ const BehaviorScript bhvMindMoundBlock[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(mind_mound_block_collision),
-    CALL_NATIVE(bhv_mind_mound_block_init),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_mind_mound_block_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_mind_mound_block_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvMindMips[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, mips_seg6_anims_06015634),
+    SET_INT(oInteractType, INTERACT_IGLOO_BARRIER),
+    //DROP_TO_FLOOR(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 80, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_HITBOX(/*Radius*/ 50, /*Height*/ 75),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_mind_mips_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mind_mips_loop),
     END_LOOP(),
 };
