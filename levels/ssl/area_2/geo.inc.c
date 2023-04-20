@@ -49,6 +49,7 @@ const GeoLayout ssl_dl_204__The_Mind_Palace_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_MindPalace_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_MindPalace_001_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_SpookyFaces_mesh_layer_6),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
