@@ -2,6 +2,48 @@ static struct Object *sMIPSObjs[4][4] = {NULL};
 
 
 
+void bhv_mind_gate_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioCurrentRoom == o->oRoom) {
+                o->oAction = 1;
+                if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_LEVER) {
+                    o->activeFlags = 0;
+                }
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_LEVER) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 10.0f, 10.0f);
+            if (o->oPosY == o->oHomeY)
+                o->activeFlags = 0;
+            break;
+    }
+}
+
+
+
+
+void bhv_mind_lever_loop(void) {
+    if (o->oF4 == 0) {
+        o->header.gfx.animInfo.animFrame = 0;
+        if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_LEVER) {
+            o->oF4 = 1;
+        }
+        if (cur_obj_was_attacked_or_ground_pounded() != 0) {
+            play_puzzle_jingle();
+            save_file_set_newflags(SAVE_TOAD_FLAG_MIND_LEVER, 1);
+            o->oF4 = 1;
+        }
+    }
+}
+
+
 void bhv_mind_mips_init(void) {
     struct Object *obj;
     u8 starFlags = 0;//save_file_get_currency_flags() & (1 << 1);

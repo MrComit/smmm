@@ -886,6 +886,8 @@ extern const BehaviorScript bhvBoogooObjectNoCage[];
 extern const BehaviorScript bhvMindMound[];
 extern const BehaviorScript bhvMindMoundBlock[];
 extern const BehaviorScript bhvMindMips[];
+extern const BehaviorScript bhvMindLever[];
+extern const BehaviorScript bhvMindGate[];
 
 
 #endif // BEHAVIOR_DATA_H

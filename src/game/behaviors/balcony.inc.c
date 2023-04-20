@@ -1,3 +1,4 @@
+#include "levels/ssl/l8_locked_cage/geo_header.h"
 void obj_set_dist_from_home(f32 distFromHome);
 
 static struct ObjectHitbox sLightningHitbox = {
@@ -19,6 +20,10 @@ Vec3f sBalconyRespawn = {2796.0f, 2283.0f, 13634.0f};
 void bhv_locked_cage_init(void) {
     if (save_file_get_keys(1) & (1 << o->oBehParams2ndByte)) {
         o->activeFlags = 0;
+    }
+
+    if (gCurrLevelNum == LEVEL_SSL) {
+        o->collisionData = segmented_to_virtual(&l8_locked_cage_collision);
     }
 }
 

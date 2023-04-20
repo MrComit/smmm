@@ -895,6 +895,8 @@
 #define MODEL_MIND_MOUND          0xF3
 #define MODEL_MIND_MOUND_BLOCK    0xF2
 #define MODEL_MIND_MIPS           0xF1
+#define MODEL_L8_LOCKED_CAGE      0xF0
+#define MODEL_MIND_LEVER          0xEF
 
 
 // LEVEL 8 MODELS CONT:
@@ -903,6 +905,7 @@
 #define MODEL_O2_BOOGOO           0x5C
 #define MODEL_LAB_BOOGOO          0x5D
 #define MODEL_O1_BOOGOO           0x5E
+#define MODEL_MP_BOOGOO           0x5F
 
 // 0x6C-0x73
 

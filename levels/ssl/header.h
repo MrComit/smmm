@@ -148,4 +148,18 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/mind_mips/geo_header.h"
 
+#include "levels/ssl/l8_locked_cage/geo_header.h"
+
+#include "levels/ssl/l8_locked_cage/collision_header.h"
+
+#include "levels/ssl/mind_lever/collision_header.h"
+
+#include "levels/ssl/mind_lever/geo_header.h"
+
+#include "levels/ssl/mind_lever/anim_header.h"
+
+#include "levels/ssl/mp_boogoo/geo_header.h"
+
+#include "levels/ssl/mp_boogoo/collision_header.h"
+
 #endif

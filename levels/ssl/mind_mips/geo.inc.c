@@ -5,7 +5,7 @@ const GeoLayout mind_mips_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_SHADOW(0, 150, 50),
 		GEO_OPEN_NODE(),
-			GEO_ASM(2, geo_update_boogoo_color),
+			GEO_ASM(3, geo_update_boogoo_color),
 			GEO_SCALE(LAYER_FORCE, 16384),
 			GEO_OPEN_NODE(),
 				GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, 0, NULL),

@@ -47,3 +47,6 @@
 #include "levels/ssl/mind_mound/geo.inc.c"
 #include "levels/ssl/mind_mound_block/geo.inc.c"
 #include "levels/ssl/mind_mips/geo.inc.c"
+#include "levels/ssl/l8_locked_cage/geo.inc.c"
+#include "levels/ssl/mind_lever/geo.inc.c"
+#include "levels/ssl/mp_boogoo/geo.inc.c"

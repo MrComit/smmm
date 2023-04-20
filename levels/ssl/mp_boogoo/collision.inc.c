@@ -1,0 +1,22 @@
+const Collision mp_boogoo_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(8),
+	COL_VERTEX(29, 0, -312),
+	COL_VERTEX(-285, 0, -242),
+	COL_VERTEX(29, 239, -15),
+	COL_VERTEX(43, 0, 251),
+	COL_VERTEX(350, 0, 140),
+	COL_VERTEX(-328, 0, 79),
+	COL_VERTEX(-150, 0, 242),
+	COL_VERTEX(340, 0, -158),
+	COL_TRI_INIT(SURFACE_INSTANT_QUICKSAND, 7),
+	COL_TRI(0, 1, 2),
+	COL_TRI(3, 4, 2),
+	COL_TRI(5, 6, 2),
+	COL_TRI(6, 3, 2),
+	COL_TRI(2, 4, 7),
+	COL_TRI(0, 2, 7),
+	COL_TRI(1, 5, 2),
+	COL_TRI_STOP(),
+	COL_END()
+};

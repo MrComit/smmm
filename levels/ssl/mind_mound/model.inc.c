@@ -403,34 +403,35 @@ Vtx mind_mound_MindMound_mesh_layer_1_vtx_cull[8] = {
 	{{ {120, 0, -120}, 0, {-16, -16}, {0, 0, 0, 0} }},
 };
 
-Vtx mind_mound_MindMound_mesh_layer_1_vtx_0[13] = {
-	{{ {-120, 100, 120}, 0, {-16, 2032}, {100, 146, 116, 255} }},
-	{{ {120, 100, 120}, 0, {2032, 2032}, {100, 146, 116, 255} }},
-	{{ {120, 100, -120}, 0, {2032, -16}, {100, 146, 116, 255} }},
-	{{ {-120, 100, -120}, 0, {-16, -16}, {100, 146, 116, 255} }},
-	{{ {120, 0, -120}, 0, {-6160, -869}, {100, 146, 116, 255} }},
-	{{ {-120, 0, -120}, 0, {-8208, -869}, {100, 146, 116, 255} }},
-	{{ {-120, 100, -120}, 0, {-8208, -16}, {100, 146, 116, 255} }},
-	{{ {120, 100, -120}, 0, {-6160, -16}, {100, 146, 116, 255} }},
-	{{ {120, 0, 120}, 0, {-4112, -869}, {100, 146, 116, 255} }},
-	{{ {120, 100, 120}, 0, {-4112, -16}, {100, 146, 116, 255} }},
-	{{ {-120, 0, 120}, 0, {-2064, -869}, {100, 146, 116, 255} }},
-	{{ {-120, 100, 120}, 0, {-2064, -16}, {100, 146, 116, 255} }},
-	{{ {-120, 0, -120}, 0, {-16, -869}, {100, 146, 116, 255} }},
+Vtx mind_mound_MindMound_mesh_layer_1_vtx_0[14] = {
+	{{ {-120, 100, 120}, 0, {477, 1512}, {100, 131, 93, 255} }},
+	{{ {120, 100, 120}, 0, {1539, 1512}, {100, 131, 93, 255} }},
+	{{ {120, 100, -120}, 0, {1539, 504}, {100, 131, 93, 255} }},
+	{{ {-120, 100, -120}, 0, {477, 504}, {100, 131, 93, 255} }},
+	{{ {120, 0, -120}, 0, {495, -534}, {100, 131, 93, 255} }},
+	{{ {-120, 100, -120}, 0, {-535, -6}, {100, 131, 93, 255} }},
+	{{ {120, 100, -120}, 0, {495, -6}, {100, 131, 93, 255} }},
+	{{ {-120, 0, -120}, 0, {-535, -534}, {100, 131, 93, 255} }},
+	{{ {-120, 100, 120}, 0, {-1555, -6}, {100, 131, 93, 255} }},
+	{{ {-120, 0, 120}, 0, {-1555, -534}, {100, 131, 93, 255} }},
+	{{ {120, 100, 120}, 0, {-2585, -6}, {100, 131, 93, 255} }},
+	{{ {120, 0, 120}, 0, {-2585, -534}, {100, 131, 93, 255} }},
+	{{ {120, 100, -120}, 0, {-3594, -6}, {100, 131, 93, 255} }},
+	{{ {120, 0, -120}, 0, {-3594, -534}, {100, 131, 93, 255} }},
 };
 
 Gfx mind_mound_MindMound_mesh_layer_1_tri_0[] = {
-	gsSPVertex(mind_mound_MindMound_mesh_layer_1_vtx_0 + 0, 13, 0),
+	gsSPVertex(mind_mound_MindMound_mesh_layer_1_vtx_0 + 0, 14, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 4, 7, 0, 8, 7, 9, 0),
-	gsSP2Triangles(10, 8, 9, 0, 10, 9, 11, 0),
-	gsSP2Triangles(12, 10, 11, 0, 12, 11, 3, 0),
+	gsSP2Triangles(4, 5, 6, 0, 4, 7, 5, 0),
+	gsSP2Triangles(7, 8, 5, 0, 7, 9, 8, 0),
+	gsSP2Triangles(9, 10, 8, 0, 9, 11, 10, 0),
+	gsSP2Triangles(11, 12, 10, 0, 11, 13, 12, 0),
 	gsSPEndDisplayList(),
 };
 
 
-Gfx mat_mind_mound_PalaceFloor_layer1[] = {
+Gfx mat_mind_mound_MoundFloor_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, TEXEL1, SHADE_ALPHA, TEXEL1, 0, 0, 0, 0, COMBINED, 0, SHADE, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -450,7 +451,7 @@ Gfx mat_mind_mound_PalaceFloor_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_mind_mound_PalaceFloor_layer1[] = {
+Gfx mat_revert_mind_mound_MoundFloor_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -463,9 +464,9 @@ Gfx mind_mound_MindMound_mesh_layer_1[] = {
 	gsSPVertex(mind_mound_MindMound_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_mind_mound_PalaceFloor_layer1),
+	gsSPDisplayList(mat_mind_mound_MoundFloor_layer1),
 	gsSPDisplayList(mind_mound_MindMound_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_mind_mound_PalaceFloor_layer1),
+	gsSPDisplayList(mat_revert_mind_mound_MoundFloor_layer1),
 	gsSPEndDisplayList(),
 };
 

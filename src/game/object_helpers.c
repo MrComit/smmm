@@ -455,7 +455,11 @@ Gfx *geo_update_boogoo_object(s32 callContext, struct GraphNode *node, UNUSED vo
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
 
-        index = get_l8_boogoo_index();
+        if (currentGraphNode->parameter == 0) {
+            index = get_l8_boogoo_index();
+        } else {
+            index = currentGraphNode->parameter - 1;
+        }
 
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;

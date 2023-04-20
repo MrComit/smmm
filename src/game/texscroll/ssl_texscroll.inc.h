@@ -1,5 +1,5 @@
+#include "levels/ssl/mp_boogoo/texscroll.inc.h"
 #include "levels/ssl/mind_mips/texscroll.inc.h"
-#include "levels/ssl/mind_mound/texscroll.inc.h"
 #include "levels/ssl/o1_bg/texscroll.inc.h"
 #include "levels/ssl/lab_bg/texscroll.inc.h"
 #include "levels/ssl/big_spinning_plat/texscroll.inc.h"

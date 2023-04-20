@@ -10665,3 +10665,35 @@ const BehaviorScript bhvMindMips[] = {
         CALL_NATIVE(bhv_mind_mips_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMindLever[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, mind_lever_anims),
+    ANIMATE(0),
+    LOAD_COLLISION_DATA(mind_lever_collision),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_lever_init),
+    CALL_NATIVE(load_object_static_model),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mind_lever_loop),
+        // CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvMindGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(global_gate_collision),
+    ADD_FLOAT(oPosY, 300),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_mind_gate_loop),
+    END_LOOP(),
+    BREAK(),
+};
