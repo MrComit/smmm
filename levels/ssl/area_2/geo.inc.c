@@ -89,7 +89,11 @@ const GeoLayout ssl_dl_206__The_Laboratory_geo[] = {
 const GeoLayout ssl_dl_207__Outside4_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_ASM(0, geo_mind_static),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_2Static_002_mesh_layer_6),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 65536, ssl_dl_ArtWall_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_004_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_PalaceWall_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
