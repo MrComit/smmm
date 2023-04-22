@@ -888,6 +888,8 @@ extern const BehaviorScript bhvMindMoundBlock[];
 extern const BehaviorScript bhvMindMips[];
 extern const BehaviorScript bhvMindLever[];
 extern const BehaviorScript bhvMindGate[];
+extern const BehaviorScript bhvOutsideMound[];
+extern const BehaviorScript bhvOutsideMoundBlock[];
 
 
 #endif // BEHAVIOR_DATA_H

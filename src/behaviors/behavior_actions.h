@@ -1112,6 +1112,10 @@ void bhv_mind_mips_init(void);
 void bhv_mind_mips_loop(void);
 void bhv_mind_lever_loop(void);
 void bhv_mind_gate_loop(void);
+void bhv_outside_mound_init(void);
+void bhv_outside_mound_loop(void);
+void bhv_outside_mound_block_init(void);
+void bhv_outside_mound_block_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
