@@ -1,0 +1,10 @@
+extern const GeoLayout mind_2d_goomba_geo[];
+extern u8 mind_2d_goomba_goomba_sprite_ci4[];
+extern u8 mind_2d_goomba_goomba_sprite_ci4_pal_rgba16[];
+extern Vtx mind_2d_goomba_2DGoomba_mesh_layer_4_vtx_cull[8];
+extern Vtx mind_2d_goomba_2DGoomba_mesh_layer_4_vtx_0[4];
+extern Gfx mind_2d_goomba_2DGoomba_mesh_layer_4_tri_0[];
+extern Gfx mat_mind_2d_goomba__2DGoomba[];
+extern Gfx mat_revert_mind_2d_goomba__2DGoomba[];
+extern Gfx mind_2d_goomba_2DGoomba_mesh_layer_4[];
+extern Gfx mind_2d_goomba_material_revert_render_settings[];

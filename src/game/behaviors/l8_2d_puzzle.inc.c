@@ -1,6 +1,112 @@
 static struct Object *sOutsideObjs[4][4] = {NULL};
 
+
+s8 sMoundToColor[16] = {
+    0, 4, 1, -1,
+    3, 2, 3, 2,
+    4, 3, 2, 1,
+    0, 1, 4, 0,
+};
+
+
+
+s8 s2DGateVals[5] = {
+    0,
+    0,
+    0,
+    0,
+    0,
+};
+
+
+Vec3s s2DGateColors[5] = {
+    {0xFF, 0x00, 0x00}, // RED
+    {0x00, 0xFF, 0x00}, // GREEN
+    {0x00, 0x90, 0xFF}, // BLUE
+    {0xFF, 0xFF, 0x00}, // YELLOW
+    {0xFF, 0x00, 0xE0}, // PINK
+};
+
+
+
+void bhv_mind_2d_gate_init(void) {
+    o->os16F4 = s2DGateColors[o->oBehParams2ndByte][0];
+    o->os16F6 = s2DGateColors[o->oBehParams2ndByte][1];
+    o->os16F8 = s2DGateColors[o->oBehParams2ndByte][2];
+
+    o->oFloatFC = 1.0f;
+}
+
+
+void bhv_mind_2d_gate_loop(void) {
+    o->os16FA = s2DGateVals[o->oBehParams2ndByte];
+    o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.01f + (0.33f * o->os16FA), 0.05f);
+}
+
+
+
+void bhv_mind_2d_goomba_init(void) {
+    o->oMoveAngleYaw = o->oFaceAngleYaw - 0x4000;
+}
+
+
+void bhv_mind_2d_goomba_loop(void) {
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(0);
+
+
+    if (o->oMoveFlags & OBJ_MOVE_HIT_WALL /*|| cur_obj_dist_to_nearest_object_with_behavior(bhvMind2DGate) < 150.0f*/) {
+        o->oMoveAngleYaw += 0x8000;
+        cur_obj_move_standard(0);
+    }
+
+    if (o->oMoveFlags & OBJ_MOVE_IN_AIR) {
+        o->oForwardVel = 0.0f;
+    } else {
+        o->oForwardVel = 10.0f;
+    }
+
+    // if (o->oPosY < o->oHomeY - 150.0f) {
+    //     o->activeFlags = 0;
+    //     create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    //     gMarioState->numCoins++;
+    // }
+    if (o->oTimer & 0x10) {
+        // o->header.gfx.scale[0] *= -1.0f;
+        o->oFaceAngleYaw += 0x8000;
+        o->oTimer = 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void bhv_outside_mound_block_init(void) {
+    // s2DGateVals[0] = 0;
+    // s2DGateVals[1] = 0;
+    // s2DGateVals[2] = 0;
+    // s2DGateVals[3] = 0;
+    // s2DGateVals[4] = 0;
     o->os16F4 = o->oBehParams2ndByte % 4;
     o->os16F6 = o->oBehParams2ndByte / 4;
     if (sOutsideObjs[o->os16F4][o->os16F6] == NULL) {
@@ -234,6 +340,10 @@ void bhv_outside_mound_init(void) {
     if (o->os16F8) {
         o->oAction = 2;
         o->oPosY -= 150.0f;
+    } else {
+        if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
+            s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]++;
+        }
     }
 
     // if (save_file_get_currency_flags() & (1 << 8)) {
@@ -249,6 +359,9 @@ void bhv_outside_mound_loop(void) {
             if (cur_obj_is_mario_ground_pounding_platform()) {
                 o->oAction = 1;
                 outside_mounds_check_adjacent();
+                if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
+                    s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]--;
+                }
             }
             break;
         case 1:
@@ -279,6 +392,9 @@ void bhv_outside_mound_loop(void) {
             if (o->oPosY == o->oHomeY) {
                 o->oAction = 0;
                 o->os16F8 = 0;
+                if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
+                    s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]++;
+                }
             }
             break;
     }

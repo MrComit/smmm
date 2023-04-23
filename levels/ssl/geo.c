@@ -50,3 +50,5 @@
 #include "levels/ssl/l8_locked_cage/geo.inc.c"
 #include "levels/ssl/mind_lever/geo.inc.c"
 #include "levels/ssl/mp_boogoo/geo.inc.c"
+#include "levels/ssl/mind_2d_goomba/geo.inc.c"
+#include "levels/ssl/mind_2d_gate/geo.inc.c"

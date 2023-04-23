@@ -63,6 +63,8 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_L8_LOCKED_CAGE, l8_locked_cage_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_LEVER, mind_lever_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MP_BOOGOO, mp_boogoo_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MIND_2D_GOOMBA, mind_2d_goomba_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MIND_2D_GATE, mind_2d_gate_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -234,7 +236,14 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MR_I, 14932, 7311, -10229, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_SUNCUBE, 14493, 7311, -15838, 0, 0, 0, 0x00000000, bhvSuncube),
 		OBJECT(MODEL_SUNCUBE, 14493, 7311, -7576, 0, 0, 0, (1 << 16), bhvSuncube),
+		OBJECT(MODEL_MIND_2D_GATE, -8493, 9452, 9383, 0, 0, 0, 0x00000000, bhvMind2DGate),
+		OBJECT(MODEL_MIND_2D_GATE, -8493, 8252, 10583, 0, 0, 0, (1 << 16), bhvMind2DGate),
+		OBJECT(MODEL_MIND_2D_GATE, -8493, 8252, 8283, 0, 0, 0, (3 << 16), bhvMind2DGate),
+		OBJECT(MODEL_MIND_2D_GATE, -8493, 9052, 7083, 0, 0, 0, (4 << 16), bhvMind2DGate),
+		OBJECT(MODEL_MIND_2D_GATE, -8493, 9402, 7633, -90, 0, 0, (1 << 16), bhvMind2DGate),
+		OBJECT(MODEL_MIND_2D_GATE, -8493, 9002, 9833, -90, 0, 0, (3 << 16), bhvMind2DGate),
 		OBJECT(MODEL_MIND_MOUND_BLOCK, -9870, 8052, 8985, 0, 0, 0, (3 << 16), bhvOutsideMoundBlock),
+		OBJECT(MODEL_MIND_2D_GOOMBA, -8493, 9552, 8733, 0, -90, 0, 0x00000000, bhvMind2DGoomba),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 7695, 0, 0, 0, (1 << 24), bhvOutsideMound),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 8320, 0, 0, 0, (1 << 16), bhvOutsideMound),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 8945, 0, 0, 0, (1 << 24) | (2 << 16), bhvOutsideMound),

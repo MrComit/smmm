@@ -90,3 +90,6 @@
 #include "levels/ssl/mind_lever/anims/table.inc.c"
 #include "levels/ssl/mp_boogoo/model.inc.c"
 #include "levels/ssl/mp_boogoo/collision.inc.c"
+#include "levels/ssl/mind_2d_goomba/model.inc.c"
+#include "levels/ssl/mind_2d_gate/model.inc.c"
+#include "levels/ssl/mind_2d_gate/collision.inc.c"

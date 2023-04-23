@@ -897,6 +897,8 @@
 #define MODEL_MIND_MIPS           0xF1
 #define MODEL_L8_LOCKED_CAGE      0xF0
 #define MODEL_MIND_LEVER          0xEF
+#define MODEL_MIND_2D_GOOMBA      0xEE
+#define MODEL_MIND_2D_GATE        0xED
 
 
 // LEVEL 8 MODELS CONT:
