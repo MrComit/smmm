@@ -1537,6 +1537,21 @@ void fixed_cam_presets(struct Camera *c) {
         case 19: // MAIN MENU OUTSIDE
             main_menu_cutscenes(c, gMenuCutscene);
             break;
+        case 20:
+            if (obj == NULL) {
+                c->comitCutscene = 0;
+                break;
+            }
+
+            pos[0] = obj->oPosX + 3000.0f * sins(obj->oFaceAngleYaw);
+            pos[1] = obj->oPosY + 300.0f;
+            pos[2] = obj->oPosZ + 3000.0f * coss(obj->oFaceAngleYaw);
+
+            // vec3f_copy(c->pos, gComitCutscenePosVec);
+            vec3f_copy(c->pos, pos);
+            vec3f_set(c->focus, obj->oPosX, obj->oPosY, obj->oPosZ);
+            c->yaw = c->nextYaw = obj->oFaceAngleYaw + 0x8000;//DEGREES(0);
+            break;
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);
             vec3f_copy(c->focus, gComitCutsceneFocVec);

@@ -1,5 +1,17 @@
 static struct Object *sOutsideObjs[4][4] = {NULL};
 
+struct ObjectHitbox sMind2DGoombaHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 1,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
 
 s8 sMoundToColor[16] = {
     0, 4, 1, -1,
@@ -27,6 +39,75 @@ Vec3s s2DGateColors[5] = {
     {0xFF, 0x00, 0xE0}, // PINK
 };
 
+#define COMIT_OBJECT(a, b, c, d, e, f, g, h) \
+    obj = spawn_object_abs_with_rot(o, 0, a, h, b, c, d, DEGREES(e), DEGREES(f), DEGREES(g)); \
+    obj->oRoom = o->oRoom; \
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+
+
+void bhv_mind_button_init(void) {
+
+}
+
+
+void mind_button_play_maze(void) {
+    gCamera->comitCutscene = 20;
+    set_mario_npc_dialog(1);
+
+
+    switch (o->oSubAction) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+    }
+}
+
+
+void bhv_mind_button_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.3f, 0.08f);
+            if (o->header.gfx.scale[1] == 0.3f) {
+                o->oAction = 2;
+                if (o->oBehParams2ndByte == 0) {
+                    COMIT_OBJECT(MODEL_MIND_2D_GOOMBA, -8493, 9752, 8733, 0, -90, 0, bhvMind2DGoomba); // 1
+                } else if (o->oBehParams2ndByte == 1) {
+                    COMIT_OBJECT(MODEL_MIND_2D_GOOMBA, -12743, 9752, 5883, 0, 0, 0, bhvMind2DGoomba); // 2
+                } else {
+                    COMIT_OBJECT(MODEL_MIND_2D_GOOMBA, -9943, 9752, 11383, 0, -180, 0, bhvMind2DGoomba); // 3
+                }
+                obj->oObj104 = o;
+                gComitCutsceneObject = obj;
+                o->oBehParams2ndByte++;
+                gCamera->comitCutscene = 20;
+                set_mario_npc_dialog(1);
+            }
+            break;
+        case 2:
+            mind_button_play_maze();
+            break;
+        case 3:
+            set_mario_npc_dialog(0);
+            gMarioState->pos[0] -= 500.0f;
+            o->header.gfx.scale[1] = 1.0f;
+            o->oBehParams2ndByte = 0;
+            o->oAction = 0;
+            break;
+    }
+}
+
+
+
+
 
 
 void bhv_mind_2d_gate_init(void) {
@@ -40,13 +121,20 @@ void bhv_mind_2d_gate_init(void) {
 
 void bhv_mind_2d_gate_loop(void) {
     o->os16FA = s2DGateVals[o->oBehParams2ndByte];
-    o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.01f + (0.33f * o->os16FA), 0.05f);
+    if (o->os16FA == 0) {
+        o->header.gfx.scale[1] = 0.0f;
+    } else {
+        o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.01f + (0.33f * o->os16FA), 0.05f);
+        load_object_collision_model();
+    }
+    // o->header.gfx.scale[1] = 1.0f;
 }
 
 
 
 void bhv_mind_2d_goomba_init(void) {
-    o->oMoveAngleYaw = o->oFaceAngleYaw - 0x4000;
+    obj_set_hitbox(o, &sMind2DGoombaHitbox);
+    o->oMoveAngleYaw = o->oFaceAngleYaw + 0x4000;
 }
 
 
@@ -63,40 +151,31 @@ void bhv_mind_2d_goomba_loop(void) {
     if (o->oMoveFlags & OBJ_MOVE_IN_AIR) {
         o->oForwardVel = 0.0f;
     } else {
-        o->oForwardVel = 10.0f;
+        o->oForwardVel = 30.0f;
     }
+
+    if (o->oPosY < 7500.0f || o->oTimer > 500) {
+        if (o->oObj104->oBehParams2ndByte >= 3) {
+            o->oObj104->oAction = 3;
+        } else {
+            o->oObj104->oAction = 1;
+        }
+        gComitCutsceneObject = NULL;
+        o->activeFlags = 0;
+    }
+    print_text_fmt_int(80, 80, "%d", o->oTimer, 0);
 
     // if (o->oPosY < o->oHomeY - 150.0f) {
     //     o->activeFlags = 0;
     //     create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
     //     gMarioState->numCoins++;
     // }
-    if (o->oTimer & 0x10) {
-        // o->header.gfx.scale[0] *= -1.0f;
-        o->oFaceAngleYaw += 0x8000;
-        o->oTimer = 0;
-    }
+    // if (o->oTimer & 0x10) {
+    //     // o->header.gfx.scale[0] *= -1.0f;
+    //     o->oFaceAngleYaw += 0x8000;
+    //     o->oTimer = 0;
+    // }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

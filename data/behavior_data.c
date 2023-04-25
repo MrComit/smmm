@@ -10730,8 +10730,8 @@ const BehaviorScript bhvOutsideMoundBlock[] = {
 
 const BehaviorScript bhvMind2DGoomba[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    SET_HOME(),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    // SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_mind_2d_goomba_init),
     BEGIN_LOOP(),
@@ -10742,7 +10742,7 @@ const BehaviorScript bhvMind2DGoomba[] = {
 
 const BehaviorScript bhvMind2DGate[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(mind_2d_gate_collision),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x7FFF),
@@ -10750,6 +10750,20 @@ const BehaviorScript bhvMind2DGate[] = {
     CALL_NATIVE(bhv_mind_2d_gate_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_mind_2d_gate_loop),
+        // CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvMindButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(mind_button_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    CALL_NATIVE(bhv_mind_button_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mind_button_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

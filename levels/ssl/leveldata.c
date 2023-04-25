@@ -93,3 +93,5 @@
 #include "levels/ssl/mind_2d_goomba/model.inc.c"
 #include "levels/ssl/mind_2d_gate/model.inc.c"
 #include "levels/ssl/mind_2d_gate/collision.inc.c"
+#include "levels/ssl/mind_button/model.inc.c"
+#include "levels/ssl/mind_button/collision.inc.c"

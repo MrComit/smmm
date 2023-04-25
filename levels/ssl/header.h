@@ -168,4 +168,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/mind_2d_gate/collision_header.h"
 
+#include "levels/ssl/mind_button/geo_header.h"
+
+#include "levels/ssl/mind_button/collision_header.h"
+
 #endif

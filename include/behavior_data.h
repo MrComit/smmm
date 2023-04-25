@@ -892,6 +892,7 @@ extern const BehaviorScript bhvOutsideMound[];
 extern const BehaviorScript bhvOutsideMoundBlock[];
 extern const BehaviorScript bhvMind2DGoomba[];
 extern const BehaviorScript bhvMind2DGate[];
+extern const BehaviorScript bhvMindButton[];
 
 
 #endif // BEHAVIOR_DATA_H
