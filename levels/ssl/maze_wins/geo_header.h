@@ -1,0 +1,16 @@
+extern const GeoLayout maze_wins_MazeWins2nd[];
+extern const GeoLayout maze_wins_MazeWins3rd[];
+extern const GeoLayout maze_wins_geo[];
+extern u8 maze_wins_i8_wave_i8[];
+extern Vtx maze_wins_m1_mesh_layer_5_vtx_0[36];
+extern Gfx maze_wins_m1_mesh_layer_5_tri_0[];
+extern Vtx maze_wins_start_m2_mesh_layer_5_vtx_0[36];
+extern Gfx maze_wins_start_m2_mesh_layer_5_tri_0[];
+extern Vtx maze_wins_start_m3_mesh_layer_5_vtx_0[36];
+extern Gfx maze_wins_start_m3_mesh_layer_5_tri_0[];
+extern Gfx mat_maze_wins_OrangeWave[];
+extern Gfx mat_revert_maze_wins_OrangeWave[];
+extern Gfx maze_wins_m1_mesh_layer_5[];
+extern Gfx maze_wins_start_m2_mesh_layer_5[];
+extern Gfx maze_wins_start_m3_mesh_layer_5[];
+extern Gfx maze_wins_material_revert_render_settings[];

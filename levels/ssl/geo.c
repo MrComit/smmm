@@ -53,3 +53,4 @@
 #include "levels/ssl/mind_2d_goomba/geo.inc.c"
 #include "levels/ssl/mind_2d_gate/geo.inc.c"
 #include "levels/ssl/mind_button/geo.inc.c"
+#include "levels/ssl/maze_wins/geo.inc.c"

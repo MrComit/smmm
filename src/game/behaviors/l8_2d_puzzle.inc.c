@@ -45,8 +45,24 @@ Vec3s s2DGateColors[5] = {
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
 
-void bhv_mind_button_init(void) {
 
+void bhv_maze_wins_loop(void) {
+    struct Object *obj;
+    if (o->oObjF4 == NULL || o->oObjF4->os1610A != o->oBehParams2ndByte) {
+        if (o->oBehParams2ndByte < 2) {
+            obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
+            obj->oObjF4 = o->oObjF4;
+            obj->oBehParams2ndByte = o->oBehParams2ndByte + 1;
+        }
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_mind_button_init(void) {
+    struct Object *obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
+    obj->oObjF4 = o;
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 }
 
 
@@ -101,6 +117,10 @@ void bhv_mind_button_loop(void) {
             o->header.gfx.scale[1] = 1.0f;
             o->oBehParams2ndByte = 0;
             o->oAction = 0;
+            if (o->os16108 >= 3) {
+                o->os16108 = 0;
+                o->os1610A++;
+            }
             break;
     }
 }
@@ -154,6 +174,21 @@ void bhv_mind_2d_goomba_loop(void) {
         o->oForwardVel = 30.0f;
     }
 
+    if (o->oFloor != NULL && o->oFloorType == SURFACE_MAZE_WIN && o->oPosY - o->oFloorHeight < 100.0f) {
+        if (o->oObj104->oBehParams2ndByte >= 3) {
+            o->oObj104->oAction = 3;
+        } else {
+            o->oObj104->oAction = 1;
+        }
+        gComitCutsceneObject = NULL;
+        o->activeFlags = 0;
+        if (o->oObj104->os1610A == o->oFloor->force) {
+            play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+            o->oObj104->os16108++;
+        }
+    }
+
+
     if (o->oPosY < 7500.0f || o->oTimer > 500) {
         if (o->oObj104->oBehParams2ndByte >= 3) {
             o->oObj104->oAction = 3;
@@ -163,7 +198,6 @@ void bhv_mind_2d_goomba_loop(void) {
         gComitCutsceneObject = NULL;
         o->activeFlags = 0;
     }
-    print_text_fmt_int(80, 80, "%d", o->oTimer, 0);
 
     // if (o->oPosY < o->oHomeY - 150.0f) {
     //     o->activeFlags = 0;

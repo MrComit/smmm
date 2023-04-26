@@ -10767,3 +10767,15 @@ const BehaviorScript bhvMindButton[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMazeWins[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    // SET_HOME(),
+    // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    // CALL_NATIVE(bhv_mind_2d_goomba_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_maze_wins_loop),
+    END_LOOP(),
+};

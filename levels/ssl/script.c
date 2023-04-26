@@ -66,6 +66,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_2D_GOOMBA, mind_2d_goomba_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_2D_GATE, mind_2d_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_BUTTON, mind_button_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MAZE_WINS, maze_wins_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -255,10 +256,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MIND_2D_GATE, -12093, 9052, 11383, 0, -90, 0, (1 << 16), bhvMind2DGate),
 		OBJECT(MODEL_MIND_2D_GATE, -12593, 8752, 11383, 0, -90, 0, (2 << 16), bhvMind2DGate),
 		OBJECT(MODEL_MIND_2D_GATE, -10743, 9402, 11383, -90, -90, 0, (2 << 16), bhvMind2DGate),
-		// OBJECT(MODEL_MIND_2D_GOOMBA, -12743, 9752, 5883, 0, 0, 0, (1 << 16), bhvMind2DGoomba),
-		// OBJECT(MODEL_MIND_2D_GOOMBA, -9943, 9752, 11383, 0, -180, 0, (2 << 16), bhvMind2DGoomba),
 		OBJECT(MODEL_MIND_MOUND_BLOCK, -9870, 8052, 8985, 0, 0, 0, (3 << 16), bhvOutsideMoundBlock),
-		// OBJECT(MODEL_MIND_2D_GOOMBA, -8493, 9752, 8733, 0, -90, 0, 0x00000000, bhvMind2DGoomba),
 		OBJECT(MODEL_MIND_BUTTON, -9711, 8052, 8733, 0, 0, 0, 0x00000000, bhvMindButton),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 7695, 0, 0, 0, (1 << 24), bhvOutsideMound),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 8320, 0, 0, 0, (1 << 16), bhvOutsideMound),

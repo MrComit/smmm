@@ -900,6 +900,7 @@
 #define MODEL_MIND_2D_GOOMBA      0xEE
 #define MODEL_MIND_2D_GATE        0xED
 #define MODEL_MIND_BUTTON         0xEC
+#define MODEL_MAZE_WINS           0xEB
 
 
 // LEVEL 8 MODELS CONT:

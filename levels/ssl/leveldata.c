@@ -95,3 +95,4 @@
 #include "levels/ssl/mind_2d_gate/collision.inc.c"
 #include "levels/ssl/mind_button/model.inc.c"
 #include "levels/ssl/mind_button/collision.inc.c"
+#include "levels/ssl/maze_wins/model.inc.c"
