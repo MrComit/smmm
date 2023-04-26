@@ -1123,6 +1123,7 @@ void bhv_mind_2d_gate_loop(void);
 void bhv_mind_button_init(void);
 void bhv_mind_button_loop(void);
 void bhv_maze_wins_loop(void);
+void bhv_maze_gate_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -45,6 +45,31 @@ Vec3s s2DGateColors[5] = {
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
 
+void bhv_maze_gate_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioCurrentRoom == o->oRoom) {
+                o->oAction = 1;
+                if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_MAZE) {
+                    o->activeFlags = 0;
+                }
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 20.0f, 20.0f);
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_MAZE) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32(o->oPosY, o->oHomeY, 10.0f, 10.0f);
+            if (o->oPosY == o->oHomeY)
+                o->activeFlags = 0;
+            break;
+    }
+}
+
+
 
 void bhv_maze_wins_loop(void) {
     struct Object *obj;
@@ -53,6 +78,12 @@ void bhv_maze_wins_loop(void) {
             obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
             obj->oObjF4 = o->oObjF4;
             obj->oBehParams2ndByte = o->oBehParams2ndByte + 1;
+        } else {
+            save_file_set_newflags(SAVE_TOAD_FLAG_MIND_MAZE, 1);
+            play_puzzle_jingle();
+            if (o->oObjF4 != NULL) {
+                o->oObjF4->oAction = 4;
+            }
         }
         o->activeFlags = 0;
     }
@@ -60,25 +91,14 @@ void bhv_maze_wins_loop(void) {
 
 
 void bhv_mind_button_init(void) {
-    struct Object *obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
+    struct Object *obj;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_MAZE) {
+        o->oAction = 4;
+        return;
+    }
+    obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
     obj->oObjF4 = o;
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-}
-
-
-void mind_button_play_maze(void) {
-    gCamera->comitCutscene = 20;
-    set_mario_npc_dialog(1);
-
-
-    switch (o->oSubAction) {
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-    }
 }
 
 
@@ -86,6 +106,10 @@ void bhv_mind_button_loop(void) {
     struct Object *obj;
     switch (o->oAction) {
         case 0:
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_MAZE) {
+                o->oAction = 4;
+                return;
+            }
             if (gMarioObject->platform == o) {
                 o->oAction = 1;
             }
@@ -109,7 +133,8 @@ void bhv_mind_button_loop(void) {
             }
             break;
         case 2:
-            mind_button_play_maze();
+            gCamera->comitCutscene = 20;
+            set_mario_npc_dialog(1);
             break;
         case 3:
             set_mario_npc_dialog(0);

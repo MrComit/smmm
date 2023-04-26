@@ -258,6 +258,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MIND_2D_GATE, -10743, 9402, 11383, -90, -90, 0, (2 << 16), bhvMind2DGate),
 		OBJECT(MODEL_MIND_MOUND_BLOCK, -9870, 8052, 8985, 0, 0, 0, (3 << 16), bhvOutsideMoundBlock),
 		OBJECT(MODEL_MIND_BUTTON, -9711, 8052, 8733, 0, 0, 0, 0x00000000, bhvMindButton),
+		OBJECT(MODEL_GLOBAL_GATE, -16765, 7187, 1241, 0, 0, 0, 0x00000000, bhvMazeGate),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 7695, 0, 0, 0, (1 << 24), bhvOutsideMound),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 8320, 0, 0, 0, (1 << 16), bhvOutsideMound),
 		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 8945, 0, 0, 0, (1 << 24) | (2 << 16), bhvOutsideMound),

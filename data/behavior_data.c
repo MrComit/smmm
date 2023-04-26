@@ -10779,3 +10779,18 @@ const BehaviorScript bhvMazeWins[] = {
         CALL_NATIVE(bhv_maze_wins_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMazeGate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(global_gate_collision),
+    ADD_FLOAT(oPosY, 300),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_maze_gate_loop),
+    END_LOOP(),
+    BREAK(),
+};
