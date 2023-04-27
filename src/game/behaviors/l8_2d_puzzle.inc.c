@@ -79,11 +79,10 @@ void bhv_maze_wins_loop(void) {
             obj->oObjF4 = o->oObjF4;
             obj->oBehParams2ndByte = o->oBehParams2ndByte + 1;
         } else {
-            save_file_set_newflags(SAVE_TOAD_FLAG_MIND_MAZE, 1);
-            play_puzzle_jingle();
             if (o->oObjF4 != NULL) {
                 o->oObjF4->oAction = 4;
             }
+            gComitCutsceneTimer = 30;
         }
         o->activeFlags = 0;
     }
@@ -93,7 +92,7 @@ void bhv_maze_wins_loop(void) {
 void bhv_mind_button_init(void) {
     struct Object *obj;
     if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_MAZE) {
-        o->oAction = 4;
+        o->oAction = 7;
         return;
     }
     obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
@@ -102,19 +101,38 @@ void bhv_mind_button_init(void) {
 }
 
 
+s32 check_maze_invalid(void) {
+    s32 i;
+    for (i = 0; i < 5; i++) {
+        if (s2DGateVals[i] == 1 || s2DGateVals[i] == 2) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+
 void bhv_mind_button_loop(void) {
     struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_MAZE) {
-                o->oAction = 4;
+                o->oAction = 7;
                 return;
             }
             if (gMarioObject->platform == o) {
-                o->oAction = 1;
+                // if (check_maze_invalid()) {
+                //     o->oAction = 5;
+                // } else {
+                    o->oAction = 1;
+                    o->oFloatF4 = gMarioState->pos[0];
+                    o->oFloatF8 = gMarioState->pos[2];
+                // }
             }
             break;
         case 1:
+            gMarioState->pos[0] = o->oFloatF4;
+            gMarioState->pos[2] = o->oFloatF8;
             o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.3f, 0.08f);
             if (o->header.gfx.scale[1] == 0.3f) {
                 o->oAction = 2;
@@ -133,6 +151,8 @@ void bhv_mind_button_loop(void) {
             }
             break;
         case 2:
+            gMarioState->pos[0] = o->oFloatF4;
+            gMarioState->pos[2] = o->oFloatF8;
             gCamera->comitCutscene = 20;
             set_mario_npc_dialog(1);
             break;
@@ -145,6 +165,40 @@ void bhv_mind_button_loop(void) {
             if (o->os16108 >= 3) {
                 o->os16108 = 0;
                 o->os1610A++;
+            }
+            break;
+        case 4:
+            if (o->oTimer > 30) {
+                gCamera->comitCutscene = 0xFF;
+                gComitCutsceneTimer = 45;
+                obj = cur_obj_nearest_object_with_behavior(bhvMazeGate);
+                if (obj != NULL) {
+                    vec3f_set(gComitCutscenePosVec, obj->oHomeX, obj->oHomeY + 200.0f, obj->oHomeZ + 1500.0f);
+                    vec3f_copy(gComitCutsceneFocVec, &obj->oHomeX);
+                } else {
+                    o->oAction = 5;
+                }
+            } else if (o->oTimer == 30) {
+                save_file_set_newflags(SAVE_TOAD_FLAG_MIND_MAZE, 1);
+                play_puzzle_jingle();
+            } else {
+
+            }
+            break;
+        case 5:
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.3f, 0.08f);
+            if (o->header.gfx.scale[1] == 0.3f) {
+                if (CL_NPC_Dialog(DIALOG_072)) {
+                    o->oAction = 6;
+                }
+            }
+            break;
+        case 6:
+            if (gMarioObject->platform != o) {
+                o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.0f, 0.1f);
+                if (o->header.gfx.scale[1] == 1.0f) {
+                    o->oAction = 0;
+                }
             }
             break;
     }
@@ -168,7 +222,9 @@ void bhv_mind_2d_gate_loop(void) {
     o->os16FA = s2DGateVals[o->oBehParams2ndByte];
     if (o->os16FA == 0) {
         o->header.gfx.scale[1] = 0.0f;
+        cur_obj_hide();
     } else {
+        cur_obj_unhide();
         o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.01f + (0.33f * o->os16FA), 0.05f);
         load_object_collision_model();
     }
@@ -196,20 +252,30 @@ void bhv_mind_2d_goomba_loop(void) {
     if (o->oMoveFlags & OBJ_MOVE_IN_AIR) {
         o->oForwardVel = 0.0f;
     } else {
-        o->oForwardVel = 30.0f;
+        o->oForwardVel = 40.0f;
     }
 
-    if (o->oFloor != NULL && o->oFloorType == SURFACE_MAZE_WIN && o->oPosY - o->oFloorHeight < 100.0f) {
-        if (o->oObj104->oBehParams2ndByte >= 3) {
-            o->oObj104->oAction = 3;
-        } else {
-            o->oObj104->oAction = 1;
+    if (o->oAction == 0) {
+        if (o->oFloor != NULL && o->oFloorType == SURFACE_MAZE_WIN && o->oPosY - o->oFloorHeight < 100.0f) {
+            o->oAction = 1;
+            if (o->oObj104->os1610A == o->oFloor->force) {
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                o->oObj104->os16108++;
+            }
         }
-        gComitCutsceneObject = NULL;
-        o->activeFlags = 0;
-        if (o->oObj104->os1610A == o->oFloor->force) {
-            play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
-            o->oObj104->os16108++;
+    } else {
+        cur_obj_hide();
+        o->oVelY = 0.0f;
+        o->oForwardVel = 0.0f;
+        if (o->oTimer > 20) {
+            if (o->oObj104->oBehParams2ndByte >= 3) {
+                o->oObj104->oAction = 3;
+            } else {
+                o->oObj104->oAction = 1;
+            }
+
+            gComitCutsceneObject = NULL;
+            o->activeFlags = 0;
         }
     }
 

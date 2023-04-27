@@ -804,12 +804,10 @@ leading to floor two.\n\
 Everything in there is yours,\n\
 Mario."))
 
-DEFINE_DIALOG(DIALOG_072, 1, 5, 30, 200, _("\
-High winds ahead!\n\
-Pull your Cap down tight.\n\
-If it blows off, you'll\n\
-have to find it on this\n\
-mountain."))
+DEFINE_DIALOG(DIALOG_072, 1, 3, 30, 200, _("\
+ERROR: Gates must be fully\n\
+on or fully off to activate\n\
+the maze."))
 
 DEFINE_DIALOG(DIALOG_073, 1, 4, 95, 200, _("\
 Aarrgh! Ahoy, matey. I\n\
