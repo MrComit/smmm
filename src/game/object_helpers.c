@@ -32,6 +32,7 @@
 #include "levels/bbh/header.h"
 #include "levels/jrb/header.inc.h"
 #include "levels/lll/header.h"
+#include "levels/ssl/header.h"
 #include "save_file.h"
 #include "src/game/tile_scroll.h"
 #include "actors/common0.h"
@@ -612,6 +613,7 @@ Vtx *sVanishVerts[] = {
     &hmc_dl_BelowMaze_mesh_layer_1_vtx_1,
     &lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0,
     &lll_dl_MUSICFLOOR_Cellar_mesh_layer_1_vtx_0,
+    &ssl_dl_BGMuiscFloor_mesh_layer_1_vtx_0,
 };
 
 s16 sVanishVertCounts[] = {
@@ -625,6 +627,7 @@ s16 sVanishVertCounts[] = {
     sizeof(hmc_dl_BelowMaze_mesh_layer_1_vtx_1) / 16,
     sizeof(lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0) / 16,
     sizeof(lll_dl_MUSICFLOOR_Cellar_mesh_layer_1_vtx_0) / 16,
+    sizeof(ssl_dl_BGMuiscFloor_mesh_layer_1_vtx_0) / 16,
 };
 
 s16 sVanishVertDists[] = {
@@ -638,6 +641,7 @@ s16 sVanishVertDists[] = {
     2500,
     1000,
     1000,
+    7000,
 };
 
 Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
@@ -662,6 +666,39 @@ Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED voi
                 vert[i].v.cn[3] = 0;
             }
         }
+    }
+    return NULL;
+}
+
+
+Gfx *geo_update_bgrock_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    s32 i;
+    s32 dist, distDefault;
+    Vtx *vert;
+    Vec3s marioPos;
+    struct GraphNodeGenerated *currentGraphNode;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        vec3f_to_vec3s(marioPos, gMarioState->pos);
+        // marioPos[0] -= 8796;
+        // marioPos[2] -= 14423;
+        vert = segmented_to_virtual(sVanishVerts[currentGraphNode->parameter]);
+        distDefault = sVanishVertDists[currentGraphNode->parameter];
+        distDefault *= distDefault * 2;
+        for (i = 0; i < sVanishVertCounts[currentGraphNode->parameter]; i++) {
+            dist = absi((marioPos[0] - vert[i].v.ob[0]) * (marioPos[0] - vert[i].v.ob[0]) + 
+                    (marioPos[2] - vert[i].v.ob[2]) * (marioPos[2] - vert[i].v.ob[2]));
+            if (dist <= distDefault) {
+                if (distDefault - dist >= distDefault - 82000000) {
+                    vert[i].v.cn[3] = 255;
+                } else {
+                    vert[i].v.cn[3] = (f32)((distDefault - dist)) / (f32)(distDefault - 82000000) * 255;
+                }
+            } else if (vert[i].v.cn[3] != 0) {
+                vert[i].v.cn[3] = 0;
+            }
+        }
+        // print_text_fmt_int(80, 80, "%d", (s32)dist, 0);
     }
     return NULL;
 }
