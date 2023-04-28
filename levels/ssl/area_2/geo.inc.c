@@ -63,6 +63,7 @@ const GeoLayout ssl_dl_205__Outside3_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_ArtWall_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_BGRocks_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_FancyChair_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Lab_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_PalaceWall_mesh_layer_1),
@@ -105,7 +106,7 @@ const GeoLayout ssl_dl_207__Outside4_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_006_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_OGround_006_mesh_layer_5),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_PalaceWall_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 65536, ssl_dl_PalaceWall_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

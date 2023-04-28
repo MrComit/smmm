@@ -176,7 +176,7 @@ void bhv_mind_button_loop(void) {
                     vec3f_set(gComitCutscenePosVec, obj->oHomeX, obj->oHomeY + 200.0f, obj->oHomeZ + 1500.0f);
                     vec3f_copy(gComitCutsceneFocVec, &obj->oHomeX);
                 } else {
-                    o->oAction = 5;
+                    o->oAction = 7;
                 }
             } else if (o->oTimer == 30) {
                 save_file_set_newflags(SAVE_TOAD_FLAG_MIND_MAZE, 1);

@@ -813,6 +813,8 @@ void bhv_small_key_loop(void) {
         else if (o->oMoveFlags & OBJ_MOVE_LANDED)
             cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3);
     } else {
+        o->oFaceAngleYaw += 0x400;
+        o->oGraphYOffset = sins(o->oFaceAngleYaw * 2) * 10.0f;
         obj_set_hitbox(o, &sSmallKeyHitbox);
         if (o->oInteractStatus & INT_STATUS_INTERACTED) {
             o->activeFlags = 0;
