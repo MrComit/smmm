@@ -1,16 +1,32 @@
 s32 absi(s32 x);
 
-void bhv_yoshi_head_init(void) {
+void bhv_yoshi_head_rectangle_init(void) {
     // o->oF4 = 1;
+    o->oFloatFC = o->oPosX;
+    o->oFloat100 = o->oPosZ;
+    o->oAction = (o->oBehParams >> 8) & 0xFF;
+    o->oMoveAngleYaw = o->oFaceAngleYaw = 0x4000 * o->oAction;
+    o->o104 = o->oMoveAngleYaw;
+    switch (o->oAction) {
+        case 1:
+            o->oPosZ += (o->oBehParams2ndByte * 100.0f);
+            break;
+        case 2:
+            o->oPosZ += (o->oBehParams2ndByte * 100.0f);
+            o->oPosX += (o->oBehParams >> 24) * 100.0f;
+            break;
+        case 3:
+            o->oPosX += (o->oBehParams >> 24) * 100.0f;
+            break;
+    }
 }
 
-void bhv_yoshi_head_loop(void) {
+void yoshi_head_calc(void) {
     s32 i = 0;
     f32 length, sin, cos;
     f32 divisor;
     struct Surface *wall;
     struct MarioState *m = gMarioState;
-    o->oMoveAngleYaw += 0x100;
 
     // RAYCAST TYPE THING
     o->oHomeY = o->oPosY;
@@ -68,14 +84,85 @@ void bhv_yoshi_head_loop(void) {
 
     divisor = (f32)o->oF4 / 1024.0f;
     if ((s16)o->oDistanceToMario < o->oF4 && absi(o->oAngleToMario - (s16)o->oMoveAngleYaw) < (o->oDistanceToMario / divisor)) {
-        if (o->oTimer > 60) {
+        // if (o->oTimer > 60) {
             CL_get_hit(gMarioState, gMarioObject, 0);
             // spawn_object(o, MODEL_SAWBLADE, bhvSawbladeShoot);
             o->oTimer = 0;
+        // }
+    }
+    // print_text_fmt_int(80, 80, "%x", absi(o->oAngleToMario - (s16)o->oMoveAngleYaw), 0);
+    // print_text_fmt_int(80, 40, "%x", (s32)(o->oDistanceToMario / divisor), 0);
+}
+
+void bhv_yoshi_head_spin_loop(void) {
+    o->oMoveAngleYaw += 0x100;
+
+    yoshi_head_calc();
+}
+
+
+void bhv_yoshi_head_rectangle_loop(void) {
+    // o->oMoveAngleYaw += 0x100;
+    o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->o104, 0x300);
+
+    if ((u16)o->oMoveAngleYaw == o->o104) {
+        switch (o->oAction) {
+            case 0:
+                o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat100 + (o->oBehParams2ndByte * 100.0f), 20.0f);
+                if (o->oPosZ == o->oFloat100 + (o->oBehParams2ndByte * 100.0f)) {
+                    o->oAction = 1;
+                    o->o104 = 0x4000;
+                }
+                break;
+            case 1:
+                o->oPosX = approach_f32_symmetric(o->oPosX, o->oFloatFC + ((o->oBehParams >> 24) * 100.0f), 20.0f);
+                if (o->oPosX == o->oFloatFC + ((o->oBehParams >> 24) * 100.0f)) {
+                    o->oAction = 2;
+                    o->o104 = 0x8000;
+                }
+                break;
+            case 2:
+                o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat100, 20.0f);
+                if (o->oPosZ == o->oFloat100) {
+                    o->oAction = 3;
+                    o->o104 = 0xC000;
+                }
+                break;
+            case 3:
+                o->oPosX = approach_f32_symmetric(o->oPosX, o->oFloatFC, 20.0f);
+                if (o->oPosX == o->oFloatFC) {
+                    o->oAction = 0;
+                    o->o104 = 0;
+                }
+                break;
         }
     }
-    print_text_fmt_int(80, 80, "%x", absi(o->oAngleToMario - (s16)o->oMoveAngleYaw), 0);
-    print_text_fmt_int(80, 40, "%x", (s32)(o->oDistanceToMario / divisor), 0);
+
+    yoshi_head_calc();
+}
 
 
+
+void bhv_yoshi_head_line_loop(void) {
+    // o->oMoveAngleYaw += 0x100;
+    // o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->o104, 0x300);
+
+    switch (o->oAction) {
+        case 0:
+            o->oPosX += 20.0f * sins(o->oMoveAngleYaw);
+            o->oPosZ += 20.0f * coss(o->oMoveAngleYaw);
+            if (o->oTimer > o->oBehParams2ndByte) {
+                o->oAction = 1;
+                o->o104 = (u16)(o->oMoveAngleYaw + 0x8000);
+            }
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->o104, 0x300);
+            if ((u16)o->oMoveAngleYaw == o->o104) {
+                o->oAction = 0;
+            }
+            break;
+    }
+
+    yoshi_head_calc();
 }

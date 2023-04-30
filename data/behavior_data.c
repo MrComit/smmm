@@ -10796,13 +10796,38 @@ const BehaviorScript bhvMazeGate[] = {
 };
 
 
-const BehaviorScript bhvYoshiHead[] = {
+const BehaviorScript bhvYoshiHeadSpin[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     SET_HOME(),
     // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
-    CALL_NATIVE(bhv_yoshi_head_init),
+    // CALL_NATIVE(bhv_yoshi_head_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_yoshi_head_loop),
+        CALL_NATIVE(bhv_yoshi_head_spin_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvYoshiHeadRectangle[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_HOME(),
+    // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_yoshi_head_rectangle_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_yoshi_head_rectangle_loop),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvYoshiHeadLine[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_HOME(),
+    // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    // CALL_NATIVE(bhv_yoshi_head_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_yoshi_head_line_loop),
     END_LOOP(),
 };
