@@ -37,6 +37,7 @@
 #include "src/game/tile_scroll.h"
 #include "actors/common0.h"
 #include "print.h"
+#include "levels/ssl/yoshi_head/geo_header.h"
 
 extern Mtx *gMatStackFixed[32];
 extern s16 gMatStackIndex;
@@ -1527,6 +1528,125 @@ Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void
     return NULL;
     
 }
+
+
+
+/*
+Vtx yoshi_head_spotlight_mesh_layer_5_vtx_0[24] = {
+	{{ {0, 0, 0}, 0, {-16, 1008}, {125, 0, 234, 255} }},
+	{{ {179, 103, 1000}, 0, {-16, 1008}, {125, 0, 234, 255} }},
+	{{ {179, -103, 1000}, 0, {-16, 1008}, {125, 0, 234, 255} }},
+	{{ {0, -206, 1000}, 0, {-16, 1008}, {193, 148, 234, 255} }},
+	{{ {-179, -103, 1000}, 0, {-16, 1008}, {193, 148, 234, 255} }},
+	{{ {-179, 103, 1000}, 0, {-16, 1008}, {193, 108, 234, 255} }},
+	{{ {0, 206, 1000}, 0, {-16, 1008}, {193, 108, 234, 255} }},
+};
+
+0: 0, 3, 6, 9, 12, 15
+1: 1, 11, 23
+2: 2, 13, 21
+3: 4, 14, 22
+4: 5, 16, 20
+5: 7, 17, 19
+6: 8, 10, 18
+
+
+Gfx yoshi_head_spotlight_mesh_layer_5_tri_0[] = {
+	// gsSPVertex(yoshi_head_spotlight_mesh_layer_5_vtx_0 + 0, 24, 0),
+	// gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+	// gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+	// gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
+	// gsSP2Triangles(18, 19, 20, 0, 20, 21, 18, 0),
+	// gsSP2Triangles(20, 22, 21, 0, 21, 23, 18, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 4, 0),
+	gsSP2Triangles(0, 5, 6, 0, 0, 6, 1, 0),
+	gsSP2Triangles(0, 2, 3, 0, 0, 4, 5, 0),
+	gsSP2Triangles(6, 5, 4, 0, 4, 2, 6, 0),
+	gsSP2Triangles(4, 3, 2, 0, 2, 1, 6, 0),
+	gsSPEndDisplayList(),
+};
+
+
+*/
+
+Gfx *geo_generate_spotlight(s32 callContext, struct GraphNode *node, void *context) {
+    Vtx *vertexBuffer;
+    Gfx *dlStart, *dlHead;
+    struct Object *obj;
+    struct GraphNodeGenerated *currentGraphNode;
+    // s16 height;
+    // s16 baseX, baseZ, dist;
+    s16 dist;
+
+
+    currentGraphNode = node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+
+        currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
+
+        // height = obj->os16F4;
+        // baseX = obj->os16F8;
+        // baseZ = obj->os16FA;
+        // dist = obj->os16FC;
+
+
+        dist = obj->oF4;
+
+
+        // {{ {0, 0, 0}, 0, {-16, 1008}, {125, 0, 234, 255} }},
+        // {{ {179, 103, 1000}, 0, {-16, 1008}, {125, 0, 234, 255} }},
+        // {{ {179, -103, 1000}, 0, {-16, 1008}, {125, 0, 234, 255} }},
+        // {{ {0, -206, 1000}, 0, {-16, 1008}, {193, 148, 234, 255} }},
+        // {{ {-179, -103, 1000}, 0, {-16, 1008}, {193, 148, 234, 255} }},
+        // {{ {-179, 103, 1000}, 0, {-16, 1008}, {193, 108, 234, 255} }},
+        // {{ {0, 206, 1000}, 0, {-16, 1008}, {193, 108, 234, 255} }},
+
+        // MAIN VERT
+        make_vertex(vertexBuffer, 0, 0, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        // 1
+        make_vertex(vertexBuffer, 1, 179, 103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        // 2
+        make_vertex(vertexBuffer, 2, 179, -103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        // 3
+        make_vertex(vertexBuffer, 3, 0, -206, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        // 4
+        make_vertex(vertexBuffer, 4, -179, -103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        // 5
+        make_vertex(vertexBuffer, 5, -179, 103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        // 6
+        make_vertex(vertexBuffer, 6, 0, 206, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+
+        dlHead = alloc_display_list(sizeof(Gfx) * (6));
+        dlStart = dlHead;
+
+        gSPDisplayList(dlHead++, mat_yoshi_head_Spotlight);
+        gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 7, 0);
+
+        // gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 10, 0);
+        // gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
+        // gSP2Triangles(dlHead++, 2, 3, 4, 0, 3, 4, 5, 0);
+
+        // gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
+        // gSP2Triangles(dlHead++, 6, 7, 8, 0, 7, 8, 9, 0);
+        
+        gSPDisplayList(dlHead++, yoshi_head_spotlight_mesh_layer_5_tri_0);
+        gSPDisplayList(dlHead++, mat_revert_yoshi_head_Spotlight);
+        
+        gSPEndDisplayList(dlHead++);
+    }
+    return dlStart;
+    
+}
+
+
+
+
+
+
 
 
 

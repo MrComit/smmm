@@ -174,4 +174,6 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/maze_wins/geo_header.h"
 
+#include "levels/ssl/yoshi_head/geo_header.h"
+
 #endif

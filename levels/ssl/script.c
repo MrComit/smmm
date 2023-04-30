@@ -67,6 +67,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_2D_GATE, mind_2d_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_BUTTON, mind_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MAZE_WINS, maze_wins_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_YOSHI_HEAD, yoshi_head_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -285,6 +286,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, -12899, 7199, 14986, 0, -90, 0, (2 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_SPINNING_PLAT, -17811, 5895, 7985, 0, 0, 0, (1 << 16), bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, -15611, 7299, 13819, 0, 0, 0, (1 << 16), bhvSpinningPlat),
+		OBJECT(MODEL_YOSHI_HEAD, -6485, 16799, 14929, 0, 0, 0, 0x00000000, bhvYoshiHead),
 		TERRAIN(ssl_area_2_collision),
 		ROOMS(ssl_area_2_collision_rooms),
 		MACRO_OBJECTS(ssl_area_2_macro_objs),

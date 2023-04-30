@@ -901,6 +901,7 @@
 #define MODEL_MIND_2D_GATE        0xED
 #define MODEL_MIND_BUTTON         0xEC
 #define MODEL_MAZE_WINS           0xEB
+#define MODEL_YOSHI_HEAD          0xEA
 
 
 // LEVEL 8 MODELS CONT:

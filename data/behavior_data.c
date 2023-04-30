@@ -10794,3 +10794,15 @@ const BehaviorScript bhvMazeGate[] = {
     END_LOOP(),
     BREAK(),
 };
+
+
+const BehaviorScript bhvYoshiHead[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SET_HOME(),
+    // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_yoshi_head_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_yoshi_head_loop),
+    END_LOOP(),
+};
