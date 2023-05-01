@@ -1,7 +1,33 @@
 s32 absi(s32 x);
 
+
+static struct ObjectHitbox sYoshiHeadHitbox = {
+    /* interactType:      */ INTERACT_IGLOO_BARRIER,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 130,
+    /* height:            */ 170,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+void bhv_yoshi_head_init(void) {
+    o->os16108 = 1500;  // MAX DIST
+    obj_set_hitbox(o, &sYoshiHeadHitbox);
+}
+
+
+void bhv_yoshi_head_line_init(void) {
+    o->os16108 = 1000;  // MAX DIST
+    obj_set_hitbox(o, &sYoshiHeadHitbox);
+}
+
 void bhv_yoshi_head_rectangle_init(void) {
     // o->oF4 = 1;
+    obj_set_hitbox(o, &sYoshiHeadHitbox);
+    o->os16108 = 2000; // MAX DIST
     o->oFloatFC = o->oPosX;
     o->oFloat100 = o->oPosZ;
     o->oAction = (o->oBehParams >> 8) & 0xFF;
@@ -35,8 +61,8 @@ void yoshi_head_calc(void) {
     cos = coss(o->oMoveAngleYaw);
     while (wall == NULL) {
         length += 50.0f;
-        if (length >= 2000.0f) {
-            length = 2000.0f;
+        if (length >= o->os16108) {
+            length = o->os16108;
             break;
         }
         o->oHomeX = o->oPosX + (length * sin);
@@ -149,6 +175,7 @@ void bhv_yoshi_head_line_loop(void) {
 
     switch (o->oAction) {
         case 0:
+            o->os16108 = approach_s16_symmetric(o->os16108, 1000, 40);
             o->oPosX += 20.0f * sins(o->oMoveAngleYaw);
             o->oPosZ += 20.0f * coss(o->oMoveAngleYaw);
             if (o->oTimer > o->oBehParams2ndByte) {
@@ -157,8 +184,9 @@ void bhv_yoshi_head_line_loop(void) {
             }
             break;
         case 1:
+            o->os16108 = approach_s16_symmetric(o->os16108, 200, 40);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->o104, 0x300);
-            if ((u16)o->oMoveAngleYaw == o->o104) {
+            if ((u16)o->oMoveAngleYaw == o->o104 && o->os16108 == 200) {
                 o->oAction = 0;
             }
             break;
