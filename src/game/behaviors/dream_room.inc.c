@@ -175,7 +175,7 @@ void bhv_yoshi_head_line_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            o->os16108 = approach_s16_symmetric(o->os16108, 1000, 40);
+            o->os16108 = approach_s16_symmetric(o->os16108, 1000, 90);
             o->oPosX += 20.0f * sins(o->oMoveAngleYaw);
             o->oPosZ += 20.0f * coss(o->oMoveAngleYaw);
             if (o->oTimer > o->oBehParams2ndByte) {
@@ -184,7 +184,7 @@ void bhv_yoshi_head_line_loop(void) {
             }
             break;
         case 1:
-            o->os16108 = approach_s16_symmetric(o->os16108, 200, 40);
+            o->os16108 = approach_s16_symmetric(o->os16108, 200, 70);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->o104, 0x300);
             if ((u16)o->oMoveAngleYaw == o->o104 && o->os16108 == 200) {
                 o->oAction = 0;
