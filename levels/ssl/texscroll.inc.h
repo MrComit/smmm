@@ -4,4 +4,6 @@ extern void scroll_sts_mat_ssl_dl_BooGoo_layer1();
 extern void scroll_sts_mat_ssl_dl_PalaceFloor_001_layer1();
 extern void scroll_sts_mat_ssl_dl_BooGooContainer_layer1();
 extern void scroll_sts_mat_ssl_dl_WoodFloorTransparent_002_layer1();
+extern void scroll_ssl_dl_DreamRoom_mesh_layer_1_vtx_3();
+extern void scroll_sts_mat_ssl_dl_Lava_layer1();
 extern void scroll_ssl();

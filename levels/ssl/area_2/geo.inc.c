@@ -114,6 +114,8 @@ const GeoLayout ssl_dl_208__Dream_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_DreamRoom_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_DreamRoom_mesh_layer_5),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_LavaRockFloor_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
