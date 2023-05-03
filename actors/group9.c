@@ -34,3 +34,12 @@ UNUSED static const u64 binid_4 = 4;
 //UNUSED static const u64 binid_6 = 6;
 
 #include "peepa/model.inc.c"
+
+#include "penguin/model.inc.c"
+#include "penguin/anims/data.inc.c"
+#include "penguin/anims/table.inc.c"
+#include "penguin/collision.inc.c"
+
+#include "yoshi/model.inc.c"
+#include "yoshi/anims/data.inc.c"
+#include "yoshi/anims/table.inc.c"

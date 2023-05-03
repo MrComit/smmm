@@ -13,6 +13,66 @@ static struct ObjectHitbox sYoshiHeadHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+
+
+void bhv_dream_penguin_loop(void) {
+    f32 pos;
+    switch (o->oAction) {
+        case 0:
+            cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(-78);
+            play_penguin_walking_sound(PENGUIN_WALK_BABY);
+
+            if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
+                play_sound(SOUND_MENU_COLLECT_SECRET, gGlobalSoundSource);
+                o->oAction = 1;
+                cur_obj_hide();
+                spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+            }
+            break;
+        case 1:
+            set_mario_npc_dialog(1);
+            gDreamEnv = approach_s16_symmetric(gDreamEnv, 0, 10);
+            if (gDreamEnv == 0) {
+                switch (o->oBehParams2ndByte) {
+                    case 0:
+                        pos = 6000.0f;
+                        break;
+                    case 1:
+                        pos = -15888.0f;
+                        break;
+                    case 2:
+                        pos = 10103.0f;
+                        break;
+                }
+                // CL_instantly_warp(pos);
+                CL_call_warp(0, pos, 0);
+                o->oAction = 2;
+                // set_mario_npc_dialog(0);
+            }
+            break;
+        case 2:
+            set_mario_npc_dialog(1);
+            gDreamEnv = approach_s16_symmetric(gDreamEnv, 255, 10);
+            if (gDreamEnv == 255) {
+                o->activeFlags = 0;
+                set_mario_npc_dialog(0);
+            }
+            break;
+    }
+}
+
+
+void bhv_dream_yoshi_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            break;
+        case 1:
+            break;
+    }
+}
+
+
 void bhv_yoshi_head_init(void) {
     if (o->oPosY < 5000.0f) {
         o->os16108 = 1200;  // MAX DIST

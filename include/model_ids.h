@@ -380,7 +380,7 @@
 #define MODEL_SPINDRIFT                   0x54        // spindrift_geo
 #define MODEL_MR_BLIZZARD_HIDDEN          0x55        // mr_blizzard_hidden_geo
 #define MODEL_MR_BLIZZARD                 0x56        // mr_blizzard_geo
-#define MODEL_PENGUIN                     0x57        // penguin_geo
+// #define MODEL_PENGUIN                     0x57        // penguin_geo
 
 // group 8
 #define MODEL_CAP_SWITCH_EXCLAMATION      0x54        // cap_switch_exclamation_seg5_dl_05002E00
@@ -393,13 +393,19 @@
 #define MODEL_BETA_BOO_KEY                0x55        // small_key_geo
 #define MODEL_HAUNTED_CHAIR               0x56        // haunted_chair_geo
 #define MODEL_MAD_PIANO                   0x57        // mad_piano_geo
-#define MODEL_BOOKEND_PART                0x58        // bookend_part_geo
+#define MODEL_YOSHI                       0x58        // yoshi_geo
 #define MODEL_BOOKEND                     0x59        // bookend_geo
+#define MODEL_PENGUIN                     0x5A        // penguin_geo
 //#define MODEL_HAUNTED_CAGE                0x5A        // haunted_cage_geo
+
+
+// DEPRECATED
+#define MODEL_BOOKEND_PART                0x5B        // bookend_part_geo
+
 
 // group 10
 #define MODEL_BIRDS                       0x54        // birds_geo
-#define MODEL_YOSHI                       0x55        // yoshi_geo
+// #define MODEL_YOSHI                       0x55        // yoshi_geo
 
 // group 11
 #define MODEL_ENEMY_LAKITU                0x54        // enemy_lakitu_geo

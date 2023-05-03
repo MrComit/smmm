@@ -8,5 +8,5 @@
 #include "group7.h"
 
 #include "spindrift/geo.inc.c"
-#include "penguin/geo.inc.c"
+// #include "penguin/geo.inc.c"
 #include "snowman/geo.inc.c"

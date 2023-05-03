@@ -898,6 +898,8 @@ extern const BehaviorScript bhvMazeGate[];
 extern const BehaviorScript bhvYoshiHeadSpin[];
 extern const BehaviorScript bhvYoshiHeadRectangle[];
 extern const BehaviorScript bhvYoshiHeadLine[];
+extern const BehaviorScript bhvDreamYoshi[];
+extern const BehaviorScript bhvDreamPenguin[];
 
 
 #endif // BEHAVIOR_DATA_H

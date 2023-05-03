@@ -83,4 +83,54 @@ extern const Gfx small_key_seg5_dl_05006A68[];
 
 #include "peepa/geo_header.h"
 
+
+// penguin
+extern const GeoLayout penguin_geo[];
+extern const Gfx penguin_seg5_dl_05006188[];
+extern const Gfx penguin_seg5_dl_050061C8[];
+extern const Gfx penguin_seg5_dl_050061F8[];
+extern const Gfx penguin_seg5_dl_05006380[];
+extern const Gfx penguin_seg5_dl_050063C8[];
+extern const Gfx penguin_seg5_dl_05006428[];
+extern const Gfx penguin_seg5_dl_05006458[];
+extern const Gfx penguin_seg5_dl_05006488[];
+extern const Gfx penguin_seg5_dl_050064B8[];
+extern const Gfx penguin_seg5_dl_050064E8[];
+extern const Gfx penguin_seg5_dl_05007198[];
+extern const Gfx penguin_seg5_dl_050071E8[];
+extern const Gfx penguin_seg5_dl_05007238[];
+extern const Gfx penguin_seg5_dl_050072C8[];
+extern const Gfx penguin_seg5_dl_05007358[];
+extern const Gfx penguin_seg5_dl_05007540[];
+extern const struct Animation *const penguin_seg5_anims_05008B74[];
+extern const Collision penguin_seg5_collision_05008B88[];
+
+
+// yoshi
+extern const GeoLayout yoshi_geo[];
+extern const Gfx yoshi_seg5_dl_0501D440[];
+extern const Gfx yoshi_seg5_dl_0501D488[];
+extern const Gfx yoshi_seg5_dl_0501D4E0[];
+extern const Gfx yoshi_seg5_dl_0501D8F8[];
+extern const Gfx yoshi_seg5_dl_0501D940[];
+extern const Gfx yoshi_seg5_dl_0501D970[];
+extern const Gfx yoshi_seg5_dl_0501D998[];
+extern const Gfx yoshi_seg5_dl_050212B0[];
+extern const Gfx yoshi_seg5_dl_05021490[];
+extern const Gfx yoshi_seg5_dl_050215D8[];
+extern const Gfx yoshi_seg5_dl_05021678[];
+extern const Gfx yoshi_seg5_dl_05021718[];
+extern const Gfx yoshi_seg5_dl_05021860[];
+extern const Gfx yoshi_seg5_dl_05021900[];
+extern const Gfx yoshi_seg5_dl_050219A0[];
+extern const Gfx yoshi_seg5_dl_05021B90[];
+extern const Gfx yoshi_seg5_dl_05021CD8[];
+extern const Gfx yoshi_seg5_dl_05021E38[];
+extern const Gfx yoshi_seg5_dl_05021F70[];
+extern const Gfx yoshi_seg5_dl_05022160[];
+extern const Gfx yoshi_seg5_dl_050222A8[];
+extern const Gfx yoshi_seg5_dl_05022408[];
+extern const Gfx yoshi_seg5_dl_05022608[];
+extern const struct Animation *const yoshi_seg5_anims_05024100[];
+
 #endif

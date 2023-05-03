@@ -153,6 +153,7 @@ const GeoLayout ssl_dl_208__Dream_Room_geo[] = {
 			GEO_BRANCH(1, ssl_dl_e__Snow_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_NULLTri_005_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_BlackBox_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

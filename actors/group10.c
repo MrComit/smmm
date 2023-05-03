@@ -16,7 +16,7 @@ UNUSED static const u64 binid_0 = 0;
 #include "peach/anims/table.inc.c"
 UNUSED static const u64 binid_1 = 1;
 
-#include "yoshi/model.inc.c"
-#include "yoshi/anims/data.inc.c"
-#include "yoshi/anims/table.inc.c"
+// #include "yoshi/model.inc.c"
+// #include "yoshi/anims/data.inc.c"
+// #include "yoshi/anims/table.inc.c"
 UNUSED static const u64 binid_2 = 2;

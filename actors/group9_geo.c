@@ -16,3 +16,6 @@
 //#include "haunted_cage/geo.inc.c"
 
 #include "peepa/geo.inc.c"
+
+#include "penguin/geo.inc.c"
+#include "yoshi/geo.inc.c"
