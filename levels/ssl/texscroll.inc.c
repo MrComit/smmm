@@ -53,7 +53,7 @@ void scroll_sts_mat_ssl_dl_WoodFloorTransparent_002_layer1() {
 	}
 };
 
-void scroll_ssl_dl_DreamRoom_mesh_layer_1_vtx_3() {
+void scroll_ssl_dl_Lava_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 4;
 	int width = 64 * 0x20;
@@ -71,7 +71,7 @@ void scroll_ssl_dl_DreamRoom_mesh_layer_1_vtx_3() {
 	float amplitudeY = 1.0;
 	float frequencyY = 0.10000000149011612;
 	float offsetY = 0.5;
-	Vtx *vertices = segmented_to_virtual(ssl_dl_DreamRoom_mesh_layer_1_vtx_3);
+	Vtx *vertices = segmented_to_virtual(ssl_dl_Lava_mesh_layer_1_vtx_0);
 
 	deltaX = (int)(amplitudeX * frequencyX * coss((frequencyX * timeX + offsetX) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
 	deltaY = (int)(amplitudeY * frequencyY * coss((frequencyY * timeY + offsetY) * (1024 * 16 - 1) / 6.28318530718) * 0x20);
@@ -102,6 +102,6 @@ void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_PalaceFloor_001_layer1();
 	scroll_sts_mat_ssl_dl_BooGooContainer_layer1();
 	scroll_sts_mat_ssl_dl_WoodFloorTransparent_002_layer1();
-	scroll_ssl_dl_DreamRoom_mesh_layer_1_vtx_3();
+	scroll_ssl_dl_Lava_mesh_layer_1_vtx_0();
 	scroll_sts_mat_ssl_dl_Lava_layer1();
 }

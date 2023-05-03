@@ -110,12 +110,49 @@ const GeoLayout ssl_dl_207__Outside4_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout ssl_dl_b__Lava_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Lava_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_LavaRockFloor_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_c__Base_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Base_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_d__Grass_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Grass_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_e__Snow_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Snow_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_Snow_mesh_layer_5),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout ssl_dl_208__Dream_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_DreamRoom_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_DreamRoom_mesh_layer_5),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_LavaRockFloor_mesh_layer_1),
+		GEO_ASM(1, geo_set_dream_env),
+		GEO_ASM(5, geo_set_dream_env),
+		GEO_SWITCH_CASE(4, geo_switch_dream_layers),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, ssl_dl_b__Lava_geo),
+			GEO_BRANCH(1, ssl_dl_c__Base_geo),
+			GEO_BRANCH(1, ssl_dl_d__Grass_geo),
+			GEO_BRANCH(1, ssl_dl_e__Snow_geo),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_NULLTri_005_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

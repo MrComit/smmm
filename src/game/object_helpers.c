@@ -1936,6 +1936,27 @@ Gfx *geo_set_red_painting(s32 callContext, struct GraphNode *node, UNUSED void *
 }
 
 
+u8 gDreamEnv = 0xFF;
+
+Gfx *geo_set_dream_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+        currentGraphNode->fnNode.node.flags = (currentGraphNode->parameter << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
+        gDPSetEnvColor(dlHead++, gDreamEnv, gDreamEnv, gDreamEnv, gDreamEnv);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
+
+
 s32 gSunblockOpacity = 0x38;
 
 Gfx *geo_sunblock_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context) {
@@ -3503,6 +3524,35 @@ Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node) {
             switchCase->selectedCase = 0;
         } else {
             switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
+#ifdef AVOID_UB
+Gfx *geo_switch_dream_layers(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_dream_layers(s32 callContext, struct GraphNode *node) {
+#endif
+    struct MarioState *m = gMarioState;
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (m->pos[1] < 7000.0f) {
+            switchCase->selectedCase = 0;
+        } else if (m->pos[1] < 12000.0f) {
+            switchCase->selectedCase = 1;
+        } else if (m->pos[1] < 15000.0f) {
+            switchCase->selectedCase = 2;
+        } else {
+            switchCase->selectedCase = 3;
         }
     }
 

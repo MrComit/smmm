@@ -1,5 +1,5 @@
 s32 absi(s32 x);
-
+extern u8 gDreamEnv;
 
 static struct ObjectHitbox sYoshiHeadHitbox = {
     /* interactType:      */ INTERACT_IGLOO_BARRIER,
@@ -133,6 +133,13 @@ void yoshi_head_calc(void) {
     }
     // print_text_fmt_int(80, 80, "%x", absi(o->oAngleToMario - (s16)o->oMoveAngleYaw), 0);
     // print_text_fmt_int(80, 40, "%x", (s32)(o->oDistanceToMario / divisor), 0);
+
+    if (gDreamEnv < 200) {
+        cur_obj_hide();
+    } else {
+        cur_obj_unhide();
+    }
+
 }
 
 void bhv_yoshi_head_spin_loop(void) {
@@ -144,6 +151,11 @@ void bhv_yoshi_head_spin_loop(void) {
     }
 
     yoshi_head_calc();
+    // if (o->os16112) {
+    //     gDreamEnv = approach_s16_symmetric(gDreamEnv, 0, 10);
+    // } else {
+    //     gDreamEnv = approach_s16_symmetric(gDreamEnv, 255, 10);
+    // }
 }
 
 
