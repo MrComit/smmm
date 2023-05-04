@@ -114,7 +114,9 @@ const GeoLayout ssl_dl_b__Lava_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Lava_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_Lava_001_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_LavaRockFloor_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_LavaSky_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -129,6 +131,8 @@ const GeoLayout ssl_dl_d__Grass_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Grass_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_Grass_001_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_GrassSky_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -137,6 +141,8 @@ const GeoLayout ssl_dl_e__Snow_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Snow_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_Snow_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_SnowSky_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_SnowSky_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -153,7 +159,6 @@ const GeoLayout ssl_dl_208__Dream_Room_geo[] = {
 			GEO_BRANCH(1, ssl_dl_e__Snow_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_NULLTri_005_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_BlackBox_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

@@ -10841,6 +10841,8 @@ const BehaviorScript bhvDreamYoshi[] = {
     SET_HITBOX(/*Radius*/ 160, /*Height*/ 150),
     ANIMATE(0),
     SET_HOME(),
+    HIDE(),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_NPC),
     // CALL_NATIVE(bhv_yoshi_init),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),

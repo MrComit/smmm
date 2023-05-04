@@ -17,11 +17,17 @@ static struct ObjectHitbox sYoshiHeadHitbox = {
 
 void bhv_dream_penguin_loop(void) {
     f32 pos;
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(-78);
-            play_penguin_walking_sound(PENGUIN_WALK_BABY);
+            if (absf(o->oPosY - gMarioState->pos[1]) > 3000.0f) {
+                cur_obj_hide();
+            } else {
+                cur_obj_unhide();
+                play_penguin_walking_sound(PENGUIN_WALK_BABY);
+            }
 
             if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
                 play_sound(SOUND_MENU_COLLECT_SECRET, gGlobalSoundSource);
@@ -43,6 +49,10 @@ void bhv_dream_penguin_loop(void) {
                         break;
                     case 2:
                         pos = 10103.0f;
+                        obj = cur_obj_nearest_object_with_behavior(bhvDreamYoshi);
+                        if (obj != NULL) {
+                            obj->oAction = 4;
+                        }
                         break;
                 }
                 // CL_instantly_warp(pos);
@@ -55,6 +65,11 @@ void bhv_dream_penguin_loop(void) {
             set_mario_npc_dialog(1);
             gDreamEnv = approach_s16_symmetric(gDreamEnv, 255, 10);
             if (gDreamEnv == 255) {
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_copy(&obj->oPosX, gMarioState->pos);
+                    obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                }
                 o->activeFlags = 0;
                 set_mario_npc_dialog(0);
             }
@@ -64,12 +79,52 @@ void bhv_dream_penguin_loop(void) {
 
 
 void bhv_dream_yoshi_loop(void) {
+    struct Object *obj;
+    if (absf(o->oPosY - gMarioState->pos[1]) > 3000.0f) {
+        cur_obj_hide();
+    } else {
+        cur_obj_unhide();
+    }
     switch (o->oAction) {
         case 0:
+            if (1) {
+                // cur_obj_unhide();
+                o->oAction = 1;
+            }
             break;
         case 1:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
+            // if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                if (CL_NPC_Dialog(DIALOG_161)) {
+                    o->oAction = 3;
+                    obj = spawn_object_abs_with_rot(o, 0, MODEL_PENGUIN, bhvDreamPenguin, -6891, 12799, 19466, 0, DEGREES(180), 0);
+                    obj->oRoom = o->oRoom;
+                    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                }
+            // }
+            break;
+        case 4:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 5;
+            }
+            break;
+        case 5:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
+            // if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                if (CL_NPC_Dialog(DIALOG_162)) {
+                    o->oAction = 6;
+                    o->oInteractType = INTERACT_IGLOO_BARRIER;
+                    o->oInteractionSubtype = 0;
+                }
+            // }
             break;
     }
+    o->oInteractStatus = 0;
 }
 
 
@@ -194,7 +249,7 @@ void yoshi_head_calc(void) {
     // print_text_fmt_int(80, 80, "%x", absi(o->oAngleToMario - (s16)o->oMoveAngleYaw), 0);
     // print_text_fmt_int(80, 40, "%x", (s32)(o->oDistanceToMario / divisor), 0);
 
-    if (gDreamEnv < 200) {
+    if (gDreamEnv < 200 || absf(o->oPosY - gMarioState->pos[1]) > 3000.0f) {
         cur_obj_hide();
     } else {
         cur_obj_unhide();
