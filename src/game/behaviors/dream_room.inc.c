@@ -33,6 +33,7 @@ void bhv_dream_penguin_attack_init(void) {
 
 
 void bhv_dream_penguin_attack_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->oObj100 == NULL || o->oObj100->oAction == 6) {
@@ -45,6 +46,7 @@ void bhv_dream_penguin_attack_loop(void) {
             cur_obj_scale(o->oFloatF4);
             gDreamEnv = approach_s16_symmetric(gDreamEnv, 0, 1);
             if (o->oFloatF4 >= 2.5f && gDreamEnv == 0) {
+                o->oFloat108 = gMarioState->pos[1] - 12599.0f;
                 if (o->oBehParams2ndByte) {
                     CL_call_warp(0, -5000 - (gMarioState->pos[1] - 12599), 0);
                 }
@@ -83,7 +85,14 @@ void bhv_dream_penguin_attack_loop(void) {
             }
             break;
         case 3:
-            o->oPosY -= (5000.0f + (o->oPosY - 12599.0f));
+            if (o->oBehParams2ndByte) {
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_copy(&obj->oPosX, gMarioState->pos);
+                    obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                }
+            }
+            o->oPosY -= (5000.0f + o->oFloat108);
             o->oAction = 2;
             break;
     }
@@ -178,6 +187,10 @@ void bhv_dream_yoshi_loop(void) {
             }
             break;
         case 1:
+            if (o->oTimer < 45) {
+                cur_obj_hide();
+            }
+
             if (o->oInteractStatus == INT_STATUS_INTERACTED) {
                 o->oAction = 2;
             }
@@ -245,6 +258,7 @@ void bhv_dream_yoshi_loop(void) {
             spawn_mist_particles();
             if (cur_obj_nearest_object_with_behavior(bhvDreamPenguinAttack) == NULL) {
                 o->oAction = 7;
+                play_puzzle_jingle();
             }
             break;
         case 7:
@@ -254,15 +268,18 @@ void bhv_dream_yoshi_loop(void) {
             }
             break;
         case 8:
-            gDreamEnv = approach_s16_symmetric(gDreamEnv, 255, 10);
-            if (gDreamEnv == 255) {
-                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
-                if (obj != NULL) {
-                    vec3f_copy(&obj->oPosX, gMarioState->pos);
-                    obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+            cur_obj_hide();
+            if (o->oTimer > 20) {
+                gDreamEnv = approach_s16_symmetric(gDreamEnv, 255, 10);
+                if (gDreamEnv == 255) {
+                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    if (obj != NULL) {
+                        vec3f_copy(&obj->oPosX, gMarioState->pos);
+                        obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                    }
+                    o->oAction = 1;
+                    set_mario_npc_dialog(0);
                 }
-                o->oAction = 1;
-                set_mario_npc_dialog(0);
             }
             break;
     }
@@ -407,9 +424,12 @@ void yoshi_head_calc(void) {
     //     }
     // }
 
-    divisor = (f32)o->oF4 / 1024.0f;
-    if (o->os16112 == 0 && absf(o->oPosY - m->pos[1]) < 800.0f && (s16)o->oDistanceToMario < o->oF4 && 
-        absi(o->oAngleToMario - (s16)o->oMoveAngleYaw) < (o->oDistanceToMario / divisor)) {
+    // divisor = (f32)o->oF4 / 1024.0f;
+    // if (o->os16112 == 0 && absf(o->oPosY - m->pos[1]) < 800.0f && (s16)o->oDistanceToMario < o->oF4 && 
+    //     absi(o->oAngleToMario - (s16)o->oMoveAngleYaw) < (o->oDistanceToMario / divisor)) {
+    divisor = 2000.0f / o->oF4;
+    if (o->os16112 == 0 && absf(o->oPosY - m->pos[1]) < 800.0f && (s16)o->oDistanceToMario < o->oF4 &&
+        absi(o->oAngleToMario - (s16)o->oMoveAngleYaw) < (0x500 * divisor)) {
         // if (o->oTimer > 60) {
             CL_get_hit(m, gMarioObject, 0);
             o->os16112 = 1;
@@ -438,6 +458,9 @@ void yoshi_head_calc(void) {
         cur_obj_hide();
     } else {
         cur_obj_unhide();
+        // if (obj_has_behavior(o, bhvYoshiHeadLine)) {
+        //     print_text_fmt_int(80, 80, "%x", absi(o->oAngleToMario - (s16)o->oMoveAngleYaw), 0);
+        // }
     }
 
 }
