@@ -900,6 +900,7 @@ extern const BehaviorScript bhvYoshiHeadRectangle[];
 extern const BehaviorScript bhvYoshiHeadLine[];
 extern const BehaviorScript bhvDreamYoshi[];
 extern const BehaviorScript bhvDreamPenguin[];
+extern const BehaviorScript bhvDreamPenguinAttack[];
 
 
 #endif // BEHAVIOR_DATA_H

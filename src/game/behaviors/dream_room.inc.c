@@ -14,6 +14,81 @@ static struct ObjectHitbox sYoshiHeadHitbox = {
 };
 
 
+static struct ObjectHitbox sAttackPenguinHitbox = {
+    /* interactType:      */ INTERACT_IGLOO_BARRIER,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 75,
+    /* height:            */ 100,
+    /* hurtboxRadius:     */ 75,
+    /* hurtboxHeight:     */ 100,
+};
+
+
+void bhv_dream_penguin_attack_init(void) {
+    obj_set_hitbox(o, &sAttackPenguinHitbox);
+}
+
+
+void bhv_dream_penguin_attack_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oObj100 == NULL || o->oObj100->oAction == 6) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 2.5f, 0.08f);
+            cur_obj_scale(o->oFloatF4);
+            gDreamEnv = approach_s16_symmetric(gDreamEnv, 0, 1);
+            if (o->oFloatF4 >= 2.5f && gDreamEnv == 0) {
+                if (o->oBehParams2ndByte) {
+                    CL_call_warp(0, -5000 - (gMarioState->pos[1] - 12599), 0);
+                }
+                o->oAction = 3;
+                o->oForwardVel = 10.0f;
+                o->oInteractType = INTERACT_BOUNCE_TOP;
+                set_mario_npc_dialog(0);
+            }
+            break;
+        case 2:
+            cur_obj_update_floor_and_walls();
+            if (o->oTimer & 16 == 0) {
+                play_sound(SOUND_OBJ_BIG_PENGUIN_YELL, gGlobalSoundSource);
+            }
+
+            if (o->oTimer > o->os16106) {
+                o->os16104 = CL_RandomMinMaxU16(0, 10) - 5;
+                o->os16106 = CL_RandomMinMaxU16(40, 100);
+                o->oTimer = 0;
+            }
+
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 25.0f + (f32)(o->os16104), 0.1f);
+            cur_obj_move_standard(-78);
+            // CL_Move();
+            o->os16FA = approach_s16_symmetric(o->os16FA, 0x40, 0x4);
+            o->os16F8 = approach_s16_symmetric(o->os16F8, 0x600, o->os16FA + (o->os16104 * 4));
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, o->os16F8);
+            o->oFaceAngleYaw = o->oMoveAngleYaw;
+
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                spawn_mist_particles();
+                obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                o->activeFlags = 0;
+                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+            }
+            break;
+        case 3:
+            o->oPosY -= (5000.0f + (o->oPosY - 12599.0f));
+            o->oAction = 2;
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
 
 void bhv_dream_penguin_loop(void) {
     f32 pos;
@@ -51,7 +126,8 @@ void bhv_dream_penguin_loop(void) {
                         pos = 10103.0f;
                         obj = cur_obj_nearest_object_with_behavior(bhvDreamYoshi);
                         if (obj != NULL) {
-                            obj->oAction = 4;
+                            // obj->oAction = 4;
+                            obj->os16112 = 1;
                         }
                         break;
                 }
@@ -80,6 +156,7 @@ void bhv_dream_penguin_loop(void) {
 
 void bhv_dream_yoshi_loop(void) {
     struct Object *obj;
+    Vec3s pos;
     if (absf(o->oPosY - gMarioState->pos[1]) > 3000.0f) {
         cur_obj_hide();
     } else {
@@ -87,9 +164,15 @@ void bhv_dream_yoshi_loop(void) {
     }
     switch (o->oAction) {
         case 0:
-            if (1) {
+            if (gMarioState->pos[0] >= -7500.0f) {
+                set_mario_npc_dialog(1);
+                gDreamEnv = approach_s16_symmetric(gDreamEnv, 0, 10);
+                if (gDreamEnv == 0) {
+                    CL_call_warp(0, 5000, 0);
+                    o->oAction = 8;
+                }
                 // cur_obj_unhide();
-                o->oAction = 1;
+                // o->oAction = 1;
             }
             break;
         case 1:
@@ -105,8 +188,38 @@ void bhv_dream_yoshi_loop(void) {
                     obj = spawn_object_abs_with_rot(o, 0, MODEL_PENGUIN, bhvDreamPenguin, -6891, 12799, 19466, 0, DEGREES(180), 0);
                     obj->oRoom = o->oRoom;
                     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                    o->oInteractType = INTERACT_IGLOO_BARRIER;
                 }
             // }
+            break;
+        case 3:
+            if (o->os16112) {
+                o->oAction = 4;
+                o->oInteractType = INTERACT_TEXT;
+
+                pos[0] = o->oPosX - 400;
+                pos[1] = o->oPosY + 300;
+                pos[2] = o->oPosZ - 300;
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_PENGUIN, bhvDreamPenguinAttack, pos[0], pos[1], pos[2], 0, 0, 0);
+                obj->oObj100 = o;
+                obj->oRoom = o->oRoom;
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                obj->oBehParams2ndByte = 1;
+
+                pos[0] += 400;
+                pos[2] -= 200;
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_PENGUIN, bhvDreamPenguinAttack, pos[0], pos[1], pos[2], 0, 0, 0);
+                obj->oObj100 = o;
+                obj->oRoom = o->oRoom;
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+
+                pos[0] += 300;
+                pos[2] += 100;
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_PENGUIN, bhvDreamPenguinAttack, pos[0], pos[1], pos[2], 0, 0, 0);
+                obj->oObj100 = o;
+                obj->oRoom = o->oRoom;
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            }
             break;
         case 4:
             if (o->oInteractStatus == INT_STATUS_INTERACTED) {
@@ -120,8 +233,35 @@ void bhv_dream_yoshi_loop(void) {
                     o->oAction = 6;
                     o->oInteractType = INTERACT_IGLOO_BARRIER;
                     o->oInteractionSubtype = 0;
+                    set_mario_npc_dialog(1);
                 }
             // }
+            break;
+        case 6:
+            o->oFloat104 = approach_f32_symmetric(o->oFloat104, 60.0f, 0.8f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 1800.0f, o->oFloat104);
+            spawn_mist_particles();
+            if (cur_obj_nearest_object_with_behavior(bhvDreamPenguinAttack) == NULL) {
+                o->oAction = 7;
+            }
+            break;
+        case 7:
+            gDreamEnv = approach_s16_symmetric(gDreamEnv, 255, 10);
+            if (gDreamEnv == 255) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 8:
+            gDreamEnv = approach_s16_symmetric(gDreamEnv, 255, 10);
+            if (gDreamEnv == 255) {
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_copy(&obj->oPosX, gMarioState->pos);
+                    obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                }
+                o->oAction = 1;
+                set_mario_npc_dialog(0);
+            }
             break;
     }
     o->oInteractStatus = 0;

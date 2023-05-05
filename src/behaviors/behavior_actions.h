@@ -1132,6 +1132,8 @@ void bhv_yoshi_head_rectangle_loop(void);
 void bhv_yoshi_head_line_loop(void);
 void bhv_dream_yoshi_loop(void);
 void bhv_dream_penguin_loop(void);
+void bhv_dream_penguin_attack_init(void);
+void bhv_dream_penguin_attack_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
