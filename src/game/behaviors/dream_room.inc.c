@@ -316,10 +316,38 @@ void bhv_yoshi_head_rectangle_init(void) {
     }
 }
 
+
+s32 yoshi_head_respawn(Vec3f pos, s16 faceAngle, s16 damage) {
+    vec3f_set(gMarioState->vel, 0, 0, 0);
+    switch (o->os16110) {
+        case 0:
+            play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x10, 0x00, 0x00, 0x00);
+            break;
+        case 13:
+            vec3f_copy(gMarioState->pos, pos);
+            CL_set_camera_pos(pos, pos);
+            gMarioState->faceAngle[1] = faceAngle;
+            s8DirModeBaseYaw = (s16)(faceAngle & 0xC000) - 0x4000;
+            set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
+            break;
+        case 16:
+            play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+            gMarioState->hurtCounter = 4 * damage;
+            o->os16110 = 0;
+            return 1;
+            break;
+    }
+    o->os16110++;
+    return 0;
+}
+
+
+
 void yoshi_head_calc(void) {
     s32 i = 0;
     f32 length, sin, cos;
     f32 divisor;
+    struct Object *obj;
     struct Surface *wall;
     struct MarioState *m = gMarioState;
 
@@ -378,16 +406,31 @@ void yoshi_head_calc(void) {
     // }
 
     divisor = (f32)o->oF4 / 1024.0f;
-    if (absf(o->oPosY - gMarioState->pos[1]) < 800.0f && (s16)o->oDistanceToMario < o->oF4 && 
+    if (o->os16112 == 0 && absf(o->oPosY - m->pos[1]) < 800.0f && (s16)o->oDistanceToMario < o->oF4 && 
         absi(o->oAngleToMario - (s16)o->oMoveAngleYaw) < (o->oDistanceToMario / divisor)) {
         // if (o->oTimer > 60) {
-            CL_get_hit(gMarioState, gMarioObject, 0);
+            CL_get_hit(m, gMarioObject, 0);
+            o->os16112 = 1;
             // spawn_object(o, MODEL_SAWBLADE, bhvSawbladeShoot);
             // o->oTimer = 0;
         // }
     }
     // print_text_fmt_int(80, 80, "%x", absi(o->oAngleToMario - (s16)o->oMoveAngleYaw), 0);
     // print_text_fmt_int(80, 40, "%x", (s32)(o->oDistanceToMario / divisor), 0);
+    if (o->os16112) {
+        if (m->health < 0x300) {
+            level_trigger_warp(m, WARP_OP_WARP_FLOOR_OBJECT);
+            o->os16112 = 0;
+        } else {
+            obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+            if (obj != NULL) {
+                if (yoshi_head_respawn(&obj->oPosX, -obj->oFaceAngleYaw, 2)) {
+                    o->os16112 = 0;
+                }
+            }
+        }
+    }
+
 
     if (gDreamEnv < 200 || absf(o->oPosY - gMarioState->pos[1]) > 3000.0f) {
         cur_obj_hide();

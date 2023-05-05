@@ -1605,18 +1605,19 @@ Gfx *geo_generate_spotlight(s32 callContext, struct GraphNode *node, void *conte
         // {{ {-179, 103, 1000}, 0, {-16, 1008}, {193, 108, 234, 255} }},
         // {{ {0, 206, 1000}, 0, {-16, 1008}, {193, 108, 234, 255} }},
 
+        // x values were +/- 179 originally
         // MAIN VERT
         make_vertex(vertexBuffer, 0, 0, 0, 0, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
         // 1
-        make_vertex(vertexBuffer, 1, 179, 103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 1, 240, 103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
         // 2
-        make_vertex(vertexBuffer, 2, 179, -103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 2, 240, -103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
         // 3
         make_vertex(vertexBuffer, 3, 0, -206, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
         // 4
-        make_vertex(vertexBuffer, 4, -179, -103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 4, -240, -103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
         // 5
-        make_vertex(vertexBuffer, 5, -179, 103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
+        make_vertex(vertexBuffer, 5, -240, 103, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
         // 6
         make_vertex(vertexBuffer, 6, 0, 206, dist, 0, 0, 0xFF, 0xFF, 0xFF, 0xFF);
 
