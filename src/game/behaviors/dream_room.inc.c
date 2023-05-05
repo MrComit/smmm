@@ -19,7 +19,7 @@ static struct ObjectHitbox sAttackPenguinHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
-    /* numLootCoins:      */ 1,
+    /* numLootCoins:      */ 2,
     /* radius:            */ 75,
     /* height:            */ 100,
     /* hurtboxRadius:     */ 75,
@@ -40,6 +40,7 @@ void bhv_dream_penguin_attack_loop(void) {
             }
             break;
         case 1:
+            set_mario_npc_dialog(1);
             o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 2.5f, 0.08f);
             cur_obj_scale(o->oFloatF4);
             gDreamEnv = approach_s16_symmetric(gDreamEnv, 0, 1);
@@ -75,7 +76,8 @@ void bhv_dream_penguin_attack_loop(void) {
 
             if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                 spawn_mist_particles();
-                obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                obj_force_spawn_loot_coins(o, o->oNumLootCoins, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+
                 o->activeFlags = 0;
                 create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
             }

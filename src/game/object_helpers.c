@@ -5094,6 +5094,43 @@ void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
     }
 }
 
+
+
+
+void obj_force_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
+                                    const BehaviorScript *coinBehavior,
+                                    s16 posJitter, s16 model) {
+    s32 i;
+    f32 spawnHeight;
+    struct Surface *floor;
+    struct Object *coin;
+
+    spawnHeight = find_floor(obj->oPosX, obj->oPosY, obj->oPosZ, &floor);
+    if (obj->oPosY - spawnHeight > 100.0f) {
+        spawnHeight = obj->oPosY;
+    }
+
+    for (i = 0; i < numCoins; i++) {
+        if (obj->oNumLootCoins <= 0) {
+            break;
+        }
+
+        obj->oNumLootCoins--;
+
+        coin = spawn_object(obj, model, coinBehavior);
+        obj_translate_xz_random(coin, posJitter);
+        coin->oPosY = spawnHeight;
+        coin->oCoinUnk110 = sp30;
+    }
+}
+
+
+
+
+
+
+
+
 void obj_spawn_loot_blue_coins(struct Object *obj, s32 numCoins, f32 sp28, s16 posJitter) {
     obj_spawn_loot_coins(obj, numCoins, sp28, bhvBlueCoinJumping, posJitter, MODEL_BLUE_COIN);
 }
