@@ -950,13 +950,13 @@ s32 l8_is_indoors(void) {
 void geo_process_background(struct GraphNodeBackground *node) {
     Gfx *list = NULL;
 
-    if (gCurrLevelNum == LEVEL_SSL && l8_is_indoors()) {
-        node->fnNode.func = NULL;
-    }
 
     if (node->fnNode.func != NULL) {
         list = node->fnNode.func(GEO_CONTEXT_RENDER, &node->fnNode.node,
                                  (struct AllocOnlyPool *) gMatStack[gMatStackIndex]);
+    }
+    if (gCurrLevelNum == LEVEL_SSL && l8_is_indoors()) {
+        list = NULL;
     }
     if (list != NULL) {
         geo_append_display_list((void *) VIRTUAL_TO_PHYSICAL(list), node->fnNode.node.flags >> 8);

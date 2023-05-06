@@ -899,6 +899,15 @@ const BehaviorScript bhvMrIBlueCoin[] = {
     END_LOOP(),
 };
 
+
+
+const BehaviorScript bhvMrIBlueCoinNoSpeed[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    GOTO(bhvMrIBlueCoin + 1),
+};
+
+
+
 const BehaviorScript bhvCoinInsideBoo[] = {
     BEGIN(OBJ_LIST_LEVEL),
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 64),

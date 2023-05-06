@@ -901,6 +901,7 @@ extern const BehaviorScript bhvYoshiHeadLine[];
 extern const BehaviorScript bhvDreamYoshi[];
 extern const BehaviorScript bhvDreamPenguin[];
 extern const BehaviorScript bhvDreamPenguinAttack[];
+extern const BehaviorScript bhvMrIBlueCoinNoSpeed[];
 
 
 #endif // BEHAVIOR_DATA_H

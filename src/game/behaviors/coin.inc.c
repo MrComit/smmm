@@ -69,7 +69,8 @@ void bhv_temp_coin_loop(void) {
 void bhv_coin_init(void) {
     o->oVelY = random_float() * 10.0f + 30 + o->oCoinUnk110;
     o->oForwardVel = random_float() * 10.0f;
-    if (obj_has_behavior(o->parentObj, bhvKoopa) || obj_has_behavior(o->parentObj, bhvIceCube)) {
+    if (obj_has_behavior(o->parentObj, bhvKoopa) || obj_has_behavior(o->parentObj, bhvIceCube)
+        || obj_has_behavior(o, bhvMrIBlueCoinNoSpeed)) {
         o->oForwardVel = 0.0f;
     }
     o->oMoveAngleYaw = random_u16();

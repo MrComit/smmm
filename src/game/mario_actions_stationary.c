@@ -1162,6 +1162,11 @@ void handle_ground_pound_floor(struct MarioState *m) {
                 vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
             }
             break;
+        case 19:
+        case 20:
+        case 21:
+            obj = spawn_object(gMarioObject, MODEL_BLUE_COIN, bhvMrIBlueCoinNoSpeed);
+            break;
     }
     save_file_set_gpflags(1 << index);
 }
