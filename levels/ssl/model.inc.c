@@ -37606,55 +37606,6 @@ Gfx ssl_dl_ArtGallery_mesh_layer_1_tri_2[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx ssl_dl_BlackBox_mesh_layer_1_vtx_cull[8] = {
-	{{ {-3317, -4462, 7716}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-3317, 3504, 7716}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-3317, 3504, -2896}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-3317, -4462, -2896}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {6675, -4462, 7716}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {6675, 3504, 7716}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {6675, 3504, -2896}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {6675, -4462, -2896}, 0, {-16, -16}, {0, 0, 0, 0} }},
-};
-
-Vtx ssl_dl_BlackBox_mesh_layer_1_vtx_0[24] = {
-	{{ {-3317, -4462, 7716}, 0, {368, 1008}, {127, 0, 0, 255} }},
-	{{ {-3317, -4462, -2896}, 0, {368, 752}, {127, 0, 0, 255} }},
-	{{ {-3317, 3504, -2896}, 0, {624, 752}, {127, 0, 0, 255} }},
-	{{ {-3317, 3504, 7716}, 0, {624, 1008}, {127, 0, 0, 255} }},
-	{{ {-3317, -4462, -2896}, 0, {368, 752}, {0, 0, 127, 255} }},
-	{{ {6675, -4462, -2896}, 0, {368, 496}, {0, 0, 127, 255} }},
-	{{ {6675, 3504, -2896}, 0, {624, 496}, {0, 0, 127, 255} }},
-	{{ {-3317, 3504, -2896}, 0, {624, 752}, {0, 0, 127, 255} }},
-	{{ {6675, -4462, -2896}, 0, {368, 496}, {129, 0, 0, 255} }},
-	{{ {6675, -4462, 7716}, 0, {368, 240}, {129, 0, 0, 255} }},
-	{{ {6675, 3504, 7716}, 0, {624, 240}, {129, 0, 0, 255} }},
-	{{ {6675, 3504, -2896}, 0, {624, 496}, {129, 0, 0, 255} }},
-	{{ {6675, -4462, 7716}, 0, {368, 240}, {0, 0, 129, 255} }},
-	{{ {-3317, -4462, 7716}, 0, {368, -16}, {0, 0, 129, 255} }},
-	{{ {-3317, 3504, 7716}, 0, {624, -16}, {0, 0, 129, 255} }},
-	{{ {6675, 3504, 7716}, 0, {624, 240}, {0, 0, 129, 255} }},
-	{{ {-3317, -4462, -2896}, 0, {112, 496}, {0, 127, 0, 255} }},
-	{{ {-3317, -4462, 7716}, 0, {112, 240}, {0, 127, 0, 255} }},
-	{{ {6675, -4462, 7716}, 0, {368, 240}, {0, 127, 0, 255} }},
-	{{ {6675, -4462, -2896}, 0, {368, 496}, {0, 127, 0, 255} }},
-	{{ {6675, 3504, -2896}, 0, {624, 496}, {0, 129, 0, 255} }},
-	{{ {6675, 3504, 7716}, 0, {624, 240}, {0, 129, 0, 255} }},
-	{{ {-3317, 3504, 7716}, 0, {880, 240}, {0, 129, 0, 255} }},
-	{{ {-3317, 3504, -2896}, 0, {880, 496}, {0, 129, 0, 255} }},
-};
-
-Gfx ssl_dl_BlackBox_mesh_layer_1_tri_0[] = {
-	gsSPVertex(ssl_dl_BlackBox_mesh_layer_1_vtx_0 + 0, 24, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
-	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
-	gsSPEndDisplayList(),
-};
-
 Vtx ssl_dl_Brushes_mesh_layer_1_vtx_cull[8] = {
 	{{ {-21414, 1867, 5946}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-21414, 2483, 5946}, 0, {-16, -16}, {0, 0, 0, 0} }},
@@ -66402,7 +66353,7 @@ Gfx mat_ssl_dl_AIShyguyPainting[] = {
 
 Gfx mat_ssl_dl_PaintingFrame_001[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, TEXEL0, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ssl_dl_ci4_painting_frame_ci4_pal_rgba16),
@@ -68149,6 +68100,29 @@ Gfx mat_revert_ssl_dl_DreamFloor_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_ssl_dl_PaintingFrameDream[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetTextureLUT(G_TT_RGBA16),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, ssl_dl_ci4_painting_frame_ci4_pal_rgba16),
+	gsDPSetTile(0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadTLUTCmd(7, 11),
+	gsDPLoadSync(),
+	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_16b, 1, ssl_dl_ci4_painting_frame_ci4),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPLoadBlock(7, 0, 0, 1023, 512),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPSetTileSize(0, 0, 0, 252, 252),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_ssl_dl_PaintingFrameDream[] = {
+	gsDPPipeSync(),
+	gsDPSetTextureLUT(G_TT_NONE),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_ssl_dl_RoomSpotlight[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(PRIMITIVE, 0, ENVIRONMENT, 0, PRIMITIVE, 0, ENVIRONMENT, 0, PRIMITIVE, 0, ENVIRONMENT, 0, PRIMITIVE, 0, ENVIRONMENT, 0),
@@ -68535,16 +68509,6 @@ Gfx ssl_dl_ArtGallery_mesh_layer_1[] = {
 	gsSPDisplayList(mat_revert_ssl_dl_ArtFloor),
 	gsSPDisplayList(mat_ssl_dl_Deathfloor),
 	gsSPDisplayList(ssl_dl_ArtGallery_mesh_layer_1_tri_2),
-	gsSPEndDisplayList(),
-};
-
-Gfx ssl_dl_BlackBox_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(ssl_dl_BlackBox_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_Deathfloor),
-	gsSPDisplayList(ssl_dl_BlackBox_mesh_layer_1_tri_0),
 	gsSPEndDisplayList(),
 };
 
@@ -69436,9 +69400,9 @@ Gfx ssl_dl_Base_mesh_layer_1[] = {
 	gsSPDisplayList(mat_ssl_dl_CabinFloor_layer1),
 	gsSPDisplayList(ssl_dl_Base_mesh_layer_1_tri_2),
 	gsSPDisplayList(mat_revert_ssl_dl_CabinFloor_layer1),
-	gsSPDisplayList(mat_ssl_dl_PaintingFrame_001),
+	gsSPDisplayList(mat_ssl_dl_PaintingFrameDream),
 	gsSPDisplayList(ssl_dl_Base_mesh_layer_1_tri_3),
-	gsSPDisplayList(mat_revert_ssl_dl_PaintingFrame_001),
+	gsSPDisplayList(mat_revert_ssl_dl_PaintingFrameDream),
 	gsSPEndDisplayList(),
 };
 
@@ -69530,9 +69494,9 @@ Gfx ssl_dl_Paintings_001_mesh_layer_1[] = {
 	gsSPVertex(ssl_dl_Paintings_001_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ssl_dl_PaintingFrame_001),
+	gsSPDisplayList(mat_ssl_dl_PaintingFrameDream),
 	gsSPDisplayList(ssl_dl_Paintings_001_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_ssl_dl_PaintingFrame_001),
+	gsSPDisplayList(mat_revert_ssl_dl_PaintingFrameDream),
 	gsSPDisplayList(mat_ssl_dl_BowserPaintingBottom_layer1),
 	gsSPDisplayList(ssl_dl_Paintings_001_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_ssl_dl_BowserPaintingBottom_layer1),

@@ -926,6 +926,22 @@ void geo_process_generated_list(struct GraphNodeGenerated *node) {
     }
 }
 
+
+
+s32 l8_is_indoors(void) {
+    // print_text_fmt_int(80, 80, "%d", gMarioCurrentRoom, 0);
+    switch (gMarioCurrentRoom) {
+        case 2:
+        case 6:
+        case 8:
+        case 10:
+            return TRUE;
+    }
+    return FALSE;
+}
+
+
+
 /**
  * Process a background node. Tries to retrieve a background display list from
  * the function of the node. If that function is null or returns null, a black
@@ -933,6 +949,10 @@ void geo_process_generated_list(struct GraphNodeGenerated *node) {
  */
 void geo_process_background(struct GraphNodeBackground *node) {
     Gfx *list = NULL;
+
+    if (gCurrLevelNum == LEVEL_SSL && l8_is_indoors()) {
+        node->fnNode.func = NULL;
+    }
 
     if (node->fnNode.func != NULL) {
         list = node->fnNode.func(GEO_CONTEXT_RENDER, &node->fnNode.node,

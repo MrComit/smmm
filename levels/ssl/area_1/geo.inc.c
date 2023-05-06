@@ -37,7 +37,6 @@ const GeoLayout ssl_dl_102__Art_Gallery_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_ArtGallery_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -22054, 2672, 1117, ssl_dl_BlackBox_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Brushes_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_Brushes_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Buckets_mesh_layer_1),
