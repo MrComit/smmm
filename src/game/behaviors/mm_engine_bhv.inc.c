@@ -867,6 +867,8 @@ void bhv_star_piece_init(void) {
     obj_set_hitbox(o, &sStarPieceHitbox);
 }
 
+extern u8 gDreamEnv;
+
 void bhv_star_piece_loop(void) {
     s8 pieceId = (o->oBehParams >> 24) & 0xFF;
     if (save_file_get_star_piece() & (1 << pieceId)) {
@@ -890,6 +892,13 @@ void bhv_star_piece_loop(void) {
             cur_obj_enable();
         }
     } else {
+        if (pieceId == 0x16) {
+            if (gDreamEnv <= 240) {
+                cur_obj_hide();
+            } else {
+                cur_obj_unhide();
+            }
+        }
         o->os16F8 += 0x300;
         o->oGraphYOffset = 20.0f + (sins(o->os16F8) * 20.0f);
         o->oFaceAngleYaw += 0x400;

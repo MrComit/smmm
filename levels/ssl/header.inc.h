@@ -557,7 +557,7 @@ extern Vtx ssl_dl_Base_mesh_layer_1_vtx_0[47];
 extern Gfx ssl_dl_Base_mesh_layer_1_tri_0[];
 extern Vtx ssl_dl_Base_mesh_layer_1_vtx_1[12];
 extern Gfx ssl_dl_Base_mesh_layer_1_tri_1[];
-extern Vtx ssl_dl_Base_mesh_layer_1_vtx_2[154];
+extern Vtx ssl_dl_Base_mesh_layer_1_vtx_2[174];
 extern Gfx ssl_dl_Base_mesh_layer_1_tri_2[];
 extern Vtx ssl_dl_Base_mesh_layer_1_vtx_3[78];
 extern Gfx ssl_dl_Base_mesh_layer_1_tri_3[];

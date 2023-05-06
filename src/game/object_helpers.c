@@ -1937,7 +1937,7 @@ Gfx *geo_set_red_painting(s32 callContext, struct GraphNode *node, UNUSED void *
 }
 
 
-u8 gDreamEnv = 0xFF;
+u8 gDreamEnv = 0;
 
 Gfx *geo_set_dream_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;

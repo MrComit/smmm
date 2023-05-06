@@ -175,6 +175,9 @@ void bhv_dream_yoshi_loop(void) {
     }
     switch (o->oAction) {
         case 0:
+            if (o->oTimer == 0) {
+                gDreamEnv = 0;
+            }
             if (gMarioState->pos[0] >= -7500.0f) {
                 set_mario_npc_dialog(1);
                 gDreamEnv = approach_s16_symmetric(gDreamEnv, 0, 10);
