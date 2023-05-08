@@ -16,19 +16,19 @@ void bhv_spinning_plat_loop(void) {
     if (o->oBehParams2ndByte) {
         o->oFaceAngleYaw += 0x100;
     }
-    if ((o->oBehParams >> 8) & 0xFF && o->oAction == 0) {
-        o->oHomeY = approach_f32_symmetric(o->oHomeY, -100.0f, 50.0f);
-        o->oPosY = o->oHomeY;
-        if (o->oHomeY == -100.0f) {
-            o->oAction = 1;
-        }
-    } else {
-        if (gMarioObject->platform == o) {
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 20.0f, 2.0f);
-        } else {
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 2.0f);
-        }
-    }
+    // if ((o->oBehParams >> 8) & 0xFF && o->oAction == 0) {
+    //     o->oHomeY = approach_f32_symmetric(o->oHomeY, -100.0f, 50.0f);
+    //     o->oPosY = o->oHomeY;
+    //     if (o->oHomeY == -100.0f) {
+    //         o->oAction = 1;
+    //     }
+    // } else {
+    //     if (gMarioObject->platform == o) {
+    //         o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 20.0f, 2.0f);
+    //     } else {
+    //         o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 2.0f);
+    //     }
+    // }
 }
 
 

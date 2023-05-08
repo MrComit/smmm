@@ -1134,6 +1134,10 @@ void bhv_dream_yoshi_loop(void);
 void bhv_dream_penguin_loop(void);
 void bhv_dream_penguin_attack_init(void);
 void bhv_dream_penguin_attack_loop(void);
+void bhv_observatory_spinning_plat_init(void);
+void bhv_observatory_spinning_plat_loop(void);
+void bhv_observatory_bomb_init(void);
+void bhv_observatory_bomb_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

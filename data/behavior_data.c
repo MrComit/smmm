@@ -10895,3 +10895,33 @@ const BehaviorScript bhvDreamPenguinAttack[] = {
         CALL_NATIVE(bhv_dream_penguin_attack_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvObservatorySpinningPlat[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
+    LOAD_COLLISION_DATA(big_spinning_plat_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    // SCALE(0, 90),
+    CALL_NATIVE(bhv_observatory_spinning_plat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_observatory_spinning_plat_loop),
+        ADD_INT(oFaceAngleYaw, 0x80),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvObservatoryBomb[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, bobomb_seg8_anims_0802396C),
+    ANIMATE(0),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_observatory_bomb_init),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_observatory_bomb_loop),
+    END_LOOP(),
+};
