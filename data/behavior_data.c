@@ -10900,7 +10900,7 @@ const BehaviorScript bhvDreamPenguinAttack[] = {
 const BehaviorScript bhvObservatorySpinningPlat[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
-    LOAD_COLLISION_DATA(big_spinning_plat_collision),
+    LOAD_COLLISION_DATA(observatory_splat_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
     // SCALE(0, 90),

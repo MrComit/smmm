@@ -1,0 +1,2 @@
+extern void scroll_sts_mat_observatory_splat_WoodFloorTrophyRoom_002_v5_002_layer1();
+extern void scroll_ssl_level_geo_observatory_splat();

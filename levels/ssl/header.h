@@ -176,4 +176,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/yoshi_head/geo_header.h"
 
+#include "levels/ssl/observatory_splat/collision_header.h"
+
+#include "levels/ssl/observatory_splat/geo_header.h"
+
 #endif

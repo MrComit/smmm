@@ -1479,18 +1479,6 @@ Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void
     if (callContext == GEO_CONTEXT_RENDER) {
         obj = (struct Object *) gCurGraphNodeObject;
 
-        // currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
-
-        // vertexBuffer = alloc_display_list(314 * sizeof(Vtx));
-
-        // make_vertex(vertexBuffer, 7, 0, 40, -10, 1024, -BIG_CHAIN_UV_Y, 0xFF, 0xFF, 0xFF, 0xFF);
-
-        // make_spinning_plat_verts(vertexBuffer, 0, 32, obj->oFaceAngleYaw);
-        // make_spinning_plat_verts(vertexBuffer2, 32, 32 + 14, obj->oFaceAngleYaw);
-        
-        // aSins = sins(obj->oFaceAngleYaw);
-        // aCoss = coss(obj->oFaceAngleYaw);
-
         verts = segmented_to_virtual(&big_spinning_plat_bsplat_mesh_layer_1_vtx_0);
         verts2 = segmented_to_virtual(&big_spinning_plat_bsplat_mesh_layer_1_vtx_0_copy);
         bcopy(verts, verts2, 315 * sizeof(Vtx));
@@ -1504,26 +1492,45 @@ Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void
             // make_vertex(vertexBuffer, i, verts[i].v.ob[0], verts[i].v.ob[1], verts[i].v.ob[2], x, 
             //             y, verts[i].v.cn[0], verts[i].v.cn[1], verts[i].v.cn[2], verts[i].v.cn[3]);
         }
-        // sPrevYaw = obj->oFaceAngleYaw;
-        // dlHead = alloc_display_list(sizeof(Gfx) * (8));
-        // dlStart = dlHead;
+    }
+    return NULL;
+    
+}
 
 
+extern Vtx observatory_splat_osplat_mesh_layer_1_vtx_0[209];
+extern Vtx observatory_splat_osplat_mesh_layer_1_vtx_0_copy[209];
 
 
-        // gSPDisplayList(dlHead++, mat_spinning_plat_WoodFloorTrophyRoom_002_v5_layer1);
+Gfx *geo_dynamic_observatory_spinning_plat(s32 callContext, struct GraphNode *node, void *context) {
+    s32 i;
+    s16 angle, x, y;
+    f32 mag;
+    Vtx *verts;
+    Vtx *verts2;
+    // f32 aSins, aCoss;
+    // Gfx *dlStart, *dlHead;
+    struct Object *obj;
+    struct GraphNodeGenerated *currentGraphNode;
 
-        // gSPDisplayList(dlHead++, big_spinning_plat_bsplat_mesh_layer_1_tri_0);
-        // gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 32, 0);
-        // gSPDisplayList(dlHead++, big_spinning_plat_tris1);
-        // gSPVertex(dlHead++, vertexBuffer + 32, 31, 0);
-        // gSPDisplayList(dlHead++, big_spinning_plat_tris2);
-        // gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
-        // gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
-        
-        // gSPDisplayList(dlHead++, mat_revert_spinning_plat_WoodFloorTrophyRoom_002_v5_layer1);
-        
-        // gSPEndDisplayList(dlHead++);
+    currentGraphNode = node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+
+        verts = segmented_to_virtual(&observatory_splat_osplat_mesh_layer_1_vtx_0);
+        verts2 = segmented_to_virtual(&observatory_splat_osplat_mesh_layer_1_vtx_0_copy);
+        bcopy(verts, verts2, 209 * sizeof(Vtx));
+        for (i = 0; i < 209; i++) {
+            x = verts2[i].v.tc[0] - 496;
+            y = verts2[i].v.tc[1] - 496;
+            angle = atan2s(y, x) + obj->oFaceAngleYaw;
+            mag = sqrtf(x * x + y * y);
+            verts2[i].v.tc[0] = mag * sins(angle) + 496;
+            verts2[i].v.tc[1] = mag * coss(angle) + 496;
+            // make_vertex(vertexBuffer, i, verts[i].v.ob[0], verts[i].v.ob[1], verts[i].v.ob[2], x, 
+            //             y, verts[i].v.cn[0], verts[i].v.cn[1], verts[i].v.cn[2], verts[i].v.cn[3]);
+        }
     }
     return NULL;
     

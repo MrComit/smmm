@@ -97,3 +97,5 @@
 #include "levels/ssl/mind_button/collision.inc.c"
 #include "levels/ssl/maze_wins/model.inc.c"
 #include "levels/ssl/yoshi_head/model.inc.c"
+#include "levels/ssl/observatory_splat/collision.inc.c"
+#include "levels/ssl/observatory_splat/model.inc.c"

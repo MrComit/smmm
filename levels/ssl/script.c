@@ -68,6 +68,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_BUTTON, mind_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MAZE_WINS, maze_wins_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_YOSHI_HEAD, yoshi_head_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_OBSERVATORY_SPLAT, observatory_splat_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -213,7 +214,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 6243, 7311, -11707, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 19343, 7311, -11707, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_SMALL_KEY, -16684, 7287, -8703, 0, 0, 0, (1 << 24) | (12 << 16), bhvSmallKey),
-		OBJECT(MODEL_BIG_SPINNING_PLAT, 15440, 8546, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
+		OBJECT(MODEL_OBSERVATORY_SPLAT, 15940, 8546, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, -17725, 5759, -10961, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, -14605, 6243, -9337, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, -13916, 6243, -8073, 0, 0, 0, 0x00000000, bhvSpinningPlat),
