@@ -139,7 +139,7 @@ void observatory_spawn_bombs(void) {
     Vec3f pos;
     if (++o->os16F4 > o->os16F6) {
         o->os16F4 = 0;
-        o->os16F6 = CL_RandomMinMaxU16(70, 120);
+        o->os16F6 = CL_RandomMinMaxU16(o->os16100, o->os16100 + 50);
         obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
         vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
     }
@@ -147,7 +147,7 @@ void observatory_spawn_bombs(void) {
 
     if (++o->os16F8 > o->os16FA) {
         o->os16F8 = 0;
-        o->os16FA = CL_RandomMinMaxU16(15, 35);
+        o->os16FA = CL_RandomMinMaxU16(o->os16102, o->os16104);
         obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
         pos[1] = o->oPosY + 900.0f;
 
@@ -158,6 +158,33 @@ void observatory_spawn_bombs(void) {
     }
 
 }
+
+
+
+void update_observatory_time(void) {
+    if (o->oTimer < 500) {
+        o->os16FE = 0x80;
+        o->os16100 = 70;
+        o->os16102 = 15;
+        o->os16104 = 35;
+    } else if (o->oTimer < 1300) {
+        o->os16FE = 0xA0;
+        o->os16100 = 65;
+        o->os16102 = 13;
+        o->os16104 = 30;
+    } else if (o->oTimer < 2000) {
+        o->os16FE = 0x100;
+        o->os16100 = 55;
+        o->os16102 = 10;
+        o->os16104 = 28;
+    } else {
+        o->os16FE = 0x180;
+        o->os16100 = 40;
+        o->os16102 = 8;
+        o->os16104 = 23;
+    }
+}
+
 
 void bhv_observatory_spinning_plat_init(void) {
     o->os16F6 = 90;
@@ -179,8 +206,9 @@ void bhv_observatory_spinning_plat_loop(void) {
             }
             break;
         case 2:
+            update_observatory_time();
             observatory_spawn_bombs();
-            o->os16FC = approach_s16_symmetric(o->os16FC, 0x80, 0xC);
+            o->os16FC = approach_s16_symmetric(o->os16FC, o->os16FE, 0x8);
             o->oFaceAngleYaw += o->os16FC;
             o->oPosY += 5.0f;
             // if (gMarioObject->platform == o) {
