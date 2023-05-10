@@ -151,7 +151,7 @@ void scroll_sts_mat_ssl_dl_WoodFloor_002_layer1() {
 
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 235;
+	int count = 68;
 	int width = 256 * 0x20;
 	int height = 128 * 0x20;
 
@@ -178,6 +178,46 @@ void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 	currentX += deltaX;	currentY += deltaY;
 }
 
+void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1() {
+	int i = 0;
+	int count = 180;
+	int width = 256 * 0x20;
+	int height = 128 * 0x20;
+
+	static int currentX = 0;
+	int deltaX;
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(ssl_dl_Observatory_mesh_layer_1_vtx_1);
+
+	deltaX = (int)(1.0 * 0x20) % width;
+	deltaY = (int)(0.0 * 0x20) % height;
+
+	if (absi(currentX) > width) {
+		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
+	}
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[0] += deltaX;
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentX += deltaX;	currentY += deltaY;
+}
+
+void scroll_sts_mat_ssl_dl_ObservatoryWallDither_layer1() {
+	static int intervalTex0 = 30;
+	static int curInterval0 = 30;
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_ObservatoryWallDither_layer1);
+
+	if (--curInterval0 <= 0) {
+		shift_s(mat, 12, PACK_TILESIZE(0, 256));
+		curInterval0 = intervalTex0;
+	}
+};
+
 void scroll_sts_mat_ssl_dl_ObservatoryWall_layer1() {
 	static int intervalTex0 = 30;
 	static int curInterval0 = 30;
@@ -202,5 +242,7 @@ void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_LavaTrans_layer5();
 	scroll_sts_mat_ssl_dl_WoodFloor_002_layer1();
 	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0();
+	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1();
+	scroll_sts_mat_ssl_dl_ObservatoryWallDither_layer1();
 	scroll_sts_mat_ssl_dl_ObservatoryWall_layer1();
 }

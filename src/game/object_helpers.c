@@ -385,10 +385,11 @@ Gfx *geo_update_opacity_and_color(s32 callContext, struct GraphNode *node, UNUSE
     return dlStart;
 }
 
-Vec3s sBooGooColors[4] = {
+Vec3s sBooGooColors[5] = {
     {0x9F, 0x00, 0x00},
     {0xCC, 0x29, 0x7A},
     {0x1E, 0x1E, 0x99},
+    {0x5B, 0x28, 0x73},
     {0x9F, 0x00, 0x00},
 };
 
@@ -405,6 +406,9 @@ s32 get_l8_boogoo_index(void) {
                 break;
             case 6:
                 index = 2;
+                break;
+            case 10:
+                index = 3;
                 break;
         }
     return index;

@@ -123,7 +123,7 @@ void bhv_observatory_bomb_loop(void) {
         // obj->oGraphYOffset += 100.0f;
         obj->oIntangibleTimer = -1;
         o->activeFlags = 0;
-        if (CL_RandomMinMaxU16(0, 20) == 0) {
+        if (CL_RandomMinMaxU16(0, 11) == 0) {
             obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
         }
     }
@@ -185,6 +185,56 @@ void update_observatory_time(void) {
     }
 }
 
+extern s16 gCutsceneTimer;
+extern s16 s8DirModeBaseYaw;
+
+void observatory_respawn_handler(void) {
+    struct MarioState *m = gMarioState;
+    struct Object *obj;
+    if (o->os16106 > 0) {
+        switch (o->os16106++) {
+            case 1:
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                break;
+            case 19:
+                o->oFaceAngleYaw = 0xE000;
+                m->faceAngle[1] = 0x4000;
+                // set_r_button_camera(gCamera);
+                warp_camera((o->oPosX - 1000.0f) - m->pos[0], (o->oPosY + 500.0f) - m->pos[1], (o->oPosZ) - m->pos[2]);
+                // vec3f_copy(m->pos, &obj->oPosX);
+                vec3f_set(m->pos, o->oPosX - 1000.0f, o->oPosY + 500.0f, o->oPosZ);
+                s8DirModeBaseYaw = (m->faceAngle[1] + 0x8000) >> 8;
+                m->forwardVel = 0;
+                vec3f_set(m->vel, 0.0f, 0.0f, 0.0f);
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+                m->hurtCounter = 8;
+                gCamera->cutscene = 0;
+                gCutsceneTimer = CUTSCENE_STOP;
+                o->os16106 = 0;
+                return set_mario_action(m, ACT_FREEFALL, 0);
+        }
+    } else if (m->pos[1] < o->oPosY - 2048.0f) {
+        if (o->os16106 < 0 && m->health >= 0x300) {
+            o->os16106 = 0;
+        }
+        if (m->health < 0x300 && o->os16106 >= 0) {
+            obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+            if (obj == NULL) {
+                return;
+            }
+            o->oFaceAngleYaw = 0xE000;
+            m->faceAngle[1] = 0x4000;
+            vec3f_set(&obj->oPosX, o->oPosX - 1000.0f, o->oPosY + 500.0f, o->oPosZ);
+            if (level_trigger_warp(m, WARP_OP_WARP_FLOOR_OBJECT) == 20 && !(m->flags & MARIO_UNKNOWN_18)) {
+                play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+            }
+            o->os16106 = -1;
+        } else if (o->os16106 == 0) {
+            o->os16106 = 1;
+        }
+    }
+}
+
 
 void bhv_observatory_spinning_plat_init(void) {
     o->os16F6 = 90;
@@ -207,6 +257,7 @@ void bhv_observatory_spinning_plat_loop(void) {
             break;
         case 2:
             update_observatory_time();
+            observatory_respawn_handler();
             observatory_spawn_bombs();
             o->os16FC = approach_s16_symmetric(o->os16FC, o->os16FE, 0x8);
             o->oFaceAngleYaw += o->os16FC;

@@ -1852,7 +1852,7 @@ void mario_process_interactions(struct MarioState *m) {
 }
 
 extern s16 gCutsceneTimer;
-extern s8 s8DirModeBaseYaw;
+extern s16 s8DirModeBaseYaw;
 s32 sDeathFloorTimer = 0;
 
 void check_death_barrier(struct MarioState *m) {
