@@ -16,6 +16,31 @@ void bhv_jenga_plat_init(void) {
 }
 
 
+
+void spawn_jenga_object(s32 param) {
+    struct Object *obj;
+    switch (param) {
+        case 1:
+            o->oObj100 = spawn_object(o, MODEL_BG_GOOMBA, bhvGoomba);
+            o->oObj100->oPosY += 30.0f;
+            o->oObj100->oRoom = o->oRoom;
+            o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        case 2:
+            o->oObjFC = spawn_object(o, MODEL_BG_GOOMBA, bhvGoomba);
+            o->oObjFC->oPosY += 30.0f;
+            o->oObjFC->oRoom = o->oRoom;
+            o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            break;
+        case 3:
+            o->oObj104 = spawn_object(o, MODEL_GOLDEN_CRATE, bhvGoldenCrate);
+            o->oObj104->oPosY += 20.0f;
+            o->oObj104->oBehParams = 13 << 8;
+            break;
+    }
+}
+
+
+
 void bhv_jenga_plat_loop(void) {
     if (o->oObjF4 == NULL) {
         o->activeFlags = 0;
@@ -23,22 +48,55 @@ void bhv_jenga_plat_loop(void) {
     }
     switch (o->oAction) {
         case 0:
-            if (o->oPosY <= o->oObjF4->oPosY + 50.0f) {
+            if (o->oObjF4->oAction == 2) {
                 o->oAction = 1;
+                spawn_jenga_object(o->oBehParams >> 24);
             }
             break;
         case 1:
-            o->oPosY = o->oObjF4->oPosY + 50.0f;
-            if (o->oTimer > 30*o->oBehParams2ndByte) {
-                o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
-                vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 800.0f, o->oPosZ);
+            o->oPosY -= 2.0f;
+            if (o->oPosY <= o->oObjF4->oPosY + 50.0f) {
                 o->oAction = 2;
+            }
+            if (o->oObjFC != NULL && o->oObjFC->activeFlags != 0) {
+                vec3f_copy(&o->oObjFC->oPosX, &o->oObjFC->oHomeX);
+                o->oObjFC->oPosY = o->oPosY + 20.0f;
+            } else {
+                o->oObjFC = NULL;
+            }
+            if (o->oObj100 != NULL && o->oObj100->activeFlags != 0) {
+                vec3f_copy(&o->oObj100->oPosX, &o->oObj100->oHomeX);
+                o->oObj100->oPosY = o->oPosY + 20.0f;
+            } else {
+                o->oObj100 = NULL;
+            }
+            if (o->oObj104 != NULL && o->oObj104->activeFlags != 0) {
+                o->oObj104->oPosY = o->oPosY + 20.0f;
+            } else {
+                o->oObj104 = NULL;
             }
             break;
         case 2:
+            if (o->oObj104 != NULL && o->oObj104->activeFlags != 0) {
+                o->oObj104->oPosY = o->oPosY + 20.0f;
+            } else {
+                o->oObj104 = NULL;
+            }
+            o->oPosY = o->oObjF4->oPosY + 50.0f;
+            if (o->oTimer > 30*o->oBehParams2ndByte) {
+                o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
+                obj_scale(o->oObjF8, 2.0f);
+                vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 900.0f, o->oPosZ);
+                o->oAction = 3;
+            }
+            break;
+        case 3:
             o->oPosY = o->oObjF4->oPosY + 50.0f;
             if (o->oObjF8 == NULL || o->oObjF8->activeFlags == 0) {
                 CL_explode_object(o, 1);
+                if (o->oObj104 != NULL) {
+                    o->oObj104->activeFlags = 0;
+                }
             }
             break;
     }
@@ -83,7 +141,7 @@ void observatory_spawn_bombs(void) {
         o->os16F4 = 0;
         o->os16F6 = CL_RandomMinMaxU16(70, 120);
         obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
-        vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 600.0f, gMarioState->pos[2]);
+        vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
     }
 
 
@@ -91,7 +149,7 @@ void observatory_spawn_bombs(void) {
         o->os16F8 = 0;
         o->os16FA = CL_RandomMinMaxU16(15, 35);
         obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
-        pos[1] = o->oPosY + 800.0f;
+        pos[1] = o->oPosY + 900.0f;
 
         pos[0] = o->oPosX + (1500.0f * random_float()) - 750.0f;
         pos[2] = o->oPosZ + (1500.0f * random_float()) - 750.0f;
