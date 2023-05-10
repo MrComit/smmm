@@ -1,0 +1,10 @@
+extern const GeoLayout jenga_plat_geo[];
+extern u8 jenga_plat_living_wood2_ci8[];
+extern u8 jenga_plat_living_wood2_ci8_pal_rgba16[];
+extern Vtx jenga_plat_JengaPlat_mesh_layer_1_vtx_cull[8];
+extern Vtx jenga_plat_JengaPlat_mesh_layer_1_vtx_0[92];
+extern Gfx jenga_plat_JengaPlat_mesh_layer_1_tri_0[];
+extern Gfx mat_jenga_plat_Jenga_001[];
+extern Gfx mat_revert_jenga_plat_Jenga_001[];
+extern Gfx jenga_plat_JengaPlat_mesh_layer_1[];
+extern Gfx jenga_plat_material_revert_render_settings[];

@@ -99,3 +99,5 @@
 #include "levels/ssl/yoshi_head/model.inc.c"
 #include "levels/ssl/observatory_splat/collision.inc.c"
 #include "levels/ssl/observatory_splat/model.inc.c"
+#include "levels/ssl/jenga_plat/collision.inc.c"
+#include "levels/ssl/jenga_plat/model.inc.c"

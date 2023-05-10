@@ -10899,9 +10899,10 @@ const BehaviorScript bhvDreamPenguinAttack[] = {
 
 const BehaviorScript bhvObservatorySpinningPlat[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
     LOAD_COLLISION_DATA(observatory_splat_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     SET_HOME(),
     // SCALE(0, 90),
     CALL_NATIVE(bhv_observatory_spinning_plat_init),
@@ -10923,5 +10924,23 @@ const BehaviorScript bhvObservatoryBomb[] = {
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_observatory_bomb_loop),
+    END_LOOP(),
+};
+
+
+
+const BehaviorScript bhvJengaPlat[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(jenga_plat_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_HOME(),
+    // SCALE(0, 90),
+    CALL_NATIVE(bhv_jenga_plat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_jenga_plat_loop),
+        // ADD_INT(oFaceAngleYaw, 0x80),
     END_LOOP(),
 };

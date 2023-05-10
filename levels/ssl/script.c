@@ -69,6 +69,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MAZE_WINS, maze_wins_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_YOSHI_HEAD, yoshi_head_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_OBSERVATORY_SPLAT, observatory_splat_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_JENGA_PLAT, jenga_plat_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -216,7 +217,6 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 6243, 7311, -11707, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 19343, 7311, -11707, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_SMALL_KEY, -16684, 7287, -8703, 0, 0, 0, (1 << 24) | (12 << 16), bhvSmallKey),
-		OBJECT(MODEL_OBSERVATORY_SPLAT, 15940, -1454, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, -17725, 5759, -10961, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, -14605, 6243, -9337, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, -13916, 6243, -8073, 0, 0, 0, 0x00000000, bhvSpinningPlat),
@@ -321,6 +321,13 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 13519, 8596, 17964, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 13519, -1404, 17964, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_GLOBAL_GATE, 13529, -1404, 17964, 0, 90, 0, 0x00000000, bhvGlobalGate),
+		OBJECT(MODEL_JENGA_PLAT, 15784, 2875, 19335, 0, 0, 0, (10 << 16), bhvJengaPlat),
+		OBJECT(MODEL_JENGA_PLAT, 16869, 10375, 18596, 0, 63, 0, (10 << 16), bhvJengaPlat),
+		OBJECT(MODEL_JENGA_PLAT, 17004, 7975, 17518, 0, 120, 0, (10 << 16), bhvJengaPlat),
+		OBJECT(MODEL_JENGA_PLAT, 16052, 5375, 17082, 0, -176, 0, (8 << 16), bhvJengaPlat),
+		OBJECT(MODEL_JENGA_PLAT, 14735, 8375, 17297, 0, -116, 0, (10 << 16), bhvJengaPlat),
+		OBJECT(MODEL_JENGA_PLAT, 15416, 6875, 18234, 0, -155, 0, (5 << 16), bhvJengaPlat),
+		OBJECT(MODEL_OBSERVATORY_SPLAT, 15940, -1454, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
 		TERRAIN(ssl_area_2_collision),
 		ROOMS(ssl_area_2_collision_rooms),
 		MACRO_OBJECTS(ssl_area_2_macro_objs),

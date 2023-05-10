@@ -909,6 +909,7 @@
 #define MODEL_MAZE_WINS           0xEB
 #define MODEL_YOSHI_HEAD          0xEA
 #define MODEL_OBSERVATORY_SPLAT   0xE9
+#define MODEL_JENGA_PLAT          0xE8
 
 
 // LEVEL 8 MODELS CONT:

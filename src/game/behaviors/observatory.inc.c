@@ -11,6 +11,39 @@ struct ObjectHitbox sFallingBombHitbox = {
 };
 
 
+void bhv_jenga_plat_init(void) {
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvObservatorySpinningPlat);
+}
+
+
+void bhv_jenga_plat_loop(void) {
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+    switch (o->oAction) {
+        case 0:
+            if (o->oPosY <= o->oObjF4->oPosY + 50.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = o->oObjF4->oPosY + 50.0f;
+            if (o->oTimer > 30*o->oBehParams2ndByte) {
+                o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
+                vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 800.0f, o->oPosZ);
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = o->oObjF4->oPosY + 50.0f;
+            if (o->oObjF8 == NULL || o->oObjF8->activeFlags == 0) {
+                CL_explode_object(o, 1);
+            }
+            break;
+    }
+}
+
 
 void bhv_observatory_bomb_init(void) {
     obj_set_hitbox(o, &sFallingBombHitbox);
