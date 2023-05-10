@@ -151,7 +151,7 @@ void scroll_sts_mat_ssl_dl_WoodFloor_002_layer1() {
 
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 	int i = 0;
-	int count = 147;
+	int count = 235;
 	int width = 256 * 0x20;
 	int height = 128 * 0x20;
 

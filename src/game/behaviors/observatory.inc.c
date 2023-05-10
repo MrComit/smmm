@@ -74,25 +74,30 @@ void bhv_observatory_spinning_plat_init(void) {
 }
 
 void bhv_observatory_spinning_plat_loop(void) {
-    observatory_spawn_bombs();
-    return;
+    // return;
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o) {
                 o->oAction = 1;
-                o->oVelY = 10.0f;
             }
             break;
         case 1:
-            if (o->oTimer > 20) {
-                o->oPosY += 10.0f;
-                // if (gMarioObject->platform == o) {
-                //     gMarioState->pos[1] += 10.0f;
-                //     if (gMarioState->vel[1] > 0.0f) {
-                //         gMarioState->vel[1] += 10.0f;
-                //     }
-                // }
+            if (o->oTimer > 50) {
+                o->oAction = 2;
+                o->oVelY = 5.0f;
             }
+            break;
+        case 2:
+            observatory_spawn_bombs();
+            o->os16FC = approach_s16_symmetric(o->os16FC, 0x80, 0xC);
+            o->oFaceAngleYaw += o->os16FC;
+            o->oPosY += 5.0f;
+            // if (gMarioObject->platform == o) {
+            //     gMarioState->pos[1] += 10.0f;
+            //     if (gMarioState->vel[1] > 0.0f) {
+            //         gMarioState->vel[1] += 10.0f;
+            //     }
+            // }
             break;
     }
     //     if (gMarioObject->platform == o) {

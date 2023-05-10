@@ -170,12 +170,32 @@ const GeoLayout ssl_dl_208__Dream_Room_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout ssl_dl_209__Outside5_geo[] = {
+const GeoLayout ssl_dl_b_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_GameroomBG_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 65536, ssl_dl_OGround_007_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 0, 0, 65536, ssl_dl_OGround_008_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_007_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_OGround_008_mesh_layer_5),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_c_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_GameroomBG_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_010_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_209__Outside5_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_SWITCH_CASE(2, geo_switch_o5_layers),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, ssl_dl_b_geo),
+			GEO_BRANCH(1, ssl_dl_c_geo),
+		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_NULLTri_006_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

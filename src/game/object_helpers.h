@@ -160,6 +160,7 @@ Gfx *geo_switch_engine_last(s32 callContext, struct GraphNode *node, UNUSED void
 Gfx *geo_switch_ice_backroom(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_dream_layers(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_o5_layers(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node);

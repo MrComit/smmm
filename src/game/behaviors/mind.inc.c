@@ -13,8 +13,23 @@ static struct ObjectHitbox sFloorPeepaHitbox = {
 
 
 void bhv_spinning_plat_loop(void) {
+    struct Object *obj;
     if (o->oBehParams2ndByte) {
         o->oFaceAngleYaw += 0x100;
+    }
+    if ((o->oBehParams >> 24) == 1) {
+        obj = cur_obj_nearest_object_with_behavior(bhvDoor);
+        if (gMarioState->pos[1] < 2500.0f) {
+            cur_obj_unhide();
+            if (obj != NULL) {
+                obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+            }
+        } else {
+            cur_obj_hide();
+            if (obj != NULL) {
+                obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            }
+        }
     }
     // if ((o->oBehParams >> 8) & 0xFF && o->oAction == 0) {
     //     o->oHomeY = approach_f32_symmetric(o->oHomeY, -100.0f, 50.0f);
