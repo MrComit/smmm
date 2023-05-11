@@ -325,7 +325,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_JENGA_PLAT, 16052, 5375, 17082, 0, -176, 0, (1 << 24) | (8 << 16), bhvJengaPlat),
 		OBJECT(MODEL_JENGA_PLAT, 15416, 6875, 18234, 0, -155, 0, (2 << 24) | (5 << 16), bhvJengaPlat),
 		OBJECT(MODEL_JENGA_PLAT, 17004, 7975, 17518, 0, 120, 0, (1 << 24) | (10 << 16), bhvJengaPlat),
-		OBJECT(MODEL_JENGA_PLAT, 14735, 8375, 17297, 0, -116, 0, (3 << 24) | (5 << 16), bhvJengaPlat),
+		OBJECT(MODEL_JENGA_PLAT, 14735, 8375, 17297, 0, -116, 0, (3 << 24) | (10 << 16), bhvJengaPlat),
 		OBJECT(MODEL_JENGA_PLAT, 16869, 10375, 18596, 0, 63, 0, (1 << 24) | (10 << 16), bhvJengaPlat),
 		OBJECT(MODEL_OBSERVATORY_SPLAT, 15940, -1454, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
 		TERRAIN(ssl_area_2_collision),

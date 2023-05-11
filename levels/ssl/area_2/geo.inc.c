@@ -202,7 +202,10 @@ const GeoLayout ssl_dl_209__Outside5_geo[] = {
 const GeoLayout ssl_dl_210__Observatory_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 0, 0, -65536, ssl_dl_Clouds_mesh_layer_5),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_Observatory_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, -65536, ssl_dl_Observatory_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 0, 0, -65536, ssl_dl_Observatory_002_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

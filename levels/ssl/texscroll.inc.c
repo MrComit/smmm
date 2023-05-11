@@ -149,6 +149,12 @@ void scroll_sts_mat_ssl_dl_WoodFloor_002_layer1() {
 	}
 };
 
+void scroll_sts_mat_ssl_dl_NightClouds_layer5() {
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_NightClouds_layer5);
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
+};
+
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 68;
@@ -180,7 +186,7 @@ void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 180;
+	int count = 282;
 	int width = 256 * 0x20;
 	int height = 128 * 0x20;
 
@@ -229,6 +235,11 @@ void scroll_sts_mat_ssl_dl_ObservatoryWall_layer1() {
 	}
 };
 
+void scroll_sts_mat_ssl_dl_ObservatorySky_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_ObservatorySky_layer1);
+	shift_s(mat, 14, PACK_TILESIZE(0, 2));
+};
+
 void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_RedWall_001_layer1();
 	scroll_sts_mat_ssl_dl_WoodFloorTrophyRoom_001_layer1();
@@ -241,8 +252,10 @@ void scroll_ssl() {
 	scroll_ssl_dl_Lava_001_mesh_layer_5_vtx_0();
 	scroll_sts_mat_ssl_dl_LavaTrans_layer5();
 	scroll_sts_mat_ssl_dl_WoodFloor_002_layer1();
+	scroll_sts_mat_ssl_dl_NightClouds_layer5();
 	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0();
 	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1();
 	scroll_sts_mat_ssl_dl_ObservatoryWallDither_layer1();
 	scroll_sts_mat_ssl_dl_ObservatoryWall_layer1();
+	scroll_sts_mat_ssl_dl_ObservatorySky_layer1();
 }

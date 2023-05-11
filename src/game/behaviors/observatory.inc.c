@@ -236,6 +236,30 @@ void observatory_respawn_handler(void) {
 }
 
 
+
+
+void observatory_kill_goombas(void) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(bhvGoomba);
+    struct Object *obj;
+    struct ObjectNode *listHead;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj->oPosY < o->oPosY - 2048.0f) {
+                obj->activeFlags = 0;
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+}
+
+
+
+
+
 void bhv_observatory_spinning_plat_init(void) {
     o->os16F6 = 90;
     o->os16FA = 20;
@@ -259,6 +283,7 @@ void bhv_observatory_spinning_plat_loop(void) {
             update_observatory_time();
             observatory_respawn_handler();
             observatory_spawn_bombs();
+            observatory_kill_goombas();
             o->os16FC = approach_s16_symmetric(o->os16FC, o->os16FE, 0x8);
             o->oFaceAngleYaw += o->os16FC;
             o->oPosY += 5.0f;
@@ -268,6 +293,11 @@ void bhv_observatory_spinning_plat_loop(void) {
             //         gMarioState->vel[1] += 10.0f;
             //     }
             // }
+            if (o->oPosY > o->oHomeY + 12000.0f) {
+                o->oPosY = o->oHomeY + 12000.0f;
+                o->oVelY = 0;
+                o->oAction = 3;
+            }
             break;
     }
     //     if (gMarioObject->platform == o) {

@@ -1502,8 +1502,8 @@ Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void
 }
 
 
-extern Vtx observatory_splat_osplat_mesh_layer_1_vtx_0[209];
-extern Vtx observatory_splat_osplat_mesh_layer_1_vtx_0_copy[209];
+extern Vtx observatory_splat_osplat_mesh_layer_1_vtx_0[201];
+extern Vtx observatory_splat_osplat_mesh_layer_1_vtx_0_copy[201];
 
 
 Gfx *geo_dynamic_observatory_spinning_plat(s32 callContext, struct GraphNode *node, void *context) {
@@ -1524,8 +1524,8 @@ Gfx *geo_dynamic_observatory_spinning_plat(s32 callContext, struct GraphNode *no
 
         verts = segmented_to_virtual(&observatory_splat_osplat_mesh_layer_1_vtx_0);
         verts2 = segmented_to_virtual(&observatory_splat_osplat_mesh_layer_1_vtx_0_copy);
-        bcopy(verts, verts2, 209 * sizeof(Vtx));
-        for (i = 0; i < 209; i++) {
+        bcopy(verts, verts2, 201 * sizeof(Vtx));
+        for (i = 0; i < 201; i++) {
             x = verts2[i].v.tc[0] - 496;
             y = verts2[i].v.tc[1] - 496;
             angle = atan2s(y, x) + obj->oFaceAngleYaw;
