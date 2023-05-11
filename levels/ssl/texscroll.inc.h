@@ -10,6 +10,7 @@ extern void scroll_ssl_dl_Lava_001_mesh_layer_5_vtx_0();
 extern void scroll_sts_mat_ssl_dl_LavaTrans_layer5();
 extern void scroll_sts_mat_ssl_dl_WoodFloor_002_layer1();
 extern void scroll_sts_mat_ssl_dl_NightClouds_layer5();
+extern void scroll_sts_mat_ssl_dl_NightCloudsNoCol_layer5();
 extern void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0();
 extern void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1();
 extern void scroll_sts_mat_ssl_dl_ObservatoryWallDither_layer1();

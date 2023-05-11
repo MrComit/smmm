@@ -155,62 +155,52 @@ void scroll_sts_mat_ssl_dl_NightClouds_layer5() {
 	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
+void scroll_sts_mat_ssl_dl_NightCloudsNoCol_layer5() {
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_NightCloudsNoCol_layer5);
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
+};
+
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 68;
 	int width = 256 * 0x20;
-	int height = 128 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
-	static int currentY = 0;
-	int deltaY;
 	Vtx *vertices = segmented_to_virtual(ssl_dl_Observatory_mesh_layer_1_vtx_0);
 
 	deltaX = (int)(1.0 * 0x20) % width;
-	deltaY = (int)(0.0 * 0x20) % height;
 
 	if (absi(currentX) > width) {
 		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
 	}
-	if (absi(currentY) > height) {
-		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
-	}
 
 	for (i = 0; i < count; i++) {
 		vertices[i].n.tc[0] += deltaX;
-		vertices[i].n.tc[1] += deltaY;
 	}
-	currentX += deltaX;	currentY += deltaY;
+	currentX += deltaX;
 }
 
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 282;
+	int count = 303;
 	int width = 256 * 0x20;
-	int height = 128 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
-	static int currentY = 0;
-	int deltaY;
 	Vtx *vertices = segmented_to_virtual(ssl_dl_Observatory_mesh_layer_1_vtx_1);
 
 	deltaX = (int)(1.0 * 0x20) % width;
-	deltaY = (int)(0.0 * 0x20) % height;
 
 	if (absi(currentX) > width) {
 		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
 	}
-	if (absi(currentY) > height) {
-		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
-	}
 
 	for (i = 0; i < count; i++) {
 		vertices[i].n.tc[0] += deltaX;
-		vertices[i].n.tc[1] += deltaY;
 	}
-	currentX += deltaX;	currentY += deltaY;
+	currentX += deltaX;
 }
 
 void scroll_sts_mat_ssl_dl_ObservatoryWallDither_layer1() {
@@ -253,6 +243,7 @@ void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_LavaTrans_layer5();
 	scroll_sts_mat_ssl_dl_WoodFloor_002_layer1();
 	scroll_sts_mat_ssl_dl_NightClouds_layer5();
+	scroll_sts_mat_ssl_dl_NightCloudsNoCol_layer5();
 	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0();
 	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1();
 	scroll_sts_mat_ssl_dl_ObservatoryWallDither_layer1();

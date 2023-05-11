@@ -256,6 +256,50 @@ void observatory_kill_goombas(void) {
     }
 }
 
+void observatory_scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
+	int i = 0;
+	int count = 68;
+	int width = 256 * 0x20;
+	int height = 128 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(ssl_dl_Observatory_mesh_layer_1_vtx_0);
+
+	deltaY = (int)(-1.25 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+
+void observatory_scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1() {
+	int i = 0;
+	int count = 303;
+	int width = 256 * 0x20;
+	int height = 128 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(ssl_dl_Observatory_mesh_layer_1_vtx_1);
+
+	deltaY = (int)(-1.25 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
 
 
 
@@ -266,6 +310,7 @@ void bhv_observatory_spinning_plat_init(void) {
 }
 
 void bhv_observatory_spinning_plat_loop(void) {
+    struct Object *obj;
     // return;
     switch (o->oAction) {
         case 0:
@@ -284,6 +329,8 @@ void bhv_observatory_spinning_plat_loop(void) {
             observatory_respawn_handler();
             observatory_spawn_bombs();
             observatory_kill_goombas();
+            observatory_scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0();
+            observatory_scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1();
             o->os16FC = approach_s16_symmetric(o->os16FC, o->os16FE, 0x8);
             o->oFaceAngleYaw += o->os16FC;
             o->oPosY += 5.0f;
@@ -297,6 +344,16 @@ void bhv_observatory_spinning_plat_loop(void) {
                 o->oPosY = o->oHomeY + 12000.0f;
                 o->oVelY = 0;
                 o->oAction = 3;
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    obj->oFaceAngleYaw = 0x8000;
+                    vec3f_set(&obj->oPosX, o->oPosX, o->oPosY + 500.0f, o->oPosZ);
+                }
+            }
+            break;
+        case 3:
+            if (lateral_dist_between_objects(o, gMarioObject) < 2100.0f) {
+                observatory_respawn_handler();
             }
             break;
     }
