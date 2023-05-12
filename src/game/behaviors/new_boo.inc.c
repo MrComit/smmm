@@ -218,6 +218,7 @@ static void const *sBGObjectCollision[] = {
     lab_bg_collision,
     o1_bg_collision,
     mp_boogoo_collision,
+    obs_boogoo_collision,
 };
 
 void bhv_boogoo_object_init(void) {

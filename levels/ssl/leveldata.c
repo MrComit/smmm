@@ -101,3 +101,5 @@
 #include "levels/ssl/observatory_splat/model.inc.c"
 #include "levels/ssl/jenga_plat/collision.inc.c"
 #include "levels/ssl/jenga_plat/model.inc.c"
+#include "levels/ssl/obs_boogoo/model.inc.c"
+#include "levels/ssl/obs_boogoo/collision.inc.c"

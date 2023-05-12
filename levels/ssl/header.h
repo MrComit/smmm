@@ -184,4 +184,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/jenga_plat/geo_header.h"
 
+#include "levels/ssl/obs_boogoo/geo_header.h"
+
+#include "levels/ssl/obs_boogoo/collision_header.h"
+
 #endif

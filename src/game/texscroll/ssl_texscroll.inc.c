@@ -16,6 +16,7 @@
 #include "levels/ssl/mind_2d_goomba/texscroll.inc.c"
 #include "levels/ssl/maze_wins/texscroll.inc.c"
 #include "levels/ssl/observatory_splat/texscroll.inc.c"
+#include "levels/ssl/obs_boogoo/texscroll.inc.c"
 void scroll_textures_ssl() {
 		scroll_ssl_level_geo_boogoo_goomba();
 	scroll_ssl_level_geo_boogoo_koopa();
@@ -34,4 +35,5 @@ void scroll_textures_ssl() {
 	scroll_ssl_level_geo_mind_2d_goomba();
 		scroll_ssl_level_geo_maze_wins();
 	scroll_ssl_level_geo_observatory_splat();
+	scroll_ssl_level_geo_obs_boogoo();
 }

@@ -57,3 +57,4 @@
 #include "levels/ssl/yoshi_head/geo.inc.c"
 #include "levels/ssl/observatory_splat/geo.inc.c"
 #include "levels/ssl/jenga_plat/geo.inc.c"
+#include "levels/ssl/obs_boogoo/geo.inc.c"

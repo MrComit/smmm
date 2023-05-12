@@ -919,6 +919,7 @@
 #define MODEL_LAB_BOOGOO          0x5D
 #define MODEL_O1_BOOGOO           0x5E
 #define MODEL_MP_BOOGOO           0x5F
+#define MODEL_OBS_BOOGOO          0x60
 
 // 0x6C-0x73
 
