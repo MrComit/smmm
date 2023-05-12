@@ -11,7 +11,7 @@
 /**
  * The size of the dynamic surface pool, in bytes.
  */
-#define DYNAMIC_SURFACE_POOL_SIZE 0x8000
+#define DYNAMIC_SURFACE_POOL_SIZE 0x10000
 
 //#define NUM_CELLS       (2 * LEVEL_BOUNDARY_MAX / CELL_SIZE)
 //#define NUM_CELLS_INDEX (NUM_CELLS - 1)
