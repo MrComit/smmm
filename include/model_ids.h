@@ -910,6 +910,7 @@
 #define MODEL_YOSHI_HEAD          0xEA
 #define MODEL_OBSERVATORY_SPLAT   0xE9
 #define MODEL_JENGA_PLAT          0xE8
+#define MODEL_RED_SHADOW          0xE7
 
 
 // LEVEL 8 MODELS CONT:

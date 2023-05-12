@@ -58,3 +58,4 @@
 #include "levels/ssl/observatory_splat/geo.inc.c"
 #include "levels/ssl/jenga_plat/geo.inc.c"
 #include "levels/ssl/obs_boogoo/geo.inc.c"
+#include "levels/ssl/red_shadow/geo.inc.c"

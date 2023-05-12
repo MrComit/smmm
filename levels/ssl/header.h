@@ -188,4 +188,6 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/obs_boogoo/collision_header.h"
 
+#include "levels/ssl/red_shadow/geo_header.h"
+
 #endif

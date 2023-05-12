@@ -86,7 +86,7 @@ void bhv_jenga_plat_loop(void) {
             if (o->oTimer > 30*o->oBehParams2ndByte) {
                 o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
                 obj_scale(o->oObjF8, 2.0f);
-                vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 900.0f, o->oPosZ);
+                vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 1100.0f, o->oPosZ);
                 o->oAction = 3;
             }
             break;
@@ -109,6 +109,12 @@ void bhv_observatory_bomb_init(void) {
     o->oFaceAngleYaw = random_u16();
     // vec3f_set(o->header.gfx.scale, 0.25f, 0.35f, 0.6f);
     // o->oGraphYOffset = -35.0f;
+    o->oObj100 = spawn_object(o, MODEL_RED_SHADOW, bhvStaticObject);
+    o->oObj100->oPosX = o->oPosX;
+    o->oObj100->oPosZ = o->oPosZ;
+    o->oObj100->oFaceAnglePitch = 0;
+    o->oObj100->oFaceAngleYaw = 0;
+    o->oObjFC = cur_obj_nearest_object_with_behavior(bhvObservatorySpinningPlat);
 }
 
 void bhv_observatory_bomb_loop(void) {
@@ -118,11 +124,17 @@ void bhv_observatory_bomb_loop(void) {
     o->oFaceAnglePitch += 0x600;
     o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 1.2f);
     o->oPosY -= o->oFloatF4;
-    if (o->oInteractStatus || object_step() & 1 || o->oTimer > 90) {
+    if (o->oObj100 != NULL && o->oObjFC != NULL) {
+        o->oObj100->oPosY = o->oObjFC->oPosY + 50.0f;
+    }
+    if (o->oInteractStatus || object_step() & 1 || o->oTimer > 100) {
         obj = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         // obj->oGraphYOffset += 100.0f;
         obj->oIntangibleTimer = -1;
         o->activeFlags = 0;
+        if (o->oObj100 != NULL) {
+            o->oObj100->activeFlags = 0;
+        }
         if (CL_RandomMinMaxU16(0, 11) == 0) {
             obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
         }
@@ -141,7 +153,7 @@ void observatory_spawn_bombs(void) {
         o->os16F4 = 0;
         o->os16F6 = CL_RandomMinMaxU16(o->os16100, o->os16100 + 50);
         obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
-        vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
+        vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2]);
     }
 
 
@@ -149,7 +161,7 @@ void observatory_spawn_bombs(void) {
         o->os16F8 = 0;
         o->os16FA = CL_RandomMinMaxU16(o->os16102, o->os16104);
         obj = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
-        pos[1] = o->oPosY + 900.0f;
+        pos[1] = o->oPosY + 1100.0f;
 
         pos[0] = o->oPosX + (1500.0f * random_float()) - 750.0f;
         pos[2] = o->oPosZ + (1500.0f * random_float()) - 750.0f;

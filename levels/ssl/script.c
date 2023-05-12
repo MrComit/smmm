@@ -71,6 +71,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_OBSERVATORY_SPLAT, observatory_splat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_JENGA_PLAT, jenga_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_OBS_BOOGOO, obs_boogoo_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_RED_SHADOW, red_shadow_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -334,7 +335,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_JENGA_PLAT, 17004, 7975, 17518, 0, 120, 0, (1 << 24) | (10 << 16), bhvJengaPlat),
 		OBJECT(MODEL_JENGA_PLAT, 14735, 8375, 17297, 0, -116, 0, (3 << 24) | (10 << 16), bhvJengaPlat),
 		OBJECT(MODEL_JENGA_PLAT, 16869, 10375, 18596, 0, 63, 0, (1 << 24) | (10 << 16), bhvJengaPlat),
-		OBJECT(MODEL_OBS_BOOGOO, 17318, 11496, 11508, 0, 0, 0, (3 << 16), bhvBoogooObject),
+		OBJECT(MODEL_OBS_BOOGOO, 17318, 11496, 11508, 0, 0, 0, (5 << 16), bhvBoogooObject),
 		OBJECT(MODEL_OBSERVATORY_SPLAT, 15940, -1454, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
 		OBJECT(MODEL_TELEPORTER, 17318, 11454, 11508, 0, -90, 0, (0x42 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -19265, 5987, 2353, 0, -180, 0, (0x43 << 16), bhvFadingWarp),
