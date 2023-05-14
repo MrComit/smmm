@@ -230,6 +230,76 @@ void scroll_sts_mat_ssl_dl_ObservatorySky_layer1() {
 	shift_s(mat, 14, PACK_TILESIZE(0, 2));
 };
 
+void scroll_sts_mat_ssl_dl_LaundryWall_001() {
+	static int intervalTex1 = 2;
+	static int curInterval1 = 2;
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_LaundryWall_001);
+
+	if (--curInterval1 <= 0) {
+		shift_s(mat, -1, PACK_TILESIZE(0, 1));
+		curInterval1 = intervalTex1;
+	}
+};
+
+void scroll_ssl_dl_TideToad_mesh_layer_5_vtx_0() {
+	int i = 0;
+	int count = 8;
+	int height = 64 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(ssl_dl_TideToad_mesh_layer_5_vtx_0);
+
+	deltaY = (int)(-0.20000000298023224 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+void scroll_sts_mat_ssl_dl_BooGoo_001_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_BooGoo_001_layer1);
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
+};
+
+void scroll_ssl_dl_Steam_001_mesh_layer_5_vtx_0() {
+	int i = 0;
+	int count = 8;
+	int height = 64 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(ssl_dl_Steam_001_mesh_layer_5_vtx_0);
+
+	deltaY = (int)(-1.0 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+void scroll_sts_mat_ssl_dl_FlowerPetal_002_v4_002_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_FlowerPetal_002_v4_002_layer1);
+	shift_t_down(mat, 15, PACK_TILESIZE(0, 2));
+};
+
+void scroll_sts_mat_ssl_dl_Vase_v4_003_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_Vase_v4_003_layer1);
+	shift_s(mat, 10, PACK_TILESIZE(0, 4));
+};
+
 void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_RedWall_001_layer1();
 	scroll_sts_mat_ssl_dl_WoodFloorTrophyRoom_001_layer1();
@@ -249,4 +319,10 @@ void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_ObservatoryWallDither_layer1();
 	scroll_sts_mat_ssl_dl_ObservatoryWall_layer1();
 	scroll_sts_mat_ssl_dl_ObservatorySky_layer1();
+	scroll_sts_mat_ssl_dl_LaundryWall_001();
+	scroll_ssl_dl_TideToad_mesh_layer_5_vtx_0();
+	scroll_sts_mat_ssl_dl_BooGoo_001_layer1();
+	scroll_ssl_dl_Steam_001_mesh_layer_5_vtx_0();
+	scroll_sts_mat_ssl_dl_FlowerPetal_002_v4_002_layer1();
+	scroll_sts_mat_ssl_dl_Vase_v4_003_layer1();
 }
