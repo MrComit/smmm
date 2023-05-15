@@ -935,6 +935,7 @@ s32 l8_is_indoors(void) {
         case 6:
         case 8:
         case 10:
+        case 11:
             return TRUE;
     }
     return FALSE;
