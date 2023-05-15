@@ -1140,6 +1140,10 @@ void bhv_observatory_bomb_init(void);
 void bhv_observatory_bomb_loop(void);
 void bhv_jenga_plat_init(void);
 void bhv_jenga_plat_loop(void);
+void bhv_mem_shyguy_plate_loop(void);
+void bhv_mem_wall_loop(void);
+void bhv_spin_plate_big_init(void);
+void bhv_spin_plate_big_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

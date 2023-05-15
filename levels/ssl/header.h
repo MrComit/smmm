@@ -190,4 +190,12 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/red_shadow/geo_header.h"
 
+#include "levels/ssl/mem_plate/geo_header.h"
+
+#include "levels/ssl/mem_plate/collision_header.h"
+
+#include "levels/ssl/mem_wall/geo_header.h"
+
+#include "levels/ssl/mem_wall/collision_header.h"
+
 #endif

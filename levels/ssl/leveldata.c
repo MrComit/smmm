@@ -104,3 +104,7 @@
 #include "levels/ssl/obs_boogoo/model.inc.c"
 #include "levels/ssl/obs_boogoo/collision.inc.c"
 #include "levels/ssl/red_shadow/model.inc.c"
+#include "levels/ssl/mem_plate/model.inc.c"
+#include "levels/ssl/mem_plate/collision.inc.c"
+#include "levels/ssl/mem_wall/model.inc.c"
+#include "levels/ssl/mem_wall/collision.inc.c"

@@ -923,6 +923,8 @@
 #define MODEL_OBS_BOOGOO          0x60
 
 // 0x6C-0x73
+#define MODEL_MEM_PLATE           0x6C
+#define MODEL_MEM_WALL            0x6D
 
 
 // 0x97-0x9B

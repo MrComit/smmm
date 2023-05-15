@@ -6238,9 +6238,9 @@ const BehaviorScript bhvShyguyPlate[] = {
 const BehaviorScript bhvSpinPlate[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(plate_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
-    LOAD_COLLISION_DATA(plate_collision),
     SCALE(/*Unused*/ 0, /*Field*/ 180),
     CALL_NATIVE(bhv_spin_plate_init),
     BEGIN_LOOP(),
@@ -10942,5 +10942,61 @@ const BehaviorScript bhvJengaPlat[] = {
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_jenga_plat_loop),
         // ADD_INT(oFaceAngleYaw, 0x80),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvMemShyguyPlate[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    // ANIMATE(0),
+    SET_FLOAT(oGraphYOffset, 30),
+    SET_HOME(),
+    //SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
+    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    CALL_NATIVE(bhv_shyguy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mem_shyguy_plate_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvMemSpinPlate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(mem_plate_collision),
+    GOTO(bhvSpinPlate + 4),
+    BREAK(),
+};
+
+
+const BehaviorScript bhvMemWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(mem_wall_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_HOME(),
+    // SCALE(0, 90),
+    // CALL_NATIVE(bhv_jenga_plat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_mem_wall_loop),
+        // ADD_INT(oFaceAngleYaw, 0x80),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvMemSpinPlateBig[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(mem_plate_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    HIDE(),
+    SCALE(/*Unused*/ 0, /*Field*/ 450),
+    CALL_NATIVE(bhv_spin_plate_big_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_spin_plate_big_loop),
     END_LOOP(),
 };

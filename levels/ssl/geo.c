@@ -59,3 +59,5 @@
 #include "levels/ssl/jenga_plat/geo.inc.c"
 #include "levels/ssl/obs_boogoo/geo.inc.c"
 #include "levels/ssl/red_shadow/geo.inc.c"
+#include "levels/ssl/mem_plate/geo.inc.c"
+#include "levels/ssl/mem_wall/geo.inc.c"

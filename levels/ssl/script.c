@@ -72,6 +72,8 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_JENGA_PLAT, jenga_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_OBS_BOOGOO, obs_boogoo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_SHADOW, red_shadow_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_PLATE, mem_plate_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_WALL, mem_wall_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -341,7 +343,10 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_OBSERVATORY_SPLAT, 15940, -1454, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
 		OBJECT(MODEL_TELEPORTER, 17318, 11454, 11508, 0, -90, 0, (0x42 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -19265, 5987, 2353, 0, -180, 0, (0x43 << 16), bhvFadingWarp),
-		OBJECT(MODEL_NONE, -25272, 7812, -28527, 0, 0, 0, (0x49 << 16), bhvFlyingWarp),
+		OBJECT(MODEL_MEM_PLATE, -27158, 8434, -28710, 0, 90, 0, 0x00000000, bhvMemSpinPlateBig),
+		OBJECT(MODEL_NONE, -25272, 7812, -28527, 0, -180, 0, (0x49 << 16), bhvFlyingWarp),
+		OBJECT(MODEL_SHYGUY, -26528, 8414, -28710, 0, 90, 0, 0x00000000, bhvMemShyguyPlate),
+		OBJECT(MODEL_MEM_WALL, -22822, 8414, -28710, 0, 0, 0, 0x00000000, bhvMemWall),
 		TERRAIN(ssl_area_2_collision),
 		ROOMS(ssl_area_2_collision_rooms),
 		MACRO_OBJECTS(ssl_area_2_macro_objs),

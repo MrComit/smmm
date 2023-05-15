@@ -1,0 +1,10 @@
+extern const GeoLayout mem_plate_geo[];
+extern Lights1 mem_plate_Cookery_Plate_Diffuse_shader_f3d_v2_001_lights;
+extern u8 mem_plate_plate_ci4[];
+extern u8 mem_plate_plate_ci4_pal_rgba16[];
+extern Vtx mem_plate_Plate_006_mesh_layer_1_vtx_0[24];
+extern Gfx mem_plate_Plate_006_mesh_layer_1_tri_0[];
+extern Gfx mat_mem_plate_Cookery_Plate_Diffuse_shader_f3d_v2_001[];
+extern Gfx mat_revert_mem_plate_Cookery_Plate_Diffuse_shader_f3d_v2_001[];
+extern Gfx mem_plate_Plate_006_mesh_layer_1[];
+extern Gfx mem_plate_material_revert_render_settings[];

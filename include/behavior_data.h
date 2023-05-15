@@ -905,6 +905,10 @@ extern const BehaviorScript bhvMrIBlueCoinNoSpeed[];
 extern const BehaviorScript bhvObservatorySpinningPlat[];
 extern const BehaviorScript bhvObservatoryBomb[];
 extern const BehaviorScript bhvJengaPlat[];
+extern const BehaviorScript bhvMemShyguyPlate[];
+extern const BehaviorScript bhvMemSpinPlate[];
+extern const BehaviorScript bhvMemWall[];
+extern const BehaviorScript bhvMemSpinPlateBig[];
 
 
 #endif // BEHAVIOR_DATA_H

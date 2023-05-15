@@ -1,0 +1,10 @@
+extern const GeoLayout mem_wall_geo[];
+extern u8 mem_wall_ci8_dining_wall_ci8[];
+extern u8 mem_wall_ci8_dining_wall_ci8_pal_rgba16[];
+extern Vtx mem_wall_DiningWall_mesh_layer_1_vtx_cull[8];
+extern Vtx mem_wall_DiningWall_mesh_layer_1_vtx_0[4];
+extern Gfx mem_wall_DiningWall_mesh_layer_1_tri_0[];
+extern Gfx mat_mem_wall_DWall_v4[];
+extern Gfx mat_revert_mem_wall_DWall_v4[];
+extern Gfx mem_wall_DiningWall_mesh_layer_1[];
+extern Gfx mem_wall_material_revert_render_settings[];
