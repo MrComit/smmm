@@ -61,3 +61,4 @@
 #include "levels/ssl/red_shadow/geo.inc.c"
 #include "levels/ssl/mem_plate/geo.inc.c"
 #include "levels/ssl/mem_wall/geo.inc.c"
+#include "levels/ssl/mem_bounce_box/geo.inc.c"

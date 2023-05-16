@@ -664,6 +664,7 @@ static void const *sBoxCollision[] = {
     bounce_box_collision,
     snow_box_collision,
     laundry_bounce_box_collision,
+    mem_bounce_box_collision,
 };
 
 void bhv_bounce_box_init(void) {

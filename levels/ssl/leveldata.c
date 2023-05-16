@@ -108,3 +108,5 @@
 #include "levels/ssl/mem_plate/collision.inc.c"
 #include "levels/ssl/mem_wall/model.inc.c"
 #include "levels/ssl/mem_wall/collision.inc.c"
+#include "levels/ssl/mem_bounce_box/model.inc.c"
+#include "levels/ssl/mem_bounce_box/collision.inc.c"

@@ -925,6 +925,7 @@
 // 0x6C-0x73
 #define MODEL_MEM_PLATE           0x6C
 #define MODEL_MEM_WALL            0x6D
+#define MODEL_MEM_BOUNCE_BOX      0x6E
 
 
 // 0x97-0x9B

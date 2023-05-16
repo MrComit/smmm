@@ -74,6 +74,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_RED_SHADOW, red_shadow_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_PLATE, mem_plate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_WALL, mem_wall_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_BOUNCE_BOX, mem_bounce_box_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -186,6 +187,10 @@ const LevelScript level_ssl_entry[] = {
 		WARP_NODE(0x43, LEVEL_SSL, 0x02, 0x42, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x48, LEVEL_SSL, 0x02, 0x49, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x49, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		INSTANT_WARP(7, 0x02, -4518, 155, 480),
+		INSTANT_WARP(8, 0x02, -10392, 552, 4501),
+		INSTANT_WARP(5, 0x02, 4518, -155, -480),
+		INSTANT_WARP(6, 0x02, 10392, -552, -4501),
 		OBJECT(MODEL_NONE, -22687, 6347, -1694, 0, 90, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -22687, 6347, -1694, 0, 90, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_MIND_MOUND_BLOCK, -14394, 7337, -1639, 0, 0, 0, (3 << 16), bhvMindMoundBlock),
@@ -343,6 +348,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_OBSERVATORY_SPLAT, 15940, -1454, 17964, 0, 0, 0, 0x00000000, bhvObservatorySpinningPlat),
 		OBJECT(MODEL_TELEPORTER, 17318, 11454, 11508, 0, -90, 0, (0x42 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -19265, 5987, 2353, 0, -180, 0, (0x43 << 16), bhvFadingWarp),
+		OBJECT(MODEL_MEM_BOUNCE_BOX, -23018, 6429, -20938, 0, 0, 0, (3 << 24) | (10 << 16), bhvBounceBoxes),
+		OBJECT(MODEL_MEM_BOUNCE_BOX, -25089, 6429, -24324, 0, -180, 0, (3 << 24) | (10 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_MEM_PLATE, -27158, 8434, -28710, 0, 90, 0, 0x00000000, bhvMemSpinPlateBig),
 		OBJECT(MODEL_NONE, -25272, 7812, -28527, 0, -180, 0, (0x49 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_SHYGUY, -26528, 8414, -28710, 0, 90, 0, 0x00000000, bhvMemShyguyPlate),

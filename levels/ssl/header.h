@@ -198,4 +198,8 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/mem_wall/collision_header.h"
 
+#include "levels/ssl/mem_bounce_box/geo_header.h"
+
+#include "levels/ssl/mem_bounce_box/collision_header.h"
+
 #endif
