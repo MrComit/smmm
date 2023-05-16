@@ -11000,3 +11000,32 @@ const BehaviorScript bhvMemSpinPlateBig[] = {
         CALL_NATIVE(bhv_spin_plate_big_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMemFallingFloor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(mem_fall_floor_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    CALL_NATIVE(bhv_mem_falling_floor_init),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_mem_falling_floor_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvMemBathFloor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(mem_bath_floor_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    // CALL_NATIVE(bhv_mem_bath_floor_init),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_mem_bath_floor_loop),
+    END_LOOP(),
+};

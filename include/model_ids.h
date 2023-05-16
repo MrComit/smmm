@@ -926,6 +926,8 @@
 #define MODEL_MEM_PLATE           0x6C
 #define MODEL_MEM_WALL            0x6D
 #define MODEL_MEM_BOUNCE_BOX      0x6E
+#define MODEL_MEM_FALL_FLOOR      0x6F
+#define MODEL_MEM_BATH_FLOOR      0x70
 
 
 // 0x97-0x9B

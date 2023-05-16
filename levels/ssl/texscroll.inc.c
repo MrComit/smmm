@@ -241,14 +241,35 @@ void scroll_sts_mat_ssl_dl_LaundryWall_001() {
 	}
 };
 
-void scroll_ssl_dl_TideToad_mesh_layer_5_vtx_0() {
+void scroll_ssl_dl_TideToad_002_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 8;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
 	int deltaY;
-	Vtx *vertices = segmented_to_virtual(ssl_dl_TideToad_mesh_layer_5_vtx_0);
+	Vtx *vertices = segmented_to_virtual(ssl_dl_TideToad_002_mesh_layer_5_vtx_0);
+
+	deltaY = (int)(-0.20000000298023224 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+void scroll_ssl_dl_TideToad_001_mesh_layer_5_vtx_0() {
+	int i = 0;
+	int count = 4;
+	int height = 64 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(ssl_dl_TideToad_001_mesh_layer_5_vtx_0);
 
 	deltaY = (int)(-0.20000000298023224 * 0x20) % height;
 
@@ -308,7 +329,8 @@ void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_ObservatoryWall_layer1();
 	scroll_sts_mat_ssl_dl_ObservatorySky_layer1();
 	scroll_sts_mat_ssl_dl_LaundryWall_001();
-	scroll_ssl_dl_TideToad_mesh_layer_5_vtx_0();
+	scroll_ssl_dl_TideToad_002_mesh_layer_5_vtx_0();
+	scroll_ssl_dl_TideToad_001_mesh_layer_5_vtx_0();
 	scroll_ssl_dl_Steam_001_mesh_layer_5_vtx_0();
 	scroll_sts_mat_ssl_dl_Vase_v4_003_layer1();
 }

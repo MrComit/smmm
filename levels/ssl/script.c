@@ -75,6 +75,8 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_PLATE, mem_plate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_WALL, mem_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_BOUNCE_BOX, mem_bounce_box_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_FALL_FLOOR, mem_fall_floor_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_BATH_FLOOR, mem_bath_floor_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -350,6 +352,9 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -19265, 5987, 2353, 0, -180, 0, (0x43 << 16), bhvFadingWarp),
 		OBJECT(MODEL_MEM_BOUNCE_BOX, -23018, 6429, -20938, 0, 0, 0, (3 << 24) | (10 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_MEM_BOUNCE_BOX, -25089, 6429, -24324, 0, -180, 0, (3 << 24) | (10 << 16), bhvBounceBoxes),
+		OBJECT(MODEL_MEM_BOUNCE_BOX, -10923, -9091, -26137, 0, 90, 0, (3 << 24) | (18 << 16), bhvBounceBoxes),
+		OBJECT(MODEL_MEM_BATH_FLOOR, -12363, 381, -22114, 0, 0, 0, 0x00000000, bhvMemBathFloor),
+		OBJECT(MODEL_MEM_FALL_FLOOR, -13333, 829, -21485, 0, 0, 0, 0x00000000, bhvMemFallingFloor),
 		OBJECT(MODEL_MEM_PLATE, -27158, 8434, -28710, 0, 90, 0, 0x00000000, bhvMemSpinPlateBig),
 		OBJECT(MODEL_NONE, -25272, 7812, -28527, 0, -180, 0, (0x49 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_SHYGUY, -26528, 8414, -28710, 0, 90, 0, 0x00000000, bhvMemShyguyPlate),

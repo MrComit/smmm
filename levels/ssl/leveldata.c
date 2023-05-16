@@ -110,3 +110,7 @@
 #include "levels/ssl/mem_wall/collision.inc.c"
 #include "levels/ssl/mem_bounce_box/model.inc.c"
 #include "levels/ssl/mem_bounce_box/collision.inc.c"
+#include "levels/ssl/mem_fall_floor/model.inc.c"
+#include "levels/ssl/mem_fall_floor/collision.inc.c"
+#include "levels/ssl/mem_bath_floor/model.inc.c"
+#include "levels/ssl/mem_bath_floor/collision.inc.c"
