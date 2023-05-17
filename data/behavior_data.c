@@ -11045,3 +11045,42 @@ const BehaviorScript bhvMemForeroomObject[] = {
         CALL_NATIVE(bhv_mem_foreroom_object_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvMemIceCube[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oFloatFC, 1),
+    SET_HOME(),
+    SCALE(0, 75),
+    // SPAWN_OBJ(/*Model*/ MODEL_TOY_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
+    CALL_NATIVE(bhv_mem_ice_cube_init),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvMemIceCubeChild),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mem_ice_cube_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvMemIceCubeChild[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(crate_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_mem_ice_cube_child_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvFrozenStarPiece[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_ANIMATIONS(oAnimations, goomba_seg8_anims_0801DA4C),
+    SET_HOME(),
+    CALL_NATIVE(bhv_frozen_star_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_frozen_star_piece_loop),
+    END_LOOP(),
+};
