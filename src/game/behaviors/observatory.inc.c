@@ -24,11 +24,13 @@ void spawn_jenga_object(s32 param) {
             o->oObj100 = spawn_object(o, MODEL_BG_GOOMBA, bhvGoomba);
             o->oObj100->oPosY += 30.0f;
             o->oObj100->oRoom = o->oRoom;
+            o->oObj100->parentObj = o->oObj100;
             o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         case 2:
             o->oObjFC = spawn_object(o, MODEL_BG_GOOMBA, bhvGoomba);
             o->oObjFC->oPosY += 30.0f;
             o->oObjFC->oRoom = o->oRoom;
+            o->oObjFC->parentObj = o->oObjFC;
             o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             break;
         case 3:

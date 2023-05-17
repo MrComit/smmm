@@ -2650,7 +2650,7 @@ u8 mem_morning_obj_squigglyline_i8[] = {
 	
 };
 
-Vtx mem_morning_obj_chair_mesh_layer_1_vtx_0[142] = {
+Vtx mem_morning_obj_chair_mesh_layer_4_vtx_0[142] = {
 	{{ {8, 68, 77}, 0, {117, 1850}, {255, 255, 255, 213} }},
 	{{ {26, 1, 76}, 0, {114, 1890}, {255, 255, 255, 213} }},
 	{{ {27, 67, 111}, 0, {127, 1850}, {255, 255, 255, 213} }},
@@ -2795,15 +2795,15 @@ Vtx mem_morning_obj_chair_mesh_layer_1_vtx_0[142] = {
 	{{ {-99, 277, -109}, 0, {978, 1253}, {255, 255, 255, 213} }},
 };
 
-Gfx mem_morning_obj_chair_mesh_layer_1_tri_0[] = {
-	gsSPVertex(mem_morning_obj_chair_mesh_layer_1_vtx_0 + 0, 32, 0),
+Gfx mem_morning_obj_chair_mesh_layer_4_tri_0[] = {
+	gsSPVertex(mem_morning_obj_chair_mesh_layer_4_vtx_0 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
 	gsSP2Triangles(12, 13, 14, 0, 15, 16, 17, 0),
 	gsSP2Triangles(18, 19, 20, 0, 21, 22, 23, 0),
 	gsSP2Triangles(24, 25, 26, 0, 27, 24, 26, 0),
 	gsSP2Triangles(28, 29, 30, 0, 31, 30, 29, 0),
-	gsSPVertex(mem_morning_obj_chair_mesh_layer_1_vtx_0 + 32, 32, 0),
+	gsSPVertex(mem_morning_obj_chair_mesh_layer_4_vtx_0 + 32, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
 	gsSP2Triangles(4, 5, 6, 0, 7, 6, 5, 0),
 	gsSP2Triangles(8, 9, 10, 0, 9, 11, 10, 0),
@@ -2818,7 +2818,7 @@ Gfx mem_morning_obj_chair_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(26, 24, 25, 0, 27, 26, 25, 0),
 	gsSP2Triangles(28, 27, 25, 0, 27, 28, 29, 0),
 	gsSP2Triangles(29, 30, 27, 0, 31, 30, 29, 0),
-	gsSPVertex(mem_morning_obj_chair_mesh_layer_1_vtx_0 + 64, 32, 0),
+	gsSPVertex(mem_morning_obj_chair_mesh_layer_4_vtx_0 + 64, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
 	gsSP2Triangles(3, 0, 4, 0, 4, 5, 3, 0),
 	gsSP2Triangles(4, 6, 5, 0, 7, 6, 4, 0),
@@ -2834,7 +2834,7 @@ Gfx mem_morning_obj_chair_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(25, 21, 26, 0, 24, 25, 27, 0),
 	gsSP2Triangles(27, 25, 28, 0, 29, 28, 25, 0),
 	gsSP2Triangles(25, 30, 29, 0, 27, 28, 31, 0),
-	gsSPVertex(mem_morning_obj_chair_mesh_layer_1_vtx_0 + 96, 32, 0),
+	gsSPVertex(mem_morning_obj_chair_mesh_layer_4_vtx_0 + 96, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 2, 1, 3, 0),
 	gsSP2Triangles(2, 3, 4, 0, 4, 3, 5, 0),
 	gsSP2Triangles(5, 3, 6, 0, 7, 4, 5, 0),
@@ -2853,7 +2853,7 @@ Gfx mem_morning_obj_chair_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(28, 26, 27, 0, 28, 27, 29, 0),
 	gsSP2Triangles(29, 18, 28, 0, 30, 18, 29, 0),
 	gsSP1Triangle(30, 29, 31, 0),
-	gsSPVertex(mem_morning_obj_chair_mesh_layer_1_vtx_0 + 128, 14, 0),
+	gsSPVertex(mem_morning_obj_chair_mesh_layer_4_vtx_0 + 128, 14, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(0, 3, 4, 0, 1, 0, 4, 0),
 	gsSP2Triangles(1, 5, 0, 0, 0, 5, 3, 0),
@@ -2863,7 +2863,7 @@ Gfx mem_morning_obj_chair_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx mem_morning_obj_chair_mesh_layer_1_vtx_1[23] = {
+Vtx mem_morning_obj_chair_mesh_layer_4_vtx_1[23] = {
 	{{ {-94, 126, 35}, 0, {1551, 2280}, {220, 220, 220, 213} }},
 	{{ {-120, 140, 15}, 0, {1835, 2138}, {220, 220, 220, 213} }},
 	{{ {-109, 204, 2}, 0, {1924, 1484}, {220, 220, 220, 213} }},
@@ -2889,8 +2889,8 @@ Vtx mem_morning_obj_chair_mesh_layer_1_vtx_1[23] = {
 	{{ {-61, 322, 88}, 0, {976, 306}, {255, 255, 255, 213} }},
 };
 
-Gfx mem_morning_obj_chair_mesh_layer_1_tri_1[] = {
-	gsSPVertex(mem_morning_obj_chair_mesh_layer_1_vtx_1 + 0, 23, 0),
+Gfx mem_morning_obj_chair_mesh_layer_4_tri_1[] = {
+	gsSPVertex(mem_morning_obj_chair_mesh_layer_4_vtx_1 + 0, 23, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 0, 2, 0),
 	gsSP2Triangles(2, 4, 3, 0, 5, 4, 2, 0),
 	gsSP2Triangles(4, 5, 6, 0, 5, 7, 6, 0),
@@ -2910,7 +2910,23 @@ Gfx mem_morning_obj_chair_mesh_layer_1_tri_1[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx mem_morning_obj_start_books_mesh_layer_4_vtx_0[56] = {
+Vtx mem_morning_obj_start_books_mesh_layer_4_vtx_0[60] = {
+	{{ {80, 75, 153}, 0, {-361, 3738}, {127, 0, 0, 255} }},
+	{{ {80, 521, 183}, 0, {-528, -16}, {127, 0, 0, 255} }},
+	{{ {80, 34, 183}, 0, {-528, 4077}, {127, 0, 0, 255} }},
+	{{ {80, 482, 153}, 0, {-361, 301}, {127, 0, 0, 255} }},
+	{{ {80, 75, -153}, 0, {1353, 3738}, {127, 0, 0, 255} }},
+	{{ {80, 75, 153}, 0, {-361, 3738}, {127, 0, 0, 255} }},
+	{{ {80, 34, 183}, 0, {-528, 4077}, {127, 0, 0, 255} }},
+	{{ {80, 34, -183}, 0, {1520, 4077}, {127, 0, 0, 255} }},
+	{{ {80, 0, 225}, 0, {-693, 4412}, {127, 0, 0, 255} }},
+	{{ {80, 0, -225}, 0, {1685, 4412}, {127, 0, 0, 255} }},
+	{{ {80, 482, -153}, 0, {1353, 301}, {127, 0, 0, 255} }},
+	{{ {80, 521, -183}, 0, {1520, -16}, {127, 0, 0, 255} }},
+	{{ {80, 482, 153}, 0, {-361, 301}, {127, 0, 0, 255} }},
+	{{ {80, 521, 183}, 0, {-528, -16}, {127, 0, 0, 255} }},
+	{{ {80, 555, -225}, 0, {1685, -330}, {127, 0, 0, 255} }},
+	{{ {80, 555, 225}, 0, {-693, -330}, {127, 0, 0, 255} }},
 	{{ {80, 34, 183}, 0, {976, 4080}, {0, 0, 127, 255} }},
 	{{ {80, 521, 183}, 0, {976, -16}, {0, 0, 127, 255} }},
 	{{ {-80, 521, 183}, 0, {-16, -16}, {0, 0, 127, 255} }},
@@ -2931,18 +2947,6 @@ Vtx mem_morning_obj_start_books_mesh_layer_4_vtx_0[56] = {
 	{{ {80, 521, -183}, 0, {-16, -16}, {0, 0, 129, 255} }},
 	{{ {80, 34, -183}, 0, {-16, 4080}, {0, 0, 129, 255} }},
 	{{ {-80, 521, -183}, 0, {976, -16}, {0, 0, 129, 255} }},
-	{{ {80, 34, -183}, 0, {1520, 4077}, {127, 0, 0, 255} }},
-	{{ {80, 0, 225}, 0, {-693, 4412}, {127, 0, 0, 255} }},
-	{{ {80, 0, -225}, 0, {1685, 4412}, {127, 0, 0, 255} }},
-	{{ {80, 34, 183}, 0, {-528, 4077}, {127, 0, 0, 255} }},
-	{{ {80, 75, -153}, 0, {1353, 3738}, {127, 0, 0, 255} }},
-	{{ {80, 482, -153}, 0, {1353, 301}, {127, 0, 0, 255} }},
-	{{ {80, 521, -183}, 0, {1520, -16}, {127, 0, 0, 255} }},
-	{{ {80, 482, 153}, 0, {-361, 301}, {127, 0, 0, 255} }},
-	{{ {80, 521, 183}, 0, {-528, -16}, {127, 0, 0, 255} }},
-	{{ {80, 555, -225}, 0, {1685, -330}, {127, 0, 0, 255} }},
-	{{ {80, 555, 225}, 0, {-693, -330}, {127, 0, 0, 255} }},
-	{{ {80, 75, 153}, 0, {-361, 3738}, {127, 0, 0, 255} }},
 	{{ {-80, 34, -183}, 0, {976, 4080}, {0, 99, 176, 255} }},
 	{{ {80, 34, -183}, 0, {-16, 4080}, {0, 99, 176, 255} }},
 	{{ {80, 0, -225}, 0, {-16, 4483}, {0, 99, 176, 255} }},
@@ -2971,24 +2975,24 @@ Vtx mem_morning_obj_start_books_mesh_layer_4_vtx_0[56] = {
 
 Gfx mem_morning_obj_start_books_mesh_layer_4_tri_0[] = {
 	gsSPVertex(mem_morning_obj_start_books_mesh_layer_4_vtx_0 + 0, 32, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
-	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
-	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
-	gsSP2Triangles(16, 17, 18, 0, 16, 19, 17, 0),
-	gsSP2Triangles(20, 21, 22, 0, 20, 23, 21, 0),
-	gsSP2Triangles(24, 23, 20, 0, 25, 24, 20, 0),
-	gsSP2Triangles(25, 20, 26, 0, 27, 25, 26, 0),
-	gsSP2Triangles(27, 26, 28, 0, 28, 26, 29, 0),
-	gsSP2Triangles(28, 29, 30, 0, 31, 27, 28, 0),
-	gsSP2Triangles(31, 28, 23, 0, 24, 31, 23, 0),
-	gsSPVertex(mem_morning_obj_start_books_mesh_layer_4_vtx_0 + 32, 24, 0),
-	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsSP2Triangles(7, 6, 8, 0, 7, 8, 9, 0),
+	gsSP2Triangles(10, 4, 7, 0, 10, 7, 11, 0),
+	gsSP2Triangles(12, 10, 11, 0, 12, 11, 13, 0),
+	gsSP2Triangles(13, 11, 14, 0, 13, 14, 15, 0),
+	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
+	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
+	gsSP2Triangles(24, 25, 26, 0, 24, 26, 27, 0),
+	gsSP2Triangles(28, 29, 30, 0, 28, 30, 31, 0),
+	gsSPVertex(mem_morning_obj_start_books_mesh_layer_4_vtx_0 + 32, 28, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
 	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
 	gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
 	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
+	gsSP2Triangles(24, 25, 26, 0, 24, 26, 27, 0),
 	gsSPEndDisplayList(),
 };
 
@@ -3237,7 +3241,7 @@ Gfx mem_morning_obj_start_table_mesh_layer_4_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx mem_morning_obj_start_vase_mesh_layer_1_vtx_0[99] = {
+Vtx mem_morning_obj_start_vase_mesh_layer_4_vtx_0[99] = {
 	{{ {-58, 31, -34}, 0, {1349, 1043}, {255, 255, 255, 255} }},
 	{{ {0, 0, -67}, 0, {2715, -562}, {217, 217, 217, 255} }},
 	{{ {-58, 0, -34}, 0, {1349, -562}, {217, 217, 217, 255} }},
@@ -3339,8 +3343,8 @@ Vtx mem_morning_obj_start_vase_mesh_layer_1_vtx_0[99] = {
 	{{ {0, 94, -81}, 0, {5445, 2566}, {255, 255, 255, 255} }},
 };
 
-Gfx mem_morning_obj_start_vase_mesh_layer_1_tri_0[] = {
-	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_1_vtx_0 + 0, 32, 0),
+Gfx mem_morning_obj_start_vase_mesh_layer_4_tri_0[] = {
+	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_4_vtx_0 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 3, 0, 0, 4, 5, 3, 0),
 	gsSP2Triangles(6, 7, 8, 0, 6, 9, 7, 0),
@@ -3353,7 +3357,7 @@ Gfx mem_morning_obj_start_vase_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(26, 25, 22, 0, 26, 27, 25, 0),
 	gsSP2Triangles(28, 29, 30, 0, 28, 31, 29, 0),
 	gsSP1Triangle(31, 26, 29, 0),
-	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_1_vtx_0 + 32, 30, 0),
+	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_4_vtx_0 + 32, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP2Triangles(3, 6, 4, 0, 6, 1, 4, 0),
 	gsSP2Triangles(6, 7, 1, 0, 8, 9, 10, 0),
@@ -3363,7 +3367,7 @@ Gfx mem_morning_obj_start_vase_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(18, 20, 21, 0, 22, 23, 24, 0),
 	gsSP2Triangles(22, 24, 25, 0, 26, 27, 28, 0),
 	gsSP1Triangle(26, 28, 29, 0),
-	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_1_vtx_0 + 62, 32, 0),
+	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_4_vtx_0 + 62, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
@@ -3377,58 +3381,62 @@ Gfx mem_morning_obj_start_vase_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(21, 26, 25, 0, 27, 26, 21, 0),
 	gsSP2Triangles(27, 28, 26, 0, 29, 30, 31, 0),
 	gsSP1Triangle(29, 31, 11, 0),
-	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_1_vtx_0 + 94, 5, 0),
+	gsSPVertex(mem_morning_obj_start_vase_mesh_layer_4_vtx_0 + 94, 5, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP1Triangle(2, 4, 3, 0),
 	gsSPEndDisplayList(),
 };
 
 
-Gfx mat_mem_morning_obj_ChairGold_layer1[] = {
+Gfx mat_mem_morning_obj_ChairGoldDither_layer4[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, ENVIRONMENT, 0, SHADE, 0, COMBINED, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
+	gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPSetCycleType(G_CYC_2CYCLE),
-	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetAlphaCompare(G_AC_DITHER),
+	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), Z_CMP | Z_UPD | IM_RD | CVG_DST_CLAMP | ZMODE_OPA),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, mem_morning_obj_i8_chair_bright_i8),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPLoadBlock(7, 0, 0, 2047, 256),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsDPSetEnvColor(255, 218, 43, 255),
+	gsDPSetPrimColor(0, 0, 255, 218, 43, 255),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_mem_morning_obj_ChairGold_layer1[] = {
+Gfx mat_revert_mem_morning_obj_ChairGoldDither_layer4[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_mem_morning_obj_ChairFrontGold_layer1[] = {
+Gfx mat_mem_morning_obj_ChairFrontGoldDither_layer4[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, ENVIRONMENT, 0, SHADE, 0, COMBINED, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0),
+	gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPSetCycleType(G_CYC_2CYCLE),
-	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetAlphaCompare(G_AC_DITHER),
+	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), Z_CMP | Z_UPD | IM_RD | CVG_DST_CLAMP | ZMODE_OPA),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, mem_morning_obj_i8_chairfront_bright_i8),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPLoadBlock(7, 0, 0, 2047, 256),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 252),
-	gsDPSetEnvColor(255, 218, 43, 255),
+	gsDPSetPrimColor(0, 0, 255, 218, 43, 255),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_mem_morning_obj_ChairFrontGold_layer1[] = {
+Gfx mat_revert_mem_morning_obj_ChairFrontGoldDither_layer4[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
 	gsSPEndDisplayList(),
 };
 
@@ -3493,7 +3501,7 @@ Gfx mat_revert_mem_morning_obj_Books3_001_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_mem_morning_obj_Stick_v4_001_layer4[] = {
+Gfx mat_mem_morning_obj_Stick_v4_003_layer4[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsDPSetAlphaCompare(G_AC_DITHER),
@@ -3514,7 +3522,7 @@ Gfx mat_mem_morning_obj_Stick_v4_001_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_mem_morning_obj_Stick_v4_001_layer4[] = {
+Gfx mat_revert_mem_morning_obj_Stick_v4_003_layer4[] = {
 	gsDPPipeSync(),
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
@@ -3551,7 +3559,7 @@ Gfx mat_revert_mem_morning_obj_Base_v4_001_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_mem_morning_obj_Leaves_v4_001_layer4[] = {
+Gfx mat_mem_morning_obj_Leaves_v4_003_layer4[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, ENVIRONMENT, 0),
 	gsDPSetAlphaCompare(G_AC_DITHER),
@@ -3572,7 +3580,7 @@ Gfx mat_mem_morning_obj_Leaves_v4_001_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_mem_morning_obj_Leaves_v4_001_layer4[] = {
+Gfx mat_revert_mem_morning_obj_Leaves_v4_003_layer4[] = {
 	gsDPPipeSync(),
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
@@ -3580,7 +3588,7 @@ Gfx mat_revert_mem_morning_obj_Leaves_v4_001_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_mem_morning_obj_Table_003_layer4[] = {
+Gfx mat_mem_morning_obj_Table_002_layer4[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -3600,7 +3608,7 @@ Gfx mat_mem_morning_obj_Table_003_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_mem_morning_obj_Table_003_layer4[] = {
+Gfx mat_revert_mem_morning_obj_Table_002_layer4[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetAlphaCompare(G_AC_NONE),
@@ -3609,37 +3617,39 @@ Gfx mat_revert_mem_morning_obj_Table_003_layer4[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_mem_morning_obj_VaseYellow_layer1[] = {
+Gfx mat_mem_morning_obj_VaseYellowDither_layer4[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(1, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
+	gsDPSetCombineLERP(1, TEXEL0, PRIMITIVE, TEXEL0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
 	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPSetCycleType(G_CYC_2CYCLE),
-	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetAlphaCompare(G_AC_DITHER),
+	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA), Z_CMP | Z_UPD | IM_RD | CVG_DST_CLAMP | ZMODE_OPA),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, mem_morning_obj_squigglyline_i8),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_CLAMP | G_TX_MIRROR, 6, 0, G_TX_WRAP | G_TX_MIRROR, 6, 0),
 	gsDPLoadBlock(7, 0, 0, 2047, 256),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_MIRROR, 6, 0, G_TX_WRAP | G_TX_MIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 508),
-	gsDPSetEnvColor(196, 168, 33, 255),
+	gsDPSetPrimColor(0, 0, 196, 168, 33, 255),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_mem_morning_obj_VaseYellow_layer1[] = {
+Gfx mat_revert_mem_morning_obj_VaseYellowDither_layer4[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
-	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsDPSetAlphaCompare(G_AC_NONE),
+	gsDPSetRenderMode(G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2),
 	gsSPEndDisplayList(),
 };
 
-Gfx mem_morning_obj_chair_mesh_layer_1[] = {
-	gsSPDisplayList(mat_mem_morning_obj_ChairGold_layer1),
-	gsSPDisplayList(mem_morning_obj_chair_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_mem_morning_obj_ChairGold_layer1),
-	gsSPDisplayList(mat_mem_morning_obj_ChairFrontGold_layer1),
-	gsSPDisplayList(mem_morning_obj_chair_mesh_layer_1_tri_1),
-	gsSPDisplayList(mat_revert_mem_morning_obj_ChairFrontGold_layer1),
+Gfx mem_morning_obj_chair_mesh_layer_4[] = {
+	gsSPDisplayList(mat_mem_morning_obj_ChairGoldDither_layer4),
+	gsSPDisplayList(mem_morning_obj_chair_mesh_layer_4_tri_0),
+	gsSPDisplayList(mat_revert_mem_morning_obj_ChairGoldDither_layer4),
+	gsSPDisplayList(mat_mem_morning_obj_ChairFrontGoldDither_layer4),
+	gsSPDisplayList(mem_morning_obj_chair_mesh_layer_4_tri_1),
+	gsSPDisplayList(mat_revert_mem_morning_obj_ChairFrontGoldDither_layer4),
 	gsSPEndDisplayList(),
 };
 
@@ -3654,29 +3664,29 @@ Gfx mem_morning_obj_start_books_mesh_layer_4[] = {
 };
 
 Gfx mem_morning_obj_start_plant_mesh_layer_4[] = {
-	gsSPDisplayList(mat_mem_morning_obj_Stick_v4_001_layer4),
+	gsSPDisplayList(mat_mem_morning_obj_Stick_v4_003_layer4),
 	gsSPDisplayList(mem_morning_obj_start_plant_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_mem_morning_obj_Stick_v4_001_layer4),
+	gsSPDisplayList(mat_revert_mem_morning_obj_Stick_v4_003_layer4),
 	gsSPDisplayList(mat_mem_morning_obj_Base_v4_001_layer4),
 	gsSPDisplayList(mem_morning_obj_start_plant_mesh_layer_4_tri_1),
 	gsSPDisplayList(mat_revert_mem_morning_obj_Base_v4_001_layer4),
-	gsSPDisplayList(mat_mem_morning_obj_Leaves_v4_001_layer4),
+	gsSPDisplayList(mat_mem_morning_obj_Leaves_v4_003_layer4),
 	gsSPDisplayList(mem_morning_obj_start_plant_mesh_layer_4_tri_2),
-	gsSPDisplayList(mat_revert_mem_morning_obj_Leaves_v4_001_layer4),
+	gsSPDisplayList(mat_revert_mem_morning_obj_Leaves_v4_003_layer4),
 	gsSPEndDisplayList(),
 };
 
 Gfx mem_morning_obj_start_table_mesh_layer_4[] = {
-	gsSPDisplayList(mat_mem_morning_obj_Table_003_layer4),
+	gsSPDisplayList(mat_mem_morning_obj_Table_002_layer4),
 	gsSPDisplayList(mem_morning_obj_start_table_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_mem_morning_obj_Table_003_layer4),
+	gsSPDisplayList(mat_revert_mem_morning_obj_Table_002_layer4),
 	gsSPEndDisplayList(),
 };
 
-Gfx mem_morning_obj_start_vase_mesh_layer_1[] = {
-	gsSPDisplayList(mat_mem_morning_obj_VaseYellow_layer1),
-	gsSPDisplayList(mem_morning_obj_start_vase_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_mem_morning_obj_VaseYellow_layer1),
+Gfx mem_morning_obj_start_vase_mesh_layer_4[] = {
+	gsSPDisplayList(mat_mem_morning_obj_VaseYellowDither_layer4),
+	gsSPDisplayList(mem_morning_obj_start_vase_mesh_layer_4_tri_0),
+	gsSPDisplayList(mat_revert_mem_morning_obj_VaseYellowDither_layer4),
 	gsSPEndDisplayList(),
 };
 

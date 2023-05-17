@@ -23,6 +23,9 @@ void bhv_mem_foreroom_object_init(void) {
     if (o->oBehParams2ndByte) {
         o->os16F4 -= 35;
     }
+    if (o->oBehParams2ndByte == 4) {
+        o->os16F4 -= 50;
+    }
 
     o->os16F6 = 255 - o->os16F4;
 
@@ -33,6 +36,7 @@ void bhv_mem_foreroom_object_init(void) {
 
 
 void bhv_mem_foreroom_object_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED || cur_obj_is_mario_ground_pounding_platform()) {
@@ -52,6 +56,9 @@ void bhv_mem_foreroom_object_loop(void) {
         case 1:
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x10);
             if (o->oOpacity < 0x11) {
+                obj = spawn_object(o, MODEL_BG_GOOMBA, bhvGoomba);
+                obj->parentObj = obj;
+                spawn_mist_particles();
                 o->activeFlags = 0;
                 if (gMarioObject->platform == o) {
                     set_mario_action(gMarioState, ACT_FREEFALL, 0);
@@ -68,14 +75,18 @@ void bhv_mem_bath_floor_loop(void) {
     switch (o->oAction) {
         case 0:
             if (gMarioState->pos[1] < 3200.0f && gMarioState->pos[1] > -2000.0f) {
-                if (o->oTimer & 1) {
-                    o->oPosY -= 2.0f;
-                } else {
-                    o->oPosY += 2.0f;
+                if (o->oTimer > 60) {
+                    if (o->oTimer & 1) {
+                        o->oPosY -= 2.0f;
+                    } else {
+                        o->oPosY += 2.0f;
+                    }
                 }
                 if (o->oTimer > 100) {
                     o->oAction = 1;
                 }
+            } else {
+                o->oTimer = 0;
             }
             break;
         case 1:

@@ -297,7 +297,7 @@ const GeoLayout ssl_dl_211__Memory_Hole_geo[] = {
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Observatory_003_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2862, 0, -63963, ssl_dl_Vase_mesh_layer_1),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -696, 218, -70626, ssl_dl_Vase_001_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -2862, 0, -63963, ssl_dl_Vase_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

@@ -364,6 +364,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MEM_MORNING_OBJ, -22644, -5758, -20788, 0, 0, 0, (3 << 16), bhvMemForeroomObject),
 		OBJECT(MODEL_MEM_MORNING_OBJ, -20094, -5799, -21711, 0, 0, 0, (4 << 16), bhvMemForeroomObject),
 		OBJECT(MODEL_OBS_BOOGOO, -23519, -5895, -20128, 0, 0, 0, (5 << 16), bhvBoogooObject),
+		OBJECT(MODEL_TOKEN, -19488, -4946, -20884, 0, 0, 0, (1 << 16) | (0x39 << 8), bhvToken),
 		OBJECT(MODEL_TELEPORTER, -23519, -5937, -20128, 0, -90, 0, (0x58 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -12471, 6187, -2178, 0, -180, 0, (0x59 << 16), bhvFadingWarp),
 		OBJECT(MODEL_MEM_PLATE, -27158, 8434, -28710, 0, 90, 0, 0x00000000, bhvMemSpinPlateBig),
