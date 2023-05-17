@@ -11029,3 +11029,19 @@ const BehaviorScript bhvMemBathFloor[] = {
         CALL_NATIVE(bhv_mem_bath_floor_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMemForeroomObject[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR)),
+    // LOAD_COLLISION_DATA(trophy_rectangle_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    // SCALE(0, 75),
+    CALL_NATIVE(bhv_mem_foreroom_object_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        // ADD_INT(oFaceAngleYaw, 0x300),
+        CALL_NATIVE(bhv_mem_foreroom_object_loop),
+    END_LOOP(),
+};

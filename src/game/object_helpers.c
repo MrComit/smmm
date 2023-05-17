@@ -391,7 +391,7 @@ Vec3s sBooGooColors[5] = {
     {0x1E, 0x1E, 0x99},
     // {0x5B, 0x28, 0x73},
     {0x49, 0x0D, 0x7F},
-    {0x9F, 0x00, 0x00},
+    {0x9F, 0x9F, 0x00},
 };
 
 
@@ -410,6 +410,9 @@ s32 get_l8_boogoo_index(void) {
                 break;
             case 10:
                 index = 3;
+                break;
+            case 11:
+                index = 4;
                 break;
         }
     return index;

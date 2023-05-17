@@ -64,3 +64,4 @@
 #include "levels/ssl/mem_bounce_box/geo.inc.c"
 #include "levels/ssl/mem_fall_floor/geo.inc.c"
 #include "levels/ssl/mem_bath_floor/geo.inc.c"
+#include "levels/ssl/mem_morning_obj/geo.inc.c"

@@ -114,3 +114,8 @@
 #include "levels/ssl/mem_fall_floor/collision.inc.c"
 #include "levels/ssl/mem_bath_floor/model.inc.c"
 #include "levels/ssl/mem_bath_floor/collision.inc.c"
+#include "levels/ssl/mem_morning_obj/model.inc.c"
+#include "levels/ssl/mem_vase/collision.inc.c"
+#include "levels/ssl/mem_table/collision.inc.c"
+#include "levels/ssl/mem_chair/collision.inc.c"
+#include "levels/ssl/mem_books/collision.inc.c"

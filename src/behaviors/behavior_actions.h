@@ -1147,6 +1147,8 @@ void bhv_spin_plate_big_loop(void);
 void bhv_mem_falling_floor_init(void);
 void bhv_mem_falling_floor_loop(void);
 void bhv_mem_bath_floor_loop(void);
+void bhv_mem_foreroom_object_init(void);
+void bhv_mem_foreroom_object_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

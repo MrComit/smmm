@@ -77,6 +77,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_BOUNCE_BOX, mem_bounce_box_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_FALL_FLOOR, mem_fall_floor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_BATH_FLOOR, mem_bath_floor_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_MORNING_OBJ, mem_morning_obj_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -193,6 +194,8 @@ const LevelScript level_ssl_entry[] = {
 		INSTANT_WARP(8, 0x02, -10392, 552, 4501),
 		INSTANT_WARP(5, 0x02, 4518, -155, -480),
 		INSTANT_WARP(6, 0x02, 10392, -552, -4501),
+		WARP_NODE(0x58, LEVEL_SSL, 0x02, 0x59, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x59, LEVEL_SSL, 0x03, 0x58, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -22687, 6347, -1694, 0, 90, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -22687, 6347, -1694, 0, 90, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_MIND_MOUND_BLOCK, -14394, 7337, -1639, 0, 0, 0, (3 << 16), bhvMindMoundBlock),
@@ -355,6 +358,14 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MEM_BOUNCE_BOX, -10923, -9091, -26137, 0, 90, 0, (3 << 24) | (18 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_MEM_BATH_FLOOR, -12363, 381, -22114, 0, 0, 0, 0x00000000, bhvMemBathFloor),
 		OBJECT(MODEL_MEM_FALL_FLOOR, -13333, 829, -21485, 0, 0, 0, 0x00000000, bhvMemFallingFloor),
+		OBJECT(MODEL_HAUNTED_CAGE, -19833, -5759, -21433, 0, 0, 0, (24 << 16), bhvBoogooCage),
+		OBJECT(MODEL_MEM_MORNING_OBJ, -21340, -5937, -19619, 0, 90, 0, (1 << 16), bhvMemForeroomObject),
+		OBJECT(MODEL_MEM_MORNING_OBJ, -18867, -5937, -21673, 0, -180, 0, 0x00000000, bhvMemForeroomObject),
+		OBJECT(MODEL_MEM_MORNING_OBJ, -22644, -5758, -20788, 0, 0, 0, (3 << 16), bhvMemForeroomObject),
+		OBJECT(MODEL_MEM_MORNING_OBJ, -20094, -5799, -21711, 0, 0, 0, (4 << 16), bhvMemForeroomObject),
+		OBJECT(MODEL_OBS_BOOGOO, -23519, -5895, -20128, 0, 0, 0, (5 << 16), bhvBoogooObject),
+		OBJECT(MODEL_TELEPORTER, -23519, -5937, -20128, 0, -90, 0, (0x58 << 16), bhvFadingWarp),
+		OBJECT(MODEL_NONE, -12471, 6187, -2178, 0, -180, 0, (0x59 << 16), bhvFadingWarp),
 		OBJECT(MODEL_MEM_PLATE, -27158, 8434, -28710, 0, 90, 0, 0x00000000, bhvMemSpinPlateBig),
 		OBJECT(MODEL_NONE, -25272, 7812, -28527, 0, -180, 0, (0x49 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_SHYGUY, -26528, 8414, -28710, 0, 90, 0, 0x00000000, bhvMemShyguyPlate),

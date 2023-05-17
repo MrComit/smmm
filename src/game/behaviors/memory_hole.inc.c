@@ -1,4 +1,66 @@
+static void const *sMemForeroomCollision[] = {
+    mem_chair_collision,
+    mem_books_collision,
+    NULL,
+    mem_table_collision,
+    mem_vase_collision,
+};
+
+
 f32 sMemPlateZPos[2] = {-28510.0f, -28910.0f};
+
+
+
+void bhv_mem_foreroom_object_init(void) {
+    o->collisionData = segmented_to_virtual(sMemForeroomCollision[o->oBehParams2ndByte]);
+    // o->oOpacity = 255;
+    if (gIsConsole) {
+        o->os16F4 = 200;
+    } else {
+        o->os16F4 = 225;
+    }
+
+    if (o->oBehParams2ndByte) {
+        o->os16F4 -= 35;
+    }
+
+    o->os16F6 = 255 - o->os16F4;
+
+    if (o->oBehParams2ndByte == 5) {
+        o->oFlags &= ~(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR);
+    }
+}
+
+
+void bhv_mem_foreroom_object_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED || cur_obj_is_mario_ground_pounding_platform()) {
+                o->oAction = 1;
+                cur_obj_play_sound_1(SOUND_GENERAL_VANISH_SFX);
+            }
+            if (o->oDistanceToMario < 800.0f) {
+                if (gIsConsole) {
+                    o->oOpacity = o->os16F4 + (o->oDistanceToMario / 800) * o->os16F6;
+                } else {
+                    o->oOpacity = o->os16F4 + (o->oDistanceToMario / 800) * o->os16F6;
+                }
+            } else {
+                o->oOpacity = 255;
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x10);
+            if (o->oOpacity < 0x11) {
+                o->activeFlags = 0;
+                if (gMarioObject->platform == o) {
+                    set_mario_action(gMarioState, ACT_FREEFALL, 0);
+                }
+            }
+            break;
+    }
+}
+
 
 
 

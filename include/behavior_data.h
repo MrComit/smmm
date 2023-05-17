@@ -911,6 +911,7 @@ extern const BehaviorScript bhvMemWall[];
 extern const BehaviorScript bhvMemSpinPlateBig[];
 extern const BehaviorScript bhvMemFallingFloor[];
 extern const BehaviorScript bhvMemBathFloor[];
+extern const BehaviorScript bhvMemForeroomObject[];
 
 
 #endif // BEHAVIOR_DATA_H
