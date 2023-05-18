@@ -11054,7 +11054,7 @@ const BehaviorScript bhvMemIceCube[] = {
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_FLOAT(oFloatFC, 1),
     SET_HOME(),
-    SCALE(0, 75),
+    // SCALE(0, 75),
     // SPAWN_OBJ(/*Model*/ MODEL_TOY_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
     CALL_NATIVE(bhv_mem_ice_cube_init),
     SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvMemIceCubeChild),
@@ -11067,7 +11067,7 @@ const BehaviorScript bhvMemIceCube[] = {
 const BehaviorScript bhvMemIceCubeChild[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(crate_collision),
+    LOAD_COLLISION_DATA(mem_icecube_collision),
     SET_FLOAT(oCollisionDistance, 0x7FFF),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_mem_ice_cube_child_loop),
@@ -11083,4 +11083,13 @@ const BehaviorScript bhvFrozenStarPiece[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_frozen_star_piece_loop),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvMemButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(mem_button_collision),
+    GOTO(bhvRedButton + 4),
+    BREAK(),
 };

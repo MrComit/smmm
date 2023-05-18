@@ -907,7 +907,7 @@ extern Gfx ssl_dl_Castle_005_mesh_layer_1_tri_0[];
 extern Vtx ssl_dl_Castle_005_mesh_layer_1_vtx_1[12];
 extern Gfx ssl_dl_Castle_005_mesh_layer_1_tri_1[];
 extern Vtx ssl_dl_Castle_006_mesh_layer_1_vtx_cull[8];
-extern Vtx ssl_dl_Castle_006_mesh_layer_1_vtx_0[188];
+extern Vtx ssl_dl_Castle_006_mesh_layer_1_vtx_0[190];
 extern Gfx ssl_dl_Castle_006_mesh_layer_1_tri_0[];
 extern Vtx ssl_dl_Castle_006_mesh_layer_1_vtx_1[80];
 extern Gfx ssl_dl_Castle_006_mesh_layer_1_tri_1[];

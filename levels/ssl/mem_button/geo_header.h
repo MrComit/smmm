@@ -1,0 +1,12 @@
+extern const GeoLayout mem_button_geo[];
+extern Vtx mem_button_RedButton_mesh_layer_1_vtx_0[12];
+extern Gfx mem_button_RedButton_mesh_layer_1_tri_0[];
+extern Vtx mem_button_RedButton_mesh_layer_2_vtx_0[10];
+extern Gfx mem_button_RedButton_mesh_layer_2_tri_0[];
+extern Gfx mat_mem_button_RedButton_003[];
+extern Gfx mat_revert_mem_button_RedButton_003[];
+extern Gfx mat_mem_button_ButtonDecal_002[];
+extern Gfx mat_revert_mem_button_ButtonDecal_002[];
+extern Gfx mem_button_RedButton_mesh_layer_1[];
+extern Gfx mem_button_RedButton_mesh_layer_2[];
+extern Gfx mem_button_material_revert_render_settings[];

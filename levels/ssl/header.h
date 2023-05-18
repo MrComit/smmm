@@ -220,4 +220,12 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/mem_books/collision_header.h"
 
+#include "levels/ssl/mem_icecube/geo_header.h"
+
+#include "levels/ssl/mem_icecube/collision_header.h"
+
+#include "levels/ssl/mem_button/geo_header.h"
+
+#include "levels/ssl/mem_button/collision_header.h"
+
 #endif

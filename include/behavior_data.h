@@ -915,6 +915,7 @@ extern const BehaviorScript bhvMemForeroomObject[];
 extern const BehaviorScript bhvMemIceCube[];
 extern const BehaviorScript bhvMemIceCubeChild[];
 extern const BehaviorScript bhvFrozenStarPiece[];
+extern const BehaviorScript bhvMemButton[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -78,6 +78,8 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_FALL_FLOOR, mem_fall_floor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_BATH_FLOOR, mem_bath_floor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_MORNING_OBJ, mem_morning_obj_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_ICECUBE, mem_icecube_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MEM_BUTTON, mem_button_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -358,10 +360,10 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MEM_BOUNCE_BOX, -10923, -9091, -26137, 0, 90, 0, (3 << 24) | (18 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_MEM_BATH_FLOOR, -12363, 381, -22114, 0, 0, 0, 0x00000000, bhvMemBathFloor),
 		OBJECT(MODEL_MEM_FALL_FLOOR, -13333, 829, -21485, 0, 0, 0, 0x00000000, bhvMemFallingFloor),
-		OBJECT(MODEL_BREAKABLE_BOX, -14626, -9373, -20048, 0, 0, 0, (2 << 16), bhvMemIceCube),
-		OBJECT(MODEL_BREAKABLE_BOX, -13125, -9372, -18678, 0, 0, 0, (1 << 16), bhvMemIceCube),
-		OBJECT(MODEL_BREAKABLE_BOX, -11925, -9373, -19500, 0, 0, 0, 0x00000000, bhvMemIceCube),
-		// OBJECT(MODEL_RED_BUTTON, -12975, -9341, -18978, 0, 0, 0, 0x00000000, bhvRedButton),
+		OBJECT(MODEL_MEM_ICECUBE, -14626, -9373, -20048, 0, 0, 0, (2 << 16), bhvMemIceCube),
+		OBJECT(MODEL_MEM_ICECUBE, -13125, -9372, -18678, 0, 0, 0, (1 << 16), bhvMemIceCube),
+		OBJECT(MODEL_MEM_ICECUBE, -11925, -9373, -19500, 0, 0, 0, 0x00000000, bhvMemIceCube),
+		OBJECT(MODEL_MEM_BUTTON, -12975, -9341, -18978, 0, 0, 0, 0x00000000, bhvMemButton),
 		OBJECT(MODEL_HAUNTED_CAGE, -19833, -5759, -21433, 0, 0, 0, (24 << 16), bhvBoogooCage),
 		OBJECT(MODEL_MEM_MORNING_OBJ, -21340, -5937, -19619, 0, 90, 0, (1 << 16), bhvMemForeroomObject),
 		OBJECT(MODEL_MEM_MORNING_OBJ, -18867, -5937, -21673, 0, -180, 0, 0x00000000, bhvMemForeroomObject),

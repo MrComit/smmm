@@ -929,6 +929,8 @@
 #define MODEL_MEM_FALL_FLOOR      0x6F
 #define MODEL_MEM_BATH_FLOOR      0x70
 #define MODEL_MEM_MORNING_OBJ     0x71
+#define MODEL_MEM_ICECUBE         0x72
+#define MODEL_MEM_BUTTON          0x73
 
 
 // 0x97-0x9B

@@ -1,0 +1,12 @@
+extern const GeoLayout mem_icecube_switch_opt1[];
+extern const GeoLayout mem_icecube_geo[];
+extern u8 mem_icecube_rgba32_icecube2_rgba32[];
+extern u8 mem_icecube__32x_metal_crate_i8[];
+extern Vtx mem_icecube_cube_mesh_layer_5_vtx_0[22];
+extern Gfx mem_icecube_cube_mesh_layer_5_tri_0[];
+extern Gfx mat_mem_icecube_IceCube[];
+extern Gfx mat_revert_mem_icecube_IceCube[];
+extern Gfx mat_mem_icecube_MetalBox[];
+extern Gfx mem_icecube_cube_mesh_layer_5[];
+extern Gfx mem_icecube_cube_mesh_layer_5_mat_override_MetalBox_0[];
+extern Gfx mem_icecube_material_revert_render_settings[];

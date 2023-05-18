@@ -119,3 +119,7 @@
 #include "levels/ssl/mem_table/collision.inc.c"
 #include "levels/ssl/mem_chair/collision.inc.c"
 #include "levels/ssl/mem_books/collision.inc.c"
+#include "levels/ssl/mem_icecube/model.inc.c"
+#include "levels/ssl/mem_icecube/collision.inc.c"
+#include "levels/ssl/mem_button/model.inc.c"
+#include "levels/ssl/mem_button/collision.inc.c"

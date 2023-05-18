@@ -18,6 +18,7 @@ void bhv_frozen_star_piece_init(void) {
 
 void bhv_frozen_star_piece_loop(void) {
     vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
+    o->oPosY += 50.0f;
     o->header.gfx.animInfo.animFrame = 0;
 }
 
@@ -35,6 +36,8 @@ void bhv_mem_ice_cube_init(void) {
     if (o->oBehParams2ndByte == 0) {
         obj = spawn_object_at_origin(o, 0, MODEL_STAR_PIECE, bhvFrozenStarPiece);
         obj->oBehParams = 0x17 << 24;
+    } else {
+        o->oAnimState = 1;
     }
     obj_copy_pos_and_angle(obj, o);
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
@@ -48,7 +51,7 @@ void bhv_mem_ice_cube_loop(void) {
     // if (sCubesMelt == 0xF) {
     //     o->oAction = 2;
     // } else {
-        obj = cur_obj_nearest_object_with_behavior(bhvRedButton);
+        obj = cur_obj_nearest_object_with_behavior(bhvMemButton);
         if (obj != NULL && obj->oAction == 2) {
             o->oAction = 0;
             o->oForwardVel = 0;
@@ -88,6 +91,7 @@ void bhv_mem_ice_cube_loop(void) {
                 //     play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
                 // }
                 o->oAction = 2;
+                play_puzzle_jingle();
             }
             spawn_mist_particles_variable(2, -40, 6.0f);
             break;
