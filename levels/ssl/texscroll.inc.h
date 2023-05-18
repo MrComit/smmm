@@ -19,6 +19,6 @@ extern void scroll_sts_mat_ssl_dl_ObservatorySky_001_layer1();
 extern void scroll_sts_mat_ssl_dl_LaundryWall_003();
 extern void scroll_ssl_dl_TideToad_002_mesh_layer_5_vtx_0();
 extern void scroll_ssl_dl_TideToad_001_mesh_layer_5_vtx_0();
-extern void scroll_ssl_dl_Steam_001_mesh_layer_5_vtx_0();
 extern void scroll_sts_mat_ssl_dl_VaseYellow_001_layer1();
+extern void scroll_ssl_dl_Steam_001_mesh_layer_5_vtx_0();
 extern void scroll_ssl();

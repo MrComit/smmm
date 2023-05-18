@@ -9,6 +9,22 @@ static void const *sMemForeroomCollision[] = {
 
 f32 sMemPlateZPos[2] = {-28510.0f, -28910.0f};
 
+
+
+void bhv_bounce_box_hidden_loop(void) {
+    if (save_file_check_global_room()) {
+        cur_obj_unhide();
+        bhv_bounce_box_loop();
+        load_object_collision_model();
+    } else {
+        cur_obj_hide();
+    }
+
+
+}
+
+
+
 void bhv_frozen_star_piece_init(void) {
     o->oFaceAngleYaw = random_u16();
     o->oFaceAnglePitch = random_u16();
@@ -172,14 +188,26 @@ void bhv_mem_foreroom_object_loop(void) {
 
 
 void bhv_mem_bath_floor_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
+            if (gMarioState->pos[1] > 4000.0f) {
+                cur_obj_hide();
+            } else {
+                cur_obj_unhide();
+            }
             if (gMarioState->pos[1] < 6000.0f) {
                 gCamera->comitCutscene = 24;
                 gComitCutscenePosVec[1] = gMarioState->pos[1] + 200.0f;
             }
             if (gMarioState->pos[1] < 1000.0f) {
                 o->oAction = 1;
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_set(&obj->oPosX, -13200.0f, 830.0f, -23550.0f);
+                    // obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                    obj->oFaceAngleYaw = 0x4000;
+                }
             }
             break;
         case 1:
@@ -196,6 +224,15 @@ void bhv_mem_bath_floor_loop(void) {
                 }
             } else {
                 o->oTimer = 0;
+                if (o->os1610A == 0 && gMarioState->pos[1] < -2000.0f && gMarioState->pos[0] < -18200.0f) {
+                    o->os1610A = 1;
+                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    if (obj != NULL) {
+                        vec3f_copy(&obj->oPosX, gMarioState->pos);
+                        // obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                        obj->oFaceAngleYaw = 0xC000;
+                    }
+                }
             }
             break;
         case 2:
@@ -234,8 +271,14 @@ void bhv_mem_falling_floor_init(void) {
 
 
 void bhv_mem_falling_floor_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
+            if (gMarioState->pos[1] > 4000.0f) {
+                cur_obj_hide();
+            } else {
+                cur_obj_unhide();
+            }
             if (gMarioObject->platform == o) {
                 o->oAction = 1;
             }
@@ -266,9 +309,16 @@ void bhv_mem_falling_floor_loop(void) {
                 // spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
 
                     // obj->oAction = 1;
-                    set_mario_npc_dialog(0);
-                    set_mario_action(gMarioState, ACT_JUMP, 0);
-                    gMarioState->forwardVel = 50.0f;
+                set_mario_npc_dialog(0);
+                set_mario_action(gMarioState, ACT_JUMP, 0);
+                gMarioState->forwardVel = 50.0f;
+
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_copy(&obj->oPosX, &o->oPosX);
+                    // obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                    obj->oFaceAngleYaw = 0x8000;
+                }
             } else {
                 gCamera->comitCutscene = 0xFF;
                 gComitCutsceneTimer = 30;
@@ -302,6 +352,7 @@ void bhv_spin_plate_big_init(void) {
 
 
 void bhv_spin_plate_big_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (cur_obj_nearest_object_with_behavior(bhvMemShyguyPlate) == NULL) {
@@ -324,8 +375,15 @@ void bhv_spin_plate_big_loop(void) {
             if (o->oPosX > -21900.0f) {
                 cur_obj_scale(o->oFloatF4);
                 o->oFloatF4 -= 0.20f;
-                if (o->oFloatF4 < 0.01f)
+                if (o->oFloatF4 < 0.01f) {
                     o->activeFlags = 0;
+                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    if (obj != NULL) {
+                        vec3f_copy(&obj->oPosX, &o->oPosX);
+                        // obj->oFaceAngleYaw = gMarioState->faceAngle[1];
+                        obj->oFaceAngleYaw = 0x4000;
+                    }
+                }
             }
             break;
     }

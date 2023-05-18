@@ -161,6 +161,7 @@ Gfx *geo_switch_ice_backroom(s32 callContext, struct GraphNode *node, UNUSED voi
 Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_dream_layers(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_o5_layers(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_memory_hole(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node);
@@ -215,6 +216,7 @@ Gfx *geo_switch_engine_last(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_ice_backroom(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_dream_layers(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_memory_hole(s32 callContext, struct GraphNode *node);
 #endif
 void obj_update_pos_from_parent_transformation(Mat4 a0, struct Object *a1);
 void obj_apply_scale_to_matrix(struct Object *obj, Mat4 dst, Mat4 src);

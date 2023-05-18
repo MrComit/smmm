@@ -11093,3 +11093,15 @@ const BehaviorScript bhvMemButton[] = {
     GOTO(bhvRedButton + 4),
     BREAK(),
 };
+
+const BehaviorScript bhvBounceBoxHidden[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(mem_bounce_box_collision),
+    SET_INT(oAnimState, 1),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bounce_box_hidden_loop),
+        // CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
