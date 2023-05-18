@@ -174,6 +174,15 @@ void bhv_mem_foreroom_object_loop(void) {
 void bhv_mem_bath_floor_loop(void) {
     switch (o->oAction) {
         case 0:
+            if (gMarioState->pos[1] < 6000.0f) {
+                gCamera->comitCutscene = 24;
+                gComitCutscenePosVec[1] = gMarioState->pos[1] + 200.0f;
+            }
+            if (gMarioState->pos[1] < 1000.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
             if (gMarioState->pos[1] < 3200.0f && gMarioState->pos[1] > -2000.0f) {
                 if (o->oTimer > 60) {
                     if (o->oTimer & 1) {
@@ -183,26 +192,34 @@ void bhv_mem_bath_floor_loop(void) {
                     }
                 }
                 if (o->oTimer > 100) {
-                    o->oAction = 1;
+                    o->oAction = 2;
                 }
             } else {
                 o->oTimer = 0;
             }
             break;
-        case 1:
-            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 150.0f, 10.0f);
+        case 2:
+            if (gMarioState->pos[1] < 3200.0f && gMarioState->pos[1] > -2000.0f) {
+                gCamera->comitCutscene = 24;
+                gComitCutscenePosVec[1] = gCamera->pos[1];
+            }
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 120.0f, 10.0f);
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 2270.0f, o->oFloatF4);
             if (o->oPosY == o->oHomeY + 2270.0f) {
-                o->oAction = 2;
+                o->oAction = 3;
                 o->oFloatF4 = 0.0f;
             }
             break;
-        case 2:
+        case 3:
+            if (gMarioState->pos[1] < 3200.0f && gMarioState->pos[1] > -2000.0f) {
+                gCamera->comitCutscene = 24;
+                gComitCutscenePosVec[1] = gCamera->pos[1];
+            }
             if (o->oTimer > 50) {
-                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 150.0f, 10.0f);
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 120.0f, 10.0f);
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, o->oFloatF4);
                 if (o->oPosY == o->oHomeY) {
-                    o->oAction = 0;
+                    o->oAction = 1;
                     o->oFloatF4 = 0.0f;
                 }
             }
@@ -224,12 +241,44 @@ void bhv_mem_falling_floor_loop(void) {
             }
             break;
         case 1:
+            set_mario_npc_dialog(1);
             o->oFloatF4 = approach_f32(o->oFloatF4, 60.0f, 1.1f, 1.1f);
             o->oPosY -= o->oFloatF4;
-            if (o->oPosY < o->oHomeY - 2200.0f) {
-                CL_explode_object(o, 1);
+            if (o->oPosY < o->oHomeY - 2000.0f) {
+                // CL_explode_object(o, 1);
                 o->oAction = 2;
             }
+            break;
+        case 2:
+            o->oFloatF4 = approach_f32(o->oFloatF4, 98.0f, 1.1f, 1.1f);
+            o->oPosY -= o->oFloatF4;
+            /*o->oPosY = approach_f32(o->oPosY, o->oHomeY - 300.0f, 35.0f, 35.0f);
+            if (o->oPosY == o->oHomeY - 300.0f) {
+                o->oAction = 3;
+                o->oHomeY += 20.0f;
+            }*/
+            // obj = cur_obj_nearest_object_with_behavior(bhvBigIceCube);
+            if (o->oPosY <= -9275.0f) {
+                CL_explode_object(o, 1);
+                // o->oHomeY += 20.0f;
+                // play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
+                // cur_obj_play_sound_1(SOUND_PEACH_MARIO);
+                // spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
+
+                    // obj->oAction = 1;
+                    set_mario_npc_dialog(0);
+                    set_mario_action(gMarioState, ACT_JUMP, 0);
+                    gMarioState->forwardVel = 50.0f;
+            } else {
+                gCamera->comitCutscene = 0xFF;
+                gComitCutsceneTimer = 30;
+                set_mario_npc_dialog(1);
+                vec3f_set(gComitCutscenePosVec, o->oPosX, o->oPosY + 600.0f, o->oPosZ + 2100.0f);
+                vec3f_set(gComitCutsceneFocVec, o->oPosX, o->oPosY, o->oPosZ);
+                vec3f_set(gMarioState->pos, o->oPosX, gMarioState->floorHeight, o->oPosZ);
+                gMarioState->faceAngle[1] = 0;
+            }
+
             break;
     }
 }
