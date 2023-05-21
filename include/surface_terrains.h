@@ -90,6 +90,8 @@
 #define SURFACE_INSTANT_QUICKSAND_WALL       0x0085
 #define SURFACE_SUNCUBE_FLOOR                0x0086
 #define SURFACE_MAZE_WIN                     0x0087
+#define SURFACE_WARP_HEIGHT_LOWER2            0x0088
+
 
 #define SURFACE_PAINTING_WOBBLE_A6           0x00A6 // Painting wobble (BOB Left)
 #define SURFACE_PAINTING_WOBBLE_A7           0x00A7 // Painting wobble (BOB Middle)

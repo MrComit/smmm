@@ -1155,6 +1155,8 @@ void bhv_frozen_star_piece_init(void);
 void bhv_frozen_star_piece_loop(void);
 void bhv_mem_ice_cube_child_loop(void);
 void bhv_bounce_box_hidden_loop(void);
+void bhv_mind_chandelier_init(void);
+void bhv_mind_chandelier_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

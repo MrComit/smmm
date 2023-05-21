@@ -1956,7 +1956,11 @@ void mario_handle_special_floors(struct MarioState *m) {
             case SURFACE_WARP:
                 level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                 break;
-
+            case SURFACE_WARP_HEIGHT_LOWER2:
+                if (m->pos[1] - m->floorHeight <= 1200.0f) {
+                    level_trigger_warp(m, WARP_OP_WARP_FLOOR);
+                }
+                break;
             case SURFACE_TIMER_START:
                 pss_begin_slide(m);
                 break;

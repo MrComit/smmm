@@ -67,3 +67,4 @@
 #include "levels/ssl/mem_morning_obj/geo.inc.c"
 #include "levels/ssl/mem_icecube/geo.inc.c"
 #include "levels/ssl/mem_button/geo.inc.c"
+#include "levels/ssl/mind_chandelier/geo.inc.c"

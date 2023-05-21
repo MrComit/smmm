@@ -421,18 +421,20 @@ s32 get_l8_boogoo_index(void) {
 
 Gfx *geo_update_boogoo_color(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
     struct GraphNodeGenerated *currentGraphNode;
     s32 index = 0;
 
     dlStart = NULL;
 
     if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject;
         currentGraphNode = (struct GraphNodeGenerated *) node;
 
-        if (currentGraphNode->parameter == 0) {
+        if (((objectGraphNode->oBehParams >> 8) & 0xFF) == 0) {
             index = get_l8_boogoo_index();
         } else {
-            index = currentGraphNode->parameter - 1;
+            index = ((objectGraphNode->oBehParams >> 8) & 0xFF) - 1;
         }
 
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
@@ -465,10 +467,10 @@ Gfx *geo_update_boogoo_object(s32 callContext, struct GraphNode *node, UNUSED vo
             objectGraphNode = gCurGraphNodeHeldObject->objNode;
         }
 
-        if (currentGraphNode->parameter == 0) {
+        if (((objectGraphNode->oBehParams >> 8) & 0xFF) == 0) {
             index = get_l8_boogoo_index();
         } else {
-            index = currentGraphNode->parameter - 1;
+            index = ((objectGraphNode->oBehParams >> 8) & 0xFF) - 1;
         }
 
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
@@ -623,6 +625,7 @@ Vtx *sVanishVerts[] = {
     &lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0,
     &lll_dl_MUSICFLOOR_Cellar_mesh_layer_1_vtx_0,
     &ssl_dl_BGMuiscFloor_mesh_layer_1_vtx_0,
+    &ssl_dl_MUSICFLOOR_Palace_mesh_layer_1_vtx_0,
 };
 
 s16 sVanishVertCounts[] = {
@@ -637,6 +640,7 @@ s16 sVanishVertCounts[] = {
     sizeof(lll_dl_MUSICFLOOR_Chamber_mesh_layer_1_vtx_0) / 16,
     sizeof(lll_dl_MUSICFLOOR_Cellar_mesh_layer_1_vtx_0) / 16,
     sizeof(ssl_dl_BGMuiscFloor_mesh_layer_1_vtx_0) / 16,
+    sizeof(ssl_dl_MUSICFLOOR_Palace_mesh_layer_1_vtx_0) / 16,
 };
 
 s16 sVanishVertDists[] = {
@@ -651,6 +655,7 @@ s16 sVanishVertDists[] = {
     1000,
     1000,
     7000,
+    1000,
 };
 
 Gfx *geo_update_vanish_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {

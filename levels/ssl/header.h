@@ -228,4 +228,6 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/mem_button/collision_header.h"
 
+#include "levels/ssl/mind_chandelier/geo_header.h"
+
 #endif

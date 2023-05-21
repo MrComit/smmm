@@ -3,13 +3,20 @@
 const GeoLayout ssl_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_SWITCH_CASE(6, geo_switch_area),
+		GEO_SWITCH_CASE(13, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, ssl_dl_101__Opening_geo),
 			GEO_BRANCH(1, ssl_dl_102__Art_Gallery_geo),
 			GEO_BRANCH(1, ssl_dl_103__Outside2_geo),
 			GEO_BRANCH(1, ssl_dl_104__The_Mind_Palace_geo),
 			GEO_BRANCH(1, ssl_dl_105__Outside3_NULL_geo),
+			GEO_BRANCH(1, ssl_dl_106__The_LaboratoryNULL_geo),
+			GEO_BRANCH(1, ssl_dl_107__Outside4_NULL_geo),
+			GEO_BRANCH(1, ssl_dl_108__Dream_Room_NULL_geo),
+			GEO_BRANCH(1, ssl_dl_109__Outside5_NULL_geo),
+			GEO_BRANCH(1, ssl_dl_110__Observatory_NULL_geo),
+			GEO_BRANCH(1, ssl_dl_111__Memory_Hole_NULL_geo),
+			GEO_BRANCH(1, ssl_dl_112__Outside6_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -21859, 385, 24269, 0, -180, 0),
 		GEO_TRANSLATE_ROTATE(LAYER_OPAQUE, -21859, 385, 24269, 0, -180, 0),
@@ -64,7 +71,10 @@ const GeoLayout ssl_dl_103__Outside2_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_GardenCircle_001_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_GardenCircle_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_GardenCircle_001_mesh_layer_4),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_MindPalace_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_MindPalace_006_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_MindPalace_006_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_MindPalace_006_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_MindPalace_006_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_TallGrass_001_mesh_layer_4),
 	GEO_CLOSE_NODE(),
@@ -81,6 +91,59 @@ const GeoLayout ssl_dl_105__Outside3_NULL_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_NULLTri_001_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_106__The_LaboratoryNULL_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_NULLTri_008_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_107__Outside4_NULL_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_NULLTri_009_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_108__Dream_Room_NULL_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_NULLTri_010_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_109__Outside5_NULL_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_NULLTri_011_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_110__Observatory_NULL_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_NULLTri_012_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_111__Memory_Hole_NULL_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_NULLTri_013_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ssl_dl_112__Outside6_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_MindPalace_006_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_MindPalace_006_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_MindPalace_006_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_MindPalace_006_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_011_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -109,6 +172,7 @@ const GeoLayout ssl_area_1[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ssl_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),

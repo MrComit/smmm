@@ -123,3 +123,4 @@
 #include "levels/ssl/mem_icecube/collision.inc.c"
 #include "levels/ssl/mem_button/model.inc.c"
 #include "levels/ssl/mem_button/collision.inc.c"
+#include "levels/ssl/mind_chandelier/model.inc.c"

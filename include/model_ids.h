@@ -911,6 +911,7 @@
 #define MODEL_OBSERVATORY_SPLAT   0xE9
 #define MODEL_JENGA_PLAT          0xE8
 #define MODEL_RED_SHADOW          0xE7
+#define MODEL_MIND_CHANDELIER     0xE6
 
 
 // LEVEL 8 MODELS CONT:
