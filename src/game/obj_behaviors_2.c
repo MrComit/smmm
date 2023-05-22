@@ -159,12 +159,12 @@ static void platform_on_track_update_pos_or_spawn_ball(s32 ballIndex, f32 x, f32
     f32 dz;
     f32 distToNextWaypoint;
 
-    if (ballIndex == 0 || ((u16)(o->oBehParams >> 16) & 0x0080)) {
+    if (ballIndex == 0 || ((u16)(o->oBehParams >> 16) & 0x0080) == 0) {
         initialPrevWaypoint = o->oPlatformOnTrackPrevWaypoint;
         nextWaypoint = initialPrevWaypoint;
 
         if (ballIndex != 0) {
-            amountToMove = 300.0f * ballIndex;
+            amountToMove = 500.0f * ballIndex;
         } else {
             obj_perform_position_op(POS_OP_SAVE_POSITION);
             o->oPlatformOnTrackPrevWaypointFlags = 0;

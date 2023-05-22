@@ -46,7 +46,7 @@ static void platform_on_track_reset(void) {
 static void platform_on_track_mario_not_on_platform(void) {
     if (!((u16)(o->oBehParams >> 16) & PLATFORM_ON_TRACK_BP_DONT_DISAPPEAR)) {
         // Once oTimer reaches 150, blink 40 times
-        if (cur_obj_wait_then_blink(150, 40)) {
+        if (cur_obj_wait_then_blink(400, 40) || o->oDistanceToMario > 15000.0f) {
             platform_on_track_reset();
             o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
         }
@@ -163,12 +163,12 @@ static void platform_on_track_act_move_along_track(void) {
             if (!o->oPlatformOnTrackIsNotSkiLift) {
                 obj_forward_vel_approach(10.0, 0.1f);
             } else {
-                o->oForwardVel = 10.0f;
+                o->oForwardVel = 26.0f;
             }
 
             // Spawn a new track ball if necessary
-            if (approach_f32_ptr(&o->oPlatformOnTrackDistMovedSinceLastBall, 300.0f, o->oForwardVel)) {
-                o->oPlatformOnTrackDistMovedSinceLastBall -= 300.0f;
+            if (approach_f32_ptr(&o->oPlatformOnTrackDistMovedSinceLastBall, 500.0f, o->oForwardVel)) {
+                o->oPlatformOnTrackDistMovedSinceLastBall -= 500.0f;
 
                 o->oHomeX = o->oPosX;
                 o->oHomeY = o->oPosY;
@@ -191,10 +191,10 @@ static void platform_on_track_act_move_along_track(void) {
         // Turn face yaw and compute yaw vel
         if (!((u16)(o->oBehParams >> 16) & PLATFORM_ON_TRACK_BP_DONT_TURN_YAW)) {
             s16 targetFaceYaw = o->oMoveAngleYaw + 0x4000;
-            s16 yawSpeed = abs_angle_diff(targetFaceYaw, o->oFaceAngleYaw) / 20;
+            s16 yawSpeed = abs_angle_diff(targetFaceYaw, o->oFaceAngleYaw) / 7;
 
             initialAngle = o->oFaceAngleYaw;
-            clamp_s16(&yawSpeed, 100, 500);
+            clamp_s16(&yawSpeed, 200, 1000);
             obj_face_yaw_approach(targetFaceYaw, yawSpeed);
             o->oAngleVelYaw = (s16) o->oFaceAngleYaw - initialAngle;
         }
