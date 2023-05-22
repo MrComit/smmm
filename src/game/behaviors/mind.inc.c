@@ -47,11 +47,11 @@ void bhv_mind_chandelier_loop(void) {
 void bhv_spinning_plat_loop(void) {
     struct Object *obj;
     struct MarioState *m = gMarioState;
-    if (m->action == ACT_LEDGE_GRAB) {
-        if (m->wall != NULL && m->wall->object == o) {
-            set_mario_action(m, ACT_LEDGE_CLIMB_FAST, 0);
-        }
-    }
+    // if (m->action == ACT_LEDGE_GRAB) {
+    //     if (m->wall != NULL && m->wall->object == o) {
+    //         set_mario_action(m, ACT_LEDGE_CLIMB_FAST, 0);
+    //     }
+    // }
     if (o->oBehParams2ndByte) {
         o->oFaceAngleYaw += 0x100;
     }

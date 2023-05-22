@@ -68,3 +68,4 @@
 #include "levels/ssl/mem_icecube/geo.inc.c"
 #include "levels/ssl/mem_button/geo.inc.c"
 #include "levels/ssl/mind_chandelier/geo.inc.c"
+#include "levels/ssl/magic_carpet/geo.inc.c"

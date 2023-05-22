@@ -230,4 +230,12 @@ extern const LevelScript level_ssl_entry[];
 
 #include "levels/ssl/mind_chandelier/geo_header.h"
 
+
+extern const GeoLayout magic_carpet_geo[];
+extern const s16 magic_carpet_static_vertex_data[];
+extern const Gfx dl_magic_carpet_begin[];
+extern const Gfx dl_magic_carpet_model_half[];
+extern const Gfx dl_magic_carpet_end[];
+extern const Collision magic_carpet_collision[];
+
 #endif

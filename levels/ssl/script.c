@@ -81,6 +81,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_ICECUBE, mem_icecube_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_BUTTON, mem_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_CHANDELIER, mind_chandelier_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_MAGIC_CARPET, magic_carpet_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -171,6 +172,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, -21848, 6595, -8922, 0, -90, 0, 0x00000000, bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -21848, 6395, -8922, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -21848, 6195, -8922, 0, -90, 0, (2 << 16), bhvFloorPeepa),
+		OBJECT(MODEL_MAGIC_CARPET, 20533, 8070, 4468, 0, 90, 0, 0x00000000, bhvPlatformOnTrack),
 		OBJECT(MODEL_MIND_CHANDELIER, 20580, 7147, -11050, 0, 90, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 20640, 7681, -7295, 0, 143, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 17174, 7731, -4093, 0, 154, 0, 0x00000000, bhvMindChandelier),

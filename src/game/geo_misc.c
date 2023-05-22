@@ -9,6 +9,7 @@
 #include "levels/castle_inside/header.h"
 #include "levels/ending/header.h"
 #include "levels/rr/header.h"
+#include "levels/ssl/header.h"
 #include "mario.h"
 #include "mario_actions_cutscene.h"
 #include "memory.h"
@@ -135,10 +136,24 @@ Gfx *geo_exec_flying_carpet_create(s32 callContext, struct GraphNode *node, UNUS
     Vtx *verts;
     struct GraphNodeGenerated *generatedNode = (struct GraphNodeGenerated *) node;
 
-    s16 *sp64 = segmented_to_virtual(&flying_carpet_static_vertex_data);
+    s16 *sp64 = segmented_to_virtual(&magic_carpet_static_vertex_data);
     Gfx *displayList = NULL;
     Gfx *displayListHead = NULL;
     struct Object *curGraphNodeObject;
+
+
+    // if (callContext != GEO_CONTEXT_RENDER) {
+    //     sFlyingCarpetRippleTimer = 0;
+    //     sPrevAreaTimer = gAreaUpdateCounter - 1;
+    //     sCurAreaTimer = gAreaUpdateCounter;
+    //     gFlyingCarpetState = FLYING_CARPET_IDLE;
+    // } else {
+    //     sPrevAreaTimer = sCurAreaTimer;
+    //     sCurAreaTimer = gAreaUpdateCounter;
+    //     if (sPrevAreaTimer != sCurAreaTimer) {
+    //         sFlyingCarpetRippleTimer += 0x400;
+    //     }
+    // }
 
     if (callContext == GEO_CONTEXT_RENDER) {
         verts = alloc_display_list(NUM_FLYING_CARPET_VERTICES * sizeof(*verts));
@@ -164,17 +179,17 @@ Gfx *geo_exec_flying_carpet_create(s32 callContext, struct GraphNode *node, UNUS
             make_vertex(verts, n, x, y, z, tx, ty, 0, 127, 0, 255);
         }
 
-        gSPDisplayList(displayListHead++, dl_flying_carpet_begin);
+        gSPDisplayList(displayListHead++, dl_magic_carpet_begin);
 
         // The forward half.
         gSPVertex(displayListHead++, verts, 12, 0);
-        gSPDisplayList(displayListHead++, dl_flying_carpet_model_half);
+        gSPDisplayList(displayListHead++, dl_magic_carpet_model_half);
 
         // The back half.
         gSPVertex(displayListHead++, verts + 9, 12, 0);
-        gSPDisplayList(displayListHead++, dl_flying_carpet_model_half);
+        gSPDisplayList(displayListHead++, dl_magic_carpet_model_half);
 
-        gSPDisplayList(displayListHead++, dl_flying_carpet_end);
+        gSPDisplayList(displayListHead++, dl_magic_carpet_end);
         gSPEndDisplayList(displayListHead);
 
         curGraphNodeObject = (struct Object *) gCurGraphNodeObject;

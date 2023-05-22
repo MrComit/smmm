@@ -9,7 +9,7 @@
  * Collision models for the different types of platforms.
  */
 static Collision const *sPlatformOnTrackCollisionModels[] = {
-    /* PLATFORM_ON_TRACK_TYPE_CARPET    */ rr_seg7_collision_07029038,
+    /* PLATFORM_ON_TRACK_TYPE_CARPET    */ magic_carpet_collision, //rr_seg7_collision_07029038,
     /* PLATFORM_ON_TRACK_TYPE_SKI_LIFT  */ ccm_seg7_collision_070163F8,
     /* PLATFORM_ON_TRACK_TYPE_CHECKERED */ checkerboard_platform_seg8_collision_0800D710,
     /* PLATFORM_ON_TRACK_TYPE_GRATE     */ bitfs_seg7_collision_070157E0,
@@ -19,7 +19,7 @@ static Collision const *sPlatformOnTrackCollisionModels[] = {
  * Paths for the different instances of these platforms.
  */
 static Trajectory const *sPlatformOnTrackPaths[] = {
-    rr_seg7_trajectory_0702EC3C,
+    ssl_area_1_spline_CarpetTrack, //rr_seg7_trajectory_0702EC3C,
     rr_seg7_trajectory_0702ECC0,
     ccm_seg7_trajectory_0701669C,
     bitfs_seg7_trajectory_070159AC,

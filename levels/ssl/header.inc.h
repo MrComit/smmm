@@ -1,4 +1,5 @@
 extern const GeoLayout ssl_area_1_geo[];
+extern const GeoLayout ssl_dl_100__Global_geo[];
 extern const GeoLayout ssl_dl_101__Opening_geo[];
 extern const GeoLayout ssl_dl_102__Art_Gallery_geo[];
 extern const GeoLayout ssl_dl_103__Outside2_geo[];
@@ -15,6 +16,7 @@ extern const GeoLayout ssl_area_1[];
 extern const Collision ssl_area_1_collision[];
 extern const u8 ssl_area_1_collision_rooms[];
 extern const MacroObject ssl_area_1_macro_objs[];
+extern const Trajectory ssl_area_1_spline_CarpetTrack[];
 extern const GeoLayout ssl_area_2_geo[];
 extern const GeoLayout ssl_dl_201__NULL_geo[];
 extern const GeoLayout ssl_dl_202__NULL_geo[];

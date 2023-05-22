@@ -912,6 +912,7 @@
 #define MODEL_JENGA_PLAT          0xE8
 #define MODEL_RED_SHADOW          0xE7
 #define MODEL_MIND_CHANDELIER     0xE6
+#define MODEL_MAGIC_CARPET        0xE5
 
 
 // LEVEL 8 MODELS CONT:
