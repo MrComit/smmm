@@ -16,10 +16,10 @@ static struct ObjectHitbox sMindChandelierHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 300,
-    /* height:            */ 200,
-    /* hurtboxRadius:     */ 300,
-    /* hurtboxHeight:     */ 200,
+    /* radius:            */ 200,
+    /* height:            */ 150,
+    /* hurtboxRadius:     */ 200,
+    /* hurtboxHeight:     */ 150,
 };
 
 
@@ -31,11 +31,11 @@ void bhv_mind_chandelier_init(void) {
 void bhv_mind_chandelier_loop(void) {
     Vec3f point1, point2;
     point1[0] = o->oHomeX;
-    point1[1] = o->oHomeY + 700.0f;
+    point1[1] = o->oHomeY + 1000.0f;
     point1[2] = o->oHomeZ;
     o->oF8 += 0x200;
     o->oFaceAngleRoll = 0x2800 * sins(o->oF8);
-    vec3f_set_dist_and_angle(point1, point2, 700.0f, o->oFaceAngleRoll - 0x4000, o->oFaceAngleYaw + 0x4000);
+    vec3f_set_dist_and_angle(point1, point2, 1000.0f, o->oFaceAngleRoll - 0x4000, o->oFaceAngleYaw + 0x4000);
     vec3f_copy(&o->oPosX, point2);
     if (gMarioCurrentRoom == o->oRoom && absi(o->oFaceAngleRoll) > 0x2000) {
         cur_obj_play_sound_2(SOUND_ENV_BOAT_ROCKING1);
@@ -46,6 +46,12 @@ void bhv_mind_chandelier_loop(void) {
 
 void bhv_spinning_plat_loop(void) {
     struct Object *obj;
+    struct MarioState *m = gMarioState;
+    if (m->action == ACT_LEDGE_GRAB) {
+        if (m->wall != NULL && m->wall->object == o) {
+            set_mario_action(m, ACT_LEDGE_CLIMB_FAST, 0);
+        }
+    }
     if (o->oBehParams2ndByte) {
         o->oFaceAngleYaw += 0x100;
     }
