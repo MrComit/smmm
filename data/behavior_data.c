@@ -5463,6 +5463,7 @@ const BehaviorScript bhvPlatformOnTrack[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ -100, /*Bounciness*/ -50, /*Drag strength*/ 100, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_FLOAT(oDrawingDistance, 0x6000),
     CALL_NATIVE(bhv_platform_on_track_init),
     SCALE(0, 150),
     BEGIN_LOOP(),
@@ -11116,5 +11117,34 @@ const BehaviorScript bhvMindChandelier[] = {
     SET_INT(oIntangibleTimer, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_mind_chandelier_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCarpetCage[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l8_locked_cage_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SCALE(0, 60),
+    // SET_INT(oRoom, 12),
+    CALL_NATIVE(bhv_carpet_cage_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_carpet_cage_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCarpetSwitch[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    // SCALE(0, 150),
+    CALL_NATIVE(bhv_carpet_cage_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_carpet_switch_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

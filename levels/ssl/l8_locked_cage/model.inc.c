@@ -858,7 +858,7 @@ u8 l8_locked_cage_keylock_grey_i8[] = {
 	
 };
 
-Vtx l8_locked_cage_Jail_mesh_layer_1_vtx_0[44] = {
+Vtx l8_locked_cage_Jail_mesh_layer_1_vtx_0[48] = {
 	{{ {-175, 0, 175}, 0, {2032, 2441}, {129, 0, 0, 255} }},
 	{{ {-175, 50, 175}, 0, {2032, 2032}, {129, 0, 0, 255} }},
 	{{ {-175, 50, -175}, 0, {-16, 2032}, {129, 0, 0, 255} }},
@@ -903,6 +903,10 @@ Vtx l8_locked_cage_Jail_mesh_layer_1_vtx_0[44] = {
 	{{ {175, 300, 175}, 0, {2032, -16}, {0, 129, 0, 255} }},
 	{{ {-175, 300, 175}, 0, {2032, 2032}, {0, 129, 0, 255} }},
 	{{ {-175, 300, -175}, 0, {-16, 2032}, {0, 129, 0, 255} }},
+	{{ {-175, 0, -175}, 0, {-425, 2032}, {0, 129, 0, 255} }},
+	{{ {175, 0, -175}, 0, {-425, -16}, {0, 129, 0, 255} }},
+	{{ {175, 0, 175}, 0, {-3292, -16}, {0, 129, 0, 255} }},
+	{{ {-175, 0, 175}, 0, {-3292, 2032}, {0, 129, 0, 255} }},
 };
 
 Gfx l8_locked_cage_Jail_mesh_layer_1_tri_0[] = {
@@ -915,10 +919,11 @@ Gfx l8_locked_cage_Jail_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
 	gsSP2Triangles(24, 25, 26, 0, 24, 26, 27, 0),
 	gsSP2Triangles(28, 29, 30, 0, 28, 30, 31, 0),
-	gsSPVertex(l8_locked_cage_Jail_mesh_layer_1_vtx_0 + 32, 12, 0),
+	gsSPVertex(l8_locked_cage_Jail_mesh_layer_1_vtx_0 + 32, 16, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
 	gsSPEndDisplayList(),
 };
 

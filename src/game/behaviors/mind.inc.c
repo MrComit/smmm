@@ -23,6 +23,50 @@ static struct ObjectHitbox sMindChandelierHitbox = {
 };
 
 
+void bhv_carpet_switch_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
+                if (lateral_dist_between_objects(o, gMarioObject) < 127.5f) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            cur_obj_scale_over_time(2, 3, 1.5f, 0.2f);
+            if (o->oTimer == 3) {
+                cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                o->oAction = 2;
+                cur_obj_shake_screen(SHAKE_POS_SMALL);
+                queue_rumble_data(5, 80);
+                obj = cur_obj_nearest_object_with_behavior(bhvCarpetCage);
+                if (obj != NULL) {
+                    obj->oF4 = 1;
+                }
+            }
+            break;
+    }
+}
+
+
+
+void bhv_carpet_cage_init(void) {
+    if (save_file_get_star_piece() & (1 << 0x18)) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_carpet_cage_loop(void) {
+    if (o->oF4) {
+        CL_explode_object(o, 1);
+        play_puzzle_jingle();
+    }
+}
+
+
+
 void bhv_mind_chandelier_init(void) {
     obj_set_hitbox(o, &sMindChandelierHitbox); 
 }

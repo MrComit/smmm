@@ -5,7 +5,7 @@ extern u8 l8_locked_cage_MetalGround_i8[];
 extern u8 l8_locked_cage_darkgate_ci8[];
 extern u8 l8_locked_cage_darkgate_ci8_pal_rgba16[];
 extern u8 l8_locked_cage_keylock_grey_i8[];
-extern Vtx l8_locked_cage_Jail_mesh_layer_1_vtx_0[44];
+extern Vtx l8_locked_cage_Jail_mesh_layer_1_vtx_0[48];
 extern Gfx l8_locked_cage_Jail_mesh_layer_1_tri_0[];
 extern Vtx l8_locked_cage_Jail_mesh_layer_1_vtx_1[16];
 extern Gfx l8_locked_cage_Jail_mesh_layer_1_tri_1[];
