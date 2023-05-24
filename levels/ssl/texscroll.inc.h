@@ -1,6 +1,7 @@
 extern void scroll_sts_mat_ssl_dl_PalaceFloor_002_layer1();
 extern void scroll_sts_mat_ssl_dl_RedWall_002_layer1();
 extern void scroll_sts_mat_ssl_dl_WoodFloorTrophyRoom_002_layer1();
+extern void scroll_sts_mat_ssl_dl_BooGoo_layer1();
 extern void scroll_sts_mat_ssl_dl_WoodFloorTransparent_002_layer1();
 extern void scroll_sts_mat_ssl_dl_BooGooContainer_layer1();
 extern void scroll_sts_mat_ssl_dl_WoodFloorTransparent_001_layer1();

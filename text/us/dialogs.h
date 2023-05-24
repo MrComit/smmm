@@ -636,31 +636,66 @@ will be able to wreak havoc\n\
 over the Mushroom Kingdom\n\
 ever again!"))
 
-DEFINE_DIALOG(DIALOG_056, 1, 6, 30, 200, _("\
-You brrrr-oke my record!\n\
-Unbelievable! I knew\n\
-that you were the coolest.\n\
-Now you've proven\n\
-that you're also the\n\
-fastest!\n\
-I can't award you a gold\n\
-medal, but here, take this\n\
-Star instead. You've\n\
-earned it!"))
+DEFINE_DIALOG(DIALOG_056, 1, 4, 30, 200, _("\
+Journal Entry 09\n\
+Date: ???. \n\
+\n\
+I don't know where I am.\n\
+The last thing I remember\n\
+is putting the finishing\n\
+touches on the portal, and \n\
+I am frightened at the idea\n\
+that this place could be the\n\
+Thought Realm I've spent so\n\
+much time trying to access.\n\
+\n\
+Or, it could just as easily\n\
+be what the real world has\n\
+turned into after opening\n\
+the portal.\n\
+Maybe I was just born today,\n\
+merely spoken into existence\n\
+by a thought inside the head\n\
+of the real me.\n\
+I don't know. All I know is\n\
+that it's cold, and I feel\n\
+a strange presence urging me\n\
+to keep moving forward."))
 
-DEFINE_DIALOG(DIALOG_057, 1, 4, 30, 200, _("\
-Egad! My baby!! Have you\n\
-seen my baby??? She's\n\
-the most precious baby in\n\
-the whole wide world.\n\
-(They say she has my\n\
-beak...) I just can't\n\
-remember where I left\n\
-her.\n\
-Let's see...I stopped\n\
-for herring and ice cubes,\n\
-then I...oohh! I just\n\
-don't know!"))
+DEFINE_DIALOG(DIALOG_057, 1, 5, 30, 200, _("\
+Journal Entry 10\n\
+Date: ???. \n\
+\n\
+\n\
+\n\
+After surveying my \n\
+surroundings, I now believe\n\
+myself to be trapped inside\n\
+my own mind - rather, a\n\
+portion of it.\n\
+A portion that was taken\n\
+from me and claimed by the\n\
+thought realm. \n\
+\n\
+\n\
+If this place contains the\n\
+materialization of some of\n\
+my thoughts, it stands to\n\
+reason that it could contain\n\
+the portal itself.\n\
+The odds may be slim, but at\n\
+this point, it's my only hope\n\
+for ever finding my way home.\n\
+\n\
+\n\
+I still feel the presence\n\
+though, and am beginning to\n\
+fear that I might not be\n\
+alone down here.\n\
+\n\
+Perhaps something is in here\n\
+with me, and perhaps whatever\n\
+it is doesn't want me to leave."))
 
 DEFINE_DIALOG(DIALOG_058, 1, 4, 30, 200, _("\
 You found my precious,\n\
