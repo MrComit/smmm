@@ -208,6 +208,14 @@ void bhv_boogoo_cage_loop(void) {
     if (sBooBits[o->oBehParams2ndByte]) {
         room_boo_multiplier_loop();
     }
+
+    if (gCurrLevelNum == LEVEL_SSL && gMarioCurrentRoom == 10) {
+        if (gMarioState->pos[1] > 9000.0f) {
+            cur_obj_unhide();
+        } else {
+            cur_obj_hide();
+        }
+    }
 }
 
 
@@ -232,6 +240,14 @@ void bhv_boogoo_object_loop(void) {
         o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 4);
         if (o->oOpacity == 0) {
             o->activeFlags = 0;
+        }
+    }
+
+    if (gCurrLevelNum == LEVEL_SSL && gMarioCurrentRoom == 10) {
+        if (gMarioState->pos[1] > 9000.0f) {
+            cur_obj_unhide();
+        } else {
+            cur_obj_hide();
         }
     }
 }

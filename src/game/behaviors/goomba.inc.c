@@ -264,14 +264,8 @@ void huge_goomba_weakly_attacked(void) {
     o->oAction = GOOMBA_ACT_ATTACKED_MARIO;
 }
 
-/**
- * Update function for goomba.
- */
-void bhv_goomba_update(void) {
-    // PARTIAL_UPDATE
 
-    f32 animSpeed;
-
+void goomba_level_specific_checks(void) {
     if (gCurrLevelNum == LEVEL_CCM && gCurrAreaIndex == 1) {
         if (gHideCityGoombas) {
             cur_obj_hide();
@@ -287,6 +281,24 @@ void bhv_goomba_update(void) {
     } else if (gCurrLevelNum == LEVEL_BBH && gCurrAreaIndex == 2) {
         o->oPosZ = 0.0f;
     }
+    // } else if (gCurrLevelNum == LEVEL_SSL && gMarioCurrentRoom == 10) {
+    //     if (absf(o->oPosY - gMarioState->pos[1]) > 2000.0f) {
+    //         cur_obj_unhide();
+    //     } else {
+    //         cur_obj_hide();
+    //     }
+    // }
+}
+
+/**
+ * Update function for goomba.
+ */
+void bhv_goomba_update(void) {
+    // PARTIAL_UPDATE
+
+    f32 animSpeed;
+
+    goomba_level_specific_checks();
 
     if (obj_update_standard_actions(o->oGoombaScale)) {
         // If this goomba has a spawner and mario moved away from the spawner, unload

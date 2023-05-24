@@ -41,6 +41,20 @@ void spawn_jenga_object(s32 param) {
     }
 }
 
+void jenga_plat_act_3(void) {
+    if (o->oObj104 != NULL && o->oObj104->activeFlags != 0) {
+        o->oObj104->oPosY = o->oPosY + 20.0f;
+    } else {
+        o->oObj104 = NULL;
+    }
+    o->oPosY = o->oObjF4->oPosY + 50.0f;
+    if (o->oTimer > 30*o->oBehParams2ndByte && (o->oBehParams >> 24) != 3) {
+        o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
+        obj_scale(o->oObjF8, 2.0f);
+        vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 1100.0f, o->oPosZ);
+        o->oAction = 4;
+    }
+}
 
 
 void bhv_jenga_plat_loop(void) {
@@ -52,13 +66,21 @@ void bhv_jenga_plat_loop(void) {
         case 0:
             if (o->oObjF4->oAction == 2) {
                 o->oAction = 1;
-                spawn_jenga_object(o->oBehParams >> 24);
+                // spawn_jenga_object(o->oBehParams >> 24);
             }
             break;
         case 1:
             o->oPosY -= 2.0f;
-            if (o->oPosY <= o->oObjF4->oPosY + 50.0f) {
+            if (o->oPosY < o->oObjF4->oPosY + 1000.0f) {
                 o->oAction = 2;
+                spawn_jenga_object(o->oBehParams >> 24);
+            }
+            break;
+        case 2:
+            load_object_collision_model();
+            o->oPosY -= 2.0f;
+            if (o->oPosY <= o->oObjF4->oPosY + 50.0f) {
+                o->oAction = 3;
             }
             if (o->oObjFC != NULL && o->oObjFC->activeFlags != 0) {
                 vec3f_copy(&o->oObjFC->oPosX, &o->oObjFC->oHomeX);
@@ -78,21 +100,12 @@ void bhv_jenga_plat_loop(void) {
                 o->oObj104 = NULL;
             }
             break;
-        case 2:
-            if (o->oObj104 != NULL && o->oObj104->activeFlags != 0) {
-                o->oObj104->oPosY = o->oPosY + 20.0f;
-            } else {
-                o->oObj104 = NULL;
-            }
-            o->oPosY = o->oObjF4->oPosY + 50.0f;
-            if (o->oTimer > 30*o->oBehParams2ndByte) {
-                o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
-                obj_scale(o->oObjF8, 2.0f);
-                vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 1100.0f, o->oPosZ);
-                o->oAction = 3;
-            }
-            break;
         case 3:
+            load_object_collision_model();
+            jenga_plat_act_3();
+            break;
+        case 4:
+            load_object_collision_model();
             o->oPosY = o->oObjF4->oPosY + 50.0f;
             if (o->oObjF8 == NULL || o->oObjF8->activeFlags == 0) {
                 CL_explode_object(o, 1);
@@ -106,6 +119,18 @@ void bhv_jenga_plat_loop(void) {
 
 
 void bhv_observatory_bomb_init(void) {
+    if (!gIsConsole) {
+        o->oAnimations = &bobomb_seg8_anims_0802396C;
+        geo_obj_init_animation(&o->header.gfx, &o->oAnimations[0]);
+    } else {
+        cur_obj_set_model(MODEL_BOWLING_BALL);
+        o->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
+        cur_obj_scale(0.75f);
+    }
+
+
+
+
     obj_set_hitbox(o, &sFallingBombHitbox);
     // vec3f_set(&o->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 600.0f, gMarioState->pos[2]);
     o->oFaceAngleYaw = random_u16();
@@ -178,24 +203,24 @@ void observatory_spawn_bombs(void) {
 void update_observatory_time(void) {
     if (o->oTimer < 500) {
         o->os16FE = 0x80;
-        o->os16100 = 70;
-        o->os16102 = 15;
-        o->os16104 = 35;
+        o->os16100 = 80;
+        o->os16102 = 20;
+        o->os16104 = 40;
     } else if (o->oTimer < 1300) {
         o->os16FE = 0xA0;
-        o->os16100 = 65;
-        o->os16102 = 13;
-        o->os16104 = 30;
+        o->os16100 = 75;
+        o->os16102 = 18;
+        o->os16104 = 36;
     } else if (o->oTimer < 2000) {
         o->os16FE = 0x100;
-        o->os16100 = 55;
-        o->os16102 = 10;
-        o->os16104 = 28;
+        o->os16100 = 67;
+        o->os16102 = 14;
+        o->os16104 = 32;
     } else {
         o->os16FE = 0x180;
-        o->os16100 = 40;
-        o->os16102 = 8;
-        o->os16104 = 23;
+        o->os16100 = 58;
+        o->os16102 = 10;
+        o->os16104 = 28;
     }
 }
 

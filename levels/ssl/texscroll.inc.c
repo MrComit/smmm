@@ -27,13 +27,6 @@ void scroll_sts_mat_ssl_dl_WoodFloorTrophyRoom_002_layer1() {
 	}
 };
 
-void scroll_sts_mat_ssl_dl_BooGoo_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_ssl_dl_BooGoo_layer1);
-	shift_s(mat, 10, PACK_TILESIZE(0, 1));
-	shift_s(mat, 15, PACK_TILESIZE(0, 1));
-	shift_t(mat, 15, PACK_TILESIZE(0, 1));
-};
-
 void scroll_sts_mat_ssl_dl_WoodFloorTransparent_002_layer1() {
 	static int intervalTex1 = 3;
 	static int curInterval1 = 3;
@@ -173,6 +166,11 @@ void scroll_sts_mat_ssl_dl_NightCloudsNoCol_001_layer5() {
 	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
+void scroll_sts_mat_ssl_dl_ObservatorySky_001_layer1() {
+	Gfx *mat = segmented_to_virtual(mat_ssl_dl_ObservatorySky_001_layer1);
+	shift_s(mat, 14, PACK_TILESIZE(0, 2));
+};
+
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 68;
@@ -196,7 +194,7 @@ void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0() {
 
 void scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 303;
+	int count = 333;
 	int width = 256 * 0x20;
 
 	static int currentX = 0;
@@ -235,11 +233,6 @@ void scroll_sts_mat_ssl_dl_ObservatoryWall_001_layer1() {
 		shift_s(mat, 11, PACK_TILESIZE(0, 256));
 		curInterval0 = intervalTex0;
 	}
-};
-
-void scroll_sts_mat_ssl_dl_ObservatorySky_001_layer1() {
-	Gfx *mat = segmented_to_virtual(mat_ssl_dl_ObservatorySky_001_layer1);
-	shift_s(mat, 14, PACK_TILESIZE(0, 2));
 };
 
 void scroll_sts_mat_ssl_dl_LaundryWall_001() {
@@ -325,7 +318,6 @@ void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_PalaceFloor_002_layer1();
 	scroll_sts_mat_ssl_dl_RedWall_002_layer1();
 	scroll_sts_mat_ssl_dl_WoodFloorTrophyRoom_002_layer1();
-	scroll_sts_mat_ssl_dl_BooGoo_layer1();
 	scroll_sts_mat_ssl_dl_WoodFloorTransparent_002_layer1();
 	scroll_sts_mat_ssl_dl_BooGooContainer_layer1();
 	scroll_sts_mat_ssl_dl_WoodFloorTransparent_001_layer1();
@@ -336,11 +328,11 @@ void scroll_ssl() {
 	scroll_sts_mat_ssl_dl_WoodFloor_001_layer1();
 	scroll_sts_mat_ssl_dl_NightClouds_001_layer5();
 	scroll_sts_mat_ssl_dl_NightCloudsNoCol_001_layer5();
+	scroll_sts_mat_ssl_dl_ObservatorySky_001_layer1();
 	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_0();
 	scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1();
 	scroll_sts_mat_ssl_dl_ObservatoryWallDither_001_layer1();
 	scroll_sts_mat_ssl_dl_ObservatoryWall_001_layer1();
-	scroll_sts_mat_ssl_dl_ObservatorySky_001_layer1();
 	scroll_sts_mat_ssl_dl_LaundryWall_001();
 	scroll_ssl_dl_TideToad_002_mesh_layer_5_vtx_0();
 	scroll_ssl_dl_TideToad_001_mesh_layer_5_vtx_0();
