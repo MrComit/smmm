@@ -118,6 +118,7 @@ const GeoLayout ssl_dl_207__Outside4_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OGround_006_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, ssl_dl_OGround_006_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_OpeningGround_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, 0, 0, 65536, ssl_dl_PalaceWall_002_mesh_layer_4),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
