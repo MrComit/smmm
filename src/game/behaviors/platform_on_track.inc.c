@@ -68,7 +68,8 @@ void bhv_platform_on_track_init(void) {
 
         o->oPlatformOnTrackStartWaypoint = segmented_to_virtual(sPlatformOnTrackPaths[pathIndex]);
 
-        o->oPlatformOnTrackIsNotHMC = pathIndex - 4;
+        // o->oPlatformOnTrackIsNotHMC = pathIndex - 4;
+        o->oPlatformOnTrackIsNotHMC = 0;
 
         o->oBehParams2ndByte = o->oMoveAngleYaw; // TODO: Weird?
 
@@ -83,6 +84,7 @@ void bhv_platform_on_track_init(void) {
  * wait for mario action.
  */
 static void platform_on_track_act_init(void) {
+    // struct Object *obj;
     s32 i;
 
     o->oPlatformOnTrackPrevWaypoint = o->oPlatformOnTrackStartWaypoint;
@@ -106,6 +108,14 @@ static void platform_on_track_act_init(void) {
     for (i = 1; i < 6; i++) {
         platform_on_track_update_pos_or_spawn_ball(i, o->oHomeX, o->oHomeY, o->oHomeZ);
     }
+    // if (!o->oPlatformOnTrackIsNotHMC) {
+    //     obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+    //     if (obj != NULL) {
+    //         vec3f_set(&obj->oPosX, 20548.0f, 8347.0f, 3150.0f);
+    //         obj->oFaceAngleYaw = 0;
+    //     }
+    //     o->oPlatformOnTrackIsNotHMC = 1;
+    // }
 
     o->oAction = PLATFORM_ON_TRACK_ACT_WAIT_FOR_MARIO;
 }
@@ -114,9 +124,18 @@ static void platform_on_track_act_init(void) {
  * Wait for mario to stand on the platform for 20 frames, then begin moving.
  */
 static void platform_on_track_act_wait_for_mario(void) {
+    struct Object *obj;
     if (gMarioObject->platform == o) {
         if (o->oTimer > 20) {
             o->oAction = PLATFORM_ON_TRACK_ACT_MOVE_ALONG_TRACK;
+            if (!o->oPlatformOnTrackIsNotHMC) {
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_set(&obj->oPosX, 20548.0f, 8347.0f, 3150.0f);
+                    obj->oFaceAngleYaw = 0;
+                }
+                o->oPlatformOnTrackIsNotHMC = 1;
+            }
         }
     } else {
         if (o->activeFlags & ACTIVE_FLAG_IN_DIFFERENT_ROOM) {
@@ -127,16 +146,30 @@ static void platform_on_track_act_wait_for_mario(void) {
     }
 }
 
+void platform_on_track_change_respawn(void) {
+    struct Object *obj;
+            obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+            if (obj != NULL) {
+                vec3f_set(&obj->oPosX, 18730.0f, 16570.0f, 9359.0f);
+                obj->oFaceAngleYaw = 0x8000;
+            }
+            obj = CL_nearest_object_with_behavior_and_field(bhvFadingWarp, 0x188, 0x00930700);
+            if (obj != NULL) {
+                obj->oF4 = 1;
+            }
+}
+
 /**
  * Move along the track. After reaching the end, either start falling,
  * return to the init action, or continue moving back to the start waypoint.
  */
 static void platform_on_track_act_move_along_track(void) {
+    struct Object *obj;
     s16 initialAngle;
 
     if (!o->oPlatformOnTrackIsNotSkiLift) {
         cur_obj_play_sound_1(SOUND_ENV_ELEVATOR3);
-    } else if (!o->oPlatformOnTrackIsNotHMC) {
+    } else /*if (!o->oPlatformOnTrackIsNotHMC)*/ {
         cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
     }
 
@@ -144,6 +177,9 @@ static void platform_on_track_act_move_along_track(void) {
     if (o->oPlatformOnTrackPrevWaypointFlags == WAYPOINT_FLAGS_END
         && !((u16)(o->oBehParams >> 16) & PLATFORM_ON_TRACK_BP_RETURN_TO_START)) {
         o->oAction = PLATFORM_ON_TRACK_ACT_FALL;
+        if (gMarioState->pos[1] >= 16450.0f) {
+            platform_on_track_change_respawn();
+        }
     } else {
         // The ski lift should pause or stop after reaching a special waypoint
         if (o->oPlatformOnTrackPrevWaypointFlags != 0 && !o->oPlatformOnTrackIsNotSkiLift) {
