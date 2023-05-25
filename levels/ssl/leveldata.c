@@ -126,3 +126,5 @@
 #include "levels/ssl/mind_chandelier/model.inc.c"
 #include "levels/ssl/magic_carpet/model.inc.c"
 #include "levels/ssl/magic_carpet/collision.inc.c"
+#include "levels/ssl/toad_cage/model.inc.c"
+#include "levels/ssl/toad_cage/collision.inc.c"

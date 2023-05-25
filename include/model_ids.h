@@ -923,6 +923,7 @@
 #define MODEL_O1_BOOGOO           0x5E
 #define MODEL_MP_BOOGOO           0x5F
 #define MODEL_OBS_BOOGOO          0x60
+#define MODEL_TOAD_CAGE           0x61
 
 // 0x6C-0x73
 #define MODEL_MEM_PLATE           0x6C

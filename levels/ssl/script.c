@@ -82,6 +82,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_BUTTON, mem_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_CHANDELIER, mind_chandelier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MAGIC_CARPET, magic_carpet_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_TOAD_CAGE, toad_cage_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -238,6 +239,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -22687, 6347, -1694, 0, 90, 0, (0xA << 16), bhvFlyingWarp),
 		OBJECT(MODEL_MIND_MOUND_BLOCK, -14394, 7337, -1639, 0, 0, 0, (3 << 16), bhvMindMoundBlock),
 		OBJECT(MODEL_MP_BOOGOO, -17138, 5687, -1654, 0, 0, 0, (2 << 24) | (4 << 16) | (3 << 8), bhvBoogooObjectNoCage),
+		OBJECT(MODEL_TOAD_CAGE, -19557, 5787, -1675, 0, 0, 0, (3 << 24) | (6 << 16) | (4 << 8), bhvBoogooObjectNoCage),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -19265, 5687, -4800, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -16765, 7187, -4550, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -19265, 5687, 1450, 0, 180, 0, 0x00000000, bhvDoor),

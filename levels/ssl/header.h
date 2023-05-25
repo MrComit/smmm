@@ -238,4 +238,8 @@ extern const Gfx dl_magic_carpet_model_half[];
 extern const Gfx dl_magic_carpet_end[];
 extern const Collision magic_carpet_collision[];
 
+#include "levels/ssl/toad_cage/geo_header.h"
+
+#include "levels/ssl/toad_cage/collision_header.h"
+
 #endif

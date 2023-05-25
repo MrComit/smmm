@@ -1,0 +1,18 @@
+extern const GeoLayout toad_cage_switch_opt1[];
+extern const GeoLayout toad_cage_geo[];
+extern u8 toad_cage_BOOGOO1_i4[];
+extern u8 toad_cage_BOOGOO2_i4[];
+extern u8 toad_cage_darkmetal_i8[];
+extern Vtx toad_cage_tc_mesh_layer_1_vtx_0[212];
+extern Gfx toad_cage_tc_mesh_layer_1_tri_0[];
+extern Vtx toad_cage_tc_mesh_layer_1_vtx_1[67];
+extern Gfx toad_cage_tc_mesh_layer_1_tri_1[];
+extern Gfx mat_toad_cage_BooGooObjectNoCull_layer1[];
+extern Gfx mat_revert_toad_cage_BooGooObjectNoCull_layer1[];
+extern Gfx mat_toad_cage_Cage[];
+extern Gfx mat_revert_toad_cage_Cage[];
+extern Gfx mat_toad_cage_BooGooObjectTransNoCull_layer1[];
+extern Gfx mat_revert_toad_cage_BooGooObjectTransNoCull_layer1[];
+extern Gfx toad_cage_tc_mesh_layer_1[];
+extern Gfx toad_cage_tc_mesh_layer_1_mat_override_BooGooObjectTransNoCull_0[];
+extern Gfx toad_cage_material_revert_render_settings[];

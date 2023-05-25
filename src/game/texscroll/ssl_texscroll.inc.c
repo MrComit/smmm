@@ -18,6 +18,7 @@
 #include "levels/ssl/observatory_splat/texscroll.inc.c"
 #include "levels/ssl/obs_boogoo/texscroll.inc.c"
 #include "levels/ssl/mem_morning_obj/texscroll.inc.c"
+#include "levels/ssl/toad_cage/texscroll.inc.c"
 void scroll_textures_ssl() {
 		scroll_ssl_level_geo_boogoo_goomba();
 	scroll_ssl_level_geo_boogoo_koopa();
@@ -38,4 +39,5 @@ void scroll_textures_ssl() {
 	scroll_ssl_level_geo_observatory_splat();
 	scroll_ssl_level_geo_obs_boogoo();
 	scroll_ssl_level_geo_mem_morning_obj();
+	scroll_ssl_level_geo_toad_cage();
 }

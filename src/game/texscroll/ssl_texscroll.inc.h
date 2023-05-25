@@ -1,3 +1,4 @@
+#include "levels/ssl/toad_cage/texscroll.inc.h"
 #include "levels/ssl/mem_morning_obj/texscroll.inc.h"
 #include "levels/ssl/obs_boogoo/texscroll.inc.h"
 #include "levels/ssl/observatory_splat/texscroll.inc.h"
