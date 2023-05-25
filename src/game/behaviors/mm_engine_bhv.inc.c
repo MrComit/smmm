@@ -988,6 +988,92 @@ void toad_friend_l1_loop(void) {
     o->oInteractStatus = 0;
 }
 
+
+void toad_friend_portal_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                o->oAction = 2;
+                play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+            }
+
+            cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            break;
+        case 2:
+            if (o->oTimer > 12) {
+                if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                    o->oAction = 0;
+                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                }
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+void toad_friend_cage_one(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oF8 == 0) {
+                if (gMarioState->pos[0] > -20500.0f) {
+                    o->oAction = 1;
+                    o->oF8 = 1;
+                }
+            } else {
+                if (o->oInteractStatus == INT_STATUS_INTERACTED)
+                    o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                o->oAction = 2;
+                play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+            }
+
+            cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            break;
+        case 2:
+            if (o->oTimer > 12) {
+                if (CL_NPC_Dialog(DIALOG_062)) {
+                    o->oAction = 0;
+                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                }
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
+
+void toad_friend_cage_loop(void) {
+    switch (o->oF4) {
+        case 0:
+            toad_friend_cage_one();
+            if (save_file_get_boos() & (1 << 23)) {
+                // o->oF8 = 0;
+                o->oF4 = 1;
+                o->oFaceAngleYaw = o->oMoveAngleYaw = 0xD000;
+                vec3f_set(&o->oPosX, -9400.0f, 6847.0f, -2100.0f);
+            }
+            break;
+        case 1:
+            toad_friend_portal_loop();
+            if (save_file_get_boos() & (1 << 24)) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 extern Vec3f sToadFriendWarp1;
 
 void bhv_friend_toad_loop(void) {
@@ -1002,7 +1088,12 @@ void bhv_friend_toad_loop(void) {
                 o->oRoom = 13;
             }
             break;
-        case LEVEL_WF:
+        case LEVEL_SSL:
+            if (gCurrAreaIndex == 1) {
+                toad_friend_portal_loop();
+            } else if (gCurrAreaIndex == 2) {
+                toad_friend_cage_loop();
+            }
             break;
     }
 }

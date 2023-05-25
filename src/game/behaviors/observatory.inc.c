@@ -37,6 +37,8 @@ void spawn_jenga_object(s32 param) {
             o->oObj104 = spawn_object(o, MODEL_GOLDEN_CRATE, bhvGoldenCrate);
             o->oObj104->oPosY += 20.0f;
             o->oObj104->oBehParams = 13 << 8;
+
+            o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
             break;
     }
 }

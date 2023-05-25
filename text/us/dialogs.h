@@ -725,18 +725,56 @@ The challenge for this chapter\n\
 is now available in the file\n\
 select menu."))
 
-DEFINE_DIALOG(DIALOG_062, 1, 3, 30, 200, _("\
-Hidden inside the green\n\
-block is the amazing\n\
-Metal Cap.\n\
-Wearing it, you won't\n\
-catch fire or be hurt\n\
-by enemy attacks.\n\
-You don't even have to\n\
-breathe while wearing it.\n\
+DEFINE_DIALOG(DIALOG_062, 1, 5, 30, 200, _("\
+Mario! Is that really you?\n\
+How on earth did you find me?\n\
+You plumbers are so crafty,\n\
+shame on me for discounting\n\
+the trades yet again... \n\
+OK, SO. You're probably\n\
+wondering what this place is.\n\
+Basically, I invented a way to\n\
+transform thoughts into- \n\
+wait, you already know?\n\
+How did you find out?\n\
 \n\
-The only problem:\n"
-YOU_CANT_SWIM_IN_IT))
+\n\
+\n\
+\n\
+YOU READ MY JOURNAL???? \n\
+WHAT GIVES YOU THE RIGHT TO-\n\
+ahem, perhaps we have bigger\n\
+fish to fry.\n\
+\n\
+I really must apologize, after\n\
+being stuck in here for so long\n\
+my brain is such a mess. Where\n\
+was I? Ah right - this mess.\n\
+I messed up.\n\
+I wanted to save the world,\n\
+but I failed to consider my\n\
+own imperfections. When the\n\
+imperfections took over, I\n\
+realized I had created what\n\
+I sought to destroy - but it\n\
+was too late. I let my pride\n\
+get the better of me, but you\n\
+Mario - you really help people.\n\
+\n\
+You don't take shortcuts like I\n\
+did, You really put in the work\n\
+to make a difference and help\n\
+people. \n\
+\n\
+Even if it's just to save that\n\
+princess, who we only pretend\n\
+to care about for the sake of\n\
+strengthening our broader\n\
+social cohesion.\n\
+So, I'll ask for your help\n\
+just this once: \n\
+Mario, please help me escape\n\
+this place."))
 
 DEFINE_DIALOG(DIALOG_063, 1, 5, 30, 200, _("\
 The Vanish Cap is inside\n\
