@@ -698,20 +698,51 @@ with me, and perhaps whatever\n\
 it is doesn't want me to leave."))
 
 DEFINE_DIALOG(DIALOG_058, 1, 4, 30, 200, _("\
-You found my precious,\n\
-precious baby! Where\n\
-have you been? How can\n\
-I ever thank you, Mario?\n\
-Oh, I do have this...\n\
-...Star. Here, take it\n\
-with my eternal\n\
-gratitude."))
+Drats! Another roadblock.\n\
+Look around Mario, there's\n\
+gotta be a cage somewhere\n\
+around here..."))
 
-DEFINE_DIALOG(DIALOG_059, 1, 4, 30, 200, _("\
-That's not my baby! She\n\
-looks nothing like me!\n\
-Her parents must be\n\
-worried sick!"))
+DEFINE_DIALOG(DIALOG_059, 1, 5, 30, 200, _("\
+This is it Mario.\n\
+This portal should bring us\n\
+back to the real world!\n\
+\n\
+\n\
+On the other hand, it could also\n\
+be one of my hundreds of failed\n\
+portal ideas, which will rip\n\
+our bodies to shreds gruesomely\n\
+as soon as we enter - \n\
+but at this point I'll take it!\n\
+\n\
+\n\
+\n\
+\n\
+No matter what happens,\n\
+Mario, thank you for everything\n\
+you've done. \n\
+\n\
+\n\
+You're an inspiration to myself\n\
+and millions all around the\n\
+Mushroom Kingdom, and I can't\n\
+help but feel guilty for getting\n\
+you involved in all of this.\n\
+So, if we somehow make it out\n\
+of here alive, I want you to\n\
+keep my fortune. Or, at least\n\
+what's left of it. \n\
+\n\
+I never really deserved it\n\
+anyway, this was all a foolish\n\
+endeavor...\n\
+\n\
+\n\
+Alright, I've given my spiel.\n\
+There's nothing left to do but\n\
+jump in the portal!\n\
+Are you ready, Mario?"))
 
 DEFINE_DIALOG(DIALOG_060, 1, 4, 30, 200, _("\
 You defeated a boo!\n\

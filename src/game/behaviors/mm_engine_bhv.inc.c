@@ -992,8 +992,15 @@ void toad_friend_l1_loop(void) {
 void toad_friend_portal_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
-                o->oAction = 1;
+            if (o->oFC == 0) {
+                if (o->oDistanceToMario < 600.0f) {
+                    o->oAction = 1;
+                    o->oFC = 1;
+                }
+            } else {
+                if (o->oDistanceToMario > 800.0f) {
+                    o->oFC == 0;
+                }
             }
             break;
         case 1:
