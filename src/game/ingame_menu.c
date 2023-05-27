@@ -4469,10 +4469,6 @@ void print_mind_level(void) {
     s16 y;
     if (gMindTitleTimer >= 0) {
         gMindTitleTimer++;
-    } else if (gMindTitleTimer-- < 25) {
-        save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
-        gCamera->comitCutscene = 0;
-        set_mario_npc_dialog(0);
     }
     if (gMindTitleTimer >= MIND_TITLE_DELAY) {
         set_mario_npc_dialog(1);

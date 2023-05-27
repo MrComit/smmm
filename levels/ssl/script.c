@@ -12,6 +12,7 @@
 #include "levels/scripts.h"
 
 #include "actors/common1.h"
+#include "actors/common0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -72,7 +73,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_OBSERVATORY_SPLAT, observatory_splat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_JENGA_PLAT, jenga_plat_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_OBS_BOOGOO, obs_boogoo_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_RED_SHADOW, red_shadow_geo), 
+	LOAD_MODEL_FROM_DL(MODEL_RED_SHADOW, red_shadow_RedShadow_mesh_layer_6, LAYER_TRANSPARENT_DECAL), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_PLATE, mem_plate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_WALL, mem_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MEM_BOUNCE_BOX, mem_bounce_box_geo), 
@@ -84,7 +85,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_CHANDELIER, mind_chandelier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MAGIC_CARPET, magic_carpet_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOAD_CAGE, toad_cage_geo), 
-	LOAD_MODEL_FROM_DL( MODEL_CONSOLE_OBS_BOMB,       bobomb_seg8_dl_08022D08, LAYER_ALPHA),
+	LOAD_MODEL_FROM_DL(MODEL_CONSOLE_OBS_BOMB, bobomb_seg8_dl_08022D08, LAYER_ALPHA), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

@@ -552,17 +552,6 @@ Gfx mat_red_shadow_RedShadow[] = {
 	gsDPSetEnvColor(231, 0, 0, 178),
 	gsSPEndDisplayList(),
 };
-
-Gfx red_shadow_RedShadow_mesh_layer_6[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(red_shadow_RedShadow_mesh_layer_6_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_red_shadow_RedShadow),
-	gsSPDisplayList(red_shadow_RedShadow_mesh_layer_6_tri_0),
-	gsSPEndDisplayList(),
-};
-
 Gfx red_shadow_material_revert_render_settings[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
@@ -573,4 +562,16 @@ Gfx red_shadow_material_revert_render_settings[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
+
+Gfx red_shadow_RedShadow_mesh_layer_6[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(red_shadow_RedShadow_mesh_layer_6_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_red_shadow_RedShadow),
+	gsSPDisplayList(red_shadow_RedShadow_mesh_layer_6_tri_0),
+	gsSPDisplayList(red_shadow_material_revert_render_settings),
+	gsSPEndDisplayList(),
+};
+
 
