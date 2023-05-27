@@ -651,6 +651,7 @@ void mario_l_to_levitate(void) {
 
 extern s16 gEdgeLengths[3];
 extern s32 gStarPieceReward;
+extern s32 gMindTitleTimer;
 /**
  * Mario's primary behavior update function.
  */
@@ -685,6 +686,31 @@ void bhv_mario_update(void) {
     // }
     mario_update_toad_friend(gMarioState);
     mario_update_room_clear(gMarioState);
+
+
+    if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {
+        // vec3s_set(gMarioSpawnInfo->startPos, -21762, 8000, 24318);
+        // save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
+        gCamera->comitCutscene = 25;
+        set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 0);
+        // if (gMarioState->pos[1] > gMarioState->floorHeight) {
+        //     set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 0);
+        // } else if (gMarioState->action == ACT_CUTSCENE_JUMP) {
+        //     set_mario_action(gMarioState, ACT_JUMP_LAND_STOP, 0);
+        // }
+        // if (gMindTitleTimer < -19) {
+        //     if (gMindTitleTimer == -21) {
+        //         play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+        //     } else if (gMindTitleTimer == -39) {
+        //         play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
+        //         // save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
+        //         // gCamera->comitCutscene = 0;
+        //         // set_mario_npc_dialog(0);
+        //     }
+        // }
+
+    }
+
 
 #ifndef SMMM_DEBUG
     if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) && gMarioCurrentRoom == 2 && gCurrLevelNum == LEVEL_BOB) {

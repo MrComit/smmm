@@ -14,6 +14,7 @@
 #include "actors/common1.h"
 
 /* Fast64 begin persistent block [includes] */
+#include "actors/common0.h"
 /* Fast64 end persistent block [includes] */
 
 #include "make_const_nonconst.h"
@@ -83,6 +84,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MIND_CHANDELIER, mind_chandelier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_MAGIC_CARPET, magic_carpet_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOAD_CAGE, toad_cage_geo), 
+	LOAD_MODEL_FROM_DL( MODEL_CONSOLE_OBS_BOMB,       bobomb_seg8_dl_08022D08, LAYER_ALPHA),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -95,9 +97,9 @@ const LevelScript level_ssl_entry[] = {
 		WARP_NODE(0x92, LEVEL_SSL, 0x01, 0x93, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x93, LEVEL_SSL, 0x01, 0x92, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xAA, LEVEL_DDD, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		OBJECT(MODEL_NONE, 14658, 7147, -11675, 0, 90, 0, (0x1A << 16), bhvAirborneDeathWarp),
-		OBJECT(MODEL_NONE, 14658, 7147, -11675, 0, 90, 0, (0xA << 16), bhvFlyingWarp),
-		MARIO_POS(0x01, 90, 14658, 7147, -11675),
+		OBJECT(MODEL_NONE, -21859, 385, 24269, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, -21859, 13000, 24269, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
+		MARIO_POS(0x01, -180, -21859, 13000, 24269),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -19963, 2068, 7128, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_JOURNAL_BOOK, -23228, 1697, 16095, 0, 0, 0, (DIALOG_056 << 16), bhvJournalBook),
 		OBJECT(MODEL_O1_BOOGOO, -20163, 157, 25243, 0, 0, 0, (3 << 16), bhvBoogooObjectNoCage),
@@ -190,6 +192,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MIND_CHANDELIER, 22169, 13732, 13286, 0, -13, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_TELEPORTER, 21070, 16470, 5404, 0, -90, 0, (0x92 << 16), bhvFadingWarp),
 		OBJECT(MODEL_TELEPORTER, 22467, 7847, 3805, 0, -73, 0, (0x93 << 16) | (7 << 8), bhvFadingWarp),
+		OBJECT(MODEL_HEART, 19575, 16520, 7278, 0, -90, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_L8_LOCKED_CAGE, 21195, 16470, 9359, 0, 90, 0, 0x00000000, bhvCarpetCage),
 		OBJECT(MODEL_PURPLE_SWITCH, 16118, 12467, 1798, 0, 90, 0, 0x00000000, bhvCarpetSwitch),
 		OBJECT(MODEL_PEEPA, 21057, 7731, -7778, 0, -90, 0, (1 << 24), bhvFloorPeepa),
@@ -202,7 +205,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_SPINNING_PLAT, 17856, 7758, -999, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 19637, 7758, 9, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_STAR_PIECE, 21195, 16570, 9359, 0, 0, 0, (0x18 << 24), bhvStarPiece),
-		OBJECT(MODEL_TOAD_FRIEND, 18369, 16470, 5803, 0, -65, 0, (DIALOG_059 << 16), bhvToadFriend),
+		OBJECT(MODEL_TOAD_FRIEND, 18129, 16470, 6813, 0, -65, 0, (DIALOG_059 << 16), bhvToadFriend),
 		TERRAIN(ssl_area_1_collision),
 		ROOMS(ssl_area_1_collision_rooms),
 		MACRO_OBJECTS(ssl_area_1_macro_objs),
@@ -434,7 +437,7 @@ const LevelScript level_ssl_entry[] = {
 	END_AREA(),
 
 	FREE_LEVEL_POOL(),
-	MARIO_POS(0x01, 90, 14658, 7147, -11675),
+	MARIO_POS(0x01, -180, -21859, 13000, 24269),
 	CALL(0, lvl_init_or_update),
 	CALL_LOOP(1, lvl_init_or_update),
 	CLEAR_LEVEL(),

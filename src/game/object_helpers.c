@@ -1517,7 +1517,7 @@ extern Vtx observatory_splat_osplat_mesh_layer_1_vtx_0_copy[201];
 
 Gfx *geo_dynamic_observatory_spinning_plat(s32 callContext, struct GraphNode *node, void *context) {
     s32 i;
-    s16 angle, x, y;
+    s16 angle, x, y, yaw;
     f32 mag;
     Vtx *verts;
     Vtx *verts2;
@@ -1531,13 +1531,15 @@ Gfx *geo_dynamic_observatory_spinning_plat(s32 callContext, struct GraphNode *no
     if (callContext == GEO_CONTEXT_RENDER) {
         obj = (struct Object *) gCurGraphNodeObject;
 
+        yaw = obj->oFaceAngleYaw;
+
         verts = segmented_to_virtual(&observatory_splat_osplat_mesh_layer_1_vtx_0);
         verts2 = segmented_to_virtual(&observatory_splat_osplat_mesh_layer_1_vtx_0_copy);
-        bcopy(verts, verts2, 201 * sizeof(Vtx));
+        // bcopy(verts, verts2, 201 * sizeof(Vtx));
         for (i = 0; i < 201; i++) {
-            x = verts2[i].v.tc[0] - 496;
-            y = verts2[i].v.tc[1] - 496;
-            angle = atan2s(y, x) + obj->oFaceAngleYaw;
+            x = verts[i].v.tc[0] - 496;
+            y = verts[i].v.tc[1] - 496;
+            angle = atan2s(y, x) + yaw;
             mag = sqrtf(x * x + y * y);
             verts2[i].v.tc[0] = mag * sins(angle) + 496;
             verts2[i].v.tc[1] = mag * coss(angle) + 496;

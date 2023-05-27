@@ -4196,6 +4196,7 @@ static char sRoom87[] = { TEXT_ROOM87 };
 
 
 char sRoomCorrupt[] = { TEXT_CORRUPT };
+char sRoomMind[] = { TEXT_MIND };
 
 char *sRoomNames[] = {
     sRoom1, sRoom2, sRoom3, sRoom4, sRoom5, sRoom6, sRoom7, sRoom8, sRoom9, sRoom10,
@@ -4442,9 +4443,64 @@ void print_mirror_controls(void) {
 }
 
 
+
+
+
+void print_mind_string(s16 x, s16 y, u8 alpha, const u8 *str) {
+    f32 scale = 2.5f;
+    create_dl_ortho_matrix();
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, 1.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
+    print_generic_string(x + 1, y - 1, str);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
+    print_generic_string(x, y, str);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+
+s32 gMindTitleTimer = 0;
+
+#define MIND_TITLE_DELAY 95
+
+void print_mind_level(void) {
+    s16 y;
+    if (gMindTitleTimer >= 0) {
+        gMindTitleTimer++;
+    } else if (gMindTitleTimer-- < 25) {
+        save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
+        gCamera->comitCutscene = 0;
+        set_mario_npc_dialog(0);
+    }
+    if (gMindTitleTimer >= MIND_TITLE_DELAY) {
+        set_mario_npc_dialog(1);
+        y = 255;
+        if (gMindTitleTimer < 50+MIND_TITLE_DELAY) {
+            y = ((gMindTitleTimer - MIND_TITLE_DELAY) * 5) + 5;
+        } else if (gMindTitleTimer < 120+MIND_TITLE_DELAY) {
+            y = 255;
+        } else {
+            y = 255 - ((gMindTitleTimer - (120+MIND_TITLE_DELAY)) * 5);
+        }
+
+        print_mind_string(16, 5, y, sRoomMind);
+        if (gMindTitleTimer >= 170+MIND_TITLE_DELAY) {
+            gMindTitleTimer = -1;
+        }
+    }
+    // print_text_fmt_int(20, 20, "%x", gMarioState->action, 0);
+}
+
+
 void special_print(void) {
     if (gCurrDemoInput == NULL && gMenuOptSelectIndex != MENU_OPT_MAP) {
-        print_room_names();
+        if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {
+            print_mind_level();
+        } else {
+            print_room_names();
+        }
         print_multiplier();
         print_mirror_controls();
     }

@@ -4,7 +4,7 @@ void scroll_sts_mat_lll_dl_CorridorWall_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_CorridorWall_layer1);
 
 	if (--curInterval1 <= 0) {
-		shift_s(mat, 21, PACK_TILESIZE(0, 1));
+		shift_s(mat, 15, PACK_TILESIZE(0, 1));
 		curInterval1 = intervalTex1;
 	}
 };
@@ -23,8 +23,7 @@ void scroll_sts_mat_lll_dl_ElevatorWallFake_layer1() {
 void scroll_lll_dl_Fog_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 39;
-	int width = 32 * 0x20;
-	int height = 128 * 0x20;
+	int height = 256 * 0x20;
 
 	static int currentY = 0;
 	int deltaY;
@@ -48,15 +47,15 @@ void scroll_sts_mat_lll_dl_Fog_001_layer5() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_Fog_001_layer5);
 
 	if (--curInterval1 <= 0) {
-		shift_s_down(mat, 21, PACK_TILESIZE(0, 1));
-		shift_t(mat, 21, PACK_TILESIZE(0, 1));
+		shift_s_down(mat, 15, PACK_TILESIZE(0, 1));
+		shift_t(mat, 15, PACK_TILESIZE(0, 1));
 		curInterval1 = intervalTex1;
 	}
 };
 
 void scroll_sts_mat_lll_dl_FlowerPetal_002_v4_001_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_FlowerPetal_002_v4_001_layer1);
-	shift_t_down(mat, 21, PACK_TILESIZE(0, 2));
+	shift_t_down(mat, 15, PACK_TILESIZE(0, 2));
 };
 
 void scroll_sts_mat_lll_dl_LaundryWall_001() {
@@ -73,7 +72,6 @@ void scroll_sts_mat_lll_dl_LaundryWall_001() {
 void scroll_lll_dl_TideToad_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 12;
-	int width = 64 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -106,7 +104,6 @@ void scroll_sts_mat_lll_dl_GymWall_layer1() {
 void scroll_lll_dl_Treadmill_002_mesh_layer_1_vtx_1() {
 	int i = 0;
 	int count = 24;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -131,7 +128,7 @@ void scroll_sts_mat_lll_dl_Treadmill_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_Treadmill_layer1);
 
 	if (--curInterval0 <= 0) {
-		shift_t_down(mat, 13, PACK_TILESIZE(0, 1));
+		shift_t_down(mat, 10, PACK_TILESIZE(0, 1));
 		curInterval0 = intervalTex0;
 	}
 };
@@ -139,7 +136,6 @@ void scroll_sts_mat_lll_dl_Treadmill_layer1() {
 void scroll_lll_dl_Treadmill_001_mesh_layer_1_vtx_1() {
 	int i = 0;
 	int count = 48;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -161,7 +157,6 @@ void scroll_lll_dl_Treadmill_001_mesh_layer_1_vtx_1() {
 void scroll_lll_dl_Treadmill_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 98;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -183,7 +178,6 @@ void scroll_lll_dl_Treadmill_mesh_layer_1_vtx_0() {
 void scroll_lll_dl_Treadmill_mesh_layer_1_vtx_2() {
 	int i = 0;
 	int count = 32;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -204,7 +198,7 @@ void scroll_lll_dl_Treadmill_mesh_layer_1_vtx_2() {
 
 void scroll_sts_mat_lll_dl_TreadmillFAST_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_TreadmillFAST_layer1);
-	shift_t_down(mat, 13, PACK_TILESIZE(0, 1));
+	shift_t_down(mat, 10, PACK_TILESIZE(0, 1));
 };
 
 void scroll_sts_mat_lll_dl_WoodFloorTransparent_002_layer1() {
@@ -213,8 +207,8 @@ void scroll_sts_mat_lll_dl_WoodFloorTransparent_002_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_WoodFloorTransparent_002_layer1);
 
 	if (--curInterval1 <= 0) {
-		shift_s(mat, 23, PACK_TILESIZE(0, 1));
-		shift_t(mat, 23, PACK_TILESIZE(0, 2));
+		shift_s(mat, 17, PACK_TILESIZE(0, 1));
+		shift_t(mat, 17, PACK_TILESIZE(0, 2));
 		curInterval1 = intervalTex1;
 	}
 };
@@ -244,7 +238,6 @@ void scroll_sts_mat_lll_dl_LockerWall_001() {
 void scroll_lll_dl_EngineRoom_002_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 12;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -269,22 +262,21 @@ void scroll_sts_mat_lll_dl_EngineWall_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_EngineWall_layer1);
 
 	if (--curInterval1 <= 0) {
-		shift_s(mat, 21, PACK_TILESIZE(0, 1));
+		shift_s(mat, 15, PACK_TILESIZE(0, 1));
 		curInterval1 = intervalTex1;
 	}
 };
 
 void scroll_sts_mat_lll_dl_BooGoo_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_BooGoo_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
 void scroll_lll_dl_EngineRoom_006_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 12;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -309,16 +301,16 @@ void scroll_sts_mat_lll_dl_Buttons_001_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_Buttons_001_layer1);
 
 	if (--curInterval1 <= 0) {
-		shift_t(mat, 21, PACK_TILESIZE(0, 128));
+		shift_t(mat, 15, PACK_TILESIZE(0, 128));
 		curInterval1 = intervalTex1;
 	}
 };
 
 void scroll_sts_mat_lll_dl_BooGooContainer_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_BooGooContainer_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
 void scroll_sts_mat_lll_dl_ChamberWall_layer1() {
@@ -327,7 +319,7 @@ void scroll_sts_mat_lll_dl_ChamberWall_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_ChamberWall_layer1);
 
 	if (--curInterval1 <= 0) {
-		shift_s(mat, 21, PACK_TILESIZE(0, 1));
+		shift_s(mat, 15, PACK_TILESIZE(0, 1));
 		curInterval1 = intervalTex1;
 	}
 };
@@ -338,20 +330,20 @@ void scroll_sts_mat_lll_dl_WoodPlat_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_WoodPlat_layer1);
 
 	if (--curInterval1 <= 0) {
-		shift_s(mat, 21, PACK_TILESIZE(0, 1));
-		shift_t(mat, 21, PACK_TILESIZE(0, 1));
+		shift_s(mat, 15, PACK_TILESIZE(0, 1));
+		shift_t(mat, 15, PACK_TILESIZE(0, 1));
 		curInterval1 = intervalTex1;
 	}
 };
 
 void scroll_sts_mat_lll_dl_ElevatorBG() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorBG);
-	shift_t_down(mat, 18, PACK_TILESIZE(0, 25));
+	shift_t_down(mat, 13, PACK_TILESIZE(0, 25));
 };
 
 void scroll_sts_mat_lll_dl_ElevatorPillars() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorPillars);
-	shift_s_down(mat, 11, PACK_TILESIZE(0, 45));
+	shift_s_down(mat, 8, PACK_TILESIZE(0, 45));
 };
 
 void scroll_sts_mat_lll_dl_AElevatorWall_layer1() {
@@ -367,9 +359,9 @@ void scroll_sts_mat_lll_dl_AElevatorWall_layer1() {
 
 void scroll_sts_mat_lll_dl_BooGooContainerTrans_layer5() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_BooGooContainerTrans_layer5);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
 void scroll_lll() {

@@ -325,6 +325,7 @@
 #define TEXT_ROOM87 _("The Roof")
 
 #define TEXT_CORRUPT _("-!-t!r- c     -R")
+#define TEXT_MIND _("The Monstrous Mind")
 
 
 #define TEXT_CHAPTER _("Chapter")

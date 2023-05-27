@@ -1038,6 +1038,7 @@ void toad_friend_cage_one(void) {
             }
             break;
         case 1:
+            set_mario_npc_dialog(1);
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
             if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                 o->oAction = 2;

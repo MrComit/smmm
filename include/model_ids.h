@@ -913,6 +913,7 @@
 #define MODEL_RED_SHADOW          0xE7
 #define MODEL_MIND_CHANDELIER     0xE6
 #define MODEL_MAGIC_CARPET        0xE5
+#define MODEL_CONSOLE_OBS_BOMB    0xE4
 
 
 // LEVEL 8 MODELS CONT:

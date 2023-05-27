@@ -125,9 +125,9 @@ void bhv_observatory_bomb_init(void) {
         o->oAnimations = &bobomb_seg8_anims_0802396C;
         geo_obj_init_animation(&o->header.gfx, &o->oAnimations[0]);
     } else {
-        cur_obj_set_model(MODEL_BOWLING_BALL);
+        cur_obj_set_model(MODEL_CONSOLE_OBS_BOMB);
         o->header.gfx.node.flags |= GRAPH_RENDER_BILLBOARD;
-        cur_obj_scale(0.75f);
+        cur_obj_scale(1.95f); // was 0.75f
     }
 
 

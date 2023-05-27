@@ -677,6 +677,12 @@ static void level_cmd_set_mario_start_pos(void) {
         gMarioSpawnInfo->startAngle[1] = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
     }
 
+    // if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {
+    //     vec3s_set(gMarioSpawnInfo->startPos, -21762, 8000, 24318);
+    //     save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
+    //     gCamera->comitCutscene = 25;
+    // }
+
 
     sCurrentCmd = CMD_NEXT;
 }
