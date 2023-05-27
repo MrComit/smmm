@@ -696,21 +696,14 @@ void bhv_mario_update(void) {
         set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 8);
         if (gMindTitleTimer < 0) {
             gMindTitleTimer--;
-            if (gMindTitleTimer == -20) {
+            if (gMindTitleTimer == -14) {
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
-            } else if (gMindTitleTimer < -30) {
+            } else if (gMindTitleTimer == -39) {
                 gCamera->comitCutscene = 0;
-                // set_r_button_camera(gCamera);
-                // s8DirModeBaseYaw = 0;
-                // set_mario_action(gMarioState, ACT_FREEFALL, 0);
-                if (gMindTitleTimer == -38) {
-                    CL_set_camera_pos(gMarioState->pos, gMarioState->pos);
-                    // warp_camera(gMarioState->pos[0] - gCamera->pos[0], gMarioState->pos[1] - gCamera->pos[1], gMarioState->pos[2] - gCamera->pos[2]);
-                    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
-                    save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
-                    // CL_set_camera_pos(gMarioState->pos, gMarioState->pos);
-                    set_mario_npc_dialog(0);
-                }
+                reset_camera(gCamera);
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x12, 0x00, 0x00, 0x00);
+                save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
+                set_mario_npc_dialog(0);
             }
         }
 
