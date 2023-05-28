@@ -815,17 +815,11 @@ Once you enter the portal,\n\
 you will not be able to return.\n\
 --------------------------"))
 
-DEFINE_DIALOG(DIALOG_064, 1, 5, 30, 200, _("\
-When you put on the Wing\n\
-Cap that comes from a\n\
-red block, do the Triple\n\
-Jump to soar high into\n\
-the sky.\n\
-Use the Control Stick to\n\
-guide Mario. Pull back to\n\
-to fly up, press forward\n\
-to nose down, and press [Z]\n\
-to land."))
+DEFINE_DIALOG(DIALOG_064, 1, 4, 30, 200, _("\
+You destroyed a cage!\n\
+Do you want to save?\n\
+\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_065, 1, 3, 30, 200, _("\
 (One of my favorite things to\n\

@@ -201,6 +201,11 @@ void bhv_boogoo_cage_loop(void) {
                 CL_explode_object(o->oObjFC, 1);
                 save_file_set_boos(o->oBehParams2ndByte);
                 o->oUnk1A8 = 3;
+
+                obj = spawn_object(o, MODEL_NONE, bhvBooSavePrompt);
+                obj->oBehParams2ndByte = DIALOG_064;
+                // play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+                // play_course_clear();
             }
             break;
     }

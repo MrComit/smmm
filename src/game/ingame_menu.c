@@ -4492,11 +4492,15 @@ void print_mind_level(void) {
 
 void special_print(void) {
     if (gCurrDemoInput == NULL && gMenuOptSelectIndex != MENU_OPT_MAP) {
+#ifndef SMMM_DEBUG
         if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {
             print_mind_level();
         } else {
+#endif
             print_room_names();
+#ifndef SMMM_DEBUG
         }
+#endif
         print_multiplier();
         print_mirror_controls();
     }
