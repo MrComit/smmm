@@ -164,7 +164,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_TOAD_FLAG_MIND_LEVER        /* 0x00000400 */ (1 << 10)
 #define SAVE_TOAD_FLAG_MIND_MAZE         /* 0x00000800 */ (1 << 11)
 #define SAVE_TOAD_FLAG_MIND_ENTRY        /* 0x00001000 */ (1 << 12)
-#define SAVE_TOAD_FLAG_014               /* 0x00002000 */ (1 << 13)
+#define SAVE_TOAD_FLAG_PROF_CAGE_MSG     /* 0x00002000 */ (1 << 13)
 #define SAVE_TOAD_FLAG_015               /* 0x00004000 */ (1 << 14)
 #define SAVE_TOAD_FLAG_016               /* 0x00008000 */ (1 << 15)
 #define SAVE_TOAD_FLAG_017               /* 0x00010000 */ (1 << 16)

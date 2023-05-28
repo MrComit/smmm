@@ -1045,10 +1045,11 @@ void toad_friend_portal_loop(void) {
 void toad_friend_cage_one(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oF8 == 0) {
+            if (o->oF8 == 0 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_PROF_CAGE_MSG) == 0) {
                 if (gMarioState->pos[0] > -20500.0f) {
                     o->oAction = 1;
                     o->oF8 = 1;
+                    save_file_set_newflags(SAVE_TOAD_FLAG_PROF_CAGE_MSG, 1);
                 }
             } else {
                 if (o->oInteractStatus == INT_STATUS_INTERACTED)
