@@ -4,7 +4,6 @@
 void reverse_scroll_lll_dl_Treadmill_002_mesh_layer_1_vtx_1() {
 	int i = 0;
 	int count = 24;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -29,7 +28,7 @@ void reverse_scroll_sts_mat_lll_dl_Treadmill_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_Treadmill_layer1);
 
 	if (--curInterval0 <= 0) {
-		shift_t_down(mat, 13, PACK_TILESIZE(0, -1));
+		shift_t_down(mat, 10, PACK_TILESIZE(0, -1));
 		curInterval0 = intervalTex0;
 	}
 };
@@ -102,7 +101,7 @@ void reverse_scroll_lll_dl_Treadmill_mesh_layer_1_vtx_2() {
 
 void reverse_scroll_sts_mat_lll_dl_TreadmillFAST_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_TreadmillFAST_layer1);
-	shift_t_down(mat, 13, PACK_TILESIZE(0, -1));
+	shift_t_down(mat, 10, PACK_TILESIZE(0, -1));
 };
 
 

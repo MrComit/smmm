@@ -222,6 +222,24 @@ void bhv_golden_pillar_loop(void) {
 }
 
 
+void bhv_portal_warning_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oRoom == gMarioCurrentRoom && gMarioState->pos[2] > -7500.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (CL_NPC_Dialog(DIALOG_063)) {
+                o->oAction = 2;
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+    o->oIntangibleTimer = 0;
+}
+
+
 
 void bhv_journal_book_init(void) {
     obj_set_hitbox(o, &sJournalHitbox);

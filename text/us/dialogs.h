@@ -807,15 +807,13 @@ just this once: \n\
 Mario, please help me escape\n\
 this place."))
 
-DEFINE_DIALOG(DIALOG_063, 1, 5, 30, 200, _("\
-The Vanish Cap is inside\n\
-the blue block. Mr. I.\n\
-will be surprised, since\n\
-you'll be invisible when\n\
-you wear it!\n\
-Even the Big Boo will be\n\
-fooled--and you can walk\n\
-through secret walls, too."))
+DEFINE_DIALOG(DIALOG_063, 1, 6, 30, 200, _("\
+--------------------------\n\
+           WARNING\n\
+\n\
+Once you enter the portal,\n\
+you will not be able to return.\n\
+--------------------------"))
 
 DEFINE_DIALOG(DIALOG_064, 1, 5, 30, 200, _("\
 When you put on the Wing\n\

@@ -920,6 +920,7 @@ extern const BehaviorScript bhvBounceBoxHidden[];
 extern const BehaviorScript bhvMindChandelier[];
 extern const BehaviorScript bhvCarpetCage[];
 extern const BehaviorScript bhvCarpetSwitch[];
+extern const BehaviorScript bhvPortalWarning[];
 
 
 #endif // BEHAVIOR_DATA_H

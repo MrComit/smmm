@@ -1160,6 +1160,7 @@ void bhv_mind_chandelier_loop(void);
 void bhv_carpet_cage_init(void);
 void bhv_carpet_cage_loop(void);
 void bhv_carpet_switch_loop(void);
+void bhv_portal_warning_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -1775,12 +1775,12 @@ Vec3s sElevatorColor = {0xCB, 0x94, 0x29};
 
 void reverse_scroll_sts_mat_lll_dl_ElevatorPillars() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorPillars);
-	shift_s_down(mat, 11, PACK_TILESIZE(0, -45));
+	shift_s_down(mat, 8, PACK_TILESIZE(0, -45));
 };
 
 void reverse_scroll_sts_mat_lll_dl_ElevatorBG() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorBG);
-	shift_t_down(mat, 18, PACK_TILESIZE(0, -25));
+	shift_t_down(mat, 13, PACK_TILESIZE(0, -25));
 };
 
 
@@ -1789,12 +1789,12 @@ void reverse_scroll_sts_mat_lll_dl_ElevatorBG() {
 
 void slow_reverse_scroll_sts_mat_lll_dl_ElevatorPillars() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorPillars);
-	shift_s_down(mat, 11, PACK_TILESIZE(0, -22));
+	shift_s_down(mat, 8, PACK_TILESIZE(0, -22));
 };
 
 void slow_reverse_scroll_sts_mat_lll_dl_ElevatorBG() {
 	Gfx *mat = segmented_to_virtual(mat_lll_dl_ElevatorBG);
-	shift_t_down(mat, 18, PACK_TILESIZE(0, -13));
+	shift_t_down(mat, 13, PACK_TILESIZE(0, -13));
 };
 
 
