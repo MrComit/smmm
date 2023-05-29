@@ -610,7 +610,7 @@ void mario_update_toad_friend(struct MarioState *m) {
     mario_update_manager_upgrades(m);
 }
 
-s8 sLevelRoomOffsets[] = {0, 14, 32, 36, 41, 48, 64, 74, 0, 0, 0,};
+s8 sLevelRoomOffsets[] = {0, 14, 32, 36, 41, 48, 64, 74, 86, 0, 0,};
 s8 gGlobalMarioRoom = 0;
 
 
