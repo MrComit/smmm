@@ -45,4 +45,10 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/controller/geo_header.h"
 
+#include "levels/ddd/end_goomba/geo_header.h"
+
+#include "levels/ddd/end_shyguy/geo_header.h"
+
+#include "levels/ddd/end_boo/geo_header.h"
+
 #endif

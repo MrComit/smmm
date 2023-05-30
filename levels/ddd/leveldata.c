@@ -37,3 +37,6 @@
 #include "levels/ddd/leveldata.inc.c"
 
 #include "levels/ddd/controller/model.inc.c"
+#include "levels/ddd/end_goomba/model.inc.c"
+#include "levels/ddd/end_shyguy/model.inc.c"
+#include "levels/ddd/end_boo/model.inc.c"

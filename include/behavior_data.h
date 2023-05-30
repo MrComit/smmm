@@ -922,6 +922,7 @@ extern const BehaviorScript bhvCarpetCage[];
 extern const BehaviorScript bhvCarpetSwitch[];
 extern const BehaviorScript bhvPortalWarning[];
 extern const BehaviorScript bhvTheController[];
+extern const BehaviorScript bhvEndBoo[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -944,6 +944,9 @@
 
 // LEVEL 9 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_THE_CONTROLLER      0xFF
+#define MODEL_END_GOOMBA          0xFE
+#define MODEL_END_SHYGUY          0xFD
+#define MODEL_END_BOO             0xFC
 
 
 

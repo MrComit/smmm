@@ -40,6 +40,9 @@ const LevelScript level_ddd_entry[] = {
 	JUMP_LINK(script_func_global_5), 
 	JUMP_LINK(script_func_global_14), 
 	LOAD_MODEL_FROM_GEO(MODEL_THE_CONTROLLER, controller_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_GOOMBA, end_goomba_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_SHYGUY, end_shyguy_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_BOO, end_boo_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -52,6 +55,9 @@ const LevelScript level_ddd_entry[] = {
 		OBJECT(MODEL_NONE, 1083, 7706, -3448, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 1083, 7706, -3448),
 		OBJECT(MODEL_THE_CONTROLLER, 1083, 7706, -8781, 0, 0, 0, 0x00000000, bhvTheController),
+		OBJECT(MODEL_END_BOO, 495, 7506, -5029, 0, 0, 0, 0x00000000, bhvEndBoo),
+		OBJECT(MODEL_END_GOOMBA, -700, 7406, -5149, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_END_SHYGUY, 63, 7406, -5409, 0, 0, 0, 0x00000000, bhvShyguy),
 		TERRAIN(ddd_area_1_collision),
 		ROOMS(ddd_area_1_collision_rooms),
 		MACRO_OBJECTS(ddd_area_1_macro_objs),

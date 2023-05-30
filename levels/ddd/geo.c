@@ -23,3 +23,6 @@
 #include "levels/ddd/geo.inc.c"
 
 #include "levels/ddd/controller/geo.inc.c"
+#include "levels/ddd/end_goomba/geo.inc.c"
+#include "levels/ddd/end_shyguy/geo.inc.c"
+#include "levels/ddd/end_boo/geo.inc.c"

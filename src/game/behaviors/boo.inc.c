@@ -472,6 +472,9 @@ static void boo_act_3(void) {
     u32 params = 0;
     if (boo_update_during_death()) {
         o->activeFlags = 0;
+        if (cur_obj_has_behavior(bhvEndBoo)) {
+            return;
+        }
         save_file_set_boos(o->oBehParams2ndByte);
         switch (o->oBehParams >> 24) {
             case 1:

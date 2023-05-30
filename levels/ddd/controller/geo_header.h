@@ -10,7 +10,7 @@ extern Gfx controller_Controller_mesh_layer_5_tri_0[];
 extern Vtx controller_Controller_mesh_layer_5_vtx_1[32];
 extern Gfx controller_Controller_mesh_layer_5_tri_1[];
 extern Vtx controller_Controller_mesh_layer_1_vtx_cull[8];
-extern Vtx controller_Controller_mesh_layer_1_vtx_0[25];
+extern Vtx controller_Controller_mesh_layer_1_vtx_0[26];
 extern Gfx controller_Controller_mesh_layer_1_tri_0[];
 extern Gfx mat_controller_BooGoo_layer5[];
 extern Gfx mat_revert_controller_BooGoo_layer5[];
