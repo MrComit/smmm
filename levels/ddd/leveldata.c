@@ -40,3 +40,6 @@
 #include "levels/ddd/end_goomba/model.inc.c"
 #include "levels/ddd/end_shyguy/model.inc.c"
 #include "levels/ddd/end_boo/model.inc.c"
+#include "levels/ddd/end_cage/model.inc.c"
+#include "levels/ddd/end_cage/collision.inc.c"
+#include "levels/ddd/end_fist/model.inc.c"

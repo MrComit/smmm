@@ -1,3 +1,5 @@
+#include "levels/ddd/end_fist/texscroll.inc.h"
+#include "levels/ddd/end_cage/texscroll.inc.h"
 #include "levels/ddd/end_boo/texscroll.inc.h"
 #include "levels/ddd/end_shyguy/texscroll.inc.h"
 #include "levels/ddd/end_goomba/texscroll.inc.h"

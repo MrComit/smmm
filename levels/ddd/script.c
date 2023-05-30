@@ -43,6 +43,8 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_END_GOOMBA, end_goomba_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_SHYGUY, end_shyguy_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_BOO, end_boo_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_CAGE, end_cage_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_FIST, end_fist_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

@@ -11202,3 +11202,39 @@ const BehaviorScript bhvEndBoo[] = {
         CALL_NATIVE(bhv_boo_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFinalBossAttacks[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_attack_manager_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_attack_manager_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvEndCage[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(end_cage_collision),
+    // SCALE(0, 150),
+    SET_HOME(),
+    CALL_NATIVE(bhv_end_cage_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_end_cage_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvEndFist[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    CALL_NATIVE(bhv_end_fist_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_end_fist_loop),
+    END_LOOP(),
+};

@@ -10,12 +10,208 @@ static struct ObjectHitbox sTheControllerHitbox = {
     /* hurtboxHeight:     */ 300,
 };
 
+struct ObjectHitbox sEndFistHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 180,
+    /* height:            */ 850,
+    /* hurtboxRadius:     */ 180,
+    /* hurtboxHeight:     */ 850,
+};
 
-void bhv_the_controller_init(void) {
-    obj_set_hitbox(o, &sTheControllerHitbox);
+
+
+enum FinalBossAttacks {
+    FBA_BUBBLES,     // 0
+    FBA_CAGE,        // 1
+    FBA_LASER,       // 2
+    FBA_LOGS,        // 3
+    FBA_WALL,        // 4
+    FBA_DROPPER,     // 5
+    FBA_BOWSER,      // 6
+};
+
+
+
+
+void bhv_end_fist_init(void) {
+    obj_set_hitbox(o, &sEndFistHitbox);
+}
+
+
+void bhv_end_fist_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosY = approach_f32_symmetric(o->oPosY, 7406.0f, 50.0f);
+            if (o->oPosY == 7406.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > 25) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, 6400.0f, 65.0f);
+                if (o->oPosY == 6400.0f) {
+                    o->activeFlags = 0;
+                }
+            }
+            break;
+    }
+}
+
+
+
+void bhv_end_cage_init(void) {
+    o->oPosY = 6500.0f;
+    o->oFaceAngleYaw = 0x4000 * CL_RandomMinMaxU16(0, 3);
+}
+
+
+void bhv_end_cage_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosX = gMarioState->pos[0];
+            o->oPosZ = gMarioState->pos[2];
+            o->oPosY = approach_f32_symmetric(o->oPosY, 6806.0f, 15.0f);
+            if (o->oPosY == 6806.0f) {
+                o->oAction = 1;
+                o->oFloatF4 = 5.0f;
+            }
+            break;
+        case 1:
+            if (o->oTimer < 60) {
+                o->oPosY += o->oFloatF4;
+                o->oFloatF4 *= -1.0f;
+                o->oPosX = gMarioState->pos[0];
+                o->oPosZ = gMarioState->pos[2];
+            } else if (o->oTimer <= 90) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 40.0f);
+                // if (o->oPosY == o->oHomeY) {
+                // }
+            } 
+            if (o->oTimer == 80) {
+                o->oObjF8 = spawn_object(o, MODEL_END_FIST, bhvEndFist);
+                o->oObjF8->oPosY = 6400.0f;
+                o->oAction = 2;
+                // o->oObjF8->oHomeY = 7406.0f;
+            }
+            break;
+        case 2:
+            if (o->oTimer > 60) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, 6500.0f, 35.0f);
+                if (o->oPosY == 6500.0f) {
+                    o->parentObj->oObjF4 = NULL;
+                    o->activeFlags = 0;
+                }
+            }
+            break;
+    }
 
 }
 
+
+
+
+void controller_bubble_attack(void) {
+    
+}
+
+void controller_cage_attack(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oObjF4 = spawn_object(o, MODEL_END_CAGE, bhvEndCage);
+            o->oObjF4->oPosY = 7406.0f;
+            o->oObjF4->oHomeY = 7406.0f;
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oObjF4 == NULL) {
+                o->os16F8++;
+                if (o->os16F8 > 3) {
+                    o->activeFlags = 0;
+                }
+                o->oAction = 0;
+            }
+            break;
+    }
+}
+
+void controller_laser_attack(void) {
+
+}
+
+void controller_log_attack(void) {
+
+}
+
+void controller_wall_attack(void) {
+
+}
+
+void controller_dropper_attack(void) {
+
+}
+
+void controller_bowser_attack(void) {
+
+}
+
+
+void bhv_attack_manager_init(void) {
+    
+}
+
+
+void bhv_attack_manager_loop(void) {
+    switch (o->oBehParams2ndByte) {
+        case FBA_BUBBLES:
+            controller_bubble_attack();
+            break;
+        case FBA_CAGE:
+            controller_cage_attack();
+            break;
+        case FBA_LASER:
+            controller_laser_attack();
+            break;
+        case FBA_LOGS:
+            controller_log_attack();
+            break;
+        case FBA_WALL:
+            controller_wall_attack();
+            break;
+        case FBA_DROPPER:
+            controller_dropper_attack();
+            break;
+        case FBA_BOWSER:
+            controller_bowser_attack();
+            break;
+    }
+}
+
+
+void bhv_the_controller_init(void) {
+    struct Object *obj;
+    obj = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
+    obj->oBehParams2ndByte = FBA_CAGE;
+
+    obj_set_hitbox(o, &sTheControllerHitbox);
+}
+
+
+
+/*
+BOSS STRUCTURE PLAN:
+
+in one act: he decides which attack(s) to use
+in the next act: he waits for those attacks to end
+
+    -a separate entity should carry out the attacks.
+        -a generic attack handler bhv, with a bparam2 switch case?
+
+
+*/
 
 void bhv_the_controller_loop(void) {
     o->oInteractStatus = 0;

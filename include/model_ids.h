@@ -947,6 +947,8 @@
 #define MODEL_END_GOOMBA          0xFE
 #define MODEL_END_SHYGUY          0xFD
 #define MODEL_END_BOO             0xFC
+#define MODEL_END_CAGE            0xFB
+#define MODEL_END_FIST            0xFA
 
 
 
