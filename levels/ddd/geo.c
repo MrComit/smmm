@@ -21,3 +21,5 @@
 
 
 #include "levels/ddd/geo.inc.c"
+
+#include "levels/ddd/controller/geo.inc.c"

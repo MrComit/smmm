@@ -43,4 +43,6 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/header.inc.h"
 
+#include "levels/ddd/controller/geo_header.h"
+
 #endif

@@ -11167,3 +11167,19 @@ const BehaviorScript bhvPortalWarning[] = {
         CALL_NATIVE(bhv_portal_warning_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvTheController[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO)),
+    // LOAD_ANIMATIONS(oAnimations, bully_seg5_anims_0500470C),
+    // ANIMATE(0),
+    SET_HOME(),
+    // HIDE(),
+    CALL_NATIVE(bhv_the_controller_init),
+    // SET_INT(oOpacity, 255),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_the_controller_loop),
+    END_LOOP(),
+};
