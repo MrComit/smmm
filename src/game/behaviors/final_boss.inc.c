@@ -141,6 +141,7 @@ static u8 sEndSpikeAttackHandler[6] = {
 
 void bhv_end_spike_init(void) {
     // obj_set_hitbox(o, &sEndSpikeHitbox);
+    o->header.gfx.scale[1] = 0.0f;
 }
 
 
@@ -149,6 +150,9 @@ void bhv_end_spike_loop(void) {
     f32 x, z, x2, z2;
     switch (o->oAction) {
         case 0:
+            if (o->header.gfx.scale[1] < 1.25f) {
+                o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.25f, 0.1f);
+            }
             // if (o->oBehParams2ndByte && o->oDistanceToMario < 2750.0f) {
             //     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
             // }
@@ -195,6 +199,10 @@ void bhv_end_spike_loop(void) {
     // }
     obj_handle_attacks(&sEndSpikeHitbox, o->oAction, sEndSpikeAttackHandler);
     obj_update_standard_actions(1.0f);
+
+    if (o->activeFlags == 0) {
+        o->parentObj->os16100++;
+    }
     // o->header.gfx.scale[1] = 0.5f;
     // print_text_fmt_int(80, 80, "%x", (s32)o->prevObj, 0);
     // if (o->activeFlags == 0 && (o->oBehParams >> 24) & 0xFF) {
@@ -380,7 +388,42 @@ void controller_laser_attack(void) {
 }
 
 void controller_log_attack(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oObjF4 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+            vec3f_set(&o->oObjF4->oPosX, -937.0f, 7406.0f, -8110.0f);
+            o->oObjF8 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+            vec3f_set(&o->oObjF8->oPosX, 1063.0f, 7406.0f, -8110.0f);
+            o->oObjFC = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+            vec3f_set(&o->oObjFC->oPosX, 3063.0f, 7406.0f, -8110.0f);
 
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oTimer > 500) {
+                if (o->oObjF4 != NULL && o->oObjF4->oAction == 0) {
+                    o->oObjF4->activeFlags = 0;
+                    o->oObjF4 = NULL;
+                    o->os16100++;
+                }
+                if (o->oObjF8 != NULL && o->oObjF8->oAction == 0) {
+                    o->oObjF8->activeFlags = 0;
+                    o->oObjF8 = NULL;
+                    o->os16100++;
+                }
+                if (o->oObjFC != NULL && o->oObjFC->oAction == 0) {
+                    o->oObjFC->activeFlags = 0;
+                    o->oObjFC = NULL;
+                    o->os16100++;
+                }
+            }
+
+            if (o->os16100 >= 3) {
+                o->activeFlags = 0;
+                o->parentObj->oObjF4 = NULL;
+            }
+            break;
+    }
 }
 
 void controller_wall_attack(void) {
@@ -431,7 +474,7 @@ void bhv_attack_manager_loop(void) {
 void bhv_the_controller_init(void) {
     struct Object *obj;
     o->oObjF4 = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    o->oObjF4->oBehParams2ndByte = FBA_BUBBLES;
+    o->oObjF4->oBehParams2ndByte = FBA_LOGS;
 
     obj_set_hitbox(o, &sTheControllerHitbox);
 }
