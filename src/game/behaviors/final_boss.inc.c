@@ -1,3 +1,4 @@
+#include "levels/ddd/header.h"
 static struct ObjectHitbox sTheControllerHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 180,
@@ -72,6 +73,52 @@ enum FinalBossAttacks {
     FBA_DROPPER,     // 5
     FBA_BOWSER,      // 6
 };
+
+
+
+static void const *sHoleWallCollisions[] = {
+    hole_wall1_collision,
+    hole_wall2_collision,
+    hole_wall3_collision,
+};
+
+void bhv_hole_wall_init(void) {
+   o->collisionData = segmented_to_virtual(sHoleWallCollisions[o->oBehParams2ndByte]);
+   cur_obj_scale(0.0f);
+}
+
+
+
+void bhv_hole_wall_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosZ += 8.0f;
+            load_object_collision_model();
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f, 0.03f);
+            cur_obj_scale(o->oFloatF4);
+            if (o->oFloatF4 == 1.0f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            load_object_collision_model();
+            o->oPosZ += 25.0f;
+            if (gMarioState->pos[2] < o->oPosZ || o->oPosZ > -3000.0f) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosZ += 20.0f;
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 0.0f, 0.025f);
+            cur_obj_scale(o->oFloatF4);
+            if (o->oFloatF4 == 0.0f) {
+                o->activeFlags = 0;
+                // o->parentObj->oObjF4 = NULL;
+            }
+            break;
+    }
+}
+
 
 
 void bhv_laser_shyguy_loop(void) {
@@ -506,7 +553,24 @@ void controller_log_attack(void) {
 }
 
 void controller_wall_attack(void) {
-
+    switch (o->oAction) {
+        case 0:
+            o->oObjF4 = spawn_object(o, MODEL_HOLE_WALL, bhvHoleWall);
+            o->oObjF4->oBehParams2ndByte = o->os16F8;
+            vec3f_set(&o->oObjF4->oPosX, 1083.0f, 7406.0f, -8568.0f);
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oObjF4 == NULL || o->oObjF4->oAction == 2) {
+                o->oAction = 0;
+                o->os16F8++;
+                if (o->os16F8 >= 3) {
+                    o->activeFlags = 0;
+                    o->parentObj->oObjF4 = NULL;
+                }
+            }
+            break;
+    }
 }
 
 void controller_dropper_attack(void) {
@@ -553,7 +617,9 @@ void bhv_attack_manager_loop(void) {
 void bhv_the_controller_init(void) {
     struct Object *obj;
     o->oObjF4 = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    o->oObjF4->oBehParams2ndByte = FBA_LASER;
+    o->oObjF4->oBehParams2ndByte = FBA_WALL;
+    // o->oObjF8 = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
+    // o->oObjF8->oBehParams2ndByte = FBA_LOGS;
 
     obj_set_hitbox(o, &sTheControllerHitbox);
 }

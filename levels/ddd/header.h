@@ -67,4 +67,12 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/end_laser/geo_header.h"
 
+#include "levels/ddd/hole_wall/geo_header.h"
+
+#include "levels/ddd/hole_wall1/collision_header.h"
+
+#include "levels/ddd/hole_wall2/collision_header.h"
+
+#include "levels/ddd/hole_wall3/collision_header.h"
+
 #endif

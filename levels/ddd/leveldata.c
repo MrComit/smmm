@@ -49,3 +49,7 @@
 #include "levels/ddd/end_spike/anims/data.inc.c"
 #include "levels/ddd/end_spike/anims/table.inc.c"
 #include "levels/ddd/end_laser/model.inc.c"
+#include "levels/ddd/hole_wall/model.inc.c"
+#include "levels/ddd/hole_wall1/collision.inc.c"
+#include "levels/ddd/hole_wall2/collision.inc.c"
+#include "levels/ddd/hole_wall3/collision.inc.c"

@@ -1,0 +1,17 @@
+extern const GeoLayout hole_wall_H2[];
+extern const GeoLayout hole_wall_H3[];
+extern const GeoLayout hole_wall_geo[];
+extern u8 hole_wall_BOOGOO1_i4[];
+extern u8 hole_wall_BOOGOO2_i4[];
+extern Vtx hole_wall_h1_mesh_layer_1_vtx_0[38];
+extern Gfx hole_wall_h1_mesh_layer_1_tri_0[];
+extern Vtx hole_wall_start_h2_mesh_layer_1_vtx_0[52];
+extern Gfx hole_wall_start_h2_mesh_layer_1_tri_0[];
+extern Vtx hole_wall_start_h3_mesh_layer_1_vtx_0[63];
+extern Gfx hole_wall_start_h3_mesh_layer_1_tri_0[];
+extern Gfx mat_hole_wall_BooGooObjWall_layer1[];
+extern Gfx mat_revert_hole_wall_BooGooObjWall_layer1[];
+extern Gfx hole_wall_h1_mesh_layer_1[];
+extern Gfx hole_wall_start_h2_mesh_layer_1[];
+extern Gfx hole_wall_start_h3_mesh_layer_1[];
+extern Gfx hole_wall_material_revert_render_settings[];

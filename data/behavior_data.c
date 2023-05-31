@@ -11313,3 +11313,17 @@ const BehaviorScript bhvShyguyLaser[] = {
         CALL_NATIVE(bhv_laser_shyguy_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvHoleWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    // LOAD_COLLISION_DATA(end_cage_collision),
+    // SCALE(0, 150),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    CALL_NATIVE(bhv_hole_wall_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hole_wall_loop),
+        // CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

@@ -9,6 +9,7 @@
 #include "levels/ddd/end_log/texscroll.inc.c"
 #include "levels/ddd/end_spike/texscroll.inc.c"
 #include "levels/ddd/end_laser/texscroll.inc.c"
+#include "levels/ddd/hole_wall/texscroll.inc.c"
 void scroll_textures_ddd() {
 	scroll_ddd_level_geo_controller();
 	scroll_ddd_level_geo_end_goomba();
@@ -20,4 +21,5 @@ void scroll_textures_ddd() {
 	scroll_ddd_level_geo_end_log();
 	scroll_ddd_level_geo_end_spike();
 	scroll_ddd_level_geo_end_laser();
+	scroll_ddd_level_geo_hole_wall();
 }

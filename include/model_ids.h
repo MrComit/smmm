@@ -953,6 +953,7 @@
 #define MODEL_END_LOG             0xF8
 #define MODEL_END_SPIKE           0xF7
 #define MODEL_END_LASER           0xF6
+#define MODEL_HOLE_WALL           0xF5
 
 
 
