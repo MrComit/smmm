@@ -48,6 +48,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_END_BUBBLE, end_bubble_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_LOG, end_log_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_SPIKE, end_spike_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_LASER, end_laser_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

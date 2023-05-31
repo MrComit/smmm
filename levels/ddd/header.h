@@ -65,4 +65,6 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/end_spike/anim_header.h"
 
+#include "levels/ddd/end_laser/geo_header.h"
+
 #endif

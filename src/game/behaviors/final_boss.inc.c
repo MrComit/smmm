@@ -74,7 +74,25 @@ enum FinalBossAttacks {
 };
 
 
-
+void bhv_end_laser_loop(void) {
+    //MARIO DISTANCE FROM LINE
+    // f32 m = coss(o->oFaceAngleYaw) / (sins(o->oFaceAngleYaw) + 0.01f);
+    // f32 b = o->oPosZ - (o->oPosX * m);
+    // f32 e1 = absf((m * gMarioState->pos[0]) - gMarioState->pos[2] + b);
+    // f32 d = e1 / sqrtf(m*m + 1);
+    f32 zDif = (o->oPosZ - gMarioState->pos[2]) * sins(o->oFaceAngleYaw);
+    f32 xDif = (o->oPosX - gMarioState->pos[0]) * coss(o->oFaceAngleYaw);
+    f32 d = absf(zDif - xDif);
+    f32 yDif = absf(gMarioState->pos[1] - o->oPosY);
+    if (d < 120.0f && yDif < 120.0f) {
+        if (o->oTimer > 60) {
+            CL_get_hit(gMarioState, gMarioObject, 1);
+            // spawn_object(o, MODEL_SAWBLADE, bhvSawbladeShoot);
+            o->oTimer = 0;
+        }
+    }
+    o->oInteractStatus = 0;
+}
 
 
 
@@ -384,7 +402,26 @@ void controller_cage_attack(void) {
 }
 
 void controller_laser_attack(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oObjF4 = spawn_object(o, MODEL_END_LASER, bhvEndLaser);
+            obj_scale(o->oObjF4, 0.0f);
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oObjF4->header.gfx.scale[2] < 5.0f) {
+                o->oObjF4->header.gfx.scale[2] = approach_f32_symmetric(o->oObjF4->header.gfx.scale[2], 5.0f, 0.05f * 5.0f);
+                o->oObjF4->header.gfx.scale[0] = o->oObjF4->header.gfx.scale[2] / 5.0f;
+                o->oObjF4->header.gfx.scale[1] = o->oObjF4->header.gfx.scale[0];
 
+            } else {
+                // o->oObjF4->oFaceAngleYaw = 0x1244;
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            break;
+    }
 }
 
 void controller_log_attack(void) {
@@ -474,7 +511,7 @@ void bhv_attack_manager_loop(void) {
 void bhv_the_controller_init(void) {
     struct Object *obj;
     o->oObjF4 = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    o->oObjF4->oBehParams2ndByte = FBA_LOGS;
+    o->oObjF4->oBehParams2ndByte = FBA_LASER;
 
     obj_set_hitbox(o, &sTheControllerHitbox);
 }

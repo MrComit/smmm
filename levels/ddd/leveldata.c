@@ -48,3 +48,4 @@
 #include "levels/ddd/end_spike/model.inc.c"
 #include "levels/ddd/end_spike/anims/data.inc.c"
 #include "levels/ddd/end_spike/anims/table.inc.c"
+#include "levels/ddd/end_laser/model.inc.c"

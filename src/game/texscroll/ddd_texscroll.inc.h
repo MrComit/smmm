@@ -1,3 +1,4 @@
+#include "levels/ddd/end_laser/texscroll.inc.h"
 #include "levels/ddd/end_spike/texscroll.inc.h"
 #include "levels/ddd/end_log/texscroll.inc.h"
 #include "levels/ddd/end_bubble/texscroll.inc.h"

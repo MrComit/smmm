@@ -11285,3 +11285,15 @@ const BehaviorScript bhvEndSpike[] = {
         CALL_NATIVE(bhv_end_spike_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvEndLaser[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_yoshi_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_end_laser_loop),
+    END_LOOP(),
+};
