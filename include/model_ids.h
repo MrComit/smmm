@@ -949,6 +949,7 @@
 #define MODEL_END_BOO             0xFC
 #define MODEL_END_CAGE            0xFB
 #define MODEL_END_FIST            0xFA
+#define MODEL_END_BUBBLE          0xF9
 
 
 

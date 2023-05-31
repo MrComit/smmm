@@ -926,6 +926,7 @@ extern const BehaviorScript bhvEndBoo[];
 extern const BehaviorScript bhvFinalBossAttacks[];
 extern const BehaviorScript bhvEndCage[];
 extern const BehaviorScript bhvEndFist[];
+extern const BehaviorScript bhvEndBubble[];
 
 
 #endif // BEHAVIOR_DATA_H

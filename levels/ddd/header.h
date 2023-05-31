@@ -57,4 +57,6 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/end_fist/geo_header.h"
 
+#include "levels/ddd/end_bubble/geo_header.h"
+
 #endif

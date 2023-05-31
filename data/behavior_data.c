@@ -11238,3 +11238,15 @@ const BehaviorScript bhvEndFist[] = {
         CALL_NATIVE(bhv_end_fist_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvEndBubble[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_HOME(),
+    BILLBOARD(),
+    CALL_NATIVE(bhv_end_bubble_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_end_bubble_loop),
+    END_LOOP(),
+};

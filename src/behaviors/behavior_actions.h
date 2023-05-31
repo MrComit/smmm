@@ -1169,6 +1169,8 @@ void bhv_end_cage_init(void);
 void bhv_end_cage_loop(void);
 void bhv_end_fist_init(void);
 void bhv_end_fist_loop(void);
+void bhv_end_bubble_init(void);
+void bhv_end_bubble_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

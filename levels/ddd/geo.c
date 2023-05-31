@@ -28,3 +28,4 @@
 #include "levels/ddd/end_boo/geo.inc.c"
 #include "levels/ddd/end_cage/geo.inc.c"
 #include "levels/ddd/end_fist/geo.inc.c"
+#include "levels/ddd/end_bubble/geo.inc.c"

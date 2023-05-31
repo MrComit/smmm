@@ -23,6 +23,18 @@ struct ObjectHitbox sEndFistHitbox = {
 };
 
 
+struct ObjectHitbox sEndBubbleHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 100,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 80,
+    /* height:            */ 180,
+    /* hurtboxRadius:     */ 80,
+    /* hurtboxHeight:     */ 180,
+};
+
 
 enum FinalBossAttacks {
     FBA_BUBBLES,     // 0
@@ -34,6 +46,43 @@ enum FinalBossAttacks {
     FBA_BOWSER,      // 6
 };
 
+
+
+void bhv_end_bubble_init(void) {
+    obj_set_hitbox(o, &sEndBubbleHitbox);
+    // o->oForwardVel = 10.0f;
+}
+
+
+void bhv_end_bubble_loop(void) {
+    o->os16F4 += 0x300;
+    o->oGraphYOffset = 10.0f * sins(o->os16F4);
+    CL_Move_3d();
+    // print_text_fmt_int(80, 80, "%d", (s16)o->oForwardVel, 0);
+    if (o->oTimer > o->os16F6) {
+        CL_explode_object(o, 0);
+        o->oFaceAnglePitch = o->oFaceAngleYaw = 0;
+        switch (CL_RandomMinMaxU16(0, 8)) {
+            case 0:
+                obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+                break;
+            case 1:
+                o->oObjF8 = spawn_object(o, MODEL_END_GOOMBA, bhvGoomba);
+                o->oObjF8->parentObj = o->oObjF8;
+                break;
+            case 2:
+                spawn_object(o, MODEL_END_SHYGUY, bhvShyguy);
+                break;
+            case 3:
+                spawn_object(o, MODEL_END_BOO, bhvEndBoo);
+                break;
+        }
+        return;
+    }
+    if (o->oInteractStatus) {
+        CL_explode_object(o, 0);
+    }
+}
 
 
 
@@ -115,7 +164,19 @@ void bhv_end_cage_loop(void) {
 
 
 void controller_bubble_attack(void) {
-    
+    if (o->os16F8 < 20) {
+        if (o->oTimer > 20) {
+            o->oObjF4 = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+            o->oObjF4->oMoveAngleYaw = CL_RandomMinMaxU16(0, 0x2800) - 0x1400;
+            o->oObjF4->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x800);
+            o->oObjF4->oForwardVel = CL_RandomMinMaxU16(8, 15);
+            o->oObjF4->os16F6 = (CL_RandomMinMaxU16(480, 520) * 10.0f) / o->oObjF4->oForwardVel;
+            o->oTimer = 0;
+            o->os16F8++;
+        }
+    } else {
+        o->activeFlags = 0;
+    }
 }
 
 void controller_cage_attack(void) {
@@ -194,7 +255,7 @@ void bhv_attack_manager_loop(void) {
 void bhv_the_controller_init(void) {
     struct Object *obj;
     obj = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    obj->oBehParams2ndByte = FBA_CAGE;
+    obj->oBehParams2ndByte = FBA_BUBBLES;
 
     obj_set_hitbox(o, &sTheControllerHitbox);
 }

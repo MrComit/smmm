@@ -5,6 +5,7 @@
 #include "levels/ddd/end_boo/texscroll.inc.c"
 #include "levels/ddd/end_cage/texscroll.inc.c"
 #include "levels/ddd/end_fist/texscroll.inc.c"
+#include "levels/ddd/end_bubble/texscroll.inc.c"
 void scroll_textures_ddd() {
 	scroll_ddd_level_geo_controller();
 	scroll_ddd_level_geo_end_goomba();
@@ -12,4 +13,5 @@ void scroll_textures_ddd() {
 	scroll_ddd_level_geo_end_boo();
 	scroll_ddd_level_geo_end_cage();
 	scroll_ddd_level_geo_end_fist();
+	scroll_ddd_level_geo_end_bubble();
 }

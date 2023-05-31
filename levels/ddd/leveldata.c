@@ -43,3 +43,4 @@
 #include "levels/ddd/end_cage/model.inc.c"
 #include "levels/ddd/end_cage/collision.inc.c"
 #include "levels/ddd/end_fist/model.inc.c"
+#include "levels/ddd/end_bubble/model.inc.c"
