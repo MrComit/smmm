@@ -2325,9 +2325,10 @@ static char sLevel5[] = { TEXT_L5 };
 static char sLevel6[] = { TEXT_L6 };
 static char sLevel7[] = { TEXT_L7 };
 static char sLevel8[] = { TEXT_L8 };
+static char sLevel9[] = { TEXT_L9 };
 
 char *sLevelNames[] = {
-    sLevel1, sLevel2, sLevel3, sLevel4, sLevel5, sLevel6, sLevel7, sLevel8
+    sLevel1, sLevel2, sLevel3, sLevel4, sLevel5, sLevel6, sLevel7, sLevel8, sLevel9
 };
 
 
@@ -2451,11 +2452,13 @@ void render_pause_my_score_coins(void) {
         centerX = get_str_x_pos_from_center(160, sLevelNames[gCurrCourseNum - 1], 0.0f);
         print_generic_string(centerX, 156, sLevelNames[gCurrCourseNum - 1]);
 
-        centerX = get_str_x_pos_from_center(160, sRoomNames[gGlobalMarioRoom - 1], 0.0f);
-        if (gGlobalMarioRoom == 72) {
-            print_generic_string(centerX, 140, sRoomCorrupt);
+        if (gCurrLevelNum != LEVEL_DDD) {
+            centerX = get_str_x_pos_from_center(160, sRoomNames[gGlobalMarioRoom - 1], 0.0f);
+            if (gGlobalMarioRoom == 72) {
+                print_generic_string(centerX, 140, sRoomCorrupt);
+            }
+            print_generic_string(centerX, 140, sRoomNames[gGlobalMarioRoom - 1]);
         }
-        print_generic_string(centerX, 140, sRoomNames[gGlobalMarioRoom - 1]);
 
 /*#ifndef VERSION_JP
         print_generic_string(LVL_NAME_X, 157, &courseName[3]);

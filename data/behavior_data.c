@@ -11301,12 +11301,12 @@ const BehaviorScript bhvEndLaser[] = {
 
 const BehaviorScript bhvShyguyLaser[] = {
     BEGIN(OBJ_LIST_PUSHABLE),
-    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     // LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
     // ANIMATE(0),
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
-    SCALE(/*Unused*/ 0, /*Field*/ 150),
+    SCALE(/*Unused*/ 0, /*Field*/ 220),
     CALL_NATIVE(bhv_shyguy_init),
     CALL_NATIVE(bhv_goomba_init),
     BEGIN_LOOP(),
@@ -11316,11 +11316,12 @@ const BehaviorScript bhvShyguyLaser[] = {
 
 const BehaviorScript bhvHoleWall[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
     // LOAD_COLLISION_DATA(end_cage_collision),
     // SCALE(0, 150),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
     CALL_NATIVE(bhv_hole_wall_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hole_wall_loop),

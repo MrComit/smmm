@@ -350,6 +350,7 @@
 #define TEXT_L6 _("Floor 3")
 #define TEXT_L7 _("The Basement")
 #define TEXT_L8 _("The Monstrous Mind")
+#define TEXT_L9 _("The Roof")
 
 
 
