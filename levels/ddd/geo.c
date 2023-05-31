@@ -29,3 +29,5 @@
 #include "levels/ddd/end_cage/geo.inc.c"
 #include "levels/ddd/end_fist/geo.inc.c"
 #include "levels/ddd/end_bubble/geo.inc.c"
+#include "levels/ddd/end_log/geo.inc.c"
+#include "levels/ddd/end_spike/geo.inc.c"

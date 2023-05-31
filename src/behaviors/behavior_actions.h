@@ -1171,6 +1171,10 @@ void bhv_end_fist_init(void);
 void bhv_end_fist_loop(void);
 void bhv_end_bubble_init(void);
 void bhv_end_bubble_loop(void);
+void bhv_end_log_init(void);
+void bhv_end_log_loop(void);
+void bhv_end_spike_init(void);
+void bhv_end_spike_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

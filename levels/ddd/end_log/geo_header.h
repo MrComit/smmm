@@ -1,0 +1,10 @@
+extern const GeoLayout end_log_geo[];
+extern u8 end_log_BOOGOO1_i4[];
+extern u8 end_log_BOOGOO2_i4[];
+extern Vtx end_log_Log_001_mesh_layer_1_vtx_cull[8];
+extern Vtx end_log_Log_001_mesh_layer_1_vtx_0[48];
+extern Gfx end_log_Log_001_mesh_layer_1_tri_0[];
+extern Gfx mat_end_log_BooGooObj_layer1[];
+extern Gfx mat_revert_end_log_BooGooObj_layer1[];
+extern Gfx end_log_Log_001_mesh_layer_1[];
+extern Gfx end_log_material_revert_render_settings[];

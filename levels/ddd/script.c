@@ -46,6 +46,8 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_END_CAGE, end_cage_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_FIST, end_fist_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_BUBBLE, end_bubble_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_LOG, end_log_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_SPIKE, end_spike_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -58,9 +60,12 @@ const LevelScript level_ddd_entry[] = {
 		OBJECT(MODEL_NONE, 1083, 7706, -3448, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 1083, 7706, -3448),
 		OBJECT(MODEL_THE_CONTROLLER, 1083, 7706, -8781, 0, 0, 0, 0x00000000, bhvTheController),
-		OBJECT(MODEL_END_BOO, 495, 7506, -5029, 0, 0, 0, 0x00000000, bhvEndBoo),
-		OBJECT(MODEL_END_GOOMBA, -700, 7406, -5149, 0, 0, 0, 0x00000000, bhvGoomba),
-		OBJECT(MODEL_END_SHYGUY, 63, 7406, -5409, 0, 0, 0, 0x00000000, bhvShyguy),
+		OBJECT(MODEL_END_BOO, -1342, 7506, -4549, 0, 0, 0, 0x00000000, bhvEndBoo),
+		OBJECT(MODEL_END_SPIKE, -937, 7406, -8110, 0, 0, 0, 0x00000000, bhvEndSpike),
+		OBJECT(MODEL_END_SPIKE, 1063, 7406, -8110, 0, 0, 0, 0x00000000, bhvEndSpike),
+		OBJECT(MODEL_END_SPIKE, 3063, 7406, -8110, 0, 0, 0, 0x00000000, bhvEndSpike),
+		OBJECT(MODEL_END_GOOMBA, -2536, 7406, -4669, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_END_SHYGUY, -1773, 7406, -4929, 0, 0, 0, 0x00000000, bhvShyguy),
 		TERRAIN(ddd_area_1_collision),
 		ROOMS(ddd_area_1_collision_rooms),
 		MACRO_OBJECTS(ddd_area_1_macro_objs),

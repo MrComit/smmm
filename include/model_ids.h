@@ -950,6 +950,8 @@
 #define MODEL_END_CAGE            0xFB
 #define MODEL_END_FIST            0xFA
 #define MODEL_END_BUBBLE          0xF9
+#define MODEL_END_LOG             0xF8
+#define MODEL_END_SPIKE           0xF7
 
 
 

@@ -36,6 +36,33 @@ struct ObjectHitbox sEndBubbleHitbox = {
 };
 
 
+
+static struct ObjectHitbox sEndLogHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 1,
+    /* radius:            */ 80,
+    /* height:            */ 54,
+    /* hurtboxRadius:     */ 80,
+    /* hurtboxHeight:     */ 54,
+};
+
+static struct ObjectHitbox sEndSpikeHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 3,
+    /* radius:            */ 90,
+    /* height:            */ 90,
+    /* hurtboxRadius:     */ 90,
+    /* hurtboxHeight:     */ 90,
+};
+
+
+
 enum FinalBossAttacks {
     FBA_BUBBLES,     // 0
     FBA_CAGE,        // 1
@@ -45,6 +72,153 @@ enum FinalBossAttacks {
     FBA_DROPPER,     // 5
     FBA_BOWSER,      // 6
 };
+
+
+
+
+
+
+
+void bhv_end_log_init(void) {
+    o->oForwardVel = 20.0f;
+    o->oFloatF8 = 45.0f;
+    obj_set_hitbox(o, &sEndLogHitbox);
+    // o->hitboxDownOffset = -50.0f;
+    cur_obj_become_intangible();
+}
+
+
+void bhv_end_log_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if ((o->parentObj->oBehParams >> 24) != 2) {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f * 2.5f, 0.033f * 2.5f);
+                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f * 2.5f, 1.0f * 2.5f);
+            } else {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f * 2.5f, 0.033f * 2.0f * 2.5f);
+                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f * 2.5f, 2.0f * 2.5f);
+            }
+            cur_obj_scale(o->oFloatF4);
+            if (o->parentObj->header.gfx.animInfo.animFrame == 50) {
+                o->oAction = 1;
+                o->parentObj->oInteractType = INTERACT_BOUNCE_TOP;
+                cur_obj_become_tangible();
+                cur_obj_play_sound_1(SOUND_OBJ_UNKNOWN4);
+            }
+            if (o->parentObj->activeFlags == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 1:
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 0.0f, 0.06f);
+            o->oFaceAnglePitch += 0x600;
+            cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(0);
+            if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+                o->oVelY = o->oFloatF8;
+                cur_obj_play_sound_1(SOUND_GENERAL_POUND_ROCK);
+            }
+            if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+                obj_explode_and_spawn_coins(46.0f, 0);
+                create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
+                o->activeFlags = 0;
+                o->parentObj->oObjF4 = NULL;
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
+static u8 sEndSpikeAttackHandler[6] = {
+    /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SQUISHED,
+    /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SQUISHED,
+    /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
+};
+
+void bhv_end_spike_init(void) {
+    // obj_set_hitbox(o, &sEndSpikeHitbox);
+}
+
+
+void bhv_end_spike_loop(void) {
+    struct Object *obj;
+    f32 x, z, x2, z2;
+    switch (o->oAction) {
+        case 0:
+            // if (o->oBehParams2ndByte && o->oDistanceToMario < 2750.0f) {
+            //     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
+            // }
+            // x = absf((gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw + 0x4000));
+            // z = absf((gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw + 0x4000));
+            // x2 = (gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw);
+            // z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw);
+            // if (x + z < 500.0f && x2 + z2 > 200.0f) {
+                if (o->oDistanceToMario > 600.0f && (cur_obj_check_if_at_animation_end() || o->oTimer > 20)) {
+                    if ((o->oBehParams >> 24) == 2) {
+                        cur_obj_init_animation_with_accel_and_sound(1, 2.0f);
+                    } else {
+                        cur_obj_init_animation_with_sound(1);
+                    }
+                    o->oAction = 1;
+
+                }
+            // }
+            break;
+        case 1:
+            // if (x + z >= 300.0f || x2 + z2 <= 180) {
+            //     o->oAction = 0;
+            // }
+
+            if (cur_obj_check_anim_frame(20)) {
+                o->oObjF4 = spawn_object(o, MODEL_END_LOG, bhvEndLog);
+                // o->prevObj->oPosY += 100.0f;
+                o->oInteractType = INTERACT_DAMAGE;
+            }
+            if (cur_obj_check_if_at_animation_end()) {
+                o->oAction = 0;
+                if ((o->oBehParams >> 24) == 2) {
+                    cur_obj_init_animation_with_accel_and_sound(0, 2.0f);
+                } else {
+                    cur_obj_init_animation_with_sound(0);
+                }
+            }
+            break;
+    }
+
+
+    // if (obj_handle_attacks(&sEndSpikeHitbox, o->oAction, sEndSpikeAttackHandler)) {
+    //     mark_goomba_as_dead();
+    // }
+    obj_handle_attacks(&sEndSpikeHitbox, o->oAction, sEndSpikeAttackHandler);
+    obj_update_standard_actions(1.0f);
+    // o->header.gfx.scale[1] = 0.5f;
+    // print_text_fmt_int(80, 80, "%x", (s32)o->prevObj, 0);
+    // if (o->activeFlags == 0 && (o->oBehParams >> 24) & 0xFF) {
+    //     obj = spawn_object(o, MODEL_ENV_FLAME, bhvTreehouseFlame);
+    //     obj->oBehParams2ndByte = (o->oBehParams >> 24) - 1;
+    // }
+    o->oInteractStatus = 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -176,6 +350,7 @@ void controller_bubble_attack(void) {
         }
     } else {
         o->activeFlags = 0;
+        o->parentObj->oObjF4 = NULL;
     }
 }
 
@@ -192,6 +367,7 @@ void controller_cage_attack(void) {
                 o->os16F8++;
                 if (o->os16F8 > 3) {
                     o->activeFlags = 0;
+                    o->parentObj->oObjF4 = NULL;
                 }
                 o->oAction = 0;
             }
@@ -254,8 +430,8 @@ void bhv_attack_manager_loop(void) {
 
 void bhv_the_controller_init(void) {
     struct Object *obj;
-    obj = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    obj->oBehParams2ndByte = FBA_BUBBLES;
+    o->oObjF4 = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
+    o->oObjF4->oBehParams2ndByte = FBA_BUBBLES;
 
     obj_set_hitbox(o, &sTheControllerHitbox);
 }

@@ -44,3 +44,7 @@
 #include "levels/ddd/end_cage/collision.inc.c"
 #include "levels/ddd/end_fist/model.inc.c"
 #include "levels/ddd/end_bubble/model.inc.c"
+#include "levels/ddd/end_log/model.inc.c"
+#include "levels/ddd/end_spike/model.inc.c"
+#include "levels/ddd/end_spike/anims/data.inc.c"
+#include "levels/ddd/end_spike/anims/table.inc.c"
