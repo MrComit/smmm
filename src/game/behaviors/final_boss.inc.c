@@ -74,6 +74,51 @@ enum FinalBossAttacks {
 };
 
 
+void bhv_laser_shyguy_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            o->oObjF4 = spawn_object(o, MODEL_END_LASER, bhvEndLaser);
+            obj_scale(o->oObjF4, 0.0f);
+            o->oObjF4->oPosY += 20.0f;
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oObjF4->header.gfx.scale[2] < 5.0f) {
+                o->oObjF4->header.gfx.scale[2] = approach_f32_symmetric(o->oObjF4->header.gfx.scale[2], 5.0f, 0.05f * 5.0f);
+                o->oObjF4->header.gfx.scale[0] = o->oObjF4->header.gfx.scale[2] / 5.0f;
+                o->oObjF4->header.gfx.scale[1] = o->oObjF4->header.gfx.scale[0];
+
+            } else {
+                // o->oObjF4->oFaceAngleYaw = 0x1244;
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            break;
+    }
+    o->os16F8 += 0x180;
+    if (o->parentObj->oObjF4 == o) {
+        o->oFaceAngleYaw = 0x2000 * sins(o->os16F8) + 0x2000;
+    } else {
+        o->oFaceAngleYaw = -0x2000 * sins(o->os16F8) - 0x2000;
+    }
+    o->oObjF4->oFaceAngleYaw = o->oFaceAngleYaw;
+    
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED || o->oTimer > 500) {
+        if (o->oTimer <= 500) {
+            obj_force_spawn_loot_coins(o, o->oNumLootCoins, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+        }
+        spawn_mist_particles();
+        o->activeFlags = 0;
+        o->parentObj->oObjF4 = NULL;
+        o->oObjF4->activeFlags = 0;
+        create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    }
+    o->oInteractStatus = 0;
+}
+
+
 void bhv_end_laser_loop(void) {
     //MARIO DISTANCE FROM LINE
     // f32 m = coss(o->oFaceAngleYaw) / (sins(o->oFaceAngleYaw) + 0.01f);
@@ -84,7 +129,7 @@ void bhv_end_laser_loop(void) {
     f32 xDif = (o->oPosX - gMarioState->pos[0]) * coss(o->oFaceAngleYaw);
     f32 d = absf(zDif - xDif);
     f32 yDif = absf(gMarioState->pos[1] - o->oPosY);
-    if (d < 120.0f && yDif < 120.0f) {
+    if (d < 100.0f && yDif < 120.0f && lateral_dist_between_objects(o, gMarioObject) > 150.0f) {
         if (o->oTimer > 60) {
             CL_get_hit(gMarioState, gMarioObject, 1);
             // spawn_object(o, MODEL_SAWBLADE, bhvSawbladeShoot);
@@ -404,22 +449,19 @@ void controller_cage_attack(void) {
 void controller_laser_attack(void) {
     switch (o->oAction) {
         case 0:
-            o->oObjF4 = spawn_object(o, MODEL_END_LASER, bhvEndLaser);
-            obj_scale(o->oObjF4, 0.0f);
+            o->oObjF4 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
+            vec3f_set(&o->oObjF4->oPosX, -1953.0f, 7406.0f, -7674.0f);
+            if (o->os16FC) {
+                o->oObjF8 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
+                vec3f_set(&o->oObjF8->oPosX, 4036.0f, 7406.0f, -7674.0f);
+            }
             o->oAction = 1;
             break;
         case 1:
-            if (o->oObjF4->header.gfx.scale[2] < 5.0f) {
-                o->oObjF4->header.gfx.scale[2] = approach_f32_symmetric(o->oObjF4->header.gfx.scale[2], 5.0f, 0.05f * 5.0f);
-                o->oObjF4->header.gfx.scale[0] = o->oObjF4->header.gfx.scale[2] / 5.0f;
-                o->oObjF4->header.gfx.scale[1] = o->oObjF4->header.gfx.scale[0];
-
-            } else {
-                // o->oObjF4->oFaceAngleYaw = 0x1244;
-                o->oAction = 2;
+            if (o->oObjF4 == NULL && o->oObjF8 == NULL) {
+                o->activeFlags = 0;
+                o->parentObj->oObjF4 = NULL;
             }
-            break;
-        case 2:
             break;
     }
 }

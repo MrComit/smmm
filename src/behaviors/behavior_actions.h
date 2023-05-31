@@ -1176,6 +1176,7 @@ void bhv_end_log_loop(void);
 void bhv_end_spike_init(void);
 void bhv_end_spike_loop(void);
 void bhv_end_laser_loop(void);
+void bhv_laser_shyguy_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

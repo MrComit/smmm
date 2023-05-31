@@ -930,6 +930,7 @@ extern const BehaviorScript bhvEndBubble[];
 extern const BehaviorScript bhvEndLog[];
 extern const BehaviorScript bhvEndSpike[];
 extern const BehaviorScript bhvEndLaser[];
+extern const BehaviorScript bhvShyguyLaser[];
 
 
 #endif // BEHAVIOR_DATA_H
