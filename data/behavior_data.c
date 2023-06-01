@@ -11328,3 +11328,21 @@ const BehaviorScript bhvHoleWall[] = {
         // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvRoofHole[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(roof_hole_collision),
+    // SCALE(0, 150),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_INT(oOpacity, 255),
+    // CALL_NATIVE(bhv_roof_hole_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_roof_hole_loop),
+        // CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

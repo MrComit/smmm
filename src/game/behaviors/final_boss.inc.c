@@ -582,11 +582,67 @@ void controller_wall_attack(void) {
 }
 
 void controller_dropper_attack(void) {
-
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 120) {
+                o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvRoofHole);
+                if (o->oObjF4 != NULL) {
+                    o->oObjF4->oF4 = 1;
+                    o->oAction = 1;
+                } else {
+                    o->activeFlags = 0;
+                    sEndAttacks[o->os16112] = NULL;
+                }
+            }
+            break;
+        case 1:
+            if (o->oObjF4 == NULL || o->oObjF4->oF4 == 0) {
+                o->activeFlags = 0;
+                sEndAttacks[o->os16112] = NULL;
+            }
+            break;
+    }
 }
 
 void controller_bowser_attack(void) {
 
+}
+
+
+void bhv_roof_hole_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oF4) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 6);
+                gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], o->oPosX, 45.0f);
+                gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], o->oPosZ, 45.0f);
+
+            }
+
+            if (o->oOpacity > 20) {
+                load_object_collision_model();
+            } else if (o->oOpacity == 0) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            gCamera->comitCutscene = 26;
+            if (gMarioState->pos[1] > 15000.0f && gMarioState->pos[0] < 15000.0f) {
+                o->oAction = 2;
+                o->oOpacity = 255;
+            }
+            break;
+        case 2:
+            gCamera->comitCutscene = 26;
+            load_object_collision_model();
+            if (gMarioState->pos[1] < 11000.0f) {
+                gCamera->comitCutscene = 0;
+                o->oAction = 0;
+                o->oF4 = 0;
+            }
+            break;
+
+    }
 }
 
 
@@ -625,11 +681,11 @@ void bhv_attack_manager_loop(void) {
 void bhv_the_controller_init(void) {
     struct Object *obj;
     sEndAttacks[0] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    sEndAttacks[0]->oBehParams2ndByte = FBA_WALL;
+    sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
     sEndAttacks[0]->os16112 = 0;
-    sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    sEndAttacks[1]->oBehParams2ndByte = FBA_LASER;
-    sEndAttacks[1]->os16112 = 1;
+    // sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
+    // sEndAttacks[1]->oBehParams2ndByte = FBA_LASER;
+    // sEndAttacks[1]->os16112 = 1;
 
     obj_set_hitbox(o, &sTheControllerHitbox);
 }

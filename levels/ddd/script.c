@@ -50,6 +50,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_END_SPIKE, end_spike_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_LASER, end_laser_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_HOLE_WALL, hole_wall_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ROOF_HOLE, roof_hole_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -58,10 +59,14 @@ const LevelScript level_ddd_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_DDD, 0x01, 0x0B, WARP_NO_CHECKPOINT),
+		INSTANT_WARP(0, 0x01, 26526, 14154, -2516),
+		INSTANT_WARP(1, 0x01, 1425, 25915, 9124),
+		INSTANT_WARP(2, 0x01, -27950, 27214, -6608),
 		OBJECT(MODEL_NONE, 1083, 7706, -3448, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 1083, 7706, -3448, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 1083, 7706, -3448),
 		OBJECT(MODEL_THE_CONTROLLER, 1083, 7706, -10281, 0, 0, 0, 0x00000000, bhvTheController),
+		OBJECT(MODEL_ROOF_HOLE, 1081, 7406, -7477, 0, 0, 0, 0x00000000, bhvRoofHole),
 		TERRAIN(ddd_area_1_collision),
 		ROOMS(ddd_area_1_collision_rooms),
 		MACRO_OBJECTS(ddd_area_1_macro_objs),

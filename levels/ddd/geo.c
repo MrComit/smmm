@@ -33,3 +33,4 @@
 #include "levels/ddd/end_spike/geo.inc.c"
 #include "levels/ddd/end_laser/geo.inc.c"
 #include "levels/ddd/hole_wall/geo.inc.c"
+#include "levels/ddd/roof_hole/geo.inc.c"

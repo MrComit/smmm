@@ -932,6 +932,7 @@ extern const BehaviorScript bhvEndSpike[];
 extern const BehaviorScript bhvEndLaser[];
 extern const BehaviorScript bhvShyguyLaser[];
 extern const BehaviorScript bhvHoleWall[];
+extern const BehaviorScript bhvRoofHole[];
 
 
 #endif // BEHAVIOR_DATA_H

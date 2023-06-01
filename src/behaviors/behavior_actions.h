@@ -1179,6 +1179,7 @@ void bhv_end_laser_loop(void);
 void bhv_laser_shyguy_loop(void);
 void bhv_hole_wall_init(void);
 void bhv_hole_wall_loop(void);
+void bhv_roof_hole_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

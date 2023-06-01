@@ -1576,6 +1576,16 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->focus, m->pos[0], 2000.0f, m->pos[2] - 4000.0f);
             c->yaw = c->nextYaw = 0x1162;
             break;
+        case 26:
+            vec3f_set(c->pos, m->pos[0], m->pos[1] + 2000.0f, m->pos[2]);
+            // if (gIsConsole) {
+                vec3f_set(c->focus, m->pos[0], m->pos[1], m->pos[2] - 60.0f);
+            // } else {
+            //     vec3f_set(c->focus, 0.0f, m->pos[1], 0.0f);
+            // }
+            c->yaw = c->nextYaw = 0x0000;
+            s8DirModeBaseYaw = 0;
+            break;
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);
             vec3f_copy(c->focus, gComitCutsceneFocVec);

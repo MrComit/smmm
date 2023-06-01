@@ -954,6 +954,7 @@
 #define MODEL_END_SPIKE           0xF7
 #define MODEL_END_LASER           0xF6
 #define MODEL_HOLE_WALL           0xF5
+#define MODEL_ROOF_HOLE           0xF4
 
 
 
