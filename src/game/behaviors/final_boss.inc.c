@@ -627,7 +627,7 @@ void bhv_roof_hole_loop(void) {
             break;
         case 1:
             gCamera->comitCutscene = 26;
-            if (gMarioState->pos[1] > 15000.0f && gMarioState->pos[0] < 15000.0f) {
+            if (o->oTimer > 150 && gMarioState->pos[1] > 7000.0f && gMarioState->pos[0] < 15000.0f) {
                 o->oAction = 2;
                 o->oOpacity = 255;
             }

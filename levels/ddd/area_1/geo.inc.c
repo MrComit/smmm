@@ -20,6 +20,7 @@ const GeoLayout ddd_dl_101__Roof_geo[] = {
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 29031, -7414, -870),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, 1081, 19800, -7477),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Tunnel_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Tunnel_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Mansion_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Mansion_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Mansion_001_mesh_layer_1),
