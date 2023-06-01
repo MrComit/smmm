@@ -55,3 +55,5 @@
 #include "levels/ddd/hole_wall3/collision.inc.c"
 #include "levels/ddd/roof_hole/model.inc.c"
 #include "levels/ddd/roof_hole/collision.inc.c"
+#include "levels/ddd/controller/anims/data.inc.c"
+#include "levels/ddd/controller/anims/table.inc.c"

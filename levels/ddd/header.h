@@ -79,4 +79,6 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/roof_hole/collision_header.h"
 
+#include "levels/ddd/controller/anim_header.h"
+
 #endif
