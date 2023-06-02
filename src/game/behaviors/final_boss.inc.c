@@ -86,10 +86,15 @@ enum FinalBossAttacks {
 
 
 
+Vec3f sEndBossMarioPoint = {1083.0f, 7406.0f, -4448.0f};
+
+
 static void const *sHoleWallCollisions[] = {
     hole_wall1_collision,
     hole_wall2_collision,
     hole_wall3_collision,
+    hole_wall4_collision,
+    hole_wall5_collision,
 };
 
 void bhv_hole_wall_init(void) {
@@ -512,6 +517,35 @@ void bhv_end_cage_loop(void) {
 }
 
 
+void bhv_hole_wall_ground_init(void) {
+}
+
+
+void bhv_hole_wall_ground_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 60) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 120.0f, 6.0f);
+                if (o->oPosY == o->oHomeY + 120.0f) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            if (o->parentObj->activeFlags == 0) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 8.0f);
+            if (o->oPosY == o->oHomeY) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 
 struct Object *sEndAttacks[4] = {
     NULL, NULL, NULL, NULL,
@@ -519,20 +553,25 @@ struct Object *sEndAttacks[4] = {
 
 
 void controller_bubble_attack(void) {
-    if (o->os16F8 < 20) {
-        if (o->oTimer > 20) {
-            o->oObjF4 = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
-            o->oObjF4->oMoveAngleYaw = CL_RandomMinMaxU16(0, 0x2800) - 0x1400;
-            o->oObjF4->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x800);
-            o->oObjF4->oForwardVel = CL_RandomMinMaxU16(12, 18);
-            o->oObjF4->os16F6 = (CL_RandomMinMaxU16(580, 620) * 10.0f) / o->oObjF4->oForwardVel;
-            o->oObjF4->oBehParams2ndByte = 0;
-            o->oTimer = 0;
-            o->os16F8++;
+    if (o->os16100++ > 90) {
+        if (o->os16F8 < 20) {
+            if (o->oTimer > 20) {
+                o->oObjF4 = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+                o->oObjF4->oMoveAngleYaw = CL_RandomMinMaxU16(0, 0x2800) - 0x1400;
+                o->oObjF4->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x800);
+                o->oObjF4->oForwardVel = CL_RandomMinMaxU16(12, 18);
+                o->oObjF4->os16F6 = (CL_RandomMinMaxU16(580, 620) * 10.0f) / o->oObjF4->oForwardVel;
+                o->oObjF4->oBehParams2ndByte = 0;
+                o->oTimer = 0;
+                o->os16F8++;
+            }
+        } else {
+            o->activeFlags = 0;
+            sEndAttacks[o->os16112] = NULL;
         }
     } else {
-        o->activeFlags = 0;
-        sEndAttacks[o->os16112] = NULL;
+        vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
+        o->oFaceAngleYaw = o->oMoveAngleYaw = o->parentObj->oMoveAngleYaw;
     }
 }
 
@@ -617,18 +656,54 @@ void controller_log_attack(void) {
 }
 
 void controller_wall_attack(void) {
+    f32 dist;
+    s16 pitch, yaw;
     switch (o->oAction) {
         case 0:
-            o->oObjF4 = spawn_object(o, MODEL_HOLE_WALL, bhvHoleWall);
-            o->oObjF4->oBehParams2ndByte = o->os16F8;
-            vec3f_set(&o->oObjF4->oPosX, 1083.0f, 7406.0f, -10068.0f);
-            o->oAction = 1;
+            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+                if (o->os16F8 == 0) {
+                    vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
+                    mario_set_forward_vel(gMarioState, dist / 48.0f);
+                    gMarioState->vel[1] = 30.0f;
+                    set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                    // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
+                    // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
+                    // gMarioState->faceAngle[1] = angle_to
+                    o->os16FA = 0x2490;
+                    o->os16102 = -1;
+
+                    o->oObj10C = spawn_object(o, MODEL_HOLE_WALL_GROUND, bhvHoleWallGround);
+                    vec3f_set(&o->oObj10C->oPosX, 1083.0f, 7406.0f - 120.0f, -8568.0f);
+
+
+                }
+                o->oObjF4 = spawn_object(o, MODEL_HOLE_WALL, bhvHoleWall);
+                do {
+                    o->os16100 = CL_RandomMinMaxU16(0, 4);
+                } while (o->os16100 == o->os16102);
+                o->oObjF4->oBehParams2ndByte = o->os16100;
+                o->os16102 = o->os16100;
+                vec3f_set(&o->oObjF4->oPosX, 1083.0f, 7406.0f, -10068.0f);
+                o->oAction = 1;
+            }
             break;
         case 1:
+            if (o->os16F8 == 0 && o->oTimer <= 48) {
+                if (gMarioState->vel[1] < 0.0f) {
+                    gMarioState->vel[1] = 0.0f;
+                }
+                o->os16FA += 0x492;
+                gMarioState->pos[1] += sins(o->os16FA) * 30.0f;
+            }
             if (o->oObjF4 == NULL || o->oObjF4->oAction == 2) {
                 o->oAction = 0;
                 o->os16F8++;
                 if (o->os16F8 >= 3) {
+                    // o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvTheController);
+                    // if (o->oObjF4 != NULL) {
+                    //     o->oObjF4->os16108 = 1;
+                    // }
+
                     o->activeFlags = 0;
                     sEndAttacks[o->os16112] = NULL;
                 }
@@ -672,14 +747,14 @@ void bhv_roof_hole_loop(void) {
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 6);
                 gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], o->oPosX, 45.0f);
                 gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], o->oPosZ, 45.0f);
-
+                gMarioState->faceAngle[1] = approach_s16_symmetric(gMarioState->faceAngle[1], 0x8000, 0x600);
             }
 
             if (o->oOpacity > 20) {
                 load_object_collision_model();
             } else if (o->oOpacity == 0) {
                 o->oAction = 1;
-                gMarioState->faceAngle[1] = 0x8000;
+                // gMarioState->faceAngle[1] = 0x8000;
                 gMarioState->forwardVel = 0.0f;
             }
             break;
@@ -1081,6 +1156,8 @@ void bhv_the_controller_loop(void) {
                 sEndAttacks[0]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 5);
                 sEndAttacks[0]->os16112 = 0;
 
+                // sEndAttacks[0]->oBehParams2ndByte = FBA_WALL;
+
                 if (sEndAttacks[0]->oBehParams2ndByte == FBA_BUBBLES) {
                     o->oSubAction = 1;
                 }
@@ -1139,6 +1216,31 @@ void bhv_the_controller_loop(void) {
             controller_act_run();
             break;
         case CONTROLLER_ACT_RUN_END:
+            if (o->oSubAction == 0) {
+                if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_PLACING_DOWN) {
+                    vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
+                    mario_set_forward_vel(gMarioState, dist / 48.0f);
+                    gMarioState->vel[1] = 30.0f;
+                    set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                    // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
+                    // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
+                    // gMarioState->faceAngle[1] = angle_to
+                    o->os16106 = 0x2490;
+                    o->oSubAction = 1;
+                }
+            } else {
+                if (o->oTimer <= 48) {
+                    if (gMarioState->vel[1] < 0.0f) {
+                        gMarioState->vel[1] = 0.0f;
+                    }
+                    o->os16106 += 0x492;
+                    gMarioState->pos[1] += sins(o->os16106) * 30.0f;
+                } else {
+                    o->oSubAction = 2;
+                }
+            }
+
+
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, 0, 0x400);
             o->oFaceAngleYaw = o->oMoveAngleYaw;
 
@@ -1149,7 +1251,8 @@ void bhv_the_controller_loop(void) {
             o->oPosX = approach_f32_symmetric(o->oPosX, hitboxPos[0], 140.0f);
             o->oPosY = approach_f32_symmetric(o->oPosY, hitboxPos[1], 20.0f);
             o->oPosZ = approach_f32_symmetric(o->oPosZ, hitboxPos[2], 140.0f);
-            if (!o->oMoveAngleYaw && o->oPosX == hitboxPos[0] && o->oPosY == hitboxPos[1] && o->oPosZ == hitboxPos[2]) {
+            if (o->oSubAction == 2 && !o->oMoveAngleYaw 
+                && o->oPosX == hitboxPos[0] && o->oPosY == hitboxPos[1] && o->oPosZ == hitboxPos[2]) {
                 o->oAction = CONTROLLER_ACT_DEFAULT;
             }
             break;

@@ -936,6 +936,7 @@ extern const BehaviorScript bhvRoofHole[];
 extern const BehaviorScript bhvBossCage[];
 extern const BehaviorScript bhvEndShyguy[];
 extern const BehaviorScript bhvEndGoomba[];
+extern const BehaviorScript bhvHoleWallGround[];
 
 
 #endif // BEHAVIOR_DATA_H

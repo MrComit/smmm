@@ -51,6 +51,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_END_LASER, end_laser_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_HOLE_WALL, hole_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ROOF_HOLE, roof_hole_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_HOLE_WALL_GROUND, hole_wall_ground_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

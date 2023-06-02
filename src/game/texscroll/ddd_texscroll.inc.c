@@ -11,6 +11,7 @@
 #include "levels/ddd/end_laser/texscroll.inc.c"
 #include "levels/ddd/hole_wall/texscroll.inc.c"
 #include "levels/ddd/texscroll.inc.c"
+#include "levels/ddd/hole_wall_ground/texscroll.inc.c"
 void scroll_textures_ddd() {
 	scroll_ddd_level_geo_controller();
 	scroll_ddd_level_geo_end_goomba();
@@ -24,4 +25,5 @@ void scroll_textures_ddd() {
 	scroll_ddd_level_geo_end_laser();
 	scroll_ddd_level_geo_hole_wall();
 	scroll_ddd();
+	scroll_ddd_level_geo_hole_wall_ground();
 }

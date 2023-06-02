@@ -11389,3 +11389,19 @@ const BehaviorScript bhvEndGoomba[] = {
         CALL_NATIVE(bhv_end_shyguy_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvHoleWallGround[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(hole_wall_ground_collision),
+    // SCALE(0, 150),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    CALL_NATIVE(bhv_hole_wall_ground_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hole_wall_ground_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

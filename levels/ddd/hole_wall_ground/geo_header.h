@@ -1,0 +1,10 @@
+extern const GeoLayout hole_wall_ground_geo[];
+extern u8 hole_wall_ground_BOOGOO1_i4[];
+extern u8 hole_wall_ground_BOOGOO2_i4[];
+extern Vtx hole_wall_ground_HoleWallGround_mesh_layer_1_vtx_cull[8];
+extern Vtx hole_wall_ground_HoleWallGround_mesh_layer_1_vtx_0[32];
+extern Gfx hole_wall_ground_HoleWallGround_mesh_layer_1_tri_0[];
+extern Gfx mat_hole_wall_ground_BooGooObj_layer1[];
+extern Gfx mat_revert_hole_wall_ground_BooGooObj_layer1[];
+extern Gfx hole_wall_ground_HoleWallGround_mesh_layer_1[];
+extern Gfx hole_wall_ground_material_revert_render_settings[];
