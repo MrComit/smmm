@@ -934,6 +934,7 @@ extern const BehaviorScript bhvShyguyLaser[];
 extern const BehaviorScript bhvHoleWall[];
 extern const BehaviorScript bhvRoofHole[];
 extern const BehaviorScript bhvBossCage[];
+extern const BehaviorScript bhvEndShyguy[];
 
 
 #endif // BEHAVIOR_DATA_H
