@@ -62,7 +62,17 @@ static struct ObjectHitbox sEndSpikeHitbox = {
     /* hurtboxHeight:     */ 90,
 };
 
-
+static struct ObjectHitbox sBossCageHitbox = {
+    /* interactType:      */ INTERACT_GRABBABLE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 90,
+    /* height:            */ 140,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
 
 enum FinalBossAttacks {
     FBA_BUBBLES,     // 0
@@ -690,6 +700,96 @@ void bhv_the_controller_init(void) {
 }
 
 
+void cage_held_loop(void) {
+    cur_obj_become_intangible();
+    o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    // o->oFC = 0;
+    cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
+
+    // o->os16F4 = approach_s16_symmetric(o->os16F4, 0xFF, 0x10);
+    // o->os16F6 = approach_s16_symmetric(o->os16F6, 0xBD, 0x10);
+    // o->os16FA = o->header.gfx.animInfo.animFrame;
+}
+
+void cage_dropped_loop(void) {
+    cur_obj_get_dropped();
+    cur_obj_become_tangible();
+
+    o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+    //cur_obj_init_animation(0);
+
+    //o->oFC = 1;
+    o->oHeldState = 0;
+    //o->oAction = 0;
+}
+
+
+void cage_free_loop(void) {
+    object_step();
+    // o->header.gfx.animInfo.animFrame = o->os16FA;
+    // o->os16F4 = approach_s16_symmetric(o->os16F4, 0x99, 0x10);
+    // o->os16F6 = approach_s16_symmetric(o->os16F6, 0x71, 0x10);
+
+    // if (sObjFloor != NULL && (sObjFloor->type == SURFACE_BURNING || sObjFloor->type == SURFACE_INSTANT_QUICKSAND)) {
+    //     o->os16FC = 1;
+    // } 
+    
+    // if (o->oPosY > 0.0f && gMarioState->pos[1] < -150.0f) {
+    //     if (++o->os16110 > 45) {
+    //         o->os16FC = 1;
+    //     }
+    // } else {
+    //     o->os16110 = 0;
+    // }
+
+    // if (o->os16FC == 1) {
+    //     o->os16FE++;
+    //     if (o->os16FE > 10) {
+    //         o->header.gfx.scale[0] -= 0.05f;
+    //         o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+    //     }
+    //     if (o->os16FE > 30) {
+    //         o->os16FE = 0;
+    //         o->oHeldState = 0;
+    //         vec3f_copy(&o->oPosX, &o->oHomeX);
+    //         o->oFaceAngleYaw = 0;
+    //         o->os16FC = 0;
+    //         o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0] = 1.0f;
+    //     }
+    // }
+}
+
+
+
+void bhv_boss_cage_init(void) {
+    o->oGravity = 2.5;
+    o->oFriction = 0.8;
+    o->oBuoyancy = 1.3;
+    o->os16F4 = 0x99;
+    o->os16F6 = 0x71;
+    o->os16F8 = 0;
+    o->os16FA = 0;
+    obj_set_hitbox(o, &sBossCageHitbox);
+}
+
+
+void bhv_boss_cage_loop(void) {
+    switch (o->oHeldState) {
+        case HELD_FREE:
+            cage_free_loop();
+            break;
+
+        case HELD_HELD:
+            cage_held_loop();
+            break;
+        case HELD_THROWN:
+        case HELD_DROPPED:
+            cage_dropped_loop();
+            break;
+    }
+}
+
+
 
 /*
 BOSS STRUCTURE PLAN:
@@ -703,19 +803,56 @@ in the next act: he waits for those attacks to end
 
 */
 
+#define CONTROLLER_ACT_DEFAULT 0
+#define CONTROLLER_ACT_SWIPE   1
+#define CONTROLLER_ACT_RUN     2
+#define CONTROLLER_ACT_DEATH   6
+
+
+void controller_pos_constrain(void) {
+    s8 val = FALSE;
+    if (o->oPosX > 5600.0f) {
+        o->oPosX = 5600.0f;
+        val = TRUE;
+    } else if (o->oPosX < -3600.0f) {
+        o->oPosX = -3600.0f;
+        val = TRUE;
+    }
+
+    if (o->oPosZ > -3400.0f) {
+        o->oPosZ = -3400.0f;
+        val = TRUE;
+    } else if (o->oPosZ < -11500.0f) {
+        o->oPosZ = -11500.0f;
+        val = TRUE;
+    }
+    if (val) {
+        if (o->oMoveAngleYaw > (o->oMoveAngleYaw + 0x2000) & 0xC000) {
+            o->os16F6 = (o->oMoveAngleYaw & 0xC000) - 0x4000;
+        } else {
+            o->os16F6 = ((o->oMoveAngleYaw + 0x2000) & 0xC000) + 0x4000;
+        }
+    }
+}
+
+
 void bhv_the_controller_loop(void) {
     f32 dist;
     s16 pitch, yaw;
     Vec3f hitboxPos;
 
     switch (o->oAction) {
-        case 0:
-            if (o->oTimer > 90 && cur_obj_check_if_at_animation_end()) {
-                o->oAction = 1;
-                cur_obj_init_animation_with_sound(1);
+        case CONTROLLER_ACT_DEFAULT:
+            // if (o->oTimer > 90 && cur_obj_check_if_at_animation_end()) {
+            //     o->oAction = CONTROLLER_ACT_SWIPE;
+            //     cur_obj_init_animation_with_sound(1);
+            // }
+            if (gMarioState->heldObj != NULL) {
+                o->oAction = CONTROLLER_ACT_RUN;
+                o->os16F6 = o->oAngleToMario + 0x8000;
             }
             break;
-        case 1:
+        case CONTROLLER_ACT_SWIPE:
             if (o->header.gfx.animInfo.animFrame >= 50 && o->header.gfx.animInfo.animFrame <= 66) {
                 hitboxPos[1] = gMarioState->pos[1];
                 hitboxPos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 350.0f);
@@ -728,9 +865,27 @@ void bhv_the_controller_loop(void) {
 
 
             if (cur_obj_check_if_at_animation_end()) {
-                o->oAction = 0;
+                o->oAction = CONTROLLER_ACT_DEFAULT;
                 cur_obj_init_animation_with_sound(0);
             }
+            break;
+        case CONTROLLER_ACT_RUN:
+            o->os16F6 = approach_s16_symmetric(o->os16F6, o->oAngleToMario + 0x8000, 0x100);
+            controller_pos_constrain();
+            o->oMoveAngleYaw = approach_s16_symmetric((s16)o->oMoveAngleYaw, o->os16F6, 0x600);
+            if (o->oDistanceToMario > 2500.0f) {
+                o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 15.0f, 0.7f);
+            } else {
+                o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 25.0f, 0.7f);
+            }
+            if (o->oDistanceToMario < 1500.0f) {
+                o->oOpacity--;
+            }
+            print_text_fmt_int(80, 80, "%x", o->oOpacity);
+            if (o->oOpacity <= 0) {
+                o->oAction = CONTROLLER_ACT_DEATH;
+            }
+            CL_Move();
             break;
     }
     o->oInteractStatus = 0;

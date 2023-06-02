@@ -11722,7 +11722,7 @@ Gfx ddd_dl_Trees_mesh_layer_4_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_ddd_dl_BooGooObj_layer1[] = {
+Gfx mat_ddd_dl_BooGooObjWall_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, 0, 0, 0, 0, 1, 0, COMBINED, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_LIGHTING, 0),
@@ -11742,7 +11742,7 @@ Gfx mat_ddd_dl_BooGooObj_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_ddd_dl_BooGooObj_layer1[] = {
+Gfx mat_revert_ddd_dl_BooGooObjWall_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -12144,6 +12144,34 @@ Gfx mat_revert_ddd_dl_StainedGlass_001[] = {
 	gsSPEndDisplayList(),
 };
 
+Gfx mat_ddd_dl_BooGooObj_layer1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, 0, 0, 0, 0, 1, 0, COMBINED, 0, 0, 0, 0, 1),
+	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
+	gsDPSetRenderMode(G_RM_PASS, G_RM_AA_ZB_OPA_SURF2),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_16b, 1, ddd_dl_BOOGOO1_i4),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPLoadBlock(7, 0, 0, 1023, 512),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPSetTileSize(0, 0, 0, 252, 252),
+	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_16b, 1, ddd_dl_BOOGOO2_i4),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_16b, 0, 256, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPLoadBlock(6, 0, 0, 1023, 512),
+	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_4b, 4, 256, 1, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
+	gsDPSetTileSize(1, 0, 0, 252, 252),
+	gsSPEndDisplayList(),
+};
+
+Gfx mat_revert_ddd_dl_BooGooObj_layer1[] = {
+	gsDPPipeSync(),
+	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
+	gsSPEndDisplayList(),
+};
+
 Gfx mat_ddd_dl_TreeBark_002[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT),
@@ -12188,9 +12216,9 @@ Gfx ddd_dl_Tunnel_mesh_layer_1[] = {
 	gsSPVertex(ddd_dl_Tunnel_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_ddd_dl_BooGooObj_layer1),
+	gsSPDisplayList(mat_ddd_dl_BooGooObjWall_layer1),
 	gsSPDisplayList(ddd_dl_Tunnel_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_ddd_dl_BooGooObj_layer1),
+	gsSPDisplayList(mat_revert_ddd_dl_BooGooObjWall_layer1),
 	gsSPDisplayList(mat_ddd_dl_Black),
 	gsSPDisplayList(ddd_dl_Tunnel_mesh_layer_1_tri_1),
 	gsSPEndDisplayList(),
@@ -12229,9 +12257,9 @@ Gfx ddd_dl_Mansion_mesh_layer_1[] = {
 	gsSPDisplayList(mat_ddd_dl_Roof_layer1),
 	gsSPDisplayList(ddd_dl_Mansion_mesh_layer_1_tri_6),
 	gsSPDisplayList(mat_revert_ddd_dl_Roof_layer1),
-	gsSPDisplayList(mat_ddd_dl_BooGooObj_layer1),
+	gsSPDisplayList(mat_ddd_dl_BooGooObjWall_layer1),
 	gsSPDisplayList(ddd_dl_Mansion_mesh_layer_1_tri_7),
-	gsSPDisplayList(mat_revert_ddd_dl_BooGooObj_layer1),
+	gsSPDisplayList(mat_revert_ddd_dl_BooGooObjWall_layer1),
 	gsSPEndDisplayList(),
 };
 

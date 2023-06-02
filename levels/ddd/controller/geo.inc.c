@@ -5,6 +5,7 @@ const GeoLayout controller_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_NODE_START(),
 		GEO_OPEN_NODE(),
+			GEO_ASM(5, geo_update_layer_transparency),
 			GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, 0, NULL),
 			GEO_OPEN_NODE(),
 				GEO_ANIMATED_PART(LAYER_TRANSPARENT, 342, -83, 56, controller_LDW_mesh_layer_5),
