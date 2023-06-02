@@ -679,10 +679,9 @@ void bhv_attack_manager_loop(void) {
 
 
 void bhv_the_controller_init(void) {
-    struct Object *obj;
-    sEndAttacks[0] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-    sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
-    sEndAttacks[0]->os16112 = 0;
+    // sEndAttacks[0] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
+    // sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
+    // sEndAttacks[0]->os16112 = 0;
     // sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
     // sEndAttacks[1]->oBehParams2ndByte = FBA_LASER;
     // sEndAttacks[1]->os16112 = 1;
@@ -705,5 +704,34 @@ in the next act: he waits for those attacks to end
 */
 
 void bhv_the_controller_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    Vec3f hitboxPos;
+
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 90 && cur_obj_check_if_at_animation_end()) {
+                o->oAction = 1;
+                cur_obj_init_animation_with_sound(1);
+            }
+            break;
+        case 1:
+            if (o->header.gfx.animInfo.animFrame >= 50 && o->header.gfx.animInfo.animFrame <= 66) {
+                hitboxPos[1] = gMarioState->pos[1];
+                hitboxPos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 350.0f);
+                hitboxPos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 350.0f);
+                vec3f_get_dist_and_angle(hitboxPos, gMarioState->pos, &dist, &pitch, &yaw);
+                if (dist < 350.0f && absf (gMarioState->pos[1] - o->oPosY) < 450.0f) {
+                    CL_get_hit(gMarioState, o, 2);            
+                }
+            }
+
+
+            if (cur_obj_check_if_at_animation_end()) {
+                o->oAction = 0;
+                cur_obj_init_animation_with_sound(0);
+            }
+            break;
+    }
     o->oInteractStatus = 0;
 }
