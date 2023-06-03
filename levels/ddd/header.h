@@ -93,4 +93,6 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/bg_ground/collision_header.h"
 
+#include "levels/ddd/cage_beam/geo_header.h"
+
 #endif

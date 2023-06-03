@@ -1,0 +1,10 @@
+extern const GeoLayout cage_beam_geo[];
+extern u8 cage_beam_BOOGOO1_i4[];
+extern u8 cage_beam_BOOGOO2_i4[];
+extern Vtx cage_beam_CageBeam_mesh_layer_5_vtx_cull[8];
+extern Vtx cage_beam_CageBeam_mesh_layer_5_vtx_0[26];
+extern Gfx cage_beam_CageBeam_mesh_layer_5_tri_0[];
+extern Gfx mat_cage_beam_BooGooContainer_layer5[];
+extern Gfx mat_revert_cage_beam_BooGooContainer_layer5[];
+extern Gfx cage_beam_CageBeam_mesh_layer_5[];
+extern Gfx cage_beam_material_revert_render_settings[];

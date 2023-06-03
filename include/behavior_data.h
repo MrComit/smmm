@@ -940,6 +940,7 @@ extern const BehaviorScript bhvHoleWallGround[];
 extern const BehaviorScript bhvBGGround[];
 extern const BehaviorScript bhvFakeMario[];
 extern const BehaviorScript bhvMarioBowser[];
+extern const BehaviorScript bhvBossCageBeam[];
 
 
 #endif // BEHAVIOR_DATA_H

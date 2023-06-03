@@ -957,6 +957,7 @@
 #define MODEL_ROOF_HOLE           0xF4
 #define MODEL_HOLE_WALL_GROUND    0xF3
 #define MODEL_BG_GROUND           0xF2
+#define MODEL_CAGE_BEAM           0xF1
 
 
 

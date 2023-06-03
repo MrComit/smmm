@@ -1,3 +1,4 @@
+#include "levels/ddd/cage_beam/texscroll.inc.h"
 #include "levels/ddd/bg_ground/texscroll.inc.h"
 #include "levels/ddd/hole_wall_ground/texscroll.inc.h"
 #include "levels/ddd/texscroll.inc.h"

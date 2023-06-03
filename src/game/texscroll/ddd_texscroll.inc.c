@@ -13,6 +13,7 @@
 #include "levels/ddd/texscroll.inc.c"
 #include "levels/ddd/hole_wall_ground/texscroll.inc.c"
 #include "levels/ddd/bg_ground/texscroll.inc.c"
+#include "levels/ddd/cage_beam/texscroll.inc.c"
 void scroll_textures_ddd() {
 	scroll_ddd_level_geo_controller();
 	scroll_ddd_level_geo_end_goomba();
@@ -28,4 +29,5 @@ void scroll_textures_ddd() {
 	scroll_ddd();
 	scroll_ddd_level_geo_hole_wall_ground();
 	scroll_ddd_level_geo_bg_ground();
+	scroll_ddd_level_geo_cage_beam();
 }

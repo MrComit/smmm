@@ -942,8 +942,19 @@ void cage_held_loop(void) {
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     // o->oFC = 0;
     cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
-    o->o100 = 1;
 
+    if (o->oObj108->oDistanceToMario < 1800.0f) {
+        if (o->oObj100 == NULL) {
+            o->oObj100 = spawn_object(o, MODEL_CAGE_BEAM, bhvBossCageBeam);
+        }
+    } else {
+        if (o->oObj100 != NULL) {
+            o->oObj100->activeFlags = 0;
+            o->oObj100 = NULL;
+        }
+    }
+
+    o->oFC = 1;
     // o->os16F4 = approach_s16_symmetric(o->os16F4, 0xFF, 0x10);
     // o->os16F6 = approach_s16_symmetric(o->os16F6, 0xBD, 0x10);
     // o->os16FA = o->header.gfx.animInfo.animFrame;
@@ -957,7 +968,7 @@ void cage_dropped_loop(void) {
     //cur_obj_init_animation(0);
 
     //o->oFC = 1;
-    o->o100 = 1;
+    o->oFC = 1;
     o->oHeldState = 0;
     //o->oAction = 0;
 }
@@ -966,7 +977,7 @@ void cage_dropped_loop(void) {
 void cage_free_loop(void) {
     object_step();
 
-    if (o->o100) {
+    if (o->oFC) {
         CL_explode_object(o, 1);
     }
     // o->header.gfx.animInfo.animFrame = o->os16FA;
@@ -1014,6 +1025,7 @@ void bhv_boss_cage_init(void) {
     // o->os16FA = 0;
     obj_set_hitbox(o, &sBossCageHitbox);
 
+    o->oObj108 = cur_obj_nearest_object_with_behavior(bhvTheController);
     spawn_mist_particles();
 }
 
@@ -1047,7 +1059,24 @@ void bhv_boss_cage_loop(void) {
     }
 }
 
+void bhv_boss_cage_beam_init(void) {
+    o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvTheController);
+}
 
+
+void bhv_boss_cage_beam_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    if (o->parentObj->activeFlags == 0 || o->parentObj->oHeldState != HELD_HELD) {
+        o->activeFlags = 0;
+        return;
+    }
+    vec3f_set(&o->oPosX, o->parentObj->oPosX, o->parentObj->oPosY + 40.0f, o->parentObj->oPosZ);
+    vec3f_get_dist_and_angle(&o->oPosX, &o->oObjF4->oPosX, &dist, &pitch, &yaw);
+    o->oFaceAngleYaw = yaw;
+    o->oFaceAnglePitch = -pitch;
+    o->header.gfx.scale[2] = dist / 10.0f;
+}
 
 /*
 BOSS STRUCTURE PLAN:
@@ -1243,7 +1272,7 @@ void controller_act_run(void) {
         if (obj != NULL) {
             // obj->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
             set_mario_action(gMarioState, ACT_PLACING_DOWN, 0);
-            obj->o100 = 1;
+            obj->oFC = 1;
         }
     }
     
