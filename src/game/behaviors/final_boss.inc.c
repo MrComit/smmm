@@ -1313,7 +1313,7 @@ void bhv_the_controller_loop(void) {
                 sEndAttacks[0]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 5);
                 sEndAttacks[0]->os16112 = 0;
 
-                sEndAttacks[0]->oBehParams2ndByte = FBA_BOWSER;
+                // sEndAttacks[0]->oBehParams2ndByte = FBA_BOWSER;
 
                 if (sEndAttacks[0]->oBehParams2ndByte == FBA_BUBBLES) {
                     o->oSubAction = 1;
