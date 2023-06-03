@@ -602,6 +602,8 @@ void bhv_fake_mario_init(void) {
 void bhv_fake_mario_loop(void) {
     struct MarioState *m = gMarioState;
     m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    m->marioBodyState->punchState = 0;
+    // print_text_fmt_int(80, 80, "%x", m->action, 0);
     cur_obj_update_floor_and_walls();
     cur_obj_move_standard(-78);
     switch (o->oAction) {
@@ -622,7 +624,7 @@ void bhv_fake_mario_loop(void) {
                     // o->oInteractType = INTERACT_DAMAGE;
                 }
             }
-            if (o->oDistanceToMario < 500.0f && o->oPosY + 30.0f > gMarioState->pos[1]) {
+            if (o->oTimer > 60 && o->oDistanceToMario < 500.0f && o->oPosY + 30.0f > gMarioState->pos[1]) {
                 o->oAction = 1;
                 o->oVelY = 40.0f;
             }
@@ -1221,7 +1223,7 @@ void controller_act_run(void) {
         o->oFloatFC -= 0.2f;
         o->oOpacity = (s16)o->oFloatFC;
     }
-    // print_text_fmt_int(80, 80, "%d", o->oOpacity);
+    print_text_fmt_int(80, 80, "%d", o->oOpacity, 0);
     if (o->oOpacity <= o->os16FA - 0x40 || gMarioState->heldObj == NULL) {
         o->oAction = CONTROLLER_ACT_RUN_END;
         obj = cur_obj_nearest_object_with_behavior(bhvBossCage);

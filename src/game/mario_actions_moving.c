@@ -1656,7 +1656,7 @@ s32 common_ground_knockback_action(struct MarioState *m, s32 animation, s32 arg2
         } else {
             set_mario_action(m, ACT_BACKWARD_AIR_KB, arg4);
         }
-    } else if (is_anim_at_end(m)) {
+    } else if (is_anim_at_end(m) || (m->flags & MARIO_METAL_CAP && m->actionTimer++ > 23)) {
         if (m->health < 0x100) {
             set_mario_action(m, ACT_STANDING_DEATH, 0);
         } else {
