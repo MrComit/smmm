@@ -1155,7 +1155,7 @@ void bhv_the_controller_loop(void) {
 
 
             if (o->oTimer > 180 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
-                if (o->os16104 >= 0) {
+                if (o->os16104 >= 3) {
                     obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBossCage);
                     vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
                     o->os16104 = 0;

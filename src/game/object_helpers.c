@@ -1666,7 +1666,40 @@ Gfx *geo_generate_spotlight(s32 callContext, struct GraphNode *node, void *conte
 }
 
 
+s32 sControllerHue = 0;
 
+Gfx *geo_set_controller_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    s16 r, g, b;
+    f32 valAdd;
+    Gfx *dlStart, *dlHead;
+    struct Object *objectGraphNode;
+    struct GraphNodeGenerated *currentGraphNode;
+    dlStart = NULL;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        objectGraphNode = (struct Object *) gCurGraphNodeObject; // TODO: change this to object pointer?
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        if (gCurGraphNodeHeldObject) {
+            objectGraphNode = gCurGraphNodeHeldObject->objNode;
+        }
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+        currentGraphNode->fnNode.node.flags = (currentGraphNode->parameter << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        sControllerHue += 8;
+        if (sControllerHue >= 360) {
+            sControllerHue -= 360;
+        }
+
+        valAdd = (objectGraphNode->oOpacity / 255) * 0.45f;
+
+        CL_HSVtoRGB(sControllerHue, 0.85f, 0.3f + valAdd, &r, &g, &b);
+
+        gDPSetEnvColor(dlHead++, r, g, b, 255);
+        gSPEndDisplayList(dlHead);
+    }
+    return dlStart;
+}
 
 
 
