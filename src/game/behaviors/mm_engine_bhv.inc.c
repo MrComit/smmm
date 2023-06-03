@@ -1100,6 +1100,51 @@ void toad_friend_cage_loop(void) {
     }
 }
 
+void toad_friend_final_boss(void) {
+    s32 dialogId;
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvBossCage);
+            if (o->oObjF4 != NULL) {
+                o->oAction = 1;
+
+                while ((obj = cur_obj_nearest_object_with_behavior(bhvEndGoomba)) != NULL) {
+                    obj->activeFlags = 0;
+                }
+
+                while ((obj = cur_obj_nearest_object_with_behavior(bhvEndShyguy)) != NULL) {
+                    obj->activeFlags = 0;
+                }
+            }
+            break;
+        case 1:
+            gCamera->comitCutscene = 27;
+            gComitCutsceneObject = o;
+            gComitCutsceneTimer = 25;
+            if (o->oF8) {
+                dialogId = DIALOG_074;
+            } else {
+                dialogId = DIALOG_073;
+            }
+            if (CL_NPC_Dialog(dialogId)) {
+                o->oF8 = 1;
+                o->oAction = 2;
+                // gCamera->comitCutscene = 0;
+                // stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                o->oObjF4->oAction = 1;
+                o->oObjF4->oForwardVel = 120.0f;
+                o->oObjF4->oVelY = 75.0f;
+            }
+            break;
+        case 2:
+            if (cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL) {
+                o->oAction = 0;
+            }
+            break;
+    }
+}
+
 
 extern Vec3f sToadFriendWarp1;
 
@@ -1121,6 +1166,9 @@ void bhv_friend_toad_loop(void) {
             } else if (gCurrAreaIndex == 2) {
                 toad_friend_cage_loop();
             }
+            break;
+        case LEVEL_DDD:
+            toad_friend_final_boss();
             break;
     }
 }

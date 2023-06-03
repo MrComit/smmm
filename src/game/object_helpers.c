@@ -1691,7 +1691,7 @@ Gfx *geo_set_controller_env(s32 callContext, struct GraphNode *node, UNUSED void
             sControllerHue -= 360;
         }
 
-        valAdd = (objectGraphNode->oOpacity / 255) * 0.45f;
+        valAdd = ((f32)(objectGraphNode->oOpacity) / 255.0f) * 0.45f;
 
         CL_HSVtoRGB(sControllerHue, 0.85f, 0.3f + valAdd, &r, &g, &b);
 

@@ -1005,13 +1005,13 @@ void cage_free_loop(void) {
 
 
 void bhv_boss_cage_init(void) {
-    o->oGravity = 2.5;
-    o->oFriction = 0.8;
-    o->oBuoyancy = 1.3;
-    o->os16F4 = 0x99;
-    o->os16F6 = 0x71;
-    o->os16F8 = 0;
-    o->os16FA = 0;
+    // o->oGravity = 2.5;
+    // o->oFriction = 0.8;
+    // o->oBuoyancy = 1.3;
+    // o->os16F4 = 0x99;
+    // o->os16F6 = 0x71;
+    // o->os16F8 = 0;
+    // o->os16FA = 0;
     obj_set_hitbox(o, &sBossCageHitbox);
 
     spawn_mist_particles();
@@ -1019,18 +1019,31 @@ void bhv_boss_cage_init(void) {
 
 
 void bhv_boss_cage_loop(void) {
-    switch (o->oHeldState) {
-        case HELD_FREE:
-            cage_free_loop();
-            break;
+    if (o->oAction == 1) {
+        CL_Move();
+        o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 0.1f);
+        if (o->oPosY <= 7406.0f) {
+            o->oAction = 2;
+            o->oForwardVel = 0.0f;
+            o->oVelY = 0.0f;
+            o->oGravity = 2.5;
+            o->oFriction = 0.8;
+            o->oBuoyancy = 1.3;
+        }
+    } else if (o->oAction == 2) {
+        switch (o->oHeldState) {
+            case HELD_FREE:
+                cage_free_loop();
+                break;
 
-        case HELD_HELD:
-            cage_held_loop();
-            break;
-        case HELD_THROWN:
-        case HELD_DROPPED:
-            cage_dropped_loop();
-            break;
+            case HELD_HELD:
+                cage_held_loop();
+                break;
+            case HELD_THROWN:
+            case HELD_DROPPED:
+                cage_dropped_loop();
+                break;
+        }
     }
 }
 
@@ -1284,10 +1297,12 @@ void bhv_the_controller_loop(void) {
             o->oPosZ = o->oHomeZ + (300.0f * sins(o->os16102));
 
 
-            if (o->oTimer > 180 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
-                if (o->os16104 >= 3) {
+            if (o->oTimer > 150 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
+                if (o->os16104 >= 0) {
                     obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBossCage);
-                    vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
+                    // vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
+                    obj->oFaceAngleYaw = obj->oMoveAngleYaw = 0x6C00;
+                    vec3f_set(&obj->oPosX, -2020.0f, 7416.0f, -1518.0f);
                     o->os16104 = 0;
                 } else {
                     o->oAction = CONTROLLER_ACT_ATTACKS;

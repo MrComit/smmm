@@ -68,6 +68,7 @@ const LevelScript level_ddd_entry[] = {
 		OBJECT(MODEL_NONE, 1083, 7706, -3448, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 1083, 7706, -3448),
 		OBJECT(MODEL_THE_CONTROLLER, 1083, 7706, -10281, 0, 0, 0, 0x00000000, bhvTheController),
+		OBJECT(MODEL_TOAD_FRIEND, -2126, 7416, -1593, 0, 140, 0, 0x00000000, bhvToadFriend),
 		OBJECT(MODEL_ROOF_HOLE, 1081, 7406, -7477, 0, 0, 0, 0x00000000, bhvRoofHole),
 		TERRAIN(ddd_area_1_collision),
 		ROOMS(ddd_area_1_collision_rooms),

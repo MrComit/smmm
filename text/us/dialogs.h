@@ -905,39 +905,16 @@ ERROR: Gates must be fully\n\
 on or fully off to activate\n\
 the maze."))
 
-DEFINE_DIALOG(DIALOG_073, 1, 4, 95, 200, _("\
-Aarrgh! Ahoy, matey. I\n\
-have sunken treasure,\n\
-here, I do.\n\
-\n\
-But to pluck the plunder,\n\
-you must open the\n\
-Treasure Chests in the\n\
-right order.\n\
-What order is that,\n\
-ye say?\n\
-\n\
-\n\
-I'll never tell!\n\
-\n\
-//--The Cap'n"))
+DEFINE_DIALOG(DIALOG_073, 1, 3, 95, 200, _("\
+Mario! Try to get near him\n\
+while holding one of these\n\
+cages I've constructed!\n\
+It may be the only way to\n\
+remove his powers!"))
 
-DEFINE_DIALOG(DIALOG_074, 1, 5, 30, 200, _("\
-You can grab on to the\n\
-edge of a cliff or ledge\n\
-with your fingertips and\n\
-hang down from it.\n\
-\n\
-To drop from the edge,\n\
-either press the Control\n\
-Stick in the direction of\n\
-Mario's back or press the\n\
-[Z] Button.\n\
-To get up onto the ledge,\n\
-either press Up on the\n\
-Control Stick or press [A]\n\
-as soon as you grab the\n\
-ledge to climb up quickly."))
+DEFINE_DIALOG(DIALOG_074, 1, 2, 30, 200, _("\
+Another cage, comin' right\n\
+up!"))
 
 DEFINE_DIALOG(DIALOG_075, 1, 5, 30, 200, _("\
 Mario!! My castle is in\n\

@@ -11353,7 +11353,7 @@ const BehaviorScript bhvBossCage[] = {
     // SET_HITBOX(/*Radius*/ 100, /*Height*/ 80),
     // SET_FLOAT(oGraphYOffset, 30),
     // SPAWN_OBJ(/*Model*/ MODEL_HAUNTED_CAGE, /*Behavior*/ bhvBooCage),
-    // SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -300, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_boss_cage_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_boss_cage_loop),
