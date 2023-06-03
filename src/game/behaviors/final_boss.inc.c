@@ -517,10 +517,6 @@ void bhv_end_cage_loop(void) {
 }
 
 
-void bhv_hole_wall_ground_init(void) {
-}
-
-
 void bhv_hole_wall_ground_loop(void) {
     switch (o->oAction) {
         case 0:
@@ -558,10 +554,11 @@ void controller_bubble_attack(void) {
             if (o->oTimer > 20) {
                 o->oObjF4 = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
                 o->oObjF4->oMoveAngleYaw = CL_RandomMinMaxU16(0, 0x2800) - 0x1400;
-                o->oObjF4->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x800);
+                o->oObjF4->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x600);
                 o->oObjF4->oForwardVel = CL_RandomMinMaxU16(12, 18);
                 o->oObjF4->os16F6 = (CL_RandomMinMaxU16(580, 620) * 10.0f) / o->oObjF4->oForwardVel;
                 o->oObjF4->oBehParams2ndByte = 0;
+                o->oObjF4->oPosY -= 30.0f;
                 o->oTimer = 0;
                 o->os16F8++;
             }
@@ -965,6 +962,34 @@ void controller_pos_constrain(void) {
     }
 }
 
+
+void bhv_bg_ground_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->parentObj->oOpacity <= 0xC0 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 200.0f, 30.0f);
+            if (o->parentObj->oOpacity <= 0x80 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
+                o->oAction = 2;
+                o->oHomeY += 200.0f;
+            }
+            break;
+        case 2:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 100.0f, 15.0f);
+            if (o->parentObj->oOpacity <= 0x40 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
+                o->oAction = 3;
+                o->oHomeY += 100.0f;
+            }
+            break;
+        case 3:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 100.0f, 15.0f);
+            break;
+    }
+}
+
 void bhv_the_controller_init(void) {
     // sEndAttacks[0] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
     // sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
@@ -972,6 +997,8 @@ void bhv_the_controller_init(void) {
     // sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
     // sEndAttacks[1]->oBehParams2ndByte = FBA_LASER;
     // sEndAttacks[1]->os16112 = 1;
+    o->oObj108 = spawn_object(o, MODEL_BG_GROUND, bhvBGGround);
+    vec3f_set(&o->oObj108->oPosX, 1083.0f, 7406.0f - 390.0f, -8568.0f);
 
     o->oFloatFC = 255.0f;
     obj_set_hitbox(o, &sTheControllerHitbox);
@@ -1128,7 +1155,7 @@ void bhv_the_controller_loop(void) {
 
 
             if (o->oTimer > 180 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
-                if (o->os16104 >= 3) {
+                if (o->os16104 >= 0) {
                     obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBossCage);
                     vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
                     o->os16104 = 0;

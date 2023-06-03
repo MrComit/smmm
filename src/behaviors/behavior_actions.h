@@ -1183,8 +1183,8 @@ void bhv_roof_hole_loop(void);
 void bhv_boss_cage_init(void);
 void bhv_boss_cage_loop(void);
 void bhv_end_shyguy_loop(void);
-void bhv_hole_wall_ground_init(void);
 void bhv_hole_wall_ground_loop(void);
+void bhv_bg_ground_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

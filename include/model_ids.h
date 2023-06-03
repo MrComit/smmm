@@ -956,6 +956,7 @@
 #define MODEL_HOLE_WALL           0xF5
 #define MODEL_ROOF_HOLE           0xF4
 #define MODEL_HOLE_WALL_GROUND    0xF3
+#define MODEL_BG_GROUND           0xF2
 
 
 

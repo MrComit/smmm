@@ -89,4 +89,8 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/hole_wall_ground/collision_header.h"
 
+#include "levels/ddd/bg_ground/geo_header.h"
+
+#include "levels/ddd/bg_ground/collision_header.h"
+
 #endif
