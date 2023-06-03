@@ -696,9 +696,9 @@ u32 take_damage_from_interact_object(struct MarioState *m) {
         damage += (damage + 1) / 2;
     }
 
-    if (m->flags & MARIO_METAL_CAP) {
-        damage = 0;
-    }
+    // if (m->flags & MARIO_METAL_CAP) {
+    //     damage = 0;
+    // }
 
     m->hurtCounter += 4 * damage;
 
@@ -1366,11 +1366,11 @@ u32 interact_hit_from_below(struct MarioState *m, UNUSED u32 interactType, struc
     UNUSED u8 filler[4];
 
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
-        interaction = INT_FAST_ATTACK_OR_SHELL;
-    } else {
+    // if (m->flags & MARIO_METAL_CAP) {
+    //     interaction = INT_FAST_ATTACK_OR_SHELL;
+    // } else {
         interaction = determine_interaction(m, o);
-    }
+    // }
 
     if (interaction & INT_ANY_ATTACK) {
         queue_rumble_data(5, 80);
@@ -1406,11 +1406,11 @@ u32 interact_hit_from_below(struct MarioState *m, UNUSED u32 interactType, struc
 
 u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Object *o) {
     u32 interaction;
-    if (m->flags & MARIO_METAL_CAP) {
-        interaction = INT_FAST_ATTACK_OR_SHELL;
-    } else {
+    // if (m->flags & MARIO_METAL_CAP) {
+    //     interaction = INT_FAST_ATTACK_OR_SHELL;
+    // } else {
         interaction = determine_interaction(m, o);
-    }
+    // }
 
     if (interaction & INT_ATTACK_NOT_FROM_BELOW) {
         queue_rumble_data(5, 80);

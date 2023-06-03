@@ -91,12 +91,77 @@ s16 set_mario_animation(struct MarioState *m, s32 targetAnimID) {
     return o->header.gfx.animInfo.animFrame;
 }
 
+
+
+s16 set_mario_animation_other(struct MarioState *m, s32 targetAnimID) {
+    struct Object *o = gCurrentObject;
+    struct Animation *targetAnim = m->animList->bufTarget;
+
+    if (load_patchable_table(m->animList, targetAnimID)) {
+        targetAnim->values = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->values);
+        targetAnim->index = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->index);
+    }
+
+    if (o->header.gfx.animInfo.animID != targetAnimID) {
+        o->header.gfx.animInfo.animID = targetAnimID;
+        o->header.gfx.animInfo.curAnim = targetAnim;
+        o->header.gfx.animInfo.animAccel = 0;
+        o->header.gfx.animInfo.animYTrans = m->unkB0;
+
+        if (targetAnim->flags & ANIM_FLAG_2) {
+            o->header.gfx.animInfo.animFrame = targetAnim->startFrame;
+        } else {
+            if (targetAnim->flags & ANIM_FLAG_FORWARD) {
+                o->header.gfx.animInfo.animFrame = targetAnim->startFrame + 1;
+            } else {
+                o->header.gfx.animInfo.animFrame = targetAnim->startFrame - 1;
+            }
+        }
+    }
+
+    return o->header.gfx.animInfo.animFrame;
+}
+
+
 /**
  * Sets Mario's animation where the animation is sped up or
  * slowed down via acceleration.
  */
 s16 set_mario_anim_with_accel(struct MarioState *m, s32 targetAnimID, s32 accel) {
     struct Object *o = m->marioObj;
+    struct Animation *targetAnim = m->animList->bufTarget;
+
+    if (load_patchable_table(m->animList, targetAnimID)) {
+        targetAnim->values = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->values);
+        targetAnim->index = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->index);
+    }
+
+    if (o->header.gfx.animInfo.animID != targetAnimID) {
+        o->header.gfx.animInfo.animID = targetAnimID;
+        o->header.gfx.animInfo.curAnim = targetAnim;
+        o->header.gfx.animInfo.animYTrans = m->unkB0;
+
+        if (targetAnim->flags & ANIM_FLAG_2) {
+            o->header.gfx.animInfo.animFrameAccelAssist = (targetAnim->startFrame << 0x10);
+        } else {
+            if (targetAnim->flags & ANIM_FLAG_FORWARD) {
+                o->header.gfx.animInfo.animFrameAccelAssist = (targetAnim->startFrame << 0x10) + accel;
+            } else {
+                o->header.gfx.animInfo.animFrameAccelAssist = (targetAnim->startFrame << 0x10) - accel;
+            }
+        }
+
+        o->header.gfx.animInfo.animFrame = (o->header.gfx.animInfo.animFrameAccelAssist >> 0x10);
+    }
+
+    o->header.gfx.animInfo.animAccel = accel;
+
+    return o->header.gfx.animInfo.animFrame;
+}
+
+
+s16 set_mario_anim_with_accel_other(struct MarioState *m, s32 targetAnimID, s32 accel) {
+    struct Object *o = gCurrentObject;
     struct Animation *targetAnim = m->animList->bufTarget;
 
     if (load_patchable_table(m->animList, targetAnimID)) {

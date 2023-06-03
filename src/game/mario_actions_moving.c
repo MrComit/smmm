@@ -534,8 +534,15 @@ void anim_and_audio_for_walk(struct MarioState *m) {
     s32 val0C = TRUE;
     s16 targetPitch = 0;
     f32 val04;
+    struct Object *obj;
 
-    val04 = m->intendedMag > m->forwardVel ? m->intendedMag : m->forwardVel;
+    if (m->flags & MARIO_METAL_CAP && (obj = cur_obj_nearest_object_with_behavior(bhvFakeMario)) != NULL) {
+        // val04 = obj->oForwardVel;
+        // set_mario_anim_with_accel(m, MARIO_ANIM_RUNNING, (s32)(val04 / 4.0f * 0x10000));
+        return;
+    } else {
+        val04 = m->intendedMag > m->forwardVel ? m->intendedMag : m->forwardVel;
+    }
 
     if (val04 < 4.0f) {
         val04 = 4.0f;
@@ -728,7 +735,7 @@ void tilt_body_walking(struct MarioState *m, s16 startYaw) {
     UNUSED struct Object *marioObj = m->marioObj;
     s16 animID = m->marioObj->header.gfx.animInfo.animID;
 
-    if (animID == MARIO_ANIM_WALKING || animID == MARIO_ANIM_RUNNING) {
+    if ((animID == MARIO_ANIM_WALKING || animID == MARIO_ANIM_RUNNING) && !(m->flags & MARIO_METAL_CAP)) {
         s16 dYaw = m->faceAngle[1] - startYaw;
         //! (Speed Crash) These casts can cause a crash if (dYaw * forwardVel / 12) or
         //! (forwardVel * 170) exceed or equal 2^31.

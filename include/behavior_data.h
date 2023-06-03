@@ -938,6 +938,8 @@ extern const BehaviorScript bhvEndShyguy[];
 extern const BehaviorScript bhvEndGoomba[];
 extern const BehaviorScript bhvHoleWallGround[];
 extern const BehaviorScript bhvBGGround[];
+extern const BehaviorScript bhvFakeMario[];
+extern const BehaviorScript bhvMarioBowser[];
 
 
 #endif // BEHAVIOR_DATA_H

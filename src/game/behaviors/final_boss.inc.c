@@ -74,6 +74,18 @@ static struct ObjectHitbox sBossCageHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+static struct ObjectHitbox sFakeMarioHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 3,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 37 + 120,
+    /* height:            */ 160,
+    /* hurtboxRadius:     */ 37 + 120,
+    /* hurtboxHeight:     */ 160,
+};
+
 enum FinalBossAttacks {
     FBA_BUBBLES,     // 0
     FBA_CAGE,        // 1
@@ -543,6 +555,100 @@ void bhv_hole_wall_ground_loop(void) {
 
 
 
+void bhv_mario_bowser_loop(void) {
+    o->oFaceAngleYaw = o->oMoveAngleYaw = gMarioState->faceAngle[1];
+    switch (o->oAction) {
+        case 0:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 8);
+            if (o->oOpacity == 255) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oPosY > 7406.0f) {
+                cur_obj_init_animation_with_sound(7);
+                if (o->header.gfx.animInfo.animFrame < 7) {
+                    o->header.gfx.animInfo.animFrame = 7;
+                }
+            } else if (o->oPosX != gMarioState->pos[0] || o->oPosZ != gMarioState->pos[2]) {
+                cur_obj_init_animation_with_sound(15);
+            } else {
+                cur_obj_init_animation_with_sound(12);
+            }
+            break;
+        case 2:
+            cur_obj_init_animation_with_sound(12);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 8);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+    vec3f_copy(&o->oPosX, gMarioState->pos);
+}
+
+s16 set_mario_animation_other(struct MarioState *m, s32 targetAnimID);
+s16 set_mario_anim_with_accel_other(struct MarioState *m, s32 targetAnimID, s32 accel);
+
+void bhv_fake_mario_init(void) {
+    struct MarioState *m = gMarioState;
+    o->oForwardVel = 20.0f;
+    obj_set_hitbox(o, &sFakeMarioHitbox);
+    m->flags |= MARIO_METAL_CAP;
+    // m->marioBodyState->modelState |= MODEL_STATE_METAL;
+    set_mario_animation_other(m, MARIO_ANIM_WALKING);
+}
+
+void bhv_fake_mario_loop(void) {
+    struct MarioState *m = gMarioState;
+    m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(-78);
+    switch (o->oAction) {
+        case 0:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 28.0f, 1.6f);
+            set_mario_anim_with_accel_other(m, MARIO_ANIM_RUNNING, (s32)(o->oForwardVel / 4.0f * 0x10000));
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                if (--o->oHealth <= 0) {
+                    spawn_mist_particles();
+                    o->activeFlags = 0;
+                    m->flags &= ~MARIO_METAL_CAP;
+                    create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                } else {
+                    o->oAction = 2;
+                    o->oForwardVel = -30.0f;
+                    cur_obj_become_intangible();
+                    // o->oInteractType = INTERACT_DAMAGE;
+                }
+            }
+            if (o->oDistanceToMario < 500.0f && o->oPosY + 30.0f > gMarioState->pos[1]) {
+                o->oAction = 1;
+                o->oVelY = 40.0f;
+            }
+            break;
+        case 1:
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 20.0f, 1.0f);
+            if (o->oPosY <= 7410.0f) {
+                o->oAction = 0;
+            }
+            set_mario_animation_other(m, MARIO_ANIM_SINGLE_JUMP);
+            break;
+        case 2:
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 1.0f);
+            set_mario_animation_other(m, MARIO_ANIM_BACKWARD_KB);
+            if (o->oTimer > 40) {
+                o->oAction = 0;
+                cur_obj_become_tangible();
+                // o->oInteractType = INTERACT_BOUNCE_TOP;
+            }
+            break;
+    }
+
+    o->oInteractStatus = 0;
+}
+
+
 struct Object *sEndAttacks[4] = {
     NULL, NULL, NULL, NULL,
 };
@@ -733,7 +839,26 @@ void controller_dropper_attack(void) {
 }
 
 void controller_bowser_attack(void) {
+    switch (o->oAction) {
+        case 0:
+            cur_obj_play_sound_2(SOUND_GENERAL_VANISH_SFX);
+            o->oObjF4 = spawn_object(o, MODEL_MARIO, bhvFakeMario);
+            // o->oObjF4 = spawn_object(o, MODEL_MARIO, bhvFakeMario);
+            // o->oObjF4 = spawn_object(o, MODEL_MARIO, bhvFakeMario);
+            o->oObjF8 = spawn_object(o, MODEL_BOWSER, bhvMarioBowser);
 
+            o->oAction = 1;
+            break;
+        case 1:
+            if (o->oObjF4 == NULL || o->oObjF4->activeFlags == 0) {
+                if (o->oObjF8 != NULL) {
+                    o->oObjF8->oAction = 2;
+                }
+                o->activeFlags = 0;
+                sEndAttacks[o->os16112] = NULL;
+            }
+            break;
+    }
 }
 
 
@@ -966,6 +1091,7 @@ void controller_pos_constrain(void) {
 void bhv_bg_ground_loop(void) {
     switch (o->oAction) {
         case 0:
+            // o->oPosY = o->oHomeY + 300.0f;
             if (o->parentObj->oOpacity <= 0xC0 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
                 o->oAction = 1;
             }
@@ -1141,6 +1267,8 @@ void bhv_the_controller_loop(void) {
     s16 angle;
     Vec3f hitboxPos;
 
+    // set_mario_animation_other(gMarioState, MARIO_ANIM_IDLE_HEAD_LEFT);
+
     switch (o->oAction) {
         case CONTROLLER_ACT_DEFAULT:
             //ANGLE
@@ -1183,7 +1311,7 @@ void bhv_the_controller_loop(void) {
                 sEndAttacks[0]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 5);
                 sEndAttacks[0]->os16112 = 0;
 
-                // sEndAttacks[0]->oBehParams2ndByte = FBA_WALL;
+                sEndAttacks[0]->oBehParams2ndByte = FBA_BOWSER;
 
                 if (sEndAttacks[0]->oBehParams2ndByte == FBA_BUBBLES) {
                     o->oSubAction = 1;
