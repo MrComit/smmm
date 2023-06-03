@@ -11245,6 +11245,7 @@ const BehaviorScript bhvEndBubble[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     SET_HOME(),
     BILLBOARD(),
+    // SCALE(0, 140),
     CALL_NATIVE(bhv_end_bubble_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_end_bubble_loop),

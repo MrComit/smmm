@@ -17,10 +17,10 @@ struct ObjectHitbox sEndFistHitbox = {
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 180,
-    /* height:            */ 850,
-    /* hurtboxRadius:     */ 180,
-    /* hurtboxHeight:     */ 850,
+    /* radius:            */ 320,
+    /* height:            */ 880,
+    /* hurtboxRadius:     */ 320,
+    /* hurtboxHeight:     */ 880,
 };
 
 
@@ -100,6 +100,7 @@ enum FinalBossAttacks {
 
 Vec3f sEndBossMarioPoint = {1083.0f, 7406.0f, -4448.0f};
 
+f32 sEndHoleWallSpeeds[] = {25.0f, 35.0f, 45.0f};
 
 static void const *sHoleWallCollisions[] = {
     hole_wall1_collision,
@@ -130,13 +131,13 @@ void bhv_hole_wall_loop(void) {
             break;
         case 1:
             load_object_collision_model();
-            o->oPosZ += 25.0f;
+            o->oPosZ += sEndHoleWallSpeeds[o->os16100];
             if (gMarioState->pos[2] < o->oPosZ - 200.0f || o->oPosZ > -3000.0f) {
                 o->oAction = 2;
             }
             break;
         case 2:
-            o->oPosZ += 40.0f;
+            o->oPosZ += sEndHoleWallSpeeds[o->os16100] * 2.0f;
             o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 0.025f);
             // cur_obj_scale(o->oFloatF4);
             if (o->header.gfx.scale[1] == 0.0f) {
@@ -211,8 +212,13 @@ void bhv_laser_shyguy_loop(void) {
                 }
                 spawn_mist_particles();
                 o->activeFlags = 0;
-                o->parentObj->oObjF4 = NULL;
-                o->oObjF4->activeFlags = 0;
+                if (o->os1610E == 0) {
+                    o->parentObj->oObjF4 = NULL;
+                    o->oObjF4->activeFlags = 0;
+                } else {
+                    o->parentObj->oObjF8 = NULL;
+                    o->oObjF8->activeFlags = 0;
+                }
                 create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
             }
             o->oInteractStatus = 0;
@@ -231,7 +237,7 @@ void bhv_end_laser_loop(void) {
     f32 xDif = (o->oPosX - gMarioState->pos[0]) * coss(o->oFaceAngleYaw);
     f32 d = absf(zDif - xDif);
     f32 yDif = absf(gMarioState->pos[1] - o->oPosY);
-    if (d < 70.0f && yDif < 70.0f && lateral_dist_between_objects(o, gMarioObject) > 150.0f) {
+    if (d < 70.0f && yDif < 70.0f && lateral_dist_between_objects(o, gMarioObject) > 150.0f && gMarioState->pos[2] > -9030.0f) {
         if (o->oTimer > 60) {
             CL_get_hit(gMarioState, gMarioObject, 1);
             // spawn_object(o, MODEL_SAWBLADE, bhvSawbladeShoot);
@@ -326,7 +332,7 @@ void bhv_end_spike_loop(void) {
             // x2 = (gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw);
             // z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw);
             // if (x + z < 500.0f && x2 + z2 > 200.0f) {
-                if (o->oDistanceToMario > 600.0f && (cur_obj_check_if_at_animation_end() || o->oTimer > 20)) {
+                if (gMarioState->pos[2] > -9300.0f && (cur_obj_check_if_at_animation_end() || o->oTimer > 20)) {
                     if ((o->oBehParams >> 24) == 2) {
                         cur_obj_init_animation_with_accel_and_sound(1, 2.0f);
                     } else {
@@ -379,20 +385,7 @@ void bhv_end_spike_loop(void) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+f32 sEndBubbleSizes[] = {1.2f, 1.4f, 1.6f};
 
 
 void bhv_end_bubble_init(void) {
@@ -478,7 +471,8 @@ void bhv_end_fist_loop(void) {
     }
 }
 
-
+s16 sEndCageTimers[] = {60, 45, 30};
+f32 sEndCageSpeeds[] = {40.0f, 50.0f, 60.0f};
 
 void bhv_end_cage_init(void) {
     o->oPosY = 6500.0f;
@@ -489,6 +483,9 @@ void bhv_end_cage_init(void) {
 void bhv_end_cage_loop(void) {
     switch (o->oAction) {
         case 0:
+            if (gMarioObject->oAction == ACT_CUTSCENE_JUMP) {
+                return;
+            }
             o->oPosX = gMarioState->pos[0];
             o->oPosZ = gMarioState->pos[2];
             o->oPosY = approach_f32_symmetric(o->oPosY, 6806.0f, 15.0f);
@@ -498,17 +495,16 @@ void bhv_end_cage_loop(void) {
             }
             break;
         case 1:
-            if (o->oTimer < 60) {
+            if (o->oTimer < sEndCageTimers[o->os16100]) {
                 o->oPosY += o->oFloatF4;
                 o->oFloatF4 *= -1.0f;
                 o->oPosX = gMarioState->pos[0];
                 o->oPosZ = gMarioState->pos[2];
-            } else if (o->oTimer <= 90) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 40.0f);
+            } else if (o->oPosY != o->oHomeY) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, sEndCageSpeeds[o->os16100]);
                 // if (o->oPosY == o->oHomeY) {
                 // }
-            } 
-            if (o->oTimer == 80) {
+            } else if (o->os16102++ >= 5) {
                 o->oObjF8 = spawn_object(o, MODEL_END_FIST, bhvEndFist);
                 o->oObjF8->oPosY = 6400.0f;
                 o->oAction = 2;
@@ -667,6 +663,15 @@ void controller_bubble_attack(void) {
                 o->oObjF4->os16F6 = (CL_RandomMinMaxU16(580, 620) * 10.0f) / o->oObjF4->oForwardVel;
                 o->oObjF4->oBehParams2ndByte = 0;
                 o->oObjF4->oPosY -= 30.0f;
+
+                if (o->parentObj->oOpacity <= 0x40) {
+                    obj_scale(o->oObjF4, 1.6f);
+                } else if (o->parentObj->oOpacity <= 0x40) {
+                    obj_scale(o->oObjF4, 1.4f);
+                } else {
+                    obj_scale(o->oObjF4, 1.2f);
+                }
+
                 o->oTimer = 0;
                 o->os16F8++;
             }
@@ -686,6 +691,11 @@ void controller_cage_attack(void) {
             o->oObjF4 = spawn_object(o, MODEL_END_CAGE, bhvEndCage);
             o->oObjF4->oPosY = 7406.0f;
             o->oObjF4->oHomeY = 7406.0f;
+            if (o->parentObj->oOpacity <= 0x40) {
+                o->oObjF4->os16100 = 2;
+            } else if (o->parentObj->oOpacity <= 0x40) {
+                o->oObjF4->os16100 = 1;
+            }
             o->oAction = 1;
             break;
         case 1:
@@ -706,8 +716,9 @@ void controller_laser_attack(void) {
         case 0:
             o->oObjF4 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
             vec3f_set(&o->oObjF4->oPosX, -1953.0f, 7406.0f, -9174.0f);
-            if (o->os16FC) {
+            if (o->parentObj->oOpacity <= 0xC0) {
                 o->oObjF8 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
+                o->oObjF8->os1610E = 1;
                 vec3f_set(&o->oObjF8->oPosX, 4036.0f, 7406.0f, -9174.0f);
             }
             o->oAction = 1;
@@ -788,6 +799,13 @@ void controller_wall_attack(void) {
                 } while (o->os16100 == o->os16102);
                 o->oObjF4->oBehParams2ndByte = o->os16100;
                 o->os16102 = o->os16100;
+
+                if (o->parentObj->oOpacity <= 0x40) {
+                    o->oObjF4->os16100 = 2;
+                } else if (o->parentObj->oOpacity <= 0x40) {
+                    o->oObjF4->os16100 = 1;
+                }
+
                 vec3f_set(&o->oObjF4->oPosX, 1083.0f, 7406.0f, -10068.0f);
                 o->oAction = 1;
             }
@@ -1326,8 +1344,8 @@ void bhv_the_controller_loop(void) {
             o->oPosZ = o->oHomeZ + (300.0f * sins(o->os16102));
 
 
-            if (o->oTimer > 150 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
-                if (o->os16104 >= 0) {
+            if (o->oTimer > 120 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
+                if (o->os16104 >= 3) {
                     obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBossCage);
                     // vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
                     obj->oFaceAngleYaw = obj->oMoveAngleYaw = 0x6C00;
@@ -1354,16 +1372,30 @@ void bhv_the_controller_loop(void) {
         case CONTROLLER_ACT_ATTACKS:
             if (o->oTimer == 0) {
                 sEndAttacks[0] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
-                sEndAttacks[0]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 5);
+                sEndAttacks[0]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 6);
                 sEndAttacks[0]->os16112 = 0;
 
+                obj = cur_obj_nearest_object_with_behavior(bhvToadFriend);
+                if (obj != NULL && obj->oF8 == 0) {
+                    switch (o->os16104) {
+                        case 0:
+                            sEndAttacks[0]->oBehParams2ndByte = FBA_BUBBLES;
+                            break;
+                        case 1:
+                            sEndAttacks[0]->oBehParams2ndByte = FBA_LASER;
+                            break;
+                        case 2:
+                            sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
+                            break;
+                    }
+                }
                 // sEndAttacks[0]->oBehParams2ndByte = FBA_BOWSER;
 
                 if (sEndAttacks[0]->oBehParams2ndByte == FBA_BUBBLES) {
                     o->oSubAction = 1;
                 }
 
-                if (sEndAttacks[0]->oBehParams2ndByte < 5) {
+                if (o->oOpacity <= 0x80 && sEndAttacks[0]->oBehParams2ndByte < 5) {
                     sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
                     sEndAttacks[1]->os16112 = 1;
 
