@@ -97,4 +97,8 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/end_bubble/header.h"
 
+#include "levels/ddd/end_cage/header.h"
+
+#include "levels/ddd/end_fist/header.h"
+
 #endif

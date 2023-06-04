@@ -19,8 +19,8 @@ void scroll_textures_ddd() {
 	scroll_ddd_level_geo_end_goomba();
 	scroll_ddd_level_geo_end_shyguy();
 	scroll_ddd_level_geo_end_boo();
-	scroll_ddd_level_geo_end_cage();
-	scroll_ddd_level_geo_end_fist();
+	scroll_ddd_level_dl_end_cage();
+	scroll_ddd_level_dl_end_fist();
 	scroll_ddd_level_dl_end_bubble();
 	scroll_ddd_level_geo_end_log();
 	scroll_ddd_level_geo_end_spike();

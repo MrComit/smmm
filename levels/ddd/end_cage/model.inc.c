@@ -520,18 +520,18 @@ u8 end_cage_BOOGOO2_i4[] = {
 	
 };
 
-Vtx end_cage_Cage_mesh_layer_1_vtx_cull[8] = {
+Vtx end_cage_Cage_mesh_vtx_cull[8] = {
+	{{ {-412, 0, -452}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-412, 0, 360}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-412, 640, 360}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-412, 640, -452}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-412, 0, -452}, 0, {-16, -16}, {0, 0, 0, 0} }},
+	{{ {412, 0, -452}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {412, 0, 360}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {412, 640, 360}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {412, 640, -452}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {412, 0, -452}, 0, {-16, -16}, {0, 0, 0, 0} }},
 };
 
-Vtx end_cage_Cage_mesh_layer_1_vtx_0[444] = {
+Vtx end_cage_Cage_mesh_vtx_0[444] = {
 	{{ {320, 512, -360}, 0, {-218, -1039}, {255, 255, 255, 255} }},
 	{{ {320, 640, -360}, 0, {-1034, -1034}, {255, 255, 255, 255} }},
 	{{ {240, 640, -360}, 0, {-1036, -523}, {255, 255, 255, 255} }},
@@ -978,8 +978,8 @@ Vtx end_cage_Cage_mesh_layer_1_vtx_0[444] = {
 	{{ {412, 531, 224}, 0, {1033, 2513}, {255, 255, 255, 255} }},
 };
 
-Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 0, 32, 0),
+Gfx end_cage_Cage_mesh_tri_0[] = {
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
 	gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),
@@ -996,7 +996,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(27, 28, 25, 0, 27, 29, 28, 0),
 	gsSP2Triangles(29, 30, 28, 0, 29, 31, 30, 0),
 	gsSP2Triangles(31, 3, 30, 0, 31, 0, 3, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 32, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 32, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 2, 1, 0),
 	gsSP2Triangles(3, 1, 4, 0, 1, 5, 4, 0),
 	gsSP2Triangles(1, 6, 5, 0, 2, 3, 7, 0),
@@ -1011,7 +1011,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(25, 24, 26, 0, 27, 25, 26, 0),
 	gsSP2Triangles(27, 26, 28, 0, 29, 27, 28, 0),
 	gsSP2Triangles(29, 28, 30, 0, 31, 27, 29, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 64, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 64, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
 	gsSP2Triangles(3, 4, 1, 0, 5, 4, 3, 0),
 	gsSP2Triangles(5, 6, 4, 0, 7, 6, 5, 0),
@@ -1027,7 +1027,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(23, 26, 24, 0, 27, 26, 23, 0),
 	gsSP2Triangles(28, 27, 23, 0, 28, 23, 29, 0),
 	gsSP2Triangles(27, 30, 26, 0, 31, 30, 27, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 96, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 96, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
 	gsSP2Triangles(7, 6, 8, 0, 7, 8, 9, 0),
@@ -1042,7 +1042,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(26, 25, 24, 0, 26, 27, 25, 0),
 	gsSP2Triangles(28, 27, 26, 0, 28, 29, 27, 0),
 	gsSP2Triangles(30, 29, 28, 0, 30, 31, 29, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 128, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 128, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(3, 4, 1, 0, 3, 5, 4, 0),
 	gsSP2Triangles(5, 6, 4, 0, 5, 7, 6, 0),
@@ -1057,7 +1057,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(25, 24, 26, 0, 25, 26, 27, 0),
 	gsSP2Triangles(27, 26, 28, 0, 27, 28, 29, 0),
 	gsSP2Triangles(30, 27, 29, 0, 30, 29, 31, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 160, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 160, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
 	gsSP2Triangles(6, 4, 5, 0, 6, 5, 7, 0),
@@ -1073,7 +1073,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(18, 26, 25, 0, 22, 23, 27, 0),
 	gsSP2Triangles(22, 27, 28, 0, 27, 29, 28, 0),
 	gsSP2Triangles(27, 30, 29, 0, 16, 22, 31, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 192, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 192, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
 	gsSP2Triangles(1, 4, 3, 0, 0, 2, 5, 0),
 	gsSP2Triangles(5, 2, 6, 0, 7, 6, 2, 0),
@@ -1087,7 +1087,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(23, 22, 24, 0, 23, 24, 25, 0),
 	gsSP2Triangles(24, 26, 25, 0, 24, 27, 26, 0),
 	gsSP2Triangles(28, 29, 30, 0, 28, 30, 31, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 224, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 224, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(3, 0, 4, 0, 3, 4, 5, 0),
 	gsSP2Triangles(4, 6, 5, 0, 4, 7, 6, 0),
@@ -1101,7 +1101,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(25, 26, 24, 0, 25, 27, 26, 0),
 	gsSP2Triangles(27, 28, 26, 0, 27, 29, 28, 0),
 	gsSP2Triangles(30, 28, 29, 0, 30, 29, 31, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 256, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 256, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
 	gsSP2Triangles(6, 4, 5, 0, 6, 5, 7, 0),
@@ -1117,7 +1117,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(26, 24, 25, 0, 26, 25, 27, 0),
 	gsSP2Triangles(28, 26, 27, 0, 28, 27, 29, 0),
 	gsSP2Triangles(30, 28, 29, 0, 30, 29, 31, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 288, 30, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 288, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 0, 3, 0, 4, 3, 5, 0),
 	gsSP2Triangles(6, 4, 5, 0, 6, 5, 7, 0),
@@ -1130,7 +1130,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(24, 20, 23, 0, 24, 25, 20, 0),
 	gsSP2Triangles(25, 24, 26, 0, 25, 26, 27, 0),
 	gsSP2Triangles(26, 28, 27, 0, 26, 29, 28, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 318, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 318, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
 	gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),
@@ -1147,7 +1147,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(27, 28, 25, 0, 27, 29, 28, 0),
 	gsSP2Triangles(29, 30, 28, 0, 29, 31, 30, 0),
 	gsSP2Triangles(31, 3, 30, 0, 31, 0, 3, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 350, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 350, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(3, 2, 4, 0, 2, 5, 4, 0),
 	gsSP2Triangles(2, 6, 5, 0, 3, 4, 7, 0),
@@ -1162,7 +1162,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(26, 24, 25, 0, 26, 25, 27, 0),
 	gsSP2Triangles(28, 26, 27, 0, 28, 27, 29, 0),
 	gsSP2Triangles(30, 28, 29, 0, 30, 29, 31, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 382, 32, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 382, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
 	gsSP2Triangles(4, 3, 0, 0, 4, 5, 3, 0),
 	gsSP2Triangles(6, 5, 4, 0, 6, 7, 5, 0),
@@ -1179,7 +1179,7 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(5, 29, 25, 0, 5, 25, 3, 0),
 	gsSP2Triangles(29, 16, 28, 0, 10, 16, 29, 0),
 	gsSP2Triangles(16, 30, 28, 0, 16, 31, 30, 0),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_0 + 414, 30, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_0 + 414, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(4, 0, 3, 0, 4, 5, 0, 0),
 	gsSP2Triangles(5, 4, 6, 0, 5, 6, 7, 0),
@@ -1194,7 +1194,6 @@ Gfx end_cage_Cage_mesh_layer_1_tri_0[] = {
 	gsSP2Triangles(26, 28, 27, 0, 26, 29, 28, 0),
 	gsSPEndDisplayList(),
 };
-
 
 Gfx mat_end_cage_BooGooObj_layer1[] = {
 	gsDPPipeSync(),
@@ -1224,25 +1223,19 @@ Gfx mat_revert_end_cage_BooGooObj_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx end_cage_Cage_mesh_layer_1[] = {
+Gfx end_cage_Cage_mesh[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(end_cage_Cage_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPVertex(end_cage_Cage_mesh_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_end_cage_BooGooObj_layer1),
-	gsSPDisplayList(end_cage_Cage_mesh_layer_1_tri_0),
+	gsSPDisplayList(end_cage_Cage_mesh_tri_0),
 	gsSPDisplayList(mat_revert_end_cage_BooGooObj_layer1),
-	gsSPEndDisplayList(),
-};
-
-Gfx end_cage_material_revert_render_settings[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
-	gsDPSetEnvColor(255, 255, 255, 255),
-	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 
