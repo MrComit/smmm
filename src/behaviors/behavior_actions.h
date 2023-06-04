@@ -1190,6 +1190,8 @@ void bhv_fake_mario_loop(void);
 void bhv_mario_bowser_loop(void);
 void bhv_boss_cage_beam_init(void);
 void bhv_boss_cage_beam_loop(void);
+void bhv_end_boo_init(void);
+void bhv_end_boo_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

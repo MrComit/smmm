@@ -37,7 +37,7 @@ extern Gfx ddd_dl_Tunnel_mesh_layer_1_tri_0[];
 extern Vtx ddd_dl_Tunnel_mesh_layer_1_vtx_1[24];
 extern Gfx ddd_dl_Tunnel_mesh_layer_1_tri_1[];
 extern Vtx ddd_dl_Tunnel_001_mesh_layer_1_vtx_cull[8];
-extern Vtx ddd_dl_Tunnel_001_mesh_layer_1_vtx_0[250];
+extern Vtx ddd_dl_Tunnel_001_mesh_layer_1_vtx_0[352];
 extern Gfx ddd_dl_Tunnel_001_mesh_layer_1_tri_0[];
 extern Vtx ddd_dl_Mansion_mesh_layer_1_vtx_0[776];
 extern Gfx ddd_dl_Mansion_mesh_layer_1_tri_0[];
