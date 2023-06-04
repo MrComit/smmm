@@ -914,7 +914,7 @@ void controller_wall_attack(void) {
 void controller_dropper_attack(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 120) {
+            if (o->oTimer > 20) {
                 o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvRoofHole);
                 if (o->oObjF4 != NULL) {
                     o->oObjF4->oF4 = 1;
@@ -959,13 +959,20 @@ void controller_bowser_attack(void) {
 
 
 void bhv_roof_hole_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->oF4) {
-                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 6);
                 gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], o->oPosX, 45.0f);
                 gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], o->oPosZ, 45.0f);
                 gMarioState->faceAngle[1] = approach_s16_symmetric(gMarioState->faceAngle[1], 0x8000, 0x600);
+                if (o->oFC == 0 && gMarioState->pos[0] == o->oPosX && gMarioState->pos[2] == o->oPosZ) {
+                    o->oFC = 1;
+                }
+                obj = cur_obj_nearest_object_with_behavior(bhvToadFriend);
+                if (o->oFC == 2 || obj == NULL || obj->oF8 != 0) {
+                    o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 9);
+                }
             }
 
             if (o->oOpacity > 20) {
@@ -978,7 +985,7 @@ void bhv_roof_hole_loop(void) {
             break;
         case 1:
             gCamera->comitCutscene = 26;
-            if (o->oTimer > 150 && gMarioState->pos[1] > 7000.0f && gMarioState->pos[0] < 15000.0f) {
+            if (o->oTimer > 90 && gMarioState->pos[1] > 7000.0f && gMarioState->pos[0] < 15000.0f) {
                 o->oAction = 2;
                 o->oOpacity = 255;
             }
@@ -1294,13 +1301,14 @@ void controller_act_attacks(void) {
         if (obj != NULL && obj->oF8 == 0) {
             switch (o->os16104) {
                 case 0:
-                    sEndAttacks[0]->oBehParams2ndByte = FBA_LOGS;
+                    sEndAttacks[0]->oBehParams2ndByte = FBA_BUBBLES;
                     break;
                 case 1:
                     sEndAttacks[0]->oBehParams2ndByte = FBA_LASER;
                     break;
                 case 2:
                     sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
+                    o->oSubAction = 2;
                     break;
             }
         }
@@ -1334,6 +1342,16 @@ void controller_act_attacks(void) {
         o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 80.0f);
         o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
         o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oHomeZ, 40.0f);
+
+        if (o->oSubAction == 2) {
+            obj = cur_obj_nearest_object_with_behavior(bhvRoofHole);
+            if (obj != NULL && obj->oFC == 1) {
+                if (CL_NPC_Dialog(DIALOG_075)) {
+                    o->oSubAction = 3;
+                    obj->oFC = 2;
+                }
+            }
+        }
     }
 
     if (boss_attacks_finished()) {
@@ -1534,11 +1552,13 @@ void bhv_the_controller_loop(void) {
 
             if (o->oTimer > 30 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
                 if (o->os16104 >= 3) {
-                    obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBossCage);
-                    // vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
-                    obj->oFaceAngleYaw = obj->oMoveAngleYaw = 0x6C00;
-                    vec3f_set(&obj->oPosX, -2020.0f, 7416.0f, -1518.0f);
-                    o->os16104 = 0;
+                    if (o->oTimer > 75) {
+                        obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBossCage);
+                        // vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
+                        obj->oFaceAngleYaw = obj->oMoveAngleYaw = 0x6C00;
+                        vec3f_set(&obj->oPosX, -2020.0f, 7416.0f, -1518.0f);
+                        o->os16104 = 0;
+                    }
                 } else {
                     o->oAction = CONTROLLER_ACT_ATTACKS;
                 }

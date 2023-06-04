@@ -1121,7 +1121,7 @@ void toad_friend_final_boss(void) {
         case 1:
             gCamera->comitCutscene = 27;
             gComitCutsceneObject = o;
-            gComitCutsceneTimer = 25;
+            gComitCutsceneTimer = 22;
             if (o->oF8) {
                 dialogId = DIALOG_074;
             } else {

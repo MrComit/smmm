@@ -916,37 +916,11 @@ DEFINE_DIALOG(DIALOG_074, 1, 2, 30, 200, _("\
 Another cage, comin' right\n\
 up!"))
 
-DEFINE_DIALOG(DIALOG_075, 1, 5, 30, 200, _("\
-Mario!! My castle is in\n\
-great peril. I know that\n\
-Bowser is the cause...and\n\
-I know that only you can\n\
-stop him!\n\
-The doors in the castle\n\
-that have been sealed by\n\
-Bowser can be opened only\n\
-with Star Power.\n\
-\n\
-But there are secret\n\
-paths in the castle,\n\
-paths that Bowser hasn't\n\
-found.\n\
-\n\
-One of those paths is in\n\
-this room, and it holds\n\
-one of the castle's Secret\n\
-Stars!\n\
-\n\
-Find that Secret Star,\n\
-Mario! It will help you\n\
-on your quest. Please,\n\
-Mario, you have to\n\
-help us!\n\
-Retrieve all of the\n\
-Power Stars in the castle\n\
-and free us from this\n\
-awful prison!\n\
-Please!"))
+DEFINE_DIALOG(DIALOG_075, 1, 3, 30, 200, _("\
+YOU WILL FEEL MY HATRED.\n\
+YOU WILL NEVER ESCAPE FROM\n\
+MY GRASP.\n\
+I. WILL. BREAK. YOU."))
 
 DEFINE_DIALOG(DIALOG_076, 1, 6, 30, 200, _("\
 Thanks to the power of\n\

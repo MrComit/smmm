@@ -676,7 +676,8 @@ void check_instant_warp(void) {
     //    return;
     // }
 
-    if ((floor = m->floor) != NULL && floor->type == SURFACE_INSTANT_WARP_1B) {
+    if ((floor = m->floor) != NULL && (floor->type == SURFACE_INSTANT_WARP_1B || 
+        (floor->type == SURFACE_INSTANT_WARP_1C && m->pos[1] < m->floorHeight + 110.0f))) {
         if (gCurrentArea->instantWarps != NULL) {
             struct InstantWarp *warp = &gCurrentArea->instantWarps[floor->force];
 
