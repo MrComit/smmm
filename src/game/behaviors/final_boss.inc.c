@@ -963,6 +963,18 @@ void bhv_roof_hole_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oF4) {
+                if (o->oTimer == 1) {
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndGoomba)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndShyguy)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
+                    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndBoo)) != NULL) {
+                        obj->activeFlags = 0;
+                    }
+                }
+
                 gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], o->oPosX, 45.0f);
                 gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], o->oPosZ, 45.0f);
                 gMarioState->faceAngle[1] = approach_s16_symmetric(gMarioState->faceAngle[1], 0x8000, 0x600);
@@ -973,6 +985,8 @@ void bhv_roof_hole_loop(void) {
                 if (o->oFC == 2 || obj == NULL || obj->oF8 != 0) {
                     o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 9);
                 }
+            } else {
+                o->oTimer = 0;
             }
 
             if (o->oOpacity > 20) {

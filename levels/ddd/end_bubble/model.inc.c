@@ -520,18 +520,18 @@ u8 end_bubble_BOOGOO2_i4[] = {
 	
 };
 
-Vtx end_bubble_Bubble_mesh_layer_1_vtx_cull[8] = {
+Vtx end_bubble_Bubble_mesh_vtx_cull[8] = {
+	{{ {-100, -100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-100, -100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-100, 100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-100, 100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-100, -100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
+	{{ {100, -100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {100, -100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {100, 100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {100, 100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {100, -100, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
 };
 
-Vtx end_bubble_Bubble_mesh_layer_1_vtx_0[8] = {
+Vtx end_bubble_Bubble_mesh_vtx_0[8] = {
 	{{ {-100, 0, 0}, 0, {360, -557}, {255, 255, 255, 255} }},
 	{{ {-71, 71, 0}, 0, {-557, 360}, {255, 255, 255, 255} }},
 	{{ {0, 100, 0}, 0, {-557, 1656}, {255, 255, 255, 255} }},
@@ -542,16 +542,15 @@ Vtx end_bubble_Bubble_mesh_layer_1_vtx_0[8] = {
 	{{ {-71, -71, 0}, 0, {1656, -557}, {255, 255, 255, 255} }},
 };
 
-Gfx end_bubble_Bubble_mesh_layer_1_tri_0[] = {
-	gsSPVertex(end_bubble_Bubble_mesh_layer_1_vtx_0 + 0, 8, 0),
+Gfx end_bubble_Bubble_mesh_tri_0[] = {
+	gsSPVertex(end_bubble_Bubble_mesh_vtx_0 + 0, 8, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(2, 4, 3, 0, 3, 5, 0, 0),
 	gsSP2Triangles(3, 6, 5, 0, 5, 7, 0, 0),
 	gsSPEndDisplayList(),
 };
 
-
-Gfx mat_end_bubble_BooGooObj_layer1[] = {
+Gfx mat_end_bubble_BooGooObjNoCull_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, 0, 0, 0, 0, 1, 0, COMBINED, 0, 0, 0, 0, 1),
 	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
@@ -571,7 +570,7 @@ Gfx mat_end_bubble_BooGooObj_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_end_bubble_BooGooObj_layer1[] = {
+Gfx mat_revert_end_bubble_BooGooObjNoCull_layer1[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
@@ -579,25 +578,19 @@ Gfx mat_revert_end_bubble_BooGooObj_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx end_bubble_Bubble_mesh_layer_1[] = {
+Gfx end_bubble_Bubble_mesh[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(end_bubble_Bubble_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPVertex(end_bubble_Bubble_mesh_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_end_bubble_BooGooObj_layer1),
-	gsSPDisplayList(end_bubble_Bubble_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_end_bubble_BooGooObj_layer1),
-	gsSPEndDisplayList(),
-};
-
-Gfx end_bubble_material_revert_render_settings[] = {
+	gsSPDisplayList(mat_end_bubble_BooGooObjNoCull_layer1),
+	gsSPDisplayList(end_bubble_Bubble_mesh_tri_0),
+	gsSPDisplayList(mat_revert_end_bubble_BooGooObjNoCull_layer1),
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
-	gsDPSetEnvColor(255, 255, 255, 255),
-	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 

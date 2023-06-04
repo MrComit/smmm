@@ -95,4 +95,6 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/cage_beam/geo_header.h"
 
+#include "levels/ddd/end_bubble/header.h"
+
 #endif

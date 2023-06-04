@@ -45,7 +45,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_END_BOO, end_boo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_CAGE, end_cage_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_FIST, end_fist_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_END_BUBBLE, end_bubble_geo), 
+	LOAD_MODEL_FROM_DL( MODEL_END_BUBBLE, end_bubble_Bubble_mesh, LAYER_OPAQUE), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_LOG, end_log_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_SPIKE, end_spike_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_LASER, end_laser_geo), 
