@@ -37,3 +37,4 @@
 #include "levels/ddd/hole_wall_ground/geo.inc.c"
 #include "levels/ddd/bg_ground/geo.inc.c"
 #include "levels/ddd/cage_beam/geo.inc.c"
+#include "levels/ddd/bg_ground_center/geo.inc.c"

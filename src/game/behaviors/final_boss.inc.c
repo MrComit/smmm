@@ -989,11 +989,12 @@ void bhv_roof_hole_loop(void) {
                 o->oTimer = 0;
             }
 
-            if (o->oOpacity > 20) {
+            if (o->oOpacity > 20 || gMarioState->pos[0] != o->oPosX || gMarioState->pos[2] != o->oPosZ) {
                 load_object_collision_model();
-            } else if (o->oOpacity == 0) {
+            } else if (o->oOpacity == 0 && gMarioState->pos[1] <= o->oPosY) {
                 o->oAction = 1;
                 // gMarioState->faceAngle[1] = 0x8000;
+                set_mario_action(gMarioState, ACT_IDLE, 0);
                 gMarioState->forwardVel = 0.0f;
             }
             break;
@@ -1246,6 +1247,28 @@ void controller_pos_constrain(void) {
     }
 }
 
+void bhv_bg_ground_center_loop(void) {
+    if (cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && 
+        (sEndAttacks[0] == NULL || sEndAttacks[0]->oBehParams2ndByte != FBA_DROPPER) &&
+        (sEndAttacks[1] == NULL || sEndAttacks[1]->oBehParams2ndByte != FBA_DROPPER)) {
+        bhv_bg_ground_loop();
+        load_object_collision_model();
+        cur_obj_unhide();
+    } else {
+        o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 60.0f);
+        if (o->oPosY == o->oHomeY) {
+            cur_obj_hide();
+        }
+    }
+}
+
+
+void bhv_bg_ground_init(void) {
+    o->oObjF4 = spawn_object(o, MODEL_BG_GROUND_CENTER, bhvBGGroundCenter);
+    o->oObjF4->oHomeY = o->oHomeY;
+    o->oObjF4->parentObj = o->parentObj;
+}
+
 
 void bhv_bg_ground_loop(void) {
     switch (o->oAction) {
@@ -1253,26 +1276,23 @@ void bhv_bg_ground_loop(void) {
             // o->oPosY = o->oHomeY + 300.0f;
             if (o->parentObj->oOpacity <= 0xC0 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
                 o->oAction = 1;
+                o->oFloatFC = 200.0f;
             }
             break;
         case 1:
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 200.0f, 30.0f);
             if (o->parentObj->oOpacity <= 0x80 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
                 o->oAction = 2;
-                o->oHomeY += 200.0f;
+                o->oFloatFC += 100.0f;
             }
             break;
         case 2:
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 100.0f, 15.0f);
             if (o->parentObj->oOpacity <= 0x40 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
                 o->oAction = 3;
-                o->oHomeY += 100.0f;
+                o->oFloatFC += 100.0f;
             }
             break;
-        case 3:
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 100.0f, 15.0f);
-            break;
     }
+    o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatFC, 15.0f);
 }
 
 void bhv_the_controller_init(void) {
