@@ -40,14 +40,14 @@ struct ObjectHitbox sEndBubbleHitbox = {
 
 static struct ObjectHitbox sEndLogHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
-    /* downOffset:        */ 0,
+    /* downOffset:        */ 200,
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 80,
-    /* height:            */ 54,
-    /* hurtboxRadius:     */ 80,
-    /* hurtboxHeight:     */ 54,
+    /* radius:            */ 700,
+    /* height:            */ 700,
+    /* hurtboxRadius:     */ 700,
+    /* hurtboxHeight:     */ 700,
 };
 
 static struct ObjectHitbox sEndSpikeHitbox = {
@@ -55,7 +55,7 @@ static struct ObjectHitbox sEndSpikeHitbox = {
     /* downOffset:        */ 0,
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
-    /* numLootCoins:      */ 3,
+    /* numLootCoins:      */ 0,
     /* radius:            */ 90,
     /* height:            */ 90,
     /* hurtboxRadius:     */ 90,
@@ -249,7 +249,7 @@ void bhv_laser_shyguy_loop(void) {
             
             if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED || o->oTimer > 500) {
                 if (o->oTimer <= 500) {
-                    obj_force_spawn_loot_coins(o, o->oNumLootCoins, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+                    obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
                 }
                 spawn_mist_particles();
                 o->activeFlags = 0;
@@ -335,6 +335,13 @@ void bhv_end_log_loop(void) {
                 o->activeFlags = 0;
                 o->parentObj->oObjF4 = NULL;
             }
+
+            if (absf(gMarioState->pos[0] - o->oPosX) < 130.0f * 4.0f && absf(gMarioState->pos[1] - o->oPosY) < 28.0f * 4.0f 
+                && absf(gMarioState->pos[2] - o->oPosZ) < 28.0f * 4.0f * 1.7f) {
+                cur_obj_become_tangible();
+            } else {
+                cur_obj_become_intangible();
+            }
             break;
     }
     o->oInteractStatus = 0;
@@ -412,6 +419,7 @@ void bhv_end_spike_loop(void) {
     obj_update_standard_actions(1.0f);
 
     if (o->activeFlags == 0) {
+        obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
         o->parentObj->os16100++;
     }
     // o->header.gfx.scale[1] = 0.5f;
@@ -511,7 +519,7 @@ void bhv_end_fist_loop(void) {
     }
 }
 
-s16 sEndCageTimers[] = {60, 45, 30};
+s16 sEndCageTimers[] = {60, 50, 40};
 f32 sEndCageSpeeds[] = {40.0f, 50.0f, 60.0f};
 
 void bhv_end_cage_init(void) {
@@ -697,7 +705,7 @@ void controller_bubble_attack(void) {
         if (o->os16F8 < 25) {
             if (o->oTimer > 16) {
                 o->oObjF4 = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
-                o->oObjF4->oMoveAngleYaw = CL_RandomMinMaxU16(0, 0x2000) - 0x1000;
+                o->oObjF4->oMoveAngleYaw = o->oAngleToMario + CL_RandomMinMaxU16(0, 0xC00) - 0x600;
                 o->oObjF4->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x500);
                 o->oObjF4->oForwardVel = CL_RandomMinMaxU16(24, 32);
                 o->oObjF4->os16F6 = (CL_RandomMinMaxU16(580, 620) * 10.0f) / o->oObjF4->oForwardVel;
@@ -767,18 +775,20 @@ void controller_laser_attack(void) {
                 // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
                 // gMarioState->faceAngle[1] = angle_to
                 o->os16102 = 0x2490;
+
+                o->oObjF4 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
+                vec3f_set(&o->oObjF4->oPosX, -437.0f, 7406.0f, -9740.0f);
+                if (o->parentObj->oOpacity <= 0xC0) {
+                    o->oObjF8 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
+                    o->oObjF8->os1610E = 1;
+                    vec3f_set(&o->oObjF8->oPosX, 2563.0f, 7406.0f, -9740.0f);
+                }
+                o->oAction = 1;
             }
-            o->oObjF4 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
-            vec3f_set(&o->oObjF4->oPosX, -437.0f, 7406.0f, -9740.0f);
-            if (o->parentObj->oOpacity <= 0xC0) {
-                o->oObjF8 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
-                o->oObjF8->os1610E = 1;
-                vec3f_set(&o->oObjF8->oPosX, 2563.0f, 7406.0f, -9740.0f);
-            }
-            o->oAction = 1;
             break;
         case 1:
             if (o->oTimer <= 48) {
+                set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
                 if (gMarioState->vel[1] < 0.0f) {
                     gMarioState->vel[1] = 0.0f;
                 }
@@ -808,19 +818,23 @@ void controller_log_attack(void) {
                 // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
                 // gMarioState->faceAngle[1] = angle_to
                 o->os16102 = 0x2490;
+                o->os16108 = 1;
             }
 
-            o->oObjF4 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
-            vec3f_set(&o->oObjF4->oPosX, -937.0f, 7406.0f, -9610.0f);
-            o->oObjF8 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
-            vec3f_set(&o->oObjF8->oPosX, 1063.0f, 7406.0f, -9610.0f);
-            o->oObjFC = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
-            vec3f_set(&o->oObjFC->oPosX, 3063.0f, 7406.0f, -9610.0f);
+            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+                o->oObjF4 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+                vec3f_set(&o->oObjF4->oPosX, -937.0f, 7406.0f, -9610.0f);
+                o->oObjF8 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+                vec3f_set(&o->oObjF8->oPosX, 1063.0f, 7406.0f, -9610.0f);
+                o->oObjFC = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+                vec3f_set(&o->oObjFC->oPosX, 3063.0f, 7406.0f, -9610.0f);
 
-            o->oAction = 1;
+                o->oAction = 1;
+            }
             break;
         case 1:
-            if (o->oTimer <= 48) {
+            if (o->os16108 && o->oTimer <= 48) {
+                set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
                 if (gMarioState->vel[1] < 0.0f) {
                     gMarioState->vel[1] = 0.0f;
                 }
@@ -888,6 +902,7 @@ void controller_wall_attack(void) {
             break;
         case 1:
             if (o->os16F8 == 0 && o->oTimer <= 48) {
+                set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
                 if (gMarioState->vel[1] < 0.0f) {
                     gMarioState->vel[1] = 0.0f;
                 }
@@ -957,6 +972,18 @@ void controller_bowser_attack(void) {
     }
 }
 
+void kill_small_enemies(void) {
+    struct Object *obj;
+    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndGoomba)) != NULL) {
+        obj->activeFlags = 0;
+    }
+    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndShyguy)) != NULL) {
+        obj->activeFlags = 0;
+    }
+    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndBoo)) != NULL) {
+        obj->activeFlags = 0;
+    }
+}
 
 void bhv_roof_hole_loop(void) {
     struct Object *obj;
@@ -964,20 +991,14 @@ void bhv_roof_hole_loop(void) {
         case 0:
             if (o->oF4) {
                 if (o->oTimer == 1) {
-                    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndGoomba)) != NULL) {
-                        obj->activeFlags = 0;
-                    }
-                    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndShyguy)) != NULL) {
-                        obj->activeFlags = 0;
-                    }
-                    while ((obj = cur_obj_nearest_object_with_behavior(bhvEndBoo)) != NULL) {
-                        obj->activeFlags = 0;
-                    }
+                    kill_small_enemies();
                 }
 
-                gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], o->oPosX, 45.0f);
-                gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], o->oPosZ, 45.0f);
-                gMarioState->faceAngle[1] = approach_s16_symmetric(gMarioState->faceAngle[1], 0x8000, 0x600);
+                if (gMarioState->action != ACT_CUTSCENE_JUMP) {
+                    gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], o->oPosX, 45.0f);
+                    gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], o->oPosZ, 45.0f);
+                    gMarioState->faceAngle[1] = approach_s16_symmetric(gMarioState->faceAngle[1], 0x8000, 0x600);
+                }
                 if (o->oFC == 0 && gMarioState->pos[0] == o->oPosX && gMarioState->pos[2] == o->oPosZ) {
                     o->oFC = 1;
                 }
@@ -1220,19 +1241,27 @@ void controller_pos_constrain(void) {
     s16 yaw;
     if (o->oPosX > 5600.0f) {
         o->oPosX = 5600.0f;
-        val = 2;
     } else if (o->oPosX < -3600.0f) {
         o->oPosX = -3600.0f;
-        val = 4;
     }
-
     if (o->oPosZ > -3400.0f) {
         o->oPosZ = -3400.0f;
-        val = 1;
     } else if (o->oPosZ < -11500.0f) {
         o->oPosZ = -11500.0f;
+    }
+
+    if (o->oPosX > 3411.0f) {
+        val = 2;
+    } else if (o->oPosX < -1256.0f) {
+        val = 4;
+    }
+    if (o->oPosZ > -5148.0f) {
+        val = 1;
+    } else if (o->oPosZ < -9815.0f) {
         val = 3;
     }
+
+
     if (val) {
         // yaw = (val-1) * 0x4000;
         // if (o->oMoveAngleYaw > yaw) {
@@ -1252,7 +1281,9 @@ void bhv_bg_ground_center_loop(void) {
         (sEndAttacks[0] == NULL || sEndAttacks[0]->oBehParams2ndByte != FBA_DROPPER) &&
         (sEndAttacks[1] == NULL || sEndAttacks[1]->oBehParams2ndByte != FBA_DROPPER)) {
         bhv_bg_ground_loop();
-        load_object_collision_model();
+        if (gMarioState->action != ACT_CUTSCENE_JUMP) {
+            load_object_collision_model();
+        }
         cur_obj_unhide();
     } else {
         o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 60.0f);
@@ -1271,12 +1302,15 @@ void bhv_bg_ground_init(void) {
 
 
 void bhv_bg_ground_loop(void) {
+    if (gMarioState->action != ACT_CUTSCENE_JUMP) {
+        load_object_collision_model();
+    }
     switch (o->oAction) {
         case 0:
             // o->oPosY = o->oHomeY + 300.0f;
             if (o->parentObj->oOpacity <= 0xC0 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
                 o->oAction = 1;
-                o->oFloatFC = 200.0f;
+                o->oFloatFC = 150.0f;
             }
             break;
         case 1:
@@ -1303,7 +1337,7 @@ void bhv_the_controller_init(void) {
     // sEndAttacks[1]->oBehParams2ndByte = FBA_LASER;
     // sEndAttacks[1]->os16112 = 1;
     o->oObj108 = spawn_object(o, MODEL_BG_GROUND, bhvBGGround);
-    vec3f_set(&o->oObj108->oPosX, 1083.0f, 7406.0f - 390.0f, -8568.0f);
+    vec3f_set(&o->oObj108->oPosX, 1083.0f, 7406.0f - 340.0f, -8568.0f);
 
     o->os1610C = -1;
     o->oFloatFC = 255.0f;
@@ -1537,6 +1571,7 @@ void controller_act_run(void) {
     print_text_fmt_int(80, 80, "%d", o->oOpacity, 0);
     if (o->oOpacity <= o->os16FA - 0x40 || gMarioState->heldObj == NULL) {
         o->oAction = CONTROLLER_ACT_RUN_END;
+        kill_small_enemies();
         obj = cur_obj_nearest_object_with_behavior(bhvBossCage);
         if (obj != NULL) {
             // obj->oInteractionSubtype |= INT_SUBTYPE_DROP_IMMEDIATELY;
@@ -1547,6 +1582,7 @@ void controller_act_run(void) {
     
     if (o->oOpacity <= 0) {
         o->oAction = CONTROLLER_ACT_DEATH;
+        kill_small_enemies();
     }
 
     if (o->oAction != CONTROLLER_ACT_RUN) {
@@ -1573,6 +1609,7 @@ void controller_act_run_end(void) {
         }
     } else {
         if (o->oTimer <= 48) {
+            set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
             if (gMarioState->vel[1] < 0.0f) {
                 gMarioState->vel[1] = 0.0f;
             }

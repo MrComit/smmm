@@ -11435,7 +11435,7 @@ const BehaviorScript bhvBGGround[] = {
     CALL_NATIVE(bhv_bg_ground_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bg_ground_loop),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
