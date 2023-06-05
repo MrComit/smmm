@@ -171,7 +171,7 @@ void bhv_end_boo_init(void) {
     vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
     o->oFaceAngleYaw = o->oMoveAngleYaw = yaw;
     o->oFaceAnglePitch = o->oMoveAnglePitch = pitch;
-    o->oForwardVel = 80.0f;
+    o->oForwardVel = 50.0f;
 
     obj_set_hitbox(o, &sEndBooHitbox);
 }
@@ -480,7 +480,7 @@ void bhv_end_bubble_loop(void) {
         }
         return;
     }
-    if (o->oInteractStatus || end_bubble_oob_check()) {
+    if (o->oInteractStatus || (o->oTimer > o->os16F6 / 2 && end_bubble_oob_check())) {
         CL_explode_object(o, 0);
     }
 }
@@ -706,7 +706,7 @@ void controller_bubble_attack(void) {
 
                 if (o->parentObj->oOpacity <= 0x40) {
                     obj_scale(o->oObjF4, sEndBubbleSizes[2]);
-                } else if (o->parentObj->oOpacity <= 0x40) {
+                } else if (o->parentObj->oOpacity <= 0x80) {
                     obj_scale(o->oObjF4, sEndBubbleSizes[1]);
                 } else {
                     obj_scale(o->oObjF4, sEndBubbleSizes[0]);
@@ -1320,6 +1320,36 @@ s32 boss_attacks_finished(void) {
 }
 
 
+void boss_spawn_arena_bubbles(s32 rate) {
+    struct Object *obj;
+    s16 randomYaw;
+    s32 timer = rate ? 110 : 70;
+    if (o->os1610E++ > timer) {
+        obj = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+
+        randomYaw = random_u16();
+        vec3f_set(&obj->oPosX, 1081.0f + (6000.0f * sins(randomYaw)), 7656.0f, -7477.0f + (6000.0f * coss(randomYaw)));
+
+        obj->oMoveAngleYaw = (s16)(randomYaw + 0x8000) + CL_RandomMinMaxU16(0, 0x1000) - 0x800;
+        obj->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x500);
+        obj->oForwardVel = CL_RandomMinMaxU16(24, 32);
+        obj->os16F6 = (CL_RandomMinMaxU16(710, 840) * 10.0f) / obj->oForwardVel;
+        obj->oBehParams2ndByte = 0;
+        // obj->oPosY -= 30.0f;
+
+        if (o->oOpacity <= 0x40) {
+            obj_scale(obj, sEndBubbleSizes[2]);
+        } else if (o->oOpacity <= 0x80) {
+            obj_scale(obj, sEndBubbleSizes[1]);
+        } else {
+            obj_scale(obj, sEndBubbleSizes[0]);
+        }
+
+        o->os1610E = 0;
+    }
+}
+
+
 void controller_act_attacks(void) {
     struct Object *obj;
     f32 posY;
@@ -1388,6 +1418,12 @@ void controller_act_attacks(void) {
         }
     }
 
+    if ((sEndAttacks[0] == NULL || (sEndAttacks[0]->oBehParams2ndByte != FBA_BUBBLES 
+        && sEndAttacks[0]->oBehParams2ndByte != FBA_DROPPER)) && (sEndAttacks[1] == NULL || 
+        sEndAttacks[1]->oBehParams2ndByte != FBA_BUBBLES)) {
+            boss_spawn_arena_bubbles(0);
+        }
+
     if (boss_attacks_finished()) {
         o->oAction = CONTROLLER_ACT_DEFAULT;
         o->oSubAction = 0;
@@ -1436,11 +1472,32 @@ void controller_act_run(void) {
 
         obj = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
         obj->oPosY -= 40.0f;
-        obj->oMoveAngleYaw = o->oAngleToMario + CL_RandomMinMaxU16(0, 0x2400) - 0x1200;
+        obj->oMoveAngleYaw = o->oAngleToMario + CL_RandomMinMaxU16(0, 0x800) - 0x400;
         obj->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x600);
         obj->oForwardVel = CL_RandomMinMaxU16(12, 18);
         obj->os16F6 = CL_RandomMinMaxU16(120, 160);
         obj->oBehParams2ndByte = 1;
+
+        if (o->oOpacity <= 0x40) {
+            obj_scale(obj, sEndBubbleSizes[2]);
+        } else if (o->oOpacity <= 0x80) {
+            obj_scale(obj, sEndBubbleSizes[1]);
+        } else {
+            obj_scale(obj, sEndBubbleSizes[0]);
+        }
+
+        switch (CL_RandomMinMaxU16(0, 1)) {
+            case 0:
+                obj = spawn_object(o, MODEL_END_GOOMBA, bhvEndGoomba);
+                obj->parentObj = obj;
+                break;
+            case 1:
+                obj = spawn_object(o, MODEL_END_SHYGUY, bhvEndShyguy);
+                break;
+        }
+        vec3f_set(&obj->oPosX, o->oPosX + (1600.0f * sins(o->oAngleToMario + 0x8000)), 
+                    7406.0f, o->oPosZ + (1600.0f * coss(o->oAngleToMario + 0x8000)));
+
     }
         //SWIPE
     if (o->oSubAction == 0) {
@@ -1583,6 +1640,11 @@ void bhv_the_controller_loop(void) {
             o->oPosX = o->oHomeX + (1200.0f * coss(o->os16102));
             o->oPosZ = o->oHomeZ + (300.0f * sins(o->os16102));
 
+
+            //SPAWN BUBBLES
+            if (o->oOpacity < 0xFF) {
+                boss_spawn_arena_bubbles(1);
+            }
 
             if (o->oTimer > 30 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
                 if (o->os16104 >= 3) {

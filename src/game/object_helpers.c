@@ -1691,9 +1691,9 @@ Gfx *geo_set_controller_env(s32 callContext, struct GraphNode *node, UNUSED void
             sControllerHue -= 360;
         }
 
-        valAdd = ((f32)(objectGraphNode->oOpacity) / 255.0f) * 0.45f;
+        valAdd = ((f32)(objectGraphNode->oOpacity) / 255.0f) * 0.6f;
 
-        CL_HSVtoRGB(sControllerHue, 0.85f, 0.3f + valAdd, &r, &g, &b);
+        CL_HSVtoRGB(sControllerHue, 0.85f, 0.15f + valAdd, &r, &g, &b);
 
         gDPSetEnvColor(dlHead++, r, g, b, 255);
         gSPEndDisplayList(dlHead);
