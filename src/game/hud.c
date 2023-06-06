@@ -1294,7 +1294,7 @@ extern s32 sLevelToChapter[COURSE_MAX];
 void render_hud_starpieces(void) {
     s16 i, h;
 
-	if (save_file_get_star_piece() == 0) {
+	if (save_file_get_star_piece() == 0 || gCurrLevelNum == LEVEL_DDD) {
 		sStarPieceRectX = 0;
 		return;
 	}
@@ -1513,6 +1513,39 @@ void render_hud_manager_icon(void) {
 }
 
 
+
+s32 sBossHealthX = -32;
+
+#include "boss_health_huds/boss_health_hud/model.inc.c"
+#include "boss_health_huds/boss_health_bar/model.inc.c"
+
+void render_boss_health(void) {
+	struct Object *obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvTheController);
+	f32 health = 0.0f;
+
+	if (obj != NULL && obj->oOpacity != 0) {
+		health = (obj->oOpacity) / 255.0f;
+	} else {
+		return;
+	}
+	sBossHealthX = approach_s16_symmetric(sBossHealthX, 0, 2);
+
+	create_dl_translation_matrix(MENU_MTX_PUSH, sBossHealthX, 79, 5);
+
+	// gDPSetEnvColor(gDisplayListHead++, sManagerEnv[0], sManagerEnv[1], sManagerEnv[2], 255);
+	// gDPSetPrimColor(gDisplayListHead++, 0, 0, sManagerPrim[0], sManagerPrim[1], sManagerPrim[2], 255);
+	gSPDisplayList(gDisplayListHead++, boss_health_hud_BossHealthHud_mesh);
+	create_dl_translation_matrix(MENU_MTX_NOPUSH, 0, 5, 0);
+	create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.0f, health, 1.0f);
+	gSPDisplayList(gDisplayListHead++, boss_health_bar_BossHealthBar_mesh);
+	gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
+
+
+
+
 s32 gPauseHudFirstFrame = 0;
 
 
@@ -1555,6 +1588,10 @@ void render_hud(void) {
 			}
 		} else {
 			gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_TRACKER;
+		}
+
+		if (gCurrLevelNum == LEVEL_DDD) {
+			render_boss_health();
 		}
 
 		if (gHudDisplay.flags & (HUD_DISPLAY_FLAG_TRACKER | HUD_DISPLAY_FLAG_CALL)) {
@@ -1626,6 +1663,9 @@ void render_hud(void) {
 			render_hud_coins();
 			render_hud_boos();
 			render_hud_keys();
+			if (gCurrLevelNum == LEVEL_DDD) {
+				render_boss_health();
+			}
 			gPauseHudFirstFrame++;
 		}
 

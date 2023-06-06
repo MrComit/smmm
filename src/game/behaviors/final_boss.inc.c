@@ -336,13 +336,13 @@ void bhv_end_log_loop(void) {
                 o->parentObj->oObjF4 = NULL;
             }
 
-            if (absf(gMarioState->pos[0] - o->oPosX) < 130.0f * 4.0f && absf(gMarioState->pos[1] - o->oPosY) < 28.0f * 4.0f 
-                && absf(gMarioState->pos[2] - o->oPosZ) < 28.0f * 4.0f * 1.7f) {
-                cur_obj_become_tangible();
-            } else {
-                cur_obj_become_intangible();
-            }
             break;
+    }
+    if (absf(gMarioState->pos[0] - o->oPosX) < 130.0f * 4.0f && absf(gMarioState->pos[1] - o->oPosY) < 28.0f * 4.0f 
+        && absf(gMarioState->pos[2] - o->oPosZ) < 28.0f * 4.0f * 1.7f) {
+        cur_obj_become_tangible();
+    } else {
+        cur_obj_become_intangible();
     }
     o->oInteractStatus = 0;
 }
@@ -421,6 +421,7 @@ void bhv_end_spike_loop(void) {
     if (o->activeFlags == 0) {
         obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
         o->parentObj->os16100++;
+        // play_puzzle_jingle();
     }
     // o->header.gfx.scale[1] = 0.5f;
     // print_text_fmt_int(80, 80, "%x", (s32)o->prevObj, 0);
@@ -1565,10 +1566,10 @@ void controller_act_run(void) {
 
     //HEALTH/OPACITY
     if (o->oDistanceToMario < 1800.0f) {
-        o->oFloatFC -= 0.2f;
+        o->oFloatFC -= 0.16f;
         o->oOpacity = (s16)o->oFloatFC;
     }
-    print_text_fmt_int(80, 80, "%d", o->oOpacity, 0);
+    // print_text_fmt_int(80, 80, "%d", o->oOpacity, 0);
     if (o->oOpacity <= o->os16FA - 0x40 || gMarioState->heldObj == NULL) {
         o->oAction = CONTROLLER_ACT_RUN_END;
         kill_small_enemies();
