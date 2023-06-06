@@ -1281,6 +1281,7 @@ void bhv_bg_ground_center_loop(void) {
     if (cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && 
         (sEndAttacks[0] == NULL || sEndAttacks[0]->oBehParams2ndByte != FBA_DROPPER) &&
         (sEndAttacks[1] == NULL || sEndAttacks[1]->oBehParams2ndByte != FBA_DROPPER)) {
+        o->o100 = o->oAction;
         bhv_bg_ground_loop();
         if (gMarioState->action != ACT_CUTSCENE_JUMP) {
             load_object_collision_model();
@@ -1303,9 +1304,9 @@ void bhv_bg_ground_init(void) {
 
 
 void bhv_bg_ground_loop(void) {
-    if (gMarioState->action != ACT_CUTSCENE_JUMP) {
-        load_object_collision_model();
-    }
+    // if (gMarioState->action != ACT_CUTSCENE_JUMP && o->oFloatFC != 0) {
+    //     load_object_collision_model();
+    // }
     switch (o->oAction) {
         case 0:
             // o->oPosY = o->oHomeY + 300.0f;
@@ -1328,6 +1329,12 @@ void bhv_bg_ground_loop(void) {
             break;
     }
     o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatFC, 15.0f);
+    if (o->oAction != o->o100) {
+        if (o->oPosY == o->oHomeY + o->oFloatFC) {
+            load_object_static_model();
+            o->o100 = o->oAction;
+        }
+    }
 }
 
 void bhv_the_controller_init(void) {
@@ -1570,7 +1577,7 @@ void controller_act_run(void) {
         o->oOpacity = (s16)o->oFloatFC;
     }
     // print_text_fmt_int(80, 80, "%d", o->oOpacity, 0);
-    if (o->oOpacity <= o->os16FA - 0x40 || gMarioState->heldObj == NULL) {
+    if (o->oOpacity <= o->os16FA - 0x48 || gMarioState->heldObj == NULL) {
         o->oAction = CONTROLLER_ACT_RUN_END;
         kill_small_enemies();
         obj = cur_obj_nearest_object_with_behavior(bhvBossCage);

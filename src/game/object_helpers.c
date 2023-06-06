@@ -1670,7 +1670,9 @@ s32 sControllerHue = 0;
 
 Gfx *geo_set_controller_env(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     s16 r, g, b;
+    f32 opacityPercent;
     f32 valAdd;
+    f32 satAdd;
     Gfx *dlStart, *dlHead;
     struct Object *objectGraphNode;
     struct GraphNodeGenerated *currentGraphNode;
@@ -1691,9 +1693,11 @@ Gfx *geo_set_controller_env(s32 callContext, struct GraphNode *node, UNUSED void
             sControllerHue -= 360;
         }
 
-        valAdd = ((f32)(objectGraphNode->oOpacity) / 255.0f) * 0.6f;
+        opacityPercent = ((f32)(objectGraphNode->oOpacity) / 255.0f);
+        valAdd = opacityPercent * 0.6f;
+        satAdd = opacityPercent * 0.4f;
 
-        CL_HSVtoRGB(sControllerHue, 0.85f, 0.15f + valAdd, &r, &g, &b);
+        CL_HSVtoRGB(sControllerHue, 0.45f + satAdd, 0.15f + valAdd, &r, &g, &b);
 
         gDPSetEnvColor(dlHead++, r, g, b, 255);
         gSPEndDisplayList(dlHead);
