@@ -1105,9 +1105,16 @@ void toad_friend_final_boss(void) {
     struct Object *obj;
     switch (o->oAction) {
         case 0:
+            o->oPosY += gMarioState->vel[1];
+            if (o->oPosY <= 7416.0f) {
+                o->oPosY = o->oHomeY = 7416.0f;
+                o->oAction = 1;
+            }
+            break;
+        case 1:
             o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvBossCage);
             if (o->oObjF4 != NULL) {
-                o->oAction = 1;
+                o->oAction = 2;
 
                 while ((obj = cur_obj_nearest_object_with_behavior(bhvEndGoomba)) != NULL) {
                     obj->activeFlags = 0;
@@ -1118,7 +1125,7 @@ void toad_friend_final_boss(void) {
                 }
             }
             break;
-        case 1:
+        case 2:
             gCamera->comitCutscene = 27;
             gComitCutsceneObject = o;
             gComitCutsceneTimer = 22;
@@ -1129,7 +1136,7 @@ void toad_friend_final_boss(void) {
             }
             if (CL_NPC_Dialog(dialogId)) {
                 o->oF8 = 1;
-                o->oAction = 2;
+                o->oAction = 3;
                 // gCamera->comitCutscene = 0;
                 // stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
                 o->oObjF4->oAction = 1;
@@ -1137,9 +1144,9 @@ void toad_friend_final_boss(void) {
                 o->oObjF4->oVelY = 75.0f;
             }
             break;
-        case 2:
+        case 3:
             if (cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL) {
-                o->oAction = 0;
+                o->oAction = 1;
             }
             break;
     }

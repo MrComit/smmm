@@ -1523,7 +1523,7 @@ void render_boss_health(void) {
 	struct Object *obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvTheController);
 	f32 health = 0.0f;
 
-	if (obj != NULL && obj->oOpacity != 0) {
+	if (obj != NULL && obj->oOpacity != 0 && obj->oAction != 0) {
 		health = (obj->oOpacity) / 255.0f;
 	} else {
 		return;

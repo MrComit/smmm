@@ -654,7 +654,7 @@ extern s32 gStarPieceReward;
 extern s32 gMindTitleTimer;
 extern s16 s8DirModeBaseYaw;
 
-s32 gEnterBoss = 0;
+// s32 gEnterBoss = 0;
 
 /**
  * Mario's primary behavior update function.
@@ -710,16 +710,6 @@ void bhv_mario_update(void) {
                 save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
                 set_mario_npc_dialog(0);
             }
-        }
-    } else if (gCurrLevelNum == LEVEL_DDD && gEnterBoss == 0) {
-        gCamera->comitCutscene = 28;
-        // set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 8);
-        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvTheController);
-        if (obj == NULL || obj->oAction == 1) {
-            gCamera->comitCutscene = 0;
-            reset_camera(gCamera);
-            gEnterBoss = 1;
-            set_mario_npc_dialog(0);
         }
     }
 

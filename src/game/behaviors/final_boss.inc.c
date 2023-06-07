@@ -1666,6 +1666,76 @@ void controller_act_run_end(void) {
 }
 
 
+extern s32 gBossTitleTimer;
+
+void controller_act_intro(void) {
+    // print_text_fmt_int(80, 80, "%x", gMarioState->action, 0);
+    switch (o->oSubAction) {
+        case 0:
+            gCamera->comitCutscene = 28;
+            set_mario_npc_dialog(1);
+            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+                if (o->oTimer > 30) {
+                    o->oSubAction = 1;
+                    o->oTimer = 0;
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            break;
+        case 1:
+            gCamera->comitCutscene = 29;
+            gComitCutsceneObject = o;
+            gComitCutsceneTimer = 20;
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.02f);
+            cur_obj_scale(o->header.gfx.scale[0]);
+            o->oPosZ = approach_f32_asymptotic(o->oPosZ, -10281.0f, 0.04f);
+            if (o->oTimer > 70 && cur_obj_check_if_at_animation_end()) {
+                // o->oPosZ = o->oHomeZ = -10281.0f;
+                o->oSubAction = 2;
+                o->oTimer = 0;
+                cur_obj_init_animation_with_sound(1);
+            }
+            break;
+        case 2:
+            gCamera->comitCutscene = 29;
+            gComitCutsceneObject = o;
+            gComitCutsceneTimer = 20;
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.02f);
+            cur_obj_scale(o->header.gfx.scale[0]);
+            if (o->oPosZ != -10281.0f) {
+                o->oPosZ = o->oHomeZ = approach_f32_symmetric(o->oPosZ, -10281.0f, 15.0f);
+            }
+
+            if (o->header.gfx.animInfo.animFrame == 8) {
+                gBossTitleTimer = 1;
+            }
+            if (o->header.gfx.animInfo.animFrame == 40) {
+                cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_ROAR);
+                cur_obj_shake_screen(SHAKE_POS_LARGE);
+                queue_rumble_data(5, 80);
+            }
+
+            if (cur_obj_check_if_at_animation_end()) {
+                cur_obj_init_animation_with_sound(0);
+                o->oSubAction = 3;
+                o->oTimer = 0;
+                // o->oAction = CONTROLLER_ACT_DEFAULT;
+            }
+            break;
+        case 3:
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.07f);
+            cur_obj_scale(o->header.gfx.scale[0]);
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.05f);
+            if (o->oTimer > 25) {
+                o->oSubAction = 0;
+                o->oAction = CONTROLLER_ACT_DEFAULT;
+                set_mario_npc_dialog(0);
+            }
+            break;
+    }
+}
+
 s32 boss_attacks_incompatible(void) {
     s32 end1 = sEndAttacks[0]->oBehParams2ndByte;
     s32 end2 = sEndAttacks[1]->oBehParams2ndByte;
@@ -1695,20 +1765,7 @@ void bhv_the_controller_loop(void) {
 
     switch (o->oAction) {
         case CONTROLLER_ACT_INTRO:
-            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
-                if (o->oTimer > 30) {
-                    o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.04f);
-                    cur_obj_scale(o->header.gfx.scale[0]);
-                    o->oPosZ = approach_f32_asymptotic(o->oPosZ, -10281.0f, 0.05f);
-                    o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.05f);
-                    if (o->oTimer > 90) {
-                        o->oPosZ = o->oHomeZ = -10281.0f;
-                        o->oAction = CONTROLLER_ACT_DEFAULT;
-                    }
-                }
-            } else {
-                o->oTimer = 0;
-            }
+            controller_act_intro();
             break;
         case CONTROLLER_ACT_DEFAULT:
             //ANGLE

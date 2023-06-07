@@ -1496,7 +1496,11 @@ s32 init_level(void) {
             val4 = 1;
         } else if (gDebugLevelSelect == 0) {
             if (gMarioState->action != ACT_UNINITIALIZED) {
+                if (gCurrLevelNum == LEVEL_DDD) {
+                    set_mario_action(gMarioState, ACT_SPAWN_SPIN_AIRBORNE, 0);
+                } else {
                     set_mario_action(gMarioState, ACT_IDLE, 0);
+                }
             }
         }
     }

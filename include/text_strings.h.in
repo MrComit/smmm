@@ -353,6 +353,9 @@
 #define TEXT_L9 _("The Roof")
 
 
+#define TEXT_THE_CONTROLLER _("The Controller")
+
+
 
 
 #define TEXT_OBJ1 _("Enter The Library")

@@ -2331,6 +2331,7 @@ char *sLevelNames[] = {
     sLevel1, sLevel2, sLevel3, sLevel4, sLevel5, sLevel6, sLevel7, sLevel8, sLevel9
 };
 
+static char sTheControllerText[] = { TEXT_THE_CONTROLLER };
 
 
 static char sObj1[] = { TEXT_OBJ1 };
@@ -4495,18 +4496,43 @@ void print_mind_level(void) {
     // print_text_fmt_int(20, 20, "%x", gMarioState->action, 0);
 }
 
+s32 gBossTitleTimer = 0;
+
+void print_final_boss_name(void) {
+    s16 y;
+    gBossTitleTimer++;
+    if (gBossTitleTimer >= 0) {
+        // set_mario_npc_dialog(1);
+        y = 255;
+        if (gBossTitleTimer < 50) {
+            y = (gBossTitleTimer * 5) + 5;
+        } else if (gBossTitleTimer < 80) {
+            y = 255;
+        } else {
+            y = 255 - ((gBossTitleTimer - 80) * 10);
+        }
+
+        print_mind_string(32, 5, y, sTheControllerText);
+        if (gBossTitleTimer >= 105) {
+            gBossTitleTimer = -1;
+        }
+    }
+    // print_text_fmt_int(20, 20, "%x", gMarioState->action, 0);
+}
 
 void special_print(void) {
     if (gCurrDemoInput == NULL && gMenuOptSelectIndex != MENU_OPT_MAP) {
-#ifndef SMMM_DEBUG
+// #ifndef SMMM_DEBUG
         if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {
             print_mind_level();
+        } else if (gCurrLevelNum == LEVEL_DDD && gBossTitleTimer > 0) {
+            print_final_boss_name();
         } else {
-#endif
+// #endif
             print_room_names();
-#ifndef SMMM_DEBUG
+// #ifndef SMMM_DEBUG
         }
-#endif
+// #endif
         print_multiplier();
         print_mirror_controls();
     }
