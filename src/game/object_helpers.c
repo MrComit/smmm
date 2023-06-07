@@ -3801,7 +3801,7 @@ Gfx *geo_switch_boss_startwalls(s32 callContext, struct GraphNode *node) {
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
         // assign the case number for execution.
-        if (m->pos[2] < -11200.0f || m->pos[1] > 9000.0f || !gIsConsole) {
+        if (m->pos[2] > -3500.0f || m->pos[1] > 9000.0f || !gIsConsole) {
             switchCase->selectedCase = 0;
         } else {
             switchCase->selectedCase = 1;

@@ -419,7 +419,9 @@ void bhv_end_spike_loop(void) {
     obj_update_standard_actions(1.0f);
 
     if (o->activeFlags == 0) {
-        obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+        if (o->os16112 == 0) {
+            obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
+        }
         o->parentObj->os16100++;
         // play_puzzle_jingle();
     }
@@ -846,6 +848,7 @@ void controller_log_attack(void) {
             if (o->oTimer > 500) {
                 while ((o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvEndSpike)) != NULL) {
                     o->oObjF4->activeFlags = 0;
+                    o->oObjF4->os16112 = 1;
                     o->os16100++;
                 }
 
@@ -987,6 +990,7 @@ void kill_small_enemies(void) {
 }
 
 void bhv_roof_hole_loop(void) {
+    struct MarioState *m = gMarioState;
     struct Object *obj;
     switch (o->oAction) {
         case 0:
@@ -995,12 +999,12 @@ void bhv_roof_hole_loop(void) {
                     kill_small_enemies();
                 }
 
-                if (gMarioState->action != ACT_CUTSCENE_JUMP) {
-                    gMarioState->pos[0] = approach_f32_symmetric(gMarioState->pos[0], o->oPosX, 45.0f);
-                    gMarioState->pos[2] = approach_f32_symmetric(gMarioState->pos[2], o->oPosZ, 45.0f);
-                    gMarioState->faceAngle[1] = approach_s16_symmetric(gMarioState->faceAngle[1], 0x8000, 0x600);
+                if (m->action != ACT_CUTSCENE_JUMP && m->action != ACT_QUICKSAND_DEATH) {
+                    m->pos[0] = approach_f32_symmetric(m->pos[0], o->oPosX, 45.0f);
+                    m->pos[2] = approach_f32_symmetric(m->pos[2], o->oPosZ, 45.0f);
+                    m->faceAngle[1] = approach_s16_symmetric(m->faceAngle[1], 0x8000, 0x600);
                 }
-                if (o->oFC == 0 && gMarioState->pos[0] == o->oPosX && gMarioState->pos[2] == o->oPosZ) {
+                if (o->oFC == 0 && m->pos[0] == o->oPosX && m->pos[2] == o->oPosZ) {
                     o->oFC = 1;
                 }
                 obj = cur_obj_nearest_object_with_behavior(bhvToadFriend);
@@ -1011,18 +1015,18 @@ void bhv_roof_hole_loop(void) {
                 o->oTimer = 0;
             }
 
-            if (o->oOpacity > 20 || gMarioState->pos[0] != o->oPosX || gMarioState->pos[2] != o->oPosZ) {
+            if (o->oOpacity > 20 || m->pos[0] != o->oPosX || m->pos[2] != o->oPosZ) {
                 load_object_collision_model();
-            } else if (o->oOpacity == 0 && gMarioState->pos[1] <= o->oPosY) {
+            } else if (o->oOpacity == 0 && m->pos[1] <= o->oPosY) {
                 o->oAction = 1;
-                // gMarioState->faceAngle[1] = 0x8000;
-                set_mario_action(gMarioState, ACT_IDLE, 0);
-                gMarioState->forwardVel = 0.0f;
+                // m->faceAngle[1] = 0x8000;
+                set_mario_action(m, ACT_IDLE, 0);
+                m->forwardVel = 0.0f;
             }
             break;
         case 1:
             gCamera->comitCutscene = 26;
-            if (o->oTimer > 90 && gMarioState->pos[1] > 7000.0f && gMarioState->pos[0] < 15000.0f) {
+            if (o->oTimer > 90 && m->pos[1] > 7000.0f && m->pos[0] < 15000.0f) {
                 o->oAction = 2;
                 o->oOpacity = 255;
             }
@@ -1030,7 +1034,7 @@ void bhv_roof_hole_loop(void) {
         case 2:
             gCamera->comitCutscene = 26;
             load_object_collision_model();
-            if (gMarioState->pos[1] < 11000.0f) {
+            if (m->pos[1] < 11000.0f) {
                 gCamera->comitCutscene = 0;
                 o->oAction = 0;
                 o->oF4 = 0;
@@ -1312,7 +1316,7 @@ void bhv_bg_ground_loop(void) {
             // o->oPosY = o->oHomeY + 300.0f;
             if (o->parentObj->oOpacity <= 0xC0 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
                 o->oAction = 1;
-                o->oFloatFC = 150.0f;
+                o->oFloatFC = 250.0f;
             }
             break;
         case 1:
@@ -1321,12 +1325,12 @@ void bhv_bg_ground_loop(void) {
                 o->oFloatFC += 100.0f;
             }
             break;
-        case 2:
-            if (o->parentObj->oOpacity <= 0x40 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
-                o->oAction = 3;
-                o->oFloatFC += 100.0f;
-            }
-            break;
+        // case 2:
+        //     if (o->parentObj->oOpacity <= 0x40 && o->parentObj->oAction == CONTROLLER_ACT_DEFAULT) {
+        //         o->oAction = 3;
+        //         o->oFloatFC += 100.0f;
+        //     }
+        //     break;
     }
     o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + o->oFloatFC, 15.0f);
     if (o->oAction != o->o100) {
@@ -1424,7 +1428,8 @@ void controller_act_attacks(void) {
             o->oSubAction = 1;
         }
 
-        if (o->oOpacity <= 0x80 && sEndAttacks[0]->oBehParams2ndByte < 5) {
+        if ((o->oOpacity <= 0x80 && sEndAttacks[0]->oBehParams2ndByte < 5) || 
+            (o->oOpacity <= 0xC0 && sEndAttacks[0]->oBehParams2ndByte == FBA_BUBBLES)) {
             sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
             sEndAttacks[1]->os16112 = 1;
 
@@ -1550,6 +1555,8 @@ void controller_act_run(void) {
         }
     } else {
         if (o->header.gfx.animInfo.animFrame < 50) {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.02f);
+            cur_obj_scale(o->header.gfx.scale[0]);
             o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToMario, 0xA00);
             o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 5.0f, 1.0f);
         } else if (o->header.gfx.animInfo.animFrame <= 66) {
@@ -1558,10 +1565,12 @@ void controller_act_run(void) {
             hitboxPos[0] = o->oPosX + (sins(o->oFaceAngleYaw) * 350.0f);
             hitboxPos[2] = o->oPosZ + (coss(o->oFaceAngleYaw) * 350.0f);
             vec3f_get_dist_and_angle(hitboxPos, gMarioState->pos, &dist, &pitch, &yaw);
-            if (dist < 350.0f && absf(gMarioState->pos[1] - o->oPosY) < 450.0f) {
+            if (dist < 500.0f && absf(gMarioState->pos[1] - o->oPosY) < 600.0f) {
                 CL_get_hit(gMarioState, o, 2);            
             }
         } else {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.06f);
+            cur_obj_scale(o->header.gfx.scale[0]);
             o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, (s16)(o->oMoveAngleYaw), 0xA00);
             o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 22.0f, 1.3f);
             if (cur_obj_check_if_at_animation_end()) {
@@ -1724,14 +1733,20 @@ void bhv_the_controller_loop(void) {
         case CONTROLLER_ACT_SWIPE:
             o->oFaceAngleYaw = o->oMoveAngleYaw;
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
-            if (o->header.gfx.animInfo.animFrame >= 50 && o->header.gfx.animInfo.animFrame <= 66) {
+            if (o->header.gfx.animInfo.animFrame < 50) {
+                o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.02f);
+                cur_obj_scale(o->header.gfx.scale[0]);
+            } else if (o->header.gfx.animInfo.animFrame <= 66) {
                 hitboxPos[1] = gMarioState->pos[1];
                 hitboxPos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 350.0f);
                 hitboxPos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 350.0f);
                 vec3f_get_dist_and_angle(hitboxPos, gMarioState->pos, &dist, &pitch, &yaw);
-                if (dist < 350.0f && absf (gMarioState->pos[1] - o->oPosY) < 450.0f) {
+                if (dist < 500.0f && absf (gMarioState->pos[1] - o->oPosY) < 600.0f) {
                     CL_get_hit(gMarioState, o, 2);            
                 }
+            } else {
+                o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.06f);
+                cur_obj_scale(o->header.gfx.scale[0]);
             }
 
             if (cur_obj_check_if_at_animation_end()) {
