@@ -653,10 +653,14 @@ extern s16 gEdgeLengths[3];
 extern s32 gStarPieceReward;
 extern s32 gMindTitleTimer;
 extern s16 s8DirModeBaseYaw;
+
+s32 gEnterBoss = 0;
+
 /**
  * Mario's primary behavior update function.
  */
 void bhv_mario_update(void) {
+    struct Object *obj;
     u32 particleFlags = 0;
     s32 i;
     #ifdef SMMM_DEBUG
@@ -689,7 +693,7 @@ void bhv_mario_update(void) {
     mario_update_room_clear(gMarioState);
 
 
-#ifndef SMMM_DEBUG
+// #ifndef SMMM_DEBUG
     if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {
         // vec3s_set(gMarioSpawnInfo->startPos, -21762, 8000, 24318);
         // save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
@@ -707,12 +711,22 @@ void bhv_mario_update(void) {
                 set_mario_npc_dialog(0);
             }
         }
+    } else if (gCurrLevelNum == LEVEL_DDD && gEnterBoss == 0) {
+        gCamera->comitCutscene = 28;
+        // set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 8);
+        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvTheController);
+        if (obj == NULL || obj->oAction == 1) {
+            gCamera->comitCutscene = 0;
+            reset_camera(gCamera);
+            gEnterBoss = 1;
+            set_mario_npc_dialog(0);
+        }
     }
 
     if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) && gMarioCurrentRoom == 2 && gCurrLevelNum == LEVEL_BOB) {
         gCamera->comitCutscene = 10;
     }
-#endif
+// #endif
 
 
     if (gStarPieceReward >= 0) {

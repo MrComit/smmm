@@ -1232,11 +1232,12 @@ in the next act: he waits for those attacks to end
 
 */
 
-#define CONTROLLER_ACT_DEFAULT 0
-#define CONTROLLER_ACT_ATTACKS 1
-#define CONTROLLER_ACT_SWIPE   2
-#define CONTROLLER_ACT_RUN     3
-#define CONTROLLER_ACT_RUN_END 4
+#define CONTROLLER_ACT_INTRO   0
+#define CONTROLLER_ACT_DEFAULT 1
+#define CONTROLLER_ACT_ATTACKS 2
+#define CONTROLLER_ACT_SWIPE   3
+#define CONTROLLER_ACT_RUN     4
+#define CONTROLLER_ACT_RUN_END 5
 #define CONTROLLER_ACT_DEATH   6
 
 
@@ -1348,6 +1349,9 @@ void bhv_the_controller_init(void) {
     // sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
     // sEndAttacks[1]->oBehParams2ndByte = FBA_LASER;
     // sEndAttacks[1]->os16112 = 1;
+    cur_obj_scale(0.0f);
+    o->oHomeY -= 1500.0f;
+
     o->oObj108 = spawn_object(o, MODEL_BG_GROUND, bhvBGGround);
     vec3f_set(&o->oObj108->oPosX, 1083.0f, 7406.0f - 340.0f, -8568.0f);
 
@@ -1683,6 +1687,22 @@ void bhv_the_controller_loop(void) {
     // set_mario_animation_other(gMarioState, MARIO_ANIM_IDLE_HEAD_LEFT);
 
     switch (o->oAction) {
+        case CONTROLLER_ACT_INTRO:
+            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+                if (o->oTimer > 30) {
+                    o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.04f);
+                    cur_obj_scale(o->header.gfx.scale[0]);
+                    o->oPosZ = approach_f32_asymptotic(o->oPosZ, -10281.0f, 0.05f);
+                    o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.05f);
+                    if (o->oTimer > 90) {
+                        o->oPosZ = o->oHomeZ = -10281.0f;
+                        o->oAction = CONTROLLER_ACT_DEFAULT;
+                    }
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            break;
         case CONTROLLER_ACT_DEFAULT:
             //ANGLE
             o->oFaceAngleYaw = o->oMoveAngleYaw;
