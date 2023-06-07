@@ -125,6 +125,12 @@ static void const *sHoleWallCollisions[] = {
     hole_wall5_collision,
 };
 
+
+void bhv_boss_objects_room(void) {
+    o->oRoom = 1;
+}
+
+
 void bhv_hole_wall_init(void) {
    o->collisionData = segmented_to_virtual(sHoleWallCollisions[o->oBehParams2ndByte]);
    // cur_obj_scale(0.0f);
@@ -1019,6 +1025,7 @@ void bhv_roof_hole_loop(void) {
                 load_object_collision_model();
             } else if (o->oOpacity == 0 && m->pos[1] <= o->oPosY) {
                 o->oAction = 1;
+                kill_small_enemies();
                 // m->faceAngle[1] = 0x8000;
                 set_mario_action(m, ACT_IDLE, 0);
                 m->forwardVel = 0.0f;

@@ -1194,6 +1194,7 @@ void bhv_boss_cage_beam_loop(void);
 void bhv_end_boo_init(void);
 void bhv_end_boo_loop(void);
 void bhv_bg_ground_center_loop(void);
+void bhv_boss_objects_room(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

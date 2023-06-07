@@ -3759,6 +3759,7 @@ Gfx *geo_switch_boss_tunnel(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+extern s32 gCliffTimer;
 
 #ifdef AVOID_UB
 Gfx *geo_switch_boss_backwalls(s32 callContext, struct GraphNode *node, UNUSED void *context) {
@@ -3775,7 +3776,7 @@ Gfx *geo_switch_boss_backwalls(s32 callContext, struct GraphNode *node) {
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
         // assign the case number for execution.
-        if (m->pos[2] < -11200.0f || m->pos[1] > 9000.0f || !gIsConsole) {
+        if (m->pos[2] < -11200.0f || m->pos[1] > 9000.0f || gCliffTimer || gIsConsole) {
             switchCase->selectedCase = 0;
         } else {
             switchCase->selectedCase = 1;
@@ -3801,7 +3802,7 @@ Gfx *geo_switch_boss_startwalls(s32 callContext, struct GraphNode *node) {
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
         // assign the case number for execution.
-        if (m->pos[2] > -3500.0f || m->pos[1] > 9000.0f || !gIsConsole) {
+        if (m->pos[2] > -3500.0f || m->pos[1] > 9000.0f || gCliffTimer || gIsConsole) {
             switchCase->selectedCase = 0;
         } else {
             switchCase->selectedCase = 1;
