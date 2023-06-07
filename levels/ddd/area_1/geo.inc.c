@@ -48,6 +48,21 @@ const GeoLayout ddd_dl_c_001_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout ddd_dl_b_002_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Mansion_008_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Mansion_008_mesh_layer_4),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout ddd_dl_c_002_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_NULLTri_005_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout ddd_dl_101__Roof_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -63,12 +78,17 @@ const GeoLayout ddd_dl_101__Roof_geo[] = {
 			GEO_BRANCH(1, ddd_dl_c_001_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_NULLTri_002_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_boss_startwalls),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, ddd_dl_b_002_geo),
+			GEO_BRANCH(1, ddd_dl_c_002_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_NULLTri_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Mansion_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Mansion_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Mansion_001_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Mansion_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Mansion_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Mansion_005_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_Mansion_007_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_MountainExterior_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, ddd_dl_MountainExterior_003_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ddd_dl_Trees_mesh_layer_1),
