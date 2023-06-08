@@ -1905,6 +1905,7 @@ void bhv_the_controller_loop(void) {
 
 
 void bhv_nice_face_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             gCamera->comitCutscene = 29;
@@ -1939,12 +1940,65 @@ void bhv_nice_face_loop(void) {
             if (o->oFaceAnglePitch == -0x4000) {
                 spawn_mist_particles_variable(4, 0, 33.0f);
                 o->oAction = 2;
+                o->oObj100 = cur_obj_nearest_object_with_behavior(bhvToadFriend);
+                if (o->oObj100 != NULL) {
+                    // gComitCutsceneObject = obj;
+                    vec3f_set(&o->oObj100->oPosX, 981.0f, 7606.0f, -6477.0f);
+                }
             }
             break;
         case 2:
+            if (o->oTimer > 40) {
+                gCamera->comitCutscene = 30;
+                gComitCutsceneObject = o->oObj100;
+                gComitCutsceneTimer = 180;
+
+                if (o->oTimer == 41) {
+                    o->oPosY += 200.0f;
+                    o->oFaceAnglePitch = 0xF000;
+                    o->oPosX = o->oObj100->oPosX;
+                }
+
+                o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.1f, 0.1f);
+                cur_obj_scale(o->header.gfx.scale[0]);
+
+                o->oPosZ = approach_f32_asymptotic(o->oPosZ, o->oObj100->oPosZ, 0.05f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oObj100->oPosY + 60.0f, 0.6f);
+                // o->oPosY = approach_f32_asymptotic(o->oPosY, o->oObj100->oPosY + 61.0f, 0.07f);
+                if (o->oPosY >= o->oObj100->oPosY + 60.0f) {
+                    o->activeFlags = 0;
+                    spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+                    o->oObj100->oAction = 4;
+                    spawn_object(o, MODEL_TEARDROP, bhvTeardrop);
+                }
+                // o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oObj100->oPosZ - 25.0f, 7.0f);
+                // o->oPosY = approach_f32_symmetric(o->oPosY, o->oObj100->oPosY + 60.0f, 0.4f);
+            }
             // gCamera->comitCutscene = 29;
             // gComitCutsceneObject = o;
             // gComitCutsceneTimer = 2;
+            break;
+    }
+}
+
+
+void bhv_teardrop_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 100) {
+                o->oAction = 1;
+                o->oPosZ -= 5.0f;
+                o->oPosY += 4.0f;
+
+                cur_obj_unhide();
+            }
+            break;
+        case 1:
+            o->oFloatF4 += 0.27f;
+            o->oPosY -= o->oFloatF4;
+            if (o->oPosY < 6000.0f) {
+                o->activeFlags = 0;
+            }
             break;
     }
 }

@@ -1196,6 +1196,7 @@ void bhv_end_boo_loop(void);
 void bhv_bg_ground_center_loop(void);
 void bhv_boss_objects_room(void);
 void bhv_nice_face_loop(void);
+void bhv_teardrop_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

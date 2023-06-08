@@ -1628,6 +1628,22 @@ void fixed_cam_presets(struct Camera *c) {
                     gComitCutsceneTimer = 0;
             }
             break;
+        case 30:
+            if (gComitCutsceneObject == NULL) {
+                break;
+            }
+            pos[1] = 7406.0f;
+            pos[0] = gComitCutsceneObject->oPosX + 55.0f;// + 800.0f * (sins(0));
+            pos[2] = gComitCutsceneObject->oPosZ - 70.0f;
+            vec3f_set(c->focus, gComitCutsceneObject->oPosX, gComitCutsceneObject->oPosY + 100.0f, gComitCutsceneObject->oPosZ);
+            vec3f_copy(c->pos, pos);
+
+            if (gComitCutsceneTimer == 0) {
+                c->comitCutscene = 0;
+            } else if (--gComitCutsceneTimer <= 0) {
+                    gComitCutsceneTimer = 0;
+            }
+            break;
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);
             vec3f_copy(c->focus, gComitCutsceneFocVec);

@@ -1149,6 +1149,13 @@ void toad_friend_final_boss(void) {
                 o->oAction = 1;
             }
             break;
+        case 4:
+            // if (o->oTimer > 40) {
+            //     gCamera->comitCutscene = 30;
+            //     gComitCutsceneObject = o;
+            //     gComitCutsceneTimer = 20;
+            // }
+            break;
     }
 }
 

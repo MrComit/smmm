@@ -943,6 +943,7 @@ extern const BehaviorScript bhvMarioBowser[];
 extern const BehaviorScript bhvBossCageBeam[];
 extern const BehaviorScript bhvBGGroundCenter[];
 extern const BehaviorScript bhvNiceFace[];
+extern const BehaviorScript bhvTeardrop[];
 
 
 #endif // BEHAVIOR_DATA_H
