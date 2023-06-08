@@ -1612,8 +1612,13 @@ void fixed_cam_presets(struct Camera *c) {
                 break;
             }
             pos[1] = gComitCutsceneObject->oPosY + 600.0f;
-            pos[0] = gComitCutsceneObject->oPosX;// + 800.0f * (sins(0));
-            pos[2] = gComitCutsceneObject->oPosZ + 3500.0f;
+            if (obj_has_behavior(gComitCutsceneObject, bhvNiceFace)) {
+                pos[0] = gComitCutsceneObject->oPosX + gComitCutsceneObject->oFloatFC;// + 800.0f * (sins(0));
+                pos[2] = gComitCutsceneObject->oPosZ + gComitCutsceneObject->oFloatF8;
+            } else {
+                pos[0] = gComitCutsceneObject->oPosX;// + 800.0f * (sins(0));
+                pos[2] = gComitCutsceneObject->oPosZ + 3500.0f;
+            }
             vec3f_copy(c->focus, &gComitCutsceneObject->oPosX);
             vec3f_copy(c->pos, pos);
 

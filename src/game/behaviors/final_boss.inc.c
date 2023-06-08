@@ -1610,7 +1610,7 @@ void controller_act_run(void) {
     
     if (o->oOpacity <= 0) {
         o->oAction = CONTROLLER_ACT_DEATH;
-        vec3f_set(&o->oPosX, 1081.0f, 7556.0f, -7477.0f);
+        vec3f_set(&o->oPosX, 1081.0f, 8256.0f, -7477.0f);
         o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
         o->oFloatF4 = 0.0f;
         kill_small_enemies();
@@ -1735,6 +1735,7 @@ void controller_act_intro(void) {
                 o->oAction = CONTROLLER_ACT_DEATH;
                 o->oOpacity = 0;
                 o->oFloatF4 = 0.0f;
+                vec3f_set(&o->oPosX, 1081.0f, 8256.0f, -7477.0f);
                 // o->oAction = CONTROLLER_ACT_DEFAULT;
                 set_mario_npc_dialog(0);
             }
@@ -1744,6 +1745,7 @@ void controller_act_intro(void) {
 
 
 void controller_act_death(void) {
+    set_mario_npc_dialog(1);
     gCamera->comitCutscene = 29;
     gComitCutsceneObject = o;
     gComitCutsceneTimer = 20;
@@ -1773,6 +1775,7 @@ void controller_act_death(void) {
             if (o->header.gfx.scale[1] >= 3.0f) {
                 if (o->oTimer > 15) {
                     CL_explode_object(o, 1);
+                    gComitCutsceneObject = spawn_object(o, MODEL_NICE_FACE, bhvNiceFace);
                 }
             } else {
                 o->oTimer = 0;
@@ -1896,4 +1899,52 @@ void bhv_the_controller_loop(void) {
             break;
     }
     o->oInteractStatus = 0;
+}
+
+
+
+
+void bhv_nice_face_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            gCamera->comitCutscene = 29;
+            gComitCutsceneObject = o;
+            gComitCutsceneTimer = 2;
+
+            if (o->oTimer > 30) {
+                o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 800.0f, 70.0f);
+                o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 500.0f, 50.0f);
+
+                o->oFloatF4 += 3.0f;
+                if (o->oFloatF4 > 70.0f) {
+                    o->oFloatF4 = 70.0f;
+                }
+
+                o->oPosY = approach_f32_symmetric(o->oPosY, 7406.0f + 140.0f, o->oFloatF4);
+                if (o->oPosY == 7406.0f + 140.0f) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 800.0f, 70.0f);
+            o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 500.0f, 50.0f);
+            gCamera->comitCutscene = 29;
+            gComitCutsceneObject = o;
+            gComitCutsceneTimer = 45;
+
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0xC000, 0x400);
+            o->oPosY = approach_f32_symmetric(o->oPosY, 7406.0f + 10.0f, 8.0f);
+
+            if (o->oFaceAnglePitch == -0x4000) {
+                spawn_mist_particles_variable(4, 0, 33.0f);
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            // gCamera->comitCutscene = 29;
+            // gComitCutsceneObject = o;
+            // gComitCutsceneTimer = 2;
+            break;
+    }
 }

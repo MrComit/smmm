@@ -55,6 +55,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BG_GROUND, bg_ground_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CAGE_BEAM, cage_beam_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_GROUND_CENTER, bg_ground_center_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_NICE_FACE, nice_face_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

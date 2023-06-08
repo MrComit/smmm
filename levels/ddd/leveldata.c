@@ -66,3 +66,4 @@
 #include "levels/ddd/cage_beam/model.inc.c"
 #include "levels/ddd/bg_ground_center/model.inc.c"
 #include "levels/ddd/bg_ground_center/collision.inc.c"
+#include "levels/ddd/nice_face/model.inc.c"
