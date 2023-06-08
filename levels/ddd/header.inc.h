@@ -131,7 +131,7 @@ extern Gfx ddd_dl_MountainExterior_003_mesh_layer_1_tri_1[];
 extern Vtx ddd_dl_MountainExterior_003_mesh_layer_4_vtx_0[76];
 extern Gfx ddd_dl_MountainExterior_003_mesh_layer_4_tri_0[];
 extern Vtx ddd_dl_Trees_mesh_layer_1_vtx_cull[8];
-extern Vtx ddd_dl_Trees_mesh_layer_1_vtx_0[169];
+extern Vtx ddd_dl_Trees_mesh_layer_1_vtx_0[162];
 extern Gfx ddd_dl_Trees_mesh_layer_1_tri_0[];
 extern Vtx ddd_dl_Trees_mesh_layer_4_vtx_cull[8];
 extern Vtx ddd_dl_Trees_mesh_layer_4_vtx_0[218];

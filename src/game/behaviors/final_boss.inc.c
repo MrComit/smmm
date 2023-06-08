@@ -1610,6 +1610,9 @@ void controller_act_run(void) {
     
     if (o->oOpacity <= 0) {
         o->oAction = CONTROLLER_ACT_DEATH;
+        vec3f_set(&o->oPosX, 1081.0f, 7556.0f, -7477.0f);
+        o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
+        o->oFloatF4 = 0.0f;
         kill_small_enemies();
     }
 
@@ -1729,12 +1732,56 @@ void controller_act_intro(void) {
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.05f);
             if (o->oTimer > 25) {
                 o->oSubAction = 0;
-                o->oAction = CONTROLLER_ACT_DEFAULT;
+                o->oAction = CONTROLLER_ACT_DEATH;
+                o->oOpacity = 0;
+                o->oFloatF4 = 0.0f;
+                // o->oAction = CONTROLLER_ACT_DEFAULT;
                 set_mario_npc_dialog(0);
             }
             break;
     }
 }
+
+
+void controller_act_death(void) {
+    gCamera->comitCutscene = 29;
+    gComitCutsceneObject = o;
+    gComitCutsceneTimer = 20;
+
+    o->os16112 = approach_s16_symmetric(o->os16112, 0x100, 0x4);
+    o->os16110 = approach_s16_symmetric(o->os16110, 0x3000, o->os16112);
+    o->oFaceAngleYaw += o->os16110;
+    switch (o->oSubAction) {
+        case 0:
+            // o->oFaceAngleYaw = approach_s16_asymptotic(o->oFaceAngleYaw, 0xD000, 0x10);
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, 0xD000, 0x400);
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.03f);
+            o->header.gfx.scale[2] = o->header.gfx.scale[0];
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.7f, 0.022f);
+
+            if (o->os16110 > 0x600) {
+                o->oSubAction = 1;
+                o->oFloatF4 = 0.001f;
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[0] = approach_f32_asymptotic(o->header.gfx.scale[0], 0.15f, 0.13f);
+            o->header.gfx.scale[2] = o->header.gfx.scale[0];
+            o->oFloatF4 *= 1.2f;// approach_f32_symmetric(o->oFloatF4, 0.7f, 0.001f);
+            o->header.gfx.scale[1] += o->oFloatF4;
+            // o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 6.0f, o->oFloatF4);
+            if (o->header.gfx.scale[1] >= 3.0f) {
+                if (o->oTimer > 15) {
+                    CL_explode_object(o, 1);
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            // print_text_fmt_int(80, 80, "%d", (s32)(o->header.gfx.scale[1] * 100.0f), 1);
+            break;
+    }
+}
+
 
 s32 boss_attacks_incompatible(void) {
     s32 end1 = sEndAttacks[0]->oBehParams2ndByte;
@@ -1843,6 +1890,9 @@ void bhv_the_controller_loop(void) {
             break;
         case CONTROLLER_ACT_RUN_END:
             controller_act_run_end();
+            break;
+        case CONTROLLER_ACT_DEATH:
+            controller_act_death();
             break;
     }
     o->oInteractStatus = 0;

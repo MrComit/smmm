@@ -5,6 +5,10 @@ void bhv_explosion_init(void) {
     set_environmental_camera_shake(SHAKE_ENV_EXPLOSION);
 
     o->oOpacity = 255;
+
+    if (obj_has_behavior(o->parentObj, bhvTheController)) {
+        o->oF4 = 1;
+    }
 }
 
 void bhv_explosion_loop(void) {
@@ -24,5 +28,9 @@ void bhv_explosion_loop(void) {
 
     o->oOpacity -= 14;
 
-    cur_obj_scale((f32) o->oTimer / 9.0f + 1.0);
+    if (o->oF4) {
+        cur_obj_scale((f32) o->oTimer / 2.0f + 10.0f);
+    } else {
+        cur_obj_scale((f32) o->oTimer / 9.0f + 1.0);
+    }
 }
