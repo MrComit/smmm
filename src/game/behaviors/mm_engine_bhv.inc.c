@@ -1150,11 +1150,17 @@ void toad_friend_final_boss(void) {
             }
             break;
         case 4:
+            cur_obj_init_animation_with_sound(8);
             // if (o->oTimer > 40) {
             //     gCamera->comitCutscene = 30;
             //     gComitCutsceneObject = o;
             //     gComitCutsceneTimer = 20;
             // }
+            break;
+        case 5:
+            if (o->oTimer > 15) {
+                o->os16112 = 1;
+            }
             break;
     }
 }

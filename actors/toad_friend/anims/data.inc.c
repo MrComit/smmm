@@ -6,3 +6,4 @@
 #include "anim_sm64_anim_007.inc.c"
 #include "anim_sm64_anim_008.inc.c"
 #include "anim_sm64_anim_009.inc.c"
+#include "anim_look_down.inc.c"

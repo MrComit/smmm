@@ -1757,7 +1757,7 @@ void controller_act_death(void) {
         case 0:
             // o->oFaceAngleYaw = approach_s16_asymptotic(o->oFaceAngleYaw, 0xD000, 0x10);
             o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, 0xD000, 0x400);
-            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.03f);
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.028f);
             o->header.gfx.scale[2] = o->header.gfx.scale[0];
             o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.7f, 0.022f);
 
@@ -1906,13 +1906,14 @@ void bhv_the_controller_loop(void) {
 
 void bhv_nice_face_loop(void) {
     struct Object *obj;
+    o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 10);
     switch (o->oAction) {
         case 0:
             gCamera->comitCutscene = 29;
             gComitCutsceneObject = o;
             gComitCutsceneTimer = 2;
 
-            if (o->oTimer > 30) {
+            if (o->oTimer > 60) {
                 o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 800.0f, 70.0f);
                 o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 500.0f, 50.0f);
 
@@ -1932,7 +1933,7 @@ void bhv_nice_face_loop(void) {
             o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 500.0f, 50.0f);
             gCamera->comitCutscene = 29;
             gComitCutsceneObject = o;
-            gComitCutsceneTimer = 45;
+            gComitCutsceneTimer = 65;
 
             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0xC000, 0x400);
             o->oPosY = approach_f32_symmetric(o->oPosY, 7406.0f + 10.0f, 8.0f);
@@ -1943,17 +1944,18 @@ void bhv_nice_face_loop(void) {
                 o->oObj100 = cur_obj_nearest_object_with_behavior(bhvToadFriend);
                 if (o->oObj100 != NULL) {
                     // gComitCutsceneObject = obj;
+                    o->oObj100->oAction = 4;
                     vec3f_set(&o->oObj100->oPosX, 981.0f, 7606.0f, -6477.0f);
                 }
             }
             break;
         case 2:
-            if (o->oTimer > 40) {
+            if (o->oTimer > 60) {
                 gCamera->comitCutscene = 30;
                 gComitCutsceneObject = o->oObj100;
                 gComitCutsceneTimer = 180;
 
-                if (o->oTimer == 41) {
+                if (o->oTimer == 61) {
                     o->oPosY += 200.0f;
                     o->oFaceAnglePitch = 0xF000;
                     o->oPosX = o->oObj100->oPosX;
@@ -1962,14 +1964,14 @@ void bhv_nice_face_loop(void) {
                 o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.1f, 0.1f);
                 cur_obj_scale(o->header.gfx.scale[0]);
 
-                o->oPosZ = approach_f32_asymptotic(o->oPosZ, o->oObj100->oPosZ, 0.05f);
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oObj100->oPosY + 60.0f, 0.6f);
+                o->oPosZ = approach_f32_asymptotic(o->oPosZ, o->oObj100->oPosZ + 10.0f, 0.03f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oObj100->oPosY + 30.0f, 0.18f);
                 // o->oPosY = approach_f32_asymptotic(o->oPosY, o->oObj100->oPosY + 61.0f, 0.07f);
-                if (o->oPosY >= o->oObj100->oPosY + 60.0f) {
+                if (o->oPosY >= o->oObj100->oPosY + 30.0f) {
                     o->activeFlags = 0;
                     spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
-                    o->oObj100->oAction = 4;
                     spawn_object(o, MODEL_TEARDROP, bhvTeardrop);
+                    o->oObj100->oAction = 5;
                 }
                 // o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oObj100->oPosZ - 25.0f, 7.0f);
                 // o->oPosY = approach_f32_symmetric(o->oPosY, o->oObj100->oPosY + 60.0f, 0.4f);
@@ -1981,24 +1983,36 @@ void bhv_nice_face_loop(void) {
     }
 }
 
+// struct ParticleProperties {
+//     u32 particleFlag;
+//     u32 activeParticleFlag;
+//     u8 model;
+//     const BehaviorScript *behavior;
+// };
+
+// extern struct ParticleProperties sParticleTypes[];
+
 
 void bhv_teardrop_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oTimer > 100) {
+            if (o->oTimer > 70) {
                 o->oAction = 1;
-                o->oPosZ -= 5.0f;
-                o->oPosY += 4.0f;
+                o->oPosZ += 12.0f;
+                o->oPosX += 12.0f;
+                o->oPosY += 9.0f;
 
                 cur_obj_unhide();
             }
             break;
         case 1:
-            o->oFloatF4 += 0.27f;
+            o->oFloatF4 += 0.1f;
             o->oPosY -= o->oFloatF4;
-            if (o->oPosY < 6000.0f) {
+            if (o->oPosY < 7500.0f) {
                 o->activeFlags = 0;
             }
+                // spawn_particle(sParticleTypes[4].activeParticleFlag, sParticleTypes[4].model,
+                //                 sParticleTypes[4].behavior);
             break;
     }
 }

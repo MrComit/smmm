@@ -2159,6 +2159,35 @@ Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node) {
 }
 
 
+#ifdef AVOID_UB
+Gfx *geo_switch_112(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_112(s32 callContext, struct GraphNode *node) {
+#endif
+    struct Object *obj;
+    struct GraphNodeSwitchCase *switchCase;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject; // TODO: change global type to Object pointer
+
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        if (gCurGraphNodeHeldObject != NULL) {
+            obj = gCurGraphNodeHeldObject->objNode;
+        }
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+
+        // assign the case number for execution.
+        switchCase->selectedCase = obj->os16112;
+    }
+
+    return NULL;
+}
+
 
 
 //[0] = hub

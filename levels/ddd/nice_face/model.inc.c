@@ -265,26 +265,15 @@ u8 nice_face_nice_face_ci4_pal_rgba16[] = {
 	0xee, 0x81, 0xee, 0x01, 
 };
 
-Vtx nice_face_NiceFace_mesh_layer_4_vtx_cull[8] = {
-	{{ {-200, -200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-200, 200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-200, 200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {-200, -200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {200, -200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {200, 200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {200, 200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {200, -200, 0}, 0, {-16, -16}, {0, 0, 0, 0} }},
-};
-
-Vtx nice_face_NiceFace_mesh_layer_4_vtx_0[4] = {
+Vtx nice_face_nface_mesh_layer_4_vtx_0[4] = {
 	{{ {-200, -200, 0}, 0, {0, 2048}, {0, 0, 127, 255} }},
 	{{ {200, -200, 0}, 0, {2048, 2048}, {0, 0, 127, 255} }},
 	{{ {200, 200, 0}, 0, {2048, 0}, {0, 0, 127, 255} }},
 	{{ {-200, 200, 0}, 0, {0, 0}, {0, 0, 127, 255} }},
 };
 
-Gfx nice_face_NiceFace_mesh_layer_4_tri_0[] = {
-	gsSPVertex(nice_face_NiceFace_mesh_layer_4_vtx_0 + 0, 4, 0),
+Gfx nice_face_nface_mesh_layer_4_tri_0[] = {
+	gsSPVertex(nice_face_nface_mesh_layer_4_vtx_0 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSPEndDisplayList(),
 };
@@ -292,7 +281,7 @@ Gfx nice_face_NiceFace_mesh_layer_4_tri_0[] = {
 
 Gfx mat_nice_face_NiceFace[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
+	gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, ENVIRONMENT, 0),
 	gsSPGeometryMode(G_CULL_BACK, 0),
 	gsDPSetTextureFilter(G_TF_POINT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
@@ -317,13 +306,9 @@ Gfx mat_revert_nice_face_NiceFace[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx nice_face_NiceFace_mesh_layer_4[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(nice_face_NiceFace_mesh_layer_4_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
+Gfx nice_face_nface_mesh_layer_4[] = {
 	gsSPDisplayList(mat_nice_face_NiceFace),
-	gsSPDisplayList(nice_face_NiceFace_mesh_layer_4_tri_0),
+	gsSPDisplayList(nice_face_nface_mesh_layer_4_tri_0),
 	gsSPDisplayList(mat_revert_nice_face_NiceFace),
 	gsSPEndDisplayList(),
 };

@@ -6882,6 +6882,7 @@ const BehaviorScript bhvToadFriend[] = {
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oOpacity, 255),
+    SET_FLOAT(oGraphYOffset, -14),
     CALL_NATIVE(bhv_friend_toad_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_friend_toad_loop),

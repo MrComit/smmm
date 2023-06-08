@@ -15,5 +15,6 @@ const struct Animation *const toad_friend_anims[] = {
 
 	&toad_friend_anim_sm64_anim_009,
 
+	&toad_friend_anim_look_down,
 	NULL,
 };
