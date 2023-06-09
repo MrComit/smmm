@@ -1415,9 +1415,10 @@ void fixed_cam_cutscene_ending(struct Camera *c) {
         case 1:
             if (gComitCutsceneTimer == 100) {
                 gComitCredits = 1;
-                stop_cutscene_and_retrieve_stored_info(c);
-                c->comitCutscene = 0;
-                gComitCutsceneTimer = 0;
+                gComitCutsceneAction = 2;
+                // stop_cutscene_and_retrieve_stored_info(c);
+                // c->comitCutscene = 0;
+                // gComitCutsceneTimer = 0;
             }
                 // play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
             // } else if (gComitCutsceneTimer == 70) {
