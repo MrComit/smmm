@@ -33,6 +33,7 @@
 #include "levels/ccm/header.h"
 #include "levels/hmc/header.h"
 #include "levels/lll/header.h"
+#include "levels/ddd/header.h"
 #include "levels/castle_grounds/header.h"
 #include "interaction.h"
 #include "mario.h"
@@ -1392,6 +1393,55 @@ void main_menu_cutscenes(struct Camera *c, s32 cutscene) {
 
 s32 gMenuCutscene = 0;
 
+
+void fixed_cam_cutscene_ending(struct Camera *c) {
+    struct CutsceneSplinePoint *point, *point2;
+    struct MarioState *m = gMarioState;
+    gComitCutsceneTimer++;
+    switch (gComitCutsceneAction) {
+        case 0:
+            start_cutscene(c, CUTSCENE_OPENING);
+            point = segmented_to_virtual(ddd_area_1_spline_0EndingPos);
+            point2 = segmented_to_virtual(ddd_area_1_spline_0EndingFoc);
+            move_point_along_spline(c->pos, point, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress);
+            if (move_point_along_spline(c->focus, point2, &sCutsceneSplineSegment, &sCutsceneSplineSegmentProgress)) {
+                //stop_cutscene_and_retrieve_stored_info(c);
+                // m->actionArg++;
+                gComitCutsceneAction++;
+                gComitCutsceneTimer = 0;
+                // create_dialog_box(DIALOG_020);
+            }
+            break;
+        case 1:
+            if (gComitCutsceneTimer == 60) {
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
+            } else if (gComitCutsceneTimer == 70) {
+                // m->pos[0] = 0.0f;
+                // m->pos[2] -= 300.0f;
+                stop_cutscene_and_retrieve_stored_info(c);
+                gComitCutsceneAction = 2;
+                gComitCutsceneTimer = 0;
+            }
+            break;
+        case 2:
+            if (gComitCutsceneTimer > 10) {
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
+                set_mario_npc_dialog(0);
+                gComitCutsceneAction = 0;
+                gComitCutsceneTimer = 0;
+                c->comitCutscene = 0;
+                // save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
+            }
+            break;
+    }
+}
+
+
+
+
+
+
+
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
     struct Object *obj = gComitCutsceneObject;
@@ -1643,6 +1693,9 @@ void fixed_cam_presets(struct Camera *c) {
             } else if (--gComitCutsceneTimer <= 0) {
                     gComitCutsceneTimer = 0;
             }
+            break;
+        case 31:
+            fixed_cam_cutscene_ending(c);
             break;
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);

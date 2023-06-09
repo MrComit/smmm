@@ -10,6 +10,10 @@ extern const GeoLayout ddd_area_1[];
 extern const Collision ddd_area_1_collision[];
 extern const u8 ddd_area_1_collision_rooms[];
 extern const MacroObject ddd_area_1_macro_objs[];
+#include "src/game/camera.h"
+
+extern struct CutsceneSplinePoint ddd_area_1_spline_0EndingFoc[];
+extern struct CutsceneSplinePoint ddd_area_1_spline_0EndingPos[];
 extern Lights1 ddd_dl_BalconyFloor_001_lights;
 extern Lights1 ddd_dl_TreeBark_002_lights;
 extern Lights1 ddd_dl_Leaves_002_lights;

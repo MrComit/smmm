@@ -1753,6 +1753,24 @@ void controller_act_death(void) {
     o->os16112 = approach_s16_symmetric(o->os16112, 0x100, 0x4);
     o->os16110 = approach_s16_symmetric(o->os16110, 0x3000, o->os16112);
     o->oFaceAngleYaw += o->os16110;
+
+    if (o->oObj108 != NULL && o->oObj108->oObjF4 != NULL) {
+        o->oObj108->oObjF4->oAction = 10;
+        o->oObj108->oObjF4->o100 = 10;
+        o->oObj108->oAction = 10;
+        o->oObj108->o100 = 10;
+
+        o->oObj108->oObjF4->oPosY -= 60.0f;
+        o->oObj108->oPosY -= 60.0f;
+        if (o->oObj108->oPosY < 7000.0f && o->oObj108->oObjF4->oPosY < 7000.0f) {
+            o->oObj108->oObjF4->activeFlags = 0;
+            o->oObj108->activeFlags = 0;
+
+            o->oObj108->oObjF4 = NULL;
+            o->oObj108 = NULL;
+        }
+    }
+
     switch (o->oSubAction) {
         case 0:
             // o->oFaceAngleYaw = approach_s16_asymptotic(o->oFaceAngleYaw, 0xD000, 0x10);
@@ -1994,6 +2012,7 @@ void bhv_nice_face_loop(void) {
 
 
 void bhv_teardrop_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (o->oTimer > 70) {
@@ -2006,10 +2025,19 @@ void bhv_teardrop_loop(void) {
             }
             break;
         case 1:
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.08f);
+            cur_obj_scale(o->header.gfx.scale[0]);
             o->oFloatF4 += 0.1f;
             o->oPosY -= o->oFloatF4;
-            if (o->oPosY < 7500.0f) {
+            if (o->oPosY < 7400.0f) {
                 o->activeFlags = 0;
+                gCamera->comitCutscene = 31;
+                obj = cur_obj_nearest_object_with_behavior(bhvToadFriend);
+                if (obj != NULL) {
+                    obj->oPosY = 7406.0f;
+                    vec3f_set(gMarioState->pos, obj->oPosX + 140.0f, obj->oPosY, obj->oPosZ + 500.0f);
+                    gMarioState->faceAngle[1] = 0x8000;
+                }
             }
                 // spawn_particle(sParticleTypes[4].activeParticleFlag, sParticleTypes[4].model,
                 //                 sParticleTypes[4].behavior);

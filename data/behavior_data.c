@@ -11520,6 +11520,7 @@ const BehaviorScript bhvTeardrop[] = {
     SET_HOME(),
     HIDE(),
     BILLBOARD(),
+    SCALE(0, 0),
     // CALL_NATIVE(bhv_nice_face_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_teardrop_loop),
