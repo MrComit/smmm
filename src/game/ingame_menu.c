@@ -4536,4 +4536,184 @@ void special_print(void) {
         print_multiplier();
         print_mirror_controls();
     }
+    // render_credits_title();
+}
+
+char sCreditsTitle[] = { TEXT_CREDITS_TITLE };
+// char sCreditsDummy1[] = { TEXT_CREDITS_DUMMY1 };
+// char sCreditsDummy2[] = { TEXT_CREDITS_DUMMY2 };
+
+char sCreditsGeneral[] = { TEXT_CREDITS_GENERAL };
+char sCreditsGeneral2[] = { TEXT_CREDITS_GENERAL2 };
+char sCreditsComit[] = { TEXT_CREDITS_COMIT };
+
+char sCreditsTextures[] = { TEXT_CREDITS_TEXTURES };
+char sCreditsTextures1[] = { TEXT_CREDITS_TEXTURES1 };
+char sCreditsTextures2[] = { TEXT_CREDITS_TEXTURES2 };
+// char sCreditsSophie7[] = { TEXT_CREDITS_SOPHIE };
+// char sCreditsNeuralB8[] = { TEXT_CREDITS_NEURALB };
+// char sCreditsCraiyon9[] = { TEXT_CREDITS_CRAIYON };
+
+char sCreditsPatches[] = { TEXT_CREDITS_PATCHES };
+char sCreditsPatches1[] = { TEXT_CREDITS_PATCHES1 };
+char sCreditsPatches2[] = { TEXT_CREDITS_PATCHES2 };
+// char sCreditsReonu13[] = { TEXT_CREDITS_REONU };
+// char sCreditsArthur14[] = { TEXT_CREDITS_ARTHUR };
+// char sCreditsFazana15[] = { TEXT_CREDITS_FAZANA };
+// char sCreditsKaze16[] = { TEXT_CREDITS_KAZE };
+
+char sCreditsBeta[] = { TEXT_CREDITS_BETA };
+char sCreditsBeta1[] = { TEXT_CREDITS_BETA1 };
+char sCreditsBeta2[] = { TEXT_CREDITS_BETA2 };
+// char sCreditsPlaceholder20[] = { TEXT_CREDITS_TESTERS_PLACEHOLDER };
+
+char sCreditsThanks[] = { TEXT_CREDITS_THANKS };
+char sCreditsHSM64[] = { TEXT_CREDITS_HSM64 };
+char sCreditsUltra[] = { TEXT_CREDITS_ULTRA };
+char sCreditsCheezepin[] = { TEXT_CREDITS_CHEEZEPIN };
+char sCreditsYou[] = { TEXT_CREDITS_YOU };
+
+char sCreditsOG[] = { TEXT_CREDITS_OG };
+char sCreditsEndtitle[] = { TEXT_CREDITS_ENDTITLE };
+char sCredits2023[] = { TEXT_CREDITS_2023 };
+
+
+
+
+struct CreditTextLine {
+    char *str;
+    s16 y;
+};
+
+#define CREDIT_ENTRY_COUNT 20
+
+struct CreditTextLine sComitCredits[CREDIT_ENTRY_COUNT] = {
+    {sCreditsGeneral, -20},
+    {sCreditsGeneral2, -40},
+    {sCreditsComit, -70},
+
+    {sCreditsTextures, -150},
+    {sCreditsTextures1, -180},
+    {sCreditsTextures2, -200},
+
+    {sCreditsPatches, -280},
+    {sCreditsPatches1, -310},
+    {sCreditsPatches2, -330},
+
+    {sCreditsBeta, -410},
+    {sCreditsBeta1, -440},
+    {sCreditsBeta2, -460},
+
+    {sCreditsThanks, -540},
+    {sCreditsHSM64, -570},
+    {sCreditsUltra, -590},
+    {sCreditsCheezepin, -610},
+    {sCreditsYou, -630},
+
+    {sCreditsOG, -710},
+
+    {sCreditsEndtitle, -840},
+    {sCredits2023, -870},
+};
+
+
+
+
+
+s32 gComitCreditsTimer = 0;
+s32 gComitCreditsAct = 0;
+
+
+
+
+void render_credits_string(s32 index) {
+    // f32 scale = 2.5f;
+    s16 x = get_str_x_pos_from_center(160, sComitCredits[index].str, 1.0f);
+    create_dl_ortho_matrix();
+    // create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+    print_generic_string(x, sComitCredits[index].y, sComitCredits[index].str);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+
+void render_credits_lines(void) {
+    s32 i;
+    for (i = 0; i < CREDIT_ENTRY_COUNT; i++) {
+        if ((i != CREDIT_ENTRY_COUNT-1 || sComitCredits[CREDIT_ENTRY_COUNT-1].y < 105) && 
+            (i != CREDIT_ENTRY_COUNT-2 || sComitCredits[CREDIT_ENTRY_COUNT-2].y < 135)) {
+            sComitCredits[i].y += 1;
+            // if (gComitCreditsTimer & 1) {
+            //     sComitCredits[i].y += 1;
+            // }
+        }
+        if (sComitCredits[i].y >= -30) {
+            render_credits_string(i);
+        }
+    }
+}
+
+
+
+void render_credits_title(void) {
+    // f32 scale = 2.5f;
+    create_dl_ortho_matrix();
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 2.0f, 2.0f, 1.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+    print_generic_string(38, 53, sCreditsTitle);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+}
+
+
+void render_credits_logo(void) {
+	create_dl_ortho_matrix();
+    create_dl_translation_matrix(MENU_MTX_PUSH, 160.0f, 120.0f, 0.0f);
+    // if (gIsConsole) {
+    //     create_dl_scale_matrix(MENU_MTX_NOPUSH, 1.25f, 1.25f, 1.0f);
+    // }
+	// if (sLogoTimer > 70) {
+	// 	sLogoOpacity += 4;
+	// 	if (sLogoOpacity > 255) {
+	// 		sLogoOpacity = 255;
+	// 	}
+	// } else {
+	// 	sLogoTimer++;
+	// }
+    gDPSetEnvColor(gDisplayListHead++, 0xFF, 0xFF, 0xFF, 255);
+    gSPDisplayList(gDisplayListHead++, &logo_Plane_mesh);
+    // gSPDisplayList(gDisplayListHead++, &logo_console_PlaneConsole_mesh);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+void render_comit_credits(void) {
+    gComitCreditsTimer++;
+    create_dl_ortho_matrix();
+    shade_screen_rgba(0, 0, 0, 255);
+    switch (gComitCreditsAct) {
+        case 0:
+            render_credits_logo();
+            if (gComitCreditsTimer > 101) {
+                gComitCreditsAct = 1;
+                gComitCreditsTimer = 0;
+            }
+            break;
+        case 1:
+            render_credits_title();
+            if (gComitCreditsTimer > 101) {
+                gComitCreditsAct = 2;
+                gComitCreditsTimer = 0;
+            }
+            break;
+        case 2:
+            render_credits_lines();
+            break;
+        case 3:
+            break;
+    }
 }

@@ -1744,7 +1744,10 @@ void controller_act_intro(void) {
 }
 
 
+    extern s32 gComitCredits;
 void controller_act_death(void) {
+    gComitCredits = 1;
+    return;
     set_mario_npc_dialog(1);
     gCamera->comitCutscene = 29;
     gComitCutsceneObject = o;

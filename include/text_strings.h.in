@@ -388,6 +388,52 @@
 // #define TEXT_OFF _("Off")
 
 
+//CREDITS
+#define TEXT_CREDITS_TITLE _("Made By MrComit")
+// #define TEXT_CREDITS_DUMMY1 _("xascasd")
+// #define TEXT_CREDITS_DUMMY2 _("Art Design: John Nintendo")
+
+
+#define TEXT_CREDITS_GENERAL _("Game Design, Programming, Writing,")
+#define TEXT_CREDITS_GENERAL2 _("Modeling, and Soundtrack")
+#define TEXT_CREDITS_COMIT _("MrComit")
+
+#define TEXT_CREDITS_TEXTURES _("Textures")
+#define TEXT_CREDITS_TEXTURES1 _("MrComit      Pyro Jay      Furyousfight")
+#define TEXT_CREDITS_TEXTURES2 _("NeuralBlender.com      Craiyon.com")
+// comit
+// #define TEXT_CREDITS_PYRO _("Pyro Jay")
+// #define TEXT_CREDITS_SOPHIE _("Furyousfight")
+// #define TEXT_CREDITS_NEURALB _("NeuralBlender.com")
+// #define TEXT_CREDITS_CRAIYON _("Craiyon.com")
+
+#define TEXT_CREDITS_PATCHES _("Miscellaneous Patches")
+#define TEXT_CREDITS_PATCHES1 _("Wiseguy      thecozies      Reonu")
+#define TEXT_CREDITS_PATCHES2 _("Arthurtilly      Fazana      Kaze")
+// #define TEXT_CREDITS_WISEGUY _("Wiseguy")
+// #define TEXT_CREDITS_COZIES _("thecozies")
+// #define TEXT_CREDITS_REONU _("Reonu")
+// #define TEXT_CREDITS_ARTHUR _("Arthurtilly")
+// #define TEXT_CREDITS_FAZANA _("Fazana")
+// #define TEXT_CREDITS_KAZE _("Kaze")
+
+#define TEXT_CREDITS_BETA _("Beta Testing")
+#define TEXT_CREDITS_BETA1 _("GTM      Cheezepin      TBD")
+#define TEXT_CREDITS_BETA2 _("TBD      TBD      TBD      TBD")
+// #define TEXT_CREDITS_GTM _("GTM")
+// #define TEXT_CREDITS_CHEEZE _("Cheezepin")
+// #define TEXT_CREDITS_TESTERS_PLACEHOLDER _("TBD")
+
+#define TEXT_CREDITS_THANKS _("Special Thanks")
+#define TEXT_CREDITS_HSM64 _("The HackerSM64 Repository")
+#define TEXT_CREDITS_ULTRA _("The UltraSM64 Repository")
+#define TEXT_CREDITS_CHEEZEPIN _("Cheezepin (General feedback)")
+#define TEXT_CREDITS_YOU _("You, for playing")
+
+#define TEXT_CREDITS_OG _("Original Game By Nintendo")
+
+#define TEXT_CREDITS_ENDTITLE _("Super Mario and the Monstrous Manor")
+#define TEXT_CREDITS_2023 _("2023")
 
 #endif
 

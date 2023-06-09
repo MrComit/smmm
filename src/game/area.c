@@ -379,6 +379,7 @@ void play_transition_after_delay(s16 transType, s16 time, u8 red, u8 green, u8 b
 }
 
 s32 sShouldRenderCursor = FALSE;
+extern s32 gComitCredits;
 
 void render_game(void) {
     if (gCurrentArea != NULL && !gWarpTransition.pauseRendering) {
@@ -395,7 +396,7 @@ void render_game(void) {
         //}
         if (gMenuOptSelectIndex != MENU_OPT_MAP) {
             render_hud();
-        } else {
+        } else if (!gComitCredits) {
             update_map_screen();
         }
         gMenuOptSelectIndex = render_menus_and_dialogs();
@@ -408,6 +409,9 @@ void render_game(void) {
         do_cutscene_handler();
         print_displaying_credits_entry();
         special_print();
+        if (gComitCredits) {
+            render_comit_credits();
+        }
         gDPSetScissor(gDisplayListHead++, G_SC_NON_INTERLACE, 0, gBorderHeight, SCREEN_WIDTH,
                       SCREEN_HEIGHT - gBorderHeight);
         //gMenuOptSelectIndex = render_menus_and_dialogs();
