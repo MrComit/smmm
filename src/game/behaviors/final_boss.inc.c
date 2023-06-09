@@ -2044,3 +2044,21 @@ void bhv_teardrop_loop(void) {
             break;
     }
 }
+
+
+void bhv_winking_moon_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gCamera->comitCutscene == 31) {
+                cur_obj_unhide();
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > 500) {
+                o->oAnimState = 1;
+                o->oAction = 2;
+            }
+            break;
+    }
+}

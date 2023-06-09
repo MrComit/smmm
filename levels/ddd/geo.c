@@ -40,3 +40,4 @@
 #include "levels/ddd/bg_ground_center/geo.inc.c"
 #include "levels/ddd/nice_face/geo.inc.c"
 #include "levels/ddd/teardrop/geo.inc.c"
+#include "levels/ddd/winking_moon/geo.inc.c"

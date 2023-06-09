@@ -109,4 +109,6 @@ extern const LevelScript level_ddd_entry[];
 
 #include "levels/ddd/teardrop/geo_header.h"
 
+#include "levels/ddd/winking_moon/geo_header.h"
+
 #endif

@@ -961,6 +961,7 @@
 #define MODEL_BG_GROUND_CENTER    0xF0
 #define MODEL_NICE_FACE           0xEF
 #define MODEL_TEARDROP            0xEE
+#define MODEL_WINKING_MOON        0xED
 
 
 

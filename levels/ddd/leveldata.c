@@ -68,3 +68,4 @@
 #include "levels/ddd/bg_ground_center/collision.inc.c"
 #include "levels/ddd/nice_face/model.inc.c"
 #include "levels/ddd/teardrop/model.inc.c"
+#include "levels/ddd/winking_moon/model.inc.c"

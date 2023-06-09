@@ -944,6 +944,7 @@ extern const BehaviorScript bhvBossCageBeam[];
 extern const BehaviorScript bhvBGGroundCenter[];
 extern const BehaviorScript bhvNiceFace[];
 extern const BehaviorScript bhvTeardrop[];
+extern const BehaviorScript bhvWinkingMoon[];
 
 
 #endif // BEHAVIOR_DATA_H

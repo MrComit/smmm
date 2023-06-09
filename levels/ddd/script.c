@@ -57,6 +57,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BG_GROUND_CENTER, bg_ground_center_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NICE_FACE, nice_face_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TEARDROP, teardrop_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_WINKING_MOON, winking_moon_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -72,6 +73,7 @@ const LevelScript level_ddd_entry[] = {
 		OBJECT(MODEL_NONE, 1083, 11559, -3448, 0, -180, 0, 0x000A0000, bhvSpinAirborneCircleWarp),
 		MARIO_POS(0x01, -180, 1083, 11559, -3448),
 		OBJECT(MODEL_THE_CONTROLLER, 1083, 9206, -25619, 0, 0, 0, 0x00000000, bhvTheController),
+		OBJECT(MODEL_WINKING_MOON, 6505, 17716, -9373, 0, 0, 0, 0x00000000, bhvWinkingMoon),
 		OBJECT(MODEL_TOAD_FRIEND, -2126, 11559, -1593, 0, 140, 0, 0x00000000, bhvToadFriend),
 		OBJECT(MODEL_ROOF_HOLE, 1081, 7406, -7477, 0, 0, 0, 0x00000000, bhvRoofHole),
 		TERRAIN(ddd_area_1_collision),
