@@ -1515,6 +1515,8 @@ void render_hud_manager_icon(void) {
 
 
 s32 sBossHealthX = -32;
+f32 sBossHealthLastFrame = 255.0f;
+s8 sBossTwitchBit = 0;
 
 #include "boss_health_huds/boss_health_hud/model.inc.c"
 #include "boss_health_huds/boss_health_bar/model.inc.c"
@@ -1524,11 +1526,24 @@ void render_boss_health(void) {
 	f32 health = 0.0f;
 
 	if (obj != NULL && obj->oOpacity != 0 && obj->oAction != 0) {
-		health = (obj->oOpacity) / 255.0f;
+		health = obj->oFloatFC / 255.0f;
 	} else {
 		return;
 	}
-	sBossHealthX = approach_s16_symmetric(sBossHealthX, 0, 2);
+
+	if (sBossHealthLastFrame != obj->oFloatFC) {
+		if (sBossTwitchBit) {
+			sBossHealthX--;
+		} else {
+			sBossHealthX++;
+		}
+		sBossTwitchBit ^= 1;
+		sBossHealthLastFrame = obj->oFloatFC;
+	} else {
+		sBossHealthX = approach_s16_symmetric(sBossHealthX, 0, 2);
+	}
+
+
 
 	create_dl_translation_matrix(MENU_MTX_PUSH, sBossHealthX, 79, 5);
 
@@ -1637,7 +1652,7 @@ void render_hud(void) {
             render_hud_stars();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER) {
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER && (gCamera->comitCutscene < 29 || gCamera->comitCutscene > 31)) {
             render_hud_power_meter();
             //render_hud_camera_status();
         }
