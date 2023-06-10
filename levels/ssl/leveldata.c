@@ -128,3 +128,4 @@
 #include "levels/ssl/magic_carpet/collision.inc.c"
 #include "levels/ssl/toad_cage/model.inc.c"
 #include "levels/ssl/toad_cage/collision.inc.c"
+#include "levels/ssl/map_l8/model.inc.c"

@@ -35,6 +35,7 @@
 #include "levels/bbh/header.h"
 #include "levels/hmc/header.h"
 #include "levels/lll/header.h"
+#include "levels/ssl/header.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -3671,7 +3672,26 @@ void spawn_map_7(void) {
 
     spawn_map_key(-428, 483, 0xA);
 }
+
+
 void spawn_map_8(void) {
+    spawn_map_object(-3477, 1908, map_l8_1OPENING_mesh_layer_1, 1);
+    spawn_map_object(-3426, 635, map_l8_2ART_mesh_layer_1, 2);
+    spawn_map_object(-3477, -1082, map_l8_3O2_mesh_layer_1, 3);
+    spawn_map_object(-788, -925, map_l8_4PALACE_mesh_layer_1, 4);
+    spawn_map_object(184, -1868, map_l8_5O3_mesh_layer_1, 5);
+    spawn_map_object(2143, -1928, map_l8_6LAB_mesh_layer_1, 6);
+    spawn_map_object(-763, 235, map_l8_7O4_mesh_layer_1, 7);
+    spawn_map_object(371, 949, map_l8_8DREAM_mesh_layer_1, 8);
+    spawn_map_object(1495, 992, map_l8_9O5_mesh_layer_1, 9);
+    spawn_map_object(2409, 1036, map_l8_10OBSERVATORY_mesh_layer_1, 10);
+    spawn_map_object(-2065, 2005, map_l8_11MEMHOLE_mesh_layer_1, 11);
+    spawn_map_object(559, -925, map_l8_12O6_mesh_layer_1, 12);
+
+
+
+    spawn_map_key(-573, -1013, 0xB);
+    spawn_map_key(-34, 949, 0xC);
 }
 
 static void (*MapObjectsSpawnTable[])(void) = {

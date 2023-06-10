@@ -269,10 +269,10 @@ u8 spooky_face_angry_eyes_ci4_pal_rgba16[] = {
 #include "game/logo/header.h"
 
 static const Vtx vertex_map_border[] = {
-    {{{     5000,  -500, 4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{   5000,    -500, -4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{   -5000,   -500, 4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
-    {{{     -5000, -500, -4500}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     5500,  -500, 5000}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   5500,    -500, -5000}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   -5500,   -500, 5000}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{     -5500, -500, -5000}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
 };
 
 

@@ -242,4 +242,6 @@ extern const Collision magic_carpet_collision[];
 
 #include "levels/ssl/toad_cage/collision_header.h"
 
+#include "levels/ssl/map_l8/geo_header.h"
+
 #endif
