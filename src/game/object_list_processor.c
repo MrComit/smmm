@@ -693,7 +693,7 @@ void bhv_mario_update(void) {
     mario_update_room_clear(gMarioState);
 
 
-// #ifndef SMMM_DEBUG
+#ifndef SMMM_DEBUG
     if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {
         // vec3s_set(gMarioSpawnInfo->startPos, -21762, 8000, 24318);
         // save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
@@ -716,7 +716,7 @@ void bhv_mario_update(void) {
     if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) && gMarioCurrentRoom == 2 && gCurrLevelNum == LEVEL_BOB) {
         gCamera->comitCutscene = 10;
     }
-// #endif
+#endif
 
 
     if (gStarPieceReward >= 0) {

@@ -426,7 +426,7 @@ extern Vtx ssl_dl_GardenCircle_mesh_layer_1_vtx_0[131];
 extern Gfx ssl_dl_GardenCircle_mesh_layer_1_tri_0[];
 extern Vtx ssl_dl_GardenCircle_mesh_layer_1_vtx_1[30];
 extern Gfx ssl_dl_GardenCircle_mesh_layer_1_tri_1[];
-extern Vtx ssl_dl_GardenCircle_mesh_layer_1_vtx_2[198];
+extern Vtx ssl_dl_GardenCircle_mesh_layer_1_vtx_2[199];
 extern Gfx ssl_dl_GardenCircle_mesh_layer_1_tri_2[];
 extern Vtx ssl_dl_GardenCircle_mesh_layer_1_vtx_3[13];
 extern Gfx ssl_dl_GardenCircle_mesh_layer_1_tri_3[];

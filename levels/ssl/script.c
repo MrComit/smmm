@@ -13,6 +13,9 @@
 
 #include "actors/common1.h"
 #include "actors/common0.h"
+#include "actors/common0.h"
+#include "actors/common0.h"
+#include "actors/common0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -234,11 +237,13 @@ const LevelScript level_ssl_entry[] = {
 		INSTANT_WARP(5, 0x02, 4518, -155, -480),
 		INSTANT_WARP(6, 0x02, 10392, -552, -4501),
 		WARP_NODE(0x58, LEVEL_SSL, 0x02, 0x59, WARP_NO_CHECKPOINT),
-		WARP_NODE(0x59, LEVEL_SSL, 0x03, 0x58, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x59, LEVEL_SSL, 0x02, 0x58, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x8D, LEVEL_SSL, 0x02, 0x0B, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x98, LEVEL_SSL, 0x02, 0x99, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x99, LEVEL_SSL, 0x02, 0x98, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x40, LEVEL_SSL, 0x02, 0x41, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x41, LEVEL_SSL, 0x02, 0x40, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -22687, 6347, -1694, 0, 90, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -12471, 6187, -2178, 0, -180, 0, (0xB << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, -22687, 6347, -1694, 0, 90, 0, (0xA << 16), bhvFlyingWarp),
