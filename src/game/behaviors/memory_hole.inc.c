@@ -101,6 +101,7 @@ void bhv_mem_ice_cube_loop(void) {
                 break;
             }
 
+            cur_obj_play_sound_1(SOUND_MOVING_TERRAIN_SLIDE);
             cur_obj_update_floor();
             if (o->oFloorType == SURFACE_CUBE_MELT && o->oBehParams2ndByte == 0) {
                 // if (!(sCubesMelt & k)) {

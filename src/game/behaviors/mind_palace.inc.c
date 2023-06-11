@@ -266,6 +266,7 @@ void bhv_mind_mound_block_loop(void) {
             o->oMoveAngleYaw = 0x8000;
             if (gMarioState->wall != NULL && gMarioState->wall->object == o && gMarioState->flags & MARIO_UNKNOWN_31
                 && gMarioState->wall->force == 1) {
+                cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
                 o->oForwardVel = 10.0f;
                 CL_Move();
                 gMarioState->pos[0] += o->oVelX;
@@ -300,6 +301,7 @@ void bhv_mind_mound_block_loop(void) {
 }
 
 void mind_mound_block_act_1(void) {
+    f32 x, z;
     struct Object *obj;
     if (sMIPSObjs[0][0] == NULL) {
         return;
@@ -403,8 +405,14 @@ void mind_mound_block_act_1(void) {
         return;
     }
     sMIPSObjs[o->os16F4][o->os16F6]->os16FA = 1;
+    x = o->oPosX;
+    z = o->oPosZ;
     o->oPosX = approach_f32_symmetric(o->oPosX, sMIPSObjs[o->os16F4][o->os16F6]->oPosX, absf(20.0f * sins(o->oMoveAngleYaw)));
     o->oPosZ = approach_f32_symmetric(o->oPosZ, sMIPSObjs[o->os16F4][o->os16F6]->oPosZ, absf(20.0f * coss(o->oMoveAngleYaw)));
+
+    if (x != o->oPosX || z != o->oPosZ) {
+        cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
+    }
 }
 
 
@@ -491,6 +499,7 @@ void bhv_mind_mound_loop(void) {
     switch (o->oAction) {
         case 0:
             if (cur_obj_is_mario_ground_pounding_platform()) {
+                cur_obj_play_sound_1(SOUND_GENERAL_SWITCH_DOOR_OPEN);
                 o->oAction = 1;
                 mind_mounds_check_adjacent();
             }

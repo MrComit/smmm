@@ -425,6 +425,7 @@ void bhv_ice_cube_loop(void) {
                 break;
             }
 
+            cur_obj_play_sound_1(SOUND_MOVING_TERRAIN_SLIDE);
             cur_obj_update_floor();
             k = 1 << o->oBehParams2ndByte;
             if (o->oFloorType == SURFACE_CUBE_MELT) {

@@ -252,6 +252,9 @@ void bhv_mind_2d_goomba_loop(void) {
     if (o->oMoveFlags & OBJ_MOVE_IN_AIR) {
         o->oForwardVel = 0.0f;
     } else {
+        if (o->oTimer & 4) {
+            cur_obj_play_sound_1(SOUND_OBJ_GOOMBA_WALK);
+        }
         o->oForwardVel = 40.0f;
     }
 
@@ -288,6 +291,8 @@ void bhv_mind_2d_goomba_loop(void) {
         }
         gComitCutsceneObject = NULL;
         o->activeFlags = 0;
+
+        cur_obj_play_sound_1(SOUND_OBJ_ENEMY_DEATH_HIGH);
     }
 
     // if (o->oPosY < o->oHomeY - 150.0f) {
@@ -367,6 +372,7 @@ void bhv_outside_mound_block_init(void) {
 
 void bhv_outside_mound_block_loop(void) {
     struct Object *obj;
+    f32 x, z;
     if (sOutsideObjs[0][0] == NULL) {
         return;
     }
@@ -469,8 +475,14 @@ void bhv_outside_mound_block_loop(void) {
         return;
     }
     sOutsideObjs[o->os16F4][o->os16F6]->os16FA = 1;
+    x = o->oPosX;
+    z = o->oPosZ;
     o->oPosX = approach_f32_symmetric(o->oPosX, sOutsideObjs[o->os16F4][o->os16F6]->oPosX, absf(20.0f * sins(o->oMoveAngleYaw)));
     o->oPosZ = approach_f32_symmetric(o->oPosZ, sOutsideObjs[o->os16F4][o->os16F6]->oPosZ, absf(20.0f * coss(o->oMoveAngleYaw)));
+
+    if (x != o->oPosX || z != o->oPosZ) {
+        cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
+    }
 }
 
 
@@ -561,6 +573,7 @@ void bhv_outside_mound_loop(void) {
     switch (o->oAction) {
         case 0:
             if (cur_obj_is_mario_ground_pounding_platform()) {
+                cur_obj_play_sound_1(SOUND_GENERAL_SWITCH_DOOR_OPEN);
                 o->oAction = 1;
                 outside_mounds_check_adjacent();
                 if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
@@ -569,6 +582,7 @@ void bhv_outside_mound_loop(void) {
             }
             break;
         case 1:
+            // cur_obj_play_sound_1(SOUND_ENV_MOVING_BIG_PLATFORM);
             o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 0.0f, 0.2f);
             if (o->header.gfx.scale[1] < 0.1f) {
                 o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.0f, 0.1f);

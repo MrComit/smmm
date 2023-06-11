@@ -158,6 +158,9 @@ void bhv_antenna_ball_loop(void) {
             if (m->pos[0] > 11000.0f && m->pos[0] < 17650.0f && m->heldObj == NULL && m->floor->type != SURFACE_INSTANT_QUICKSAND) {
                 o->oAction = 1;
                 if (o->oBehParams2ndByte) {
+                    // cur_obj_play_sound_1(SOUND_OBJ2_BOWSER_TELEPORT);
+                    play_sound(SOUND_OBJ2_BOWSER_TELEPORT, gMarioState->marioObj->header.gfx.cameraToObject);
+
                     // gJoystickSwitch = CL_RandomMinMaxU16(0x1800, 0xE800);
                     gJoystickSwitch = 0x8000;
                     // m->particleFlags |= PARTICLE_DIZZY;

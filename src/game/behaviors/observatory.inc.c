@@ -375,6 +375,8 @@ void bhv_observatory_spinning_plat_loop(void) {
             o->os16FC = approach_s16_symmetric(o->os16FC, o->os16FE, 0x8);
             o->oFaceAngleYaw += o->os16FC;
             o->oPosY += 5.0f;
+
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
             // if (gMarioObject->platform == o) {
             //     gMarioState->pos[1] += 10.0f;
             //     if (gMarioState->vel[1] > 0.0f) {

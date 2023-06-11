@@ -61,7 +61,7 @@ void bhv_dream_penguin_attack_loop(void) {
             if (o->oTimer & 16 == 0) {
                 play_sound(SOUND_OBJ_BIG_PENGUIN_YELL, gGlobalSoundSource);
             }
-
+            play_penguin_walking_sound(PENGUIN_WALK_BABY);
             if (o->oTimer > o->os16106) {
                 o->os16104 = CL_RandomMinMaxU16(0, 10) - 5;
                 o->os16106 = CL_RandomMinMaxU16(40, 100);
@@ -490,6 +490,10 @@ void bhv_yoshi_head_rectangle_loop(void) {
     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->o104, 0x300);
 
     if ((u16)o->oMoveAngleYaw == o->o104) {
+        if (absf(o->oPosY - gMarioState->pos[1]) < 800.0f) {
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+        }
+
         switch (o->oAction) {
             case 0:
                 o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oFloat100 + (o->oBehParams2ndByte * 100.0f), 20.0f);
@@ -533,6 +537,7 @@ void bhv_yoshi_head_line_loop(void) {
 
     switch (o->oAction) {
         case 0:
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
             o->os16108 = approach_s16_symmetric(o->os16108, o->os1610A, 90);
             o->oPosX += 20.0f * sins(o->oMoveAngleYaw);
             o->oPosZ += 20.0f * coss(o->oMoveAngleYaw);

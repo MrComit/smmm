@@ -82,6 +82,9 @@ void bhv_painting_brick_loop(void) {
             }
             break;
         case 1:
+            cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
+
+
             CL_Move();
             if (o->oTimer >= 23) {
                 o->oAction = 2;
@@ -206,6 +209,7 @@ void bhv_painting_enemy_respawn_loop(void) {
                 obj = spawn_object(o, MODEL_BG_SHYGUY, bhvMiniShyguy);
                 obj->parentObj = obj;
                 obj->oFaceAngleYaw = obj->oMoveAngleYaw += 0x8000;
+                cur_obj_play_sound_1(SOUND_ACTION_TELEPORT);
                 // o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
             }
 
@@ -267,6 +271,7 @@ void bhv_painting_enemy_loop(void) {
         case 0:
             if (o->oDistanceToMario < 1000.0f) {
                 o->oAction = 1;
+                cur_obj_play_sound_1(SOUND_ACTION_TELEPORT);
                 if (o->oBehParams2ndByte == 0) {
                     obj = spawn_object(o, MODEL_BG_GOOMBA, bhvGoomba);
                 } else {
