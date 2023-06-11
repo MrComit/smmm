@@ -252,7 +252,7 @@ void bhv_mind_2d_goomba_loop(void) {
     if (o->oMoveFlags & OBJ_MOVE_IN_AIR) {
         o->oForwardVel = 0.0f;
     } else {
-        if (o->oTimer & 4) {
+        if ((o->oTimer & 7) == 0) {
             cur_obj_play_sound_1(SOUND_OBJ_GOOMBA_WALK);
         }
         o->oForwardVel = 40.0f;

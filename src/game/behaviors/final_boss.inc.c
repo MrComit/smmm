@@ -245,6 +245,7 @@ void bhv_laser_shyguy_loop(void) {
             }
             break;
         case 2:
+            cur_obj_play_sound_1(SOUND_AIR_AMP_BUZZ);
             o->os16F8 += 0x180;
             if (o->os1610E == 0) {
                 o->oFaceAngleYaw = 0x2000 * sins(o->os16F8);
@@ -513,7 +514,9 @@ void bhv_end_fist_loop(void) {
     switch (o->oAction) {
         case 0:
             o->oPosY = approach_f32_symmetric(o->oPosY, 7406.0f, 50.0f);
+            // cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
             if (o->oPosY == 7406.0f) {
+                cur_obj_play_sound_2(SOUND_OBJ_THWOMP);
                 o->oAction = 1;
             }
             break;
@@ -555,13 +558,18 @@ void bhv_end_cage_loop(void) {
             if (o->oTimer < sEndCageTimers[o->os16100]) {
                 o->oPosY += o->oFloatF4;
                 o->oFloatF4 *= -1.0f;
+
+                // cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_ALERT);
+
                 o->oPosX = gMarioState->pos[0];
                 o->oPosZ = gMarioState->pos[2];
             } else if (o->oPosY != o->oHomeY) {
+                // cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_CLICK);
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, sEndCageSpeeds[o->os16100]);
                 // if (o->oPosY == o->oHomeY) {
                 // }
             } else if (o->os16102++ >= 5) {
+                cur_obj_play_sound_1(SOUND_ACTION_KEY_SWISH);
                 o->oObjF8 = spawn_object(o, MODEL_END_FIST, bhvEndFist);
                 o->oObjF8->oPosY = 6400.0f;
                 o->oAction = 2;
@@ -732,6 +740,9 @@ void controller_bubble_attack(void) {
 
                 o->oTimer = 0;
                 o->os16F8++;
+                if ((o->os16F8 & 1) == 0) {
+                    cur_obj_play_sound_1(SOUND_OBJ_WATER_BOMB_BOUNCING);
+                }
             }
         } else {
             if (o->oTimer > 100) {
@@ -1016,6 +1027,9 @@ void bhv_roof_hole_loop(void) {
                 }
                 obj = cur_obj_nearest_object_with_behavior(bhvToadFriend);
                 if (o->oFC == 2 || obj == NULL || obj->oF8 != 0) {
+                    if (o->oOpacity == 255) {
+                        cur_obj_play_sound_1(SOUND_OBJ2_BOWSER_TELEPORT);
+                    }
                     o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 9);
                 }
             } else {
@@ -1094,6 +1108,7 @@ void cage_held_loop(void) {
     cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
 
     if (o->oObj108->oDistanceToMario < 1800.0f) {
+        cur_obj_play_sound_1(SOUND_AIR_AMP_BUZZ);
         if (o->oObj100 == NULL) {
             o->oObj100 = spawn_object(o, MODEL_CAGE_BEAM, bhvBossCageBeam);
         }
@@ -1572,7 +1587,13 @@ void controller_act_run(void) {
             cur_obj_scale(o->header.gfx.scale[0]);
             o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, o->oAngleToMario, 0xA00);
             o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 5.0f, 1.0f);
+            if (o->header.gfx.animInfo.animFrame == 35) {
+                cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_ROAR);
+            }
         } else if (o->header.gfx.animInfo.animFrame <= 66) {
+                if (o->header.gfx.animInfo.animFrame == 50) {
+                    cur_obj_play_sound_2(SOUND_GENERAL_SWISH_AIR_2);
+                }
             o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, (s16)(o->oMoveAngleYaw + 0x8000), 0xA00);
             hitboxPos[1] = gMarioState->pos[1];
             hitboxPos[0] = o->oPosX + (sins(o->oFaceAngleYaw) * 350.0f);
@@ -1822,13 +1843,16 @@ void controller_act_death(void) {
             o->oFloatF4 *= 1.2f;// approach_f32_symmetric(o->oFloatF4, 0.7f, 0.001f);
             o->header.gfx.scale[1] += o->oFloatF4;
             // o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 6.0f, o->oFloatF4);
-            if (o->header.gfx.scale[1] >= 3.0f) {
+            if (o->header.gfx.scale[1] >= 4.0f) {
                 if (o->oTimer > 15) {
                     CL_explode_object(o, 1);
                     gComitCutsceneObject = spawn_object(o, MODEL_NICE_FACE, bhvNiceFace);
                 }
             } else {
-                o->oTimer = 0;
+                if (o->oTimer > 10) {
+                    o->oTimer = 0;
+                    cur_obj_play_sound_1(SOUND_OBJ_BOWSER_SPINNING);
+                }
             }
             // print_text_fmt_int(80, 80, "%d", (s32)(o->header.gfx.scale[1] * 100.0f), 1);
             break;
@@ -1891,6 +1915,11 @@ void bhv_the_controller_loop(void) {
             if (o->oTimer > 30 && cur_obj_nearest_object_with_behavior(bhvBossCage) == NULL && boss_attacks_finished())  {
                 if (o->os16104 >= 3) {
                     if (o->oTimer > 75) {
+                        kill_small_enemies();
+                        while ((obj = cur_obj_nearest_object_with_behavior(bhvEndBubble)) != NULL) {
+                            obj->activeFlags = 0;
+                        }
+
                         obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBossCage);
                         // vec3f_set(&obj->oPosX, 1081.0f, 8406.0f, -7477.0f);
                         obj->oFaceAngleYaw = obj->oMoveAngleYaw = 0x6C00;
@@ -1924,7 +1953,13 @@ void bhv_the_controller_loop(void) {
             if (o->header.gfx.animInfo.animFrame < 50) {
                 o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.02f);
                 cur_obj_scale(o->header.gfx.scale[0]);
+                if (o->header.gfx.animInfo.animFrame == 35) {
+                    cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_ROAR);
+                }
             } else if (o->header.gfx.animInfo.animFrame <= 66) {
+                if (o->header.gfx.animInfo.animFrame == 50) {
+                    cur_obj_play_sound_2(SOUND_GENERAL_SWISH_AIR_2);
+                }
                 hitboxPos[1] = gMarioState->pos[1];
                 hitboxPos[0] = o->oPosX + (sins(o->oMoveAngleYaw) * 350.0f);
                 hitboxPos[2] = o->oPosZ + (coss(o->oMoveAngleYaw) * 350.0f);
@@ -2026,6 +2061,8 @@ void bhv_nice_face_loop(void) {
                     spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
                     spawn_object(o, MODEL_TEARDROP, bhvTeardrop);
                     o->oObj100->oAction = 5;
+                    
+                    cur_obj_play_sound_2(SOUND_GENERAL_HEART_SPIN);
                 }
                 // o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oObj100->oPosZ - 25.0f, 7.0f);
                 // o->oPosY = approach_f32_symmetric(o->oPosY, o->oObj100->oPosY + 60.0f, 0.4f);
