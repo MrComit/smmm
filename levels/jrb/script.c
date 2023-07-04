@@ -156,7 +156,7 @@ const LevelScript level_jrb_entry[] = {
 		TERRAIN(jrb_area_1_collision),
 		ROOMS(jrb_area_1_collision_rooms),
 		MACRO_OBJECTS(jrb_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SPOOKY),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_OUTISDE),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -181,7 +181,7 @@ const LevelScript level_jrb_entry[] = {
 		TERRAIN(jrb_area_2_collision),
 		ROOMS(jrb_area_2_collision_rooms),
 		MACRO_OBJECTS(jrb_area_2_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_SPOOKY),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_OUTISDE),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

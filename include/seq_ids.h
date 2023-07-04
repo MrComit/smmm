@@ -14,12 +14,12 @@ enum SeqId {
     SEQ_MENU_TITLE_SCREEN,            // 0x02
     SEQ_LEVEL_GRASS,                  // 0x03
     SEQ_LEVEL_INSIDE_CASTLE,          // 0x04
-    SEQ_LEVEL_WATER,                  // 0x05
+    SEQ_OUTISDE,                  // 0x05
     SEQ_LEVEL_HOT,                    // 0x06
     SEQ_LEVEL_BOSS_KOOPA,             // 0x07
     SEQ_LEVEL_SNOW,                   // 0x08
     SEQ_LEVEL_SLIDE,                  // 0x09
-    SEQ_LEVEL_SPOOKY,                 // 0x0A
+    SEQ_FLOOR_2,                 // 0x0A
     SEQ_EVENT_PIRANHA_PLANT,          // 0x0B
     SEQ_LEVEL_UNDERGROUND,            // 0x0C
     SEQ_MENU_STAR_SELECT,             // 0x0D
@@ -51,6 +51,7 @@ enum SeqId {
     SEQ_GENERIC_BOSS,                 // 0x27
     SEQ_MUSIC_ROOM,                   // 0x28
     SEQ_BASEMENT,                     // 0x29
+    SEQ_FLOOR_2_OLD,                     // 0x2A
     SEQ_COUNT
 };
 

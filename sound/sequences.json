@@ -5,12 +5,12 @@
     "02_menu_title_screen": ["11"],
     "03_level_grass": ["22"],
     "04_level_inside_castle": ["0E"],
-    "05_level_water": ["13"],
+    "05_outside": ["27_manor_theme"],
     "06_level_hot": ["0F"],
     "07_level_boss_koopa": ["12"],
     "08_level_snow": ["0B"],
     "09_level_slide": ["0D"],
-    "0A_level_spooky": ["10", "21"],
+    "0A_floor_2_theme": ["27_manor_theme"],
     "0B_event_piranha_plant": ["14_piranha_music_box"],
     "0C_level_underground": ["15"],
     "0D_menu_star_select": ["16_course_start"],
@@ -41,5 +41,6 @@
     "26_prof_t_theme": ["27_manor_theme"],
     "27_generic_boss": ["28_boss"],
     "28_music_room": ["25"],
-    "29_basement": ["1A_basement"]
+    "29_basement": ["1A_basement"],
+    "2A_floor_2_theme": ["27_manor_theme"]
 }

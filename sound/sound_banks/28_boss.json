@@ -32,6 +32,18 @@
             [32700, 29430],
             "hang"
         ],
+        "envelopeTrumpet": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelopeFlute": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
         "envelopeCymbal": [
             [2, 32700],
             [1, 32700],
@@ -43,7 +55,7 @@
         "instBass": {
             "release_rate": 208,
             "envelope": "envelopeBass",
-            "sound": "05_acoustic_bass"
+            "sound": "1A_slap_bass"
         },
         "instHorns": {
             "release_rate": 208,
@@ -58,6 +70,16 @@
             "sound_lo": "3B_banjo_2",
             "sound": "3C_acoustic_guitar",
             "sound_hi": "3D"
+        },
+        "instTrumpet": {
+            "release_rate": 67,
+            "envelope": "envelopeTrumpet",
+            "sound": "17_trumpet"
+        },
+        "instFlute": {
+            "release_rate": 114,
+            "envelope": "envelopeFlute",
+            "sound": "34_alto_flute"
         },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelopePercussion", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
@@ -147,6 +169,8 @@
         "instHorns",
         "instGuitar",
         "instHiHat",
-        "instCymbal"
+        "instCymbal",
+        "instTrumpet",
+        "instFlute"
     ]
 }

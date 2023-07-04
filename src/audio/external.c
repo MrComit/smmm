@@ -170,18 +170,18 @@ u8 sSoundRequestCount = 0;
     (s16)(1 << (15 - cond1) | 1 << (15 - cond2) | 1 << (15 - cond3) | res), val1, val2, val3
 
 s16 sDynBbh[] = {
-    SEQ_LEVEL_SPOOKY, DYN1(MARIO_IS_IN_ROOM, BBH_OUTSIDE_ROOM, 6),
+    // SEQ_LEVEL_SPOOKY, DYN1(MARIO_IS_IN_ROOM, BBH_OUTSIDE_ROOM, 6),
     DYN1(MARIO_IS_IN_ROOM, BBH_NEAR_MERRY_GO_ROUND_ROOM, 6), 5,
 };
 s16 sDynDdd[] = {
-    SEQ_LEVEL_WATER,
+    // SEQ_LEVEL_WATER,
     DYN2(MARIO_X_LT, -800, MARIO_IS_IN_AREA, AREA_DDD_WHIRLPOOL & 0xf, 0),
     DYN3(MARIO_Y_GE, -2000, MARIO_X_LT, 470, MARIO_IS_IN_AREA, AREA_DDD_WHIRLPOOL & 0xf, 0),
     DYN2(MARIO_Y_GE, 100, MARIO_IS_IN_AREA, AREA_DDD_SUB & 0xf, 2),
     1,
 };
 s16 sDynJrb[] = {
-    SEQ_LEVEL_WATER,
+    // SEQ_LEVEL_WATER,
     DYN2(MARIO_Y_GE, 945, MARIO_X_LT, -5260, 0),
     DYN1(MARIO_IS_IN_AREA, AREA_JRB_SHIP & 0xf, 0),
     DYN1(MARIO_Y_GE, 1000, 0),
@@ -321,6 +321,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     50,  // SEQ_GENERIC_BOSS
     50,  // SEQ_MUSIC_ROOM
     50,  // SEQ_BASEMENT
+    50,  // SEQ_FLOOR_2
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
