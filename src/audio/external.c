@@ -286,11 +286,11 @@ u8 sBackgroundMusicDefaultVolume[] = {
     75,  // SEQ_LEVEL_GRASS
     70,  // SEQ_LEVEL_INSIDE_CASTLE
     75,  // SEQ_LEVEL_WATER
-    75,  // SEQ_LEVEL_HOT
+    50,  // SEQ_LEVEL_HOT
     75,  // SEQ_LEVEL_BOSS_KOOPA
     70,  // SEQ_LEVEL_SNOW
     65,  // SEQ_LEVEL_SLIDE
-    80,  // SEQ_LEVEL_SPOOKY
+    50,  // SEQ_LEVEL_SPOOKY
     65,  // SEQ_EVENT_PIRANHA_PLANT
     85,  // SEQ_LEVEL_UNDERGROUND
     75,  // SEQ_MENU_STAR_SELECT
@@ -2643,7 +2643,7 @@ void play_course_clear(void) {
  * Called from threads: thread5_game_loop
  */
 void play_peachs_jingle(void) {
-    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_PEACH_MESSAGE, 0);
+    // seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_PEACH_MESSAGE, 0);
     sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG | 0;
 #if defined(VERSION_EU) || defined(VERSION_SH)
     D_EU_80300558 = 2;
@@ -2660,6 +2660,16 @@ void play_peachs_jingle(void) {
  */
 void play_puzzle_jingle(void) {
     seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_EVENT_SOLVE_PUZZLE, 0);
+    sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG | 20;
+#if defined(VERSION_EU) || defined(VERSION_SH)
+    D_EU_80300558 = 2;
+#endif
+    begin_background_music_fade(50);
+}
+
+
+void play_boo_jingle(void) {
+    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_BOO_JINGLE, 0);
     sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG | 20;
 #if defined(VERSION_EU) || defined(VERSION_SH)
     D_EU_80300558 = 2;
@@ -2748,7 +2758,7 @@ void sound_reset(u8 presetId) {
     osWritebackDCacheAll();
     if (presetId != 7) {
         preload_sequence(SEQ_EVENT_SOLVE_PUZZLE, PRELOAD_BANKS | PRELOAD_SEQUENCE);
-        preload_sequence(SEQ_EVENT_PEACH_MESSAGE, PRELOAD_BANKS | PRELOAD_SEQUENCE);
+        // preload_sequence(SEQ_EVENT_PEACH_MESSAGE, PRELOAD_BANKS | PRELOAD_SEQUENCE);
         preload_sequence(SEQ_EVENT_CUTSCENE_STAR_SPAWN, PRELOAD_BANKS | PRELOAD_SEQUENCE);
     }
     seq_player_play_sequence(SEQ_PLAYER_SFX, SEQ_SOUND_PLAYER, 0);

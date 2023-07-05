@@ -133,7 +133,7 @@ void bhv_room_boo_loop(void) {
         o->oUnk1A8 = 2;
         o->oOpacity = 255;
         if (o->oBehParams2ndByte)
-            play_puzzle_jingle();
+            play_boo_jingle();
     } else {
         bhv_boo_loop();
     }
@@ -183,7 +183,7 @@ void bhv_boogoo_cage_loop(void) {
             o->oUnk1A8 = 2;
             // o->oOpacity = 255;
             o->oObjFC->header.gfx.scale[1] = 1.0f;
-            play_puzzle_jingle();
+            play_boo_jingle();
             obj = cur_obj_nearest_object_with_behavior(bhvBoogooObject);
             if (obj != NULL && obj->oRoom == o->oRoom) {
                 obj->oFC = 1;
