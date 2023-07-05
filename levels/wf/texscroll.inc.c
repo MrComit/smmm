@@ -1,15 +1,14 @@
 void scroll_sts_mat_wf_dl_SolidQuicksand_001_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_wf_dl_SolidQuicksand_001_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
 void scroll_wf_dl_Hallway_007_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 74;
 	int width = 64 * 0x20;
-	int height = 32 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
@@ -30,7 +29,6 @@ void scroll_wf_dl_Hallway_007_mesh_layer_5_vtx_0() {
 void scroll_wf_dl_Steam_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 24;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;

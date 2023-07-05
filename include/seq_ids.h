@@ -14,8 +14,8 @@ enum SeqId {
     SEQ_MENU_TITLE_SCREEN,            // 0x02
     SEQ_LEVEL_GRASS,                  // 0x03
     SEQ_LEVEL_INSIDE_CASTLE,          // 0x04
-    SEQ_OUTISDE,                  // 0x05
-    SEQ_LEVEL_HOT,                    // 0x06
+    SEQ_OUTSIDE,                  // 0x05
+    SEQ_FLOOR_3,                    // 0x06
     SEQ_LEVEL_BOSS_KOOPA,             // 0x07
     SEQ_LEVEL_SNOW,                   // 0x08
     SEQ_LEVEL_SLIDE,                  // 0x09
@@ -52,6 +52,7 @@ enum SeqId {
     SEQ_MUSIC_ROOM,                   // 0x28
     SEQ_BASEMENT,                     // 0x29
     SEQ_FLOOR_2_OLD,                     // 0x2A
+    SEQ_FLOOR_3_OLD,                     // 0x2B
     SEQ_COUNT
 };
 

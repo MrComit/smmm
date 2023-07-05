@@ -1090,7 +1090,6 @@
 "sound/sequences/us/02_menu_title_screen.m64": [8254,{"us":[8077440]}],
 "sound/sequences/us/03_level_grass.m64": [5122,{"us":[8085696]}],
 "sound/sequences/us/04_level_inside_castle.m64": [2494,{"us":[8090832]}],
-"sound/sequences/us/06_level_hot.m64": [2451,{"us":[8098112]}],
 "sound/sequences/us/07_level_boss_koopa.m64": [3418,{"us":[8100576]}],
 "sound/sequences/us/08_level_snow.m64": [8143,{"us":[8104000]}],
 "sound/sequences/us/09_level_slide.m64": [7432,{"us":[8112144]}],

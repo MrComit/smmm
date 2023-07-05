@@ -47,7 +47,7 @@ static struct AllocOnlyPool *sLevelPool = NULL;
 static u16 sDelayFrames = 0;
 static u16 sDelayFrames2 = 0;
 
-static s16 sCurrAreaIndex = -1;
+s16 sCurrAreaIndex = -1;
 
 static uintptr_t *sStackTop = sStack;
 static uintptr_t *sStackBase = NULL;
@@ -719,10 +719,9 @@ static void level_cmd_show_dialog(void) {
 
 static void level_cmd_set_music(void) {
     if (sCurrAreaIndex != -1) {
-        if (gCurrLevelNum != LEVEL_BOB || save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) {
-            gAreas[sCurrAreaIndex].musicParam = CMD_GET(s16, 2);
-            gAreas[sCurrAreaIndex].musicParam2 = CMD_GET(s16, 4);
-        }
+        gAreas[sCurrAreaIndex].musicParam = CMD_GET(s16, 2);
+        gAreas[sCurrAreaIndex].musicParam2 = CMD_GET(s16, 4);
+
     }
     sCurrentCmd = CMD_NEXT;
 }

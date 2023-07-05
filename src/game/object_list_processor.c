@@ -654,6 +654,7 @@ extern s32 gStarPieceReward;
 extern s32 gMindTitleTimer;
 extern s16 s8DirModeBaseYaw;
 
+extern s32 gL6MusicCheck;
 // s32 gEnterBoss = 0;
 
 /**
@@ -718,6 +719,12 @@ void bhv_mario_update(void) {
     }
 #endif
 
+    if (gL6MusicCheck == TRUE && gCurrLevelNum == LEVEL_HMC) {
+        if (gMarioCurrentRoom == 2) {
+            gL6MusicCheck = FALSE;
+            play_music(0, SEQUENCE_ARGS(4, SEQ_FLOOR_3), 0);
+        }
+    }
 
     if (gStarPieceReward >= 0) {
         if (gStarPieceReward == 120) {

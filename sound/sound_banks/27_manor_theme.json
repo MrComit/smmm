@@ -86,6 +86,24 @@
             [523, 0],
             "hang"
         ],
+        "envelopeCymbal": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelopeTrumpet": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelopeGuitar": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
         "envelopePercussion": [
             [2, 32700],
             [1, 32700],
@@ -152,6 +170,29 @@
             "envelope": "envelopeBanjo",
             "sound_lo": "00",
             "sound": "01_banjo_1"
+        },
+        "instCymbal": {
+            "release_rate": 10,
+            "normal_range_lo": 28,
+            "normal_range_hi": 28,
+            "envelope": "envelopeCymbal",
+            "sound_lo": "10_cymbal_bell",
+            "sound": "11_splash_cymbal",
+            "sound_hi": "10_cymbal_bell"
+        },
+        "instTrumpet": {
+            "release_rate": 67,
+            "envelope": "envelopeTrumpet",
+            "sound": "17_trumpet"
+        },
+        "instGuitar": {
+            "release_rate": 19,
+            "normal_range_lo": 29,
+            "normal_range_hi": 63,
+            "envelope": "envelopeGuitar",
+            "sound_lo": "3B_banjo_2",
+            "sound": "3C_acoustic_guitar",
+            "sound_hi": "3D"
         },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelopePercussion", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
@@ -233,6 +274,9 @@
         "instMusicBox",
         "instWind",
         "instHiHats",
-        "instBanjo"
+        "instBanjo",
+        "instCymbal",
+        "instTrumpet",
+        "instGuitar"
     ]
 }

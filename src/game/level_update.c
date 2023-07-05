@@ -482,7 +482,7 @@ void reset_objects_in_room(s32 room, struct SpawnInfo *spawnInfo) {
 }
 
 
-
+s32 gL6MusicCheck = FALSE;
 extern s16 s8DirModeBaseYaw;
 
 void init_mario_after_warp(void) {
@@ -556,7 +556,28 @@ void init_mario_after_warp(void) {
     }
 
     if (gCurrDemoInput == NULL) {
-        set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
+        switch (gCurrLevelNum) {
+            case LEVEL_BOB:
+                if (save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) {
+                    set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
+                } else {
+                    set_background_music(0, 0, 0);
+                }
+                break;
+            case LEVEL_HMC:
+                if (gCurrAreaIndex != 1 || save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6) {
+                    set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
+                } else {
+                    set_background_music(0, 0, 0);
+                    if (gCurrAreaIndex == 1) {
+                        gL6MusicCheck = TRUE;
+                    }
+                }
+                break;
+            default:
+                set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
+                break;
+        }
 
         if (gMarioState->flags & MARIO_METAL_CAP) {
             play_cap_music(SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP));
