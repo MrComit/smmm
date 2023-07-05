@@ -20,7 +20,7 @@ enum SeqId {
     SEQ_LEVEL_SNOW,                   // 0x08
     SEQ_LEVEL_SLIDE,                  // 0x09
     SEQ_FLOOR_2,                 // 0x0A
-    SEQ_EVENT_PIRANHA_PLANT,          // 0x0B
+    SEQ_MAIN_MENU,          // 0x0B
     SEQ_LEVEL_UNDERGROUND,            // 0x0C
     SEQ_MENU_STAR_SELECT,             // 0x0D
     SEQ_EVENT_POWERUP,                // 0x0E

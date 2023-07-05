@@ -2527,7 +2527,7 @@ void func_80320ED8(void) {
     begin_background_music_fade(50);
 
     if (sBackgroundMusicTargetVolume != TARGET_VOLUME_UNSET
-        && (D_80332120 == SEQ_EVENT_MERRY_GO_ROUND || D_80332120 == SEQ_EVENT_PIRANHA_PLANT)) {
+        && (D_80332120 == SEQ_EVENT_MERRY_GO_ROUND/* || D_80332120 == SEQ_EVENT_PIRANHA_PLANT*/)) {
         seq_player_play_sequence(SEQ_PLAYER_ENV, D_80332120, 1);
         if (D_80332124 != 0xff) {
             seq_player_fade_to_target_volume(SEQ_PLAYER_ENV, 1, D_80332124);

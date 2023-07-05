@@ -1551,7 +1551,7 @@ s32 init_level(void) {
         if (gCurrDemoInput == NULL) {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
         } else {
-            play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
+            play_music(0, SEQUENCE_ARGS(4, SEQ_MAIN_MENU), 0);
         }
     }
     if (gCurrDemoInput == NULL) {

@@ -93,7 +93,7 @@ void piranha_plant_act_sleeping(void) {
             o->oAction = PIRANHA_PLANT_ACT_WOKEN_UP;
         }
     } else if (o->oDistanceToMario < 1000.0f) {
-        play_secondary_music(SEQ_EVENT_PIRANHA_PLANT, 0, 255, 1000);
+        // play_secondary_music(SEQ_EVENT_PIRANHA_PLANT, 0, 255, 1000);
         o->oPiranhaPlantSleepMusicState = PIRANHA_PLANT_SLEEP_MUSIC_PLAYING;
     } else if (o->oPiranhaPlantSleepMusicState == PIRANHA_PLANT_SLEEP_MUSIC_PLAYING) {
         o->oPiranhaPlantSleepMusicState++;
