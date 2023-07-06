@@ -51,7 +51,7 @@ enum SeqId {
     SEQ_GENERIC_BOSS,                 // 0x27
     SEQ_MUSIC_ROOM,                   // 0x28
     SEQ_BASEMENT,                     // 0x29
-    SEQ_FLOOR_2_OLD,
+    SEQ_END_JINGLE,                   // 0x2A
     SEQ_TEST2,
     SEQ_COUNT
 };

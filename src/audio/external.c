@@ -286,11 +286,11 @@ u8 sBackgroundMusicDefaultVolume[] = {
     75,  // SEQ_LEVEL_GRASS
     70,  // SEQ_LEVEL_INSIDE_CASTLE
     75,  // SEQ_LEVEL_WATER
-    50,  // SEQ_LEVEL_HOT
+    100,  // SEQ_LEVEL_HOT // FLOOR 3
     75,  // SEQ_LEVEL_BOSS_KOOPA
     70,  // SEQ_LEVEL_SNOW
     65,  // SEQ_LEVEL_SLIDE
-    50,  // SEQ_LEVEL_SPOOKY
+    100,  // SEQ_LEVEL_SPOOKY // FLOOR_2
     65,  // SEQ_EVENT_PIRANHA_PLANT
     85,  // SEQ_LEVEL_UNDERGROUND
     75,  // SEQ_MENU_STAR_SELECT
@@ -316,13 +316,13 @@ u8 sBackgroundMusicDefaultVolume[] = {
     65,  // SEQ_MENU_FILE_SELECT
     0,   // SEQ_SMALL_KEY
     0,   // SEQ_BIG_KEY
-    50,  // SEQ_MANOR
+    100,  // SEQ_MANOR
     50,  // SEQ_PROF_T
-    50,  // SEQ_GENERIC_BOSS
-    50,  // SEQ_MUSIC_ROOM
-    50,  // SEQ_BASEMENT
-    50, 
-    50,
+    100,  // SEQ_GENERIC_BOSS
+    100,  // SEQ_MUSIC_ROOM
+    100,  // SEQ_BASEMENT
+    100, 
+    100,
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
@@ -2681,6 +2681,17 @@ void play_boo_jingle(void) {
 #endif
     begin_background_music_fade(50);
 }
+
+
+void play_end_jingle(void) {
+    seq_player_play_sequence(SEQ_PLAYER_ENV, SEQ_END_JINGLE, 0);
+    sBackgroundMusicMaxTargetVolume = TARGET_VOLUME_IS_PRESENT_FLAG | 20;
+#if defined(VERSION_EU) || defined(VERSION_SH)
+    D_EU_80300558 = 2;
+#endif
+    begin_background_music_fade(50);
+}
+
 
 /**
  * Called from threads: thread5_game_loop

@@ -2015,6 +2015,11 @@ void bhv_nice_face_loop(void) {
                 if (o->oPosY == 7406.0f + 140.0f) {
                     o->oAction = 1;
                 }
+
+                if (o->oTimer == 66) {
+                    play_end_jingle();
+                }
+
             }
             break;
         case 1:
@@ -2022,7 +2027,7 @@ void bhv_nice_face_loop(void) {
             o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 500.0f, 50.0f);
             gCamera->comitCutscene = 29;
             gComitCutsceneObject = o;
-            gComitCutsceneTimer = 65;
+            gComitCutsceneTimer = 200;
 
             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0xC000, 0x400);
             o->oPosY = approach_f32_symmetric(o->oPosY, 7406.0f + 10.0f, 8.0f);
@@ -2039,12 +2044,12 @@ void bhv_nice_face_loop(void) {
             }
             break;
         case 2:
-            if (o->oTimer > 60) {
+            if (o->oTimer > 65) {
                 gCamera->comitCutscene = 30;
                 gComitCutsceneObject = o->oObj100;
                 gComitCutsceneTimer = 180;
 
-                if (o->oTimer == 61) {
+                if (o->oTimer == 66) {
                     o->oPosY += 200.0f;
                     o->oFaceAnglePitch = 0xF000;
                     o->oPosX = o->oObj100->oPosX;

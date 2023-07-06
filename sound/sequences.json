@@ -42,6 +42,6 @@
     "27_generic_boss": ["28_boss"],
     "28_music_room": ["25"],
     "29_basement": ["1A_basement"],
-    "2A_floor_2_theme": ["27_manor_theme"],
+    "2A_ending_jingle": ["26_key"],
     "2B_floor_2_theme": ["27_manor_theme"]
 }
