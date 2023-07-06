@@ -57,6 +57,9 @@ void sequence_channel_process_sound(struct SequenceChannel *seqChannel, s32 reca
     seqChannel->changes.as_u8 = 0;
 }
 #else
+
+extern s32 gDisableMusic;
+
 static void sequence_channel_process_sound(struct SequenceChannel *seqChannel) {
     f32 channelVolume;
     f32 panLayerWeight;
@@ -66,6 +69,13 @@ static void sequence_channel_process_sound(struct SequenceChannel *seqChannel) {
     channelVolume = seqChannel->volume * seqChannel->volumeScale * seqChannel->seqPlayer->fadeVolume;
     if (seqChannel->seqPlayer->muted && (seqChannel->muteBehavior & MUTE_BEHAVIOR_SOFTEN) != 0) {
         channelVolume *= seqChannel->seqPlayer->muteVolumeScale;
+    }
+
+    if (gDisableMusic) {
+        if (seqChannel->seqPlayer == &gSequencePlayers[0]
+            || seqChannel->seqPlayer == &gSequencePlayers[1]) {
+            channelVolume = 0;
+        }
     }
 
     panFromChannel = seqChannel->pan * seqChannel->panChannelWeight;

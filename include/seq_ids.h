@@ -38,8 +38,8 @@ enum SeqId {
     SEQ_EVENT_CUTSCENE_CREDITS,       // 0x1A
     SEQ_EVENT_SOLVE_PUZZLE,           // 0x1B
     SEQ_EVENT_TOAD_MESSAGE,           // 0x1C
-    SEQ_BOO_JINGLE,          // 0x1D
-    SEQ_EVENT_CUTSCENE_INTRO,         // 0x1E
+    SEQ_EVENT_PEACH_MESSAGE,          // 0x1D
+    SEQ_BOO_JINGLE,         // 0x1E
     SEQ_EVENT_CUTSCENE_VICTORY,       // 0x1F
     SEQ_EVENT_CUTSCENE_ENDING,        // 0x20
     SEQ_MENU_FILE_SELECT,             // 0x21
@@ -51,8 +51,8 @@ enum SeqId {
     SEQ_GENERIC_BOSS,                 // 0x27
     SEQ_MUSIC_ROOM,                   // 0x28
     SEQ_BASEMENT,                     // 0x29
-    SEQ_FLOOR_2_OLD,                     // 0x2A
-    SEQ_FLOOR_3_OLD,                     // 0x2B
+    SEQ_FLOOR_2_OLD,
+    SEQ_TEST2,
     SEQ_COUNT
 };
 

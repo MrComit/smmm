@@ -55,7 +55,7 @@ struct PoolSplit sTemporaryCommonPoolSplit;
 #ifdef VERSION_SH
 u8 gUnkLoadStatus[0x40];
 #endif
-u8 gBankLoadStatus[0x40];
+u8 gBankLoadStatus[0x100];
 u8 gSeqLoadStatus[0x100];
 
 #if defined(VERSION_EU) || defined(VERSION_SH)

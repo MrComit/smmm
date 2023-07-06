@@ -321,8 +321,8 @@ u8 sBackgroundMusicDefaultVolume[] = {
     50,  // SEQ_GENERIC_BOSS
     50,  // SEQ_MUSIC_ROOM
     50,  // SEQ_BASEMENT
-    50,  // SEQ_FLOOR_2
-    50,  // SEQ_FLOOR_3
+    50, 
+    50,
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
@@ -1338,6 +1338,9 @@ void audio_signal_game_loop_tick(void) {
     noop_8031EEC8();
 }
 
+
+s32 gDisableMusic;
+
 /**
  * Called from threads: thread4_sound, thread5_game_loop (EU and SH only)
  */
@@ -1722,9 +1725,11 @@ static void update_game_sound(void) {
     }
 
     if (save_file_get_options() & SAVE_OPTION_MUSIC) {
-        gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = 0.0f;
+        // gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = 0.0f;
+        gDisableMusic = 1;
     } else {
-        gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = gSequencePlayers[SEQ_PLAYER_LEVEL].volume;
+        gDisableMusic = 0;
+        // gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = gSequencePlayers[SEQ_PLAYER_LEVEL].volume;
     }
 }
 
@@ -2758,7 +2763,7 @@ void sound_reset(u8 presetId) {
     osWritebackDCacheAll();
     if (presetId != 7) {
         preload_sequence(SEQ_EVENT_SOLVE_PUZZLE, PRELOAD_BANKS | PRELOAD_SEQUENCE);
-        // preload_sequence(SEQ_EVENT_PEACH_MESSAGE, PRELOAD_BANKS | PRELOAD_SEQUENCE);
+        preload_sequence(SEQ_EVENT_PEACH_MESSAGE, PRELOAD_BANKS | PRELOAD_SEQUENCE);
         preload_sequence(SEQ_EVENT_CUTSCENE_STAR_SPAWN, PRELOAD_BANKS | PRELOAD_SEQUENCE);
     }
     seq_player_play_sequence(SEQ_PLAYER_SFX, SEQ_SOUND_PLAYER, 0);

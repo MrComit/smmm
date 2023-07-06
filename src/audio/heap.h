@@ -98,7 +98,7 @@ extern struct Unk1Pool gUnkPool1;
 extern struct UnkPool gUnkPool2;
 extern struct UnkPool gUnkPool3;
 #endif
-extern u8 gBankLoadStatus[64];
+extern u8 gBankLoadStatus[64*4];
 extern u8 gSeqLoadStatus[256];
 extern volatile u8 gAudioResetStatus;
 extern u8 gAudioResetPresetIdToLoad;

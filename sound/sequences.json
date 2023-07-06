@@ -29,8 +29,8 @@
     "1A_cutscene_credits": ["25"],
     "1B_event_solve_puzzle": ["26_key"],
     "1C_event_toad_message": ["20"],
-    "1D_boo_jingle": ["26_key"],
-    "1E_cutscene_intro": ["1B_main_menu"],
+    "1D_event_peach_message": ["1E"],
+    "1E_boo_jingle": ["26_key"],
     "1F_cutscene_victory": ["1A_basement"],
     "20_cutscene_ending": ["23"],
     "21_menu_file_select": ["24"],
@@ -43,5 +43,5 @@
     "28_music_room": ["25"],
     "29_basement": ["1A_basement"],
     "2A_floor_2_theme": ["27_manor_theme"],
-    "2B_floor_3_theme": ["27_manor_theme"]
+    "2B_floor_2_theme": ["27_manor_theme"]
 }
