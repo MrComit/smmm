@@ -1731,6 +1731,7 @@ static void update_game_sound(void) {
         gDisableMusic = 0;
         // gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = gSequencePlayers[SEQ_PLAYER_LEVEL].volume;
     }
+        // gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = 127.0f;
 }
 
 /**

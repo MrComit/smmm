@@ -74,6 +74,18 @@
             [127, 0],
             "hang"
         ],
+        "envelopeStrings": [
+            [6, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelopeFiddle": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
         "envelope12": [
             [2, 32700],
             [1, 32700],
@@ -125,6 +137,20 @@
             "release_rate": 208,
             "envelope": "envelope7",
             "sound": "1C"
+        },
+        "instStrings": {
+            "release_rate": 15,
+            "normal_range_lo": 27,
+            "normal_range_hi": 46,
+            "envelope": "envelopeStrings",
+            "sound_lo": "23_strings_1",
+            "sound": "24_strings_2",
+            "sound_hi": "25_strings_3"
+        },
+        "instFiddle": {
+            "release_rate": 180,
+            "envelope": "envelopeFiddle",
+            "sound": "02"
         },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelope8", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
@@ -239,6 +265,8 @@
         "inst8",
         "inst9",
         "inst10",
-        "inst11"
+        "inst11",
+        "instStrings",
+        "instFiddle"
     ]
 }

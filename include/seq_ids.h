@@ -52,7 +52,7 @@ enum SeqId {
     SEQ_MUSIC_ROOM,                   // 0x28
     SEQ_BASEMENT,                     // 0x29
     SEQ_END_JINGLE,                   // 0x2A
-    SEQ_TEST2,
+    SEQ_GALLERY,
     SEQ_COUNT
 };
 

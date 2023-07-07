@@ -693,6 +693,7 @@ void bhv_gallery_handler_loop(void) {
         case 0:
             if (m->action == ACT_IN_CANNON && m->actionState == 2) {
                 o->oAction = 1;
+                play_music(0, SEQUENCE_ARGS(4, SEQ_GALLERY), 0);
             }
             if (m->pos[2] < -8150.0f) {
                 m->pos[2] = -8150.0f;
@@ -704,13 +705,13 @@ void bhv_gallery_handler_loop(void) {
             o->os16F4--;
             if (o->os16F4 > 10*30) {
                 if (o->os16F4 % 30 == 0) {
-                    play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+                    // play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
                 }
                 o->os16F6 = 209;
                 o->os16F8 = 20;
             } else {
                 if (o->os16F4 % 30 == 0 || o->os16F4 % 30 == 15) {
-                    play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+                    // play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
                 }
                 o->os16FA += 0x1000;
                 o->os16F6 = 209 + (sins(o->os16FA) * 2);
@@ -722,6 +723,7 @@ void bhv_gallery_handler_loop(void) {
             //print_text_fmt_int(20, 215, "GOAL %d", MINIGAME_GOAL, 0);
             if (o->os16F4 <= 0) {
                 o->oAction = 2;
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_GALLERY));
             }
             if (m->health < 0x800) {
                 m->health = 0x800;
