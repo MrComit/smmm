@@ -321,8 +321,9 @@ u8 sBackgroundMusicDefaultVolume[] = {
     100,  // SEQ_GENERIC_BOSS
     100,  // SEQ_MUSIC_ROOM
     100,  // SEQ_BASEMENT
-    100, 
-    100,
+    100, // SEQ_END_JINGLE
+    100, // SEQ_GALLERY
+    100, // SEQ_BEDROOM_BOSS
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
@@ -1731,13 +1732,14 @@ static void update_game_sound(void) {
         gDisableMusic = 0;
         // gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = gSequencePlayers[SEQ_PLAYER_LEVEL].volume;
     }
+        // gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = gSequencePlayers[SEQ_PLAYER_LEVEL].volume;
         // gSequencePlayers[SEQ_PLAYER_LEVEL].fadeVolume = 127.0f;
 }
 
 /**
  * Called from threads: thread4_sound, thread5_game_loop
  */
-static void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2) {
+void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2) {
     u8 targetVolume;
     u8 i;
 

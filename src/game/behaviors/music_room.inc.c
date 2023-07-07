@@ -180,7 +180,7 @@ void bhv_music_shyguy_loop(void) {
                 o->oObjF4->oFaceAngleYaw = 0;
                 vec3f_set(&o->oObjF4->oPosX, 12795.0f, 0.0f, 14423.0f);
                 o->oAction = 1;
-                seq_player_unlower_volume(0, 60);
+                // seq_player_unlower_volume(0, 60);
                 play_music(0, SEQUENCE_ARGS(4, SEQ_MUSIC_ROOM), 0);
                 // stop_background_music(SEQUENCE_ARGS(4, SEQ_LEVEL_GRASS));
             }
@@ -191,6 +191,7 @@ void bhv_music_shyguy_loop(void) {
                 o->oObjF4->oAction = 1;
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 15);
                 if (o->oOpacity == 255) {
+                    o->oFaceAnglePitch = 0;
                     o->activeFlags = 0;
                     o->oObjF8 = spawn_object(o, MODEL_SHYGUY, bhvShyguy);
                     o->oObjF8->os16110 = 1;

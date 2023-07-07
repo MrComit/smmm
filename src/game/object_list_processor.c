@@ -655,6 +655,7 @@ extern s32 gMindTitleTimer;
 extern s16 s8DirModeBaseYaw;
 
 extern s32 gL6MusicCheck;
+void seq_player_play_sequence(u8 player, u8 seqId, u16 arg2);
 // s32 gEnterBoss = 0;
 
 /**
@@ -719,10 +720,16 @@ void bhv_mario_update(void) {
     }
 #endif
 
-    if (gL6MusicCheck == TRUE && gCurrLevelNum == LEVEL_HMC) {
-        if (gMarioCurrentRoom == 2) {
+    if (gCurrLevelNum == LEVEL_HMC) {
+        if (gL6MusicCheck == TRUE && gMarioCurrentRoom == 2) {
             gL6MusicCheck = FALSE;
-            play_music(0, SEQUENCE_ARGS(4, SEQ_FLOOR_3), 0);
+            // play_music(0, SEQUENCE_ARGS(4, SEQ_FLOOR_3), 0);
+            seq_player_play_sequence(0, SEQ_FLOOR_3, 0);
+        }
+
+        if (get_current_background_music() == SEQUENCE_ARGS(4, SEQ_MUSIC_ROOM) && gMarioCurrentRoom != 4) {
+            stop_background_music(SEQUENCE_ARGS(4, SEQ_MUSIC_ROOM));
+            seq_player_play_sequence(0, SEQ_FLOOR_3, 0);
         }
     }
 

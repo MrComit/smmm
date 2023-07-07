@@ -353,6 +353,7 @@ void bhv_master_pressure_plate_loop(void) {
             if (gMarioObject->platform != o) {
                 o->oAction = 2;
                 o->oBehParams2ndByte++;
+                // handle_shadow_boss_music(o->oBehParams2ndByte);
                 if (o->oBehParams2ndByte == 5) {
                     //o->activeFlags = 0;
                     break;
@@ -456,6 +457,53 @@ void handle_shadow_boss_phases(s16 phase) {
     }
 }
 
+
+void handle_shadow_boss_music(s16 phase) {
+    switch (phase) {
+        case 0:
+            // fade_channel_volume_scale(0, 0, 127, 1);
+            // fade_channel_volume_scale(0, 1, 127, 1);
+            // fade_channel_volume_scale(0, 8, 127, 1);
+            // fade_channel_volume_scale(0, 10, 127, 1);
+
+            fade_channel_volume_scale(0, 2, 0, 1);
+            fade_channel_volume_scale(0, 3, 0, 1);
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 13, 0, 1);
+            fade_channel_volume_scale(0, 5, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            fade_channel_volume_scale(0, 7, 0, 1);
+            fade_channel_volume_scale(0, 11, 0, 1);
+            fade_channel_volume_scale(0, 12, 0, 1);
+            break;
+        case 1:
+            fade_channel_volume_scale(0, 3, 127, 1);
+            // fade_channel_volume_scale(0, 2, 127, 1);
+            break;
+        case 2:
+            fade_channel_volume_scale(0, 4, 127, 1);
+            fade_channel_volume_scale(0, 13, 127, 1);
+            // fade_channel_volume_scale(0, 3, 127, 1);
+            break;
+        case 3:
+            // fade_channel_volume_scale(0, 4, 127, 1);
+            // fade_channel_volume_scale(0, 13, 127, 1);
+            fade_channel_volume_scale(0, 5, 127, 1);
+            break;
+        case 4:
+            fade_channel_volume_scale(0, 6, 127, 1);
+            fade_channel_volume_scale(0, 7, 127, 1);
+            fade_channel_volume_scale(0, 11, 127, 1);
+            fade_channel_volume_scale(0, 12, 127, 1);
+
+            fade_channel_volume_scale(0, 8, 0, 1);
+            fade_channel_volume_scale(0, 10, 0, 1);
+            break;
+    }
+}
+
+
+
 u16 sShadowBossColors[] = {60, 100, 140, 180};
 
 extern s32 gBossPrecoins;
@@ -483,6 +531,9 @@ void bhv_shadow_boss_init(void) {
 
 void bhv_shadow_boss_loop(void) {
     struct Object *obj;
+    if (o->oObj100 != NULL && o->oAction != 0) {
+        handle_shadow_boss_music(o->oObj100->oBehParams2ndByte);
+    }
     if (gMarioCurrentRoom == o->oRoom) {
         gHudDisplay.flags |=  HUD_DISPLAY_FLAG_MULTIPLIER;
     }
@@ -492,6 +543,10 @@ void bhv_shadow_boss_loop(void) {
                 o->oAction = 1;
                 gBossPrecoins = gMarioState->numCoins;
                 o->oForwardVel = 8.0f;
+                // seq_player_unlower_volume(0, 60);
+                // play_music(0, SEQUENCE_ARGS(4, SEQ_BEDROOM_BOSS), 0);
+                seq_player_play_sequence(0, SEQ_BEDROOM_BOSS, 0);
+                // handle_shadow_boss_music(0);
             }
             break;
         case 1:
@@ -574,6 +629,8 @@ void bhv_shadow_boss_loop(void) {
                 obj->oBehParams2ndByte = 0xA;
                 obj->oBehParams = 0x040A0700;
                 gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_MULTIPLIER;
+
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_BEDROOM_BOSS));
             }
             break;
     }
