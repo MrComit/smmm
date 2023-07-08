@@ -44,5 +44,6 @@
     "29_basement": ["1A_basement"],
     "2A_ending_jingle": ["26_key"],
     "2B_shooting_gallery": ["11"],
-    "2C_bedroom_boss": ["28_bedroom_boss"]
+    "2C_bedroom_boss": ["28_bedroom_boss"],
+    "2D_credits": ["28_bedroom_boss"]
 }

@@ -543,9 +543,9 @@ void bhv_shadow_boss_loop(void) {
                 o->oAction = 1;
                 gBossPrecoins = gMarioState->numCoins;
                 o->oForwardVel = 8.0f;
-                // seq_player_unlower_volume(0, 60);
-                // play_music(0, SEQUENCE_ARGS(4, SEQ_BEDROOM_BOSS), 0);
-                seq_player_play_sequence(0, SEQ_BEDROOM_BOSS, 0);
+                seq_player_unlower_volume(0, 60);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_BEDROOM_BOSS), 0);
+                // seq_player_play_sequence(0, SEQ_BEDROOM_BOSS, 0);
                 // handle_shadow_boss_music(0);
             }
             break;

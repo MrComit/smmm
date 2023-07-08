@@ -1779,10 +1779,10 @@ void controller_act_intro(void) {
                     // obj->oFaceAngleYaw = gMarioState->faceAngle[1];
                 }
 
-                // o->oAction = CONTROLLER_ACT_DEATH;
-                // o->oOpacity = 0;
-                // o->oFloatF4 = 0.0f;
-                // vec3f_set(&o->oPosX, 1081.0f, 8256.0f, -7477.0f);
+                o->oAction = CONTROLLER_ACT_DEATH;
+                o->oOpacity = 0;
+                o->oFloatF4 = 0.0f;
+                vec3f_set(&o->oPosX, 1081.0f, 8256.0f, -7477.0f);
                 set_mario_npc_dialog(0);
             }
             break;
@@ -2108,7 +2108,8 @@ void bhv_teardrop_loop(void) {
             o->oFloatF4 += 0.1f;
             o->oPosY -= o->oFloatF4;
             if (o->oPosY < 7400.0f) {
-                o->activeFlags = 0;
+                // o->activeFlags = 0;
+                o->oAction = 2;
                 gCamera->comitCutscene = 31;
                 obj = cur_obj_nearest_object_with_behavior(bhvToadFriend);
                 if (obj != NULL) {
@@ -2119,6 +2120,13 @@ void bhv_teardrop_loop(void) {
             }
                 // spawn_particle(sParticleTypes[4].activeParticleFlag, sParticleTypes[4].model,
                 //                 sParticleTypes[4].behavior);
+            break;
+        case 2:
+            if (o->oTimer > 20) {
+                o->activeFlags = 0;
+                seq_player_unlower_volume(0, 60);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_CREDITS), 0);
+            }
             break;
     }
 }

@@ -54,6 +54,7 @@ enum SeqId {
     SEQ_END_JINGLE,                   // 0x2A
     SEQ_GALLERY,                      // 0x2B
     SEQ_BEDROOM_BOSS,                 // 0x2C
+    SEQ_CREDITS,                 // 0x2D
     SEQ_COUNT
 };
 

@@ -20,9 +20,9 @@
             [32700, 29430],
             "hang"
         ],
-        "envelopeBrightPiano": [
+        "envelopeHarpsichord": [
             [2, 32700],
-            [205, 0],
+            [202, 0],
             [1, 0],
             "hang"
         ],
@@ -50,6 +50,18 @@
             [32700, 29430],
             "hang"
         ],
+        "envelopeGuitar": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelopeVoice": [
+            [2, 32700],
+            [205, 19818],
+            [535, 0],
+            "hang"
+        ],
         "envelopePercussion": [
             [2, 32700],
             [1, 32700],
@@ -73,10 +85,10 @@
             "envelope": "envelopeWhistle",
             "sound": "03_human_whistle"
         },
-        "instBrightPiano": {
-            "release_rate": 53,
-            "envelope": "envelopeBrightPiano",
-            "sound": "04_bright_piano"
+        "instHarpsichord": {
+            "release_rate": 255,
+            "envelope": "envelopeHarpsichord",
+            "sound": "27_harpsichord"
         },
         "instMusicBox": {
             "release_rate": 10,
@@ -103,6 +115,20 @@
             "sound_lo": "10_cymbal_bell",
             "sound": "11_splash_cymbal",
             "sound_hi": "10_cymbal_bell"
+        },
+        "instGuitar": {
+            "release_rate": 19,
+            "normal_range_lo": 29,
+            "normal_range_hi": 63,
+            "envelope": "envelopeGuitar",
+            "sound_lo": "3B_banjo_2",
+            "sound": "3C_acoustic_guitar",
+            "sound_hi": "3D"
+        },
+        "instVoice": {
+            "release_rate": 128,
+            "envelope": "envelopeWhistle",
+            "sound": "1B_organ_2"
         },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelopePercussion", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
@@ -177,10 +203,12 @@
         "instBass",
         "instPiano",
         "instWhistle",
-        "instBrightPiano",
+        "instHarpsichord",
         "instMusicBox",
         "instCowbells",
         "instHiHats",
-        "instCymbal"
+        "instCymbal",
+        "instGuitar",
+        "instVoice"
     ]
 }

@@ -56,9 +56,9 @@
             [205, 0],
             "hang"
         ],
-        "envelopeBrightPiano": [
+        "envelopeHarpsichord": [
             [2, 32700],
-            [205, 0],
+            [202, 0],
             [1, 0],
             "hang"
         ],
@@ -142,10 +142,10 @@
             "envelope": "envelopeSynth",
             "sound": "21_sine_bass"
         },
-        "instBrightPiano": {
-            "release_rate": 53,
-            "envelope": "envelopeBrightPiano",
-            "sound": "04_bright_piano"
+        "instHarpsichord": {
+            "release_rate": 255,
+            "envelope": "envelopeHarpsichord",
+            "sound": "27_harpsichord"
         },
         "instMusicBox": {
             "release_rate": 10,
@@ -270,7 +270,7 @@
         "instWhistle",
         "instHorns",
         "instSynth",
-        "instBrightPiano",
+        "instHarpsichord",
         "instMusicBox",
         "instWind",
         "instHiHats",
