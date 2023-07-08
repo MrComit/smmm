@@ -1779,10 +1779,10 @@ void controller_act_intro(void) {
                     // obj->oFaceAngleYaw = gMarioState->faceAngle[1];
                 }
 
-                o->oAction = CONTROLLER_ACT_DEATH;
-                o->oOpacity = 0;
-                o->oFloatF4 = 0.0f;
-                vec3f_set(&o->oPosX, 1081.0f, 8256.0f, -7477.0f);
+                // o->oAction = CONTROLLER_ACT_DEATH;
+                // o->oOpacity = 0;
+                // o->oFloatF4 = 0.0f;
+                // vec3f_set(&o->oPosX, 1081.0f, 8256.0f, -7477.0f);
                 set_mario_npc_dialog(0);
             }
             break;
@@ -2141,9 +2141,10 @@ void bhv_winking_moon_loop(void) {
             }
             break;
         case 1:
-            if (o->oTimer > 500) {
+            if (o->oTimer > 380) {
                 o->oAnimState = 1;
                 o->oAction = 2;
+                cur_obj_play_sound_2(SOUND_GENERAL_UNKNOWN3);
             }
             break;
     }
