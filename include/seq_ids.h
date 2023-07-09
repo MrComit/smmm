@@ -58,6 +58,7 @@ enum SeqId {
     SEQ_TERRARIUM,                    // 0x2E
     SEQ_CAVE,                         // 0x2F
     SEQ_SNOWGLOBE,                    // 0x30
+    SEQ_CITY,                         // 0x31
     SEQ_COUNT
 };
 
