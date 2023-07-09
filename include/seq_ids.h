@@ -54,7 +54,10 @@ enum SeqId {
     SEQ_END_JINGLE,                   // 0x2A
     SEQ_GALLERY,                      // 0x2B
     SEQ_BEDROOM_BOSS,                 // 0x2C
-    SEQ_CREDITS,                 // 0x2D
+    SEQ_CREDITS,                      // 0x2D
+    SEQ_TERRARIUM,                    // 0x2E
+    SEQ_CAVE,                         // 0x2F
+    SEQ_SNOWGLOBE,                    // 0x30
     SEQ_COUNT
 };
 

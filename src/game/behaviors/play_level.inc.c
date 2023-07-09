@@ -7,9 +7,9 @@ static struct ObjectHitbox sStalactiteHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
-    /* radius:            */ 50,
+    /* radius:            */ 70,
     /* height:            */ 300,
-    /* hurtboxRadius:     */ 50,
+    /* hurtboxRadius:     */ 70,
     /* hurtboxHeight:     */ 300,
 };
 

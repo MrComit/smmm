@@ -325,6 +325,9 @@ u8 sBackgroundMusicDefaultVolume[] = {
     100, // SEQ_GALLERY
     100, // SEQ_BEDROOM_BOSS
     100, // SEQ_CREDITS
+    100, // SEQ_TERRARIUM
+    100, // SEQ_CAVE
+    100, // SEQ_SNOWGLOBE
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
 
