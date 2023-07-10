@@ -1115,7 +1115,7 @@ void bhv_block_tower_loop(void) {
 
                 if (--o->oObjFC->oHealth <= 0) {
                     o->oObjFC->oAction = 2;
-                    stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
+                    // stop_background_music(SEQUENCE_ARGS(4, SEQ_CITY_BOSS));
                 } else {
                     o->oObjFC->oAction = 4;
                 }
@@ -1325,7 +1325,7 @@ void bhv_shyguy_boss_loop(void) {
             if (o->oDistanceToMario < 11000.0f) {
                 o->oAction = 5;
                 gBossPrecoins = gMarioState->numCoins;
-                play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_CITY_BOSS), 0);
                 gCamera->comitCutscene = 17;
                 gComitCutsceneObject = o;
                 set_mario_npc_dialog(1);
@@ -1367,6 +1367,8 @@ void bhv_shyguy_boss_loop(void) {
                 if (obj != NULL) {
                     obj->oF4 = 1;
                 }
+
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_CITY_BOSS));
             }
             break;
         case 3:

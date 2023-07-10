@@ -314,6 +314,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     80,  // SEQ_EVENT_CUTSCENE_VICTORY
     70,  // SEQ_EVENT_CUTSCENE_ENDING
     65,  // SEQ_MENU_FILE_SELECT
+    0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
     0,   // SEQ_SMALL_KEY
     0,   // SEQ_BIG_KEY
     100,  // SEQ_MANOR
@@ -329,7 +330,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     100, // SEQ_CAVE
     100, // SEQ_SNOWGLOBE
     100, // SEQ_CITY
-    0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
+    100, // SEQ_CITY_BOSS
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
