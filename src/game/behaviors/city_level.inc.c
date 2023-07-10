@@ -1116,6 +1116,7 @@ void bhv_block_tower_loop(void) {
                 if (--o->oObjFC->oHealth <= 0) {
                     o->oObjFC->oAction = 2;
                     // stop_background_music(SEQUENCE_ARGS(4, SEQ_CITY_BOSS));
+                    seq_player_lower_volume(0, 1, 30);
                 } else {
                     o->oObjFC->oAction = 4;
                 }
@@ -1367,8 +1368,9 @@ void bhv_shyguy_boss_loop(void) {
                 if (obj != NULL) {
                     obj->oF4 = 1;
                 }
-
+            
                 stop_background_music(SEQUENCE_ARGS(4, SEQ_CITY_BOSS));
+                seq_player_unlower_volume(0, 60);
             }
             break;
         case 3:
@@ -1937,7 +1939,9 @@ void bhv_rubber_band_loop(void) {
                 sDelayedWarpOp = 0x10;
                 sDelayedWarpTimer = 12;
                 sSourceWarpNodeId = 0x20;
-                music_changed_through_warp(sSourceWarpNodeId);
+                if (!music_changed_through_warp(sSourceWarpNodeId)) {
+                    fadeout_music((3 * sDelayedWarpTimer / 2) * 8 - 2);
+                }
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
                 if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_UNLOCKED_PLAYSET)) {
                     save_file_set_newflags(SAVE_NEW_FLAG_UNLOCKED_PLAYSET, 0);

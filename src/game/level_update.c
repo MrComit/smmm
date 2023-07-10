@@ -777,22 +777,31 @@ s32 in_boss_room(s16 level, s16 room) {
             if (room == 11) {
                 return TRUE;
             }
+            break;
         case LEVEL_WF:
             if (room == 14) {
                 return TRUE;
             }
+            break;
         case LEVEL_CCM:
             if (room == 3) {
                 return TRUE;
             }
+            break;
         case LEVEL_HMC:
             if (room == 15) {
                 return TRUE;
             }
+            break;
         case LEVEL_LLL:
             if (room == 9) {
                 return TRUE;
             }
+            break;
+        case LEVEL_DDD:
+            return TRUE;
+            break;
+            
     }
     gMarioDeathRoom = 0;
     return FALSE;
@@ -945,6 +954,7 @@ s16 level_trigger_warp(struct MarioState *m, s32 warpOp) {
                         //}
                     }
                 }
+                val04 = !music_changed_through_warp(sSourceWarpNodeId);
                 sDelayedWarpTimer = 20;
                 play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
                 break;
