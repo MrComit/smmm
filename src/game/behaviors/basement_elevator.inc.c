@@ -476,7 +476,7 @@ void ghost_bully_phases(void) {
                 o->os16100 &= ~((1 << EH_ARROW) | (1 << EH_SAWBLADE) | (1 << EH_FLAME));
                 o->oAction = 11;
                 cur_obj_play_sound_1(SOUND_OBJ_BOO_LAUGH_LONG);
-                stop_background_music(SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS));
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_BASEMENT_BOSS));
             }
             break;
         case 8:
@@ -675,7 +675,7 @@ void bhv_ghost_bully_loop(void) {
                 o->oAction = 1;
                 cur_obj_unhide();
                 cur_obj_become_tangible();
-                play_music(0, SEQUENCE_ARGS(4, SEQ_GENERIC_BOSS), 0);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_BASEMENT_BOSS), 0);
             }
             break;
         case 11:

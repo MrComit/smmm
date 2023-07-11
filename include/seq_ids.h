@@ -60,6 +60,7 @@ enum SeqId {
     SEQ_SNOWGLOBE,                    // 0x30
     SEQ_CITY,                         // 0x31
     SEQ_CITY_BOSS,                    // 0x32
+    SEQ_BASEMENT_BOSS,                // 0x33
     SEQ_COUNT
 };
 
