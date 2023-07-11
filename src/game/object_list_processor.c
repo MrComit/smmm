@@ -640,6 +640,60 @@ f32 intDist;
 Vec3f intersect;
 
 
+void control_basement_music(s32 room) {
+    switch (room) {
+        case 2: // laundry
+            fade_channel_volume_scale(0, 6, 127, 1);
+
+            fade_channel_volume_scale(0, 0, 0, 1);
+            fade_channel_volume_scale(0, 1, 0, 1);
+            fade_channel_volume_scale(0, 2, 0, 1);
+            fade_channel_volume_scale(0, 3, 0, 1);
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 5, 0, 1);
+            break;
+        case 3: // gym
+            fade_channel_volume_scale(0, 2, 127, 1);
+            fade_channel_volume_scale(0, 3, 127, 1);
+
+            fade_channel_volume_scale(0, 0, 0, 1);
+            fade_channel_volume_scale(0, 1, 0, 1);
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 5, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            break;
+        case 7: // engine
+            fade_channel_volume_scale(0, 4, 127, 1);
+            fade_channel_volume_scale(0, 5, 127, 1);
+
+            fade_channel_volume_scale(0, 0, 0, 1);
+            fade_channel_volume_scale(0, 1, 0, 1);
+            fade_channel_volume_scale(0, 2, 0, 1);
+            fade_channel_volume_scale(0, 3, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            break;
+        case 8: // chamber
+            fade_channel_volume_scale(0, 0, 127, 1);
+            fade_channel_volume_scale(0, 1, 127, 1);
+
+            fade_channel_volume_scale(0, 2, 0, 1);
+            fade_channel_volume_scale(0, 3, 0, 1);
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 5, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            break;
+        default:
+            fade_channel_volume_scale(0, 0, 0, 1);
+            fade_channel_volume_scale(0, 1, 0, 1);
+            fade_channel_volume_scale(0, 2, 0, 1);
+            fade_channel_volume_scale(0, 3, 0, 1);
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 5, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            break;
+    }
+}
+
 void mario_l_to_levitate(void) {
     if (gMarioState->controller->buttonPressed & L_TRIG) {
          set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
@@ -731,6 +785,8 @@ void bhv_mario_update(void) {
             stop_background_music(SEQUENCE_ARGS(4, SEQ_MUSIC_ROOM));
             seq_player_play_sequence(0, SEQ_FLOOR_3, 0);
         }
+    } else if (gCurrLevelNum == LEVEL_LLL && (get_current_background_music() & 0xFF) == SEQ_BASEMENT) {
+        control_basement_music(gMarioCurrentRoom);
     }
 
     if (gStarPieceReward >= 0) {

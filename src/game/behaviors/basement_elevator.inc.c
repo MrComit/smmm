@@ -659,6 +659,9 @@ void bhv_ghost_bully_loop(void) {
         case 9:
             cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
             if (o->oTimer > 90) {
+                if (o->oTimer == 91) {
+                    cur_obj_play_sound_2(SOUND_GENERAL2_PYRAMID_TOP_EXPLOSION);
+                }
                 if (o->oTimer < 105) {
                     cur_obj_shake_screen(SHAKE_POS_SMALL);
                 } else {

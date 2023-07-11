@@ -44,6 +44,36 @@
             [32700, 29430],
             "hang"
         ],
+        "envelopeHarpsichord": [
+            [2, 32700],
+            [202, 0],
+            [1, 0],
+            "hang"
+        ],
+        "envelopeOverdrivenGuitar": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelopeElePiano": [
+            [3, 32700],
+            [298, 0],
+            [1, 0],
+            "hang"
+        ],
+        "envelopeTimpani": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
+        "envelopeCymbal": [
+            [2, 32700],
+            [1, 32700],
+            [32700, 29430],
+            "hang"
+        ],
         "envelopePercussion": [
             [2, 32700],
             [1, 32700],
@@ -53,7 +83,7 @@
     },
     "instruments": {
         "instOrgan": {
-            "release_rate": 208,
+            "release_rate": 10,
             "envelope": "envelopeInverseLong",
             "sound": "35_gospel_organ"
         },
@@ -62,15 +92,39 @@
             "envelope": "envelopeInverseLong",
             "sound": "44_grand_piano"
         },
-        "instTrumpet": {
-            "release_rate": 67,
-            "envelope": "envelopeInverseShort",
-            "sound": "17_trumpet"
-        },
         "instFlute": {
-            "release_rate": 43,
+            "release_rate": 20,
             "envelope": "envelopeInverseLong",
             "sound": "41_pan_flute"
+        },
+        "instHarpsichord": {
+            "release_rate": 255,
+            "envelope": "envelopeHarpsichord",
+            "sound": "27_harpsichord"
+        },
+        "instOverdrivenGuitar": {
+            "release_rate": 10,
+            "envelope": "envelopeOverdrivenGuitar",
+            "sound": "31_rarefaction-convolution"
+        },
+        "instElePiano": {
+            "release_rate": 50,
+            "envelope": "envelopeInverseMedium",
+            "sound": "26_crystal_rhodes"
+        },
+        "instTimpani": {
+            "release_rate": 10,
+            "envelope": "envelopeTimpani",
+            "sound": "18_timpani"
+        },
+        "instCymbal": {
+            "release_rate": 10,
+            "normal_range_lo": 28,
+            "normal_range_hi": 28,
+            "envelope": "envelopeCymbal",
+            "sound_lo": "10_cymbal_bell",
+            "sound": "11_splash_cymbal",
+            "sound_hi": "10_cymbal_bell"
         },
         "percussion": [
             {"release_rate": 10, "pan": 62, "envelope": "envelopePercussion", "sound": {"sample": "06_kick_drum_1", "tuning": 0.210224}},
@@ -144,7 +198,11 @@
     "instrument_list": [
         "instOrgan",
         "instPiano",
-        "instTrumpet",
-        "instFlute"
+        "instFlute",
+        "instHarpsichord",
+        "instOverdrivenGuitar",
+        "instElePiano",
+        "instTimpani",
+        "instCymbal"
     ]
 }
