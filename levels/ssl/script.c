@@ -16,6 +16,8 @@
 #include "actors/common0.h"
 #include "actors/common0.h"
 #include "actors/common0.h"
+#include "actors/common0.h"
+#include "actors/common0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -104,6 +106,9 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -21859, 385, 24269, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -21859, 13000, 24269, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, -180, -21859, 13000, 24269),
+		OBJECT(MODEL_NONE, -26665, 1408, 24587, 0, -90, 0, 0x00000000, bhvBirdsSoundLoop),
+		OBJECT(MODEL_NONE, -24496, 3996, 18092, 0, -90, 0, 0x00000000, bhvBirdsSoundLoop),
+		OBJECT(MODEL_NONE, -20069, 6795, 11600, 0, -90, 0, 0x00000000, bhvBirdsSoundLoop),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -19963, 2068, 7128, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_JOURNAL_BOOK, -23228, 1697, 16095, 0, 0, 0, (DIALOG_056 << 16), bhvJournalBook),
 		OBJECT(MODEL_O1_BOOGOO, -20163, 157, 25243, 0, 0, 0, (3 << 16), bhvBoogooObjectNoCage),
@@ -213,7 +218,7 @@ const LevelScript level_ssl_entry[] = {
 		TERRAIN(ssl_area_1_collision),
 		ROOMS(ssl_area_1_collision_rooms),
 		MACRO_OBJECTS(ssl_area_1_macro_objs),
-		STOP_MUSIC(0),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_MIND),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
@@ -436,7 +441,7 @@ const LevelScript level_ssl_entry[] = {
 		TERRAIN(ssl_area_2_collision),
 		ROOMS(ssl_area_2_collision_rooms),
 		MACRO_OBJECTS(ssl_area_2_macro_objs),
-		STOP_MUSIC(0),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_MIND),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

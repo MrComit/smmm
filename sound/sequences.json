@@ -51,5 +51,6 @@
     "30_snowglobe_theme": ["2A_play_level"],
     "31_city_theme": ["2B_city_level"],
     "32_city_boss": ["2B_city_level"],
-    "33_basement_boss": ["1A_basement"]
+    "33_basement_boss": ["1A_basement"],
+    "34_mind_theme": ["2C_mind"]
 }

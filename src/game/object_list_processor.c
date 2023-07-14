@@ -694,6 +694,81 @@ void control_basement_music(s32 room) {
     }
 }
 
+
+
+void control_mind_music(s32 room) {
+    s32 cages = save_file_get_boos();
+    if (cages & (1 << 24) || room == 11) { // mind hole
+            fade_channel_volume_scale(0, 5, 127, 1);
+            fade_channel_volume_scale(0, 2, 127, 1);
+            fade_channel_volume_scale(0, 3, 127, 1);
+            fade_channel_volume_scale(0, 6, 127, 1);
+            fade_channel_volume_scale(0, 4, 127, 1);
+            fade_channel_volume_scale(0, 7, 127, 1);
+            fade_channel_volume_scale(0, 8, 127, 1);
+            fade_channel_volume_scale(0, 10, 127, 1);
+
+            fade_channel_volume_scale(0, 1, 0, 1);
+    } else if (cages & (1 << 23) || room == 10) { // observatory
+            fade_channel_volume_scale(0, 5, 127, 1);
+            fade_channel_volume_scale(0, 2, 127, 1);
+            fade_channel_volume_scale(0, 1, 127, 1);
+            fade_channel_volume_scale(0, 3, 127, 1);
+            fade_channel_volume_scale(0, 6, 127, 1);
+            fade_channel_volume_scale(0, 4, 127, 1);
+
+            fade_channel_volume_scale(0, 7, 0, 1);
+            fade_channel_volume_scale(0, 8, 0, 1);
+            fade_channel_volume_scale(0, 10, 0, 1);
+    } else if (cages & (1 << 22) || room == 6) { // lab
+            fade_channel_volume_scale(0, 5, 127, 1);
+            fade_channel_volume_scale(0, 2, 127, 1);
+            fade_channel_volume_scale(0, 1, 127, 1);
+            fade_channel_volume_scale(0, 3, 127, 1);
+            fade_channel_volume_scale(0, 6, 127, 1);
+
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 7, 0, 1);
+            fade_channel_volume_scale(0, 8, 0, 1);
+            fade_channel_volume_scale(0, 10, 0, 1);
+    } else if (cages & (1 << 21) || room == 3)  { // outside
+            fade_channel_volume_scale(0, 5, 127, 1);
+            fade_channel_volume_scale(0, 2, 127, 1);
+            fade_channel_volume_scale(0, 1, 127, 1);
+            fade_channel_volume_scale(0, 3, 127, 1);
+
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            fade_channel_volume_scale(0, 7, 0, 1);
+            fade_channel_volume_scale(0, 8, 0, 1);
+            fade_channel_volume_scale(0, 10, 0, 1);
+    } else if (cages & (1 << 20) || room == 2) { // art gallery
+            fade_channel_volume_scale(0, 5, 127, 1);
+            fade_channel_volume_scale(0, 2, 127, 1);
+
+            fade_channel_volume_scale(0, 1, 0, 1);
+            fade_channel_volume_scale(0, 3, 0, 1);
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            fade_channel_volume_scale(0, 7, 0, 1);
+            fade_channel_volume_scale(0, 8, 0, 1);
+            fade_channel_volume_scale(0, 10, 0, 1);
+    } else { // beginning
+            fade_channel_volume_scale(0, 5, 127, 1);
+
+            fade_channel_volume_scale(0, 1, 0, 1);
+            fade_channel_volume_scale(0, 2, 0, 1);
+            fade_channel_volume_scale(0, 3, 0, 1);
+            fade_channel_volume_scale(0, 4, 0, 1);
+            fade_channel_volume_scale(0, 6, 0, 1);
+            fade_channel_volume_scale(0, 7, 0, 1);
+            fade_channel_volume_scale(0, 8, 0, 1);
+            fade_channel_volume_scale(0, 10, 0, 1);
+    }
+
+}
+
+
 void mario_l_to_levitate(void) {
     if (gMarioState->controller->buttonPressed & L_TRIG) {
          set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
@@ -787,6 +862,8 @@ void bhv_mario_update(void) {
         }
     } else if (gCurrLevelNum == LEVEL_LLL && (get_current_background_music() & 0xFF) == SEQ_BASEMENT) {
         control_basement_music(gMarioCurrentRoom);
+    } else if (gCurrLevelNum == LEVEL_SSL && (get_current_background_music() & 0xFF) == SEQ_MIND) {
+        control_mind_music(gMarioCurrentRoom);
     }
 
     if (gStarPieceReward >= 0) {
