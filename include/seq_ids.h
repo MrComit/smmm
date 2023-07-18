@@ -62,6 +62,7 @@ enum SeqId {
     SEQ_CITY_BOSS,                    // 0x32
     SEQ_BASEMENT_BOSS,                // 0x33
     SEQ_MIND,                         // 0x34
+    SEQ_FINAL_BOSS,                   // 0x35
     SEQ_COUNT
 };
 

@@ -52,5 +52,6 @@
     "31_city_theme": ["2B_city_level"],
     "32_city_boss": ["2B_city_level"],
     "33_basement_boss": ["1A_basement"],
-    "34_mind_theme": ["2C_mind"]
+    "34_mind_theme": ["2C_mind"],
+    "35_final_boss": ["2D_final_boss"]
 }

@@ -333,6 +333,7 @@ u8 sBackgroundMusicDefaultVolume[] = {
     100, // SEQ_CITY_BOSS
     100, // SEQ_BASEMENT_BOSS
     100, // SEQ_MIND
+    100, // SEQ_FINAL_BOSS
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,

@@ -1378,6 +1378,9 @@ void bhv_the_controller_init(void) {
     o->oObj108 = spawn_object(o, MODEL_BG_GROUND, bhvBGGround);
     vec3f_set(&o->oObj108->oPosX, 1083.0f, 7406.0f - 340.0f, -8568.0f);
 
+
+    o->header.gfx.animInfo.animFrame = 50;
+
     o->os1610C = -1;
     o->oFloatFC = 255.0f;
     obj_set_hitbox(o, &sTheControllerHitbox);
@@ -1632,6 +1635,7 @@ void controller_act_run(void) {
     }
     
     if (o->oOpacity <= 0) {
+        stop_background_music(SEQUENCE_ARGS(4, SEQ_FINAL_BOSS));
         o->oAction = CONTROLLER_ACT_DEATH;
         vec3f_set(&o->oPosX, 1081.0f, 8256.0f, -7477.0f);
         o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
@@ -1716,7 +1720,10 @@ void controller_act_intro(void) {
             gCamera->comitCutscene = 28;
             set_mario_npc_dialog(1);
             if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+                // if (o->oTimer == 1) {
+                // }
                 if (o->oTimer > 30) {
+                    play_music(0, SEQUENCE_ARGS(4, SEQ_FINAL_BOSS), 0);
                     o->oSubAction = 1;
                     o->oTimer = 0;
                 }
@@ -1728,10 +1735,10 @@ void controller_act_intro(void) {
             gCamera->comitCutscene = 29;
             gComitCutsceneObject = o;
             gComitCutsceneTimer = 20;
-            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.02f);
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.016f);
             cur_obj_scale(o->header.gfx.scale[0]);
-            o->oPosZ = approach_f32_asymptotic(o->oPosZ, -10281.0f, 0.04f);
-            if (o->oTimer > 70 && cur_obj_check_if_at_animation_end()) {
+            o->oPosZ = approach_f32_asymptotic(o->oPosZ, -10281.0f, 0.03f);
+            if (o->oTimer > 120 && cur_obj_check_if_at_animation_end()) {
                 // o->oPosZ = o->oHomeZ = -10281.0f;
                 o->oSubAction = 2;
                 o->oTimer = 0;
@@ -1741,7 +1748,7 @@ void controller_act_intro(void) {
         case 2:
             gCamera->comitCutscene = 29;
             gComitCutsceneObject = o;
-            gComitCutsceneTimer = 20;
+            gComitCutsceneTimer = 70;
             o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.4f, 0.02f);
             cur_obj_scale(o->header.gfx.scale[0]);
             if (o->oPosZ != -10281.0f) {
@@ -1768,7 +1775,8 @@ void controller_act_intro(void) {
             o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.07f);
             cur_obj_scale(o->header.gfx.scale[0]);
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.05f);
-            if (o->oTimer > 25) {
+            if (o->oTimer > 55) {
+                gComitCutsceneTimer = 0;
                 o->oSubAction = 0;
                 o->oAction = CONTROLLER_ACT_DEFAULT;
 
