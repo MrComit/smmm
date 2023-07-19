@@ -15,8 +15,13 @@ static struct ObjectHitbox sCollectStarHitbox = {
 void bhv_collect_star_init(void) {
     s8 starId = (o->oBehParams >> 24) & 0xFF;
 
-    if (save_file_get_currency_flags() & (1 << starId)) {
-        o->activeFlags = 0;
+    if (o->oInteractionSubtype == INT_SUBTYPE_CURRENCY) {
+        if (save_file_get_currency_flags() & (1 << starId)) {
+            o->activeFlags = 0;
+        }
+        cur_obj_set_model(MODEL_STAR_CURRENCY);
+    } else if (o->oInteractionSubtype == INT_SUBTYPE_REDS_STAR) {
+        cur_obj_set_model(MODEL_STAR);
     }
     obj_set_hitbox(o, &sCollectStarHitbox);
 }
@@ -35,7 +40,13 @@ void bhv_collect_star_loop(void) {
 }
 
 void bhv_star_spawn_init(void) {
-    o->oInteractionSubtype |= INT_SUBTYPE_CURRENCY;
+    if (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH) {
+        o->oInteractionSubtype |= INT_SUBTYPE_CURRENCY;
+        cur_obj_set_model(MODEL_STAR_CURRENCY);
+    } else {
+        o->oInteractionSubtype |= INT_SUBTYPE_REDS_STAR;
+        cur_obj_set_model(MODEL_STAR);
+    }
     o->oMoveAngleYaw = atan2s(o->oHomeZ - o->oPosZ, o->oHomeX - o->oPosX);
     o->oStarSpawnDisFromHome = sqrtf(sqr(o->oHomeX - o->oPosX) + sqr(o->oHomeZ - o->oPosZ));
     o->oVelY = (o->oHomeY - o->oPosY) / 30.0f;

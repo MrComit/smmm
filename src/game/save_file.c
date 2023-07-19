@@ -639,7 +639,7 @@ u32 save_file_get_star_piece(void) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }
-    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces;
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces & 0x1FFFFFF;
 }
 
 void save_file_set_star_piece(u32 piece) {

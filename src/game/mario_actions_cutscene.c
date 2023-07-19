@@ -615,6 +615,9 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                     case 4:
                         spawn_object(m->marioObj, MODEL_STAR_CURRENCY, bhvCelebrationStar);
                         break;
+                    case 5:
+                        spawn_object(m->marioObj, MODEL_STAR, bhvCelebrationStar);
+                        break;
                 }
                 disable_background_sound();
                 break;
@@ -632,6 +635,8 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                     enable_time_stop();
                     if (isKey == 4)
                         dialogID = DIALOG_015;
+                    else if (isKey == 5)
+                        dialogID = DIALOG_077;
                     else if (isKey == 0)
                         dialogID = DIALOG_013;
                     else

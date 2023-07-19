@@ -1,17 +1,8 @@
-
-/**
- * This file contains the initialization and behavior for red coins.
- * Behavior controls audio and the orange number spawned, as well as interacting with
- * the course's red coin star.
- */
-
-/**
- * Red coin's hitbox details.
- */
+void spawn_orange_number_palette(s8 behParam, s16 relX, s16 relY, s16 relZ, s16 palette);
 static struct ObjectHitbox sRedCoinHitbox = {
     /* interactType:      */ INTERACT_COIN,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 2,
+    /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
     /* radius:            */ 100,
@@ -33,27 +24,32 @@ static struct ObjectHitbox sGreenCoinHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
-/**
- * Red coin initialization function. Sets the coin's hitbox and parent object.
- */
+extern s8 gRedCoinsCollected;
+
 void bhv_red_coin_init(void) {
-    // This floor and floor height are unused. Perhaps for orange number spawns originally?
-    struct Surface *dummyFloor;
-    UNUSED f32 floorHeight = find_floor(o->oPosX, o->oPosY, o->oPosZ, &dummyFloor);
-
     // Set the red coins to have a parent of the closest red coin star.
-    struct Object *hiddenRedCoinStar;
+    // struct Object *hiddenRedCoinStar;
 
-    if ((hiddenRedCoinStar =
-             cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar)) != NULL) {
-        o->parentObj = hiddenRedCoinStar;
-    } else if ((hiddenRedCoinStar =
-             cur_obj_nearest_object_with_behavior(bhvBowserCourseRedCoinStar)) != NULL) {
-        o->parentObj = hiddenRedCoinStar;
-    } else {
-        o->parentObj = NULL;
+    // if ((hiddenRedCoinStar =
+    //          cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar)) != NULL) {
+    //     o->parentObj = hiddenRedCoinStar;
+    // } else if ((hiddenRedCoinStar =
+    //          cur_obj_nearest_object_with_behavior(bhvBowserCourseRedCoinStar)) != NULL) {
+    //     o->parentObj = hiddenRedCoinStar;
+    // } else {
+    //     o->parentObj = NULL;
+    // }
+    switch (gCurrLevelNum) {
+        case LEVEL_BOB:
+            o->oBehParams = 0;
+            break;
+        case LEVEL_WF:
+            o->oBehParams = 1 << 24;
+            break;
+        case LEVEL_HMC:
+            o->oBehParams = 2 << 24;
+            break;
     }
-
     obj_set_hitbox(o, &sRedCoinHitbox);
 }
 
@@ -62,32 +58,23 @@ void bhv_red_coin_init(void) {
  * the orange number counter.
  */
 void bhv_red_coin_loop(void) {
-    // If Mario interacted with the object...
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-        // ...and there is a red coin star in the level...
-        if (o->parentObj != NULL) {
-            // ...increment the star's counter.
-            o->parentObj->oHiddenStarTriggerCounter++;
+            gRedCoinsCollected++;
 
-            // For JP version, play an identical sound for all coins.
-#ifdef VERSION_JP
-            create_sound_spawner(SOUND_GENERAL_RED_COIN);
-#endif
             // Spawn the orange number counter, as long as it isn't the last coin.
-            if (o->parentObj->oHiddenStarTriggerCounter != 8) {
-                spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
+            if (gRedCoinsCollected != 8) {
+                spawn_orange_number_palette(gRedCoinsCollected, 0, 0, 0, 1);
+            } else {
+                // o->oBehParams = (o->oBehParams & 0xFF00) << 16;
+                spawn_default_star(gMarioState->pos[0], gMarioState->pos[1] + 100.0f, gMarioState->pos[2]);
             }
 
             // On all versions but the JP version, each coin collected plays a higher noise.
-#ifndef VERSION_JP
             play_sound(SOUND_MENU_COLLECT_RED_COIN
-                       + (((u8) o->parentObj->oHiddenStarTriggerCounter - 1) << 16),
+                       + (((u8) gRedCoinsCollected - 1) << 16),
                        gGlobalSoundSource);
-#endif
-        }
 
         coin_collected();
-        // Despawn the coin.
         o->oInteractStatus = 0;
     }
 }

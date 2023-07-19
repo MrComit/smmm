@@ -107,6 +107,7 @@ Gfx *geo_set_red_painting(s32 callContext, struct GraphNode *node, UNUSED void *
 Gfx *geo_set_dream_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_sunblock_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_mind_static(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_star_color(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #ifdef AVOID_UB
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_bparam2(s32 callContext, struct GraphNode *node, UNUSED void *context);

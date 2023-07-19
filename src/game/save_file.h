@@ -39,7 +39,7 @@ struct SaveFile
     u16 goldenGoombas;
     u32 boosCaptured;
     u32 currencyStars: 20;
-    u32 starPieces: 25;
+    u32 starPieces;
     s32 coinCount;
 
     struct SaveBlockSignature signature;

@@ -2086,7 +2086,39 @@ Gfx *geo_mind_static(s32 callContext, struct GraphNode *node, UNUSED void *conte
     return dlStart;
 }
 
+Vec3s sStarColors[8] = {
+    {0xFF, 0xFF, 0},
+    {0xFF, 0, 0},
+    {0, 0xFF, 0},
+    {0xFF, 0x95, 0},
+    {0xAA, 0, 0xFF},
+    {0xFF, 0xFF, 0xFF},
+    {0x7F, 0x7F, 0x7F},
+    {0, 0, 0},
+};
 
+
+Gfx *geo_star_color(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    s32 index;
+    struct GraphNodeGenerated *currentGraphNode;
+    struct Object *obj;
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        obj = (struct Object *) gCurGraphNodeObject;
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+        dlHead = dlStart;
+        currentGraphNode->fnNode.node.flags = (1 << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        index = (obj->oBehParams >> 24) + 5;
+        gDPSetEnvColor(dlHead++, sStarColors[index][0], sStarColors[index][1], sStarColors[index][2], 255);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
 
 
 /**

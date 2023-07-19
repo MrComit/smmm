@@ -941,9 +941,12 @@ it with a high jump into\n\
 the painting. Oh, by the\n\
 way, look what I found!"))
 
-DEFINE_DIALOG(DIALOG_077, 1, 2, 150, 200, _("\
-It is decreed that one\n\
-shall pound the pillars."))
+DEFINE_DIALOG(DIALOG_077, 1, 3, 150, 200, _("\
+You've collected a Star!\n\
+Go talk to (name)\n\
+to claim your reward!\n\
+Do you want to Save?\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_078, 1, 5, 30, 200, _("\
 Break open the Blue Coin\n\

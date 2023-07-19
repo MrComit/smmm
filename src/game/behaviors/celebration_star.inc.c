@@ -48,14 +48,14 @@ void celeb_star_act_face_camera(void) {
         cur_obj_scale((f32) o->oTimer / 10.0);
 #endif
         o->oFaceAngleYaw += 0x1000;
-        if (cur_obj_has_model(MODEL_STAR_CURRENCY))
+        if (cur_obj_has_model(MODEL_STAR_CURRENCY) || cur_obj_has_model(MODEL_STAR))
             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x500);
         else
             o->oFaceAnglePitch += 0x400;
     } else {
         //o->oFaceAngleYaw = gMarioObject->header.gfx.angle[1];
         o->oFaceAngleYaw += 0x400;
-        if (cur_obj_has_model(MODEL_STAR_CURRENCY))
+        if (cur_obj_has_model(MODEL_STAR_CURRENCY) || cur_obj_has_model(MODEL_STAR))
             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0x500);
         else
             o->oFaceAnglePitch += 0x400;

@@ -4,7 +4,7 @@
 
 // 0x0302A6F0
 ALIGNED8 static const Texture star_seg3_texture_0302A6F0[] = {
-#include "actors/star/star_surface.rgba16.inc.c"
+#include "actors/star/CUSTOM_gray_star_surface.rgba16.inc.c"
 };
 
 // 0x0302AEF0
@@ -51,7 +51,7 @@ const Gfx star_seg3_dl_0302B870[] = {
     gsDPPipeSync(),
     gsSPSetGeometryMode(G_TEXTURE_GEN),
     gsDPSetEnvColor(255, 255, 255, 255),
-    gsDPSetCombineMode(G_CC_DECALFADE, G_CC_DECALFADE),
+    gsDPSetCombineLERP(TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT, TEXEL0, 0, ENVIRONMENT, 0, 0, 0, 0, ENVIRONMENT),
     gsDPLoadTextureBlock(star_seg3_texture_0302A6F0, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 64, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_WRAP | G_TX_NOMIRROR, 5, 6, G_TX_NOLOD, G_TX_NOLOD), //! Dimensions loaded as 32x64 despite this texture having only 32x32 dimensions, harmless due to environment mapping (G_TEXTURE_GEN & gsSPTexture values)
     gsSPTexture(0x07C0, 0x07C0, 0, G_TX_RENDERTILE, G_ON),
     gsSPDisplayList(star_seg3_dl_0302B7B0),
