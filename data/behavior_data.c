@@ -11568,10 +11568,26 @@ const BehaviorScript bhvPhysicsRedCoin[] = {
     BILLBOARD(),
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oAnimState, -1),
-    CALL_NATIVE(bhv_red_coin_init),
+    CALL_NATIVE(bhv_physics_red_coin_init),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_physics_red_coin_loop),
         ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvGoldMedal[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(gold_medal_collision),
+    // SCALE(0, 150),
+    // SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    // CALL_NATIVE(bhv_bg_ground_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_gold_medal_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

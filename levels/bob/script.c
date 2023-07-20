@@ -71,6 +71,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_BOMB, ice_bobomb_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_HALLWAY_FAKEWALL, hallway_fakewall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GOLDEN_PILLAR, golden_pillar_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_GOLD_MEDAL, gold_medal_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -147,7 +148,6 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_RED_COIN, -1307, 52, 26722, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -1620, 78, 26707, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -1821, 19, 26492, 0, 0, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_RED_COIN, -2140, 82, 26501, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -2157, 82, 26153, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -2106, 82, 25840, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -1809, 82, 26092, 0, 0, 0, 0x00000000, bhvRedCoin),
@@ -166,6 +166,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_BOOK, 5617, 288, 13060, 0, -90, 0, 0x02010000, bhvL1Book),
 		OBJECT(MODEL_L1_BOOK, 5617, 288, 13010, 0, -90, 0, 0x01010000, bhvL1Book),
 		OBJECT(MODEL_L1_BOOK, 5617, 288, 12959, 0, -90, 0, 0x00000000, bhvL1Book),
+		OBJECT(MODEL_GOLD_MEDAL, 5695, 436, 13704, 0, 0, 0, 0x00000000, bhvGoldMedal),
 		OBJECT(MODEL_STAR_PIECE, 5650, 210, 12959, 100, 0, 0, 0x01010000, bhvStarPiece),
 		OBJECT(MODEL_GARAGE_WALL, 5741, 0, 16261, 0, 0, 0, 0x00000000, bhvGhostBarrier),
 		OBJECT(MODEL_BOO, 4316, 179, 17006, 0, -180, 0, 0x00000000, bhvRoomBoo),

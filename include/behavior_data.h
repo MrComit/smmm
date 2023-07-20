@@ -948,6 +948,7 @@ extern const BehaviorScript bhvWinkingMoon[];
 extern const BehaviorScript bhvRedSparkles[];
 extern const BehaviorScript bhvRedSparkleSpawn[];
 extern const BehaviorScript bhvPhysicsRedCoin[];
+extern const BehaviorScript bhvGoldMedal[];
 
 
 #endif // BEHAVIOR_DATA_H

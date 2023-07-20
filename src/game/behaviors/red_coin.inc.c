@@ -24,6 +24,9 @@ static struct ObjectHitbox sGreenCoinHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+
+s32 gRedCoinMissionActive = 1;
+
 extern s8 gRedCoinsCollected;
 
 void bhv_red_coin_init(void) {
@@ -222,6 +225,10 @@ void bhv_red_sparkles_loop(void) {
     o->oInteractStatus = 0;
 }
 
+void bhv_physics_red_coin_init(void) {
+    cur_obj_become_intangible();
+    bhv_red_coin_init();
+}
 
 void bhv_physics_red_coin_loop(void) {
     struct Surface *sp1C;
@@ -264,6 +271,25 @@ void bhv_physics_red_coin_loop(void) {
         }
         o->oCoinUnk1B0++;
     }
+    if (o->oTimer > 30) {
+        bhv_red_coin_loop();
+    }
+    o->oInteractStatus = 0;
+}
 
-    bhv_red_coin_loop();
+
+void bhv_gold_medal_loop(void) {
+    struct Object *obj;
+    if (gRedCoinMissionActive) {
+        if (o->oAction == 0 && o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+            obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oPosX -= 150.0f;
+            obj->oVelY = 20.0f;
+            obj->oForwardVel = 20.0f;
+            obj->oMoveAngleYaw = 0xC000;
+            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
+        }
+    }
 }

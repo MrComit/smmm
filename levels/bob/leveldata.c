@@ -81,3 +81,5 @@
 #include "levels/bob/hallway_fakewall/collision.inc.c"
 #include "levels/bob/golden_pillar/model.inc.c"
 #include "levels/bob/golden_pillar/collision.inc.c"
+#include "levels/bob/gold_medal/model.inc.c"
+#include "levels/bob/gold_medal/collision.inc.c"

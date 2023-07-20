@@ -3877,6 +3877,33 @@ Gfx *geo_switch_boss_startwalls(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+extern s32 gRedCoinMissionActive;
+
+#ifdef AVOID_UB
+Gfx *geo_switch_red_mission(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_red_mission(s32 callContext, struct GraphNode *node) {
+#endif
+    struct MarioState *m = gMarioState;
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (gRedCoinMissionActive) {
+            switchCase->selectedCase = 1;
+        } else {
+            switchCase->selectedCase = 0;
+        }
+    }
+
+    return NULL;
+}
+
 
 
 extern s8 sLevelRoomOffsets[];

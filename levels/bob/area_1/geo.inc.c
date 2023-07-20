@@ -65,7 +65,6 @@ const GeoLayout bob_dl_103__Parlor_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Bookshelf_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_chair_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_chair_008_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Medal_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Medal_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Medal_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Painting_009_mesh_layer_1),
