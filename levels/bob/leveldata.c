@@ -83,3 +83,5 @@
 #include "levels/bob/golden_pillar/collision.inc.c"
 #include "levels/bob/gold_medal/model.inc.c"
 #include "levels/bob/gold_medal/collision.inc.c"
+#include "levels/bob/red_spot/model.inc.c"
+#include "levels/bob/red_spot/collision.inc.c"

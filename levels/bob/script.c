@@ -72,6 +72,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_HALLWAY_FAKEWALL, hallway_fakewall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GOLDEN_PILLAR, golden_pillar_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GOLD_MEDAL, gold_medal_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_RED_SPOT,      red_spot_geo),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -148,9 +149,9 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_RED_COIN, -1307, 52, 26722, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -1620, 78, 26707, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -1821, 19, 26492, 0, 0, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_RED_COIN, -2157, 82, 26153, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -2106, 82, 25840, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_COIN, -1809, 82, 26092, 0, 0, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_RED_SPOT, 1016, -7, 22064, 0, 0, 0, 0x00000000, bhvRedSpot),
 		OBJECT(MODEL_LAND_CHUNK, -2431, -200, 23982, 0, 0, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -2101, -200, 23213, 0, 28, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -1210, -200, 23651, 0, 82, 0, 0x021E0000, bhvLandChunk),

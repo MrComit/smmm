@@ -141,4 +141,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/gold_medal/collision_header.h"
 
+#include "levels/bob/red_spot/geo_header.h"
+
+#include "levels/bob/red_spot/collision_header.h"
+
 #endif

@@ -674,6 +674,16 @@
 #define MODEL_GOLD_MEDAL          0xE2
 
 
+// LEVEL 1 MODELS CONT:
+// 0x5B-0x63
+#define MODEL_RED_SPOT            0x5B
+
+
+// 0x6C-0x73
+
+// 0x97-0x9B
+
+
 // LEVEL 2 MODELS - 0xFF TO 0xE2 ARE FREE
 #define MODEL_HEAVY_OBJECT        0xFF
 #define MODEL_HEAVY_SWITCH        0xFE

@@ -49,3 +49,4 @@
 #include "levels/bob/hallway_fakewall/geo.inc.c"
 #include "levels/bob/golden_pillar/geo.inc.c"
 #include "levels/bob/gold_medal/geo.inc.c"
+#include "levels/bob/red_spot/geo.inc.c"

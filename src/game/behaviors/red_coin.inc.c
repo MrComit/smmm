@@ -293,3 +293,15 @@ void bhv_gold_medal_loop(void) {
         }
     }
 }
+
+
+void bhv_red_spot_loop(void) {
+    struct Object *obj;
+    if (cur_obj_is_mario_ground_pounding_platform()) {
+        o->oPosY += 800.0f;
+        obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+        spawn_mist_particles();
+        o->activeFlags = 0;
+        cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
+    }
+}

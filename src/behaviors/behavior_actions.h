@@ -1204,6 +1204,7 @@ void bhv_red_sparkle_spawn_loop(void);
 void bhv_physics_red_coin_init(void);
 void bhv_physics_red_coin_loop(void);
 void bhv_gold_medal_loop(void);
+void bhv_red_spot_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
