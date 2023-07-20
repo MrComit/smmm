@@ -1207,6 +1207,7 @@ void bhv_gold_medal_loop(void);
 void bhv_red_spot_loop(void);
 void bhv_hidden_object_init(void);
 void bhv_floor_switch_hidden_init(void);
+void bhv_red_coin_goomba_update(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

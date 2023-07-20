@@ -950,6 +950,7 @@ extern const BehaviorScript bhvRedSparkleSpawn[];
 extern const BehaviorScript bhvPhysicsRedCoin[];
 extern const BehaviorScript bhvGoldMedal[];
 extern const BehaviorScript bhvRedSpot[];
+extern const BehaviorScript bhvRedCoinGoomba[];
 
 
 #endif // BEHAVIOR_DATA_H

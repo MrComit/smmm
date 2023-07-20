@@ -22,6 +22,20 @@ struct ObjectHitbox sGoombaHitbox = {
     /* hurtboxHeight:     */ 40,
 };
 
+
+struct ObjectHitbox sRCGoombaHitbox = {
+    /* interactType:      */ INTERACT_BOUNCE_TOP,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 72,
+    /* height:            */ 50,
+    /* hurtboxRadius:     */ 42,
+    /* hurtboxHeight:     */ 40,
+};
+
+
 /**
  * Properties that vary based on goomba size.
  */
@@ -340,6 +354,82 @@ void bhv_goomba_update(void) {
                                sGoombaAttackHandlers[o->oGoombaSize & 1])) {
             mark_goomba_as_dead();
         }
+
+        if (o->oFloorType == SURFACE_INSTANT_QUICKSAND && o->oPosY - o->oFloorHeight < 30.0f) {
+            o->activeFlags = 0;
+        }
+
+        cur_obj_move_standard(-78);
+    } else {
+        o->oAnimState = 1;
+    }
+}
+
+
+
+void bhv_red_coin_goomba_update(void) {
+    struct Object *obj;
+    // PARTIAL_UPDATE
+
+    f32 animSpeed;
+    // obj_set_hitbox(o, &sRCGoombaHitbox);
+    spawn_object(o, MODEL_NONE, bhvRedSparkleSpawn);
+    // goomba_level_specific_checks();
+
+    if (obj_update_standard_actions(o->oGoombaScale)) {
+        // If this goomba has a spawner and mario moved away from the spawner, unload
+        if (o->parentObj != o) {
+            if (o->parentObj->oAction == GOOMBA_TRIPLET_SPAWNER_ACT_UNLOADED) {
+                obj_mark_for_deletion(o);
+            }
+        }
+
+        cur_obj_scale(o->oGoombaScale);
+        obj_update_blinking(&o->oGoombaBlinkTimer, 30, 50, 5);
+        cur_obj_update_floor_and_walls();
+
+        if ((animSpeed = o->oForwardVel / o->oGoombaScale * 0.4f) < 1.0f) {
+            animSpeed = 1.0f;
+        }
+
+        cur_obj_init_animation_with_accel_and_sound(0, animSpeed);
+
+        switch (o->oAction) {
+            case GOOMBA_ACT_WALK:
+                goomba_act_walk();
+                break;
+            case GOOMBA_ACT_ATTACKED_MARIO:
+                goomba_act_attacked_mario();
+                break;
+            case GOOMBA_ACT_JUMP:
+                goomba_act_jump();
+                break;
+        }
+
+        //! @bug Weak attacks on huge goombas in a triplet mark them as dead even if they're not.
+        // obj_handle_attacks returns the type of the attack, which is non-zero
+        // even for Mario's weak attacks. Thus, if Mario weakly attacks a huge goomba
+        // without harming it (e.g. by punching it), the goomba will be marked as dead
+        // and will not respawn if Mario leaves and re-enters the spawner's radius
+        // even though the goomba isn't actually dead.
+        // o->oNumLootCoins = 0;
+        if (obj_handle_attacks(&sGoombaHitbox, GOOMBA_ACT_ATTACKED_MARIO,
+                               sGoombaAttackHandlers[o->oGoombaSize & 1])) {
+            mark_goomba_as_dead();
+            // o->oPosY += 800.0f;
+            // obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            // obj->oPosY += 800.0f;
+            // vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
+            // vec3f_copy(&o->oPosX, &obj->oPosX);
+            // spawn_mist_particles();
+        }
+
+
+        // if (o->oHealth <= 0) {
+        //     obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+        //     // obj->oVelY = 80.0f;
+        //     spawn_mist_particles();
+        // }
 
         if (o->oFloorType == SURFACE_INSTANT_QUICKSAND && o->oPosY - o->oFloorHeight < 30.0f) {
             o->activeFlags = 0;

@@ -5414,7 +5414,10 @@ void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
     struct Surface *floor;
     struct Object *coin;
 
-    if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) && !(obj_has_behavior(obj, bhvShyguyBookSteal)) &&
+    if (obj_has_behavior(obj, bhvRedCoinGoomba)) {
+        coinBehavior = bhvPhysicsRedCoin;
+        model = MODEL_RED_COIN;
+    } else if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) && !(obj_has_behavior(obj, bhvShyguyBookSteal)) &&
         !(gCurrLevelNum == LEVEL_LLL && gMarioCurrentRoom == 9)) {
         coinBehavior = bhvCollectHeart;
         model = MODEL_HEART;
@@ -5436,6 +5439,11 @@ void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
         obj_translate_xz_random(coin, posJitter);
         coin->oPosY = spawnHeight;
         coin->oCoinUnk110 = sp30;
+        if (coinBehavior == bhvPhysicsRedCoin) {
+            coin->oVelY = 55.0f;
+            coin->oForwardVel = 10.0f;
+            coin->oMoveAngleYaw = random_u16();
+        }
     }
 }
 

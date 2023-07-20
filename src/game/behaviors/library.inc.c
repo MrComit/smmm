@@ -72,6 +72,7 @@ void koopa_boss_clamp_mario(void) {
 extern s32 gBossPrecoins;
 
 void bhv_koopa_boss_init(void) {
+    // o->activeFlags = 0;
     o->oHealth = 2;
     // o->oFloat10C = 5.0f;
     if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MULTI_3) {
