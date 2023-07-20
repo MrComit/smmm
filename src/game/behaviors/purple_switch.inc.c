@@ -7,7 +7,16 @@
  * the environment.
  */
 
+void bhv_floor_switch_hidden_init(void) {
+    if ((o->oBehParams >> 24) == 0) {
+        o->oF4 = 360;
+    } else {
+        o->oF4 = (o->oBehParams >> 24) * 30;
+    }
+}
+
 void bhv_purple_switch_loop(void) {
+    s32 timer;
     UNUSED u8 filler[4];
 
     switch (o->oAction) {
@@ -48,12 +57,17 @@ void bhv_purple_switch_loop(void) {
                 if (o->oBehParams2ndByte == 1 && gMarioObject->platform != o) {
                     o->oAction++;
                 } else {
-                    if (o->oTimer < 360) {
+                    if (o->oF4 != 0) {
+                        timer = o->oF4;
+                    } else {
+                        timer = 360;
+                    }
+                    if (o->oTimer < timer) {
                         play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
                     } else {
                         play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
                     }
-                    if (o->oTimer > 400) {
+                    if (o->oTimer > timer+40) {
                         o->oAction = PURPLE_SWITCH_WAIT_FOR_MARIO_TO_GET_OFF;
                     }
                 }

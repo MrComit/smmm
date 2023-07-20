@@ -81,13 +81,13 @@ void hidden_breakable_box_actions(void) {
 void hidden_unbreakable_box_actions(void) {
     struct Object *sp1C;
 
-    obj_set_collision_data(o, wdw_seg7_collision_07018528);
+    // obj_set_collision_data(o, wdw_seg7_collision_07018528);
 
     if (o->oAction == 0) {
         cur_obj_disable_rendering();
         cur_obj_become_intangible();
         if (o->oHiddenObjectUnkF4 == NULL) {
-            o->oHiddenObjectUnkF4 = cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
+            o->oHiddenObjectUnkF4 = CL_obj_find_nearest_object_with_behavior_room(o, bhvFloorSwitchHiddenObjects, o->oRoom);
         }
         if ((sp1C = o->oHiddenObjectUnkF4) != NULL) {
             if (sp1C->oAction == 2) {
@@ -98,15 +98,21 @@ void hidden_unbreakable_box_actions(void) {
         }
     } else {
         cur_obj_become_tangible();
-        if (cur_obj_wait_then_blink(360, 20)) {
+        if (cur_obj_wait_then_blink(o->oHiddenObjectUnkF4->oF4, 20)) {
             o->oAction = 0;
         }
         load_object_collision_model();
     }
 }
 
+void bhv_hidden_object_init(void) {
+    o->header.gfx.scale[1] = 0.9f;
+    o->header.gfx.scale[0] = 1.5f;
+    o->header.gfx.scale[2] = o->header.gfx.scale[0];
+}
+
 void bhv_hidden_object_loop(void) {
-    if (o->oBehParams2ndByte == 0) {
+    if (o->oBehParams2ndByte == 1) {
         hidden_breakable_box_actions(); // Confused, that function has code depending on the action
     } else {
         hidden_unbreakable_box_actions();
