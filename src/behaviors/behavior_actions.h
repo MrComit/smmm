@@ -1208,6 +1208,8 @@ void bhv_red_spot_loop(void);
 void bhv_hidden_object_init(void);
 void bhv_floor_switch_hidden_init(void);
 void bhv_red_coin_goomba_update(void);
+void bhv_winged_red_coin_init(void);
+void bhv_winged_red_coin_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

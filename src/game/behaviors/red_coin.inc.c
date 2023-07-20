@@ -305,3 +305,53 @@ void bhv_red_spot_loop(void) {
         cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
     }
 }
+
+
+s32 golden_goomba_turn_away_from_doors(void);
+
+void bhv_winged_red_coin_init(void) {
+    o->oObjFC = spawn_object(o, MODEL_MARIOS_WING_CAP, bhvStaticObject);
+    o->oObjFC->oRoom = o->oRoom;
+    o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+
+
+    bhv_red_coin_init();
+}
+
+
+void bhv_winged_red_coin_loop(void) {
+    // vec3f_copy(&o->oObjFC->oPosX, &o->oPosX);
+    o->oObjFC->oFaceAngleYaw = o->oFaceAngleYaw + 0x4000;
+
+    o->oObjFC->oPosX = o->oPosX;// + (coss(o->oObjFC->oFaceAngleYaw) * 50.0f);
+    o->oObjFC->oPosZ = o->oPosZ;// + (sins(o->oObjFC->oFaceAngleYaw) * 50.0f);
+    o->oObjFC->oPosY = o->oPosY + 30.0f;
+
+    if (o->oAction) {
+        cur_obj_update_floor_and_walls();
+        cur_obj_move_standard(-78);
+
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os16112, 0x300);
+        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+            o->os16112 = o->oWallAngle; 
+        } else if (o->oFloor != NULL && (o->oFloorType == SURFACE_BURNING || o->oFloorType == SURFACE_INSTANT_QUICKSAND)) {
+            o->os16112 += 0x600;
+        } else if (!(golden_goomba_turn_away_from_doors())) {
+            o->os16112 = approach_s16_symmetric(o->os16112, o->oAngleToMario + 0x8000, 0xC00);
+        }
+        // o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 30.0f, 0.5f);
+        o->oForwardVel = 50.0f;
+
+
+        bhv_red_coin_loop();
+        if (o->activeFlags == 0) {
+            o->oObjFC->activeFlags = 0;
+        }
+    } else {
+        if (o->oDistanceToMario < 1200.0f) {
+            o->oAction = 1;
+        }
+    }
+    o->os16F4 += 0x400;
+    o->oPosY = o->oHomeY + (sins(o->os16F4) * 20.0f);
+}
