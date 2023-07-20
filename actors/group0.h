@@ -281,6 +281,13 @@ extern const Gfx sparkles_animation_seg4_dl_04035318[];
 extern const Gfx sparkles_animation_seg4_dl_04035330[];
 extern const Gfx sparkles_animation_seg4_dl_04035348[];
 extern const Gfx sparkles_animation_seg4_dl_04035360[];
+extern const GeoLayout red_sparkles_animation_geo[];
+extern const Gfx red_sparkles_animation_seg4_dl_04035288[];
+extern const Gfx red_sparkles_animation_seg4_dl_04035300[];
+extern const Gfx red_sparkles_animation_seg4_dl_04035318[];
+extern const Gfx red_sparkles_animation_seg4_dl_04035330[];
+extern const Gfx red_sparkles_animation_seg4_dl_04035348[];
+extern const Gfx red_sparkles_animation_seg4_dl_04035360[];
 
 // stomp_smoke
 extern const GeoLayout small_water_splash_geo[];

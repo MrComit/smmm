@@ -161,3 +161,109 @@ void bhv_hidden_green_coin_star_loop(void) {
             break;
     }
 }
+
+s32 gRedSparklesCollected = -1;
+void bhv_red_sparkles_init(void) {
+    gRedSparklesCollected = -1;
+}
+
+void bhv_red_sparkles_loop(void) {
+    struct Object *obj;
+    switch (o->oAction) {
+        case 0:
+            if (gRedSparklesCollected == -1 && o->oBehParams2ndByte == 0) {
+                break;
+            }
+            spawn_object(o, MODEL_NONE, bhvRedSparkleSpawn);
+            if (gRedSparklesCollected == -1 && o->oDistanceToMario < 800.0f) {
+                gRedSparklesCollected = 0;
+            }
+            if (obj_check_if_collided_with_object(o, gMarioObject) == 1) {
+                play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+                o->oAction = 1;
+                // cur_obj_disable();
+                o->oF4 = ++gRedSparklesCollected;
+                
+                // if (gRedSparklesCollected == 5) {
+                //     obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+                //     vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
+                //     vec3f_copy(&o->oPosX, &obj->oPosX);
+                //     spawn_mist_particles();
+                // }
+            }
+            break;
+        case 1:
+            if (gRedSparklesCollected == o->oF4) {
+                if ((o->oTimer & 8) == 0) {
+                    play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+                }
+                if (o->oTimer > 80) {
+                    gRedSparklesCollected = 0;
+                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+                }
+            }
+            if (gRedSparklesCollected == 5) {
+                o->activeFlags = 0;
+                if (o->oBehParams2ndByte == 1) {
+                    o->oPosY += 800.0f;
+                    obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+                    // vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
+                    // vec3f_copy(&o->oPosX, &obj->oPosX);
+                    spawn_mist_particles();
+                }
+            } else if (gRedSparklesCollected == 0 && o->oDistanceToMario > 250.0f) {
+                // cur_obj_enable();
+                o->oAction = 0;
+                o->oF4 = 0;
+            }
+
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
+void bhv_physics_red_coin_loop(void) {
+    struct Surface *sp1C;
+
+    cur_obj_update_floor_and_walls();
+    cur_obj_if_hit_wall_bounce_away();
+    cur_obj_move_standard(-62);
+
+    if ((sp1C = o->oFloor) != NULL) {
+        if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+            o->oSubAction = 1;
+        }
+        if (o->oSubAction == 1) {
+            o->oBounciness = 0;
+            if (sp1C->normal.y < 0.9) {
+                s16 sp1A = atan2s(sp1C->normal.z, sp1C->normal.x);
+                cur_obj_rotate_yaw_toward(sp1A, 0x400);
+            }
+        }
+    }
+
+    if (o->oTimer == 0) {
+        cur_obj_play_sound_2(SOUND_GENERAL_COIN_SPURT);
+    }
+
+    if (o->oVelY < 0) {
+        cur_obj_become_tangible();
+    }
+
+    if (o->oMoveFlags & OBJ_MOVE_LANDED) {
+        if (o->oMoveFlags & (OBJ_MOVE_ABOVE_DEATH_BARRIER | OBJ_MOVE_ABOVE_LAVA))
+        {
+            obj_mark_for_deletion(o);
+        }
+    }
+
+    if (o->oMoveFlags & OBJ_MOVE_BOUNCE) {
+        if (o->oCoinUnk1B0 < 5) {
+            cur_obj_play_sound_2(SOUND_GENERAL_COIN_DROP);
+        }
+        o->oCoinUnk1B0++;
+    }
+
+    bhv_red_coin_loop();
+}

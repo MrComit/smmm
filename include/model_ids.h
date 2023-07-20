@@ -626,6 +626,7 @@
 #define MODEL_GOLDEN_GOOMBA       0x45
 #define MODEL_GOLDEN_CRATE        0x46
 #define MODEL_JOURNAL_BOOK        0x47
+#define MODEL_RED_SPARKLES_ANIMATION        0x48
 
 
 

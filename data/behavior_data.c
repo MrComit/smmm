@@ -11541,14 +11541,37 @@ const BehaviorScript bhvWinkingMoon[] = {
     END_LOOP(),
 };
 
-
-const BehaviorScript bhvRedsStar[] = {
+const BehaviorScript bhvRedSparkles[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
-    SET_INT(oInteractionSubtype, INT_SUBTYPE_REDS_STAR),
-    //SCALE(0, 40),
-    CALL_NATIVE(bhv_collect_star_init),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_red_sparkles_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_collect_star_loop),
+        CALL_NATIVE(bhv_red_sparkles_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvRedSparkleSpawn[] = {
+    BEGIN(OBJ_LIST_UNIMPORTANT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_red_sparkle_spawn_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvPhysicsRedCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, -1),
+    CALL_NATIVE(bhv_red_coin_init),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_physics_red_coin_loop),
+        ADD_INT(oAnimState, 1),
     END_LOOP(),
 };

@@ -1198,6 +1198,10 @@ void bhv_boss_objects_room(void);
 void bhv_nice_face_loop(void);
 void bhv_teardrop_loop(void);
 void bhv_winking_moon_loop(void);
+void bhv_red_sparkles_init(void);
+void bhv_red_sparkles_loop(void);
+void bhv_red_sparkle_spawn_loop(void);
+void bhv_physics_red_coin_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
