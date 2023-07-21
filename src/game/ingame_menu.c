@@ -4047,21 +4047,20 @@ void shade_screen_rgba(u8 r, u8 g, u8 b, u8 a) {
 
 s16 gRoomAlpha = 0x0;
 
+extern s32 gFakeRedActive;
+
 // Only case 1 and 2 are used
 s16 render_menus_and_dialogs(void) {
     s16 index = MENU_OPT_NONE;
 
     create_dl_ortho_matrix();
-    // if (gRoomAlpha) {
-    //     shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
-    // }
-    // if (gMarioCurrentRoom != 0) {
-    //     if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO)) { //save_file_check_global_room()
-    //         gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x4);
-    //     } else {
-    //         gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x90, 0x10);
-    //     }
-    // }
+    if (gFakeRedActive) {
+        shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
+        gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0xE0, 0xC);
+    } else if (gRoomAlpha != 0) {
+        shade_screen_rgba(0x3, 0xB, 0x3, gRoomAlpha);
+        gRoomAlpha = approach_s16_symmetric(gRoomAlpha, 0x0, 0x10);
+    }
 
     if (gMenuMode != MENU_MODE_NONE) {
         switch (gMenuMode) {

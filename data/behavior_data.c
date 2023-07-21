@@ -11673,3 +11673,17 @@ const BehaviorScript bhvRedStool[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvFakeRedCoin[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oAnimState, -1),
+    CALL_NATIVE(bhv_red_coin_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fake_red_coin_loop),
+        ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};

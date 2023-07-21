@@ -393,3 +393,59 @@ void bhv_red_stool_loop(void) {
         }
     }
 }
+
+
+s32 gFakeRedActive = 0;
+
+void bhv_fake_red_coin_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+                o->oInteractStatus = 0;
+                cur_obj_play_sound_2(SOUND_OBJ_BOO_LAUGH_LONG);
+                spawn_mist_particles();
+                cur_obj_disable();
+                gFakeRedActive = 1;
+
+                o->oObjF4 = spawn_object(o, MODEL_RED_COIN, bhvRedCoin);
+                vec3f_set(&o->oObjF4->oPosX, 757.0f, 178.0f, -9320.0f);
+            }
+            break;
+        case 1:
+            if (o->oObjF4 == NULL || o->oObjF4->activeFlags == 0) {
+                o->activeFlags = 0;
+                gFakeRedActive = 0;
+            }
+            if (o->oDistanceToMario > 3500.0f) {
+                gFakeRedActive = 0;
+                o->oAction = 0;
+                cur_obj_enable();
+                if (o->oObjF4 != NULL) {
+                    o->oObjF4->activeFlags = 0;
+                    o->oObjF4 = NULL;
+                }
+            }
+            break;
+    }
+
+    // if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+    //         gRedCoinsCollected++;
+
+    //         // Spawn the orange number counter, as long as it isn't the last coin.
+    //         if (gRedCoinsCollected != 8) {
+    //             spawn_orange_number_palette(gRedCoinsCollected, 0, 0, 0, 1);
+    //         } else {
+    //             // o->oBehParams = (o->oBehParams & 0xFF00) << 16;
+    //             spawn_default_star(gMarioState->pos[0], gMarioState->pos[1] + 100.0f, gMarioState->pos[2]);
+    //         }
+
+    //         // On all versions but the JP version, each coin collected plays a higher noise.
+    //         play_sound(SOUND_MENU_COLLECT_RED_COIN
+    //                    + (((u8) gRedCoinsCollected - 1) << 16),
+    //                    gGlobalSoundSource);
+
+    //     coin_collected();
+    //     o->oInteractStatus = 0;
+    // }
+}
