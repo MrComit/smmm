@@ -725,6 +725,7 @@
 #define MODEL_FLOATING_PLANT      0x5E
 #define MODEL_BOTTLED_LAVA        0x5F
 #define MODEL_BAR_STOOL           0x60
+#define MODEL_RED_LIGHT_BUTTON    0x61
 
 // 0x6C-0x73
 

@@ -225,4 +225,6 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/bar_stool/collision_header.h"
 
+#include "levels/wf/red_light_button/geo_header.h"
+
 #endif

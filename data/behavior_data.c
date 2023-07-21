@@ -11687,3 +11687,17 @@ const BehaviorScript bhvFakeRedCoin[] = {
         ADD_INT(oAnimState, 1),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvRedLightButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    // Floor switch - common:
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(light_button_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    //CALL_NATIVE(bhv_light_button_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_red_light_button_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

@@ -1,0 +1,18 @@
+extern const GeoLayout red_light_button_Switch_opt1[];
+extern const GeoLayout red_light_button_geo[];
+extern u8 red_light_button_stoneplat_ci8[];
+extern u8 red_light_button_stoneplat_ci8_pal_rgba16[];
+extern Vtx red_light_button_Main_mesh_layer_1_vtx_0[48];
+extern Gfx red_light_button_Main_mesh_layer_1_tri_0[];
+extern Vtx red_light_button_Main_mesh_layer_1_vtx_1[6];
+extern Gfx red_light_button_Main_mesh_layer_1_tri_1[];
+extern Vtx red_light_button_Main_mesh_layer_1_vtx_2[20];
+extern Gfx red_light_button_Main_mesh_layer_1_tri_2[];
+extern Gfx mat_red_light_button_LightButton_002[];
+extern Gfx mat_revert_red_light_button_LightButton_002[];
+extern Gfx mat_red_light_button_Black_001[];
+extern Gfx mat_red_light_button_DarkRed[];
+extern Gfx mat_red_light_button_BrightRed[];
+extern Gfx red_light_button_Main_mesh_layer_1[];
+extern Gfx red_light_button_Main_mesh_layer_1_mat_override_BrightRed_0[];
+extern Gfx red_light_button_material_revert_render_settings[];

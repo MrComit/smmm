@@ -80,3 +80,4 @@
 #include "levels/wf/bottled_lava/geo.inc.c"
 #include "levels/wf/map_l2/geo.inc.c"
 #include "levels/wf/bar_stool/geo.inc.c"
+#include "levels/wf/red_light_button/geo.inc.c"

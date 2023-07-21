@@ -449,3 +449,25 @@ void bhv_fake_red_coin_loop(void) {
     //     o->oInteractStatus = 0;
     // }
 }
+
+
+void bhv_red_light_button_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oAnimState = 0;
+            break;
+        case 1:
+            o->oAnimState = 1;
+            if (o->oF4 == 0) {
+                o->oF4 = 1;
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                    o->oObj100 = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+                    // o->oObj100->oBehParams = 0x09000000;
+                    o->oObj100->oPosZ += 197.0f;
+                    o->oObj100->oPosY += 700.0f;
+                    // vec3f_set(&o->oObj100->oPosX, -8823.0f, 493.5f, -17575.0f);
+            }
+            break;
+    }
+    o->oAction = 0;
+}

@@ -78,6 +78,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_FLOATING_PLANT, floating_plant_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOTTLED_LAVA, bottled_lava_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BAR_STOOL, bar_stool_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_RED_LIGHT_BUTTON, red_light_button_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -161,7 +162,6 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_LOCKED_CAGE, -3337, 0, -5810, 0, 0, 0, 0x00020000, bhvLockedCage),
 		OBJECT(MODEL_PURPLE_SWITCH, -315, 2000, -5461, 0, 0, 0, (19 << 24), bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, 2115, 2206, -9369, 0, 0, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_RED_COIN, -3682, 0, -6464, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_STAR_PIECE, -1685, 2738, 11977, 0, 0, 0, 0x05000000, bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -3832, 102, -11791, 0, 0, 0, 0x07000000, bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, 5296, 487, -5545, 0, 0, 0, 0x06000000, bhvStarPiece),
@@ -295,6 +295,8 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_MIRROR_SWITCH, -9098, 0, -19644, 0, 0, 0, 0x00010000, bhvMirrorSwitch),
 		OBJECT(MODEL_MIRROR_SWITCH, -9448, 0, -19644, 0, 0, 0, 0x00000000, bhvMirrorSwitch),
 		OBJECT(MODEL_MIRROR_SWITCH, -8748, 0, -19644, 0, 0, 0, 0x00020000, bhvMirrorSwitch),
+		OBJECT(MODEL_RED_LIGHT_BUTTON, -6004, 213, -19328, 0, 180, 0, 0x00010000, bhvRedLightButton),
+		OBJECT(MODEL_RED_LIGHT_BUTTON, -6004, 213, -20728, 0, 0, 0, 0x00010000, bhvRedLightButton),
 		OBJECT(MODEL_BEDROOM_OBJECT, -6020, 0, -10737, 0, 0, 0, 0x00000000, bhvBedroomObject),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5472, 0, -11340, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_BEDROOM_GATE, -5472, 0, -11300, 0, 0, 0, 0x00000000, bhvBedroomGate),
