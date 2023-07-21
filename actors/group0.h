@@ -440,4 +440,6 @@ extern const Gfx snufit_seg6_dl_06009B68[];
 
 #include "journal_book/geo_header.h"
 
+#include "invis_coin_spot/collision_header.h"
+
 #endif

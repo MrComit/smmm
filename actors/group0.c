@@ -63,3 +63,4 @@
 #include "garage_wall/model.inc.c"
 #include "garage_wall/collision.inc.c"
 #include "journal_book/model.inc.c"
+#include "invis_coin_spot/collision.inc.c"

@@ -351,7 +351,27 @@ void bhv_winged_red_coin_loop(void) {
         if (o->oDistanceToMario < 1200.0f) {
             o->oAction = 1;
         }
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->os16112, 0x300);
+        o->os16112 = approach_s16_symmetric(o->os16112, o->oAngleToMario + 0x8000, 0xC00);
     }
     o->os16F4 += 0x400;
     o->oPosY = o->oHomeY + (sins(o->os16F4) * 20.0f);
+}
+
+
+
+
+void bhv_invis_red_coin_loop(void) {
+    struct Object *obj;
+    if (o->oDistanceToMario < 2000.0f) {
+        cur_obj_play_sound_1(SOUND_AIR_PEACH_TWINKLE);
+    }
+
+    if (cur_obj_is_mario_ground_pounding_platform()) {
+        o->oPosY += 800.0f;
+        obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+        spawn_mist_particles();
+        o->activeFlags = 0;
+        cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
+    }
 }
