@@ -26,7 +26,7 @@ extern s32 gDialogResponse;
 
 void bhv_chapter_end_prompt_loop(void) {
     vec3f_copy(&o->oPosX, gMarioState->pos);
-    if (o->oTimer > 10 && CL_NPC_Dialog(o->oBehParams2ndByte)) {
+    if (o->oTimer > 10 && gCamera->comitCutscene == 0 && CL_NPC_Dialog(o->oBehParams2ndByte)) {
         save_file_set_menu_challenges(1 << o->oF4);
 
         disable_time_stop();
@@ -41,16 +41,19 @@ void bhv_chapter_end_prompt_loop(void) {
 
 
 void bhv_boo_save_prompt_loop(void) {
-    s32 dialogResponse = CL_NPC_Dialog_Options(o->oBehParams2ndByte);
-    if (gDialogResponse != DIALOG_RESPONSE_NONE) {
-        if (gDialogResponse == DIALOG_RESPONSE_YES) {
-            save_file_do_save(gCurrSaveFileNum - 1);
-            play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+    s32 dialogResponse;
+    if (gCamera->comitCutscene == 0) {
+        dialogResponse = CL_NPC_Dialog_Options(o->oBehParams2ndByte);
+        if (gDialogResponse != DIALOG_RESPONSE_NONE) {
+            if (gDialogResponse == DIALOG_RESPONSE_YES) {
+                save_file_do_save(gCurrSaveFileNum - 1);
+                play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+            }
+            disable_time_stop();
+            enable_background_sound();
+            o->activeFlags = 0;
+            set_mario_npc_dialog(0);
         }
-        disable_time_stop();
-        enable_background_sound();
-        o->activeFlags = 0;
-        set_mario_npc_dialog(0);
     }
 }
 
