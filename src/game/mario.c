@@ -2003,7 +2003,7 @@ s32 execute_mario_action(UNUSED struct Object *o) {
             if ((m->pos[1] <= m->floorHeight && m->floor->type == SURFACE_GP_FLOOR && 
                 !(save_file_get_gpflags() & (1 << m->floor->force))) || 
                 (obj != NULL && ((obj_has_behavior(obj, bhvGoldenPillar) && obj->oAction == 1) || obj_has_behavior(obj, bhvRedSpot) 
-                || obj_has_behavior(obj, bhvInvisRedCoin)))) {
+                || obj_has_behavior(obj, bhvInvisRedCoin) || obj_has_behavior(obj, bhvRedStool)))) {
                 m->particleFlags |= PARTICLE_GP_MIST_CIRCLE;
             }
         } 

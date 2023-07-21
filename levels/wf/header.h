@@ -221,4 +221,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/map_l2/geo_header.h"
 
+#include "levels/wf/bar_stool/geo_header.h"
+
+#include "levels/wf/bar_stool/collision_header.h"
+
 #endif

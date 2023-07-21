@@ -132,3 +132,5 @@
 #include "levels/wf/floating_plant/collision.inc.c"
 #include "levels/wf/bottled_lava/model.inc.c"
 #include "levels/wf/map_l2/model.inc.c"
+#include "levels/wf/bar_stool/model.inc.c"
+#include "levels/wf/bar_stool/collision.inc.c"

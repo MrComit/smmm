@@ -1211,6 +1211,7 @@ void bhv_red_coin_goomba_update(void);
 void bhv_winged_red_coin_init(void);
 void bhv_winged_red_coin_loop(void);
 void bhv_invis_red_coin_loop(void);
+void bhv_red_stool_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -724,6 +724,7 @@
 #define MODEL_LIGHTNING_SPINNER   0x5D
 #define MODEL_FLOATING_PLANT      0x5E
 #define MODEL_BOTTLED_LAVA        0x5F
+#define MODEL_BAR_STOOL           0x60
 
 // 0x6C-0x73
 

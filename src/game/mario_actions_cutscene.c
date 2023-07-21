@@ -616,7 +616,12 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                         spawn_object(m->marioObj, MODEL_STAR_CURRENCY, bhvCelebrationStar);
                         break;
                     case 5:
-                        spawn_object(m->marioObj, MODEL_STAR, bhvCelebrationStar);
+                        obj = spawn_object(m->marioObj, MODEL_STAR, bhvCelebrationStar);
+                        if (gCurrLevelNum == LEVEL_WF) {
+                            obj->oBehParams = 1 << 24;
+                        } else if (gCurrLevelNum == LEVEL_HMC) {
+                            obj->oBehParams = 2 << 24;
+                        }
                         break;
                 }
                 disable_background_sound();

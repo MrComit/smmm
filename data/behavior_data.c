@@ -11635,7 +11635,7 @@ const BehaviorScript bhvWingedRedCoin[] = {
     SET_INT(oAnimState, -1),
     SET_HOME(),
     CALL_NATIVE(bhv_winged_red_coin_init),
-    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 70, /*Gravity*/ 0, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_winged_red_coin_loop),
         ADD_INT(oAnimState, 1),
@@ -11654,6 +11654,22 @@ const BehaviorScript bhvInvisRedCoin[] = {
     // CALL_NATIVE(bhv_bg_ground_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_invis_red_coin_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvRedStool[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_CALC_COLL_DIST)),
+    LOAD_COLLISION_DATA(bar_stool_collision),
+    // SCALE(0, 150),
+    // SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    // CALL_NATIVE(bhv_bg_ground_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_red_stool_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
