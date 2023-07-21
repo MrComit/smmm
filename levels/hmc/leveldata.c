@@ -159,3 +159,5 @@
 #include "levels/hmc/trophy_elevator/collision.inc.c"
 #include "levels/hmc/plat_hall_wall/model.inc.c"
 #include "levels/hmc/map_l6/model.inc.c"
+#include "levels/hmc/red_vase/model.inc.c"
+#include "levels/hmc/red_vase/collision.inc.c"

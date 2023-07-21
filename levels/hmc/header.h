@@ -277,4 +277,8 @@ extern const LevelScript level_hmc_entry[];
 
 #include "levels/hmc/map_l6/geo_header.h"
 
+#include "levels/hmc/red_vase/geo_header.h"
+
+#include "levels/hmc/red_vase/collision_header.h"
+
 #endif

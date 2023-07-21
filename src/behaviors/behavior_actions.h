@@ -1214,6 +1214,7 @@ void bhv_invis_red_coin_loop(void);
 void bhv_red_stool_loop(void);
 void bhv_fake_red_coin_loop(void);
 void bhv_red_light_button_loop(void);
+void bhv_red_vase_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

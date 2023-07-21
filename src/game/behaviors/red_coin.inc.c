@@ -471,3 +471,22 @@ void bhv_red_light_button_loop(void) {
     }
     o->oAction = 0;
 }
+
+
+
+void bhv_red_vase_loop(void) {
+    struct Object *obj;
+    if (gRedCoinMissionActive) {
+        if (o->oAction == 0 && (cur_obj_is_mario_ground_pounding_platform() || o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED)) {
+            obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oPosY += 700.0f;
+            // obj->oPosX -= 150.0f;
+            // obj->oVelY = 20.0f;
+            // obj->oForwardVel = 20.0f;
+            // obj->oMoveAngleYaw = 0xC000;
+            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
+        }
+    }
+}

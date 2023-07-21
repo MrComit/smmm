@@ -1,0 +1,12 @@
+extern const GeoLayout red_vase_switch_opt1[];
+extern const GeoLayout red_vase_geo[];
+extern u8 red_vase_squigglyline_i8[];
+extern Vtx red_vase_rv_mesh_layer_1_vtx_0[114];
+extern Gfx red_vase_rv_mesh_layer_1_tri_0[];
+extern Gfx mat_red_vase_Vase_v4_003_layer1[];
+extern Gfx mat_revert_red_vase_Vase_v4_003_layer1[];
+extern Gfx mat_red_vase_RedVase_layer1[];
+extern Gfx mat_revert_red_vase_RedVase_layer1[];
+extern Gfx red_vase_rv_mesh_layer_1[];
+extern Gfx red_vase_rv_mesh_layer_1_mat_override_RedVase_0[];
+extern Gfx red_vase_material_revert_render_settings[];

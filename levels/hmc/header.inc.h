@@ -728,7 +728,7 @@ extern Gfx hmc_dl_Vase_mesh_layer_1_tri_12[];
 extern Vtx hmc_dl_Vase_mesh_layer_4_vtx_cull[8];
 extern Vtx hmc_dl_Vase_mesh_layer_4_vtx_0[80];
 extern Gfx hmc_dl_Vase_mesh_layer_4_tri_0[];
-extern Vtx hmc_dl_Vase_001_mesh_layer_1_vtx_0[240];
+extern Vtx hmc_dl_Vase_001_mesh_layer_1_vtx_0[120];
 extern Gfx hmc_dl_Vase_001_mesh_layer_1_tri_0[];
 extern Vtx hmc_dl_AA_mesh_layer_1_vtx_0[3];
 extern Gfx hmc_dl_AA_mesh_layer_1_tri_0[];
