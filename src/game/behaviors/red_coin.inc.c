@@ -397,6 +397,15 @@ void bhv_red_stool_loop(void) {
 
 s32 gFakeRedActive = 0;
 
+void bhv_fake_red_coin_init(void) {
+    if (gCurrLevelNum == LEVEL_WF) {
+        o->oRoom2 = 2;
+    } else {
+        o->oRoom2 = 13;
+    }
+    bhv_red_coin_init();
+}
+
 void bhv_fake_red_coin_loop(void) {
     switch (o->oAction) {
         case 0:
@@ -409,7 +418,13 @@ void bhv_fake_red_coin_loop(void) {
                 gFakeRedActive = 1;
 
                 o->oObjF4 = spawn_object(o, MODEL_RED_COIN, bhvRedCoin);
-                vec3f_set(&o->oObjF4->oPosX, 757.0f, 178.0f, -9320.0f);
+                o->oObjF4->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                o->oObjF4->oRoom = o->oRoom;
+                if (gCurrLevelNum == LEVEL_WF) {
+                    vec3f_set(&o->oObjF4->oPosX, 757.0f, 178.0f, -9320.0f);
+                } else {
+                    vec3f_set(&o->oObjF4->oPosX, -2235.0f, 407.0f, -10310.0f);
+                }
             }
             break;
         case 1:
@@ -417,7 +432,7 @@ void bhv_fake_red_coin_loop(void) {
                 o->activeFlags = 0;
                 gFakeRedActive = 0;
             }
-            if (o->oDistanceToMario > 3500.0f) {
+            if (o->oDistanceToMario > 3000.0f || o->oRoom != gMarioCurrentRoom) {
                 gFakeRedActive = 0;
                 o->oAction = 0;
                 cur_obj_enable();

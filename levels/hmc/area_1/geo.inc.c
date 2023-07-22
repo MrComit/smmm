@@ -78,6 +78,7 @@ const GeoLayout hmc_dl_bb_006_geo[] = {
 		GEO_ASM(1, geo_update_vanish_floor),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_MUSICFLOOR_Trophy_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Paintings_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Paintings_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_007_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_015_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_018_mesh_layer_1),
@@ -86,6 +87,7 @@ const GeoLayout hmc_dl_bb_006_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_024_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoom_025_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, hmc_dl_TrophyRoom_025_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_TrophyRoomFakeWall_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

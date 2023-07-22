@@ -166,14 +166,14 @@ void scroll_sts_mat_hmc_dl_WoodFloorTransparent_002_layer1() {
 	}
 };
 
-void scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_2() {
+void scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_0() {
 	int i = 0;
 	int count = 6;
 	int width = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Paintings_001_mesh_layer_1_vtx_2);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Paintings_001_mesh_layer_1_vtx_0);
 
 	deltaX = (int)(-0.5 * 0x20) % width;
 
@@ -187,14 +187,14 @@ void scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_2() {
 	currentX += deltaX;
 }
 
-void scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_3() {
+void scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_1() {
 	int i = 0;
 	int count = 9;
 	int width = 64 * 0x20;
 
 	static int currentX = 0;
 	int deltaX;
-	Vtx *vertices = segmented_to_virtual(hmc_dl_Paintings_001_mesh_layer_1_vtx_3);
+	Vtx *vertices = segmented_to_virtual(hmc_dl_Paintings_001_mesh_layer_1_vtx_1);
 
 	deltaX = (int)(0.5 * 0x20) % width;
 
@@ -245,11 +245,6 @@ void scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_6() {
 	currentX += deltaX;	timeX += 1;	currentY += deltaY;	timeY += 1;
 }
 
-void scroll_sts_mat_hmc_dl_Study1_002() {
-	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Study1_002);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-};
-
 void scroll_sts_mat_hmc_dl_Cons1_layer1() {
 	static int intervalTex0 = 20;
 	static int curInterval0 = 20;
@@ -266,6 +261,11 @@ void scroll_sts_mat_hmc_dl_Cons1_layer1() {
 		shift_t(mat, 15, PACK_TILESIZE(0, 16));
 		curInterval1 = intervalTex1;
 	}
+};
+
+void scroll_sts_mat_hmc_dl_Study1_002() {
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_Study1_002);
+	shift_s(mat, 13, PACK_TILESIZE(0, 1));
 };
 
 void scroll_sts_mat_hmc_dl_Parlor1_002_layer1() {
@@ -759,11 +759,11 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_RedWall_002_layer1();
 	scroll_sts_mat_hmc_dl_BooGoo_layer1();
 	scroll_sts_mat_hmc_dl_WoodFloorTransparent_002_layer1();
-	scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_2();
-	scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_3();
+	scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_0();
+	scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_1();
 	scroll_hmc_dl_Paintings_001_mesh_layer_1_vtx_6();
-	scroll_sts_mat_hmc_dl_Study1_002();
 	scroll_sts_mat_hmc_dl_Cons1_layer1();
+	scroll_sts_mat_hmc_dl_Study1_002();
 	scroll_sts_mat_hmc_dl_Parlor1_002_layer1();
 	scroll_sts_mat_hmc_dl_WoodFloorOneCycle_002();
 	scroll_sts_mat_hmc_dl_Lava_002_layer1();

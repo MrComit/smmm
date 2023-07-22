@@ -29,6 +29,8 @@ void bhv_warp_loop(void) {
     }
 }
 
+extern s32 gRedCoinMissionActive;
+
 
 void fading_warp_active_check(s16 param) {
     struct Object *obj;
@@ -78,6 +80,11 @@ void fading_warp_active_check(s16 param) {
             break;
         case 7:
             if (o->oF4) {
+                val = TRUE;
+            }
+            break;
+        case 8:
+            if (gRedCoinMissionActive) {
                 val = TRUE;
             }
             break;

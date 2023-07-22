@@ -11677,11 +11677,11 @@ const BehaviorScript bhvRedStool[] = {
 
 const BehaviorScript bhvFakeRedCoin[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    OR_INT(oFlags, (OBJ_FLAG_MULTIROOM | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     SET_INT(oIntangibleTimer, 0),
     SET_INT(oAnimState, -1),
-    CALL_NATIVE(bhv_red_coin_init),
+    CALL_NATIVE(bhv_fake_red_coin_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_fake_red_coin_loop),
         ADD_INT(oAnimState, 1),
