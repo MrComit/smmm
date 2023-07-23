@@ -228,8 +228,10 @@ void clear_area_graph_nodes(void) {
 
 extern s8 gGreenCoinsCollected;
 extern s32 gFakeRedActive;
+extern s32 gRedCoinMissionActive;
 
 void load_area(s32 index) {
+    gRedCoinMissionActive = 0;
     gFakeRedActive = 0;
     gGreenCoinsCollected = 0;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {

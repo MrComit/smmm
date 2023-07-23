@@ -11717,3 +11717,20 @@ const BehaviorScript bhvRedVase[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvProspectorT[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_PERSISTENT_RESPAWN | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, toad_friend_anims),
+    ANIMATE(6),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 100),
+    SET_INT(oIntangibleTimer, 0),
+    SET_INT(oOpacity, 255),
+    SET_FLOAT(oGraphYOffset, -14),
+    CALL_NATIVE(bhv_prospector_t_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_prospector_t_loop),
+    END_LOOP(),
+};

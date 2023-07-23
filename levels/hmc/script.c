@@ -14,6 +14,7 @@
 #include "actors/common1.h"
 
 /* Fast64 begin persistent block [includes] */
+#include "actors/group0.h"
 /* Fast64 end persistent block [includes] */
 
 #include "make_const_nonconst.h"
@@ -90,6 +91,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_ELEVATOR, trophy_elevator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PLAT_HALL_WALL, plat_hall_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_VASE, red_vase_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T,      prospector_t_geo),
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

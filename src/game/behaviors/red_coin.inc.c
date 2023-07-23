@@ -25,7 +25,7 @@ static struct ObjectHitbox sGreenCoinHitbox = {
 };
 
 
-s32 gRedCoinMissionActive = 1;
+s32 gRedCoinMissionActive = 0;
 
 extern s8 gRedCoinsCollected;
 
@@ -210,6 +210,7 @@ void bhv_red_sparkles_loop(void) {
                 if (o->oBehParams2ndByte == 1) {
                     o->oPosY += 800.0f;
                     obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+                    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                     // vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
                     // vec3f_copy(&o->oPosX, &obj->oPosX);
                     spawn_mist_particles();
@@ -283,6 +284,7 @@ void bhv_gold_medal_loop(void) {
     if (gRedCoinMissionActive) {
         if (o->oAction == 0 && o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             obj->oPosX -= 150.0f;
             obj->oVelY = 20.0f;
             obj->oForwardVel = 20.0f;
@@ -300,6 +302,7 @@ void bhv_red_spot_loop(void) {
     if (cur_obj_is_mario_ground_pounding_platform()) {
         o->oPosY += 800.0f;
         obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         spawn_mist_particles();
         o->activeFlags = 0;
         cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
@@ -370,6 +373,7 @@ void bhv_invis_red_coin_loop(void) {
     if (cur_obj_is_mario_ground_pounding_platform()) {
         o->oPosY += 800.0f;
         obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         spawn_mist_particles();
         o->activeFlags = 0;
         cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
@@ -382,6 +386,7 @@ void bhv_red_stool_loop(void) {
     if (gRedCoinMissionActive) {
         if (o->oAction == 0 && cur_obj_is_mario_ground_pounding_platform()) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             obj->oPosY += 700.0f;
             // obj->oPosX -= 150.0f;
             // obj->oVelY = 20.0f;
@@ -477,6 +482,7 @@ void bhv_red_light_button_loop(void) {
                 o->oF4 = 1;
                 play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
                     o->oObj100 = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+                    o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                     // o->oObj100->oBehParams = 0x09000000;
                     o->oObj100->oPosZ += 197.0f;
                     o->oObj100->oPosY += 700.0f;
@@ -494,6 +500,7 @@ void bhv_red_vase_loop(void) {
     if (gRedCoinMissionActive) {
         if (o->oAction == 0 && (cur_obj_is_mario_ground_pounding_platform() || o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED)) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             obj->oPosY += 700.0f;
             // obj->oPosX -= 150.0f;
             // obj->oVelY = 20.0f;
@@ -504,4 +511,53 @@ void bhv_red_vase_loop(void) {
             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
         }
     }
+}
+
+
+void garbage_rc(void) {
+            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+            o->oAction = 1;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER); 
 }

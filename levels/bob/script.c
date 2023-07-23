@@ -12,9 +12,11 @@
 #include "levels/scripts.h"
 
 #include "actors/common1.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
+#include "actors/group0.h"
 /* Fast64 end persistent block [includes] */
 
 #include "make_const_nonconst.h"
@@ -73,6 +75,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_GOLDEN_PILLAR, golden_pillar_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_GOLD_MEDAL, gold_medal_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_SPOT, red_spot_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T, prospector_t_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -152,6 +155,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, 346, 948, 21436, 0, 30, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_CHANDELIER, 741, 685, 17689, 0, 0, 0, 0x00000000, bhvChandelier),
 		OBJECT(MODEL_GOLDEN_PILLAR, -2587, -206, 16608, 0, 0, 0, (1 << 8), bhvGoldenPillar),
+		OBJECT(MODEL_PROSPECTOR_T, 506, 690, 3982, 0, 0, 0, 0x00000000, bhvProspectorT),
 		OBJECT(MODEL_PURPLE_SWITCH, 1017, 0, 26555, 0, 0, 0, (23 << 24), bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, 39, 1500, 13437, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_SPOT, 1016, -7, 22064, 0, 0, 0, 0x00000000, bhvRedSpot),

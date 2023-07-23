@@ -165,9 +165,9 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_TOAD_FLAG_MIND_MAZE         /* 0x00000800 */ (1 << 11)
 #define SAVE_TOAD_FLAG_MIND_ENTRY        /* 0x00001000 */ (1 << 12)
 #define SAVE_TOAD_FLAG_PROF_CAGE_MSG     /* 0x00002000 */ (1 << 13)
-#define SAVE_TOAD_FLAG_015               /* 0x00004000 */ (1 << 14)
-#define SAVE_TOAD_FLAG_016               /* 0x00008000 */ (1 << 15)
-#define SAVE_TOAD_FLAG_017               /* 0x00010000 */ (1 << 16)
+#define SAVE_TOAD_FLAG_REDS1             /* 0x00004000 */ (1 << 14)
+#define SAVE_TOAD_FLAG_REDS2             /* 0x00008000 */ (1 << 15)
+#define SAVE_TOAD_FLAG_REDS3             /* 0x00010000 */ (1 << 16)
 #define SAVE_TOAD_FLAG_018               /* 0x00020000 */ (1 << 17)
 #define SAVE_TOAD_FLAG_019               /* 0x00040000 */ (1 << 18)
 #define SAVE_TOAD_FLAG_020               /* 0x00080000 */ (1 << 19)
@@ -322,6 +322,7 @@ u32 save_file_get_boos(void);
 void save_file_set_boos(u32 boo);
 u32 save_file_get_golden_goombas(void);
 void save_file_set_golden_goombas(u32 goomba);
+u32 save_file_get_reds_star(void);
 u32 save_file_get_star_piece(void);
 void save_file_set_star_piece(u32 piece);
 u32 save_file_get_challenges(u8 index);

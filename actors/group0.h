@@ -442,4 +442,6 @@ extern const Gfx snufit_seg6_dl_06009B68[];
 
 #include "invis_coin_spot/collision_header.h"
 
+#include "prospector_t/geo_header.h"
+
 #endif

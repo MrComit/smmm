@@ -634,6 +634,14 @@ void save_file_set_heavy_object(u8 obj, u32 id) {
 }
 
 
+u32 save_file_get_reds_star(void) {
+    if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
+        return 0;
+    }
+    return (gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces & 0xE000000) >> 25;
+}
+
+
 
 u32 save_file_get_star_piece(void) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {

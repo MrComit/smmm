@@ -1203,6 +1203,86 @@ void bhv_friend_toad_init(void) {
         o->oInteractionSubtype = INT_SUBTYPE_NPC;
 }
 
+extern s32 gRedCoinMissionActive;
+
+
+void spawn_red_coin_objects(s16 level) {
+
+}
+
+
+void bhv_prospector_t_init(void) {
+    o->oInteractionSubtype = INT_SUBTYPE_NPC;
+
+    switch (gCurrLevelNum) {
+        case LEVEL_BOB:
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS1 || 
+                (!(save_file_get_newflags(0) & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)))) {
+                // o->activeFlags = 0;
+            }
+
+            o->os16F4 = 0;
+            break;
+        case LEVEL_WF:
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS2) {
+                o->activeFlags = 0;
+            }
+            o->os16F4 = 1;
+            break;
+        case LEVEL_HMC:
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS3) {
+                o->activeFlags = 0;
+            }
+            o->os16F4 = 2;
+            break;
+    }
+
+}
+
+
+void bhv_prospector_t_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+                if (gRedCoinMissionActive && o->os16F8 == 0) {
+                    //check if hes gotten them
+                    if (save_file_get_reds_star() & (1 << o->os16F4)) {
+                        //change dialog id
+                        //set flag to give mario coins (after dialog)
+                        o->os16F8 = 1;
+                        //set save flag
+                        save_file_set_newflags(SAVE_TOAD_FLAG_REDS1 << o->os16F4, 1);
+                    }
+                }
+            }
+
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                o->oAction = 2;
+                play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+            }
+
+            cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            break;
+        case 2:
+            if (o->oTimer > 12) {
+                if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                    o->oAction = 0;
+                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                    //spawn_red_coin_objects(); //spawn objects
+                    gRedCoinMissionActive = 1;
+                    //CHANGE DIALOG ID
+                }
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
 
 void bhv_bparam1_to_animstate(void) {
     o->oAnimState = o->oBehParams >> 24;
