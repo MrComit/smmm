@@ -13,6 +13,7 @@
 #include "game/object_list_processor.h"
 #include "graph_node.h"
 #include "surface_collision.h"
+#include "game/save_file.h"
 
 // Macros for retrieving arguments from behavior scripts.
 #define BHV_CMD_GET_1ST_U8(index)  (u8)((gCurBhvCommand[index] >> 24) & 0xFF) // unused
@@ -533,12 +534,36 @@ static s32 bhv_cmd_bit_clear(void) {
     return BHV_PROC_CONTINUE;
 }
 
+
+void handle_red_coin_obj_spawns(void) {
+    // return;
+    switch (gCurrLevelNum) {
+        case LEVEL_BOB:
+            if (!(save_file_get_newflags(0) & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3))) {
+                gCurrentObject->activeFlags = 0;
+            }
+            break;
+        case LEVEL_WF:
+            if (!(save_file_get_newflags(1) & SAVE_TOAD_FLAG_ENTER_L6)) {
+                gCurrentObject->activeFlags = 0;
+            }
+            break;
+    }
+}
+
 // Command 0x27: Loads the animations for the object. <field> is always set to oAnimations.
 // Usage: LOAD_ANIMATIONS(field, anims)
 static s32 bhv_cmd_load_animations(void) {
     u8 field = BHV_CMD_GET_2ND_U8(0);
 
     cur_obj_set_vptr(field, BHV_CMD_GET_VPTR(1));
+
+
+
+        if (gCurrentObject->oFlags & OBJ_FLAG_RED_COIN_OBJ) {
+            handle_red_coin_obj_spawns();
+        }
+
 
     gCurBhvCommand += 2;
     return BHV_PROC_CONTINUE;
@@ -1090,6 +1115,8 @@ void obj_move_y_with_terminal_vel(struct Object *obj) {
     obj->oPosY += obj->oVelY;
 }
 
+extern s32 gRedCoinMissionActive;
+
 void cur_obj_update(void) {
     struct Object *obj = gCurrentObject;
     s32 objFlags = obj->oFlags;
@@ -1097,6 +1124,9 @@ void cur_obj_update(void) {
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
+    if (objFlags & OBJ_FLAG_RED_COIN_OBJ && gRedCoinMissionActive == FALSE) {
+        return;
+    }
 
     // Handle visibility of object
     if (cur_obj_enable_rendering_if_mario_in_room()) {

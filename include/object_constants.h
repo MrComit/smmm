@@ -49,6 +49,7 @@
 #define OBJ_FLAG_0020                             (1 << 18) // 0x00040000
 #define OBJ_FLAG_DONT_CALC_COLL_DIST              (1 << 19) // 0x00080000
 #define OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST         (1 << 20) // 0x00100000
+#define OBJ_FLAG_RED_COIN_OBJ                     (1 << 21) // 0x00200000
 
 #define OBJ_FLAG_30                               (1 << 30) // 0x40000000
 

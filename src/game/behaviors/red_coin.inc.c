@@ -316,6 +316,7 @@ void bhv_winged_red_coin_init(void) {
     o->oObjFC = spawn_object(o, MODEL_MARIOS_WING_CAP, bhvStaticObject);
     o->oObjFC->oRoom = o->oRoom;
     o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    o->oObjFC->oFlags |= OBJ_FLAG_RED_COIN_OBJ;
 
 
     bhv_red_coin_init();
