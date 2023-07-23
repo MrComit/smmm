@@ -1205,12 +1205,6 @@ void bhv_friend_toad_init(void) {
 
 extern s32 gRedCoinMissionActive;
 
-
-void spawn_red_coin_objects(s16 level) {
-
-}
-
-
 void bhv_prospector_t_init(void) {
     o->oInteractionSubtype = INT_SUBTYPE_NPC;
 
@@ -1236,7 +1230,7 @@ void bhv_prospector_t_init(void) {
             o->os16F4 = 2;
             break;
     }
-
+    o->oBehParams2ndByte = DIALOG_078 + o->os16F4;
 }
 
 
@@ -1249,6 +1243,11 @@ void bhv_prospector_t_loop(void) {
                     //check if hes gotten them
                     if (save_file_get_reds_star() & (1 << o->os16F4)) {
                         //change dialog id
+                        if (o->os16F4 == 2) {
+                            o->oBehParams2ndByte = DIALOG_083;
+                        } else {
+                            o->oBehParams2ndByte = DIALOG_082;
+                        }
                         //set flag to give mario coins (after dialog)
                         o->os16F8 = 1;
                         //set save flag
@@ -1272,9 +1271,17 @@ void bhv_prospector_t_loop(void) {
                 if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
                     o->oAction = 0;
                     stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
-                    //spawn_red_coin_objects(); //spawn objects
-                    gRedCoinMissionActive = 1;
-                    //CHANGE DIALOG ID
+                    if (o->os16F8 == 0) {
+                        gRedCoinMissionActive = 1;
+                        //CHANGE DIALOG ID
+                        o->oBehParams2ndByte = DIALOG_081;
+                    } else if (o->os16F8 == 1) {
+                        o->os16F8 = 2;
+                        gMarioState->numCoins += 1000;
+                        if (o->os16F4 == 2) {
+                            gMarioState->numCoins += 1000;
+                        }
+                    }
                 }
             }
             break;

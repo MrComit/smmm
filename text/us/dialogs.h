@@ -949,70 +949,24 @@ Do you want to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_078, 1, 5, 30, 200, _("\
-Break open the Blue Coin\n\
-Block by Pounding the\n\
-Ground with the [Z] Button.\n\
-One Blue Coin is worth\n\
-five Yellow Coins.\n\
-But you have to hurry!\n\
-The coins will disappear\n\
-if you're not quick to\n\
-collect them! Too bad."))
+prospector t first visit"))
 
 DEFINE_DIALOG(DIALOG_079, 1, 4, 30, 200, _("\
-Owwwuu! Let me go!\n\
-Uukee-kee! I was only\n\
-teasing! Can't you take\n\
-a joke?\n\
-I'll tell you what, let's\n\
-trade. If you let me go,\n\
-I'll give you something\n\
-really good.\n\
-So, how about it?\n\
-\n\
-//Free him/ Hold on"))
+prospector t second visit"))
 
 DEFINE_DIALOG(DIALOG_080, 1, 1, 30, 200, _("\
-Eeeh hee hee hee!"))
+prospector t third visit"))
 
 DEFINE_DIALOG(DIALOG_081, 1, 4, 30, 200, _("\
-The mystery is of Wet\n\
-or Dry.\n\
-And where does the\n\
-solution lie?\n\
-The city welcomes visitors\n\
-with the depth they bring\n\
-as they enter."))
+prospector t mid \n\
+mission text"))
 
 DEFINE_DIALOG(DIALOG_082, 1, 4, 30, 200, _("\
-Hold on to your hat! If\n\
-you lose it, you'll be\n\
-injured easily.\n\
-\n\
-If you do lose your Cap,\n\
-you'll have to find it in\n\
-the course where you\n\
-lost it.\n\
-Oh, boy, it's not looking\n\
-good for Peach. She's\n\
-still trapped somewhere\n\
-inside the walls.\n\
-Please, Mario, you have\n\
-to help her! Did you know\n\
-that there are enemy\n\
-worlds inside the walls?\n\
-Yup. It's true. Bowser's\n\
-troops are there, too.\n\
-Oh, here, take this. I've\n\
-been keeping it for you."))
+prospector t gives you star"))
 
 DEFINE_DIALOG(DIALOG_083, 1, 6, 30, 200, _("\
-There's something strange\n\
-about that clock. As you\n\
-jump inside, watch the\n\
-position of the big hand.\n\
-Oh, look what I found!\n\
-Here, Mario, catch!"))
+prospector t gives you\n\
+the final star"))
 
 DEFINE_DIALOG(DIALOG_084, 1, 2, 30, 200, _("\
 Yeeoww! Unhand me, please!\n\
