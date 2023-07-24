@@ -13,6 +13,9 @@
 
 #include "actors/common1.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -108,7 +111,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6601, 200, -7121, 0, -180, 0, (0xE << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, -42, 200, -18584, 0, 0, 0, (0xF << 16), bhvFlyingWarp),
-		OBJECT(MODEL_NONE, 6486, 200, -11266, 0, -180, 0, (0x5 << 16), bhvFlyingWarp),
+		OBJECT(MODEL_NONE, 6621, 359, -12383, 0, -180, 0, (0x5 << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, 0, 2057, 200, -18319),
 		OBJECT(MODEL_BREAKABLE_BOX, -397, 1917, -6410, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -505, 1735, -7952, 0, 0, 0, 0x00000000, bhvHiddenObject),
@@ -368,10 +371,11 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_PRESSURE_PLATE, -8464, 0, -4932, 0, 0, 0, 0x00000000, bhvMastersPlate),
 		OBJECT(MODEL_SHADOW_BOSS, -7328, 201, -5521, 0, 90, 0, 0x00000000, bhvShadowBoss),
 		OBJECT(MODEL_PROSPECTOR_LOCK, 6521, 0, -10783, 0, 0, 0, (2 << 16), bhvProspectorLock),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 6521, 0, -10883, 0, -180, 0, (2 << 16), bhvProspectorLock),
 		OBJECT(MODEL_DBLOCK, 5770, 0, -8672, 0, 0, 0, (4 << 8), bhvDBlock),
 		OBJECT(MODEL_NONE, 6874, 160, -6548, 0, 0, 0, 0x00AF0000, bhvPlaysetEntrance),
 		OBJECT(MODEL_NONE, 6411, 160, -6548, 0, 0, 0, 0x01AE0000, bhvPlaysetEntrance),
-		OBJECT(MODEL_PROSPECTOR_T, 6623, 0, -12913, 0, -180, 0, 0x00000000, bhvProspectorT),
+		OBJECT(MODEL_PROSPECTOR_T, 7337, 0, -13602, 0, -33, 0, 0x00000000, bhvProspectorT),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),
 		MACRO_OBJECTS(wf_area_1_macro_objs),

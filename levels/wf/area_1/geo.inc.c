@@ -526,7 +526,13 @@ const GeoLayout wf_dl_17__Play_Room_geo[] = {
 const GeoLayout wf_dl_18__Pool_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Hallway_012_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_PoolRoom_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_PoolRoom_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Simple_Chairs_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_TowelRacks_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Towels_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Towels_001_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, wf_dl_WaterFloor_mesh_layer_6),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
