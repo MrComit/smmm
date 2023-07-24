@@ -14,6 +14,7 @@
 #include "actors/common1.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -162,7 +163,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_HEART, -2181, 2235, 3663, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_PURPLE_SWITCH, 697, 100, 7489, 0, 90, 0, (18 << 24), bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, -1380, 2440, 3520, 0, -180, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_RED_COIN, -3674, 67, 10626, 0, -180, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_RED_COIN, -3674, 67, 10626, 0, -180, 0, (1 << 16), bhvRedCoin),
 		OBJECT(MODEL_TELEPORTER, -3674, 67, 10273, 0, -180, 0, (0x3E << 16) | (8 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 1558, 300, 11348, 0, -90, 0, (0x3F << 16), bhvFadingWarp),
 		OBJECT(MODEL_STAR_PIECE, -8321, 100, 12170, 0, 0, 0, (0xF << 24), bhvStarPiece),
@@ -224,11 +225,11 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_SHYGUY, 5288, 160, 4395, 0, -90, 0, (1 << 16), bhvShyguyPingpong),
 		OBJECT(MODEL_SMALL_KEY, 9608, 1875, 5761, 0, 0, 0, (1 << 24) | (9 << 16), bhvSmallKey),
 		OBJECT(MODEL_TOY_MOLE, 9171, 100, 8698, 0, -14, 0, 0x06000000, bhvToyMole),
-		OBJECT(MODEL_RED_COIN, 7733, 150, 5011, 0, -180, 0, 0x00000000, bhvWingedRedCoin),
+		OBJECT(MODEL_RED_COIN, 7733, 150, 5011, 0, -180, 0, (2 << 16), bhvWingedRedCoin),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1096, 0, -5196, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_FAN_BLADES, -860, 888, -6295, 0, 0, 0, 0x00000000, bhvFanBlades),
 		OBJECT(MODEL_GLOBAL_GATE, -2114, 0, -6496, 0, 90, 0, 0x00000000, bhvGlobalGate),
-		OBJECT(MODEL_RED_VASE, -1967, 114, -7111, 0, 0, 0, 0x00000000, bhvRedVase),
+		OBJECT(MODEL_RED_VASE, -1967, 114, -7111, 0, 0, 0, (3 << 16), bhvRedVase),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2154, 0, -6496, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 250, -11146, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 0, -8496, 0, -90, 0, 0x00000000, bhvDoor),
@@ -236,7 +237,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_FOREROOM_OBJECT, -2024, 0, -5920, 0, 0, 0, (1 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, -176, 0, -6101, 0, 0, 0, 0x00000000, bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, -544, 0, -7488, 0, 0, 0, (2 << 16), bhvForeroomObject),
-		OBJECT(MODEL_RED_COIN, -3454, 0, -9221, 0, -180, 0, 0x00000000, bhvFakeRedCoin),
+		OBJECT(MODEL_RED_COIN, -3454, 0, -9221, 0, -180, 0, (4 << 16), bhvFakeRedCoin),
 		OBJECT(MODEL_FOREROOM_OBJECT, -1243, 0, -7035, 0, 0, 0, (3 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, 2296, 0, -6046, 0, 0, 0, (4 << 16), bhvForeroomObject),
 		OBJECT(MODEL_FOREROOM_OBJECT, 2896, 0, -7157, 0, 0, 0, (5 << 16), bhvForeroomObject),
@@ -290,7 +291,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, -3648, 671, 493, 0, 0, 0, 0x00000000, bhvRedSparkles),
 		OBJECT(MODEL_NONE, -2598, 671, -537, 0, 0, 0, 0x00000000, bhvRedSparkles),
 		OBJECT(MODEL_NONE, -1412, 671, -1127, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, -2888, 671, -3139, 0, 0, 0, 0x00010000, bhvRedSparkles),
+		OBJECT(MODEL_NONE, -2888, 671, -3139, 0, 0, 0, (5 << 24) | (1 << 16), bhvRedSparkles),
 		OBJECT(MODEL_SAUNA_ROCK, -3926, 500, -1004, 0, 0, 0, (1 << 16), bhvSaunaRockRise),
 		OBJECT(MODEL_SAUNA_ROCK, -1919, 500, -2937, 0, -29, 0, 0x00000000, bhvSaunaRockRise),
 		OBJECT(MODEL_SAUNA_ROCK, -2639, 500, -1904, 0, 83, 0, 0x00000000, bhvSaunaRockRise),
@@ -324,11 +325,11 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -1802, 4185, 11706, 0, -112, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -1774, 4354, 26378, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_GARAGE_WALL, -1838, 4354, 26380, 0, 0, 0, 0x00000000, bhvGhostBarrier),
-		OBJECT(MODEL_NONE, -4597, 5185, 7063, 0, 0, 0, 0x00000000, bhvInvisRedCoin),
+		OBJECT(MODEL_NONE, -4597, 5185, 7063, 0, 0, 0, (7 << 16), bhvInvisRedCoin),
 		OBJECT(MODEL_JOURNAL_BOOK, -3556, 5185, 16409, 0, 0, 0, (DIALOG_048 << 16), bhvJournalBook),
 		OBJECT(MODEL_PROSPECTOR_LOCK, 2096, 5185, 11348, 0, -90, 0, (4 << 16), bhvProspectorLock),
 		OBJECT(MODEL_PURPLE_SWITCH, -2579, 5185, 14688, 0, 0, 0, (17 << 24), bhvFloorSwitchHiddenObjects),
-		OBJECT(MODEL_RED_COIN, -1802, 4385, 11706, 0, -180, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_RED_COIN, -1802, 4385, 11706, 0, -180, 0, (6 << 16), bhvRedCoin),
 		OBJECT(MODEL_ATTIC_GRATE, -1579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -2579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),

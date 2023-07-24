@@ -1212,7 +1212,7 @@ void bhv_prospector_t_init(void) {
         case LEVEL_BOB:
             if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS1 || 
                 (!(save_file_get_newflags(0) & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)))) {
-                // o->activeFlags = 0;
+                o->activeFlags = 0;
             }
 
             o->os16F4 = 0;

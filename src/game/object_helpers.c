@@ -5443,6 +5443,7 @@ void obj_spawn_loot_coins(struct Object *obj, s32 numCoins, f32 sp30,
             coin->oVelY = 55.0f;
             coin->oForwardVel = 10.0f;
             coin->oMoveAngleYaw = random_u16();
+            coin->oBehParams2ndByte = 3;
         }
     }
 }

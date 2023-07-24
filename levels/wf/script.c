@@ -16,6 +16,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -145,7 +146,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SHYGUY, -5528, 19, -13050, 0, 0, 0, 0x01000000, bhvShyguyFlame),
 		OBJECT(MODEL_SHYGUY, -7853, 19, -13149, 0, 0, 0, 0x02000000, bhvShyguyFlame),
 		OBJECT(MODEL_SHYGUY, -8238, 19, -10644, 0, 0, 0, 0x03000000, bhvShyguyFlame),
-		OBJECT(MODEL_RED_COIN, 6, 0, -7588, 0, 0, 0, 0x00000000, bhvFakeRedCoin),
+		OBJECT(MODEL_RED_COIN, 6, 0, -7588, 0, 0, 0, (1 << 16), bhvFakeRedCoin),
 		OBJECT(MODEL_GOLDEN_CRATE, -1218, 178, -7754, 0, 0, 0, (2 << 8), bhvGoldenCrate),
 		OBJECT(MODEL_NONE, -7516, 19, -10610, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_HEART, -6072, 50, -8015, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
@@ -192,7 +193,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_TOKEN, 2979, 1649, 6360, 0, -180, 0, 0x00020A00, bhvToken),
 		OBJECT(MODEL_BOTTLED_LAVA, -764, 1218, -1965, 0, 27, 0, (80 << 16), bhvBottledLava),
 		OBJECT(MODEL_BOTTLED_LAVA, 2327, 1218, -2173, 0, 0, 0, (80 << 16), bhvBottledLava),
-		OBJECT(MODEL_BAR_STOOL, -1107, -148, 365, 0, 0, 0, 0x00000000, bhvRedStool),
+		OBJECT(MODEL_BAR_STOOL, -1107, -148, 365, 0, 0, 0, (2 << 16), bhvRedStool),
 		OBJECT(MODEL_BOO_COIN, -810, 2266, 14226, 0, 0, 0, 0x00000000, bhvBooCoin),
 		OBJECT(MODEL_HAUNTED_CAGE, 1738, 2800, 7428, 0, 0, 0, 0x00000200, bhvBooCoinCage),
 		OBJECT(MODEL_BOO_COIN, 988, 2291, 15419, 0, 0, 0, 0x00000000, bhvBooCoin),
@@ -236,7 +237,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_LIGHTNING, 988, 241, 15419, 0, 0, 0, (1 << 24), bhvLightning),
 		OBJECT(MODEL_LIGHTNING, -1687, 2646, 11984, 0, 0, 0, 0x01010000, bhvLightning),
 		OBJECT(MODEL_PURPLE_SWITCH, -381, 216, 15128, 0, -180, 0, (21 << 24), bhvFloorSwitchHiddenObjects),
-		OBJECT(MODEL_RED_COIN, 383, 3244, 14462, 0, 0, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_RED_COIN, 383, 3244, 14462, 0, 0, 0, (3 << 16), bhvRedCoin),
 		OBJECT(MODEL_TOKEN, 3347, 1524, 15780, 0, -180, 0, 0x00000B00, bhvToken),
 		OBJECT(MODEL_TOKEN, 3793, 2317, 16781, -90, -180, 0, 0x00020C00, bhvToken),
 		OBJECT(MODEL_TOKEN, 4767, 1368, -15298, -90, -180, 0, 0x00010D00, bhvToken),
@@ -271,7 +272,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 3699, -2470, -15082, 0, 0, 0, 0x00000000, bhvRedSparkles),
 		OBJECT(MODEL_NONE, 2102, -2515, -15298, 0, 0, 0, 0x00000000, bhvRedSparkles),
 		OBJECT(MODEL_NONE, 1340, -2580, -14425, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 3815, -1586, -15071, 0, 0, 0, 0x00010000, bhvRedSparkles),
+		OBJECT(MODEL_NONE, 3815, -1586, -15071, 0, 0, 0, (5 << 24) | (1 << 16), bhvRedSparkles),
 		OBJECT(MODEL_BLUE_CUSHION, -4504, 0, -19682, 0, 23, 0, 0x00010000, bhvCushion),
 		OBJECT(MODEL_MIRROR_LIGHT, -5707, 213, -18703, 0, 90, 0, 0x00000000, bhvDenLight),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5757, 0, -17953, 0, 90, 0, 0x00000000, bhvDoor),
@@ -358,11 +359,11 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SNUFIT, 16455, 632, -3914, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_SNUFIT, 20071, 1092, -3659, 0, 0, 0, 0x00000000, bhvSnufit),
 		OBJECT(MODEL_TOKEN, 18790, 487, -1631, -90, 161, 0, 0x00001400, bhvToken),
-		OBJECT(MODEL_RED_COIN, 18517, 689, -4583, 0, 171, 0, 0x00000000, bhvWingedRedCoin),
+		OBJECT(MODEL_RED_COIN, 18517, 689, -4583, 0, 171, 0, (4 << 16), bhvWingedRedCoin),
 		OBJECT(MODEL_BEDROOM_GATE, -5472, 0, -7050, 0, 0, 0, 0x00000000, bhvL2RoomGate),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4322, 0, -3473, 0, 90, 0, 0x00050000, bhvDoor),
 		OBJECT(MODEL_BEDROOM_GATE, -4362, 0, -3473, 0, -90, 0, 0x00000000, bhvL2RoomGate),
-		OBJECT(MODEL_NONE, -4536, 0, -4653, 0, 0, 0, 0x00000000, bhvInvisRedCoin),
+		OBJECT(MODEL_NONE, -4536, 0, -4653, 0, 0, 0, (7 << 16), bhvInvisRedCoin),
 		OBJECT(MODEL_ENV_FLAME, -9308, 495, -3305, 0, -90, 0, 0x00000000, bhvMastersFlame),
 		OBJECT(MODEL_ENV_FLAME, -9308, 495, -3889, 0, -90, 0, 0x00010000, bhvMastersFlame),
 		OBJECT(MODEL_ENV_FLAME, -9308, 495, -4474, 0, -90, 0, 0x00020000, bhvMastersFlame),

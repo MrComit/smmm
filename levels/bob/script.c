@@ -18,6 +18,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -169,7 +171,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_PROSPECTOR_T, 1005, 690, 2956, 0, -41, 0, 0x00000000, bhvProspectorT),
 		OBJECT(MODEL_PURPLE_SWITCH, 1017, 0, 26555, 0, 0, 0, (23 << 24), bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, 39, 1500, 13437, 0, 0, 0, 0x00000000, bhvRedCoin),
-		OBJECT(MODEL_RED_SPOT, 1016, -7, 22064, 0, 0, 0, 0x00000000, bhvRedSpot),
+		OBJECT(MODEL_RED_SPOT, 1016, -7, 22064, 0, 0, 0, (1 << 16), bhvRedSpot),
 		OBJECT(MODEL_LAND_CHUNK, -2431, -200, 23982, 0, 0, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -2101, -200, 23213, 0, 28, 0, 0x021E0000, bhvLandChunk),
 		OBJECT(MODEL_LAND_CHUNK, -1210, -200, 23651, 0, 82, 0, 0x021E0000, bhvLandChunk),
@@ -185,7 +187,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_BOOK, 5617, 288, 13060, 0, -90, 0, 0x02010000, bhvL1Book),
 		OBJECT(MODEL_L1_BOOK, 5617, 288, 13010, 0, -90, 0, 0x01010000, bhvL1Book),
 		OBJECT(MODEL_L1_BOOK, 5617, 288, 12959, 0, -90, 0, 0x00000000, bhvL1Book),
-		OBJECT(MODEL_GOLD_MEDAL, 5695, 436, 13704, 0, 0, 0, 0x00000000, bhvGoldMedal),
+		OBJECT(MODEL_GOLD_MEDAL, 5695, 436, 13704, 0, 0, 0, (2 << 16), bhvGoldMedal),
 		OBJECT(MODEL_STAR_PIECE, 5650, 210, 12959, 100, 0, 0, 0x01010000, bhvStarPiece),
 		OBJECT(MODEL_GARAGE_WALL, 5741, 0, 16261, 0, 0, 0, 0x00000000, bhvGhostBarrier),
 		OBJECT(MODEL_BOO, 4316, 179, 17006, 0, -180, 0, 0x00000000, bhvRoomBoo),
@@ -201,7 +203,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BIG_BOOKSHELF, 4005, 0, 3910, 0, 0, 0, 0x00000000, bhvBigBookshelf),
 		OBJECT(MODEL_GOLDEN_CRATE, 5230, 0, 8859, 0, 0, 0, 0x00000000, bhvGoldenCrate),
 		OBJECT(MODEL_HALLWAY_FAKEWALL, 5105, 0, 8859, 0, 0, 0, 0x00000000, bhvHallwayFakeWall),
-		OBJECT(MODEL_RED_COIN, -995, 150, 3088, 0, -90, 0, 0x00000000, bhvWingedRedCoin),
+		OBJECT(MODEL_RED_COIN, -995, 150, 3088, 0, -90, 0, 0x00050000, bhvWingedRedCoin),
 		OBJECT(MODEL_STAR_PIECE, -6718, 100, 9556, 0, 0, 0, 0x03000000, bhvStarPiece),
 		OBJECT(MODEL_DINING_CHAIR, 7773, 0, 5120, 0, -60, 0, 0x00010000, bhvDiningChair),
 		OBJECT(MODEL_DINING_CHAIR, 7195, 0, 4781, 0, 0, 0, 0x00000000, bhvDiningChair),
@@ -255,7 +257,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, 2252, 121, 2325, 0, 0, 0, 0x00000000, bhvRedSparkles),
 		OBJECT(MODEL_NONE, 2652, 121, 1480, 0, 0, 0, 0x00000000, bhvRedSparkles),
 		OBJECT(MODEL_NONE, 2852, 121, 2625, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 2621, 0, 19, 0, 0, 0, 0x00010000, bhvRedSparkles),
+		OBJECT(MODEL_NONE, 2621, 0, 19, 0, 0, 0, 0x04010000, bhvRedSparkles),
 		OBJECT(MODEL_BOO, 1917, 197, 6668, 0, -180, 0, 0x00020000, bhvRoomBoo),
 		OBJECT(MODEL_L1_GATE, 3915, 0, 7927, 0, -90, 0, 0x00000000, bhvL1RoomGate),
 		OBJECT(MODEL_L1_GATE, 195, 0, 7198, 0, 90, 0, 0x00000000, bhvL1RoomGate),
@@ -331,9 +333,9 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -8795, 2781, 18331, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -9747, 2881, 18332, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -9770, 3081, 17492, 0, 0, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_NONE, -8509, 946, 17939, 0, 0, 0, 0x00000000, bhvInvisRedCoin),
+		OBJECT(MODEL_NONE, -8509, 946, 17939, 0, 0, 0, 0x00070000, bhvInvisRedCoin),
 		OBJECT(MODEL_PURPLE_SWITCH, -10320, 1944, 15200, 0, -180, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
-		OBJECT(MODEL_RED_COIN, -10478, 3341, 17409, 0, 0, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_RED_COIN, -10478, 3341, 17409, 0, 0, 0, 0x00060000, bhvRedCoin),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5374, 944, 17158, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -3355, 0, 13808, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5455, 0, 13808, 0, -90, 0, 0x00000000, bhvDoor),

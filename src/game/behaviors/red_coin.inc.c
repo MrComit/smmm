@@ -28,6 +28,7 @@ static struct ObjectHitbox sGreenCoinHitbox = {
 s32 gRedCoinMissionActive = 0;
 
 extern s8 gRedCoinsCollected;
+s8 gRedCoinBitfield = 0;
 
 void bhv_red_coin_init(void) {
     // Set the red coins to have a parent of the closest red coin star.
@@ -63,6 +64,7 @@ void bhv_red_coin_init(void) {
 void bhv_red_coin_loop(void) {
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
             gRedCoinsCollected++;
+            gRedCoinBitfield |= (1 << o->oBehParams2ndByte);
 
             // Spawn the orange number counter, as long as it isn't the last coin.
             if (gRedCoinsCollected != 8) {
@@ -210,6 +212,8 @@ void bhv_red_sparkles_loop(void) {
                 if (o->oBehParams2ndByte == 1) {
                     o->oPosY += 800.0f;
                     obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+                    obj->oBehParams2ndByte = (o->oBehParams >> 24);
+                    obj->oBehParams = ((o->oBehParams >> 24) & 0xFF) << 16;
                     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                     // vec3f_set(&obj->oPosX, gMarioState->pos[0], gMarioState->pos[1] + 800.0f, gMarioState->pos[2]);
                     // vec3f_copy(&o->oPosX, &obj->oPosX);
@@ -284,6 +288,7 @@ void bhv_gold_medal_loop(void) {
     if (gRedCoinMissionActive) {
         if (o->oAction == 0 && o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oBehParams2ndByte = o->oBehParams2ndByte;
             obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             obj->oPosX -= 150.0f;
             obj->oVelY = 20.0f;
@@ -303,6 +308,7 @@ void bhv_red_spot_loop(void) {
         o->oPosY += 800.0f;
         obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
         obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        obj->oBehParams2ndByte = o->oBehParams2ndByte;
         spawn_mist_particles();
         o->activeFlags = 0;
         cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
@@ -375,6 +381,7 @@ void bhv_invis_red_coin_loop(void) {
         o->oPosY += 800.0f;
         obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
         obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        obj->oBehParams2ndByte = o->oBehParams2ndByte;
         spawn_mist_particles();
         o->activeFlags = 0;
         cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
@@ -388,6 +395,7 @@ void bhv_red_stool_loop(void) {
         if (o->oAction == 0 && cur_obj_is_mario_ground_pounding_platform()) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
             obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            obj->oBehParams2ndByte = o->oBehParams2ndByte;
             obj->oPosY += 700.0f;
             // obj->oPosX -= 150.0f;
             // obj->oVelY = 20.0f;
@@ -425,6 +433,7 @@ void bhv_fake_red_coin_loop(void) {
 
                 o->oObjF4 = spawn_object(o, MODEL_RED_COIN, bhvRedCoin);
                 o->oObjF4->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                o->oObjF4->oBehParams2ndByte = o->oBehParams2ndByte;
                 o->oObjF4->oRoom = o->oRoom;
                 if (gCurrLevelNum == LEVEL_WF) {
                     vec3f_set(&o->oObjF4->oPosX, 757.0f, 178.0f, -9320.0f);
@@ -484,6 +493,7 @@ void bhv_red_light_button_loop(void) {
                 play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
                     o->oObj100 = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
                     o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                    o->oObj100->oBehParams2ndByte = 6;
                     // o->oObj100->oBehParams = 0x09000000;
                     o->oObj100->oPosZ += 197.0f;
                     o->oObj100->oPosY += 700.0f;
@@ -502,6 +512,7 @@ void bhv_red_vase_loop(void) {
         if (o->oAction == 0 && (cur_obj_is_mario_ground_pounding_platform() || o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED)) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
             obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            obj->oBehParams2ndByte = o->oBehParams2ndByte;
             obj->oPosY += 700.0f;
             // obj->oPosX -= 150.0f;
             // obj->oVelY = 20.0f;

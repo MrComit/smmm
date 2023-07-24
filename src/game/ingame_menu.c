@@ -3418,9 +3418,11 @@ struct MapKey {
 };
 
 struct MapKey gMapKeyPool[10];
+struct MapKey gMapRCPool[8];
 struct MapObject gMapObjectPool[30];
 struct MapObject *gCurrentMapObject;
 struct MapKey *gCurrentMapKey;
+struct MapKey *gCurrentMapRC;
 
 s32 sCurrGoalLevel;
 s32 sCurrGoalRoom;
@@ -3557,6 +3559,30 @@ void spawn_map_key(f32 x, f32 z, s8 id) {
     }
 }
 
+extern s8 gRedCoinBitfield;
+
+void spawn_map_red_coin(f32 x, f32 z, s8 id) {
+    s32 i;
+    // if (save_file_get_keys(1) & (1 << id)) {
+    //     return;
+    // }
+    if (gRedCoinBitfield & (1 << id)) {
+        return;
+    }
+
+
+    for (i = 0; i < 8; i++) {
+        if (gMapRCPool[i].alive == 0) {
+            gCurrentMapRC = &gMapRCPool[i];
+            gCurrentMapRC->alive = 1;
+            gCurrentMapRC->id = id;
+            gCurrentMapRC->x = x;
+            gCurrentMapRC->z = z;
+            break;
+        }
+    }
+}
+
 
 void spawn_map_1(void) {
     spawn_map_object(0, 2824, map_l1_1MUDROOM_mesh_layer_1, 1);
@@ -3577,6 +3603,17 @@ void spawn_map_1(void) {
     spawn_map_key(395, 793, 0);
     spawn_map_key(0, 1271, 1);
     spawn_map_key(-140, 1166, 15);
+
+
+    spawn_map_red_coin(-25, 1993, 0); // main hall
+    spawn_map_red_coin(25, 1993, 1); // main hall
+    spawn_map_red_coin(455, 1383, 2); // parlor
+    spawn_map_red_coin(717, 536, 3); // dining room
+    spawn_map_red_coin(260, 50, 4); // kitchen
+    spawn_map_red_coin(-60, 340, 5); // hallway
+    spawn_map_red_coin(-844 - 25, 1475, 6); // library
+    spawn_map_red_coin(-844 + 25, 1475, 7); // library
+
 }
 
 
@@ -3607,6 +3644,15 @@ void spawn_map_2(void) {
     spawn_map_key(-547, -708, 5);
     spawn_map_key(455, -1031, 6);
     spawn_map_key(-4, -1918, 7);
+
+    spawn_map_red_coin(21 - 25, -802, 0); // lounge plat
+    spawn_map_red_coin(21 + 25, -802, 1); // lounge fake
+    spawn_map_red_coin(46, 137, 2); // bar
+    spawn_map_red_coin(104, 1434, 3); // balcony
+    spawn_map_red_coin(1810, -313, 4); // office
+    spawn_map_red_coin(292, -1383, 5); // bathroom
+    spawn_map_red_coin(-781, -1870, 6); // mirror
+    spawn_map_red_coin(-692, -496, 7); // master bedroom
 }
 
 void spawn_map_3(void) {
@@ -3655,6 +3701,17 @@ void spawn_map_6(void) {
 
     spawn_map_key(-90, 511, 8);
     spawn_map_key(423, 502, 9);
+
+
+    spawn_map_red_coin(-757 - 25, 608, 0); // trophy plat
+    spawn_map_red_coin(-757 + 25, 608, 1); // trophy hidden
+    spawn_map_red_coin(215, 316, 2); // game room
+    spawn_map_red_coin(-425, -965, 3); // morning room
+    spawn_map_red_coin(-810, -1255, 4); // theater
+    spawn_map_red_coin(-910, -406, 5); // sauna
+    spawn_map_red_coin(-723 - 25, 1781, 6); // attic plat
+    spawn_map_red_coin(-723 + 25, 1781, 7); // attic invis
+
 }
 
 
@@ -3735,6 +3792,19 @@ void despawn_map_keys(void) {
             gMapKeyPool[i].x = 0;
             gMapKeyPool[i].z = 0;
             gMapKeyPool[i].id = 0;
+        }
+    }
+}
+
+
+void despawn_map_red_coins(void) {
+    s32 i;
+    for (i = 0; i < 8; i++) {
+        if (gMapRCPool[i].alive != 0) {
+            gMapRCPool[i].alive = 0;
+            gMapRCPool[i].x = 0;
+            gMapRCPool[i].z = 0;
+            gMapRCPool[i].id = 0;
         }
     }
 }
@@ -3914,6 +3984,35 @@ void render_map_key(f32 x, f32 z, s8 id) {
 }
 
 
+
+void render_map_red_coin(f32 x, f32 z, s8 id) {
+    Vec3f pos, scale;
+    Vec3s angle;
+    vec3s_set(angle, 0xC000, 0, 0);
+    vec3f_set(pos, x, -25985.0f, z);
+    vec3f_set(scale, 0.5f, 0.5f, 0.5f);
+    mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
+    mtxf_scale_vec3f(gMatStack[gMatStackIndex + 1], gMatStack[gMatStackIndex + 1], scale);
+    Mtx *mtx = alloc_display_list(sizeof(*mtx));
+    mtxf_to_mtx(mtx, gMatStack[gMatStackIndex + 1]);
+    gSPMatrix(gDisplayListHead++, mtx, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
+
+    // if (/*save_file_get_keys(0) & (1 << id)*/) {
+    //     gDPSetEnvColor(gDisplayListHead++, 50, 120, 50, 255);
+    // } else {
+    //     gDPSetEnvColor(gDisplayListHead++, 120, 120, 120, 255);
+    // }
+
+    gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_0);
+
+    gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
+
+
 extern Vec3s sBasementSwitchCols[5];
 
 void render_map_switch(f32 x, f32 z, s8 id) {
@@ -3959,6 +4058,24 @@ void render_map_keys(void) {
 }
 
 
+extern s32 gRedCoinMissionActive;
+
+void render_map_red_coins(void) {
+    s32 i;
+
+    if (gRedCoinMissionActive == FALSE) {
+        return;
+    }
+
+    for (i = 0; i < 8; i++) {
+        if (gMapRCPool[i].alive != 0) {
+            gCurrentMapRC = &gMapRCPool[i];
+            render_map_red_coin(gCurrentMapRC->x, gCurrentMapRC->z, gCurrentMapRC->id);
+        }
+    }
+}
+
+
 void update_map_screen(void) {
     s32 objective, centerX;
     f32 div = 3.0f;
@@ -3998,6 +4115,7 @@ void update_map_screen(void) {
     render_map_background();
     render_map_objects();
     render_map_keys();
+    render_map_red_coins();
     if (gCurrLevelNum == LEVEL_LLL) {
         render_map_switches();
     }
@@ -4094,6 +4212,7 @@ s16 render_menus_and_dialogs(void) {
                     gMapModeInit = 0;
                     despawn_map_objects();
                     despawn_map_keys();
+                    despawn_map_red_coins();
                 } else if (gPlayer1Controller->buttonPressed & START_BUTTON) {
                     index = MENU_OPT_DEFAULT;
                     level_set_transition(0, NULL);
@@ -4103,6 +4222,7 @@ s16 render_menus_and_dialogs(void) {
                     gDialogBoxState = DIALOG_STATE_OPENING;
                     despawn_map_objects();
                     despawn_map_keys();
+                    despawn_map_red_coins();
                 } else {
                     index = MENU_OPT_MAP;
                 }
