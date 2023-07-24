@@ -57,11 +57,13 @@ void play_warp_door_open_noise(void) {
 }
 
 void bhv_door_loop(void) {
+    struct Object *obj;
     s32 sp1C = 0;
     
     if (o->oDistanceToMario < 1500.0f) {
-        if (cur_obj_dist_to_nearest_object_with_behavior(bhvProspectorLock) < 600.0f) {
-            o->oInteractType = INTERACT_IGLOO_BARRIER;
+        if ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvProspectorLock, gMarioCurrentRoom)) != NULL 
+            && dist_between_objects(o, obj) < 600.0f) {
+                o->oInteractType = INTERACT_IGLOO_BARRIER;
         } else {
             o->oInteractType = INTERACT_DOOR;
         }
