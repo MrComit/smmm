@@ -1276,6 +1276,7 @@ void bhv_prospector_t_loop(void) {
                         //CHANGE DIALOG ID
                         o->oBehParams2ndByte = DIALOG_081;
                     } else if (o->os16F8 == 1) {
+                        gRedCoinMissionActive = 0;
                         o->os16F8 = 2;
                         gMarioState->numCoins += 1000;
                         if (o->os16F4 == 2) {
@@ -1289,6 +1290,7 @@ void bhv_prospector_t_loop(void) {
     o->oInteractStatus = 0;
 }
 
+s32 gPoolLockDisabled = 0;
 
 void bhv_prospector_lock_loop(void) {
     switch (o->oBehParams2ndByte) {
@@ -1304,8 +1306,9 @@ void bhv_prospector_lock_loop(void) {
             }
             break;
         case 2: // pool room
-            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS2 || gRedCoinMissionActive) {
+            if (gPoolLockDisabled || save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS2 || gRedCoinMissionActive) {
                 o->activeFlags = 0;
+                gPoolLockDisabled = 1;
             }
             break;
         case 3: // panic room

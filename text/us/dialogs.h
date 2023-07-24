@@ -948,25 +948,76 @@ to claim your reward!\n\
 Do you want to Save?\n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_078, 1, 5, 30, 200, _("\
-prospector t first visit"))
+DEFINE_DIALOG(DIALOG_078, 1, 6, 30, 200, _("\
+Hello there Mario, my name\n\
+is Prospector T. I try to\n\
+keep a low profile around\n\
+here but I see you've found\n\
+me. \n\
+\n\
+Well, if you're gonna so rudely\n\
+impose upon my space, you might\n\
+as well make yourself useful.\n\
+My red coins are all scattered\n\
+across this manor. There are 8\n\
+on this floor.\n\
+How about you collect them,\n\
+then come back here and speak\n\
+to me. I'll reward you \n\
+handsomely for your trouble.\n\
+\n\
+\n\
+Your Room Manager should mark\n\
+the rooms that have red coins\n\
+in them.\n\
+\n\
+\n\
+\n\
+Good luck, Mario..."))
 
 DEFINE_DIALOG(DIALOG_079, 1, 4, 30, 200, _("\
-prospector t second visit"))
+So, we meet again...\n\
+\n\
+\n\
+\n\
+There are 8 more red coins\n\
+on this floor. Collect all\n\
+of them and then come back\n\
+here to speak with me."))
 
-DEFINE_DIALOG(DIALOG_080, 1, 1, 30, 200, _("\
-prospector t third visit"))
+DEFINE_DIALOG(DIALOG_080, 1, 3, 30, 200, _("\
+Hello again, Mario. \n\
+You know the drill. \n\
+\n\
+The last of my red coins are\n\
+on this floor. Collect all 8\n\
+then return here."))
 
-DEFINE_DIALOG(DIALOG_081, 1, 4, 30, 200, _("\
-prospector t mid \n\
-mission text"))
+DEFINE_DIALOG(DIALOG_081, 1, 3, 30, 200, _("\
+The red coins might not be\n\
+so easy to find. \n\
+\n\
+You may have to keep your\n\
+eyes and your ears open\n\
+to subtle details..."))
 
-DEFINE_DIALOG(DIALOG_082, 1, 4, 30, 200, _("\
-prospector t gives you star"))
+DEFINE_DIALOG(DIALOG_082, 1, 2, 30, 200, _("\
+Well, that's all 8 of 'em.\n\
+\n\
+As promised, heres 1000 coins\n\
+for your trouble.\n\
+Till we meet again..."))
 
-DEFINE_DIALOG(DIALOG_083, 1, 6, 30, 200, _("\
-prospector t gives you\n\
-the final star"))
+DEFINE_DIALOG(DIALOG_083, 1, 4, 30, 200, _("\
+Excellent! I now have all\n\
+24 of my red coins back.\n\
+\n\
+\n\
+You've been indispensable to\n\
+me Mario, so since I'm\n\
+feeling generous your final\n\
+reward will be 2000 coins.\n\
+Goodbye, Mario..."))
 
 DEFINE_DIALOG(DIALOG_084, 1, 2, 30, 200, _("\
 Yeeoww! Unhand me, please!\n\
