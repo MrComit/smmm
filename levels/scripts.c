@@ -141,6 +141,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_GARAGE_WALL, garage_wall_geo),
     LOAD_MODEL_FROM_GEO(MODEL_JOURNAL_BOOK, journal_book_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_SPARKLES_ANIMATION,      red_sparkles_animation_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_LOCK,      prospector_lock_geo),
     // LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T,      prospector_t_geo),
 
     //LOAD_MODEL_FROM_GEO(MODEL_LANTERN,                 lantern_geo),

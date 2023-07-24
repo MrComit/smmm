@@ -12,6 +12,8 @@
 #include "levels/scripts.h"
 
 #include "actors/common1.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -91,7 +93,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TROPHY_ELEVATOR, trophy_elevator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PLAT_HALL_WALL, plat_hall_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_VASE, red_vase_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T,      prospector_t_geo),
+	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T, prospector_t_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -180,6 +182,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3746, 0, 8273, 0, 90, 0, (8 << 16), bhvSmallKeyDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2946, 0, 6223, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_JOURNAL_BOOK, 2296, 0, 14463, 0, 0, 0, (DIALOG_052 << 16), bhvJournalBook),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 2946, 0, 6273, 0, 0, 0, (3 << 16), bhvProspectorLock),
 		OBJECT(MODEL_GLOBAL_GATE, 3786, 0, 12498, 0, 90, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_MUSIC_INSTS, 12796, 0, 18423, 0, -90, 0, (3 << 16), bhvMusicInsts),
 		OBJECT(MODEL_MUSIC_INSTS, 6296, 0, 17423, 0, -180, 0, (1 << 16), bhvMusicInsts),
@@ -323,6 +326,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_GARAGE_WALL, -1838, 4354, 26380, 0, 0, 0, 0x00000000, bhvGhostBarrier),
 		OBJECT(MODEL_NONE, -4597, 5185, 7063, 0, 0, 0, 0x00000000, bhvInvisRedCoin),
 		OBJECT(MODEL_JOURNAL_BOOK, -3556, 5185, 16409, 0, 0, 0, (DIALOG_048 << 16), bhvJournalBook),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 2096, 5185, 11348, 0, -90, 0, (4 << 16), bhvProspectorLock),
 		OBJECT(MODEL_PURPLE_SWITCH, -2579, 5185, 14688, 0, 0, 0, (17 << 24), bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, -1802, 4385, 11706, 0, -180, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_ATTIC_GRATE, -1579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
@@ -346,6 +350,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_ATTIC_GRATE, -3579, 5185, 12888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -2579, 5185, 12888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -1579, 5185, 12888, 0, -90, 0, 0x00000000, bhvAtticGrate),
+		OBJECT(MODEL_PROSPECTOR_T, 2917, 5185, 11348, 0, -90, 0, 0x00000000, bhvProspectorT),
 		TERRAIN(hmc_area_1_collision),
 		ROOMS(hmc_area_1_collision_rooms),
 		MACRO_OBJECTS(hmc_area_1_macro_objs),

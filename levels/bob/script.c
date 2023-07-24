@@ -13,6 +13,11 @@
 
 #include "actors/common1.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -125,12 +130,18 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -8155, 0, 8952, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -9876, 0, 3738, 0, 180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -9726, 2944, 12759, 0, 180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 490, 690, 3760, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_L1_GATE, 0, 0, 27228, 0, 0, 0, 0x00000000, bhvL1Gate),
 		OBJECT(MODEL_L1_GATE, 4555, 0, 12698, 0, 0, 0, 0x00010000, bhvL1Gate),
 		OBJECT(MODEL_L1_GATE, -9876, 0, 3648, 0, -180, 0, 0x00020000, bhvL1Gate),
 		OBJECT(MODEL_L1_GATE, -9726, 2944, 12669, 0, -180, 0, 0x00030000, bhvL1Gate),
 		OBJECT(MODEL_L1_GATE, -3315, 0, 13808, 0, 90, 0, 0x00040000, bhvL1Gate),
 		OBJECT(MODEL_LEVER, 1061, 0, 29142, 0, 0, 0, 0x00000000, bhvLever),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 4005, 0, 7927, 0, 90, 0, 0x00000000, bhvProspectorLock),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 3905, 0, 7927, 0, -90, 0, 0x00000000, bhvProspectorLock),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 105, 0, 7198, 0, -90, 0, 0x00000000, bhvProspectorLock),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 205, 0, 7198, 0, 90, 0, 0x00000000, bhvProspectorLock),
+		OBJECT(MODEL_PROSPECTOR_LOCK, 490, 690, 3810, 0, 0, 0, (1 << 16), bhvProspectorLock),
 		OBJECT(MODEL_CASTLE_GROUNDS_CASTLE_DOOR, 75, 0, 29332, 0, -180, 0, 0x00910000, bhvDoorWarp),
 		OBJECT(MODEL_CASTLE_GROUNDS_CASTLE_DOOR, -75, 0, 29332, 0, 0, 0, 0x00900000, bhvDoorWarp),
 		OBJECT(MODEL_BLUE_COIN, -1988, -177, 19963, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
@@ -155,7 +166,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, 346, 948, 21436, 0, 30, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_CHANDELIER, 741, 685, 17689, 0, 0, 0, 0x00000000, bhvChandelier),
 		OBJECT(MODEL_GOLDEN_PILLAR, -2587, -206, 16608, 0, 0, 0, (1 << 8), bhvGoldenPillar),
-		OBJECT(MODEL_PROSPECTOR_T, 506, 690, 3982, 0, 0, 0, 0x00000000, bhvProspectorT),
+		OBJECT(MODEL_PROSPECTOR_T, 1005, 690, 2956, 0, -41, 0, 0x00000000, bhvProspectorT),
 		OBJECT(MODEL_PURPLE_SWITCH, 1017, 0, 26555, 0, 0, 0, (23 << 24), bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, 39, 1500, 13437, 0, 0, 0, 0x00000000, bhvRedCoin),
 		OBJECT(MODEL_RED_SPOT, 1016, -7, 22064, 0, 0, 0, 0x00000000, bhvRedSpot),
@@ -254,7 +265,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_STOVE_BUTTON, 2992, 131, 5062, 0, 0, 0, 0x00000000, bhvStoveButton),
 		OBJECT(MODEL_FRYING_PAN, 3071, 269, 4990, 0, 0, 0, 0x00000000, bhvFryingPan),
 		OBJECT(MODEL_TOKEN, 354, 40, 5593, 0, 90, 0, 0x00000800, bhvToken),
-		OBJECT(MODEL_TOKEN, 402, 690, 4852, 0, 135, 0, 0x00010600, bhvToken),
+		OBJECT(MODEL_TOKEN, 1166, 1210, 4891, 0, -135, 0, 0x00010600, bhvToken),
 		OBJECT(MODEL_GOOMBA, -6135, 0, 6820, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -5748, 0, 7372, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, -5546, 0, 6425, 0, 0, 0, 0x00000000, bhvGoomba),

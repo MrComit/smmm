@@ -41,3 +41,4 @@
 #include "garage_wall/geo.inc.c"
 #include "journal_book/geo.inc.c"
 #include "prospector_t/geo.inc.c"
+#include "prospector_lock/geo.inc.c"

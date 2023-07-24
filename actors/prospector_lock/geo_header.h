@@ -1,0 +1,15 @@
+extern const GeoLayout prospector_lock_geo[];
+extern u8 prospector_lock_i8_toad_hat_side_ia8[];
+extern Vtx prospector_lock_Lock_mesh_layer_4_vtx_cull[8];
+extern Vtx prospector_lock_Lock_mesh_layer_4_vtx_0[7];
+extern Gfx prospector_lock_Lock_mesh_layer_4_tri_0[];
+extern Vtx prospector_lock_Lock_mesh_layer_1_vtx_cull[8];
+extern Vtx prospector_lock_Lock_mesh_layer_1_vtx_0[18];
+extern Gfx prospector_lock_Lock_mesh_layer_1_tri_0[];
+extern Gfx mat_prospector_lock_ToadSideProfile[];
+extern Gfx mat_revert_prospector_lock_ToadSideProfile[];
+extern Gfx mat_prospector_lock_VertSolid[];
+extern Gfx mat_revert_prospector_lock_VertSolid[];
+extern Gfx prospector_lock_Lock_mesh_layer_4[];
+extern Gfx prospector_lock_Lock_mesh_layer_1[];
+extern Gfx prospector_lock_material_revert_render_settings[];

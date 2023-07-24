@@ -1290,6 +1290,38 @@ void bhv_prospector_t_loop(void) {
 }
 
 
+void bhv_prospector_lock_loop(void) {
+    switch (o->oBehParams2ndByte) {
+        case 0: // kitchen
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS1 || gRedCoinMissionActive || 
+                (!(save_file_get_newflags(0) & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)))) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 1: // pantry2
+            if (save_file_get_newflags(0) & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 2: // pool room
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS2 || gRedCoinMissionActive) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 3: // panic room
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS1) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 4: // attic2
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS2 && save_file_get_boos() & (1 << 0x12)) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
 
 void bhv_bparam1_to_animstate(void) {
     o->oAnimState = o->oBehParams >> 24;

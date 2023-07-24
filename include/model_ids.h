@@ -628,6 +628,7 @@
 #define MODEL_JOURNAL_BOOK        0x47
 #define MODEL_RED_SPARKLES_ANIMATION        0x48
 #define MODEL_PROSPECTOR_T        0x49
+#define MODEL_PROSPECTOR_LOCK     0x4A
 
 
 
