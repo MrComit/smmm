@@ -34,8 +34,6 @@ const GeoLayout sl_dl_102__Main_Hall_geo[] = {
 const GeoLayout sl_dl_103__Hallway_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Hallway_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Hallway_001_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1261, 11400, -9811, sl_dl_Hallway_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
@@ -65,6 +63,7 @@ const GeoLayout sl_dl_107__Entertainment_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_EntertainmentRoom_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, sl_dl_EntertainmentRoom_mesh_layer_2),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -105,6 +104,7 @@ const GeoLayout sl_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, sl_dl_material_revert_render_settings),
 	GEO_CLOSE_NODE(),
 	GEO_END(),
 };
