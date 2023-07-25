@@ -324,6 +324,16 @@
 #define TEXT_ROOM86 _("Outside")
 #define TEXT_ROOM87 _("The Roof")
 
+#define TEXT_ROOM88 _("Outside")
+#define TEXT_ROOM89 _("Main Hall")
+#define TEXT_ROOM90 _("Hallway")
+#define TEXT_ROOM91 _("Living Room")
+#define TEXT_ROOM92 _("Kitchen")
+#define TEXT_ROOM93 _("Lounge")
+#define TEXT_ROOM94 _("Entertainment Room")
+#define TEXT_ROOM95 _("Basement")
+#define TEXT_ROOM96 _("Bedroom")
+
 #define TEXT_CORRUPT _("-!-t!r- c     -R")
 #define TEXT_MIND _("The Monstrous Mind")
 
@@ -351,6 +361,7 @@
 #define TEXT_L7 _("The Basement")
 #define TEXT_L8 _("The Monstrous Mind")
 #define TEXT_L9 _("The Roof")
+#define TEXT_L10 _("Mario's Manor")
 
 
 #define TEXT_THE_CONTROLLER _("The Controller")

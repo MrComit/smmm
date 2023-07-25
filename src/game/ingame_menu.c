@@ -2327,9 +2327,10 @@ static char sLevel6[] = { TEXT_L6 };
 static char sLevel7[] = { TEXT_L7 };
 static char sLevel8[] = { TEXT_L8 };
 static char sLevel9[] = { TEXT_L9 };
+static char sLevel10[] = { TEXT_L10 };
 
 char *sLevelNames[] = {
-    sLevel1, sLevel2, sLevel3, sLevel4, sLevel5, sLevel6, sLevel7, sLevel8, sLevel9
+    sLevel1, sLevel2, sLevel3, sLevel4, sLevel5, sLevel6, sLevel7, sLevel8, sLevel9, sLevel10
 };
 
 static char sTheControllerText[] = { TEXT_THE_CONTROLLER };
@@ -4339,6 +4340,16 @@ static char sRoom85[] = { TEXT_ROOM85 };
 static char sRoom86[] = { TEXT_ROOM86 };
 static char sRoom87[] = { TEXT_ROOM87 };
 
+static char sRoom88[] = { TEXT_ROOM88 };
+static char sRoom89[] = { TEXT_ROOM89 };
+static char sRoom90[] = { TEXT_ROOM90 };
+static char sRoom91[] = { TEXT_ROOM91 };
+static char sRoom92[] = { TEXT_ROOM92 };
+static char sRoom93[] = { TEXT_ROOM93 };
+static char sRoom94[] = { TEXT_ROOM94 };
+static char sRoom95[] = { TEXT_ROOM95 };
+static char sRoom96[] = { TEXT_ROOM96 };
+
 
 
 char sRoomCorrupt[] = { TEXT_CORRUPT };
@@ -4353,7 +4364,8 @@ char *sRoomNames[] = {
     sRoom51, sRoom52, sRoom53, sRoom54, sRoom55, sRoom56, sRoom57, sRoom58, sRoom58, sRoom60,
     sRoom61, sRoom62, sRoom63, sRoom63, sRoom65, sRoom66, sRoom67, sRoom68, sRoom69, sRoom70,
     sRoom71, sRoom72, sRoom73, sRoom74, sRoom75, sRoom76, sRoom75, sRoom78, sRoom75, sRoom80,
-    sRoom75, sRoom82, sRoom75, sRoom84, sRoom85, sRoom75, sRoom87
+    sRoom75, sRoom82, sRoom75, sRoom84, sRoom85, sRoom75, sRoom87, sRoom88, sRoom89, sRoom90,
+    sRoom91, sRoom92, sRoom93, sRoom94, sRoom95, sRoom96,
 };
 
 char *sPrevRoomName;
