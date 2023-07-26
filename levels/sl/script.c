@@ -59,6 +59,7 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2088, 0, 2247, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -250, 2500, -3428, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3050, -2500, 11597, 0, 90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_NONE, 9338, 135, 6812, 0, -90, 0, (DIALOG_084 << 16), bhvSignOnWall),
 		TERRAIN(sl_area_1_collision),
 		ROOMS(sl_area_1_collision_rooms),
 		MACRO_OBJECTS(sl_area_1_macro_objs),

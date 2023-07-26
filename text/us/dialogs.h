@@ -1019,11 +1019,10 @@ feeling generous your final\n\
 reward will be 2000 coins.\n\
 Goodbye, Mario..."))
 
-DEFINE_DIALOG(DIALOG_084, 1, 2, 30, 200, _("\
-Yeeoww! Unhand me, please!\n\
-\n\
-Just take this and leave me\n\
-alone, it's all I have!"))
+DEFINE_DIALOG(DIALOG_084, 1, 3, 30, 200, _("\
+'How To Be A Good Friend And\n\
+Get Respect Doing It'\n\
+(The spine is well-worn.)"))
 
 DEFINE_DIALOG(DIALOG_085, 1, 5, 30, 200, _("\
 You don't stand a ghost\n\
