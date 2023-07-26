@@ -42,3 +42,5 @@
 #include "levels/sl/purple_cushion/collision.inc.c"
 #include "levels/sl/l10_gravity_button/model.inc.c"
 #include "levels/sl/l10_gravity_button/collision.inc.c"
+#include "levels/sl/l10_bounce_box/collision.inc.c"
+#include "levels/sl/l10_bounce_box/model.inc.c"

@@ -44,6 +44,7 @@ const LevelScript level_sl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_L10_PRESSURE_PLATE, l10_pressure_plate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PURPLE_CUSHION, purple_cushion_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L10_GRAVITY_BUTTON, l10_gravity_button_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_L10_BOUNCE_BOX, l10_bounce_box_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -76,6 +77,14 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_L10_THIN_BOOK, 7349, 1555, 5773, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_THIN_BOOK, 6994, 1405, 6462, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_THIN_BOOK, 6178, 1105, 6628, 0, -38, 0, 0x00000000, bhvSpinningBook),
+		OBJECT(MODEL_L10_BOUNCE_BOX, 2828, -2, -2703, 0, -90, 0, (4 << 24) | (13 << 16), bhvBounceBoxes),
+		OBJECT(MODEL_NONE, 4946, 1841, -717, 0, 0, 0, 0x00100000, bhvHorizontalPole),
+		OBJECT(MODEL_NONE, 4046, 2143, 1009, 0, -90, 0, 0x00100000, bhvHorizontalPole),
+		OBJECT(MODEL_L10_THIN_BOOK, 1672, 2289, -3342, 0, 0, 0, 0x00000000, bhvSpinningBook),
+		OBJECT(MODEL_L10_THIN_BOOK, 1744, 2639, -3823, 0, 0, 0, 0x00000000, bhvSpinningBook),
+		OBJECT(MODEL_L10_THIN_BOOK, 2091, 2919, -4420, 0, 0, 0, 0x00000000, bhvSpinningBook),
+		OBJECT(MODEL_L10_THIN_BOOK, 2821, 3156, -3958, 0, 0, 0, 0x00000000, bhvSpinningBook),
+		OBJECT(MODEL_L10_THIN_BOOK, 4887, 1906, 1031, 0, 0, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_NONE, 7993, 135, 6812, 0, -90, 0, (DIALOG_084 << 16), bhvSignOnWall),
 		OBJECT(MODEL_L10_GRAVITY_BUTTON, 3000, -2350, 11022, 0, -90, 0, 0x00000000, bhvGravityButton),
 		OBJECT(MODEL_L10_PRESSURE_PLATE, -952, 2500, -4824, 0, 0, 0, 0x00000000, bhvL10PressurePlate),

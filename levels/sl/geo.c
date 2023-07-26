@@ -25,3 +25,4 @@
 #include "levels/sl/l10_pressure_plate/geo.inc.c"
 #include "levels/sl/purple_cushion/geo.inc.c"
 #include "levels/sl/l10_gravity_button/geo.inc.c"
+#include "levels/sl/l10_bounce_box/geo.inc.c"

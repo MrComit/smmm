@@ -53,7 +53,7 @@ void scroll_sl_dl_KitchenGround_005_mesh_layer_5_vtx_0() {
 
 void scroll_sl_dl_Treadmill_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 88;
+	int count = 86;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;

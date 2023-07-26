@@ -81,8 +81,13 @@ const GeoLayout sl_dl_106__Lounge_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_CushionCol_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Lounge_mesh_layer_1),
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, sl_dl_MarioTrophy_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 4946, 1856, -717, 0, 0, -90, sl_dl_Pole1_001_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 4046, 2157, 555, 0, -90, -90, sl_dl_Pole1_002_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 4946, 1796, -717, 0, 0, -90, sl_dl_Pole2_001_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 4046, 2097, 555, 0, -90, -90, sl_dl_Pole2_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Simple_Table_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, sl_dl_Simple_Table_003_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Slide_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
