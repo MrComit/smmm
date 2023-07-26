@@ -987,6 +987,7 @@
 #define MODEL_PURPLE_CUSHION      0xFD
 #define MODEL_L10_GRAVITY_BUTTON  0xFC
 #define MODEL_L10_BOUNCE_BOX      0xFB
+#define MODEL_END_STAR            0xFA
 
 
 

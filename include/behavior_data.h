@@ -960,6 +960,7 @@ extern const BehaviorScript bhvRedVase[];
 extern const BehaviorScript bhvProspectorT[];
 extern const BehaviorScript bhvProspectorLock[];
 extern const BehaviorScript bhvL10PressurePlate[];
+extern const BehaviorScript bhvEndStar[];
 
 
 #endif // BEHAVIOR_DATA_H

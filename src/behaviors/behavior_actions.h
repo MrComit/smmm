@@ -1220,6 +1220,7 @@ void bhv_prospector_t_init(void);
 void bhv_prospector_t_loop(void);
 void bhv_prospector_lock_loop(void);
 void bhv_l10_pressure_plate_loop(void);
+void bhv_end_star_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

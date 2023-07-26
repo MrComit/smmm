@@ -635,6 +635,7 @@ void save_file_set_heavy_object(u8 obj, u32 id) {
 
 
 u32 save_file_get_reds_star(void) {
+    // return 0x1FFFFFF;
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }
@@ -644,6 +645,7 @@ u32 save_file_get_reds_star(void) {
 
 
 u32 save_file_get_star_piece(void) {
+    return 0x1FFFFFF;
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }

@@ -44,3 +44,4 @@
 #include "levels/sl/l10_gravity_button/collision.inc.c"
 #include "levels/sl/l10_bounce_box/collision.inc.c"
 #include "levels/sl/l10_bounce_box/model.inc.c"
+#include "levels/sl/end_star/model.inc.c"

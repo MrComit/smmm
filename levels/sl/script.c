@@ -45,6 +45,7 @@ const LevelScript level_sl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PURPLE_CUSHION, purple_cushion_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L10_GRAVITY_BUTTON, l10_gravity_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L10_BOUNCE_BOX, l10_bounce_box_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_STAR, end_star_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -58,6 +59,14 @@ const LevelScript level_sl_entry[] = {
 		MARIO_POS(0x01, -180, 0, 192, 10608),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -3050, 0, 5297, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3050, 0, 5297, 0, -90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_END_STAR, -2900, 680, 6797, 0, 90, 0, 0x00000000, bhvEndStar),
+		OBJECT(MODEL_END_STAR, -2900, 530, 7147, 0, 90, 0, (1 << 24), bhvEndStar),
+		OBJECT(MODEL_END_STAR, -2900, 530, 6447, 0, 90, 0, (2 << 24), bhvEndStar),
+		OBJECT(MODEL_END_STAR, -2900, 380, 7497, 0, 90, 0, (3 << 24), bhvEndStar),
+		OBJECT(MODEL_END_STAR, -2900, 380, 6097, 0, 90, 0, (4 << 24), bhvEndStar),
+		OBJECT(MODEL_END_STAR, -2900, 1000, 6797, 0, 90, 0, (5 << 24), bhvEndStar),
+		OBJECT(MODEL_END_STAR, -2900, 850, 7147, 0, 90, 0, (6 << 24), bhvEndStar),
+		OBJECT(MODEL_END_STAR, -2900, 850, 6447, 0, 90, 0, (7 << 24), bhvEndStar),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4150, 0, 5297, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 4150, 0, 5297, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2088, 0, 2247, 0, 0, 0, 0x00000000, bhvDoor),

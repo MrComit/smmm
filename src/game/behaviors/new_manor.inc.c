@@ -1,3 +1,56 @@
+void bhv_end_star_init(void) {
+    u32 flags = save_file_get_star_piece();
+    u32 redsStars = save_file_get_reds_star();
+    switch (o->oBehParams >> 24) {
+        case 0:
+            if ((flags & 0b11111) != 0b11111) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 1:
+            flags = flags >> 5;
+            if ((flags & 0b11111) != 0b11111) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 2:
+            flags = flags >> 10;
+            if ((flags & 0b11111) != 0b11111) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 3:
+            flags = flags >> 15;
+            if ((flags & 0b11111) != 0b11111) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 4:
+            flags = flags >> 20;
+            if ((flags & 0b11111) != 0b11111) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 5:
+            if (!(redsStars & 1)) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 6:
+            if (!(redsStars & 2)) {
+                o->activeFlags = 0;
+            }
+            break;
+        case 7:
+            if (!(redsStars & 4)) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+
 extern s8 sServantsLights;
 
 void bhv_l10_pressure_plate_loop(void) {

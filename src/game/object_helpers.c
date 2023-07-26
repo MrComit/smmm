@@ -2112,7 +2112,10 @@ Gfx *geo_star_color(s32 callContext, struct GraphNode *node, UNUSED void *contex
         dlHead = dlStart;
         currentGraphNode->fnNode.node.flags = (1 << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
 
-        index = (obj->oBehParams >> 24) + 5;
+        index = obj->oBehParams >> 24;
+        if (currentGraphNode->parameter == 0) {
+            index += 5;
+        }
         gDPSetEnvColor(dlHead++, sStarColors[index][0], sStarColors[index][1], sStarColors[index][2], 255);
         gSPEndDisplayList(dlHead);
     }

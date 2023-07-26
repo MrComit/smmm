@@ -11758,3 +11758,14 @@ const BehaviorScript bhvL10PressurePlate[] = {
         CALL_NATIVE(bhv_l10_pressure_plate_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvEndStar[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    SCALE(0, 40),
+    CALL_NATIVE(bhv_end_star_init),
+    BEGIN_LOOP(),
+        // CALL_NATIVE(bhv_end_star_loop),
+    END_LOOP(),
+};
