@@ -43,6 +43,7 @@ const LevelScript level_sl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_L10_THIN_BOOK, thin_book_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L10_PRESSURE_PLATE, l10_pressure_plate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PURPLE_CUSHION, purple_cushion_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_L10_GRAVITY_BUTTON, l10_gravity_button_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -76,6 +77,7 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_L10_THIN_BOOK, 6994, 1405, 6462, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_THIN_BOOK, 6178, 1105, 6628, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_NONE, 7993, 135, 6812, 0, -90, 0, (DIALOG_084 << 16), bhvSignOnWall),
+		OBJECT(MODEL_L10_GRAVITY_BUTTON, 3000, -2350, 11022, 0, -90, 0, 0x00000000, bhvGravityButton),
 		OBJECT(MODEL_L10_PRESSURE_PLATE, -952, 2500, -4824, 0, 0, 0, 0x00000000, bhvL10PressurePlate),
 		OBJECT(MODEL_PURPLE_CUSHION, -2499, 2500, -1759, 0, 53, 0, (2 << 16), bhvCushion),
 		OBJECT(MODEL_PURPLE_CUSHION, -837, 2500, -1749, 0, 125, 0, (2 << 16), bhvCushion),

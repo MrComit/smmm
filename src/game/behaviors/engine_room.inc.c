@@ -120,6 +120,48 @@ void reverse_treadmill_scroll(void) {
 
 
 
+
+void reverse_scroll_sl_dl_Treadmill_mesh_layer_1_vtx_1() {
+	int i = 0;
+	int count = 88;
+	int height = 64 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(sl_dl_Treadmill_mesh_layer_1_vtx_1);
+
+	deltaY = (int)(-2.799999952316284 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+void reverse_scroll_sts_mat_sl_dl_Treadmill_layer1() {
+	static int intervalTex0 = 2;
+	static int curInterval0 = 2;
+	Gfx *mat = segmented_to_virtual(mat_sl_dl_Treadmill_layer1);
+
+	if (--curInterval0 <= 0) {
+		shift_t_down(mat, 10, PACK_TILESIZE(0, -1));
+		curInterval0 = intervalTex0;
+	}
+};
+
+
+
+void reverse_l10_treadmill_scroll(void) {
+	reverse_scroll_sl_dl_Treadmill_mesh_layer_1_vtx_1();
+    reverse_scroll_sts_mat_sl_dl_Treadmill_layer1();
+}
+
+
+
 s32 gPowerOn = FALSE;
 void bhv_exercise_bike_loop(void) {
     if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
@@ -789,9 +831,23 @@ void bhv_gravity_button_init(void) {
     } else {
         o->os16F4 = 0xFF;
     }
+
+    if (gCurrLevelNum == LEVEL_SL) {
+        o->collisionData = segmented_to_virtual(l10_gravity_button_collision);
+    }
 }
 
 void bhv_gravity_button_loop(void) {
+    if (gCurrLevelNum == LEVEL_SL) {
+        if (gLowGrav) {
+            gPowerOn = TRUE;
+        } else {
+            gPowerOn = FALSE;
+            reverse_l10_treadmill_scroll();
+        }
+    }
+
+
     switch (o->oAction) {
         case 0:
             if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {

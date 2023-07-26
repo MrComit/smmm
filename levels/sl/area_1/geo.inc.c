@@ -110,6 +110,7 @@ const GeoLayout sl_dl_108__Basement_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Dryer_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Meat_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Tomatos_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Treadmill_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Veggies_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Veggies_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, sl_dl_Veggies_mesh_layer_7),

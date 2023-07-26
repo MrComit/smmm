@@ -51,8 +51,42 @@ void scroll_sl_dl_KitchenGround_005_mesh_layer_5_vtx_0() {
 	currentX += deltaX;	timeX += 1;	currentY += deltaY;	timeY += 1;
 }
 
+void scroll_sl_dl_Treadmill_mesh_layer_1_vtx_1() {
+	int i = 0;
+	int count = 88;
+	int height = 64 * 0x20;
+
+	static int currentY = 0;
+	int deltaY;
+	Vtx *vertices = segmented_to_virtual(sl_dl_Treadmill_mesh_layer_1_vtx_1);
+
+	deltaY = (int)(2.799999952316284 * 0x20) % height;
+
+	if (absi(currentY) > height) {
+		deltaY -= (int)(absi(currentY) / height) * height * signum_positive(deltaY);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[1] += deltaY;
+	}
+	currentY += deltaY;
+}
+
+void scroll_sts_mat_sl_dl_Treadmill_layer1() {
+	static int intervalTex0 = 2;
+	static int curInterval0 = 2;
+	Gfx *mat = segmented_to_virtual(mat_sl_dl_Treadmill_layer1);
+
+	if (--curInterval0 <= 0) {
+		shift_t_down(mat, 10, PACK_TILESIZE(0, 1));
+		curInterval0 = intervalTex0;
+	}
+};
+
 void scroll_sl() {
 	scroll_sts_mat_sl_dl_Wall_002();
 	scroll_sts_mat_sl_dl_FlowerPetal_002_v4_002_layer1();
 	scroll_sl_dl_KitchenGround_005_mesh_layer_5_vtx_0();
+	scroll_sl_dl_Treadmill_mesh_layer_1_vtx_1();
+	scroll_sts_mat_sl_dl_Treadmill_layer1();
 }

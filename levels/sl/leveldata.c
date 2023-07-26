@@ -40,3 +40,5 @@
 #include "levels/sl/l10_pressure_plate/collision.inc.c"
 #include "levels/sl/purple_cushion/model.inc.c"
 #include "levels/sl/purple_cushion/collision.inc.c"
+#include "levels/sl/l10_gravity_button/model.inc.c"
+#include "levels/sl/l10_gravity_button/collision.inc.c"

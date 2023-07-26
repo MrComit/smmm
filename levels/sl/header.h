@@ -52,4 +52,8 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/purple_cushion/collision_header.h"
 
+#include "levels/sl/l10_gravity_button/geo_header.h"
+
+#include "levels/sl/l10_gravity_button/collision_header.h"
+
 #endif
