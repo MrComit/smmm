@@ -981,5 +981,13 @@
 #define MODEL_WINKING_MOON        0xED
 
 
+// LEVEL 10 MODELS - 0xFF TO 0xE2 ARE FREE
+#define MODEL_L10_THIN_BOOK       0xFF
+#define MODEL_L10_PRESSURE_PLATE  0xFE
+#define MODEL_PURPLE_CUSHION      0xFD
+
+
+
+
 
 #endif // MODEL_IDS_H

@@ -1,4 +1,5 @@
 #include "levels/bob/tv_static/geo_header.h"
+#include "levels/sl/header.h"
 struct ObjectHitbox sRemoteHitbox = {
     /* interactType: */ INTERACT_COIN,
     /* downOffset: */ 0,
@@ -105,9 +106,12 @@ void bhv_tv_static_loop(void) {
     }
 }
 
+extern Vec3s gRoomColors[];
+
 static void const *sCushionCollision[] = {
     cushion_collision,
-    blue_cushion_collision
+    blue_cushion_collision,
+    purple_cushion_collision,
 };
 
 void bhv_cushion_init(void) {
@@ -118,6 +122,11 @@ void bhv_cushion_init(void) {
 
 void bhv_cushion_loop(void) {
     struct MarioState *m = gMarioState;
+
+    if (gCurrLevelNum == LEVEL_SL) {
+        o->oOpacity = gRoomColors[0][0];
+    }
+
     switch (o->oAction) {
         case 0:
             if (gMarioObject->platform == o) {

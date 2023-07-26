@@ -294,3 +294,4 @@ s32 set_obj_anim_with_accel_and_sound(s16 a0, s16 a1, s32 a2) {
 #include "game/behaviors/observatory.inc.c"
 #include "game/behaviors/memory_hole.inc.c"
 #include "game/behaviors/final_boss.inc.c"
+#include "game/behaviors/new_manor.inc.c"

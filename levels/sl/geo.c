@@ -20,3 +20,7 @@
 #include "levels/sl/areas/2/geo.inc.c"
 
 #include "levels/sl/geo.inc.c"
+
+#include "levels/sl/thin_book/geo.inc.c"
+#include "levels/sl/l10_pressure_plate/geo.inc.c"
+#include "levels/sl/purple_cushion/geo.inc.c"

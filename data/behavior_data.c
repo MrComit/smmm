@@ -11744,3 +11744,17 @@ const BehaviorScript bhvProspectorLock[] = {
         CALL_NATIVE(bhv_prospector_lock_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvL10PressurePlate[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(l10_pressure_plate_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_pressure_plate_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_l10_pressure_plate_loop),
+    END_LOOP(),
+};

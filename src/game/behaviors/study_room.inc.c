@@ -1,3 +1,4 @@
+#include "levels/sl/header.h"
 static struct ObjectHitbox sBucketHitbox = {
     /* interactType:      */ INTERACT_GRABBABLE,
     /* downOffset:        */ 0,
@@ -58,6 +59,10 @@ void bhv_spinning_book_init(void) {
     o->oBehParams2ndByte = CL_RandomMinMaxU16(0, 2);
     o->o104 = random_u16();
     o->oFaceAngleYaw = random_u16();
+
+    if (gCurrLevelNum == LEVEL_SL) {
+        o->collisionData = segmented_to_virtual(thin_book_big_collision);
+    }
 }
 
 

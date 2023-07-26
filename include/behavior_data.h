@@ -959,6 +959,7 @@ extern const BehaviorScript bhvRedLightButton[];
 extern const BehaviorScript bhvRedVase[];
 extern const BehaviorScript bhvProspectorT[];
 extern const BehaviorScript bhvProspectorLock[];
+extern const BehaviorScript bhvL10PressurePlate[];
 
 
 #endif // BEHAVIOR_DATA_H

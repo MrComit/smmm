@@ -33,3 +33,10 @@
 #include "levels/sl/areas/1/movtext.inc.c"
 
 #include "levels/sl/leveldata.inc.c"
+
+#include "levels/sl/thin_book_big/collision.inc.c"
+#include "levels/sl/thin_book/model.inc.c"
+#include "levels/sl/l10_pressure_plate/model.inc.c"
+#include "levels/sl/l10_pressure_plate/collision.inc.c"
+#include "levels/sl/purple_cushion/model.inc.c"
+#include "levels/sl/purple_cushion/collision.inc.c"

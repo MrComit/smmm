@@ -30,6 +30,7 @@ const GeoLayout sl_dl_102__Main_Hall_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Chandelier_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Chandelier_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_MainHall_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Painting_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -51,7 +52,6 @@ const GeoLayout sl_dl_104__Living_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, sl_dl_CarpetEnd_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Couch_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_FancyChair_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Library_008_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_LivingRoom_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_LTable_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_TV_mesh_layer_1),
@@ -120,9 +120,13 @@ const GeoLayout sl_dl_108__Basement_geo[] = {
 const GeoLayout sl_dl_109__Bedroom_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_ASM(0, geo_set_room_color_env),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_AAA_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Bed_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1261, 11400, -9811, sl_dl_Bedroom_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Dresser_009_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Light_005_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Painting_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

@@ -40,4 +40,16 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/header.inc.h"
 
+#include "levels/sl/thin_book_big/collision_header.h"
+
+#include "levels/sl/thin_book/geo_header.h"
+
+#include "levels/sl/l10_pressure_plate/geo_header.h"
+
+#include "levels/sl/l10_pressure_plate/collision_header.h"
+
+#include "levels/sl/purple_cushion/geo_header.h"
+
+#include "levels/sl/purple_cushion/collision_header.h"
+
 #endif
