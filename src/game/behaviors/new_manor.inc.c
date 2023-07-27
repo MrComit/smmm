@@ -1,3 +1,43 @@
+void spawn_orange_number_infinite_digit_scale(u32 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale, s32 palette) {
+    struct Object *orangeNumber;
+    s32 behParamMod = behParam;
+    s32 digits = 0;
+    f32 digitsCenter;
+    s32 offset;
+
+    while (behParamMod > 10) {
+        behParamMod /= 10;
+        digits++;
+    }
+    
+    digitsCenter = digits / 2.0f;
+
+    while (digits+1) {
+        offset = (digits - digitsCenter) * 220.0f;
+        orangeNumber = spawn_object_relative(behParam % 10, relX + offset, relY, relZ, o, MODEL_NUMBER, bhvStationaryOrangeNumber);
+        orangeNumber->oFC = palette;
+        obj_scale(orangeNumber, scale);
+
+
+        behParam /= 10;
+        digits--;
+    }
+}
+
+
+void bhv_end_coin_count_init(void) {
+    struct Object *obj = spawn_object(o, MODEL_RANK_LETTER, bhvStationaryOrangeNumber);
+    obj_scale(obj, 8.0f);
+    obj->oPosY += 400.0f;
+    //obj->oBehParams2ndByte = save_file_get_rank();
+    //obj->oFC = palette?
+
+    spawn_orange_number_infinite_digit_scale(gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount, 0, 0, 0, 0, 4.2f, 6);
+}
+
+
+
+
 void bhv_end_star_init(void) {
     u32 flags = save_file_get_star_piece();
     u32 redsStars = save_file_get_reds_star();

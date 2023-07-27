@@ -57,6 +57,7 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_NONE, 0, 192, 10608, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, 192, 10608, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 0, 192, 10608),
+		OBJECT(MODEL_NONE, -75, 350, 4447, 0, 0, 0, (7 << 24), bhvEndCoinCount),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -3050, 0, 5297, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3050, 0, 5297, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_END_STAR, -2900, 680, 6797, 0, 90, 0, 0x00000000, bhvEndStar),

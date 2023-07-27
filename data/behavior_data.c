@@ -11769,3 +11769,27 @@ const BehaviorScript bhvEndStar[] = {
         // CALL_NATIVE(bhv_end_star_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvStationaryOrangeNumber[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    //BILLBOARD(),
+    SET_HOME(),
+    // SCALE(0, 200),
+    CALL_NATIVE(bhv_orange_number_init),
+    BEGIN_LOOP(),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvEndCoinCount[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    //BILLBOARD(),
+    SET_HOME(),
+    // SCALE(0, 200),
+    CALL_NATIVE(bhv_end_coin_count_init),
+    BEGIN_LOOP(),
+    END_LOOP(),
+};

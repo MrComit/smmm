@@ -629,6 +629,7 @@
 #define MODEL_RED_SPARKLES_ANIMATION        0x48
 #define MODEL_PROSPECTOR_T        0x49
 #define MODEL_PROSPECTOR_LOCK     0x4A
+#define MODEL_RANK_LETTER         0x4B        // number_geo
 
 
 
