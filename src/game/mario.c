@@ -358,7 +358,7 @@ void play_sound_and_spawn_particles(struct MarioState *m, u32 soundBits, u32 wav
         }
     }
 
-    if ((m->flags & MARIO_METAL_CAP) || soundBits == SOUND_ACTION_UNSTUCK_FROM_GROUND
+    if (soundBits == SOUND_ACTION_UNSTUCK_FROM_GROUND
         || soundBits == SOUND_MARIO_PUNCH_HOO) {
         play_sound(soundBits, m->marioObj->header.gfx.cameraToObject);
     } else {
@@ -381,7 +381,7 @@ void play_mario_action_sound(struct MarioState *m, u32 soundBits, u32 wavePartic
  */
 void play_mario_landing_sound(struct MarioState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
+        m,soundBits, 1);
 }
 
 /**
@@ -391,7 +391,7 @@ void play_mario_landing_sound(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_landing_sound_once(struct MarioState *m, u32 soundBits) {
     play_mario_action_sound(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
+        m, soundBits, 1);
 }
 
 /**
@@ -399,7 +399,7 @@ void play_mario_landing_sound_once(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_heavy_landing_sound(struct MarioState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
+        m, soundBits, 1);
 }
 
 /**
@@ -409,7 +409,7 @@ void play_mario_heavy_landing_sound(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_heavy_landing_sound_once(struct MarioState *m, u32 soundBits) {
     play_mario_action_sound(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
+        m, soundBits, 1);
 }
 
 /**
@@ -417,8 +417,7 @@ void play_mario_heavy_landing_sound_once(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_sound(struct MarioState *m, s32 actionSound, s32 marioSound) {
     if (actionSound == SOUND_ACTION_TERRAIN_JUMP) {
-        play_mario_action_sound(m, (m->flags & MARIO_METAL_CAP) ? (s32) SOUND_ACTION_METAL_JUMP
-                                                                : (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
+        play_mario_action_sound(m,  (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
     } else {
         play_sound_if_no_flag(m, actionSound, MARIO_ACTION_SOUND_PLAYED);
     }

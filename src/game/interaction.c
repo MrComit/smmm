@@ -1071,6 +1071,9 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
                 enterDoorAction = ACT_ENTERING_STAR_DOOR;
             }
 
+            // if (o->oInteractionSubtype & INT_SUBTYPE_DRESSER_DOOR) {
+            //     m->flags ^= MARIO_METAL_CAP;
+            // }
             // if (doorSaveFileFlag != 0 && !(save_file_get_flags() & doorSaveFileFlag)) {
             //     enterDoorAction = ACT_UNLOCKING_STAR_DOOR;
             // }

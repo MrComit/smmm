@@ -11818,3 +11818,11 @@ const BehaviorScript bhvBooBubbleCage[] = {
     CALL_NATIVE(bhv_bubble_cage_init),
     BREAK(),
 };
+
+
+const BehaviorScript bhvDresserDoor[] = {
+    BEGIN(OBJ_LIST_DOORS),
+    SET_INT(oInteractType, INTERACT_DOOR),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_DRESSER_DOOR),
+    GOTO(bhvDoor + 1 + 1),
+};

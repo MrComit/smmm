@@ -132,6 +132,7 @@ const GeoLayout sl_dl_109__Bedroom_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_AAA_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Bed_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -1261, 11400, -9811, sl_dl_Bedroom_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Dresser_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Dresser_009_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Light_005_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Painting_001_mesh_layer_1),

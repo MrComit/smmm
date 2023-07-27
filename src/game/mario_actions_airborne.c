@@ -1764,8 +1764,7 @@ s32 act_flying(struct MarioState *m) {
                     m->vel[1] = 0.0f;
                 }
 
-                play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK
-                                                        : SOUND_ACTION_BONK,
+                play_sound(SOUND_ACTION_BONK,
                            m->marioObj->header.gfx.cameraToObject);
 
                 m->particleFlags |= PARTICLE_VERTICAL_STAR;

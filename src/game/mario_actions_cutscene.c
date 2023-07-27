@@ -1025,8 +1025,17 @@ s32 act_going_through_door(struct MarioState *m) {
     } else if (is_anim_at_end(m)) {
         if (m->actionArg & 2) {
             m->faceAngle[1] += 0x8000;
+            set_mario_action(m, ACT_IDLE, 0);
+            if (m->interactObj->oInteractionSubtype == INT_SUBTYPE_DRESSER_DOOR) {
+                m->flags ^= MARIO_METAL_CAP;
+                // m->pos[2] += 300.0f;
+                set_mario_action(m, ACT_WALKING, 0);
+                m->forwardVel = -30.0f;
+                // set_mario_action(m, ACT_PULLING_DOOR, 1);
+            }
+        } else {
+            set_mario_action(m, ACT_IDLE, 0);
         }
-        set_mario_action(m, ACT_IDLE, 0);
     }
 
     m->actionTimer++;
@@ -1607,7 +1616,7 @@ s32 act_squished(struct MarioState *m) {
                 vec3f_set(m->marioObj->header.gfx.scale, 2.0f - squishAmount, squishAmount,
                           2.0f - squishAmount);
             } else {
-                if (!(m->flags & MARIO_METAL_CAP) && m->invincTimer == 0) {
+                if (m->invincTimer == 0) {
                     // cap on: 3 units; cap off: 4.5 units
                     m->hurtCounter += m->flags & MARIO_CAP_ON_HEAD ? 12 : 18;
                     play_sound_if_no_flag(m, SOUND_MARIO_ATTACKED, MARIO_MARIO_SOUND_PLAYED);
