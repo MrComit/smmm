@@ -4242,9 +4242,9 @@ void render_jukebox_menu(void) {
     s32 scrollY;
     s32 preIndex = gDialogMusicIndex;
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogMusicIndex, 1, 28);
-    if (preIndex < gDialogMusicIndex && (gDialogMusicIndex - gDialogMusicScroll) > 12) {
+    if (preIndex < gDialogMusicIndex && (gDialogMusicIndex - gDialogMusicScroll) > 6) {
         gDialogMusicScroll++;
-    } else if (preIndex > gDialogMusicIndex && (gDialogMusicIndex - gDialogMusicScroll) < 1) {
+    } else if (preIndex > gDialogMusicIndex && gDialogMusicScroll > 0 && (gDialogMusicIndex - gDialogMusicScroll) < 2) {
         gDialogMusicScroll--;
     }
 
@@ -4253,6 +4253,11 @@ void render_jukebox_menu(void) {
 
     scrollY = gDialogMusicScroll * 15;
     for (i = 0; i < 28; i++) {
+        if ((i - gDialogMusicScroll) < 0 || (i - gDialogMusicScroll) > 6) {
+            y -= 15;
+            continue;
+        }
+
         x = get_str_x_pos_from_center(MUS_X, sSongNames[i], 1.0f);
         print_generic_string(x, MUS_Y + y + scrollY, sSongNames[i]);
 
@@ -4340,7 +4345,17 @@ void render_jukebox_menu(void) {
 }
 
 
+void render_jukebox_dialog_box(void) {
+    create_dl_translation_matrix(MENU_MTX_PUSH, MUS_X - 57, MUS_Y + 10, 0);
 
+    // This is a bit weird. It reuses the dialog text box (width 130, height -80),
+    // so scale to at least fit the screen.
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.9f, 1.6f, 1.0f);
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, 110);
+    gSPDisplayList(gDisplayListHead++, dl_draw_text_bg_box);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
 
 
 
@@ -4435,7 +4450,8 @@ s16 render_menus_and_dialogs(void) {
             return index;
         }
         if (gDialogID == DIALOG_085) {
-            shade_screen();
+            // shade_screen();
+            render_jukebox_dialog_box();
             render_jukebox_menu();
             return index;
         }
