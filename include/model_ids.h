@@ -989,6 +989,7 @@
 #define MODEL_L10_GRAVITY_BUTTON  0xFC
 #define MODEL_L10_BOUNCE_BOX      0xFB
 #define MODEL_END_STAR            0xFA
+#define MODEL_BOO_BUBBLE          0xF9
 
 
 

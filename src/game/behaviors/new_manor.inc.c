@@ -1,3 +1,36 @@
+extern s8 sBooColorsDark[][3];
+
+void bhv_bubble_cage_init(void) {
+    obj_set_hitbox(o, &sJustCageHitbox);
+}
+
+void bhv_boo_bubble_init(void) {
+    struct Object *obj;
+    if (!(save_file_get_boos() & (1 << o->oBehParams2ndByte))) {
+        o->activeFlags = 0;
+        return;
+    }
+
+    obj = spawn_object(o, MODEL_HAUNTED_CAGE, bhvBooBubbleCage);
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    o->oPosY += 150.0f;
+
+    o->os16F4 = sBooColorsDark[o->oBehParams2ndByte][0] * 1.5f;
+    o->os16F6 = sBooColorsDark[o->oBehParams2ndByte][1] * 1.5f;
+    o->os16F8 = sBooColorsDark[o->oBehParams2ndByte][2] * 1.5f;
+
+}
+
+void bhv_boo_bubble_loop(void) {
+    o->os16100 += 0x400;
+    o->oOpacity = 180 + (coss(o->os16100 + 0x2000) * 60);
+    o->oGraphYOffset = 15.0f - (coss(o->os16100) * 15.0f);
+}
+
+
+
+
+
 void spawn_orange_number_infinite_digit_scale(u32 behParam, s16 relX, s16 relY, s16 relZ, f32 dist, f32 scale, s32 palette) {
     struct Object *orangeNumber;
     s32 behParamMod = behParam;
@@ -16,6 +49,7 @@ void spawn_orange_number_infinite_digit_scale(u32 behParam, s16 relX, s16 relY, 
         offset = (digits - digitsCenter) * 220.0f;
         orangeNumber = spawn_object_relative(behParam % 10, relX + offset, relY, relZ, o, MODEL_NUMBER, bhvStationaryOrangeNumber);
         orangeNumber->oFC = palette;
+        orangeNumber->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         obj_scale(orangeNumber, scale);
 
 
@@ -29,6 +63,7 @@ void bhv_end_coin_count_init(void) {
     struct Object *obj = spawn_object(o, MODEL_RANK_LETTER, bhvStationaryOrangeNumber);
     obj_scale(obj, 8.0f);
     obj->oPosY += 400.0f;
+    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     //obj->oBehParams2ndByte = save_file_get_rank();
     //obj->oFC = palette?
 

@@ -62,4 +62,6 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/end_star/geo_header.h"
 
+#include "levels/sl/boo_bubble/geo_header.h"
+
 #endif

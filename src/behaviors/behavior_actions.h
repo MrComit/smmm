@@ -1222,6 +1222,9 @@ void bhv_prospector_lock_loop(void);
 void bhv_l10_pressure_plate_loop(void);
 void bhv_end_star_init(void);
 void bhv_end_coin_count_init(void);
+void bhv_boo_bubble_init(void);
+void bhv_boo_bubble_loop(void);
+void bhv_bubble_cage_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

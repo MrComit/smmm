@@ -27,3 +27,4 @@
 #include "levels/sl/l10_gravity_button/geo.inc.c"
 #include "levels/sl/l10_bounce_box/geo.inc.c"
 #include "levels/sl/end_star/geo.inc.c"
+#include "levels/sl/boo_bubble/geo.inc.c"

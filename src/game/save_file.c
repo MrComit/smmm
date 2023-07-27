@@ -645,7 +645,7 @@ u32 save_file_get_reds_star(void) {
 
 
 u32 save_file_get_star_piece(void) {
-    return 0x1FFFFFF;
+    // return 0x1FFFFFF;
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }

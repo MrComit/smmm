@@ -958,7 +958,10 @@ void geo_process_background(struct GraphNodeBackground *node) {
     }
     if (gCurrLevelNum == LEVEL_SSL && l8_is_indoors()) {
         list = NULL;
+    } else if (gCurrLevelNum == LEVEL_SL && gMarioCurrentRoom != 1) {
+        list = NULL;
     }
+
     if (list != NULL) {
         geo_append_display_list((void *) VIRTUAL_TO_PHYSICAL(list), node->fnNode.node.flags >> 8);
     } else if (gCurGraphNodeMasterList != NULL) {

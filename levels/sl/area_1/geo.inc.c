@@ -30,6 +30,8 @@ const GeoLayout sl_dl_102__Main_Hall_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Chandelier_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Chandelier_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_MainHall_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_OpeningHallPlants_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_OpeningHallPlants_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Painting_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -2900, 680, 6797, 0, 90, 0, sl_dl_StarPlaque_mesh_layer_1),
 		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -2900, 680, 6797, 0, 90, 0, sl_dl_StarPlaque_001_mesh_layer_1),

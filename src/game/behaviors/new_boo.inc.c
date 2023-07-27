@@ -11,7 +11,7 @@ static struct ObjectHitbox sBooCageHitbox = {
     /* hurtboxHeight: */ 0,
 };
 
-static struct ObjectHitbox sJustCageHitbox = {
+struct ObjectHitbox sJustCageHitbox = {
     /* interactType: */ INTERACT_IGLOO_BARRIER,
     /* downOffset: */ 0,
     /* damageOrCoinValue: */ 0,

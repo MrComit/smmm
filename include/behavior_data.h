@@ -963,6 +963,8 @@ extern const BehaviorScript bhvL10PressurePlate[];
 extern const BehaviorScript bhvEndStar[];
 extern const BehaviorScript bhvStationaryOrangeNumber[];
 extern const BehaviorScript bhvEndCoinCount[];
+extern const BehaviorScript bhvBooBubble[];
+extern const BehaviorScript bhvBooBubbleCage[];
 
 
 #endif // BEHAVIOR_DATA_H
