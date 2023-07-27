@@ -4149,6 +4149,203 @@ void update_map_screen(void) {
     // render_map_object(-500.0f, 0.0f, test_map_TestMap_mesh);
 }
 
+static char sMusicMain[] = { TEXT_MUSIC_MAIN };
+static char sMusicFloor1[] = { TEXT_MUSIC_FLOOR_1 };
+static char sMusicProfT[] = { TEXT_MUSIC_PROF_T };
+static char sMusicGenBoss[] = { TEXT_MUSIC_GEN_BOSS };
+static char sMusicFloor2[] = { TEXT_MUSIC_FLOOR_2 };
+static char sMusicBedroomBoss[] = { TEXT_MUSIC_BEDROOM_BOSS };
+static char sMusicOutside[] = { TEXT_MUSIC_OUTSIDE };
+static char sMusicCity[] = { TEXT_MUSIC_CITY };
+static char sMusicTerrarium[] = { TEXT_MUSIC_TERRARIUM };
+static char sMusicCave[] = { TEXT_MUSIC_CAVE };
+static char sMusicSnowglobe[] = { TEXT_MUSIC_SNOWGLOBE };
+static char sMusicGallery[] = { TEXT_MUSIC_GALLERY };
+static char sMusicCityBoss[] = { TEXT_MUSIC_CITY_BOSS };
+static char sMusicFloor3[] = { TEXT_MUSIC_FLOOR_3 };
+static char sMusicMusicRoom[] = { TEXT_MUSIC_MUSIC_ROOM };
+static char sMusicBasement[] = { TEXT_MUSIC_BASEMENT };
+static char sMusicBasementBoss[] = { TEXT_MUSIC_BASEMENT_BOSS };
+static char sMusicMind[] = { TEXT_MUSIC_MIND };
+static char sMusicFinalBoss[] = { TEXT_MUSIC_FINAL_BOSS };
+static char sMusicCredits[] = { TEXT_MUSIC_CREDITS };
+static char sMusicSideToad[] = { TEXT_MUSIC_SIDE_TOAD };
+static char sMusicMarioManor[] = { TEXT_MUSIC_MARIO_MANOR };
+static char sMusicChallenge[] = { TEXT_MUSIC_CHALLENGE };
+static char sMusicSmallKey[] = { TEXT_MUSIC_SMALL_KEY };
+static char sMusicBigKey[] = { TEXT_MUSIC_BIG_KEY };
+static char sMusicPuzzleJingle[] = { TEXT_MUSIC_PUZZLE_JINGLE };
+static char sMusicBooJingle[] = { TEXT_MUSIC_BOO_JINGLE };
+static char sMusicEndJingle[] = { TEXT_MUSIC_END_JINGLE };
+
+
+char *sSongNames[] = {
+    sMusicMain, sMusicFloor1, sMusicProfT, sMusicGenBoss, sMusicFloor2,
+    sMusicBedroomBoss, sMusicOutside, sMusicCity, sMusicTerrarium, sMusicCave,
+    sMusicSnowglobe, sMusicGallery, sMusicCityBoss, sMusicFloor3, sMusicMusicRoom,
+    sMusicBasement, sMusicBasementBoss, sMusicMind, sMusicFinalBoss, sMusicCredits,
+    sMusicSideToad, sMusicMarioManor, sMusicChallenge, sMusicSmallKey, sMusicBigKey,
+    sMusicPuzzleJingle, sMusicBooJingle, sMusicEndJingle
+};
+
+s32 sSongNameToSeqID[] = {
+    SEQ_MAIN_MENU, 
+    SEQ_MANOR, 
+    SEQ_PROF_T, 
+    SEQ_GENERIC_BOSS, 
+    SEQ_FLOOR_2, 
+    SEQ_BEDROOM_BOSS, 
+    SEQ_OUTSIDE, 
+    SEQ_CITY,
+    SEQ_TERRARIUM,
+    SEQ_CAVE,
+    SEQ_SNOWGLOBE,
+    SEQ_GALLERY,
+    SEQ_CITY_BOSS,
+    SEQ_FLOOR_3,
+    SEQ_MUSIC_ROOM,
+    SEQ_BASEMENT,
+    SEQ_BASEMENT_BOSS,
+    SEQ_MIND,
+    SEQ_FINAL_BOSS,
+    SEQ_CREDITS, 
+    SEQ_CREDITS, // SHOULD BE SIDE TOAD 
+    SEQ_CREDITS, // SHOULD BE MARIOS MANOR
+    SEQ_CREDITS, // SHOULD BE CHALLENGE THEME
+    SEQ_SMALL_KEY,
+    SEQ_BIG_KEY,
+    SEQ_EVENT_SOLVE_PUZZLE,
+    SEQ_BOO_JINGLE,
+    SEQ_END_JINGLE
+};
+
+
+
+s8 gDialogMusicIndex = 1;
+s32 gDialogMusicScroll = 0;
+
+#define MUS_X 90
+#define MUS_Y 210
+
+void render_jukebox_menu(void) {
+    // u8 textOptions[] = { TEXT_OPTIONS };
+    // u8 textMusicOn[] = { TEXT_MUSIC_ON };
+    // u8 textMusicOff[] = { TEXT_MUSIC_OFF };
+    // u8 textTrackerOn[] = { TEXT_TRACKER_ON };
+    // u8 textTrackerOff[] = { TEXT_TRACKER_OFF };
+    // u8 textOn[] = { TEXT_ON };
+    // u8 textOff[] = { TEXT_OFF };
+    s32 x;
+    s32 i;
+    s32 y = -15;
+    s32 x2 = 32;
+    s32 scrollY;
+    s32 preIndex = gDialogMusicIndex;
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, &gDialogMusicIndex, 1, 28);
+    if (preIndex < gDialogMusicIndex && (gDialogMusicIndex - gDialogMusicScroll) > 12) {
+        gDialogMusicScroll++;
+    } else if (preIndex > gDialogMusicIndex && (gDialogMusicIndex - gDialogMusicScroll) < 1) {
+        gDialogMusicScroll--;
+    }
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+
+    scrollY = gDialogMusicScroll * 15;
+    for (i = 0; i < 28; i++) {
+        x = get_str_x_pos_from_center(MUS_X, sSongNames[i], 1.0f);
+        print_generic_string(x, MUS_Y + y + scrollY, sSongNames[i]);
+
+        if (i+1 == gDialogMusicIndex) {
+            create_dl_translation_matrix(MENU_MTX_PUSH, MUS_X - (MUS_X - x) - 5, MUS_Y + 16 - ((gDialogMusicIndex - gDialogMusicScroll) * 15), 0);
+            create_dl_rotation_matrix(MENU_MTX_NOPUSH, 180.0f, 0, 0, 1.0f);
+            // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+            gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+            create_dl_translation_matrix(MENU_MTX_PUSH, MUS_X + (MUS_X - x) + 5, MUS_Y - ((gDialogMusicIndex - gDialogMusicScroll) * 15), 0);
+            gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+            gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+        }
+
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        y -= 15;
+    }
+
+
+    // x = get_str_x_pos_from_center(OPT_X, textOptions, 1.0f);
+    // print_generic_string(x, OPT_Y + y2, textOptions);
+
+    // switch (gDialogMusicIndex) {
+    //     case 1:
+    //         musicC2 = musicCheck;
+    //         handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &musicCheck, 0, 1);
+    //         if (musicC2 != musicCheck) {
+    //             save_file_set_options(SAVE_OPTION_MUSIC);
+    //         }
+    //         break;
+    //     case 2:
+    //         if (hasTracker) {
+    //             trackerC2 = trackerCheck;
+    //             handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &trackerCheck, 0, 1);
+    //             if (trackerC2 != trackerCheck) {
+    //                 save_file_set_options(SAVE_OPTION_TRACKER);
+    //             }
+    //         } else {
+    //             x2 = 80;
+    //             camC2 = camCheck;
+    //             handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &camCheck, 1, 5);
+    //             if (camC2 != camCheck) {
+    //                 save_file_set_sensitivity(camCheck);
+    //             }
+    //         }
+    //         break;
+    //     case 3:
+    //         x2 = 80;
+    //         camC2 = camCheck;
+    //         handle_menu_scrolling2(MENU_SCROLL_HORIZONTAL, &camCheck, 1, 5);
+    //         if (camC2 != camCheck) {
+    //             save_file_set_sensitivity(camCheck);
+    //         }
+    //         break;
+    // }
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+    // create_dl_translation_matrix(MENU_MTX_PUSH, MUS_X - x2, MUS_Y + 16 - ((gDialogMusicIndex - gDialogMusicScroll) * 15), 0);
+    // create_dl_rotation_matrix(MENU_MTX_NOPUSH, 180.0f, 0, 0, 1.0f);
+    // gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, 255);
+    // gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    // gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    // create_dl_translation_matrix(MENU_MTX_PUSH, MUS_X + x2, MUS_Y - ((gDialogMusicIndex - gDialogMusicScroll) * 15), 0);
+    // gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    // gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+
+    if (gMarioState->input & INPUT_A_PRESSED) {
+        gDialogID = DIALOG_NONE;
+        stop_background_music(get_current_background_music());
+
+
+        play_music(0, SEQUENCE_ARGS(4, sSongNameToSeqID[gDialogMusicIndex - 1]), 0);
+    }
+
+
+    if (gMarioState->input & INPUT_B_PRESSED) {
+        gDialogID = DIALOG_NONE;
+    }
+
+
+}
+
+
+
+
+
+
+
+
 
 void shade_screen_rgba(u8 r, u8 g, u8 b, u8 a) {
     create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
@@ -4235,6 +4432,11 @@ s16 render_menus_and_dialogs(void) {
         // The Peach "Dear Mario" message needs to be repositioned separately
         if (gDialogID == DIALOG_020) {
             print_peach_letter_message();
+            return index;
+        }
+        if (gDialogID == DIALOG_085) {
+            shade_screen();
+            render_jukebox_menu();
             return index;
         }
 

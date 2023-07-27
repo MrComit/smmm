@@ -11826,3 +11826,21 @@ const BehaviorScript bhvDresserDoor[] = {
     SET_INT(oInteractionSubtype, INT_SUBTYPE_DRESSER_DOOR),
     GOTO(bhvDoor + 1 + 1),
 };
+
+
+const BehaviorScript bhvJukeBox[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(jukebox_collision),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_JUKEBOX),
+    DROP_TO_FLOOR(),
+    SET_HITBOX(/*Radius*/ 300, /*Height*/ 350),
+    SET_INT(oWoodenPostTotalMarioAngle, 0),
+    CALL_NATIVE(load_object_static_model),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        SET_INT(oInteractStatus, 0),
+        CALL_NATIVE(bhv_jukebox_loop),
+    END_LOOP(),
+};

@@ -966,6 +966,7 @@ extern const BehaviorScript bhvEndCoinCount[];
 extern const BehaviorScript bhvBooBubble[];
 extern const BehaviorScript bhvBooBubbleCage[];
 extern const BehaviorScript bhvDresserDoor[];
+extern const BehaviorScript bhvJukeBox[];
 
 
 #endif // BEHAVIOR_DATA_H

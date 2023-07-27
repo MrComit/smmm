@@ -87,6 +87,8 @@ const GeoLayout sl_dl_106__Lounge_geo[] = {
 		GEO_ROTATION_NODE_WITH_DL(LAYER_OPAQUE, 90, 0, 0, sl_dl_MarioTrophy_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Painting_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Pole1_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_RecordPlayer_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_RecordPlayer_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Simple_Table_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, sl_dl_Simple_Table_003_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Slide_mesh_layer_1),

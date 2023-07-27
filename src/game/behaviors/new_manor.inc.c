@@ -1,3 +1,41 @@
+void bhv_jukebox_loop(void) {
+    if (o->oDistanceToMario < 3000.0f) {
+        if (o->oTimer > 25) {
+            struct Object *obj = spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+            obj->oPosY += 30.0f;
+            switch (o->os16F4) {
+                case 0:
+                    obj->oPosY += 90.0f;
+                    // obj->oPosY -= 120.0f;
+                    o->os16F4 = 1;
+                    break;
+                case 1:
+                    obj->oPosX += 120.0f;
+                    obj->oPosZ -= 120.0f;
+                    o->os16F4 = 2;
+                    break;
+                case 2:
+                    obj->oPosX -= 120.0f;
+                    obj->oPosZ += 120.0f;
+                    o->os16F4 = 3;
+                    break;
+                case 3:
+                    obj->oPosX -= 120.0f;
+                    obj->oPosZ -= 120.0f;
+                    o->os16F4 = 4;
+                    break;
+                case 4:
+                    obj->oPosX += 120.0f;
+                    obj->oPosZ += 120.0f;
+                    o->os16F4 = 0;
+                    break;
+            }
+            o->oTimer = 0;
+        }
+    }
+}
+
+
 extern s8 sBooColorsDark[][3];
 
 void bhv_bubble_cage_init(void) {

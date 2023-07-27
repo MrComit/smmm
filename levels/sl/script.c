@@ -109,6 +109,7 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_L10_THIN_BOOK, 6994, 1405, 6462, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_THIN_BOOK, 6178, 1105, 6628, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_BOUNCE_BOX, 2828, -2, -2703, 0, -90, 0, (4 << 24) | (13 << 16), bhvBounceBoxes),
+		OBJECT(MODEL_WOODEN_SIGNPOST, 965, 0, -1329, 0, 90, 0, (DIALOG_085 << 16), bhvJukeBox),
 		OBJECT(MODEL_NONE, 4946, 1841, -717, 0, 0, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_NONE, 4046, 2143, 1009, 0, -90, 0, 0x00100000, bhvHorizontalPole),
 		OBJECT(MODEL_L10_THIN_BOOK, 1672, 2289, -3342, 0, 0, 0, 0x00000000, bhvSpinningBook),

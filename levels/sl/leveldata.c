@@ -46,3 +46,4 @@
 #include "levels/sl/l10_bounce_box/model.inc.c"
 #include "levels/sl/end_star/model.inc.c"
 #include "levels/sl/boo_bubble/model.inc.c"
+#include "levels/sl/jukebox/collision.inc.c"

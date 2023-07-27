@@ -399,6 +399,37 @@
 // #define TEXT_OFF _("Off")
 
 
+
+
+#define TEXT_MUSIC_MAIN _("Main Menu")
+#define TEXT_MUSIC_FLOOR_1 _("Floor 1")
+#define TEXT_MUSIC_PROF_T _("Professor T")
+#define TEXT_MUSIC_GEN_BOSS _("Boss Theme")
+#define TEXT_MUSIC_FLOOR_2 _("Floor 2")
+#define TEXT_MUSIC_BEDROOM_BOSS _("Bedroom Boss")
+#define TEXT_MUSIC_OUTSIDE _("Backyard")
+#define TEXT_MUSIC_CITY _("City")
+#define TEXT_MUSIC_TERRARIUM _("Terrarium")
+#define TEXT_MUSIC_CAVE _("Cave")
+#define TEXT_MUSIC_SNOWGLOBE _("Snowglobe")
+#define TEXT_MUSIC_GALLERY _("Shooting Gallery")
+#define TEXT_MUSIC_CITY_BOSS _("City Boss")
+#define TEXT_MUSIC_FLOOR_3 _("Floor 3")
+#define TEXT_MUSIC_MUSIC_ROOM _("Music Room")
+#define TEXT_MUSIC_BASEMENT _("Basement")
+#define TEXT_MUSIC_BASEMENT_BOSS _("Basement Boss")
+#define TEXT_MUSIC_MIND _("The Monstrous Mind")
+#define TEXT_MUSIC_FINAL_BOSS _("Final Boss")
+#define TEXT_MUSIC_CREDITS _("Credits")
+#define TEXT_MUSIC_SIDE_TOAD _("Prospector T")
+#define TEXT_MUSIC_MARIO_MANOR _("Mario's Manor")
+#define TEXT_MUSIC_CHALLENGE _("Challenge Theme")
+#define TEXT_MUSIC_SMALL_KEY _("Small Key")
+#define TEXT_MUSIC_BIG_KEY _("Big Key")
+#define TEXT_MUSIC_PUZZLE_JINGLE _("Puzzle Jingle")
+#define TEXT_MUSIC_BOO_JINGLE _("Boo Jingle")
+#define TEXT_MUSIC_END_JINGLE _("The Face Is Revealed")
+
 //CREDITS
 #define TEXT_CREDITS_TITLE _("Made By MrComit")
 // #define TEXT_CREDITS_DUMMY1 _("xascasd")

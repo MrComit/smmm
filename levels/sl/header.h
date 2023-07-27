@@ -64,4 +64,6 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/boo_bubble/geo_header.h"
 
+#include "levels/sl/jukebox/collision_header.h"
+
 #endif

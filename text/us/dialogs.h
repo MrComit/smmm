@@ -1025,11 +1025,7 @@ Get Respect Doing It'\n\
 (The spine is well-worn.)"))
 
 DEFINE_DIALOG(DIALOG_085, 1, 5, 30, 200, _("\
-You don't stand a ghost\n\
-of a chance in this house.\n\
-If you walk out of here,\n\
-you deserve...\n\
-...a Ghoul Medal..."))
+jukebox dialog id"))
 
 DEFINE_DIALOG(DIALOG_086, 1, 3, 30, 200, _("\
 Running around in circles\n\

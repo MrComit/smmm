@@ -1781,6 +1781,12 @@ u32 interact_text(struct MarioState *m, UNUSED u32 interactType, struct Object *
         interact = check_read_sign(m, o);
     } else if (o->oInteractionSubtype & INT_SUBTYPE_NPC) {
         interact = check_npc_talk(m, o);
+    } else if (o->oInteractionSubtype & INT_SUBTYPE_JUKEBOX) {
+        if ((m->input & READ_MASK) && mario_can_talk(m, 0)) {
+            m->interactObj = o;
+            m->usedObj = o;
+            return set_mario_action(m, ACT_READING_SIGN, 0);
+        }
     } else {
         push_mario_out_of_object(m, o, 2.0f);
     }
