@@ -66,4 +66,8 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/jukebox/collision_header.h"
 
+#include "levels/sl/new_tv_static/geo_header.h"
+
+#include "levels/sl/new_remote/geo_header.h"
+
 #endif

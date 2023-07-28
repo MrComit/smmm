@@ -270,7 +270,17 @@ void bhv_peepa_number_loop(void) {
     if (o->parentObj == o)
         return o->activeFlags = 0;
 
-    o->oPosX = o->parentObj->oPosX;
-    o->oPosY = o->parentObj->oPosY + o->parentObj->oGraphYOffset + 100.0f;
-    o->oPosZ = o->parentObj->oPosZ;
+
+    if (o->oF4 == 1) {
+        o->oPosX = o->parentObj->oPosX + (sins(gCamera->yaw + 0x4000) * 30.0f);
+        o->oPosZ = o->parentObj->oPosZ + (coss(gCamera->yaw + 0x4000) * 30.0f);
+    } else if (o->oF4 == 2) {
+        o->oPosX = o->parentObj->oPosX + (sins(gCamera->yaw - 0x4000) * 30.0f);
+        o->oPosZ = o->parentObj->oPosZ + (coss(gCamera->yaw - 0x4000) * 30.0f);
+    } else {
+        o->oPosX = o->parentObj->oPosX;
+        o->oPosZ = o->parentObj->oPosZ;
+    }
+
+        o->oPosY = o->parentObj->oPosY + o->parentObj->oGraphYOffset + 100.0f;
 }

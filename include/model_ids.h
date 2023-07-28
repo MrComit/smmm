@@ -990,6 +990,8 @@
 #define MODEL_L10_BOUNCE_BOX      0xFB
 #define MODEL_END_STAR            0xFA
 #define MODEL_BOO_BUBBLE          0xF9
+#define MODEL_NEW_TV_STATIC       0xF8
+#define MODEL_NEW_REMOTE          0xF7
 
 
 

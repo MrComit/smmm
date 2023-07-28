@@ -804,6 +804,52 @@ s32 save_file_get_cap_pos(Vec3s capPos) {
 
 
 
+u8 save_file_get_peepa_score(void) {
+    return gSaveBuffer.menuData[0].tvPeepaScore;
+}
+
+void save_file_set_peepa_score(u8 score) {
+    if (score > gSaveBuffer.menuData[0].tvPeepaScore) {
+        gSaveBuffer.menuData[0].tvPeepaScore = score;
+    }
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
+
+
+u8 save_file_get_gallery_score(void) {
+    return gSaveBuffer.menuData[0].galleryScore;
+}
+
+void save_file_set_gallery_score(u8 score) {
+    if (score > gSaveBuffer.menuData[0].galleryScore) {
+        gSaveBuffer.menuData[0].galleryScore = score;
+    }
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
+
+u8 save_file_get_chase_score(void) {
+    return gSaveBuffer.menuData[0].chaseScore;
+}
+
+void save_file_set_chase_score(u8 score) {
+    if (score > gSaveBuffer.menuData[0].chaseScore) {
+        gSaveBuffer.menuData[0].chaseScore = score;
+    }
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
+
+
+
+
 u8 save_file_get_menu_challenges(void) {
     return gSaveBuffer.menuData[0].challenges;
 }

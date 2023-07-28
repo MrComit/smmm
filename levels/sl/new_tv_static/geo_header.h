@@ -1,0 +1,18 @@
+extern const GeoLayout new_tv_static_Switch_opt1[];
+extern const GeoLayout new_tv_static_Switch2_opt1[];
+extern const GeoLayout new_tv_static_geo[];
+extern Lights1 new_tv_static_Light_001_lights;
+extern u8 new_tv_static_i8_static_i4[];
+extern Vtx new_tv_static_Static_mesh_layer_1_vtx_0[4];
+extern Gfx new_tv_static_Static_mesh_layer_1_tri_0[];
+extern Vtx new_tv_static_Light_mesh_layer_6_vtx_0[24];
+extern Gfx new_tv_static_Light_mesh_layer_6_tri_0[];
+extern Gfx mat_new_tv_static_Static_001_v4_001[];
+extern Gfx mat_new_tv_static_Black_v4[];
+extern Gfx mat_new_tv_static_Light_001[];
+extern Gfx mat_new_tv_static_Blank[];
+extern Gfx new_tv_static_Static_mesh_layer_1[];
+extern Gfx new_tv_static_Static_mesh_layer_1_mat_override_Black_v4_0[];
+extern Gfx new_tv_static_Light_mesh_layer_6[];
+extern Gfx new_tv_static_Light_mesh_layer_6_mat_override_Blank_0[];
+extern Gfx new_tv_static_material_revert_render_settings[];

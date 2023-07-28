@@ -62,6 +62,9 @@ struct MainMenuSaveData {
     u8 camSens;
     u8 challenges;
     u8 soundMode: 2;
+    u8 tvPeepaScore;
+    u16 galleryScore;
+    u16 chaseScore;
 
 #ifdef WIDE
     u8 wideMode: 1;
@@ -294,6 +297,14 @@ s32 save_file_is_cannon_unlocked(void);
 void save_file_set_cannon_unlocked(void);
 void save_file_set_cap_pos(s16 x, s16 y, s16 z);
 s32 save_file_get_cap_pos(Vec3s capPos);
+
+u8 save_file_get_peepa_score(void);
+void save_file_set_peepa_score(u8 score);
+u8 save_file_get_gallery_score(void);
+void save_file_set_gallery_score(u8 score);
+u8 save_file_get_chase_score(void);
+void save_file_set_chase_score(u8 score);
+
 void save_file_set_sound_mode(u16 mode);
 u16 save_file_get_sound_mode(void);
 s32 get_chapter_from_save_data(s32 saveFile);

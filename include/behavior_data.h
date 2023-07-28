@@ -967,6 +967,9 @@ extern const BehaviorScript bhvBooBubble[];
 extern const BehaviorScript bhvBooBubbleCage[];
 extern const BehaviorScript bhvDresserDoor[];
 extern const BehaviorScript bhvJukeBox[];
+extern const BehaviorScript bhvNewTVPeepa[];
+extern const BehaviorScript bhvNewTVStatic[];
+extern const BehaviorScript bhvNewRemote[];
 
 
 #endif // BEHAVIOR_DATA_H

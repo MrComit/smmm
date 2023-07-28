@@ -1226,6 +1226,10 @@ void bhv_boo_bubble_init(void);
 void bhv_boo_bubble_loop(void);
 void bhv_bubble_cage_init(void);
 void bhv_jukebox_loop(void);
+void bhv_new_tv_peepa_init(void);
+void bhv_new_tv_peepa_loop(void);
+void bhv_new_tv_static_loop(void);
+void bhv_new_remote_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

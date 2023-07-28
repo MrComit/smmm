@@ -1286,11 +1286,12 @@ s32 act_unused_death_exit(struct MarioState *m) {
                 m->numBooCoins -= 5;
             else
                 m->numBooCoins = 0;
-        } else {
-            if (m->numCoins > 10)
+        } else if (gCurrLevelNum != LEVEL_SL){
+            if (m->numCoins > 10) {
                 m->numCoins -= 10;
-            else
+            } else {
                 m->numCoins = 0;
+            }
             
             if (in_boss_room(gCurrLevelNum, gMarioDeathRoom)) {
                 if (gBossPrecoins > 10) {
