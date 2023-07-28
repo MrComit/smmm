@@ -1,5 +1,5 @@
 
-void obj_update_standard_actions(f32 scale);
+// s32 obj_update_standard_actions(f32 scale);
 extern Vec3f gComitCutscenePosVec;
 extern Vec3f gComitCutsceneFocVec;
 

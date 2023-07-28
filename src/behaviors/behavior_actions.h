@@ -1230,6 +1230,14 @@ void bhv_new_tv_peepa_init(void);
 void bhv_new_tv_peepa_loop(void);
 void bhv_new_tv_static_loop(void);
 void bhv_new_remote_loop(void);
+void bhv_new_cannon_lid_init(void);
+void bhv_new_cannon_lid_loop(void);
+void bhv_new_gallery_snufit_loop(void);
+void bhv_new_cannon_balls_loop(void);
+void bhv_new_gallery_goomba_update(void);
+void bhv_new_gallery_shyguy_init(void);
+void bhv_new_gallery_shyguy_loop(void);
+void bhv_new_gallery_handler_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

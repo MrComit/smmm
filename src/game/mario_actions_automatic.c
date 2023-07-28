@@ -797,6 +797,8 @@ s32 act_grabbed(struct MarioState *m) {
 }
 
 
+extern s32 gGalleryScore;
+
 s32 act_in_cannon(struct MarioState *m) {
     struct Object *marioObj = m->marioObj;
     struct Object *obj;
@@ -821,6 +823,8 @@ s32 act_in_cannon(struct MarioState *m) {
             m->pos[2] = m->usedObj->oPosZ;
 
             m->forwardVel = 0.0f;
+
+            m->healCounter = 31;
 
             m->actionState = 1;
             break;
@@ -871,7 +875,11 @@ s32 act_in_cannon(struct MarioState *m) {
             if (++m->actionTimer >= 8 && m->input & INPUT_A_PRESSED) {
                 m->actionTimer = 0;
                 play_sound(SOUND_OBJ_POUNDING_CANNON, m->marioObj->header.gfx.cameraToObject);
-                obj = spawn_object(marioObj, MODEL_BOWLING_BALL, bhvCannonBalls);
+                if (gCurrLevelNum != LEVEL_SL) {
+                    obj = spawn_object(marioObj, MODEL_BOWLING_BALL, bhvCannonBalls);
+                } else {
+                    obj = spawn_object(marioObj, MODEL_BOWLING_BALL, bhvNewCannonBalls);
+                }
                 vec3f_copy(&obj->oPosX, c->pos);
                 vec3f_get_dist_and_angle(c->pos, c->focus, &dist, &pitch, &yaw);
                 obj->oMoveAngleYaw = yaw;
@@ -893,10 +901,15 @@ s32 act_in_cannon(struct MarioState *m) {
                 queue_rumble_data(5, 80);
                 set_camera_shake_from_hit(5);
                 update_mario_sound_and_camera(m);
+                if (gCurrLevelNum == LEVEL_SL) {
+                    gGalleryScore -= 10;
+                }
             }
 
 
-            if (cur_obj_nearest_object_with_behavior(bhvShootingGalleryHandler) == NULL) {
+            if ((cur_obj_nearest_object_with_behavior(bhvShootingGalleryHandler) == NULL) && 
+                !(gCurrLevelNum == LEVEL_SL && (obj = cur_obj_nearest_object_with_behavior(bhvNewShootingGalleryHandler)) != NULL 
+                && obj->oAction != 2)) {
                 m->forwardVel = 0;//50.0f * coss(m->faceAngle[0]);
 
                 m->vel[1] = 50.0f;// * sins(m->faceAngle[0]);
@@ -912,17 +925,28 @@ s32 act_in_cannon(struct MarioState *m) {
 
                 set_mario_action(m, ACT_SHOT_FROM_CANNON, 0);
                 queue_rumble_data(60, 70);
-                obj = spawn_object(marioObj, MODEL_DL_CANNON_LID, bhvCannonLid);
+                if (gCurrLevelNum != LEVEL_SL) {
+                    obj = spawn_object(marioObj, MODEL_DL_CANNON_LID, bhvCannonLid);
+                } else {
+                    obj = spawn_object(marioObj, MODEL_DL_CANNON_LID, bhvNewCannonLid);
+                }
+                obj->oFaceAngleYaw = 0x8000;
                 obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 vec3f_copy(&obj->oPosX, &m->usedObj->oPosX);
                 obj->oPosY -= 20.0f;
                 obj->oFaceAngleYaw += 0x8000;
-                m->usedObj->activeFlags = 0;
-                m->usedObj == NULL;
                 obj = cur_obj_nearest_object_with_behavior(bhvCannonBarrel);
                 if (obj != NULL) {
                     obj->activeFlags = 0;
                 }
+                if (gCurrLevelNum == LEVEL_SL) {
+                    obj = spawn_object(m->usedObj, MODEL_CANNON_BASE, bhvCannon);
+                    obj->oBehParams2ndByte = 0x40;
+                    // obj->oFaceAngleYaw += 0x4000;
+                    // obj->oMoveAngleYaw += 0x4000;
+                }
+                m->usedObj->activeFlags = 0;
+                m->usedObj = NULL;
                 return FALSE;
             }
     }

@@ -970,6 +970,12 @@ extern const BehaviorScript bhvJukeBox[];
 extern const BehaviorScript bhvNewTVPeepa[];
 extern const BehaviorScript bhvNewTVStatic[];
 extern const BehaviorScript bhvNewRemote[];
+extern const BehaviorScript bhvNewCannonLid[];
+extern const BehaviorScript bhvNewShootingGalleryHandler[];
+extern const BehaviorScript bhvNewGalleryShyguy[];
+extern const BehaviorScript bhvNewGalleryGoomba[];
+extern const BehaviorScript bhvNewGallerySnufit[];
+extern const BehaviorScript bhvNewCannonBalls[];
 
 
 #endif // BEHAVIOR_DATA_H

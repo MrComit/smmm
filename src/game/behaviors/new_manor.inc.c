@@ -1,3 +1,439 @@
+// GALLERY START
+
+// #define NEW_MINIGAME_SECONDS 120
+
+// struct Object *sGalleryShyguys[4] = {
+//     NULL, NULL, NULL, NULL,
+// };
+
+// struct Object *sGalleryGoombas[6] = {
+//     NULL, NULL, NULL, NULL, NULL, NULL,
+// };
+
+// struct Object *sGallerySnufits[3] = {
+//     NULL, NULL, NULL,
+// };
+
+const BehaviorScript *sNewGalleryEnemies[4] = {
+    bhvNewGalleryShyguy, bhvNewGalleryGoomba, bhvNewGallerySnufit, bhvSnufitBalls,
+};
+
+s32 gGalleryScore = 0;
+
+Vec3f sNewShyguyPositions[4] = {
+    {7044.0f - 13049.0f, 291.0f, -10352.0f + 6421.0f},
+    {6811.0f - 13049.0f, 291.0f, -10159.0f + 6421.0f},
+    {8875.0f - 13049.0f, 591.0f, -10125.0f + 6421.0f},
+    {8644.0f - 13049.0f, 591.0f, -10321.0f + 6421.0f},
+};
+
+
+Vec3f sNewSnufitPositions[3] = {
+    {7805.0f - 13049.0f, 1890.0f - 859.0f, -10110.0f + 6421.0f},
+    {8372.0f - 13049.0f, 2000.0f - 859.0f, -10110.0f + 6421.0f},
+    {6909.0f - 13049.0f, 2190.0f - 859.0f, -10110.0f + 6421.0f},
+};
+
+
+void bhv_new_cannon_lid_init(void) {
+    o->oPosX -= 300.0f;
+    o->oPosY -= 180.0f;
+    o->header.gfx.scale[0] = 0.5f;
+    o->oRoom = 7;
+}
+
+void bhv_new_cannon_lid_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 30.0f);
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.5f, 0.1f);
+            if (o->oPosX == o->oHomeX && o->header.gfx.scale[0] == 1.5f) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
+            if (o->oPosY == o->oHomeY) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (lateral_dist_between_objects(o, gMarioObject) > 600.0f) {
+                o->oAction = 3;
+            }
+            break;
+        case 3:
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY - 180.0f, 30.0f);
+            o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX - 300.0f, 30.0f);
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.5f, 0.1f);
+
+            if (o->oPosX == o->oHomeX - 300.0f && o->header.gfx.scale[0] == 0.5f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+void bhv_new_gallery_snufit_loop(void) {
+    f32 dist;
+    s16 pitch, yaw;
+    obj_set_hitbox(o, &sGallerySnufitHitbox);
+    o->oDeathSound = SOUND_OBJ_SNUFIT_SKEETER_DEATH;
+
+
+    vec3f_get_dist_and_angle(&o->oPosX, gMarioState->pos, &dist, &pitch, &yaw);
+    o->oMoveAnglePitch = -pitch;
+
+    cur_obj_rotate_yaw_toward(o->oAngleToMario, 2000);
+
+    o->oFaceAnglePitch = o->oMoveAnglePitch;
+
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 90) {
+                o->oAction = 1;
+            }
+            o->oSnufitCircularPeriod += 0x20;
+            o->oPosX = o->oHomeX + 300.0f * sins(o->oSnufitCircularPeriod);
+            break;
+        case 1:
+            if (o->oTimer > 5) {
+                o->oSnufitBullets += 3;
+                cur_obj_play_sound_2(SOUND_OBJ_SNUFIT_SHOOT);
+                spawn_object_relative(0, 0, -20, 40, o, MODEL_GHOSTSAND_BALL, bhvSnufitBalls);
+                o->oSnufitRecoil = -30;
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            if (o->oTimer > 5) {
+                o->oAction = 0;
+            }
+            break;
+    }
+
+    o->oFloat110 = (o->oHomeY - 400.0f) + 8.0f * coss(4000 * gGlobalTimer);
+    o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloat110, 4.0f);
+
+    o->oSnufitYOffset = -0x20;
+    o->oSnufitZOffset = o->oSnufitRecoil + 180;
+    o->oSnufitBodyScale
+        = (s16)(o->oSnufitBodyBaseScale + 666
+        + o->oSnufitBodyBaseScale * coss(o->oSnufitBodyScalePeriod));
+
+    if (o->oSnufitBodyScale > 1000) {
+        o->oSnufitScale = (o->oSnufitBodyScale - 1000) / 1000.0f + 1.0f;
+        o->oSnufitBodyScale = 1000;
+    } else {
+        o->oSnufitScale = 1.0f;
+    }
+
+    cur_obj_scale(o->oSnufitScale);
+    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+            spawn_mist_particles();
+            o->activeFlags = 0;
+            sGallerySnufits[o->oBehParams2ndByte] = NULL;
+            create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+            // interact_coin(gMarioState, 0, o);
+            play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
+            gGalleryScore += 3;
+    }
+}
+
+
+// void bhv_gallery_goomba_init(void) {
+//     obj_set_hitbox(o, &sGalleryGoombaHitbox);
+
+//     o->oGravity = -5.0f;
+//     o->oMoveAngleYaw = 0x4000 * random_sign();;
+// }
+
+
+void bhv_new_gallery_goomba_update(void) {
+    f32 animSpeed;
+
+    if (obj_update_standard_actions(o->oGoombaScale)) {
+        o->oGoombaScale = approach_f32_symmetric(o->oGoombaScale, 1.5f, 0.1f);
+        cur_obj_scale(o->oGoombaScale);
+        obj_update_blinking(&o->oGoombaBlinkTimer, 30, 50, 5);
+        cur_obj_update_floor_and_walls();
+
+        if ((animSpeed = o->oForwardVel / o->oGoombaScale * 0.4f) < 1.0f) {
+            animSpeed = 1.0f;
+        }
+
+        cur_obj_init_animation_with_accel_and_sound(0, animSpeed);
+
+        //obj_forward_vel_approach(20.0f * o->oGoombaScale, 0.4f);
+        o->oForwardVel = 6.0f;// * o->oGoombaScale;
+        cur_obj_move_standard(0);
+
+        if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                spawn_mist_particles();
+                o->activeFlags = 0;
+                sGalleryGoombas[o->oBehParams2ndByte] = NULL;
+                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                // interact_coin(gMarioState, 0, o);
+                play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
+                gGalleryScore += 1;
+        }
+
+    } else {
+        o->oAnimState = 1;
+    }
+
+    if (o->oPosY < 1000.0f - 859.0f) {
+        o->activeFlags = 0;
+        sGalleryGoombas[o->oBehParams2ndByte] = NULL;
+    }
+}
+
+
+ void bhv_new_gallery_shyguy_init(void) {
+    obj_set_hitbox(o, &sShyguyHitbox);
+    o->oOpacity = 0xFF;
+    vec3f_copy(&o->oPosX, sNewShyguyPositions[o->oBehParams2ndByte]);
+}
+
+void bhv_new_gallery_shyguy_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.1f);
+            if (o->oTimer > 90) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY + 120.0f, 0.1f);
+            if (o->oTimer > 120) {
+                o->oAction = 0;
+            }
+
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                    spawn_mist_particles();
+                    o->activeFlags = 0;
+                    sGalleryShyguys[o->oBehParams2ndByte] = NULL;
+                    create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+                    // interact_coin(gMarioState, 0, o);
+                    play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
+                    gGalleryScore += 5;
+            }
+            break;
+    }
+    o->oMoveAngleYaw = o->oAngleToMario;
+    o->oInteractStatus = 0;
+}
+
+void new_gallery_spawn_enemies(void) {
+    struct Object *obj;
+
+    if (/*o->oShyguyCount < 12 && */o->oShyguyIndex == 0) {
+        if (sGalleryShyguys[0] == NULL && sGalleryShyguys[1] == NULL && ++o->oShyguyTimer > 90) {
+            sGalleryShyguys[0] = spawn_object(o, MODEL_SHYGUY, bhvNewGalleryShyguy);
+            sGalleryShyguys[1] = spawn_object(o, MODEL_SHYGUY, bhvNewGalleryShyguy);
+            sGalleryShyguys[1]->oBehParams2ndByte = 1;
+            o->oShyguyIndex = 1;
+            o->oShyguyTimer = 0;
+            o->oShyguyCount++;
+        }
+    } else/* if (o->oShyguyCount < 12)*/ {
+        if (sGalleryShyguys[2] == NULL && sGalleryShyguys[3] == NULL && ++o->oShyguyTimer > 90) {
+            sGalleryShyguys[2] = spawn_object(o, MODEL_SHYGUY, bhvNewGalleryShyguy);
+            sGalleryShyguys[3] = spawn_object(o, MODEL_SHYGUY, bhvNewGalleryShyguy);
+            sGalleryShyguys[2]->oBehParams2ndByte = 2;
+            sGalleryShyguys[3]->oBehParams2ndByte = 3;
+            o->oShyguyIndex = 0;
+            o->oShyguyTimer = 0;
+            o->oShyguyCount++;
+        }
+    }
+
+    // if (o->oGoombaCount < 7) {
+        if (o->oGoombaIndex < 6) {
+            if (++o->oGoombaTimer > 75) {
+                sGalleryGoombas[o->oGoombaIndex] = spawn_object(o, MODEL_GOOMBA, bhvNewGalleryGoomba);
+                sGalleryGoombas[o->oGoombaIndex]->oBehParams2ndByte = o->oGoombaIndex;
+                o->oGoombaIndex++;
+                o->oGoombaTimer = 0;
+            }
+        } else {
+            if (cur_obj_nearest_object_with_behavior(bhvNewGalleryGoomba) == NULL) {
+                o->oGoombaIndex = 0;
+                o->oGoombaTimer = -120;
+                o->oGoombaCount++;
+            }
+        }
+    // }
+
+    // if (o->oSnufitCount < 5) {
+        if (o->oSnufitIndex < 3) {
+            if (++o->oSnufitTimer > 120) {
+                sGallerySnufits[o->oSnufitIndex] = spawn_object(o, MODEL_SNUFIT, bhvNewGallerySnufit);
+                sGallerySnufits[o->oSnufitIndex]->oBehParams2ndByte = o->oSnufitIndex;
+                vec3f_copy(&sGallerySnufits[o->oSnufitIndex]->oPosX, sNewSnufitPositions[o->oSnufitIndex]);
+                o->oSnufitIndex++;
+                o->oSnufitTimer = 0;
+
+            }
+        } else {
+            if (cur_obj_nearest_object_with_behavior(bhvNewGallerySnufit) == NULL) {
+                o->oSnufitIndex = 0;
+                o->oSnufitTimer = -210;
+                o->oSnufitCount++;
+            }
+        }
+    // }
+}
+
+void new_gallery_kill_enemies(void) {
+    s32 i;
+    struct Object *obj;
+    for (i = 0; i < 4; i++) {
+        while ((obj = cur_obj_nearest_object_with_behavior(sNewGalleryEnemies[i])) != NULL) {
+            obj->activeFlags = 0;
+        }
+    }
+}
+
+
+// void bhv_gallery_handler_init(void) {
+//     o->os16F4 = (NEW_MINIGAME_SECONDS*30 + 1);
+
+//     sGalleryShyguys[0] = NULL; sGalleryShyguys[1] = NULL; sGalleryShyguys[2] = NULL; sGalleryShyguys[3] = NULL;
+//     sGalleryGoombas[0] = NULL; sGalleryGoombas[1] = NULL; sGalleryGoombas[2] = NULL; 
+//     sGalleryGoombas[3] = NULL; sGalleryGoombas[4] = NULL; sGalleryGoombas[5] = NULL;
+//     sGallerySnufits[0] = NULL; sGallerySnufits[1] = NULL; sGallerySnufits[2] = NULL;
+// }
+
+void bhv_new_gallery_handler_loop(void) {
+    struct Object *obj;
+    struct MarioState *m = gMarioState;
+    Vec3f pos;
+    switch (o->oAction) {
+        case 0:
+            obj = cur_obj_nearest_object_with_behavior(bhvCannon);
+            if (obj != NULL && lateral_dist_between_objects(gMarioObject, obj) < 600.0f) {
+                print_text_fmt_int(20, 167, "HIGH  %d", save_file_get_gallery_score(), 4);
+            }
+            if (m->action == ACT_IN_CANNON && m->actionState == 2) {
+                o->oAction = 1;
+                play_music(0, SEQUENCE_ARGS(4, SEQ_GALLERY), 0);
+            }
+            if (m->pos[2] < -1700.0f) {
+                m->pos[2] = -1700.0f;
+            }
+            break;
+        case 1:
+            new_gallery_spawn_enemies();
+
+            if (gGalleryScore < 0) {
+                gGalleryScore = 0;
+            }
+
+            o->os16F4--;
+            if (o->os16F4 > 10*30) {
+                if (o->os16F4 % 30 == 0) {
+                    // play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
+                }
+                o->os16F6 = 209;
+                o->os16F8 = 20;
+            } else {
+                if (o->os16F4 % 30 == 0 || o->os16F4 % 30 == 15) {
+                    // play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
+                }
+                o->os16FA += 0x1000;
+                o->os16F6 = 209 + (sins(o->os16FA) * 2);
+                o->os16F8 = 20 + (coss(o->os16FA) * 2);
+            }
+
+            print_text_fmt_int(o->os16F8, o->os16F6, "TIME  %d", o->os16F4 / 30, 0);
+
+            print_text_fmt_int(20, 187, "SCORE %d", gGalleryScore, 3);
+            print_text_fmt_int(20, 167, "HIGH  %d", save_file_get_gallery_score(), 4);
+
+
+            //print_text_fmt_int(20, 200, "POINTS %d", o->os16F6, 0);
+            //print_text_fmt_int(20, 215, "GOAL %d", MINIGAME_GOAL, 0);
+            if (o->os16F4 <= 0) {
+                o->oAction = 2;
+                stop_background_music(SEQUENCE_ARGS(4, SEQ_GALLERY));
+            }
+            if (m->health < 0x800) {
+                m->health = 0x800;
+            }
+            break;
+        case 2:
+            new_gallery_kill_enemies();
+            // o->activeFlags = 0;
+            if (o->oTimer > 30) {
+                if (gGalleryScore > save_file_get_gallery_score()) {
+                    save_file_set_gallery_score(gGalleryScore);
+                }
+                o->oAction = 0;
+                bhv_gallery_handler_init();
+                gGalleryScore = 0;
+                o->os16F6 = 0;
+                o->os16F8 = 0;
+                o->oShyguyTimer = 0;
+                o->oGoombaTimer = 0;
+                o->oSnufitTimer = 0;
+                o->oShyguyIndex = 0;
+                o->oGoombaIndex = 0;
+                o->oSnufitIndex = 0;
+            }
+            break;
+    }
+}
+
+void bhv_new_cannon_balls_loop(void) {
+    s32 i;
+    struct Object *obj;
+    if (o->oTimer > 90) {
+        o->activeFlags = 0;
+    }
+
+    for (i = 0; i < 4; i++) {
+        if (cur_obj_dist_to_nearest_object_with_behavior(sNewGalleryEnemies[i]) < 200.0f) {
+            obj = cur_obj_nearest_object_with_behavior(sNewGalleryEnemies[i]);
+            if (i != 3) {
+                attack_object(obj, 2);
+            } else {
+                obj->activeFlags = 0;
+                spawn_mist_particles();
+            }
+            o->activeFlags = 0;
+            break;
+        }
+    }
+
+
+    cur_obj_update_floor_and_walls();
+
+    obj_compute_vel_from_move_pitch(200.0f);
+    if (obj_check_attacks(&sCannonBallHitbox, 1) != 0) {
+        // We hit Mario while he is metal!
+        // Bounce off, and fall until the first check is true.
+        o->oMoveAngleYaw += 0x8000;
+        o->oForwardVel *= 0.05f;
+        o->oVelY = 30.0f;
+        o->oGravity = -4.0f;
+
+        cur_obj_become_intangible();
+        o->oDeathSound = -1;
+        obj_die_if_health_non_positive();
+    } else if (o->oMoveFlags & (OBJ_MOVE_MASK_ON_GROUND | OBJ_MOVE_HIT_WALL)) {
+        o->oDeathSound = -1;
+        obj_die_if_health_non_positive();
+    }
+
+    cur_obj_move_standard(78);
+}
+
+// GALLERY END
+
+
+
 // TV PEEPA START
 #include "levels/sl/new_tv_static/geo_header.h"
 static struct ObjectHitbox sNewTVPeepaHitbox = {
