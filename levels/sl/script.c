@@ -50,6 +50,7 @@ const LevelScript level_sl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_TV_STATIC, new_tv_static_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_REMOTE, new_remote_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_SHYGUY_GROUP, new_shyguy_group_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_NEW_CHASE_PIECES, new_chase_pieces_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -58,6 +59,7 @@ const LevelScript level_sl_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_SL, 0x01, 0x0B, WARP_NO_CHECKPOINT),
+		INSTANT_WARP(0, 0x01, 0, 0, 22639),
 		OBJECT(MODEL_NONE, 0, 192, 9115, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, 192, 9115, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 0, 192, 9115),

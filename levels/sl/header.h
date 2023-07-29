@@ -72,4 +72,24 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/new_shyguy_group/geo_header.h"
 
+#include "levels/sl/new_chase_pieces/geo_header.h"
+
+#include "levels/sl/new_chase_piece_0/collision_header.h"
+
+#include "levels/sl/new_chase_piece_1/collision_header.h"
+
+#include "levels/sl/new_chase_piece_2/collision_header.h"
+
+#include "levels/sl/new_chase_piece_3/collision_header.h"
+
+#include "levels/sl/new_chase_piece_4/collision_header.h"
+
+#include "levels/sl/new_chase_piece_5/collision_header.h"
+
+#include "levels/sl/new_chase_piece_6/collision_header.h"
+
+#include "levels/sl/new_chase_piece_7/collision_header.h"
+
+#include "levels/sl/new_chase_piece_8/collision_header.h"
+
 #endif

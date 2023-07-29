@@ -1,4 +1,144 @@
 // CHASE START
+#include "levels/sl/header.h"
+/*
+
+  3x3 grid based on where the pieces start and stop (left, center, right)
+    o->oAnimState = ((o->oBehParams >> 24) * 3) + o->oBehParams2ndByte;
+  
+  each one is spawned 1500 units in front of next one (each one is 1300 units, so 100 at each end are empty)
+  
+  each one spawns with its starting point the same as the previous end point, but the end point is random
+  
+  each one is spawned with random height offset (maybe -50 to +50 off of previous one, with hard limits on both)
+
+  each one is spawned with random horizontal scaling (z axis?) from 1.0 to 0.8, based on the timer
+*/
+
+static void const *sNewChasePieces[] = {
+    new_chase_piece_0_collision,
+    new_chase_piece_1_collision,
+    new_chase_piece_2_collision,
+    new_chase_piece_3_collision,
+    new_chase_piece_4_collision,
+    new_chase_piece_5_collision,
+    new_chase_piece_6_collision,
+    new_chase_piece_7_collision,
+    new_chase_piece_8_collision,
+};
+
+void bhv_new_chase_piece_init(void) {
+
+    o->oAnimState = ((o->oBehParams >> 24) * 3) + o->oBehParams2ndByte;
+    o->collisionData = segmented_to_virtual(sNewChasePieces[o->oAnimState]);
+}
+
+
+void bhv_new_chase_piece_loop(void) {
+    struct Object *obj;
+    s32 rand;
+    f32 randFloat;
+    // return;
+    switch (o->oAction) {
+        case 0:
+            if (o->oF8 >= 9) {
+                o->oAction = 1;
+                break;
+            }
+            if (absf(gMarioState->pos[2] - o->oPosZ) < 5000.0f) {
+                o->oObjF4 = spawn_object(o, MODEL_NEW_CHASE_PIECES, bhvNewChasePiece);
+                o->oObjF4->oBehParams = o->oBehParams2ndByte << 24;
+                // rand = random_sign();
+                rand = random_u16();
+                // if (rand < 0x3333) {
+                //     o->oObjF4->oBehParams2ndByte = o->oBehParams2ndByte;
+                // } else if (random_sign() > 0) {
+                //     o->oObjF4->oBehParams2ndByte = o->oBehParams2ndByte + 1;
+                // } else {
+                //     o->oObjF4->oBehParams2ndByte = o->oBehParams2ndByte + 2;
+                // }
+                // if (o->oObjF4->oBehParams2ndByte > 2) {
+                //     o->oObjF4->oBehParams2ndByte -= 3;
+                // }
+                if (o->oBehParams2ndByte == 0) {
+                    if (rand < 0x5555) {
+                        o->oObjF4->oBehParams2ndByte = 0;
+                    } else {
+                        o->oObjF4->oBehParams2ndByte = 1;
+                    }
+                } else if (o->oBehParams2ndByte == 2) {
+                    if (rand < 0x5555) {
+                        o->oObjF4->oBehParams2ndByte = 2;
+                    } else {
+                        o->oObjF4->oBehParams2ndByte = 1;
+                    }
+                } else {
+                    // rand = random_u16();
+                    if (rand < 0x3333) {
+                        o->oObjF4->oBehParams2ndByte = 1;
+                    } else if (random_sign() > 0) {
+                        o->oObjF4->oBehParams2ndByte = 0;
+                    } else {
+                        o->oObjF4->oBehParams2ndByte = 2;
+                    }
+                }
+                
+                o->oObjF4->oPosZ -= 1500.0f;
+                
+                // o->oObjF4->header.gfx.scale[2] = 0.9f;
+                obj = cur_obj_nearest_object_with_behavior(bhvNewJSShyguyManager);
+                if (obj != NULL) {
+                    if (obj->os16110 * 10 > random_u16()) {
+                        rand = random_u16() - (obj->os16110 * 10);
+                        if (rand < 0) {
+                            rand = 0;
+                        }
+
+                        o->oObjF4->header.gfx.scale[2] = 0.9f + (0.1f * (rand / 0x10000));
+                    }
+                }
+
+
+                if (obj == NULL || obj->os16110 < 100*30) {
+                    randFloat = (random_float() - 0.5f) * 40.0f;
+                } else if (obj->os16110 < 200*30) {
+                    randFloat = (random_float() - 0.5f) * 60.0f;
+                } else {
+                    randFloat = (random_float() - 0.5f) * 70.0f;
+                }
+
+                o->oObjF4->oFloatFC = o->oFloatFC + randFloat;
+                if (o->oObjF4->oFloatFC > 70.0f) {
+                    o->oObjF4->oFloatFC = 70.0f;
+                } else if (o->oObjF4->oFloatFC < -50.0f) {
+                    o->oObjF4->oFloatFC = -50.0f;
+                }
+                o->oObjF4->oPosY += (o->oObjF4->oFloatFC - o->oFloatFC);
+                // o->oObjF4->oPosY += (random_float() - 0.5f) * 40.0f;
+
+                o->oObjF4->oF8 = o->oF8 + 1;
+
+                if (o->oObjF4->oF8 == 9) {
+                    o->oObjF4->oBehParams2ndByte = 1;
+
+                    if (o->oObjF4->oFloatFC > 40.0f) {
+                        o->oObjF4->oPosY -= (o->oObjF4->oFloatFC - 40.0f);
+                    } else if (o->oObjF4->oFloatFC < -25.0f) {
+                        o->oObjF4->oPosY -= (o->oObjF4->oFloatFC + 25.0f);
+                    }
+                }
+
+
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (gMarioState->pos[2] - o->oPosZ < -6000.0f || gMarioState->pos[2] - o->oPosZ > 10000.0f) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
 
 void bhv_new_jumpscare_shyguy_init(void) {
     o->oObjF8 = cur_obj_nearest_object_with_behavior(bhvNewJSShyguyManager);
@@ -26,13 +166,24 @@ void bhv_new_jumpscare_shyguy_loop(void) {
             if (o->oTimer <= 60) {
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xFF, 0x10);
             } else {
-                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 0.6f);
+                if (o->oObjF8 == NULL || o->oObjF8->os16110 < 100*30) {
+                    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 28.5f, 0.6f);
+                } else if (o->oObjF8->os16110 < 200*30) {
+                    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 29.0f, 0.6f);
+                } else {
+                    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 29.2f, 0.6f);
+                }
+
                 o->oPosZ -= o->oFloatF4;
                 // if (gMarioState->pos[2] < -13200.0f) {
                 //     o->oAction = 1;
                 // }
+                if (o->oPosZ < -5000.0f && gMarioState->pos[2] > 0.0f) {
+                    o->oPosZ += 22639.0f;
+                }
+
                 if (o->oBehParams2ndByte) {
-                    if (gMarioState->pos[2] > o->oPosZ || gMarioState->pos[1] < -2000.0f - 3007.0f) {
+                    if (gMarioState->pos[2] > o->oPosZ || gMarioState->pos[1] < -2000.0f - 3007.0f - 500.0f) {
                         if (o->oObjF8 != NULL) {
                             o->oObjF8->oAction = 3;
                         }
@@ -158,6 +309,31 @@ void bhv_new_js_shyguy_manager_loop(void) {
 
             print_text_fmt_int(20, 210, "SCORE %d", o->os16110 / 30, 3);
             print_text_fmt_int(20, 190, "HIGH  %d", save_file_get_chase_score(), 4);
+
+            if (o->os16112 == 0) {
+                if (gMarioState->pos[2] < 881.0f) {
+                    o->os16112 = 1;
+                    obj = spawn_object(o, MODEL_NEW_CHASE_PIECES, bhvNewChasePiece);
+                    obj->oBehParams = 1 << 24;
+                    obj->oBehParams2ndByte = CL_RandomMinMaxU16(0, 2);
+                    vec3f_set(&obj->oPosX, 375.0f, -6243.0f - 100.0f, -520.0f - 650.0f);
+                }
+            } else {
+                if (o->os16112 == 1) {
+                    if (gMarioState->pos[2] < -15000.0f) {
+                        o->os16112 = 2;
+                    }
+                } else {
+                    if (gMarioState->pos[2] > -5000.0f) {
+                        o->os16112 = 1;
+                        obj = spawn_object(o, MODEL_NEW_CHASE_PIECES, bhvNewChasePiece);
+                        obj->oBehParams = 1 << 24;
+                        obj->oBehParams2ndByte = CL_RandomMinMaxU16(0, 2);
+                        vec3f_set(&obj->oPosX, 375.0f, -6243.0f - 100.0f, -520.0f - 650.0f);
+                    }
+                }
+            }
+
             // if (m->pos[2] < -13200.0f) {
             //     o->oAction = 4;
             // }
@@ -178,10 +354,15 @@ void bhv_new_js_shyguy_manager_loop(void) {
                 o->oPosY -= 100.0f;
 
 
+                while ((obj = cur_obj_nearest_object_with_behavior(bhvNewChasePiece)) != NULL) {
+                    obj->activeFlags = 0;
+                }
+
                 if (o->os16110 / 30 > save_file_get_chase_score()) {
                     save_file_set_chase_score(o->os16110 / 30);
                 }
                 o->os16110 = 0;
+                o->os16112 = 0;
             }
             break;
         case 4:

@@ -11989,3 +11989,18 @@ const BehaviorScript bhvNewJumpscareShyguy[] = {
         CALL_NATIVE(bhv_new_jumpscare_shyguy_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvNewChasePiece[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_COLLISION_DATA(new_chase_pieces_collision),
+    SET_HOME(),
+    // SCALE(0, 150),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    CALL_NATIVE(bhv_new_chase_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_new_chase_piece_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

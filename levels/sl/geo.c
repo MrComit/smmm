@@ -31,3 +31,4 @@
 #include "levels/sl/new_tv_static/geo.inc.c"
 #include "levels/sl/new_remote/geo.inc.c"
 #include "levels/sl/new_shyguy_group/geo.inc.c"
+#include "levels/sl/new_chase_pieces/geo.inc.c"

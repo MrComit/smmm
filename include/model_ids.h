@@ -993,6 +993,7 @@
 #define MODEL_NEW_TV_STATIC       0xF8
 #define MODEL_NEW_REMOTE          0xF7
 #define MODEL_NEW_SHYGUY_GROUP    0xF6
+#define MODEL_NEW_CHASE_PIECES    0xF5
 
 
 

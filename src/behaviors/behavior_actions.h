@@ -1242,6 +1242,8 @@ void bhv_new_js_shyguy_manager_init(void);
 void bhv_new_js_shyguy_manager_loop(void);
 void bhv_new_jumpscare_shyguy_init(void);
 void bhv_new_jumpscare_shyguy_loop(void);
+void bhv_new_chase_piece_init(void);
+void bhv_new_chase_piece_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
