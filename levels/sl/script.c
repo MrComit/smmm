@@ -49,6 +49,7 @@ const LevelScript level_sl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOO_BUBBLE, boo_bubble_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_TV_STATIC, new_tv_static_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_REMOTE, new_remote_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_NEW_SHYGUY_GROUP, new_shyguy_group_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -125,6 +126,7 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_CANNON_BASE, -5187, 315, -1115, 0, 0, 0, (0x40 << 16), bhvCannon),
 		OBJECT(MODEL_NONE, -5187, 937, -3383, 0, 0, 0, (0x40 << 16), bhvNewShootingGalleryHandler),
 		OBJECT(MODEL_L10_GRAVITY_BUTTON, 3000, -2350, 11022, 0, -90, 0, 0x00000000, bhvGravityButton),
+		OBJECT(MODEL_NONE, 558, -2907, 11006, 0, -180, 0, 0x00000000, bhvNewJSShyguyManager),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -3170, 2500, -2903, 0, 90, 0, 0x00000000, bhvDresserDoor),
 		OBJECT(MODEL_L10_PRESSURE_PLATE, -952, 2500, -4824, 0, 0, 0, 0x00000000, bhvL10PressurePlate),
 		OBJECT(MODEL_PURPLE_CUSHION, -2499, 2500, -1759, 0, 53, 0, (2 << 16), bhvCushion),

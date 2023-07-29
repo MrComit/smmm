@@ -70,4 +70,6 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/new_remote/geo_header.h"
 
+#include "levels/sl/new_shyguy_group/geo_header.h"
+
 #endif

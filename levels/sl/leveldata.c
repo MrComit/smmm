@@ -49,3 +49,4 @@
 #include "levels/sl/jukebox/collision.inc.c"
 #include "levels/sl/new_tv_static/model.inc.c"
 #include "levels/sl/new_remote/model.inc.c"
+#include "levels/sl/new_shyguy_group/model.inc.c"

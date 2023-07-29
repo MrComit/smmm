@@ -11960,3 +11960,32 @@ const BehaviorScript bhvNewCannonBalls[] = {
         CALL_NATIVE(bhv_new_cannon_balls_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvNewJSShyguyManager[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    // ANIMATE(0),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 250),
+    // SET_INT(oOpacity, 255),
+    CALL_NATIVE(bhv_new_js_shyguy_manager_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_new_js_shyguy_manager_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvNewJumpscareShyguy[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_ANIMATIONS(oAnimations, new_shyguy_anims),
+    // ANIMATE(1),
+    SET_HOME(),
+    CALL_NATIVE(bhv_new_jumpscare_shyguy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_new_jumpscare_shyguy_loop),
+    END_LOOP(),
+};

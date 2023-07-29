@@ -123,7 +123,7 @@ void reverse_treadmill_scroll(void) {
 
 void reverse_scroll_sl_dl_Treadmill_mesh_layer_1_vtx_1() {
 	int i = 0;
-	int count = 88;
+	int count = 86;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;

@@ -976,6 +976,8 @@ extern const BehaviorScript bhvNewGalleryShyguy[];
 extern const BehaviorScript bhvNewGalleryGoomba[];
 extern const BehaviorScript bhvNewGallerySnufit[];
 extern const BehaviorScript bhvNewCannonBalls[];
+extern const BehaviorScript bhvNewJSShyguyManager[];
+extern const BehaviorScript bhvNewJumpscareShyguy[];
 
 
 #endif // BEHAVIOR_DATA_H

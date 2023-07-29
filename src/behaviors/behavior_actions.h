@@ -1238,6 +1238,10 @@ void bhv_new_gallery_goomba_update(void);
 void bhv_new_gallery_shyguy_init(void);
 void bhv_new_gallery_shyguy_loop(void);
 void bhv_new_gallery_handler_loop(void);
+void bhv_new_js_shyguy_manager_init(void);
+void bhv_new_js_shyguy_manager_loop(void);
+void bhv_new_jumpscare_shyguy_init(void);
+void bhv_new_jumpscare_shyguy_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

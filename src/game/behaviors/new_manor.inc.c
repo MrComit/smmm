@@ -1,3 +1,203 @@
+// CHASE START
+
+void bhv_new_jumpscare_shyguy_init(void) {
+    o->oObjF8 = cur_obj_nearest_object_with_behavior(bhvNewJSShyguyManager);
+    if (o->oObjF8 == NULL) {
+        o->activeFlags = 0;
+    }
+    if (!gIsConsole) {
+        o->header.gfx.scale[0] = (random_float() + 0.75f) * 3.0f;
+        o->header.gfx.scale[1] = (random_float() + 0.75f) * 3.0f;
+        o->header.gfx.scale[2] = (random_float() + 0.75f) * 3.0f;
+    } else {
+        o->header.gfx.scale[0] = 1.0f;
+        o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+    }
+    o->header.gfx.animInfo.animFrame = CL_RandomMinMaxU16(0, 10);
+    o->os16104 = random_u16();
+}
+
+void bhv_new_jumpscare_shyguy_loop(void) {
+    struct Object *obj;
+    o->os16104 += 0x5D1;
+    o->oFaceAnglePitch = 0x888 + (sins(o->os16104 - 0x4000) * 0x888);
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer <= 60) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0xFF, 0x10);
+            } else {
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 0.6f);
+                o->oPosZ -= o->oFloatF4;
+                // if (gMarioState->pos[2] < -13200.0f) {
+                //     o->oAction = 1;
+                // }
+                if (o->oBehParams2ndByte) {
+                    if (gMarioState->pos[2] > o->oPosZ || gMarioState->pos[1] < -2000.0f - 3007.0f) {
+                        if (o->oObjF8 != NULL) {
+                            o->oObjF8->oAction = 3;
+                        }
+                        o->oBehParams2ndByte = 0;
+                        play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0x00, 0x00, 0x00);
+                    }
+                }
+                if (o->oObjF8 == NULL || o->oObjF8->os16100) {
+                    o->activeFlags = 0;
+                }
+            }
+            break;
+        case 1:
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x10);
+            if (o->oOpacity == 0) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+void spawn_new_chamber_shyguys(f32 xPos, f32 yPos, f32 zPos) {
+    struct Object *obj;
+    s32 i, k;
+    for (i = 0; i < 3; i++) {
+        if (!gIsConsole) {
+            for (k = 0; k < 5; k++) {
+                obj = spawn_object(o, MODEL_SHYGUY, bhvNewJumpscareShyguy);
+                obj->oPosX = xPos - (k * 300.0f);
+                if (i == 1) {
+                    obj->oPosX -= 100.0f;
+                }
+                if ((i | k) == 0) {
+                    obj->oBehParams2ndByte = 1;
+                }
+                obj->oPosY = yPos + (i * 100.0f);
+                obj->oPosZ = zPos + (i * 150.0f);
+            }
+        } else {
+                obj = spawn_object(o, MODEL_NEW_SHYGUY_GROUP, bhvNewJumpscareShyguy);
+                // obj->oPosX = xPos - (k * 300.0f);
+                if (i == 1) {
+                    obj->oPosX -= 100.0f;
+                }
+                if (i == 0) {
+                    obj->oBehParams2ndByte = 1;
+                }
+                obj->oPosY = yPos + (i * 100.0f);
+                obj->oPosZ = zPos + (i * 150.0f);
+        }
+    }
+}
+
+
+void new_chamber_contain_mario(struct MarioState *m) {
+    if (m->pos[0] < -286.0f) {
+        m->pos[0] = -286.0f;
+    } else if (m->pos[0] > 1014.0f) {
+        m->pos[0] = 1014.0f;
+    }
+
+    // if (m->pos[2] < -14300.0f) {
+    //     m->pos[2] = -14300.0f;
+    // } else if (m->pos[2] > -13100.0f) {
+    //     m->pos[2] = -13100.0f;
+    // }
+}
+
+
+void bhv_new_js_shyguy_manager_init(void) {
+    vec3f_set(&o->oFloatF4, 492.0f, -2500.0f, 9806.0f);
+    o->oPosY -= 100.0f;
+}
+
+void bhv_new_js_shyguy_manager_loop(void) {
+    struct Object *obj;
+    struct MarioState *m = gMarioState;
+    f32 dist;
+    switch (o->oAction) {
+        case 0:
+            CL_dist_between_points(m->pos, &o->oFloatF4, &dist);
+            if (dist < 1100.0f && save_file_get_chase_score() != 0) {
+                print_text_fmt_int(20, 190, "HIGH  %d", save_file_get_chase_score(), 4);
+            }
+            if (m->pos[1] < -300.0f - 3007.0f) {
+                o->oAction = 2;
+                o->os16100 = 0;
+                spawn_new_chamber_shyguys(o->oPosX + 600.0f, o->oHomeY - 1700.0f, o->oPosZ);
+            }
+            break;
+        // case 1:
+        //     o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x18);
+        //     o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 30.0f);
+
+        //     m->pos[0] = approach_f32_symmetric(m->pos[0], o->oFloatF4, 80.0f);
+        //     m->pos[1] = approach_f32_symmetric(m->pos[1], o->oFloatF8, 40.0f);
+        //     m->pos[2] = approach_f32_symmetric(m->pos[2], o->oFloatFC, 80.0f);
+        //     CL_dist_between_points(m->pos, &o->oFloatF4, &dist);
+        //     if (dist < 200.0f) {
+        //         obj = cur_obj_nearest_object_with_behavior(bhvCrumbleFloor);
+        //         if (obj != NULL) {
+        //             obj->oAction = 1;
+        //         }
+        //         o->oAction = 2;
+        //         o->os16100 = 0;
+        //         spawn_new_chamber_shyguys(o->oPosX + 600.0f, o->oPosY - 1700.0f, o->oPosZ);
+        //     }
+        //     break;
+        case 2:
+            if (o->oTimer < 30) {
+                m->pos[0] = approach_f32_symmetric(m->pos[0], o->oFloatF4, 80.0f);
+                m->pos[2] = approach_f32_symmetric(m->pos[2], o->oFloatFC, 80.0f);
+            }
+            if (m->pos[1] < -300.0f - 3007.0f) {
+                gCamera->comitCutscene = 32;
+                if ((o->oTimer & 0xF) == 0) {
+                    cur_obj_play_sound_1(SOUND_OBJ_MAD_PIANO_CHOMPING);
+                }
+            }
+
+            o->os16110++;
+
+            print_text_fmt_int(20, 210, "SCORE %d", o->os16110 / 30, 3);
+            print_text_fmt_int(20, 190, "HIGH  %d", save_file_get_chase_score(), 4);
+            // if (m->pos[2] < -13200.0f) {
+            //     o->oAction = 4;
+            // }
+            break;
+        case 3:
+            if (o->oTimer > 13) {
+                // m->hurtCounter = 4;
+                // vec3f_set(m->pos, 10709.0f, 1705.0f, -3420.0f);
+                vec3f_set(m->pos, 492.0f + 1000.0f, -2400.0f, 9806.0f);
+                m->faceAngle[1] = 0xC000;
+                set_r_button_camera(gCamera);
+                s8DirModeBaseYaw = m->faceAngle[1] + 0x8000;
+                gCamera->comitCutscene = 0;
+                play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 5, 0x00, 0x00, 0x00);
+                o->oAction = 0;
+                o->os16100 = 1;
+                o->oOpacity = 0;
+                o->oPosY -= 100.0f;
+
+
+                if (o->os16110 / 30 > save_file_get_chase_score()) {
+                    save_file_set_chase_score(o->os16110 / 30);
+                }
+                o->os16110 = 0;
+            }
+            break;
+        case 4:
+            new_chamber_contain_mario(m);
+            if (m->action == ACT_TELEPORT_FADE_OUT) {
+                o->activeFlags = 0;
+            }
+            break;
+    }
+}
+
+
+// CHASE END
+
+
+
 // GALLERY START
 
 // #define NEW_MINIGAME_SECONDS 120

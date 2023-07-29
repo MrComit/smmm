@@ -26,6 +26,7 @@ void bhv_jumpscare_shyguy_init(void) {
         o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
     }
     o->header.gfx.animInfo.animFrame = CL_RandomMinMaxU16(0, 10);
+    o->os16104 = random_u16();
 }
 
 void bhv_jumpscare_shyguy_loop(void) {
