@@ -12004,3 +12004,64 @@ const BehaviorScript bhvNewChasePiece[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvNewIceCube[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oFloatFC, 1),
+    SET_HOME(),
+    // SCALE(0, 75),
+    // SPAWN_OBJ(/*Model*/ MODEL_TOY_GOOMBA, /*Behavior*/ bhvFrozenGoomba),
+    CALL_NATIVE(bhv_new_ice_cube_init),
+    SPAWN_OBJ(/*Model*/ MODEL_NONE, /*Behavior*/ bhvNewIceCubeChild),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_new_ice_cube_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvNewIceCubeChild[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_DONT_CALC_COLL_DIST | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(new_icecube_collision),
+    SET_FLOAT(oCollisionDistance, 0x7FFF),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_new_ice_cube_child_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvNewButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(new_button_collision),
+    GOTO(bhvRedButton + 4),
+    BREAK(),
+};
+
+
+const BehaviorScript bhvNewKitchenFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 2100),
+    GOTO(bhvFlame + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1),
+};
+
+
+const BehaviorScript bhvNewFridgeDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(new_fridge_collision),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 128, /*Gravity*/ -400, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    //CALL_NATIVE(bhv_kitchen_door_init),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_new_fridge_door_loop),
+    END_LOOP(),
+};

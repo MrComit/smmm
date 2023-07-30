@@ -994,6 +994,9 @@
 #define MODEL_NEW_REMOTE          0xF7
 #define MODEL_NEW_SHYGUY_GROUP    0xF6
 #define MODEL_NEW_CHASE_PIECES    0xF5
+#define MODEL_NEW_ICECUBE         0xF4
+#define MODEL_NEW_BUTTON          0xF3
+#define MODEL_NEW_FRIDGE          0xF2
 
 
 

@@ -979,6 +979,11 @@ extern const BehaviorScript bhvNewCannonBalls[];
 extern const BehaviorScript bhvNewJSShyguyManager[];
 extern const BehaviorScript bhvNewJumpscareShyguy[];
 extern const BehaviorScript bhvNewChasePiece[];
+extern const BehaviorScript bhvNewIceCube[];
+extern const BehaviorScript bhvNewIceCubeChild[];
+extern const BehaviorScript bhvNewButton[];
+extern const BehaviorScript bhvNewKitchenFlame[];
+extern const BehaviorScript bhvNewFridgeDoor[];
 
 
 #endif // BEHAVIOR_DATA_H

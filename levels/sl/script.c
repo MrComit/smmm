@@ -51,6 +51,9 @@ const LevelScript level_sl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_REMOTE, new_remote_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_SHYGUY_GROUP, new_shyguy_group_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_CHASE_PIECES, new_chase_pieces_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_NEW_ICECUBE, new_icecube_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_NEW_BUTTON, new_button_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_NEW_FRIDGE, new_fridge_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -115,6 +118,14 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_L10_THIN_BOOK, 6994, 1405, 6462, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_THIN_BOOK, 6178, 1105, 6628, 0, -38, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_NEW_TV_STATIC, 8848, 500, 3618, 0, -90, 0, 0x00000000, bhvNewTVStatic),
+		OBJECT(MODEL_RED_FLAME, -9280, -148, 2626, 0, 0, 0, 0x00000000, bhvNewKitchenFlame),
+		OBJECT(MODEL_RED_FLAME, -9080, -148, 3026, 0, 0, 0, 0x00000000, bhvNewKitchenFlame),
+		OBJECT(MODEL_RED_FLAME, -9480, -148, 3026, 0, 0, 0, 0x00000000, bhvNewKitchenFlame),
+		OBJECT(MODEL_NEW_FRIDGE, -9729, 350, 7148, 0, 0, 0, 0x00000000, bhvNewFridgeDoor),
+		OBJECT(MODEL_NEW_ICECUBE, -7200, -40, 7678, 0, 0, 0, 0x00000000, bhvNewIceCube),
+		OBJECT(MODEL_NEW_ICECUBE, -9046, -40, 7678, 0, 0, 0, 0x00000000, bhvNewIceCube),
+		OBJECT(MODEL_NEW_ICECUBE, -5354, -40, 7678, 0, 0, 0, 0x00000000, bhvNewIceCube),
+		OBJECT(MODEL_NEW_BUTTON, -7284, 151, 5111, 0, 0, 0, 0x00000000, bhvNewButton),
 		OBJECT(MODEL_L10_BOUNCE_BOX, 2828, -2, -2703, 0, -90, 0, (4 << 24) | (13 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_WOODEN_SIGNPOST, 965, 0, -1329, 0, 90, 0, (DIALOG_085 << 16), bhvJukeBox),
 		OBJECT(MODEL_NONE, 4946, 1841, -717, 0, 0, 0, 0x00100000, bhvHorizontalPole),

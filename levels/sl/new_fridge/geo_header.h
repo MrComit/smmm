@@ -1,0 +1,10 @@
+extern const GeoLayout new_fridge_geo[];
+extern Lights1 new_fridge_Fridge_v3_002_lights;
+extern u8 new_fridge_Fridge_ci8[];
+extern u8 new_fridge_Fridge_ci8_pal_rgba16[];
+extern Vtx new_fridge_Fridge_mesh_layer_1_vtx_0[20];
+extern Gfx new_fridge_Fridge_mesh_layer_1_tri_0[];
+extern Gfx mat_new_fridge_Fridge_v3_002[];
+extern Gfx mat_revert_new_fridge_Fridge_v3_002[];
+extern Gfx new_fridge_Fridge_mesh_layer_1[];
+extern Gfx new_fridge_material_revert_render_settings[];

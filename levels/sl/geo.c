@@ -32,3 +32,6 @@
 #include "levels/sl/new_remote/geo.inc.c"
 #include "levels/sl/new_shyguy_group/geo.inc.c"
 #include "levels/sl/new_chase_pieces/geo.inc.c"
+#include "levels/sl/new_icecube/geo.inc.c"
+#include "levels/sl/new_button/geo.inc.c"
+#include "levels/sl/new_fridge/geo.inc.c"

@@ -1244,6 +1244,10 @@ void bhv_new_jumpscare_shyguy_init(void);
 void bhv_new_jumpscare_shyguy_loop(void);
 void bhv_new_chase_piece_init(void);
 void bhv_new_chase_piece_loop(void);
+void bhv_new_ice_cube_child_loop(void);
+void bhv_new_ice_cube_init(void);
+void bhv_new_ice_cube_loop(void);
+void bhv_new_fridge_door_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

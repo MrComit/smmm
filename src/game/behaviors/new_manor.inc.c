@@ -1,3 +1,122 @@
+
+// KITCHEN ICE CUBES START
+
+
+void bhv_new_fridge_door_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (cur_obj_nearest_object_with_behavior(bhvNewIceCube) == NULL) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            o->oFaceAngleYaw -= 0xA000;
+            o->oFaceAngleYaw -= o->oFaceAngleYaw / 48;
+            o->oFaceAngleYaw += 0xA000;
+            if (o->oFaceAngleYaw == 0xA000) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            break;
+    }
+}
+
+
+void bhv_new_ice_cube_child_loop(void) {
+    vec3f_copy(&o->oPosX, &o->parentObj->oPosX);
+    if (o->parentObj->oAction == 0) {
+        load_object_collision_model();
+    }
+}
+
+
+void bhv_new_ice_cube_init(void) {
+    // struct Object *obj;
+    // if (o->oBehParams2ndByte == 0) {
+    //     obj = spawn_object_at_origin(o, 0, MODEL_STAR_PIECE, bhvFrozenStarPiece);
+    //     obj->oBehParams = 0x17 << 24;
+    // } else {
+    //     o->oAnimState = 1;
+    // }
+    // obj_copy_pos_and_angle(obj, o);
+    // obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    // o->prevObj = obj;
+}
+
+
+void bhv_new_ice_cube_loop(void) {
+    struct Object *obj;
+    s16 x, z;
+    // if (sCubesMelt == 0xF) {
+    //     o->oAction = 2;
+    // } else {
+        obj = cur_obj_nearest_object_with_behavior(bhvNewButton);
+        if (obj != NULL && obj->oAction == 2) {
+            o->oAction = 0;
+            o->oForwardVel = 0;
+            o->oFloatF8 = 0;
+            o->oFloatF4 = 0;
+            vec3f_copy(&o->oPosX, &o->oHomeX);
+        }
+    // }
+    switch (o->oAction) {
+        case 0:
+            if (o->prevObj->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+                o->oAction = 1;
+
+                if (absi((u16)(gMarioState->faceAngle[1]) - (u16)(gMarioState->faceAngle[1] & 0xC000)) < 0x2000) {
+                    o->oMoveAngleYaw = gMarioState->faceAngle[1] & 0xC000;
+                } else {
+                    o->oMoveAngleYaw = (gMarioState->faceAngle[1] & 0xC000) + 0x4000;
+                }
+
+            }
+            break;
+        case 1:
+            o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 4.0f, 0.5f);
+            o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 40.0f, o->oFloatF4);
+            o->oForwardVel = o->oFloatF8 / 4;
+            if (ice_cube_detect_wall()) {
+                o->oAction = 0;
+                o->oForwardVel = 0;
+                o->oFloatF8 = 0;
+                o->oFloatF4 = 0;
+                break;
+            }
+
+            cur_obj_play_sound_1(SOUND_MOVING_TERRAIN_SLIDE);
+            cur_obj_update_floor();
+            if (o->oFloorType == SURFACE_CUBE_MELT) {
+                // if (!(sCubesMelt & k)) {
+                //     play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                // }
+                o->oAction = 2;
+                if (cur_obj_nearest_object_with_behavior(bhvNewIceCube) == NULL) {
+                    play_puzzle_jingle();
+                }
+            }
+            spawn_mist_particles_variable(2, -40, 6.0f);
+            break;
+        case 2:
+            o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 0.0f, 0.013f);
+            cur_obj_scale(o->oFloatFC);
+            cur_obj_play_sound_1(SOUND_AIR_BOBOMB_LIT_FUSE);
+            if (o->oFloatFC <= 0.02f) {
+                o->activeFlags = 0;
+                o->prevObj->activeFlags = 0;
+                // o->oObj100->activeFlags = 0;
+                // obj = spawn_object(o, MODEL_STAR_PIECE, bhvStarPiece);
+                // obj->oBehParams = 0x17 << 24;
+            }
+            break;
+    }
+}
+
+
+// KITCHEN ICE CUBES END
+
+
 // CHASE START
 #include "levels/sl/header.h"
 /*

@@ -92,4 +92,16 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/new_chase_piece_8/collision_header.h"
 
+#include "levels/sl/new_icecube/geo_header.h"
+
+#include "levels/sl/new_icecube/collision_header.h"
+
+#include "levels/sl/new_button/collision_header.h"
+
+#include "levels/sl/new_button/geo_header.h"
+
+#include "levels/sl/new_fridge/collision_header.h"
+
+#include "levels/sl/new_fridge/geo_header.h"
+
 #endif
