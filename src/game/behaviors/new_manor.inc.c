@@ -1,6 +1,8 @@
 
 // KITCHEN ICE CUBES START
-
+void bhv_set_newkitchenflame_room(void) {
+    o->oRoom = 5;
+}
 
 void bhv_new_fridge_door_loop(void) {
     switch (o->oAction) {

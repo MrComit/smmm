@@ -1248,6 +1248,7 @@ void bhv_new_ice_cube_child_loop(void);
 void bhv_new_ice_cube_init(void);
 void bhv_new_ice_cube_loop(void);
 void bhv_new_fridge_door_loop(void);
+void bhv_set_newkitchenflame_room(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

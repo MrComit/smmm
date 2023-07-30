@@ -12048,6 +12048,7 @@ const BehaviorScript bhvNewKitchenFlame[] = {
     BILLBOARD(),
     SET_HOME(),
     SCALE(/*Unused*/ 0, /*Field*/ 2100),
+    CALL_NATIVE(bhv_set_newkitchenflame_room),
     GOTO(bhvFlame + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1),
 };
 
