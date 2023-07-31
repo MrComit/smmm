@@ -36,7 +36,7 @@ void bhv_marios_journal_loop(void) {
 void bhv_blocker_lounge_init(void) {
     struct Object *obj;
     //DISABLE IF C RANK OR BETTER
-    if (0) {
+    if (save_file_get_final_rank() >= SAVE_RANK_C) {
         o->activeFlags = 0;
     } else {
         obj = cur_obj_nearest_object_with_behavior(bhvDoor);
@@ -50,7 +50,7 @@ void bhv_blocker_lounge_init(void) {
 void bhv_blocker_entertainment_init(void) {
     struct Object *obj;
     //DISABLE IF B RANK OR BETTER
-    if (0) {
+    if (save_file_get_final_rank() >= SAVE_RANK_B) {
         o->activeFlags = 0;
     } else {
         obj = cur_obj_nearest_object_with_behavior(bhvDoor);
@@ -63,7 +63,7 @@ void bhv_blocker_entertainment_init(void) {
 
 void bhv_blocker_basement_init(void) {
     //DISABLE IF A RANK OR BETTER
-    if (0) {
+    if (save_file_get_final_rank() >= SAVE_RANK_A) {
         o->activeFlags = 0;
     }
 }
@@ -71,7 +71,7 @@ void bhv_blocker_basement_init(void) {
 
 void bhv_blocker_bedroom_init(void) {
     //DISABLE IF S RANK
-    if (0) {
+    if (save_file_get_final_rank() >= SAVE_RANK_S) {
         o->activeFlags = 0;
     }
 }
@@ -1409,14 +1409,26 @@ void spawn_orange_number_infinite_digit_scale(u32 behParam, s16 relX, s16 relY, 
     }
 }
 
+s8 sRankToPalette[7] = {
+    4, // F
+    8, // E
+    2, // D
+    6, // C
+    3, // B
+    0, // A
+    1, // S
+};
 
 void bhv_end_coin_count_init(void) {
     struct Object *obj = spawn_object(o, MODEL_RANK_LETTER, bhvStationaryOrangeNumber);
+    s32 rank;
     obj_scale(obj, 8.0f);
     obj->oPosY += 400.0f;
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-    //obj->oBehParams2ndByte = save_file_get_rank();
-    //obj->oFC = palette?
+    rank = save_file_get_final_rank() - 1;
+    // rank = 1;
+    obj->oBehParams2ndByte = rank;
+    obj->oFC = sRankToPalette[rank];
 
     spawn_orange_number_infinite_digit_scale(gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount, 0, 0, 0, 0, 4.2f, 6);
 }

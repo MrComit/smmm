@@ -661,6 +661,7 @@ static void level_cmd_unload_area(void) {
 }
 
 static void level_cmd_set_mario_start_pos(void) {
+    s32 rank;
     gMarioSpawnInfo->areaIndex = CMD_GET(u8, 2);
 
 #if IS_64_BIT
@@ -670,11 +671,17 @@ static void level_cmd_set_mario_start_pos(void) {
 #endif
     vec3s_set(gMarioSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
 
-
-    if (gCurrDemoInput == NULL && gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
-        gMarioSpawnInfo->areaIndex = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea;
-        vec3s_copy(gMarioSpawnInfo->startPos, gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos);
-        gMarioSpawnInfo->startAngle[1] = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
+    if (gCurrDemoInput == NULL) {
+        rank = save_file_get_final_rank();
+        if (rank == 1)  {
+            gMarioSpawnInfo->areaIndex = 3;
+        } else if (rank == 2) {
+            gMarioSpawnInfo->areaIndex = 2;
+        } else if (rank == 0 && gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+            gMarioSpawnInfo->areaIndex = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea;
+            vec3s_copy(gMarioSpawnInfo->startPos, gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos);
+            gMarioSpawnInfo->startAngle[1] = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
+        }
     }
 
     // if (gCurrLevelNum == LEVEL_SSL && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY) == 0) {

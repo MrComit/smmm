@@ -36,11 +36,12 @@ struct SaveFile
     u32 roomsCleared[3];
     u32 miscChallenges[2];
     u16 keys[2];
-    u16 goldenGoombas;
     u32 boosCaptured;
     u32 currencyStars: 20;
     u32 starPieces;
     s32 coinCount;
+    u16 goldenGoombas;
+    s8 finalRank;
 
     struct SaveBlockSignature signature;
 };
@@ -65,6 +66,10 @@ struct MainMenuSaveData {
     u8 tvPeepaScore;
     u16 galleryScore;
     u16 chaseScore;
+    u16 challengeTimes[5];
+    // s8 finalRankA: 3;
+    // s8 finalRankB: 3;
+    // s8 finalRankC: 3;
 
 #ifdef WIDE
     u8 wideMode: 1;
@@ -228,6 +233,16 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_FLAG_GP_032                 /* 0x80000000 */ (1 << 31)
 
 
+//ranks
+#define SAVE_RANK_NO_RANK           0
+#define SAVE_RANK_S                 7
+#define SAVE_RANK_A                 6
+#define SAVE_RANK_B                 5
+#define SAVE_RANK_C                 4
+#define SAVE_RANK_D                 3
+#define SAVE_RANK_E                 2
+#define SAVE_RANK_F                 1
+
 
 
 // game progress flags
@@ -290,6 +305,10 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse);
 // void save_file_set_flags(u32 flags);
 // void save_file_clear_flags(u32 flags);
 // u32 save_file_get_flags(void);
+
+s8 save_file_get_final_rank(void);
+void save_file_set_final_rank(s8 rank);
+
 u32 save_file_get_star_flags(s32 fileIndex, s32 courseIndex);
 void save_file_set_star_flags(s32 fileIndex, s32 courseIndex, u32 starFlags);
 s32 save_file_get_course_coin_score(s32 fileIndex, s32 courseIndex);

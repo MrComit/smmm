@@ -1327,13 +1327,20 @@ void bhv_prospector_lock_loop(void) {
 
 
 void bhv_post_friend_toad_loop(void) {
+    s32 rank;
     switch (o->oAction) {
         case 0:
             if (o->oFC == 0) {
                 o->oAction = 1;
                 o->oFC = 1;
-                //if less than S rank, DIALOG_088
-                //if less than D rank, DIALOG_089
+                rank = save_file_get_final_rank();
+                if (rank < SAVE_RANK_D) {
+                    //if less than D rank, DIALOG_089
+                    o->oBehParams2ndByte = DIALOG_089;
+                } else if (rank < SAVE_RANK_S) {
+                    //if less than S rank, DIALOG_088
+                    o->oBehParams2ndByte = DIALOG_088;
+                }
             
             } else {
                 if (o->oInteractStatus == INT_STATUS_INTERACTED) {

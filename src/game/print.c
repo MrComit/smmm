@@ -359,6 +359,10 @@ s8 char_to_glyph_index(char c) {
         return GLYPH_BOO;
     }
 
+    if (c == '[') {
+        return GLYPH_WHITE_STAR;
+    }
+
     return GLYPH_SPACE;
 }
 
@@ -429,6 +433,7 @@ struct HSV sTextPaletteOrange = {24, 0.907f, 0.843f};
 struct HSV sTextPalettePink = {309, 0.667f, 0.706f};
 struct HSV sTextPaletteYellow = {60, 0.907f, 0.843f};
 struct HSV sTextPaletteWhite = {0, 0.0f, 1.0f};
+struct HSV sTextPaletteBrown = {30, 0.881f, 0.548f};
 
 struct HSV *sTextPalettes[] = {
     &sTextPaletteGreen,
@@ -439,6 +444,7 @@ struct HSV *sTextPalettes[] = {
     &sTextPalettePink,
     &sTextPaletteYellow,
     &sTextPaletteWhite,
+    &sTextPaletteBrown,
 };
 
 

@@ -232,6 +232,9 @@ s32 intro_regular(void) {
     return run_level_id_or_demo(level);
 }
 
+
+// extern s8 sSelectedFileNum;
+
 /**
  * Game over intro function that handles Mario's game over voice and game start.
  */
@@ -255,6 +258,7 @@ s32 intro_game_over(void) {
 #endif
         // same criteria as intro_regular
         level = 100 + gDebugLevelSelect;
+        // sSelectedFileNum =  1;
 #ifndef VERSION_JP
         sPlayMarioGameOver = TRUE;
 #endif

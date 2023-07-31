@@ -718,6 +718,27 @@ s32 save_file_check_global_room(void) {
 }
 
 
+
+// NO RANK = 0
+// S RANK = 7
+// A RANK = 6
+// B RANK = 5
+// C RANK = 4
+// D RANK = 3
+// E RANK = 2
+// F RANK = 1
+
+s8 save_file_get_final_rank(void) {
+    return gSaveBuffer.files[gCurrSaveFileNum - 1][0].finalRank;
+}
+
+void save_file_set_final_rank(s8 rank) {
+    gSaveBuffer.files[gCurrSaveFileNum - 1][0].finalRank = rank;
+
+    gSaveFileModified = TRUE;
+}
+
+
 /**
  * Return the bitset of obtained stars in the specified course.
  * If course is COURSE_NONE, return the bitset of obtained castle secret stars.

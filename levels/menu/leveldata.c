@@ -1852,5 +1852,5 @@ const Collision main_menu_seg7_collision[] = {
 
 #endif
 
-#include "levels/menu/bg_manor/model.inc.c"
+// #include "levels/menu/bg_manor/model.inc.c"
 #include "levels/menu/file_button/model.inc.c"

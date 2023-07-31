@@ -1623,7 +1623,9 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     sDelayedWarpOp = WARP_OP_NONE;
     gNeverEnteredCastle = !save_file_exists(gCurrSaveFileNum - 1);
 
-    if (gCurrDemoInput == NULL && gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+    if (gCurrDemoInput == NULL && save_file_get_final_rank()) {
+        levelNum = LEVEL_SL;
+    } else if (gCurrDemoInput == NULL && gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
         levelNum = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel;
     }
 

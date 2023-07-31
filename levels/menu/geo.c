@@ -197,5 +197,5 @@ const GeoLayout geo_menu_act_selector_strings[] = {
    GEO_END(),
 };
 
-#include "levels/menu/bg_manor/geo.inc.c"
+// #include "levels/menu/bg_manor/geo.inc.c"
 #include "levels/menu/file_button/geo.inc.c"

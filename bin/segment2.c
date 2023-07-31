@@ -1859,6 +1859,10 @@ ALIGNED8 static const Texture texture_hud_char_star[] = {
 #include "textures/segment2/CUSTOM_segment2.05C00.rgba16.inc.c"
 };
 
+ALIGNED8 static const Texture texture_hud_char_white_star[] = {
+#include "textures/segment2/CUSTOM_segment2_whitestar.rgba16.inc.c"
+};
+
 
 ALIGNED8 static const Texture texture_hud_char_decimal_point[] = {
 #include "textures/segment2/CUSTOM_segment2.05E00.rgba16.inc.c"
@@ -3501,7 +3505,7 @@ const Texture *const main_hud_lut[] = {
     texture_hud_char_S, texture_hud_char_T, texture_hud_char_U, texture_hud_char_V,
     texture_hud_char_W, texture_hud_char_X, texture_hud_char_Y, texture_hud_char_Z,
     texture_hud_char_exclamation, texture_hud_char_double_exclamation, texture_hud_char_question, texture_hud_char_ampersand,
-    texture_hud_char_percent,  texture_hud_char_gear,  texture_hud_char_normal_boo,                  0x0,
+    texture_hud_char_percent,  texture_hud_char_gear,  texture_hud_char_normal_boo, texture_hud_char_white_star,
                       0x0,                   0x0,                      0x0,                  0x0,
                       0x0,                   0x0, texture_hud_char_multiply, texture_hud_char_coin,
     texture_hud_char_mario_head, texture_hud_char_star, texture_hud_char_decimal_point, texture_hud_char_beta_key,
