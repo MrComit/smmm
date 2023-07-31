@@ -321,7 +321,7 @@ extern Vtx sl_dl_ConceptArtHallway_mesh_layer_1_vtx_cull[8];
 extern Vtx sl_dl_ConceptArtHallway_mesh_layer_1_vtx_0[36];
 extern Gfx sl_dl_ConceptArtHallway_mesh_layer_1_tri_0[];
 extern Vtx sl_dl_Hallway_002_mesh_layer_1_vtx_cull[8];
-extern Vtx sl_dl_Hallway_002_mesh_layer_1_vtx_0[1513];
+extern Vtx sl_dl_Hallway_002_mesh_layer_1_vtx_0[1551];
 extern Gfx sl_dl_Hallway_002_mesh_layer_1_tri_0[];
 extern Vtx sl_dl_Hallway_002_mesh_layer_1_vtx_1[500];
 extern Gfx sl_dl_Hallway_002_mesh_layer_1_tri_1[];

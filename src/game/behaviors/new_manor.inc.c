@@ -1,3 +1,51 @@
+// BLOCKERS START
+
+void bhv_blocker_lounge_init(void) {
+    struct Object *obj;
+    //DISABLE IF C RANK OR BETTER
+    if (0) {
+        o->activeFlags = 0;
+    } else {
+        obj = cur_obj_nearest_object_with_behavior(bhvDoor);
+        if (obj != NULL && lateral_dist_between_objects(o, obj) < 300.0f) {
+            obj->activeFlags = 0;
+        }
+    }
+}
+
+
+void bhv_blocker_entertainment_init(void) {
+    struct Object *obj;
+    //DISABLE IF B RANK OR BETTER
+    if (0) {
+        o->activeFlags = 0;
+    } else {
+        obj = cur_obj_nearest_object_with_behavior(bhvDoor);
+        if (obj != NULL && lateral_dist_between_objects(o, obj) < 300.0f) {
+            obj->activeFlags = 0;
+        }
+    }
+}
+
+
+void bhv_blocker_basement_init(void) {
+    //DISABLE IF A RANK OR BETTER
+    if (0) {
+        o->activeFlags = 0;
+    }
+}
+
+
+void bhv_blocker_bedroom_init(void) {
+    //DISABLE IF S RANK
+    if (0) {
+        o->activeFlags = 0;
+    }
+}
+
+// BLOCKERS END
+
+
 
 // KITCHEN ICE CUBES START
 void bhv_set_newkitchenflame_room(void) {

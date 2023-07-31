@@ -104,4 +104,20 @@ extern const LevelScript level_sl_entry[];
 
 #include "levels/sl/new_fridge/geo_header.h"
 
+#include "levels/sl/blocker_bedroom/collision_header.h"
+
+#include "levels/sl/blocker_bedroom/geo_header.h"
+
+#include "levels/sl/blocker_basement/geo_header.h"
+
+#include "levels/sl/blocker_basement/collision_header.h"
+
+#include "levels/sl/blocker_entertainment/collision_header.h"
+
+#include "levels/sl/blocker_entertainment/geo_header.h"
+
+#include "levels/sl/blocker_lounge/collision_header.h"
+
+#include "levels/sl/blocker_lounge/geo_header.h"
+
 #endif

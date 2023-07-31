@@ -35,3 +35,7 @@
 #include "levels/sl/new_icecube/geo.inc.c"
 #include "levels/sl/new_button/geo.inc.c"
 #include "levels/sl/new_fridge/geo.inc.c"
+#include "levels/sl/blocker_bedroom/geo.inc.c"
+#include "levels/sl/blocker_basement/geo.inc.c"
+#include "levels/sl/blocker_entertainment/geo.inc.c"
+#include "levels/sl/blocker_lounge/geo.inc.c"

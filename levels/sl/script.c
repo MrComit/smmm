@@ -54,6 +54,10 @@ const LevelScript level_sl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_ICECUBE, new_icecube_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_BUTTON, new_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_NEW_FRIDGE, new_fridge_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BEDROOM_BLOCKER, blocker_bedroom_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BASEMENT_BLOCKER, blocker_basement_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_ENTERTAINMENT_BLOCKER, blocker_entertainment_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_LOUNGE_BLOCKER, blocker_lounge_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -100,12 +104,16 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_END_STAR, -2900, 1000, 6797, 0, 90, 0, (5 << 24), bhvEndStar),
 		OBJECT(MODEL_END_STAR, -2900, 850, 7147, 0, 90, 0, (6 << 24), bhvEndStar),
 		OBJECT(MODEL_END_STAR, -2900, 850, 6447, 0, 90, 0, (7 << 24), bhvEndStar),
+		OBJECT(MODEL_BASEMENT_BLOCKER, 3600, 0, 6372, 0, 0, 0, 0x00000000, bhvBlockerBasement),
+		OBJECT(MODEL_BEDROOM_BLOCKER, 0, 0, 2297, 0, 0, 0, 0x00000000, bhvBlockerBedroom),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4150, 0, 5297, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 4150, 0, 5297, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2088, 0, 2247, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2088, 0, 2247, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -250, 2500, -3428, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3050, -2500, 11597, 0, 90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_ENTERTAINMENT_BLOCKER, -2088, 0, 2297, 0, 0, 0, 0x00000000, bhvBlockerEntertainment),
+		OBJECT(MODEL_LOUNGE_BLOCKER, 2087, 0, 2297, 0, 0, 0, 0x00000000, bhvBlockerLounge),
 		OBJECT(MODEL_NEW_REMOTE, 8102, 200, 3618, 0, 0, 0, 0x00000000, bhvNewRemote),
 		OBJECT(MODEL_L10_THIN_BOOK, 4522, 659, 7125, 0, 0, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_THIN_BOOK, 5084, 457, 7833, 0, 0, 0, 0x00000000, bhvSpinningBook),

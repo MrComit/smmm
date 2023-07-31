@@ -12083,3 +12083,55 @@ const BehaviorScript bhvPostToadFriend[] = {
         CALL_NATIVE(bhv_post_friend_toad_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvBlockerBedroom[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(blocker_bedroom_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    CALL_NATIVE(bhv_blocker_bedroom_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBlockerBasement[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(blocker_basement_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    CALL_NATIVE(bhv_blocker_basement_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBlockerEntertainment[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(blocker_entertainment_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    CALL_NATIVE(bhv_blocker_entertainment_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBlockerLounge[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(blocker_lounge_collision),
+    SET_HOME(),
+    SET_FLOAT(oDrawingDistance, 0x7FFF),
+    CALL_NATIVE(bhv_blocker_lounge_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

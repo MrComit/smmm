@@ -1333,7 +1333,7 @@ void bhv_post_friend_toad_loop(void) {
                 o->oAction = 1;
                 o->oFC = 1;
                 //if less than S rank, DIALOG_088
-                //if less than C rank, DIALOG_089
+                //if less than D rank, DIALOG_089
             
             } else {
                 if (o->oInteractStatus == INT_STATUS_INTERACTED) {
