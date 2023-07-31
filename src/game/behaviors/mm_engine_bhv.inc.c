@@ -1326,6 +1326,46 @@ void bhv_prospector_lock_loop(void) {
 
 
 
+void bhv_post_friend_toad_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oFC == 0) {
+                o->oAction = 1;
+                o->oFC = 1;
+                //if less than S rank, DIALOG_088
+                //if less than C rank, DIALOG_089
+            
+            } else {
+                if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                    o->oAction = 1;
+                }
+            }
+            break;
+        case 1:
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                o->oAction = 2;
+                // play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+            }
+
+            cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            break;
+        case 2:
+            if (o->oTimer > 12) {
+                if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
+                    o->oAction = 0;
+                    // stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                    o->oBehParams2ndByte = DIALOG_087;
+                }
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
+
+
 void bhv_bparam1_to_animstate(void) {
     o->oAnimState = o->oBehParams >> 24;
 }

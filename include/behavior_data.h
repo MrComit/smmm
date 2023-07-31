@@ -984,6 +984,7 @@ extern const BehaviorScript bhvNewIceCubeChild[];
 extern const BehaviorScript bhvNewButton[];
 extern const BehaviorScript bhvNewKitchenFlame[];
 extern const BehaviorScript bhvNewFridgeDoor[];
+extern const BehaviorScript bhvPostToadFriend[];
 
 
 #endif // BEHAVIOR_DATA_H

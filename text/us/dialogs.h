@@ -1027,38 +1027,51 @@ Get Respect Doing It'\n\
 DEFINE_DIALOG(DIALOG_085, 1, 5, 30, 200, _("\
 jukebox dialog id"))
 
-DEFINE_DIALOG(DIALOG_086, 1, 3, 30, 200, _("\
-Running around in circles\n\
-makes some bad guys roll\n\
-their eyes."))
+DEFINE_DIALOG(DIALOG_086, 1, 6, 30, 200, _("\
+Mario! Welcome to your new\n\
+home! I'm a toad of my\n\
+word, so I really did\n\
+everything I could to\n\
+make this manor as big\n\
+and beautiful as possible!\n\
+With all the coins you collected,\n\
+I was able to pull out all the\n\
+stops!\n\
+I really can't do enough to\n\
+thank you Mario. So please,\n\
+accept this."))
 
-DEFINE_DIALOG(DIALOG_087, 1, 4, 30, 200, _("\
-Santa Claus isn't the only\n\
-one who can go down a\n\
-chimney! Come on in!\n\
-/--Cabin Proprietor"))
+DEFINE_DIALOG(DIALOG_087, 1, 3, 30, 200, _("\
+I hope your new manor\n\
+is everything you dreamed\n\
+it would be!\n\
+Might I suggest  giving\n\
+it a name? How does\n\
+'Mario's Manor' sound?"))
 
-DEFINE_DIALOG(DIALOG_088, 1, 5, 30, 200, _("\
-Work Elevator\n\
-For those who get off\n\
-here: Grab the pole to the\n\
-left and slide carefully\n\
-down."))
+DEFINE_DIALOG(DIALOG_088, 1, 6, 30, 200, _("\
+Mario! Welcome to your new\n\
+home! I'm a toad of my\n\
+word, so I really did\n\
+everything I could to\n\
+make this manor as big\n\
+and beautiful as possible!\n\
+Although, maybe if you were\n\
+able to collect more coins\n\
+I would've been able to make\n\
+it bigger... Ah, what am I\n\
+saying. I'm sure you'll\n\
+find it to your satisfaction."))
 
 DEFINE_DIALOG(DIALOG_089, 1, 5, 95, 200, _("\
-Both ways fraught with\n\
-danger! Watch your feet!\n\
-Those who can't do the\n\
-Long Jump, tsk, tsk. Make\n\
-your way to the right.\n\
-Right: Work Elevator\n\
-/// Cloudy Maze\n\
-Left: Black Hole\n\
-///Underground Lake\n\
-\n\
-Red Circle: Elevator 2\n\
-//// Underground Lake\n\
-Arrow: You are here"))
+Mario! Welcome to your new\n\
+home! I'm sorry I wasn't\n\
+able to make it quite as big\n\
+as I would've wanted to, but\n\
+I'm a toad of my word.\n\
+I did the best I could with\n\
+the coins you collected. \n\
+I hope it's enough."))
 
 DEFINE_DIALOG(DIALOG_090, 1, 6, 30, 200, _("\
 Bwa ha ha ha!\n\

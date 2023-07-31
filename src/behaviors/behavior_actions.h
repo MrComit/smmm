@@ -1249,6 +1249,7 @@ void bhv_new_ice_cube_init(void);
 void bhv_new_ice_cube_loop(void);
 void bhv_new_fridge_door_loop(void);
 void bhv_set_newkitchenflame_room(void);
+void bhv_post_friend_toad_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
