@@ -6,7 +6,7 @@ const GeoLayout sl_area_1_geo[] = {
 		GEO_SWITCH_CASE(10, geo_switch_area),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, sl_dl_101__Outside_geo),
-			GEO_BRANCH(1, sl_dl_102__Main_Hall_geo),
+			GEO_BRANCH(1, sl_dl_102__Main_Hall_001_geo),
 			GEO_BRANCH(1, sl_dl_103__Hallway_geo),
 			GEO_BRANCH(1, sl_dl_104__Living_Room_geo),
 			GEO_BRANCH(1, sl_dl_105__Kitchen_geo),
@@ -30,7 +30,7 @@ const GeoLayout sl_dl_101__Outside_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout sl_dl_102__Main_Hall_geo[] = {
+const GeoLayout sl_dl_102__Main_Hall_001_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Chandelier_mesh_layer_1),
@@ -51,6 +51,8 @@ const GeoLayout sl_dl_103__Hallway_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Bookshelf_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_ConceptArtHallway_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Hallway_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Hallway_003_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Hallway_004_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_OpeningHallPlants_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_OpeningHallPlants_mesh_layer_4),
 	GEO_CLOSE_NODE(),
