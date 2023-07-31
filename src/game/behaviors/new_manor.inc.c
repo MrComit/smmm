@@ -1,3 +1,36 @@
+void bhv_marios_journal_loop(void) {
+    s32 dialogResponse;
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = 1;
+                cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            }
+            break;
+        case 1:
+            if (o->oTimer > 12) {
+                dialogResponse = CL_NPC_Dialog_Options(o->oBehParams2ndByte);
+                if (dialogResponse == 2) {
+                    o->oAction = 0;
+                    // stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                    // o->oBehParams2ndByte = DIALOG_087;
+                } else if (dialogResponse == 1) {
+                    o->oAction = 2;
+                }
+            }
+            break;
+        case 2:
+            if (o->oTimer > 30) {
+                if (CL_NPC_Dialog(DIALOG_092)) {
+                    o->oAction = 0;
+                }
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
 // BLOCKERS START
 
 void bhv_blocker_lounge_init(void) {

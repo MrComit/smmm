@@ -60,6 +60,7 @@ const GeoLayout sl_dl_104__Living_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Books_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Books_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, sl_dl_Carpet_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, sl_dl_CarpetEnd_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_ConceptArtLivingRoom_mesh_layer_4),

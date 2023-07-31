@@ -1081,21 +1081,14 @@ you would! I warn you,\n\
 『Friend,』 watch your\n\
 step!"))
 
-DEFINE_DIALOG(DIALOG_091, 2, 2, 30, 200, _("\
-Danger!\n\
-Strong Gusts!\n\
-But the wind makes a\n\
-comfy ride."))
+DEFINE_DIALOG(DIALOG_091, 2, 4, 30, 200, _("\
+Mario's Journal\n\
+Write something down\n\
+in it?\n\
+//Yes////No"))
 
-DEFINE_DIALOG(DIALOG_092, 1, 5, 30, 200, _("\
-Pestering me again, are\n\
-you, Mario? Can't you see\n\
-that I'm having a merry\n\
-little time, making\n\
-mischief with my minions?\n\
-Now, return those Stars!\n\
-My troops in the walls\n\
-need them! Bwa ha ha!"))
+DEFINE_DIALOG(DIALOG_092, 1, 1, 30, 200, _("\
+Mario wrote in his journal."))
 
 DEFINE_DIALOG(DIALOG_093, 1, 5, 30, 200, _("\
 Mario! You again! Well\n\

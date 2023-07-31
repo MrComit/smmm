@@ -12135,3 +12135,21 @@ const BehaviorScript bhvBlockerLounge[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvMariosJournal[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(wooden_signpost_seg3_collision_0302DD80),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    SET_INT(oInteractionSubtype, INT_SUBTYPE_NPC),
+    DROP_TO_FLOOR(),
+    SET_HITBOX(/*Radius*/ 150, /*Height*/ 80),
+    // SET_INT(oWoodenPostTotalMarioAngle, 0),
+    CALL_NATIVE(load_object_static_model),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        // SET_INT(oInteractStatus, 0),
+        CALL_NATIVE(bhv_marios_journal_loop),
+    END_LOOP(),
+};

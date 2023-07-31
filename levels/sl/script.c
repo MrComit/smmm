@@ -147,6 +147,7 @@ const LevelScript level_sl_entry[] = {
 		OBJECT(MODEL_L10_THIN_BOOK, 2821, 3156, -3958, 0, 0, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L10_THIN_BOOK, 4887, 1906, 1031, 0, 0, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_NONE, 7993, 135, 6812, 0, -90, 0, (DIALOG_084 << 16), bhvSignOnWall),
+		OBJECT(MODEL_NONE, 7993, 135, 7675, 0, -90, 0, (DIALOG_091 << 16), bhvMariosJournal),
 		OBJECT(MODEL_CANNON_BASE, -5187, 315, -1115, 0, 0, 0, (0x40 << 16), bhvCannon),
 		OBJECT(MODEL_NONE, -5187, 937, -3383, 0, 0, 0, (0x40 << 16), bhvNewShootingGalleryHandler),
 		OBJECT(MODEL_L10_GRAVITY_BUTTON, 3000, -2350, 11022, 0, -90, 0, 0x00000000, bhvGravityButton),
