@@ -272,7 +272,7 @@ extern Gfx bob_dl_Lamp_mesh_layer_1_tri_0[];
 extern Vtx bob_dl_Mudroom_mesh_layer_1_vtx_cull[8];
 extern Vtx bob_dl_Mudroom_mesh_layer_1_vtx_0[31];
 extern Gfx bob_dl_Mudroom_mesh_layer_1_tri_0[];
-extern Vtx bob_dl_Mudroom_mesh_layer_1_vtx_1[145];
+extern Vtx bob_dl_Mudroom_mesh_layer_1_vtx_1[149];
 extern Gfx bob_dl_Mudroom_mesh_layer_1_tri_1[];
 extern Vtx bob_dl_Mudroom_001_mesh_layer_2_vtx_cull[8];
 extern Vtx bob_dl_Mudroom_001_mesh_layer_2_vtx_0[4];

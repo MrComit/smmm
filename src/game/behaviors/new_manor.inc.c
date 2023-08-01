@@ -1389,7 +1389,7 @@ void spawn_orange_number_infinite_digit_scale(u32 behParam, s16 relX, s16 relY, 
     f32 digitsCenter;
     s32 offset;
 
-    while (behParamMod > 10) {
+    while (behParamMod >= 10) {
         behParamMod /= 10;
         digits++;
     }

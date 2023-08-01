@@ -60,7 +60,7 @@ void bhv_door_loop(void) {
     struct Object *obj;
     s32 sp1C = 0;
     
-    if (o->oDistanceToMario < 1500.0f) {
+    if (o->oDistanceToMario < 1500.0f && o->oInteractType != INTERACT_WARP_DOOR) {
         if ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvProspectorLock, gMarioCurrentRoom)) != NULL 
             && dist_between_objects(o, obj) < 600.0f) {
                 o->oInteractType = INTERACT_IGLOO_BARRIER;
