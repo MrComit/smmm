@@ -19,6 +19,7 @@
 #include "levels/menu/header.h"
 
 const LevelScript level_main_menu_entry_1[] = {
+    CLEAR_LEVEL(),
     INIT_LEVEL(),
     FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd),
     LOAD_YAY0(/*seg*/ 0x07, _menu_segment_7SegmentRomStart, _menu_segment_7SegmentRomEnd),
@@ -34,12 +35,12 @@ const LevelScript level_main_menu_entry_1[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_MARIO_NEW_BUTTON_FADE,  geo_menu_mario_new_button_fade),
     LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_PURPLE_SOUND_BUTTON,    geo_menu_sound_button),
     LOAD_MODEL_FROM_GEO(MODEL_MAIN_MENU_GENERIC_BUTTON,         geo_menu_generic_button),
-    // LOAD_MODEL_FROM_GEO(MODEL_BG_MANOR,         bg_manor_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BG_MANOR,         bg_manor_geo),
     LOAD_MODEL_FROM_GEO(MODEL_FILE_BUTTON,         file_button_geo),
 
     AREA(/*index*/ 1, geo_menu_file_select_strings_and_menu_cursor),
         OBJECT(/*model*/ MODEL_NONE,         /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*behParam*/ 0x04000000, /*beh*/ bhvCSButtonManager),
-        // OBJECT(/*model*/ MODEL_BG_MANOR, /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*behParam*/ 0x04000000, /*beh*/ bhvCSBackground),
+        OBJECT(/*model*/ MODEL_BG_MANOR, /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*behParam*/ 0x04000000, /*beh*/ bhvCSBackground),
         TERRAIN(/*terrainData*/ main_menu_seg7_collision),
     END_AREA(),
 
@@ -54,7 +55,7 @@ const LevelScript level_main_menu_entry_1[] = {
     TRANSITION(/*transType*/ WARP_TRANSITION_FADE_INTO_COLOR, /*time*/ 16, /*color*/ 0, 0, 0),
     SLEEP(/*frames*/ 16),
     CLEAR_LEVEL(),
-    CLEAR_LEVEL(),
+    // CLEAR_LEVEL(),
     SLEEP_BEFORE_EXIT(/*frames*/ 1),
     SET_REG(LEVEL_CASTLE_GROUNDS),
     EXIT_AND_EXECUTE(/*seg*/ 0x15, _scriptsSegmentRomStart, _scriptsSegmentRomEnd, level_main_scripts_entry),
