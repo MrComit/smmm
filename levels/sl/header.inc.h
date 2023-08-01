@@ -611,7 +611,7 @@ extern Gfx sl_dl_Antenna_mesh_layer_1_tri_1[];
 extern Vtx sl_dl_Antenna_mesh_layer_1_vtx_2[120];
 extern Gfx sl_dl_Antenna_mesh_layer_1_tri_2[];
 extern Vtx sl_dl_Basement_mesh_layer_1_vtx_cull[8];
-extern Vtx sl_dl_Basement_mesh_layer_1_vtx_0[44];
+extern Vtx sl_dl_Basement_mesh_layer_1_vtx_0[50];
 extern Gfx sl_dl_Basement_mesh_layer_1_tri_0[];
 extern Vtx sl_dl_Basement_mesh_layer_1_vtx_1[59];
 extern Gfx sl_dl_Basement_mesh_layer_1_tri_1[];

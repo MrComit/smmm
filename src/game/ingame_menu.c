@@ -4992,7 +4992,7 @@ struct CreditTextLine sComitCredits[CREDIT_ENTRY_COUNT] = {
 s32 gComitCreditsTimer = 0;
 s32 gComitCreditsAct = 0;
 
-
+extern s32 gComitCredits;
 
 
 void render_credits_string(s32 index) {
@@ -5023,6 +5023,16 @@ void render_credits_lines(void) {
             render_credits_string(i);
         }
     }
+
+    if (sComitCredits[CREDIT_ENTRY_COUNT-2].y >= 135) {
+        gComitCreditsTimer++;
+        if (gComitCreditsTimer >= 60) {
+            gComitCreditsAct = 3;
+            gComitCreditsTimer = 0;
+        }
+    }
+
+
 }
 
 
@@ -5060,19 +5070,208 @@ void render_credits_logo(void) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
+
+
+
+
+extern s8 sRankToPalette[7];
+
+
+
+const char sCreditsFRank[] = {
+    'F',
+    0xFF
+};
+
+const char sCreditsERank[] = {
+    'E',
+    0xFF
+};
+
+const char sCreditsDRank[] = {
+    'D',
+    0xFF
+};
+
+const char sCreditsCRank[] = {
+    'C',
+    0xFF
+};
+
+const char sCreditsBRank[] = {
+    'B',
+    0xFF
+};
+
+const char sCreditsARank[] = {
+    'A',
+    0xFF
+};
+
+const char sCreditsSRank[] = {
+    'S',
+    0xFF
+};
+
+const char *sCreditsRanks[14] = {
+    sCreditsFRank,
+    sCreditsERank,
+    sCreditsDRank,
+    sCreditsCRank,
+    sCreditsBRank,
+    sCreditsARank,
+    sCreditsSRank,
+};
+
+
+
+
+s32 gCreditsCoinNum = 0;
+
+
+//S: 15000
+//A: 13500
+//B: 12000
+//C: 10000
+//D: 8000
+//E: 6000
+//F: <6000
+
+s32 get_rank_from_coin_count(s32 coins) {
+    if (coins < 6000) {
+        return 1;
+    } else if (coins < 8000) {
+        return 2;
+    } else if (coins < 10000) {
+        return 3;
+    } else if (coins < 12000) {
+        return 4;
+    } else if (coins < 13500) {
+        return 5;
+    } else if (coins < 15000) {
+        return 6;
+    }
+    return 7;
+}
+
+void play_sound_for_rank(s32 rank) {
+    s32 sound;
+    switch (rank) {
+        default:
+        case 1: // F
+            sound = SOUND_MARIO_WAAAOOOW; // good
+            break;
+        case 2: // E
+            sound = SOUND_MARIO_OOOF2; // good
+            break;
+        case 3: // D
+            sound = SOUND_MARIO_DOH; // good
+            break;
+        case 4: // C
+            sound = SOUND_MARIO_OKEY_DOKEY_REAL; // good
+            break;
+        case 5: // B
+            sound = SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x2E, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE); // good
+            break;
+        case 6: // A
+            sound = SOUND_ARG_LOAD(SOUND_BANK_VOICE,    0x2F, 0x80, SOUND_NO_PRIORITY_LOSS | SOUND_DISCRETE); // good
+            break;
+        case 7: // S
+            sound = SOUND_MARIO_HERE_WE_GO; // good
+            break;
+    }
+    play_sound(sound, gMarioState->marioObj->header.gfx.cameraToObject);
+}
+
+s32 sCreditsRankY = 150;
+s32 sCreditsRankAct2 = 0;
+
+void render_credits_rank_evaluation(void) {
+    s32 rank;
+    s32 coinUpdateFast = TRUE;
+    // vec3f_copy(gMarioState->pos, gCamera->pos);
+    if (gComitCreditsTimer < 15) {
+        gComitCreditsTimer++;
+    }
+    // gMarioState->numCoins = 14999;
+        if (gComitCreditsTimer >= 15 && gCreditsCoinNum < gMarioState->numCoins) {
+            if (gMarioState->numCoins - gCreditsCoinNum > 1000) {
+                gCreditsCoinNum += 100;
+            } else if (gMarioState->numCoins - gCreditsCoinNum > 100) {
+                gCreditsCoinNum += 10;
+            } else if (gMarioState->numCoins - gCreditsCoinNum > 50) {
+                gCreditsCoinNum += 2;
+            } else {
+                gCreditsCoinNum++;
+                coinUpdateFast = FALSE;
+            }
+
+            if (gGlobalTimer & 0x00000001 || coinUpdateFast) {
+                play_sound(SOUND_GENERAL_COIN, gMarioState->marioObj->header.gfx.cameraToObject);
+            }
+        }
+
+        print_text_fmt_int(120, sCreditsRankY - 30, "%d", gCreditsCoinNum, 6);
+        print_text(60 + 60, sCreditsRankY, "RANK ", 4);
+        rank = get_rank_from_coin_count(gCreditsCoinNum);
+        print_text(130 + 60, sCreditsRankY, sCreditsRanks[rank - 1], sRankToPalette[rank - 1]);
+
+        if (gCreditsCoinNum == gMarioState->numCoins) {
+            if (sCreditsRankAct2 == 1) {
+                sCreditsRankY -= 4;
+                if (sCreditsRankY < 0) {
+                    // sCreditsRankAct2 = 2;
+                    gComitCredits = 0;
+                    gComitCreditsAct = 0;
+                    gComitCreditsTimer = 0;
+                    sDelayedWarpOp = 0x10;
+                    sDelayedWarpTimer = 1;
+                    sSourceWarpNodeId = 0xAB;
+                    if (rank == SAVE_RANK_F) {
+                        sSourceWarpNodeId += 2;
+                    } else if (rank == SAVE_RANK_E) {
+                        sSourceWarpNodeId += 1;
+                    }
+                }
+            } else {
+                gComitCreditsTimer++;
+                if (gComitCreditsTimer == 25) {
+                    save_file_set_final_rank(rank);
+                    play_sound_for_rank(rank);
+                } else if (gComitCreditsTimer > 25) {
+                    print_text(60 + 60, 30, "PRESS A", 0);
+                    if (gMarioState->input & INPUT_A_PRESSED) {
+                        sCreditsRankAct2 = 1;
+                    }
+                }
+            }
+            
+            
+        }
+
+}
+
+
+
 void render_comit_credits(void) {
-    gComitCreditsTimer++;
+    // gComitCreditsTimer++;
     create_dl_ortho_matrix();
-    shade_screen_rgba(0, 0, 0, 255);
+    if (gComitCreditsAct != 3) {
+        shade_screen_rgba(0, 0, 0, 255);
+    }
     switch (gComitCreditsAct) {
         case 0:
+            gComitCreditsTimer++;
             render_credits_logo();
             if (gComitCreditsTimer > 101) {
                 gComitCreditsAct = 1;
                 gComitCreditsTimer = 0;
             }
+                // gComitCreditsAct = 3;
+                // gComitCreditsTimer = 0;
             break;
         case 1:
+            gComitCreditsTimer++;
             render_credits_title();
             if (gComitCreditsTimer > 101) {
                 gComitCreditsAct = 2;
@@ -5083,6 +5282,7 @@ void render_comit_credits(void) {
             render_credits_lines();
             break;
         case 3:
+            render_credits_rank_evaluation();
             break;
     }
 }

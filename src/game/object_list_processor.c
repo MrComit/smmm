@@ -768,9 +768,11 @@ void control_mind_music(s32 room) {
 
 }
 
+// extern s32 gComitCredits;
 
 void mario_l_to_levitate(void) {
     if (gMarioState->controller->buttonPressed & L_TRIG) {
+        // gComitCredits = 1;
          set_mario_action(gMarioState, ACT_DEBUG_FREE_MOVE, 0);
         //  cur_obj_set_model(MODEL_NONE);
         // gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0]; //makes mario invisible

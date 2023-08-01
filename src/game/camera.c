@@ -1416,6 +1416,8 @@ void fixed_cam_cutscene_ending(struct Camera *c) {
             if (gComitCutsceneTimer == 40) {
                 gComitCredits = 1;
                 gComitCutsceneAction = 2;
+                // vec3f_copy(gMarioState->pos, gCamera->pos);
+                // gMarioObject->header.gfx.sharedChild = gLoadedGraphNodes[0];
                 // stop_cutscene_and_retrieve_stored_info(c);
                 // c->comitCutscene = 0;
                 // gComitCutsceneTimer = 0;
