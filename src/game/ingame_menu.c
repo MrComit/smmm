@@ -2361,7 +2361,11 @@ char *sObjectives[] = {
 s32 get_current_objective(void) {
     s32 flags = save_file_get_newflags(0);
     s32 boos = save_file_get_boos();
-    if (gCurrLevelNum == LEVEL_LLL) {
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_PROF_CAGE_MSG) {
+        return 11;
+    } else if (gCurrLevelNum == LEVEL_SSL) {
+        return 10;
+    } if (gCurrLevelNum == LEVEL_LLL) {
         return 9;
     } else if (boos & (1 << 0x12)) {
         return 8;

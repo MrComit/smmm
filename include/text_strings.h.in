@@ -380,8 +380,8 @@
 #define TEXT_OBJ8 _("Track Down The Paranormal Activity")
 #define TEXT_OBJ9 _("Reach The Basement")
 #define TEXT_OBJ10 _("Find Professor T's Lab")
-#define TEXT_OBJ11 _("NULL")
-#define TEXT_OBJ12 _("NULL")
+#define TEXT_OBJ11 _("Explore The Monstrous Mind")
+#define TEXT_OBJ12 _("Escape The Monstrous Mind")
 #define TEXT_OBJ13 _("NULL")
 
 
