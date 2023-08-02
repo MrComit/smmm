@@ -127,6 +127,8 @@ const GeoLayout sl_dl_107__Entertainment_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Paddle_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Paddle_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_ALPHA, -5295, 243, -3358, sl_dl_Tall_Grass_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_ToadToys_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_ToadToys_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_ToyBoxes_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Toys_mesh_layer_1),
 	GEO_CLOSE_NODE(),
