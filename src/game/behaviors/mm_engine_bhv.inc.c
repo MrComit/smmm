@@ -1261,7 +1261,7 @@ void bhv_prospector_t_loop(void) {
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
             if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                 o->oAction = 2;
-                play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                play_music(0, SEQUENCE_ARGS(4, SEQ_PROSPECTOR), 0);
             }
 
             cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
@@ -1270,7 +1270,7 @@ void bhv_prospector_t_loop(void) {
             if (o->oTimer > 12) {
                 if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
                     o->oAction = 0;
-                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROSPECTOR));
                     if (o->os16F8 == 0) {
                         gRedCoinMissionActive = 1;
                         //CHANGE DIALOG ID
