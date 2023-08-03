@@ -348,6 +348,10 @@ void observatory_scroll_ssl_dl_Observatory_mesh_layer_1_vtx_1() {
 void bhv_observatory_spinning_plat_init(void) {
     o->os16F6 = 90;
     o->os16FA = 20;
+
+    if (save_file_get_boos() & (1 << 23)) {
+        o->oAction = 3;
+    }
 }
 
 void bhv_observatory_spinning_plat_loop(void) {

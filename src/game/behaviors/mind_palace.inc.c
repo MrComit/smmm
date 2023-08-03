@@ -73,6 +73,10 @@ void bhv_mind_mips_init(void) {
     // }
     // vec3f_copy(&o->oObjF4->oHomeX, &o->oObjF4->oPosX);
     vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
+
+    if (save_file_get_keys(0) & (1 << 11)) {
+        o->activeFlags = 0;
+    }
 }
 
 void bhv_mind_mips_run_loop(void) {
@@ -263,6 +267,17 @@ void bhv_mind_mound_block_init(void) {
 void bhv_mind_mound_block_loop(void) {
     switch (o->oAction) {
         case 0:
+            if (save_file_get_keys(0) & (1 << 11)) {
+                o->oAction = 1;
+                o->oPosY = 5637.0f;
+                if (sMIPSObjs[3][0] != NULL) {
+                    sMIPSObjs[3][0]->os16FA = 1;
+                    sMIPSObjs[3][0]->oAction = 1;
+                }
+                bhv_mind_mound_block_init();
+                return;
+            }
+
             o->oMoveAngleYaw = 0x8000;
             if (gMarioState->wall != NULL && gMarioState->wall->object == o && gMarioState->flags & MARIO_UNKNOWN_31
                 && gMarioState->wall->force == 1) {

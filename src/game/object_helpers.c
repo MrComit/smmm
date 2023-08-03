@@ -2011,6 +2011,11 @@ Gfx *geo_set_dream_env(s32 callContext, struct GraphNode *node, UNUSED void *con
         currentGraphNode = (struct GraphNodeGenerated *) node;
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;
+
+        if (cur_obj_nearest_object_with_behavior(bhvDreamYoshi) == NULL) {
+            gDreamEnv = 255;
+        }
+
         currentGraphNode->fnNode.node.flags = (currentGraphNode->parameter << 8) | (currentGraphNode->fnNode.node.flags & 0xFF);
         gDPSetEnvColor(dlHead++, gDreamEnv, gDreamEnv, gDreamEnv, gDreamEnv);
         gSPEndDisplayList(dlHead);

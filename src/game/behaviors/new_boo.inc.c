@@ -1,4 +1,6 @@
 #include "levels/ssl/header.h"
+#include "game/save_file.h"
+#include "buffers/buffers.h"
 static struct ObjectHitbox sBooCageHitbox = {
     /* interactType: */ INTERACT_IGLOO_BARRIER,
     /* downOffset: */ 0,
@@ -153,9 +155,11 @@ void bhv_boogoo_cage_init(void) {
     bhv_room_boo_init();
     o->header.gfx.scale[1] = 1.4f;
     obj_set_hitbox(o, &sJustCageHitbox);
-    o->oObjFC = spawn_object(o, MODEL_CAGE_GOO, bhvCageGoo);
-    o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-    o->oObjFC->header.gfx.scale[1] = 0.0f;
+    if (o->activeFlags != 0) {
+        o->oObjFC = spawn_object(o, MODEL_CAGE_GOO, bhvCageGoo);
+        o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        o->oObjFC->header.gfx.scale[1] = 0.0f;
+    }
 }
 
 
@@ -171,7 +175,7 @@ void bhv_boogoo_cage_loop(void) {
     switch (o->oUnk1A8) {
         case 0:
             numObjs = count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, o->oRoom);
-            if (numObjs <= 15) {
+            if (numObjs <= 15 && o->oObjFC != NULL) {
                 o->oObjFC->header.gfx.scale[1] = 1.0f - (numObjs * 0.067f);
                 // o->oOpacity = 255 - (17 * numObjs);
             }
@@ -182,7 +186,9 @@ void bhv_boogoo_cage_loop(void) {
         case 1:
             o->oUnk1A8 = 2;
             // o->oOpacity = 255;
-            o->oObjFC->header.gfx.scale[1] = 1.0f;
+            if (o->oObjFC != NULL) {
+                o->oObjFC->header.gfx.scale[1] = 1.0f;
+            }
             play_boo_jingle();
             obj = cur_obj_nearest_object_with_behavior(bhvBoogooObject);
             if (obj != NULL && obj->oRoom == o->oRoom) {
@@ -201,6 +207,22 @@ void bhv_boogoo_cage_loop(void) {
                 CL_explode_object(o->oObjFC, 1);
                 save_file_set_boos(o->oBehParams2ndByte);
                 o->oUnk1A8 = 3;
+
+                if (o->oBehParams2ndByte == 24) {
+                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    if (obj != NULL) {
+                        vec3f_set(&obj->oPosX, -12471.0f, 6187.0f, -2178.0f);
+                        obj->oFaceAngleYaw = 0x8000;
+                    }
+
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = -12471;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = 6187;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = -2178;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea = gCurrAreaIndex;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle = 0x8000;
+                }
+
 
                 obj = spawn_object(o, MODEL_NONE, bhvBooSavePrompt);
                 obj->oBehParams2ndByte = DIALOG_064;

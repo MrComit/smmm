@@ -99,6 +99,7 @@ void suncube_free_loop(void) {
 
 
 void bhv_suncube_init(void) {
+    struct Object *obj;
     o->oGravity = 2.5;
     o->oFriction = 0.8;
     o->oBuoyancy = 1.3;
@@ -107,6 +108,22 @@ void bhv_suncube_init(void) {
     o->os16F8 = 0;
     o->os16FA = 0;
     obj_set_hitbox(o, &sSuncubeHitbox);
+
+    if (save_file_get_boos() & (1 << 22)) {
+        o->oAction = 1;
+        o->oFlags &= ~OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
+        o->oInteractType = INTERACT_IGLOO_BARRIER;
+        vec3f_copy(&o->oPosX, sSuncubeSpots[o->oBehParams2ndByte]);
+        o->oFaceAngleYaw = o->oMoveAngleYaw = 0;
+        o->oFloat10C = 1.0f;
+        obj = cur_obj_nearest_object_with_behavior(bhvSuncube);
+        if (obj == NULL || obj->oAction == 1) {
+            obj = CL_nearest_object_with_behavior_and_field(bhvAntennaBall, 0x144, 1);
+            if (obj != NULL) {
+                obj->os16110 = 1;
+            }
+        }
+    }
 }
 
 

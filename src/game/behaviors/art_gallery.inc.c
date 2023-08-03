@@ -172,6 +172,11 @@ void bhv_painter_shyguy_loop(void) {
 void bhv_paintbrush_init(void) {
     o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPaintingEnemyRespawn);
     o->os16106 = 0x400;
+
+    if (save_file_get_boos() & (1 << 20)) {
+        o->activeFlags = 0;
+    }
+
 }
 
 
@@ -261,6 +266,11 @@ void bhv_painting_enemy_init(void) {
     o->oFloat100 = 0.8f;
 
     CL_HSVtoRGB(o->os16FA, o->oFloatFC, o->oFloat100, &o->os16F4, &o->os16F6, &o->os16F8);
+
+    if (save_file_get_boos() & (1 << 20)) {
+        o->oAction = 1;
+        o->o104 = 1;
+    }
 }
 
 
