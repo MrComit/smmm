@@ -2010,7 +2010,7 @@ void bhv_nice_face_loop(void) {
             gComitCutsceneObject = o;
             gComitCutsceneTimer = 2;
 
-            if (o->oTimer > 60) {
+            if (o->oTimer > 75) {
                 o->oFloatF8 = approach_f32_symmetric(o->oFloatF8, 800.0f, 70.0f);
                 o->oFloatFC = approach_f32_symmetric(o->oFloatFC, 500.0f, 50.0f);
 
@@ -2024,7 +2024,7 @@ void bhv_nice_face_loop(void) {
                     o->oAction = 1;
                 }
 
-                if (o->oTimer == 66) {
+                if (o->oTimer == 76) {
                     play_end_jingle();
                 }
 
@@ -2052,12 +2052,12 @@ void bhv_nice_face_loop(void) {
             }
             break;
         case 2:
-            if (o->oTimer > 65) {
+            if (o->oTimer > 85) {
                 gCamera->comitCutscene = 30;
                 gComitCutsceneObject = o->oObj100;
                 gComitCutsceneTimer = 180;
 
-                if (o->oTimer == 66) {
+                if (o->oTimer == 86) {
                     o->oPosY += 200.0f;
                     o->oFaceAnglePitch = 0xF000;
                     o->oPosX = o->oObj100->oPosX;
@@ -2115,7 +2115,7 @@ void bhv_teardrop_loop(void) {
             cur_obj_scale(o->header.gfx.scale[0]);
             o->oFloatF4 += 0.1f;
             o->oPosY -= o->oFloatF4;
-            if (o->oPosY < 7400.0f) {
+            if (o->oPosY < 7350.0f) {
                 // o->activeFlags = 0;
                 o->oAction = 2;
                 gCamera->comitCutscene = 31;
