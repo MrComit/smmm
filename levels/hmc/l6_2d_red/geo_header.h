@@ -1,0 +1,10 @@
+extern const GeoLayout l6_2d_red_geo[];
+extern u8 l6_2d_red__2d_red_coin_ci4[];
+extern u8 l6_2d_red__2d_red_coin_ci4_pal_rgba16[];
+extern Vtx l6_2d_red_2DRedCoin_mesh_layer_4_vtx_cull[8];
+extern Vtx l6_2d_red_2DRedCoin_mesh_layer_4_vtx_0[4];
+extern Gfx l6_2d_red_2DRedCoin_mesh_layer_4_tri_0[];
+extern Gfx mat_l6_2d_red__2DRed[];
+extern Gfx mat_revert_l6_2d_red__2DRed[];
+extern Gfx l6_2d_red_2DRedCoin_mesh_layer_4[];
+extern Gfx l6_2d_red_material_revert_render_settings[];

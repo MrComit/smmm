@@ -21,6 +21,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -84,6 +85,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_GOLD_MEDAL, gold_medal_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_SPOT, red_spot_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T, prospector_t_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_L1_2D_RED, l1_2d_red_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -206,6 +208,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_HALLWAY_FAKEWALL, 5105, 0, 8859, 0, 0, 0, 0x00000000, bhvHallwayFakeWall),
 		OBJECT(MODEL_RED_COIN, -995, 150, 3088, 0, -90, 0, 0x00050000, bhvWingedRedCoin),
 		OBJECT(MODEL_STAR_PIECE, -6718, 100, 9556, 0, 0, 0, 0x03000000, bhvStarPiece),
+		OBJECT(MODEL_L1_2D_RED, 7582, 348, 3755, 0, 0, 0, (3 << 16), bhv2DRedCoin),
 		OBJECT(MODEL_DINING_CHAIR, 7773, 0, 5120, 0, -60, 0, 0x00010000, bhvDiningChair),
 		OBJECT(MODEL_DINING_CHAIR, 7195, 0, 4781, 0, 0, 0, 0x00000000, bhvDiningChair),
 		OBJECT(MODEL_DINING_CHAIR, 6776, 0, 5792, 0, 135, 0, 0x00030000, bhvDiningChair),
@@ -213,7 +216,6 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_DINING_CHAIR, 5279, 0, 5683, -20, 90, 0, 0x00040000, bhvBlockingChair),
 		OBJECT(MODEL_DINING_CHAIR, 7613, 0, 5792, 0, -135, 0, 0x00020000, bhvDiningChair),
 		OBJECT(MODEL_GOOMBA, 8186, 0, 4468, 0, 0, 0, 0x00000000, bhvGoomba),
-		OBJECT(MODEL_GOOMBA, 8673, 0, 5698, 0, 0, 0, 0x00000000, bhvRedCoinGoomba),
 		OBJECT(MODEL_KOOPA, 5960, 0, 4634, 0, 0, 0, 0x00020000, bhvKoopa),
 		OBJECT(MODEL_KOOPA, 6343, 0, 4994, 0, 0, 0, 0x00010000, bhvKoopa),
 		OBJECT(MODEL_KOOPA, 5704, 0, 5370, 0, 0, 0, 0x00000000, bhvKoopa),

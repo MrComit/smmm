@@ -1,3 +1,6 @@
+#include "levels/bob/header.h"
+#include "levels/hmc/header.h"
+
 void spawn_orange_number_palette(s8 behParam, s16 relX, s16 relY, s16 relZ, s16 palette);
 static struct ObjectHitbox sRedCoinHitbox = {
     /* interactType:      */ INTERACT_COIN,
@@ -525,51 +528,78 @@ void bhv_red_vase_loop(void) {
     }
 }
 
+static void const *s2DRedCollision[] = {
+    l1_2d_red_collision,
+    l6_2d_red_collision,
+};
 
-void garbage_rc(void) {
-            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
-            o->oAction = 1;
-            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER); 
+
+
+void bhv_2d_red_init(void) {
+    o->collisionData = segmented_to_virtual(s2DRedCollision[(o->oBehParams >> 24)]);
 }
+
+void bhv_2d_red_loop(void) {
+    struct Object *obj;
+    if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+            obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oBehParams2ndByte = o->oBehParams2ndByte;
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            // obj->oPosX -= 150.0f;
+            obj->oVelY = 20.0f;
+            obj->oForwardVel = 20.0f;
+            obj->oMoveAngleYaw = o->oMoveAngleYaw;
+            spawn_mist_particles();
+            o->activeFlags = 0;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
+    }
+}
+
+
+// void garbage_rc(void) {
+//             spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);            spawn_mist_particles();
+//             o->oAction = 1;
+//             cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER); 
+// }

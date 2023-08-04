@@ -145,4 +145,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/red_spot/collision_header.h"
 
+#include "levels/bob/l1_2d_red/geo_header.h"
+
+#include "levels/bob/l1_2d_red/collision_header.h"
+
 #endif

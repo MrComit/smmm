@@ -161,3 +161,5 @@
 #include "levels/hmc/map_l6/model.inc.c"
 #include "levels/hmc/red_vase/model.inc.c"
 #include "levels/hmc/red_vase/collision.inc.c"
+#include "levels/hmc/l6_2d_red/model.inc.c"
+#include "levels/hmc/l6_2d_red/collision.inc.c"

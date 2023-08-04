@@ -680,6 +680,7 @@
 // LEVEL 1 MODELS CONT:
 // 0x5B-0x63
 #define MODEL_RED_SPOT            0x5B
+#define MODEL_L1_2D_RED           0x5A
 
 
 // 0x6C-0x73
@@ -849,6 +850,7 @@
 #define MODEL_TROPHY_ELEVATOR     0x6E
 #define MODEL_PLAT_HALL_WALL      0x6F
 #define MODEL_RED_VASE            0x70
+#define MODEL_L6_2D_RED           0x71
 
 // 0x97-0x9B
 #define MODEL_GOOMBA_2D           0x97

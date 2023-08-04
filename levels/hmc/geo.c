@@ -74,3 +74,4 @@
 #include "levels/hmc/plat_hall_wall/geo.inc.c"
 #include "levels/hmc/map_l6/geo.inc.c"
 #include "levels/hmc/red_vase/geo.inc.c"
+#include "levels/hmc/l6_2d_red/geo.inc.c"

@@ -15,6 +15,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -95,6 +97,7 @@ const LevelScript level_hmc_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PLAT_HALL_WALL, plat_hall_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_VASE, red_vase_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T, prospector_t_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_L6_2D_RED, l6_2d_red_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -227,9 +230,9 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TOY_MOLE, 9171, 100, 8698, 0, -14, 0, 0x06000000, bhvToyMole),
 		OBJECT(MODEL_RED_COIN, 7733, 150, 5011, 0, -180, 0, (2 << 16), bhvWingedRedCoin),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 1096, 0, -5196, 0, -180, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_L6_2D_RED, -56, 455, -7691, 0, 0, 0, (1 << 24) | (3 << 16), bhv2DRedCoin),
 		OBJECT(MODEL_FAN_BLADES, -860, 888, -6295, 0, 0, 0, 0x00000000, bhvFanBlades),
 		OBJECT(MODEL_GLOBAL_GATE, -2114, 0, -6496, 0, 90, 0, 0x00000000, bhvGlobalGate),
-		OBJECT(MODEL_RED_VASE, -1967, 114, -7111, 0, 0, 0, (3 << 16), bhvRedVase),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2154, 0, -6496, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 250, -11146, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 0, -8496, 0, -90, 0, 0x00000000, bhvDoor),
