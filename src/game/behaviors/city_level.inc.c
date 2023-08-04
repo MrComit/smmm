@@ -281,11 +281,27 @@ void bhv_toy_toad_init(void) {
     }
 }
 
+s32 auto_initiate_bridge_toad_dialog(void) {
+    if (o->oBehParams2ndByte == 2 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_BRIDGE_TOY_TOAD) == 0 &&
+    gMarioState->pos[0] < 18000.0f && gMarioState->pos[2] < -9000.0f && gMarioState->pos[1] <= gMarioState->floorHeight) {
+        save_file_set_newflags(SAVE_TOAD_FLAG_BRIDGE_TOY_TOAD, 1);
+
+        o->oInteractStatus = INT_STATUS_INTERACTED;
+
+        gMarioState->interactObj = o;
+        gMarioState->usedObj = o;
+        set_mario_action(gMarioState, ACT_WAITING_FOR_DIALOG, 0);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 void bhv_toy_toad_loop(void) {
     u32 starPieces;
     switch (o->oAction) {
         case 0:
-            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+            if (o->oInteractStatus == INT_STATUS_INTERACTED || auto_initiate_bridge_toad_dialog()) {
                 o->oAction = 1;
                 o->os16F4 = o->oMoveAngleYaw;
                 if (o->oAngleToMario - o->oMoveAngleYaw > 0) {

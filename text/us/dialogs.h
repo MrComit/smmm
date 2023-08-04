@@ -17,60 +17,72 @@
 #endif
 
 DEFINE_DIALOG(DIALOG_000, 1, 6, 30, 200, _("\
-Ah, well if it isn't the \n\
-world famous Mario! You \n\
-can call me Professor T. \n\
-I'm what you could \n\
-consider the owner of\n\
-this manor. \n\
-I wish I had time to sit\n\
-around and chat - but as\n\
-you can see things are\n\
-not well. My manor has\n\
-been sieged by ghosts, \n\
-monsters of another realm.\n\
-I was down in the basement\n\
-working on my... research.\n\
-That was when it happened.\n\
-Before I knew it, these \n\
-otherwordly creatures had\n\
-taken over my lab, and -\n\
-infested every part of the \n\
-manor, stealing, distorting\n\
-rooms, and creating holes \n\
-in the very fabric of this\n\
-world - though, I suppose \n\
-you're familiar with that one.\n\
-If I could just get into my\n\
-lab I might be able to shut \n\
-the portal that's letting \n\
-them in - but there's just 1 \n\
-small problem with that, the \n\
-entrance to the basement - \n\
+Ah, well if it isn't the world\n\
+famous Mario! You can call me\n\
+Professor T. I'm the owner of\n\
+this manor. I wish I had time\n\
+to sit and chat, but as you can\n\
+see things here are not well.\n\
+My manor has been sieged by \n\
+ghosts - monsters of another\n\
+realm. I was in the basement\n\
+working on my research, when\n\
+suddenly before I knew it,\n\
+my lab had been taken over -\n\
+by these otherworldly creatures,\n\
+these spectermites, these \n\
+polter-mice, spooksquitoes\n\
+(I've had a lot of time to \n\
+come up with fitting insults\n\
+for them).\n\
+They infested every part of the\n\
+manor. Stealing, distroting \n\
+rooms, creating holes in the\n\
+very fabric of this world and\n\
+filling them with their own\n\
+disgusting, toxic spectral goop.\n\
+Though, I suppose you've noticed\n\
+that one already. If I could\n\
+just get into my lab I might\n\
+be able to shut the portal\n\
+letting them in - but there's\n\
+just 1 small problem with that.\n\
+The entrance to the basement\n\
 seems to be blocked by some\n\
-sort of spectral barrier. \n\
-The only lead I have is an \n\
-especially high level of \n\
-paranormal activity \n\
-detected on the third floor.\n\
+sort of spectral barrier.\n\
+The only lead I have is an\n\
+especially high level of\n\
+paranormal activity detected -\n\
+on the third floor.\n\
+\n\
 Do you think you could check\n\
 it out for me? You'll first\n\
-need to find the key to this\n\
-door, which I believe I left\n\
-in the Library. Here, I'll \n\
-give you this, I call it the -\n\
-Room Manager. \n\
+need to find the key to the\n\
+door right behind us, which -\n\
+- I believe I left in the \n\
+Library.\n\
+Here, I'll give you this,\n\
+I call it the Room Manager.\n\
+\n\
+\n\
+It's really just a \n\
+souped-up piece of C Sharp \n\
+software, but it'll allow me\n\
+to contact you anywhere, \n\
+in addition to functioning\n\
+as a map of the entire manor.\n\
+Press [L]   from the Pause Menu\n\
+to open it. \n\
 \n\
 \n\
 \n\
 \n\
-\n\
-It will allow me to contact \n\
-you anywhere, in addition to\n\
-functioning as a map of the\n\
-entire manor. I'm counting on\n\
-you Mario, the fate of our \n\
-world is in your hands."))
+I'm counting on you Mario, my\n\
+fate is in your hands, and\n\
+depending on how fast these\n\
+Phantom-Fireflies can spread, \n\
+the fate of our entire world\n\
+may be in your hands too."))
 
 DEFINE_DIALOG(DIALOG_001, 1, 5, 95, 200, _("\
 Hello Mario! It's me, \n\
@@ -89,10 +101,10 @@ careful out there, virtually\n\
 every room of this place is\n\
 crawling with creatures - \n\
 but more importantly, money.\n\
-These little gremlins broke \n\
-into my treasury and spread \n\
-its contents far and wide.\n\
-\n\
+These ghostly little gremlins\n\
+broke into my treasury and \n\
+spread its contents far and\n\
+wide. \n\
 I'm asking you to be on the\n\
 lookout for anything and\n\
 everything that looks valuable.\n\
@@ -185,14 +197,14 @@ place doesn't serve real food.)\n\
 ..."))
 
 DEFINE_DIALOG(DIALOG_008, 1, 4, 30, 200, _("\
+(Mario! I'm so glad you're\n\
+here! The bridge to the other\n\
+side of the city is out!)\n\
+\n\
 (We'll need to construct a\n\
-new bridge to get over to the\n\
-other side of the city.)\n\
-\n\
-(But the construction worker\n\
-seems to have gotten lost on\n\
-his way over here!)\n\
-\n\
+new one, but the construction\n\
+worker seems to have gotten\n\
+lost on his way over here!)\n\
 (Plus, he said it would cost 8\n\
 star coins, BUT I DON'T HAVE\n\
 THAT KIND OF MONEY!!!!)\n\
@@ -260,7 +272,7 @@ do you say?)\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_017, 1, 3, 30, 200, _("\
-(Can you believe the traffick!\n\
+(Can you believe the traffic!\n\
 I'm trying to get to work on\n\
 time!)\n\
 ..."))
@@ -404,7 +416,7 @@ DEFINE_DIALOG(DIALOG_035, 1, 4, 30, 200, _("\
 Mario! I've marked on your map\n\
 where the paranormal activity\n\
 is coming from.\n\
-Please take a look."))
+Please take a look. ☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_036, 1, 1, 30, 200, _("\
 Psst. Hey there. \n\
@@ -420,7 +432,8 @@ DEFINE_DIALOG(DIALOG_038, 1, 3, 95, 200, _("\
 Darn, it was a false reading.\n\
 Alright, I've found the next\n\
 closest activity reading.\n\
-I'll mark it on your map"))
+I'll mark it on your map.\n\
+☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_039, 1, 3, 30, 200, _("\
 No luck eh? \n\
@@ -429,8 +442,8 @@ looking for over here?"))
 
 DEFINE_DIALOG(DIALOG_040, 1, 3, 30, 200, _("\
 You know you're really doing\n\
-Mr. Sunglasses over there a\n\
-big favor by helping him out.\n\
+Mr. Sunglasses in here a big\n\
+favor by helping him out.\n\
 I mean who would seriously\n\
 wanna live in a place like this?\n\
 \n\
@@ -444,7 +457,8 @@ either. The only other place\n\
 to check is the attic.\n\
 If that paranormal activity\n\
 is anywhere in this cursed\n\
-chateau, it's gotta be there!"))
+chateau, it's gotta be there!\n\
+☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_042, 1, 3, 30, 200, _("\
 Through here is the only way\n\
@@ -865,7 +879,9 @@ nose!\n\
 This should help you find all the\n\
 fragmented star pieces. If you'd\n\
 rather not use it though, you can\n\
-turn it off in the Options menu."))
+turn it off in the Options menu.\n\
+That's all for now. Keep up the\n\
+good work! ☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_069, 1, 5, 30, 200, _("\
 Mario! Great work taking care\n\
@@ -873,7 +889,8 @@ of those pesky Boos. \n\
 For your trouble, here's a\n\
 little present: some coins!\n\
 500, to be exact.\n\
-Keep it up! I'm counting on you."))
+Keep it up! I'm counting on you.\n\
+☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_070, 1, 5, 30, 200, _("\
 Mario! Now that you've\n\
@@ -885,20 +902,20 @@ From now on, instead of\n\
 starting at 5.0, it'll start\n\
 at 8.0! I'll accept my thank\n\
 you note in pen... Haha, just\n\
-kidding of course!"))
+kidding of course! ☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_071, 1, 3, 30, 200, _("\
 Mario! You've done it!\n\
 You've captured every Boo in\n\
 this place!\n\
 As a token of my gratitude,\n\
-here's the key to my Treasury\n\
+here's the key to my Treasury.\n\
 \n\
 The room is on the first floor,\n\
 to the left of the staircase\n\
 leading to floor two.\n\
 Everything in there is yours,\n\
-Mario."))
+Mario. ☆CLICK☆"))
 
 DEFINE_DIALOG(DIALOG_072, 1, 3, 30, 200, _("\
 ERROR: Gates must be fully\n\
