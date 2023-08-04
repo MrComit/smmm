@@ -350,7 +350,7 @@ static void koopa_shelled_update(void) {
     obj_update_blinking(&o->oKoopaBlinkTimer, 20, 50, 4);
 
     if (gCurrLevelNum == LEVEL_BBH) {
-        if (o->oDistanceToMario < 5000.0f || !gIsConsole) {
+        if ((gMarioState->pos[1] < 12500.0f && o->oDistanceToMario < 5000.0f) || !gIsConsole) {
             cur_obj_unhide();
         } else {
             cur_obj_hide();

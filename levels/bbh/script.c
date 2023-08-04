@@ -43,6 +43,7 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CASTLE_DOOR, castle_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FAKE_WALL, fake_dirt_wall_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOMB_ROCK, bomb_rock_geo), 
+	LOAD_MODEL_FROM_DL(MODEL_BOMB_ROCK, bomb_rock_ROCK_mesh_layer_1, LAYER_OPAQUE), 
 	LOAD_MODEL_FROM_GEO(MODEL_UNSTABLE_ROCK, unstable_rock_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_UNSTABLE_ROCK_YELLOW, unstable_rock_yellow_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SNOWFLAKE, snowflake_geo), 
@@ -55,12 +56,15 @@ const LevelScript level_bbh_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_CUBE_CRACKED, ice_cube_cracked_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_CUBE_CHUNK, bbh_ice_chunk_geo_000378), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOMB_CHAIN, bomb_chain_geo), 
+	LOAD_MODEL_FROM_DL(MODEL_BOMB_CHAIN, bomb_chain_Chain_001_mesh_layer_4, LAYER_ALPHA), 
 	LOAD_MODEL_FROM_GEO(MODEL_BIG_ICE_CUBE, big_ice_cube_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_BUTTON, red_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ICE_CEILING_GATE, ice_ceiling_gate_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RUBBERBAND_TWO, rubberband_two_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_GOOMBA, play_toy_goomba_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CONSOLE_BOMB, console_bomb_geo), 
+	LOAD_MODEL_FROM_DL(MODEL_CONSOLE_BOMB, console_bomb_BobOmb_mesh_layer_4, LAYER_ALPHA), 
+	LOAD_MODEL_FROM_DL(MODEL_CONSOLE_ICECUBE_CRACKED, console_ice_cube_cracked_IceCubeCracked_mesh, LAYER_TRANSPARENT), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

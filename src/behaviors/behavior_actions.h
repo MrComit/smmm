@@ -1255,6 +1255,7 @@ void bhv_blocker_basement_init(void);
 void bhv_blocker_entertainment_init(void);
 void bhv_blocker_lounge_init(void);
 void bhv_marios_journal_loop(void);
+void bhv_ice_cube_cracked_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

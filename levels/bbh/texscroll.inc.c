@@ -38,7 +38,6 @@ void scroll_bbh_dl_Water_mesh_layer_5_vtx_0() {
 void scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 29;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -60,7 +59,6 @@ void scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_0() {
 void scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_1() {
 	int i = 0;
 	int count = 30;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -119,7 +117,6 @@ void scroll_bbh_dl_Waterfall_002_mesh_layer_5_vtx_2() {
 void scroll_bbh_dl_Waterfall_003_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 30;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -177,8 +174,8 @@ void scroll_bbh_dl_Waterfall_003_mesh_layer_5_vtx_1() {
 
 void scroll_sts_mat_bbh_dl_BooSand_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_bbh_dl_BooSand_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
 void scroll_bbh_dl_BB_mesh_layer_5_vtx_0() {
@@ -220,14 +217,13 @@ void scroll_bbh_dl_BB_mesh_layer_5_vtx_0() {
 
 void scroll_sts_mat_bbh_dl_PurpleLava_002_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_bbh_dl_PurpleLava_002_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
 void scroll_bbh_dl_Z94Chains_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 21;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -253,7 +249,6 @@ void scroll_bbh_dl_Z94Chains_mesh_layer_5_vtx_0() {
 void scroll_bbh_dl_Z96Chains_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 21;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -279,7 +274,6 @@ void scroll_bbh_dl_Z96Chains_mesh_layer_5_vtx_0() {
 void scroll_bbh_dl_Z97Chains_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 21;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -305,7 +299,6 @@ void scroll_bbh_dl_Z97Chains_mesh_layer_5_vtx_0() {
 void scroll_bbh_dl_Z98Waterfall_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 45;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;
@@ -330,15 +323,14 @@ void scroll_bbh_dl_Z98Waterfall_mesh_layer_5_vtx_0() {
 
 void scroll_sts_mat_bbh_dl_BooGoo_layer1() {
 	Gfx *mat = segmented_to_virtual(mat_bbh_dl_BooGoo_layer1);
-	shift_s(mat, 13, PACK_TILESIZE(0, 1));
-	shift_s(mat, 21, PACK_TILESIZE(0, 1));
-	shift_t(mat, 21, PACK_TILESIZE(0, 1));
+	shift_s(mat, 10, PACK_TILESIZE(0, 1));
+	shift_s(mat, 15, PACK_TILESIZE(0, 1));
+	shift_t(mat, 15, PACK_TILESIZE(0, 1));
 };
 
 void scroll_bbh_dl_Steam_mesh_layer_5_vtx_0() {
 	int i = 0;
 	int count = 8;
-	int width = 32 * 0x20;
 	int height = 64 * 0x20;
 
 	static int currentY = 0;

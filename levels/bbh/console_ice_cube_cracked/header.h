@@ -1,0 +1,11 @@
+extern u8 console_ice_cube_cracked_rgba32_icecube2_rgba32[];
+extern u8 console_ice_cube_cracked_rgba32_icecubeCracked_rgba32[];
+extern Vtx console_ice_cube_cracked_IceCubeCracked_mesh_vtx_0[25];
+extern Gfx console_ice_cube_cracked_IceCubeCracked_mesh_tri_0[];
+extern Vtx console_ice_cube_cracked_IceCubeCracked_mesh_vtx_1[4];
+extern Gfx console_ice_cube_cracked_IceCubeCracked_mesh_tri_1[];
+extern Gfx mat_console_ice_cube_cracked_IceCube_003[];
+extern Gfx mat_revert_console_ice_cube_cracked_IceCube_003[];
+extern Gfx mat_console_ice_cube_cracked_IceCubeCrack_001[];
+extern Gfx mat_revert_console_ice_cube_cracked_IceCubeCrack_001[];
+extern Gfx console_ice_cube_cracked_IceCubeCracked_mesh[];

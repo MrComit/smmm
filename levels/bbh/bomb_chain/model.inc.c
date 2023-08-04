@@ -303,13 +303,6 @@ Gfx mat_revert_bomb_chain_Chain_001[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx bomb_chain_Chain_001_mesh_layer_4[] = {
-	gsSPDisplayList(mat_bomb_chain_Chain_001),
-	gsSPDisplayList(bomb_chain_Chain_001_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_bomb_chain_Chain_001),
-	gsSPEndDisplayList(),
-};
-
 Gfx bomb_chain_material_revert_render_settings[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
@@ -318,6 +311,14 @@ Gfx bomb_chain_material_revert_render_settings[] = {
 	gsSPTexture(65535, 65535, 0, 0, 0),
 	gsDPSetEnvColor(255, 255, 255, 255),
 	gsDPSetAlphaCompare(G_AC_NONE),
+	gsSPEndDisplayList(),
+};
+
+Gfx bomb_chain_Chain_001_mesh_layer_4[] = {
+	gsSPDisplayList(mat_bomb_chain_Chain_001),
+	gsSPDisplayList(bomb_chain_Chain_001_mesh_layer_4_tri_0),
+	gsSPDisplayList(mat_revert_bomb_chain_Chain_001),
+	gsSPDisplayList(bomb_chain_material_revert_render_settings),
 	gsSPEndDisplayList(),
 };
 

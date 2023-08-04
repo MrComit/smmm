@@ -160,6 +160,15 @@ void bhv_bomb_chain_loop(void) {
 }
 
 
+void bhv_ice_cube_cracked_init(void) {
+    if (gIsConsole && o->oBehParams2ndByte != 1) {
+        cur_obj_set_model(MODEL_CONSOLE_ICECUBE_CRACKED);
+    }
+
+
+}
+
+
 void bhv_ice_cube_cracked_loop(void) {
     struct Object *obj;
     if (o->oDistanceToMario < 3000.0f || !gIsConsole) {

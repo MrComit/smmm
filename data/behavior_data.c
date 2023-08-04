@@ -8151,6 +8151,7 @@ const BehaviorScript bhvIceCubeCracked[] = {
     SET_HOME(),
     SET_FLOAT(oFloat100, 4),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_ice_cube_cracked_init),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_ice_cube_cracked_loop),

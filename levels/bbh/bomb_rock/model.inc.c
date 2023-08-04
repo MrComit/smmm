@@ -619,17 +619,6 @@ Gfx mat_revert_bomb_rock_Rock_001_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx bomb_rock_ROCK_mesh_layer_1[] = {
-	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(bomb_rock_ROCK_mesh_layer_1_vtx_cull + 0, 8, 0),
-	gsSPSetGeometryMode(G_LIGHTING),
-	gsSPCullDisplayList(0, 7),
-	gsSPDisplayList(mat_bomb_rock_Rock_001_layer1),
-	gsSPDisplayList(bomb_rock_ROCK_mesh_layer_1_tri_0),
-	gsSPDisplayList(mat_revert_bomb_rock_Rock_001_layer1),
-	gsSPEndDisplayList(),
-};
-
 Gfx bomb_rock_material_revert_render_settings[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
@@ -640,4 +629,16 @@ Gfx bomb_rock_material_revert_render_settings[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
+Gfx bomb_rock_ROCK_mesh_layer_1[] = {
+	gsSPClearGeometryMode(G_LIGHTING),
+	gsSPVertex(bomb_rock_ROCK_mesh_layer_1_vtx_cull + 0, 8, 0),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPCullDisplayList(0, 7),
+	gsSPDisplayList(mat_bomb_rock_Rock_001_layer1),
+	gsSPDisplayList(bomb_rock_ROCK_mesh_layer_1_tri_0),
+	gsSPDisplayList(mat_revert_bomb_rock_Rock_001_layer1),
+	gsSPDisplayList(bomb_rock_material_revert_render_settings),
+	gsSPEndDisplayList(),
+};
+
 
