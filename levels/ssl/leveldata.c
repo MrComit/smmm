@@ -52,6 +52,8 @@
 
 #include "levels/ssl/leveldata.inc.c"
 
+#include "levels/ssl/ag_boogoo/collision.inc.c"
+#include "levels/ssl/ag_boogoo/model.inc.c"
 #include "levels/ssl/painting_enemy/model.inc.c"
 #include "levels/ssl/painting_enemy/collision.inc.c"
 #include "levels/ssl/boogoo_goomba/model.inc.c"
@@ -61,8 +63,6 @@
 #include "levels/ssl/painting_brick/model.inc.c"
 #include "levels/ssl/painting_brick/collision.inc.c"
 #include "levels/ssl/cage_goo/model.inc.c"
-#include "levels/ssl/ag_boogoo/collision.inc.c"
-#include "levels/ssl/ag_boogoo/model.inc.c"
 #include "levels/ssl/bg_asteroid/model.inc.c"
 #include "levels/ssl/bg_asteroid/collision.inc.c"
 #include "levels/ssl/o2_boogoo/model.inc.c"

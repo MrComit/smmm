@@ -19,6 +19,7 @@
 #include "actors/common0.h"
 #include "actors/common0.h"
 #include "actors/common0.h"
+#include "actors/common0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -49,6 +50,7 @@ const LevelScript level_ssl_entry[] = {
 	JUMP_LINK(script_func_global_16), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_CASTLE_DOOR, castle_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CASTLE_KEY_DOOR, key_door_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_AG_BOOGOO, ag_boogoo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTING_ENEMY, painting_enemy_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_GOOMBA, boogoo_goomba_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_KOOPA, boogoo_koopa_geo), 
@@ -56,7 +58,6 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTBRUSH, paintbrush_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PAINTING_BRICK, painting_brick_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CAGE_GOO, cage_goo_geo), 
-	LOAD_MODEL_FROM_GEO(MODEL_AG_BOOGOO, ag_boogoo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BG_ASTEROID, bg_asteroid_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_O2_BOOGOO, o2_boogoo_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SPINNING_PLAT, spinning_plat_geo), 
@@ -132,6 +133,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_AG_BOOGOO, -19732, 2274, 4079, 0, 0, 0, 0x00000000, bhvBoogooObject),
 		OBJECT(MODEL_HAUNTED_CAGE, -19321, 2068, 1313, 0, 180, 0, (20 << 16), bhvBoogooCage),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -19321, 2068, 728, 0, 0, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_GLOBAL_GATE, -19963, 2068, 7088, 0, 180, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_PAINTBRUSH, -24339, 2289, 3585, 0, 0, 0, 0x00000000, bhvPaintbrush),
 		OBJECT(MODEL_PAINTING_BRICK, -22054, 2672, 617, 0, 0, 0, (80 << 24), bhvPaintingBrick),
 		OBJECT(MODEL_PAINTING_BRICK, -21158, 2865, 617, 0, 0, 0, (110 << 24) | (1 << 16), bhvPaintingBrick),
@@ -308,6 +310,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_ANTENNA_BALL, 17697, 7809, -13576, 0, 0, 0, 0x00000000, bhvAntennaBall),
 		OBJECT(MODEL_HAUNTED_CAGE, 18724, 7311, -11707, 0, 0, 0, (22 << 16), bhvBoogooCage),
 		OBJECT(MODEL_ANTENNA_BALL, 11330, 7809, -12776, 0, 0, 0, (1 << 16), bhvAntennaBall),
+		OBJECT(MODEL_GLOBAL_GATE, 6283, 7311, -11707, 0, 90, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_BG_GOOMBA, 15957, 7311, -8830, 0, -90, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, 12372, 7311, -14732, 0, -90, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_HEART, 14420, 7361, -12371, 0, -90, 0, 0x00000000, bhvRecoveryHeart),
