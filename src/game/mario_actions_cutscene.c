@@ -1894,6 +1894,7 @@ static s32 act_intro_cutscene(struct MarioState *m) {
             m->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_ACTIVE;
             gCamera->comitCutscene = 11;
             m->actionArg++;
+            play_music(0, SEQUENCE_ARGS(4, SEQ_MAIN_MENU), 0);
             break;
         case INTRO_CUTSCENE_WAIT:
             gCamera->comitCutscene = 11;
@@ -1910,6 +1911,7 @@ static s32 act_intro_cutscene(struct MarioState *m) {
         case INTRO_CUTSCENE_SET_MARIO_TO_IDLE:
             m->marioBodyState->headAngle[0] = 0;
             intro_cutscene_set_mario_to_idle(m);
+            // stop_background_music(SEQUENCE_ARGS(4, SEQ_MAIN_MENU));
             break;
     }
 
