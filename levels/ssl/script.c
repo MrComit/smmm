@@ -20,6 +20,7 @@
 #include "actors/common0.h"
 #include "actors/common0.h"
 #include "actors/common0.h"
+#include "actors/common0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -279,6 +280,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MIND_MOUND, -15644, 5637, -2838, 0, 0, 0, (1 << 24) | (10 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -16269, 5637, -4088, 0, 0, 0, (1 << 24) | (12 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -16269, 5637, -3463, 0, 0, 0, (1 << 24) | (13 << 16), bhvMindMound),
+		OBJECT(MODEL_SAVE_STATION, -18832, 5687, -1250, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_STAR_PIECE, -14280, 5787, -781, 0, 0, 0, (0x15 << 24), bhvStarPiece),
 		OBJECT(MODEL_TOAD_FRIEND, -19548, 5787, -1675, 0, -90, 0, (DIALOG_058 << 16), bhvToadFriend),
 		OBJECT(MODEL_TOKEN, -10355, 5712, -3491, 0, 66, 0, (1 << 16) | (0x3A << 8), bhvToken),

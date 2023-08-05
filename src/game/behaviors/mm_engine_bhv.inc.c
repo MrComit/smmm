@@ -126,6 +126,43 @@ Vec3f sPreviousMarioPos = {0, 0, 0};
 u8 sTokenCoins[3] = {10, 50, 100};
 
 
+void bhv_save_station_loop(void) {
+    s32 dialogResponse;
+    s32 dialogId;
+    o->oFaceAngleYaw += 0x400;
+    o->oGraphYOffset = 20.0f + (sins(o->oFaceAngleYaw) * 20.0f);
+    switch (o->oAction) {
+        case 0:
+            if (o->oInteractStatus == INT_STATUS_INTERACTED && gCamera->comitCutscene == 0) {
+                o->oAction = 1;
+                set_mario_npc_dialog(1);
+            }
+            break;
+        case 1:
+            if (gRedCoinMissionActive) {
+                dialogId = DIALOG_096;
+            } else {
+                dialogId = DIALOG_095;
+            }
+            dialogResponse = CL_NPC_Dialog_Options(dialogId);
+            if (gDialogResponse != DIALOG_RESPONSE_NONE) {
+                if (gDialogResponse == DIALOG_RESPONSE_YES) {
+                    save_file_do_save(gCurrSaveFileNum - 1);
+                    play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+                }
+                disable_time_stop();
+                enable_background_sound();
+                // o->activeFlags = 0;
+                set_mario_npc_dialog(0);
+                o->oAction = 0;
+            }
+            break;
+    }
+    o->oInteractStatus = 0;
+}
+
+
+
 
 // void bhv_dirt_pile_init(void)
 void bhv_dirt_pile_loop(void) {

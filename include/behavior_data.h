@@ -991,6 +991,7 @@ extern const BehaviorScript bhvBlockerEntertainment[];
 extern const BehaviorScript bhvBlockerLounge[];
 extern const BehaviorScript bhvMariosJournal[];
 extern const BehaviorScript bhv2DRedCoin[];
+extern const BehaviorScript bhvSaveStation[];
 
 
 #endif // BEHAVIOR_DATA_H

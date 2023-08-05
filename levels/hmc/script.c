@@ -17,6 +17,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -169,6 +170,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_RED_COIN, -3674, 67, 10626, 0, -180, 0, (1 << 16), bhvRedCoin),
 		OBJECT(MODEL_TELEPORTER, -3674, 67, 10273, 0, -180, 0, (0x3E << 16) | (8 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 1558, 300, 11348, 0, -90, 0, (0x3F << 16), bhvFadingWarp),
+		OBJECT(MODEL_SAVE_STATION, -6365, 0, 11598, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_STAR_PIECE, -8321, 100, 12170, 0, 0, 0, (0xF << 24), bhvStarPiece),
 		OBJECT(MODEL_TOKEN, -2777, 57, 3363, 0, 90, 0, (1 << 16) | (0x23 << 8), bhvToken),
 		OBJECT(MODEL_TOKEN, -8131, 5247, 11348, 0, 90, 0, (2 << 16) | (0x24 << 8), bhvToken),

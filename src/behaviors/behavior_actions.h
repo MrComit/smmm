@@ -1258,6 +1258,7 @@ void bhv_marios_journal_loop(void);
 void bhv_ice_cube_cracked_init(void);
 void bhv_2d_red_init(void);
 void bhv_2d_red_loop(void);
+void bhv_save_station_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

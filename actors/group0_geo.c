@@ -42,3 +42,4 @@
 #include "journal_book/geo.inc.c"
 #include "prospector_t/geo.inc.c"
 #include "prospector_lock/geo.inc.c"
+#include "save_station/geo.inc.c"

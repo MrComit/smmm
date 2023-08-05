@@ -1128,30 +1128,16 @@ DEFINE_DIALOG(DIALOG_094, 1, 3, 30, 200, _("\
 Get Respect Doing It'\n\
 (The spine is well-worn.)"))
 
-DEFINE_DIALOG(DIALOG_095, 1, 4, 30, 200, _("\
-To read a sign, stand in\n\
-front of it and press [B],\n\
-like you did just now.\n\
-\n\
-When you want to talk to\n\
-a Koopa Troopa or other\n\
-animal, stand right in\n\
-front of it.\n\
-Please recover the Stars\n\
-that were stolen by\n\
-Bowser in this course."))
+DEFINE_DIALOG(DIALOG_095, 1, 2, 30, 200, _("\
+Save your progress?\n\
+//Yes////No"))
 
-DEFINE_DIALOG(DIALOG_096, 1, 4, 30, 200, _("\
-The path is narrow here.\n\
-Easy does it! No one is\n\
-allowed on top of the\n\
-mountain!\n\
-And if you know what's\n\
-good for you, you won't\n\
-wake anyone who's\n\
-sleeping!\n\
-Move slowly,\n\
-tread lightly."))
+DEFINE_DIALOG(DIALOG_096, 1, 5, 30, 200, _("\
+Save your progress?\n\
+(Red coin progress will not\n\
+be saved if you quit before\n\
+collecting all 8)\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_097, 1, 5, 30, 200, _("\
 Don't be a pushover!\n\

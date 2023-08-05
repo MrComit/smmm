@@ -446,4 +446,6 @@ extern const Gfx snufit_seg6_dl_06009B68[];
 
 #include "prospector_lock/geo_header.h"
 
+#include "save_station/geo_header.h"
+
 #endif

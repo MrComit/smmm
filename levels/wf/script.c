@@ -18,6 +18,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -170,6 +171,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_LOCKED_CAGE, -3337, 0, -5810, 0, 0, 0, 0x00020000, bhvLockedCage),
 		OBJECT(MODEL_PURPLE_SWITCH, -315, 2000, -5461, 0, 0, 0, (19 << 24), bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, 2115, 2206, -9369, 0, 0, 0, 0x00000000, bhvRedCoin),
+		OBJECT(MODEL_SAVE_STATION, 2823, 0, -17953, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_STAR_PIECE, -1685, 2738, 11977, 0, 0, 0, 0x05000000, bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, -3832, 102, -11791, 0, 0, 0, 0x07000000, bhvStarPiece),
 		OBJECT(MODEL_STAR_PIECE, 5296, 487, -5545, 0, 0, 0, 0x06000000, bhvStarPiece),

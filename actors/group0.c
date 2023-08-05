@@ -66,3 +66,4 @@
 #include "invis_coin_spot/collision.inc.c"
 #include "prospector_t/model.inc.c"
 #include "prospector_lock/model.inc.c"
+#include "save_station/model.inc.c"
