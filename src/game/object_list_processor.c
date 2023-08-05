@@ -882,7 +882,7 @@ void bhv_mario_update(void) {
     //     print_text_fmt_int(50, 8*20, "HELLO WORLD", 0, 0);
     //     print_text_fmt_int(50, 7*20, "LOREM IPSUM", 0, 1);
     //     print_text_fmt_int(50, 6*20, "CONGRATULATIONS!", 0, 2);
-    //     print_text_fmt_int(50, 5*20, "YOU WIN", 0, 3);
+        // print_text_fmt_int(50, 5*20, "%d", gCurrCourseNum, 3);
     //     print_text_fmt_int(50, 4*20, "SUPER MARIO AND", 0, 4);
     //     print_text_fmt_int(50, 3*20, "THE MONSTROUS MANOR", 0, 5);
     //     print_text_fmt_int(50, 8*20, "the quick", 0, 0);

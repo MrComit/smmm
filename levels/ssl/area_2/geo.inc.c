@@ -115,6 +115,7 @@ const GeoLayout ssl_dl_206__The_Laboratory_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, ssl_dl_Lab_001_mesh_layer_2),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 13133, 7774, -10212, ssl_dl_Lab_002_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_Lab_004_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
