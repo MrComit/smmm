@@ -846,7 +846,8 @@ void bhv_mario_update(void) {
         }
     }
 
-    if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) && gMarioCurrentRoom == 2 && gCurrLevelNum == LEVEL_BOB) {
+    if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_MAINHALL_SCENE) && gMarioCurrentRoom == 2
+        && gCurrLevelNum == LEVEL_BOB && gCurrDemoInput == NULL) {
         gCamera->comitCutscene = 10;
     }
 #endif

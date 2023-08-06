@@ -639,7 +639,7 @@ u32 save_file_get_reds_star(void) {
     if (gCurrCreditsEntry != NULL || gCurrDemoInput != NULL) {
         return 0;
     }
-    return (gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces & 0xE000000) >> 25;
+    return (gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces & 0xE0000000) >> 29;
 }
 
 

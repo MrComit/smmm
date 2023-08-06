@@ -81,6 +81,10 @@ void bhv_koopa_boss_init(void) {
         gMultiplierUpper = 5;
     }
     gMultiplierLower = 0;
+
+    if (save_file_get_boos() & (1 << 4)) {
+        o->activeFlags = 0;
+    }
 }
 
 extern f32 gComitCutsceneKoopaBossHeight;
