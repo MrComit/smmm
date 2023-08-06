@@ -278,7 +278,7 @@ Vec3f sToadFriendWarp1 = {438.67, 0, 11512.5};
 s32 sToadFriendSubAct = 0;
 
 void mario_update_friend_l1_loop(struct MarioState *m) {
-    u32 flags = save_file_get_newflags(1) & ~0xF0000000;
+    u32 flags = save_file_get_newflags(1) & 0b1111;
     u32 index = CL_count_bits(flags);
     struct Object *obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvToadFriend);
     if (obj == NULL)
@@ -388,7 +388,7 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
 
 
 void mario_update_friend_l6_loop(struct MarioState *m) {
-    u32 flags = (save_file_get_newflags(1) & ~0b1111) & ~0xF0000000;
+    u32 flags = ((save_file_get_newflags(1) >> 4) & 0b11111);
     u32 index = CL_count_bits(flags);
     struct Object *obj;
     switch (index) {
