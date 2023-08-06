@@ -874,7 +874,7 @@ Gfx *geo_update_hall_fakewall(s32 callContext, struct GraphNode *node, UNUSED vo
     Gfx *dlStart, *dlHead;
     struct MarioState *m = gMarioState;
     struct GraphNodeGenerated *currentGraphNode;
-    s32 opacity;
+    u8 opacity;
 
     dlStart = NULL;
 
@@ -886,10 +886,10 @@ Gfx *geo_update_hall_fakewall(s32 callContext, struct GraphNode *node, UNUSED vo
         } else if (m->pos[2] < -2500.0f) {
             opacity = 0xD0;
         } else {
-            opacity = 0xD0 + (m->pos[2] + 2500.0f) / 4500.0f * 0x2F;
+            opacity = 0xD0 + ((m->pos[2] + 2500.0f) / 4500.0f) * 0x2F;
         }
 
-        currentGraphNode->fnNode.node.flags = 0x400 | (currentGraphNode->fnNode.node.flags & 0xFF);
+        currentGraphNode->fnNode.node.flags = 0x100 | (currentGraphNode->fnNode.node.flags & 0xFF);
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
 
         dlHead = dlStart;

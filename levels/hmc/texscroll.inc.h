@@ -20,7 +20,7 @@ extern void scroll_sts_mat_hmc_dl_Study1_002();
 extern void scroll_sts_mat_hmc_dl_Parlor1_002_layer1();
 extern void scroll_sts_mat_hmc_dl_WoodFloorOneCycle_002();
 extern void scroll_sts_mat_hmc_dl_Lava_002_layer1();
-extern void scroll_sts_mat_hmc_dl_WallDither_002_layer4();
+extern void scroll_sts_mat_hmc_dl_WallDither_002_layer1();
 extern void scroll_hmc_dl_Repeats_mesh_layer_1_vtx_0();
 extern void scroll_sts_mat_hmc_dl_WallTransition_002_layer1();
 extern void scroll_sts_mat_hmc_dl_MazeBooGoo_layer1();

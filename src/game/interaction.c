@@ -837,6 +837,10 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
                 gStarPieceReward = 120;
             }
             gHudLowerTimer2 = 0;
+
+            if ((o->oBehParams >> 24) == 0x12) {
+                isKey = 6;
+            }
         }
         //save_file_collect_star_or_key(m->numCoins, starIndex);
 

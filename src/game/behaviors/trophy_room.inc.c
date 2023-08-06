@@ -103,6 +103,7 @@ void cushion_friend_trophy_one(void) {
             }
             break;
         case 1:
+            set_mario_npc_dialog(1);
             gCamera->comitCutscene = 0xFF;
             if (o->oTimer > 20) {
                 COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 1578, 0, 10898, 0, 90, 0, bhvTrophyRect)
@@ -123,7 +124,10 @@ void cushion_friend_trophy_one(void) {
             gCamera->comitCutscene = 0xFF;
             if (o->oTimer > 80) {
                 o->oAction = 3;
+                set_mario_npc_dialog(0);
                 save_file_set_newflags(SAVE_TOAD_FLAG_SPAWN_PLATS, 1);
+            } else {
+                set_mario_npc_dialog(1);
             }
             break;
     }
@@ -168,7 +172,8 @@ void cushion_friend_trophy_two(void) {
 
 void bhv_cushion_friend_init(void) {
     struct Object *obj;
-    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_SPAWN_PLATS) {
+    s32 flags = save_file_get_newflags(1);
+    if (flags & SAVE_TOAD_FLAG_SPAWN_PLATS) {
         o->oRoom = 2;
         COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, bhvTrophyRect)
         obj->oBehParams = (32 << 24) | (3 << 16);
@@ -182,6 +187,30 @@ void bhv_cushion_friend_init(void) {
         obj->oRoom = 2;
         COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, -100, 5109, 0, 22, 0, bhvTrophyPlatSpin)
         obj->oRoom = 2;
+
+
+        if (flags & SAVE_TOAD_FLAG_CLEAR_THEATER) {
+            o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
+            vec3f_set(&o->oPosX, -2100.0f, 2185.0f, 3800.0f);
+            o->oRoom = 2;
+            o->oFaceAngleYaw = 0x8C00;
+            o->oFC = 3;
+            o->oAction = 0;
+        } else {
+            vec3f_set(&o->oPosX, 1630.0f, 0.0f, -5675.0f);
+            o->oRoom = 8;
+            o->oFaceAngleYaw = 0x5800;
+            o->oFC = 2;
+            o->oAction = 0;
+            o->oTimer = 0;
+        }
+
+    } else if (flags & SAVE_TOAD_FLAG_CLEAR_GAME) {
+        vec3f_set(&o->oPosX, 1500.0f, 0.0f, 12000.0f);
+        o->oRoom = 2;
+        o->oFaceAngleYaw = 0xED00;
+        o->oFC = 1;
+        o->oAction = 0;
     }
 }
 

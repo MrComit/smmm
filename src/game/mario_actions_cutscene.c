@@ -598,6 +598,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
             case 1:
                 switch (isKey) {
                     case 0:
+                    case 6:
                         spawn_object(m->marioObj, MODEL_STAR_PIECE, bhvCelebrationStar);
                         break;
                     case 1:
@@ -634,7 +635,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                 break;
 
             case 80:
-                if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+                if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO || isKey == 6) {
                     gDialogResponse = DIALOG_RESPONSE_NO;
                 } else {
                     enable_time_stop();

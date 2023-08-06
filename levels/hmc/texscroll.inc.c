@@ -298,10 +298,10 @@ void scroll_sts_mat_hmc_dl_Lava_002_layer1() {
 	}
 };
 
-void scroll_sts_mat_hmc_dl_WallDither_002_layer4() {
+void scroll_sts_mat_hmc_dl_WallDither_002_layer1() {
 	static int intervalTex1 = 2;
 	static int curInterval1 = 2;
-	Gfx *mat = segmented_to_virtual(mat_hmc_dl_WallDither_002_layer4);
+	Gfx *mat = segmented_to_virtual(mat_hmc_dl_WallDither_002_layer1);
 
 	if (--curInterval1 <= 0) {
 		shift_s(mat, 16, PACK_TILESIZE(0, 1));
@@ -767,7 +767,7 @@ void scroll_hmc() {
 	scroll_sts_mat_hmc_dl_Parlor1_002_layer1();
 	scroll_sts_mat_hmc_dl_WoodFloorOneCycle_002();
 	scroll_sts_mat_hmc_dl_Lava_002_layer1();
-	scroll_sts_mat_hmc_dl_WallDither_002_layer4();
+	scroll_sts_mat_hmc_dl_WallDither_002_layer1();
 	scroll_hmc_dl_Repeats_mesh_layer_1_vtx_0();
 	scroll_sts_mat_hmc_dl_WallTransition_002_layer1();
 	scroll_sts_mat_hmc_dl_MazeBooGoo_layer1();

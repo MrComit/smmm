@@ -179,7 +179,7 @@ void bhv_boogoo_cage_loop(void) {
                 o->oObjFC->header.gfx.scale[1] = 1.0f - (numObjs * 0.067f);
                 // o->oOpacity = 255 - (17 * numObjs);
             }
-            if (numObjs <= 3) {
+            if (numObjs <= 2) {
                 o->oUnk1A8 = 1;
             }
             break;

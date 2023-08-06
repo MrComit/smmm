@@ -20,6 +20,12 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -173,6 +179,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_TELEPORTER, -3674, 67, 10273, 0, -180, 0, (0x3E << 16) | (8 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 1558, 300, 11348, 0, -90, 0, (0x3F << 16), bhvFadingWarp),
 		OBJECT(MODEL_SAVE_STATION, -6365, 0, 11598, 0, 0, 0, 0x00000000, bhvSaveStation),
+		OBJECT(MODEL_SAVE_STATION, -3072, 2185, 3663, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_STAR_PIECE, -8321, 100, 12170, 0, 0, 0, (0xF << 24), bhvStarPiece),
 		OBJECT(MODEL_TOKEN, -2777, 57, 3363, 0, 90, 0, (1 << 16) | (0x23 << 8), bhvToken),
 		OBJECT(MODEL_TOKEN, -8131, 5247, 11348, 0, 90, 0, (2 << 16) | (0x24 << 8), bhvToken),
@@ -270,6 +277,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_NONE, -23929, 8539, -9532, 0, 0, 0, (3 << 16), bhvMazeIndicator),
 		OBJECT(MODEL_NONE, -7819, 0, -7246, 0, 0, 0, 0x00000000, bhvPlatHallManage),
 		OBJECT(MODEL_PLAT_HALL_WALL, -18582, -2200, -17301, 0, 0, 0, 0x00000000, bhvPlatHallWall),
+		OBJECT(MODEL_SAVE_STATION, -5562, 0, -6017, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_CUSHION_FRIEND, -7819, 0, -7246, 0, 0, 0, (3 << 16), bhvCushionShell),
 		OBJECT(MODEL_STAR_PIECE, -19368, -2150, -6700, 0, 0, 0, (0x12 << 24), bhvStarPiece),
 		OBJECT(MODEL_STATIC_TRI, -11851, -200, -8239, 0, 0, 0, 0x00000000, bhvStaticTri),

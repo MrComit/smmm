@@ -464,7 +464,7 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
             if (gMarioCurrentRoom == 7 || gMarioCurrentRoom == 8) {
                 obj = cur_obj_nearest_object_with_behavior(bhvCushionFriend);
                 if (obj != NULL && obj->oFC != 2) {
-                    vec3f_set(&obj->oPosX, 1630.0f, 0.0f, -5675.0f);
+                    // vec3f_set(&obj->oPosX, 1630.0f, 0.0f, -5675.0f);
                     obj->oRoom = 8;
                     obj->oFaceAngleYaw = 0x5800;
                     obj->oFC = 2;
