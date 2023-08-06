@@ -1569,6 +1569,7 @@ s32 gPauseHudFirstFrame = 0;
  * excluding the cannon reticle which detects a camera preset for it.
  */
 void render_hud(void) {
+	s32 canonCheck = (gMarioState->action == ACT_IN_CANNON);
     s16 hudDisplayFlags = gHudDisplay.flags;
 
 	if (gCurrDemoInput != NULL) {
@@ -1648,7 +1649,7 @@ void render_hud(void) {
         	render_hud_keys();
 		}
 
-        if (sCurrPlayMode != 2 && gHudTopY < gHudYMax && (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)) {
+        if (!canonCheck && sCurrPlayMode != 2 && gHudTopY < gHudYMax && (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH)) {
             render_hud_stars();
         }
 
@@ -1665,7 +1666,7 @@ void render_hud(void) {
         if (gCurrLevelNum == LEVEL_HMC && sCurrPlayMode == 0) {
             render_targets();
         }
-		if (hudDisplayFlags & HUD_DISPLAY_FLAG_BROKENKEY || sBrokenKeyRectY < 240 || sCurrPlayMode == 2) {
+		if (hudDisplayFlags & HUD_DISPLAY_FLAG_BROKENKEY || (sBrokenKeyRectY < 240 && sCurrPlayMode != 2)/* || sCurrPlayMode == 2*/) {
 			render_hud_broken_key();
 		}
 
@@ -1681,6 +1682,11 @@ void render_hud(void) {
 			if (gCurrLevelNum == LEVEL_DDD) {
 				render_boss_health();
 			}
+			if (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH) {
+				render_hud_stars();
+			}
+
+			render_hud_broken_key();
 			gPauseHudFirstFrame++;
 		}
 

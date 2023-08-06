@@ -2934,8 +2934,12 @@ s16 render_pause_courses_and_castle(void) {
             render_hud_coins();
             render_hud_boos();
             render_hud_keys();
+            render_hud_broken_key();
 			if (gCurrLevelNum == LEVEL_DDD) {
 				render_boss_health();
+			}
+			if (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH) {
+				render_hud_stars();
 			}
 
             if (gPlayer3Controller->buttonPressed & A_BUTTON

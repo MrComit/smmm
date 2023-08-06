@@ -1309,9 +1309,20 @@ void bhv_prospector_t_loop(void) {
                     o->oAction = 0;
                     stop_background_music(SEQUENCE_ARGS(4, SEQ_PROSPECTOR));
                     if (o->os16F8 == 0) {
-                        gRedCoinMissionActive = 1;
-                        //CHANGE DIALOG ID
-                        o->oBehParams2ndByte = DIALOG_081;
+                        if (save_file_get_reds_star() & (1 << o->os16F4)) {
+                            o->oAction = 3;
+                            save_file_set_newflags(SAVE_TOAD_FLAG_REDS1 << o->os16F4, 1);
+                            o->os16F8 = 1;
+                            if (o->os16F4 == 2) {
+                                o->oBehParams2ndByte = DIALOG_098;
+                            } else {
+                                o->oBehParams2ndByte = DIALOG_097;
+                            }
+                        } else {
+                            gRedCoinMissionActive = 1;
+                            //CHANGE DIALOG ID
+                            o->oBehParams2ndByte = DIALOG_081;
+                        }
                     } else if (o->os16F8 == 1) {
                         gRedCoinMissionActive = 0;
                         o->os16F8 = 2;
@@ -1322,6 +1333,9 @@ void bhv_prospector_t_loop(void) {
                     }
                 }
             }
+            break;
+        case 3:
+            o->oAction = 2;
             break;
     }
     o->oInteractStatus = 0;

@@ -1109,6 +1109,9 @@ s32 gHudCoinUpdateFaster;
 
 s32 should_display_brokenkey(void) {
     s32 flags = save_file_get_newflags(0);
+    if (gMarioState->action == ACT_IN_CANNON) {
+        return FALSE;
+    }
     if ((flags & (1 << 7)) && (flags & (1 << 8)) && (flags & (1 << 9))) {
         if (save_file_get_keys(1) & (1 << 7)) {
             return FALSE;
@@ -1127,7 +1130,7 @@ void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL && gCurrDemoInput == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
-        if (gMarioState->action & ACT_FLAG_STATIONARY && gCamera->comitCutscene == 0) {
+        if (gMarioState->action != ACT_IN_CANNON && gMarioState->action & ACT_FLAG_STATIONARY && gCamera->comitCutscene == 0) {
             if (sTimer2++ > 45) {
                 gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
                 if (sTimer2 > 180) {

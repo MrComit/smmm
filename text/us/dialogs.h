@@ -863,23 +863,27 @@ swing ME around! A wimp\n\
 like you won't throw me\n\
 out of here! Never! Ha!"))
 
-DEFINE_DIALOG(DIALOG_068, 1, 4, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_068, 1, 5, 30, 200, _("\
 Mario! I've developed a new\n\
 tool for your Room Manager.\n\
 It's called the Star Piece\n\
 Tracker.\n\
+\n\
 It helps you locate star pieces\n\
 when you're in the same room\n\
 as one.\n\
 \n\
+\n\
 Red means it's far away, yellow\n\
-means you're getting closer, and\n\
-green means it's right under your\n\
-nose!\n\
+means you're getting closer,\n\
+and green means it's right\n\
+under your nose!\n\
+\n\
 This should help you find all the\n\
-fragmented star pieces. If you'd\n\
-rather not use it though, you can\n\
-turn it off in the Options menu.\n\
+fragmented star pieces. But \n\
+if you'd rather not use it,\n\
+you can turn it off in the\n\
+Options menu.\n\
 That's all for now. Keep up the\n\
 good work! ☆CLICK☆"))
 
@@ -1139,16 +1143,24 @@ be saved if you quit before\n\
 collecting all 8)\n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_097, 1, 5, 30, 200, _("\
-Don't be a pushover!\n\
-If anyone tries to shove\n\
-you around, push back!\n\
-It's one-on-one, with a\n\
-fiery finish for the loser!"))
+DEFINE_DIALOG(DIALOG_097, 1, 2, 30, 200, _("\
+Oh, you've already collected\n\
+them? Excellent!\n\
+As promised, heres 1000 coins\n\
+for your trouble.\n\
+Till we meet again..."))
 
-DEFINE_DIALOG(DIALOG_098, 1, 2, 95, 200, _("\
-Come on in here...\n\
-...heh, heh, heh..."))
+DEFINE_DIALOG(DIALOG_098, 1, 5, 95, 200, _("\
+Oh, you've already collected\n\
+them? Excellent! Now I have\n\
+all 24 of my red coins back.\n\
+\n\
+\n\
+You've been indispensable to\n\
+me Mario, so since I'm\n\
+feeling generous your final\n\
+reward will be 2000 coins.\n\
+Goodbye, Mario..."))
 
 // unused
 DEFINE_DIALOG(DIALOG_099, 1, 5, 95, 200, _("\

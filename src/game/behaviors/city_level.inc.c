@@ -305,9 +305,9 @@ void bhv_toy_toad_loop(void) {
                 o->oAction = 1;
                 o->os16F4 = o->oMoveAngleYaw;
                 if (o->oAngleToMario - o->oMoveAngleYaw > 0) {
-                    o->os16F8 = 0x600;
+                    o->os16F8 = 0xC80;
                 } else {
-                    o->os16F8 = -0x600;
+                    o->os16F8 = -0xC80;
                 }
                 if (o->oBehParams2ndByte == 2 && save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BRIDGE_BOUGHT) {
                     o->oBehParams = 9 << 24;
@@ -321,7 +321,7 @@ void bhv_toy_toad_loop(void) {
                     o->os16F6 = 1;
                 }
             } else {
-                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x600);
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0xC80);
                 if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                     if (o->oBehParams2ndByte == 1 && !(save_file_get_newflags(0) & SAVE_NEW_FLAG_CITY_BAND_BOUGHT)) {
                         o->oAction = 4;
