@@ -5250,6 +5250,9 @@ void render_credits_rank_evaluation(void) {
                     print_text(60 + 60, 30, "PRESS A", 0);
                     if (gMarioState->input & INPUT_A_PRESSED) {
                         sCreditsRankAct2 = 1;
+                        save_file_do_save(gCurrSaveFileNum - 1);
+                        play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+
                     }
                 }
             }
