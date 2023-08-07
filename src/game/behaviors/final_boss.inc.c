@@ -99,7 +99,7 @@ struct ObjectHitbox sEndBooHitbox = {
 };
 
 
-
+extern s32 gBossPrecoins;
 
 enum FinalBossAttacks {
     FBA_BUBBLES,     // 0
@@ -1779,6 +1779,8 @@ void controller_act_intro(void) {
                 gComitCutsceneTimer = 0;
                 o->oSubAction = 0;
                 o->oAction = CONTROLLER_ACT_DEFAULT;
+
+                gBossPrecoins = gMarioState->numCoins;
 
                 obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
                 if (obj != NULL) {

@@ -186,7 +186,7 @@ ifeq ($(HVQM),1)
 endif
 
 
-SMMM_DEBUG ?= 0
+SMMM_DEBUG ?= 1
 $(eval $(call validate-option,SMMM_DEBUG,0 1))
 ifeq ($(SMMM_DEBUG),1)
   DEFINES += SMMM_DEBUG=1
