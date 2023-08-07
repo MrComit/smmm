@@ -1366,6 +1366,10 @@ void bhv_bg_ground_loop(void) {
 }
 
 void bhv_the_controller_init(void) {
+    sEndAttacks[0] = NULL;
+    sEndAttacks[1] = NULL;
+    sEndAttacks[2] = NULL;
+    sEndAttacks[3] = NULL;
     // sEndAttacks[0] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
     // sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
     // sEndAttacks[0]->os16112 = 0;
