@@ -772,32 +772,47 @@ s16 music_changed_through_warp(s16 arg) {
 s32 gMarioDeathRoom = 0;
 
 s32 in_boss_room(s16 level, s16 room) {
-    // struct Object *obj;
+    struct Object *obj;
     // s32 boos = save_file_get_boos();
     switch (level) {
         case LEVEL_BOB:
-            if (room == 11 && cur_obj_nearest_object_with_behavior(bhvKoopaBoss) != NULL) {
-                return TRUE;
+            if (room == 11) {
+                obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
+                if (obj != NULL && obj->oAction != 0) {
+                    return TRUE;
+                }
             }
             break;
         case LEVEL_WF:
-            if (room == 14 && cur_obj_nearest_object_with_behavior(bhvShadowBoss) != NULL) {
-                return TRUE;
+            if (room == 14) {
+                obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
+                if (obj != NULL && obj->oAction != 0) {
+                    return TRUE;
+                }
             }
             break;
         case LEVEL_CCM:
-            if (room == 3 && cur_obj_nearest_object_with_behavior(bhvShyGuyBoss) != NULL) {
-                return TRUE;
+            if (room == 3) {
+                obj = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
+                if (obj != NULL && obj->oAction != 0) {
+                    return TRUE;
+                }
             }
             break;
         case LEVEL_HMC:
-            if (room == 15 && cur_obj_nearest_object_with_behavior(bhvAtticBully) != NULL) {
-                return TRUE;
+            if (room == 15) {
+                obj = cur_obj_nearest_object_with_behavior(bhvAtticBully);
+                if (obj != NULL && obj->oAction != 8) {
+                    return TRUE;
+                }
             }
             break;
         case LEVEL_LLL:
-            if (room == 9 && cur_obj_nearest_object_with_behavior(bhvGhostBully) != NULL) {
-                return TRUE;
+            if (room == 9) {
+                obj = cur_obj_nearest_object_with_behavior(bhvGhostBully);
+                if (obj != NULL && obj->oAction != 0) {
+                    return TRUE;
+                }
             }
             break;
         case LEVEL_DDD:
