@@ -73,6 +73,15 @@ static void const *sSnufitSpots[] = {
     wf_area_1_spline_Snufit2, wf_area_1_spline_Snufit3,
 };
 
+
+u8 sCoinBitsCopy[4][8] = {
+{0, 0, 0, 1, 0, 0, 0, 0,},
+{0, 0, 0, 1, 0, 0, 0, 0,},
+{0, 0, 0, 1, 0, 0, 0, 0,},
+{1, 0, 0, 1, 0, 0, 0, 0,},
+};
+
+
 u8 sCoinBits[4][8] = {
 {0, 0, 0, 1, 0, 0, 0, 0,},
 {0, 0, 0, 1, 0, 0, 0, 0,},
@@ -509,6 +518,9 @@ u16 sShadowBossColors[] = {60, 100, 140, 180};
 extern s32 gBossPrecoins;
 
 void bhv_shadow_boss_init(void) {
+    bcopy(sCoinBitsCopy, sCoinBits, sizeof(sCoinBits));
+
+
     obj_set_hitbox(o, &sShadowBossHitbox);
     o->os16F4 = 20;
     o->os16F6 = 20;

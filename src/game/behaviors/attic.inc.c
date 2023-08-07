@@ -678,6 +678,9 @@ void bhv_attic_indicator_loop(void) {
 
 
 void bhv_attic_spire_init(void) {
+    sSpiresReady[0] = 0;
+    sSpiresReady[1] = 0;
+
     o->header.gfx.scale[1] = 0.0f;
     o->oObj104 = cur_obj_nearest_object_with_behavior(bhvAtticBully);
     if (o->oObj104 == NULL) {

@@ -801,8 +801,12 @@ s32 in_boss_room(s16 level, s16 room) {
             break;
         case LEVEL_HMC:
             if (room == 15) {
-                obj = cur_obj_nearest_object_with_behavior(bhvAtticBully);
-                if (obj != NULL && obj->oAction != 8) {
+                // obj = cur_obj_nearest_object_with_behavior(bhvAtticBully);
+                // if (obj != NULL && obj->oAction != 8) {
+                //     return TRUE;
+                // }
+                obj = cur_obj_nearest_object_with_behavior(bhvAtticMovingFlame);
+                if (obj != NULL) {
                     return TRUE;
                 }
             }
