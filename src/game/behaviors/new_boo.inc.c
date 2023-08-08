@@ -265,7 +265,7 @@ void bhv_boogoo_object_init(void) {
 
 void bhv_boogoo_object_loop(void) {
     if (o->oFC) {
-        o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 4);
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 10);
         if (o->oOpacity == 0) {
             o->activeFlags = 0;
         }

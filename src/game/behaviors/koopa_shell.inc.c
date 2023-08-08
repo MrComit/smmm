@@ -114,11 +114,15 @@ void bhv_koopa_shell_loop(void) {
 void bhv_cushion_shell_loop(void) {
     struct Object *obj;
     struct MarioState *m = gMarioState;
+    s32 dialogId;
 
     obj_set_hitbox(o, &sKoopaShellHitbox);
     if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_TROPHY_TWO) {
-        o->activeFlags = 0;
+       dialogId = DIALOG_103;
+    } else {
+       dialogId = DIALOG_042;
     }
+
     switch (o->oAction) {
         case 0:
             if (o->os16104) {
@@ -129,7 +133,7 @@ void bhv_cushion_shell_loop(void) {
             }
             break;
         case 1:
-            if (CL_NPC_Dialog(DIALOG_042)) {
+            if (CL_NPC_Dialog(dialogId)) {
                 o->oAction = 2;
             }
             break;
@@ -156,6 +160,7 @@ void bhv_cushion_shell_loop(void) {
                 o->activeFlags = 0;
                 spawn_mist_particles();
                 obj = spawn_object(o, MODEL_CUSHION_FRIEND, bhvCushionShell);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 obj->os16104 = 1;
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 obj->oFaceAngleYaw = 0;
@@ -171,6 +176,17 @@ void bhv_cushion_shell_loop(void) {
                 mario_stop_riding_object(m);
                 set_mario_action(m, ACT_JUMP, 0);
                 o->oInteractType = INTERACT_IGLOO_BARRIER;
+            }
+            break;
+        case 4:
+            if (o->oDistanceToMario > 5000.0f) {
+                o->activeFlags = 0;
+                spawn_mist_particles();
+                obj = spawn_object(o, MODEL_CUSHION_FRIEND, bhvCushionShell);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                // obj->os16104 = 1;
+                vec3f_copy(&obj->oPosX, &o->oHomeX);
+                obj->oFaceAngleYaw = 0;
             }
             break;
     }

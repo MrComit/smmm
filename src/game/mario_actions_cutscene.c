@@ -591,6 +591,7 @@ s32 act_debug_free_move(struct MarioState *m) {
 void general_star_dance_handler(struct MarioState *m, s32 isKey) {
     struct Object *obj;
     s32 dialogID;
+    s32 skipSave = 0;
     s32 animState = (isKey >> 16) & 0xFF;
     isKey = isKey & 0xFF;
     if (m->actionState == 0) {
@@ -636,7 +637,8 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
 
             case 80:
                 if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO || isKey == 6) {
-                    gDialogResponse = DIALOG_RESPONSE_NO;
+                    // gDialogResponse = DIALOG_RESPONSE_NO;
+                    // skipSave = 1;
                 } else {
                     enable_time_stop();
                     if (isKey == 4)
@@ -653,14 +655,16 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                 m->actionState = 1;
                 break;
         }
-    } else if (m->actionState == 1 && gDialogResponse != DIALOG_RESPONSE_NONE) {
+    } else if (m->actionState == 1 && (gDialogResponse != DIALOG_RESPONSE_NONE 
+        || (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO || isKey == 6))) {
         if (gDialogResponse == DIALOG_RESPONSE_YES) {
             save_file_do_save(gCurrSaveFileNum - 1);
         }
         m->actionState = 2;
+        // gDialogResponse = DIALOG_RESPONSE_NONE;
     } else if (m->actionState == 2 && is_anim_at_end(m)) {
-        disable_time_stop();
         enable_background_sound();
+        disable_time_stop();
         dialogID = get_star_collection_dialog(m);
         if (dialogID) {
             // look up for dialog

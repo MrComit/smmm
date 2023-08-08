@@ -1207,7 +1207,7 @@ const BehaviorScript bhvFlame[] = {
 const BehaviorScript bhvAnotherElavator[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(hmc_seg7_collision_elevator),
+    // LOAD_COLLISION_DATA(hmc_seg7_collision_elevator),
     SET_HOME(),
     CALL_NATIVE(bhv_elevator_init),
     BEGIN_LOOP(),
@@ -1231,7 +1231,7 @@ const BehaviorScript bhvRrElevatorPlatform[] = {
 const BehaviorScript bhvHmcElevatorPlatform[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(hmc_seg7_collision_elevator),
+    // LOAD_COLLISION_DATA(hmc_seg7_collision_elevator),
     SET_HOME(),
     CALL_NATIVE(bhv_elevator_init),
     BEGIN_LOOP(),
@@ -4916,7 +4916,7 @@ const BehaviorScript bhvHidden1upInPoleSpawner[] = {
 const BehaviorScript bhvControllablePlatform[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_SET_THROW_MATRIX_FROM_TRANSFORM | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(hmc_seg7_collision_controllable_platform),
+    // LOAD_COLLISION_DATA(hmc_seg7_collision_controllable_platform),
     SET_HOME(),
     CALL_NATIVE(bhv_controllable_platform_init),
     BEGIN_LOOP(),
@@ -4928,7 +4928,7 @@ const BehaviorScript bhvControllablePlatform[] = {
 const BehaviorScript bhvControllablePlatformSub[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_COLLISION_DATA(hmc_seg7_collision_controllable_platform_sub),
+    // LOAD_COLLISION_DATA(hmc_seg7_collision_controllable_platform_sub),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_controllable_platform_sub_loop),
         CALL_NATIVE(load_object_collision_model),

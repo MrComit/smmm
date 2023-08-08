@@ -109,13 +109,17 @@ void cushion_friend_trophy_one(void) {
                 COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 1578, 0, 10898, 0, 90, 0, bhvTrophyRect)
                 obj->oBehParams = (32 << 24) | (3 << 16) | (1 << 8);
                 obj->oBehParams2ndByte = 3;
+                obj->parentObj = obj;
                 COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 1578, 0, 8893, 0, -90, 0, bhvTrophyRect)
                 obj->oBehParams = (32 << 24) | (3 << 16) | (1 << 8);
                 obj->oBehParams2ndByte = 3;
+                obj->parentObj = obj;
                 COMIT_OBJECT(MODEL_TROPHY_OCTOGON, -455, 1600, 6514, 0, -22, 0, bhvTrophyPlatSpin)
                 obj->oBehParams = 1 << 8;
+                obj->parentObj = obj;
                 COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, 1600, 5109, 0, 22, 0, bhvTrophyPlatSpin)
                 obj->oBehParams = 1 << 8;
+                obj->parentObj = obj;
                 play_puzzle_jingle();
                 o->oAction = 2;
             }
@@ -136,6 +140,10 @@ void cushion_friend_trophy_one(void) {
 void cushion_friend_morning_room(void) {
     switch (o->oAction) {
         case 0:
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MORNING_ROOM) {
+                o->oAction = 2;
+                break;
+            }
             vec3f_set(&o->oPosX, 1630.0f, 0.0f, -5675.0f);
             if (gMarioState->pos[2] < -5700.0f || o->oTimer > 100) {
                 o->oAction = 1;
@@ -151,12 +159,15 @@ void cushion_friend_morning_room(void) {
 }
 
 void cushion_friend_trophy_two(void) {
+    if (save_file_get_boos() & (1 << 0x12)) {
+        o->activeFlags = 0;
+    }
     switch (o->oAction) {
         case 0:
             if (o->oRoom == gMarioCurrentRoom) {
                 cur_obj_unhide();
             }
-            vec3f_set(&o->oPosX, -2100.0f, 2185.0f, 3800.0f);
+            vec3f_set(&o->oPosX, -2100.0f - 100.0f, 2185.0f, 3800.0 + 180.0f);
             if (gMarioState->pos[1] > 2000.0f && (gMarioState->pos[2] > 3450.0f || o->oTimer > 100)) {
                 o->oAction = 1;
             }
@@ -173,25 +184,32 @@ void cushion_friend_trophy_two(void) {
 void bhv_cushion_friend_init(void) {
     struct Object *obj;
     s32 flags = save_file_get_newflags(1);
-    if (flags & SAVE_TOAD_FLAG_SPAWN_PLATS) {
+
+    if (save_file_get_boos() & (1 << 0x12)) {
+        o->activeFlags = 0;
+    } else if (flags & SAVE_TOAD_FLAG_SPAWN_PLATS) {
         o->oRoom = 2;
         COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, bhvTrophyRect)
         obj->oBehParams = (32 << 24) | (3 << 16);
         obj->oBehParams2ndByte = 3;
         obj->oRoom = 2;
+        obj->parentObj = obj;
         COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 8893, 0, -90, 0, bhvTrophyRect)
         obj->oBehParams = (32 << 24) | (3 << 16);
         obj->oBehParams2ndByte = 3;
         obj->oRoom = 2;
+        obj->parentObj = obj;
         COMIT_OBJECT(MODEL_TROPHY_OCTOGON, -455, -100, 6514, 0, -22, 0, bhvTrophyPlatSpin)
         obj->oRoom = 2;
+        obj->parentObj = obj;
         COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, -100, 5109, 0, 22, 0, bhvTrophyPlatSpin)
         obj->oRoom = 2;
+        obj->parentObj = obj;
 
 
         if (flags & SAVE_TOAD_FLAG_CLEAR_THEATER) {
             o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
-            vec3f_set(&o->oPosX, -2100.0f, 2185.0f, 3800.0f);
+            vec3f_set(&o->oPosX, -2100.0f - 100.0f, 2185.0f, 3800.0 + 180.0f);
             o->oRoom = 2;
             o->oFaceAngleYaw = 0x8C00;
             o->oFC = 3;

@@ -15,17 +15,6 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -330,21 +319,26 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_BREAKABLE_BOX, -2581, 5185, 13738, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -3381, 4985, 13538, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -4181, 4785, 13538, 0, 0, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, -4781, 4485, 13438, 0, 0, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, -4781, 4285, 12638, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -4781, 4585, 13438, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -4781, 4321, 12740, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -4781, 4185, 11838, 0, 0, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, -4630, 4185, 11049, 0, -21, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, -3846, 4185, 10212, 0, -66, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, -2548, 4185, 10153, 0, -103, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, -1398, 4185, 10615, 0, -148, 0, 0x00000000, bhvHiddenObject),
-		OBJECT(MODEL_BREAKABLE_BOX, -1802, 4185, 11706, 0, -112, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -4275, 4185, 11273, 0, -60, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -3386, 4185, 11037, 0, -100, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -2427, 4185, 11127, 0, -103, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -1474, 4185, 10253, 0, -177, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -1703, 4185, 11027, 0, -112, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -1781, 4985, 8238, 0, -180, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -981, 4785, 8238, 0, -180, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -258, 4635, 8338, 0, 0, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -1214, 4185, 9422, 0, 131, 0, 0x00000000, bhvHiddenObject),
+		OBJECT(MODEL_BREAKABLE_BOX, -258, 4285, 9037, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -1774, 4354, 26378, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_GARAGE_WALL, -1838, 4354, 26380, 0, 0, 0, 0x00000000, bhvGhostBarrier),
 		OBJECT(MODEL_NONE, -4597, 5185, 7063, 0, 0, 0, (7 << 16), bhvInvisRedCoin),
 		OBJECT(MODEL_JOURNAL_BOOK, -3556, 5185, 16409, 0, 0, 0, (DIALOG_048 << 16), bhvJournalBook),
 		OBJECT(MODEL_PROSPECTOR_LOCK, 2096, 5185, 11348, 0, -90, 0, (4 << 16), bhvProspectorLock),
-		OBJECT(MODEL_PURPLE_SWITCH, -2579, 5185, 14688, 0, 0, 0, (17 << 24), bhvFloorSwitchHiddenObjects),
-		OBJECT(MODEL_RED_COIN, -1802, 4385, 11706, 0, -180, 0, (6 << 16), bhvRedCoin),
+		OBJECT(MODEL_PURPLE_SWITCH, -2579, 5185, 14688, 0, 0, 0, (20 << 24), bhvFloorSwitchHiddenObjects),
+		OBJECT(MODEL_RED_COIN, -1703, 4385, 11027, 0, -180, 0, (6 << 16), bhvRedCoin),
 		OBJECT(MODEL_ATTIC_GRATE, -1579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),
 		OBJECT(MODEL_ATTIC_GRATE, -2579, 5185, 8888, 0, -90, 0, 0x00000000, bhvAtticGrate),

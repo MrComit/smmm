@@ -1197,11 +1197,9 @@ them when they're fading\n\
 away. Instead, sneak up\n\
 behind them and punch."))
 
-DEFINE_DIALOG(DIALOG_103, 1, 4, 95, 200, _("\
-Upon four towers\n\
-one must alight...\n\
-Then at the peak\n\
-shall shine the light..."))
+DEFINE_DIALOG(DIALOG_103, 1, 2, 95, 200, _("\
+Need another lift?\n\
+Hop on."))
 
 DEFINE_DIALOG(DIALOG_104, 1, 5, 30, 200, _("\
 The shadowy star in front\n\

@@ -165,7 +165,7 @@ struct Painting *gRipplingPainting;
 s8 gDddPaintingStatus;
 
 struct Painting *sHmcPaintings[] = {
-    &cotmc_painting,
+    // &cotmc_painting,
     NULL,
 };
 
