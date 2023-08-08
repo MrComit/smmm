@@ -244,6 +244,8 @@ void bhv_mem_bath_floor_loop(void) {
             o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 120.0f, 10.0f);
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY + 2270.0f, o->oFloatF4);
             if (o->oPosY == o->oHomeY + 2270.0f) {
+                cur_obj_play_sound_2(SOUND_OBJ_WHOMP);
+                cur_obj_shake_screen(SHAKE_POS_SMALL);
                 o->oAction = 3;
                 o->oFloatF4 = 0.0f;
             }

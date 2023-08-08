@@ -1598,6 +1598,7 @@ void render_hud(void) {
 		// check if mario has starpiece tracker
 		if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_TRACKER_1 && !(save_file_get_options() & SAVE_OPTION_TRACKER)) {
 			if (CL_obj_find_nearest_object_with_behavior_room(gCurrentObject, bhvStarPiece, gMarioCurrentRoom)) {
+				if (gCurrLevelNum != LEVEL_SSL || (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MIND_ENTRY))
 				gHudDisplay.flags |= HUD_DISPLAY_FLAG_TRACKER;
 			} else {
 				gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_TRACKER;

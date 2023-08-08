@@ -776,6 +776,26 @@ void bhv_deathwarp_loop(void) {
             o->oPosY = 200.0f;
             o->oPosZ = -5671.0f;
         }
+    } else if (gCurrLevelNum == LEVEL_SSL) {
+        if (gMarioCurrentRoom == 3) {
+            if (m->pos[1] > 4900.0f && m->pos[1] < 5200.0f && m->pos[1] <= m->floorHeight) {
+                o->oPosX = -16800.0f;
+                o->oPosY = 5200.0f;
+                o->oPosZ = -13520.0f;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = (s16)o->oPosX;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)o->oPosY;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)o->oPosZ;
+            }
+        } else if (gMarioCurrentRoom == 12) {
+            if (gMarioObject->platform == NULL && m->pos[1] > 16400.0f && m->pos[1] <= m->floorHeight) {
+                o->oPosX = 19575.0f;
+                o->oPosY = 16750.0f;
+                o->oPosZ = 8278.0f;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = (s16)o->oPosX;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)o->oPosY;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)o->oPosZ;
+            }
+        }
     }
     o->oRoom = (gMarioPreviousRoom = gMarioCurrentRoom);
     vec3f_copy(sPreviousMarioPos, m->pos);

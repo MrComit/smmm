@@ -28,6 +28,10 @@
 #include "actors/common0.h"
 #include "actors/common0.h"
 #include "actors/common0.h"
+#include "actors/common0.h"
+#include "actors/common0.h"
+#include "actors/common0.h"
+#include "actors/common0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -221,6 +225,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PEEPA, 21426, 8158, 1940, 0, -90, 0, 0x00000000, bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, 21426, 7958, 1940, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, 21426, 7758, 1940, 0, -90, 0, (2 << 16), bhvFloorPeepa),
+		OBJECT(MODEL_SAVE_STATION, 19575, 16470, 6305, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_SPINNING_PLAT, 17860, 7608, -4973, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 17856, 7758, -999, 0, 0, 0, 0x00000000, bhvSpinningPlat),
 		OBJECT(MODEL_SPINNING_PLAT, 19637, 7758, 9, 0, 0, 0, 0x00000000, bhvSpinningPlat),
@@ -408,8 +413,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PENGUIN, -1579, 18699, 19963, 0, 180, 0, (1 << 16), bhvDreamPenguin),
 		OBJECT(MODEL_PENGUIN, -1508, 2812, 16267, 0, 180, 0, (2 << 16), bhvDreamPenguin),
 		OBJECT(MODEL_STAR_PIECE, -4213, 9105, 19265, 0, 0, 0, (0x16 << 24), bhvStarPiece),
-		OBJECT(MODEL_TOKEN, -2799, 18649, 20866, 0, 0, 0, (0x38 << 8), bhvToken),
-		OBJECT(MODEL_TOKEN, -922, 9055, 20449, 0, 90, 0, (0x3C << 8), bhvToken),
+		OBJECT(MODEL_TOKEN, -2799, 18649, 20866, 0, 0, 0, (1 << 16) | (0x38 << 8), bhvToken),
+		OBJECT(MODEL_TOKEN, -922, 9055, 20449, 0, 90, 0, (1 << 16) | (0x3C << 8), bhvToken),
 		OBJECT(MODEL_YOSHI, -2891, 13099, 15466, 0, 180, 0, 0x00000000, bhvDreamYoshi),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 13519, 8596, 17964, 0, 90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 13519, -1404, 17964, 0, 90, 0, 0x00000000, bhvDoor),
