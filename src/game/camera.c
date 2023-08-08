@@ -1483,6 +1483,10 @@ void fixed_cam_presets(struct Camera *c) {
         case 2:
             c->pos[1] = m->pos[1] + 200.0f;
             c->focus[1] = m->pos[1];
+
+            if (gCurrLevelNum == LEVEL_JRB && gMarioState->pos[1] < -1300.0f) {
+                c->comitCutscene = 0;
+            }
             break;
         case 3:
             vec3f_set(c->pos, -7807.0f, 3300.0f, -16078.0f);

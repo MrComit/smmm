@@ -185,7 +185,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_SHAKY_PLAT, 23773, 139, 3574, 0, 0, 0, 0x00000000, bhvShakyPlat),
 		OBJECT(MODEL_SHAKY_PLAT, 23773, 1935, 3574, 0, 0, 0, 0x00000000, bhvShakyPlat),
 		OBJECT(MODEL_TOKEN, 23234, 164, -1878, 90, 0, 0, (2 << 16) | (0x1E << 8), bhvToken),
-		OBJECT(MODEL_TOKEN, 19759, 2912, -1404, 0, 0, 0, (0 << 16) | (0x1F << 8), bhvToken),
+		OBJECT(MODEL_TOKEN, 19759, 2912, -1404, 0, 0, 0, (1 << 16) | (0x1F << 8), bhvToken),
 		OBJECT(MODEL_TOY_TOAD, 20985, -161, -6092, 0, 90, 0, (DIALOG_006 << 24), bhvToyToad),
 		OBJECT(MODEL_TOY_TOAD, 17623, -161, -11650, 0, 0, 0, (12 << 24) | (1 << 16), bhvToyToad),
 		OBJECT(MODEL_TOY_TOAD, 22711, -161, -1628, 0, -180, 0, (DIALOG_007 << 24), bhvToyToad),

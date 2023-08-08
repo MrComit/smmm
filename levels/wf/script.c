@@ -21,6 +21,11 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -187,7 +192,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_TOKEN, -3444, 1200, 2995, 0, 90, 0, 0x00010900, bhvToken),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 3956, 0, -2832, 0, -90, 0, 0x00040000, bhvSmallKeyDoor),
 		OBJECT(MODEL_TELEPORTER, 2307, -50, 5947, 0, -90, 0, (0x22 << 16) | (1 << 8), bhvFadingWarp),
-		OBJECT(MODEL_TELEPORTER, 519, 0, -4251, 0, -180, 0, 0x00230100, bhvFadingWarp),
+		OBJECT(MODEL_TELEPORTER, 519, 0, -4251, 0, -180, 0, 0x00230900, bhvFadingWarp),
 		OBJECT(MODEL_L2_LAVA, 1181, -175, 1039, 0, 0, 0, 0x00000000, bhvL2Lava),
 		OBJECT(MODEL_LEMON, 1820, -175, 172, 0, 23, 0, 0x01640000, bhvLemon),
 		OBJECT(MODEL_LEMON, 2812, -175, 860, 0, 0, 0, 0x01640000, bhvLemon),
@@ -337,8 +342,8 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_BOUNCY_BED, 12539, 350, -3152, -2, -44, 2, 0x00000000, bhvBouncyBed),
 		OBJECT(MODEL_BOUNCY_BED, 13335, 627, -2035, 0, 22, 0, 0x00000000, bhvBouncyBed),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 16056, 470, -2832, 0, -90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_TELEPORTER, 15506, 470, -3348, 0, 90, 0, (0x20 << 16) | (2 << 8), bhvFadingWarp),
-		OBJECT(MODEL_NONE, 4528, 200, -2802, 0, -90, 0, 0x00210000, bhvFadingWarp),
+		OBJECT(MODEL_TELEPORTER, 15506, 470, -3348, 0, 0, 0, (0x20 << 16) | (2 << 8), bhvFadingWarp),
+		OBJECT(MODEL_TELEPORTER, 4528, 0, -3602, 0, 0, 0, (0x21 << 16) | (2 << 8), bhvFadingWarp),
 		OBJECT(MODEL_PRESSURE_PLATE, 7886, 350, -4085, 0, 0, 0, 0x00000000, bhvServantsPlate),
 		OBJECT(MODEL_PRESSURE_PLATE, 9540, 350, -1609, 0, 0, 0, 0x00000000, bhvServantsPlate),
 		OBJECT(MODEL_PRESSURE_PLATE, 11470, 350, -1558, 0, 0, 0, 0x00000000, bhvServantsPlate),

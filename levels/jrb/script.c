@@ -90,7 +90,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_POOCHY, 1132, 3509, 1206, 0, -90, 0, 0x00000000, bhvPoochyBoss),
 		OBJECT(MODEL_SUNFLOWER, -6480, -488, 2215, 0, 0, 0, 0x00000000, bhvSunflower),
 		OBJECT(MODEL_SUNFLOWER, -1503, -488, -1749, 0, -60, 0, 0x00000000, bhvSunflower),
-		OBJECT(MODEL_SUNFLOWER, 3043, -539, 23, 0, 145, 0, 0x00000000, bhvSunflower),
+		OBJECT(MODEL_SUNFLOWER, 3043, -539, 23, 0, 145, 0, (1 << 16), bhvSunflower),
 		OBJECT(MODEL_BROKEN_KEY, -5840, -478, -9469, -90, 12, 0, 0x01080000, bhvBrokenKey),
 		OBJECT(MODEL_TELEPORTER, -5016, -488, -8898, 0, 0, 0, 0x00770500, bhvFadingWarp),
 		OBJECT(MODEL_NONE, -4159, -288, -126, 0, 59, 0, 0x00780000, bhvFadingWarp),

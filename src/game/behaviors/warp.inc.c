@@ -30,7 +30,9 @@ void bhv_warp_loop(void) {
 }
 
 extern s32 gRedCoinMissionActive;
-
+extern s16 gComitCutsceneTimer;
+extern Vec3f gComitCutscenePosVec;
+extern Vec3f gComitCutsceneFocVec;
 
 void fading_warp_active_check(s16 param) {
     struct Object *obj;
@@ -39,6 +41,20 @@ void fading_warp_active_check(s16 param) {
         case 1:
             if (save_file_get_keys(0) & (1 << 2)) {
                 val = TRUE;
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+                if (!(save_file_get_newflags(1) & SAVE_TOAD_FLAG_WARP_CUTSCENE)) {
+                    gCamera->comitCutscene = 0xFF;
+                    gComitCutsceneTimer = 15;
+                    vec3f_set(gComitCutscenePosVec, o->oPosX, o->oPosY + 700.0f, o->oPosZ - 2500.0f);
+                    vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
+                    // set_mario_npc_dialog(1);
+                    if (o->oPosY == o->oHomeY) {
+                        // set_mario_npc_dialog(0);
+                        save_file_set_newflags(SAVE_TOAD_FLAG_WARP_CUTSCENE, 1);
+                    }
+                }
+            } else {
+                o->oPosY = o->oHomeY + 1000.0f;
             }
             break;
         case 2:
@@ -85,6 +101,11 @@ void fading_warp_active_check(s16 param) {
             break;
         case 8:
             if (gRedCoinMissionActive) {
+                val = TRUE;
+            }
+            break;
+        case 9:
+            if (save_file_get_keys(0) & (1 << 2)) {
                 val = TRUE;
             }
             break;

@@ -27,7 +27,7 @@ static struct ObjectHitbox sPanHitbox = {
 
 void bhv_fridge_level_entrance_loop(void) {
     // if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_UNLOCKED_PLAYSET)) {
-    if (!(save_file_get_boos() & (1 << 2))) {
+    if (!(save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS1)) {
         cur_obj_become_intangible();
     } else {
         cur_obj_become_tangible();

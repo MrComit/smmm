@@ -782,4 +782,12 @@ void bhv_sunflower_loop(void) {
         case 2:
             break;
     }
+
+    if (o->oBehParams2ndByte) {
+        if (gMarioState->pos[1] < -600.0f && gMarioState->pos[1] > -1300.0f) {
+            gCamera->comitCutscene = 2;
+        } else if (gCamera->comitCutscene == 2) {
+            gCamera->comitCutscene = 0;
+        }
+    }
 }

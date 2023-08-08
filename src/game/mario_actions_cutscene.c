@@ -641,14 +641,17 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                     // skipSave = 1;
                 } else {
                     enable_time_stop();
-                    if (isKey == 4)
+                    if (isKey == 4) {
                         dialogID = DIALOG_015;
-                    else if (isKey == 5)
+                    } else if (isKey == 5) {
                         dialogID = DIALOG_077;
-                    else if (isKey == 0)
+                    } else if (isKey == 0) {
                         dialogID = DIALOG_013;
-                    else
+                    } else if (isKey == 3) {
+                        dialogID = DIALOG_101;
+                    } else {
                         dialogID = DIALOG_014;
+                    }
                     create_dialog_box_with_response(dialogID);
                     dialogID = 0;
                 }

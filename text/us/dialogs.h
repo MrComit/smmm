@@ -1187,16 +1187,16 @@ playset you came from by\n\
 jumping back into the fridge.\n\
 Till we meet again..."))
 
-DEFINE_DIALOG(DIALOG_101, 1, 3, 95, 200, _("\
-Ackk! Let...go...\n\
-You're...choking...me...\n\
-Cough...I've been framed!\n\
-This Cap? Oh, all right,\n\
-take it. It's a cool Cap,\n\
-but I'll give it back.\n\
-I think it looks better on\n\
-me than it does on you,\n\
-though! Eeeee! Kee keee!"))
+DEFINE_DIALOG(DIALOG_101, 1, 3, 30, 200, _("\
+You've collected a piece of\n\
+the Broken Key!\n\
+\n\
+Collect all 3 to put the key\n\
+back together and unlock\n\
+the door to the third floor!\n\
+Do you want to Save?\n\
+\n\
+//Yes////No"))
 
 DEFINE_DIALOG(DIALOG_102, 1, 5, 30, 200, _("\
 Pssst! The Boos are super\n\

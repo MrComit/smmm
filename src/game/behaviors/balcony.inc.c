@@ -113,7 +113,7 @@ void bhv_lightning_spinner_loop(void) {
 void bhv_lightning_loop(void) {
     struct MarioState *m = gMarioState;
     o->oInteractStatus = 0;
-    if (o->oTimer == 0 && count_room_objects_with_behavior(bhvBooCoinCage, o->oRoom) == 0) {
+    if (o->oTimer < 2 && count_room_objects_with_behavior(bhvBooCoinCage, o->oRoom) == 0) {
         o->oAction = 4;
         o->oOpacity = 0;
         cur_obj_disable();

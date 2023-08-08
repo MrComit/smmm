@@ -587,9 +587,16 @@ void bhv_env_flame_loop(void) {
 }
 
 void bhv_boocoin_cage_init(void) {
+    s32 kill = 0;
+    struct Object *obj;
     o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
     switch (o->oBehParams2ndByte) {
         case 0:
+            if (save_file_get_keys(0) & (1 << ((o->oBehParams >> 8) & 0xFF))) {
+                kill = 1;
+                break;
+            }
+
             o->oObj100 = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
             o->oObj100->oAction = 1;
             o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
@@ -598,6 +605,11 @@ void bhv_boocoin_cage_init(void) {
             o->oObj100->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             break;
         case 1:
+            if (save_file_get_currency_flags() & (1 << ((o->oBehParams >> 8) & 0xFF))) {
+                kill = 1;
+                break;
+            }
+
             o->oObj100 = spawn_object(o, MODEL_STAR_CURRENCY, bhvStar);
             o->oObj100->oAction = 1;
             o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
@@ -607,6 +619,11 @@ void bhv_boocoin_cage_init(void) {
             obj_scale(o, 1.8f);
             break;
         case 2:
+            if (save_file_get_star_piece() & (1 << ((o->oBehParams >> 8) & 0xFF))) {
+                kill = 1;
+                break;
+            }
+
             o->oObj100 = spawn_object(o, MODEL_STAR_PIECE, bhvStarPiece);
             o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             o->oObj100->oBehParams = o->oBehParams << 16;
@@ -614,6 +631,14 @@ void bhv_boocoin_cage_init(void) {
             o->oObj100->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
             break;
     }
+
+    if (kill) {
+        o->activeFlags = 0;
+        while ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvBooCoin, o->oRoom)) != NULL) {
+            obj->activeFlags = 0;
+        }
+    }
+
     obj_set_hitbox(o, &sBooCoinCageHitbox);
 }
 
@@ -741,6 +766,16 @@ void bhv_deathwarp_loop(void) {
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea = gCurrAreaIndex;
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle = angle;
+    } else if (gCurrLevelNum == LEVEL_CCM) {
+        if (m->pos[0] < 8500.0f && o->oPosX > 8500.0f) {
+            o->oPosX = 8500.0f;
+            o->oPosY = 400.0f;
+            o->oPosZ = 700.0f;
+        } else if (m->pos[0] > 12400.0f && o->oPosX <= 9000.0f) {
+            o->oPosX = 23998.0f;
+            o->oPosY = 200.0f;
+            o->oPosZ = -5671.0f;
+        }
     }
     o->oRoom = (gMarioPreviousRoom = gMarioCurrentRoom);
     vec3f_copy(sPreviousMarioPos, m->pos);
@@ -753,6 +788,10 @@ void bhv_broken_key_init(void) {
 
 void bhv_broken_key_loop(void) {
     if ((o->oBehParams >> 24) == 1) {
+        if (save_file_get_newflags(0) & (1 << 8)) {
+            o->activeFlags = 0;
+            return;
+        }
         cur_obj_scale(0.5f);
         obj_set_hitbox(o, &sSmallKeyHitbox);
         if (o->oInteractStatus & INT_STATUS_INTERACTED) {
