@@ -137,10 +137,12 @@ void cushion_friend_trophy_one(void) {
     }
 }
 
+s32 sCushionFriendMorningText = FALSE;
+
 void cushion_friend_morning_room(void) {
     switch (o->oAction) {
         case 0:
-            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MORNING_ROOM) {
+            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_MORNING_ROOM || sCushionFriendMorningText) {
                 o->oAction = 2;
                 break;
             }
@@ -153,6 +155,7 @@ void cushion_friend_morning_room(void) {
             if (CL_NPC_Dialog(DIALOG_040)) {
                 o->oAction = 2;
                 save_file_set_newflags(SAVE_TOAD_FLAG_MORNING_ROOM, 1);
+                sCushionFriendMorningText = TRUE;
             }
             break;
     }

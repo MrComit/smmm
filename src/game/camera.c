@@ -4309,6 +4309,7 @@ void init_camera(struct Camera *c) {
     c->nextYaw = gLakituState.yaw;
     s8DirModeBaseYaw = gMarioSpawnInfo->startAngle[1] + 0x8000;
     c->comitCutscene = 0;
+    c->comit2dcam = 0;
 }
 
 

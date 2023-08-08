@@ -271,6 +271,7 @@ void unload_area(void) {
         gGlobalMarioRoom = 0;
         if (gCamera != NULL) {
             gCamera->comitCutscene = 0;
+            gCamera->comit2dcam = 0;
         }
     }
 }
