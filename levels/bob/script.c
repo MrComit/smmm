@@ -28,6 +28,10 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -112,6 +116,7 @@ const LevelScript level_bob_entry[] = {
 		WARP_NODE(0x74, LEVEL_LLL, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x75, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x27, LEVEL_JRB, 0x01, 0x0C, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x3A, LEVEL_BBH, 0x03, 0x3A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 0, 150, 10940, 0, 0, 0, 0x000D0000, bhvFlyingWarp),
@@ -147,6 +152,7 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_GATE, -9876, 0, 3648, 0, -180, 0, 0x00020000, bhvL1Gate),
 		OBJECT(MODEL_L1_GATE, -9726, 2944, 12669, 0, -180, 0, 0x00030000, bhvL1Gate),
 		OBJECT(MODEL_L1_GATE, -3315, 0, 13808, 0, 90, 0, 0x00040000, bhvL1Gate),
+		OBJECT(MODEL_L1_GATE, 3395, 300, 13808, 0, 90, 0, 0x00050000, bhvL1Gate),
 		OBJECT(MODEL_LEVER, 1061, 0, 29142, 0, 0, 0, 0x00000000, bhvLever),
 		OBJECT(MODEL_PROSPECTOR_LOCK, 4005, 0, 7927, 0, 90, 0, 0x00000000, bhvProspectorLock),
 		OBJECT(MODEL_PROSPECTOR_LOCK, 3905, 0, 7927, 0, -90, 0, 0x00000000, bhvProspectorLock),
@@ -259,7 +265,8 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_BURNER, 2652, -9, 1480, 0, 0, 0, 0x00010000, bhvOvenBurner),
 		OBJECT(MODEL_L1_BARREL, 2993, 236, 8691, 0, 0, 0, 0x00010000, bhvL1Barrel),
 		OBJECT(MODEL_KITCHEN_FRIDGE, 676, 350, 7753, 0, 0, 0, 0x00000000, bhvFridgeDoor),
-		OBJECT(MODEL_NONE, 592, 283, 7973, 0, 0, 0, 0x00000000, bhvFridgeSpawner),
+		OBJECT(MODEL_BLUE_FLAME, 592, 283, 7973, 0, 0, 0, 0x00000000, bhvFridgeSpawner),
+		OBJECT(MODEL_NONE, 489, 248, 8036, 0, 0, 0, (0x3A << 16), bhvFridgeEntrance),
 		OBJECT(MODEL_L1_SHELF, 655, 733, 8452, 0, 0, 0, 0x00000000, bhvL1Shelf),
 		OBJECT(MODEL_NONE, 762, 150, 7973, 0, 90, 0, (0x33 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 1802, 121, 1575, 0, 0, 0, 0x00000000, bhvRedSparkles),

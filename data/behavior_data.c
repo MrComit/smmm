@@ -6514,11 +6514,18 @@ const BehaviorScript bhvFridgeDoor[] = {
 
 
 const BehaviorScript bhvFridgeSpawner[] = {
-    BEGIN(OBJ_LIST_SPAWNER),
+    BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_DISABLE_TO_ROOM_CLEAR | OBJ_FLAG_DISABLE_ON_ROOM_CLEAR | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    BILLBOARD(),
+    SCALE(/*Unused*/ 0, /*Field*/ 1350),
     SET_HOME(),
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
+    SET_INT(oIntangibleTimer, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_fridge_spawner_loop),
+        SET_INT(oInteractStatus, 0),
+        ANIMATE_TEXTURE(oAnimState, 2),
     END_LOOP(),
 };
 
@@ -12181,5 +12188,15 @@ const BehaviorScript bhvSaveStation[] = {
     CALL_NATIVE(bhv_friend_toad_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_save_station_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvFridgeEntrance[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_level_entrance_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fridge_level_entrance_loop),
     END_LOOP(),
 };

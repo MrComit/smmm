@@ -856,12 +856,14 @@ void bhv_mario_update(void) {
         if (gL6MusicCheck == TRUE && gMarioCurrentRoom == 2) {
             gL6MusicCheck = FALSE;
             // play_music(0, SEQUENCE_ARGS(4, SEQ_FLOOR_3), 0);
-            seq_player_play_sequence(0, SEQ_FLOOR_3, 0);
+            // seq_player_play_sequence(0, SEQ_FLOOR_3, 0);
+            set_background_music(0, SEQ_FLOOR_3, 0);
         }
 
         if (get_current_background_music() == SEQUENCE_ARGS(4, SEQ_MUSIC_ROOM) && gMarioCurrentRoom != 4) {
             stop_background_music(SEQUENCE_ARGS(4, SEQ_MUSIC_ROOM));
-            seq_player_play_sequence(0, SEQ_FLOOR_3, 0);
+            // seq_player_play_sequence(0, SEQ_FLOOR_3, 0);
+            set_background_music(0, SEQ_FLOOR_3, 0);
         }
     } else if (gCurrLevelNum == LEVEL_LLL && (get_current_background_music() & 0xFF) == SEQ_BASEMENT) {
         control_basement_music(gMarioCurrentRoom);

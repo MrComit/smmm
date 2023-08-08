@@ -1289,8 +1289,10 @@ void bhv_prospector_t_loop(void) {
                         //change dialog id
                         if (o->os16F4 == 2) {
                             o->oBehParams2ndByte = DIALOG_083;
-                        } else {
+                        } else if (o->os16F4 == 1) {
                             o->oBehParams2ndByte = DIALOG_082;
+                        } else {
+                            o->oBehParams2ndByte = DIALOG_099;
                         }
                         //set flag to give mario coins (after dialog)
                         o->os16F8 = 1;
@@ -1322,8 +1324,10 @@ void bhv_prospector_t_loop(void) {
                             o->os16F8 = 1;
                             if (o->os16F4 == 2) {
                                 o->oBehParams2ndByte = DIALOG_098;
-                            } else {
+                            } else if (o->os16F4 == 1) {
                                 o->oBehParams2ndByte = DIALOG_097;
+                            } else {
+                                o->oBehParams2ndByte = DIALOG_100;
                             }
                         } else {
                             gRedCoinMissionActive = 1;

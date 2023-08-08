@@ -1162,18 +1162,30 @@ feeling generous your final\n\
 reward will be 2000 coins.\n\
 Goodbye, Mario..."))
 
-// unused
-DEFINE_DIALOG(DIALOG_099, 1, 5, 95, 200, _("\
-Eh he he...\n\
-You're mine, now, hee hee!\n\
-I'll pass right through\n\
-this wall. Can you do\n\
-that? Heh, heh, heh!"))
 
-DEFINE_DIALOG(DIALOG_100, 1, 3, 95, 200, _("\
-Ukkiki...Wakkiki...kee kee!\n\
-Ha! I snagged it!\n\
-It's mine! Heeheeheeee!"))
+DEFINE_DIALOG(DIALOG_099, 1, 3, 30, 200, _("\
+Well, that's all 8 of 'em.\n\
+\n\
+\n\
+As promised, heres 1000 coins\n\
+for your trouble.\n\
+\n\
+You can return to that little\n\
+playset you came from by\n\
+jumping back into the fridge.\n\
+Till we meet again..."))
+
+DEFINE_DIALOG(DIALOG_100, 1, 3, 30, 200, _("\
+Oh, you've already collected\n\
+them? Excellent!\n\
+\n\
+As promised, heres 1000 coins\n\
+for your trouble.\n\
+\n\
+You can return to that little\n\
+playset you came from by\n\
+jumping back into the fridge.\n\
+Till we meet again..."))
 
 DEFINE_DIALOG(DIALOG_101, 1, 3, 95, 200, _("\
 Ackk! Let...go...\n\

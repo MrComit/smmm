@@ -1304,7 +1304,8 @@ void fixed_cam_cutscene_mainhall(struct Camera *c) {
     switch (gComitCutsceneAction) {
         case 0:
             if (gComitCutsceneTimer == 1) {
-                play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
+                // play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
+                set_background_music(0, SEQ_MANOR, 0);
             }
 
             if (gComitCutsceneTimer == 31) {

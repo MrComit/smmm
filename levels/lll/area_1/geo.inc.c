@@ -365,7 +365,7 @@ const GeoLayout lll_dl_106__Meat_Locker_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Meat_Locker_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Meat_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Meat_002_mesh_layer_1),
-		GEO_ASM(0x25, geo_set_red_painting),
+		GEO_ASM(0x2E, geo_set_red_painting),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Painting_002_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

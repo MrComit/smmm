@@ -137,6 +137,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_POWER_DOOR, 1429, 0, 5963, 0, 0, 0, (1 << 16), bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 1429, 0, -5187, 0, 0, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_SAVE_STATION, -79, 0, 6197, 0, 0, 0, 0x00000000, bhvSaveStation),
+		OBJECT(MODEL_SAVE_STATION, -700, -3520, -7643, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_BASEMENT_DRYER, 7949, 0, 13525, 0, -180, 0, (1 << 16), bhvBasementDryer),
 		OBJECT(MODEL_BASEMENT_DRYER, 13126, 1131, 11520, 0, -180, 0, (3 << 16), bhvBasementDryer),
 		OBJECT(MODEL_BASEMENT_DRYER, 9751, 0, 4244, 0, 90, 0, (2 << 16), bhvBasementDryer),

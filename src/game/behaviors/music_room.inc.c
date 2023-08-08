@@ -113,9 +113,9 @@ void bhv_music_chase_init(void) {
 void bhv_music_chase_loop(void) {
     switch (o->oAction) {
         case 0:
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 210, 6);
+            o->oOpacity = approach_s16_symmetric(o->oOpacity, 180, 6);
             o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 10.0f);
-            if (o->oPosY == o->oHomeY && o->oOpacity == 210) {
+            if (o->oPosY == o->oHomeY && o->oOpacity == 180) {
                 o->oAction = 1;
             }
             break;

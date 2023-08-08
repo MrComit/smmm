@@ -25,6 +25,16 @@ static struct ObjectHitbox sPanHitbox = {
 };
 
 
+void bhv_fridge_level_entrance_loop(void) {
+    // if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_UNLOCKED_PLAYSET)) {
+    if (!(save_file_get_boos() & (1 << 2))) {
+        cur_obj_become_intangible();
+    } else {
+        cur_obj_become_tangible();
+    }
+}
+
+
 
 void bhv_burner_init(void) {
     if (o->oBehParams2ndByte == 1) {
@@ -201,6 +211,10 @@ void bhv_l1_shelf_loop(void) {
 void bhv_kitchen_door_loop(void) {
     switch (o->oAction) {
         case 0:
+            if (save_file_get_boos() & (1 << 2)) {
+                o->oAction = 2;
+                o->oFaceAngleYaw = 0xA000;
+            }
             if (o->oDistanceToMario < 800.0f) {
                 o->oAction = 1;
             }

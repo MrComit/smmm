@@ -325,7 +325,7 @@ void bhv_blocking_chair_init(void) {
 
 void bhv_blocking_chair_loop(void) {
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvBlockedDoor);
-    if (obj != NULL)
+    if (obj != NULL && o->activeFlags)
         obj->oF4 = 1;
     switch (o->oAction) {
         case 0:

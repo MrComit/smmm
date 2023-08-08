@@ -1259,6 +1259,7 @@ void bhv_ice_cube_cracked_init(void);
 void bhv_2d_red_init(void);
 void bhv_2d_red_loop(void);
 void bhv_save_station_loop(void);
+void bhv_fridge_level_entrance_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"
