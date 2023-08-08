@@ -653,6 +653,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                     dialogID = 0;
                 }
                 m->actionState = 1;
+                m->healCounter = 31;
                 break;
         }
     } else if (m->actionState == 1 && (gDialogResponse != DIALOG_RESPONSE_NONE 

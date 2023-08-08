@@ -255,6 +255,7 @@ void bhv_toy_mole_init(void) {
     o->oFaceAngleYaw = random_u16();
     if (o->oBehParams2ndByte == 3) {
         o->oObj100 = spawn_object(o, MODEL_STAR_PIECE, bhvStarPiece);
+        o->oObj100->parentObj = o;
         o->oObj100->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         o->oObj100->oBehParams = 0x10 << 24;
         o->oObj100->oBehParams2ndByte = 0;
@@ -298,11 +299,21 @@ void bhv_toy_mole_loop(void) {
 s32 gPoolFloorUp = 0;
 
 void bhv_pool_floor_init(void) {
+    struct Object *obj;
     o->oOpacity = 255;
     gPoolFloorUp = 0;
     o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoolCue);
     if (o->oObjF4 == NULL) {
         o->oAction = 3;
+        gPoolFloorUp = 1;
+        obj = cur_obj_nearest_object_with_behavior(bhvToyMole);
+        if (obj != NULL) {
+            obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+        }
+        obj = cur_obj_nearest_object_with_behavior(bhvMoleCage);
+        if (obj != NULL) {
+            obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+        }
     }
 }
 
@@ -313,6 +324,24 @@ void bhv_pool_floor_loop(void) {
     }
     switch (o->oAction) {
         case 0:
+            if (o->oTimer < 2) {
+                o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoolCue);
+                if (o->oObjF4 == NULL) {
+                    o->oAction = 3;
+                    gPoolFloorUp = 1;
+
+                    obj = cur_obj_nearest_object_with_behavior(bhvToyMole);
+                    if (obj != NULL) {
+                        obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+                    }
+                    obj = cur_obj_nearest_object_with_behavior(bhvMoleCage);
+                    if (obj != NULL) {
+                        obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
+                    }
+
+                    break;
+                }
+            }
             if (o->oObjF4->os16FA > 3) {
                 o->oAction = 1;
             }

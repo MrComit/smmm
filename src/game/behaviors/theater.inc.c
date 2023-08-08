@@ -367,7 +367,7 @@ void bhv_theater_screen_loop(void) {
         case 2:
             if (o->os16112 < 3 && o->os16FC == 0) {
                 if (o->oTimer < 20) {
-                    print_text(45, 208, "KILL THE ENEMIES", 1);
+                    print_text(45, 192, "KILL THE ENEMIES", 1);
                 } else if (o->oTimer > 30) {
                     o->os16112++;
                     o->oTimer = 0;

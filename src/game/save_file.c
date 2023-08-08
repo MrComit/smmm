@@ -702,6 +702,9 @@ void save_file_set_rooms(u32 room) {
         room -= 32;
         index++;
     }
+    if (index > 2) {
+        return;
+    }
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].roomsCleared[index] |= 1 << room;
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;

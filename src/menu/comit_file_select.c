@@ -830,6 +830,11 @@ void print_CF_strings(void) {
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
     }
 
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, sCTextBaseAlpha);
+    print_generic_string(220 - 1, 30 - 1, textMadeBy);
+    print_generic_string(276 - 1, 16 - 1, text2023);
+
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
 
     print_generic_string(220, 30, textMadeBy);
     print_generic_string(276, 16, text2023);

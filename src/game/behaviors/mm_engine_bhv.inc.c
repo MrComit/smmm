@@ -953,6 +953,13 @@ void bhv_star_piece_loop(void) {
             } else {
                 cur_obj_unhide();
             }
+        } else if (pieceId == 0x10) {
+            if (o->parentObj == o || o->parentObj->activeFlags == 0) {
+                cur_obj_become_tangible();
+                o->parentObj = o;
+            } else {
+                cur_obj_become_intangible();
+            }
         }
         o->os16F8 += 0x300;
         o->oGraphYOffset = 20.0f + (sins(o->os16F8) * 20.0f);

@@ -15,6 +15,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -159,7 +161,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2579, 5185, 5663, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -7304, 5185, 11348, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 2146, 5185, 11348, 0, 90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_TELEPORTER, -7681, 5185, 11347, 0, 90, 0, (0x27 << 16), bhvFadingWarp),
+		OBJECT(MODEL_TELEPORTER, -7761, 5185, 11347, 0, 90, 0, (0x27 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -7681, 150, 11347, 0, -90, 0, (0x28 << 16), bhvFadingWarp),
 		OBJECT(MODEL_HEART, -2181, 2235, 3663, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_PURPLE_SWITCH, 697, 100, 7489, 0, 90, 0, (18 << 24), bhvFloorSwitchHiddenObjects),
