@@ -542,7 +542,7 @@ s32 mario_update_manager_upgrade_action(struct MarioState *m, s32 dialogId) {
 
 void mario_update_manager_upgrades(struct MarioState *m) {
     struct Object *obj;
-    s32 boos = CL_count_bits(save_file_get_boos());
+    s32 boos = CL_count_bits(save_file_get_boos() & 0xFFFFF);
     s32 flags = save_file_get_newflags(1);
     switch (boos) {
         case 5:
