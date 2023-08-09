@@ -151,7 +151,7 @@ void bhv_observatory_bomb_loop(void) {
     o->oF8 += 0x800;
     // o->oFaceAngleRoll = 0x600 * sins(o->oF8);
     o->oFaceAnglePitch += 0x600;
-    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 1.2f);
+    o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 20.0f, 0.85f);
     o->oPosY -= o->oFloatF4;
     if (o->oObj100 != NULL && o->oObjFC != NULL) {
         o->oObj100->oPosY = o->oObjFC->oPosY + 50.0f;
@@ -205,24 +205,24 @@ void observatory_spawn_bombs(void) {
 void update_observatory_time(void) {
     if (o->oTimer < 500) {
         o->os16FE = 0x80;
-        o->os16100 = 80;
-        o->os16102 = 20;
-        o->os16104 = 40;
+        o->os16100 = 90;
+        o->os16102 = 38;
+        o->os16104 = 50;
     } else if (o->oTimer < 1300) {
         o->os16FE = 0xA0;
-        o->os16100 = 75;
-        o->os16102 = 18;
-        o->os16104 = 36;
+        o->os16100 = 85;
+        o->os16102 = 30;
+        o->os16104 = 48;
     } else if (o->oTimer < 2000) {
         o->os16FE = 0x100;
-        o->os16100 = 67;
-        o->os16102 = 14;
-        o->os16104 = 32;
+        o->os16100 = 80;
+        o->os16102 = 24;
+        o->os16104 = 42;
     } else {
         o->os16FE = 0x180;
-        o->os16100 = 58;
-        o->os16102 = 10;
-        o->os16104 = 28;
+        o->os16100 = 73;
+        o->os16102 = 18;
+        o->os16104 = 36;
     }
 }
 
