@@ -14,27 +14,13 @@
 #include "actors/common1.h"
 #include "actors/common0.h"
 #include "actors/common0.h"
+#include "actors/group15.h"
 #include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
-#include "actors/common0.h"
+#include "actors/group15.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
+#include "actors/group15.h"
 /* Fast64 end persistent block [includes] */
 
 #include "make_const_nonconst.h"
@@ -105,6 +91,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_MAGIC_CARPET, magic_carpet_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TOAD_CAGE, toad_cage_geo), 
 	LOAD_MODEL_FROM_DL(MODEL_CONSOLE_OBS_BOMB, bobomb_seg8_dl_08022D08, LAYER_ALPHA), 
+	LOAD_MODEL_FROM_DL(MODEL_CONSOLE_MR_I, mr_i_eyeball_seg6_dl_06002080, LAYER_ALPHA), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

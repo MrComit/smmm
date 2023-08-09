@@ -290,12 +290,19 @@ void mr_i_act_0(void) {
 #endif
     cur_obj_scale(o->oBehParams2ndByte + 1);
 
+    if (gIsConsole) {
+        cur_obj_hide();
+    }
+
     if (o->oTimer == 0) {
         cur_obj_set_pos_to_home();
     }
 
     if (o->oDistanceToMario < 7000.0f) { // was 1500.0f
         o->oAction = 1;
+        if (gIsConsole) {
+            cur_obj_unhide();
+        }
     }
 }
 
@@ -317,6 +324,12 @@ struct ObjectHitbox sMrIHitbox = {
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
 };
+
+void bhv_mr_i_init(void) {
+    if (gIsConsole) {
+        cur_obj_set_model(MODEL_CONSOLE_MR_I);
+    }
+}
 
 void bhv_mr_i_loop(void) {
     obj_set_hitbox(o, &sMrIHitbox);

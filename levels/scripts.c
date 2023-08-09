@@ -283,7 +283,7 @@ const LevelScript script_func_global_6[] = {
 const LevelScript script_func_global_7[] = {
     LOAD_MODEL_FROM_DL( MODEL_DL_MONTY_MOLE_HOLE,      monty_mole_hole_seg5_dl_05000840, LAYER_TRANSPARENT_DECAL),
     LOAD_MODEL_FROM_GEO(MODEL_MONTY_MOLE,              monty_mole_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_UKIKI,                   ukiki_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_UKIKI,                   ukiki_geo),
     LOAD_MODEL_FROM_GEO(MODEL_FWOOSH,                  fwoosh_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SWOOP,                   swoop_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BULLY,                   bully_geo),
@@ -309,9 +309,9 @@ const LevelScript script_func_global_9[] = {
 const LevelScript script_func_global_10[] = {
     //LOAD_MODEL_FROM_GEO(MODEL_BOO,                     boo_geo),
     LOAD_MODEL_FROM_GEO(MODEL_PEEPA, peepa_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_BETA_BOO_KEY,               small_key_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_HAUNTED_CHAIR,           haunted_chair_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_MAD_PIANO,               mad_piano_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_BETA_BOO_KEY,               small_key_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_HAUNTED_CHAIR,           haunted_chair_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_MAD_PIANO,               mad_piano_geo),
     // LOAD_MODEL_FROM_GEO(MODEL_BOOKEND_PART,            bookend_part_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOOKEND,                 bookend_geo),
     //LOAD_MODEL_FROM_GEO(MODEL_HAUNTED_CAGE,            haunted_cage_geo),
@@ -378,9 +378,9 @@ const LevelScript script_func_global_16[] = {
     LOAD_MODEL_FROM_GEO(MODEL_MR_I_IRIS,               mr_i_iris_geo),
     LOAD_MODEL_FROM_GEO(MODEL_MR_I,                    mr_i_geo),
 
-    LOAD_MODEL_FROM_GEO(MODEL_BOO_CASTLE,              boo_castle_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_LAKITU,                  lakitu_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_TOAD,                    toad_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_BOO_CASTLE,              boo_castle_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_LAKITU,                  lakitu_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_TOAD,                    toad_geo),
     RETURN(),
 };
 
@@ -396,7 +396,7 @@ const LevelScript script_func_global_18[] = {
     LOAD_MODEL_FROM_GEO(MODEL_SCUTTLEBUG,              scuttlebug_geo),
     // LOAD_MODEL_FROM_GEO(MODEL_MR_I_IRIS,               mr_i_iris_geo),
     // LOAD_MODEL_FROM_GEO(MODEL_MR_I,                    mr_i_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_DORRIE,                  dorrie_geo),
+    // LOAD_MODEL_FROM_GEO(MODEL_DORRIE,                  dorrie_geo),
     //LOAD_MODEL_FROM_GEO(MODEL_SNUFIT,                  snufit_geo),
     RETURN(),
 };

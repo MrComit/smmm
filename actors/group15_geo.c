@@ -7,9 +7,9 @@
 #include "common1.h"
 #include "group15.h"
 
-#include "lakitu_cameraman/geo.inc.c"
-#include "toad/geo.inc.c"
+// #include "lakitu_cameraman/geo.inc.c"
+// #include "toad/geo.inc.c"
 #include "mips/geo.inc.c"
-#include "boo_castle/geo.inc.c"
+// #include "boo_castle/geo.inc.c"
 #include "mr_i_eyeball/geo.inc.c"
 #include "mr_i_iris/geo.inc.c"
