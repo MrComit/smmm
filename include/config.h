@@ -65,8 +65,8 @@
 #define ALL_SURFACES_HAVE_FORCE
 
 //puppyprint, thx to fazana
-#define PUPPYPRINT
-#define PUPPYPRINT_DEBUG 1
+// #define PUPPYPRINT
+// #define PUPPYPRINT_DEBUG 1
 
 
 #endif // CONFIG_H
