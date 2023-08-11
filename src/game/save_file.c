@@ -549,6 +549,9 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse) 
 
 
 void save_file_set_newflags(u32 flags, u8 index) {
+    if (flags > 31) {
+        return;
+    } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].newFlags[index] |= flags;
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
@@ -597,6 +600,9 @@ u32 save_file_get_boos(void) {
 }
 
 void save_file_set_boos(u32 boo) {
+    if (boo > 31) {
+        return;
+    } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].boosCaptured |= 1 << boo;
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
@@ -611,6 +617,9 @@ u32 save_file_get_golden_goombas(void) {
 }
 
 void save_file_set_golden_goombas(u32 goomba) {
+    if (goomba > 15) {
+        return;
+    } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].goldenGoombas |= 1 << goomba;
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
@@ -653,6 +662,9 @@ u32 save_file_get_star_piece(void) {
 }
 
 void save_file_set_star_piece(u32 piece) {
+    if (piece > 31) {
+        return;
+    } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].starPieces |= 1 << piece;
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
@@ -668,6 +680,9 @@ u32 save_file_get_challenges(u8 index) {
 }
 
 void save_file_set_challenges(u32 challenge) {
+    if (challenge > 63) {
+        return;
+    } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].miscChallenges[challenge / 32] |= 1 << (challenge % 32);
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
@@ -683,6 +698,9 @@ u32 save_file_get_keys(u32 page) {
 }
 
 void save_file_set_keys(u32 key, u32 page) {
+    if (key > 15 || page > 1) {
+        return;
+    } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].keys[page] |= 1 << key;
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
     gSaveFileModified = TRUE;
@@ -764,6 +782,9 @@ u32 save_file_get_currency_flags(void) {
 }
 
 void save_file_set_currency_flags(u32 flag) {
+    if (flag > 31) {
+        return;
+    } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].currencyStars |= 1 << flag;
 
     // gSaveBuffer.files[gCurrSaveFileNum - 1][0].flags |= SAVE_FLAG_FILE_EXISTS;
