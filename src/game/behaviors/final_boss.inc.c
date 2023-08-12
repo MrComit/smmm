@@ -1817,10 +1817,12 @@ void controller_act_death(void) {
     o->os16110 = approach_s16_symmetric(o->os16110, 0x3000, o->os16112);
     o->oFaceAngleYaw += o->os16110;
 
-    if (o->oObj108 != NULL && o->oObj108->oObjF4 != NULL) {
-        o->oObj108->oObjF4->activeFlags = 0;
+    if (o->oObj108 != NULL) {
+        if (o->oObj108->oObjF4 != NULL) {
+            o->oObj108->oObjF4->activeFlags = 0;
+            o->oObj108->oObjF4 = NULL;
+        }
         o->oObj108->activeFlags = 0;
-        o->oObj108->oObjF4 = NULL;
         o->oObj108 = NULL;
         // o->oObj108->oObjF4->oAction = 10;
         // o->oObj108->oObjF4->o100 = 10;

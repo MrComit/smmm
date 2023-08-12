@@ -63,7 +63,7 @@ s32 main_menu_get_which_cutscene(void) {
     s32 max = max_3(maxA, maxB, maxC);
     u16 seed;
     if (main_menu_check_l7(0) || main_menu_check_l7(1) || main_menu_check_l7(2)) {
-        max += 1;
+        max = 5;
     }
 
     //todo

@@ -1431,12 +1431,12 @@ void fixed_cam_cutscene_ending(struct Camera *c) {
             // }
             break;
         case 2:
-            c->pos[0] = 0;
+            c->pos[0] = 30;
             c->pos[1] = -24500.0f;
-            c->pos[2] = 0;
-            c->focus[0] = 0;
+            c->pos[2] = 20;
+            c->focus[0] = 060;
             c->focus[1] = -28000.0f;
-            c->focus[2] = -1.0f;
+            c->focus[2] = -1500.0f;
             // if (gComitCutsceneTimer > 10) {
             //     play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0x10, 0x00, 0x00, 0x00);
             //     set_mario_npc_dialog(0);
