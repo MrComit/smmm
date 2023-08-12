@@ -1056,6 +1056,9 @@ void basic_npc_loop(void) {
 
 
 void toad_friend_l1_loop(void) {
+    if (save_file_get_boos() & (1 << 0xA)) {
+        o->activeFlags = 0;
+    }
     if (o->oF4) {
         switch (o->oAction) {
             case 0:

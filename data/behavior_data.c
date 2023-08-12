@@ -4693,7 +4693,8 @@ const BehaviorScript bhvVanishCap[] = {
 const BehaviorScript bhvStar[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
-    SET_INT(oInteractionSubtype, INT_SUBTYPE_CURRENCY),
+    // SET_INT(oInteractType, INTERACT_STAR_OR_KEY),
+    SET_INTERACT_SUBTYPE(INT_SUBTYPE_CURRENCY),
     //SCALE(0, 40),
     CALL_NATIVE(bhv_collect_star_init),
     BEGIN_LOOP(),
@@ -11842,7 +11843,7 @@ const BehaviorScript bhvJukeBox[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
     LOAD_COLLISION_DATA(jukebox_collision),
     SET_INTERACT_TYPE(INTERACT_TEXT),
-    SET_INT(oInteractionSubtype, INT_SUBTYPE_JUKEBOX),
+    SET_INTERACT_SUBTYPE(INT_SUBTYPE_JUKEBOX),
     DROP_TO_FLOOR(),
     SET_HITBOX(/*Radius*/ 300, /*Height*/ 350),
     SET_INT(oWoodenPostTotalMarioAngle, 0),

@@ -545,8 +545,8 @@ thought just adding a couple of\n\
 neutrons and protons would've\n\
 been so easy! \n\
 Now that I have these elements,\n\
-I can begin to move forward with\n\
-my first big experiment."))
+I can begin to move forward\n\
+with my first big experiment."))
 
 DEFINE_DIALOG(DIALOG_051, 1, 6, 30, 200, _("\
 Journal Entry 04\n\

@@ -66,6 +66,7 @@ void bhv_remote_loop(void) {
             }
             break;
     }
+    o->oInteractStatus = 0;
 }
 
 void tv_spawn_peepa(s32 count) {

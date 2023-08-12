@@ -37,7 +37,7 @@ struct SaveFile
     u32 miscChallenges[2];
     u16 keys[2];
     u32 boosCaptured;
-    u32 currencyStars: 20;
+    u32 currencyStars;
     u32 starPieces;
     s32 coinCount;
     u16 goldenGoombas;

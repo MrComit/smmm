@@ -535,7 +535,7 @@ extern Gfx bbh_dl_Z97Platform_mesh_layer_1_tri_0[];
 extern Vtx bbh_dl_Z97Platform_mesh_layer_1_vtx_1[18];
 extern Gfx bbh_dl_Z97Platform_mesh_layer_1_tri_1[];
 extern Vtx bbh_dl_Z98Platform_mesh_layer_1_vtx_cull[8];
-extern Vtx bbh_dl_Z98Platform_mesh_layer_1_vtx_0[11];
+extern Vtx bbh_dl_Z98Platform_mesh_layer_1_vtx_0[7];
 extern Gfx bbh_dl_Z98Platform_mesh_layer_1_tri_0[];
 extern Vtx bbh_dl_Z98Platform_mesh_layer_1_vtx_1[4];
 extern Gfx bbh_dl_Z98Platform_mesh_layer_1_tri_1[];

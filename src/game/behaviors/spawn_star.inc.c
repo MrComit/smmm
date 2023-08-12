@@ -138,6 +138,7 @@ struct Object *spawn_star(struct Object *sp30, f32 sp34, f32 sp38, f32 sp3C) {
 void spawn_default_star(f32 sp20, f32 sp24, f32 sp28) {
     struct Object *sp1C = spawn_star(sp1C, sp20, sp24, sp28);
     sp1C->oBehParams2ndByte = 0;
+    sp1C->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     if (o->oFlags & OBJ_FLAG_MULTIROOM) {
         sp1C->oRoom = o->oRoom;
         sp1C->oRoom2 = o->oRoom2;
