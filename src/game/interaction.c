@@ -859,6 +859,7 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
         //    return set_mario_action(m, ACT_JUMBO_STAR_CUTSCENE, 0);
         //}
 
+        m->forwardVel = 0.0f;
         return set_mario_action(m, starGrabAction, isKey | (o->oAnimState << 16));
     }
 

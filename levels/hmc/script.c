@@ -17,6 +17,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -236,7 +238,7 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_FAN_BLADES, -860, 888, -6295, 0, 0, 0, 0x00000000, bhvFanBlades),
 		OBJECT(MODEL_GLOBAL_GATE, -2114, 0, -6496, 0, 90, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2154, 0, -6496, 0, -90, 0, 0x00000000, bhvDoor),
-		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 250, -11146, 0, -90, 0, 0x00000000, bhvDoor),
+		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 250, -11146, 0, -90, 0, (1 << 16), bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -4754, 0, -8496, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -3454, 0, -7346, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_FOREROOM_OBJECT, -2024, 0, -5920, 0, 0, 0, (1 << 16), bhvForeroomObject),

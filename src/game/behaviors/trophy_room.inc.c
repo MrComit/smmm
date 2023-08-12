@@ -357,6 +357,9 @@ void bhv_foreroom_object_loop(void) {
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x10);
             if (o->oOpacity < 0x11) {
                 o->activeFlags = 0;
+                if (o->oBehParams2ndByte != 5 && count_room_objects_with_flag(OBJ_FLAG_DISABLE_TO_ROOM_CLEAR, gMarioCurrentRoom) <= 1) {
+                    play_puzzle_jingle();
+                }
                 if (gMarioObject->platform == o) {
                     set_mario_action(gMarioState, ACT_FREEFALL, 0);
                 }

@@ -55,12 +55,14 @@ void play_warp_door_open_noise(void) {
         cur_obj_play_sound_2(sDoorCloseSounds[sp1C]);
     }
 }
-
+extern s8 sLevelRoomOffsets[];
 void bhv_door_loop(void) {
     struct Object *obj;
     s32 sp1C = 0;
     
-    if (o->oDistanceToMario < 1500.0f && o->oInteractType != INTERACT_WARP_DOOR) {
+    if (gCurrLevelNum == LEVEL_HMC && o->oRoom == 9 && o->oBehParams2ndByte == 1 && save_file_get_rooms(1) & (1 << 25)) {
+        o->oInteractType = INTERACT_IGLOO_BARRIER;
+    } else if (o->oDistanceToMario < 1500.0f && o->oInteractType != INTERACT_WARP_DOOR) {
         if ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvProspectorLock, gMarioCurrentRoom)) != NULL 
             && dist_between_objects(o, obj) < 600.0f) {
                 o->oInteractType = INTERACT_IGLOO_BARRIER;
