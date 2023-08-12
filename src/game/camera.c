@@ -4404,6 +4404,10 @@ void create_camera(struct GraphNodeCamera *gc, struct AllocOnlyPool *pool) {
     c->areaCenY = gc->focus[1];
     c->areaCenZ = gc->focus[2];
     c->yaw = 0;
+
+    c->comitCutscene = 0;
+    c->comit2dcam = 0;
+
     vec3f_copy(c->pos, gc->pos);
     vec3f_copy(c->focus, gc->focus);
 }

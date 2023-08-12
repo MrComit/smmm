@@ -479,7 +479,7 @@ void print_file_chapter(s8 file, s16 x, s16 y) {
     unsigned char chapterNum[2];
     unsigned char textChapter[] = { TEXT_CHAPTER };
     unsigned char textComplete[] = { TEXT_COMPLETE };
-    if (save_file_get_final_rank()) {
+    if (gSaveBuffer.files[file][0].finalRank) {
         print_generic_string(x, y, textComplete);
     } else {
         // Print "[coin] x"
@@ -548,7 +548,7 @@ void print_file_coin_count(s8 file, s16 x, s16 y) {
     // int_to_str(gSaveBuffer.files[file][0].coinCount, coinScoreText);
     // print_generic_string(x + 38, y, coinScoreText);
     s8 rankOffset = 0;
-    s8 rank = save_file_get_final_rank();
+    s8 rank = gSaveBuffer.files[file][0].finalRank;
     s32 coins = gSaveBuffer.files[file][0].coinCount;
     s32 subtract = (coins > 9999 || rank) ? 14 : 0;
 
@@ -574,9 +574,9 @@ void print_file_coin_count(s8 file, s16 x, s16 y) {
 //1 star for all reds stars
 //2 stars for S rank (1 for A)
 
-s32 get_save_file_stars(void) {
+s32 get_save_file_stars(s32 file) {
     s32 stars = 0;
-    s32 rank = save_file_get_final_rank();
+    s32 rank = gSaveBuffer.files[file][0].finalRank;
     if (rank >= SAVE_RANK_A) {
         stars++;
     }
@@ -584,15 +584,15 @@ s32 get_save_file_stars(void) {
         stars++;
     }
     // if (CL_count_bits(0b1111111111111111111111111) >= 25) {
-    if (CL_count_bits(save_file_get_boos()) >= 25) {
+    if (CL_count_bits(gSaveBuffer.files[file][0].boosCaptured) >= 25) {
         stars++;
     }
 
-    if (CL_count_bits(save_file_get_star_piece()) >= 25) {
+    if (CL_count_bits(gSaveBuffer.files[file][0].starPieces & 0x1FFFFFF) >= 25) {
         stars++;
     }
 
-    if (CL_count_bits(save_file_get_reds_star()) >= 3) {
+    if (CL_count_bits((gSaveBuffer.files[file][0].starPieces & 0xE0000000) >> 29) >= 3) {
         stars++;
     }
 
@@ -601,7 +601,7 @@ s32 get_save_file_stars(void) {
 
 void print_file_completion_stars(s8 file, s16 x, s16 y) {
     s32 i;
-    s32 stars = get_save_file_stars();
+    s32 stars = get_save_file_stars(file);
     s32 xAdd = 68;
 
     for (i = 0; i < stars; i++, xAdd -= 14) {
@@ -653,7 +653,7 @@ void print_save_info(s32 file) {
             break;
     }
     print_file_coin_count(file, xBase + 30, yBase);
-    if (save_file_get_final_rank()) {
+    if (gSaveBuffer.files[file][0].finalRank) {
         print_file_completion_stars(file, xBase + 30, yBase);
     }
     // gSPDisplayList(gDisplayListHead++, dl_menu_ia8_text_end);

@@ -832,6 +832,7 @@ void bhv_mario_update(void) {
         // save_file_set_newflags(SAVE_TOAD_FLAG_MIND_ENTRY, 1);
         gCamera->comitCutscene = 25;
         set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 8);
+        mario_set_forward_vel(gMarioState, 0.0f);
         if (gMindTitleTimer < 0) {
             gMindTitleTimer--;
             if (gMindTitleTimer == -14) {

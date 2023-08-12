@@ -135,10 +135,11 @@ void bhv_save_station_loop(void) {
         case 0:
             if (o->oInteractStatus == INT_STATUS_INTERACTED && gCamera->comitCutscene == 0) {
                 o->oAction = 1;
-                set_mario_npc_dialog(1);
+                // set_mario_npc_dialog(1);
             }
             break;
         case 1:
+            // print_text_fmt_int(80, 80, "%d", 0, 0);
             if (gRedCoinMissionActive) {
                 dialogId = DIALOG_096;
             } else {
@@ -1122,8 +1123,8 @@ void toad_friend_portal_loop(void) {
                     o->oFC = 1;
                 }
             } else {
-                if (o->oDistanceToMario > 800.0f) {
-                    o->oFC == 0;
+                if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                    o->oAction = 1;
                 }
             }
             break;
