@@ -60,7 +60,8 @@ void bhv_door_loop(void) {
     struct Object *obj;
     s32 sp1C = 0;
     
-    if (gCurrLevelNum == LEVEL_HMC && o->oRoom == 9 && o->oBehParams2ndByte == 1 && save_file_get_rooms(1) & (1 << 25)) {
+    if (gCurrLevelNum == LEVEL_HMC && o->oRoom == 9 && (o->oBehParams2ndByte == 2 ||
+        (o->oBehParams2ndByte == 1 && save_file_get_rooms(1) & (1 << 25)))) {
         o->oInteractType = INTERACT_IGLOO_BARRIER;
     } else if (o->oDistanceToMario < 1500.0f && o->oInteractType != INTERACT_WARP_DOOR) {
         if ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvProspectorLock, gMarioCurrentRoom)) != NULL 

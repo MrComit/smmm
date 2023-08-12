@@ -194,7 +194,7 @@ void spawn_theater_arena(s16 arena) {
         obj->activeFlags = 0;
     }
 
-    if ((obj = cur_obj_nearest_object_with_behavior(bhvToken)) != NULL) {
+    if ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvToken, o->oRoom)) != NULL) {
         obj->activeFlags = 0;
     }
 
@@ -384,10 +384,14 @@ void bhv_theater_screen_loop(void) {
 
             if (m->pos[1] < -500.0f) {
                 if (m->health < 0x300) {
+                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    if (obj != NULL) {
+                        vec3f_copy(&obj->oPosX, sTheaterRespawn[o->os16F4]);
+                    }
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR_OBJECT);
-                    o->oAction = 4;
-                    o->oOpacity = 254;
-                    cur_obj_unhide();
+                    o->oAction = 5;
+                    // o->oOpacity = 254;
+                    // cur_obj_unhide();
                 } else {
                     o->oAction = 3;
                 }
@@ -421,6 +425,13 @@ void bhv_theater_screen_loop(void) {
                 sSourceWarpNodeId = 0x26;
                 music_changed_through_warp(sSourceWarpNodeId);
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+
+                obj = CL_nearest_object_with_behavior_and_field(bhvDoor, 0x144, 1);
+                if (obj != NULL) {
+                    // obj->oInteractType = INTERACT_IGLOO_BARRIER;
+                    obj->oBehParams2ndByte = 2;
+                }
+
             } else if (o->oTimer >= 90) {
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
                 if (o->oOpacity == 255) {
@@ -440,6 +451,12 @@ void bhv_theater_screen_loop(void) {
                         obj->activeFlags = 0;
                     }
                 }
+            }
+            break;
+        case 5:
+            gCamera->comit2dcam = 3;
+            if (o->oTimer > 50) {
+                o->oAction = 2;
             }
             break;
     }
