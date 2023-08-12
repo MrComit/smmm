@@ -1687,8 +1687,14 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_copy(c->focus, &gComitCutsceneObject->oPosX);
             vec3f_copy(c->pos, pos);
 
+            c->yaw = c->nextYaw = 0x8000;
+            s8DirModeBaseYaw = 0;
+
             if (gComitCutsceneTimer == 0) {
                 c->comitCutscene = 0;
+                warp_camera(0.0f, 0.0f, 15000.0f);
+                // c->pos[2] += 15000.0f;
+                // c->focus[2] += 15000.0f;
             } else if (--gComitCutsceneTimer <= 0) {
                     gComitCutsceneTimer = 0;
             }
