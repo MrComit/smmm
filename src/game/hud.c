@@ -1102,6 +1102,9 @@ void render_hud_boos(void) {
 	gDPSetPrimColor(gDisplayListHead++, 0, 0, 0x04, 0x18, 0x22, 255);
 	gSPDisplayList(gDisplayListHead++, manager_hud_MANAGER_mesh);
 	gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+	if (boos > 9) {
+		gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+	}
 
     print_text(270 - 130, gHudTopYBoos, "}", 0); // 'Boo' glyph
     print_text(286 - 130, gHudTopYBoos, "*", palette); // 'X' glyph

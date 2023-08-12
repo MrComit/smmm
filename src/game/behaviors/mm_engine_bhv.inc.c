@@ -766,7 +766,7 @@ void bhv_deathwarp_loop(void) {
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea = gCurrAreaIndex;
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle = angle;
-    } else if (gCurrLevelNum == LEVEL_CCM) {
+    } else if (gCurrLevelNum == LEVEL_CCM && gCurrAreaIndex == 1) {
         if (m->pos[0] < 8500.0f && o->oPosX > 8500.0f) {
             o->oPosX = 8500.0f;
             o->oPosY = 400.0f;

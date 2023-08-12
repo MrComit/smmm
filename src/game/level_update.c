@@ -1226,7 +1226,7 @@ void update_hud_values(void) {
                         gHudCoinUpdateFaster = FALSE;
                     }
                 }
-                gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount = gHudDisplay.coins;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount = gMarioState->numCoins;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
                 //gGotFileCoinHiScore = 1;
                 gSaveFileModified = TRUE;
@@ -1249,7 +1249,7 @@ void update_hud_values(void) {
                 gHudLowerTimer = 0;
 
                 gHudDisplay.coins -= 1;
-                gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount = gHudDisplay.coins;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].coinCount = gMarioState->numCoins;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
                 //gGotFileCoinHiScore = 1;
                 gSaveFileModified = TRUE;

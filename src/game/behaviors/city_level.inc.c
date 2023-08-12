@@ -1455,13 +1455,16 @@ void bhv_racecar_init(void) {
     o->oFloatF8 = (o->oBehParams >> 24) * 100.0f;
     if (((o->oBehParams >> 8) & 0xFF) == 1) {
         o->oObjFC = spawn_object(o, MODEL_STAR_CURRENCY, bhvStar);
+        o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         o->oObjFC->oBehParams = 0x12 << 24;
         o->oFloat100 = 100.0f;
     } else if (((o->oBehParams >> 8) & 0xFF) == 2) {
         o->oObjFC = cur_obj_nearest_object_with_behavior(bhvToyToad);
+        o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         o->oFloat100 = 50.0f;
     } else if (((o->oBehParams >> 8) & 0xFF) != 3) {
         o->oObjFC = spawn_object(o, MODEL_HEART, bhvCollectHeart);
+        o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         o->oObjFC->oF4 = 1;
         o->oFloat100 = 50.0f;
     }

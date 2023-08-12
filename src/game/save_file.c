@@ -549,7 +549,7 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse) 
 
 
 void save_file_set_newflags(u32 flags, u8 index) {
-    if (flags > 31) {
+    if (index > 1) {
         return;
     } 
     gSaveBuffer.files[gCurrSaveFileNum - 1][0].newFlags[index] |= flags;
