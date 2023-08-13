@@ -393,8 +393,10 @@ void bhv_spin_plate_big_loop(void) {
 }
 
 
-
 void bhv_mem_wall_loop(void) {
+    // gRandomVal++;
+    // o->oPosY++;
+    // print_text_fmt_int(50, 5*20, "%d", gRandomVal, 3);
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvMemSpinPlateBig);
     if (obj == NULL || obj->oPosX > -23175.0f) {
         CL_explode_object(o, 1);
