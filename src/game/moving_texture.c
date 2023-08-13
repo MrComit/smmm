@@ -962,7 +962,7 @@ Gfx *geo_movtex_update_horizontal(s32 callContext, struct GraphNode *node, UNUSE
             // case MOVTEX_SSL_SAND_PIT_OUTSIDE:
             //     movtexVerts = segmented_to_virtual(ssl_movtex_tris_quicksand_pit);
             //     break;
-            case MOVTEX_SSL_SAND_PIT_PYRAMID:
+            // case MOVTEX_SSL_SAND_PIT_PYRAMID:
             //     movtexVerts = segmented_to_virtual(ssl_movtex_tris_pyramid_quicksand_pit);
             //     break;
             case MOVTEX_TREADMILL_BIG:

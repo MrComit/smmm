@@ -13,7 +13,7 @@
 //OG: 25600
 //NEW: 38400
 
-#define GFX_POOL_SIZE 38400 // Size of how large the master display list (gDisplayListHead) can be
+#define GFX_POOL_SIZE 25600 // Size of how large the master display list (gDisplayListHead) can be
 
 struct GfxPool {
     Gfx buffer[GFX_POOL_SIZE];

@@ -52,12 +52,12 @@ void bhv_mem_ice_cube_init(void) {
     if (o->oBehParams2ndByte == 0) {
         obj = spawn_object_at_origin(o, 0, MODEL_STAR_PIECE, bhvFrozenStarPiece);
         obj->oBehParams = 0x17 << 24;
+        obj_copy_pos_and_angle(obj, o);
+        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        o->prevObj = obj;
     } else {
         o->oAnimState = 1;
     }
-    obj_copy_pos_and_angle(obj, o);
-    obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-    o->prevObj = obj;
 }
 
 
