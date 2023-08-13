@@ -168,6 +168,9 @@ void bhv_dream_penguin_loop(void) {
 void bhv_dream_yoshi_loop(void) {
     struct Object *obj;
     Vec3s pos;
+    if (gMarioCurrentRoom != o->oRoom) {
+        return;
+    }
     if (absf(o->oPosY - gMarioState->pos[1]) > 3000.0f) {
         cur_obj_hide();
     } else {

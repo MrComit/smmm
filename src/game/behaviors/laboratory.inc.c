@@ -161,6 +161,9 @@ void bhv_antenna_ball_init(void) {
 void bhv_antenna_ball_loop(void) {
     struct Object *obj;
     struct MarioState *m = gMarioState;
+    if (gMarioCurrentRoom != o->oRoom) {
+        return;
+    }
     if (o->oBehParams2ndByte) {
         obj = o;
     } else {

@@ -221,6 +221,18 @@ void bhv_boogoo_cage_loop(void) {
                     gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
                     gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea = gCurrAreaIndex;
                     gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle = 0x8000;
+                } else if (o->oBehParams2ndByte == 23) {
+                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    if (obj != NULL) {
+                        vec3f_copy(&obj->oPosX, &o->oPosX);
+                        obj->oFaceAngleYaw = 0x8000;
+                    }
+
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = (s16)o->oPosX;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)o->oPosY;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)o->oPosZ;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel = gCurrLevelNum;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnArea = gCurrAreaIndex;
                 }
 
 
