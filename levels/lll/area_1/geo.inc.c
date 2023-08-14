@@ -42,7 +42,7 @@ const GeoLayout lll_dl_101__The_Corridor_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, lll_dl_OilFloor_001_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Plant_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, lll_dl_Plant_001_mesh_layer_4),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -4034, 105, 547, 90, 0, 0, lll_dl_Plates_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_Plates_001_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -164,6 +164,7 @@ const GeoLayout lll_dl_102__Laundry_Room_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_SCALE(LAYER_OPAQUE, 41532),
 		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_LightBeam_001_mesh_layer_5),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

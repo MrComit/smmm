@@ -164,6 +164,7 @@ void reverse_l10_treadmill_scroll(void) {
 
 s32 gPowerOn = FALSE;
 void bhv_exercise_bike_loop(void) {
+    o->oRoom = 3;
     if (gLowGrav || cur_obj_nearest_object_with_behavior(bhvBikeShyguy)) {
         gPowerOn = TRUE;
     } else {
@@ -180,15 +181,32 @@ void bhv_exercise_bike_loop(void) {
 }
 
 void bhv_bike_shyguy_loop(void) {
-    o->os16104 += 0xBA2;
-    o->oFaceAnglePitch = 0x888 + (sins(o->os16104 - 0x4000) * 0x888);
-    if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
-        spawn_mist_particles();
-        obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
-        o->activeFlags = 0;
-        create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+    switch (o->oAction) {
+        case 0:
+            o->os16104 += 0xBA2;
+            o->oFaceAnglePitch = 0x888 + (sins(o->os16104 - 0x4000) * 0x888);
+            if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
+                spawn_mist_particles();
+                obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                o->oAction = 1;
+                cur_obj_disable();
+                create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
+            }
+            o->oInteractStatus = 0;
+            break;
+        case 1:
+            set_mario_npc_dialog(1);
+            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+                gCamera->comitCutscene = 33;
+                if (o->oTimer > 20) {
+                    o->activeFlags = 0;
+                    play_puzzle_jingle();
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            break;
     }
-    o->oInteractStatus = 0;
 }
 
 
@@ -296,9 +314,10 @@ void bhv_power_bar_loop(void) {
     struct Object *obj;
     if (o->os16FA == 0) {
         o->header.gfx.scale[2] = 0.25f;
-    } else if (o->os16FA > 5) {
-        o->os16FA = 5;
     }
+    // } else if (o->os16FA > 5) {
+    //     o->os16FA = 5;
+    // }
     o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], (f32)o->os16FA, 0.13f);
     if (sPowerButtonsReset && o->oBehParams2ndByte == 2 && sPowerButtonsPressed == 0) {
         sPowerButtonsReset = FALSE;
@@ -372,7 +391,9 @@ void bhv_power_button_loop(void) {
             o->os16F4 = approach_s16_symmetric(o->os16F4, sPowerButtonCols[o->os16FA][0], 0x6);
             o->os16F6 = approach_s16_symmetric(o->os16F6, sPowerButtonCols[o->os16FA][1], 0x6);
             o->os16F8 = approach_s16_symmetric(o->os16F8, sPowerButtonCols[o->os16FA][2], 0x6);
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 4.0f);
+            if (o->oTimer > 20) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 1.75f);
+            }
 
             if (o->oObjFC->oAction != 0) {
                 o->os16FA++;

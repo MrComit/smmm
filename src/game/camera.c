@@ -1452,7 +1452,6 @@ void fixed_cam_cutscene_ending(struct Camera *c) {
 
 
 
-
 void fixed_cam_presets(struct Camera *c) {
     struct MarioState *m = gMarioState;
     struct Object *obj = gComitCutsceneObject;
@@ -1722,6 +1721,31 @@ void fixed_cam_presets(struct Camera *c) {
             vec3f_set(c->pos, 514.0f, -4207.0f, m->pos[2] - 1750.0f);
             vec3f_set(c->focus, 514.0f, -4607.0f, m->pos[2]);
             c->yaw = c->nextYaw = DEGREES(180);
+            break;
+        case 33:
+            gComitCutsceneTimer++;
+            if (gComitCutsceneTimer < 70) {
+                vec3f_set(c->pos, -7500.0f, 3000.0f, -4200.0f);
+                vec3f_set(c->focus, -8450.0f, 2500.0f, -5100.0f);
+            } else {
+                vec3f_set(m->pos, 500.0f, 0.0f, 6000.0f);
+
+                vec3f_set(c->pos, 500.0f,  500.0f, 2500.0f);
+                vec3f_set(c->focus, 500.0f, 0.0f, -1000.0f);
+
+                if (gComitCutsceneTimer == 140) {
+                    play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 0xC, 0x00, 0x00, 0x00);
+                } else if (gComitCutsceneTimer == 158) {
+                    play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 0xC, 0x00, 0x00, 0x00);
+                    vec3f_set(m->pos, -12300.0f, 1700.0f, -10595.0f);
+                    set_mario_npc_dialog(0);
+
+                    gComitCutsceneTimer = 0;
+                    c->comitCutscene = 0;
+                    gMarioCurrentRoom = 3;
+                    // gMarioObject->oRoom = 3;
+                }
+            }
             break;
         case 0xFF:
             vec3f_copy(c->pos, gComitCutscenePosVec);
