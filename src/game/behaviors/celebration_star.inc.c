@@ -61,6 +61,15 @@ void celeb_star_act_face_camera(void) {
             o->oFaceAnglePitch += 0x400;
     }
 
+    if (o->oTimer == 40 && cur_obj_has_model(MODEL_STAR)) {
+        sDelayedWarpArg = 0;
+        sDelayedWarpOp = 0x10;
+        sSourceWarpNodeId = 0xB5;
+        // val04 = !music_changed_through_warp(sSourceWarpNodeId);
+        sDelayedWarpTimer = 20;
+        play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
+    }
+
     if (o->oTimer == 59) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }

@@ -19,6 +19,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -128,8 +130,10 @@ const LevelScript level_hmc_entry[] = {
 		WARP_NODE(0x28, LEVEL_HMC, 0x01, 0x27, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x3E, LEVEL_HMC, 0x01, 0x3F, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x3F, LEVEL_HMC, 0x01, 0x3E, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xB5, LEVEL_HMC, 0x01, 0xB5, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -10081, 145, 2264, 0, 0, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -10081, 145, 2264, 0, 0, 0, (0xA << 16), bhvFlyingWarp),
+		OBJECT(MODEL_NONE, 2609, 5335, 11348, 0, 90, 0, (0xB5 << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, 0, -10081, 145, 2264),
 		OBJECT(MODEL_NONE, 1509, 200, -7511, 0, 0, 0, (0xE << 16), bhvFlyingWarp),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -9031, 0, 11348, 0, 90, 0, 0x00000000, bhvDoor),

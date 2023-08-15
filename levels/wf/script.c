@@ -26,6 +26,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -117,11 +119,13 @@ const LevelScript level_wf_entry[] = {
 		WARP_NODE(0x5D, LEVEL_HMC, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0F, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x05, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xB5, LEVEL_WF, 0x01, 0xB5, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6601, 200, -7121, 0, -180, 0, (0xE << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, -42, 200, -18584, 0, 0, 0, (0xF << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6621, 359, -12383, 0, -180, 0, (0x5 << 16), bhvFlyingWarp),
+		OBJECT(MODEL_NONE, 7032, 105, -13596, 0, 90, 0, (0xB5 << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, 0, 2057, 200, -18319),
 		OBJECT(MODEL_BREAKABLE_BOX, -397, 1917, -6410, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -505, 1735, -7952, 0, 0, 0, 0x00000000, bhvHiddenObject),

@@ -34,6 +34,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -119,10 +121,12 @@ const LevelScript level_bob_entry[] = {
 		WARP_NODE(0x75, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x27, LEVEL_JRB, 0x01, 0x0C, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x3A, LEVEL_BBH, 0x03, 0x3A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xB5, LEVEL_BOB, 0x01, 0xB5, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 0, 192, 28972, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 0, 150, 10940, 0, 0, 0, 0x000D0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 4584, 261, 4163, 0, 0, 0, 0x00720000, bhvFlyingWarp),
+		OBJECT(MODEL_NONE, 807, 885, 3184, 0, 139, 0, 0x00B50000, bhvFlyingWarp),
 		MARIO_POS(0x01, -180, 0, 192, 28972),
 		OBJECT(MODEL_NONE, 5446, 161, 16260, 0, -90, 0, 0x00750000, bhvFlyingWarp),
 		OBJECT(MODEL_TOAD_FRIEND, 446, 0, 13173, 0, -20, 0, 0x00000000, bhvToadFriend),
