@@ -1140,7 +1140,25 @@ void cage_dropped_loop(void) {
 
 
 void cage_free_loop(void) {
+    struct Object *obj;
     object_step();
+    if ((o->oTimer % 15) == 0) {
+        obj = spawn_object(o, MODEL_SPARKLES, bhvGoldenCoinSparkles);
+        switch (o->os16112) {
+            case 0:
+                obj->oPosY += 30.0f;
+                o->os16112 = 1;
+                break;
+            case 1:
+                obj->oPosX += 40.0f;
+                o->os16112 = 2;
+                break;
+            case 2:
+                obj->oPosX -= 40.0f;
+                o->os16112 = 0;
+                break;
+        }
+    }
 
     if (o->oFC) {
         CL_explode_object(o, 1);
