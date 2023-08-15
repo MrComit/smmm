@@ -96,10 +96,12 @@ void cushion_friend_trophy_one(void) {
     switch (o->oAction) {
         case 0:
             vec3f_set(&o->oPosX, 1500.0f, 0.0f, 12000.0f);
-            if (CL_NPC_Dialog(DIALOG_039)) {
-                o->oAction = 1;
-                vec3f_set(gComitCutscenePosVec, -1919.0f, 2439.0f, 14421.0f);
-                vec3f_set(gComitCutsceneFocVec, -500.0f, 300.0f, 10400.0f);
+            if (gMarioState->pos[0] > 1020.0f) {
+                if (CL_NPC_Dialog(DIALOG_039)) {
+                    o->oAction = 1;
+                    vec3f_set(gComitCutscenePosVec, -1919.0f, 2439.0f, 14421.0f);
+                    vec3f_set(gComitCutsceneFocVec, -500.0f, 300.0f, 10400.0f);
+                }
             }
             break;
         case 1:
