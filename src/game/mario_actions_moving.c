@@ -2125,7 +2125,7 @@ u8 sForceEdges[3][2] = {
 void set_mario_angle_from_force_jump(struct MarioState *m) {
     Vec3s edgeLengths;
     Vec3s *verts[3];
-    s32 moveAngle, index;
+    s32 index;
 
     verts[0] = m->floor->vertex1;
     verts[1] = m->floor->vertex2;
@@ -2137,11 +2137,7 @@ void set_mario_angle_from_force_jump(struct MarioState *m) {
 
     index = min_vec3s_index(edgeLengths);
     m->faceAngle[1] = vec3s_get_angle(verts[sForceEdges[index][0]], verts[sForceEdges[index][1]]);
-    moveAngle = gMarioObject->oMoveAngleYaw;
-    if (m->forwardVel < 0.0f) {
-        moveAngle = -moveAngle;
-    }
-    if (absi(moveAngle - m->faceAngle[1]) > 0x4000) {
+    if (m->forwardVel > 0.0f && absi(gMarioObject->oMoveAngleYaw - m->faceAngle[1]) > 0x4000) {
         m->faceAngle[1] += 0x8000;
     }
 }

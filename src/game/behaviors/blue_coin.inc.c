@@ -14,6 +14,10 @@ void bhv_hidden_blue_coin_loop(void) {
     switch (o->oAction) {
         case HIDDEN_BLUE_COIN_ACT_INACTIVE:
             // Become invisible and intangible
+            if (o->oTimer == 0 && gCurrLevelNum == LEVEL_JRB && gCurrAreaIndex == 2) {
+                cur_obj_set_hitbox_radius_and_height(160.0f, 100.0f);
+            }
+
             cur_obj_disable_rendering();
             cur_obj_become_intangible();
 

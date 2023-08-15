@@ -898,7 +898,7 @@ void bhv_mario_update(void) {
     //     print_text_fmt_int(50, 4*20, "lazy dog", 0, 4);
     //     print_text_fmt_int(80, 8*20, "ABCDEF", 0, 0);
     //     print_text_fmt_int(80, 7*20, "GHIJKL", 0, 1);
-    //     print_text_fmt_int(80, 6*20, "MNOPQR", 0, 2);
+        // print_text_fmt_int(80, 6*20, "SPD %d", (s32)gMarioState->forwardVel, 2);
     //     print_text_fmt_int(80, 5*20, "STUVWX", 0, 3);
     //     print_text_fmt_int(80, 4*20, "YZ0123", 0, 4);
     //     print_text_fmt_int(80, 3*20, "456789", 0, 5);
