@@ -1198,16 +1198,14 @@ Do you want to Save?\n\
 \n\
 //Yes////No"))
 
-DEFINE_DIALOG(DIALOG_102, 1, 5, 30, 200, _("\
-Pssst! The Boos are super\n\
-shy. If you look them\n\
-in the eyes, they fade\n\
-away, but if you turn\n\
-your back, they reappear.\n\
-It's no use trying to hit\n\
-them when they're fading\n\
-away. Instead, sneak up\n\
-behind them and punch."))
+DEFINE_DIALOG(DIALOG_102, 1, 4, 30, 200, _("\
+Although my tricks may not\n\
+seem nice,\n\
+This hint I give will sure\n\
+suffice\n\
+Find me through the castle\n\
+of the king who rules the\n\
+land of Ice."))
 
 DEFINE_DIALOG(DIALOG_103, 1, 2, 95, 200, _("\
 Need another lift?\n\

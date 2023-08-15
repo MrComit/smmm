@@ -777,7 +777,7 @@ s32 in_boss_room(s16 level, s16 room) {
     switch (level) {
         case LEVEL_BOB:
             if (room == 11) {
-                obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
+                obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvKoopaBoss);
                 if (obj != NULL && obj->oAction != 0) {
                     return TRUE;
                 }
@@ -785,7 +785,7 @@ s32 in_boss_room(s16 level, s16 room) {
             break;
         case LEVEL_WF:
             if (room == 14) {
-                obj = cur_obj_nearest_object_with_behavior(bhvShadowBoss);
+                obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvShadowBoss);
                 if (obj != NULL && obj->oAction != 0) {
                     return TRUE;
                 }
@@ -793,7 +793,7 @@ s32 in_boss_room(s16 level, s16 room) {
             break;
         case LEVEL_CCM:
             if (room == 3) {
-                obj = cur_obj_nearest_object_with_behavior(bhvShyGuyBoss);
+                obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvShyGuyBoss);
                 if (obj != NULL && obj->oAction != 0) {
                     return TRUE;
                 }
@@ -805,7 +805,7 @@ s32 in_boss_room(s16 level, s16 room) {
                 // if (obj != NULL && obj->oAction != 8) {
                 //     return TRUE;
                 // }
-                obj = cur_obj_nearest_object_with_behavior(bhvAtticMovingFlame);
+                obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvAtticMovingFlame);
                 if (obj != NULL) {
                     return TRUE;
                 }
@@ -813,7 +813,7 @@ s32 in_boss_room(s16 level, s16 room) {
             break;
         case LEVEL_LLL:
             if (room == 9) {
-                obj = cur_obj_nearest_object_with_behavior(bhvGhostBully);
+                obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvGhostBully);
                 if (obj != NULL && obj->oAction != 0) {
                     return TRUE;
                 }

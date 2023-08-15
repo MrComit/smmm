@@ -502,10 +502,13 @@ const Gfx door_seg3_lock3[] = {
 };
 
 const Gfx door_seg3_lock4[] = {
-    gsSPDisplayList(door_seg3_dl_03014470),
-	gsDPSetEnvColor(0x59, 0xB1, 0xFE, 255),
+    gsSPDisplayList(mat_door_keylock),
+	gsDPSetEnvColor(0, 0x18, 0xFF, 255),
+    // gsSPLightColor(LIGHT_2, 0xffffffff),
     gsSPVertex(door_seg3_vertex_03014370, 8, 0),
-    gsSPBranchList(door_seg3_dl_030144E0),
+    gsSPDisplayList(door_seg3_dl_030144E0),
+    gsSPDisplayList(mat_revert_door_keylock),
+    gsSPEndDisplayList(),
 };
 
 // 0x03014540 - 0x03014558

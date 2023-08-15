@@ -578,7 +578,8 @@ void mario_update_manager_upgrades(struct MarioState *m) {
                     obj->oPosX = m->pos[0];
                     obj->oPosZ = m->pos[2];
                     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-                    obj->oAnimState = 1;
+                    obj->oAnimState = 3;
+                    set_mario_npc_dialog(1);
                     save_file_set_newflags(SAVE_TOAD_FLAG_TREASURE_4, 1);
                 }
 

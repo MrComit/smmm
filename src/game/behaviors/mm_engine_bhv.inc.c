@@ -148,6 +148,7 @@ void bhv_save_station_loop(void) {
             dialogResponse = CL_NPC_Dialog_Options(dialogId);
             if (gDialogResponse != DIALOG_RESPONSE_NONE) {
                 if (gDialogResponse == DIALOG_RESPONSE_YES) {
+                    gSaveFileModified = TRUE;
                     save_file_do_save(gCurrSaveFileNum - 1);
                     play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
                 }
@@ -855,7 +856,7 @@ void bhv_broken_key_loop(void) {
 }
 
 void bhv_big_key_loop(void) {
-    if (o->oAnimState == 1) {
+    if (o->oAnimState == 1 || o->oAnimState == 2) {
         obj_set_hitbox(o, &sSmallKeyHitbox);
         o->oPosX = gMarioState->pos[0];
         o->oPosY = gMarioState->pos[1];
@@ -1418,31 +1419,52 @@ void bhv_prospector_t_loop(void) {
 s32 gPoolLockDisabled = 0;
 
 void bhv_prospector_lock_loop(void) {
+    s32 flags0 = save_file_get_newflags(0);
+    s32 flags1 = save_file_get_newflags(1);
+
     switch (o->oBehParams2ndByte) {
         case 0: // kitchen
-            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS1 || gRedCoinMissionActive || 
-                (!(save_file_get_newflags(0) & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)))) {
+            if (flags1 & SAVE_TOAD_FLAG_REDS1 || gRedCoinMissionActive || 
+                (!(flags0 & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)))) {
                 o->activeFlags = 0;
+            } else {
+                switch (o->oAction) {
+                    case 0:
+                        if (o->oDistanceToMario < 800.0f) {
+                            o->oAction = 1;
+                        }
+                        break;
+                    case 1:
+                        if (CL_NPC_Dialog(DIALOG_102)) {
+                            o->oAction = 2;
+                        }
+                        break;
+                    case 2:
+                        if (o->oDistanceToMario > 1200.0f) {
+                            o->oAction = 0;
+                        }
+                        break;
+                }
             }
             break;
         case 1: // pantry2
-            if (save_file_get_newflags(0) & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)) {
+            if (flags0 & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)) {
                 o->activeFlags = 0;
             }
             break;
         case 2: // pool room
-            if (gPoolLockDisabled || save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS2 || gRedCoinMissionActive) {
+            if (gPoolLockDisabled || flags1 & SAVE_TOAD_FLAG_REDS2 || gRedCoinMissionActive) {
                 o->activeFlags = 0;
                 gPoolLockDisabled = 1;
             }
             break;
         case 3: // panic room
-            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS1) {
+            if (flags1 & SAVE_TOAD_FLAG_REDS1) {
                 o->activeFlags = 0;
             }
             break;
         case 4: // attic2
-            if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_REDS2 && save_file_get_boos() & (1 << 0x12)) {
+            if (flags1 & SAVE_TOAD_FLAG_REDS2 && save_file_get_boos() & (1 << 0x12)) {
                 o->activeFlags = 0;
             }
             break;

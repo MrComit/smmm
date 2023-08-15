@@ -2012,7 +2012,7 @@ Gfx *geo_set_dream_env(s32 callContext, struct GraphNode *node, UNUSED void *con
         dlStart = alloc_display_list(sizeof(Gfx) * 3);
         dlHead = dlStart;
 
-        if (cur_obj_nearest_object_with_behavior(bhvDreamYoshi) == NULL) {
+        if (CL_objptr_nearest_object_behavior(gMarioObject, bhvDreamYoshi) == NULL) {
             gDreamEnv = 255;
         }
 
@@ -2039,7 +2039,7 @@ Gfx *geo_sunblock_opacity(s32 callContext, struct GraphNode *node, UNUSED void *
         currentGraphNode = (struct GraphNodeGenerated *) node;
         currentGraphNode->fnNode.node.flags = 0x500 | (currentGraphNode->fnNode.node.flags & 0xFF);
 
-        obj = cur_obj_nearest_object_with_behavior(bhvL3Sun);
+        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvL3Sun);
         if (obj != NULL && obj->oHeldState == HELD_HELD) {
             gSunblockOpacity = approach_s16_symmetric(gSunblockOpacity, 0xA0, 0xC);
         } else {
@@ -2641,11 +2641,11 @@ Gfx *geo_switch_pool_floor(s32 callContext, struct GraphNode *node) {
             switchCase->selectedCase = 1;
         } else {
             switchCase->selectedCase = 0;
-            obj = cur_obj_nearest_object_with_behavior(bhvToyMole);
+            obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvToyMole);
             if (obj != NULL) {
                 obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
             }
-            obj = cur_obj_nearest_object_with_behavior(bhvMoleCage);
+            obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvMoleCage);
             if (obj != NULL) {
                 obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
             }
@@ -2699,7 +2699,7 @@ Gfx *geo_switch_gameroom(s32 callContext, struct GraphNode *node) {
 
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
-        obj = cur_obj_nearest_object_with_behavior(bhvPoolBarrier);
+        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvPoolBarrier);
         // assign the case number for execution.
         if (obj == NULL || obj->oOpacity != 255 || !gIsConsole) {
             switchCase->selectedCase = 0;
@@ -2727,7 +2727,7 @@ Gfx *geo_switch_attic(s32 callContext, struct GraphNode *node) {
 
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
-        obj = cur_obj_nearest_object_with_behavior(bhvAtticWall);
+        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvAtticWall);
         // assign the case number for execution.
         if (obj == NULL || obj->oOpacity != 255 || !gIsConsole) {
             switchCase->selectedCase = 0;
@@ -3024,7 +3024,7 @@ Gfx *geo_switch_library(s32 callContext, struct GraphNode *node) {
 
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
-        obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
+        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvKoopaBoss);
         // assign the case number for execution.
         if (obj != NULL && gIsConsole) {
             switchCase->selectedCase = 1;
@@ -3054,7 +3054,7 @@ Gfx *geo_switch_library2(s32 callContext, struct GraphNode *node) {
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
         // assign the case number for execution.
-        obj = cur_obj_nearest_object_with_behavior(bhvKoopaBoss);
+        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvKoopaBoss);
         if (obj != NULL && gCamera->pos[1] <= 2900.0f && gIsConsole) {
             switchCase->selectedCase = 1;
         } else {
@@ -3817,7 +3817,7 @@ Gfx *geo_switch_boss_tunnel(s32 callContext, struct GraphNode *node) {
         // cast the pointer.
         switchCase = (struct GraphNodeSwitchCase *) node;
 
-        obj = cur_obj_nearest_object_with_behavior(bhvRoofHole);
+        obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvRoofHole);
 
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
@@ -3945,7 +3945,7 @@ Gfx *geo_switch_area(s32 callContext, struct GraphNode *node) {
                     gMarioCurrentRoom = sp20->object->oRoom;
                 }
                 if (gMarioCurrentRoom != gMarioPreviousRoom) {
-                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    obj = CL_objptr_nearest_object_behavior(gMarioObject, bhvAirborneDeathWarp);
                     if (obj != NULL)
                         obj->oRoom2 = gMarioCurrentRoom;
                 }
