@@ -287,7 +287,7 @@ void goomba_level_specific_checks(void) {
             cur_obj_unhide();
         }
     } else if (gCurrLevelNum == LEVEL_WF && o->oRoom == 4) {
-        if (gMarioState->pos[1] <= -100.0f) {
+        if (gMarioState->pos[1] <= -100.0f && o->oPosY > -100.0f) {
             cur_obj_hide();
         } else {
             cur_obj_unhide();

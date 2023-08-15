@@ -28,6 +28,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -261,6 +262,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_MOVING_VINE, 3717, 859, 15028, 0, -43, 0, 0x04000000, bhvMovingVine),
 		OBJECT(MODEL_L2_FALLING_FLOOR, 2066, 0, -13060, 0, 0, 0, 0x00000000, bhvL2FallingFloor),
 		OBJECT(MODEL_GOOMBA, 2491, 0, -11969, 0, 0, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_GOOMBA, 2039, 0, -13054, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, 3231, 0, -13464, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_GOOMBA, 4551, 0, -12451, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_OCTOPUS, 3079, 1746, -11509, 0, 0, 0, 0x00000000, bhvOctopus),

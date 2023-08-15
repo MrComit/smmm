@@ -4755,9 +4755,12 @@ void print_mirror_string(void) {
     u8 str3[2];
     u8 str4[2];
     s16 col1 = 0xFF, col2 = 0xFF, col3 = 0xFF, col4 = 0xFF;
-    s16 x = 290;
-    s16 y = 155 - 8;
+    s16 x = 26;
+    s16 y = 220 - 8;
     // f32 scale = 2.0f;
+    if (gMarioState->health < 0x880) {
+        x += 50;
+    }
     if (!gIsConsole) {
         y += 8;
         // scale -= 0.5f;
@@ -4816,9 +4819,9 @@ void print_mirror_string(void) {
 void print_mirror_controls(void) {
     if (gCurrLevelNum == LEVEL_WF && gMarioCurrentRoom == 6) {
         if (gCamera->comitCutscene == 3) {
-            gMirrorAlpha = approach_s16_symmetric(gMirrorAlpha, 255, 12);
+            gMirrorAlpha = approach_s16_symmetric(gMirrorAlpha, 255, 14);
         } else {
-            gMirrorAlpha = approach_s16_symmetric(gMirrorAlpha, 0, 8);
+            gMirrorAlpha = approach_s16_symmetric(gMirrorAlpha, 0, 12);
         }
         if (gMirrorAlpha) {
             print_mirror_string();
