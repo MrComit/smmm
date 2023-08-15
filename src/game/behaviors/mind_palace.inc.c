@@ -65,14 +65,19 @@ void bhv_mind_mips_init(void) {
     // COMIT_OBJECT(MODEL_POUND_LEGO, 10399, -161, 2839, 0, 0, 0, bhvPoundLego)
     // o->oObjF4 = obj;
     // o->oObjF4->oBehParams = 0x01000000;
-    o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 0);
+    o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 4);
+    if (o->oObjF4 == NULL) {
+        o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 0);
+    }
     // o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPoundLego);
     // if (o->oObjF4 == NULL) {
     //     o->activeFlags = 0;
     //     return;
     // }
     // vec3f_copy(&o->oObjF4->oHomeX, &o->oObjF4->oPosX);
-    vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
+    if (o->oObjF4 != NULL) {
+        vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
+    }
 
     if (save_file_get_keys(0) & (1 << 11)) {
         o->activeFlags = 0;
@@ -86,7 +91,7 @@ void bhv_mind_mips_run_loop(void) {
             if (o->oDistanceToMario > 2000.0f)
                 o->oForwardVel = 0;
             else
-                o->oForwardVel = 35.0f;
+                o->oForwardVel = 25.0f;
             
             if (o->oTimer > o->os1610A) {
                 o->os1610C = CL_RandomMinMaxU16(1, 20);
@@ -137,6 +142,7 @@ void bhv_mind_mips_run_loop(void) {
 void bhv_mind_mips_loop(void) {
     struct Object *obj;
     Vec3f pos;
+    s32 act = 0;
     struct Surface *floor;
     if (o->os16FA) {
         bhv_mind_mips_run_loop();
@@ -145,7 +151,10 @@ void bhv_mind_mips_loop(void) {
     }
     switch (o->oAction) {
         case 0:
-            if (o->oObjF4->oAction != 0) {
+            if (o->oObjF4 != NULL) {
+                act = o->oObjF4->oAction;
+            }
+            if (act != 0 && act != 3 && act != 4) {
                 // if (o->os16110 >= 3) {
                 //     o->os16FA = 1;
                 //     o->oAction = 0;
@@ -159,7 +168,7 @@ void bhv_mind_mips_loop(void) {
                 cur_obj_init_animation(1);
                 o->oForwardVel = 25.0f;
                 o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 0);
-                if (o->oObjF4 != NULL) {
+                if (o->oObjF4 != NULL || (o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 4)) != NULL) {
                     o->oMoveAngleYaw = obj_angle_to_object(o, o->oObjF4);
                 } else {
                     while ((o->oObjF4 = CL_nearest_object_with_behavior_and_field(bhvMindMound, 0x14C, 2)) != NULL) {
@@ -174,11 +183,13 @@ void bhv_mind_mips_loop(void) {
                     }
                     o->os16FA = 1;
                     o->oAction = 0;
-                    o->oForwardVel = 35.0f;
+                    o->oForwardVel = 25.0f;
                     o->oInteractType = INTERACT_GRABBABLE;
                     cur_obj_enable();
                 }
                 break;
+            } else if (act == 3) {
+                vec3f_copy(&o->oPosX, &o->oObjF4->oPosX);
             }
             o->os16F8 += 0x400;
             o->oObjF4->oPosX = o->oObjF4->oHomeX + (sins(o->os16F8) * 3.0f);
@@ -500,8 +511,10 @@ void bhv_mind_mound_init(void) {
     o->os16F8 = o->oBehParams >> 24;
     if (o->os16F8) {
         o->oAction = 2;
-        o->oPosY -= 150.0f;
+    } else {
+        o->oAction = 4;
     }
+        o->oPosY -= 150.0f;
 
     // if (save_file_get_currency_flags() & (1 << 8)) {
     //     o->activeFlags = 0;
@@ -511,6 +524,7 @@ void bhv_mind_mound_init(void) {
 
 
 void bhv_mind_mound_loop(void) {
+    struct Object *obj;
     switch (o->oAction) {
         case 0:
             if (cur_obj_is_mario_ground_pounding_platform()) {
@@ -547,6 +561,13 @@ void bhv_mind_mound_loop(void) {
             if (o->oPosY == o->oHomeY) {
                 o->oAction = 0;
                 o->os16F8 = 0;
+            }
+            break;
+        case 4:
+            cur_obj_hide();
+            obj = cur_obj_nearest_object_with_behavior(bhvMindMoundBlock);
+            if (obj != NULL && obj->oAction == 1) {
+                o->oAction = 3;
             }
             break;
     }
