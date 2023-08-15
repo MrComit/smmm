@@ -8226,6 +8226,7 @@ const BehaviorScript bhvGlobalGate[] = {
     ADD_FLOAT(oPosY, 300),
     SET_HOME(),
     SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_l1_room_gate_init),
     BEGIN_LOOP(),
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_l1_room_gate_loop),

@@ -1264,6 +1264,7 @@ void bhv_mr_i_init(void);
 void bhv_green_button_init(void);
 void bhv_green_button_loop(void);
 void bhv_castle_flame_init(void);
+void bhv_l1_room_gate_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

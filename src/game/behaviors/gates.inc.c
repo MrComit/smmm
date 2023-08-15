@@ -37,6 +37,7 @@ Vec3f sStrayBookPos = {-10783.0f, 186.0f, 3062.0f};
 
 
 
+
 void bhv_hallway_fakewall_init(void) {
     o->oOpacity = 255;
     if (save_file_get_golden_goombas() & 1) {
@@ -98,6 +99,13 @@ void bhv_ice_ceiling_gate_loop(void) {
     }
 }
 
+void bhv_l1_room_gate_init(void) {
+    if (((o->oBehParams >> 8) & 0xFF) != 0) {
+        o->oFlags |= OBJ_FLAG_DONT_CALC_COLL_DIST;
+        o->oCollisionDistance = (f32)0x7FFF;
+    }
+
+}
 
 
 void bhv_l1_room_gate_loop(void) {
