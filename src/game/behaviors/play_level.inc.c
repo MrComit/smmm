@@ -27,6 +27,69 @@ static struct ObjectHitbox sBombOnChainHitbox = {
     /* hurtboxHeight:     */ 0,
 };
 
+s8 sCubesMelt = 0;
+
+void bhv_castle_flame_init(void) {
+    o->os16F4 = 70;
+    o->os16F6 = 70;
+    o->os16F8 = 255;
+}
+
+
+void bhv_green_button_init(void) {
+    o->os16F4 = 0x40;
+    o->os16F6 = 0x40;
+    o->os16F8 = 0x40;
+}
+
+
+void bhv_green_button_loop(void) {
+    struct Object *obj;
+    if (sCubesMelt == 0xF) {
+        if (o->oAction != 4) {
+            o->os16F4 = approach_s16_symmetric(o->os16F4, 0x0, 0xA);
+            o->os16F6 = approach_s16_symmetric(o->os16F6, 0xFF, 0x18);
+            o->os16F8 = approach_s16_symmetric(o->os16F8, 0x0, 0xA);
+        }
+        switch (o->oAction) {
+            case 0:
+                if (gMarioObject->platform == o && !(gMarioStates[0].action & MARIO_UNKNOWN_13)) {
+                    o->oAction = 1;
+                }
+                break;
+            case 1:
+                cur_obj_scale_over_time(2, 3, 1.0f, 0.2f);
+                if (o->oTimer == 3) {
+                    cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                    o->oAction = 2;
+                    obj = spawn_object(o, MODEL_ENV_FLAME, bhvCastleEnvFlame);
+                    vec3f_set(&obj->oPosX, 3302.0f, 11470.0f, -11810.0f);
+                }
+                break;
+            case 2:
+                if (!cur_obj_is_mario_on_platform()) {
+                    o->oAction = 3;
+                }
+                break;
+            case 3:
+                cur_obj_scale_over_time(2, 3, 0.2f, 1.0f);
+                if (o->oTimer == 3) {
+                    cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
+                    o->oAction = 4;
+                }
+                break;
+            case 4:
+                o->os16F6 = approach_s16_symmetric(o->os16F6, 0x60, 0x10);
+                break;
+        }
+    } else {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, 0x40, 0xA);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, 0x40, 0xA);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, 0x40, 0xA);
+    }
+}
+
+
 
 void bhv_big_ice_cube_loop(void) {
     switch (o->oAction) {
@@ -245,7 +308,6 @@ void bhv_ice_cube_cracked_loop(void) {
 
 
 
-s8 sCubesMelt = 0;
 
 
 void bhv_red_button_loop(void) {
@@ -364,7 +426,8 @@ void bhv_ice_cube_loop(void) {
     struct Object *obj;
     s32 k = 0;
     s16 x, z;
-    if (sCubesMelt == 0xF) {
+    // if (sCubesMelt == 0xF) {
+    if (cur_obj_nearest_object_with_behavior(bhvCastleEnvFlame) != NULL && sCubesMelt == 0xF) {
         o->oAction = 3;
     } else {
         obj = cur_obj_nearest_object_with_behavior(bhvRedButton);
@@ -373,6 +436,7 @@ void bhv_ice_cube_loop(void) {
             o->oForwardVel = 0;
             o->oFloatF8 = 0;
             o->oFloatF4 = 0;
+            sCubesMelt = 0;
             vec3f_copy(&o->oPosX, &o->oHomeX);
         }
     }

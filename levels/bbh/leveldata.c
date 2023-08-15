@@ -107,3 +107,4 @@
 #include "levels/bbh/console_bomb/model.inc.c"
 #include "levels/bbh/map_l5/model.inc.c"
 #include "levels/bbh/console_ice_cube_cracked/model.inc.c"
+#include "levels/bbh/green_button/model.inc.c"

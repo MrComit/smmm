@@ -27,6 +27,8 @@
 #include "actors/group15.h"
 #include "actors/common0.h"
 #include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -448,6 +450,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_TOKEN, -19488, -4946, -20884, 0, 0, 0, (1 << 16) | (0x39 << 8), bhvToken),
 		OBJECT(MODEL_TELEPORTER, -23519, -5937, -20128, 0, -90, 0, (0x58 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, -12471, 6187, -2178, 0, -180, 0, (0x59 << 16), bhvFadingWarp),
+		OBJECT(MODEL_ENV_FLAME, -13351, -9373, -21452, 0, 0, 0, 0x00000000, bhvCastleEnvFlame),
 		OBJECT(MODEL_MEM_ICECUBE, -14626, -9373, -20048, 0, 0, 0, (2 << 16), bhvMemIceCube),
 		OBJECT(MODEL_MEM_ICECUBE, -13125, -9372, -18678, 0, 0, 0, (1 << 16), bhvMemIceCube),
 		OBJECT(MODEL_MEM_ICECUBE, -11925, -9373, -19500, 0, 0, 0, 0x00000000, bhvMemIceCube),

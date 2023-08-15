@@ -1,0 +1,12 @@
+extern const GeoLayout green_button_geo[];
+extern Vtx green_button_gbtn_mesh_layer_1_vtx_0[12];
+extern Gfx green_button_gbtn_mesh_layer_1_tri_0[];
+extern Vtx green_button_gbtn_mesh_layer_2_vtx_0[10];
+extern Gfx green_button_gbtn_mesh_layer_2_tri_0[];
+extern Gfx mat_green_button_EnvButton[];
+extern Gfx mat_revert_green_button_EnvButton[];
+extern Gfx mat_green_button_EnvButtonDecal_001[];
+extern Gfx mat_revert_green_button_EnvButtonDecal_001[];
+extern Gfx green_button_gbtn_mesh_layer_1[];
+extern Gfx green_button_gbtn_mesh_layer_2[];
+extern Gfx green_button_material_revert_render_settings[];

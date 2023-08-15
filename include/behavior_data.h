@@ -993,6 +993,8 @@ extern const BehaviorScript bhvMariosJournal[];
 extern const BehaviorScript bhv2DRedCoin[];
 extern const BehaviorScript bhvSaveStation[];
 extern const BehaviorScript bhvFridgeEntrance[];
+extern const BehaviorScript bhvGreenButton[];
+extern const BehaviorScript bhvCastleEnvFlame[];
 
 
 #endif // BEHAVIOR_DATA_H

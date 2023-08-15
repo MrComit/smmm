@@ -12202,3 +12202,34 @@ const BehaviorScript bhvFridgeEntrance[] = {
         CALL_NATIVE(bhv_fridge_level_entrance_loop),
     END_LOOP(),
 };
+
+
+
+const BehaviorScript bhvGreenButton[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(red_button_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_green_button_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_green_button_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvCastleEnvFlame[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    SET_HOME(),
+    SCALE(/*Unused*/ 0, /*Field*/ 400),
+    // SET_INTERACT_TYPE(INTERACT_FLAME),
+    // SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 25),
+    // SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_castle_flame_init),
+    BEGIN_LOOP(),
+        // SET_INT(oInteractStatus, 0),
+        ANIMATE_TEXTURE(oAnimState, 2),
+        // CALL_NATIVE(bhv_env_flame_loop),
+    END_LOOP(),
+};
