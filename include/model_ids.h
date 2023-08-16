@@ -949,6 +949,7 @@
 #define MODEL_OBS_BOOGOO          0x60
 #define MODEL_TOAD_CAGE           0x61
 #define MODEL_CONSOLE_MR_I        0x62
+#define MODEL_WALL_BUTTON         0x63
 
 // 0x6C-0x73
 #define MODEL_MEM_PLATE           0x6C

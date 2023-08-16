@@ -4,10 +4,10 @@ struct ObjectHitbox sFallingBombHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 3,
     /* numLootCoins:      */ 2,
-    /* radius:            */ 200,
-    /* height:            */ 50,
-    /* hurtboxRadius:     */ 200,
-    /* hurtboxHeight:     */ 50,
+    /* radius:            */ 85,
+    /* height:            */ 40,
+    /* hurtboxRadius:     */ 85,
+    /* hurtboxHeight:     */ 40,
 };
 
 

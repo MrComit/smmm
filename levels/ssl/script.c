@@ -29,6 +29,20 @@
 #include "actors/group15.h"
 #include "actors/common0.h"
 #include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -104,6 +118,7 @@ const LevelScript level_ssl_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TOAD_CAGE, toad_cage_geo), 
 	LOAD_MODEL_FROM_DL(MODEL_CONSOLE_OBS_BOMB, bobomb_seg8_dl_08022D08, LAYER_ALPHA), 
 	LOAD_MODEL_FROM_DL(MODEL_CONSOLE_MR_I, mr_i_eyeball_seg6_dl_06002080, LAYER_ALPHA), 
+	LOAD_MODEL_FROM_GEO(MODEL_WALL_BUTTON, wall_button_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -355,26 +370,14 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MIND_2D_GATE, -12093, 9052, 11383, 0, -90, 0, (1 << 16), bhvMind2DGate),
 		OBJECT(MODEL_MIND_2D_GATE, -12593, 8752, 11383, 0, -90, 0, (2 << 16), bhvMind2DGate),
 		OBJECT(MODEL_MIND_2D_GATE, -10743, 9402, 11383, -90, -90, 0, (2 << 16), bhvMind2DGate),
-		OBJECT(MODEL_MIND_MOUND_BLOCK, -9870, 8052, 8985, 0, 0, 0, (3 << 16), bhvOutsideMoundBlock),
-		OBJECT(MODEL_MIND_BUTTON, -9711, 8052, 8733, 0, 0, 0, 0x00000000, bhvMindButton),
+		OBJECT(MODEL_MIND_BUTTON, -10111, 8052, 8733, 0, 0, 0, 0x00000000, bhvMindButton),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -8541, 7599, 17066, 0, -90, 0, (12 << 16), bhvSmallKeyDoor),
 		OBJECT(MODEL_GLOBAL_GATE, -16765, 7187, 1241, 0, 0, 0, 0x00000000, bhvMazeGate),
-		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 7695, 0, 0, 0, (1 << 24), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 8320, 0, 0, 0, (1 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 8945, 0, 0, 0, (1 << 24) | (2 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -10405, 8052, 9570, 0, 0, 0, (1 << 24) | (3 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11030, 8052, 8320, 0, 0, 0, (1 << 24) | (5 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11030, 8052, 8945, 0, 0, 0, (6 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11030, 8052, 9570, 0, 0, 0, (1 << 24) | (7 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11655, 8052, 8320, 0, 0, 0, (1 << 24) | (9 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11655, 8052, 8945, 0, 0, 0, (1 << 24) | (10 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -12280, 8052, 7695, 0, 0, 0, (1 << 24) | (12 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -12280, 8052, 8320, 0, 0, 0, (1 << 24) | (13 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11030, 8052, 7695, 0, 0, 0, (1 << 24) | (4 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11655, 8052, 7695, 0, 0, 0, (1 << 24) | (8 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -11655, 8052, 9570, 0, 0, 0, (1 << 24) | (11 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -12280, 8052, 8945, 0, 0, 0, (1 << 24) | (14 << 16), bhvOutsideMound),
-		OBJECT(MODEL_MIND_MOUND, -12280, 8052, 9570, 0, 0, 0, (1 << 24) | (15 << 16), bhvOutsideMound),
+		OBJECT(MODEL_WALL_BUTTON, -11015, 8207, 7358, 0, -90, 0, 0x00000000, bhvWallButton),
+		OBJECT(MODEL_WALL_BUTTON, -11015, 8207, 7995, 0, -90, 0, (1 << 16), bhvWallButton),
+		OBJECT(MODEL_WALL_BUTTON, -11015, 8207, 8633, 0, -90, 0, (2 << 16), bhvWallButton),
+		OBJECT(MODEL_WALL_BUTTON, -11015, 8207, 9270, 0, -90, 0, (3 << 16), bhvWallButton),
+		OBJECT(MODEL_WALL_BUTTON, -11015, 8207, 9908, 0, -90, 0, (4 << 16), bhvWallButton),
 		OBJECT(MODEL_PEEPA, -17826, 6287, 5520, 0, -90, 0, (1 << 24), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -17826, 6087, 5520, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -17826, 5887, 5520, 0, -90, 0, (2 << 16), bhvFloorPeepa),

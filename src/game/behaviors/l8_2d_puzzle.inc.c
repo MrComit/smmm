@@ -45,6 +45,66 @@ Vec3s s2DGateColors[5] = {
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 
 
+
+
+
+void bhv_wall_button_init(void) {
+    o->os16F4 = s2DGateColors[o->oBehParams2ndByte][0] / 2;
+    o->os16F6 = s2DGateColors[o->oBehParams2ndByte][1] / 2;
+    o->os16F8 = s2DGateColors[o->oBehParams2ndByte][2] / 2;
+    // if (gLowGrav) {
+    //     o->os16F6 = 0xFF;
+    //     o->os16100 = 120;
+    // } else {
+    //     o->os16F4 = 0xFF;
+    // }
+}
+
+void bhv_wall_button_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+                o->oAction = 1;
+                s2DGateVals[o->oBehParams2ndByte] ^= 1;
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], 0.2f, 0.1f);
+            if (o->header.gfx.scale[2] == 0.2f) {
+                o->oAction = 2;
+            }
+            break;
+        case 2:
+            o->header.gfx.scale[2] = approach_f32_symmetric(o->header.gfx.scale[2], 1.0f, 0.1f);
+            if (o->header.gfx.scale[2] == 1.0f) {
+                o->oAction = 0;
+            }
+            break;
+    }
+
+    // o->os16FA += 0x600;
+    if (s2DGateVals[o->oBehParams2ndByte]) {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, s2DGateColors[o->oBehParams2ndByte][0], 0x10);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, s2DGateColors[o->oBehParams2ndByte][1], 0x10);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, s2DGateColors[o->oBehParams2ndByte][2], 0x10);
+    } else {
+        o->os16F4 = approach_s16_symmetric(o->os16F4, s2DGateColors[o->oBehParams2ndByte][0] / 3, 0x10);
+        o->os16F6 = approach_s16_symmetric(o->os16F6, s2DGateColors[o->oBehParams2ndByte][1] / 3, 0x10);
+        o->os16F8 = approach_s16_symmetric(o->os16F8, s2DGateColors[o->oBehParams2ndByte][2] / 3, 0x10);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 void bhv_maze_gate_loop(void) {
     switch (o->oAction) {
         case 0:
@@ -97,6 +157,7 @@ void bhv_mind_button_init(void) {
     }
     obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
     obj->oObjF4 = o;
+    obj->oPosX += 400.0f;
     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
 }
 
@@ -219,13 +280,16 @@ void bhv_mind_2d_gate_init(void) {
 
 
 void bhv_mind_2d_gate_loop(void) {
-    o->os16FA = s2DGateVals[o->oBehParams2ndByte];
-    if (o->os16FA == 0) {
-        o->header.gfx.scale[1] = 0.0f;
-        cur_obj_hide();
+    // o->os16FA = s2DGateVals[o->oBehParams2ndByte];
+    if (s2DGateVals[o->oBehParams2ndByte] == 0) {
+        if (o->header.gfx.scale[1] <= 0.0f) {
+            cur_obj_hide();
+        } else {
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.0f, 0.05f);
+        }
     } else {
         cur_obj_unhide();
-        o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.01f + (0.33f * o->os16FA), 0.05f);
+        o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.0f, 0.05f);
         load_object_collision_model();
     }
     // o->header.gfx.scale[1] = 1.0f;
@@ -316,17 +380,17 @@ void bhv_outside_mound_block_init(void) {
     // s2DGateVals[2] = 0;
     // s2DGateVals[3] = 0;
     // s2DGateVals[4] = 0;
-    o->os16F4 = o->oBehParams2ndByte % 4;
-    o->os16F6 = o->oBehParams2ndByte / 4;
-    if (sOutsideObjs[o->os16F4][o->os16F6] == NULL) {
-        // if ((o->oBehParams >> 24) == 1 && !(save_file_get_currency_flags() & (1 << 8))) {
-        //     o->oBehParams = 8 << 24;
-        //     spawn_default_star(o->oPosX - 879.0f, o->oPosY + 450.0f, o->oPosZ + 662.0f);
-        // }
-    } else {
-        o->oPosX = sOutsideObjs[o->os16F4][o->os16F6]->oPosX;
-        o->oPosZ = sOutsideObjs[o->os16F4][o->os16F6]->oPosZ;
-    }
+    // o->os16F4 = o->oBehParams2ndByte % 4;
+    // o->os16F6 = o->oBehParams2ndByte / 4;
+    // if (sOutsideObjs[o->os16F4][o->os16F6] == NULL) {
+    //     // if ((o->oBehParams >> 24) == 1 && !(save_file_get_currency_flags() & (1 << 8))) {
+    //     //     o->oBehParams = 8 << 24;
+    //     //     spawn_default_star(o->oPosX - 879.0f, o->oPosY + 450.0f, o->oPosZ + 662.0f);
+    //     // }
+    // } else {
+    //     o->oPosX = sOutsideObjs[o->os16F4][o->os16F6]->oPosX;
+    //     o->oPosZ = sOutsideObjs[o->os16F4][o->os16F6]->oPosZ;
+    // }
 
 
 }
@@ -371,118 +435,118 @@ void bhv_outside_mound_block_init(void) {
 // }
 
 void bhv_outside_mound_block_loop(void) {
-    struct Object *obj;
-    f32 x, z;
-    if (sOutsideObjs[0][0] == NULL) {
-        return;
-    }
+    // struct Object *obj;
+    // f32 x, z;
+    // if (sOutsideObjs[0][0] == NULL) {
+    //     return;
+    // }
 
-    o->os16F4 = o->oBehParams2ndByte % 4;
-    o->os16F6 = o->oBehParams2ndByte / 4;
-    if (sOutsideObjs[o->os16F4][o->os16F6] == NULL) {
-        return;
-    }
-    sOutsideObjs[o->os16F4][o->os16F6]->os16FA = 0;
+    // o->os16F4 = o->oBehParams2ndByte % 4;
+    // o->os16F6 = o->oBehParams2ndByte / 4;
+    // if (sOutsideObjs[o->os16F4][o->os16F6] == NULL) {
+    //     return;
+    // }
+    // sOutsideObjs[o->os16F4][o->os16F6]->os16FA = 0;
 
-    if (gMarioState->wall != NULL && gMarioState->wall->object == o && gMarioState->flags & MARIO_UNKNOWN_31) {
-        switch (gMarioState->wall->force) {
-            case 0:
-                if (o->oBehParams2ndByte <= 3) {
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
-                o->oBehParams2ndByte -= 4;
-                obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
-                if (obj == NULL || obj->os16F8 == 0) {
-                    o->oBehParams2ndByte += 4;
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
+    // if (gMarioState->wall != NULL && gMarioState->wall->object == o && gMarioState->flags & MARIO_UNKNOWN_31) {
+    //     switch (gMarioState->wall->force) {
+    //         case 0:
+    //             if (o->oBehParams2ndByte <= 3) {
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
+    //             o->oBehParams2ndByte -= 4;
+    //             obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
+    //             if (obj == NULL || obj->os16F8 == 0) {
+    //                 o->oBehParams2ndByte += 4;
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
 
-                // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
-                //     o->oBehParams2ndByte += 4;
-                //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                //     break;
-                // }
-                break;
-            case 1:
-                if (o->oBehParams2ndByte % 4 == 0) {
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
-                o->oBehParams2ndByte -= 1;
-                obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
-                if (obj == NULL || obj->os16F8 == 0) {
-                    o->oBehParams2ndByte += 1;
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
+    //             // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
+    //             //     o->oBehParams2ndByte += 4;
+    //             //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //             //     break;
+    //             // }
+    //             break;
+    //         case 1:
+    //             if (o->oBehParams2ndByte % 4 == 0) {
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
+    //             o->oBehParams2ndByte -= 1;
+    //             obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
+    //             if (obj == NULL || obj->os16F8 == 0) {
+    //                 o->oBehParams2ndByte += 1;
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
 
-                // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
-                //     o->oBehParams2ndByte += 1;
-                //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                //     break;
-                // }
-                break;
-            case 2:
-                if (o->oBehParams2ndByte >= 12) {
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
-                o->oBehParams2ndByte += 4;
-                obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
-                if (obj == NULL || obj->os16F8 == 0) {
-                    o->oBehParams2ndByte -= 4;
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
+    //             // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
+    //             //     o->oBehParams2ndByte += 1;
+    //             //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //             //     break;
+    //             // }
+    //             break;
+    //         case 2:
+    //             if (o->oBehParams2ndByte >= 12) {
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
+    //             o->oBehParams2ndByte += 4;
+    //             obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
+    //             if (obj == NULL || obj->os16F8 == 0) {
+    //                 o->oBehParams2ndByte -= 4;
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
 
-                // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
-                //     o->oBehParams2ndByte -= 4;
-                //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                //     break;
-                // }
-                break;
-            case 3:
-                if (o->oBehParams2ndByte % 4 == 3) {
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
-                o->oBehParams2ndByte += 1;
-                obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
-                if (obj == NULL || obj->os16F8 == 0) {
-                    o->oBehParams2ndByte -= 1;
-                    play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                    break;
-                }
+    //             // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
+    //             //     o->oBehParams2ndByte -= 4;
+    //             //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //             //     break;
+    //             // }
+    //             break;
+    //         case 3:
+    //             if (o->oBehParams2ndByte % 4 == 3) {
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
+    //             o->oBehParams2ndByte += 1;
+    //             obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
+    //             if (obj == NULL || obj->os16F8 == 0) {
+    //                 o->oBehParams2ndByte -= 1;
+    //                 play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //                 break;
+    //             }
 
-                // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
-                //     o->oBehParams2ndByte -= 1;
-                //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
-                //     break;
-                // }
-                break;
-        }
-        obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
-        if (obj != NULL) {
-            o->oMoveAngleYaw = obj_angle_to_object(o, obj);
-        }
-    }
+    //             // if ((struct Object *)cur_obj_nearest_object_with_behavior(bhvSandCrab)->oBehParams2ndByte == o->oBehParams2ndByte) {
+    //             //     o->oBehParams2ndByte -= 1;
+    //             //     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
+    //             //     break;
+    //             // }
+    //             break;
+    //     }
+    //     obj = sOutsideObjs[o->oBehParams2ndByte % 4][o->oBehParams2ndByte / 4];
+    //     if (obj != NULL) {
+    //         o->oMoveAngleYaw = obj_angle_to_object(o, obj);
+    //     }
+    // }
 
-    o->os16F4 = o->oBehParams2ndByte % 4;
-    o->os16F6 = o->oBehParams2ndByte / 4;
-    if (sOutsideObjs[o->os16F4][o->os16F6] == NULL) {
-        return;
-    }
-    sOutsideObjs[o->os16F4][o->os16F6]->os16FA = 1;
-    x = o->oPosX;
-    z = o->oPosZ;
-    o->oPosX = approach_f32_symmetric(o->oPosX, sOutsideObjs[o->os16F4][o->os16F6]->oPosX, absf(20.0f * sins(o->oMoveAngleYaw)));
-    o->oPosZ = approach_f32_symmetric(o->oPosZ, sOutsideObjs[o->os16F4][o->os16F6]->oPosZ, absf(20.0f * coss(o->oMoveAngleYaw)));
+    // o->os16F4 = o->oBehParams2ndByte % 4;
+    // o->os16F6 = o->oBehParams2ndByte / 4;
+    // if (sOutsideObjs[o->os16F4][o->os16F6] == NULL) {
+    //     return;
+    // }
+    // sOutsideObjs[o->os16F4][o->os16F6]->os16FA = 1;
+    // x = o->oPosX;
+    // z = o->oPosZ;
+    // o->oPosX = approach_f32_symmetric(o->oPosX, sOutsideObjs[o->os16F4][o->os16F6]->oPosX, absf(20.0f * sins(o->oMoveAngleYaw)));
+    // o->oPosZ = approach_f32_symmetric(o->oPosZ, sOutsideObjs[o->os16F4][o->os16F6]->oPosZ, absf(20.0f * coss(o->oMoveAngleYaw)));
 
-    if (x != o->oPosX || z != o->oPosZ) {
-        cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
-    }
+    // if (x != o->oPosX || z != o->oPosZ) {
+    //     cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
+    // }
 }
 
 
@@ -548,19 +612,19 @@ void despawn_all_outside_mounds(void) {
 //F4 = column/horizontal
 //F6 = row/vertical
 void bhv_outside_mound_init(void) {
-    o->os16F4 = o->oBehParams2ndByte % 4;
-    o->os16F6 = o->oBehParams2ndByte / 4;
-    sOutsideObjs[o->os16F4][o->os16F6] = o;
+    // o->os16F4 = o->oBehParams2ndByte % 4;
+    // o->os16F6 = o->oBehParams2ndByte / 4;
+    // sOutsideObjs[o->os16F4][o->os16F6] = o;
 
-    o->os16F8 = o->oBehParams >> 24;
-    if (o->os16F8) {
-        o->oAction = 2;
-        o->oPosY -= 150.0f;
-    } else {
-        if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
-            s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]++;
-        }
-    }
+    // o->os16F8 = o->oBehParams >> 24;
+    // if (o->os16F8) {
+    //     o->oAction = 2;
+    //     o->oPosY -= 150.0f;
+    // } else {
+    //     if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
+    //         // s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]++;
+    //     }
+    // }
 
     // if (save_file_get_currency_flags() & (1 << 8)) {
     //     o->activeFlags = 0;
@@ -570,50 +634,50 @@ void bhv_outside_mound_init(void) {
 
 
 void bhv_outside_mound_loop(void) {
-    switch (o->oAction) {
-        case 0:
-            if (cur_obj_is_mario_ground_pounding_platform()) {
-                cur_obj_play_sound_1(SOUND_GENERAL_SWITCH_DOOR_OPEN);
-                o->oAction = 1;
-                outside_mounds_check_adjacent();
-                if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
-                    s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]--;
-                }
-            }
-            break;
-        case 1:
-            // cur_obj_play_sound_1(SOUND_ENV_MOVING_BIG_PLATFORM);
-            o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 0.0f, 0.2f);
-            if (o->header.gfx.scale[1] < 0.1f) {
-                o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.0f, 0.1f);
-                o->header.gfx.scale[2] = o->header.gfx.scale[0];
-                if (o->header.gfx.scale[0] < 0.1f) {
-                    o->oAction = 2;
-                    o->header.gfx.scale[0] = o->header.gfx.scale[1] = o->header.gfx.scale[2] = 1.0f;
-                    o->oPosY -= 150.0f;
-                    o->os16F8 = 1;
+    // switch (o->oAction) {
+    //     case 0:
+    //         if (cur_obj_is_mario_ground_pounding_platform()) {
+    //             cur_obj_play_sound_1(SOUND_GENERAL_SWITCH_DOOR_OPEN);
+    //             o->oAction = 1;
+    //             outside_mounds_check_adjacent();
+    //             if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
+    //                 // s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]--;
+    //             }
+    //         }
+    //         break;
+    //     case 1:
+    //         // cur_obj_play_sound_1(SOUND_ENV_MOVING_BIG_PLATFORM);
+    //         o->header.gfx.scale[1] = approach_f32_asymptotic(o->header.gfx.scale[1], 0.0f, 0.2f);
+    //         if (o->header.gfx.scale[1] < 0.1f) {
+    //             o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.0f, 0.1f);
+    //             o->header.gfx.scale[2] = o->header.gfx.scale[0];
+    //             if (o->header.gfx.scale[0] < 0.1f) {
+    //                 o->oAction = 2;
+    //                 o->header.gfx.scale[0] = o->header.gfx.scale[1] = o->header.gfx.scale[2] = 1.0f;
+    //                 o->oPosY -= 150.0f;
+    //                 o->os16F8 = 1;
 
-                    if (check_outside_mound_key()) {
-                        o->oBehParams = 8 << 24;
-                        spawn_default_star(o->oPosX, o->oPosY + 450.0f, o->oPosZ);
-                        despawn_all_outside_mounds();
-                    }
-                }
-            }
-            break;
-        case 2:
-            cur_obj_hide();
-            break;
-        case 3:
-            cur_obj_unhide();
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
-            if (o->oPosY == o->oHomeY) {
-                o->oAction = 0;
-                o->os16F8 = 0;
-                if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
-                    s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]++;
-                }
-            }
-            break;
-    }
+    //                 if (check_outside_mound_key()) {
+    //                     o->oBehParams = 8 << 24;
+    //                     spawn_default_star(o->oPosX, o->oPosY + 450.0f, o->oPosZ);
+    //                     despawn_all_outside_mounds();
+    //                 }
+    //             }
+    //         }
+    //         break;
+    //     case 2:
+    //         cur_obj_hide();
+    //         break;
+    //     case 3:
+    //         cur_obj_unhide();
+    //         o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
+    //         if (o->oPosY == o->oHomeY) {
+    //             o->oAction = 0;
+    //             o->os16F8 = 0;
+    //             if (sMoundToColor[o->oBehParams2ndByte] >= 0) {
+    //                 // s2DGateVals[sMoundToColor[o->oBehParams2ndByte]]++;
+    //             }
+    //         }
+    //         break;
+    // }
 }

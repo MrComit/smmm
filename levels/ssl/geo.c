@@ -71,3 +71,4 @@
 #include "levels/ssl/magic_carpet/geo.inc.c"
 #include "levels/ssl/toad_cage/geo.inc.c"
 #include "levels/ssl/map_l8/geo.inc.c"
+#include "levels/ssl/wall_button/geo.inc.c"
