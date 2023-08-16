@@ -2398,8 +2398,58 @@ s32 get_current_objective(void) {
 
 
 
+void print_starcoin_completion(void) {
+    s32 total = 0;
+    s32 count = 0;
+    s32 starCoins = save_file_get_currency_flags();
+    s8 totalString[4];
+    s8 countString[4];
+    s8 dashString[4];
+    switch (gCurrLevelNum) {
+        case LEVEL_CCM:
+            if (gCurrAreaIndex == 1) {
+                total = 5;
+                count = CL_count_bits(starCoins & 0b11111);
+            } else {
+                total = 3;
+                count = CL_count_bits(starCoins & 0b11100000000000000000);
+            }
+            break;
+        case LEVEL_BBH:
+            if (gCurrAreaIndex == 1) {
+                total = 5;
+                count = CL_count_bits(starCoins & 0b1111100000);
+            } else if (gCurrAreaIndex == 2) {
+                total = 2;
+                count = CL_count_bits(starCoins & 0b110000000000);
+            } else {
+                total = 5;
+                count = CL_count_bits(starCoins & 0b11111000000000000);
+            }
+            break;
+    }
 
+    if (count == total) {
+        gDPSetEnvColor(gDisplayListHead++, 0, 240, 0, gDialogTextAlpha);
+    }
 
+    int_to_str(total, totalString);
+    int_to_str(count, countString);
+    // countString[1] = 0x51;
+    countString[1] = 0xFF;
+    totalString[1] = 0xFA;
+    totalString[2] = 0xFF;
+    dashString[0] = 0x9F;
+    dashString[1] = 0x9F;
+    dashString[2] = 0x9F;
+    dashString[3] = 0xFF;
+
+    print_generic_string(160 - 4, 106, countString);
+    print_generic_string(160 - 10, 106 - 6, dashString);
+    print_generic_string(160 - 9, 106 - 16, totalString);
+
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+}
 
 
 
@@ -2465,6 +2515,9 @@ void render_pause_my_score_coins(void) {
                 print_generic_string(centerX, 140, sRoomCorrupt);
             }
             print_generic_string(centerX, 140, sRoomNames[gGlobalMarioRoom - 1]);
+        }
+        if (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH) {
+            print_starcoin_completion();
         }
 
 /*#ifndef VERSION_JP
