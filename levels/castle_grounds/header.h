@@ -49,4 +49,12 @@ extern const LevelScript level_castle_grounds_entry[];
 
 #include "levels/castle_grounds/dirt_pile/collision_header.h"
 
+#include "levels/castle_grounds/cg_elevator/geo_header.h"
+
+#include "levels/castle_grounds/cg_elevator/collision_header.h"
+
+#include "levels/castle_grounds/cg_spinner/geo_header.h"
+
+#include "levels/castle_grounds/cg_spinner/anim_header.h"
+
 #endif

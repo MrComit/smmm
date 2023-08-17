@@ -643,6 +643,8 @@
 // CASTLE GROUNDS
 #define MODEL_PLANT_GROW          0xFF
 #define MODEL_DIRT_PILE           0xFE
+#define MODEL_CG_ELEVATOR         0xFD
+#define MODEL_CG_SPINNER          0xFC
 
 
 // LEVEL 1 MODELS - 0xFF TO 0xE2 ARE FREE
@@ -731,6 +733,7 @@
 #define MODEL_BOTTLED_LAVA        0x5F
 #define MODEL_BAR_STOOL           0x60
 #define MODEL_RED_LIGHT_BUTTON    0x61
+#define MODEL_BALCONY_ELEVATOR    0x62
 
 // 0x6C-0x73
 

@@ -1,4 +1,5 @@
 #include "levels/ssl/l8_locked_cage/geo_header.h"
+#include "levels/castle_grounds/header.h"
 void obj_set_dist_from_home(f32 distFromHome);
 
 static struct ObjectHitbox sLightningHitbox = {
@@ -72,16 +73,115 @@ void bhv_moving_vine_loop(void) {
     obj_set_dist_from_home(o->oFloatFC);
 }
 
+static void const *sBalconyElevatorCols[] = {
+    balcony_elevator_collision,
+    cg_elevator_collision,
+};
+
+
+void bhv_balcony_elevator_init(void) {
+    o->collisionData = segmented_to_virtual(sBalconyElevatorCols[o->oBehParams2ndByte]);
+
+
+    if (o->oBehParams2ndByte == 1 && (save_file_get_newflags(1) & SAVE_TOAD_FLAG_BALCONY_ELEVATOR) == 0) {
+        o->activeFlags = 0;
+        return;
+    }
+    if (o->oBehParams2ndByte == 0) {
+        o->oObjF8 = spawn_object(o, MODEL_LIGHTNING_SPINNER, bhvLightningSpinner);
+    } else {
+        o->oObjF8 = spawn_object(o, MODEL_CG_SPINNER, bhvCGSpinner);
+    }
+    obj_scale(o->oObjF8, 0.8f);
+    o->oObjF8->oRoom = o->oRoom;
+    o->oObjF8->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+}
+
+
+void bhv_balcony_elevator_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (gMarioObject->platform == o) {
+                if (o->oTimer > 5) {
+                    o->oAction = 1;
+                    if ((save_file_get_newflags(1) & SAVE_TOAD_FLAG_BALCONY_ELEVATOR) == 0) {
+                        save_file_set_newflags(SAVE_TOAD_FLAG_BALCONY_ELEVATOR, 1);
+                    }
+                    if (o->oBehParams2ndByte == 0) {
+                        o->oFloatF4 = -20000.0f;
+                    } else {
+                        o->oFloatF4 = 20000.0f;
+                    }
+                }
+            } else {
+                o->oTimer = 0;
+            }
+            break;
+        case 1:
+            cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+            set_mario_npc_dialog(1);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloatF4, 20.0f);
+            if (o->oTimer == 40) {
+                sDelayedWarpArg = 0;
+                sDelayedWarpOp = 0x10;
+                sSourceWarpNodeId = 0xBA;
+                // val04 = !music_changed_through_warp(sSourceWarpNodeId);
+                sDelayedWarpTimer = 20;
+                play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
+            }
+            break;
+    }
+    if (o->oObjF8 != NULL) {
+        o->oObjF8->oPosY = o->oPosY + 60.0f;
+    }
+}
+
 
 
 void bhv_floating_plant_init(void) {
     struct Object *obj;
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FLOATING_PLANT) {
-        obj = spawn_object(o, MODEL_LIGHTNING_SPINNER, bhvLightningSpinner);
-        obj->oRoom = o->oRoom;
-        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        o->oObjF4 = spawn_object(o, MODEL_LIGHTNING_SPINNER, bhvLightningSpinner);
+        o->oObjF4->oRoom = o->oRoom;
+        o->oObjF4->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        if (CL_obj_nearest_object_behavior_params(bhvStarPiece, 0x05000000) != NULL) {
+            o->oPosY -= 6400.0f;
+        } else {
+            o->oAction = 1;
+        }
     } else {
-        o->activeFlags = 0;
+        cur_obj_disable();
+        o->oAction = 2;
+    }
+}
+
+
+void bhv_floating_plant_loop(void) {
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 30 && gMarioState->pos[1] <= gMarioState->floorHeight) {
+                cur_obj_unhide();
+                set_mario_npc_dialog(1);
+                gCamera->comitCutscene = 34;
+                gComitCutsceneTimer = 30;
+                gComitCutsceneObject = o;
+
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 60.0f);
+                o->oObjF4->oPosY = o->oPosY;
+                if (o->oPosY >= o->oHomeY) {
+                    o->oAction = 1;
+                    play_puzzle_jingle();
+                    set_mario_npc_dialog(0);
+                }
+            } else {
+                cur_obj_hide();
+            }
+            break;
+        case 1:
+            load_object_collision_model();
+            break;
+        case 2:
+            break;
     }
 }
 

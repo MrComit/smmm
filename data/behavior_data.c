@@ -7139,12 +7139,13 @@ const BehaviorScript bhvFloatingPlant[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     LOAD_COLLISION_DATA(floating_plant_collision),
-    // SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oDrawingDistance, 0x6000),
     // SET_FLOAT(oCollisionDistance, 0x7FFF),
+    SET_HOME(),
     CALL_NATIVE(bhv_floating_plant_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(load_object_collision_model),
-        // CALL_NATIVE(bhv_locked_cage_loop),
+        // CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_floating_plant_loop),
     END_LOOP(),
 };
 
@@ -12245,5 +12246,31 @@ const BehaviorScript bhvWallButton[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_wall_button_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvBalconyElevator[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO),
+    // LOAD_COLLISION_DATA(wall_button_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_balcony_elevator_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_balcony_elevator_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvCGSpinner[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, cg_spinner_anims),
+    SET_FLOAT(oDrawingDistance, 0x1000),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lightning_spinner_loop),
     END_LOOP(),
 };

@@ -22,3 +22,5 @@
 
 #include "levels/castle_grounds/plant_grow/geo.inc.c"
 #include "levels/castle_grounds/dirt_pile/geo.inc.c"
+#include "levels/castle_grounds/cg_elevator/geo.inc.c"
+#include "levels/castle_grounds/cg_spinner/geo.inc.c"

@@ -29,6 +29,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -97,6 +99,7 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BOTTLED_LAVA, bottled_lava_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BAR_STOOL, bar_stool_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_LIGHT_BUTTON, red_light_button_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BALCONY_ELEVATOR, balcony_elevator_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T, prospector_t_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
@@ -121,12 +124,15 @@ const LevelScript level_wf_entry[] = {
 		WARP_NODE(0x0F, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x05, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xB5, LEVEL_WF, 0x01, 0xB5, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xBA, LEVEL_CASTLE_GROUNDS, 0x01, 0x0C, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xBB, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6601, 200, -7121, 0, -180, 0, (0xE << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, -42, 200, -18584, 0, 0, 0, (0xF << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6621, 359, -12383, 0, -180, 0, (0x5 << 16), bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 7032, 105, -13596, 0, 90, 0, (0xB5 << 16), bhvFlyingWarp),
+		OBJECT(MODEL_NONE, 271, 200, 7389, 0, 90, 0, 0x00BB0000, bhvFlyingWarp),
 		MARIO_POS(0x01, 0, 2057, 200, -18319),
 		OBJECT(MODEL_BREAKABLE_BOX, -397, 1917, -6410, 0, 0, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, -505, 1735, -7952, 0, 0, 0, 0x00000000, bhvHiddenObject),
@@ -209,6 +215,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_BOTTLED_LAVA, -764, 1218, -1965, 0, 27, 0, (80 << 16), bhvBottledLava),
 		OBJECT(MODEL_BOTTLED_LAVA, 2327, 1218, -2173, 0, 0, 0, (80 << 16), bhvBottledLava),
 		OBJECT(MODEL_BAR_STOOL, -1107, -148, 365, 0, 0, 0, (2 << 16), bhvRedStool),
+		OBJECT(MODEL_BALCONY_ELEVATOR, -239, 0, 7389, 0, 0, 0, 0x00000000, bhvBalconyElevator),
 		OBJECT(MODEL_BOO_COIN, -810, 2266, 14226, 0, 0, 0, 0x00000000, bhvBooCoin),
 		OBJECT(MODEL_HAUNTED_CAGE, 1738, 2800, 7428, 0, 0, 0, 0x00000200, bhvBooCoinCage),
 		OBJECT(MODEL_BOO_COIN, 988, 2291, 15419, 0, 0, 0, 0x00000000, bhvBooCoin),

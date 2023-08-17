@@ -996,6 +996,8 @@ extern const BehaviorScript bhvFridgeEntrance[];
 extern const BehaviorScript bhvGreenButton[];
 extern const BehaviorScript bhvCastleEnvFlame[];
 extern const BehaviorScript bhvWallButton[];
+extern const BehaviorScript bhvBalconyElevator[];
+extern const BehaviorScript bhvCGSpinner[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -36,3 +36,8 @@
 #include "levels/castle_grounds/plant_grow/model.inc.c"
 #include "levels/castle_grounds/dirt_pile/model.inc.c"
 #include "levels/castle_grounds/dirt_pile/collision.inc.c"
+#include "levels/castle_grounds/cg_elevator/model.inc.c"
+#include "levels/castle_grounds/cg_elevator/collision.inc.c"
+#include "levels/castle_grounds/cg_spinner/model.inc.c"
+#include "levels/castle_grounds/cg_spinner/anims/data.inc.c"
+#include "levels/castle_grounds/cg_spinner/anims/table.inc.c"

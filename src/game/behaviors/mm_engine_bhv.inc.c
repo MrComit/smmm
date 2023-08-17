@@ -173,20 +173,25 @@ void bhv_dirt_pile_loop(void) {
     s32 whichSide = 0;
     switch (o->oAction) {
         case 0:
-            if (m->wall != NULL && m->wall->object == o && m->flags & MARIO_UNKNOWN_31) {
-                o->oForwardVel = 10.0f;
-                o->oMoveAngleYaw = (s16)((o->oAngleToMario - 0x8000) + 0x2000) & 0xC000;
-                CL_Move();
-                m->pos[0] += o->oVelX;
-                m->pos[2] += o->oVelZ;
-                if (cur_obj_lateral_dist_to_home() > 300.0f) {
-                    o->oAction = 1;
-                    obj = cur_obj_nearest_object_with_behavior(bhvCastlePlant);
-                    if (obj != NULL) {
-                        obj->oAction = 1;
-                        play_puzzle_jingle();
-                        save_file_set_newflags(SAVE_NEW_FLAG_FLOATING_PLANT, 0);
-                    }
+            if (cur_obj_is_mario_ground_pounding_platform()) {
+                o->oAction = 1;
+                o->oFloatF4 = 1.0f;
+            }
+            break;
+        case 1:
+            o->header.gfx.scale[0] -= 0.01f;
+            o->header.gfx.scale[2] = o->header.gfx.scale[0];
+            o->header.gfx.scale[1] -= 0.08f;
+            
+            if (o->header.gfx.scale[1] <= 0.05f) {
+                o->activeFlags = 0;
+                spawn_mist_particles();
+
+                obj = cur_obj_nearest_object_with_behavior(bhvCastlePlant);
+                if (obj != NULL && dist_between_objects(o, obj) < 1500.0f) {
+                    obj->oAction = 1;
+                    play_puzzle_jingle();
+                    save_file_set_newflags(SAVE_NEW_FLAG_FLOATING_PLANT, 0);
                 }
             }
             break;
@@ -203,7 +208,13 @@ void bhv_castle_plant_init(void) {
 
 void bhv_castle_plant_loop(void) {
     switch (o->oAction) {
+        case 0:
+            o->oFaceAngleYaw = 0x1111;
+            o->oFaceAnglePitch = 0xA00;
+            break;
         case 1:
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, 0, 0x170);
+            o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0xC0);
             o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 0.5f);
             o->oPosY += o->oFloatF4;
             if (o->oPosY - o->oHomeY > 5000.0f) {

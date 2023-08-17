@@ -1267,6 +1267,9 @@ void bhv_castle_flame_init(void);
 void bhv_l1_room_gate_init(void);
 void bhv_wall_button_init(void);
 void bhv_wall_button_loop(void);
+void bhv_floating_plant_loop(void);
+void bhv_balcony_elevator_init(void);
+void bhv_balcony_elevator_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

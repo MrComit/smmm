@@ -135,3 +135,5 @@
 #include "levels/wf/bar_stool/model.inc.c"
 #include "levels/wf/bar_stool/collision.inc.c"
 #include "levels/wf/red_light_button/model.inc.c"
+#include "levels/wf/balcony_elevator/model.inc.c"
+#include "levels/wf/balcony_elevator/collision.inc.c"
