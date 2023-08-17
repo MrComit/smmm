@@ -575,16 +575,19 @@ DEFINE_DIALOG(DIALOG_052, 1, 6, 30, 200, _("\
 Journal Entry 05\n\
 July 2nd, 2033. \n\
 Today I made a new friend.\n\
-Well, he's technically me.\n\
-But it still counts! He's so\n\
-much fun to hang around.\n\
-He wrote that part, not me.\n\
-Well, it was written by ME but\n\
-not ME ME. Oh there I go\n\
-explaining myself again, as if\n\
-anyone else is gonna read this.\n\
+Well, he's technically just\n\
+a clone of me. But it still\n\
+counts!\n\
+He's so much fun to hang \n\
+around. He wrote that part,\n\
+not me. Well, it was written\n\
+by ME but not ME ME. \n\
 \n\
-I'm just writing this for me.\n\
+\n\
+Oh there I go explaining myself\n\
+again, as if anyone else is\n\
+gonna read this. I'm just\n\
+writing this for me.\n\
 And also me I suppose."))
 
 DEFINE_DIALOG(DIALOG_053, 1, 5, 30, 200, _("\
@@ -630,9 +633,9 @@ portal to the Thought Realm.\n\
 Once I turn it on, I will be\n\
 able to seamlessly transform\n\
 my thoughts into matter.\n\
-\n\
-\n\
-Any idea, any plan, any\n\
+Cloning myself was just\n\
+the start.\n\
+Now any idea, any plan, any\n\
 invention hypothetically\n\
 possible or impossible will\n\
 be at my fingertips.\n\
@@ -672,7 +675,10 @@ merely spoken into existence\n\
 by a thought inside the head\n\
 of the real me.\n\
 I don't know. All I know is\n\
-that it's cold, and I feel\n\
+that it's cold, and I don't\n\
+see any sign of my clone\n\
+being around here.\n\
+Despite all of this, I feel\n\
 a strange presence urging me\n\
 to keep moving forward."))
 
@@ -699,7 +705,7 @@ reason that it could contain\n\
 the portal itself.\n\
 The odds may be slim, but at\n\
 this point, it's my only hope\n\
-for ever finding my way home.\n\
+of ever finding my way home.\n\
 \n\
 \n\
 I still feel the presence\n\

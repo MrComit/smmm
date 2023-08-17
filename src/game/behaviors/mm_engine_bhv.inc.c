@@ -209,11 +209,11 @@ void bhv_castle_plant_init(void) {
 void bhv_castle_plant_loop(void) {
     switch (o->oAction) {
         case 0:
-            o->oFaceAngleYaw = 0x1111;
+            o->oFaceAngleYaw = 0x9111;
             o->oFaceAnglePitch = 0xA00;
             break;
         case 1:
-            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, 0, 0x170);
+            o->oFaceAngleYaw = approach_s16_symmetric(o->oFaceAngleYaw, 0x8000, 0x170);
             o->oFaceAnglePitch = approach_s16_symmetric(o->oFaceAnglePitch, 0, 0xC0);
             o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 30.0f, 0.5f);
             o->oPosY += o->oFloatF4;
@@ -1320,6 +1320,10 @@ void bhv_friend_toad_init(void) {
         //o->oToadMessageState = TOAD_MESSAGE_FADED;
         //o->oOpacity = 81;
         o->oInteractionSubtype = INT_SUBTYPE_NPC;
+    
+    if (gCurrLevelNum != LEVEL_SSL && gCurrLevelNum != LEVEL_DDD && gCurrLevelNum != LEVEL_SL) {
+        o->os16112 = 2;
+    }
 }
 
 extern s32 gRedCoinMissionActive;

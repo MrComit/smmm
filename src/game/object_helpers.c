@@ -749,6 +749,7 @@ Gfx *geo_update_plathall_floor(s32 callContext, struct GraphNode *node, UNUSED v
 Gfx *geo_update_golden_crate(s32 callContext, struct GraphNode *node, UNUSED void *context) {
     s32 i;
     s32 dist;
+    s32 baseDist;
     Vtx *vert;
     Vec3s marioPos;
     struct Object *obj;
@@ -766,8 +767,15 @@ Gfx *geo_update_golden_crate(s32 callContext, struct GraphNode *node, UNUSED voi
             if (((obj->oBehParams >> 8) & 0xFF) == 10 || ((obj->oBehParams >> 8) & 0xFF) == 11) {
                 dist = 0;
             }
-            if (dist <= 400*400*2) {
-                vert[i].v.cn[3] = ((f32)(400*400*2 - dist) / (f32)(400*400*2) * 255);
+
+            if (gCurrLevelNum == LEVEL_WF) {
+                baseDist = 900*900*2;
+            } else {
+                baseDist = 400*400*2;
+            }
+
+            if (dist <= baseDist) {
+                vert[i].v.cn[3] = ((f32)(baseDist - dist) / (f32)(baseDist) * 255);
             } else if (vert[i].v.cn[3] != 0) {
                 vert[i].v.cn[3] = 0;
             }
