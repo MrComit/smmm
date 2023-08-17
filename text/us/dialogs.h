@@ -1211,12 +1211,11 @@ DEFINE_DIALOG(DIALOG_103, 1, 2, 95, 200, _("\
 Need another lift?\n\
 Hop on."))
 
-DEFINE_DIALOG(DIALOG_104, 1, 5, 30, 200, _("\
-The shadowy star in front\n\
-of you is a 『Star\n\
-Marker.』 When you collect\n\
-all 8 Red Coins, the Star\n\
-will appear here."))
+DEFINE_DIALOG(DIALOG_104, 1, 3, 30, 200, _("\
+(Open the Pause Menu to see\n\
+how many star coins there are\n\
+in this area!)\n\
+..."))
 
 DEFINE_DIALOG(DIALOG_105, 1, 3, 95, 200, _("\
 Ready for blastoff! Come\n\

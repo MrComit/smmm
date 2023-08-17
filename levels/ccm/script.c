@@ -194,6 +194,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_TOY_TOAD, 16469, -161, -11600, 0, 90, 0, (DIALOG_008 << 24) | (4 << 16), bhvToyToad),
 		OBJECT(MODEL_TOY_TOAD, 20392, 5839, -12571, 0, -180, 0, (0 << 24) | (DIALOG_034 << 16), bhvTrappedToyToad),
 		OBJECT(MODEL_TOY_TOAD, 6283, 379, -2473, 0, -135, 0, (DIALOG_065 << 24), bhvToyToad),
+		OBJECT(MODEL_TOY_TOAD, 3654, 379, 1929, 0, 120, 0, (DIALOG_104 << 24), bhvToyToad),
 		OBJECT(MODEL_BLUE_COIN, 3469, 930, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 3120, 1063, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN, 4627, 2470, -4915, 0, -90, 0, 0x00000000, bhvHiddenBlueCoin),
