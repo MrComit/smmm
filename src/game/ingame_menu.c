@@ -2963,15 +2963,17 @@ s16 render_pause_courses_and_castle(void) {
 
         case DIALOG_STATE_VERTICAL:
             shade_screen();
-            if (gMenuROptions) {
-                render_pause_options();
-            } else if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
-                render_pause_my_score_coins();
-            }
-            
-            render_pause_red_coins();
-            if (gGreenCoinsCollected) {
-                render_pause_green_coins();
+            if (gCurrCourseNum < 11) {
+                if (gMenuROptions) {
+                    render_pause_options();
+                } else if (gCurrCourseNum >= COURSE_MIN && gCurrCourseNum <= COURSE_MAX) {
+                    render_pause_my_score_coins();
+                }
+                
+                render_pause_red_coins();
+                if (gGreenCoinsCollected) {
+                    render_pause_green_coins();
+                }
             }
 
             // if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
@@ -2983,17 +2985,19 @@ s16 render_pause_courses_and_castle(void) {
             gSPDisplayList(gDisplayListHead++, map_overlay_Overlay_mesh);
             gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 
-            render_hud_starpieces();
-            render_hud_coins();
-            render_hud_boos();
-            render_hud_keys();
-            render_hud_broken_key();
-			if (gCurrLevelNum == LEVEL_DDD) {
-				render_boss_health();
-			}
-			if (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH) {
-				render_hud_stars();
-			}
+            if (gCurrCourseNum < 11) {
+                render_hud_starpieces();
+                render_hud_coins();
+                render_hud_boos();
+                render_hud_keys();
+                render_hud_broken_key();
+                if (gCurrLevelNum == LEVEL_DDD) {
+                    render_boss_health();
+                }
+                if (gCurrLevelNum == LEVEL_CCM || gCurrLevelNum == LEVEL_BBH) {
+                    render_hud_stars();
+                }
+            }
 
             if (gPlayer3Controller->buttonPressed & A_BUTTON
                 || gPlayer3Controller->buttonPressed & START_BUTTON)
@@ -3039,38 +3043,40 @@ s16 render_pause_courses_and_castle(void) {
     // #if defined(WIDE)
     //     render_widescreen_setting();
     // #endif
-    saveFlag = save_file_get_newflags(1) & SAVE_TOAD_FLAG_INTRODUCTION;
+    if (gCurrCourseNum < 11) {
+        saveFlag = save_file_get_newflags(1) & SAVE_TOAD_FLAG_INTRODUCTION;
 #ifdef SMMM_DEBUG
-    saveFlag = 1;
+        saveFlag = 1;
 #endif
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
-        optionsY -= 38;
-    } else if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
-        optionsY -= 16;
-    }
-
-    if (gMenuROptions) {
-        print_generic_string(243, optionsY, textRBack);
-    } else {
-        print_generic_string(243, optionsY, textROptions);
-    }
-    if (gCurrCourseNum > 0 && gCurrCourseNum <= 8 && saveFlag) {
-        print_generic_string(24, 206, textLRoomManager);
-
-        if (gPlayer1Controller->buttonPressed & L_TRIG) {
-            gMenuMode = MENU_MODE_MAP;
-            gMapModeInit = 0;
-            init_map();
+        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+            optionsY -= 38;
+        } else if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
+            optionsY -= 16;
         }
+
+        if (gMenuROptions) {
+            print_generic_string(243, optionsY, textRBack);
+        } else {
+            print_generic_string(243, optionsY, textROptions);
+        }
+        if (gCurrCourseNum > 0 && gCurrCourseNum <= 8 && saveFlag) {
+            print_generic_string(24, 206, textLRoomManager);
+
+            if (gPlayer1Controller->buttonPressed & L_TRIG) {
+                gMenuMode = MENU_MODE_MAP;
+                gMapModeInit = 0;
+                init_map();
+            }
+        }
+        if (gPlayer1Controller->buttonPressed & R_TRIG) {
+            gMenuROptions ^= 1;
+            gDialogOptionsIndex = 1;
+        }
+        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     }
-    if (gPlayer1Controller->buttonPressed & R_TRIG) {
-        gMenuROptions ^= 1;
-        gDialogOptionsIndex = 1;
-    }
-    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;
@@ -4671,7 +4677,7 @@ void print_name_string(s16 x, s16 y, u8 alpha, const u8 *str) {
 
 void print_room_names(void) {
     s16 y;
-    if (gCurrCourseNum > COURSE_MAX || gCurrCourseNum < COURSE_MIN) {
+    if (gCurrCourseNum > 10 || gCurrCourseNum < COURSE_MIN) {
         return;
     }
     if (gMarioCurrentRoom != gMarioPreviousRoom2) {

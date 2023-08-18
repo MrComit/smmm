@@ -1317,7 +1317,7 @@ s32 play_mode_normal(void) {
             // save_file_reload();
             level_trigger_warp(gMarioState, WARP_OP_DEMO_NEXT);
         }
-    } else {
+    } else if (gCurrCourseNum < 11) {
         gSaveBuffer.files[gCurrSaveFileNum - 1][0].ingameTime++;
     }
 

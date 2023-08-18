@@ -619,6 +619,11 @@ s8 gGlobalMarioRoom = 0;
 void mario_update_room_clear(struct MarioState *m) {
     u32 index = 0;
     u32 room = gGlobalMarioRoom;
+
+    if (gCurrCourseNum > 10) {
+        return;
+    }
+
     while (room > 32) {
         room -= 32;
         index++;

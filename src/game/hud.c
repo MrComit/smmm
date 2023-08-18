@@ -1598,6 +1598,19 @@ void render_hud(void) {
 		}
         create_dl_ortho_matrix();
 
+		if (gCurrCourseNum >= 11) {
+			if (hudDisplayFlags & HUD_DISPLAY_FLAG_CAMERA_AND_POWER && (gCamera->comitCutscene < 29 || gCamera->comitCutscene > 31)) {
+				render_hud_power_meter();
+				//render_hud_camera_status();
+			}
+
+			// if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
+				render_hud_timer();
+			// }
+			return;
+		}
+
+
 		// check if mario has starpiece tracker
 		if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_TRACKER_1 && !(save_file_get_options() & SAVE_OPTION_TRACKER)) {
 			if (CL_obj_find_nearest_object_with_behavior_room(gCurrentObject, bhvStarPiece, gMarioCurrentRoom)) {
