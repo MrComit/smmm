@@ -42,6 +42,9 @@ void bhv_burner_init(void) {
         o->oAction = 2;
     }
 
+    if (gCurrLevelNum == LEVEL_WDW) {
+        o->collisionData = segmented_to_virtual(c1_burner_collision);
+    }
 }
 
 

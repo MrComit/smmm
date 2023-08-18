@@ -1,5 +1,6 @@
 #include "levels/bob/tv_static/geo_header.h"
 #include "levels/sl/header.h"
+#include "levels/wdw/header.h"
 struct ObjectHitbox sRemoteHitbox = {
     /* interactType: */ INTERACT_COIN,
     /* downOffset: */ 0,
@@ -113,6 +114,7 @@ static void const *sCushionCollision[] = {
     cushion_collision,
     blue_cushion_collision,
     purple_cushion_collision,
+    c1_cushion_collision,
 };
 
 void bhv_cushion_init(void) {

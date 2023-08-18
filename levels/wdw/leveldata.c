@@ -36,3 +36,10 @@
 #include "levels/wdw/rotating_platform/collision.inc.c"
 #include "levels/wdw/areas/1/movtext.inc.c"
 #include "levels/wdw/areas/2/movtext.inc.c"
+
+#include "levels/wdw/leveldata.inc.c"
+
+#include "levels/wdw/c1_burner/model.inc.c"
+#include "levels/wdw/c1_burner/collision.inc.c"
+#include "levels/wdw/c1_cushion/collision.inc.c"
+#include "levels/wdw/c1_cushion/model.inc.c"

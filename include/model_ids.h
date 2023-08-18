@@ -1013,7 +1013,9 @@
 #define MODEL_LOUNGE_BLOCKER      0xEE
 
 
-
+// CHALLENGE 1 MODELS - 0xFF TO 0xE2 ARE FREE
+#define MODEL_C1_CUSHION          0xFF
+#define MODEL_C1_BURNER           0xFE
 
 
 #endif // MODEL_IDS_H
