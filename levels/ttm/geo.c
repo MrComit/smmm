@@ -43,3 +43,11 @@
 #include "levels/ttm/star_smiley/geo.inc.c"
 #include "levels/ttm/moon_smiley/geo.inc.c"
 #include "levels/ttm/slide_exit_podium/geo.inc.c"
+
+#include "levels/ttm/geo.inc.c"
+
+#include "levels/ttm/c2_lemon/geo.inc.c"
+#include "levels/ttm/c2_moving_vine/geo.inc.c"
+#include "levels/ttm/c2_bouncy_bed/geo.inc.c"
+#include "levels/ttm/c2_lightning_spinner/geo.inc.c"
+#include "levels/ttm/c2_lightning_strike/geo.inc.c"

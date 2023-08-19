@@ -7270,6 +7270,9 @@ struct CameraTrigger sCamDDD[] = {
 struct CameraTrigger sCamWDW[] = {
 	NULL_TRIGGER
 };
+struct CameraTrigger sCamTTM[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
     NULL,
     #include "levels/level_defines.h"

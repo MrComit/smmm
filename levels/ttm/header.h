@@ -111,4 +111,23 @@ extern const MacroObject ttm_seg7_area_4_macro_objs[];
 // script
 extern const LevelScript level_ttm_entry[];
 
+
+#include "levels/ttm/header.inc.h"
+
+#include "levels/ttm/c2_lemon/geo_header.h"
+
+#include "levels/ttm/c2_lemon/collision_header.h"
+
+#include "levels/ttm/c2_moving_vine/geo_header.h"
+
+#include "levels/ttm/c2_bouncy_bed/geo_header.h"
+
+#include "levels/ttm/c2_bouncy_bed/collision_header.h"
+
+#include "levels/ttm/c2_lightning_spinner/geo_header.h"
+
+#include "levels/ttm/c2_lightning_strike/geo_header.h"
+
+#include "levels/ttm/c2_lightning_spinner/anim_header.h"
+
 #endif

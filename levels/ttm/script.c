@@ -3,6 +3,7 @@
 #include "behavior_data.h"
 #include "model_ids.h"
 #include "seq_ids.h"
+#include "dialog_ids.h"
 #include "segment_symbols.h"
 #include "level_commands.h"
 
@@ -12,179 +13,87 @@
 
 #include "actors/common1.h"
 
+/* Fast64 begin persistent block [includes] */
+/* Fast64 end persistent block [includes] */
+
 #include "make_const_nonconst.h"
 #include "levels/ttm/header.h"
 
-static const LevelScript script_func_local_1[] = {
-    OBJECT(/*model*/ MODEL_TTM_ROLLING_LOG,    /*pos*/  4360, -1722,  4001, /*angle*/ 0,  48, 0, /*behParam*/ 0x00000000, /*beh*/ bhvTtmRollingLog),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_2[] = {
-    OBJECT(/*model*/ MODEL_NONE,               /*pos*/ -1639,  1146, -1742, /*angle*/ 0,   0, 0, /*behParam*/ 0x00010000, /*beh*/ bhvTtmBowlingBallSpawner),
-    OBJECT(/*model*/ MODEL_NONE,               /*pos*/  3295, -3692,  2928, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvWaterfallSoundLoop),
-    OBJECT(/*model*/ MODEL_NONE,               /*pos*/  2004, -1580,  1283, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvWaterfallSoundLoop),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2077, -1023, -1969, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2500, -1023, -2157, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2048, -1023, -2307, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2351, -1023, -2416, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2400, -2559, -2185, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -1435, -2559, -3118, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -1677, -2559, -3507, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -1869, -2559, -2704, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_DL_MONTY_MOLE_HOLE, /*pos*/ -2525, -2559, -2626, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMoleHole),
-    OBJECT(/*model*/ MODEL_MONTY_MOLE,         /*pos*/     0,     0,     0, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvMontyMole),
-    OBJECT(/*model*/ MODEL_MONTY_MOLE,         /*pos*/     0,     0,     0, /*angle*/ 0,   0, 0, /*behParam*/ 0x00010000, /*beh*/ bhvMontyMole),
-    OBJECT(/*model*/ MODEL_NONE,               /*pos*/  3625,   560,   165, /*angle*/ 0, 330, 0, /*behParam*/ 0x00000000, /*beh*/ bhvCloud),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_UKIKI,              /*pos*/   729,  2307,   335, /*angle*/ 0,   0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvUkiki,       /*acts*/ ACT_2),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_UKIKI,              /*pos*/  1992, -1548,  2944, /*angle*/ 0,   0, 0, /*behParam*/ 0x00010000, /*beh*/ bhvUkiki,       /*acts*/ ALL_ACTS),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_3[] = {
-    OBJECT_WITH_ACTS(/*model*/ MODEL_STAR,           /*pos*/  1200,  2600,   150, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStar,              /*acts*/ ACT_1),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_TTM_STAR_CAGE,  /*pos*/  2496,  1670,  1492, /*angle*/ 0, 0, 0, /*behParam*/ 0x01000000, /*beh*/ bhvUkikiCage,         /*acts*/ ACT_2),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_NONE,           /*pos*/ -3250, -2500, -3700, /*angle*/ 0, 0, 0, /*behParam*/ 0x02000000, /*beh*/ bhvHiddenRedCoinStar, /*acts*/ ALL_ACTS),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_STAR,           /*pos*/ -2900, -2700,  3650, /*angle*/ 0, 0, 0, /*behParam*/ 0x03000000, /*beh*/ bhvStar,              /*acts*/ ALL_ACTS),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_STAR,           /*pos*/  1800,  1200,  1050, /*angle*/ 0, 0, 0, /*behParam*/ 0x04000000, /*beh*/ bhvStar,              /*acts*/ ALL_ACTS),
-    OBJECT_WITH_ACTS(/*model*/ MODEL_STAR,           /*pos*/  7300, -3100,  1300, /*angle*/ 0, 0, 0, /*behParam*/ 0x05000000, /*beh*/ bhvStar,              /*acts*/ ALL_ACTS),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_4[] = {
-    OBJECT(/*model*/ MODEL_TTM_BLUE_SMILEY,   /*pos*/  4389,  3620,   624, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_YELLOW_SMILEY, /*pos*/ -1251,  2493,  2224, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_STAR_SMILEY,   /*pos*/ -2547,  1365,  -520, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_MOON_SMILEY,   /*pos*/  -324,   989, -4090, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_5[] = {
-    OBJECT(/*model*/ MODEL_TTM_BLUE_SMILEY,   /*pos*/  7867,  -959, -6085, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_BLUE_SMILEY,   /*pos*/ -5241,  5329,  9466, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_YELLOW_SMILEY, /*pos*/ -1869, -5311,  7358, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_STAR_SMILEY,   /*pos*/ -9095,  4262,  5348, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_MOON_SMILEY,   /*pos*/ -8477,   730, -7122, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_MOON_SMILEY,   /*pos*/  6160, -6076,  7861, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_6[] = {
-    OBJECT(/*model*/ MODEL_TTM_YELLOW_SMILEY, /*pos*/  5157,  1974, -8292, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_STAR_SMILEY,   /*pos*/ 11106,  2588,   381, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    OBJECT(/*model*/ MODEL_TTM_MOON_SMILEY,   /*pos*/    37,  1974, -1124, /*angle*/ 0, 0, 0, /*behParam*/ 0x00000000, /*beh*/ bhvStaticObject),
-    RETURN(),
-};
-
-static const LevelScript script_func_local_7[] = {
-    RETURN(),
-};
+/* Fast64 begin persistent block [scripts] */
+/* Fast64 end persistent block [scripts] */
 
 const LevelScript level_ttm_entry[] = {
-    INIT_LEVEL(),
-    LOAD_YAY0(        /*seg*/ 0x07, _ttm_segment_7SegmentRomStart, _ttm_segment_7SegmentRomEnd),
-    LOAD_YAY0_TEXTURE(/*seg*/ 0x09, _mountain_yay0SegmentRomStart, _mountain_yay0SegmentRomEnd),
-    LOAD_YAY0(        /*seg*/ 0x0A, _water_skybox_yay0SegmentRomStart, _water_skybox_yay0SegmentRomEnd),
-    LOAD_YAY0(        /*seg*/ 0x05, _group6_yay0SegmentRomStart, _group6_yay0SegmentRomEnd),
-    LOAD_RAW(         /*seg*/ 0x0C, _group6_geoSegmentRomStart,  _group6_geoSegmentRomEnd),
-    LOAD_YAY0(        /*seg*/ 0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd),
-    LOAD_RAW(         /*seg*/ 0x0F, _common0_geoSegmentRomStart,  _common0_geoSegmentRomEnd),
-    ALLOC_LEVEL_POOL(),
-    MARIO(/*model*/ MODEL_MARIO, /*behParam*/ 0x00000001, /*beh*/ bhvMario),
-    JUMP_LINK(script_func_global_1),
-    JUMP_LINK(script_func_global_7),
-    LOAD_MODEL_FROM_GEO(MODEL_TTM_SLIDE_EXIT_PODIUM, ttm_geo_000DF4),
-    LOAD_MODEL_FROM_GEO(MODEL_TTM_ROLLING_LOG,       ttm_geo_000730),
-    LOAD_MODEL_FROM_GEO(MODEL_TTM_STAR_CAGE,        ttm_geo_000710),
-    LOAD_MODEL_FROM_GEO(MODEL_TTM_BLUE_SMILEY,       ttm_geo_000D14),
-    LOAD_MODEL_FROM_GEO(MODEL_TTM_YELLOW_SMILEY,     ttm_geo_000D4C),
-    LOAD_MODEL_FROM_GEO(MODEL_TTM_STAR_SMILEY,       ttm_geo_000D84),
-    LOAD_MODEL_FROM_GEO(MODEL_TTM_MOON_SMILEY,       ttm_geo_000DBC),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_03,     ttm_geo_000748),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_04,     ttm_geo_000778),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_05,     ttm_geo_0007A8),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_06,     ttm_geo_0007D8),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_07,     ttm_geo_000808),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_08,     ttm_geo_000830),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_09,     ttm_geo_000858),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_0A,     ttm_geo_000880),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_0B,     ttm_geo_0008A8),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_0C,     ttm_geo_0008D0),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_0D,     ttm_geo_0008F8),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_0F,     ttm_geo_000920),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_10,     ttm_geo_000948),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_11,     ttm_geo_000970),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_12,     ttm_geo_000990),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_13,     ttm_geo_0009C0),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_14,     ttm_geo_0009F0),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_15,     ttm_geo_000A18),
-    LOAD_MODEL_FROM_GEO(MODEL_LEVEL_GEOMETRY_16,     ttm_geo_000A40),
+	INIT_LEVEL(),
+	LOAD_YAY0(0x07, _ttm_segment_7SegmentRomStart, _ttm_segment_7SegmentRomEnd), 
+	LOAD_YAY0_TEXTURE(0x09, _mountain_yay0SegmentRomStart, _mountain_yay0SegmentRomEnd), 
+	LOAD_YAY0(0x0A, _CUSTOM_L8_skybox_yay0SegmentRomStart, _CUSTOM_L8_skybox_yay0SegmentRomEnd), 
+	LOAD_YAY0(0x05, _group6_yay0SegmentRomStart, _group6_yay0SegmentRomEnd), 
+	LOAD_RAW(0x0C, _group6_geoSegmentRomStart, _group6_geoSegmentRomEnd), 
+	LOAD_YAY0(0x08, _common0_yay0SegmentRomStart, _common0_yay0SegmentRomEnd), 
+	LOAD_RAW(0x0F, _common0_geoSegmentRomStart, _common0_geoSegmentRomEnd), 
+	ALLOC_LEVEL_POOL(),
+	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
+	JUMP_LINK(script_func_global_1), 
+	JUMP_LINK(script_func_global_7), 
+	LOAD_MODEL_FROM_GEO(MODEL_C2_LEMON, c2_lemon_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_C2_MOVING_VINE, c2_moving_vine_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_C2_BOUNCY_BED, c2_bouncy_bed_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_C2_LIGHTNING_SPINNER, c2_lightning_spinner_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_C2_LIGHTNING_STRIKE, c2_lightning_strike_geo), 
 
-    AREA(/*index*/ 1, ttm_geo_000A70),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/   102, -3332,  5734, /*angle*/ 0,   45, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvSpinAirborneWarp),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/ -2447, -2457,  3952, /*angle*/ 0, -105, 0, /*behParam*/ 0x00140000, /*beh*/ bhvAirborneWarp),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/  2267, -3006, -3788, /*angle*/ 0,  148, 0, /*behParam*/ 0x00150000, /*beh*/ bhvFadingWarp),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/  -557, -3448, -4146, /*angle*/ 0, -168, 0, /*behParam*/ 0x00160000, /*beh*/ bhvFadingWarp),
-        WARP_NODE(/*id*/ 0x0A, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x01, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0x14, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x01, /*destNode*/ 0x14, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0x15, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x01, /*destNode*/ 0x16, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0x16, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x01, /*destNode*/ 0x15, /*flags*/ WARP_NO_CHECKPOINT),
-        PAINTING_WARP_NODE(/*id*/ 0x00, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x02, /*destNode*/ 0x0A, /*flags*/ WARP_CHECKPOINT),
-        PAINTING_WARP_NODE(/*id*/ 0x01, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x02, /*destNode*/ 0x0A, /*flags*/ WARP_CHECKPOINT),
-        PAINTING_WARP_NODE(/*id*/ 0x02, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x02, /*destNode*/ 0x0A, /*flags*/ WARP_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF0, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x34, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x66, /*flags*/ WARP_NO_CHECKPOINT),
-        JUMP_LINK(script_func_local_1),
-        JUMP_LINK(script_func_local_2),
-        JUMP_LINK(script_func_local_3),
-        TERRAIN(/*terrainData*/ ttm_seg7_area_1_collision),
-        MACRO_OBJECTS(/*objList*/ ttm_seg7_area_1_macro_objs),
-        SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0000, /*seq*/ SEQ_LEVEL_GRASS),
-        TERRAIN_TYPE(/*terrainType*/ TERRAIN_STONE),
-    END_AREA(),
+	/* Fast64 begin persistent block [level commands] */
+	/* Fast64 end persistent block [level commands] */
 
-    AREA(/*index*/ 2, ttm_geo_000B5C),
-        OBJECT(/*model*/ MODEL_NONE, /*pos*/ 7000, 5381, 6750, /*angle*/ 0, 225, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvAirborneWarp),
-        WARP_NODE(/*id*/ 0x0A, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x02, /*destNode*/ 0x0A, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF0, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x34, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x66, /*flags*/ WARP_NO_CHECKPOINT),
-        JUMP_LINK(script_func_local_4),
-        TERRAIN(/*terrainData*/ ttm_seg7_area_2_collision),
-        MACRO_OBJECTS(/*objList*/ ttm_seg7_area_2_macro_objs),
-        INSTANT_WARP(/*index*/ 2, /*destArea*/ 3, /*displace*/ 10240, 7168, 10240),
-        SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0001, /*seq*/ SEQ_LEVEL_SLIDE),
-        TERRAIN_TYPE(/*terrainType*/ TERRAIN_SLIDE),
-    END_AREA(),
+	AREA(1, ttm_area_1),
+		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0B, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xF1, LEVEL_WDW, 0x01, 0x0B, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_NONE, 0, 192, 26399, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
+		OBJECT(MODEL_NONE, 0, 192, 26399, 0, -180, 0, 0x000A0000, bhvFlyingWarp),
+		MARIO_POS(0x01, -180, 0, 192, 26399),
+		OBJECT(MODEL_C2_LEMON, 3985, -48, 16687, 0, 41, 0, 0x03640000, bhvC2Lemon),
+		OBJECT(MODEL_C2_LEMON, 4261, -48, 15894, 0, 41, 0, 0x03640000, bhvC2Lemon),
+		OBJECT(MODEL_C2_LEMON, 4668, -48, 14534, 0, -20, 0, 0x03640000, bhvC2Lemon),
+		OBJECT(MODEL_NONE, 4438, -48, 13625, 0, 0, 0, 0x00790000, bhvPoleGrabbing),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 9984, 1694, 9484, 0, 90, 0, (1 << 24) | (1 << 8), bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 10963, 1694, 9672, 0, 90, 0, 0x00010000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 12082, 1644, 10460, 0, 90, 0, 0x00010000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 12098, 1694, 9452, 0, 90, 0, 0x00000000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 13012, 1744, 8774, 0, 90, 0, 0x00010000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 13043, 1694, 9880, 0, 90, 0, 0x00000000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 13873, 1694, 9790, 0, 90, 0, 0x00010000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 13936, 1694, 8640, 0, 90, 0, 0x00000000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 14894, 1694, 8497, 0, 90, 0, (1 << 24), bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 15039, 1694, 9428, 0, 90, 0, 0x00000000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 14817, 1644, 10541, 0, 90, 0, 0x00010000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 15572, 1694, 11310, 0, 90, 0, 0x00000000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 15836, 1694, 10134, 0, 90, 0, 0x00010000, bhvC2Lightning),
+		OBJECT(MODEL_C2_LIGHTNING_STRIKE, 16474, 1694, 10881, 0, 90, 0, 0x00010000, bhvC2Lightning),
+		OBJECT(MODEL_C2_MOVING_VINE, 15011, 1598, 7374, 0, 90, 0, 0x00000000, bhvMovingVine),
+		OBJECT(MODEL_C2_MOVING_VINE, 14460, 1914, 6489, 0, 94, 0, 0x00000000, bhvMovingVine),
+		OBJECT(MODEL_C2_MOVING_VINE, 12842, 2880, 5101, 0, 170, 0, 0x00000000, bhvMovingVine),
+		OBJECT(MODEL_C2_MOVING_VINE, 14296, 2124, 5412, 0, 47, 0, 0x04000000, bhvMovingVine),
+		OBJECT(MODEL_C2_BOUNCY_BED, 16800, 3582, 4985, -3, -55, 3, 0x00000000, bhvC2BouncyBed),
+		OBJECT(MODEL_C2_BOUNCY_BED, 23075, 4857, 2849, -1, 7, 1, 0x00000000, bhvC2BouncyBed),
+		OBJECT(MODEL_C2_BOUNCY_BED, 20734, 4502, 10950, -1, -17, 2, 0x00000000, bhvC2BouncyBed),
+		OBJECT(MODEL_C2_BOUNCY_BED, 22921, 4779, 11513, 0, 49, 0, 0x00000000, bhvC2BouncyBed),
+		OBJECT(MODEL_C2_BOUNCY_BED, 17093, 4349, 4153, -3, -55, 3, 0x00000000, bhvC2BouncyBed),
+		OBJECT(MODEL_C2_BOUNCY_BED, 17422, 5057, 3496, -3, -55, 3, 0x00000000, bhvC2BouncyBed),
+		OBJECT(MODEL_C2_BOUNCY_BED, 18237, 5857, 3387, -3, -55, 3, 0x00000000, bhvC2BouncyBed),
+		TERRAIN(ttm_area_1_collision),
+		ROOMS(ttm_area_1_collision_rooms),
+		MACRO_OBJECTS(ttm_area_1_macro_objs),
+		STOP_MUSIC(0),
+		TERRAIN_TYPE(TERRAIN_GRASS),
+		/* Fast64 begin persistent block [area commands] */
+		/* Fast64 end persistent block [area commands] */
+	END_AREA(),
 
-    AREA(/*index*/ 3, ttm_geo_000BEC),
-        WARP_NODE(/*id*/ 0xF0, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x34, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x66, /*flags*/ WARP_NO_CHECKPOINT),
-        JUMP_LINK(script_func_local_5),
-        TERRAIN(/*terrainData*/ ttm_seg7_area_3_collision),
-        MACRO_OBJECTS(/*objList*/ ttm_seg7_area_3_macro_objs),
-        INSTANT_WARP(/*index*/ 3, /*destArea*/ 4, /*displace*/ -11264, 13312, 3072),
-        SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0001, /*seq*/ SEQ_LEVEL_SLIDE),
-        TERRAIN_TYPE(/*terrainType*/ TERRAIN_SLIDE),
-    END_AREA(),
-
-    AREA(/*index*/ 4, ttm_geo_000C84),
-        OBJECT(/*model*/ MODEL_TTM_SLIDE_EXIT_PODIUM, /*pos*/ -7285, -1866, -4812, /*angle*/ 0, 0, 0, /*behParam*/ 0x000A0000, /*beh*/ bhvExitPodiumWarp),
-        WARP_NODE(/*id*/ 0x0A, /*destLevel*/ LEVEL_TTM, /*destArea*/ 0x01, /*destNode*/ 0x14, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF0, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x34, /*flags*/ WARP_NO_CHECKPOINT),
-        WARP_NODE(/*id*/ 0xF1, /*destLevel*/ LEVEL_CASTLE, /*destArea*/ 0x02, /*destNode*/ 0x66, /*flags*/ WARP_NO_CHECKPOINT),
-        JUMP_LINK(script_func_local_6),
-        JUMP_LINK(script_func_local_7),
-        TERRAIN(/*terrainData*/ ttm_seg7_area_4_collision),
-        MACRO_OBJECTS(/*objList*/ ttm_seg7_area_4_macro_objs),
-        SET_BACKGROUND_MUSIC(/*settingsPreset*/ 0x0001, /*seq*/ SEQ_LEVEL_SLIDE),
-        TERRAIN_TYPE(/*terrainType*/ TERRAIN_SLIDE),
-    END_AREA(),
-
-    FREE_LEVEL_POOL(),
-    MARIO_POS(/*area*/ 1, /*yaw*/ 45, /*pos*/ 102, -4332, 5734),
-    CALL(/*arg*/ 0, /*func*/ lvl_init_or_update),
-    CALL_LOOP(/*arg*/ 1, /*func*/ lvl_init_or_update),
-    CLEAR_LEVEL(),
-    SLEEP_BEFORE_EXIT(/*frames*/ 1),
-    EXIT(),
+	FREE_LEVEL_POOL(),
+	MARIO_POS(0x01, -180, 0, 192, 26399),
+	CALL(0, lvl_init_or_update),
+	CALL_LOOP(1, lvl_init_or_update),
+	CLEAR_LEVEL(),
+	SLEEP_BEFORE_EXIT(1),
+	EXIT(),
 };

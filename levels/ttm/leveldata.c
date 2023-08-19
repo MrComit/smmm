@@ -68,3 +68,15 @@
 #include "levels/ttm/areas/2/macro.inc.c"
 #include "levels/ttm/areas/3/macro.inc.c"
 #include "levels/ttm/areas/4/macro.inc.c"
+
+#include "levels/ttm/leveldata.inc.c"
+
+#include "levels/ttm/c2_lemon/model.inc.c"
+#include "levels/ttm/c2_lemon/collision.inc.c"
+#include "levels/ttm/c2_moving_vine/model.inc.c"
+#include "levels/ttm/c2_bouncy_bed/model.inc.c"
+#include "levels/ttm/c2_bouncy_bed/collision.inc.c"
+#include "levels/ttm/c2_lightning_spinner/model.inc.c"
+#include "levels/ttm/c2_lightning_strike/model.inc.c"
+#include "levels/ttm/c2_lightning_spinner/anims/data.inc.c"
+#include "levels/ttm/c2_lightning_spinner/anims/table.inc.c"

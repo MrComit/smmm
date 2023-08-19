@@ -12274,3 +12274,57 @@ const BehaviorScript bhvCGSpinner[] = {
         CALL_NATIVE(bhv_lightning_spinner_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvC2Lemon[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(c2_lemon_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_sinking_plat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_lemon_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvC2BouncyBed[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(c2_bouncy_bed_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    CALL_NATIVE(bhv_bouncy_bed_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        CALL_NATIVE(bhv_bouncy_bed_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvC2LightningSpinner[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, c2_lightning_spinner_anims),
+    SET_FLOAT(oDrawingDistance, 0x1000),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lightning_spinner_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvC2Lightning[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // LOAD_ANIMATIONS(oAnimations, lightning_anims),
+    // ANIMATE(0),
+    DROP_TO_FLOOR(),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HOME(),
+    CALL_NATIVE(bhv_lightning_init),
+    SPAWN_OBJ(MODEL_C2_LIGHTNING_SPINNER, bhvC2LightningSpinner),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lightning_loop),
+    END_LOOP(),
+};

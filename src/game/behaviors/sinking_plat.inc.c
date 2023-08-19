@@ -3,7 +3,7 @@
 void bhv_lemon_loop(void) {
     f32 approach_pos;
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvL2Lava);
-    if (obj == NULL) {
+    if (obj == NULL && gCurrLevelNum != LEVEL_TTM) {
         o->activeFlags = 0;
         return;
     }
@@ -14,8 +14,10 @@ void bhv_lemon_loop(void) {
         approach_pos = o->oHomeY;
     }
     o->oPosY = approach_f32(o->oPosY, approach_pos, o->oFloatF4 * 4, o->oFloatF4);
-    o->oPosY += obj->oVelY;
-    o->oHomeY += obj->oVelY;
+    if (gCurrLevelNum != LEVEL_TTM) {
+        o->oPosY += obj->oVelY;
+        o->oHomeY += obj->oVelY;
+    }
 }
 
 extern s16 gComitCutsceneTimer;

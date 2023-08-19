@@ -1,0 +1,3 @@
+extern void scroll_c2_lightning_strike_lightning_mesh_layer_1_vtx_0();
+extern void scroll_c2_lightning_strike_lightning_mesh_layer_4_vtx_0();
+extern void scroll_ttm_level_geo_c2_lightning_strike();

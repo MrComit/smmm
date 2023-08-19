@@ -1,0 +1,15 @@
+extern const GeoLayout c2_bouncy_bed_geo[];
+extern u8 c2_bouncy_bed_whitesheets_ci4[];
+extern u8 c2_bouncy_bed_whitesheets_ci4_pal_rgba16[];
+extern u8 c2_bouncy_bed_bedframewood_ci4[];
+extern u8 c2_bouncy_bed_bedframewood_ci4_pal_rgba16[];
+extern Vtx c2_bouncy_bed_dl_mesh_layer_1_vtx_0[12];
+extern Gfx c2_bouncy_bed_dl_mesh_layer_1_tri_0[];
+extern Vtx c2_bouncy_bed_dl_mesh_layer_1_vtx_1[104];
+extern Gfx c2_bouncy_bed_dl_mesh_layer_1_tri_1[];
+extern Gfx mat_c2_bouncy_bed_WhiteSheets_002[];
+extern Gfx mat_revert_c2_bouncy_bed_WhiteSheets_002[];
+extern Gfx mat_c2_bouncy_bed_Bedframe_001[];
+extern Gfx mat_revert_c2_bouncy_bed_Bedframe_001[];
+extern Gfx c2_bouncy_bed_dl_mesh_layer_1[];
+extern Gfx c2_bouncy_bed_material_revert_render_settings[];

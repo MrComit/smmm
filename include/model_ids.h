@@ -1017,5 +1017,11 @@
 #define MODEL_C1_CUSHION          0xFF
 #define MODEL_C1_BURNER           0xFE
 
+// CHALLENGE 2 MODELS - 0xFF TO 0xE2 ARE FREE
+#define MODEL_C2_LEMON            0xFF
+#define MODEL_C2_MOVING_VINE      0xFE
+#define MODEL_C2_BOUNCY_BED       0xFD
+#define MODEL_C2_LIGHTNING_SPINNER 0xFC
+#define MODEL_C2_LIGHTNING_STRIKE 0xFB
 
 #endif // MODEL_IDS_H
