@@ -32,3 +32,10 @@
 #include "levels/thi/areas/1/trajectory.inc.c"
 #include "levels/thi/areas/1/movtext.inc.c"
 #include "levels/thi/areas/2/movtext.inc.c"
+
+#include "levels/thi/leveldata.inc.c"
+
+#include "levels/thi/c3_lego_piece/model.inc.c"
+#include "levels/thi/c3_lego_piece/collision.inc.c"
+#include "levels/thi/c3_unstable_rock_yellow/model.inc.c"
+#include "levels/thi/c3_unstable_rock_yellow/collision.inc.c"

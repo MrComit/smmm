@@ -12328,3 +12328,32 @@ const BehaviorScript bhvC2Lightning[] = {
         CALL_NATIVE(bhv_lightning_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvC3UnstableRock[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_DONT_DISPLACE_MARIO)),
+    LOAD_COLLISION_DATA(c3_unstable_rock_yellow_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_FLOAT(oFloat100, 4),
+    CALL_NATIVE(bhv_unstable_rock_init),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_unstable_rock_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvC3LegoPiece[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_DRAW_DIST_IS_ACTIVE_DIST)),
+    LOAD_COLLISION_DATA(c3_lego_piece_collision),
+    SET_FLOAT(oDrawingDistance, 0x2000),
+    SCALE(0, 70),
+    SET_HOME(),
+    CALL_NATIVE(bhv_lego_piece_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_lego_piece_loop),
+    END_LOOP(),
+};

@@ -18,3 +18,8 @@
 #include "levels/thi/areas/1/geo.inc.c"
 #include "levels/thi/areas/2/geo.inc.c"
 #include "levels/thi/areas/3/geo.inc.c"
+
+#include "levels/thi/geo.inc.c"
+
+#include "levels/thi/c3_lego_piece/geo.inc.c"
+#include "levels/thi/c3_unstable_rock_yellow/geo.inc.c"

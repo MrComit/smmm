@@ -15,6 +15,7 @@
 #include "src/game/texscroll/sl_texscroll.inc.h"
 #include "src/game/texscroll/wdw_texscroll.inc.h"
 #include "src/game/texscroll/ttm_texscroll.inc.h"
+#include "src/game/texscroll/thi_texscroll.inc.h"
 extern void scroll_textures();
 
 #endif
