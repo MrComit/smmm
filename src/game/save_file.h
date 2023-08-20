@@ -317,6 +317,8 @@ void save_file_set_cannon_unlocked(void);
 void save_file_set_cap_pos(s16 x, s16 y, s16 z);
 s32 save_file_get_cap_pos(Vec3s capPos);
 
+u16 save_file_get_challenge_time(u16 challenge);
+void save_file_set_challenge_time(u16 time, u16 challenge);
 u8 save_file_get_peepa_score(void);
 void save_file_set_peepa_score(u8 score);
 u8 save_file_get_gallery_score(void);

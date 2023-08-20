@@ -1585,7 +1585,8 @@ s32 init_level(void) {
         if (gCurrDemoInput == NULL) {
             set_background_music(gCurrentArea->musicParam, gCurrentArea->musicParam2, 0);
         } else {
-            play_music(0, SEQUENCE_ARGS(4, SEQ_MAIN_MENU), 0);
+            // play_music(0, SEQUENCE_ARGS(4, SEQ_MAIN_MENU), 0);
+            set_background_music(0, SEQ_MAIN_MENU, 0);
         }
     }
     if (gCurrDemoInput == NULL) {
@@ -1625,6 +1626,9 @@ s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
     return result;
 }
 
+extern u8 sPssSlideStarted;
+extern s32 sHighScore;
+
 s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
 #ifdef VERSION_EU
     s16 language = eu_get_language();
@@ -1647,10 +1651,12 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     sDelayedWarpOp = WARP_OP_NONE;
     gNeverEnteredCastle = !save_file_exists(gCurrSaveFileNum - 1);
 
-    if (gCurrDemoInput == NULL && save_file_get_final_rank()) {
-        levelNum = LEVEL_SL;
-    } else if (gCurrDemoInput == NULL && gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
-        levelNum = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel;
+    if (gCurrDemoInput == NULL && gLevelToCourseNumTable[levelNum - 1] < 11) {
+        if (save_file_get_final_rank()) {
+            levelNum = LEVEL_SL;
+        } else if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+            levelNum = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel;
+        }
     }
 
 
@@ -1659,6 +1665,12 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     gSavedCourseNum = COURSE_NONE;
     gCurrCreditsEntry = NULL;
     gSpecialTripleJump = FALSE;
+
+    // if (gLevelToCourseNumTable[gCurrLevelNum - 1] >= 11) {
+    //     level_control_timer(TIMER_CONTROL_START);
+    // }
+    sPssSlideStarted = 0;
+    sHighScore = 0;
 
     init_mario_from_save_file();
     disable_warp_checkpoint();

@@ -849,6 +849,21 @@ s32 save_file_get_cap_pos(Vec3s capPos) {
 
 
 
+u16 save_file_get_challenge_time(u16 challenge) {
+    return gSaveBuffer.menuData[0].challengeTimes[challenge];
+}
+
+void save_file_set_challenge_time(u16 time, u16 challenge) {
+    if (time < gSaveBuffer.menuData[0].challengeTimes[challenge] || gSaveBuffer.menuData[0].challengeTimes[challenge] == 0) {
+        gSaveBuffer.menuData[0].challengeTimes[challenge] = time;
+    }
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
+
+
 u8 save_file_get_peepa_score(void) {
     return gSaveBuffer.menuData[0].tvPeepaScore;
 }

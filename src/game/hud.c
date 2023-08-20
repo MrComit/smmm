@@ -1174,40 +1174,45 @@ void render_hud_keys(void) {
     }
 }
 
+#define CHALLENGE_GOAL_TIMES 3600
+
 /**
  * Renders the timer when Mario start sliding in PSS.
  */
 void render_hud_timer(void) {
+	s32 highScore = save_file_get_challenge_time(gCurrCourseNum - 11);
     u8 *(*hudLUT)[58] = segmented_to_virtual(&main_hud_lut);
     u16 timerValFrames = gHudDisplay.timer;
     u16 timerMins = timerValFrames / (30 * 60);
     u16 timerSecs = (timerValFrames - (timerMins * 1800)) / 30;
     u16 timerFracSecs = ((timerValFrames - (timerMins * 1800) - (timerSecs * 30)) & 0xFFFF) / 3;
+	u16 highMins, highSecs, highFracSecs;
 
-#ifdef VERSION_EU
-    switch (eu_get_language()) {
-        case LANGUAGE_ENGLISH:
-            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME", 0);
-            break;
-        case LANGUAGE_FRENCH:
-            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(155), 185, "TEMPS", 0);
-            break;
-        case LANGUAGE_GERMAN:
-            print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "ZEIT", 0);
-            break;
-    }
-#else
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 185, "TIME", 0);
-#endif
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 215, "TIME", 0);
 
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 185, "%0d", timerMins, 0);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 185, "%02d", timerSecs, 0);
-    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 185, "%d", timerFracSecs, 0);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 215, "%0d", timerMins, 0);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 215, "%02d", timerSecs, 0);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 215, "%d", timerFracSecs, 0);
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 215, ".", 0);
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(48), 215, ".", 0);
 
-    gSPDisplayList(gDisplayListHead++, dl_hud_img_begin);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 32, (*hudLUT)[GLYPH_APOSTROPHE]);
-    render_hud_tex_lut(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(46), 32, (*hudLUT)[GLYPH_DOUBLE_QUOTE]);
-    gSPDisplayList(gDisplayListHead++, dl_hud_img_end);
+	if (highScore == 0 || highScore >= CHALLENGE_GOAL_TIMES) {
+		highScore = CHALLENGE_GOAL_TIMES;
+    	print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 195, "GOAL", 4);
+	} else {
+    	print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(150), 195, "BEST", 4);
+	}
+
+    highMins = highScore / (30 * 60);
+    highSecs = (highScore - (highMins * 1800)) / 30;
+    highFracSecs = ((highScore - (highMins * 1800) - (highSecs * 30)) & 0xFFFF) / 3;
+
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(91), 195, "%0d", highMins, 4);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(71), 195, "%02d", highSecs, 4);
+    print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(37), 195, "%d", highFracSecs, 4);
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(81), 195, ".", 4);
+    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(48), 195, ".", 4);
+
 }
 
 /**
@@ -1605,6 +1610,7 @@ void render_hud(void) {
 			}
 
 			// if (hudDisplayFlags & HUD_DISPLAY_FLAG_TIMER) {
+        		pss_begin_slide();
 				render_hud_timer();
 			// }
 			return;

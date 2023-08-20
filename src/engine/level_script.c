@@ -671,7 +671,7 @@ static void level_cmd_set_mario_start_pos(void) {
 #endif
     vec3s_set(gMarioSpawnInfo->startAngle, 0, CMD_GET(s16, 4) * 0x8000 / 180, 0);
 
-    if (gCurrDemoInput == NULL) {
+    if (gCurrDemoInput == NULL && gLevelToCourseNumTable[gCurrLevelNum - 1] < 11) {
         rank = save_file_get_final_rank();
         if (rank == 1)  {
             gMarioSpawnInfo->areaIndex = 3;

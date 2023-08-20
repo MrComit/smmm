@@ -129,7 +129,7 @@ static u32 sBackwardKnockbackActions[][3] = {
 
 static u8 sDisplayingDoorText = FALSE;
 static u8 sJustTeleported = FALSE;
-static u8 sPssSlideStarted = FALSE;
+u8 sPssSlideStarted = FALSE;
 
 /**
  * Returns the type of cap Mario is wearing.
@@ -1922,22 +1922,56 @@ void check_lava_boost(struct MarioState *m) {
 }
 
 void pss_begin_slide(UNUSED struct MarioState *m) {
-    if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_TIMER)) {
+    if (sPssSlideStarted == 0) {
         level_control_timer(TIMER_CONTROL_SHOW);
         level_control_timer(TIMER_CONTROL_START);
-        sPssSlideStarted = TRUE;
+        sPssSlideStarted = 1;
     }
 }
 
+s32 sHighScore = 0;
+
 void pss_end_slide(struct MarioState *m) {
+    u16 challengeTime;
     //! This flag isn't set on death or level entry, allowing double star spawn
-    if (sPssSlideStarted) {
+    if (sPssSlideStarted == 1) {
         u16 slideTime = level_control_timer(TIMER_CONTROL_STOP);
-        if (slideTime < 630) {
-            m->marioObj->oBehParams = (1 << 24);
-            spawn_default_star(-6358.0f, -4300.0f, 4700.0f);
+        challengeTime = save_file_get_challenge_time(gCurrCourseNum - 11);
+        if (slideTime < challengeTime || challengeTime == 0) {
+            save_file_set_challenge_time(slideTime, gCurrCourseNum - 11);
+            if (slideTime < 3600) {
+                play_puzzle_jingle();
+                sHighScore = 1;
+            }
         }
-        sPssSlideStarted = FALSE;
+
+        // fade_into_special_warp(-2, 0);
+        // sDelayedWarpArg = 0;
+        // sDelayedWarpOp = 0x10;
+        // sSourceWarpNodeId = 0xB5;
+        // // val04 = !music_changed_through_warp(sSourceWarpNodeId);
+        // sDelayedWarpTimer = 20;
+        // play_transition(WARP_TRANSITION_FADE_INTO_CIRCLE, 0x14, 0x00, 0x00, 0x00);
+
+
+
+        // if (slideTime < 630) {
+        //     m->marioObj->oBehParams = (1 << 24);
+        //     spawn_default_star(-6358.0f, -4300.0f, 4700.0f);
+        // }
+        sPssSlideStarted = 2;
+    } else if (sPssSlideStarted > 1) {
+        // set_mario_npc_dialog(1);
+        sPssSlideStarted++;
+        if (sHighScore) {
+            if (sPssSlideStarted == 70) {
+                fade_into_special_warp(-2, 0);
+            }
+        } else {
+            if (sPssSlideStarted == 20) {
+                fade_into_special_warp(-2, 0);
+            }
+        }
     }
 }
 

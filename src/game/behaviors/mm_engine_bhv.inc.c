@@ -733,7 +733,7 @@ void bhv_boo_coin_loop(void) {
 
 
 void bhv_deathwarp_init(void) {
-    if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0) {
+    if (gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel != 0 && gLevelToCourseNumTable[gCurrLevelNum - 1] < 11) {
         s16 angle = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
         o->oPosX = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0];
         o->oPosY = (f32)gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1];
@@ -750,6 +750,11 @@ void bhv_deathwarp_loop(void) {
     s16 angle;
     struct Surface *floor;
     struct MarioState *m = gMarioState;
+    if (gLevelToCourseNumTable[gCurrLevelNum - 1] >= 11) {
+        return;
+    }
+
+
     if (o->oTimer != 0 && gMarioCurrentRoom != gMarioPreviousRoom) {
         pos[0] = m->pos[0];
         pos[2] = m->pos[2];

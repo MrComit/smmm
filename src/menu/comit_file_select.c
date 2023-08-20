@@ -21,6 +21,7 @@
 #include "game/rumble_init.h"
 #include "sm64.h"
 #include "text_strings.h"
+#include "seq_ids.h"
 #define o gCurrentObject
 
 /* 
@@ -887,6 +888,11 @@ void bhv_cs_bg_init(void) {
     gCurrentObject->oMenuButtonScale = 9.0f;
     // o->oAnimState = 1;
     cur_obj_scale(9.0f);
+
+    // play_music(0, SEQUENCE_ARGS(4, SEQ_MAIN_MENU), 0);
+    // if (get_current_background_music() == SEQUENCE_ARGS(0, SEQ_MAIN_MENU)) {
+        set_background_music(0, SEQ_MAIN_MENU, 0);
+    // }
 }
 
 /**

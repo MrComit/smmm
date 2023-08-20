@@ -42,6 +42,7 @@ const LevelScript level_main_menu_entry_1[] = {
         OBJECT(/*model*/ MODEL_NONE,         /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*behParam*/ 0x04000000, /*beh*/ bhvCSButtonManager),
         OBJECT(/*model*/ MODEL_BG_MANOR, /*pos*/ 0, 0, -19000, /*angle*/ 0, 0, 0, /*behParam*/ 0x04000000, /*beh*/ bhvCSBackground),
         TERRAIN(/*terrainData*/ main_menu_seg7_collision),
+        // SET_BACKGROUND_MUSIC(0x00, SEQ_MAIN_MENU),
     END_AREA(),
 
     FREE_LEVEL_POOL(),
