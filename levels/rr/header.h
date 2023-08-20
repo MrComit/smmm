@@ -110,4 +110,13 @@ extern const Trajectory rr_seg7_trajectory_0702EEE0[];
 // script
 extern const LevelScript level_rr_entry[];
 
+#include "levels/rr/c5_chandelier/geo_header.h"
+
+
+#include "levels/rr/header.inc.h"
+
+#include "levels/rr/c5_spinning_plat/collision_header.h"
+
+#include "levels/rr/c5_spinning_plat/geo_header.h"
+
 #endif

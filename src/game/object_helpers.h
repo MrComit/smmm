@@ -92,6 +92,7 @@ Gfx *geo_generate_cam_beam(s32 callContext, struct GraphNode *node, void *contex
 Gfx *geo_generate_plat_chain(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_generate_big_plat_chain(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_dynamic_spinning_plat(s32 callContext, struct GraphNode *node, void *context);
+Gfx *geo_dynamic_spinning_plat_rr(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_dynamic_big_spinning_plat(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_dynamic_observatory_spinning_plat(s32 callContext, struct GraphNode *node, void *context);
 Gfx *geo_generate_spotlight(s32 callContext, struct GraphNode *node, void *context);

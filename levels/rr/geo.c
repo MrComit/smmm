@@ -50,3 +50,8 @@
 #include "levels/rr/tricky_triangles_4/geo.inc.c"
 #include "levels/rr/tricky_triangles_5/geo.inc.c"
 #include "levels/rr/areas/1/geo.inc.c"
+
+#include "levels/rr/c5_chandelier/geo.inc.c"
+#include "levels/rr/geo.inc.c"
+
+#include "levels/rr/c5_spinning_plat/geo.inc.c"

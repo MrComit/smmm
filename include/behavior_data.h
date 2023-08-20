@@ -1007,6 +1007,7 @@ extern const BehaviorScript bhvC3LegoPiece[];
 extern const BehaviorScript bhvC4TrophyPlatRise[];
 extern const BehaviorScript bhvC4TrophyRect[];
 extern const BehaviorScript bhvC4SwingingPlat[];
+extern const BehaviorScript bhvC5SpinningPlat[];
 
 
 #endif // BEHAVIOR_DATA_H

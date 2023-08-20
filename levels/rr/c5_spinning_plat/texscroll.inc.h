@@ -1,0 +1,2 @@
+extern void scroll_sts_mat_c5_spinning_plat_WoodFloorTrophyRoom_002_v5_002_layer1();
+extern void scroll_rr_level_geo_c5_spinning_plat();
