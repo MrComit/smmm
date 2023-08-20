@@ -33,6 +33,7 @@
 #include "levels/jrb/header.inc.h"
 #include "levels/lll/header.h"
 #include "levels/ssl/header.h"
+#include "levels/ttc/header.h"
 #include "save_file.h"
 #include "src/game/tile_scroll.h"
 #include "actors/common0.h"
@@ -1336,13 +1337,21 @@ Gfx *geo_generate_plat_chain(s32 callContext, struct GraphNode *node, void *cont
         dlHead = alloc_display_list(sizeof(Gfx) * (7));
         dlStart = dlHead;
 
-        gSPDisplayList(dlHead++, mat_lll_dl_Chain);
+        if (gCurrLevelNum != LEVEL_TTC) {
+            gSPDisplayList(dlHead++, mat_lll_dl_Chain);
+        } else {
+            gSPDisplayList(dlHead++, mat_ttc_dl_Chain);
+        }
 
         gSPVertex(dlHead++, VIRTUAL_TO_PHYSICAL(vertexBuffer), 8, 0);
         gSP2Triangles(dlHead++, 0, 1, 2, 0, 1, 2, 3, 0);
         gSP2Triangles(dlHead++, 4, 5, 6, 0, 5, 6, 7, 0);
         
-        gSPDisplayList(dlHead++, mat_revert_lll_dl_Chain);
+        if (gCurrLevelNum != LEVEL_TTC) {
+            gSPDisplayList(dlHead++, mat_revert_lll_dl_Chain);
+        } else {
+            gSPDisplayList(dlHead++, mat_revert_ttc_dl_Chain);
+        }
         
         gSPEndDisplayList(dlHead++);
     }

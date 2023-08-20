@@ -29,3 +29,9 @@
 #include "levels/ttc/small_gear/geo.inc.c"
 #include "levels/ttc/large_gear/geo.inc.c"
 #include "levels/ttc/areas/1/geo.inc.c"
+
+#include "levels/ttc/c4_trophy_rectangle/geo.inc.c"
+#include "levels/ttc/c4_trophy_octogon/geo.inc.c"
+#include "levels/ttc/geo.inc.c"
+
+#include "levels/ttc/c4_swinging_plat/geo.inc.c"

@@ -12357,3 +12357,47 @@ const BehaviorScript bhvC3LegoPiece[] = {
         CALL_NATIVE(bhv_lego_piece_loop),
     END_LOOP(),
 };
+
+
+const BehaviorScript bhvC4TrophyPlatRise[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(c4_trophy_octogon_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    SCALE(0, 75),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        // ADD_INT(oFaceAngleYaw, 0x300),
+        CALL_NATIVE(bhv_trophy_plat_rise_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvC4TrophyRect[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(c4_trophy_rectangle_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    // SCALE(0, 75),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
+        // ADD_INT(oFaceAngleYaw, 0x300),
+        CALL_NATIVE(bhv_trophy_rect_loop),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvC4SwingingPlat[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_COLLISION_DATA(c4_swinging_plat_collision),
+    SET_FLOAT(oDrawingDistance, 0x4000),
+    SET_HOME(),
+    // CALL_NATIVE(bhv_swinging_plat_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_swinging_plat_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

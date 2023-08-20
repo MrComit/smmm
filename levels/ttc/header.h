@@ -65,4 +65,19 @@ extern const Gfx ttc_dl_surface_treadmill[];
 // script
 extern const LevelScript level_ttc_entry[];
 
+#include "levels/ttc/c4_trophy_rectangle/geo_header.h"
+
+#include "levels/ttc/c4_trophy_rectangle/collision_header.h"
+
+#include "levels/ttc/c4_trophy_octogon/geo_header.h"
+
+#include "levels/ttc/c4_trophy_octogon/collision_header.h"
+
+
+#include "levels/ttc/header.inc.h"
+
+#include "levels/ttc/c4_swinging_plat/geo_header.h"
+
+#include "levels/ttc/c4_swinging_plat/collision_header.h"
+
 #endif

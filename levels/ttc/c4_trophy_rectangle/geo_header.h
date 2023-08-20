@@ -1,0 +1,10 @@
+extern const GeoLayout c4_trophy_rectangle_geo[];
+extern u8 c4_trophy_rectangle_deepplanks_redbrown_rgba16[];
+extern u8 c4_trophy_rectangle_i4_matt_multitex_i4[];
+extern Vtx c4_trophy_rectangle_TrophyRect_mesh_layer_1_vtx_cull[8];
+extern Vtx c4_trophy_rectangle_TrophyRect_mesh_layer_1_vtx_0[42];
+extern Gfx c4_trophy_rectangle_TrophyRect_mesh_layer_1_tri_0[];
+extern Gfx mat_c4_trophy_rectangle_WoodFloorTrophyRoom_001_layer1[];
+extern Gfx mat_revert_c4_trophy_rectangle_WoodFloorTrophyRoom_001_layer1[];
+extern Gfx c4_trophy_rectangle_TrophyRect_mesh_layer_1[];
+extern Gfx c4_trophy_rectangle_material_revert_render_settings[];

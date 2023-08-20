@@ -46,3 +46,12 @@
 #include "levels/ttc/large_gear/collision.inc.c"
 #include "levels/ttc/areas/1/macro.inc.c"
 #include "levels/ttc/areas/1/movtext.inc.c"
+
+#include "levels/ttc/c4_trophy_rectangle/model.inc.c"
+#include "levels/ttc/c4_trophy_rectangle/collision.inc.c"
+#include "levels/ttc/c4_trophy_octogon/model.inc.c"
+#include "levels/ttc/c4_trophy_octogon/collision.inc.c"
+#include "levels/ttc/leveldata.inc.c"
+
+#include "levels/ttc/c4_swinging_plat/model.inc.c"
+#include "levels/ttc/c4_swinging_plat/collision.inc.c"

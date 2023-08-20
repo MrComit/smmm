@@ -1,0 +1,10 @@
+extern const GeoLayout c4_trophy_octogon_geo[];
+extern u8 c4_trophy_octogon_deepplanks_redbrown_rgba16[];
+extern u8 c4_trophy_octogon_i4_matt_multitex_i4[];
+extern Vtx c4_trophy_octogon_TrophyOctogon_mesh_layer_1_vtx_cull[8];
+extern Vtx c4_trophy_octogon_TrophyOctogon_mesh_layer_1_vtx_0[45];
+extern Gfx c4_trophy_octogon_TrophyOctogon_mesh_layer_1_tri_0[];
+extern Gfx mat_c4_trophy_octogon_WoodFloorTrophyRoom_002_v5_layer1[];
+extern Gfx mat_revert_c4_trophy_octogon_WoodFloorTrophyRoom_002_v5_layer1[];
+extern Gfx c4_trophy_octogon_TrophyOctogon_mesh_layer_1[];
+extern Gfx c4_trophy_octogon_material_revert_render_settings[];
