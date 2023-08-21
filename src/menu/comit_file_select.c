@@ -114,6 +114,13 @@ s32 C_check_clicked_button(s16 maxX, s16 minX, s16 y, f32 yScale, f32 depth) {
 }
 
 
+s32 check_if_any_files_complete(void) {
+    if (gSaveBuffer.files[0][0].finalRank || gSaveBuffer.files[1][0].finalRank || gSaveBuffer.files[2][0].finalRank) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 
 // s32 C_check_clicked_file_button(s16 y, f32 depth) {
 //     f32 a = 52.4213;
@@ -135,8 +142,12 @@ extern s32 gIsChallenge;
 
 
 void bhv_cs_challenge_button_loop(void) {
+    s32 challenges = save_file_get_menu_challenges();
     s32 sensitivity;
 
+    if ((challenges & (1 << o->oBehParams2ndByte)) == 0 && check_if_any_files_complete() == 0) {
+        return;
+    }
     // if (!o->oBehParams2ndByte) {
     //     print_text_fmt_int(20, 90, "%d", sClickPos[0], 0);
     //     print_text_fmt_int(120, 90, "%d", sClickPos[1], 0);
@@ -238,25 +249,42 @@ void bhv_cs_challenges_button_loop(void) {
         play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
         if (sCFMode != CF_CHALLENGES) {
             sCFMode = CF_CHALLENGES;
-            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 240, 0, 0, 0, 0);
-            obj->header.gfx.scale[0] = 1.5f;
-            obj->header.gfx.scale[1] = 0.7f;
-            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 125, 0, 0, 0, 0);
-            obj->header.gfx.scale[0] = 1.5f;
-            obj->header.gfx.scale[1] = 0.7f;
-            obj->oBehParams2ndByte = 1;
-            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 10, 0, 0, 0, 0);
-            obj->header.gfx.scale[0] = 1.5f;
-            obj->header.gfx.scale[1] = 0.7f;
-            obj->oBehParams2ndByte = 2;
-            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, -105, 0, 0, 0, 0);
-            obj->header.gfx.scale[0] = 1.5f;
-            obj->header.gfx.scale[1] = 0.7f;
-            obj->oBehParams2ndByte = 3;
-            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, -220, 0, 0, 0, 0);
-            obj->header.gfx.scale[0] = 1.5f;
-            obj->header.gfx.scale[1] = 0.7f;
-            obj->oBehParams2ndByte = 4;
+
+            // challenges = save_file_get_menu_challenges();
+
+            // if (challenges & 1) {
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 240, 0, 0, 0, 0);
+                obj->header.gfx.scale[0] = 1.5f;
+                obj->header.gfx.scale[1] = 0.7f;
+            // }
+
+            // if (challenges & 2) {
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 125, 0, 0, 0, 0);
+                obj->header.gfx.scale[0] = 1.5f;
+                obj->header.gfx.scale[1] = 0.7f;
+                obj->oBehParams2ndByte = 1;
+            // }
+
+            // if (challenges & 4) {
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 10, 0, 0, 0, 0);
+                obj->header.gfx.scale[0] = 1.5f;
+                obj->header.gfx.scale[1] = 0.7f;
+                obj->oBehParams2ndByte = 2;
+            // }
+
+            // if (challenges & 8) {
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, -105, 0, 0, 0, 0);
+                obj->header.gfx.scale[0] = 1.5f;
+                obj->header.gfx.scale[1] = 0.7f;
+                obj->oBehParams2ndByte = 3;
+            // }
+
+            // if (challenges & 16 || check_if_any_files_complete()) {
+                obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, -220, 0, 0, 0, 0);
+                obj->header.gfx.scale[0] = 1.5f;
+                obj->header.gfx.scale[1] = 0.7f;
+                obj->oBehParams2ndByte = 4;
+            // }
         } else {
             sCFMode = CF_NORMAL;
             while ((obj = cur_obj_nearest_object_with_behavior(bhvCSChallengeButton)) != NULL) {
@@ -517,13 +545,14 @@ void bhv_cs_button_manager_init(void) {
     obj->oFloatF8 = obj->header.gfx.scale[1];
     obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
 
-
-    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallenges, -245, -355, 0, 0, 0, 0);
-    obj->oBehParams2ndByte = 3;
-    obj->header.gfx.scale[1] = 0.9f;
-    // obj->header.gfx.scale[0] = 1.1f;
-    obj->oFloatF8 = obj->header.gfx.scale[1];
-    obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
+    if (save_file_get_menu_challenges()) {
+        obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallenges, -245, -355, 0, 0, 0, 0);
+        obj->oBehParams2ndByte = 3;
+        obj->header.gfx.scale[1] = 0.9f;
+        // obj->header.gfx.scale[0] = 1.1f;
+        obj->oFloatF8 = obj->header.gfx.scale[1];
+        obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
+    }
 }
 
 
@@ -898,24 +927,52 @@ void print_challenge_times(s32 challenge, s32 y) {
 
 
 void print_challenge_text(void) {
+    s32 challenges = save_file_get_menu_challenges();
     unsigned char textChallenge1[] = { TEXT_CHALLENGE1 };
     unsigned char textChallenge2[] = { TEXT_CHALLENGE2 };
     unsigned char textChallenge3[] = { TEXT_CHALLENGE3 };
     unsigned char textChallenge4[] = { TEXT_CHALLENGE4 };
     unsigned char textChallenge5[] = { TEXT_CHALLENGE5 };
+    unsigned char textQuestion[] = { TEXT_QUESTION };
 
 
-    print_generic_string(27, 181, textChallenge1);
-    print_generic_string(27, 148, textChallenge2);
-    print_generic_string(27, 115, textChallenge3);
-    print_generic_string(27, 82, textChallenge4);
-    print_generic_string(27, 49, textChallenge5);
+    if (challenges & 1) {
+        print_generic_string(27, 181, textChallenge1);        
+        print_challenge_times(0, 181);
+    } else {
+        print_generic_string(27, 181, textQuestion);
+    }
 
-    print_challenge_times(0, 181);
-    print_challenge_times(1, 148);
-    print_challenge_times(2, 115);
-    print_challenge_times(3, 82);
-    print_challenge_times(4, 49);
+    if (challenges & 2) {
+        print_generic_string(27, 148, textChallenge2);
+        print_challenge_times(1, 148);
+    } else {
+        print_generic_string(27, 148, textQuestion);
+    }
+
+    if (challenges & 4) {
+        print_generic_string(27, 115, textChallenge3);
+        print_challenge_times(2, 115);
+    } else {
+        print_generic_string(27, 115, textQuestion);
+    }
+
+    if (challenges & 8) {
+        print_generic_string(27, 82, textChallenge4);
+        print_challenge_times(3, 82);
+    } else {
+        print_generic_string(27, 82, textQuestion);
+    }
+
+    if (challenges & 16 || check_if_any_files_complete()) {
+        print_generic_string(27, 49, textChallenge5);
+        print_challenge_times(4, 49);
+    } else {
+        print_generic_string(27, 49, textQuestion);
+    }
+
+
+
 
 }
 
@@ -995,10 +1052,8 @@ void print_CF_strings(void) {
             print_erase_prompt();
         }
 
-        if (sCFMode != CF_CHALLENGES) {
+        if (save_file_get_menu_challenges()) {
             print_text(25, 13, "CHALLENGES", 4);
-        } else {
-            print_text(25, 13, "BACK", 7);
         }
 
 
