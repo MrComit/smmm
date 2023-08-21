@@ -222,6 +222,7 @@ void bhv_cs_options_button_loop(void) {
     }
 }
 
+extern s8 sDPADCursorLocation[2];
 
 void bhv_cs_challenges_button_loop(void) {
     struct Object *obj;
@@ -249,6 +250,7 @@ void bhv_cs_challenges_button_loop(void) {
         play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
         if (sCFMode != CF_CHALLENGES) {
             sCFMode = CF_CHALLENGES;
+            sDPADCursorLocation[1] = 5;
 
             // challenges = save_file_get_menu_challenges();
 
@@ -1107,10 +1109,11 @@ void print_CF_strings(void) {
 }
 
 
-s16 sCursorButtonPos[3][2][2] = {
+s16 sCursorButtonPos[4][2][2] = {
     { {-73, 60}, {108, 60}, },
     { {-73, 12}, {108, 12}, },
     { {-73, -38}, {128, -38}, },
+    { {-73, -90}, {-73, -90}, },
 };
 
 
@@ -1118,6 +1121,15 @@ s16 sCursorButtonOptionsPos[3][2][2] = {
     { {-46, 66}, {128, -38}, },
     { {-46, 12}, {128, -38}, },
     { {-46, -42}, {128, -38}, },
+};
+
+s16 sCursorButtonChallengesPos[6][2] = {
+    {-70, 75},
+    {-70, 35},
+    {-70, 5},
+    {-70, -30},
+    {-70, -60},
+    {-70, -90},
 };
 
 s8 sDPADCursorLocation[2] = {-1, -1}; 
@@ -1141,13 +1153,22 @@ void bhv_cs_bg_init(void) {
  * Properly scales the background in the main menu.
  */
 void bhv_cs_bg_loop(void) {
+    s32 height = 2;
+    if (sCFMode != CF_CHALLENGES && sDPADCursorLocation[1] > 3) {
+        sDPADCursorLocation[1] = 3;
+    }
+
+
     if (sDPADCursorLocation[0] == -1 || sDPADCursorLocation[1] == -1) {
         if (gPlayer1Controller->buttonPressed & (R_JPAD | L_JPAD | D_JPAD | U_JPAD)) {
             sDPADCursorLocation[0] = 0;
             sDPADCursorLocation[1] = 0;
-            if (sCFMode != CF_OPTIONS) {
+            if (sCFMode < CF_OPTIONS) {
                 sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                 sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+            } else if (sCFMode == CF_CHALLENGES) {
+                sCursorPos[0] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][0];
+                sCursorPos[1] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][1];
             } else {
                 sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                 sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
@@ -1157,9 +1178,12 @@ void bhv_cs_bg_loop(void) {
         if (gPlayer1Controller->buttonPressed & R_JPAD) {
             if (sDPADCursorLocation[0] != 1) {
                 sDPADCursorLocation[0] = 1;
-                if (sCFMode != CF_OPTIONS) {
+                if (sCFMode < CF_OPTIONS) {
                     sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else if (sCFMode == CF_CHALLENGES) {
+                    sCursorPos[0] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][0];
+                    sCursorPos[1] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][1];
                 } else {
                     sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
@@ -1168,9 +1192,12 @@ void bhv_cs_bg_loop(void) {
         } else if (gPlayer1Controller->buttonPressed & L_JPAD) {
             if (sDPADCursorLocation[0] != 0) {
                 sDPADCursorLocation[0] = 0;
-                if (sCFMode != CF_OPTIONS) {
+                if (sCFMode < CF_OPTIONS) {
                     sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else if (sCFMode == CF_CHALLENGES) {
+                    sCursorPos[0] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][0];
+                    sCursorPos[1] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][1];
                 } else {
                     sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
@@ -1178,23 +1205,35 @@ void bhv_cs_bg_loop(void) {
             }
         }
 
+        if (sCFMode == CF_CHALLENGES) {
+            height = 5;
+        } else if (sCFMode != CF_OPTIONS && sDPADCursorLocation[0] == 0 && save_file_get_menu_challenges()) {
+            height = 3;
+        }
+
         if (gPlayer1Controller->buttonPressed & D_JPAD) {
-            if (sDPADCursorLocation[1] != 2) {
+            if (sDPADCursorLocation[1] < height) {
                 sDPADCursorLocation[1]++;
-                if (sCFMode != CF_OPTIONS) {
+                if (sCFMode < CF_OPTIONS) {
                     sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else if (sCFMode == CF_CHALLENGES) {
+                    sCursorPos[0] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][0];
+                    sCursorPos[1] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][1];
                 } else {
                     sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
                 }
             }
         } else if (gPlayer1Controller->buttonPressed & U_JPAD) {
-            if (sDPADCursorLocation[1] != 0) {
+            if (sDPADCursorLocation[1] > 0) {
                 sDPADCursorLocation[1]--;
-                if (sCFMode != CF_OPTIONS) {
+                if (sCFMode < CF_OPTIONS) {
                     sCursorPos[0] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
+                } else if (sCFMode == CF_CHALLENGES) {
+                    sCursorPos[0] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][0];
+                    sCursorPos[1] = sCursorButtonChallengesPos[sDPADCursorLocation[1]][1];
                 } else {
                     sCursorPos[0] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][0];
                     sCursorPos[1] = sCursorButtonOptionsPos[sDPADCursorLocation[1]][sDPADCursorLocation[0]][1];
