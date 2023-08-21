@@ -92,12 +92,15 @@ s16 sCFMode = 0;
 
 s16 sOptionsHeights[3] = {90, 35, -20};
 
+s16 sChallengeHeights[5] = {90, 50, 20, -15, -45};
+
 enum CFModes {
     CF_NORMAL = 0,
     CF_ERASE  = 1,
     CF_COPY1 = 2,
     CF_COPY2 = 3,
-    CF_OPTIONS = 4
+    CF_OPTIONS = 4,
+    CF_CHALLENGES = 5
 };
 
 
@@ -126,6 +129,42 @@ s32 C_check_clicked_button(s16 maxX, s16 minX, s16 y, f32 yScale, f32 depth) {
 //     }
 //     return FALSE;
 // }
+
+extern s32 sShouldRenderCursor;
+extern s32 gIsChallenge;
+
+
+void bhv_cs_challenge_button_loop(void) {
+    s32 sensitivity;
+
+    // if (!o->oBehParams2ndByte) {
+    //     print_text_fmt_int(20, 90, "%d", sClickPos[0], 0);
+    //     print_text_fmt_int(120, 90, "%d", sClickPos[1], 0);
+    // }
+
+    if (sCursorPos[0] < 80 && sCursorPos[0] > -132 && sCursorPos[1] < sChallengeHeights[o->oBehParams2ndByte]
+        && sCursorPos[1] > sChallengeHeights[o->oBehParams2ndByte] - 30) {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.575f, 0.009375f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.735f, 0.004375f);
+        } else {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.5f, 0.009375f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 0.7f, 0.004375f);
+        }
+
+    if (C_check_clicked_button(80, -132, sChallengeHeights[o->oBehParams2ndByte], o->header.gfx.scale[1], 200.0f)) {
+        // play_puzzle_jingle();
+        // sSelectedFileNum = o->oBehParams2ndByte + 1;
+        play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+        sSelectedFileNum = 1;
+        play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+        sShouldRenderCursor = FALSE;
+        gIsChallenge = o->oBehParams2ndByte + 1;
+
+
+        sClickPos[0] = -10000;
+        sClickPos[1] = -10000;
+    }
+}
 
 
 void bhv_cs_options_button_init(void) {
@@ -173,6 +212,79 @@ void bhv_cs_options_button_loop(void) {
 }
 
 
+void bhv_cs_challenges_button_loop(void) {
+    struct Object *obj;
+    if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
+        return;
+    }
+    if (sCFMode == CF_OPTIONS) {
+        cur_obj_hide();
+        return;
+    } else {
+        cur_obj_unhide();
+    }
+
+    if (sCursorPos[0] < 0 && sCursorPos[1] < -70) {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.05f, 0.00625);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], o->oFloatF8 * 1.15f, o->oFloatFC);
+        } else {
+            o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.00625f);
+            o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], o->oFloatF8, o->oFloatFC);
+        }
+
+    if (sClickPos[0] < 0 && sClickPos[0] > -500 && sClickPos[1] < -70) {
+        // play_puzzle_jingle();
+        // sSelectedFileNum = o->oBehParams2ndByte + 1;
+        play_sound(SOUND_MENU_CLICK_FILE_SELECT, gGlobalSoundSource);
+        if (sCFMode != CF_CHALLENGES) {
+            sCFMode = CF_CHALLENGES;
+            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 240, 0, 0, 0, 0);
+            obj->header.gfx.scale[0] = 1.5f;
+            obj->header.gfx.scale[1] = 0.7f;
+            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 125, 0, 0, 0, 0);
+            obj->header.gfx.scale[0] = 1.5f;
+            obj->header.gfx.scale[1] = 0.7f;
+            obj->oBehParams2ndByte = 1;
+            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, 10, 0, 0, 0, 0);
+            obj->header.gfx.scale[0] = 1.5f;
+            obj->header.gfx.scale[1] = 0.7f;
+            obj->oBehParams2ndByte = 2;
+            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, -105, 0, 0, 0, 0);
+            obj->header.gfx.scale[0] = 1.5f;
+            obj->header.gfx.scale[1] = 0.7f;
+            obj->oBehParams2ndByte = 3;
+            obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallengeButton, -100, -220, 0, 0, 0, 0);
+            obj->header.gfx.scale[0] = 1.5f;
+            obj->header.gfx.scale[1] = 0.7f;
+            obj->oBehParams2ndByte = 4;
+        } else {
+            sCFMode = CF_NORMAL;
+            while ((obj = cur_obj_nearest_object_with_behavior(bhvCSChallengeButton)) != NULL) {
+                obj->activeFlags = 0;
+            }
+        }
+
+
+        sClickPos[0] = -10000;
+        sClickPos[1] = -10000;
+    }
+
+    if (o->oBehParams2ndByte == 0) {
+        if (sCFMode == CF_COPY1) {
+
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
 void bhv_cs_side_button_loop(void) {
     struct Object *obj;
     s32 subtract = (40 - (40 * o->header.gfx.scale[1])) / 2; 
@@ -180,7 +292,10 @@ void bhv_cs_side_button_loop(void) {
     if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL) {
         return;
     }
-    if (sCFMode == CF_OPTIONS && o->oBehParams2ndByte != 2) {
+    if (sCFMode >= CF_OPTIONS && o->oBehParams2ndByte != 2) {
+        cur_obj_hide();
+        return;
+    } else if (o->oBehParams2ndByte == 2 && sCFMode == CF_CHALLENGES) {
         cur_obj_hide();
         return;
     } else {
@@ -283,7 +398,6 @@ void bhv_cs_sub_button_loop(void) {
     }
 }
 
-extern s32 sShouldRenderCursor;
 
 void bhv_cs_button_init(void) {
     o->oObjF8 = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSubButton, -255, (s16)o->oPosY, -10, 0, 0, 0);
@@ -294,7 +408,7 @@ void bhv_cs_button_init(void) {
 
 void bhv_cs_button_loop(void) {
     struct Object *obj;
-    if (sCFMode == CF_OPTIONS) {
+    if (sCFMode >= CF_OPTIONS) {
         cur_obj_hide();
         return;
     } else {
@@ -400,6 +514,14 @@ void bhv_cs_button_manager_init(void) {
     obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSSideButton, 708, -140, 0, 0, 0, 0);
     obj->oBehParams2ndByte = 2;
     obj->header.gfx.scale[1] = 0.6f;
+    obj->oFloatF8 = obj->header.gfx.scale[1];
+    obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
+
+
+    obj = spawn_object_abs_with_rot(o, 0, MODEL_FILE_BUTTON, bhvCSChallenges, -245, -355, 0, 0, 0, 0);
+    obj->oBehParams2ndByte = 3;
+    obj->header.gfx.scale[1] = 0.9f;
+    // obj->header.gfx.scale[0] = 1.1f;
     obj->oFloatF8 = obj->header.gfx.scale[1];
     obj->oFloatFC = ((obj->oFloatF8 * 1.15f) - obj->oFloatF8) / 8.0f;
 }
@@ -693,6 +815,9 @@ void print_top_text(s32 mode) {
         case CF_OPTIONS:
             print_text(104, 225 - 15, "OPTIONS", 7);
             break;
+        case CF_CHALLENGES:
+            print_text(98, 225 - 15, "CHALLENGES", 7);
+            break;
     }
 }
 
@@ -745,6 +870,54 @@ void print_options(void) {
 
 }
 
+#define CHALLENGE_TIME_START_X 115
+
+void print_challenge_times(s32 challenge, s32 y) {
+    s32 palette = 2;
+	s32 highScore = save_file_get_challenge_time(challenge);
+	u16 highMins, highSecs, highFracSecs;
+
+	if (highScore == 0 || highScore >= 3600) {
+		highScore = 3600;
+        palette = 6;
+    	print_text(CHALLENGE_TIME_START_X, y, "GOAL", palette);
+	} else {
+    	print_text(CHALLENGE_TIME_START_X, y, "BEST", palette);
+	}
+
+    highMins = highScore / (30 * 60);
+    highSecs = (highScore - (highMins * 1800)) / 30;
+    highFracSecs = ((highScore - (highMins * 1800) - (highSecs * 30)) & 0xFFFF) / 3;
+
+    print_text_fmt_int(CHALLENGE_TIME_START_X + 59, y, "%0d", highMins, palette);
+    print_text_fmt_int(CHALLENGE_TIME_START_X + 79, y, "%02d", highSecs, palette);
+    print_text_fmt_int(CHALLENGE_TIME_START_X + 113, y, "%d", highFracSecs, palette);
+    print_text(CHALLENGE_TIME_START_X + 69, y, ".", palette);
+    print_text(CHALLENGE_TIME_START_X + 102, y, ".", palette);
+}
+
+
+void print_challenge_text(void) {
+    unsigned char textChallenge1[] = { TEXT_CHALLENGE1 };
+    unsigned char textChallenge2[] = { TEXT_CHALLENGE2 };
+    unsigned char textChallenge3[] = { TEXT_CHALLENGE3 };
+    unsigned char textChallenge4[] = { TEXT_CHALLENGE4 };
+    unsigned char textChallenge5[] = { TEXT_CHALLENGE5 };
+
+
+    print_generic_string(27, 181, textChallenge1);
+    print_generic_string(27, 148, textChallenge2);
+    print_generic_string(27, 115, textChallenge3);
+    print_generic_string(27, 82, textChallenge4);
+    print_generic_string(27, 49, textChallenge5);
+
+    print_challenge_times(0, 181);
+    print_challenge_times(1, 148);
+    print_challenge_times(2, 115);
+    print_challenge_times(3, 82);
+    print_challenge_times(4, 49);
+
+}
 
 
 void print_CF_strings(void) {
@@ -773,7 +946,7 @@ void print_CF_strings(void) {
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
 
-    if (sCFMode != CF_OPTIONS) {
+    if (sCFMode < CF_OPTIONS) {
         if (save_file_exists(SAVE_FILE_A) == TRUE) {
             print_save_info(0);
         } else {
@@ -821,7 +994,15 @@ void print_CF_strings(void) {
         if (cur_obj_nearest_object_with_behavior(bhvCSErasePrompt) != NULL || cur_obj_has_behavior(bhvCSErasePrompt)) {
             print_erase_prompt();
         }
-    } else {
+
+        if (sCFMode != CF_CHALLENGES) {
+            print_text(25, 13, "CHALLENGES", 4);
+        } else {
+            print_text(25, 13, "BACK", 7);
+        }
+
+
+    } else if (sCFMode != CF_CHALLENGES) {
         print_options();
         //options
         gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, sCTextBaseAlpha);
@@ -829,16 +1010,21 @@ void print_CF_strings(void) {
         gDPSetEnvColor(gDisplayListHead++, 0x52, 0x52, 0x52, sCTextBaseAlpha);
         print_generic_string(294 + 6, 79 - 6 - 1, textArrow);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
+    } else {
+        print_text(25, 13, "BACK", 7);
+        print_challenge_text();    
     }
 
-    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, sCTextBaseAlpha);
-    print_generic_string(220 - 1, 30 - 1, textMadeBy);
-    print_generic_string(276 - 1, 16 - 1, text2023);
+    if (sCFMode != CF_CHALLENGES) {
+        gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, sCTextBaseAlpha);
+        print_generic_string(220 - 1, 30 - 1, textMadeBy);
+        print_generic_string(276 - 1, 16 - 1, text2023);
 
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, sCTextBaseAlpha);
 
-    print_generic_string(220, 30, textMadeBy);
-    print_generic_string(276, 16, text2023);
+        print_generic_string(220, 30, textMadeBy);
+        print_generic_string(276, 16, text2023);
+    }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
     // Print menu names

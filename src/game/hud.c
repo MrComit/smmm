@@ -1181,7 +1181,6 @@ void render_hud_keys(void) {
  */
 void render_hud_timer(void) {
 	s32 highScore = save_file_get_challenge_time(gCurrCourseNum - 11);
-    u8 *(*hudLUT)[58] = segmented_to_virtual(&main_hud_lut);
     u16 timerValFrames = gHudDisplay.timer;
     u16 timerMins = timerValFrames / (30 * 60);
     u16 timerSecs = (timerValFrames - (timerMins * 1800)) / 30;

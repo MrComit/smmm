@@ -1628,6 +1628,7 @@ s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
 
 extern u8 sPssSlideStarted;
 extern s32 sHighScore;
+s32 gIsChallenge = 0;
 
 s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
 #ifdef VERSION_EU
@@ -1650,7 +1651,27 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     sWarpDest.type = WARP_TYPE_NOT_WARPING;
     sDelayedWarpOp = WARP_OP_NONE;
     gNeverEnteredCastle = !save_file_exists(gCurrSaveFileNum - 1);
-
+    
+    if (gIsChallenge) {
+        switch (gIsChallenge) {
+            case 1:
+                levelNum = LEVEL_WDW;
+                break;
+            case 2:
+                levelNum = LEVEL_TTM;
+                break;
+            case 3:
+                levelNum = LEVEL_THI;
+                break;
+            case 4:
+                levelNum = LEVEL_TTC;
+                break;
+            case 5:
+                levelNum = LEVEL_RR;
+                break;
+        }
+    }
+    
     if (gCurrDemoInput == NULL && gLevelToCourseNumTable[levelNum - 1] < 11) {
         if (save_file_get_final_rank()) {
             levelNum = LEVEL_SL;
@@ -1658,7 +1679,6 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
             levelNum = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnLevel;
         }
     }
-
 
     gCurrLevelNum = levelNum;
     gCurrCourseNum = COURSE_NONE;
@@ -1671,6 +1691,7 @@ s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
     // }
     sPssSlideStarted = 0;
     sHighScore = 0;
+    gIsChallenge = 0;
 
     init_mario_from_save_file();
     disable_warp_checkpoint();

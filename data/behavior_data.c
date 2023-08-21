@@ -10349,6 +10349,17 @@ const BehaviorScript bhvCSOptionsButton[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvCSChallengeButton[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    CALL_NATIVE(bhv_cs_options_button_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_cs_challenge_button_loop),
+    END_LOOP(),
+};
+
+
 const BehaviorScript bhvCSSubButton[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
@@ -10359,6 +10370,17 @@ const BehaviorScript bhvCSSubButton[] = {
         CALL_NATIVE(bhv_cs_sub_button_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvCSChallenges[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_MULTIROOM)),
+    // CALL_NATIVE(bhv_menu_button_init),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_cs_challenges_button_loop),
+    END_LOOP(),
+};
+
 
 
 

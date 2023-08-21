@@ -401,6 +401,13 @@
 
 
 
+#define TEXT_CHALLENGE1 _("Challenge 1")
+#define TEXT_CHALLENGE2 _("Challenge 2")
+#define TEXT_CHALLENGE3 _("Challenge 3")
+#define TEXT_CHALLENGE4 _("Challenge 4")
+#define TEXT_CHALLENGE5 _("Challenge 5")
+
+
 
 #define TEXT_MUSIC_MAIN _("Main Menu")
 #define TEXT_MUSIC_FLOOR_1 _("Floor 1")

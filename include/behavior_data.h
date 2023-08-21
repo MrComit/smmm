@@ -1008,6 +1008,8 @@ extern const BehaviorScript bhvC4TrophyPlatRise[];
 extern const BehaviorScript bhvC4TrophyRect[];
 extern const BehaviorScript bhvC4SwingingPlat[];
 extern const BehaviorScript bhvC5SpinningPlat[];
+extern const BehaviorScript bhvCSChallengeButton[];
+extern const BehaviorScript bhvCSChallenges[];
 
 
 #endif // BEHAVIOR_DATA_H
