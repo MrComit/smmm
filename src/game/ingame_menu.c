@@ -2717,19 +2717,19 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
 
 void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     u8 textContinue[] = { TEXT_CONTINUE };
-    u8 textExitCourse[] = { TEXT_EXIT_COURSE };
-    u8 textCameraAngleR[] = { TEXT_CAMERA_ANGLE_R };
+    u8 textExitChallenge[] = { TEXT_EXIT_CHALLENGE };
+    // u8 textCameraAngleR[] = { TEXT_CAMERA_ANGLE_R };
 
-    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 3);
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 2);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     print_generic_string(x + 10, y - 2, LANGUAGE_ARRAY(textContinue));
-    print_generic_string(x + 10, y - 17, LANGUAGE_ARRAY(textExitCourse));
+    print_generic_string(x + 10, y - 17, LANGUAGE_ARRAY(textExitChallenge));
 
-    if (*index != MENU_OPT_CAMERA_ANGLE_R) {
-        print_generic_string(x + 10, y - 33, LANGUAGE_ARRAY(textCameraAngleR));
+    // if (*index != MENU_OPT_CAMERA_ANGLE_R) {
+        // print_generic_string(x + 10, y - 33, LANGUAGE_ARRAY(textCameraAngleR));
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
         create_dl_translation_matrix(MENU_MTX_PUSH, x - X_VAL8, (y - ((*index - 1) * yIndex)) - Y_VAL8, 0);
@@ -2737,7 +2737,7 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
         gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
         gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-    }
+    // }
 
     // if (*index == MENU_OPT_CAMERA_ANGLE_R) {
     //     render_pause_camera_options(x - 42, y - 42, &gDialogCameraAngleIndex, 110);
@@ -2938,7 +2938,7 @@ s8 gHudFlash = 0;
 
 s16 render_pause_courses_and_castle(void) {
     s16 index;
-    s16 saveFlag;
+    s16 saveFlag = 0;
     s16 optionsY = 190;
 
 #ifdef VERSION_EU
@@ -2974,10 +2974,17 @@ s16 render_pause_courses_and_castle(void) {
                 if (gGreenCoinsCollected) {
                     render_pause_green_coins();
                 }
+            } else {
+                if (gMenuROptions) {
+                    render_pause_options();
+                } else {
+                    render_pause_course_options(120, 110, &gDialogLineNum, 15);
+                    // render_pause_my_score_coins();
+                }
             }
 
             // if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
-            //     render_pause_course_options(99, 93, &gDialogLineNum, 15);
+                // render_pause_course_options(99, 93, &gDialogLineNum, 15);
             // }
 
             create_dl_translation_matrix(MENU_MTX_PUSH, GFX_DIMENSIONS_FROM_LEFT_EDGE(0), SCREEN_HEIGHT, 0);
@@ -3043,7 +3050,6 @@ s16 render_pause_courses_and_castle(void) {
     // #if defined(WIDE)
     //     render_widescreen_setting();
     // #endif
-    if (gCurrCourseNum < 11) {
         saveFlag = save_file_get_newflags(1) & SAVE_TOAD_FLAG_INTRODUCTION;
 #ifdef SMMM_DEBUG
         saveFlag = 1;
@@ -3051,7 +3057,9 @@ s16 render_pause_courses_and_castle(void) {
         gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
         gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-        if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
+        if (gCurrCourseNum >= 11) {
+            optionsY -= 16;
+        } else if (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO) {
             optionsY -= 38;
         } else if (gHudDisplay.flags & HUD_DISPLAY_FLAG_MULTIPLIER) {
             optionsY -= 16;
@@ -3076,7 +3084,6 @@ s16 render_pause_courses_and_castle(void) {
             gDialogOptionsIndex = 1;
         }
         gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
-    }
 
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;

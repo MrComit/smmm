@@ -19,7 +19,9 @@
 #include "levels/menu/header.h"
 
 const LevelScript level_main_menu_entry_1[] = {
-    CLEAR_LEVEL(),
+    // CLEAR_LEVEL(),
+    // POP_POOL(),
+    // POP_POOL(),
     INIT_LEVEL(),
     FIXED_LOAD(/*loadAddr*/ _goddardSegmentStart, /*romStart*/ _goddardSegmentRomStart, /*romEnd*/ _goddardSegmentRomEnd),
     LOAD_YAY0(/*seg*/ 0x07, _menu_segment_7SegmentRomStart, _menu_segment_7SegmentRomEnd),

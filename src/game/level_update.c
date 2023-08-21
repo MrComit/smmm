@@ -1058,6 +1058,7 @@ void initiate_delayed_warp(void) {
             if (sDelayedWarpOp == WARP_OP_DEMO_END) {
                 warp_special(-2);
             } else {
+                // main_pool_pop_state();
                 warp_special(-2);
             }
         } else {
@@ -1376,10 +1377,12 @@ s32 play_mode_paused(void) {
         if (gDebugLevelSelect) {
             fade_into_special_warp(-9, 1);
         } else {
-            initiate_warp(LEVEL_CASTLE, 1, 0x1F, 0); //PAUSE EXIT
-            //initiate_warp(LEVEL_CASTLE_GROUNDS, 1, 0x1F, 0);
-            fade_into_special_warp(0, 0);
-            gSavedCourseNum = COURSE_NONE;
+            // main_pool_pop_state();
+            fade_into_special_warp(-2, 0);
+            // initiate_warp(LEVEL_CASTLE, 1, 0x1F, 0); //PAUSE EXIT
+            // //initiate_warp(LEVEL_CASTLE_GROUNDS, 1, 0x1F, 0);
+            // fade_into_special_warp(0, 0);
+            // gSavedCourseNum = COURSE_NONE;
         }
 
         gCameraMovementFlags &= ~CAM_MOVE_PAUSE_SCREEN;
@@ -1457,6 +1460,9 @@ s32 play_mode_change_level(void) {
         if (sWarpDest.type != WARP_TYPE_NOT_WARPING) {
             return sWarpDest.levelNum;
         } else {
+            if (D_80339EE0 == -2) {
+                main_pool_pop_state();
+            }
             return D_80339EE0;
         }
     }

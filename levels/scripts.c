@@ -49,6 +49,7 @@ static const LevelScript script_L2[4];
 static const LevelScript goto_mario_head_regular[4];
 static const LevelScript goto_mario_head_dizzy[4];
 static const LevelScript script_L5[4];
+static const LevelScript goto_mario_head_reset[4];
 
 #define STUB_LEVEL(_0, _1, _2, _3, _4, _5, _6, _7, _8)
 #define DEFINE_LEVEL(_0, _1, _2, folder, _4, _5, _6, _7, _8, _9, _10) static const LevelScript script_exec_ ## folder [4 + 1];
@@ -171,8 +172,11 @@ static const LevelScript script_L2[] = {
 
 static const LevelScript goto_mario_head_regular[] = {
     // CALL(/*arg*/ 0, /*func*/ lvl_reset_demo),
+    // PUSH_POOL(),
+    // POP_POOL(),
     EXIT_AND_EXECUTE(/*seg*/ 0x14, _menuSegmentRomStart, _menuSegmentRomEnd, level_main_menu_entry_1),
 };
+
 
 static const LevelScript goto_mario_head_dizzy[] = {
     EXIT_AND_EXECUTE(/*seg*/ 0x14, _introSegmentRomStart, _introSegmentRomEnd, level_intro_mario_head_dizzy),

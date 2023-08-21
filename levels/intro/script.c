@@ -160,6 +160,7 @@ const LevelScript script_intro_L1[] = {
     TRANSITION(/*transType*/ WARP_TRANSITION_FADE_INTO_COLOR, /*time*/ 16, /*color*/ 0xFF, 0xFF, 0xFF),
     SLEEP(/*frames*/ 16),
     CLEAR_LEVEL(),
+    // CLEAR_LEVEL(),
     SLEEP(/*frames*/ 2),
     SET_REG(/*value*/ 16),
     EXIT_AND_EXECUTE(/*seg*/ 0x14, _menuSegmentRomStart, _menuSegmentRomEnd, level_main_menu_entry_1),
