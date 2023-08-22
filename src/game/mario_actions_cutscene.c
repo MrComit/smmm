@@ -1295,7 +1295,7 @@ s32 act_unused_death_exit(struct MarioState *m) {
                 m->numBooCoins -= 5;
             else
                 m->numBooCoins = 0;
-        } else if (gCurrLevelNum != LEVEL_SL){
+        } else if (gCurrLevelNum != LEVEL_SL && gCurrCourseNum < 11) {
             if (m->numCoins > 10) {
                 m->numCoins -= 10;
             } else {

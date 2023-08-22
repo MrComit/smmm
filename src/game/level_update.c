@@ -481,7 +481,9 @@ void reset_objects_in_room(s32 room, struct SpawnInfo *spawnInfo) {
     }
 }
 
-
+extern u8 sPssSlideStarted;
+extern s32 sHighScore;
+s32 gIsChallenge = 0;
 s32 gL6MusicCheck = FALSE;
 extern s16 s8DirModeBaseYaw;
 
@@ -505,9 +507,15 @@ void init_mario_after_warp(void) {
         if (sWarpDest.type == WARP_TYPE_CHANGE_LEVEL || sWarpDest.type == WARP_TYPE_CHANGE_AREA 
             || sWarpDest.type == WARP_TYPE_RESPAWN) {
             gPlayerSpawnInfos[0].areaIndex = sWarpDest.areaIdx;
-            if (sWarpDest.type == WARP_TYPE_RESPAWN) {
+            if (sWarpDest.type == WARP_TYPE_RESPAWN && gCurrCourseNum < 11) {
                 vec3s_copy(gMarioSpawnInfo->startPos, gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos);
                 gMarioSpawnInfo->startAngle[1] = gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnAngle;
+            }
+
+            if (gCurrCourseNum >= 11) {
+                sPssSlideStarted = 0;
+                sHighScore = 0;
+                gIsChallenge = 0;
             }
             load_mario_area();
         }
@@ -824,6 +832,13 @@ s32 in_boss_room(s16 level, s16 room) {
             break;
             
     }
+
+    // challenges
+    if (gCurrCourseNum >= 11) {
+        return TRUE;
+    }
+
+
     gMarioDeathRoom = 0;
     return FALSE;
     // if (val) {
@@ -1632,9 +1647,6 @@ s32 lvl_init_or_update(s16 initOrUpdate, UNUSED s32 unused) {
     return result;
 }
 
-extern u8 sPssSlideStarted;
-extern s32 sHighScore;
-s32 gIsChallenge = 0;
 
 s32 lvl_init_from_save_file(UNUSED s16 arg0, s32 levelNum) {
 #ifdef VERSION_EU
