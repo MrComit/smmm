@@ -1316,12 +1316,31 @@ void basic_update(UNUSED s16 *arg) {
     }
 }
 
+
+void check_cheat_code(void) {
+    if (gPlayer1Controller->buttonDown & L_TRIG && gPlayer1Controller->buttonDown & R_TRIG && 
+        gPlayer1Controller->buttonDown & R_CBUTTONS && gPlayer1Controller->buttonPressed & B_BUTTON) {
+            if (!save_file_exists(2)) {
+                save_file_make_complete(2);
+                play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+            } else if (!save_file_exists(1)) {
+                save_file_make_complete(1);
+                play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+            } else if (!save_file_exists(0)) {
+                save_file_make_complete(0);
+                play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
+            }
+        }
+}
+
+
 extern s32 gPauseHudFirstFrame;
 extern s16 gMenuROptions;
 
 s32 play_mode_normal(void) {
     if (gCurrDemoInput != NULL) {
         print_intro_text();
+        check_cheat_code();
         if (gPlayer1Controller->buttonPressed & END_DEMO) {
             // gCurrDemoInput = NULL;
             // save_file_reload();

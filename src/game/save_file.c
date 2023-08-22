@@ -472,6 +472,33 @@ void save_file_collect_star_or_key(s16 coinScore, s16 starIndex) {
     }
 }
 
+
+void save_file_make_complete(s32 file) {
+    gSaveBuffer.files[file][0].boosCaptured = 0b1111111111111111111111111;
+    gSaveBuffer.files[file][0].starPieces = 0b11100001111111111111111111111111;
+    gSaveBuffer.files[file][0].currencyStars = 0b11111111111111111111;
+    gSaveBuffer.files[file][0].coinCount = 99999;
+    gSaveBuffer.files[file][0].finalRank = 7;
+    gSaveBuffer.files[file][0].goldenGoombas = 0xFFFF;
+    gSaveBuffer.files[file][0].gpFlags = 0xFFFFFFFF;
+    gSaveBuffer.files[file][0].miscChallenges[0] = 0xFFFFFFFF;
+    gSaveBuffer.files[file][0].miscChallenges[1] = 0xFFFFFFFF;
+    gSaveBuffer.files[file][0].keys[0] = 0xFFFF;
+    gSaveBuffer.files[file][0].keys[1] = 0xFFFF;
+    gSaveBuffer.files[file][0].roomsCleared[0] = 0xFFFFFFFF;
+    gSaveBuffer.files[file][0].roomsCleared[1] = 0xFFFFFFFF;
+    gSaveBuffer.files[file][0].roomsCleared[2] = 0xFFFFFFFF;
+
+    gSaveBuffer.files[file][0].newFlags[0] = 0xFFFFFFFF;
+    gSaveBuffer.files[file][0].newFlags[1] = 0xFFFFFFFF;
+
+
+    gSaveBuffer.files[file][0].ingameTime = 1;
+    gSaveFileModified = TRUE;
+    save_file_do_save(file);
+}
+
+
 s32 save_file_exists(s32 fileIndex) {
     return gSaveBuffer.files[fileIndex][0].ingameTime != 0;
 }

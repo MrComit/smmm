@@ -306,6 +306,8 @@ s32 save_file_get_total_star_count(s32 fileIndex, s32 minCourse, s32 maxCourse);
 // void save_file_clear_flags(u32 flags);
 // u32 save_file_get_flags(void);
 
+void save_file_make_complete(s32 file);
+
 s8 save_file_get_final_rank(void);
 void save_file_set_final_rank(s8 rank);
 

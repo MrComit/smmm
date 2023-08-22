@@ -1961,7 +1961,7 @@ void pss_end_slide(struct MarioState *m) {
         // }
         sPssSlideStarted = 2;
     } else if (sPssSlideStarted > 1) {
-        // set_mario_npc_dialog(1);
+        set_mario_npc_dialog(1);
         sPssSlideStarted++;
         if (sHighScore) {
             if (sPssSlideStarted == 70) {
@@ -1981,7 +1981,7 @@ s8 gRopeCamera = 0;
 
 void mario_handle_special_floors(struct MarioState *m) {
     struct Object *obj;
-    if ((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE) {
+    if (((m->action & ACT_GROUP_MASK) == ACT_GROUP_CUTSCENE) && (m->floor == NULL || m->floor->type != SURFACE_TIMER_END)) {
         return;
     }
 
@@ -2017,7 +2017,9 @@ void mario_handle_special_floors(struct MarioState *m) {
                 break;
 
             case SURFACE_TIMER_END:
-                pss_end_slide(m);
+                if (m->pos[1] <= m->floorHeight && m->action != ACT_LEDGE_GRAB) {
+                    pss_end_slide(m);
+                }
                 break;
         }
 
