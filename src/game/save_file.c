@@ -494,6 +494,9 @@ void save_file_make_complete(s32 file) {
 
 
     gSaveBuffer.files[file][0].ingameTime = 1;
+
+    gSaveBuffer.menuData[0].challenges = 0b11111;
+    gMainMenuDataModified = TRUE;
     gSaveFileModified = TRUE;
     save_file_do_save(file);
 }
