@@ -65,6 +65,7 @@ enum SeqId {
     SEQ_FINAL_BOSS,                   // 0x35
     SEQ_PROSPECTOR,                   // 0x36
     SEQ_POST_MANOR,                   // 0x37
+    SEQ_CHALLENGE,                    // 0x38
     SEQ_COUNT
 };
 

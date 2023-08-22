@@ -88,7 +88,7 @@ const LevelScript level_thi_entry[] = {
 		TERRAIN(thi_area_1_collision),
 		ROOMS(thi_area_1_collision_rooms),
 		MACRO_OBJECTS(thi_area_1_macro_objs),
-		STOP_MUSIC(0),
+		SET_BACKGROUND_MUSIC(0x00, SEQ_CHALLENGE),
 		TERRAIN_TYPE(TERRAIN_GRASS),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
