@@ -3965,7 +3965,7 @@ void init_map(void) {
     // map = 0;
     set_goal_level_and_room();
     gMapCamOffset[0] = 0.0f;
-    gMapCamOffset[1] = 0.0f;
+    gMapCamOffset[1] = 1000.0f;
     gMapCamOffset[2] = 0.0f;
     spawn_map_objects(map);
 }
@@ -4033,14 +4033,21 @@ void render_map_objects(void) {
     }
 }
 
-
+s32 gMapKeySinVal = 0;
 
 void render_map_key(f32 x, f32 z, s8 id) {
+    f32 scaleVal = 0.0f;
     Vec3f pos, scale;
     Vec3s angle;
     vec3s_set(angle, 0xC000, 0, 0);
     vec3f_set(pos, x, -25985.0f, z);
-    vec3f_set(scale, 0.5f, 0.5f, 0.5f);
+    if (save_file_get_keys(0) & (1 << id)) {
+        scaleVal = 0.65f + (sins(gMapKeySinVal) * 0.15f);
+        vec3f_set(scale, scaleVal, scaleVal, scaleVal);
+    } else {
+        scaleVal = 0.5f;
+        vec3f_set(scale, scaleVal, scaleVal, scaleVal);
+    }
     mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
     mtxf_scale_vec3f(gMatStack[gMatStackIndex + 1], gMatStack[gMatStackIndex + 1], scale);
     Mtx *mtx = alloc_display_list(sizeof(*mtx));
@@ -4048,7 +4055,7 @@ void render_map_key(f32 x, f32 z, s8 id) {
     gSPMatrix(gDisplayListHead++, mtx, G_MTX_MODELVIEW | G_MTX_LOAD | G_MTX_NOPUSH);
 
     if (save_file_get_keys(0) & (1 << id)) {
-        gDPSetEnvColor(gDisplayListHead++, 50, 120, 50, 255);
+        gDPSetEnvColor(gDisplayListHead++, 120, 115, 95, 255);
     } else {
         gDPSetEnvColor(gDisplayListHead++, 120, 120, 120, 255);
     }
@@ -4124,6 +4131,7 @@ void render_map_switches(void) {
 
 void render_map_keys(void) {
     s32 i;
+    gMapKeySinVal += 0x400;
     for (i = 0; i < 10; i++) {
         if (gMapKeyPool[i].alive != 0) {
             gCurrentMapKey = &gMapKeyPool[i];

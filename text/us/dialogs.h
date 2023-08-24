@@ -249,13 +249,9 @@ Do you want to Save?\n\
 
 DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
 You've collected a Key!\n\
-Use this to unlock a\n\
-door somewhere in the\n\
-manor.\n\
 Check your Room Manager\n\
 to see what lock the key\n\
 belongs to.\n\
-\n\
 Do you want to Save?\n\
 \n\
 //Yes////No"))
