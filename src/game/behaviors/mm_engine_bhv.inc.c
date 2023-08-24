@@ -1448,7 +1448,7 @@ void bhv_prospector_lock_loop(void) {
             if (flags1 & SAVE_TOAD_FLAG_REDS1 || gRedCoinMissionActive || 
                 (!(flags0 & (SAVE_NEW_FLAG_BROKEN1 | SAVE_NEW_FLAG_BROKEN2 | SAVE_NEW_FLAG_BROKEN3)))) {
                 o->activeFlags = 0;
-            } else {
+            } else if (o->oRoom != 7) {
                 switch (o->oAction) {
                     case 0:
                         if (o->oDistanceToMario < 800.0f) {

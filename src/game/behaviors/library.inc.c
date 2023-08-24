@@ -45,7 +45,7 @@ void bhv_flame_decoration_big_loop(void) {
 
 void koopa_boss_move(void) {
     o->oF8 += 0x180;
-    o->oPosZ = 17400.0f + (sins(o->oF8 & ~1) * 1300.0f);
+    o->oPosZ = 17200.0f + (sins(o->oF8 & ~1) * 1250.0f);
 }
 
 void koopa_boss_clamp_mario(void) {
@@ -132,7 +132,7 @@ void bhv_koopa_boss_loop(void) {
                 o->o108 = 1;
             }
             if (o->oTimer > o->oFC) {
-                obj = spawn_object(o, MODEL_L1_THIN_BOOK, bhvFlamingBossBook);
+                obj = spawn_object(o, MODEL_L1_THIN_BOOK_SHADOW, bhvFlamingBossBook);
                 obj->oPosY += 1800.0f;
                 obj->oPosX += 600.0f;
                 if (o->oBehParams2ndByte) {
@@ -162,7 +162,8 @@ void bhv_koopa_boss_loop(void) {
             if (lateral_dist_between_objects(o, obj) < o->oKleptoStartPosZ) {
                 CL_explode_object(obj, 1);
                 if (o->oBehParams2ndByte) {
-                    cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
+                    // cur_obj_play_sound_2(SOUND_OBJ_ENEMY_DEATH_LOW);
+                    cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_ROAR);
                     if (--o->oHealth > 0) {
                         o->oAction = 3;
                     } else {
@@ -238,11 +239,11 @@ void boss_book_flaming_loop(void) {
         o->oObjF4->activeFlags = 0;
         //o->parentObj->oAction = 1;
         if (o->o100) {
-            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMiniFlame);
+            obj = spawn_object(o, MODEL_RED_FLAME_SHADOW, bhvKoopaBossMiniFlame);
             obj->oMoveAngleYaw = o->oFaceAngleYaw;
-            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMiniFlame);
+            obj = spawn_object(o, MODEL_RED_FLAME_SHADOW, bhvKoopaBossMiniFlame);
             obj->oMoveAngleYaw = o->oFaceAngleYaw + 0x5555;
-            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMiniFlame);
+            obj = spawn_object(o, MODEL_RED_FLAME_SHADOW, bhvKoopaBossMiniFlame);
             obj->oMoveAngleYaw = o->oFaceAngleYaw + 0xAAAA;
         }
     }
@@ -254,12 +255,23 @@ void sparkling_book_act_1(void) {
     o->oFaceAnglePitch -= 0x800;
     switch (o->oHeldState) {
         case HELD_FREE:
-            if (o->oTimer > 10 && o->oDistanceToMario < 150.0f) {
-                o->oHeldState = HELD_HELD;
-                set_mario_action(gMarioState, ACT_HOLD_IDLE, 0);
+            if (gMarioState->pos[1] <= gMarioState->floorHeight && o->oTimer > 10 && o->oDistanceToMario < 150.0f) {
+                // o->oHeldState = HELD_HELD;
+                // set_mario_action(gMarioState, ACT_HOLD_IDLE, 0);
+                // set_mario_action(gMarioState, ACT_PICKING_UP, 0);
                 gMarioState->usedObj = o;
-                mario_grab_used_object(gMarioState);
-                gMarioState->marioBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
+                gMarioState->interactObj = o;
+                gMarioState->input |= INPUT_INTERACT_OBJ_GRABBABLE;
+                // gMarioState->forwardVel = 0;
+                // set_mario_action(gMarioState, ACT_IDLE, 0);
+                if (mario_check_object_grab(gMarioState)) {
+                    // o->o100 = 1;
+                    gMarioObject->header.gfx.animInfo.animFrame = gMarioObject->header.gfx.animInfo.curAnim->loopEnd - 1;
+                    set_mario_animation(gMarioState, MARIO_ANIM_FIRST_PUNCH_FAST);
+                }
+                // set_mario_action(gMarioState, (gMarioState->action & ACT_FLAG_DIVING) ? ACT_DIVE_PICKING_UP : ACT_PICKING_UP, 0);
+                // mario_grab_used_object(gMarioState);
+                // gMarioState->marioBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
             }
             o->oF8++;
             if (o->oF8 > 120) {
@@ -418,6 +430,9 @@ void bhv_boss_chandelier_loop(void) {
             if (o->oF4 >= 3) {
                 o->oAction = 1;
                 o->oPosZ = obj->oPosZ;
+            } else {
+                o->oF8 += (0x160 * o->oF4);
+                o->oFaceAnglePitch = sins(o->oF8) * (0x140 * o->oF4);
             }
             break;
         case 1:
@@ -453,7 +468,7 @@ void koopa_boss_flame_act_2(void) {
         if (CL_RandomMinMaxU16(1, 15) == 5) {
             obj = spawn_object(o, MODEL_YELLOW_COIN, bhvKoopaBossMovingCoin);
         } else {
-            obj = spawn_object(o, MODEL_RED_FLAME, bhvKoopaBossMovingFlame);
+            obj = spawn_object(o, MODEL_RED_FLAME_SHADOW, bhvKoopaBossMovingFlame);
         }
         obj->oBehParams2ndByte = o->oBehParams2ndByte;
         o->oTimer = 0;

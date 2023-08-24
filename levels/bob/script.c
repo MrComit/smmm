@@ -36,6 +36,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -100,6 +101,7 @@ const LevelScript level_bob_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_RED_SPOT, red_spot_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T, prospector_t_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_L1_2D_RED, l1_2d_red_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_L1_THIN_BOOK_SHADOW, l1_thin_book_shadow_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

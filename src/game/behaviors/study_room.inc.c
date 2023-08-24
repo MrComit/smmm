@@ -188,6 +188,7 @@ void bucket_free_loop(void) {
     object_step();
     if (dist_between_objects(o, obj) < 200.0f) {
         CL_explode_object(o, 1);
+        cur_obj_play_sound_2(SOUND_OBJ_DIVING_IN_WATER);
         water_bomb_spawn_explode_particles(0, 3, 10);
         obj->activeFlags = 0;
     }

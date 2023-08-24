@@ -1,6 +1,7 @@
 extern const GeoLayout l1_thin_book_Green[];
 extern const GeoLayout l1_thin_book_Purple[];
 extern const GeoLayout l1_thin_book_geo[];
+extern const GeoLayout l1_thin_book_shadow_geo[];
 extern Vtx l1_thin_book_Red_mesh_vtx_0[4];
 extern Gfx l1_thin_book_Red_mesh_tri_0[];
 extern Vtx l1_thin_book_Red_mesh_vtx_1[8];

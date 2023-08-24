@@ -292,6 +292,7 @@ void pan_held_loop(void) {
     o->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
     //cur_obj_init_animation(1);
     cur_obj_set_pos_relative(gMarioObject, 0, 60.0f, 60.0f);
+    // o->oFaceAngleYaw += 0x4000;
     vec3f_copy(&o->oObjF4->oPosX, &o->oPosX);
     o->oObjF4->oPosY += 25.0f;
 }
@@ -358,6 +359,13 @@ void bhv_frying_pan_init(void) {
 }
 
 void bhv_frying_pan_loop(void) {
+    if (o->oHeldState == HELD_HELD) {
+        o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 0.75f, 0.15f);
+        o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+    } else {
+        o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.05f);
+        o->header.gfx.scale[1] = o->header.gfx.scale[2] = o->header.gfx.scale[0];
+    }
     switch (o->oHeldState) {
         case HELD_FREE:
             pan_free_loop();

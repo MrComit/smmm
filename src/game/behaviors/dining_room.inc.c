@@ -181,8 +181,8 @@ void bhv_shyguy_chair_loop(void) {
             o->oOpacity = 0;
             cur_obj_disable();
             if (gMarioState->pos[1] > 100.0f) {
-                if (gMarioState->pos[0] > 7002.0f && gMarioState->pos[0] < 7386.0f) {
-                    if (gMarioState->pos[2] > 5181.0f && gMarioState->pos[2] < 5565.0f) {
+                if (gMarioState->pos[0] > 6902.0f && gMarioState->pos[0] < 7486.0f) {
+                    if (gMarioState->pos[2] > 5081.0f && gMarioState->pos[2] < 5465.0f) {
                         o->oAction = 1;
                         o->oFC = 75;
                         obj = spawn_object(o, MODEL_TABLE_BARRIER, bhvTableBarrier);

@@ -6843,7 +6843,7 @@ const BehaviorScript bhvKoopaBossMovingFlame[] =  {
     SET_INTERACT_TYPE(INTERACT_FLAME),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
     SET_INT(oIntangibleTimer, 0),
-    SET_FLOAT(oGraphYOffset, 50),
+    SET_FLOAT(oGraphYOffset, 80),
     CALL_NATIVE(bhv_koopa_boss_moving_flame_init),
     BEGIN_LOOP(),
         SET_INT(oInteractStatus, 0),

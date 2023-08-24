@@ -1,8 +1,10 @@
 // explosion.inc.c
 
 void bhv_explosion_init(void) {
-    create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
-    set_environmental_camera_shake(SHAKE_ENV_EXPLOSION);
+    if (!obj_has_behavior(o->parentObj, bhvWaterBucket)) {
+        create_sound_spawner(SOUND_GENERAL2_BOBOMB_EXPLOSION);
+        set_environmental_camera_shake(SHAKE_ENV_EXPLOSION);
+    }
 
     o->oOpacity = 255;
 

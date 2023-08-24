@@ -684,6 +684,7 @@
 // 0x5B-0x63
 #define MODEL_RED_SPOT            0x5B
 #define MODEL_L1_2D_RED           0x5A
+#define MODEL_L1_THIN_BOOK_SHADOW 0x5C
 
 
 // 0x6C-0x73
