@@ -192,6 +192,22 @@ void bhv_cushion_friend_init(void) {
 
     if (save_file_get_boos() & (1 << 0x12)) {
         o->activeFlags = 0;
+        COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, bhvTrophyRect)
+        obj->oBehParams = (32 << 24) | (3 << 16);
+        obj->oBehParams2ndByte = 3;
+        obj->oRoom = 2;
+        obj->parentObj = obj;
+        COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 8893, 0, -90, 0, bhvTrophyRect)
+        obj->oBehParams = (32 << 24) | (3 << 16);
+        obj->oBehParams2ndByte = 3;
+        obj->oRoom = 2;
+        obj->parentObj = obj;
+        COMIT_OBJECT(MODEL_TROPHY_OCTOGON, -455, -100, 6514, 0, -22, 0, bhvTrophyPlatSpin)
+        obj->oRoom = 2;
+        obj->parentObj = obj;
+        COMIT_OBJECT(MODEL_TROPHY_OCTOGON, 241, -100, 5109, 0, 22, 0, bhvTrophyPlatSpin)
+        obj->oRoom = 2;
+        obj->parentObj = obj;
     } else if (flags & SAVE_TOAD_FLAG_SPAWN_PLATS) {
         o->oRoom = 2;
         COMIT_OBJECT(MODEL_TROPHY_RECTANGLE, 578, 0, 10898, 0, 90, 0, bhvTrophyRect)
