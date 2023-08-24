@@ -4154,7 +4154,7 @@ void render_map_red_coins(void) {
 void update_map_screen(void) {
     s32 objective, centerX;
     f32 div = 3.0f;
-    if (gPlayer1Controller->buttonDown & (Z_TRIG | R_TRIG)) {
+    if (gPlayer1Controller->buttonDown & (Z_TRIG | R_TRIG | B_BUTTON)) {
         div = 1.0f;
     }
     if (absf(gPlayer1Controller->stickX) > 10.0f) {

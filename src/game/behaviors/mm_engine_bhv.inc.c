@@ -135,6 +135,7 @@ void bhv_save_station_loop(void) {
         case 0:
             if (o->oInteractStatus == INT_STATUS_INTERACTED && gCamera->comitCutscene == 0) {
                 o->oAction = 1;
+                gMarioState->healCounter = 31;
                 // set_mario_npc_dialog(1);
             }
             break;
