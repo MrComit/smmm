@@ -801,7 +801,11 @@ u32 interact_star_or_key(struct MarioState *m, UNUSED u32 interactType, struct O
             m->healCounter = 0;
         }
 
-        starGrabAction = ACT_STAR_DANCE_WATER;
+        if (m->pos[1] <= m->floorHeight) {
+            starGrabAction = ACT_STAR_DANCE_NO_EXIT;
+        } else {
+            starGrabAction = ACT_STAR_DANCE_WATER;
+        }
 
         spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
 
@@ -1042,7 +1046,7 @@ u32 interact_door(struct MarioState *m, UNUSED u32 interactType, struct Object *
         }
     }
 
-    if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
+    if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR && m->pos[1] <= m->floorHeight) {
         if (!(keyCount & (1 << o->oBehParams2ndByte))) {
             if (!sDisplayingDoorText) {
                 set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_022);

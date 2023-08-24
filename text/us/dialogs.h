@@ -16,13 +16,14 @@
 #define GIVE_UP "give"
 #endif
 
-DEFINE_DIALOG(DIALOG_000, 1, 6, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_000, 1, 7, 30, 200, _("\
 Ah, well if it isn't the world\n\
 famous Mario! You can call me\n\
 Professor T. I'm the owner of\n\
 this manor. I wish I had time\n\
 to sit and chat, but as you can\n\
 see things here are not well.\n\
+\n\
 My manor has been sieged by \n\
 ghosts - monsters of another\n\
 realm. I was in the basement\n\
@@ -35,41 +36,43 @@ polter-mice, spooksquitoes\n\
 (I've had a lot of time to \n\
 come up with fitting insults\n\
 for them).\n\
+\n\
+\n\
 They infested every part of the\n\
 manor. Stealing, distroting \n\
 rooms, creating holes in the\n\
 very fabric of this world and\n\
 filling them with their own\n\
 disgusting, toxic spectral goop.\n\
+\n\
 Though, I suppose you've noticed\n\
 that one already. If I could\n\
 just get into my lab I might\n\
 be able to shut the portal\n\
 letting them in - but there's\n\
 just 1 small problem with that.\n\
+\n\
 The entrance to the basement\n\
 seems to be blocked by some\n\
 sort of spectral barrier.\n\
 The only lead I have is an\n\
 especially high level of\n\
-paranormal activity detected -\n\
+paranormal activity detected\n\
 on the third floor.\n\
-\n\
 Do you think you could check\n\
 it out for me? You'll first\n\
 need to find the key to the\n\
-door right behind us, which -\n\
-- I believe I left in the \n\
+door right behind us, which\n\
+I believe I left in the \n\
 Library.\n\
+\n\
 Here, I'll give you this,\n\
 I call it the Room Manager.\n\
-\n\
-\n\
 It's really just a \n\
 souped-up piece of C Sharp \n\
 software, but it'll allow me\n\
 to contact you anywhere, \n\
-in addition to functioning\n\
+in addition to functioning -\n\
 as a map of the entire manor.\n\
 Press [L]   from the Pause Menu\n\
 to open it. \n\
@@ -249,6 +252,10 @@ You've collected a Key!\n\
 Use this to unlock a\n\
 door somewhere in the\n\
 manor.\n\
+Check your Room Manager\n\
+to see what lock the key\n\
+belongs to.\n\
+\n\
 Do you want to Save?\n\
 \n\
 //Yes////No"))

@@ -1,5 +1,5 @@
 extern const GeoLayout prospector_lock_geo[];
-extern u8 prospector_lock_i8_toad_hat_side_ia8[];
+extern u8 prospector_lock_rounded_bup_face_ia8[];
 extern Vtx prospector_lock_Lock_mesh_layer_4_vtx_cull[8];
 extern Vtx prospector_lock_Lock_mesh_layer_4_vtx_0[7];
 extern Gfx prospector_lock_Lock_mesh_layer_4_tri_0[];
