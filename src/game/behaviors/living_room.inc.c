@@ -269,6 +269,16 @@ void bhv_tv_peepa_loop(void) {
 }
 
 
+void bhv_peepa_number_init(void) {
+    if (gIsConsole) {
+        o->oFloat104 = 15.0f;
+        cur_obj_scale(1.5f);
+    } else {
+        o->oFloat104 = 0.0f;
+    }
+}
+
+
 void bhv_peepa_number_loop(void) {
     if (o->parentObj == o)
         return o->activeFlags = 0;
@@ -285,5 +295,5 @@ void bhv_peepa_number_loop(void) {
         o->oPosZ = o->parentObj->oPosZ;
     }
 
-        o->oPosY = o->parentObj->oPosY + o->parentObj->oGraphYOffset + 100.0f;
+        o->oPosY = o->parentObj->oPosY + o->parentObj->oGraphYOffset + 100.0f + o->oFloat104;
 }

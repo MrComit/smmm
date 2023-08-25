@@ -37,6 +37,11 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -315,8 +320,13 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_BLUE_COIN, -9040, 944, 8382, 0, 0, 0, 0x00000000, bhvHiddenBlueCoin),
 		OBJECT(MODEL_BLUE_COIN_SWITCH, -11556, 250, 8213, 0, 0, 0, 0x05020100, bhvBlueCoinSwitch),
 		OBJECT(MODEL_RED_FLAME, -12179, 250, 7566, 0, 0, 0, 0x00000000, bhvL1Fireplace),
-		OBJECT(MODEL_L1_FLIP_BOOK, -11777, 3067, 11638, 0, -90, 0, 0x00000000, bhvFlipBook),
-		OBJECT(MODEL_L1_FLIP_BOOK, -11777, 3067, 11938, 0, -90, 0, 0x00000000, bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11777, 3067, 11638, 0, -90, 0, (2 << 24) | (1 << 16), bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11777, 3067, 11938, 0, -90, 0, (1 << 24) | (1 << 16), bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11477, 3067, 11938, 0, -90, 0, (4 << 24) | (1 << 16), bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11177, 3067, 11938, 0, -90, 0, (7 << 24), bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11177, 3067, 11638, 0, -90, 0, (8 << 24) | (1 << 16), bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11777, 3067, 12238, 0, -90, 0, (1 << 16), bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11477, 3067, 12238, 0, -90, 0, (3 << 24), bhvFlipBook),
 		OBJECT(MODEL_HEART, -10101, 2994, 12459, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_L1_THIN_BOOK, -10230, 208, 6949, 0, 0, 0, 0x00000000, bhvSpinningBook),
 		OBJECT(MODEL_L1_THIN_BOOK, -9626, 156, 7068, 0, 0, 0, 0x00000000, bhvSpinningBook),
@@ -330,8 +340,8 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_L1_BOOK, -9567, 1971, 10688, 180, 0, -90, 0x40000000, bhvSineBook),
 		OBJECT(MODEL_L1_BOOK, -9279, 2245, 11189, -90, 0, -90, 0x00020000, bhvSineBook),
 		OBJECT(MODEL_L1_BOOK, -10285, 1475, 10027, -90, 0, 0, 0x00010000, bhvSineBook),
-		OBJECT(MODEL_L1_FLIP_BOOK, -11177, 3067, 12238, 0, -90, 0, 0x00000000, bhvFlipBook),
-		OBJECT(MODEL_L1_FLIP_BOOK, -11477, 3067, 11638, 0, -90, 0, 0x00000000, bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11177, 3067, 12238, 0, -90, 0, (6 << 24), bhvFlipBook),
+		OBJECT(MODEL_L1_FLIP_BOOK, -11477, 3067, 11638, 0, -90, 0, (5 << 24) | (1 << 16), bhvFlipBook),
 		OBJECT(MODEL_STAR_PIECE, -12273, 350, 7567, 0, 0, 0, 0x04000000, bhvStarPiece),
 		OBJECT(MODEL_WATER_BUCKET, -9002, 2944, 12545, 0, 0, 0, 0x00000000, bhvWaterBucket),
 		OBJECT(MODEL_CHANDELIER, -9070, 3292, 17409, 0, 0, 0, 0x00000000, bhvKoopaBossChandelier),

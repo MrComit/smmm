@@ -248,7 +248,6 @@ const GeoLayout bob_dl_110__Study_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_BucketStack_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_FancyChair_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Fireplace_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_FlipBooks_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_GBook_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_HalfPillar_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Light_mesh_layer_1),

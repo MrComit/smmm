@@ -1272,6 +1272,7 @@ void bhv_balcony_elevator_init(void);
 void bhv_balcony_elevator_loop(void);
 void bhv_cs_challenge_button_loop(void);
 void bhv_cs_challenges_button_loop(void);
+void bhv_peepa_number_init(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

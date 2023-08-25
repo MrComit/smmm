@@ -194,7 +194,7 @@ void bhv_l1_gate_loop(void) {
                     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_STUDY_GATE) {
                         o->activeFlags = 0;
                     }
-                    if (o->oF4 > 3) {
+                    if (o->oF4) {
                         o->oAction = 1;
                         save_file_set_newflags(SAVE_NEW_FLAG_STUDY_GATE, 0);
                         play_puzzle_jingle();

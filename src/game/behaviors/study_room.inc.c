@@ -253,36 +253,74 @@ void bhv_sine_book_loop(void) {
     o->oVelY = o->oPosY - oldPos;
 }
 
+s16 sFlipBookPuzzle = 0;
 
 void bhv_flip_book_init(void) {
+    sFlipBookPuzzle = 0;
+    if (o->oBehParams2ndByte == 1) {
+        o->oFaceAngleRoll = 0x8000;
+        o->os16FC = 0;
+    } else {
+        o->os16FC = 0x8000;
+    }
     o->oObjF4 = CL_obj_nearest_object_behavior_params(bhvL1Gate, 0x00030000);
     if (o->oObjF4 == NULL) {
         // o->oFaceAnglePitch = 0x8000;
-        o->oFaceAngleRoll = 0x7FFF;
+        o->oFaceAngleRoll = 0x8000;
         o->oAction = 2;
     }
 }
 
 
+
 void bhv_flip_book_loop(void) {
     switch (o->oAction) {
         case 0:
+            if (sFlipBookPuzzle & (1 << (o->oBehParams >> 24))) {
+                if (!o->oBehParams2ndByte) {
+                    sFlipBookPuzzle &= ~(1 << (o->oBehParams >> 24));
+                }
+            } else if (o->oBehParams2ndByte) {
+                sFlipBookPuzzle |= (1 << (o->oBehParams >> 24));
+            }
+
+            if (o->oObjF4 == NULL || o->oObjF4->activeFlags == 0) {
+                o->oAction = 2;
+                break;
+            }
             if (o->oObjF4->activeFlags == 0) {
                 // o->oFaceAnglePitch = 0x8000;
-                o->oFaceAngleRoll = 0x7FFF;
+                o->oFaceAngleRoll = 0x8000;
                 o->oAction = 2;
             }
             load_object_collision_model();
             if (cur_obj_is_mario_ground_pounding_platform()) {
                 o->oAction = 1;
             }
+            // print_text_fmt_int(80, 80, "%x", sFlipBookPuzzle, 0);
+
+            if ((o->oBehParams >> 24) == 0 && sFlipBookPuzzle == 0b110011001) {
+                o->oObjF4->oF4 = 1;
+            }
+
             break;
         case 1:
-            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0x7FFF, 0x400);
-            if (o->oFaceAngleRoll == 0x7FFF) {
-                o->oAction = 2;
-                o->oObjF4->oF4++;
-                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+            o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, o->os16FC, 0x400);
+            if (o->oFaceAngleRoll == o->os16FC) {
+                o->oAction = 0;
+                if (o->oBehParams2ndByte == 0) {
+                    o->oBehParams2ndByte = 1;
+                } else {
+                    o->oBehParams2ndByte = 0;
+                }
+                if ((u16)(o->os16FC) == 0x8000) {
+                    o->os16FC = 0;
+                } else {
+                    o->os16FC = 0x8000;
+                }
+                
+                // o->oObjF4->oF4++;
+                // play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
             }
             break;
     }
