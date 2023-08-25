@@ -109,6 +109,11 @@ void fading_warp_active_check(s16 param) {
                 val = TRUE;
             }
             break;
+        case 10:
+            if (save_file_get_boos() & (1 << 0xA)) {
+                val = TRUE;
+            }
+            break;
     }
     if (val) {
         cur_obj_enable();

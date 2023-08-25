@@ -87,6 +87,9 @@ void bhv_l2_bedroom_gate_loop(void) {
 
 void bhv_shyguy_flame_init(void) {
     s16 param = o->oBehParams >> 24;
+    if (save_file_check_room(o->oRoom + sLevelRoomOffsets[gCurrCourseNum - 1])) {
+        return;
+    }
     o->oObj110 = spawn_object(o, MODEL_ENV_FLAME, bhvHeldEnvFlame);
     o->oObj110->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
     o->oObj110->oBehParams = sBedroomFlameCol[param];

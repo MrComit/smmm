@@ -144,7 +144,7 @@ void bhv_floating_plant_init(void) {
         o->oObjF4 = spawn_object(o, MODEL_LIGHTNING_SPINNER, bhvLightningSpinner);
         o->oObjF4->oRoom = o->oRoom;
         o->oObjF4->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-        if (CL_obj_nearest_object_behavior_params(bhvStarPiece, 0x05000000) != NULL) {
+        if (!(save_file_get_newflags(1) & SAVE_TOAD_FLAG_PLANT_CUTSCENE)) {
             o->oPosY -= 6400.0f;
         } else {
             o->oAction = 1;
@@ -170,6 +170,7 @@ void bhv_floating_plant_loop(void) {
                 o->oObjF4->oPosY = o->oPosY;
                 if (o->oPosY >= o->oHomeY) {
                     o->oAction = 1;
+                    save_file_set_newflags(SAVE_TOAD_FLAG_PLANT_CUTSCENE, 1);
                     play_puzzle_jingle();
                     set_mario_npc_dialog(0);
                 }

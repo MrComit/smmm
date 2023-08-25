@@ -101,6 +101,7 @@ Gfx *geo_set_brightness_env(s32 callContext, struct GraphNode *node, UNUSED void
 Gfx *geo_set_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_boo_shade(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_set_bedroom_fakewall_alpha(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_elevator_color_env(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_city_window_opacity(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_set_number_palette(s32 callContext, struct GraphNode *node, UNUSED void *context);

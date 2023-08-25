@@ -595,8 +595,8 @@ void bhv_shadow_boss_loop(void) {
                     gMarioState->vel[1] = 20.0f;
                     mario_set_forward_vel(gMarioState, 50.0f);
                     set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
-                    o->header.gfx.scale[1] = (o->header.gfx.scale[0] = 0.9f);
-                    o->header.gfx.scale[2] = 0.45f;
+                    o->header.gfx.scale[1] = (o->header.gfx.scale[0] = 1.27f);
+                    o->header.gfx.scale[2] = 0.15f;
                 }
             } else {
                 cur_obj_play_sound_2(SOUND_OBJ_DYING_ENEMY1);
@@ -605,10 +605,14 @@ void bhv_shadow_boss_loop(void) {
             }
             break;
         case 4:
-            if (o->oTimer > 10) {
+            if (o->oTimer <= 10) {
+                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 1.0f, 0.02f, 0.02f);
+                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 1.0f, 0.004f, 0.004f);
+                o->header.gfx.scale[1] = o->header.gfx.scale[0];
+            } else {
                 o->oFaceAnglePitch = approach_s16_asymptotic(o->oFaceAnglePitch, 0x0000, 10);
-                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[1], 1.0f, 0.055f, 0.055f);
-                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 1.0f, 0.01f, 0.01f);
+                o->header.gfx.scale[2] = approach_f32(o->header.gfx.scale[2], 1.0f, 0.055f, 0.055f);
+                o->header.gfx.scale[0] = approach_f32(o->header.gfx.scale[0], 1.0f, 0.03f, 0.03f);
                 o->header.gfx.scale[1] = o->header.gfx.scale[0];
                 o->oGraphYOffset = approach_f32(o->oGraphYOffset, 175.0f, 8.0f, 8.0f);
             }

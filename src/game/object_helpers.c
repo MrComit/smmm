@@ -40,6 +40,8 @@
 #include "print.h"
 #include "levels/ssl/yoshi_head/geo_header.h"
 
+extern s8 sLevelRoomOffsets[];
+
 extern Mtx *gMatStackFixed[32];
 extern s16 gMatStackIndex;
 extern Mat4 gMatStack[32];
@@ -1899,6 +1901,38 @@ Gfx *geo_set_room_color_env(s32 callContext, struct GraphNode *node, UNUSED void
 
     return dlStart;
 }
+
+
+Gfx *geo_set_bedroom_fakewall_alpha(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    Gfx *dlStart, *dlHead;
+    struct GraphNodeGenerated *currentGraphNode;
+    s16 alpha;
+
+    dlStart = NULL;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        currentGraphNode = (struct GraphNodeGenerated *) node;
+
+        dlStart = alloc_display_list(sizeof(Gfx) * 3);
+
+        dlHead = dlStart;
+        if (save_file_check_room(8 + sLevelRoomOffsets[gCurrCourseNum - 1]) 
+            && gRoomColors[currentGraphNode->parameter & 0xFF][0] == 0xFF 
+            && gRoomColors[currentGraphNode->parameter & 0xFF][1] == 0xFF) {
+                alpha = 170;
+            } else {
+                alpha = 255;
+            }
+
+        currentGraphNode->fnNode.node.flags = 0x400 | (currentGraphNode->fnNode.node.flags & 0xFF);
+
+        gDPSetEnvColor(dlHead++, 255, 255, 255, alpha);
+        gSPEndDisplayList(dlHead);
+    }
+
+    return dlStart;
+}
+
 
 Vec3s sElevatorColor = {0xCB, 0x94, 0x29};
 
@@ -4001,8 +4035,6 @@ Gfx *geo_switch_red_mission(s32 callContext, struct GraphNode *node) {
 }
 
 
-
-extern s8 sLevelRoomOffsets[];
 extern s8 gGlobalMarioRoom;
 extern s32 gMenuCutscene;
 

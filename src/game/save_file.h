@@ -179,7 +179,7 @@ extern s8 gLevelToCourseNumTable[];
 #define SAVE_TOAD_FLAG_BRIDGE_TOY_TOAD   /* 0x00020000 */ (1 << 17)
 #define SAVE_TOAD_FLAG_WARP_CUTSCENE     /* 0x00040000 */ (1 << 18)
 #define SAVE_TOAD_FLAG_BALCONY_ELEVATOR  /* 0x00080000 */ (1 << 19)
-#define SAVE_TOAD_FLAG_021               /* 0x00100000 */ (1 << 20)
+#define SAVE_TOAD_FLAG_PLANT_CUTSCENE    /* 0x00100000 */ (1 << 20)
 #define SAVE_TOAD_FLAG_022               /* 0x00200000 */ (1 << 21)
 #define SAVE_TOAD_FLAG_023               /* 0x00400000 */ (1 << 22)
 #define SAVE_TOAD_FLAG_024               /* 0x00800000 */ (1 << 23)

@@ -31,6 +31,9 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -126,6 +129,8 @@ const LevelScript level_wf_entry[] = {
 		WARP_NODE(0xB5, LEVEL_WF, 0x01, 0xB5, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xBA, LEVEL_CASTLE_GROUNDS, 0x01, 0x0C, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xBB, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xC3, LEVEL_WF, 0x01, 0xC4, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xC4, LEVEL_WF, 0x01, 0xC3, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6601, 200, -7121, 0, -180, 0, (0xE << 16), bhvFlyingWarp),
@@ -166,9 +171,11 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SHYGUY, -5528, 19, -13050, 0, 0, 0, 0x01000000, bhvShyguyFlame),
 		OBJECT(MODEL_SHYGUY, -7853, 19, -13149, 0, 0, 0, 0x02000000, bhvShyguyFlame),
 		OBJECT(MODEL_SHYGUY, -8238, 19, -10644, 0, 0, 0, 0x03000000, bhvShyguyFlame),
+		OBJECT(MODEL_TELEPORTER, -704, 0, -5309, 0, 0, 0, (0xC4 << 16) | (10 << 8), bhvFadingWarp),
+		OBJECT(MODEL_NONE, -2345, 2300, -5286, 0, 90, 0, (0xC3 << 16), bhvFadingWarp),
 		OBJECT(MODEL_RED_COIN, 6, 0, -7588, 0, 0, 0, (1 << 16), bhvFakeRedCoin),
 		OBJECT(MODEL_GOLDEN_CRATE, -1218, 178, -7754, 0, 0, 0, (2 << 8), bhvGoldenCrate),
-		OBJECT(MODEL_NONE, -7516, 19, -10610, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
+		OBJECT(MODEL_NONE, -7147, 19, -10348, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_HEART, -6072, 50, -8015, 0, 0, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_L2_GATE, 1031, 0, -4811, 0, 180, 0, 0x00020000, bhvL2Gate),
 		OBJECT(MODEL_L2_GATE, -42, 0, -11219, 0, 0, 0, 0x00000000, bhvL2Gate),

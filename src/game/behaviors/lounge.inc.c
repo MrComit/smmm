@@ -375,6 +375,14 @@ void bhv_heavy_switch_loop(void) {
                 save_file_set_heavy_object(obj->oBehParams2ndByte, o->oBehParams2ndByte + 1);
                 vec3f_copy(&obj->oHomeX, &o->oPosX);
 
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_set(&obj->oPosX, 3361.0f, -240.0f, -7702.0f);
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = (s16)obj->oPosX;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)obj->oPosY;
+                    gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)obj->oPosZ;
+                }
+
                 obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, 0);
                 if (obj == NULL || obj->oAction == 2) {
                     obj = CL_obj_nearest_object_behavior_params(bhvHeavySwitch, 1 << 16);

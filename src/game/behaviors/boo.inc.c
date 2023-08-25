@@ -511,6 +511,11 @@ static void boo_act_3(void) {
                 vec3f_set(&obj->oPosX, -2950.0f, 0.0f, -18700.0f);
                 obj->oFaceAngleYaw = 0xE000;
                 obj->oFaceAngleRoll = obj->oFaceAnglePitch = 0;
+
+                obj = spawn_object(o, MODEL_NONE, bhvBooSavePrompt);
+                obj->oBehParams2ndByte = DIALOG_060;
+                // play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+                play_course_clear();
                 break;
             case 4:
                 obj = spawn_object(o, MODEL_BROKEN_KEY, bhvBrokenKey);
