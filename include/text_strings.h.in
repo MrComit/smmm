@@ -369,6 +369,28 @@
 #define TEXT_THE_CONTROLLER _("The Controller")
 
 
+#define TEXT_NEXT_STAR _("Next Star:")
+
+#define TEXT_STAR1 _("Swinging Through The City") // 0 - pole jumping and on buildings
+#define TEXT_STAR2 _("Wildlife in the Garden") // 1 - mips
+#define TEXT_STAR3 _("Touring The Neighborhood") // 2 - goin around the city
+#define TEXT_STAR4 _("Behind The Block Wall") // 3 - behind the lego wall
+#define TEXT_STAR5 _("Shopping Spree") // 4 - city strip
+#define TEXT_STAR6 _("50 Green Coins") // 5 - green coin star
+#define TEXT_STAR7 _("East Side Path of the Terrarium") // 6 - basic platforming
+#define TEXT_STAR8 _("Behind The Waterfall") // 7 - behind waterfall
+#define TEXT_STAR9 _("The Sandy Secret") // 8 - mounds
+#define TEXT_STAR10 _("Underwater Bomb Excavation") // 9 - underwater
+#define TEXT_STAR11 _("The Mole's Hideout") // A - cave boo room
+#define TEXT_STAR12 _("An Alternate Route") // B - cave alt path
+#define TEXT_STAR13 _("The Poisonous Boo Coins") // C - boocoins
+#define TEXT_STAR14 _("The Path of the Snowflakes") // D - snowflakes
+#define TEXT_STAR15 _("Under the Globe") // E - underglobe
+#define TEXT_STAR16 _("The Ice Castle") // F - ice castle
+#define TEXT_STAR17 _("50 Green Coins") // 10 - green coins
+#define TEXT_STAR18 _("Slidin' Around") // 11 - 2d plat
+#define TEXT_STAR19 _("An Unexpected Car") // 12 - hidden car
+#define TEXT_STAR20 _("The Shooting Gallery") // 13 - shooting gallery
 
 
 #define TEXT_OBJ1 _("Enter The Library")

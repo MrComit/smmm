@@ -2396,9 +2396,87 @@ s32 get_current_objective(void) {
     }
 }
 
+static char sStar1[] = { TEXT_STAR1 };
+static char sStar2[] = { TEXT_STAR2 };
+static char sStar3[] = { TEXT_STAR3 };
+static char sStar4[] = { TEXT_STAR4 };
+static char sStar5[] = { TEXT_STAR5 };
+static char sStar6[] = { TEXT_STAR6 };
+static char sStar7[] = { TEXT_STAR7 };
+static char sStar8[] = { TEXT_STAR8 };
+static char sStar9[] = { TEXT_STAR9 };
+static char sStar10[] = { TEXT_STAR10 };
+static char sStar11[] = { TEXT_STAR11 };
+static char sStar12[] = { TEXT_STAR12 };
+static char sStar13[] = { TEXT_STAR13 };
+static char sStar14[] = { TEXT_STAR14 };
+static char sStar15[] = { TEXT_STAR15 };
+static char sStar16[] = { TEXT_STAR16 };
+static char sStar17[] = { TEXT_STAR17 };
+static char sStar18[] = { TEXT_STAR18 };
+static char sStar19[] = { TEXT_STAR19 };
+static char sStar20[] = { TEXT_STAR20 };
+
+static char sNextStar[] = { TEXT_NEXT_STAR };
+
+char *sStarNames[] = {
+    sStar1, sStar2, sStar3, sStar4, sStar5,
+    sStar6, sStar7, sStar8, sStar9, sStar10,
+    sStar11, sStar12,
+    sStar13, sStar14, sStar15, sStar16, sStar17,
+    sStar18, sStar19, sStar20,
+};
+
+
+void print_next_star_hint(s32 area) {
+    s32 x, k, j;
+    s32 i = 0;
+    s32 id = 0;
+    s32 starCoins = save_file_get_currency_flags();
+    switch (area) {
+        default:
+        case 0:
+            j = starCoins & 0b11111;
+            k = 5;
+            break;
+        case 1:
+            j = (starCoins >> 5) & 0b11111;
+            k = 5;
+            id = 5;
+            break;
+        case 2:
+            j = (starCoins >> 10) & 0b11;
+            k = 2;
+            id = 10;
+            break;
+        case 3:
+            j = (starCoins >> 12) & 0b11111;
+            k = 5;
+            id = 12;
+            break;
+        case 4:
+            j = (starCoins >> 17) & 0b111;
+            k = 3;
+            id = 17;
+            break;
+    }
+
+    for (i = 0; i < k; i++) {
+        if ((j & (1 << i)) == 0) {
+            break;
+        }
+    }
+    i += id;
+
+    x = get_str_x_pos_from_center(160, sNextStar, 10.0f);
+    print_generic_string(x, 106 - 16 - 20, sNextStar);
+    x = get_str_x_pos_from_center(160, sStarNames[i], 10.0f);
+    print_generic_string(x, 106 - 16 - 35, sStarNames[i]);
+}
 
 
 void print_starcoin_completion(void) {
+    s32 area = 0;
     s32 total = 0;
     s32 count = 0;
     s32 starCoins = save_file_get_currency_flags();
@@ -2410,21 +2488,26 @@ void print_starcoin_completion(void) {
             if (gCurrAreaIndex == 1) {
                 total = 5;
                 count = CL_count_bits(starCoins & 0b11111);
+                area = 0;
             } else {
                 total = 3;
                 count = CL_count_bits(starCoins & 0b11100000000000000000);
+                area = 4;
             }
             break;
         case LEVEL_BBH:
             if (gCurrAreaIndex == 1) {
                 total = 5;
                 count = CL_count_bits(starCoins & 0b1111100000);
+                area = 1;
             } else if (gCurrAreaIndex == 2) {
                 total = 2;
                 count = CL_count_bits(starCoins & 0b110000000000);
+                area = 2;
             } else {
                 total = 5;
                 count = CL_count_bits(starCoins & 0b11111000000000000);
+                area = 3;
             }
             break;
     }
@@ -2449,6 +2532,11 @@ void print_starcoin_completion(void) {
     print_generic_string(160 - 9, 106 - 16, totalString);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+
+    if (count != total) {
+        print_next_star_hint(area);
+    }
+
 }
 
 

@@ -1664,7 +1664,7 @@ void bhv_garden_mips_loop(void) {
     switch (o->oAction) {
         case 0:
             if (o->oObjF4->activeFlags == 0) {
-                if (o->os16110 >= 3) {
+                if (o->os16110 >= 2) {
                     o->os16FA = 1;
                     o->oAction = 0;
                     o->oForwardVel = 35.0f;
