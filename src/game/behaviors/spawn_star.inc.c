@@ -53,7 +53,7 @@ void bhv_star_spawn_init(void) {
     o->oForwardVel = o->oStarSpawnDisFromHome / 30.0f;
     o->oStarSpawnUnkFC = o->oPosY;
 
-    if (o->oBehParams2ndByte == 0 || gCurrCourseNum == COURSE_BBH) {
+    if (o->oBehParams2ndByte == 0) {
         cutscene_object(CUTSCENE_STAR_SPAWN, o);
     } else {
         cutscene_object(CUTSCENE_RED_COIN_STAR_SPAWN, o);
@@ -149,6 +149,12 @@ void spawn_default_star(f32 sp20, f32 sp24, f32 sp28) {
 void spawn_red_coin_cutscene_star(f32 sp20, f32 sp24, f32 sp28) {
     struct Object *sp1C = spawn_star(sp1C, sp20, sp24, sp28);
     sp1C->oBehParams2ndByte = 1;
+    sp1C->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+    if (o->oFlags & OBJ_FLAG_MULTIROOM) {
+        sp1C->oRoom = o->oRoom;
+        sp1C->oRoom2 = o->oRoom2;
+        sp1C->oFlags |= OBJ_FLAG_MULTIROOM;
+    }
 }
 
 void spawn_no_exit_star(f32 sp20, f32 sp24, f32 sp28) {

@@ -115,7 +115,7 @@ void bhv_green_coin_loop(void) {
             gGreenCoinsCollected = ++o->parentObj->oHiddenStarTriggerCounter;
             gMarioState->healCounter += 4;
             if (o->parentObj->oHiddenStarTriggerCounter != 50) {
-                spawn_orange_number_two_digit_scale(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0, 15.0f, 0.75f);
+                spawn_orange_number_two_digit_scale(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0, 20.0f, 1.0f);
             }
             play_sound(SOUND_GENERAL_COIN, gGlobalSoundSource);
         }
@@ -157,7 +157,7 @@ void bhv_hidden_green_coin_star_loop(void) {
 
         case 1:
             if (o->oTimer > 2) {
-                spawn_default_star(o->oPosX, o->oPosY, o->oPosZ);
+                spawn_red_coin_cutscene_star(o->oPosX, o->oPosY, o->oPosZ);
                 spawn_mist_particles();
                 o->oAction = 2;
                 if (gCurrAreaIndex == 1) {

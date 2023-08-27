@@ -354,6 +354,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_NONE, -4123, 1817, -4394, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, 7542, 1849, -2332, 0, 0, 0, 0x00000000, bhvGoombaTripletSpawner),
 		OBJECT(MODEL_NONE, -1146, -200, 2160, 0, 0, 0, (0x10 << 24), bhvHiddenGreenCoinStar),
+		OBJECT(MODEL_SAVE_STATION, 451, -377, 5118, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_SNOW_BOX, -2685, 2230, -8541, 0, 20, 0, (1 << 24) | (16 << 16), bhvBounceBoxes),
 		OBJECT(MODEL_SNOWFLAKE, 4430, 462, 7376, 0, -27, 0, 0x01000000, bhvSnowflake),
 		OBJECT(MODEL_SNOWFLAKE, 3970, 562, 8264, 0, -27, 0, 0x00000000, bhvSnowflake),
