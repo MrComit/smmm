@@ -212,6 +212,10 @@ lost on his way over here!)\n\
 star coins, BUT I DON'T HAVE\n\
 THAT KIND OF MONEY!!!!)\n\
 \n\
+(The construction worker was\n\
+last seen at the snowglobe.\n\
+You can get there by using\n\
+the rubber band!)\n\
 ..."))
 
 DEFINE_DIALOG(DIALOG_009, 1, 3, 30, 200, _("\
@@ -363,7 +367,7 @@ a kind.)\n\
 DEFINE_DIALOG(DIALOG_028, 1, 3, 95, 200, _("\
 (You think your daily commute\n\
 is bad? My driveway is just\n\
-a bunch of invisible blocks!)\n\
+a bunch of floating blocks!)\n\
 ..."))
 
 DEFINE_DIALOG(DIALOG_029, 1, 5, 95, 200, _("\

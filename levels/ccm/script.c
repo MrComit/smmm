@@ -55,6 +55,7 @@ const LevelScript level_ccm_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TOY_GOOMBA, city_toy_goomba_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BOSS_GRAPHIC, boss_graphic_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CITY_BRIDGE2, city_bridge2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BLOCK_PIECE_SHADOW, block_piece_shadow_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -167,7 +168,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_CITY_BRIDGE, 13028, -67, -12223, 0, 0, 0, 0x00000000, bhvCityBridge),
 		OBJECT(MODEL_STAR_CURRENCY, 21750, 3561, -5671, 0, 90, 0, 0x00000000, bhvStar),
 		OBJECT(MODEL_STAR_CURRENCY, 23315, 199, -397, 0, 0, 0, (4 << 24), bhvStar),
-		OBJECT(MODEL_TELEPORTER, 1132, 379, 579, 0, 90, 0, (0x56 << 16), bhvFadingWarp),
+		OBJECT(MODEL_TELEPORTER, 1132, 379, 579, 0, 90, 0, (0x56 << 16) | (11 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 4177, 579, 729, 0, -90, 0, (0x55 << 16), bhvFadingWarp),
 		OBJECT(MODEL_TELEPORTER, 24177, -101, 40, 0, -90, 0, (0x59 << 16), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 22515, 39, -397, 0, 90, 0, (0x58 << 16), bhvFadingWarp),
@@ -247,7 +248,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7937, 839, -5050, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, 7486, 839, 50, 0, -180, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CITY_BRIDGE2, -6402, 4495, -2500, 0, 0, 0, 0x00000000, bhvCityBridge2),
-		OBJECT(MODEL_TELEPORTER, 16111, 5528, 3500, 0, 0, 0, (0xC2 << 16), bhvFadingWarp),
+		OBJECT(MODEL_TELEPORTER, 16111, 5528, 3500, 0, 0, 0, (0xC2 << 16) | (12 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 20361, 39, 0, 0, -90, 0, (0xC3 << 16), bhvFadingWarp),
 		OBJECT(MODEL_TELEPORTER, -2489, 4339, -1450, 0, 0, 0, (0x3e << 16) | (6 << 8), bhvFadingWarp),
 		OBJECT(MODEL_NONE, 6174, 1139, -2500, 0, 90, 0, (0x3f << 16), bhvFadingWarp),
@@ -279,6 +280,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_RACECAR, 19111, -211, 1604, 0, -180, 0, (30 << 24) | (0 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 6903, 789, -2750, 0, 90, 0, (21 << 24) | (1 << 16), bhvRacecar),
 		OBJECT(MODEL_RACECAR, 9194, 789, -2250, 0, -90, 0, (21 << 24) | (0 << 16), bhvRacecar),
+		OBJECT(MODEL_SAVE_STATION, 10361, 839, -2500, 0, 0, 0, 0x00000000, bhvSaveStation),
 		OBJECT(MODEL_BOSS_SHYGUY, -13183, 4889, -2500, 0, 90, 0, 0x00000000, bhvShyGuyBoss),
 		OBJECT(MODEL_TOKEN, 16111, 5578, -3250, 0, 0, 0, (1 << 16) | (0x21 << 8), bhvToken),
 		OBJECT(MODEL_TOY_TOAD, 15937, -161, 1371, 0, 90, 0, (DIALOG_017 << 24), bhvToyToad),

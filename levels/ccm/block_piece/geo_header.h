@@ -1,4 +1,5 @@
 extern const GeoLayout block_piece_geo[];
+extern const GeoLayout block_piece_shadow_geo[];
 extern Lights1 block_piece_Jenga_002_lights;
 extern u8 block_piece_living_wood2_ci8[];
 extern u8 block_piece_living_wood2_ci8_pal_rgba16[];

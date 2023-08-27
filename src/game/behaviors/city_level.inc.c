@@ -969,7 +969,7 @@ void bhv_toy_shyguy_init(void) {
     o->oPosX += sins(o->oFaceAngleYaw + faceAdd) * 50.0f;
     o->oPosZ += coss(o->oFaceAngleYaw + faceAdd) * 50.0f;
     vec3f_copy(&o->oHomeX, &o->oPosX);
-    o->oPosY += 1000.0f;
+    o->oPosY += 800.0f;
 }
 
 
@@ -1003,9 +1003,13 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
             m->pos[2] += coss(o->oFaceAngleYaw - 0x4000) * 50.0f;
             if (o->oTimer >= 100) {
                 o->oAction = 2;
-                o->oHomeY = o->oPosY + 1000.0f;
+                o->oHomeY = o->oPosY + 800.0f;
             }
-            set_mario_action(m, ACT_CUTSCENE_JUMP, 0);
+            if (o->oTimer == 20) {
+                play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
+            }
+            set_mario_action(m, ACT_CUTSCENE_JUMP, 8);
+            // play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
             break;
         case 2:
             if (o->oBehParams >> 24 == 0 && o->oTimer == 0) {
@@ -1022,7 +1026,7 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
             o->oPosZ += coss(o->oFaceAngleYaw - 0x4000) * 50.0f;
             if (o->oTimer >= 100) {
                 o->oAction = 2;
-                o->oHomeY = o->oPosY + 1000.0f;
+                o->oHomeY = o->oPosY + 800.0f;
             }
             break;
         case 4:
@@ -1033,6 +1037,7 @@ void bhv_toy_shyguy_loop(void) { //use 3d moving?
                 } else {
                     o->oAction = 1;
                     m->faceAngle[1] = o->oFaceAngleYaw;
+                    // play_sound(SOUND_MARIO_WAAAOOOW, m->marioObj->header.gfx.cameraToObject);
                 }
             }
             if (o->oBehParams >> 24 == 0) {
@@ -1355,7 +1360,7 @@ void bhv_shyguy_boss_loop(void) {
             shyguy_boss_handle_void_out();
             if (o->os16F6 == 1) {
                 if (++o->os16F8 > 60) {
-                    spawn_object(o, MODEL_BLOCK_PIECE, bhvBlockBomb);
+                    spawn_object(o, MODEL_BLOCK_PIECE_SHADOW, bhvBlockBomb);
                     o->os16F8 = 0;
                 }
             }
@@ -1946,7 +1951,7 @@ void bhv_rubber_band_loop(void) {
                 m->vel[1] = 30.0f;
                 set_mario_action(m, ACT_SHOT_FROM_CANNON, 0);
             }
-            if (m->input & INPUT_B_PRESSED) {
+            if (m->input & INPUT_B_PRESSED || m->input & INPUT_Z_PRESSED) {
                 m->vel[1] = 0;
                 set_mario_action(m, ACT_THROWN_FORWARD, 0);
                 o->oAction = 3;

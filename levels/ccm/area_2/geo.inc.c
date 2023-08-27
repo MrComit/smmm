@@ -31,6 +31,7 @@ const GeoLayout ccm_dl_202__NULL_geo[] = {
 const GeoLayout ccm_dl_203__City2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 0, 0, 65536, ccm_dl_2dofframp_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Bridge_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_city1preview_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_House_012_mesh_layer_1),
@@ -51,6 +52,7 @@ const GeoLayout ccm_dl_203__City2_geo[] = {
 			GEO_ASM(0x2C, geo_set_red_painting),
 			GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Painting_001_mesh_layer_1),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 0, 0, 65536, ccm_dl_SkidMarks_mesh_layer_6),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ccm_dl_Spikes_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),

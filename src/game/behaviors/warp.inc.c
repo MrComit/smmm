@@ -114,6 +114,22 @@ void fading_warp_active_check(s16 param) {
                 val = TRUE;
             }
             break;
+        case 11:
+            if (save_file_get_currency_flags() & (1 << 3)) {
+                val = TRUE;
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+            } else {
+                o->oPosY = o->oHomeY + 700.0f;
+            }
+            break;
+        case 12:
+            if (save_file_get_currency_flags() & (1 << 0x11)) {
+                val = TRUE;
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+            } else {
+                o->oPosY = o->oHomeY + 700.0f;
+            }
+            break;
     }
     if (val) {
         cur_obj_enable();

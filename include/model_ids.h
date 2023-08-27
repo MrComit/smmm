@@ -774,6 +774,7 @@
 #define MODEL_TOY_SHYGUY          0xF4
 #define MODEL_BOSS_GRAPHIC        0xF3
 #define MODEL_CITY_BRIDGE2        0xF2
+#define MODEL_BLOCK_PIECE_SHADOW  0xF1
 
 
 

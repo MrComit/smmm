@@ -2828,7 +2828,11 @@ static s32 check_for_instant_quicksand(struct MarioState *m) {
 
 static s32 act_cutscene_jump(struct MarioState *m) {
     Vec3f camPos;
-    set_mario_animation(m, MARIO_ANIM_SINGLE_JUMP);
+    if (m->actionArg & 8) {
+        set_mario_animation(m, MARIO_ANIM_BEING_GRABBED);
+    } else {
+        set_mario_animation(m, MARIO_ANIM_SINGLE_JUMP);
+    }
     if (perform_air_step(m, 0) == AIR_STEP_LANDED) {
         set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
         if (!(m->actionArg & 1))
