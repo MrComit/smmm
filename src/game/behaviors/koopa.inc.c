@@ -349,6 +349,9 @@ static void koopa_shelled_update(void) {
     cur_obj_update_floor_and_walls();
     obj_update_blinking(&o->oKoopaBlinkTimer, 20, 50, 4);
 
+    if (o->oFloorType == SURFACE_INSTANT_QUICKSAND) {
+        vec3f_copy(&o->oPosX, &o->oHomeX);
+    }
     if (gCurrLevelNum == LEVEL_BBH) {
         if ((gMarioState->pos[1] < 12500.0f && o->oDistanceToMario < 5000.0f) || !gIsConsole) {
             cur_obj_unhide();

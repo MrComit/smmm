@@ -94,7 +94,7 @@ void bhv_green_button_loop(void) {
 void bhv_big_ice_cube_loop(void) {
     switch (o->oAction) {
         case 1:
-            create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
+            // create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
             play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
             spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
             play_puzzle_jingle();
@@ -125,13 +125,9 @@ void bhv_bomb_on_chain_init(void) {
 }
 
 void bomb_on_chain_explode(void) {
-    if (o->oTimer < 5) {
-        cur_obj_scale(1.0 + (f32) o->oTimer / 5.0);
-    } else {
-        struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-        explosion->oGraphYOffset += 100.0f;
-        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-    }
+    struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+    explosion->oGraphYOffset += 100.0f;
+    o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
 }
 
 
@@ -228,16 +224,24 @@ void bhv_ice_cube_cracked_init(void) {
         cur_obj_set_model(MODEL_CONSOLE_ICECUBE_CRACKED);
     }
 
-
+    if ((o->oBehParams >> 8) & 0xFF) {
+        o->oAction = 4;
+        // cur_obj_scale(0.1f);
+        cur_obj_hide();
+    }
 }
 
 
 void bhv_ice_cube_cracked_loop(void) {
-    struct Object *obj;
-    if (o->oDistanceToMario < 3000.0f || !gIsConsole) {
+    struct Object *obj = NULL;
+    struct Object *obj2 = NULL;
+    if ((o->oDistanceToMario < 3000.0f || !gIsConsole) && o->oAction != 4) {
         cur_obj_unhide();
     } else {
         cur_obj_hide();
+    }
+    if (o->oAction != 4) {
+        load_object_collision_model();
     }
     switch (o->oAction) {
         case 0:
@@ -280,8 +284,15 @@ void bhv_ice_cube_cracked_loop(void) {
             if (object_step() & 1 || (o->oBehParams2ndByte && obj != NULL && o->oPosY <= obj->oPosY + 300.0f)) {
                 o->activeFlags = 0;
                 o->oHomeY += 20.0f;
-                if (o->oBehParams2ndByte == 0)
-                    create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
+                if (o->oBehParams2ndByte == 0) {
+                    // create_respawner_timer(MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked, 90);
+                    obj2 = spawn_object(o, MODEL_ICE_CUBE_CRACKED, bhvIceCubeCracked);
+                    obj2->oBehParams |= 1 << 8;
+                    obj2->oRoom = o->oRoom;
+                    obj2->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                    vec3f_copy(&obj2->oHomeX, &o->oHomeX);
+                    vec3f_copy(&obj2->oPosX, &obj2->oHomeX);
+                }
                 // play_sound(SOUND_GENERAL_BREAK_BOX, gGlobalSoundSource);
                 cur_obj_play_sound_1(SOUND_PEACH_MARIO);
                 spawn_triangle_break_particles(20, MODEL_ICE_CUBE_CHUNK, 3.0f, 0);
@@ -302,6 +313,13 @@ void bhv_ice_cube_cracked_loop(void) {
                 gMarioState->faceAngle[1] = 0;
             }
 
+            break;
+        case 4:
+            // cur_obj_hide();
+            if (o->oTimer > 90) {
+                o->oAction = 0;
+                // cur_obj_unhide();
+            }
             break;
     }
 }

@@ -128,8 +128,9 @@ void bhv_green_coin_loop(void) {
 
 void bhv_hidden_green_coin_star_init(void) {
     o->oRoom2 = 2;
-    gGreenCoinsCollected = 0;
-    o->oHiddenStarTriggerCounter = 0;
+    // gGreenCoinsCollected = 0;
+    gGreenCoinsCollected = 60 - count_objects_with_behavior(bhvGreenCoin);
+    o->oHiddenStarTriggerCounter = gGreenCoinsCollected;
     if (save_file_get_currency_flags() & (1 << (o->oBehParams >> 24))) {
         o->oAction = 2;
     } else {

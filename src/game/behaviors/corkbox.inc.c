@@ -53,6 +53,7 @@ void bhv_respawner_timer_loop(void) {
         struct Object *spawnedObject = spawn_object(o, o->oRespawnerModelToRespawn,
                                                     o->oRespawnerBehaviorToRespawn);
         spawnedObject->oBehParams = o->oBehParams;
+        spawnedObject->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 }
@@ -76,4 +77,5 @@ void create_respawner_timer(s32 model, const BehaviorScript *behToSpawn, s32 tim
     respawner->oRespawnerModelToRespawn = model;
     respawner->oRespawnerMinSpawnDist = timer;
     respawner->oRespawnerBehaviorToRespawn = behToSpawn;
+    respawner->oRoom = o->oRoom;
 }

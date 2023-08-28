@@ -2136,7 +2136,7 @@ void render_hud_cannon_reticle(void) {
 
 void reset_red_coins_collected(void) {
     gRedCoinsCollected = 0;
-    gGreenCoinsCollected = 0;
+    // gGreenCoinsCollected = 0;
 }
 
 void change_dialog_camera_angle(void) {
