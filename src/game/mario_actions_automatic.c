@@ -19,6 +19,7 @@
 #include "object_helpers.h"
 #include "print.h"
 #include "game_init.h"
+#include "object_list_processor.h"
 
 #define POLE_NONE          0
 #define POLE_TOUCHED_FLOOR 1
@@ -244,8 +245,16 @@ s32 act_holding_horizontal_pole(struct MarioState *m) {
 
     if (gHorizontalPoleSpeed > 250.0f) {
         gHorizontalPoleSpeed = 250.0f;
+        spawn_object(gMarioObject, MODEL_NONE, bhvSparkleSpawn);
     } else if (gHorizontalPoleSpeed < -250.0f) {
         gHorizontalPoleSpeed = -250.0f;
+        spawn_object(gMarioObject, MODEL_NONE, bhvSparkleSpawn);
+    }
+
+    if (gHorizontalPoleSpeed > 100.0f || gHorizontalPoleSpeed < -100.0f) {
+        if ((gGlobalTimer & 7) == 0) {
+            play_sound(SOUND_ACTION_SPIN, m->marioObj->header.gfx.cameraToObject);
+        }
     }
 
     set_mario_animation(m, MARIO_ANIM_IDLE_ON_LEDGE);

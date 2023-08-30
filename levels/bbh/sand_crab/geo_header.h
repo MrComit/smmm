@@ -1,6 +1,6 @@
 extern const GeoLayout sand_crab_geo[];
-extern u8 sand_crab_ci4_crab_sign_ci4[];
-extern u8 sand_crab_ci4_crab_sign_ci4_pal_rgba16[];
+extern u8 sand_crab_ci4_mound_indicator_ci4[];
+extern u8 sand_crab_ci4_mound_indicator_ci4_pal_rgba16[];
 extern Vtx sand_crab_crabsign_mesh_layer_1_vtx_cull[8];
 extern Vtx sand_crab_crabsign_mesh_layer_1_vtx_0[28];
 extern Gfx sand_crab_crabsign_mesh_layer_1_tri_0[];
