@@ -1123,7 +1123,7 @@ void handle_ground_pound_floor(struct MarioState *m) {
                 gCamera->comitCutscene = 0xFF;
                 gComitCutsceneTimer = 45;
                 obj->os16110 = 3045;
-                vec3f_set(gComitCutscenePosVec, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2] + 2000.0f);
+                vec3f_set(gComitCutscenePosVec, gMarioState->pos[0], gMarioState->pos[1] + 1000.0f, gMarioState->pos[2]);
                 vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
             }
             break;

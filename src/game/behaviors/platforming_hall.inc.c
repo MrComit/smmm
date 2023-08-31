@@ -33,9 +33,9 @@ void bhv_maze_indicator_loop(void) {
             }
             break;
     }
-    if (o->oDistanceToMario < 5000.0f && (o->oTimer % 25) == 0) {
-        cur_obj_play_sound_1(SOUND_GENERAL_UNKNOWN3);
-    }
+    // if (o->oDistanceToMario < 5000.0f && (o->oTimer % 25) == 0) {
+    //     cur_obj_play_sound_1(SOUND_GENERAL_UNKNOWN3);
+    // }
 }
 
 

@@ -28,6 +28,7 @@ const GeoLayout hmc_area_1_geo[] = {
 const GeoLayout hmc_dl_101__OpeningHall_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, hmc_dl_FloorMats_002_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_OpeningHall_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Plant_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_Plant_002_mesh_layer_4),
@@ -510,6 +511,7 @@ const GeoLayout hmc_area_1[] = {
 			GEO_CLOSE_NODE(),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_material_revert_render_settings),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, hmc_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, hmc_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, hmc_dl_material_revert_render_settings),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, hmc_dl_material_revert_render_settings),

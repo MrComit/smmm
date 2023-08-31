@@ -129,12 +129,14 @@ void bhv_cushion_shell_loop(void) {
                 o->oAction = 2;
             }
             if (o->oDistanceToMario < 500.0f) {
+                o->oInteractType = INTERACT_IGLOO_BARRIER;
                 o->oAction = 1;
             }
             break;
         case 1:
             if (CL_NPC_Dialog(dialogId)) {
                 o->oAction = 2;
+                o->oInteractType = INTERACT_KOOPA_SHELL;
             }
             break;
         case 2:
@@ -164,7 +166,7 @@ void bhv_cushion_shell_loop(void) {
                 obj->os16104 = 1;
                 vec3f_copy(&obj->oPosX, &o->oHomeX);
                 obj->oFaceAngleYaw = 0;
-                if (m->action == ACT_STAR_DANCE_WATER) {
+                if (m->action == ACT_STAR_DANCE_WATER || m->action == ACT_STAR_DANCE_NO_EXIT) {
                     vec3f_set(&obj->oPosX, m->pos[0] + 300.0f, m->pos[1], m->pos[2]);
                     gMarioPreviousRoom = 0;
                 }
