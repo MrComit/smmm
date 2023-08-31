@@ -26,10 +26,10 @@ u8 goomba_2d_goomba_sprite_ci4_pal_rgba16[] = {
 };
 
 Vtx goomba_2d_goomba_mesh_layer_4_vtx_0[4] = {
-	{{{0, 0, 50},0, {512, 512},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{0, 0, -50},0, {1024, 512},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{0, 100, -50},0, {1024, 15},{0x7F, 0x0, 0x0, 0xFF}}},
-	{{{0, 100, 50},0, {512, 15},{0x7F, 0x0, 0x0, 0xFF}}},
+	{{ {0, 0, 50}, 0, {512, 512}, {127, 0, 0, 255} }},
+	{{ {0, 0, -50}, 0, {1024, 512}, {127, 0, 0, 255} }},
+	{{ {0, 100, -50}, 0, {1024, 15}, {127, 0, 0, 255} }},
+	{{ {0, 100, 50}, 0, {512, 15}, {127, 0, 0, 255} }},
 };
 
 Gfx goomba_2d_goomba_mesh_layer_4_tri_0[] = {
@@ -39,60 +39,50 @@ Gfx goomba_2d_goomba_mesh_layer_4_tri_0[] = {
 };
 
 
-Gfx mat_goomba_2d_Goomba[] = {
+Gfx mat_goomba_2d_Goomba_001[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
 	gsDPSetTextureFilter(G_TF_POINT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, goomba_2d_goomba_sprite_ci4_pal_rgba16),
-	gsDPTileSync(),
 	gsDPSetTile(0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
-	gsDPLoadSync(),
 	gsDPLoadTLUTCmd(7, 4),
-	gsDPPipeSync(),
-	gsDPTileSync(),
-	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_16b, 1, goomba_2d_goomba_sprite_ci4),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPLoadSync(),
+	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_16b, 1, goomba_2d_goomba_sprite_ci4),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPLoadBlock(7, 0, 0, 63, 2048),
-	gsDPPipeSync(),
-	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 1, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 1, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 60),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_goomba_2d_Goomba[] = {
+Gfx mat_revert_goomba_2d_Goomba_001[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureFilter(G_TF_BILERP),
 	gsDPSetTextureLUT(G_TT_NONE),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_goomba_2d_Goomba2[] = {
+Gfx mat_goomba_2d_Goomba2_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0, 0, 0, 0, TEXEL0),
 	gsDPSetTextureFilter(G_TF_POINT),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureLUT(G_TT_RGBA16),
 	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, goomba_2d_goomba_sprite_ci4_pal_rgba16),
-	gsDPTileSync(),
 	gsDPSetTile(0, 0, 0, 256, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
-	gsDPLoadSync(),
 	gsDPLoadTLUTCmd(7, 4),
-	gsDPPipeSync(),
-	gsDPTileSync(),
+	gsDPLoadSync(),
 	gsDPSetTextureImage(G_IM_FMT_CI, G_IM_SIZ_16b, 1, goomba_2d_goomba_sprite_ci4),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_16b, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_MIRROR, 4, 0),
-	gsDPLoadSync(),
 	gsDPLoadBlock(7, 0, 0, 63, 2048),
-	gsDPPipeSync(),
 	gsDPSetTile(G_IM_FMT_CI, G_IM_SIZ_4b, 1, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0, G_TX_WRAP | G_TX_MIRROR, 4, 0),
 	gsDPSetTileSize(0, 0, 0, 60, 60),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_goomba_2d_Goomba2[] = {
+Gfx mat_revert_goomba_2d_Goomba2_v4[] = {
 	gsDPPipeSync(),
 	gsDPSetTextureFilter(G_TF_BILERP),
 	gsDPSetTextureLUT(G_TT_NONE),
@@ -100,16 +90,16 @@ Gfx mat_revert_goomba_2d_Goomba2[] = {
 };
 
 Gfx goomba_2d_goomba_mesh_layer_4[] = {
-	gsSPDisplayList(mat_goomba_2d_Goomba),
+	gsSPDisplayList(mat_goomba_2d_Goomba_001),
 	gsSPDisplayList(goomba_2d_goomba_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_goomba_2d_Goomba),
+	gsSPDisplayList(mat_revert_goomba_2d_Goomba_001),
 	gsSPEndDisplayList(),
 };
 
-Gfx goomba_2d_goomba_mesh_layer_4_mat_override_Goomba2_0[] = {
-	gsSPDisplayList(mat_goomba_2d_Goomba2),
+Gfx goomba_2d_goomba_mesh_layer_4_mat_override_Goomba2_v4_0[] = {
+	gsSPDisplayList(mat_goomba_2d_Goomba2_v4),
 	gsSPDisplayList(goomba_2d_goomba_mesh_layer_4_tri_0),
-	gsSPDisplayList(mat_revert_goomba_2d_Goomba2),
+	gsSPDisplayList(mat_revert_goomba_2d_Goomba2_v4),
 	gsSPEndDisplayList(),
 };
 

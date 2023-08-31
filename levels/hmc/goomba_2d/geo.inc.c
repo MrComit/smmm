@@ -3,7 +3,7 @@
 const GeoLayout goomba_2d_switch_opt1[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_ALPHA, goomba_2d_goomba_mesh_layer_4_mat_override_Goomba2_0),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, goomba_2d_goomba_mesh_layer_4_mat_override_Goomba2_v4_0),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

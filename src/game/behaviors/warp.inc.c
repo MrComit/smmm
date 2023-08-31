@@ -103,6 +103,13 @@ void fading_warp_active_check(s16 param) {
             if (gRedCoinMissionActive) {
                 val = TRUE;
             }
+
+            if (gRedCoinMissionActive && CL_nearest_object_with_behavior_and_field(bhvRedCoin, 0x144, 1) == NULL) {
+                val = TRUE;
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
+            } else {
+                o->oPosY = o->oHomeY + 700.0f;
+            }
             break;
         case 9:
             if (save_file_get_keys(0) & (1 << 2)) {

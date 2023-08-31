@@ -54,9 +54,10 @@ static void const *sTheaterArenaCollision[] = {
 };
 
 
-Vec3f sTheaterRespawn[3] = {
+Vec3f sTheaterRespawn[4] = {
 {-4954.0f, 300.0f, -13146.0f},
 {-3354.0f, 150.0f, -13146.0f},
+{-3354.0f, 100.0f, -13146.0f},
 {-3354.0f, 100.0f, -13146.0f},
 };
 
@@ -77,7 +78,7 @@ Vec3f sTomatoPos[3] = {
 
 void bhv_tomato_init(void) {
     obj_set_hitbox(o, &sTomatoHitbox);
-    o->oForwardVel = 60.0f;
+    o->oForwardVel = 50.0f;
     o->oMoveAngleYaw = o->parentObj->oFaceAngleYaw;
     o->oMoveAnglePitch = -o->parentObj->oFaceAnglePitch;
     o->oPosY += 100.0f;
@@ -152,9 +153,15 @@ void bhv_tomato_thrower_init(void) {
 
 
 void bhv_tomato_thrower_loop(void) {
+    struct Object *obj;
     s16 pitch, yaw;
     f32 dist;
     o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 12.0f);
+    obj = cur_obj_nearest_object_with_behavior(bhvTheaterScreen);
+    if (obj == NULL || obj->oAction >= 4) {
+        return;
+    }
+
     if (o->oTimer > o->os16FA) {
         spawn_object(o, MODEL_THEATER_TOMATO, bhvTomato);
         o->oTimer = 0;
@@ -344,6 +351,10 @@ void bhv_theater_screen_loop(void) {
                     if (o->oTimer > 30) {
                         o->oSubAction = 1;
                         vec3f_copy(m->pos, sTheaterRespawn[o->os16F4]);
+                        obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                        if (obj != NULL) {
+                            vec3f_copy(&obj->oPosX, sTheaterRespawn[o->os16F4]);
+                        }
                         set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
                         if (o->os16F4 != 0) {
                             if (o->oObjF8) {
@@ -384,10 +395,10 @@ void bhv_theater_screen_loop(void) {
 
             if (m->pos[1] < -500.0f) {
                 if (m->health < 0x300) {
-                    obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
-                    if (obj != NULL) {
-                        vec3f_copy(&obj->oPosX, sTheaterRespawn[o->os16F4]);
-                    }
+                    // obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                    // if (obj != NULL) {
+                    //     vec3f_copy(&obj->oPosX, sTheaterRespawn[o->os16F4]);
+                    // }
                     level_trigger_warp(m, WARP_OP_WARP_FLOOR_OBJECT);
                     o->oAction = 5;
                     // o->oOpacity = 254;
@@ -419,7 +430,7 @@ void bhv_theater_screen_loop(void) {
             break;
         case 4:
             gCamera->comit2dcam = 3;
-            if (o->oTimer == 90) {
+            if (o->oTimer == 30) {
                 sDelayedWarpOp = 0x10;
                 sDelayedWarpTimer = 20;
                 sSourceWarpNodeId = 0x26;
@@ -432,7 +443,7 @@ void bhv_theater_screen_loop(void) {
                     obj->oBehParams2ndByte = 2;
                 }
 
-            } else if (o->oTimer >= 90) {
+            } else if (o->oTimer >= 30) {
                 o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 0x10);
                 if (o->oOpacity == 255) {
                     o->activeFlags = 0;
@@ -465,7 +476,7 @@ void bhv_theater_screen_loop(void) {
 
 void bhv_bulletbill_2d_init(void) {
     obj_set_hitbox(o, &s2DBulletBillHitbox);
-    o->oForwardVel = 20.0f;
+    o->oForwardVel = 15.0f;
     o->hitboxDownOffset = -50.0f;
 }
 
@@ -573,7 +584,8 @@ void bhv_2d_boomboom_loop(void) {
             if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
                 if (--o->oHealth <= 0) {
                     spawn_mist_particles();
-                    obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                    // obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
+                    gMarioState->numBooCoins += 5;
                     o->activeFlags = 0;
                     create_sound_spawner(SOUND_OBJ_DYING_ENEMY1);
                 } else {

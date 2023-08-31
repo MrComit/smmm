@@ -461,10 +461,10 @@ const GeoLayout hmc_dl_bb_008_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout hmc_dl_cc_007_geo[] = {
+const GeoLayout hmc_dl_cc_008_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -7579, 4354, 10118, hmc_dl_cc_007_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_cc_008_mesh_layer_1),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
@@ -474,7 +474,7 @@ const GeoLayout hmc_dl_115__Attic_geo[] = {
 		GEO_SWITCH_CASE(2, geo_switch_attic),
 		GEO_OPEN_NODE(),
 			GEO_BRANCH(1, hmc_dl_bb_008_geo),
-			GEO_BRANCH(1, hmc_dl_cc_007_geo),
+			GEO_BRANCH(1, hmc_dl_cc_008_geo),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -7579, 4354, 10118, hmc_dl_aa_007_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, hmc_dl_Attic_004_mesh_layer_1),

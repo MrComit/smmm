@@ -64,6 +64,7 @@ void cushion_friend_opening(void) {
             }
             break;
         case 3:
+            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             if (CL_NPC_Dialog(DIALOG_036)) {
                 sOHRevert = 1;
                 obj = cur_obj_nearest_object_with_behavior(bhvOpeningWall);
@@ -75,6 +76,7 @@ void cushion_friend_opening(void) {
             }
             break;
         case 4:
+            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             if (CL_NPC_Dialog(DIALOG_037)) {
                 o->oAction = 5;
             }
@@ -97,6 +99,7 @@ void cushion_friend_trophy_one(void) {
         case 0:
             vec3f_set(&o->oPosX, 1500.0f, 0.0f, 12000.0f);
             if (gMarioState->pos[0] > 1020.0f) {
+                spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
                 if (CL_NPC_Dialog(DIALOG_039)) {
                     o->oAction = 1;
                     vec3f_set(gComitCutscenePosVec, -1919.0f, 2439.0f, 14421.0f);
@@ -154,6 +157,7 @@ void cushion_friend_morning_room(void) {
             }
             break;
         case 1:
+            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             if (CL_NPC_Dialog(DIALOG_040)) {
                 o->oAction = 2;
                 save_file_set_newflags(SAVE_TOAD_FLAG_MORNING_ROOM, 1);
@@ -178,6 +182,7 @@ void cushion_friend_trophy_two(void) {
             }
             break;
         case 1:
+            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
             if (CL_NPC_Dialog(DIALOG_043)) {
                 o->oAction = 2;
                 save_file_set_newflags(SAVE_TOAD_FLAG_TROPHY_TWO, 1);
