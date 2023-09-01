@@ -1101,7 +1101,8 @@ Gfx *geo_generate_lava_wave(s32 callContext, struct GraphNode *node, void *conte
 
         vertexBuffer = alloc_display_list(16 * sizeof(Vtx));
 
-        if (sCurrPlayMode != 2) {
+        if (sCurrPlayMode != 2 && gMarioState->action != ACT_STAR_DANCE_NO_EXIT && gMarioState->action != ACT_STAR_DANCE_WATER
+            && CL_objptr_nearest_object_behavior(gMarioObject, bhvStarSpawnCoordinates) == NULL) {
             // sLavaSinsTimer += 0xE0;
             if (!sLavaReverse) {
                 sLavaWavePos -= 75;

@@ -607,7 +607,7 @@ Gfx mat_revert_pool_barrier_GhostBarrier_layer1[] = {
 Gfx mat_pool_barrier_GhostBarrierConsole_layer1[] = {
 	gsDPPipeSync(),
 	gsDPSetCombineLERP(TEXEL0, 0, TEXEL1, 0, 0, 0, 0, ENVIRONMENT, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED),
-	gsSPGeometryMode(G_CULL_BACK | G_LIGHTING, 0),
+	gsSPGeometryMode(G_LIGHTING, 0),
 	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetAlphaCompare(G_AC_DITHER),
 	gsDPSetRenderMode(GBL_c1(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA) | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1MA), Z_CMP | Z_UPD | CVG_DST_CLAMP | ZMODE_OPA),
@@ -633,7 +633,7 @@ Gfx mat_pool_barrier_GhostBarrierConsole_layer1[] = {
 
 Gfx mat_revert_pool_barrier_GhostBarrierConsole_layer1[] = {
 	gsDPPipeSync(),
-	gsSPGeometryMode(0, G_CULL_BACK | G_LIGHTING),
+	gsSPGeometryMode(0, G_LIGHTING),
 	gsDPSetCycleType(G_CYC_1CYCLE),
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
@@ -668,4 +668,3 @@ Gfx pool_barrier_material_revert_render_settings[] = {
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
-

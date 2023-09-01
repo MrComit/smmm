@@ -84,8 +84,8 @@ void bhv_treehouse_flame_init(void) {
     o->os16F4 = 0x3A;
     o->os16F6 = 0x2B;
     o->os16F8 = 0xC3;
-    o->oFloat100 = 0.1f;
-    vec3f_copy(&o->oPosX, sTreehouseFlames[o->oBehParams2ndByte]);
+    o->oFloat100 = 2.0f;
+    vec3f_copy(&o->oHomeX, sTreehouseFlames[o->oBehParams2ndByte]);
 }
 
 
@@ -93,15 +93,20 @@ void bhv_treehouse_flame_loop(void) {
     struct Object *obj;
     switch (o->oAction) {
         case 0:
-            o->oFloat100 = approach_f32_symmetric(o->oFloat100, 10.0f, 0.3f);
+            o->oFloat100 = approach_f32_symmetric(o->oFloat100, 10.0f, 0.6f);
             cur_obj_scale(o->oFloat100);
             if (o->oFloat100 == 10.0f) {
-                o->oAction = 1;
-                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 20.0f);
+                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 20.0f);
+                o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oHomeZ, 20.0f);
+                if (o->oPosX == o->oHomeX && o->oPosY == o->oHomeY && o->oPosZ == o->oHomeZ) {
+                    o->oAction = 1;
+                    play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                }
             }
             break;
         case 1:
-            if (o->oTimer > 30) {
+            if (o->oTimer > 20) {
                 o->oAction = 2;
             }
             break;
@@ -295,10 +300,12 @@ void bhv_spike_loop(void) {
 }
 
 void treehouse_owl_hiding(void) {
+    struct Object *obj;
     switch (o->oSubAction) {
         case 0:
             cur_obj_disable();
-            if (CL_nearest_object_with_behavior_and_field(bhvTreehouseFlame, 0x144, o->oBehParams2ndByte)) {
+            obj = CL_nearest_object_with_behavior_and_field(bhvTreehouseFlame, 0x144, o->oBehParams2ndByte);
+            if (obj != NULL && obj->oAction > 0) {
                 o->oSubAction = 1;
                 o->oGraphYOffset = -120.0f;
                 cur_obj_enable();
@@ -307,7 +314,7 @@ void treehouse_owl_hiding(void) {
             break;
         case 1:
             cur_obj_update_floor_and_walls();
-            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloorHeight, 20.0f);
+            o->oPosY = approach_f32_symmetric(o->oPosY, o->oFloorHeight, 26.0f);
             if (o->oPosY == o->oFloorHeight) {
                 o->oAction = 1;
                 obj_set_hitbox(o, &sTreehouseOwlHitbox);
