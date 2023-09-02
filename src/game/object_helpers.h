@@ -162,6 +162,7 @@ Gfx *geo_switch_gym_three(s32 callContext, struct GraphNode *node, UNUSED void *
 Gfx *geo_switch_engine_first(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_engine_middle(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_engine_last(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_engine_wall(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_ice_backroom(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_dream_layers(s32 callContext, struct GraphNode *node, UNUSED void *context);
@@ -225,6 +226,7 @@ Gfx *geo_switch_gym_three(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_engine_first(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_engine_middle(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_engine_last(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_engine_wall(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_ice_backroom(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_ice_somewalls(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_dream_layers(s32 callContext, struct GraphNode *node);

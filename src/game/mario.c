@@ -1886,7 +1886,8 @@ void update_treadmills(struct MarioState *m) {
             sTreadmillDisplaceZ = displace;
         }
     } else if (sTreadmillDisplace) {
-        if (m->pos[1] <= m->floorHeight || m->action == ACT_GROUND_POUND) {
+        if (m->pos[1] <= m->floorHeight || m->action == ACT_GROUND_POUND || m->action == ACT_HOLDING_HORIZONTAL_POLE
+            || m->action == ACT_CLIMBING_HORIZONTAL_POLE) {
             sTreadmillDisplace = FALSE;
             sTreadmillDisplaceX = 0.0f;
             sTreadmillDisplaceZ = 0.0f;

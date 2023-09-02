@@ -98,6 +98,7 @@ void bhv_clothes_shot_init(void) {
 }
 
 void bhv_clothes_shot_loop(void) {
+    struct Object *obj = NULL;
     if (gMarioState->pos[1] < -952.0f) {
         o->activeFlags = 0;
         spawn_mist_particles();
@@ -124,6 +125,14 @@ void bhv_clothes_shot_loop(void) {
             if (o->oFloor->object->oBehParams2ndByte == o->oBehParams2ndByte) {
                 o->parentObj->oAction = 3;
             }
+
+            obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+            if (obj != NULL) {
+                vec3f_copy(&obj->oPosX, &o->oFloor->object->oPosX);
+                obj->oPosY += 500.0f;
+                obj->oFaceAngleYaw = o->oFloor->object->oFaceAngleYaw;
+            }
+
             o->activeFlags = 0;
             spawn_mist_particles();
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);

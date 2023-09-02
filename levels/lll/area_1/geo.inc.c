@@ -421,6 +421,20 @@ const GeoLayout lll_dl_cNULL_005_geo[] = {
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
+const GeoLayout lll_dl_b_011_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_EngineRoomWall_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
+const GeoLayout lll_dl_cNULL_007_geo[] = {
+	GEO_NODE_START(),
+	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_cNULL_007_mesh_layer_1),
+	GEO_CLOSE_NODE(),
+	GEO_RETURN(),
+};
 const GeoLayout lll_dl_107__Engine_Room_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
@@ -442,6 +456,12 @@ const GeoLayout lll_dl_107__Engine_Room_geo[] = {
 			GEO_BRANCH(1, lll_dl_cNULL_005_geo),
 		GEO_CLOSE_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_aNULL_007_mesh_layer_1),
+		GEO_SWITCH_CASE(2, geo_switch_engine_wall),
+		GEO_OPEN_NODE(),
+			GEO_BRANCH(1, lll_dl_b_011_geo),
+			GEO_BRANCH(1, lll_dl_cNULL_007_geo),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_aNULL_008_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_BoogooZone_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, lll_dl_BoogooZone_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, lll_dl_EngineRoom_mesh_layer_1),

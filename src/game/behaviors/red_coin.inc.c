@@ -206,7 +206,7 @@ void bhv_red_sparkles_loop(void) {
                 if ((o->oTimer & 8) == 0) {
                     play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
                 }
-                if (o->oTimer > 100) {
+                if (o->oTimer > 110) {
                     gRedSparklesCollected = 0;
                     play_sound(SOUND_MENU_CAMERA_BUZZ, gGlobalSoundSource);
                 }

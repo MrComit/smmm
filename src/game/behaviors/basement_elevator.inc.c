@@ -484,7 +484,8 @@ void ghost_bully_phases(void) {
     }
 
     if (o->os16100 & (1 << EH_ENEMIES)) {
-        ghost_bully_spawn_enemies(o->os16100 & (1 << EH_DUST));
+        // ghost_bully_spawn_enemies(o->os16100 & (1 << EH_DUST));
+        ghost_bully_spawn_enemies(0);
         o->os16100 &= ~(1 << EH_ENEMIES);
     }
     
