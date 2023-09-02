@@ -253,6 +253,14 @@ void bhv_champagne_init(void) {
 void bhv_champagne_loop(void) {
     switch (o->oAction) {
         case 0:
+            if (o->oDistanceToMario < 1000.0f && o->oDistanceToMario > 200.0f) {
+                o->os16112 += 0x400;
+                o->oFaceAngleRoll = sins(o->os16112) * 0x280;
+            } else {
+                o->oFaceAngleRoll = approach_s16_symmetric(o->oFaceAngleRoll, 0, 0x80);
+                o->os16112 = 0;
+            }
+
             if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED && gMarioState->faceAngle[1] < -0x2000 && gMarioState->faceAngle[1] > -0x6000) {
                 o->oAction = 1;
                 // o->oObjF4->oFC = 1;

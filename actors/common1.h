@@ -169,6 +169,7 @@ extern const GeoLayout red_flame_shadow_geo[];
 extern const GeoLayout red_flame_geo[];
 extern const GeoLayout blue_flame_geo[];
 extern const GeoLayout env_flame_geo[];
+extern const GeoLayout env_flame_shadow_geo[];
 extern const Gfx flame_seg3_dl_0301B320[];
 extern const Gfx flame_seg3_dl_0301B3B0[];
 extern const Gfx flame_seg3_dl_0301B3C8[];

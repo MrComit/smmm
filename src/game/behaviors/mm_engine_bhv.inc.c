@@ -441,7 +441,7 @@ void bhv_golden_goomba_update(void) {
     struct Object *coin;
     f32 scale;
     s32 spawnCoins;
-    if (o->os16110 % 10 == 0) {
+    if (gCamera->comitCutscene == 0 && o->os16110 % 10 == 0) {
         scale = (f32)(o->os16110) / 2500.0f;
         spawn_orange_number_three_digit_scale_stay(o->os16110 / 10, 0, 0, 0, 50.0f * scale, 0.25f + scale, 6);
     }

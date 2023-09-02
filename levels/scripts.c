@@ -132,6 +132,9 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BIG_KEY, key_big_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BOO_COIN, boocoin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_ENV_FLAME, env_flame_geo),
+
+    LOAD_MODEL_FROM_GEO(MODEL_ENV_FLAME_SHADOW, env_flame_shadow_geo),
+
     LOAD_MODEL_FROM_GEO(MODEL_GHOSTSAND_BALL, ghostsand_ball_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TELEPORTER, teleporter_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BROKEN_KEY, key_broken_geo),

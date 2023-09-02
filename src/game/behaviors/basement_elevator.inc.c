@@ -764,7 +764,7 @@ void bhv_elevator_flame_spawn_loop(void) {
             break;
         case 1:
             if (o->oTimer > 90 + o->os16F4) { // was 45
-                obj = spawn_object(o, MODEL_ENV_FLAME, bhvElevatorMovingFlame);
+                obj = spawn_object(o, MODEL_ENV_FLAME_SHADOW, bhvElevatorMovingFlame);
                 if (o->oObjF8->os16100 & (1 << EH_FLAME2) && (random_u16() & 1)) {
                     obj->oBehParams2ndByte = 1;
                     obj->oPosX -= 2500.0f;

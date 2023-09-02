@@ -1,9 +1,9 @@
 extern const GeoLayout laundry_shirts3_geo[];
 extern u8 laundry_shirts3_shirt_ia8[];
 extern u8 laundry_shirts3_shirt3_ia8[];
-extern Vtx laundry_shirts3_shirts3_mesh_layer_4_vtx_0[10];
+extern Vtx laundry_shirts3_shirts3_mesh_layer_4_vtx_0[8];
 extern Gfx laundry_shirts3_shirts3_mesh_layer_4_tri_0[];
-extern Vtx laundry_shirts3_shirts3_mesh_layer_4_vtx_1[15];
+extern Vtx laundry_shirts3_shirts3_mesh_layer_4_vtx_1[12];
 extern Gfx laundry_shirts3_shirts3_mesh_layer_4_tri_1[];
 extern Gfx mat_laundry_shirts3_Shirt_004_layer4[];
 extern Gfx mat_revert_laundry_shirts3_Shirt_004_layer4[];

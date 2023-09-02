@@ -277,7 +277,7 @@ extern Gfx lll_dl_Chains_mesh_layer_5_tri_0[];
 extern Vtx lll_dl_Cobwebs_mesh_layer_4_vtx_0[16];
 extern Gfx lll_dl_Cobwebs_mesh_layer_4_tri_0[];
 extern Vtx lll_dl_Corridor_mesh_layer_1_vtx_cull[8];
-extern Vtx lll_dl_Corridor_mesh_layer_1_vtx_0[457];
+extern Vtx lll_dl_Corridor_mesh_layer_1_vtx_0[532];
 extern Gfx lll_dl_Corridor_mesh_layer_1_tri_0[];
 extern Vtx lll_dl_Corridor_mesh_layer_1_vtx_1[239];
 extern Gfx lll_dl_Corridor_mesh_layer_1_tri_1[];

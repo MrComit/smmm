@@ -344,12 +344,12 @@ void bhv_power_bar_loop(void) {
             }
             break;
         case 1:
-            if (o->oBehParams2ndByte == 2 && sPowerButtonPatternCheck == 5 && o->oTimer > 60) {
+            if (o->oBehParams2ndByte == 2 && sPowerButtonPatternCheck == 5 && o->oTimer > 10) {
                 if (!(save_file_get_golden_goombas() & (1 << 7))) {
                     save_file_set_golden_goombas(7);
-                    play_puzzle_jingle();
+                    // play_puzzle_jingle();
                     obj = spawn_object(gMarioObject, MODEL_GOLDEN_GOOMBA, bhvGoldenGoomba);
-                    vec3f_set(&obj->oPosX, 500.0f, 800.0f, 500.0f);
+                    vec3f_set(&obj->oPosX, 500.0f, 800.0f, -500.0f);
                     gCamera->comitCutscene = 0xFF;
                     gComitCutsceneTimer = 45;
                     obj->os16110 = 3045;
@@ -515,8 +515,8 @@ void bhv_leg_press_init(void) {
         o->oFloatF4 = 60.0f;
         o->os16F8 = 15;
     } else {
-        o->oFloatF4 = 20.0f;
-        o->os16F8 = 90;
+        o->oFloatF4 = 15.0f;
+        o->os16F8 = 70;
     }
 }
 

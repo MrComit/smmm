@@ -66,3 +66,25 @@ const GeoLayout env_flame_geo[] = {
    GEO_CLOSE_NODE(),
    GEO_END(),
 };
+
+
+const GeoLayout env_flame_shadow_geo[] = {
+   GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0x50, 20),
+   GEO_OPEN_NODE(),
+      GEO_ASM(5, geo_set_color_env),
+      GEO_OPEN_NODE(),
+         GEO_SWITCH_CASE(8, geo_switch_anim_state),
+         GEO_OPEN_NODE(),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame1_dl),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame2_dl),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame3_dl),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame4_dl),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame5_dl),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame6_dl),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame7_dl),
+            GEO_DISPLAY_LIST(LAYER_TRANSPARENT, flame_frame8_dl),
+         GEO_CLOSE_NODE(),
+      GEO_CLOSE_NODE(),
+   GEO_CLOSE_NODE(),
+   GEO_END(),
+};

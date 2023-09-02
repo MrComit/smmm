@@ -1,7 +1,7 @@
 #include "src/game/envfx_snow.h"
 
 const GeoLayout thwomp_block_geo[] = {
-	GEO_CULLING_RADIUS(4096),
+	GEO_SHADOW(SHADOW_SQUARE_PERMANENT, 0xB4, 800),
 	GEO_OPEN_NODE(),
 		GEO_NODE_START(),
 		GEO_OPEN_NODE(),

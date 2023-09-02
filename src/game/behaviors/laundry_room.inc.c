@@ -98,6 +98,11 @@ void bhv_clothes_shot_init(void) {
 }
 
 void bhv_clothes_shot_loop(void) {
+    if (gMarioState->pos[1] < -952.0f) {
+        o->activeFlags = 0;
+        spawn_mist_particles();
+        return;
+    }
     CL_Move();
     o->oFaceAngleYaw += 0x200;
     o->oFaceAngleRoll += 0x400;
@@ -116,7 +121,9 @@ void bhv_clothes_shot_loop(void) {
         cur_obj_update_floor_and_walls();
         if (o->oFloor != NULL && o->oFloorType == SURFACE_GENERAL_USE && o->oFloor->object != NULL) {
             o->oFloor->object->oAction = 1;
-            o->parentObj->oAction = 3;
+            if (o->oFloor->object->oBehParams2ndByte == o->oBehParams2ndByte) {
+                o->parentObj->oAction = 3;
+            }
             o->activeFlags = 0;
             spawn_mist_particles();
             play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
@@ -204,6 +211,7 @@ void bhv_basement_dryer_loop(void) {
             } else {
                 o->oObjF8->activeFlags = 0;
                 o->oAction = 3;
+                gMarioState->numBooCoins += 10;
             }
             o->collisionData = segmented_to_virtual(&basement_dryer_collision);
             break;
@@ -255,9 +263,10 @@ void bhv_basement_washer_loop(void) {
             if (cur_obj_set_anim_if_at_end(0)) {
                 o->oAction = 2;
                 o->oObjF4 = spawn_object(o, MODEL_CLOTHES_BALL, bhvClothesShot);
-                if (o->oBehParams2ndByte == 2) {
-                    o->oObjF4->oBehParams2ndByte = 2;
-                }
+                o->oObjF4->oBehParams2ndByte = o->oBehParams2ndByte;
+                // if (o->oBehParams2ndByte == 2) {
+                //     o->oObjF4->oBehParams2ndByte = 2;
+                // }
             }
             break;
         case 2:

@@ -1,7 +1,7 @@
 #include "src/game/envfx_snow.h"
 
 const GeoLayout champagne_geo[] = {
-	GEO_CULLING_RADIUS(4096),
+	GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0x70, 140),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, champagne_CharvaarghChampagne_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_INTER, champagne_CharvaarghChampagne_mesh_layer_7),
