@@ -275,4 +275,8 @@ extern const LevelScript level_lll_entry[];
 
 #include "levels/lll/map_l7/geo_header.h"
 
+#include "levels/lll/gravity_sign/geo_header.h"
+
+#include "levels/lll/gravity_sign/collision_header.h"
+
 #endif

@@ -146,3 +146,5 @@
 #include "levels/lll/elevator_instantwarp/collision.inc.c"
 #include "levels/lll/shyguy_group/model.inc.c"
 #include "levels/lll/map_l7/model.inc.c"
+#include "levels/lll/gravity_sign/model.inc.c"
+#include "levels/lll/gravity_sign/collision.inc.c"

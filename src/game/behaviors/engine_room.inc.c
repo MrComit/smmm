@@ -210,6 +210,57 @@ void bhv_bike_shyguy_loop(void) {
 }
 
 
+void bhv_gravity_sign_loop(void) {
+    if (gLowGrav) {
+        o->oAnimState = 1;
+    } else {
+        o->oAnimations = 0;
+    }
+
+    if (o->oBehParams2ndByte) {
+        switch (o->oAction) {
+            case 0:
+                if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN) {
+                    o->oAction = 4;
+                } else {
+                    o->oPosX += 50.0f;
+                    cur_obj_hide();
+                    o->oAction = 1;
+                }
+                break;
+            case 1:
+                if (save_file_get_newflags(0) & SAVE_NEW_FLAG_ENGINE_GATE_OPEN) {
+                    o->oAction = 2;
+                }
+                break;
+            case 2:
+                if (o->oTimer > 60 && gCamera->comitCutscene == 0) {
+                    // if (o->oTimer > 35) {
+                    o->oAction = 3;
+                    cur_obj_unhide();
+                    set_mario_npc_dialog(1);
+                    gCamera->comitCutscene = 0xFF;
+                    gComitCutsceneTimer = 30;
+                    vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
+                    vec3f_set(gComitCutscenePosVec, o->oPosX - 1200.0f, o->oPosY + 100.0f, o->oPosZ);
+                    // }
+                }
+                break;
+            case 3:
+                set_mario_npc_dialog(1);
+                gComitCutsceneTimer = 30;
+                o->oPosX = approach_f32_symmetric(o->oPosX, o->oHomeX, 3.0f);
+                cur_obj_play_sound_1(SOUND_ENV_ELEVATOR1);
+                if (o->oPosX == o->oHomeX) {
+                    cur_obj_shake_screen(SHAKE_POS_SMALL);
+                    o->oAction = 4;
+                    set_mario_npc_dialog(0);
+                }
+                break;
+        }
+    }
+}
+
 void power_door_update_color(s32 val) {
     if (val) {
         o->os16F4 = approach_s16_symmetric(o->os16F4, 0x0, 0x6);

@@ -1010,6 +1010,7 @@ extern const BehaviorScript bhvC4SwingingPlat[];
 extern const BehaviorScript bhvC5SpinningPlat[];
 extern const BehaviorScript bhvCSChallengeButton[];
 extern const BehaviorScript bhvCSChallenges[];
+extern const BehaviorScript bhvGravitySign[];
 
 
 #endif // BEHAVIOR_DATA_H

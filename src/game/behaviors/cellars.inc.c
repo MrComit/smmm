@@ -76,6 +76,7 @@ void bhv_colored_gate_loop(void) {
         case 1:
             if (set_mario_npc_dialog(1)) {
                 gCamera->comitCutscene = 0xFF;
+                gComitCutsceneTimer = 2;
                 if (o->oTimer > 15) {
                     o->oAction = 2;
                     play_puzzle_jingle();
@@ -86,6 +87,7 @@ void bhv_colored_gate_loop(void) {
             break;
         case 2:
             gCamera->comitCutscene = 0xFF;
+            gComitCutsceneTimer = 2;
             move_colored_gate(o->oBehParams2ndByte);
             break;
     }

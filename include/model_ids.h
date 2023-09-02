@@ -902,6 +902,7 @@
 
 // 0x6C-0x73
 #define MODEL_SHYGUY_GROUP        0x6C
+#define MODEL_GRAVITY_SIGN        0x6D
 
 
 

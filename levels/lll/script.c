@@ -77,6 +77,7 @@ const LevelScript level_lll_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_TREADMILL_FLOOR, treadmill_floor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_ELEVATOR_DOOR, elevator_door_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_SHYGUY_GROUP, shyguy_group_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_GRAVITY_SIGN, gravity_sign_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -125,6 +126,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_COLORED_GATE, 500, 0, -8987, 0, 0, 0, (2 << 16), bhvColoredGate),
 		OBJECT(MODEL_COLORED_GATE, 500, 0, -9487, 0, 0, 0, (3 << 16), bhvColoredGate),
 		OBJECT(MODEL_COLORED_GATE, 500, 0, -9987, 0, 0, 0, (4 << 16), bhvColoredGate),
+		OBJECT(MODEL_GRAVITY_SIGN, 1379, 250, -343, 0, -90, 0, (1 << 16), bhvGravitySign),
 		OBJECT(MODEL_HEART, 1064, 50, -6780, 0, -90, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_POWER_BAR, 1379, 150, -1012, 0, 0, 0, (1 << 16), bhvPowerBar),
 		OBJECT(MODEL_POWER_BAR, 1379, 100, -1012, 0, 0, 0, (2 << 16), bhvPowerBar),
@@ -229,6 +231,7 @@ const LevelScript level_lll_entry[] = {
 		OBJECT(MODEL_GRAVITY_BUTTON, 15124, 500, -1187, 0, -90, 0, 0x00000000, bhvGravityButton),
 		OBJECT(MODEL_GRAVITY_BUTTON, 8324, 800, 263, 0, 90, 0, 0x00000000, bhvGravityButton),
 		OBJECT(MODEL_GRAVITY_BUTTON, 7824, 800, 2988, 0, -180, 0, 0x00000000, bhvGravityButton),
+		OBJECT(MODEL_GRAVITY_SIGN, 1979, 450, -2062, 0, 0, 0, 0x00000000, bhvGravitySign),
 		OBJECT(MODEL_POWER_DOOR, 5449, 350, -1187, 0, 0, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 14374, 350, -212, 0, -90, 0, 0x00000000, bhvPowerDoor),
 		OBJECT(MODEL_POWER_DOOR, 8424, 650, 1688, 0, 180, 0, (1 << 16), bhvPowerDoor),
