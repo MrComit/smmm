@@ -682,6 +682,9 @@ s32 act_twirling(struct MarioState *m) {
         yawVelTarget = 0x2000;
     } else if (m->input & INPUT_Z_DOWN) {
         yawVelTarget = 0x800;
+        // if (m->actionTimer++ & 1) {
+        //     m->particleFlags |= PARTICLE_DUST;
+        // }
     } else {
         yawVelTarget = 0x1800;
     }

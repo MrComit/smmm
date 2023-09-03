@@ -1770,6 +1770,7 @@ const BehaviorScript bhvFloorSwitchHardcodedModel[] = {
     // Floor switch - common:
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SET_FLOAT(oDrawingDistance, 0x5000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -9952,7 +9953,7 @@ const BehaviorScript bhvElevatorMovingFlame[] =  {
     SET_INTERACT_TYPE(INTERACT_FLAME),
     SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 25, /*Downwards offset*/ 0),
     SET_INT(oIntangibleTimer, 0),
-    SET_FLOAT(oGraphYOffset, 50),
+    SET_FLOAT(oGraphYOffset, 75),
     CALL_NATIVE(bhv_elevator_moving_flame_init),
     BEGIN_LOOP(),
         SET_INT(oInteractStatus, 0),

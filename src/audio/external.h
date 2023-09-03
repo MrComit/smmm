@@ -58,6 +58,7 @@ void play_power_star_jingle(u8 arg0);
 void play_race_fanfare(void);
 void play_toads_jingle(void);
 void play_prof_t_jingle(void);
+void play_pros_t_jingle(void);
 void sound_reset(u8 presetId);
 void audio_set_sound_mode(u8 arg0);
 

@@ -78,6 +78,12 @@ void bhv_door_loop(void) {
         }
     }
 
+    if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
+        if (save_file_get_keys(0) & (1 << o->oBehParams2ndByte) && !(save_file_get_keys(1) & (1 << o->oBehParams2ndByte))) {
+            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        }
+    }
+
     while (sDoorActions[sp1C].flag != 0xFFFFFFFF) {
         if (cur_obj_clear_interact_status_flag(sDoorActions[sp1C].flag)) {
             set_door_camera_event();
