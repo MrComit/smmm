@@ -1349,8 +1349,9 @@ void bhv_friend_toad_init(void) {
         //o->oToadMessageState = TOAD_MESSAGE_FADED;
         //o->oOpacity = 81;
         o->oInteractionSubtype = INT_SUBTYPE_NPC;
-    
-    if (gCurrLevelNum != LEVEL_SSL && gCurrLevelNum != LEVEL_DDD && gCurrLevelNum != LEVEL_SL) {
+    if (gCurrLevelNum == LEVEL_SL) {
+        o->os16112 = 1;
+    } else if (gCurrLevelNum != LEVEL_SSL && gCurrLevelNum != LEVEL_DDD) {
         o->os16112 = 2;
     }
 }

@@ -23,6 +23,7 @@ const GeoLayout sl_dl_101__Outside_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Mansion_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Mansion_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Mansion_001_mesh_layer_4),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Mansion_002_mesh_layer_1),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -835, 3681, -9088, sl_dl_MountainExterior_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Tree_Leaves_mesh_layer_4),

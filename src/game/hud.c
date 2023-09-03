@@ -1301,7 +1301,7 @@ extern s32 sLevelToChapter[COURSE_MAX];
 void render_hud_starpieces(void) {
     s16 i, h;
 
-	if (save_file_get_star_piece() == 0 || gCurrLevelNum == LEVEL_DDD) {
+	if (save_file_get_star_piece() == 0 || gCurrLevelNum == LEVEL_DDD || gCurrLevelNum == LEVEL_SL) {
 		sStarPieceRectX = 0;
 		return;
 	}

@@ -709,7 +709,8 @@ s32 perform_air_step(struct MarioState *m, u32 stepArg) {
     m->terrainSoundAddend = mario_get_terrain_sound_addend(m);
 
     if (m->action != ACT_FLYING) {
-        if (((gCurrLevelNum == LEVEL_LLL || gCurrLevelNum == LEVEL_SL) && gLowGrav) || gCurrLevelNum == LEVEL_TTC) {
+        if (((gCurrLevelNum == LEVEL_LLL || (gCurrLevelNum == LEVEL_SL && gMarioCurrentRoom != 1)) && gLowGrav) 
+            || gCurrLevelNum == LEVEL_TTC) {
             apply_gravity_low(m);
         } else {
             apply_gravity(m);
