@@ -515,20 +515,20 @@ void mario_update_friend_l6_loop(struct MarioState *m) {
 s32 sToadUpgradeAct = 0;
 
 s32 mario_update_manager_upgrade_action(struct MarioState *m, s32 dialogId) {
-    if (sToadUpgradeAct < 50) {
-        if (!(gTimeStopState & TIME_STOP_ENABLED) && (cur_obj_nearest_object_with_behavior(bhvBooSavePrompt) == NULL)) {
+    if (sToadUpgradeAct < 55) {
+        if (!(gHudDisplay.flags & HUD_DISPLAY_FLAG_CALL) && !(gTimeStopState & TIME_STOP_ENABLED) && (cur_obj_nearest_object_with_behavior(bhvBooSavePrompt) == NULL)) {
             sToadUpgradeAct++;
         }
-    } else if (sToadUpgradeAct == 50) {
+    } else if (sToadUpgradeAct == 55) {
         play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
         gHudDisplay.flags |= HUD_DISPLAY_FLAG_CALL;
-        sToadUpgradeAct = 51;
+        sToadUpgradeAct = 56;
         set_mario_npc_dialog(1);
-    } else if (sToadUpgradeAct == 51) {
+    } else if (sToadUpgradeAct == 56) {
         set_mario_npc_dialog(1);
         if (gPlayer1Controller->buttonPressed & A_BUTTON) {
             gHudDisplay.flags &= ~HUD_DISPLAY_FLAG_CALL;
-            sToadUpgradeAct = 52;
+            sToadUpgradeAct = 57;
         }
     } else {                
         if (CL_NPC_Dialog(dialogId)) {

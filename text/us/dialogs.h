@@ -978,9 +978,7 @@ way, look what I found!"))
 DEFINE_DIALOG(DIALOG_077, 1, 3, 150, 200, _("\
 You've collected a Star!\n\
 Go talk to Prospector T\n\
-to claim your reward!\n\
-Do you want to Save?\n\
-//Yes////No"))
+to claim your reward!"))
 
 DEFINE_DIALOG(DIALOG_078, 1, 6, 30, 200, _("\
 Hello there Mario, my name\n\

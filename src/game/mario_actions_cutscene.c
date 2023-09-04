@@ -652,7 +652,11 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
                     } else {
                         dialogID = DIALOG_014;
                     }
-                    create_dialog_box_with_response(dialogID);
+                    if (isKey != 5) {
+                        create_dialog_box_with_response(dialogID);
+                    } else {
+                        create_dialog_box(dialogID);
+                    }
                     dialogID = 0;
                 }
                 m->actionState = 1;
@@ -661,7 +665,7 @@ void general_star_dance_handler(struct MarioState *m, s32 isKey) {
         }
     } else if (m->actionState == 1 && (gDialogResponse != DIALOG_RESPONSE_NONE 
         || (gHudDisplay.flags & HUD_DISPLAY_FLAG_BOO || isKey == 6))) {
-        if (gDialogResponse == DIALOG_RESPONSE_YES) {
+        if (gDialogResponse == DIALOG_RESPONSE_YES && isKey != 5) {
             save_file_do_save(gCurrSaveFileNum - 1);
         }
         m->actionState = 2;
@@ -1296,15 +1300,15 @@ s32 act_unused_death_exit(struct MarioState *m) {
             else
                 m->numBooCoins = 0;
         } else if (gCurrLevelNum != LEVEL_SL && gCurrCourseNum < 11) {
-            if (m->numCoins > 10) {
-                m->numCoins -= 10;
+            if (m->numCoins > 20) {
+                m->numCoins -= 20;
             } else {
                 m->numCoins = 0;
             }
             
             if (in_boss_room(gCurrLevelNum, gMarioDeathRoom)) {
-                if (gBossPrecoins > 10) {
-                    m->numCoins = gBossPrecoins - 10;
+                if (gBossPrecoins > 20) {
+                    m->numCoins = gBossPrecoins - 20;
                 } else {
                     m->numCoins = 0;
                 }

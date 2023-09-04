@@ -1357,6 +1357,7 @@ void bhv_friend_toad_init(void) {
 }
 
 extern s32 gRedCoinMissionActive;
+extern s8 gRedCoinBitfield;
 
 void bhv_prospector_t_init(void) {
     o->oInteractionSubtype = INT_SUBTYPE_NPC;
@@ -1440,11 +1441,13 @@ void bhv_prospector_t_loop(void) {
                             }
                         } else {
                             gRedCoinMissionActive = 1;
+                            gRedCoinBitfield = 0;
                             //CHANGE DIALOG ID
                             o->oBehParams2ndByte = DIALOG_081;
                         }
                     } else if (o->os16F8 == 1) {
                         gRedCoinMissionActive = 0;
+                        gRedCoinBitfield = 0;
                         o->os16F8 = 2;
                         gMarioState->numCoins += 1000;
                         if (o->os16F4 == 2) {

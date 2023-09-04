@@ -34,6 +34,10 @@ extern s8 gRedCoinsCollected;
 s8 gRedCoinBitfield = 0;
 
 void bhv_red_coin_init(void) {
+    if (gRedCoinBitfield & (1 << o->oBehParams2ndByte)) {
+        gRedCoinsCollected++;
+        o->activeFlags = 0;
+    }
     // Set the red coins to have a parent of the closest red coin star.
     // struct Object *hiddenRedCoinStar;
 
@@ -174,6 +178,14 @@ void bhv_hidden_green_coin_star_loop(void) {
 s32 gRedSparklesCollected = -1;
 void bhv_red_sparkles_init(void) {
     gRedSparklesCollected = -1;
+
+    if (gRedCoinBitfield & (1 << (o->oBehParams >> 24))) {
+        o->activeFlags = 0;
+        if (o->oBehParams2ndByte == 1) {
+            gRedCoinsCollected++;
+        }
+    }
+
 }
 
 void bhv_red_sparkles_loop(void) {
@@ -289,6 +301,12 @@ void bhv_physics_red_coin_loop(void) {
 
 void bhv_gold_medal_loop(void) {
     struct Object *obj;
+
+    if (o->oAction == 0 && gRedCoinBitfield & (1 << o->oBehParams2ndByte)) {
+        gRedCoinsCollected++;
+        o->oAction = 1;
+    }
+
     if (gRedCoinMissionActive) {
         if (o->oAction == 0 && o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
@@ -308,6 +326,12 @@ void bhv_gold_medal_loop(void) {
 
 void bhv_red_spot_loop(void) {
     struct Object *obj;
+
+    if (gRedCoinBitfield & (1 << o->oBehParams2ndByte)) {
+        gRedCoinsCollected++;
+        o->activeFlags = 0;
+    }
+
     if (cur_obj_is_mario_ground_pounding_platform()) {
         o->oPosY += 800.0f;
         obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
@@ -377,6 +401,12 @@ void bhv_winged_red_coin_loop(void) {
 
 void bhv_invis_red_coin_loop(void) {
     struct Object *obj;
+
+    if (gRedCoinBitfield & (1 << o->oBehParams2ndByte)) {
+        gRedCoinsCollected++;
+        o->activeFlags = 0;
+    }
+
     if (o->oDistanceToMario < 2000.0f) {
         cur_obj_play_sound_1(SOUND_AIR_PEACH_TWINKLE);
     }
@@ -395,6 +425,10 @@ void bhv_invis_red_coin_loop(void) {
 
 void bhv_red_stool_loop(void) {
     struct Object *obj;
+    if (o->oAction == 0 && gRedCoinBitfield & (1 << o->oBehParams2ndByte)) {
+        gRedCoinsCollected++;
+        o->oAction = 1;
+    }
     if (gRedCoinMissionActive) {
         if (o->oAction == 0 && cur_obj_is_mario_ground_pounding_platform()) {
             obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
@@ -422,6 +456,11 @@ void bhv_fake_red_coin_init(void) {
         o->oRoom2 = 13;
     }
     bhv_red_coin_init();
+
+    // if (gRedCoinBitfield & (1 << o->oBehParams2ndByte)) {
+    //     o->activeFlags = 0;
+    // }
+
 }
 
 void bhv_fake_red_coin_loop(void) {
@@ -486,6 +525,10 @@ void bhv_fake_red_coin_loop(void) {
 
 
 void bhv_red_light_button_loop(void) {
+    if (o->oF4 == 0 && gRedCoinBitfield & (1 << 6)) {
+        o->oF4 = 1;
+        gRedCoinsCollected++;
+    }
     switch (o->oAction) {
         case 0:
             o->oAnimState = 0;
@@ -538,6 +581,12 @@ static void const *s2DRedCollision[] = {
 
 void bhv_2d_red_init(void) {
     o->collisionData = segmented_to_virtual(s2DRedCollision[(o->oBehParams >> 24)]);
+
+    if (gRedCoinBitfield & (1 << o->oBehParams2ndByte)) {
+        gRedCoinsCollected++;
+        o->activeFlags = 0;
+    }
+
 }
 
 void bhv_2d_red_loop(void) {

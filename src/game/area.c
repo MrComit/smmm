@@ -232,9 +232,9 @@ extern s32 gRedCoinMissionActive;
 extern s8 gRedCoinBitfield;
 
 void load_area(s32 index) {
-    gRedCoinMissionActive = 0;
-    gFakeRedActive = 0;
-    gRedCoinBitfield = 0;
+    // gRedCoinMissionActive = 0;
+    // gFakeRedActive = 0;
+    // gRedCoinBitfield = 0;
     // gGreenCoinsCollected = 0;
     if (gCurrentArea == NULL && gAreaData[index].unk04 != NULL) {
         gCurrentArea = &gAreaData[index];
