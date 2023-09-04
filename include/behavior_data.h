@@ -1011,6 +1011,8 @@ extern const BehaviorScript bhvC5SpinningPlat[];
 extern const BehaviorScript bhvCSChallengeButton[];
 extern const BehaviorScript bhvCSChallenges[];
 extern const BehaviorScript bhvGravitySign[];
+extern const BehaviorScript bhvTenFakeCoinsSpawn[];
+extern const BehaviorScript bhvSingleFakeCoinGetsSpawned[];
 
 
 #endif // BEHAVIOR_DATA_H

@@ -12,6 +12,10 @@ void bhv_sparkle_spawn_loop(void) {
     if (sparkle != NULL) {
         obj_translate_xyz_random(sparkle, 90.0f);
         obj_scale_random(sparkle, 1.0f, 0.0f);
+        if (o->oF4) {
+            sparkle->oFlags |= OBJ_FLAG_MULTIROOM;
+            sparkle->oRoom2 = gMarioCurrentRoom;
+        }
     }
     if (o->oTimer > 1) {
         obj_mark_for_deletion(o);

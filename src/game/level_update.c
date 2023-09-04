@@ -1167,8 +1167,8 @@ void update_hud_values(void) {
     if (gCurrCreditsEntry == NULL && gCurrDemoInput == NULL) {
         s16 numHealthWedges = gMarioState->health > 0 ? gMarioState->health >> 8 : 0;
 
-        if (gMarioState->action != ACT_READING_NPC_DIALOG && gMarioState->action != ACT_IN_CANNON && gMarioState->action & ACT_FLAG_STATIONARY 
-            && gCamera->comitCutscene == 0) {
+        if (gMarioState->action != ACT_READING_NPC_DIALOG && gMarioState->action != ACT_READING_AUTOMATIC_DIALOG
+            && gMarioState->action != ACT_IN_CANNON && gMarioState->action & ACT_FLAG_STATIONARY && gCamera->comitCutscene == 0) {
             if (sTimer2++ > 45) {
                 gHudDisplay.flags |= (HUD_DISPLAY_FLAG_LOWER);
                 if (sTimer2 > 180) {

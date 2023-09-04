@@ -1242,9 +1242,18 @@ If you're handy, you can\n\
 grab on to trees or poles\n\
 to land."))
 
-DEFINE_DIALOG(DIALOG_106, 1, 2, 95, 200, _("\
-Ready for blastoff! Come\n\
-on, hop into the cannon!"))
+DEFINE_DIALOG(DIALOG_106, 1, 6, 95, 200, _("\
+----- CAMERA CONTROL -----\n\
+'Hold [R] while using [C]> and\n\
+[C]< to move the camera in\n\
+small increments. You can\n\
+change the sensitivty in the\n\
+pause menu!'\n\
+'Also, press | on the D-PAD\n\
+to align the camera to the\n\
+nearest 45 degree angle, and\n\
+press ^ on the D-PAD to angle\n\
+the camera towards the floor!'"))
 
 DEFINE_DIALOG(DIALOG_107, 1, 3, 95, 200, _("\
 Ghosts...\n\

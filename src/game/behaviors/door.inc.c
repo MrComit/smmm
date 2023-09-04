@@ -57,7 +57,7 @@ void play_warp_door_open_noise(void) {
 }
 extern s8 sLevelRoomOffsets[];
 void bhv_door_loop(void) {
-    struct Object *obj;
+    struct Object *obj = NULL;
     s32 sp1C = 0;
     
     if (gCurrLevelNum == LEVEL_HMC && o->oRoom == 9 && (o->oBehParams2ndByte == 2 ||
@@ -80,7 +80,10 @@ void bhv_door_loop(void) {
 
     if (o->oInteractionSubtype & INT_SUBTYPE_LOCKED_DOOR) {
         if (save_file_get_keys(0) & (1 << o->oBehParams2ndByte) && !(save_file_get_keys(1) & (1 << o->oBehParams2ndByte))) {
-            spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+            obj = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+            obj->oFlags |= OBJ_FLAG_MULTIROOM;
+            obj->oRoom2 = gMarioCurrentRoom;
+            obj->oF4 = 1;
         }
     }
 

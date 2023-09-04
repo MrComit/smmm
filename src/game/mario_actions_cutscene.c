@@ -1302,6 +1302,7 @@ s32 act_unused_death_exit(struct MarioState *m) {
         } else if (gCurrLevelNum != LEVEL_SL && gCurrCourseNum < 11) {
             if (m->numCoins > 20) {
                 m->numCoins -= 20;
+                spawn_object(gMarioObject, MODEL_NONE, bhvTenFakeCoinsSpawn);
             } else {
                 m->numCoins = 0;
             }
@@ -1309,6 +1310,7 @@ s32 act_unused_death_exit(struct MarioState *m) {
             if (in_boss_room(gCurrLevelNum, gMarioDeathRoom)) {
                 if (gBossPrecoins > 20) {
                     m->numCoins = gBossPrecoins - 20;
+                    spawn_object(gMarioObject, MODEL_NONE, bhvTenFakeCoinsSpawn);
                 } else {
                     m->numCoins = 0;
                 }

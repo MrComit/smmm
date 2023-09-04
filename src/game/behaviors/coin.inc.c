@@ -139,6 +139,69 @@ void bhv_coin_loop(void) {
     bhv_coin_sparkles_init();
 }
 
+
+
+void bhv_uncollectable_coin_loop(void) {
+    struct Surface *sp1C;
+
+    cur_obj_update_floor_and_walls();
+    cur_obj_if_hit_wall_bounce_away();
+    cur_obj_move_standard(-62);
+    if (gCamera->comit2dcam == 1 || gCamera->comit2dcam == 3) {
+        o->oPosZ = o->oHomeZ;
+    }
+    if ((sp1C = o->oFloor) != NULL) {
+        if (o->oMoveFlags & OBJ_MOVE_ON_GROUND) {
+            o->oSubAction = 1;
+        }
+        if (o->oSubAction == 1) {
+            o->oBounciness = 0;
+            if (sp1C->normal.y < 0.9) {
+                s16 sp1A = atan2s(sp1C->normal.z, sp1C->normal.x);
+                cur_obj_rotate_yaw_toward(sp1A, 0x400);
+            }
+        }
+    }
+
+    if (o->oTimer == 0) {
+        cur_obj_play_sound_2(SOUND_GENERAL_COIN_SPURT);
+    }
+
+    // if (o->oVelY < 0) {
+    //     cur_obj_become_tangible();
+    // }
+
+    if (o->oMoveFlags & OBJ_MOVE_LANDED) {
+#ifndef VERSION_JP
+        if (o->oMoveFlags & (OBJ_MOVE_ABOVE_DEATH_BARRIER | OBJ_MOVE_ABOVE_LAVA))
+#else
+        if (o->oMoveFlags & OBJ_MOVE_ABOVE_LAVA)
+#endif
+        {
+            obj_mark_for_deletion(o);
+        }
+    }
+
+    if (o->oMoveFlags & OBJ_MOVE_BOUNCE) {
+#ifndef VERSION_JP
+        if (o->oCoinUnk1B0 < 5) {
+            cur_obj_play_sound_2(SOUND_GENERAL_COIN_DROP);
+        }
+        o->oCoinUnk1B0++;
+#else
+        cur_obj_play_sound_2(SOUND_GENERAL_COIN_DROP);
+#endif
+    }
+
+    if (cur_obj_wait_then_blink(20, 10)) {
+        obj_mark_for_deletion(o);
+    }
+
+    bhv_coin_sparkles_init();
+}
+
+
+
 void bhv_coin_formation_spawn_loop(void) {
     if (o->oTimer == 0) {
         cur_obj_set_behavior(bhvYellowCoin);

@@ -10312,7 +10312,7 @@ const BehaviorScript bhvDirtPile[] = {
     LOAD_COLLISION_DATA(dirt_pile_collision),
     SET_FLOAT(oDrawingDistance, 0x4000),
     SET_HOME(),
-    CALL_NATIVE(bhv_castle_plant_init),
+    CALL_NATIVE(bhv_dirt_pile_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_dirt_pile_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -12452,4 +12452,28 @@ const BehaviorScript bhvGravitySign[] = {
         CALL_NATIVE(load_object_collision_model),
         CALL_NATIVE(bhv_gravity_sign_loop),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvSingleFakeCoinGetsSpawned[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BILLBOARD(),
+    CALL_NATIVE(bhv_coin_init),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -70, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_uncollectable_coin_loop),
+        ADD_INT(oAnimState, 1),
+    END_LOOP(),
+};
+
+
+const BehaviorScript bhvTenFakeCoinsSpawn[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    BEGIN_REPEAT(10),
+        SPAWN_CHILD(/*Model*/ MODEL_YELLOW_COIN, /*Behavior*/ bhvSingleFakeCoinGetsSpawned),
+    END_REPEAT(),
+    DEACTIVATE(),
 };

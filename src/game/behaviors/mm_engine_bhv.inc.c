@@ -166,8 +166,74 @@ void bhv_save_station_loop(void) {
 
 
 
+void spawn_dirt_pile_coins(s32 param) {
+    struct Object *coin = NULL;
+    const BehaviorScript *coinBehavior = NULL;
+    f32 spawnHeight;
+    struct Surface *floor;
+    s32 i = 0;
+    s32 model = 0;
+    s32 numCoins = 0;
+    switch (param) {
+        case 23: // 3 coins
+            numCoins = 3;
+            model = MODEL_YELLOW_COIN;
+            coinBehavior = bhvSingleCoinGetsSpawned;
+            break;
+        case 24: // blue coin
+            numCoins = 1;
+            model = MODEL_BLUE_COIN;
+            coinBehavior = bhvMrIBlueCoin;
+            break;
+        case 25: // blue coin
+            numCoins = 1;
+            model = MODEL_BLUE_COIN;
+            coinBehavior = bhvMrIBlueCoin;
+            break;
+        case 26: // 5 coins
+            numCoins = 5;
+            model = MODEL_YELLOW_COIN;
+            coinBehavior = bhvSingleCoinGetsSpawned;
+            break;
+        case 27: // 2 coins
+            numCoins = 2;
+            model = MODEL_YELLOW_COIN;
+            coinBehavior = bhvSingleCoinGetsSpawned;
+            break;
+    }
 
-// void bhv_dirt_pile_init(void)
+    spawnHeight = find_floor(o->oPosX, o->oPosY, o->oPosZ, &floor);
+    if (o->oPosY - spawnHeight > 100.0f) {
+        spawnHeight = o->oPosY;
+    }
+
+    for (i = 0; i < numCoins; i++) {
+        coin = spawn_object(o, model, coinBehavior);
+        obj_translate_xz_random(coin, 5.0f);
+        coin->oPosY = spawnHeight;
+        coin->oCoinUnk110 = 20.0f;
+    }
+
+
+    save_file_set_gpflags(1 << param);
+}
+
+
+
+void bhv_dirt_pile_init(void) {
+    if (o->oBehParams2ndByte == 0) {
+        if (save_file_get_newflags(0) & SAVE_NEW_FLAG_FLOATING_PLANT) {
+            o->activeFlags = 0;
+        }
+    } else if (save_file_get_gpflags() & (1 << o->oBehParams2ndByte)) {
+        o->activeFlags = 0;
+    }
+
+
+
+}
+
+
 void bhv_dirt_pile_loop(void) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
@@ -193,6 +259,10 @@ void bhv_dirt_pile_loop(void) {
                     obj->oAction = 1;
                     play_puzzle_jingle();
                     save_file_set_newflags(SAVE_NEW_FLAG_FLOATING_PLANT, 0);
+                }
+
+                if (o->oBehParams2ndByte) {
+                    spawn_dirt_pile_coins(o->oBehParams2ndByte);
                 }
             }
             break;
