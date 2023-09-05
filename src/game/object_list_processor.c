@@ -624,7 +624,7 @@ void mario_update_room_clear(struct MarioState *m) {
         return;
     }
 
-    while (room > 32) {
+    while (room >= 32) {
         room -= 32;
         index++;
     }

@@ -142,7 +142,7 @@ u8 gMenuHoldKeyIndex2 = 0;
 u8 gMenuHoldKeyTimer2 = 0;
 s32 gDialogResponse = DIALOG_RESPONSE_NONE;
 
-
+void print_name_string(s16 x, s16 y, u8 alpha, const u8 *str);
 
 void init_map(void);
 
@@ -3697,7 +3697,11 @@ struct MapObject *spawn_map_object(f32 x, f32 z, Gfx *dl, s32 room) {
             //boss room:
             if (check_map_boss()) {
                     mo->flags |= 0x10;
-                } 
+            } 
+            
+            if (mo->levelRoom == gMarioCurrentRoom || mo->flags == 1) {
+                mo->flags |= 0x20;
+            }
             break;
         }
     }
@@ -3768,14 +3772,14 @@ void spawn_map_1(void) {
     spawn_map_key(-140, 1166, 15);
 
 
-    spawn_map_red_coin(-25, 1993, 0); // main hall
-    spawn_map_red_coin(25, 1993, 1); // main hall
-    spawn_map_red_coin(455, 1383, 2); // parlor
-    spawn_map_red_coin(717, 536, 3); // dining room
+    spawn_map_red_coin(-25, 1993 - 30, 0); // main hall
+    spawn_map_red_coin(25, 1993 - 30, 1); // main hall
+    spawn_map_red_coin(455, 1383 - 30, 2); // parlor
+    spawn_map_red_coin(717, 536 - 30, 3); // dining room
     spawn_map_red_coin(260, 50, 4); // kitchen
     spawn_map_red_coin(-60, 340, 5); // hallway
-    spawn_map_red_coin(-844 - 25, 1475, 6); // library
-    spawn_map_red_coin(-844 + 25, 1475, 7); // library
+    spawn_map_red_coin(-844 - 25, 1475 - 30, 6); // library
+    spawn_map_red_coin(-844 + 25, 1475 - 30, 7); // library
 
 }
 
@@ -3808,14 +3812,14 @@ void spawn_map_2(void) {
     spawn_map_key(455, -1031, 6);
     spawn_map_key(-4, -1918, 7);
 
-    spawn_map_red_coin(21 - 25, -802, 0); // lounge plat
-    spawn_map_red_coin(21 + 25, -802, 1); // lounge fake
-    spawn_map_red_coin(46, 137, 2); // bar
-    spawn_map_red_coin(104, 1434, 3); // balcony
-    spawn_map_red_coin(1810, -313, 4); // office
-    spawn_map_red_coin(292, -1383, 5); // bathroom
-    spawn_map_red_coin(-781, -1870, 6); // mirror
-    spawn_map_red_coin(-692, -496, 7); // master bedroom
+    spawn_map_red_coin(21 - 25, -802 - 30, 0); // lounge plat
+    spawn_map_red_coin(21 + 25, -802 - 30, 1); // lounge fake
+    spawn_map_red_coin(46, 137 - 30, 2); // bar
+    spawn_map_red_coin(104, 1434 - 30, 3); // balcony
+    spawn_map_red_coin(1810, -313 - 30, 4); // office
+    spawn_map_red_coin(292, -1383 - 30, 5); // bathroom
+    spawn_map_red_coin(-781, -1870 - 30, 6); // mirror
+    spawn_map_red_coin(-692, -496 - 30, 7); // master bedroom
 }
 
 void spawn_map_3(void) {
@@ -3866,14 +3870,14 @@ void spawn_map_6(void) {
     spawn_map_key(423, 502, 9);
 
 
-    spawn_map_red_coin(-757 - 25, 608, 0); // trophy plat
-    spawn_map_red_coin(-757 + 25, 608, 1); // trophy hidden
-    spawn_map_red_coin(215, 316, 2); // game room
-    spawn_map_red_coin(-425, -965, 3); // morning room
-    spawn_map_red_coin(-810, -1255, 4); // theater
-    spawn_map_red_coin(-910, -406, 5); // sauna
-    spawn_map_red_coin(-723 - 25, 1781, 6); // attic plat
-    spawn_map_red_coin(-723 + 25, 1781, 7); // attic invis
+    spawn_map_red_coin(-757 - 25, 608 - 30, 0); // trophy plat
+    spawn_map_red_coin(-757 + 25, 608 - 30, 1); // trophy hidden
+    spawn_map_red_coin(215, 316 - 30, 2); // game room
+    spawn_map_red_coin(-425, -965 - 30, 3); // morning room
+    spawn_map_red_coin(-810, -1255 - 30, 4); // theater
+    spawn_map_red_coin(-910, -406 - 30, 5); // sauna
+    spawn_map_red_coin(-723 - 25, 1781 - 30, 6); // attic plat
+    spawn_map_red_coin(-723 + 25, 1781 - 30, 7); // attic invis
 
 }
 
@@ -4073,10 +4077,65 @@ void render_map_background(void) {
 }
 
 
+extern char sRoomCorrupt[];
+extern struct GraphNodeRoot *gCurGraphNodeRoot;
+
+void set_map_name_translation(const u8 *str) {
+    f32 x = get_str_x_pos_from_center(0, str, 0.0f) * 4.0f;
+    f32 z = 32.0f;
+
+    switch (mo->globalRoom) {
+        case 5: // l1 hallway
+            x += 250.0f;
+            z += 270.0f;
+            break;
+        case 37: // l4 main city
+            x -= 610.0f;
+            break;
+        case 61: // l6 plat hall
+            x += 500.0f;
+            z -= 40.0f;
+            break;
+        case 65: // l7 corridor
+            z += 300.0f;
+            break;
+        case 71: // l7 engine room
+            z -= 150.0f;
+            break;
+    }
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, x, 0.0f, z);
+}
+
+
+
+void print_map_name_string(s16 x, s16 y, u8 alpha, const u8 *str) {
+    f32 scale = 4.0f;
+    // f32 xTrans = get_str_x_pos_from_center(0, str, 0.0f);
+    // if (gIsConsole)
+    //     scale = 2.0f;
+    // create_dl_ortho_matrix();
+    set_map_name_translation(str);
+    // create_dl_translation_matrix(MENU_MTX_PUSH, xTrans * 4.0f, 0.0f, 32.0f);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, scale, scale, scale);
+    create_dl_rotation_matrix(MENU_MTX_NOPUSH, 90.0f, -1.0f, 0.0f, 0.0f);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+
+    gDPSetEnvColor(gDisplayListHead++, 0, 0, 0, alpha);
+    print_generic_string(x + 1, y - 1, str);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, alpha);
+    print_generic_string(x, y, str);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    // gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
 
 void render_map_object(f32 x, f32 z, Gfx *dl) {
     Vec3f pos;
     Vec3s angle;
+    s16 x2, y2;
     vec3s_set(angle, 0xFF00, 0, 0xFF00);
     vec3f_set(pos, x, -26000.0f, z);
     mtxf_rotate_zxy_and_translate(gMatStack[gMatStackIndex + 1], pos, angle);
@@ -4089,7 +4148,18 @@ void render_map_object(f32 x, f32 z, Gfx *dl) {
     } else if (mo->flags & 4) {
         gSPDisplayList(gDisplayListHead++, boo_icon_dl);
     }
+
+
+
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+    // x2 = 2 * (0.5f - x / (z + 0.1f)) * (gCurGraphNodeRoot->width);
+    // y2 = 2 * (0.5f - -5000.0f / (z + 0.1f)) * (gCurGraphNodeRoot->height);
+    if (mo->levelRoom == gMarioCurrentRoom || save_file_check_room(mo->globalRoom)) {
+        print_map_name_string(0, 0, 255, sRoomNames[mo->globalRoom - 1]);
+        if (mo->globalRoom == 72) {
+            print_map_name_string(0, 0, 255, sRoomCorrupt);
+        }
+    }
     // print_text(20, 20, ",", 0);
 }
 
@@ -4799,11 +4869,11 @@ void print_room_names(void) {
             y = 255 - ((gRoomEntryTimer - 65) * 10);
         }
 
-        if (gGlobalMarioRoom == 72) {
-            print_name_string(15, 10, y, sRoomCorrupt);
-        }
         if (sRoomNames[gGlobalMarioRoom - 1] != sPrevRoomName) {
             print_name_string(15, 10, y, sRoomNames[gGlobalMarioRoom - 1]);
+            if (gGlobalMarioRoom == 72) {
+                print_name_string(15, 10, y, sRoomCorrupt);
+            }
         }
         if (gRoomEntryTimer >= 90) {
             gRoomEntryTimer = -1;

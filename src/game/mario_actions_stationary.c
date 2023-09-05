@@ -1171,6 +1171,9 @@ void handle_ground_pound_floor(struct MarioState *m) {
             spawn_token(1, 0x3B, sSpawnedTokens[8], 0, 0x0000);
             break;
         // 23, 24, 25, 26, and 27 are taken by dirt mounds in entrance
+        case 28:
+            obj = spawn_object(gMarioObject, MODEL_BLUE_COIN, bhvMrIBlueCoinNoSpeed);
+            break;
     }
     save_file_set_gpflags(1 << index);
 }
