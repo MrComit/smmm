@@ -165,7 +165,7 @@ extern u8 bob_dl_spiderweb2_ci4_pal_rgba16[];
 extern u8 bob_dl_squigglyline_i8[];
 extern u8 bob_dl_ci4_cabinet_backdrop_ci4[];
 extern u8 bob_dl_ci4_cabinet_backdrop_ci4_pal_rgba16[];
-extern u8 bob_dl_i4_marker_i8[];
+extern u8 bob_dl_rovertsquish_ia8[];
 extern u8 bob_dl_ci8_dining_wall_ci8[];
 extern u8 bob_dl_ci8_dining_wall_ci8_pal_rgba16[];
 extern u8 bob_dl_wood_flooring2_ci4[];

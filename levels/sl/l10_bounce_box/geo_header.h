@@ -1,15 +1,12 @@
 extern const GeoLayout l10_bounce_box_geo[];
 extern u8 l10_bounce_box_basket2_ci8[];
 extern u8 l10_bounce_box_basket2_ci8_pal_rgba16[];
-extern u8 l10_bounce_box_i4_marker_i8[];
+extern u8 l10_bounce_box_rovertsquish_ia8[];
 extern u8 l10_bounce_box_spring_ia8[];
-extern Vtx l10_bounce_box_Spring_002_mesh_layer_1_vtx_cull[8];
 extern Vtx l10_bounce_box_Spring_002_mesh_layer_1_vtx_0[37];
 extern Gfx l10_bounce_box_Spring_002_mesh_layer_1_tri_0[];
-extern Vtx l10_bounce_box_Spring_002_mesh_layer_6_vtx_cull[8];
 extern Vtx l10_bounce_box_Spring_002_mesh_layer_6_vtx_0[4];
 extern Gfx l10_bounce_box_Spring_002_mesh_layer_6_tri_0[];
-extern Vtx l10_bounce_box_Spring_002_mesh_layer_4_vtx_cull[8];
 extern Vtx l10_bounce_box_Spring_002_mesh_layer_4_vtx_0[6];
 extern Gfx l10_bounce_box_Spring_002_mesh_layer_4_tri_0[];
 extern Gfx mat_l10_bounce_box_LaundryBox_001[];

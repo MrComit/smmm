@@ -25,7 +25,7 @@ extern u8 ddd_dl_i8_floor_32height_i8[];
 extern u8 ddd_dl_i8_cobble_squished_i8[];
 extern u8 ddd_dl_greenbricks_i4[];
 extern u8 ddd_dl_multigrass_i4_i4[];
-extern u8 ddd_dl_gray_wooden_fence_ia16[];
+extern u8 ddd_dl_gay_wooden_fence_ia8[];
 extern u8 ddd_dl_dirtwall_ci8[];
 extern u8 ddd_dl_dirtwall_ci8_pal_rgba16[];
 extern u8 ddd_dl_multigrass_rgba16_rgba16[];

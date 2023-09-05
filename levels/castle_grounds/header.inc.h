@@ -34,7 +34,7 @@ extern u8 castle_grounds_dl_rgba16_grass_rgba16[];
 extern u8 castle_grounds_dl_dirtwall_rgba16[];
 extern u8 castle_grounds_dl_darkgate_ci8[];
 extern u8 castle_grounds_dl_darkgate_ci8_pal_rgba16[];
-extern u8 castle_grounds_dl_i4_spiderweb_i4[];
+extern u8 castle_grounds_dl_i4_spiderweb_pyro_i4[];
 extern Vtx castle_grounds_dl_BackgroundTrees_mesh_layer_1_vtx_cull[8];
 extern Vtx castle_grounds_dl_BackgroundTrees_mesh_layer_1_vtx_0[27];
 extern Gfx castle_grounds_dl_BackgroundTrees_mesh_layer_1_tri_0[];

@@ -83,7 +83,7 @@ extern u8 bbh_dl_ci4_pyrojay_ice_ci4_pal_rgba16[];
 extern u8 bbh_dl_snow_i8_i8[];
 extern u8 bbh_dl_i8_liquid_i8[];
 extern u8 bbh_dl_snow_i8_i4[];
-extern u8 bbh_dl_gray_wooden_fence_ia8[];
+extern u8 bbh_dl_gay_wooden_fence_ia8[];
 extern u8 bbh_dl_ci8_castle_bricks_ci8[];
 extern u8 bbh_dl_ci8_castle_bricks_ci8_pal_rgba16[];
 extern u8 bbh_dl_ci8_castle_bricks_bottom_ci8[];

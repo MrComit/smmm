@@ -29,7 +29,7 @@ extern u8 thi_dl_rope3_ci8_pal_rgba16[];
 extern u8 thi_dl_rgba16_pyrojay_ice2_rgba16[];
 extern u8 thi_dl_i8_slide_i8[];
 extern u8 thi_dl_i8_pyrojay_ice_i8[];
-extern u8 thi_dl_gray_wooden_fence_ia8[];
+extern u8 thi_dl_gay_wooden_fence_ia8[];
 extern u8 thi_dl_ci4_pyrojay_ice_ci4[];
 extern u8 thi_dl_ci4_pyrojay_ice_ci4_pal_rgba16[];
 extern u8 thi_dl_snow2_i8_i8[];

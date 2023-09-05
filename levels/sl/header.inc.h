@@ -293,7 +293,7 @@ extern u8 sl_dl_dresser_drawer_ci4[];
 extern u8 sl_dl_dresser_drawer_ci4_pal_rgba16[];
 extern u8 sl_dl_chandelier_base_rgba16_copy[];
 extern u8 sl_dl_i8_128x_king_mario_end_painting_i8[];
-extern u8 sl_dl_i4_spiderweb_i4[];
+extern u8 sl_dl_i4_spiderweb_pyro_i4[];
 extern Vtx sl_dl_Mansion_mesh_layer_1_vtx_0[606];
 extern Gfx sl_dl_Mansion_mesh_layer_1_tri_0[];
 extern Vtx sl_dl_Mansion_mesh_layer_1_vtx_1[140];
