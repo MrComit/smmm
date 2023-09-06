@@ -9,6 +9,7 @@
 #include "interaction.h"
 #include "engine/math_util.h"
 #include "rumble_init.h"
+#include "behavior_data.h"
 
 /**
  * Used by act_punching() to determine Mario's forward velocity during each
@@ -248,7 +249,9 @@ s32 act_placing_down(struct MarioState *m) {
 }
 
 s32 act_throwing(struct MarioState *m) {
-    if (m->heldObj && (m->heldObj->oInteractionSubtype & INT_SUBTYPE_HOLDABLE_NPC)) {
+    if (m->heldObj && ((m->heldObj->oInteractionSubtype & INT_SUBTYPE_HOLDABLE_NPC) || 
+        (obj_has_behavior(m->heldObj, bhvPipeseg) || obj_has_behavior(m->heldObj, bhvHeavyObject) || 
+        obj_has_behavior(m->heldObj, bhvL3Sun) || obj_has_behavior(m->heldObj, bhvSuncube)))) {
         return set_mario_action(m, ACT_PLACING_DOWN, 0);
     }
 

@@ -231,4 +231,8 @@ extern const LevelScript level_wf_entry[];
 
 #include "levels/wf/balcony_elevator/collision_header.h"
 
+#include "levels/wf/playset_cloth/geo_header.h"
+
+#include "levels/wf/bar_barrier/geo_header.h"
+
 #endif

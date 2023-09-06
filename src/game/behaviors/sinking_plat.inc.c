@@ -1,5 +1,18 @@
 
 
+
+void bhv_bar_barrier_loop(void) {
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_WARP_CUTSCENE) {
+        o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 0x8);
+        if (o->oOpacity < 10) {
+            o->activeFlags = 0;
+        }
+    } else {
+        o->oOpacity = 100;
+    }
+}
+
+
 void bhv_lemon_loop(void) {
     f32 approach_pos;
     struct Object *obj = cur_obj_nearest_object_with_behavior(bhvL2Lava);

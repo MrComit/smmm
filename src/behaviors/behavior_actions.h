@@ -793,7 +793,7 @@ void bhv_stalactite_loop(void);
 void bhv_stalactite_init(void);
 void bhv_held_letter_loop(void);
 void bhv_level_entrance_init(void);
-void bhv_level_entrance_loop(void);
+// void bhv_level_entrance_loop(void);
 void bhv_collect_heart_init(void);
 void bhv_collect_heart_loop(void);
 void bhv_sand_mound_loop(void);
@@ -1276,6 +1276,7 @@ void bhv_peepa_number_init(void);
 void bhv_gravity_sign_loop(void);
 void bhv_uncollectable_coin_loop(void);
 void bhv_dirt_pile_init(void);
+void bhv_bar_barrier_loop(void);
 
 
 #include "game/!COMIT_LIBRARY.h"

@@ -15,28 +15,6 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
-#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -106,6 +84,8 @@ const LevelScript level_wf_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_BAR_STOOL, bar_stool_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_RED_LIGHT_BUTTON, red_light_button_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_BALCONY_ELEVATOR, balcony_elevator_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_PLAYSET_CLOTH, playset_cloth_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_BAR_BARRIER, bar_barrier_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T, prospector_t_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
@@ -134,6 +114,7 @@ const LevelScript level_wf_entry[] = {
 		WARP_NODE(0xBB, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xC3, LEVEL_WF, 0x01, 0xC4, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xC4, LEVEL_WF, 0x01, 0xC3, WARP_NO_CHECKPOINT),
+		WARP_NODE(0xAD, LEVEL_BBH, 0x03, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000B0000, bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, 2057, 200, -18319, 0, 0, 0, 0x000A0000, bhvFlyingWarp),
 		OBJECT(MODEL_NONE, 6601, 200, -7121, 0, -180, 0, (0xE << 16), bhvFlyingWarp),
@@ -222,6 +203,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_NONE, 3025, -500, 5729, 0, 0, 0, 0x00790000, bhvPoleGrabbing),
 		OBJECT(MODEL_TOKEN, 3452, 10, -472, 0, 99, 0, 0x00001800, bhvToken),
 		OBJECT(MODEL_TOKEN, 2979, 1649, 6360, 0, -180, 0, 0x00020A00, bhvToken),
+		OBJECT(MODEL_BAR_BARRIER, 0, 0, 3309, 0, 0, 0, 0x00000000, bhvBarBarrier),
 		OBJECT(MODEL_BOTTLED_LAVA, -764, 1218, -1965, 0, 27, 0, (80 << 16), bhvBottledLava),
 		OBJECT(MODEL_BOTTLED_LAVA, 2327, 1218, -2173, 0, 0, 0, (80 << 16), bhvBottledLava),
 		OBJECT(MODEL_BAR_STOOL, -1107, -148, 365, 0, 0, 0, (2 << 16), bhvRedStool),
@@ -407,8 +389,9 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_PROSPECTOR_LOCK, 6521, 0, -10783, 0, 0, 0, (2 << 16), bhvProspectorLock),
 		OBJECT(MODEL_PROSPECTOR_LOCK, 6521, 0, -10883, 0, -180, 0, (2 << 16), bhvProspectorLock),
 		OBJECT(MODEL_DBLOCK, 5770, 0, -8672, 0, 0, 0, (4 << 8), bhvDBlock),
-		OBJECT(MODEL_NONE, 6874, 160, -6548, 0, 0, 0, 0x00AF0000, bhvPlaysetEntrance),
-		OBJECT(MODEL_NONE, 6411, 160, -6548, 0, 0, 0, 0x01AE0000, bhvPlaysetEntrance),
+		OBJECT(MODEL_NONE, 6874, 160, -6548, 0, 0, 0, (0xAF << 16), bhvPlaysetEntrance),
+		OBJECT(MODEL_PLAYSET_CLOTH, 6494, 348, -6620, 0, 0, 0, (1 << 24) | (0xAE << 16), bhvPlaysetEntrance),
+		OBJECT(MODEL_PLAYSET_CLOTH, 6361, 492, -6393, 0, 0, 0, (2 << 24) | (0xAD << 16), bhvPlaysetEntrance),
 		OBJECT(MODEL_PROSPECTOR_T, 7337, 0, -13602, 0, -33, 0, 0x00000000, bhvProspectorT),
 		TERRAIN(wf_area_1_collision),
 		ROOMS(wf_area_1_collision_rooms),

@@ -113,7 +113,7 @@ void bhv_l1_cabinet_init(void) {
 void bhv_l1_cabinet_loop(void) {
     switch (o->oAction) {
         case 0:
-            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED) {
+            if (o->oFlags & OBJ_FLAG_KICKED_OR_PUNCHED || (gMarioState->wall != NULL && gMarioState->wall->object == o)) {
                 o->oAction = 1;
                 // o->oMoveAngleYaw -= 0x4000;
                 // gMarioState->usedObj = gMarioState->interactObj = o;

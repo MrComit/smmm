@@ -97,6 +97,10 @@ void hidden_unbreakable_box_actions(void) {
             }
         }
     } else {
+        if (gMarioPreviousRoom != o->oRoom) {
+            o->oAction = 0;
+        }
+
         cur_obj_become_tangible();
         if (cur_obj_wait_then_blink(o->oHiddenObjectUnkF4->oF4, 20)) {
             o->oAction = 0;

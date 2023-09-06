@@ -1742,14 +1742,21 @@ void bhv_garden_mips_loop(void) {
 
 void bhv_level_entrance_init(void) {
     obj_set_hitbox(o, &sLevelEntranceHitbox);
-}
-
-
-void bhv_level_entrance_loop(void) {
-    if (o->oBehParams >> 24) {
-        if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_UNLOCKED_PLAYSET)) {
-            o->activeFlags = 0;
-        }
+    switch (o->oBehParams >> 24) {
+        case 1:
+            if (!(save_file_get_newflags(0) & SAVE_NEW_FLAG_UNLOCKED_PLAYSET)) {
+                cur_obj_become_intangible();
+            } else {
+                cur_obj_set_model(MODEL_NONE);
+            }
+            break;
+        case 2:
+            if (!(save_file_get_currency_flags() >> 12)) {
+                cur_obj_become_intangible();
+            } else {
+                cur_obj_set_model(MODEL_NONE);
+            }
+            break;
     }
 }
 

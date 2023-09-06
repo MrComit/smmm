@@ -53,6 +53,10 @@ void bhv_purple_switch_loop(void) {
          * up. When time is up, move to a waiting-while-pressed state.
          */
         case PURPLE_SWITCH_TICKING:
+            if (gMarioPreviousRoom != o->oRoom) {
+                o->oAction = PURPLE_SWITCH_UNPRESSED;
+                break;
+            }
             if (o->oBehParams2ndByte != 0) {
                 if (o->oBehParams2ndByte == 1 && gMarioObject->platform != o) {
                     o->oAction++;

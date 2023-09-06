@@ -518,6 +518,7 @@ const GeoLayout wf_dl_17__Play_Room_geo[] = {
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Block_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Block_002_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Hallway_011_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE_DECAL, wf_dl_Hallway_011_mesh_layer_2),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Playset_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, wf_dl_Playset_mesh_layer_5),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, wf_dl_Table_001_mesh_layer_1),

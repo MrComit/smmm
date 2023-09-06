@@ -82,3 +82,5 @@
 #include "levels/wf/bar_stool/geo.inc.c"
 #include "levels/wf/red_light_button/geo.inc.c"
 #include "levels/wf/balcony_elevator/geo.inc.c"
+#include "levels/wf/playset_cloth/geo.inc.c"
+#include "levels/wf/bar_barrier/geo.inc.c"

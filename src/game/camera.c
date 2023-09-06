@@ -1780,6 +1780,11 @@ f32 gCam2dAhead = 0.0f;
 
 s32 check_bar_cam(struct Camera *c) {
     struct MarioState *m = gMarioState;
+    if (save_file_get_newflags(1) & SAVE_TOAD_FLAG_WARP_CUTSCENE) {
+        return FALSE;
+    }
+
+
     if (m->pos[2] > 1300.0f) {
         if (m->pos[2] > 2630.0f) {
             if (m->pos[2] > 4000.0f && m->pos[2] < 4800.0f && m->pos[0] > -2800.0f) {

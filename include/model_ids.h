@@ -736,8 +736,10 @@
 #define MODEL_BAR_STOOL           0x60
 #define MODEL_RED_LIGHT_BUTTON    0x61
 #define MODEL_BALCONY_ELEVATOR    0x62
+#define MODEL_PLAYSET_CLOTH       0x63
 
 // 0x6C-0x73
+#define MODEL_BAR_BARRIER         0x6C
 
 // 0x97-0x9B
 

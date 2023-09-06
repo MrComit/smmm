@@ -8058,7 +8058,7 @@ const BehaviorScript bhvPlaysetEntrance[] = {
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     CALL_NATIVE(bhv_level_entrance_init),
     BEGIN_LOOP(),
-        CALL_NATIVE(bhv_level_entrance_loop),
+        // CALL_NATIVE(bhv_level_entrance_loop),
     END_LOOP(),
 };
 
@@ -12476,4 +12476,14 @@ const BehaviorScript bhvTenFakeCoinsSpawn[] = {
         SPAWN_CHILD(/*Model*/ MODEL_YELLOW_COIN, /*Behavior*/ bhvSingleFakeCoinGetsSpawned),
     END_REPEAT(),
     DEACTIVATE(),
+};
+
+
+const BehaviorScript bhvBarBarrier[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    // CALL_NATIVE(bhv_block_tower_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_bar_barrier_loop),
+    END_LOOP(),
 };
