@@ -472,6 +472,11 @@ void bhv_cannon_lid_loop(void) {
                 o->oAction = 2;
             }
             break;
+        case 2:
+            if (gMarioState->pos[2] < -8150.0f) {
+                gMarioState->pos[2] = -8150.0f;
+            }
+            break;
     }
 }
 

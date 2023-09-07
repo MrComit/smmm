@@ -561,10 +561,16 @@ void bhv_ice_cube_loop(void) {
 
 
 void bhv_snow_pile_init(void) {
+    struct Object *obj = NULL;
     vec3f_set(&o->oHomeX, -2359.0f, -500.0f, -2184.0f);
     if (save_file_get_newflags(0) & SAVE_NEW_FLAG_PUSHED_SNOWPILE) {
         vec3f_copy(&o->oPosX, &o->oHomeX);
-        o->oAction = 2;
+        o->oAction = 3;
+        obj = spawn_object(o, MODEL_SNOW_BOX, bhvBounceBoxes);
+        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+        obj->oBehParams = 0x010F0000;
+        obj->oBehParams2ndByte = 0x0F;
+        cur_obj_hide();
     }
 }
 
@@ -572,6 +578,9 @@ void bhv_snow_pile_loop(void) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
     s32 whichSide = 0;
+    if (o->oAction != 3) {
+        load_object_collision_model();
+    }
     switch (o->oAction) {
         case 0:
             o->oMoveAngleYaw = o->oFaceAngleYaw + 0x4000;
@@ -610,13 +619,14 @@ void bhv_snow_pile_loop(void) {
         case 2:
             if (o->oTimer == 0) {
                 obj = spawn_object(o, MODEL_SNOW_BOX, bhvBounceBoxes);
+                obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
                 obj->oBehParams = 0x010F0000;
                 obj->oBehParams2ndByte = 0x0F;
                 cur_obj_hide();
             }
             if (o->oTimer > 30) {
                 gCamera->comitCutscene = 0;
-                o->activeFlags = 0;
+                o->oAction = 3;
             }
             break;
     }

@@ -236,7 +236,7 @@ const LevelScript level_bbh_entry[] = {
 		OBJECT(MODEL_MONTY_MOLE, -2772, 1576, 0, 0, 0, 0, 0x00000000, bhvMontyMole),
 		OBJECT(MODEL_GOOMBA, -4025, 39, 0, 0, 0, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BOO, -5584, 339, 0, 0, 0, 0, (0x5 << 24) | (0xB << 16) | (0xA << 8), bhvRoomBoo),
-		OBJECT(MODEL_TOKEN, -9704, 1692, 0, 0, 10, 0, 0x00011C00, bhvToken),
+		OBJECT(MODEL_TOKEN, -9704, 1692, 0, 0, 10, 0, 0x01011C00, bhvToken),
 		TERRAIN(bbh_area_2_collision),
 		ROOMS(bbh_area_2_collision_rooms),
 		MACRO_OBJECTS(bbh_area_2_macro_objs),

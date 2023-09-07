@@ -8111,7 +8111,7 @@ const BehaviorScript bhvSnowPile[] = {
     CALL_NATIVE(bhv_snow_pile_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_snow_pile_loop),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
@@ -8618,7 +8618,7 @@ const BehaviorScript bhvPoolFloor[] = {
 
 const BehaviorScript bhvToyMole[] = {
     BEGIN(OBJ_LIST_SURFACE),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_PERSISTENT_RESPAWN)),
     LOAD_COLLISION_DATA(toy_mole_collision),
     SCALE(0, 120),
     SET_HOME(),

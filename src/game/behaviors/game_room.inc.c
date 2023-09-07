@@ -287,6 +287,8 @@ void bhv_toy_mole_loop(void) {
                 create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
                 if (o->oBehParams2ndByte < 3) {
                     o->oObjFC = spawn_object(o, MODEL_TOY_MOLE, bhvToyMole);
+                    o->oObjFC->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+
                     o->oObjFC->oBehParams2ndByte = o->oBehParams2ndByte + 1;
                     vec3f_copy(&o->oObjFC->oPosX, sToyMolePositions[o->oBehParams2ndByte]);
                 }

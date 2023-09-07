@@ -98,7 +98,7 @@ void cushion_friend_trophy_one(void) {
     switch (o->oAction) {
         case 0:
             vec3f_set(&o->oPosX, 1500.0f, 0.0f, 12000.0f);
-            if (gMarioState->pos[0] > 1020.0f) {
+            if (o->oRoom == gMarioCurrentRoom && gMarioState->pos[0] > 1020.0f && gMarioState->pos[0] < 2196.0f) {
                 spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
                 if (CL_NPC_Dialog(DIALOG_039)) {
                     o->oAction = 1;

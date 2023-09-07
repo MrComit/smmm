@@ -141,7 +141,7 @@ void bhv_attic_moving_flame_init(void) {
 
 void bhv_attic_moving_flame_loop(void) {
     s16 newAngle;
-    if (o->oObjFC->activeFlags == 0) {
+    if (o->oObjFC == NULL || o->oObjFC->activeFlags == 0) {
         o->activeFlags = 0;
         return;
     }
@@ -610,6 +610,7 @@ void bhv_attic_bully_loop(void) {
                     CL_explode_object(o, 1);
                     obj = spawn_object(o, MODEL_BOO, bhvRoomBoo);
                     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                    obj->oPosY = 5200.0f;
                     obj->oBehParams2ndByte = 0x12;
                     obj->oBehParams = 0x00120000;
                     gHudDisplay.flags &=  ~HUD_DISPLAY_FLAG_MULTIPLIER;
@@ -628,6 +629,10 @@ void bhv_attic_bully_loop(void) {
 
 
 void bhv_attic_wall_loop(void) {
+    if (o->oObjF4 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
     switch (o->oAction) {
         case 0:
             if (o->oOpacity != 255) {
@@ -696,6 +701,12 @@ void bhv_attic_spire_loop(void) {
             o->os16F6 = 30;
         }
     }
+
+    if (o->oObj104 == NULL) {
+        o->activeFlags = 0;
+        return;
+    }
+
     if (o->oAction != 5) {
         if (o->oObj104->activeFlags == 0) {
             o->oAction = 5;
@@ -793,7 +804,7 @@ void bhv_attic_grate_init(void) {
 void bhv_attic_grate_loop(void) {
     // f32 dist;
     if (o->oObj104 != NULL && o->oObj104->activeFlags == 0) {
-        o->oObj104 == NULL;
+        o->oObj104 = NULL;
     }
     if (o->oDistanceToMario < 850.0f || (o->oObj104 != NULL && lateral_dist_between_objects(o, o->oObj104) < 800.0f)) {
         load_object_collision_model();

@@ -652,7 +652,7 @@ will be out of my reach - \n\
 and it is then that I will\n\
 be able to take down\n\
 Bowser once and for all.\n\
-There wont be any continues,\n\
+There won't be any continues,\n\
 and there wont be a sequel,\n\
 he will be DEAD and neither\n\
 him nor any of his minions\n\

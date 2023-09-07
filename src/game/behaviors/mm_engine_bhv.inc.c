@@ -1060,6 +1060,11 @@ void bhv_token_init(void) {
         o->activeFlags = 0;
     }
     o->os16F4 = o->oFaceAngleYaw;
+
+    if ((o->oBehParams >> 24) == 1) {
+        o->oFlags |= OBJ_FLAG_MULTIROOM;
+        o->oRoom2 = 3;
+    }
 }
 
 
