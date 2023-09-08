@@ -248,7 +248,7 @@ void bhv_dark_piranha_loop(void) {
     if (obj == NULL) {
         o->activeFlags = 0;
     }
-    if (o->oHealth != 0 && obj->oHeldState == HELD_HELD && o->oDistanceToMario < 500.0f) {
+    if (o->oHealth != 0 && obj->oHeldState == HELD_HELD && o->oDistanceToMario < 575.0f) {
         o->oAction = 0;
         o->oHealth = 0;
         o->oFirePiranhaPlantDeathSpinTimer = 10;
@@ -395,13 +395,23 @@ void bhv_flower_wall_loop(void) {
             if (sSunflowers >= 3) {
                o->oAction = 1;
                play_puzzle_jingle();
+               gCamera->comitCutscene = 0xFF;
+               vec3f_copy(gComitCutsceneFocVec, &o->oPosX);
+               gComitCutsceneFocVec[1] += 500.0f;
+               vec3f_set(gComitCutscenePosVec, o->oPosX, o->oPosY + 1500.0f, o->oPosZ - 2000.0f);
             }
             break;
         case 1:
-            o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 10);
-            if (o->oOpacity < 10) {
-                o->activeFlags = 0;
-                save_file_set_newflags(SAVE_NEW_FLAG_FLOWER_DOOR, 0);
+            set_mario_npc_dialog(1);
+            gCamera->comitCutscene = 0xFF;
+            if (o->oTimer > 15) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 10);
+                if (o->oOpacity < 10) {
+                    o->activeFlags = 0;
+                    gComitCutsceneTimer = 30;
+                    set_mario_npc_dialog(0);
+                    save_file_set_newflags(SAVE_NEW_FLAG_FLOWER_DOOR, 0);
+                }
             }
             break;
     }

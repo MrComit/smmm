@@ -875,6 +875,11 @@ s32 act_jump_land_stop(struct MarioState *m) {
         return TRUE;
     }
 
+    if (m->prevAction == ACT_CUTSCENE_JUMP && m->floor != NULL && m->floor->type == SURFACE_RISE_STUCK_DIRT) {
+        drop_and_set_mario_action(m, ACT_FEET_STUCK_IN_GROUND, 0);
+        return TRUE;
+    }
+
     landing_step(m, MARIO_ANIM_LAND_FROM_SINGLE_JUMP, ACT_IDLE);
     return FALSE;
 }

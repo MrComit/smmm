@@ -91,6 +91,7 @@
 #define SURFACE_SUNCUBE_FLOOR                0x0086
 #define SURFACE_MAZE_WIN                     0x0087
 #define SURFACE_WARP_HEIGHT_LOWER2           0x0088
+#define SURFACE_RISE_STUCK_DIRT              0x0089
 
 
 #define SURFACE_PAINTING_WOBBLE_A6           0x00A6 // Painting wobble (BOB Left)

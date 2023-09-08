@@ -894,7 +894,9 @@ void bhv_mario_update(void) {
         }
     }
     // if (gMarioState->controller->buttonDown & Z_TRIG) {
-    //     print_text_fmt_int(50, 8*20, "HELLO WORLD", 0, 0);
+        // if (gMarioState != NULL) {
+            // print_text_fmt_int(50, 8*20, "%x", gMarioState->action, 0);
+        // }
     //     print_text_fmt_int(50, 7*20, "LOREM IPSUM", 0, 1);
     //     print_text_fmt_int(50, 6*20, "CONGRATULATIONS!", 0, 2);
         // print_text_fmt_int(50, 5*20, "%d", gRandomVal, 3);
