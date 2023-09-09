@@ -17,6 +17,31 @@ static struct ObjectHitbox sMiniShyguyHitbox = {
 // };
 
 
+s32 mario_in_painting_teleport(s32 param) {
+    struct MarioState *m = gMarioState;
+    switch (param) {
+        case 0:
+            if (m->pos[0] < -19164.0f && m->pos[0] > -19477.0f) {
+                if (m->pos[2] < 778.0f && m->pos[2] > 478.0f) {
+                    if (m->pos[1] > 3250.0f && m->pos[1] < 3784.0f) {
+                        return TRUE;
+                    }
+                }
+            }
+            break;
+        case 1:
+            if (m->pos[0] < -21368.0f && m->pos[0] > -21681.0f) {
+                if (m->pos[2] < 7378.0f && m->pos[2] > 7078.0f) {
+                    if (m->pos[1] > 2200.0f && m->pos[1] < 2715.0f) {
+                        return TRUE;
+                    }
+                }
+            }
+            break;
+    }
+
+    return FALSE;
+}
 
 void bhv_painting_teleport_init(void) {
     o->oObjF4 = cur_obj_nearest_object_with_behavior(bhvPaintingTeleport);
@@ -24,6 +49,9 @@ void bhv_painting_teleport_init(void) {
 
 
 void bhv_painting_teleport_loop(void) {
+    if (gMarioCurrentRoom != o->oRoom) {
+        return;
+    }
     if (o->oObjF4 == NULL) {
         o->activeFlags = 0;
         return;
@@ -31,7 +59,7 @@ void bhv_painting_teleport_loop(void) {
 
     switch (o->oAction) {
         case 0:
-            if (o->oDistanceToMario < 100.0f) {
+            if (mario_in_painting_teleport(o->oBehParams2ndByte)) {
                 o->oAction = 1;
                 o->oObjF4->oAction = 2;
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0xFF, 0xFF, 0xFF);

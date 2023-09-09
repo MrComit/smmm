@@ -45,6 +45,26 @@
 #include "actors/group15.h"
 #include "actors/common0.h"
 #include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -183,8 +203,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_PAINTING_ENEMY, -16963, 2467, 2847, 0, 90, 0, (1 << 16), bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -22963, 2467, 6790, 0, -90, 0, 0x00000000, bhvPaintingEnemy),
 		OBJECT(MODEL_PAINTING_ENEMY, -24463, 2467, 3413, 0, -90, 0, (2 << 16), bhvPaintingEnemyRespawn),
-		OBJECT(MODEL_NONE, -19321, 3289, 628, 0, 0, 0, 0x00000000, bhvPaintingTeleport),
-		OBJECT(MODEL_NONE, -21525, 2220, 7228, 0, -180, 0, (1 << 16), bhvPaintingTeleport),
+		OBJECT(MODEL_NONE, -19321, 3267, 817, 0, 0, 0, 0x00000000, bhvPaintingTeleport),
+		OBJECT(MODEL_NONE, -21525, 2068, 6981, 0, -180, 0, (1 << 16), bhvPaintingTeleport),
 		OBJECT(MODEL_SHYGUY, -24339, 2213, 3630, 0, -180, 0, 0x00000000, bhvShyguyPainter),
 		OBJECT(MODEL_TOKEN, -19948, 2018, 4299, 0, 0, 0, (0x37 << 8), bhvToken),
 		OBJECT(MODEL_BG_ASTEROID, -19949, 2884, -11665, 0, 124, 0, (10 << 16), bhvBGAsteroid),
@@ -208,6 +228,10 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_BG_GOOMBA, -19954, 6792, -12199, 0, 180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, -8381, 4021, -9448, 0, 180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, -17417, 7353, -16833, 0, 180, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_BG_GOOMBA, -15065, 4926, -13832, 0, 180, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_BG_GOOMBA, -15564, 4926, -12945, 0, 180, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_BG_GOOMBA, -16368, 4926, -12925, 0, 180, 0, 0x00000000, bhvGoomba),
+		OBJECT(MODEL_BG_GOOMBA, -18958, 3024, -9660, 0, 180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_JOURNAL_BOOK, -12275, 5165, -14728, 0, 0, 0, (DIALOG_057 << 16), bhvJournalBook),
 		OBJECT(MODEL_PEEPA, -19707, 2858, -5636, 0, -90, 0, (1 << 24), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, -19707, 2658, -5636, 0, -90, 0, (1 << 16), bhvFloorPeepa),
@@ -233,8 +257,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_TELEPORTER, 21070, 16470, 5404, 0, -90, 0, (0x92 << 16), bhvFadingWarp),
 		OBJECT(MODEL_TELEPORTER, 22467, 7847, 3805, 0, -73, 0, (0x93 << 16) | (7 << 8), bhvFadingWarp),
 		OBJECT(MODEL_HEART, 19575, 16520, 7278, 0, -90, 0, 0x00000000, bhvRecoveryHeart),
-		OBJECT(MODEL_L8_LOCKED_CAGE, 21195, 16470, 9359, 0, 90, 0, 0x00000000, bhvCarpetCage),
-		OBJECT(MODEL_PURPLE_SWITCH, 16118, 12467, 1798, 0, 90, 0, 0x00000000, bhvCarpetSwitch),
+		OBJECT(MODEL_L8_LOCKED_CAGE, 21195, 16470, 9359, 0, 90, 0, (13 << 16), bhvCarpetCage),
+		OBJECT(MODEL_SMALL_KEY, 17545, 12467, 2055, 0, 90, 0, (1 << 24) | (13 << 16), bhvSmallKey),
 		OBJECT(MODEL_PEEPA, 21057, 7731, -7778, 0, -90, 0, (1 << 24), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, 21057, 7531, -7778, 0, -90, 0, (1 << 16), bhvFloorPeepa),
 		OBJECT(MODEL_PEEPA, 21057, 7331, -7778, 0, -90, 0, (2 << 16), bhvFloorPeepa),

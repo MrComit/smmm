@@ -70,6 +70,7 @@ const GeoLayout ssl_dl_204__The_Mind_Palace_geo[] = {
 			GEO_SCALE(LAYER_OPAQUE, 41532),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 3093, 5687, -11834, ssl_dl_Cage_003_mesh_layer_1),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 0, 0, -65536, ssl_dl_LightBeam_002_mesh_layer_5),
 		GEO_TRANSLATE_NODE(LAYER_OPAQUE, -12471, 4087, -2957),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, ssl_dl_MindPalace_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, ssl_dl_MindPalace_001_mesh_layer_6),

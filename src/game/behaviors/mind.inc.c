@@ -59,9 +59,16 @@ void bhv_carpet_cage_init(void) {
 
 
 void bhv_carpet_cage_loop(void) {
-    if (o->oF4) {
-        CL_explode_object(o, 1);
-        play_puzzle_jingle();
+    // if (o->oF4) {
+    //     CL_explode_object(o, 1);
+    //     play_puzzle_jingle();
+    // }
+    if (o->oDistanceToMario < 500.0f) {
+        if (save_file_get_keys(0) & (1 << o->oBehParams2ndByte)) {
+            CL_explode_object(o, 1);
+            play_puzzle_jingle();
+            save_file_set_keys(o->oBehParams2ndByte, 1);
+        }
     }
 }
 
@@ -101,7 +108,7 @@ void bhv_spinning_plat_loop(void) {
     }
     if ((o->oBehParams >> 24) == 1) {
         obj = cur_obj_nearest_object_with_behavior(bhvDoor);
-        if (gMarioState->pos[1] < 2500.0f) {
+        if (m->pos[1] < 2500.0f) {
             cur_obj_unhide();
             if (obj != NULL) {
                 obj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
@@ -112,6 +119,13 @@ void bhv_spinning_plat_loop(void) {
                 obj->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
             }
         }
+    }
+
+    if (m->action == ACT_LEDGE_GRAB || m->action == ACT_LEDGE_CLIMB_SLOW_1 || m->action == ACT_LEDGE_CLIMB_SLOW_2
+        || m->action == ACT_LEDGE_CLIMB_FAST) {
+            o->oFlags &= ~OBJ_FLAG_DONT_DISPLACE_MARIO;
+    } else {
+        o->oFlags |= OBJ_FLAG_DONT_DISPLACE_MARIO;
     }
     // if ((o->oBehParams >> 8) & 0xFF && o->oAction == 0) {
     //     o->oHomeY = approach_f32_symmetric(o->oHomeY, -100.0f, 50.0f);

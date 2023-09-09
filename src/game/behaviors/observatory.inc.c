@@ -52,6 +52,8 @@ void jenga_plat_act_3(void) {
     o->oPosY = o->oObjF4->oPosY + 50.0f;
     if (o->oTimer > 30*o->oBehParams2ndByte && (o->oBehParams >> 24) != 3) {
         o->oObjF8 = spawn_object(o, MODEL_BLACK_BOBOMB, bhvObservatoryBomb);
+        o->oObjF8->os16110 = 1;
+        o->oObjF8->oObjFC = o;
         obj_scale(o->oObjF8, 2.0f);
         vec3f_set(&o->oObjF8->oPosX, o->oPosX, o->oPosY + 1100.0f, o->oPosZ);
         o->oAction = 4;
@@ -143,7 +145,12 @@ void bhv_observatory_bomb_init(void) {
     o->oObj100->oPosZ = o->oPosZ;
     o->oObj100->oFaceAnglePitch = 0;
     o->oObj100->oFaceAngleYaw = 0;
-    o->oObjFC = cur_obj_nearest_object_with_behavior(bhvObservatorySpinningPlat);
+    if (o->os16110) {
+        obj_scale(o->oObj100, 1.5f);
+        // o->oObjFC = cur_obj_nearest_object_with_behavior(bhvJengaPlat);
+    } else {
+        o->oObjFC = cur_obj_nearest_object_with_behavior(bhvObservatorySpinningPlat);
+    }
 }
 
 void bhv_observatory_bomb_loop(void) {
@@ -154,7 +161,11 @@ void bhv_observatory_bomb_loop(void) {
     o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 20.0f, 0.85f);
     o->oPosY -= o->oFloatF4;
     if (o->oObj100 != NULL && o->oObjFC != NULL) {
-        o->oObj100->oPosY = o->oObjFC->oPosY + 50.0f;
+        if (o->os16110) {
+            o->oObj100->oPosY = o->oObjFC->oPosY + 20.0f;
+        } else {
+            o->oObj100->oPosY = o->oObjFC->oPosY + 50.0f;
+        }
     }
     if (o->oInteractStatus || object_step() & 1 || o->oTimer > 100) {
         obj = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);

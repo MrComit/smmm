@@ -1,7 +1,7 @@
 #include "src/game/envfx_snow.h"
 
 const GeoLayout yoshi_head_geo[] = {
-	GEO_CULLING_RADIUS(4096),
+	GEO_SHADOW(SHADOW_CIRCLE_4_VERTS, 0x96, 320),
 	GEO_OPEN_NODE(),
 		GEO_NODE_START(),
 		GEO_OPEN_NODE(),

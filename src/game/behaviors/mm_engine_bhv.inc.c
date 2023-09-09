@@ -853,6 +853,17 @@ void handle_deathwarp_checkpoints(struct MarioState *m) {
                 gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)o->oPosY;
                 gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)o->oPosZ;
             }
+        } else if (gMarioCurrentRoom == 5) {
+            if (m->pos[0] > -8907.0f && o->oPosX <= -8907.0f && m->pos[1] <= m->floorHeight) {
+                o->oPosX = -8529.0f;
+                o->oPosY = 6787.0f;
+                o->oPosZ = -9717.0f;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[0] = (s16)o->oPosX;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[1] = (s16)o->oPosY;
+                gSaveBuffer.files[gCurrSaveFileNum - 1][0].spawnPos[2] = (s16)o->oPosZ;
+            }
+
+
         } else if (gMarioCurrentRoom == 12) {
             if (gMarioObject->platform == NULL && m->pos[1] > 16400.0f && m->pos[1] <= m->floorHeight) {
                 o->oPosX = 19575.0f;

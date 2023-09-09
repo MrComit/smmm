@@ -820,7 +820,7 @@ get the better of me, but you\n\
 Mario - you really help people.\n\
 \n\
 You don't take shortcuts like I\n\
-did, You really put in the work\n\
+did, you really put in the work\n\
 to make a difference and help\n\
 people. \n\
 \n\
