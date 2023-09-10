@@ -1462,10 +1462,14 @@ void fixed_cam_presets(struct Camera *c) {
         c->comitCutscene = m->floor->force;
         gFixedFloorCheck = 1;
     } else if (gFixedFloorCheck) {
-        c->comitCutscene = 0;
         gFixedFloorCheck = 0;
-        s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
-        set_r_button_camera(c);
+        if (c->comitCutscene != 21 && c->comitCutscene != 22 && c->comitCutscene != 23) {
+            s8DirModeBaseYaw = gMarioState->faceAngle[1] + 0x8000;
+            set_r_button_camera(c);
+        } else {
+            s8DirModeBaseYaw = c->yaw;
+        }
+        c->comitCutscene = 0;
     }
 
     switch (c->comitCutscene) {

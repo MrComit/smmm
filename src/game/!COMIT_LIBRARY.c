@@ -453,6 +453,33 @@ struct Object *CL_objptr_nearest_object_behavior(struct Object *obj2, const Beha
     return closestObj;
 }
 
+struct Object *CL_objptr_nearest_object_with_behavior_and_field(struct Object *obj2, const BehaviorScript *behavior, 
+                                                                u32 field, u32 param) {
+    uintptr_t *behaviorAddr = segmented_to_virtual(behavior);
+    struct Object *closestObj = NULL;
+    struct Object *obj;
+    struct ObjectNode *listHead;
+    f32 minDist = 0x20000;
+
+    listHead = &gObjectLists[get_object_list_from_behavior(behaviorAddr)];
+    obj = (struct Object *) listHead->next;
+
+    while (obj != (struct Object *) listHead) {
+        if (obj->behavior == behaviorAddr && obj->rawData.asU32[(field - 0x88) / 4] == param) {
+            if (obj->activeFlags != ACTIVE_FLAG_DEACTIVATED && obj != obj2) {
+                f32 objDist = dist_between_objects(obj2, obj);
+                if (objDist < minDist) {
+                    closestObj = obj;
+                    minDist = objDist;
+                }
+            }
+        }
+        obj = (struct Object *) obj->header.next;
+    }
+
+    return closestObj;
+}
+
 
 
 s32 CL_get_room_from_point(Vec3f point) {

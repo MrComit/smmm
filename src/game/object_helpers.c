@@ -4034,6 +4034,34 @@ Gfx *geo_switch_boss_startwalls(s32 callContext, struct GraphNode *node) {
     return NULL;
 }
 
+
+#ifdef AVOID_UB
+Gfx *geo_switch_lab_floor(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+#else
+Gfx *geo_switch_lab_floor(s32 callContext, struct GraphNode *node) {
+#endif
+    struct MarioState *m = gMarioState;
+    struct Object *obj = NULL;
+    struct GraphNodeSwitchCase *switchCase;
+    if (callContext == GEO_CONTEXT_RENDER) {
+        // move to a local var because GraphNodes are passed in all geo functions.
+        // cast the pointer.
+        switchCase = (struct GraphNodeSwitchCase *) node;
+
+        obj = CL_objptr_nearest_object_with_behavior_and_field(gMarioObject, bhvBoogooObject, 0x144, 2);
+        // if the case is greater than the number of cases, set to 0 to avoid overflowing
+        // the switch.
+        // assign the case number for execution.
+        if (obj == NULL || obj->oOpacity != 255) {
+            switchCase->selectedCase = 0;
+        } else {
+            switchCase->selectedCase = 1;
+        }
+    }
+
+    return NULL;
+}
+
 extern s32 gRedCoinMissionActive;
 
 #ifdef AVOID_UB

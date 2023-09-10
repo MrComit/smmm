@@ -65,6 +65,14 @@
 #include "actors/group15.h"
 #include "actors/common0.h"
 #include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -373,8 +381,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_LAB_BOOGOO, 10483, 7665, -12500, 0, 0, 0, (2 << 16), bhvBoogooObject),
 		OBJECT(MODEL_MR_I, 7603, 7311, -12007, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 14932, 7311, -14363, 0, -90, 0, 0x00000000, bhvMrI),
-		OBJECT(MODEL_MR_I, 16981, 7311, -15688, 0, -90, 0, 0x00000000, bhvMrI),
-		OBJECT(MODEL_MR_I, 16981, 7311, -7726, 0, -90, 0, 0x00000000, bhvMrI),
+		OBJECT(MODEL_MR_I, 16981, 7311, -14888, 0, -90, 0, 0x00000000, bhvMrI),
+		OBJECT(MODEL_MR_I, 16981, 7311, -8526, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 14932, 7311, -10229, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_SUNCUBE, 14493, 7311, -15838, 0, 0, 0, 0x00000000, bhvSuncube),
 		OBJECT(MODEL_SUNCUBE, 14493, 7311, -7576, 0, 0, 0, (1 << 16), bhvSuncube),

@@ -449,10 +449,11 @@ Gfx maze_wins_start_m3_mesh_layer_5_tri_0[] = {
 };
 
 
-Gfx mat_maze_wins_OrangeWave[] = {
+Gfx mat_maze_wins_OrangeWave_002[] = {
 	gsDPPipeSync(),
-	gsDPSetCombineLERP(ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, ENVIRONMENT, 0, SHADE, 0, TEXEL0, 0, SHADE, 0),
+	gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, 0, 0, 0, COMBINED, COMBINED, 0, ENVIRONMENT, 0),
 	gsSPGeometryMode(G_LIGHTING, 0),
+	gsDPSetCycleType(G_CYC_2CYCLE),
 	gsDPSetAlphaCompare(G_AC_DITHER),
 	gsSPTexture(65535, 65535, 0, 0, 1),
 	gsDPSetTextureImage(G_IM_FMT_I, G_IM_SIZ_8b_LOAD_BLOCK, 1, maze_wins_i8_wave_i8),
@@ -460,35 +461,36 @@ Gfx mat_maze_wins_OrangeWave[] = {
 	gsDPLoadBlock(7, 0, 0, 1023, 256),
 	gsDPSetTile(G_IM_FMT_I, G_IM_SIZ_8b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 6, 0),
 	gsDPSetTileSize(0, 0, 0, 252, 124),
-	gsDPSetEnvColor(255, 227, 83, 255),
+	gsDPSetPrimColor(0, 0, 255, 227, 83, 255),
 	gsSPEndDisplayList(),
 };
 
-Gfx mat_revert_maze_wins_OrangeWave[] = {
+Gfx mat_revert_maze_wins_OrangeWave_002[] = {
 	gsDPPipeSync(),
 	gsSPGeometryMode(0, G_LIGHTING),
+	gsDPSetCycleType(G_CYC_1CYCLE),
 	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 
 Gfx maze_wins_m1_mesh_layer_5[] = {
-	gsSPDisplayList(mat_maze_wins_OrangeWave),
+	gsSPDisplayList(mat_maze_wins_OrangeWave_002),
 	gsSPDisplayList(maze_wins_m1_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_maze_wins_OrangeWave),
+	gsSPDisplayList(mat_revert_maze_wins_OrangeWave_002),
 	gsSPEndDisplayList(),
 };
 
 Gfx maze_wins_start_m2_mesh_layer_5[] = {
-	gsSPDisplayList(mat_maze_wins_OrangeWave),
+	gsSPDisplayList(mat_maze_wins_OrangeWave_002),
 	gsSPDisplayList(maze_wins_start_m2_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_maze_wins_OrangeWave),
+	gsSPDisplayList(mat_revert_maze_wins_OrangeWave_002),
 	gsSPEndDisplayList(),
 };
 
 Gfx maze_wins_start_m3_mesh_layer_5[] = {
-	gsSPDisplayList(mat_maze_wins_OrangeWave),
+	gsSPDisplayList(mat_maze_wins_OrangeWave_002),
 	gsSPDisplayList(maze_wins_start_m3_mesh_layer_5_tri_0),
-	gsSPDisplayList(mat_revert_maze_wins_OrangeWave),
+	gsSPDisplayList(mat_revert_maze_wins_OrangeWave_002),
 	gsSPEndDisplayList(),
 };
 

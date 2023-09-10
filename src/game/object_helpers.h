@@ -173,6 +173,7 @@ Gfx *geo_switch_palace(s32 callContext, struct GraphNode *node, UNUSED void *con
 Gfx *geo_switch_boss_tunnel(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_boss_backwalls(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_boss_startwalls(s32 callContext, struct GraphNode *node, UNUSED void *context);
+Gfx *geo_switch_lab_floor(s32 callContext, struct GraphNode *node, UNUSED void *context);
 Gfx *geo_switch_red_mission(s32 callContext, struct GraphNode *node, UNUSED void *context);
 #else
 Gfx *geo_switch_anim_state(s32 callContext, struct GraphNode *node);
@@ -236,6 +237,7 @@ Gfx *geo_switch_palace(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_boss_tunnel(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_boss_backwalls(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_boss_startwalls(s32 callContext, struct GraphNode *node);
+Gfx *geo_switch_lab_floor(s32 callContext, struct GraphNode *node);
 Gfx *geo_switch_red_mission(s32 callContext, struct GraphNode *node);
 #endif
 void obj_update_pos_from_parent_transformation(Mat4 a0, struct Object *a1);

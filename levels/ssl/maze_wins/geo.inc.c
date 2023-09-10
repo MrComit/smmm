@@ -19,6 +19,7 @@ const GeoLayout maze_wins_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_NODE_START(),
 		GEO_OPEN_NODE(),
+			GEO_ASM(5, geo_update_layer_transparency_layer),
 			GEO_SWITCH_CASE(3, geo_switch_bparam2),
 			GEO_OPEN_NODE(),
 				GEO_NODE_START(),

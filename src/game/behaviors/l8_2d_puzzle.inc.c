@@ -133,18 +133,33 @@ void bhv_maze_gate_loop(void) {
 
 void bhv_maze_wins_loop(void) {
     struct Object *obj;
-    if (o->oObjF4 == NULL || o->oObjF4->os1610A != o->oBehParams2ndByte) {
-        if (o->oBehParams2ndByte < 2) {
-            obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
-            obj->oObjF4 = o->oObjF4;
-            obj->oBehParams2ndByte = o->oBehParams2ndByte + 1;
-        } else {
-            if (o->oObjF4 != NULL) {
-                o->oObjF4->oAction = 4;
+    switch (o->oAction) {
+        case 0:
+            if (o->oTimer > 10) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 16);
             }
-            gComitCutsceneTimer = 30;
-        }
-        o->activeFlags = 0;
+            if (o->oObjF4 == NULL || o->oObjF4->os1610A != o->oBehParams2ndByte) {
+                o->oAction = 1;
+            }
+            break;
+        case 1:
+            if (o->oTimer > 25) {
+                o->oOpacity = approach_s16_symmetric(o->oOpacity, 0, 16);
+            }
+            if (o->oOpacity < 16) {
+                if (o->oBehParams2ndByte < 2) {
+                    obj = spawn_object(o, MODEL_MAZE_WINS, bhvMazeWins);
+                    obj->oObjF4 = o->oObjF4;
+                    obj->oBehParams2ndByte = o->oBehParams2ndByte + 1;
+                } else {
+                    if (o->oObjF4 != NULL) {
+                        o->oObjF4->oAction = 4;
+                    }
+                    gComitCutsceneTimer = 30;
+                }
+                o->activeFlags = 0;
+            }
+            break;
     }
 }
 
@@ -188,6 +203,7 @@ void bhv_mind_button_loop(void) {
                     o->oAction = 1;
                     o->oFloatF4 = gMarioState->pos[0];
                     o->oFloatF8 = gMarioState->pos[2];
+                    o->os16108 = 0;
                 // }
             }
             break;
@@ -226,6 +242,11 @@ void bhv_mind_button_loop(void) {
             if (o->os16108 >= 3) {
                 o->os16108 = 0;
                 o->os1610A++;
+
+                gCamera->comitCutscene = 0xFF;
+                gComitCutsceneTimer = 120;
+                vec3f_set(gComitCutscenePosVec, -12715.0f, 8900.0f, o->oPosZ);
+                vec3f_set(gComitCutsceneFocVec, -9215.0f, 8900.0f, o->oPosZ);
             }
             break;
         case 4:
