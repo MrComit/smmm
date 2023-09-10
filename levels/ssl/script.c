@@ -73,6 +73,18 @@
 #include "actors/group15.h"
 #include "actors/common0.h"
 #include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -161,6 +173,8 @@ const LevelScript level_ssl_entry[] = {
 		WARP_NODE(0x92, LEVEL_SSL, 0x01, 0x93, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x93, LEVEL_SSL, 0x01, 0x92, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xAA, LEVEL_DDD, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x9A, LEVEL_SSL, 0x01, 0x9B, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x9B, LEVEL_SSL, 0x01, 0x9A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_NONE, -21859, 385, 24269, 0, -180, 0, (0x1A << 16), bhvAirborneDeathWarp),
 		OBJECT(MODEL_NONE, -21859, 13000, 24269, 0, -180, 0, (0xA << 16), bhvFlyingWarp),
 		MARIO_POS(0x01, -180, -21859, 13000, 24269),
@@ -233,6 +247,8 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_BG_ASTEROID, -9448, 5166, -14611, 0, 19, 0, 0x00000000, bhvBGAsteroidGrow),
 		OBJECT(MODEL_HAUNTED_CAGE, -16283, 4876, -13517, 0, 180, 0, (21 << 16), bhvBoogooCage),
 		OBJECT(MODEL_O2_BOOGOO, -15732, 6503, -21987, 0, 0, 0, (1 << 16), bhvBoogooObject),
+		OBJECT(MODEL_TELEPORTER, -21859, 100, 24269, 0, -180, 0, (0x9A << 16) | (13 << 8), bhvFadingWarp),
+		OBJECT(MODEL_TELEPORTER, -1998, 6047, -10007, 0, -180, 0, (0x9B << 16) | (13 << 8), bhvFadingWarp),
 		OBJECT(MODEL_BG_GOOMBA, -19954, 6792, -12199, 0, 180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, -8381, 4021, -9448, 0, 180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, -17417, 7353, -16833, 0, 180, 0, 0x00000000, bhvGoomba),
@@ -257,11 +273,12 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_MIND_CHANDELIER, 17174, 7731, -4093, 0, 154, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 18716, 7931, -507, 0, -116, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 17803, 8977, 6784, 0, -64, 0, 0x00000000, bhvMindChandelier),
-		OBJECT(MODEL_MIND_CHANDELIER, 14172, 12057, 7521, 0, 7, 0, 0x00000000, bhvMindChandelier),
+		OBJECT(MODEL_MIND_CHANDELIER, 14054, 12057, 7390, 0, 7, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 18199, 11821, 8364, 0, -69, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 19959, 13688, 6982, 0, 14, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 20440, 13440, 8616, 0, 14, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_MIND_CHANDELIER, 22169, 13732, 13286, 0, -13, 0, 0x00000000, bhvMindChandelier),
+		OBJECT(MODEL_MIND_CHANDELIER, 14299, 12206, 8437, 0, -173, 0, 0x00000000, bhvMindChandelier),
 		OBJECT(MODEL_TELEPORTER, 21070, 16470, 5404, 0, -90, 0, (0x92 << 16), bhvFadingWarp),
 		OBJECT(MODEL_TELEPORTER, 22467, 7847, 3805, 0, -73, 0, (0x93 << 16) | (7 << 8), bhvFadingWarp),
 		OBJECT(MODEL_HEART, 19575, 16520, 7278, 0, -90, 0, 0x00000000, bhvRecoveryHeart),
@@ -329,15 +346,14 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_OBS_BOOGOO, -8580, 6934, -1675, 0, 0, 0, (4 << 24) | (5 << 16) | (5 << 8), bhvBoogooObjectNoCage),
 		OBJECT(MODEL_OBS_BOOGOO, -14904, 5774, 570, 0, 0, 0, (3 << 24) | (5 << 16) | (4 << 8), bhvBoogooObjectNoCage),
 		OBJECT(MODEL_MIND_MIPS, -15049, 5637, -2587, 0, 0, 0, (3 << 16), bhvMindMips),
-		OBJECT(MODEL_MIND_MOUND, -14394, 5637, -4088, 0, 0, 0, (1 << 24), bhvMindMound),
+		OBJECT(MODEL_MIND_MOUND, -15649, 5637, -2213, 0, 0, 0, (1 << 24) | (11 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -14394, 5637, -3463, 0, 0, 0, (1 << 16), bhvMindMound),
-		OBJECT(MODEL_MIND_MOUND, -14394, 5637, -2838, 0, 0, 0, (1 << 24) | (2 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -14394, 5637, -2213, 0, 0, 0, (1 << 24) | (3 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -15019, 5637, -3463, 0, 0, 0, (1 << 24) | (5 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -15019, 5637, -2838, 0, 0, 0, (6 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -15019, 5637, -2213, 0, 0, 0, (1 << 24) | (7 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -15644, 5637, -3463, 0, 0, 0, (1 << 24) | (9 << 16), bhvMindMound),
-		OBJECT(MODEL_MIND_MOUND, -15644, 5637, -2838, 0, 0, 0, (1 << 24) | (10 << 16), bhvMindMound),
+		OBJECT(MODEL_MIND_MOUND, -15021, 5637, -4088, 0, 0, 0, (1 << 24) | (4 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -16269, 5637, -4088, 0, 0, 0, (1 << 24) | (12 << 16), bhvMindMound),
 		OBJECT(MODEL_MIND_MOUND, -16269, 5637, -3463, 0, 0, 0, (1 << 24) | (13 << 16), bhvMindMound),
 		OBJECT(MODEL_SAVE_STATION, -18832, 5687, -1250, 0, 0, 0, 0x00000000, bhvSaveStation),
@@ -378,7 +394,6 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_HEART, 14420, 7361, -12371, 0, -90, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_HEART, 16762, 7361, -10305, 0, -90, 0, 0x00000000, bhvRecoveryHeart),
 		OBJECT(MODEL_BG_GOOMBA, 15591, 7311, -12666, 0, -90, 0, 0x00000000, bhvGoomba),
-		OBJECT(MODEL_LAB_BOOGOO, 10483, 7665, -12500, 0, 0, 0, (2 << 16), bhvBoogooObject),
 		OBJECT(MODEL_MR_I, 7603, 7311, -12007, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 14932, 7311, -14363, 0, -90, 0, 0x00000000, bhvMrI),
 		OBJECT(MODEL_MR_I, 16981, 7311, -14888, 0, -90, 0, 0x00000000, bhvMrI),
@@ -446,6 +461,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_NONE, -4965, 7899, 17111, 0, 90, 0, (0x99 << 16), bhvFadingWarp),
 		OBJECT(MODEL_GLOBAL_GATE, -8501, 7599, 17066, 0, 90, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_GLOBAL_GATE, -481, 7599, 17066, 0, -90, 0, 0x00000000, bhvGlobalGate),
+		OBJECT(MODEL_LAB_BOOGOO, 10483, 7665, -12500, 0, 0, 0, (2 << 16), bhvBoogooObject),
 		OBJECT(MODEL_PENGUIN, -1579, 18699, 19963, 0, 180, 0, (1 << 16), bhvDreamPenguin),
 		OBJECT(MODEL_PENGUIN, -1508, 2812, 16267, 0, 180, 0, (2 << 16), bhvDreamPenguin),
 		OBJECT(MODEL_STAR_PIECE, -4213, 9105, 19265, 0, 0, 0, (0x16 << 24), bhvStarPiece),

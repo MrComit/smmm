@@ -154,7 +154,7 @@ void bhv_mind_mips_loop(void) {
             if (o->oObjF4 != NULL) {
                 act = o->oObjF4->oAction;
             }
-            if (act != 0 && act != 3 && act != 4) {
+            if (act == 2) {
                 // if (o->os16110 >= 3) {
                 //     o->os16FA = 1;
                 //     o->oAction = 0;
@@ -244,11 +244,12 @@ void bhv_mind_mips_loop(void) {
             // spawn_default_star(10668.0f, 379.0f, 729.0f);
             obj = spawn_object(o, MODEL_SMALL_KEY, bhvSmallKey);
             obj->oBehParams2ndByte = 11;
-            obj->oBehParams = 11 << 16;
+            obj->oBehParams = (1 << 24) | (11 << 16);
             obj->oFaceAngleRoll = 0xF000;
             obj->oFaceAngleYaw = 0;
-            obj->oPosX = o->oHomeX;
-            obj->oPosZ = o->oHomeZ;
+            // obj->oPosX = o->oHomeX;
+            // obj->oPosZ = o->oHomeZ;
+            vec3f_copy(&obj->oPosX, gMarioState->pos);
             obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
             o->oAction = 5;
             o->os16FA = 0;
@@ -329,7 +330,7 @@ void bhv_mind_mound_block_loop(void) {
 void mind_mound_block_act_1(void) {
     f32 x, z;
     struct Object *obj;
-    if (sMIPSObjs[0][0] == NULL) {
+    if (sMIPSObjs[0][1] == NULL) {
         return;
     }
 
@@ -545,8 +546,8 @@ void bhv_mind_mound_loop(void) {
                     o->os16F8 = 1;
 
                     if (check_mind_mound_key()) {
-                        o->oBehParams = 8 << 24;
-                        spawn_default_star(o->oPosX, o->oPosY + 450.0f, o->oPosZ);
+                        // o->oBehParams = 8 << 24;
+                        // spawn_default_star(o->oPosX, o->oPosY + 450.0f, o->oPosZ);
                         despawn_all_mind_mounds();
                     }
                 }

@@ -137,6 +137,11 @@ void fading_warp_active_check(s16 param) {
                 o->oPosY = o->oHomeY + 700.0f;
             }
             break;
+        case 13:
+            if (save_file_get_boos() & (1 << 21)) {
+                val = TRUE;
+            }
+            break;
     }
     if (val) {
         cur_obj_enable();
