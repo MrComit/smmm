@@ -1645,7 +1645,7 @@ void fixed_cam_presets(struct Camera *c) {
             c->yaw = c->nextYaw = 0x1162;
             break;
         case 26:
-            vec3f_set(c->pos, m->pos[0], m->pos[1] + 2000.0f, m->pos[2]);
+            vec3f_set(c->pos, m->pos[0], m->pos[1] + 2000.0f, m->pos[2] + 60.0f);
             // if (gIsConsole) {
                 vec3f_set(c->focus, m->pos[0], m->pos[1], m->pos[2] - 60.0f);
             // } else {

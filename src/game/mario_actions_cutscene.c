@@ -820,6 +820,10 @@ s32 act_quicksand_death(struct MarioState *m) {
                     gCamera->cutscene = 0;
                     gCutsceneTimer = CUTSCENE_STOP;
                     m->wall = NULL;
+
+                    if (gCurrLevelNum == LEVEL_DDD) {
+                        m->invincTimer = 30;
+                    }
                     return set_mario_action(m, ACT_FREEFALL, 0);
             }
         case 3:

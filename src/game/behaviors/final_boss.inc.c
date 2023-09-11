@@ -310,11 +310,11 @@ void bhv_end_log_loop(void) {
     switch (o->oAction) {
         case 0:
             if ((o->parentObj->oBehParams >> 24) != 2) {
-                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f * 4.0f, 0.033f * 4.0f);
-                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f * 4.0f, 1.0f * 4.0f);
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f * 3.5f, 0.033f * 3.5f);
+                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f * 3.5f, 1.0f * 3.5f);
             } else {
-                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f * 4.0f, 0.033f * 2.0f * 4.0f);
-                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f * 4.0f, 2.0f * 4.0f);
+                o->oFloatF4 = approach_f32_symmetric(o->oFloatF4, 1.0f * 3.5f, 0.033f * 2.0f * 3.5f);
+                o->oGraphYOffset = approach_f32_symmetric(o->oGraphYOffset, 30.0f * 3.5f, 2.0f * 3.5f);
             }
             cur_obj_scale(o->oFloatF4);
             if (o->parentObj->header.gfx.animInfo.animFrame == 50) {
@@ -378,6 +378,7 @@ void bhv_end_spike_loop(void) {
             if (o->header.gfx.scale[1] < 1.25f) {
                 o->header.gfx.scale[1] = approach_f32_symmetric(o->header.gfx.scale[1], 1.25f, 0.1f);
             }
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x400);
             // if (o->oBehParams2ndByte && o->oDistanceToMario < 2750.0f) {
             //     o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x300);
             // }
@@ -386,7 +387,7 @@ void bhv_end_spike_loop(void) {
             // x2 = (gMarioState->pos[0] - o->oPosX) * sins(o->oMoveAngleYaw);
             // z2 = (gMarioState->pos[2] - o->oPosZ) * coss(o->oMoveAngleYaw);
             // if (x + z < 500.0f && x2 + z2 > 200.0f) {
-                if (gMarioState->pos[2] > -9300.0f && (cur_obj_check_if_at_animation_end())) {
+                if (gMarioState->pos[2] > -9000.0f && (cur_obj_check_if_at_animation_end())) {
                     if ((o->oBehParams >> 24) == 2) {
                         cur_obj_init_animation_with_accel_and_sound(1, 2.0f);
                     } else {
@@ -792,6 +793,7 @@ void controller_laser_attack(void) {
                 mario_set_forward_vel(gMarioState, dist / 48.0f);
                 gMarioState->vel[1] = 30.0f;
                 set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                gMarioState->invincTimer = 30;
                 // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
                 // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
                 // gMarioState->faceAngle[1] = angle_to
@@ -810,6 +812,7 @@ void controller_laser_attack(void) {
         case 1:
             if (o->oTimer <= 48) {
                 set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                gMarioState->invincTimer = 30;
                 if (gMarioState->vel[1] < 0.0f) {
                     gMarioState->vel[1] = 0.0f;
                 }
@@ -835,6 +838,7 @@ void controller_log_attack(void) {
                 mario_set_forward_vel(gMarioState, dist / 48.0f);
                 gMarioState->vel[1] = 30.0f;
                 set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                gMarioState->invincTimer = 30;
                 // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
                 // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
                 // gMarioState->faceAngle[1] = angle_to
@@ -844,11 +848,11 @@ void controller_log_attack(void) {
 
             if (gMarioState->pos[1] <= gMarioState->floorHeight) {
                 o->oObjF4 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
-                vec3f_set(&o->oObjF4->oPosX, -937.0f, 7406.0f, -9610.0f);
-                o->oObjF8 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
-                vec3f_set(&o->oObjF8->oPosX, 1063.0f, 7406.0f, -9610.0f);
-                o->oObjFC = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
-                vec3f_set(&o->oObjFC->oPosX, 3063.0f, 7406.0f, -9610.0f);
+                // vec3f_set(&o->oObjF4->oPosX, -937.0f, 7406.0f, -9610.0f);
+                // o->oObjF8 = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+                vec3f_set(&o->oObjF4->oPosX, 1063.0f, 7406.0f, -9610.0f);
+                // o->oObjFC = spawn_object(o, MODEL_END_SPIKE, bhvEndSpike);
+                // vec3f_set(&o->oObjFC->oPosX, 3063.0f, 7406.0f, -9610.0f);
 
                 o->oAction = 1;
             }
@@ -856,6 +860,7 @@ void controller_log_attack(void) {
         case 1:
             if (o->os16108 && o->oTimer <= 48) {
                 set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                gMarioState->invincTimer = 30;
                 if (gMarioState->vel[1] < 0.0f) {
                     gMarioState->vel[1] = 0.0f;
                 }
@@ -875,7 +880,7 @@ void controller_log_attack(void) {
                 }
             }
 
-            if (o->os16100 >= 3) {
+            if (cur_obj_nearest_object_with_behavior(bhvEndSpike) == NULL) {
                 o->activeFlags = 0;
                 sEndAttacks[o->os16112] = NULL;
             }
@@ -894,6 +899,7 @@ void controller_wall_attack(void) {
                     mario_set_forward_vel(gMarioState, dist / 48.0f);
                     gMarioState->vel[1] = 30.0f;
                     set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                    gMarioState->invincTimer = 30;
                     // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
                     // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
                     // gMarioState->faceAngle[1] = angle_to
@@ -925,6 +931,7 @@ void controller_wall_attack(void) {
         case 1:
             if (o->os16F8 == 0 && o->oTimer <= 48) {
                 set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                gMarioState->invincTimer = 30;
                 if (gMarioState->vel[1] < 0.0f) {
                     gMarioState->vel[1] = 0.0f;
                 }
@@ -1007,6 +1014,9 @@ void kill_small_enemies(void) {
     }
 }
 
+
+s32 gDropperDialog = 0;
+
 void bhv_roof_hole_loop(void) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
@@ -1018,15 +1028,15 @@ void bhv_roof_hole_loop(void) {
                 }
 
                 if (m->action != ACT_CUTSCENE_JUMP && m->action != ACT_QUICKSAND_DEATH) {
-                    m->pos[0] = approach_f32_symmetric(m->pos[0], o->oPosX, 45.0f);
-                    m->pos[2] = approach_f32_symmetric(m->pos[2], o->oPosZ, 45.0f);
+                    m->pos[0] = approach_f32_symmetric(m->pos[0], o->oPosX, 80.0f);
+                    m->pos[2] = approach_f32_symmetric(m->pos[2], o->oPosZ, 80.0f);
                     m->faceAngle[1] = approach_s16_symmetric(m->faceAngle[1], 0x8000, 0x600);
                 }
                 if (o->oFC == 0 && m->pos[0] == o->oPosX && m->pos[2] == o->oPosZ) {
                     o->oFC = 1;
                 }
                 obj = cur_obj_nearest_object_with_behavior(bhvToadFriend);
-                if (o->oFC == 2 || obj == NULL || obj->oF8 != 0) {
+                if (o->oFC == 2 || obj == NULL || obj->oF8 != 0 || gDropperDialog) {
                     if (o->oOpacity == 255) {
                         cur_obj_play_sound_1(SOUND_OBJ2_BOWSER_TELEPORT);
                     }
@@ -1383,6 +1393,8 @@ void bhv_bg_ground_loop(void) {
     }
 }
 
+s32 gSkipIntro = 0;
+
 void bhv_the_controller_init(void) {
     sEndAttacks[0] = NULL;
     sEndAttacks[1] = NULL;
@@ -1399,6 +1411,10 @@ void bhv_the_controller_init(void) {
 
     o->oObj108 = spawn_object(o, MODEL_BG_GROUND, bhvBGGround);
     vec3f_set(&o->oObj108->oPosX, 1083.0f, 7406.0f - 340.0f, -8568.0f);
+
+    if (gSkipIntro) {
+        play_music(0, SEQUENCE_ARGS(4, SEQ_FINAL_BOSS), 0);
+    }
 
 
     o->header.gfx.animInfo.animFrame = 50;
@@ -1456,7 +1472,7 @@ void controller_act_attacks(void) {
         do {
             sEndAttacks[0]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 6);
         } while (sEndAttacks[0]->oBehParams2ndByte == o->os1610C || 
-                (o->oOpacity <= 0x80 && sEndAttacks[0]->oBehParams2ndByte == FBA_DROPPER));
+                (/*o->oOpacity <= 0x80 && */sEndAttacks[0]->oBehParams2ndByte == FBA_DROPPER));
         o->os1610C = sEndAttacks[0]->oBehParams2ndByte;
         sEndAttacks[0]->os16112 = 0;
 
@@ -1465,6 +1481,7 @@ void controller_act_attacks(void) {
             switch (o->os16104) {
                 case 0:
                     sEndAttacks[0]->oBehParams2ndByte = FBA_BUBBLES;
+                    // sEndAttacks[0]->oBehParams2ndByte = FBA_LOGS;
                     break;
                 case 1:
                     sEndAttacks[0]->oBehParams2ndByte = FBA_LASER;
@@ -1508,11 +1525,27 @@ void controller_act_attacks(void) {
         o->oPosZ = approach_f32_symmetric(o->oPosZ, o->oHomeZ, 40.0f);
 
         if (o->oSubAction == 2) {
+            cur_obj_init_animation_with_sound(1);
+            if (o->header.gfx.animInfo.animFrame == 35) {
+                cur_obj_play_sound_2(SOUND_OBJ2_BOWSER_ROAR);
+
+                kill_small_enemies();
+                while ((obj = cur_obj_nearest_object_with_behavior(bhvEndBubble)) != NULL) {
+                    obj->activeFlags = 0;
+                }
+            }
+            if (cur_obj_check_if_at_animation_end()) {
+                o->oSubAction = 3;
+                cur_obj_init_animation_with_sound(0);
+            }
+        } else if (o->oSubAction == 3) {
             obj = cur_obj_nearest_object_with_behavior(bhvRoofHole);
             if (obj != NULL && obj->oFC == 1) {
-                if (CL_NPC_Dialog(DIALOG_075)) {
-                    o->oSubAction = 3;
+                if (gDropperDialog || CL_NPC_Dialog(DIALOG_075)) {
+                    o->oSubAction = 4;
                     obj->oFC = 2;
+                    gDropperDialog = 1;
+                    // cur_obj_init_animation_with_sound(1);
                 }
             }
         }
@@ -1695,6 +1728,7 @@ void controller_act_run_end(void) {
             mario_set_forward_vel(gMarioState, dist / 48.0f);
             gMarioState->vel[1] = 30.0f;
             set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+            gMarioState->invincTimer = 30;
             // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
             // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
             // gMarioState->faceAngle[1] = angle_to
@@ -1704,6 +1738,7 @@ void controller_act_run_end(void) {
     } else {
         if (o->oTimer <= 48) {
             set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+            gMarioState->invincTimer = 30;
             if (gMarioState->vel[1] < 0.0f) {
                 gMarioState->vel[1] = 0.0f;
             }
@@ -1745,9 +1780,17 @@ void controller_act_intro(void) {
                 // if (o->oTimer == 1) {
                 // }
                 if (o->oTimer > 30) {
-                    play_music(0, SEQUENCE_ARGS(4, SEQ_FINAL_BOSS), 0);
-                    o->oSubAction = 1;
-                    o->oTimer = 0;
+                    if (gSkipIntro) {
+                        cur_obj_scale(1.0f);
+                        o->oPosZ = o->oHomeZ = -10281.0f;
+                        cur_obj_init_animation_with_sound(0);
+                        o->oSubAction = 3;
+                        gCamera->comitCutscene = 0;
+                    } else {
+                        play_music(0, SEQUENCE_ARGS(4, SEQ_FINAL_BOSS), 0);
+                        o->oSubAction = 1;
+                        o->oTimer = 0;
+                    }
                 }
             } else {
                 o->oTimer = 0;
@@ -1797,10 +1840,12 @@ void controller_act_intro(void) {
             o->header.gfx.scale[0] = approach_f32_symmetric(o->header.gfx.scale[0], 1.0f, 0.07f);
             cur_obj_scale(o->header.gfx.scale[0]);
             o->oPosY = approach_f32_asymptotic(o->oPosY, o->oHomeY, 0.05f);
-            if (o->oTimer > 55) {
+            if (o->oTimer > 55 || gSkipIntro) {
                 gComitCutsceneTimer = 0;
                 o->oSubAction = 0;
                 o->oAction = CONTROLLER_ACT_DEFAULT;
+
+                gSkipIntro = 1;
 
                 gBossPrecoins = gMarioState->numCoins;
 
