@@ -638,6 +638,9 @@ void bhv_hole_wall_ground_loop(void) {
 
 void bhv_mario_bowser_loop(void) {
     o->oFaceAngleYaw = o->oMoveAngleYaw = gMarioState->faceAngle[1];
+    if (gMarioState->health < 0x100) {
+        o->oAction = 2;
+    }
     switch (o->oAction) {
         case 0:
             o->oOpacity = approach_s16_symmetric(o->oOpacity, 255, 8);
@@ -729,6 +732,11 @@ void bhv_fake_mario_loop(void) {
             break;
     }
 
+    if (m->health < 0x100) {
+        o->activeFlags = 0;
+        m->flags &= ~MARIO_METAL_CAP;
+    }
+
     o->oInteractStatus = 0;
 }
 
@@ -742,7 +750,11 @@ void controller_bubble_attack(void) {
     if (o->os16100++ > 90) {
         if (o->os16F8 < 25) {
             if (o->oTimer > 16) {
-                o->oObjF4 = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+                if (gIsConsole) {
+                    o->oObjF4 = spawn_object(o, MODEL_CONSOLE_END_BUBBLE, bhvEndBubble);
+                } else {
+                    o->oObjF4 = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+                }
                 o->oObjF4->oMoveAngleYaw = o->oAngleToMario + CL_RandomMinMaxU16(0, 0xC00) - 0x600;
                 o->oObjF4->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x500);
                 o->oObjF4->oForwardVel = CL_RandomMinMaxU16(24, 32);
@@ -1010,7 +1022,7 @@ void controller_bowser_attack(void) {
             break;
         case 1:
             if (o->oObjF4 == NULL || o->oObjF4->activeFlags == 0) {
-                if (o->oObjF8 != NULL) {
+                if (o->oObjF8 != NULL && o->oObjF8->activeFlags != 0) {
                     o->oObjF8->oAction = 2;
                 }
                 o->activeFlags = 0;
@@ -1458,7 +1470,11 @@ void boss_spawn_arena_bubbles(s32 rate) {
     s16 randomYaw;
     s32 timer = rate ? 110 : 70;
     if (o->os1610E++ > timer) {
-        obj = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+        if (gIsConsole) {
+            obj = spawn_object(o, MODEL_CONSOLE_END_BUBBLE, bhvEndBubble);
+        } else {
+            obj = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+        }
 
         randomYaw = random_u16();
         vec3f_set(&obj->oPosX, 1081.0f + (6000.0f * sins(randomYaw)), 7656.0f, -7477.0f + (6000.0f * coss(randomYaw)));
@@ -1624,7 +1640,11 @@ void controller_act_run(void) {
         o->oTimer = 0;
         o->os16F8 = CL_RandomMinMaxU16(30, 100);
 
-        obj = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+        if (gIsConsole) {
+            obj = spawn_object(o, MODEL_CONSOLE_END_BUBBLE, bhvEndBubble);
+        } else {
+            obj = spawn_object(o, MODEL_END_BUBBLE, bhvEndBubble);
+        }
         obj->oPosY -= 40.0f;
         obj->oMoveAngleYaw = o->oAngleToMario + CL_RandomMinMaxU16(0, 0x800) - 0x400;
         obj->oMoveAnglePitch = CL_RandomMinMaxU16(0, 0x600);
