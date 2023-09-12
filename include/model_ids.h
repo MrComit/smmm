@@ -996,6 +996,7 @@
 #define MODEL_NICE_FACE           0xEF
 #define MODEL_TEARDROP            0xEE
 #define MODEL_WINKING_MOON        0xED
+#define MODEL_RED_SHADOW_2        0xEC
 
 
 // LEVEL 10 MODELS - 0xFF TO 0xE2 ARE FREE

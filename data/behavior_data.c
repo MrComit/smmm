@@ -11268,7 +11268,7 @@ const BehaviorScript bhvEndCage[] = {
     CALL_NATIVE(bhv_end_cage_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_end_cage_loop),
-        CALL_NATIVE(load_object_collision_model),
+        // CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
@@ -11527,6 +11527,7 @@ const BehaviorScript bhvMarioBowser[] = {
     // SET_HITBOX(/*Radius*/ 400, /*Height*/ 400),
     DROP_TO_FLOOR(),
     SET_HOME(),
+    SCALE(0, 75),
     LOAD_ANIMATIONS(oAnimations, bowser_seg6_anims_06057690),
     ANIMATE(12),
     // SPAWN_CHILD(/*Model*/ MODEL_NONE, /*Behavior*/ bhvBowserBodyAnchor),
@@ -12486,4 +12487,15 @@ const BehaviorScript bhvBarBarrier[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_bar_barrier_loop),
     END_LOOP(),
+};
+
+
+const BehaviorScript bhvThreeCoinsSpawnDelay[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    DELAY(30),
+    BEGIN_REPEAT(3),
+        SPAWN_CHILD(/*Model*/ MODEL_YELLOW_COIN, /*Behavior*/ bhvSingleCoinGetsSpawned),
+    END_REPEAT(),
+    DEACTIVATE(),
 };

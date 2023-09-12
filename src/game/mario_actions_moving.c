@@ -903,7 +903,7 @@ s32 act_hold_walking(struct MarioState *m) {
         return set_mario_action(m, ACT_HOLD_BEGIN_SLIDING, 0);
     }
 
-    if (m->input & INPUT_B_PRESSED) {
+    if (m->input & INPUT_B_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return set_mario_action(m, ACT_THROWING, 0);
     }
 
@@ -915,7 +915,7 @@ s32 act_hold_walking(struct MarioState *m) {
         return set_mario_action(m, ACT_HOLD_DECELERATING, 0);
     }
 
-    if (m->input & INPUT_Z_PRESSED) {
+    if (m->input & INPUT_Z_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return drop_and_set_mario_action(m, ACT_CROUCH_SLIDE, 0);
     }
 
@@ -1161,7 +1161,7 @@ s32 act_hold_decelerating(struct MarioState *m) {
         return set_mario_action(m, ACT_HOLD_BEGIN_SLIDING, 0);
     }
 
-    if (m->input & INPUT_B_PRESSED) {
+    if (m->input & INPUT_B_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return set_mario_action(m, ACT_THROWING, 0);
     }
 
@@ -1169,7 +1169,7 @@ s32 act_hold_decelerating(struct MarioState *m) {
         return set_jumping_action(m, ACT_HOLD_JUMP, 0);
     }
 
-    if (m->input & INPUT_Z_PRESSED) {
+    if (m->input & INPUT_Z_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return drop_and_set_mario_action(m, ACT_CROUCH_SLIDE, 0);
     }
 

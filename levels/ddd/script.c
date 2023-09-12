@@ -44,7 +44,8 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_END_SHYGUY, end_shyguy_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_BOO, end_boo_geo), 
 	LOAD_MODEL_FROM_DL(MODEL_END_CAGE, end_cage_Cage_mesh, LAYER_OPAQUE), 
-	LOAD_MODEL_FROM_DL(MODEL_END_FIST, end_fist_Fist_mesh, LAYER_OPAQUE), 
+	// LOAD_MODEL_FROM_DL(MODEL_END_FIST, end_fist_Fist_mesh, LAYER_OPAQUE), 
+	LOAD_MODEL_FROM_GEO(MODEL_END_FIST, end_fist_geo), 
 	LOAD_MODEL_FROM_DL(MODEL_END_BUBBLE, end_bubble_Bubble_mesh, LAYER_OPAQUE), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_LOG, end_log_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_END_SPIKE, end_spike_geo), 
@@ -58,6 +59,7 @@ const LevelScript level_ddd_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_NICE_FACE, nice_face_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_TEARDROP, teardrop_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_WINKING_MOON, winking_moon_geo), 
+	LOAD_MODEL_FROM_DL(MODEL_RED_SHADOW_2, red_shadow2_RedShadow_mesh, LAYER_TRANSPARENT_DECAL), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */

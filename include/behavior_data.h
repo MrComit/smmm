@@ -1014,6 +1014,7 @@ extern const BehaviorScript bhvGravitySign[];
 extern const BehaviorScript bhvTenFakeCoinsSpawn[];
 extern const BehaviorScript bhvSingleFakeCoinGetsSpawned[];
 extern const BehaviorScript bhvBarBarrier[];
+extern const BehaviorScript bhvThreeCoinsSpawnDelay[];
 
 
 #endif // BEHAVIOR_DATA_H

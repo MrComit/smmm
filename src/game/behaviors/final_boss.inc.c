@@ -13,7 +13,7 @@ static struct ObjectHitbox sTheControllerHitbox = {
 
 struct ObjectHitbox sEndFistHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
-    /* downOffset:        */ 0,
+    /* downOffset:        */ 1200,
     /* damageOrCoinValue: */ 2,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
@@ -115,7 +115,7 @@ enum FinalBossAttacks {
 
 Vec3f sEndBossMarioPoint = {1083.0f, 7406.0f, -4448.0f};
 
-f32 sEndHoleWallSpeeds[] = {25.0f, 35.0f, 45.0f};
+f32 sEndHoleWallSpeeds[] = {40.0f, 50.0f, 60.0f};
 
 static void const *sHoleWallCollisions[] = {
     hole_wall1_collision,
@@ -532,16 +532,23 @@ void bhv_end_fist_loop(void) {
     }
 }
 
-s16 sEndCageTimers[] = {60, 50, 40};
-f32 sEndCageSpeeds[] = {40.0f, 50.0f, 60.0f};
+s16 sEndCageTimers[] = {60, 55, 50};
+f32 sEndCageSpeeds[] = {40.0f, 44.0f, 48.0f};
 
 void bhv_end_cage_init(void) {
     o->oPosY = 6500.0f;
     o->oFaceAngleYaw = 0x4000 * CL_RandomMinMaxU16(0, 3);
+    o->oObj108 = spawn_object(o, MODEL_RED_SHADOW_2, bhvStaticObject);
+    o->oObj108->header.gfx.node.flags |= GRAPH_RENDER_INVISIBLE;
 }
 
 
 void bhv_end_cage_loop(void) {
+    if (o->oObj108 != NULL && o->oObj108->activeFlags != 0) {
+        o->oObj108->oPosY = 7406.0f;
+        o->oObj108->oPosX = o->oPosX;
+        o->oObj108->oPosZ = o->oPosZ;
+    }
     switch (o->oAction) {
         case 0:
             if (gMarioState->action == ACT_CUTSCENE_JUMP) {
@@ -553,6 +560,7 @@ void bhv_end_cage_loop(void) {
             if (o->oPosY == 6806.0f) {
                 o->oAction = 1;
                 o->oFloatF4 = 5.0f;
+                o->oObj108->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
             }
             break;
         case 1:
@@ -566,18 +574,29 @@ void bhv_end_cage_loop(void) {
                 o->oPosZ = gMarioState->pos[2];
             } else if (o->oPosY != o->oHomeY) {
                 // cur_obj_play_sound_2(SOUND_GENERAL2_ROTATING_BLOCK_CLICK);
+                load_object_collision_model();
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, sEndCageSpeeds[o->os16100]);
                 // if (o->oPosY == o->oHomeY) {
                 // }
             } else if (o->os16102++ >= 5) {
+                load_object_collision_model();
                 cur_obj_play_sound_1(SOUND_ACTION_KEY_SWISH);
                 o->oObjF8 = spawn_object(o, MODEL_END_FIST, bhvEndFist);
                 o->oObjF8->oPosY = 6400.0f;
+                // o->oObjF8->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+                // o->oObjF8->oRoom = o->oRoom;
                 o->oAction = 2;
                 // o->oObjF8->oHomeY = 7406.0f;
             }
             break;
         case 2:
+            load_object_collision_model();
+            if (o->oTimer == 30) {
+                if (o->oObj108 != NULL) {
+                    o->oObj108->activeFlags = 0;
+                    o->oObj108 = NULL;
+                }
+            }
             if (o->oTimer > 60) {
                 o->oPosY = approach_f32_symmetric(o->oPosY, 6500.0f, 35.0f);
                 if (o->oPosY == 6500.0f) {
@@ -1481,10 +1500,11 @@ void controller_act_attacks(void) {
             switch (o->os16104) {
                 case 0:
                     sEndAttacks[0]->oBehParams2ndByte = FBA_BUBBLES;
-                    // sEndAttacks[0]->oBehParams2ndByte = FBA_LOGS;
+                    // sEndAttacks[0]->oBehParams2ndByte = FBA_BOWSER;
                     break;
                 case 1:
                     sEndAttacks[0]->oBehParams2ndByte = FBA_LASER;
+                    // sEndAttacks[0]->oBehParams2ndByte = FBA_CAGE;
                     break;
                 case 2:
                     sEndAttacks[0]->oBehParams2ndByte = FBA_DROPPER;
@@ -1498,13 +1518,14 @@ void controller_act_attacks(void) {
             o->oSubAction = 1;
         }
 
-        if ((o->oOpacity <= 0x80 && sEndAttacks[0]->oBehParams2ndByte != FBA_DROPPER) || 
+        if (sEndAttacks[0]->oBehParams2ndByte != FBA_WALL && 
+            (o->oOpacity <= 0x80 && sEndAttacks[0]->oBehParams2ndByte != FBA_DROPPER) || 
             (o->oOpacity <= 0xC0 && sEndAttacks[0]->oBehParams2ndByte == FBA_BUBBLES)) {
             sEndAttacks[1] = spawn_object(o, MODEL_NONE, bhvFinalBossAttacks);
             sEndAttacks[1]->os16112 = 1;
 
             do {
-                sEndAttacks[1]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 4);
+                sEndAttacks[1]->oBehParams2ndByte = CL_RandomMinMaxU16(0, 3);
             } while (boss_attacks_incompatible());
 
             if (sEndAttacks[1]->oBehParams2ndByte == FBA_BUBBLES) {
@@ -1687,6 +1708,8 @@ void controller_act_run(void) {
             set_mario_action(gMarioState, ACT_PLACING_DOWN, 0);
             obj->oFC = 1;
         }
+        obj = spawn_object(o, MODEL_NONE, bhvThreeCoinsSpawnDelay);
+        vec3f_set(&obj->oPosX, 1083.0f, 7706.0f, -4048.0f);
     }
     
     if (o->oOpacity <= 0) {
@@ -1954,7 +1977,7 @@ s32 boss_attacks_incompatible(void) {
         return TRUE;
     }
 
-    if (end1 == FBA_BOWSER && (end1 == FBA_WALL || end1 == FBA_CAGE)) {
+    if (end1 == FBA_BOWSER && end2 == FBA_CAGE) {
         return TRUE;
     }
 

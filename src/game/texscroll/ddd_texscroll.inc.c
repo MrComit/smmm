@@ -21,7 +21,6 @@ void scroll_textures_ddd() {
 	scroll_ddd_level_geo_end_shyguy();
 	scroll_ddd_level_geo_end_boo();
 	scroll_ddd_level_dl_end_cage();
-	scroll_ddd_level_dl_end_fist();
 	scroll_ddd_level_dl_end_bubble();
 	scroll_ddd_level_geo_end_log();
 	scroll_ddd_level_geo_end_spike();
@@ -32,4 +31,5 @@ void scroll_textures_ddd() {
 	scroll_ddd_level_geo_bg_ground();
 	scroll_ddd_level_geo_cage_beam();
 	scroll_ddd_level_geo_bg_ground_center();
+	scroll_ddd_level_geo_end_fist();
 }

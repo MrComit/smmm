@@ -69,3 +69,4 @@
 #include "levels/ddd/nice_face/model.inc.c"
 #include "levels/ddd/teardrop/model.inc.c"
 #include "levels/ddd/winking_moon/model.inc.c"
+#include "levels/ddd/red_shadow2/model.inc.c"

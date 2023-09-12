@@ -520,18 +520,18 @@ u8 end_fist_BOOGOO2_i4[] = {
 	
 };
 
-Vtx end_fist_Fist_mesh_vtx_cull[8] = {
-	{{ {-211, 0, -242}, 0, {-16, -16}, {0, 0, 0, 0} }},
+Vtx end_fist_Fist_mesh_layer_1_vtx_cull[8] = {
 	{{ {-211, 0, 239}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-211, 945, 239}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {-211, 945, -242}, 0, {-16, -16}, {0, 0, 0, 0} }},
-	{{ {206, 0, -242}, 0, {-16, -16}, {0, 0, 0, 0} }},
+	{{ {-211, 0, -242}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {206, 0, 239}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {206, 945, 239}, 0, {-16, -16}, {0, 0, 0, 0} }},
 	{{ {206, 945, -242}, 0, {-16, -16}, {0, 0, 0, 0} }},
+	{{ {206, 0, -242}, 0, {-16, -16}, {0, 0, 0, 0} }},
 };
 
-Vtx end_fist_Fist_mesh_vtx_0[32] = {
+Vtx end_fist_Fist_mesh_layer_1_vtx_0[32] = {
 	{{ {206, 0, -122}, 0, {-1412, -16}, {255, 255, 255, 255} }},
 	{{ {-2, 0, -242}, 0, {-2110, -16}, {255, 255, 255, 255} }},
 	{{ {-2, 597, -187}, 0, {-1553, 2032}, {255, 255, 255, 255} }},
@@ -566,8 +566,8 @@ Vtx end_fist_Fist_mesh_vtx_0[32] = {
 	{{ {14, 945, -21}, 0, {1480, 3312}, {255, 255, 255, 255} }},
 };
 
-Gfx end_fist_Fist_mesh_tri_0[] = {
-	gsSPVertex(end_fist_Fist_mesh_vtx_0 + 0, 32, 0),
+Gfx end_fist_Fist_mesh_layer_1_tri_0[] = {
+	gsSPVertex(end_fist_Fist_mesh_layer_1_vtx_0 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
 	gsSP2Triangles(3, 2, 4, 0, 3, 4, 5, 0),
 	gsSP2Triangles(5, 4, 6, 0, 7, 0, 3, 0),
@@ -585,6 +585,7 @@ Gfx end_fist_Fist_mesh_tri_0[] = {
 	gsSP2Triangles(28, 29, 30, 0, 30, 29, 31, 0),
 	gsSPEndDisplayList(),
 };
+
 
 Gfx mat_end_fist_BooGooObj_layer1[] = {
 	gsDPPipeSync(),
@@ -614,19 +615,25 @@ Gfx mat_revert_end_fist_BooGooObj_layer1[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx end_fist_Fist_mesh[] = {
+Gfx end_fist_Fist_mesh_layer_1[] = {
 	gsSPClearGeometryMode(G_LIGHTING),
-	gsSPVertex(end_fist_Fist_mesh_vtx_cull + 0, 8, 0),
+	gsSPVertex(end_fist_Fist_mesh_layer_1_vtx_cull + 0, 8, 0),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPCullDisplayList(0, 7),
 	gsSPDisplayList(mat_end_fist_BooGooObj_layer1),
-	gsSPDisplayList(end_fist_Fist_mesh_tri_0),
+	gsSPDisplayList(end_fist_Fist_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_end_fist_BooGooObj_layer1),
+	gsSPEndDisplayList(),
+};
+
+Gfx end_fist_material_revert_render_settings[] = {
 	gsDPPipeSync(),
 	gsSPSetGeometryMode(G_LIGHTING),
 	gsSPClearGeometryMode(G_TEXTURE_GEN),
 	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
 	gsSPTexture(65535, 65535, 0, 0, 0),
+	gsDPSetEnvColor(255, 255, 255, 255),
+	gsDPSetAlphaCompare(G_AC_NONE),
 	gsSPEndDisplayList(),
 };
 

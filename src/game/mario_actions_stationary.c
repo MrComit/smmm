@@ -93,11 +93,11 @@ s32 check_common_hold_idle_cancels(struct MarioState *m) {
         return set_mario_action(m, ACT_HOLD_WALKING, 0);
     }
 
-    if (m->input & INPUT_B_PRESSED) {
+    if (m->input & INPUT_B_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return set_mario_action(m, ACT_THROWING, 0);
     }
 
-    if (m->input & INPUT_Z_DOWN) {
+    if (m->input & INPUT_Z_DOWN && !(obj_has_behavior(m->heldObj, bhvBossCage))) {
         return drop_and_set_mario_action(m, ACT_START_CROUCHING, 0);
     }
 
@@ -675,7 +675,7 @@ s32 act_hold_butt_slide_stop(struct MarioState *m) {
         return check_common_hold_action_exits(m);
     }
 
-    if (m->input & INPUT_B_PRESSED) {
+    if (m->input & INPUT_B_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return set_mario_action(m, ACT_THROWING, 0);
     }
 
@@ -973,7 +973,7 @@ s32 act_hold_jump_land_stop(struct MarioState *m) {
         return check_common_hold_action_exits(m);
     }
 
-    if (m->input & INPUT_B_PRESSED) {
+    if (m->input & INPUT_B_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return set_mario_action(m, ACT_THROWING, 0);
     }
 
@@ -994,7 +994,7 @@ s32 act_hold_freefall_land_stop(struct MarioState *m) {
         return check_common_hold_action_exits(m);
     }
 
-    if (m->input & INPUT_B_PRESSED) {
+    if (m->input & INPUT_B_PRESSED && !(m->heldObj->behavior == segmented_to_virtual(bhvBossCage))) {
         return set_mario_action(m, ACT_THROWING, 0);
     }
     landing_step(m, MARIO_ANIM_FALL_LAND_WITH_LIGHT_OBJ, ACT_HOLD_IDLE);
