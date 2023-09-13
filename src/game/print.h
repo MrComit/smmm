@@ -18,6 +18,7 @@
 #define GLYPH_GEAR            41 // custom
 #define GLYPH_BOO             42 // custom
 #define GLYPH_WHITE_STAR      43 // custom
+#define GLYPH_PLUS_SIGN       44 // custom
 #define GLYPH_MULTIPLY        50
 #define GLYPH_COIN            51
 #define GLYPH_MARIO_HEAD      52

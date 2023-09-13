@@ -1409,13 +1409,14 @@ void spawn_orange_number_infinite_digit_scale(u32 behParam, s16 relX, s16 relY, 
     }
 }
 
-s8 sRankToPalette[7] = {
+s8 sRankToPalette[8] = {
     4, // F
     8, // E
     2, // D
     6, // C
     3, // B
     0, // A
+    1, // S
     1, // S
 };
 

@@ -235,6 +235,7 @@ extern s8 gLevelToCourseNumTable[];
 
 //ranks
 #define SAVE_RANK_NO_RANK           0
+#define SAVE_RANK_S_PLUS            8
 #define SAVE_RANK_S                 7
 #define SAVE_RANK_A                 6
 #define SAVE_RANK_B                 5

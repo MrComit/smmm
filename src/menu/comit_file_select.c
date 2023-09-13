@@ -644,7 +644,7 @@ void print_file_chapter(s8 file, s16 x, s16 y) {
     }
 }
 
-extern s8 sRankToPalette[7];
+extern s8 sRankToPalette[8];
 
 
 
@@ -682,8 +682,13 @@ const char sSRank[] = {
     'S',
     0xFF
 };
+const char sSPlusRank[] = {
+    'S',
+    ']',
+    0xFF
+};
 
-const char *sRanks[14] = {
+const char *sRanks[17] = {
     sFRank,
     sERank,
     sDRank,
@@ -691,6 +696,7 @@ const char *sRanks[14] = {
     sBRank,
     sARank,
     sSRank,
+    sSPlusRank,
 };
 
 void print_file_coin_count(s8 file, s16 x, s16 y) {
@@ -734,7 +740,7 @@ s32 get_save_file_stars(s32 file) {
     if (rank >= SAVE_RANK_A) {
         stars++;
     }
-    if (rank == SAVE_RANK_S) {
+    if (rank >= SAVE_RANK_S) {
         stars++;
     }
     // if (CL_count_bits(0b1111111111111111111111111) >= 25) {
@@ -759,7 +765,11 @@ void print_file_completion_stars(s8 file, s16 x, s16 y) {
     s32 xAdd = 68;
 
     for (i = 0; i < stars; i++, xAdd -= 14) {
-        print_text(x + xAdd, y + 8, "[", 7);
+        if (gSaveBuffer.files[file][0].finalRank == SAVE_RANK_S_PLUS) {
+            print_text(x + xAdd, y + 8, "[", 6);
+        } else {
+            print_text(x + xAdd, y + 8, "[", 7);
+        }
     }
 }
 

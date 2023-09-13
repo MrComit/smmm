@@ -5324,7 +5324,7 @@ void render_credits_logo(void) {
 
 
 
-extern s8 sRankToPalette[7];
+extern s8 sRankToPalette[8];
 
 
 
@@ -5363,7 +5363,13 @@ const char sCreditsSRank[] = {
     0xFF
 };
 
-const char *sCreditsRanks[14] = {
+const char sCreditsSPlusRank[] = {
+    'S',
+    ']',
+    0xFF
+};
+
+const char *sCreditsRanks[17] = {
     sCreditsFRank,
     sCreditsERank,
     sCreditsDRank,
@@ -5371,6 +5377,7 @@ const char *sCreditsRanks[14] = {
     sCreditsBRank,
     sCreditsARank,
     sCreditsSRank,
+    sCreditsSPlusRank,
 };
 
 
@@ -5379,18 +5386,19 @@ const char *sCreditsRanks[14] = {
 s32 gCreditsCoinNum = 0;
 
 
+//S+: 17500
 //S: 15000
 //A: 13500
 //B: 12000
 //C: 10000
-//D: 8000
-//E: 6000
-//F: <6000
+//D: 7500
+//E: 5000
+//F: <5000
 
 s32 get_rank_from_coin_count(s32 coins) {
-    if (coins < 6000) {
+    if (coins < 5000) {
         return 1;
-    } else if (coins < 8000) {
+    } else if (coins < 7500) {
         return 2;
     } else if (coins < 10000) {
         return 3;
@@ -5400,8 +5408,10 @@ s32 get_rank_from_coin_count(s32 coins) {
         return 5;
     } else if (coins < 15000) {
         return 6;
+    } else if (coins < 17500) {
+        return 7;
     }
-    return 7;
+    return 8;
 }
 
 void play_sound_for_rank(s32 rank) {
@@ -5429,6 +5439,9 @@ void play_sound_for_rank(s32 rank) {
         case 7: // S
             sound = SOUND_MARIO_HERE_WE_GO; // good
             break;
+        case 8: // S
+            sound = SOUND_MARIO_HERE_WE_GO; // good
+            break;
     }
     play_sound(sound, gMarioState->marioObj->header.gfx.cameraToObject);
 }
@@ -5443,7 +5456,7 @@ void render_credits_rank_evaluation(void) {
     if (gComitCreditsTimer < 15) {
         gComitCreditsTimer++;
     }
-    // gMarioState->numCoins = 14999;
+    // gMarioState->numCoins = 18000;
         if (gComitCreditsTimer >= 15 && gCreditsCoinNum < gMarioState->numCoins) {
             if (gMarioState->numCoins - gCreditsCoinNum > 1000) {
                 gCreditsCoinNum += 100;

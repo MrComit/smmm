@@ -362,6 +362,9 @@ s8 char_to_glyph_index(char c) {
     if (c == '[') {
         return GLYPH_WHITE_STAR;
     }
+    if (c == ']') {
+        return GLYPH_PLUS_SIGN;
+    }
 
     return GLYPH_SPACE;
 }

@@ -21,11 +21,21 @@ const GeoLayout number_geo[] = {
 };
 
 
+const GeoLayout rank_splus_geo[] = {
+   GEO_NODE_START(),
+   GEO_OPEN_NODE(),
+      GEO_TRANSLATE_WITH_DL(LAYER_ALPHA, -24, 0, 0, dl_billboard_num_S),
+      GEO_TRANSLATE_WITH_DL(LAYER_ALPHA, 32, 0, 0, dl_billboard_num_plus),
+   GEO_CLOSE_NODE(),
+   GEO_RETURN(),
+};
+
+
 const GeoLayout rank_geo[] = {
    GEO_NODE_START(),
    GEO_OPEN_NODE(),
       GEO_ASM(0, geo_set_number_palette),
-      GEO_SWITCH_CASE(7, geo_switch_anim_state),
+      GEO_SWITCH_CASE(8, geo_switch_anim_state),
       GEO_OPEN_NODE(),
          GEO_DISPLAY_LIST(LAYER_ALPHA, dl_billboard_num_F),
          GEO_DISPLAY_LIST(LAYER_ALPHA, dl_billboard_num_E),
@@ -34,6 +44,8 @@ const GeoLayout rank_geo[] = {
          GEO_DISPLAY_LIST(LAYER_ALPHA, dl_billboard_num_B),
          GEO_DISPLAY_LIST(LAYER_ALPHA, dl_billboard_num_A),
          GEO_DISPLAY_LIST(LAYER_ALPHA, dl_billboard_num_S),
+         GEO_BRANCH(1, rank_splus_geo),
+         // GEO_DISPLAY_LIST(LAYER_ALPHA, dl_billboard_num_Splus),
       GEO_CLOSE_NODE(),
    GEO_CLOSE_NODE(),
    GEO_END(),

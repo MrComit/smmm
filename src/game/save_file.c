@@ -478,7 +478,7 @@ void save_file_make_complete(s32 file) {
     gSaveBuffer.files[file][0].starPieces = 0b11100001111111111111111111111111;
     gSaveBuffer.files[file][0].currencyStars = 0b11111111111111111111;
     gSaveBuffer.files[file][0].coinCount = 99999;
-    gSaveBuffer.files[file][0].finalRank = 7;
+    gSaveBuffer.files[file][0].finalRank = SAVE_RANK_S_PLUS;
     gSaveBuffer.files[file][0].goldenGoombas = 0xFFFF;
     gSaveBuffer.files[file][0].gpFlags = 0xFFFFFFFF;
     gSaveBuffer.files[file][0].miscChallenges[0] = 0xFFFFFFFF;
@@ -771,6 +771,7 @@ s32 save_file_check_global_room(void) {
 
 
 // NO RANK = 0
+// S+ RANK = 8
 // S RANK = 7
 // A RANK = 6
 // B RANK = 5
