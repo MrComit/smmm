@@ -5177,6 +5177,7 @@ char sCreditsPatches2[] = { TEXT_CREDITS_PATCHES2 };
 char sCreditsBeta[] = { TEXT_CREDITS_BETA };
 char sCreditsBeta1[] = { TEXT_CREDITS_BETA1 };
 char sCreditsBeta2[] = { TEXT_CREDITS_BETA2 };
+char sCreditsBeta3[] = { TEXT_CREDITS_BETA3 };
 // char sCreditsPlaceholder20[] = { TEXT_CREDITS_TESTERS_PLACEHOLDER };
 
 char sCreditsThanks[] = { TEXT_CREDITS_THANKS };
@@ -5197,35 +5198,41 @@ struct CreditTextLine {
     s16 y;
 };
 
-#define CREDIT_ENTRY_COUNT 20
+#define CREDIT_ENTRY_COUNT 21
+
+
+// FOR IT TO MATCH, ENDTITLE SHOULD BE -700
+// ALSO INCREASE if (gComitCreditsTimer >= 60) BY 140?
+
 
 struct CreditTextLine sComitCredits[CREDIT_ENTRY_COUNT] = {
     {sCreditsGeneral, -20},
     {sCreditsGeneral2, -40},
     {sCreditsComit, -70},
 
-    {sCreditsTextures, -150},
-    {sCreditsTextures1, -180},
-    {sCreditsTextures2, -200},
+    {sCreditsTextures, -120},
+    {sCreditsTextures1, -150},
+    {sCreditsTextures2, -170},
 
-    {sCreditsPatches, -280},
-    {sCreditsPatches1, -310},
-    {sCreditsPatches2, -330},
+    {sCreditsPatches, -230},
+    {sCreditsPatches1, -260},
+    {sCreditsPatches2, -275},
 
-    {sCreditsBeta, -410},
-    {sCreditsBeta1, -440},
-    {sCreditsBeta2, -460},
+    {sCreditsBeta, -340},
+    {sCreditsBeta1, -360},
+    {sCreditsBeta2, -375},
+    {sCreditsBeta3, -390},
 
-    {sCreditsThanks, -540},
-    {sCreditsHSM64, -570},
-    {sCreditsUltra, -590},
-    {sCreditsCheezepin, -610},
-    {sCreditsYou, -630},
+    {sCreditsThanks, -440},
+    {sCreditsHSM64, -465},
+    {sCreditsUltra, -480},
+    {sCreditsCheezepin, -495},
+    {sCreditsYou, -510},
 
-    {sCreditsOG, -710},
+    {sCreditsOG, -570},
 
-    {sCreditsEndtitle, -840},
-    {sCredits2023, -870},
+    {sCreditsEndtitle, -690}, // WAS -840
+    {sCredits2023, -720},
 };
 
 
@@ -5269,7 +5276,7 @@ void render_credits_lines(void) {
 
     if (sComitCredits[CREDIT_ENTRY_COUNT-2].y >= 135) {
         gComitCreditsTimer++;
-        if (gComitCreditsTimer >= 60) {
+        if (gComitCreditsTimer >= 60 + 140) {
             gComitCreditsAct = 3;
             gComitCreditsTimer = 0;
         }

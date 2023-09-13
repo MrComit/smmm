@@ -482,8 +482,8 @@
 // #define TEXT_CREDITS_CRAIYON _("Craiyon.com")
 
 #define TEXT_CREDITS_PATCHES _("Miscellaneous Patches")
-#define TEXT_CREDITS_PATCHES1 _("Wiseguy      thecozies      Reonu")
-#define TEXT_CREDITS_PATCHES2 _("Arthurtilly      Fazana      Kaze")
+#define TEXT_CREDITS_PATCHES1 _("Wiseguy   thecozies   ArcticJaguar725")
+#define TEXT_CREDITS_PATCHES2 _("Arthurtilly   Fazana   Kaze   Reonu")
 // #define TEXT_CREDITS_WISEGUY _("Wiseguy")
 // #define TEXT_CREDITS_COZIES _("thecozies")
 // #define TEXT_CREDITS_REONU _("Reonu")
@@ -492,8 +492,9 @@
 // #define TEXT_CREDITS_KAZE _("Kaze")
 
 #define TEXT_CREDITS_BETA _("Beta Testing")
-#define TEXT_CREDITS_BETA1 _("GTM      Cheezepin      TBD")
-#define TEXT_CREDITS_BETA2 _("TBD      TBD      TBD      TBD")
+#define TEXT_CREDITS_BETA1 _("GTM   Cheezepin   KingToad64   Rovert")
+#define TEXT_CREDITS_BETA2 _("Jake Dower   Pyro Jay   Fazana")
+#define TEXT_CREDITS_BETA3 _("Hyena Chan   Yoshi Milkman   CowQuack")
 // #define TEXT_CREDITS_GTM _("GTM")
 // #define TEXT_CREDITS_CHEEZE _("Cheezepin")
 // #define TEXT_CREDITS_TESTERS_PLACEHOLDER _("TBD")

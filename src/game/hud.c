@@ -1153,6 +1153,7 @@ void render_hud_stars(void) {
  */
 
 s16 sKeyRectHeight = 208;
+extern s32 gComitCredits;
 
 void render_hud_keys(void) {
     s16 i;
@@ -1160,6 +1161,11 @@ void render_hud_keys(void) {
 	s16 heightMin = gIsConsole ? 208 - 8 : 208;
 	s16 heightMax = gIsConsole ? 240 - 8 : 240;
 	// s16 height;
+
+	if (gComitCredits || gCurrLevelNum == LEVEL_SL) {
+		return;
+	}
+
 	if (keyCount) {
 		sKeyRectHeight = approach_s16_symmetric(sKeyRectHeight, heightMin, 3);
 		// if (!gIsConsole || (sKeyRectHeight >= 208 && sKeyRectHeight >= 208)) {
