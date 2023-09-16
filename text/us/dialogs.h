@@ -413,7 +413,7 @@ save me!)\n\
 \n\
 (I was supposed to go construct\n\
 a new bridge for the city, but\n\
-i got trapped up here.)\n\
+I got trapped up here.)\n\
 (Now I can get to work.)\n\
 (Thank you so much!)\n\
 \n\

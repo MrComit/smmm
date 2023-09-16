@@ -8,9 +8,10 @@
 #include "make_const_nonconst.h"
 
 
-// #ifdef SMMM_DEBUG
+#ifdef SMMM_DEBUG
 // #define TEST_STAGE LEVEL_SSL
-// #endif
+#endif
+// #define TEST_STAGE LEVEL_SL
 
 
 extern const LevelScript level_main_scripts_entry[];

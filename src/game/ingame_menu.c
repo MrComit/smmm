@@ -4081,7 +4081,11 @@ extern char sRoomCorrupt[];
 extern struct GraphNodeRoot *gCurGraphNodeRoot;
 
 void set_map_name_translation(const u8 *str) {
-    f32 x = get_str_x_pos_from_center(0, str, 0.0f) * 4.0f;
+    f32 scale = 4.0f;
+    if (gIsConsole) {
+        scale = 6.0f;
+    }
+    f32 x = get_str_x_pos_from_center(0, str, 0.0f) * scale;
     f32 z = 32.0f;
 
     switch (mo->globalRoom) {
@@ -4111,6 +4115,9 @@ void set_map_name_translation(const u8 *str) {
 
 void print_map_name_string(s16 x, s16 y, u8 alpha, const u8 *str) {
     f32 scale = 4.0f;
+    if (gIsConsole) {
+        scale = 6.0f;
+    }
     // f32 xTrans = get_str_x_pos_from_center(0, str, 0.0f);
     // if (gIsConsole)
     //     scale = 2.0f;
