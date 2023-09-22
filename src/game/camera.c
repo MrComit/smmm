@@ -3441,6 +3441,9 @@ void store_lakitu_cam_info_for_c_up(struct Camera *c) {
  */
 s32 set_mode_c_up(struct Camera *c) {
     // return 0;
+    if (c->comitCutscene != 0) {
+        return 0;
+    }
     if (!(gCameraMovementFlags & CAM_MOVE_C_UP_MODE)) {
         gCameraMovementFlags |= CAM_MOVE_C_UP_MODE;
         store_lakitu_cam_info_for_c_up(c);
@@ -4007,7 +4010,7 @@ void update_camera(struct Camera *c) {
                 mode_mario_camera(c);
         }*/
     //} else {
-    if (gGlobalMarioRoom != 11 && gMarioState->action != ACT_IN_CANNON && c->mode != CAMERA_MODE_C_UP) {
+    if (gGlobalMarioRoom != 11 && gMarioState->action != ACT_IN_CANNON && (c->mode != CAMERA_MODE_C_UP || c->comitCutscene != 0)) {
         c->mode = CAMERA_MODE_8_DIRECTIONS;
     }
     

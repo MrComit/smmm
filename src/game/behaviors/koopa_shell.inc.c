@@ -178,6 +178,10 @@ void bhv_cushion_shell_loop(void) {
                 mario_stop_riding_object(m);
                 set_mario_action(m, ACT_JUMP, 0);
                 o->oInteractType = INTERACT_IGLOO_BARRIER;
+                if (cur_obj_dist_to_nearest_object_with_behavior(bhvDoor) < 200.0f) {
+                    o->oPosX -= 50.0f;
+                    o->oPosZ -= 150.0f;
+                }
             }
             break;
         case 4:
