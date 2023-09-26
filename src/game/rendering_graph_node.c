@@ -41,7 +41,7 @@
  *
  */
 
-s16 gMatStackIndex;
+s16 gMatStackIndex = 0;
 Mat4 gMatStack[32];
 Mtx *gMatStackFixed[32];
 f32 sAspectRatio;
@@ -760,7 +760,7 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     // Terminate the point lighting DL
     gSPEndDisplayList(setLightsDL++);
     */
-    gMatStackIndex--;
+    // gMatStackIndex--; // HACKERSM642.1.1 MATSTACK FIX THING
 }
 
 /**
