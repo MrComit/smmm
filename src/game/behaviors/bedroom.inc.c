@@ -70,7 +70,7 @@ void bhv_l2_bedroom_gate_loop(void) {
                     o->oAction = 2;
                 }
             } else {
-                if (save_file_get_boos() & (1 << 8)) {
+                if (save_file_get_boos() & (1 << 8) && save_file_get_keys(0) & (1 << 4)) {
                     o->oAction = 2;
                 }
             }
