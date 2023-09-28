@@ -1691,7 +1691,7 @@ void render_hud(void) {
         }
 
 
-        if (gCurrLevelNum == LEVEL_HMC && sCurrPlayMode == 0) {
+        if (gCurrLevelNum == LEVEL_HMC && sCurrPlayMode == 0 && gMarioCurrentRoom == 9) {
             render_targets();
         }
 		if (hudDisplayFlags & HUD_DISPLAY_FLAG_BROKENKEY || (sBrokenKeyRectY < 240 && sCurrPlayMode != 2)/* || sCurrPlayMode == 2*/) {

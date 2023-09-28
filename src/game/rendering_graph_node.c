@@ -712,7 +712,7 @@ void geo_process_camera(struct GraphNodeCamera *node) {
     }
 
 
-    if (gCurrLevelNum == LEVEL_HMC || gMarioCurrentRoom == 9) {
+    if (gCurrLevelNum == LEVEL_HMC && gMarioCurrentRoom == 9) {
         get_mario_screen_coords();
     }
     // Transform the point light positions into screen space
