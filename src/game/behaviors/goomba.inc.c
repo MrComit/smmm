@@ -355,7 +355,7 @@ void bhv_goomba_update(void) {
             mark_goomba_as_dead();
         }
 
-        if (o->oFloorType == SURFACE_INSTANT_QUICKSAND && o->oPosY - o->oFloorHeight < 30.0f) {
+        if ((o->oFloorType == SURFACE_INSTANT_QUICKSAND || o->oFloorType == SURFACE_DEATH_PLANE) && o->oPosY - o->oFloorHeight < 30.0f) {
             o->activeFlags = 0;
         }
 

@@ -349,7 +349,7 @@ static void koopa_shelled_update(void) {
     cur_obj_update_floor_and_walls();
     obj_update_blinking(&o->oKoopaBlinkTimer, 20, 50, 4);
 
-    if (o->oFloorType == SURFACE_INSTANT_QUICKSAND) {
+    if (o->oFloorType == SURFACE_INSTANT_QUICKSAND || o->oFloorType == SURFACE_DEATH_PLANE) {
         vec3f_copy(&o->oPosX, &o->oHomeX);
     }
     if (gCurrLevelNum == LEVEL_BBH) {

@@ -744,7 +744,7 @@ s32 get_save_file_stars(s32 file) {
         stars++;
     }
     // if (CL_count_bits(0b1111111111111111111111111) >= 25) {
-    if (CL_count_bits(gSaveBuffer.files[file][0].boosCaptured) >= 25) {
+    if (CL_count_bits(gSaveBuffer.files[file][0].boosCaptured & 0x03FFFFFF) >= 25) {
         stars++;
     }
 

@@ -477,7 +477,7 @@ void bhv_end_bubble_loop(void) {
         CL_explode_object(o, 0);
         o->oFaceAnglePitch = o->oFaceAngleYaw = 0;
         if (o->oBehParams2ndByte == 0) {
-            switch (CL_RandomMinMaxU16(0, 8)) {
+            switch (CL_RandomMinMaxU16(0, 11)) {
                 case 0:
                     obj_force_spawn_loot_coins(o, 1, 20.0f, bhvSingleCoinGetsSpawned, 0, MODEL_YELLOW_COIN);
                     break;
@@ -1765,6 +1765,10 @@ void controller_act_run_end(void) {
     Vec3f hitboxPos;
     f32 dist;
     s16 pitch;
+    if (gMarioState->action == ACT_QUICKSAND_DEATH) {
+        o->oTimer = 0;
+        return;
+    }
     if (o->oSubAction == 0) {
         if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_PLACING_DOWN) {
             vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);

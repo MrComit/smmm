@@ -229,6 +229,10 @@ void bhv_ice_cube_cracked_init(void) {
         // cur_obj_scale(0.1f);
         cur_obj_hide();
     }
+
+    if (o->oBehParams2ndByte == 1) {
+        o->oFlags |= OBJ_FLAG_DISABLE_ON_ROOM_CLEAR;
+    }
 }
 
 

@@ -785,7 +785,7 @@ extern Vtx sl_dl_Mansion_003_mesh_layer_1_vtx_3[42];
 extern Gfx sl_dl_Mansion_003_mesh_layer_1_tri_3[];
 extern Vtx sl_dl_Mansion_003_mesh_layer_4_vtx_0[12];
 extern Gfx sl_dl_Mansion_003_mesh_layer_4_tri_0[];
-extern Vtx sl_dl_Mansion_004_mesh_layer_1_vtx_0[267];
+extern Vtx sl_dl_Mansion_004_mesh_layer_1_vtx_0[253];
 extern Gfx sl_dl_Mansion_004_mesh_layer_1_tri_0[];
 extern Vtx sl_dl_Mansion_004_mesh_layer_1_vtx_1[93];
 extern Gfx sl_dl_Mansion_004_mesh_layer_1_tri_1[];

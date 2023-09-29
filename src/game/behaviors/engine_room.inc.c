@@ -257,6 +257,11 @@ void bhv_gravity_sign_loop(void) {
                     set_mario_npc_dialog(0);
                 }
                 break;
+            case 4:
+                if (o->oTimer < 20) {
+                    set_mario_npc_dialog(0);
+                }
+                break;
         }
     }
 }
