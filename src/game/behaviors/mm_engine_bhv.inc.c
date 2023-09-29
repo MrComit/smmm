@@ -1443,6 +1443,7 @@ void bhv_friend_toad_init(void) {
 }
 
 extern s32 gRedCoinMissionActive;
+extern s32 gRedCoinLevel;
 extern s8 gRedCoinBitfield;
 
 void bhv_prospector_t_init(void) {
@@ -1527,12 +1528,20 @@ void bhv_prospector_t_loop(void) {
                             }
                         } else {
                             gRedCoinMissionActive = 1;
+                            if (o->os16F4 == 2) {
+                                gRedCoinLevel = LEVEL_HMC;
+                            } else if (o->os16F4 == 1) {
+                                gRedCoinLevel = LEVEL_WF;
+                            } else {
+                                gRedCoinLevel = LEVEL_BOB;
+                            }
                             gRedCoinBitfield = 0;
                             //CHANGE DIALOG ID
                             o->oBehParams2ndByte = DIALOG_081;
                         }
                     } else if (o->os16F8 == 1) {
                         gRedCoinMissionActive = 0;
+                        gRedCoinLevel = 0;
                         gRedCoinBitfield = 0;
                         o->os16F8 = 2;
                         gMarioState->numCoins += 1000;
@@ -1587,7 +1596,7 @@ void bhv_prospector_lock_loop(void) {
             }
             break;
         case 2: // pool room
-            if (gPoolLockDisabled || flags1 & SAVE_TOAD_FLAG_REDS2 || gRedCoinMissionActive) {
+            if (gPoolLockDisabled || flags1 & SAVE_TOAD_FLAG_REDS2 || (gRedCoinMissionActive && gRedCoinLevel == gCurrLevelNum)) {
                 o->activeFlags = 0;
                 gPoolLockDisabled = 1;
             }

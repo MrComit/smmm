@@ -4307,11 +4307,12 @@ void render_map_keys(void) {
 
 
 extern s32 gRedCoinMissionActive;
+extern s32 gRedCoinLevel;
 
 void render_map_red_coins(void) {
     s32 i;
 
-    if (gRedCoinMissionActive == FALSE) {
+    if (gRedCoinMissionActive == FALSE || gRedCoinLevel != gCurrLevelNum) {
         return;
     }
 

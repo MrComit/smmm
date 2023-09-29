@@ -35,6 +35,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -313,10 +314,10 @@ const LevelScript level_hmc_entry[] = {
 		OBJECT(MODEL_BULLY, -7222, 712, 1278, 0, 0, 0, 0x00000000, bhvSmallBully),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -2579, 2185, 3063, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_BULLY_GATE, -6379, 804, -4806, 0, 0, 0, 0x00000000, bhvBullyGate),
-		OBJECT(MODEL_NONE, -1809, 671, 1892, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, -3648, 671, 493, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, -2598, 671, -537, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, -1412, 671, -1127, 0, 0, 0, 0x00000000, bhvRedSparkles),
+		OBJECT(MODEL_NONE, -1809, 671, 1892, 0, 0, 0, (5 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, -3648, 671, 493, 0, 0, 0, (5 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, -2598, 671, -537, 0, 0, 0, (5 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, -1412, 671, -1127, 0, 0, 0, (5 << 24), bhvRedSparkles),
 		OBJECT(MODEL_NONE, -2888, 671, -3139, 0, 0, 0, (5 << 24) | (1 << 16), bhvRedSparkles),
 		OBJECT(MODEL_SAUNA_ROCK, -3926, 500, -1004, 0, 0, 0, (1 << 16), bhvSaunaRockRise),
 		OBJECT(MODEL_SAUNA_ROCK, -1919, 500, -2937, 0, -29, 0, 0x00000000, bhvSaunaRockRise),

@@ -15,6 +15,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -283,10 +284,10 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_SKEETER, 1139, -2515, -15537, 0, 90, 0, 0x00000000, bhvSkeeter),
 		OBJECT(MODEL_SKEETER, 1650, -2515, -14761, 0, -90, 0, 0x00000000, bhvSkeeter),
 		OBJECT(MODEL_CASTLE_GROUNDS_WARP_PIPE, 4574, -300, -11870, 0, 0, -180, 0x0A400000, bhvWarpPipe),
-		OBJECT(MODEL_NONE, 4361, -1915, -16366, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 3699, -2470, -15082, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 2102, -2515, -15298, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 1340, -2580, -14425, 0, 0, 0, 0x00000000, bhvRedSparkles),
+		OBJECT(MODEL_NONE, 4361, -1915, -16366, 0, 0, 0, (5 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, 3699, -2470, -15082, 0, 0, 0, (5 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, 2102, -2515, -15298, 0, 0, 0, (5 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, 1340, -2580, -14425, 0, 0, 0, (5 << 24), bhvRedSparkles),
 		OBJECT(MODEL_NONE, 3815, -1586, -15071, 0, 0, 0, (5 << 24) | (1 << 16), bhvRedSparkles),
 		OBJECT(MODEL_BLUE_CUSHION, -4504, 0, -19682, 0, 23, 0, 0x00010000, bhvCushion),
 		OBJECT(MODEL_MIRROR_LIGHT, -5707, 213, -18703, 0, 90, 0, 0x00000000, bhvDenLight),

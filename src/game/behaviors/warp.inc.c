@@ -30,6 +30,7 @@ void bhv_warp_loop(void) {
 }
 
 extern s32 gRedCoinMissionActive;
+extern s32 gRedCoinLevel;
 extern s16 gComitCutsceneTimer;
 extern Vec3f gComitCutscenePosVec;
 extern Vec3f gComitCutsceneFocVec;
@@ -100,11 +101,11 @@ void fading_warp_active_check(s16 param) {
             }
             break;
         case 8:
-            if (gRedCoinMissionActive) {
+            if (gRedCoinMissionActive && gRedCoinLevel == gCurrLevelNum) {
                 val = TRUE;
             }
 
-            if (gRedCoinMissionActive && CL_nearest_object_with_behavior_and_field(bhvRedCoin, 0x144, 1) == NULL) {
+            if (gRedCoinMissionActive && gRedCoinLevel == gCurrLevelNum && CL_nearest_object_with_behavior_and_field(bhvRedCoin, 0x144, 1) == NULL) {
                 val = TRUE;
                 o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 15.0f);
             } else {

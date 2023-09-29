@@ -1116,6 +1116,7 @@ void obj_move_y_with_terminal_vel(struct Object *obj) {
 }
 
 extern s32 gRedCoinMissionActive;
+extern s32 gRedCoinLevel;
 
 void cur_obj_update(void) {
     struct Object *obj = gCurrentObject;
@@ -1124,7 +1125,7 @@ void cur_obj_update(void) {
     BhvCommandProc bhvCmdProc;
     s32 bhvProcResult;
 
-    if (objFlags & OBJ_FLAG_RED_COIN_OBJ && gRedCoinMissionActive == FALSE) {
+    if (objFlags & OBJ_FLAG_RED_COIN_OBJ && (gRedCoinMissionActive == FALSE || gRedCoinLevel != gCurrLevelNum)) {
         return;
     }
 

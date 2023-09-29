@@ -3485,8 +3485,9 @@ Gfx *geo_switch_trophy_two(s32 callContext, struct GraphNode *node) {
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
         // assign the case number for execution.
-        if ((((m->pos[0] > -2000.0f && m->pos[2] < 7900.0f) || (m->pos[0] < -3250.0f && m->pos[2] > 11950.0f) ||
-            (m->pos[0] >= -3250.0f && m->pos[2] > 6600.0f) || (m->pos[0] > -3000.0f && m->pos[2] < 3600.0f)) && 
+        //                                                                  -3250
+        if ((((m->pos[0] > -2000.0f && m->pos[2] < 7900.0f) || (m->pos[0] < -4030.0f && m->pos[2] > 11950.0f) ||
+            (m->pos[0] >= -4030.0f && m->pos[2] > 6600.0f) || (m->pos[0] > -3000.0f && m->pos[2] < 3600.0f)) && 
             m->pos[1] < 2000.0f) || !gIsConsole) {
             switchCase->selectedCase = 0;
         } else {
@@ -4063,6 +4064,7 @@ Gfx *geo_switch_lab_floor(s32 callContext, struct GraphNode *node) {
 }
 
 extern s32 gRedCoinMissionActive;
+extern s32 gRedCoinLevel;
 
 #ifdef AVOID_UB
 Gfx *geo_switch_red_mission(s32 callContext, struct GraphNode *node, UNUSED void *context) {
@@ -4079,7 +4081,7 @@ Gfx *geo_switch_red_mission(s32 callContext, struct GraphNode *node) {
         // if the case is greater than the number of cases, set to 0 to avoid overflowing
         // the switch.
         // assign the case number for execution.
-        if (gRedCoinMissionActive) {
+        if (gRedCoinMissionActive && gRedCoinLevel == gCurrLevelNum) {
             switchCase->selectedCase = 1;
         } else {
             switchCase->selectedCase = 0;

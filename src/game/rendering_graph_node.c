@@ -1317,6 +1317,7 @@ s32 obj_is_in_view(struct GraphNodeObject *node) {
 
 
 extern s32 gRedCoinMissionActive;
+extern s32 gRedCoinLevel;
 
 /**
  * Process an object node.
@@ -1351,7 +1352,7 @@ void geo_process_object(struct Object *node) {
         if (node->header.gfx.animInfo.curAnim != NULL) {
             geo_set_animation_globals(&node->header.gfx.animInfo, hasAnimation);
         }
-        if (!(node->oFlags & OBJ_FLAG_RED_COIN_OBJ && gRedCoinMissionActive == FALSE) && obj_is_in_view(&node->header.gfx)) {
+        if (!(node->oFlags & OBJ_FLAG_RED_COIN_OBJ && (gRedCoinMissionActive == FALSE || gRedCoinLevel != gCurrLevelNum)) && obj_is_in_view(&node->header.gfx)) {
             Mtx *mtx = alloc_display_list(sizeof(*mtx));
             
             // Create the displaylist to set the active point lights

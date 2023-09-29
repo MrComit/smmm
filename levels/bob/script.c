@@ -48,6 +48,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -288,10 +289,10 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, 489, 248, 8036, 0, 0, 0, (0x3A << 16), bhvFridgeEntrance),
 		OBJECT(MODEL_L1_SHELF, 655, 733, 8452, 0, 0, 0, 0x00000000, bhvL1Shelf),
 		OBJECT(MODEL_NONE, 762, 150, 7973, 0, 90, 0, (0x33 << 16), bhvFlyingWarp),
-		OBJECT(MODEL_NONE, 1802, 121, 1575, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 2252, 121, 2325, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 2652, 121, 1480, 0, 0, 0, 0x00000000, bhvRedSparkles),
-		OBJECT(MODEL_NONE, 2852, 121, 2625, 0, 0, 0, 0x00000000, bhvRedSparkles),
+		OBJECT(MODEL_NONE, 1802, 121, 1575, 0, 0, 0, (4 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, 2252, 121, 2325, 0, 0, 0, (4 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, 2652, 121, 1480, 0, 0, 0, (4 << 24), bhvRedSparkles),
+		OBJECT(MODEL_NONE, 2852, 121, 2625, 0, 0, 0, (4 << 24), bhvRedSparkles),
 		OBJECT(MODEL_NONE, 2621, 0, 19, 0, 0, 0, 0x04010000, bhvRedSparkles),
 		OBJECT(MODEL_BOO, 1917, 197, 6668, 0, -180, 0, 0x00020000, bhvRoomBoo),
 		OBJECT(MODEL_L1_GATE, 3915, 0, 7927, 0, -90, 0, 0x00000000, bhvL1RoomGate),
