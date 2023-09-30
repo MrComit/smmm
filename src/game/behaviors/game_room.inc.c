@@ -569,6 +569,11 @@ void dice_enemy_move(void) {
         cur_obj_enable();
     }
     cur_obj_update_floor_and_walls();
+
+    if (o->oFloorType == SURFACE_INSTANT_QUICKSAND || o->oFloorType == SURFACE_DEATH_PLANE) {
+        vec3f_copy(&o->oPosX, &o->oHomeX);
+    }
+
     cur_obj_init_animation_with_accel_and_sound(o->oBehParams2ndByte, 0.6f + o->oAnimState / 3.0f);
     // treat_far_home_as_mario(3000.0f);
 

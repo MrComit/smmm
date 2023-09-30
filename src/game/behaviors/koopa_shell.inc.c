@@ -182,6 +182,7 @@ void bhv_cushion_shell_loop(void) {
                     o->oPosX -= 50.0f;
                     o->oPosZ -= 150.0f;
                 }
+                vec3f_set(&o->oHomeX, -7819.0f, 0.0f, -7246.0f);
             }
             break;
         case 4:

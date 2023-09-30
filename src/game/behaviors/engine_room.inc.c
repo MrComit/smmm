@@ -214,7 +214,7 @@ void bhv_gravity_sign_loop(void) {
     if (gLowGrav) {
         o->oAnimState = 1;
     } else {
-        o->oAnimations = 0;
+        o->oAnimState = 0;
     }
 
     if (o->oBehParams2ndByte) {

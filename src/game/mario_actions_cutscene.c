@@ -790,6 +790,7 @@ s32 act_quicksand_death(struct MarioState *m) {
                 play_sound_if_no_flag(m, SOUND_MARIO_WAAAOOOW, MARIO_ACTION_SOUND_PLAYED);
             }
             if ((m->quicksandDepth += 5.0f) >= 60.0f) {
+                m->squishTimer = 0;
                 if (m->health < 0x300) {
                     m->actionState = 3;
                     level_trigger_warp(m, WARP_OP_DEATH);
@@ -1708,7 +1709,7 @@ s32 act_squished(struct MarioState *m) {
         m->hurtCounter = 0;
         level_trigger_warp(m, WARP_OP_DEATH);
         // woosh, he's gone!
-        set_mario_action(m, ACT_DISAPPEARED, 0);
+        // set_mario_action(m, ACT_DISAPPEARED, 0);
     }
     stop_and_set_height_to_floor(m);
     set_mario_animation(m, MARIO_ANIM_A_POSE);

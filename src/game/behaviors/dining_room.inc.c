@@ -48,6 +48,11 @@ void bhv_shyguy_loop(void) {
     cur_obj_update_floor_and_walls();
     goomba_act_walk();
     cur_obj_move_standard(-78);
+
+    if (o->oFloorType == SURFACE_INSTANT_QUICKSAND || o->oFloorType == SURFACE_DEATH_PLANE) {
+        vec3f_copy(&o->oPosX, &o->oHomeX);
+    }
+
     if (o->oInteractStatus & INT_STATUS_INTERACTED && o->oInteractStatus & INT_STATUS_WAS_ATTACKED) {
             spawn_mist_particles();
             if (o->os16110) {

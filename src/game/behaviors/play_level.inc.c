@@ -212,6 +212,11 @@ void bhv_bomb_chain_loop(void) {
             }
             break;
         case 1:
+            if (o->oObjF8 != NULL && (o->oObjF8->activeFlags == 0 || !(obj_has_behavior(o->oObjF8, bhvBombOnChain)))) {
+                o->oObjF8 = NULL;
+                o->oAction = 0;
+            }
+
             if (o->oObjF8 != NULL)
                 vec3f_set_dist_and_angle(&o->oPosX, &o->oObjF8->oPosX, 2000.0f, o->oFaceAngleRoll + 0x8000, o->oFaceAngleYaw + 0x4000);
             break;
