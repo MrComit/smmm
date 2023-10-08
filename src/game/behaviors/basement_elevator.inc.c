@@ -534,6 +534,11 @@ void bhv_ghost_bully_loop(void) {
     obj_set_hitbox(o, &sGhostBullyHitbox);
     switch (o->oAction) {
         case 0:
+            if (gMarioCurrentRoom == o->oRoom) {
+                if (gMarioState->pos[2] > -10860.0f) {
+                    gMarioState->pos[2] = -10860.0f;
+                }
+            }
             if (o->oTimer > 90) {
                 o->oAction = 9;
                 gBossPrecoins = gMarioState->numCoins;

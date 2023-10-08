@@ -325,7 +325,7 @@ void save_file_set_challenge_time(u16 time, u16 challenge);
 u8 save_file_get_peepa_score(void);
 void save_file_set_peepa_score(u8 score);
 u8 save_file_get_gallery_score(void);
-void save_file_set_gallery_score(u8 score);
+void save_file_set_gallery_score(u16 score);
 u8 save_file_get_chase_score(void);
 void save_file_set_chase_score(u8 score);
 

@@ -819,7 +819,7 @@ void controller_laser_attack(void) {
     s16 pitch, yaw;
     switch (o->oAction) {
         case 0:
-            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+            if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_QUICKSAND_DEATH) {
                 vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
                 mario_set_forward_vel(gMarioState, dist / 48.0f);
                 gMarioState->vel[1] = 30.0f;
@@ -864,7 +864,7 @@ void controller_log_attack(void) {
     switch (o->oAction) {
         case 0:
             if ((sEndAttacks[o->os16112 ^ 1] == NULL || sEndAttacks[o->os16112 ^ 1]->oBehParams2ndByte != FBA_LASER) &&
-                 gMarioState->pos[1] <= gMarioState->floorHeight) {
+                 gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_QUICKSAND_DEATH) {
                 vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
                 mario_set_forward_vel(gMarioState, dist / 48.0f);
                 gMarioState->vel[1] = 30.0f;
@@ -924,7 +924,7 @@ void controller_wall_attack(void) {
     s16 pitch, yaw;
     switch (o->oAction) {
         case 0:
-            if (gMarioState->pos[1] <= gMarioState->floorHeight) {
+            if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_QUICKSAND_DEATH) {
                 if (o->os16F8 == 0) {
                     vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
                     mario_set_forward_vel(gMarioState, dist / 48.0f);
@@ -1770,7 +1770,8 @@ void controller_act_run_end(void) {
         return;
     }
     if (o->oSubAction == 0) {
-        if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_PLACING_DOWN) {
+        if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_PLACING_DOWN &&
+            gMarioState->action != ACT_QUICKSAND_DEATH) {
             vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
             mario_set_forward_vel(gMarioState, dist / 48.0f);
             gMarioState->vel[1] = 30.0f;

@@ -16,6 +16,7 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/group0.h"
@@ -319,7 +320,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_MIRROR_SWITCH, -9448, 0, -19644, 0, 0, 0, 0x00000000, bhvMirrorSwitch),
 		OBJECT(MODEL_MIRROR_SWITCH, -8748, 0, -19644, 0, 0, 0, 0x00020000, bhvMirrorSwitch),
 		OBJECT(MODEL_RED_LIGHT_BUTTON, -6004, 213, -19328, 0, 180, 0, 0x00010000, bhvRedLightButton),
-		OBJECT(MODEL_RED_LIGHT_BUTTON, -6004, 213, -20728, 0, 0, 0, 0x00010000, bhvRedLightButton),
+		OBJECT(MODEL_RED_LIGHT_BUTTON, -6004, 213, -20728, 0, 0, 0, 0x00010100, bhvRedLightButton),
 		OBJECT(MODEL_BEDROOM_OBJECT, -6020, 0, -10737, 0, 0, 0, 0x00000000, bhvBedroomObject),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5472, 0, -11340, 0, 0, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_BEDROOM_GATE, -5472, 0, -11300, 0, 0, 0, 0x00000000, bhvBedroomGate),

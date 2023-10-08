@@ -28,7 +28,7 @@ static struct ObjectHitbox sGushingWaterHitbox = {
 static struct ObjectHitbox sOctopusHitbox = {
     /* interactType:      */ INTERACT_HIT_FROM_BELOW,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 1,
+    /* damageOrCoinValue: */ 0,
     /* health:            */ 2,
     /* numLootCoins:      */ 1,
     /* radius:            */ 50,

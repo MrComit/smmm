@@ -15,7 +15,19 @@ struct ObjectHitbox sLeverHitbox = {
 struct ObjectHitbox sStrayBookHitbox = {
     /* interactType:      */ INTERACT_DAMAGE,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 1,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 70,
+    /* height:            */ 70,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 70,
+};
+
+struct ObjectHitbox sStrayBookSparkleHitbox = {
+    /* interactType:      */ INTERACT_IGLOO_BARRIER,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 0,
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
     /* radius:            */ 70,
@@ -343,7 +355,11 @@ void bhv_stray_book_init(void) {
     //o->oMoveAnglePitch = pitch;
     //o->oMoveAngleYaw = yaw;
     o->oForwardVel = 40.0f;
-    obj_set_hitbox(o, &sStrayBookHitbox);
+    if (o->oF4) {
+        obj_set_hitbox(o, &sStrayBookSparkleHitbox);
+    } else {
+        obj_set_hitbox(o, &sStrayBookHitbox);
+    }
 
 }
 

@@ -39,7 +39,7 @@ for them).\n\
 \n\
 \n\
 They infested every part of the\n\
-manor. Stealing, distroting \n\
+manor. Stealing, distorting \n\
 rooms, creating holes in the\n\
 very fabric of this world and\n\
 filling them with their own\n\
@@ -138,7 +138,7 @@ DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
 Good work, Mario. It seems\n\
 that the money you acquired\n\
 in this room was actually \n\
-under the affect of a \n\
+under the effect of a \n\
 multiplier, that you could -\n\
 see in the top right of \n\
 your screen.\n\

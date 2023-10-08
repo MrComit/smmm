@@ -8,7 +8,11 @@ void bhv_bar_barrier_loop(void) {
             o->activeFlags = 0;
         }
     } else {
-        o->oOpacity = 100;
+        if (gIsConsole) {
+            o->oOpacity = 55;
+        } else {
+            o->oOpacity = 75;
+        }
     }
 }
 

@@ -178,6 +178,7 @@ void bhv_music_shyguy_loop(void) {
                 // cur_obj_init_animation_with_sound(2);
                 o->oObjF4 = spawn_object(o, MODEL_MUSIC_BARRIER, bhvMusicBarrier);
                 o->oObjF4->oFaceAngleYaw = 0;
+                o->oObjF4->oFaceAnglePitch = 0;
                 vec3f_set(&o->oObjF4->oPosX, 12795.0f, 0.0f, 14423.0f);
                 o->oAction = 1;
                 // seq_player_unlower_volume(0, 60);

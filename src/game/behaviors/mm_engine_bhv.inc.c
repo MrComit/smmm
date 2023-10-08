@@ -838,7 +838,7 @@ void handle_deathwarp_checkpoints(struct MarioState *m) {
         } else if (gMarioCurrentRoom == 3) { // gym
             if (m->pos[2] < -4410.0f && m->pos[0] < -5366.0f && o->oPosX != -5807.0f) {
                 vec3f_set(&o->oPosX, -5807.0f, 2200.0f, -6098.0f);
-            } else if (m->pos[2] > -50.0f && m->pos[0] < -4579.0f && o->oPosX != -12728.0f) {
+            } else if (m->pos[2] > -50.0f && m->pos[0] < -4579.0f && o->oPosX != -12728.0f && gLowGrav) {
                 vec3f_set(&o->oPosX, -12728.0f, 700.0f, 1274.0f);
                 o->oFaceAngleYaw = 0x4000;
             }
@@ -1259,7 +1259,7 @@ void toad_friend_portal_loop(void) {
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
             if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                 o->oAction = 2;
-                play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                // play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
             }
 
             cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
@@ -1268,7 +1268,7 @@ void toad_friend_portal_loop(void) {
             if (o->oTimer > 12) {
                 if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
                     o->oAction = 0;
-                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                    // stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
                 }
             }
             break;
@@ -1295,7 +1295,7 @@ void toad_friend_cage_one(void) {
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
             if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
                 o->oAction = 2;
-                play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
+                // play_music(0, SEQUENCE_ARGS(4, SEQ_PROF_T), 0);
             }
 
             cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
@@ -1304,7 +1304,7 @@ void toad_friend_cage_one(void) {
             if (o->oTimer > 12) {
                 if (CL_NPC_Dialog(DIALOG_062)) {
                     o->oAction = 0;
-                    stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
+                    // stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
                 }
             }
             break;

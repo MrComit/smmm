@@ -531,7 +531,7 @@ void bhv_fake_red_coin_loop(void) {
 
 
 void bhv_red_light_button_loop(void) {
-    if (o->oF4 == 0 && gRedCoinBitfield & (1 << 6)) {
+    if (((o->oBehParams >> 8) & 0xFF) == 0 && o->oF4 == 0 && (gRedCoinBitfield & (1 << 6))) {
         o->oF4 = 1;
         gRedCoinsCollected++;
     }

@@ -2202,12 +2202,59 @@ void print_animated_red_coin(s16 x, s16 y) {
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
-void render_pause_red_coins(void) {
-    s8 x;
 
-    for (x = 0; x < gRedCoinsCollected; x++) {
-        print_animated_red_coin(GFX_DIMENSIONS_FROM_RIGHT_EDGE(30) - x * 20, 16);
+#define GREEN_COINS_HUD_X 240
+#define GREEN_COINS_HUD_Y 16
+
+void render_pause_red_coins(void) {
+    // s8 x;
+
+    // for (x = 0; x < gRedCoinsCollected; x++) {
+    //     print_animated_red_coin(GFX_DIMENSIONS_FROM_RIGHT_EDGE(30) - x * 20, 16);
+    // }
+    s32 timer = gGlobalTimer;
+    s32 x = GREEN_COINS_HUD_X;
+    s32 y = GREEN_COINS_HUD_Y;
+    if (gGreenCoinsCollected) {
+        x -= 50;
     }
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, x, y, 0);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.23f, 0.23f, 1.0f);
+    gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+
+    switch (timer & 7) {
+        case 0:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_0);
+            break;
+        case 1:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_22_5);
+            break;
+        case 2:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_45);
+            break;
+        case 3:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_67_5);
+            break;
+        case 4:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_90);
+            break;
+        case 5:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_67_5_r);
+            break;
+        case 6:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_45_r);
+            break;
+        case 7:
+            gSPDisplayList(gDisplayListHead++, coin_seg3_dl_red_22_5_r);
+            break;
+    }
+
+    gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+    print_text(x+10, y, "*", 1); // 'X' glyph
+    print_text_fmt_int(x+24, y, "%d", gRedCoinsCollected, 1);
 }
 
 #if defined(WIDE)
@@ -2231,9 +2278,6 @@ void render_widescreen_setting(void) {
 #endif
 
 
-
-#define GREEN_COINS_HUD_X 240
-#define GREEN_COINS_HUD_Y 16
 
 
 void render_pause_green_coins(void) {
@@ -3058,7 +3102,9 @@ s16 render_pause_courses_and_castle(void) {
                     render_pause_my_score_coins();
                 }
                 
-                render_pause_red_coins();
+                if (gRedCoinsCollected) {
+                    render_pause_red_coins();
+                }
                 if (gGreenCoinsCollected) {
                     render_pause_green_coins();
                 }
@@ -5457,6 +5503,8 @@ void play_sound_for_rank(s32 rank) {
 s32 sCreditsRankY = 150;
 s32 sCreditsRankAct2 = 0;
 
+extern s32 gLowGrav;
+
 void render_credits_rank_evaluation(void) {
     s32 rank;
     s32 coinUpdateFast = TRUE;
@@ -5513,6 +5561,7 @@ void render_credits_rank_evaluation(void) {
                     print_text(60 + 60, 30, "PRESS A", 0);
                     if (gMarioState->input & INPUT_A_PRESSED) {
                         sCreditsRankAct2 = 1;
+                        gLowGrav = FALSE;
                         save_file_do_save(gCurrSaveFileNum - 1);
                         play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
 

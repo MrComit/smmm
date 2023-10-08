@@ -914,7 +914,7 @@ u8 save_file_get_gallery_score(void) {
     return gSaveBuffer.menuData[0].galleryScore;
 }
 
-void save_file_set_gallery_score(u8 score) {
+void save_file_set_gallery_score(u16 score) {
     if (score > gSaveBuffer.menuData[0].galleryScore) {
         gSaveBuffer.menuData[0].galleryScore = score;
     }

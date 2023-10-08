@@ -213,6 +213,7 @@ void bhv_lightning_spinner_loop(void) {
 
 void bhv_lightning_loop(void) {
     struct MarioState *m = gMarioState;
+    struct Object *obj = NULL;
     o->oInteractStatus = 0;
     if (o->oTimer < 2 && count_room_objects_with_behavior(bhvBooCoinCage, o->oRoom) == 0 && gCurrLevelNum != LEVEL_TTM) {
         o->oAction = 4;
@@ -255,6 +256,12 @@ void bhv_lightning_loop(void) {
 
     if ((o->oBehParams >> 8) & 0xFF && count_room_objects_with_behavior(bhvSmallKey, o->oRoom)) {
         if (m->pos[1] > 2100.0f) {
+            if (o->os16FA == 0) {
+                obj = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+                if (obj != NULL) {
+                    vec3f_copy(&obj->oPosX, sBalconyRespawn);
+                }
+            }
             if (m->health < 0x300) {
                 o->os16FA = 2;
             } else {
