@@ -103,6 +103,7 @@ void bhv_blue_coin_switch_loop(void) {
                 if (gMarioStates[0].action == ACT_GROUND_POUND_LAND) {
                     // Set to BLUE_COIN_SWITCH_ACT_RECEDING
                     o->oAction++;
+                    save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
 
                     // Recede at a rate of 20 units/frame.
                     o->oVelY = -20.0f;
@@ -149,7 +150,7 @@ void bhv_blue_coin_switch_loop(void) {
                         gMarioState->numCoins += 25;
                         o->activeFlags = 0;
                         play_puzzle_jingle();
-                        save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                        // save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
                     }
                 }
             } else {
@@ -167,7 +168,7 @@ void bhv_blue_coin_switch_loop(void) {
                     while ((obj = CL_obj_find_nearest_object_with_behavior_room(o, bhvHiddenBlueCoin, o->oRoom)) != NULL) {
                         obj->activeFlags = 0;
                     }
-                    save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
+                    // save_file_set_challenges((o->oBehParams >> 8) & 0xFF);
                 }
             }
             break;

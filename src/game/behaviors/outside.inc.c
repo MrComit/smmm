@@ -701,7 +701,7 @@ void bhv_bounce_box_loop(void) {
                 set_mario_action(m, ACT_CUTSCENE_JUMP, 2);
                 set_r_button_camera(gCamera);
                 m->vel[1] = o->oFloatF4;
-                m->faceAngle[1] = (m->angleVel[1] = o->oFaceAngleYaw + 0xC000);
+                m->faceAngle[1] = (o->oFaceAngleYaw + 0xC000);
                 mario_set_forward_vel(m, 15.0f);
                 play_sound(SOUND_ACTION_BOUNCE_OFF_OBJECT, m->marioObj->header.gfx.cameraToObject);
                 cur_obj_play_sound_1(SOUND_GENERAL_BOING1);

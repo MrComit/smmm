@@ -1624,7 +1624,9 @@ void bhv_post_friend_toad_loop(void) {
                 o->oAction = 1;
                 o->oFC = 1;
                 rank = save_file_get_final_rank();
-                if (rank < SAVE_RANK_D) {
+                if (gMarioState->numCoins == 0) {
+                    o->oBehParams2ndByte = DIALOG_090;
+                } else if (rank < SAVE_RANK_D) {
                     //if less than D rank, DIALOG_089
                     o->oBehParams2ndByte = DIALOG_089;
                 } else if (rank < SAVE_RANK_S) {
@@ -1652,7 +1654,11 @@ void bhv_post_friend_toad_loop(void) {
                 if (CL_NPC_Dialog(o->oBehParams2ndByte)) {
                     o->oAction = 0;
                     // stop_background_music(SEQUENCE_ARGS(4, SEQ_PROF_T));
-                    o->oBehParams2ndByte = DIALOG_087;
+                    if (gMarioState->numCoins == 0) {
+                        o->oBehParams2ndByte = DIALOG_093;
+                    } else {
+                        o->oBehParams2ndByte = DIALOG_087;
+                    }
                 }
             }
             break;

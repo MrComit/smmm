@@ -4097,7 +4097,7 @@ void set_goal_level_and_room(void) {
 }
 
 
-
+s16 sCompassPulsate = 0;
 void init_map(void) {
     s32 map = get_map_from_level();
     // map = 0;
@@ -4106,6 +4106,7 @@ void init_map(void) {
     gMapCamOffset[1] = 1000.0f;
     gMapCamOffset[2] = 0.0f;
     spawn_map_objects(map);
+    sCompassPulsate = 0;
 }
 
 void render_map_background(void) {
@@ -4371,8 +4372,10 @@ void render_map_red_coins(void) {
 }
 
 
+
 void update_map_screen(void) {
     s32 objective, centerX;
+    s16 yellowCol;
     f32 div = 3.0f;
     if (gPlayer1Controller->buttonDown & (Z_TRIG | R_TRIG | B_BUTTON)) {
         div = 1.0f;
@@ -4432,6 +4435,25 @@ void update_map_screen(void) {
     centerX = get_str_x_pos_from_center(211 - 4 - 4, sObjectives[objective], 0.0f);
     print_generic_string(centerX, 216, sObjectives[objective]);
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, 45, 30, 0);
+    create_dl_scale_matrix(MENU_MTX_NOPUSH, 0.2f, 0.2f, 1.0f);
+    create_dl_rotation_matrix(MENU_MTX_NOPUSH, ((f32)(gMarioState->faceAngle[1] + 0x8000) * 360 / (f32)0x10000), 0.0f, 0.0f, 1.0f);
+    // gDPSetRenderMode(gDisplayListHead++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+
+    sCompassPulsate += 0xC00;
+    yellowCol = 0xBF + (sins(sCompassPulsate) * 0x40);
+
+    gDPSetEnvColor(gDisplayListHead++, yellowCol, yellowCol, 0, 255);
+
+
+    gSPDisplayList(gDisplayListHead++, dl_draw_arrow);
+
+    // gDPSetRenderMode(gDisplayListHead++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+
+
+
 
     // gDPSetEnvColor(gDisplayListHead++, 0, 255, 0, 255);
     // render_map_object(0.0f, -500.0f, test_map_TestMap_mesh);
@@ -5532,8 +5554,10 @@ void render_credits_rank_evaluation(void) {
 
         print_text_fmt_int(120, sCreditsRankY - 30, "%d", gCreditsCoinNum, 6);
         print_text(60 + 60, sCreditsRankY, "RANK ", 4);
-        rank = get_rank_from_coin_count(gCreditsCoinNum);
-        print_text(130 + 60, sCreditsRankY, sCreditsRanks[rank - 1], sRankToPalette[rank - 1]);
+        if (gComitCreditsTimer >= 15) {
+            rank = get_rank_from_coin_count(gCreditsCoinNum);
+            print_text(130 + 60, sCreditsRankY, sCreditsRanks[rank - 1], sRankToPalette[rank - 1]);
+        }
 
         if (gCreditsCoinNum == gMarioState->numCoins) {
             if (sCreditsRankAct2 == 1) {
@@ -5546,7 +5570,9 @@ void render_credits_rank_evaluation(void) {
                     sDelayedWarpOp = 0x10;
                     sDelayedWarpTimer = 1;
                     sSourceWarpNodeId = 0xAB;
-                    if (rank == SAVE_RANK_F) {
+                    if (gMarioState->numCoins == 0) {
+                        sSourceWarpNodeId += 3;
+                    } else if (rank == SAVE_RANK_F) {
                         sSourceWarpNodeId += 2;
                     } else if (rank == SAVE_RANK_E) {
                         sSourceWarpNodeId += 1;

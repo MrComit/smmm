@@ -129,6 +129,7 @@
 #define ACTIVE_PARTICLE_TRIANGLE             (1 << 19) // 0x00080000
 #define ACTIVE_PARTICLE_GP_MIST_CIRCLE       (1 << 20) // 0x00100000
 #define ACTIVE_PARTICLE_DIZZY                (1 << 21) // 0x00200000
+#define ACTIVE_PARTICLE_GP_RED_CIRCLE        (1 << 22) // 0x00200000
 
 /* oAction */
 #define OBJ_ACT_LAVA_DEATH        100

@@ -62,7 +62,8 @@ void bhv_painting_teleport_loop(void) {
             if (mario_in_painting_teleport(o->oBehParams2ndByte)) {
                 o->oAction = 1;
                 o->oObjF4->oAction = 2;
-                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0xFF, 0xFF, 0xFF);
+                // set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 0);
+                play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 10, 0xFF, 0xFF, 0xFF);
                 play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
             }
             break;
@@ -73,7 +74,8 @@ void bhv_painting_teleport_loop(void) {
                 gMarioState->pos[0] += 100.0f * sins(gMarioState->faceAngle[1]);
                 gMarioState->pos[2] += 100.0f * coss(gMarioState->faceAngle[1]);
             }
-            if (o->oTimer > 15) {
+            set_mario_npc_dialog(1);
+            if (o->oTimer > 14) {
                 play_transition(WARP_TRANSITION_FADE_FROM_COLOR, 10, 0xFF, 0xFF, 0xFF);
                 o->oAction = 2;
             }
@@ -81,6 +83,7 @@ void bhv_painting_teleport_loop(void) {
         case 2:
             if (o->oTimer > 20/* && o->oDistanceToMario > 150.0f*/) {
                 o->oAction = 0;
+                set_mario_npc_dialog(0);
             }
             break;
     }

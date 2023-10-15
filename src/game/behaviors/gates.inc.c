@@ -242,6 +242,17 @@ void bhv_l1_gate_loop(void) {
                         play_puzzle_jingle();
                     }
                     break;
+                case 6:
+                    if (o->oTimer == 0) {
+                        o->collisionData = segmented_to_virtual(l1_gate_alt_collision);
+                    }
+                    if (save_file_get_keys(0) & (1 << 1)) {
+                        o->oAction = 1;
+                        if (o->oTimer == 0) {
+                            o->activeFlags = 0;
+                        }
+                    }
+                    break;
             }
             break;
         case 1:

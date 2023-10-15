@@ -520,6 +520,9 @@ static void boo_act_3(void) {
             case 4:
                 obj = spawn_object(o, MODEL_BROKEN_KEY, bhvBrokenKey);
                 obj->oBehParams2ndByte = (o->oBehParams >> 8) & 0xFF;
+                if (obj->oBehParams2ndByte == 7) {
+                    obj->oFlags |= OBJ_FLAG_DISABLE_TO_ROOM_CLEAR;
+                }
                 obj->oFaceAngleRoll = 0xF000;
                 obj->oFaceAngleYaw = 0;
                 obj->oPosX = o->oHomeX;

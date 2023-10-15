@@ -70,6 +70,13 @@ void bhv_red_coin_init(void) {
  * the orange number counter.
  */
 void bhv_red_coin_loop(void) {
+    if (gRedCoinMissionActive == FALSE || gRedCoinLevel != gCurrLevelNum) {
+        o->oInteractStatus = 0;
+        cur_obj_become_intangible();
+        return;
+    } else {
+        cur_obj_become_tangible();
+    }
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
             gRedCoinsCollected++;
             gRedCoinBitfield |= (1 << o->oBehParams2ndByte);
@@ -88,8 +95,8 @@ void bhv_red_coin_loop(void) {
                        gGlobalSoundSource);
 
         coin_collected();
-        o->oInteractStatus = 0;
     }
+    o->oInteractStatus = 0;
 }
 
 s16 sGreenStarSpawned[2] = {0, 0};
@@ -403,7 +410,6 @@ void bhv_winged_red_coin_loop(void) {
 
 
 
-
 void bhv_invis_red_coin_loop(void) {
     struct Object *obj;
 
@@ -414,17 +420,25 @@ void bhv_invis_red_coin_loop(void) {
 
     if (o->oDistanceToMario < 2000.0f) {
         cur_obj_play_sound_1(SOUND_AIR_PEACH_TWINKLE);
+        // gMarioState->particleFlags |= PARTICLE_GP_RED_CIRCLE;
+        // sGPRedParticles.sizeBase = (2000.0f - o->oDistanceToMario) / 250.0f;
     }
 
-    if (cur_obj_is_mario_ground_pounding_platform()) {
-        // o->oPosY += 800.0f;
-        obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
-        obj->oPosY += 800.0f;
-        obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-        obj->oBehParams2ndByte = o->oBehParams2ndByte;
-        spawn_mist_particles();
-        o->activeFlags = 0;
-        cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
+    if (o->oDistanceToMario < 150.0f) {
+        if ((o->oTimer & 7) == 0) {
+            obj = spawn_object(o, MODEL_NONE, bhvSparkleSpawn);
+        }
+
+        if (cur_obj_is_mario_ground_pounding_platform()) {
+            // o->oPosY += 800.0f;
+            obj = spawn_object(o, MODEL_RED_COIN, bhvPhysicsRedCoin);
+            obj->oPosY += 800.0f;
+            obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
+            obj->oBehParams2ndByte = o->oBehParams2ndByte;
+            spawn_mist_particles();
+            o->activeFlags = 0;
+            cur_obj_play_sound_2(SOUND_GENERAL2_RIGHT_ANSWER);
+        }
     }
 }
 

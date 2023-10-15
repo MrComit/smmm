@@ -1294,12 +1294,24 @@ extern s32 gMarioDeathRoom;
 
 
 s32 act_unused_death_exit(struct MarioState *m) {
-    if (launch_mario_until_land(m, ACT_FREEFALL_LAND_STOP, MARIO_ANIM_GENERAL_FALL, 0.0f)) {
+    if (gCurrCourseNum >= 11 || launch_mario_until_land(m, ACT_FREEFALL_LAND_STOP, MARIO_ANIM_GENERAL_FALL, 0.0f)) {
 #ifdef VERSION_JP
         play_sound(SOUND_MARIO_OOOF, m->marioObj->header.gfx.cameraToObject);
 #else
         play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
 #endif
+
+        if (gCurrCourseNum >= 11) {
+            if (m->input & INPUT_B_PRESSED) {
+                return set_mario_action(m, ACT_DIVE, 0);
+            }
+
+            if (m->input & INPUT_Z_PRESSED) {
+                return set_mario_action(m, ACT_GROUND_POUND, 0);
+            }
+
+            common_air_action_step(m, ACT_FREEFALL_LAND, MARIO_ANIM_GENERAL_FALL, AIR_STEP_CHECK_LEDGE_GRAB);
+        }
         //m->numLives--;
         // restore 7.75 units of health
         m->healCounter = 31;

@@ -110,6 +110,7 @@
 #define PARTICLE_19                   /* 0x00080000 */ (1 << 19)
 #define PARTICLE_GP_MIST_CIRCLE       /* 0x00100000 */ (1 << 20)
 #define PARTICLE_DIZZY                /* 0x00200000 */ (1 << 21)
+#define PARTICLE_GP_RED_CIRCLE        /* 0x00100000 */ (1 << 22)
 
 #define MODEL_STATE_NOISE_ALPHA 0x180
 #define MODEL_STATE_METAL       0x200

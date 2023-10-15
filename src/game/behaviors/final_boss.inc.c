@@ -30,10 +30,10 @@ struct ObjectHitbox sEndBubbleHitbox = {
     /* damageOrCoinValue: */ 1,
     /* health:            */ 0,
     /* numLootCoins:      */ 1,
-    /* radius:            */ 80,
-    /* height:            */ 180,
-    /* hurtboxRadius:     */ 80,
-    /* hurtboxHeight:     */ 180,
+    /* radius:            */ 70,
+    /* height:            */ 165,
+    /* hurtboxRadius:     */ 70,
+    /* hurtboxHeight:     */ 165,
 };
 
 
@@ -819,16 +819,22 @@ void controller_laser_attack(void) {
     s16 pitch, yaw;
     switch (o->oAction) {
         case 0:
+            // if (o->parentObj->os16104 == 0) {
+            //     o->oAction = 1;
+            //     break;
+            // }
             if (gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_QUICKSAND_DEATH) {
-                vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
-                mario_set_forward_vel(gMarioState, dist / 48.0f);
-                gMarioState->vel[1] = 30.0f;
-                set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
-                gMarioState->invincTimer = 30;
-                // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
-                // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
-                // gMarioState->faceAngle[1] = angle_to
-                o->os16102 = 0x2490;
+                if (o->parentObj->os16104 != 0) {
+                    vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
+                    mario_set_forward_vel(gMarioState, dist / 48.0f);
+                    gMarioState->vel[1] = 30.0f;
+                    set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
+                    gMarioState->invincTimer = 30;
+                    // o->oFloatFC = (dist * sins(gMarioState->faceAngle[1])) / 48;
+                    // o->oFloat100 = (dist * coss(gMarioState->faceAngle[1])) / 48;
+                    // gMarioState->faceAngle[1] = angle_to
+                    o->os16102 = 0x2490;
+                }
 
                 o->oObjF4 = spawn_object(o, MODEL_END_SHYGUY, bhvShyguyLaser);
                 vec3f_set(&o->oObjF4->oPosX, -437.0f, 7406.0f, -9740.0f);
@@ -841,7 +847,7 @@ void controller_laser_attack(void) {
             }
             break;
         case 1:
-            if (o->oTimer <= 48) {
+            if (o->oTimer <= 48 && o->parentObj->os16104 != 0) {
                 set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
                 gMarioState->invincTimer = 30;
                 if (gMarioState->vel[1] < 0.0f) {
@@ -863,7 +869,12 @@ void controller_log_attack(void) {
     s16 pitch, yaw;
     switch (o->oAction) {
         case 0:
-            if ((sEndAttacks[o->os16112 ^ 1] == NULL || sEndAttacks[o->os16112 ^ 1]->oBehParams2ndByte != FBA_LASER) &&
+            // if (o->parentObj->os16104 == 0) {
+            //     o->oAction = 1;
+            //     break;
+            // }
+            if (o->parentObj->os16104 != 0 &&
+                (sEndAttacks[o->os16112 ^ 1] == NULL || sEndAttacks[o->os16112 ^ 1]->oBehParams2ndByte != FBA_LASER) &&
                  gMarioState->pos[1] <= gMarioState->floorHeight && gMarioState->action != ACT_QUICKSAND_DEATH) {
                 vec3f_get_dist_and_angle(gMarioState->pos, sEndBossMarioPoint, &dist, &pitch, &gMarioState->faceAngle[1]);
                 mario_set_forward_vel(gMarioState, dist / 48.0f);
@@ -889,7 +900,7 @@ void controller_log_attack(void) {
             }
             break;
         case 1:
-            if (o->os16108 && o->oTimer <= 48) {
+            if (o->os16108 && o->oTimer <= 48 && o->parentObj->os16104 != 0) {
                 set_mario_action(gMarioState, ACT_CUTSCENE_JUMP, 1);
                 gMarioState->invincTimer = 30;
                 if (gMarioState->vel[1] < 0.0f) {

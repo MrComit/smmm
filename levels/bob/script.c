@@ -49,6 +49,8 @@
 #include "actors/group0.h"
 #include "actors/group0.h"
 #include "actors/group0.h"
+#include "actors/group0.h"
+#include "actors/group0.h"
 
 /* Fast64 begin persistent block [includes] */
 extern const GeoLayout ice_bobomb_geo[];
@@ -378,6 +380,8 @@ const LevelScript level_bob_entry[] = {
 		OBJECT(MODEL_NONE, -8509, 946, 17939, 0, 0, 0, 0x00070000, bhvInvisRedCoin),
 		OBJECT(MODEL_PURPLE_SWITCH, -10320, 1944, 15200, 0, -180, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_RED_COIN, -10478, 3341, 17409, 0, 0, 0, 0x00060000, bhvRedCoin),
+		OBJECT(MODEL_L1_GATE, -9726, 2944, 12798, 0, 0, 0, (6 << 16), bhvL1Gate),
+		OBJECT(MODEL_L1_GATE, -7514, 944, 17158, 0, -90, 0, (6 << 16), bhvL1Gate),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5374, 944, 17158, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -3355, 0, 13808, 0, -90, 0, 0x00000000, bhvDoor),
 		OBJECT(MODEL_CASTLE_CASTLE_DOOR, -5455, 0, 13808, 0, -90, 0, 0x00000000, bhvDoor),

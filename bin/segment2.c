@@ -3841,6 +3841,30 @@ const Gfx dl_draw_text_bg_box[] = {
 
 
 
+static const Vtx vertex_arrow[] = {
+    {{{   20,      40,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{    0,     -40,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   40,     -40,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   20,      52,      0}, 0, {     0,      0}, {0x40, 0x40, 0, 0xff}}},
+    {{{    -6,     -46,      0}, 0, {     0,      0}, {0x40, 0x40, 0, 0xff}}},
+    {{{   46,     -46,      0}, 0, {     0,      0}, {0x40, 0x40, 0, 0xff}}},
+};
+
+// 0x0200EDE8 - 0x0200EE28
+const Gfx dl_draw_arrow[] = {
+    gsDPPipeSync(),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsSPVertex(vertex_arrow, 6, 0),
+    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
+    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
+    gsSP1Triangle(3,  4,  5, 0x0),
+    gsDPSetCombineMode(G_CC_FADE, G_CC_FADE),
+    gsSP1Triangle(0,  1,  2, 0x0),
+    gsSPEndDisplayList(),
+};
+
+
+
 
 static const Vtx vertex_text_green_bg_box[] = {
     {{{     0,    -80,      0}, 0, {     0,      0}, {0, 0x9f, 0xff, 0xff}}},

@@ -632,6 +632,7 @@
 #define MODEL_RANK_LETTER         0x4B        // number_geo
 #define MODEL_SAVE_STATION        0x4C
 #define MODEL_ENV_FLAME_SHADOW    0x4D
+#define MODEL_RED_MIST            0x4E
 
 
 

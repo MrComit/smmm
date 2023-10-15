@@ -772,7 +772,7 @@ extern Vtx hmc_dl_BBOutside_mesh_layer_4_vtx_2[16];
 extern Gfx hmc_dl_BBOutside_mesh_layer_4_tri_2[];
 extern Vtx hmc_dl_CC_mesh_layer_1_vtx_0[3];
 extern Gfx hmc_dl_CC_mesh_layer_1_tri_0[];
-extern Vtx hmc_dl_Theater_mesh_layer_1_vtx_0[114];
+extern Vtx hmc_dl_Theater_mesh_layer_1_vtx_0[123];
 extern Gfx hmc_dl_Theater_mesh_layer_1_tri_0[];
 extern Vtx hmc_dl_Theater_mesh_layer_1_vtx_1[46];
 extern Gfx hmc_dl_Theater_mesh_layer_1_tri_1[];

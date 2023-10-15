@@ -148,6 +148,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_LOCK,      prospector_lock_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RANK_LETTER,      rank_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SAVE_STATION,      save_station_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_RED_MIST,                    red_mist_geo),
     // LOAD_MODEL_FROM_GEO(MODEL_PROSPECTOR_T,      prospector_t_geo),
 
     //LOAD_MODEL_FROM_GEO(MODEL_LANTERN,                 lantern_geo),

@@ -983,6 +983,14 @@ void save_file_set_options(u16 flag) {
 }
 
 
+void save_file_set_options_nontoggle(u16 flag) {
+    gSaveBuffer.menuData[0].options |= flag;
+
+    gMainMenuDataModified = TRUE;
+    save_main_menu_data();
+}
+
+
 
 
 void save_file_set_sound_mode(u16 mode) {

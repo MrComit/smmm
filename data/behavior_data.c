@@ -1314,6 +1314,14 @@ const BehaviorScript bhvGPMistParticleSpawner[] = {
     DEACTIVATE(),
 };
 
+const BehaviorScript bhvGPRedParticleSpawner[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    CALL_NATIVE(bhv_gp_red_puffs_init),
+    DELAY(1),
+    DEACTIVATE(),
+};
+
 
 const BehaviorScript bhvDizzyParticleSpawner[] = {
     BEGIN(OBJ_LIST_DEFAULT),
@@ -11835,6 +11843,7 @@ const BehaviorScript bhvBooBubble[] = {
     BEGIN(OBJ_LIST_LEVEL),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
+    DROP_TO_FLOOR(),
     CALL_NATIVE(bhv_boo_bubble_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_boo_bubble_loop),
@@ -12181,7 +12190,7 @@ const BehaviorScript bhvMariosJournal[] = {
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_INT(oInteractionSubtype, INT_SUBTYPE_NPC),
     DROP_TO_FLOOR(),
-    SET_HITBOX(/*Radius*/ 150, /*Height*/ 80),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 80),
     // SET_INT(oWoodenPostTotalMarioAngle, 0),
     CALL_NATIVE(load_object_static_model),
     BEGIN_LOOP(),

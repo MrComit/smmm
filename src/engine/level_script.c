@@ -660,6 +660,8 @@ static void level_cmd_unload_area(void) {
     sCurrentCmd = CMD_NEXT;
 }
 
+extern struct MarioState *gMarioState;
+
 static void level_cmd_set_mario_start_pos(void) {
     s32 rank;
     gMarioSpawnInfo->areaIndex = CMD_GET(u8, 2);
@@ -673,7 +675,9 @@ static void level_cmd_set_mario_start_pos(void) {
 
     if (gCurrDemoInput == NULL && gLevelToCourseNumTable[gCurrLevelNum - 1] < 11) {
         rank = save_file_get_final_rank();
-        if (rank == 1)  {
+        if (rank != 0 && gMarioState->numCoins == 0) {
+            gMarioSpawnInfo->areaIndex = 4;
+        } else if (rank == 1)  {
             gMarioSpawnInfo->areaIndex = 3;
         } else if (rank == 2) {
             gMarioSpawnInfo->areaIndex = 2;

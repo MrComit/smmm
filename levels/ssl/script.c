@@ -91,6 +91,8 @@
 #include "actors/group15.h"
 #include "actors/common0.h"
 #include "actors/group15.h"
+#include "actors/common0.h"
+#include "actors/group15.h"
 
 /* Fast64 begin persistent block [includes] */
 #include "actors/common0.h"
@@ -395,6 +397,7 @@ const LevelScript level_ssl_entry[] = {
 		OBJECT(MODEL_HAUNTED_CAGE, 18724, 7311, -11707, 0, 0, 0, (22 << 16), bhvBoogooCage),
 		OBJECT(MODEL_ANTENNA_BALL, 11330, 7809, -12776, 0, 0, 0, (1 << 16), bhvAntennaBall),
 		OBJECT(MODEL_GLOBAL_GATE, 6283, 7311, -11707, 0, 90, 0, 0x00000000, bhvGlobalGate),
+		OBJECT(MODEL_GLOBAL_GATE, 19303, 7311, -11707, 0, -90, 0, 0x00000000, bhvGlobalGate),
 		OBJECT(MODEL_BG_GOOMBA, 15957, 7311, -8830, 0, -90, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BG_GOOMBA, 12372, 7311, -14732, 0, -90, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_HEART, 14420, 7361, -12371, 0, -90, 0, 0x00000000, bhvRecoveryHeart),

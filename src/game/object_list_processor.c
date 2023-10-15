@@ -228,6 +228,7 @@ struct ParticleProperties sParticleTypes[] = {
     { PARTICLE_TRIANGLE,             ACTIVE_PARTICLE_TRIANGLE,             MODEL_NONE,                 bhvTriangleParticleSpawner },
     { PARTICLE_GP_MIST_CIRCLE,       ACTIVE_PARTICLE_GP_MIST_CIRCLE,       MODEL_NONE,                 bhvGPMistParticleSpawner },
     { PARTICLE_DIZZY,                ACTIVE_PARTICLE_DIZZY,                MODEL_NONE,                 bhvDizzyParticleSpawner },
+    { PARTICLE_GP_RED_CIRCLE,        ACTIVE_PARTICLE_GP_RED_CIRCLE,        MODEL_NONE,                 bhvGPRedParticleSpawner },
     { 0, 0, MODEL_NONE, NULL },
 };
 
@@ -286,7 +287,7 @@ void mario_update_friend_l1_loop(struct MarioState *m) {
         return;
     switch (index) {
         case 0:
-            if (gMarioCurrentRoom == 2 && m->pos[2] < 14900.0f && m->pos[1] <= m->floorHeight) {
+            if (gMarioCurrentRoom == 2 && m->pos[2] < 14900.0f && m->pos[1] <= m->floorHeight && m->action != ACT_LEDGE_GRAB) {
                 if (obj->oF4 == 0) {
                     obj->oF4 = 1;
                     obj->oBehParams2ndByte = 0;
@@ -578,7 +579,7 @@ void mario_update_manager_upgrades(struct MarioState *m) {
                     obj->oPosX = m->pos[0];
                     obj->oPosZ = m->pos[2];
                     obj->oFlags &= ~OBJ_FLAG_DISABLE_ON_ROOM_EXIT;
-                    obj->oAnimState = 3;
+                    obj->oAnimState = 2;
                     set_mario_npc_dialog(1);
                     save_file_set_newflags(SAVE_TOAD_FLAG_TREASURE_4, 1);
                 }
@@ -895,7 +896,7 @@ void bhv_mario_update(void) {
     }
     // if (gMarioState->controller->buttonDown & Z_TRIG) {
         // if (gMarioState != NULL) {
-            // print_text_fmt_int(50, 8*20, "%x", gMarioState->action, 0);
+        //     print_text_fmt_int(50, 8*20, "%x", gMarioState->action, 0);
         // }
     //     print_text_fmt_int(50, 7*20, "LOREM IPSUM", 0, 1);
     //     print_text_fmt_int(50, 6*20, "CONGRATULATIONS!", 0, 2);

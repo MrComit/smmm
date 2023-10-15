@@ -1079,11 +1079,53 @@ extern Vec3f gComitCutscenePosVec;
 extern Vec3f gComitCutsceneFocVec;
 
 
+s32 check_red_frame_gp(struct MarioState *m, s32 index) {
+    s32 challenge = 0;
+    switch (index) {
+        case 8: // 0x2E
+            challenge = 0x2E;
+            if (CL_objptr_nearest_object_with_behavior_and_field(gMarioObject, bhvToken, 0x188, 0x00022E00) != NULL) {
+                return FALSE;
+            }
+            break;
+        case 9: // 0x07
+            challenge = 0x07;
+            if (CL_objptr_nearest_object_with_behavior_and_field(gMarioObject, bhvToken, 0x188, 0x00010700) != NULL) {
+                return FALSE;
+            }
+            break;
+        case 12: // 0x15
+            challenge = 0x15;
+            if (CL_objptr_nearest_object_with_behavior_and_field(gMarioObject, bhvToken, 0x188, 0x00011500) != NULL) {
+                return FALSE;
+            }
+            break;
+        case 15: // 0x2D
+            challenge = 0x2D;
+            if (CL_objptr_nearest_object_with_behavior_and_field(gMarioObject, bhvToken, 0x188, 0x00022D00) != NULL) {
+                return FALSE;
+            }
+            break;
+        default:
+            return FALSE;
+            break;
+    }
+
+    if (save_file_get_challenges(challenge / 32) & (1 << (challenge % 32))) {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+
+
 void handle_ground_pound_floor(struct MarioState *m) {
     struct Object *obj;
     s32 index = m->floor->force;
     if (save_file_get_gpflags() & (1 << index)) {
-        return;
+        if (!check_red_frame_gp(m, index)) {
+            return;
+        }
     }
     switch (index) {
         case 0:
@@ -1110,13 +1152,13 @@ void handle_ground_pound_floor(struct MarioState *m) {
             obj = spawn_object(gMarioObject, MODEL_BLUE_COIN, bhvMrIBlueCoin);
             // obj->oPosY += 200.0f;
             break;
-        case 8:
+        case 8: // RED FRAME PAINTING
             spawn_token(2, 0x2E, sSpawnedTokens[3], 0, 0); // WAS 0x25
             break;
-        case 9:
+        case 9: // RED FRAME PAINTING
             spawn_token(1, 0x07, sSpawnedTokens[4], 0, 0xC000);
             break;
-        case 12:
+        case 12: // RED FRAME PAINTING
             spawn_token(1, 0x15, sSpawnedTokens[5], 0, 0xC000);
             break;
         case 13:
@@ -1145,7 +1187,7 @@ void handle_ground_pound_floor(struct MarioState *m) {
                 vec3f_copy(gComitCutsceneFocVec, &obj->oPosX);
             }
             break;
-        case 15:
+        case 15: // RED FRAME PAINTING
             spawn_token(2, 0x2D, sSpawnedTokens[7], 0, 0x0000);
             break;
         case 16:

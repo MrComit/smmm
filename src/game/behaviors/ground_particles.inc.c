@@ -16,6 +16,22 @@ static struct SpawnParticlesInfo sGPMistParticles = {
 };
 
 
+struct SpawnParticlesInfo sGPRedParticles = {
+    /* behParam:        */ 3,
+    /* count:           */ 1,
+    /* model:           */ MODEL_RED_MIST,
+    /* offsetY:         */ 20,
+    /* forwardVelBase:  */ 4,
+    /* forwardVelRange: */ 2,
+    /* velYBase:        */ 0,
+    /* velYRange:       */ 0,
+    /* gravity:         */ 0,
+    /* dragStrength:    */ 50,
+    /* sizeBase:        */ 7.0f,
+    /* sizeRange:       */ 1.5f,
+};
+
+
 void bhv_dizzy_triangle_init(void) {
     o->oAnimState = 4;
     o->oFloatF8 = 0.01f;
@@ -71,6 +87,12 @@ void bhv_dizzy_particle_spawn_loop(void) {
 void bhv_gp_white_puffs_init(void) {
     clear_particle_flags(ACTIVE_PARTICLE_GP_MIST_CIRCLE);
     cur_obj_spawn_particles(&sGPMistParticles);
+}
+
+
+void bhv_gp_red_puffs_init(void) {
+    clear_particle_flags(ACTIVE_PARTICLE_GP_RED_CIRCLE);
+    cur_obj_spawn_particles(&sGPRedParticles);
 }
 
 

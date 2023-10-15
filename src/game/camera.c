@@ -1229,13 +1229,56 @@ struct Object *gComitCutsceneObject = NULL;
 extern s32 gRoomEntryTimer;
 
 
+extern s16 gDialogID;
+extern s16 gCutsceneMsgIndex;
+extern s16 gCutsceneMsgTimer;
+
+
+s32 gCutsceneSkip = 0;
+s32 gCutsceneSkipTimer = 0;
+
+
+s32 can_skip_cutscene(s32 scene) {
+    s32 flags = save_file_get_options();
+    if (scene == 0) {
+        if (flags & SAVE_OPTION_SKIP_OPENING) {
+            return TRUE;
+        }
+    } else {
+        if (flags & SAVE_OPTION_SKIP_MHALL) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 
 void fixed_cam_cutscene_opening(struct Camera *c) {
     struct CutsceneSplinePoint *point, *point2;
     struct MarioState *m = gMarioState;
     gComitCutsceneTimer++;
+    if (can_skip_cutscene(0) && gCutsceneSkip == 0 && gComitCutsceneAction < 3) {
+        print_text(225, 32, "HOLD A", 0);
+        print_text(220, 12, "TO SKIP", 0);
+        if (m->input & INPUT_A_DOWN) {
+            gCutsceneSkipTimer++;
+            if (gCutsceneSkipTimer > 30) {
+                gCutsceneSkip = 1;
+                gComitCutsceneAction = 3;
+                gComitCutsceneTimer = 20;
+                m->actionArg = 3;
+                m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
+                gCutsceneMsgIndex = -1;
+                gDialogID = DIALOG_NONE;
+                gCutsceneMsgTimer = 0;
+            }
+        } else {
+            gCutsceneSkipTimer = 0;
+        }
+    }
     switch (gComitCutsceneAction) {
         case 0:
+            gCutsceneSkip = 0;
             if (gComitCutsceneTimer == 250) {
                 m->marioObj->header.gfx.node.flags |= GRAPH_RENDER_ACTIVE;
                 set_mario_animation(m, MARIO_ANIM_IDLE_HEAD_CENTER);
@@ -1277,9 +1320,11 @@ void fixed_cam_cutscene_opening(struct Camera *c) {
         case 3:
             if (gComitCutsceneTimer == 20) {
                 play_transition(WARP_TRANSITION_FADE_INTO_COLOR, 8, 0x00, 0x00, 0x00);
-                obj_set_held_state(m->heldObj, bhvCarrySomething4);
-                m->heldObj->activeFlags = 0;
-                m->heldObj = NULL;
+                if (m->heldObj) {
+                    obj_set_held_state(m->heldObj, bhvCarrySomething4);
+                    m->heldObj->activeFlags = 0;
+                    m->heldObj = NULL;
+                }
             } else if (gComitCutsceneTimer == 30) {
                 stop_cutscene_and_retrieve_stored_info(c);
                 gComitCutsceneAction++;
@@ -1292,6 +1337,8 @@ void fixed_cam_cutscene_opening(struct Camera *c) {
                 gComitCutsceneAction = 0;
                 gComitCutsceneTimer = 0;
                 c->comitCutscene = 0;
+                gCutsceneSkip = 0;
+                save_file_set_options_nontoggle(SAVE_OPTION_SKIP_OPENING);
             }
             break;
     }
@@ -1301,8 +1348,24 @@ void fixed_cam_cutscene_mainhall(struct Camera *c) {
     struct CutsceneSplinePoint *point, *point2;
     struct MarioState *m = gMarioState;
     gComitCutsceneTimer++;
+    if (can_skip_cutscene(1) && gCutsceneSkip == 0 && gComitCutsceneAction == 0 && gComitCutsceneTimer > 30) {
+        print_text(225, 32, "HOLD A", 0);
+        print_text(220, 12, "TO SKIP", 0);
+        if (m->input & INPUT_A_DOWN) {
+            gCutsceneSkipTimer++;
+            if (gCutsceneSkipTimer > 30) {
+                gCutsceneSkip = 1;
+                gComitCutsceneAction = 1;
+                gComitCutsceneTimer = 20;
+                gRoomEntryTimer = 30;
+            }
+        } else {
+            gCutsceneSkipTimer = 0;
+        }
+    }
     switch (gComitCutsceneAction) {
         case 0:
+            gCutsceneSkip = 0;
             if (gComitCutsceneTimer == 1) {
                 // play_music(0, SEQUENCE_ARGS(4, SEQ_MANOR), 0);
                 set_background_music(0, SEQ_MANOR, 0);
@@ -1349,7 +1412,9 @@ void fixed_cam_cutscene_mainhall(struct Camera *c) {
                 gComitCutsceneAction = 0;
                 gComitCutsceneTimer = 0;
                 c->comitCutscene = 0;
+                gCutsceneSkip = 0;
                 save_file_set_newflags(SAVE_NEW_FLAG_MAINHALL_SCENE, 0);
+                save_file_set_options_nontoggle(SAVE_OPTION_SKIP_MHALL);
             }
             break;
     }
@@ -1470,6 +1535,13 @@ void fixed_cam_presets(struct Camera *c) {
             s8DirModeBaseYaw = c->yaw;
         }
         c->comitCutscene = 0;
+    }
+
+    if (c->comitCutscene && m->action == ACT_FIRST_PERSON) {
+        // set_mario_npc_dialog(0);
+        m->input &= ~INPUT_FIRST_PERSON;
+        set_camera_mode(m->area->camera, -1, 1);
+        set_mario_action(m, ACT_IDLE, 0);
     }
 
     switch (c->comitCutscene) {

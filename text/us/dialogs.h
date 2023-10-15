@@ -1107,12 +1107,18 @@ the coins you collected. \n\
 I hope it's enough."))
 
 DEFINE_DIALOG(DIALOG_090, 1, 6, 30, 200, _("\
-Bwa ha ha ha!\n\
-You've stepped right into\n\
-my trap, just as I knew\n\
-you would! I warn you,\n\
-『Friend,』 watch your\n\
-step!"))
+Mario! Did you seriously not\n\
+collect a single coin?\n\
+You must've explored my entire\n\
+manor! You had to have been\n\
+TRYING to miss the money at\n\
+that point.\n\
+I was originally gonna use\n\
+that money to buy you a manor\n\
+as thanks for all you've done,\n\
+but I can't even do that now!\n\
+I hope you're happy with\n\
+yourself, Mario."))
 
 DEFINE_DIALOG(DIALOG_091, 2, 4, 30, 200, _("\
 Mario's Journal\n\
@@ -1123,20 +1129,9 @@ in it?\n\
 DEFINE_DIALOG(DIALOG_092, 1, 1, 30, 200, _("\
 Mario wrote in his journal."))
 
-DEFINE_DIALOG(DIALOG_093, 1, 5, 30, 200, _("\
-Mario! You again! Well\n\
-that's just fine--I've\n\
-been looking for something\n\
-to fry with my fire\n\
-breath!\n\
-Your Star Power is\n\
-useless against me!\n\
-Your friends are all\n\
-trapped within the\n\
-walls...\n\
-And you'll never see the\n\
-Princess again!\n\
-Bwa ha ha ha!"))
+DEFINE_DIALOG(DIALOG_093, 1, 2, 30, 200, _("\
+I hope you're happy with\n\
+yourself, Mario."))
 
 DEFINE_DIALOG(DIALOG_094, 1, 3, 30, 200, _("\
 'How To Be A Good Friend And\n\

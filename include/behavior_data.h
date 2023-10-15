@@ -1015,6 +1015,7 @@ extern const BehaviorScript bhvTenFakeCoinsSpawn[];
 extern const BehaviorScript bhvSingleFakeCoinGetsSpawned[];
 extern const BehaviorScript bhvBarBarrier[];
 extern const BehaviorScript bhvThreeCoinsSpawnDelay[];
+extern const BehaviorScript bhvGPRedParticleSpawner[];
 
 
 #endif // BEHAVIOR_DATA_H

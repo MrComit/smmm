@@ -153,7 +153,16 @@ void bhv_mind_mips_loop(void) {
         case 0:
             if (o->oObjF4 != NULL) {
                 act = o->oObjF4->oAction;
+            } else {
+                o->os16FA = 1;
+                o->oAction = 0;
+                o->oForwardVel = 25.0f;
+                o->oInteractType = INTERACT_GRABBABLE;
+                cur_obj_enable();
+                cur_obj_init_animation(1);
+                return;
             }
+
             if (act == 2) {
                 // if (o->os16110 >= 3) {
                 //     o->os16FA = 1;
@@ -286,6 +295,7 @@ void bhv_mind_mound_block_loop(void) {
                     sMIPSObjs[3][0]->os16FA = 1;
                     sMIPSObjs[3][0]->oAction = 1;
                 }
+                sMIPSObjs[0][1] = NULL;
                 bhv_mind_mound_block_init();
                 return;
             }
@@ -497,6 +507,7 @@ void despawn_all_mind_mounds(void) {
         if (obj != NULL) {
             obj->activeFlags = 0;
             obj = NULL;
+            sMIPSObjs[i % 4][i / 4] = NULL;
         }
     }
 }

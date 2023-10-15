@@ -1917,8 +1917,8 @@ s32 obj_is_gp_object(struct Object *obj) {
         return TRUE;
     } else if (obj->behavior == segmented_to_virtual(bhvRedSpot)) {
         return TRUE;
-    } else if (obj->behavior == segmented_to_virtual(bhvInvisRedCoin)) {
-        return TRUE;
+    // } else if (obj->behavior == segmented_to_virtual(bhvInvisRedCoin)) {
+    //     return TRUE;
     } else if (obj->behavior == segmented_to_virtual(bhvRedStool)) {
         return TRUE;
     } else if (obj->behavior == segmented_to_virtual(bhvRedVase)) {
@@ -1929,12 +1929,17 @@ s32 obj_is_gp_object(struct Object *obj) {
 }
 
 
+
+extern struct SpawnParticlesInfo sGPRedParticles;
+
+
 /**
  * Main function for executing Mario's behavior.
  */
 s32 execute_mario_action(UNUSED struct Object *o) {
     struct MarioState *m = gMarioState;
     struct Object *obj;
+    f32 dist;
     s32 inLoop = TRUE;
 
     if (m->action) {
@@ -2017,11 +2022,17 @@ s32 execute_mario_action(UNUSED struct Object *o) {
         if (gGlobalTimer & 16) {
             obj = gMarioObject->platform;
             if ((m->pos[1] <= m->floorHeight && m->floor->type == SURFACE_GP_FLOOR && 
-                !(save_file_get_gpflags() & (1 << m->floor->force))) || 
+                (!(save_file_get_gpflags() & (1 << m->floor->force)) || check_red_frame_gp(m, m->floor->force))) || 
                 (obj != NULL && obj_is_gp_object(obj))) {
                 m->particleFlags |= PARTICLE_GP_MIST_CIRCLE;
             }
         } 
+
+        dist = CL_objptr_dist_to_nearest_object_with_behavior(gMarioObject, bhvInvisRedCoin);
+        if (m->pos[1] <= m->floorHeight && dist < 1500.0f) {
+            m->particleFlags |= PARTICLE_GP_RED_CIRCLE;
+            sGPRedParticles.sizeBase = (1500.0f - dist) / 150.0f;
+        }
 
         return m->particleFlags;
     }

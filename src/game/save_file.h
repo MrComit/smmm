@@ -114,6 +114,8 @@ extern s8 gLevelToCourseNumTable[];
  */
 #define SAVE_OPTION_MUSIC                /* 0x00000001 */ (1 << 0)
 #define SAVE_OPTION_TRACKER              /* 0x00000001 */ (1 << 1)
+#define SAVE_OPTION_SKIP_OPENING         /* 0x00000001 */ (1 << 2)
+#define SAVE_OPTION_SKIP_MHALL           /* 0x00000001 */ (1 << 3)
 
 /*
  * !!!!!!!!!!!!!!!!!!!!!!!!!
@@ -338,6 +340,7 @@ u8 save_file_get_sensitivity(void);
 void save_file_set_sensitivity(u16 sens);
 u8 save_file_get_options(void);
 void save_file_set_options(u16 flag);
+void save_file_set_options_nontoggle(u16 flag);
 
 #ifdef WIDE
 u8 save_file_get_widescreen_mode(void);
