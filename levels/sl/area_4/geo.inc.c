@@ -13,6 +13,7 @@ const GeoLayout sl_area_4_geo[] = {
 const GeoLayout sl_dl_401__Outside_001_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_CoinPaintings_003_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Mansion_007_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Mansion_007_mesh_layer_4),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, -835, 3681, -9088, sl_dl_MountainExterior_003_mesh_layer_1),

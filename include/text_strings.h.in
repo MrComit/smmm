@@ -503,6 +503,7 @@
 #define TEXT_CREDITS_HSM64 _("The HackerSM64 Repository")
 #define TEXT_CREDITS_ULTRA _("The UltraSM64 Repository")
 #define TEXT_CREDITS_CHEEZEPIN _("Cheezepin (General feedback)")
+#define TEXT_CREDITS_COINS _("Artemis64 And Cavin856 (Coin Collectors)")
 #define TEXT_CREDITS_YOU _("You, for playing")
 
 #define TEXT_CREDITS_OG _("Original Game By Nintendo")

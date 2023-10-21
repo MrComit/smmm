@@ -5260,6 +5260,7 @@ char sCreditsThanks[] = { TEXT_CREDITS_THANKS };
 char sCreditsHSM64[] = { TEXT_CREDITS_HSM64 };
 char sCreditsUltra[] = { TEXT_CREDITS_ULTRA };
 char sCreditsCheezepin[] = { TEXT_CREDITS_CHEEZEPIN };
+char sCreditsCoins[] = { TEXT_CREDITS_COINS };
 char sCreditsYou[] = { TEXT_CREDITS_YOU };
 
 char sCreditsOG[] = { TEXT_CREDITS_OG };
@@ -5274,7 +5275,7 @@ struct CreditTextLine {
     s16 y;
 };
 
-#define CREDIT_ENTRY_COUNT 21
+#define CREDIT_ENTRY_COUNT 22
 
 
 // FOR IT TO MATCH, ENDTITLE SHOULD BE -700
@@ -5299,11 +5300,12 @@ struct CreditTextLine sComitCredits[CREDIT_ENTRY_COUNT] = {
     {sCreditsBeta2, -375},
     {sCreditsBeta3, -390},
 
-    {sCreditsThanks, -440},
-    {sCreditsHSM64, -465},
-    {sCreditsUltra, -480},
-    {sCreditsCheezepin, -495},
-    {sCreditsYou, -510},
+    {sCreditsThanks, -430},
+    {sCreditsHSM64, -455},
+    {sCreditsUltra, -470},
+    {sCreditsCheezepin, -485},
+    {sCreditsCoins, -502},
+    {sCreditsYou, -516},
 
     {sCreditsOG, -570},
 

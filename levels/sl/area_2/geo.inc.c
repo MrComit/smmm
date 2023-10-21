@@ -32,6 +32,7 @@ const GeoLayout sl_dl_202__Main_Hall_geo[] = {
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_Chandelier_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_ALPHA, sl_dl_Chandelier_001_mesh_layer_4),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_CoinPaintings_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_ConceptArtMainHall_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_MainHall_001_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, sl_dl_OpeningHallPlants_003_mesh_layer_1),
